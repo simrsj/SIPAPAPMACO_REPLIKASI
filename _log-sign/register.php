@@ -38,7 +38,7 @@
                             </div>
                             <form class="user">
                                 <div class="form-group">
-	                            	<select class="form-control" >
+	                            	<select class="form-control" id="instansi" onChange='Bukains()' >
 	                            		<?php
 		                                    $sql_mou="SELECT * FROM tb_mou order by institute_mou ASC";
 		                                    
@@ -50,12 +50,14 @@
 		                                            echo "<option class='text-wrap' value='".$d_mou['id_mou']."'>".$d_mou['institute_mou']."</option>";
 		                                            $no++;
 		                                    }
-		                                        echo "
-		                                            <option class='text-warp' value='lainnya'>LAINNYA</option>
+		                                        echo "<option class='text-warp' value='lainnya'>LAINNYA</option>
 		                                            ";    
 	                            		?>
 	                            	</select>
                                 </div>
+                                <div class="form-group" id="institusi">
+                                </div>
+                                
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"
                                         placeholder="Nama Lengkap">
@@ -93,7 +95,8 @@
         </div>
 
     </div>
-
+    
+  
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -103,7 +106,19 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    
 
+    <!-- SCRIPT JS  -->
+    <script>
+        function Bukains(){
+            if($('#instansi').val() == 'lainnya'){
+                console.log("cek");
+                $('#institusi').append("<input type=text class=form-control form-control-user placeholder='Masukan Nama Instansi Anda' name=instansi>").focus();
+            }else{
+                $('#institusi').empty();
+                }
+            }
+    </script>
 </body>
 
 </html>
