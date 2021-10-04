@@ -38,8 +38,8 @@
                             </div>
                             <form class="user">
                                 <div class="form-group">
-	                            	<select class="form-control">
-                                        <option class="text-wrap" required>--<i> Pilih Institusi</i>--</option>
+	                            	<select class="form-control-user" placeholder="Pilih Institusi">
+                                        <option class="text-wrap form-control form-control-user" required>--<i> Pilih Institusi</i>--</option>
 	                            		<?php
 		                                    $sql_mou="SELECT * FROM tb_mou order by institute_mou ASC";
 		                                    
