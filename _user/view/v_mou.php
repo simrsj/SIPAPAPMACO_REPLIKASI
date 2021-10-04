@@ -1,16 +1,6 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <div class=""></div>
-                    <div class="container">
-                      <div class="row">
-                        <div class="cols ">asdasda||||</div>
-                        <div class="cols top-50 start-100 translate-middle">xasdasd</div>
-                      </div>
-                    </div>                    
                     <h1 class="h3 mb-2 text-gray-800">Daftar MoU</h1>
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
