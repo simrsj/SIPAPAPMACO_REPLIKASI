@@ -38,7 +38,8 @@
                             </div>
                             <form class="user">
                                 <div class="form-group">
-	                            	<select class="form-control" >
+	                            	<select class="form-control">
+                                        <option class="text-wrap" required>--<i> Pilih Institusi</i>--</option>
 	                            		<?php
 		                                    $sql_mou="SELECT * FROM tb_mou order by institute_mou ASC";
 		                                    
@@ -50,10 +51,8 @@
 		                                            echo "<option class='text-wrap' value='".$d_mou['id_mou']."'>".$d_mou['institute_mou']."</option>";
 		                                            $no++;
 		                                    }
-		                                        echo "
-		                                            <option class='text-warp' value='lainnya'>LAINNYA</option>
-		                                            ";    
-	                            		?>
+                                        ?>
+                                        <option class='text-warp' value='lainnya'>LAINNYA</option>
 	                            	</select>
                                 </div>
                                 <div class="form-group">
