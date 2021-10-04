@@ -38,7 +38,10 @@
                             </div>
                             <form class="user">
                                 <div class="form-group">
-	                            	<select class="form-control" id="instansi" onChange='Bukains()' >
+
+	                            	<select class="form-control-user" placeholder="Pilih Institusi" id="instansi" onChange='Bukains()'>
+                                        <option class="text-wrap form-control form-control-user" required>--<i> Pilih Institusi</i>--</option>
+
 	                            		<?php
 		                                    $sql_mou="SELECT * FROM tb_mou order by institute_mou ASC";
 		                                    
@@ -50,8 +53,7 @@
 		                                            echo "<option class='text-wrap' value='".$d_mou['id_mou']."'>".$d_mou['institute_mou']."</option>";
 		                                            $no++;
 		                                    }
-		                                        echo "<option class='text-warp' value='lainnya'>LAINNYA</option>
-		                                            ";    
+		                                        echo "<option class='text-warp' value='lainnya'>LAINNYA</option>";    
 	                            		?>
 	                            	</select>
                                 </div>
@@ -113,7 +115,7 @@
         function Bukains(){
             if($('#instansi').val() == 'lainnya'){
                 console.log("cek");
-                $('#institusi').append("<input type=text class=form-control form-control-user placeholder='Masukan Nama Instansi Anda' name=instansi>").focus();
+                $('#institusi').append("<input type=text class='form-control form-control-user' placeholder='Masukan Nama Instansi Anda' name=instansi>").focus();
             }else{
                 $('#institusi').empty();
                 }
