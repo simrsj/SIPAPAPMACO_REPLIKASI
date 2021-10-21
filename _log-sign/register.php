@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,7 +8,6 @@
     <meta name="author" content="">
 
     <title>Register</title>
-
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -23,9 +20,7 @@
 </head>
 
 <body class="bg-gradient-primary">
-
     <div class="container">
-
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
@@ -36,12 +31,11 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Pendaftaran</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" action="?reg_x" method="POST">
                                 <div class="form-group">
-
-	                            	<select class="form-control-user" placeholder="Pilih Institusi" id="instansi" onChange='Bukains()'>
+	                            	<select class="form-control-user" placeholder="Pilih Institusi" id="instansi" onChange='Bukains()' name="id_mou">
                                         <option class="text-wrap form-control form-control-user" required>--<i> Pilih Institusi</i>--</option>
-
+                                        
 	                            		<?php
 		                                    $sql_mou="SELECT * FROM tb_mou order by institute_mou ASC";
 		                                    
@@ -53,38 +47,35 @@
 		                                            echo "<option class='text-wrap' value='".$d_mou['id_mou']."'>".$d_mou['institute_mou']."</option>";
 		                                            $no++;
 		                                    }
-		                                        echo "<option class='text-warp' value='lainnya'>LAINNYA</option>";    
+		                                        echo "<option class='text-warp' value='lainnya'>LAINNYA</option>";
 	                            		?>
 	                            	</select>
                                 </div>
                                 <div class="form-group" id="institusi">
                                 </div>
-                                
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"
-                                        placeholder="Nama Lengkap">
+                                        placeholder="Nama Lengkap" name="nama">
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user"
-                                        placeholder="Alamat Email">
+                                        placeholder="Alamat Email" name="email">
                                 </div>
                                 <div class="form-group">
                                     <input type="number" class="form-control form-control-user"
-                                        placeholder="No. Kontak">
-                                </div>
+                                        placeholder="No. Kontak" name="no_kontak">
+                                </div-->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                            id="exampleInputPassword" placeholder="Password" name="password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="ulangi Password">
+                                            id="exampleRepeatPassword" placeholder="ulangi Password" name="ulangi_password">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Daftar
-                                </a>
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Daftar">
                             </form>
                             <hr>
                             <div class="text-center">
@@ -115,7 +106,7 @@
         function Bukains(){
             if($('#instansi').val() == 'lainnya'){
                 console.log("cek");
-                $('#institusi').append("<input type=text class='form-control form-control-user' placeholder='Masukan Nama Instansi Anda' name=instansi>").focus();
+                $('#institusi').append("<input type=text class='form-control form-control-user' placeholder='Masukan Nama Instansi Anda' name='nama_ip'>").focus();
             }else{
                 $('#institusi').empty();
                 }

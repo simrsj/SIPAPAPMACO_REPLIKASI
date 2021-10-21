@@ -24,6 +24,10 @@
         {
             include"_log-sign/register.php";
         }
+        elseif(isset($_GET['reg_x']))
+        {
+            include"_log-sign/register_exc.php";
+        }
         else
         {
             include"_log-sign/index.php";   
