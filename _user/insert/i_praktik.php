@@ -4,7 +4,9 @@
                         <div class="card-body">
                             <form action="">
                                 <label>Institusi : <span style="color:red">*</span></label><br>
-                                <?php
+                                <?php                                
+                                if($_SESSION['level_user']==1)
+                                {
                                     $sql_mou="SELECT * FROM tb_mou 
                                                 where end_date_mou >= CURDATE() order by institute_mou ASC";
                                     
@@ -34,6 +36,21 @@
                                             <b><i>Data MoU Tidak Ada</i></b>
                                         ";
                                     }
+                                
+                                }
+                                elseif($_SESSION['level_user']==2)
+                                {
+                                    $sql_mou="SELECT * FROM tb_mou 
+                                                where id_mou=".$_SESSION['id_mou']." order by institute_mou ASC";
+                                    
+                                    $q_mou=$conn->query($sql_mou);  
+                                    $d_mou=$q_mou->fetch(PDO::FETCH_ASSOC);
+                                    ?>
+                                        <strong><?php  echo $d_mou['institute_mou']; ?></strong><br>
+                                        <input type="hidden" name="id_mou" value="<?php  echo $_SESSION['id_mou']; ?>">
+                                        
+                                    <?php
+                                }
                                 ?>
                                 <hr>
                                 <div class="row">
@@ -182,15 +199,16 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         Nama : <span style="color:red">*</span><br>
-                                        <input type="text" name="metor_practice" placeholder="Nama" size="35" required>
+                                        <input type="text" name="metor_practice" size="35" required>
                                     </div>
                                     <div class="col-lg-4">
                                         Email : <span style="color:red">*</span><br>
-                                        <input type="email" name="email_practice" placeholder="Email" size="35" required>
+                                        <input type="email" name="email_practice" size="35" required>
                                     </div>
                                     <div class="col-lg-4">
                                         Telpon : <span style="color:red">*</span><br>
-                                        <input type="number" name="telp_practice" placeholder="Telpon" required>
+                                        <input type="number" name="telp_practice"  required>
+                                        <br><i style='font-size:12px;'>Isian hanya berupa angka</i>
                                     </div>
                                 </div>
                                 <hr>
@@ -202,13 +220,14 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         Tanggal Mulai : <span style="color:red">*</span><br>
-                                        <input id="several_disable_date_1" type="text" name="start_practice" readonly="">
+                                        <input type="date" name="start_practice">
                                     </div>
                                     <div class="col-lg-6">
                                         Tanggal Akhir : <span style="color:red">*</span><br>
-                                        <input id="several_disable_date_2" type="text"  name="end_practice" readonly="">
+                                        <input type="date"  name="end_practice">
                                     </div>
                                 </div> 
+                                <hr>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <input type="submit" name="Simpan" value="Simpan" class="btn btn-success">

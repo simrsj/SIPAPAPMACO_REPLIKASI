@@ -1,11 +1,12 @@
 <?PHP
-    $id_institusi=$_POST['id_institusi'];
+    //$id_institusi=$_POST['id_institusi'];
     $id_mou=$_POST['id_mou'];
     $nama=$_POST['nama'];
     $no_kontak=$_POST['no_kontak'];
     $email=$_POST['email'];
     $password=$_POST['password'];
     $ulangi_password=$_POST['ulangi_password'];
+    $tanggal_sekarang=date('Y-m-d');
 
     if($password!=$ulangi_password)
     {
@@ -18,10 +19,26 @@
     }
     else
     {
-        if()
-        $sql_insert="INSERT INTO `tb_user` (`id_user`,`username_user`,`password_user`,`name_user`,`email_user`,`level_user`,`create_user`,`status_user`) 
-                        VALUES (NULL, $institusi, $password, $nama, $email, 2, date('Y-m-d'), 'Y')";
-        $conn->query($sql_insert);
+        if($id_mou==0)
+        {
+            $nama_ip=$_POST['nama_ip'];
+            $sql_mou="SELECT id_mou FROM tb_mou order by id_mou ASC";
+            
+            $q_mou=$conn->query($sql_mou);
+            $r_mou = $q_mou->rowCount();
+            while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC))
+            {
+                $id_mou_baru=$d_mou['id_mou']+1;
+            }
+            $id_mou=$id_mou_baru;
+            
+            $sql_insert_mou="INSERT INTO `tb_mou` (`id_mou`,`institute_mou`,`contact_mou`) 
+                                VALUES ($id_mou, $nama_ip, $no_kontak)";
+            $conn->query($sql_insert_mou);    
+        }
+        $sql_insert_user="INSERT INTO tb_user (id_user, username_user, password_user, name_user, email_user, level_user, create_user, id_mou, status_user) 
+                        VALUES (NULL, '$email', '$password', '$nama', '$email', '2', '$tanggal_sekarang', '$id_mou', 'Y')";
+        $conn->query($sql_insert_user);
         ?>
         <script>			
                 document.location.href="?lo";

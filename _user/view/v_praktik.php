@@ -20,8 +20,19 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <?php
-                                $sql_practice="SELECT * FROM tb_practice order by id_practice ASC";
-                                
+                                if($_SESSION['level_user']==1)
+                                {
+                                    $sql_practice="SELECT * FROM tb_practice order by id_practice ASC";
+                                }
+                                elseif($_SESSION['level_user']==2)
+                                {
+                                    $sql_practice="SELECT * FROM tb_practice where id_mou=".$_SESSION['id_mou']." order by id_practice ASC";
+                                    //echo $_SESSION['id_mou'];
+                                }
+                                else
+                                {
+                                    $sql_practice="";
+                                }
                                 $q_practice=$conn->query($sql_practice);
                                 $r_practice = $q_practice->rowCount();
 

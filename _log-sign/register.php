@@ -47,7 +47,7 @@
 		                                            echo "<option class='text-wrap' value='".$d_mou['id_mou']."'>".$d_mou['institute_mou']."</option>";
 		                                            $no++;
 		                                    }
-		                                        echo "<option class='text-warp' value='lainnya'>LAINNYA</option>";
+		                                        echo "<option class='text-warp' value='0'>LAINNYA</option>";
 	                            		?>
 	                            	</select>
                                 </div>
@@ -59,12 +59,12 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user"
-                                        placeholder="Alamat Email" name="email">
+                                        placeholder="Alamat Email untuk username" name="email">
                                 </div>
                                 <div class="form-group">
                                     <input type="number" class="form-control form-control-user"
                                         placeholder="No. Kontak" name="no_kontak">
-                                </div-->
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"

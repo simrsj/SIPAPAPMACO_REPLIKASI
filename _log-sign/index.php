@@ -95,6 +95,8 @@
 					$_SESSION['name_user']=$row['name_user'];
 					$_SESSION['id_user']=$row['id_user'];
 					$_SESSION['status_user']=$row['status_user'];
+					$_SESSION['level_user']=$row['level_user'];
+					$_SESSION['id_mou']=$row['id_mou'];
 					$id_user=$row['id_user'];
 					$x_name_pass++;
 				}
