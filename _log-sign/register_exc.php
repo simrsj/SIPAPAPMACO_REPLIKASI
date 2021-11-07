@@ -21,7 +21,7 @@
     {
         if($id_mou==0)
         {
-            $nama_ip=$_POST['nama_ip'];
+            $nama_ip=$_POST['namMa_ip'];
             $sql_mou="SELECT id_mou FROM tb_mou order by id_mou ASC";
             
             $q_mou=$conn->query($sql_mou);
