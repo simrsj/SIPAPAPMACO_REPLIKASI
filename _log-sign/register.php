@@ -104,10 +104,11 @@
     <!-- SCRIPT JS  -->
     <script>
         function Bukains(){
-            if($('#instansi').val() == 'lainnya'){
+            if($('#instansi').val() == '0'){
                 console.log("cek");
                 $('#institusi').append("<input type=text class='form-control form-control-user' placeholder='Masukan Nama Instansi Anda' name='nama_ip'>").focus();
             }else{
+                console.log("cok");
                 $('#institusi').empty();
                 }
             }
