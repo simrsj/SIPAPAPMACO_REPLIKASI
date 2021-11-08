@@ -5,7 +5,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="">
                                 <?php
                                 $sql_mou="SELECT * FROM tb_mou order by institute_mou ASC";
                                 
@@ -49,7 +49,7 @@
                                             {
                                                 echo "
                                                     <td>
-                                                        <button class='btn btn-success btn-sm'>Masih Berlaku</button>
+                                                    <button type='button' class='btn btn-success btn-sm'>Masih Berlaku</button>
                                                     </td>
                                                     ";
                                             }
