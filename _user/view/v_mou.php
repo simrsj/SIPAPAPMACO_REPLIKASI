@@ -89,6 +89,3 @@
                     </div>
                 </div>
                 <!-- /.container-fluid -->
-
-                <!-- Page level plugins -->
-                <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
