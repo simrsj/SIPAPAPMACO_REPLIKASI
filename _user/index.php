@@ -55,15 +55,15 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['status_user']) == "Y") {
 				if ($_SESSION['level_user'] == 1) {
 				?>
 					<li class="nav-item">
-						<a class="nav-link" href="?prk">
+						<a class="nav-link" href="?mou">
 							<i class="fas fa-fw fa-table"></i>
 							<span>MoU</span>
 						</a>
-						<a class="nav-link" href="?prk">
+						<a class="nav-link" href="?pmb">
 							<i class="fas fa-fw fa-table"></i>
 							<span>Pembimbing</span>
 						</a>
-						<a class="nav-link" href="?prk">
+						<a class="nav-link" href="?spf">
 							<i class="fas fa-fw fa-table"></i>
 							<span>Spesifikasi</span>
 						</a>

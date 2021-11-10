@@ -4,86 +4,91 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="">
-                                <?php
-                                $sql_mou="SELECT * FROM tb_mou order by institute_mou ASC";
-                                
-                                $q_mou=$conn->query($sql_mou);
-                                $r_mou = $q_mou->rowCount();
-                                $d_mou = $q_mou->fetch(PDO::FETCH_ASSOC);
+                            <?php
+                            $sql_mou = "SELECT * FROM tb_mou order by institute_mou ASC";
+
+                            $q_mou = $conn->query($sql_mou);
+                            $r_mou = $q_mou->rowCount();
+                            $d_mou = $q_mou->fetch(PDO::FETCH_ASSOC);
 
 
-                                if($r_mou>0){
-                                    echo"
-                                        <table class='table table-striped' id='dataTable' width='100%'' cellspacing='0'>
-                                            <thead>
-                                                <tr>
-                                                    <th scope='col'>No</th>
-                                                    <th>Nama Institusi</th>
-                                                    <th>Tanggal Akhir</th>
-                                                    <th>Status</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                    ";
-                                    
-                                    $q_mou_a=$conn->query($sql_mou);
-
-                                    $no=1;
-                                    
-                                    while ($d_mou = $q_mou_a->fetch(PDO::FETCH_ASSOC)){
-                                        echo"
+                            if ($r_mou > 0) {
+                            ?>
+                                <div class='table-responsive'>
+                                    <table class='table table-striped table-hover' id='dataTable' width='100%' cellspacing='0'>
+                                        <thead>
                                             <tr>
-                                                <td style='font-size:14px'>$no</td>
-                                                <td style='font-size:14px; width:25%'>".$d_mou['institute_mou']."</td>
-                                                <td style='font-size:14px'>".$d_mou['end_date_mou']."</td>
-                                            ";
+                                                <th scope='col'>No</th>
+                                                <th>Nama Institusi</th>
+                                                <th>Tanggal Akhir</th>
+                                                <th>Status</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th scope='col'>No</th>
+                                                <th>Nama Institusi</th>
+                                                <th>Tanggal Akhir</th>
+                                                <th>Status</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <?php
+                                            $q_mou_a = $conn->query($sql_mou);
 
-                                            $date_end = strtotime($d_mou['end_date_mou']);
-                                            $date_now = strtotime(date('Y-m-d'));
-                                            $date_diff = ($date_now-$date_end)/24/60/60;
+                                            $no = 1;
 
-                                            if($date_diff<=0)
-                                            {
-                                                echo "
+                                            while ($d_mou = $q_mou_a->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                                <td style='font-size:14px'><?php echo $no; ?></td>
+                                                <td style='font-size:14px; width:25%'><?php echo $d_mou['institute_mou']; ?></td>
+                                                <td style='font-size:14px'><?php echo $d_mou['end_date_mou']; ?></td>
+                                                <?php
+
+                                                $date_end = strtotime($d_mou['end_date_mou']);
+                                                $date_now = strtotime(date('Y-m-d'));
+                                                $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
+
+                                                if ($date_diff <= 0) {
+                                                ?>
                                                     <td>
-                                                    <button type='button' class='btn btn-success btn-sm'>Masih Berlaku</button>
+                                                        <button type='button' class='btn btn-success btn-sm'>Masih Berlaku</button>
                                                     </td>
-                                                    ";
-                                            }
-                                            elseif($date_diff>0)
-                                            {
-                                                echo "
+                                                <?php
+                                                } elseif ($date_diff > 0) {
+                                                ?>
                                                     <td>
                                                         <button class='btn btn-danger btn-sm'>Tidak Berlaku</button>
                                                     </td>
-                                                    ";
-                                            }
-                                            echo"
+                                                <?php
+                                                }
+                                                ?>
                                                 <td>
-                                                    <a href='#' class='btn btn-primary btn-sm'>Ubah</a>      
+                                                    <a href='#' class='btn btn-primary btn-sm'>Ubah</a>
                                                     <a href='#' class='btn btn-danger btn-sm'>Hapus</a>
                                                 </td>
-                                            </tr>
-                                        ";
-                                        $no++;
-                                    }
+                                                </tr>
+                                            <?php
+                                                $no++;
+                                            }
 
-                                    echo"
-                                    </tbody>
-                                </table>
-                                    ";
-                                }else{
-                                    echo"
-                                        <h3> Data MoU Tidak Ada</h3>
-                                    ";
-                                }
-                                ?>
-                            </div>
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php
+                            } else {
+                            ?>
+                                <h3> Data MoU Tidak Ada</h3>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
+
+                <!-- Page level plugins -->
+                <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
