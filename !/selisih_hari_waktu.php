@@ -29,4 +29,3 @@ $days = $diff/60/60/24;
 $hours = floor($diff / (60 * 60));
 $minutes = $diff - $hours * (60 * 60);
 echo 'Selisih Waktu: '.$days.' Hari, ' . $hours .  ' Jam, ' . floor( $minutes / 60 ) . ' Menit ';
-?>

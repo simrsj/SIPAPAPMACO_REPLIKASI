@@ -89,7 +89,15 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['status_user']) == "Y") {
 					<?php
 					include "_nav_user.php";
 					if (isset($_GET['mou'])) {
-						include "_user/view/v_mou.php";
+						if (isset($_GET['i'])) {
+							include "_user/insert/i_mou.php";
+						} elseif (isset($_GET['u'])) {
+							include "_user/update/u_mou.php";
+						} elseif (isset($_GET['d'])) {
+							include "_user/delete/d_mou.php";
+						} else {
+							include "_user/view/v_mou.php";
+						}
 					} elseif (isset($_GET['pmb'])) {
 						if (isset($_GET['i'])) {
 							include "_user/inset/i_pembimbing.php";

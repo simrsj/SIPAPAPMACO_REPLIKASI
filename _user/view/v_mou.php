@@ -66,8 +66,8 @@
                                                 }
                                                 ?>
                                                 <td>
-                                                    <a href='#' class='btn btn-primary btn-sm'>Ubah</a>
-                                                    <a href='#' class='btn btn-danger btn-sm'>Hapus</a>
+                                                    <a href='?mou&i=<?php echo $d_mou['id_mou']; ?>' class='btn btn-primary btn-sm'>Ubah</a>
+                                                    <a href='?mou&d=<?php echo $d_mou['id_mou']; ?>' class='btn btn-danger btn-sm'>Hapus</a>
                                                 </td>
                                                 </tr>
                                             <?php
