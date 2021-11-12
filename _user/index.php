@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['id_user']) && isset($_SESSION['status_user']) == "Y") {
+if (isset($_SESSION['id_user']) && isset($_SESSION['status_user']) == "Y" && isset($_SESSION['level_user']) == 1) {
 ?>
 
 	<body id="page-top">
