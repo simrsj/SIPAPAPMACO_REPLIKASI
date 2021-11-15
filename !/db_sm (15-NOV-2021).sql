@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2021 at 09:20 AM
+-- Generation Time: Nov 15, 2021 at 09:55 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -352,7 +352,8 @@ INSERT INTO `tb_mou` (`id_mou`, `institusi_mou`, `tgl_mulai_mou`, `tgl_selesai_m
 (83, 'POLTEKKES KEMENKES JAYAPURA', '2019-12-16', '2022-12-15', '073/21320/RSJ/XII/2019', 'HK.03.01/1.6/0012/2019', '', '', '', '', ''),
 (84, 'POLITEKNIK NEGERI INDRAMAYU', '2020-07-30', '2023-07-30', '073/11662/RSJ', '888/PL42/KS/2020', '', '', '', '', ''),
 (85, 'UNIVERSITAS KRISTEN SATYA WACANA SALATIGA (PSIKOLOGI)', '2020-11-18', '2023-11-18', '073/18973/RSJ', '247/PKS/UKSW/XI/2020', '', '', '', '', ''),
-(86, 'FAKULTAS PSIKOLOGI MARANATHA', '2020-11-02', '2023-11-02', '073/16336/RSJ', '037/PKS/DN/FKUKMXI/2020', '', '', '', '', '');
+(86, 'FAKULTAS PSIKOLOGI MARANATHA', '2020-11-02', '2023-11-02', '073/16336/RSJ', '037/PKS/DN/FKUKMXI/2020', '', '', '', '', ''),
+(101, 'xxx', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -482,7 +483,19 @@ CREATE TABLE `tb_user` (
 INSERT INTO `tb_user` (`id_user`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `terakhir_login_user`, `tgl_buat_user`, `status_user`) VALUES
 (1, 'admin', 'admin', 'ADMIN', '-', 1, '0000-00-00', '2021-03-29', 'Y'),
 (2, 'adi_h', '1234', 'Adi Hardiansyah', '-', 1, '0000-00-00', '2021-09-02', 'Y'),
-(9, 'fajar', '1234', 'Fajar', 'fajar.rachmat.h@gmail.com', 2, '0000-00-00', '2021-11-11', 'Y');
+(9, 'fajar', '1234', 'Fajar', 'fajar.rachmat.h@gmail.com', 2, '0000-00-00', '2021-11-11', 'Y'),
+(10, 'xxx@gmail.com', '1234', 'xxx', 'xxx@gmail.com', 2, '0000-00-00', '2021-11-15', 'Y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user_detail`
+--
+
+CREATE TABLE `tb_user_detail` (
+  `id_user` int(11) NOT NULL,
+  `id_mou` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -610,7 +623,7 @@ ALTER TABLE `tb_mess`
 -- AUTO_INCREMENT for table `tb_mou`
 --
 ALTER TABLE `tb_mou`
-  MODIFY `id_mou` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id_mou` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `tb_praktik`
@@ -628,7 +641,7 @@ ALTER TABLE `tb_spesifikasi_pdd`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
