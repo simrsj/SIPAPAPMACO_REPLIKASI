@@ -1,6 +1,18 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h1 class="h3 mb-2 text-gray-800">Daftar MoU</h1>
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h1 class="h3 mb-2 text-gray-800">Daftar MoU</h1>
+                        </div>
+                        <div class="col-lg-4">
+                            <p>
+                                <a href="?mou&i" class="btn btn-success">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -66,10 +78,10 @@
                                                 }
                                                 ?>
                                                 <td>
-                                                    <a href='?mou&i=<?php echo $d_mou['id_mou']; ?>' class="btn btn-primary btn-sm btn-icon-split">
+                                                    <a href='?mou&u=<?php echo $d_mou['id_mou']; ?>' class="btn btn-primary btn-sm">
                                                         <span class="text">Ubah</span>
                                                     </a>
-                                                    <a href='?mou&d=<?php echo $d_mou['id_mou']; ?>' class="btn btn-danger btn-sm btn-icon-split">
+                                                    <a href='?mou&d=<?php echo $d_mou['id_mou']; ?>' class="btn btn-danger btn-sm">
                                                         <span class="text">Hapus</span>
                                                     </a>
                                                 </td>
@@ -77,7 +89,6 @@
                                             <?php
                                                 $no++;
                                             }
-
                                             ?>
                                         </tbody>
                                     </table>

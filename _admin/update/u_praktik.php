@@ -1,13 +1,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8">
-            <h1 class="h3 mb-2 text-gray-800">Ubah Data MoU</h1>
+            <h1 class="h3 mb-2 text-gray-800">Ubah Data Praktikan</h1>
         </div>
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
             <?php
-            $sql_mou = "SELECT * FROM tb_mou where id_mou=" . $_GET['i'];
+            $sql_mou = "SELECT * FROM tb_mou where id_mou=" . $_GET['u'];
             $q_mou = $conn->query($sql_mou);
             $r_mou = $q_mou->rowCount();
             $d_mou = $q_mou->fetch(PDO::FETCH_ASSOC);

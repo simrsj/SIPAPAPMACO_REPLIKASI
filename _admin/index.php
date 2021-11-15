@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['id_user']) && isset($_SESSION['status_user']) == "Y" && isset($_SESSION['level_user']) == 1) {
+if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 ?>
 
 	<body id="page-top">
@@ -55,6 +55,10 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['status_user']) == "Y" && iss
 				if ($_SESSION['level_user'] == 1) {
 				?>
 					<li class="nav-item">
+						<a class="nav-link" href="?jrs">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Jurusan</span>
+						</a>
 						<a class="nav-link" href="?mou">
 							<i class="fas fa-fw fa-table"></i>
 							<span>MoU</span>
@@ -87,40 +91,48 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['status_user']) == "Y" && iss
 				<!-- Main Content -->
 				<div id="content">
 					<?php
-					include "_nav_user.php";
+					include "_admin/_nav.php";
 					if (isset($_GET['mou'])) {
 						if (isset($_GET['i'])) {
-							include "_user/insert/i_mou.php";
+							include "_admin/insert/i_mou.php";
 						} elseif (isset($_GET['u'])) {
-							include "_user/update/u_mou.php";
+							include "_admin/update/u_mou.php";
 						} elseif (isset($_GET['d'])) {
-							include "_user/delete/d_mou.php";
+							include "_admin/delete/d_mou.php";
 						} else {
-							include "_user/view/v_mou.php";
+							include "_admin/view/v_mou.php";
+						}
+					} elseif (isset($_GET['jrs'])) {
+						if (isset($_GET['i'])) {
+							include "_admin/insert/i_jurusan.php";
+						} elseif (isset($_GET['u'])) {
+							include "_admin/update/u_jurusan.php";
+						} else {
+							include "_admin/view/v_jurusan.php";
 						}
 					} elseif (isset($_GET['pmb'])) {
 						if (isset($_GET['i'])) {
-							include "_user/inset/i_pembimbing.php";
+							include "_admin/insert/i_pembimbing.php";
 						} elseif (isset($_GET['u'])) {
-							include "_user/update/u_pembimbing.php";
+							include "_admin/update/u_pembimbing.php";
 						} else {
-							include "_user/view/v_pembimbing.php";
+							include "_admin/view/v_pembimbing.php";
 						}
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['i'])) {
-							include "_user/insert/i_praktik.php";
+							include "_admin/insert/i_praktik.php";
 						} else {
-							include "_user/view/v_praktik.php";
+							include "_admin/view/v_praktik.php";
 						}
 					} elseif (isset($_GET['spf'])) {
 						if (isset($_GET['u'])) {
-							include "_user/update/u_spesifikasi.php";
+							include "_admin/update/u_spesifikasi.php";
 						} elseif (isset($_GET['d'])) {
-							include "_user/delete/d_spesifikasi.php";
+							include "_admin/delete/d_spesifikasi.php";
 						} elseif (isset($_GET['i'])) {
-							include "_user/insert/i_spesifikasi.php";
+							include "_admin/insert/i_spesifikasi.php";
 						} else {
-							include "_user/view/v_spesifikasi.php";
+							include "_admin/view/v_spesifikasi.php";
 						}
 					}
 					?>
@@ -153,15 +165,14 @@ if (isset($_SESSION['id_user']) && isset($_SESSION['status_user']) == "Y" && iss
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
 						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
 					</div>
-					<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
 					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="?lo">Logout</a>
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+						<a class="btn btn-danger" href="?lo">Ya</a>
 					</div>
 				</div>
 			</div>

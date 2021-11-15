@@ -1,7 +1,7 @@
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <form action="" class="form-group">
+                            <form action="" class="form-group" method="POST">
                                 <label>Institusi : <span style="color:red">*</span></label><br>
                                 <?php
                                 if ($_SESSION['level_user'] == 1) {
@@ -207,13 +207,21 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
+                                        Jumlah Praktikan : <span style="color:red">*</span><br>
+                                        <input type="date" name="jumlah_praktik">
+                                    </div>
+                                    <div class="col-lg-4">
                                         Tanggal Mulai : <span style="color:red">*</span><br>
                                         <input type="date" name="start_practice">
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         Tanggal Akhir : <span style="color:red">*</span><br>
                                         <input type="date" name="end_practice">
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Unggah Surat : <span style="color:red">*</span><br>
+                                        <input type="file" name="file_praktik">
                                     </div>
                                 </div>
                                 <hr>
@@ -226,3 +234,7 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                if (isset($_POST['Simpan'])) {
+                }
+                ?>
