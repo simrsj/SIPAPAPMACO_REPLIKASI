@@ -39,6 +39,7 @@ if ($password != $ulangi_password) {
     nama_user, 
     email_user, 
     level_user, 
+    no_telp_user, 
     tgl_buat_user, 
     status_user
     ) VALUES (
@@ -48,6 +49,7 @@ if ($password != $ulangi_password) {
         '$nama', 
         '$email', 
         '2', 
+        '$no_telp',
         '$tanggal_sekarang', 
         'Y'
     )";

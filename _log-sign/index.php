@@ -115,12 +115,12 @@ if (empty($_SESSION['username_user'])) {
 	</body>
 <?php
 } else {
-	echo "
-			<script>
-				alert('Anda sebelumnya SUDAH LOGIN dengan nama " . $_SESSION['username_user'] . "');
-				alert('Anda akan diarahkan langsung ke halaman');
-			</script>
-		";
+?>
+	<script>
+		alert('Anda sebelumnya SUDAH LOGIN dengan nama <?php echo $_SESSION['username_user ']; ?>');
+		alert('Anda akan diarahkan langsung ke halaman');
+	</script>
+<?php
 	header("Refresh:0");
 }
 ?>

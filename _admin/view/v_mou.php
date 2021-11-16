@@ -17,7 +17,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <?php
-                            $sql_mou = "SELECT * FROM tb_mou order by institute_mou ASC";
+                            $sql_mou = "SELECT * FROM tb_mou 
+                            JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi
+                            ORDER BY tb_institusi.nama_institusi ASC";
 
                             $q_mou = $conn->query($sql_mou);
                             $r_mou = $q_mou->rowCount();
@@ -37,15 +39,6 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th scope='col'>No</th>
-                                                <th>Nama Institusi</th>
-                                                <th>Tanggal Akhir</th>
-                                                <th>Status</th>
-                                                <th></th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
                                             <?php
                                             $q_mou_a = $conn->query($sql_mou);
@@ -55,11 +48,11 @@
                                             while ($d_mou = $q_mou_a->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
                                                 <td style='font-size:14px'><?php echo $no; ?></td>
-                                                <td style='font-size:14px; width:25%'><?php echo $d_mou['institute_mou']; ?></td>
-                                                <td style='font-size:14px'><?php echo $d_mou['end_date_mou']; ?></td>
+                                                <td style='font-size:14px; width:25%'><?php echo $d_mou['nama_institusi']; ?></td>
+                                                <td style='font-size:14px'><?php echo $d_mou['tgl_selesai_mou']; ?></td>
                                                 <?php
 
-                                                $date_end = strtotime($d_mou['end_date_mou']);
+                                                $date_end = strtotime($d_mou['tgl_selesai_mou']);
                                                 $date_now = strtotime(date('Y-m-d'));
                                                 $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
 

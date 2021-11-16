@@ -21,14 +21,14 @@
                             <div class="table-responsive">
                                 <?php
                                 if ($_SESSION['level_user'] == 1) {
-                                    $sql_practice = "SELECT * FROM tb_practice order by id_practice ASC";
+                                    $sql_praktik = "SELECT * FROM tb_praktik order by id_praktik ASC";
                                 } else {
-                                    $sql_practice = "";
+                                    $sql_praktik = "";
                                 }
-                                $q_practice = $conn->query($sql_practice);
-                                $r_practice = $q_practice->rowCount();
+                                $q_praktik = $conn->query($sql_praktik);
+                                $r_praktik = $q_praktik->rowCount();
 
-                                if ($r_practice == true) {
+                                if ($r_praktik == true) {
                                 ?>
                                     <table class='table table-striped'>
                                         <thead>
@@ -45,25 +45,25 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $q_practice_a = $conn->query($sql_practice);
+                                            $q_praktik_a = $conn->query($sql_praktik);
                                             $no = 1;
 
-                                            while ($d_practice = $q_practice_a->fetch(PDO::FETCH_ASSOC)) {
+                                            while ($d_praktik = $q_praktik_a->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
                                                 <tr>
                                                     <td><?php echo $no; ?></td>
-                                                    <td><?php echo $d_practice['institute_practice']; ?></td>
-                                                    <td><?php echo $d_practice['name_practice']; ?></td>
-                                                    <td><?php echo $d_practice['start_practice']; ?></td>
-                                                    <td><?php echo $d_practice['end_practice']; ?></td>
+                                                    <td><?php echo $d_praktik['institusi_praktik']; ?></td>
+                                                    <td><?php echo $d_praktik['nama_praktik']; ?></td>
+                                                    <td><?php echo $d_praktik['tgl_mulai_praktik']; ?></td>
+                                                    <td><?php echo $d_praktik['tgl_selesai_praktik']; ?></td>
                                                     <td>
                                                         <?php
 
-                                                        if ($d_practice['status_practice'] == "Y") {
+                                                        if ($d_praktik['status_praktik'] == "Y") {
                                                         ?>
                                                             <button class='btn btn-success btn-sm'>Aktif</button>
                                                         <?php
-                                                        } elseif ($d_practice['status_practice'] == "N") {
+                                                        } elseif ($d_praktik['status_praktik'] == "N") {
                                                         ?>
                                                             <button class='btn btn-danger btn-sm'>Tidak Aktif</button>
                                                         <?php
@@ -71,53 +71,58 @@
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        <a href='#' data-toggle='modal' data-target='<?php echo "#detail" . $d_practice['id_practice']; ?>' class='btn btn-info btn-sm'>
+                                                        <a href='#' data-toggle='modal' data-target='<?php echo "#detail" . $d_praktik['id_praktik']; ?>' class='btn btn-info btn-sm'>
                                                             Detail
                                                         </a>
-                                                        <div class="modal fade" id="<?php echo "detail" . $d_practice['id_practice']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="<?php echo "detail" . $d_praktik['id_praktik']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-body">
                                                                         <?php
-                                                                        $sql_practice_1 = "SELECT * FROM tb_practice where id_practice=" . $d_practice['id_practice'];
+                                                                        $sql_praktik_1 = "SELECT * FROM tb_praktik 
+                                                                        JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou 
+                                                                        JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
+                                                                        JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
+                                                                        JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
+                                                                        JOIN tb_user ON tb_praktik.id_user = tb_user.id_user where tb_praktik.id_praktik=" . $d_praktik['tb_praktik.id_praktik'];
 
-                                                                        $q_practice_1 = $conn->query($sql_practice_1);
-                                                                        $d_practice_1 = $q_practice_1->fetch(PDO::FETCH_ASSOC);
+                                                                        $q_praktik_1 = $conn->query($sql_praktik_1);
+                                                                        $d_praktik_1 = $q_praktik_1->fetch(PDO::FETCH_ASSOC);
                                                                         ?>
                                                                         <strong>Nama Institusi</strong><br>
-                                                                        <p><?php echo $d_practice_1['institute_practice']; ?></p>
+                                                                        <p><?php echo $d_praktik_1['institusi_praktik']; ?></p>
                                                                         <strong>Nama Praktikan</strong><br>
-                                                                        <p><?php echo $d_practice_1['name_practice']; ?></p>
+                                                                        <p><?php echo $d_praktik_1['nama_praktik']; ?></p>
                                                                         <strong>Tanggal Paktikan</strong><br>
-                                                                        <p><?php echo $d_practice_1['start_practice'] . " s/d " . $d_practice_1['end_practice']; ?></p>
+                                                                        <p><?php echo $d_praktik_1['tgl_mulai_praktik'] . " s/d " . $d_praktik_1['tgl_selesai_praktik']; ?></p>
                                                                         <strong>Jurusan</strong><br>
-                                                                        <p><?php echo $d_practice_1['major_practice']; ?></p>
+                                                                        <p><?php echo $d_praktik_1['jurusan_pdd_praktik']; ?></p>
                                                                         <strong>Spesifikasi</strong><br>
-                                                                        <p><?php echo $d_practice_1['specialist_practice']; ?></p>
+                                                                        <p><?php echo $d_praktik_1['specialist_praktik']; ?></p>
                                                                         <strong>Jenjang Pendidikan</strong><br>
-                                                                        <p><?php echo $d_practice_1['level_practice']; ?></p>
+                                                                        <p><?php echo $d_praktik_1['level_praktik']; ?></p>
                                                                         <strong>Akreditasi</strong><br>
-                                                                        <p><?php echo $d_practice_1['accreditation_practice']; ?></p>
+                                                                        <p><?php echo $d_praktik_1['accreditation_praktik']; ?></p>
                                                                         <hr>
                                                                         <strong>Nama CP</strong><br>
-                                                                        <p><?php echo $d_practice_1['name_cp_practice']; ?></p>
+                                                                        <p><?php echo $d_praktik_1['name_cp_praktik']; ?></p>
                                                                         <strong>Kontak CP</strong><br>
-                                                                        <p><?php echo $d_practice_1['telp_cp_practice']; ?></p>
+                                                                        <p><?php echo $d_praktik_1['telp_cp_praktik']; ?></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <a href='?prk&u=<?php echo $d_practice['id_practice']; ?>' class='btn btn-primary btn-sm'>
+                                                        <a href='?prk&u=<?php echo $d_praktik['id_praktik']; ?>' class='btn btn-primary btn-sm'>
                                                             <span class='text' title='Ubah'>Ubah</span>
                                                         </a>
-                                                        <a href='#' data-toggle='modal' data-target='<?php echo "#hapus_praktik" . $d_practice['id_practice']; ?>' class='btn btn-danger btn-sm'>
+                                                        <a href='#' data-toggle='modal' data-target='<?php echo "#hapus_praktik" . $d_praktik['id_praktik']; ?>' class='btn btn-danger btn-sm'>
                                                             Hapus
                                                         </a>
 
 
-                                                        <div class="modal fade" id="<?php echo "hapus_praktik" . $d_practice['id_practice']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="<?php echo "hapus_praktik" . $d_praktik['id_praktik']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">

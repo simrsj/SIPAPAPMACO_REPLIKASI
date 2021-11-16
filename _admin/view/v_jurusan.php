@@ -20,73 +20,67 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <?php
-                                $sql_major = "SELECT * FROM tb_major order by name_major ASC";
+                                $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC";
 
-                                $q_major = $conn->query($sql_major);
-                                $r_major = $q_major->rowCount();
-                                $d_major = $q_major->fetch(PDO::FETCH_ASSOC);
+                                $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
+                                $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
+                                $d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC);
 
-                                if ($r_major > 0) {
-                                    echo "
-                                        <table class='table table-striped'>
-                                            <thead>
-                                                <tr>
-                                                    <th scope='col'>No</th>
-                                                    <th>Nama Spesifikasi</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                    ";
-
-                                    $q_major_a = $conn->query($sql_major);
-
-                                    $no = 1;
-
-                                    while ($d_major = $q_major_a->fetch(PDO::FETCH_ASSOC)) {
-                                        echo "
-                                            <tr>
-                                                <td>$no</td>
-                                                <td>" . $d_major['name_major'] . "</td>
-                                            ";
-                                        echo "
-                                                <td>   
-                                                    <a class='btn btn-secondary btn-sm' href='#' data-toggle='modal' data-target='#spf_u_m" . $d_major['id_major'] . "'>
-                                                        Ubah
-                                                    </a>      
-                                                    <a href='?spf&d&id=" . $d_major['id_major'] . "' class='btn btn-danger btn-sm'>
-                                                        <span class='text'>Hapus</span>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        ";
-                                        $no++;
+                                if ($r_jurusan_pdd > 0) {
                                 ?>
-                                        <div class="modal fade" id="<?php echo "spf_u_m" . $d_major['id_major']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-footer">
-                                                        <form method="post" action="?spf&u">
-                                                            <input name="id_major" value="<?php echo $d_major['id_major']; ?>" hidden>
-                                                            Nama Jurusan : <br>
-                                                            <input name="name_major" value="<?php echo $d_major['name_major']; ?>"><br>
-                                                            <button type="submit" class="btn btn-success">SIMPAN</button>
-                                                        </form>
+                                    <table class='table table-striped'>
+                                        <thead>
+                                            <tr>
+                                                <th scope='col'>No</th>
+                                                <th>Nama Spesifikasi</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $q_jurusan_pdd_a = $conn->query($sql_jurusan_pdd);
+
+                                            $no = 1;
+
+                                            while ($d_jurusan_pdd = $q_jurusan_pdd_a->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $no; ?></td>
+                                                    <td><?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></td>
+                                                    <td>
+                                                        <a class='btn btn-secondary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#spf_u_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
+                                                            Ubah
+                                                        </a>
+                                                        <a href='?spf&d&id="<?php echo $d_jurusan_pdd[' id_jurusan_pdd']; ?>' class='btn btn-danger btn-sm'>
+                                                            <span class='text'>Hapus</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <?php $no++; ?>
+                                                <div class="modal fade" id="<?php echo "spf_u_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-footer">
+                                                                <form method="post" action="?spf&u">
+                                                                    <input name="id_jurusan_pdd" value="<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>" hidden>
+                                                                    Nama Jurusan : <br>
+                                                                    <input name="nama_jurusan_pdd" value="<?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>"><br>
+                                                                    <button type="submit" class="btn btn-success">SIMPAN</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
                                 <?php
-                                    }
-
-                                    echo "
-                                            </tbody>
-                                        </table>
-                                    ";
                                 } else {
-                                    echo "
-                                        <h3> Data Spesifikasi Tidak Ada</h3>
-                                    ";
+                                ?>
+                                    <h3> Data Spesifikasi Tidak Ada</h3>
+                                <?php
                                 }
                                 ?>
                             </div>
