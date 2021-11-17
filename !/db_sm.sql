@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2021 at 09:44 AM
+-- Generation Time: Nov 17, 2021 at 09:53 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -477,17 +477,20 @@ INSERT INTO `tb_pdd_pmbb` (`id_mentor_edu`, `name_mentor_edu`) VALUES
 CREATE TABLE `tb_praktik` (
   `id_praktik` int(11) NOT NULL,
   `id_mou` int(11) NOT NULL,
-  `id_institusi` text NOT NULL,
+  `id_institusi` int(11) NOT NULL,
   `nama_praktik` text NOT NULL,
   `tgl_mulai_praktik` date NOT NULL,
   `tgl_selesai_praktik` date NOT NULL,
+  `jumlah_praktik` int(11) NOT NULL,
+  `file_praktik` text NOT NULL,
   `id_spesifikasi_pdd` text NOT NULL,
   `id_jenjang_pdd` text NOT NULL,
   `id_jurusan_pdd` text NOT NULL,
+  `id_akreditasi` text NOT NULL,
   `id_user` text NOT NULL,
   `nama_mentor_praktik` text NOT NULL,
   `email_mentor_praktik` text NOT NULL,
-  `no_mentor_praktik` text NOT NULL,
+  `telp_mentor_praktik` text NOT NULL,
   `status_praktik` enum('Y','N') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
