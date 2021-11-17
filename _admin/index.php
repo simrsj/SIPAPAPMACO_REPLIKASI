@@ -55,9 +55,25 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				if ($_SESSION['level_user'] == 1) {
 				?>
 					<li class="nav-item">
+						<a class="nav-link" href="?akr">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Akreditasi</span>
+						</a>
+						<a class="nav-link" href="?hrg">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Harga</span>
+						</a>
+						<a class="nav-link" href="?ins">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Institusi</span>
+						</a>
 						<a class="nav-link" href="?jrs">
 							<i class="fas fa-fw fa-table"></i>
 							<span>Jurusan</span>
+						</a>
+						<a class="nav-link" href="?mes">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Mess</span>
 						</a>
 						<a class="nav-link" href="?mou">
 							<i class="fas fa-fw fa-table"></i>
@@ -70,6 +86,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<a class="nav-link" href="?spf">
 							<i class="fas fa-fw fa-table"></i>
 							<span>Spesifikasi</span>
+						</a>
+						<a class="nav-link" href="?spf">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Unit</span>
 						</a>
 					</li>
 				<?php

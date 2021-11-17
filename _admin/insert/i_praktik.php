@@ -1,11 +1,22 @@
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="h3 mb-2 text-gray-800">Tambah Data Praktikan</h1>
+        </div>
+    </div>
     <div class="card shadow mb-4">
         <div class="card-body">
             <form action="" class="form-group" method="POST">
-                <!-- Mou -->
+                <!-- Data Praktikan -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <label>Institusi : <span style="color:red">*</span></label><br>
+                        <b>Data Praktikan</b>
+                    </div>
+                </div>
+                <!-- Mou dan Nama Praktikan -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        Institusi : <span style="color:red">*</span><br>
                         <?php
                         $sql_mou = "SELECT * FROM tb_mou 
                             JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi  
@@ -13,16 +24,15 @@
 
                         $q_mou = $conn->query($sql_mou);
                         $r_mou = $q_mou->rowCount();
-
                         if ($r_mou > 0) {
                             $no = 1;
                         ?>
-                            <select class='form-select' aria-label='Default select example' name='id_mou' required>
-                                <option>-- <i>Pilih</i>--</option>
+                            <select class='form-control' aria-label='Default select example' name='id_mou' required>
+                                <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
-                                    <option class='text-wrap' value='<?php $d_mou['id_institusi']; ?>'>
+                                    <option value='<?php echo $d_mou['id_mou']; ?>'>
                                         <?php echo $d_mou['nama_institusi']; ?>
                                     </option>
                                 <?php
@@ -30,7 +40,7 @@
                                 }
                                 ?>
                             </select>
-                            <br><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i>
+                            <i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i>
                         <?php
                         } else {
                         ?>
@@ -39,33 +49,33 @@
                         }
                         ?>
                     </div>
-                </div>
-                <hr>
-                <!-- Jurusan dan Jenjang -->
-                <div class="row">
                     <div class="col-lg-6">
+                        Nama Praktikan : <span style="color:red">*</span><br>
+                        <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Nama Praktikan" required>
+                    </div>
+                </div>
+                <br>
+                <!-- Jurusan, Jenjang, Spesifikasi dan Akreditasi -->
+                <div class="row">
+                    <div class="col-lg-3">
                         Pilih Jurusan : <span style="color:red">*</span><br>
                         <?php
                         $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC";
 
                         $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
                         $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
-                        $d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC);
 
                         if ($r_jurusan_pdd > 0) {
-                            $q_jurusan_pdd_a = $conn->query($sql_jurusan_pdd);
-                            $no = 1;
                         ?>
-                            <select class='form-select' aria-label='Default select example' required name='jurusan_pdd'>
-                                <option>-- <i>Pilih</i>--</option>
+                            <select class='form-control' aria-label='Default select example' name='id_jurusan_pdd' required>
+                                <option value="">-- <i>Pilih</i>--</option>
                                 <?php
-                                while ($d_jurusan_pdd = $q_jurusan_pdd_a->fetch(PDO::FETCH_ASSOC)) {
+                                while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
-                                    <option class='text-wrap' value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
+                                    <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
                                         <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
                                     </option>
                                 <?php
-                                    $no++;
                                 }
                                 ?>
                             </select>
@@ -77,29 +87,25 @@
                         }
                         ?>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                         Pilih Jenjang : <span style="color:red">*</span><br>
                         <?php
                         $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
 
                         $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
                         $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
-                        $d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC);
 
                         if ($r_jenjang_pdd > 0) {
-                            $q_jenjang_pdd_a = $conn->query($sql_jenjang_pdd);
-                            $no = 1;
                         ?>
-                            <select class='form-select' aria-label='Default select example' required name='jenjang_pdd'>
-                                <option>-- <i>Pilih</i>--</option>
+                            <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd' required>
+                                <option value="">-- <i>Pilih</i>--</option>
                                 <?php
-                                while ($d_jenjang_pdd = $q_jenjang_pdd_a->fetch(PDO::FETCH_ASSOC)) {
+                                while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
                                         <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
                                     </option>
                                 <?php
-                                    $no++;
                                 }
                                 ?>
                             </select>
@@ -111,34 +117,25 @@
                         }
                         ?>
                     </div>
-                </div>
-                <br>
-                <!-- Spesifikasi dan Akreditasi -->
-                <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                         Pilih Spesifikasi : <span style="color:red">*</span><br>
                         <?php
                         $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
 
                         $q_spesifikasi_pdd = $conn->query($sql_spesifikasi_pdd);
                         $r_spesifikasi_pdd = $q_spesifikasi_pdd->rowCount();
-                        $d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC);
 
                         if ($r_spesifikasi_pdd > 0) {
-
-                            $q_spesifikasi_pdd_a = $conn->query($sql_spesifikasi_pdd);
-                            $no = 1;
                         ?>
-                            <select class='form-select' aria-label='Default select example' required name='spesifikasi_pdd'>
-                                <option>-- <i>Pilih</i>--</option>
+                            <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd' required>
+                                <option value="">-- <i>Pilih</i>--</option>
                                 <?php
-                                while ($d_spesifikasi_pdd = $q_spesifikasi_pdd_a->fetch(PDO::FETCH_ASSOC)) {
+                                while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
-                                    <option class='text-wrap' value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
+                                    <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
                                         <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
                                     </option>
                                 <?php
-                                    $no++;
                                 }
                                 ?>
                             </select>
@@ -150,30 +147,25 @@
                         }
                         ?>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                         Akreditasi : <span style="color:red">*</span><br>
                         <?php
                         $sql_akreditasi = "SELECT * FROM tb_akreditasi";
 
                         $q_akreditasi = $conn->query($sql_akreditasi);
                         $r_akreditasi = $q_akreditasi->rowCount();
-                        $d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC);
 
                         if ($r_akreditasi > 0) {
-
-                            $q_akreditasi_a = $conn->query($sql_akreditasi);
-                            $no = 1;
                         ?>
-                            <select name='akreditasi' class='form-select' aria-label='Default select example' required>
-                                <option>-- <i>Pilih</i>--</option>
+                            <select class='form-control' aria-label='Default select example' name='id_akreditasi' required>
+                                <option value="">-- <i>Pilih</i>--</option>
                                 <?php
-                                while ($d_akreditasi = $q_akreditasi_a->fetch(PDO::FETCH_ASSOC)) {
+                                while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
-                                    <option class='text-wrap' value='<?php $d_akreditasi['id_akreditasi']; ?>'>
+                                    <option class='text-wrap' value='<?php echo $d_akreditasi['id_akreditasi']; ?>'>
                                         <?php echo $d_akreditasi['nama_akreditasi']; ?>
                                     </option>
                                 <?php
-                                    $no++;
                                 }
                                 ?>
                             </select>
@@ -184,6 +176,27 @@
                         <?php
                         }
                         ?>
+                    </div>
+                </div>
+                <br>
+                <!-- Jumlah Praktikan, Tanggal Mulai, Tanggal Selesai, dan Unggah Surat -->
+                <div class="row">
+                    <div class="col-lg-3">
+                        Jumlah Praktikan : <span style="color:red">*</span><br>
+                        <input type="number" class="form-control" name="jumlah_praktik" min="1" required>
+                    </div>
+                    <div class="col-lg-3">
+                        Tanggal Mulai : <span style="color:red">*</span><br>
+                        <input type="date" class="form-control" name="tgl_mulai_praktik" required>
+                    </div>
+                    <div class="col-lg-3">
+                        Tanggal Akhir : <span style="color:red">*</span><br>
+                        <input type="date" class="form-control" name="tgl_selesai_praktik" required>
+                    </div>
+                    <div class="col-lg-3">
+                        Unggah Surat : <span style="color:red">*</span><br>
+                        <input type="file" name="file_praktik" accept="application/pdf">
+                        <br><i style='font-size:12px;'>Data unggah harus PDF, Maksimal 5 MB</i>
                     </div>
                 </div>
                 <hr>
@@ -200,49 +213,23 @@
                     ?>
                     <div class="col-lg-4">
                         Nama : <span style="color:red">*</span><br>
-                        <input type="text" name="mentor_praktik" size="35" value="<?php echo $d_user['nama_user']; ?>" required>
+                        <input type="text" class="form-control" name="nama_mentor_praktik" value="<?php echo $d_user['nama_user']; ?>" required>
                     </div>
                     <div class="col-lg-4">
-                        Email : <span style="color:red">*</span><br>
-                        <input type="email" name="email_praktik" size="35" value="<?php echo $d_user['email_user']; ?>" required>
+                        Email :<br>
+                        <input type="text" class="form-control" name="email_mentor_praktik" value="<?php echo $d_user['email_user']; ?>">
                     </div>
                     <div class="col-lg-4">
                         Telpon : <span style="color:red">*</span><br>
-                        <input type="number" name="telp_praktik" value="<?php echo $d_user['no_telp_user']; ?>" required>
-                        <br><i style='font-size:12px;'>Isian hanya berupa angka</i>
-                    </div>
-                </div>
-                <hr>
-                <!-- Data Praktikan -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <b>Data Praktikan</b>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        Jumlah Praktikan : <span style="color:red">*</span><br>
-                        <input type="number" name="jumlah_praktik" required>
-                    </div>
-                    <div class="col-lg-3">
-                        Tanggal Mulai : <span style="color:red">*</span><br>
-                        <input type="date" name="tgl_mulai_praktik" required>
-                    </div>
-                    <div class="col-lg-3">
-                        Tanggal Akhir : <span style="color:red">*</span><br>
-                        <input type="date" name="tgl_selesai_praktik" required>
-                    </div>
-                    <div class="col-lg-3">
-                        Unggah Surat : <span style="color:red">*</span><br>
-                        <input type="file" name="file_praktik" accept="application/pdf" required />
-                        <br><i style='font-size:12px;'>Data unggah harus PDF</i>
+                        <input type="number" class="form-control" name="telp_mentor_praktik" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
+                        <i style='font-size:12px;'>Isian hanya berupa angka</i>
                     </div>
                 </div>
                 <hr>
                 <!-- Simpan -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <input type="submit" name="Simpan" value="Simpan" class="btn btn-success">
+                        <input type="submit" name="simpan_praktik" value="Simpan" class="btn btn-success">
                     </div>
                 </div>
             </form>
@@ -250,49 +237,46 @@
     </div>
 </div>
 <?php
-if (isset($_POST['Simpan'])) {
-    $id_mou = $_POST['id_mou'];
-    $id_mou = $_POST['id_mou'];
-    $jurusan_pdd = $_POST['jurusan_pdd'];
-    $jenjang_pdd = $_POST['jenjang_pdd'];
-    $spesifikasi_pdd = $_POST['spesifikasi_pdd'];
-    $akreditasi = $_POST['akreditasi'];
-    $mentor_praktik = $_POST['mentor_praktik'];
-    $email_praktik = $_POST['email_praktik'];
-    $telp_praktik = $_POST['telp_praktik'];
-    $jumlah_praktik = $_POST['jumlah praktik'];
-    $tgl_mulai_praktik = $_POST['tgl_mulai_praktik'];
-    $tgl_selesai_praktik = $_POST['tgl_selesai_praktik'];
-
+if (isset($_POST['simpan_praktik'])) {
     $sql_insert = " INSERT INTO tb_praktik (
         id_mou,
-        id_institusi, 
-        tgl_akhir_mou, 
-        no_rsj_mou, 
-        no_institusi_mou,
-        jurusan_mou,
-        spek_pdd_mou,
-        jenjang_pdd_mou,
-        akreditasi_mou,
-        ket_mou
+        id_institusi,
+        nama_praktik,  
+        tgl_mulai_praktik,
+        tgl_selesai_praktik, 
+        file_praktik, 
+        id_spesifikasi_pdd,
+        id_jenjang_pdd, 
+        id_jurusan_pdd,
+        id_akreditasi,
+        id_user, 
+        nama_mentor_praktik, 
+        email_mentor_praktik,
+        no_mentor_praktik,  
+        status_praktik
     ) VALUE (
-        '" . $_POST['nama_institusi'] . "',
-        '" . $_POST['tgl_mulai_mou'] . "',
-        '" . $_POST['tgl_akhir_mou'] . "',        
-        '" . $_POST['no_rsj_mou'] . "',
-        '" . $_POST['no_institut_mou'] . "',
-        '" . $_POST['jurusan_mou'] . "',
-        '" . $_POST['spek_pdd_mou'] . "',
-        '" . $_POST['jenjang_pdd_mou'] . "',
-        '" . $_POST['akreditasi_mou'] . "',
-        '" . $_POST['ket_mou'] . "'
+        '" . $_POST['id_mou'] . "',
+        '" . $_POST['id_mou'] . "',
+        '" . $_POST['nama_praktik'] . "',
+        '" . $_POST['tgl_mulai_praktik'] . "',
+        '" . $_POST['tgl_selesai_praktik'] . "',  
+        '" . $_POST['file_praktik'] . "',        
+        '" . $_POST['id_spesifikasi_pdd'] . "',
+        '" . $_POST['id_jenjang_pdd'] . "',
+        '" . $_POST['id_jurusan_pdd'] . "',
+        '" . $_POST['id_akreditasi'] . "',
+        '" . $_POST['id_user'] . "',
+        '" . $_POST['nama_mentor_praktik'] . "',
+        '" . $_POST['email_mentor_praktik'] . "',
+        '" . $_POST['telp_mentor_praktik'] . "'
+        'Y'
     )";
-    $conn->query($sql_insert);
+    echo $sql_insert;
+    // $conn->query($sql_insert);
 ?>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         document.location.href = "?mou";
-    </script>
+    </script> -->
 <?php
-
 }
 ?>
