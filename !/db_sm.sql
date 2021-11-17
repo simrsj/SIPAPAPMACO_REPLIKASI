@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2021 at 09:53 AM
+-- Generation Time: Nov 17, 2021 at 04:18 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -482,7 +482,7 @@ CREATE TABLE `tb_praktik` (
   `tgl_mulai_praktik` date NOT NULL,
   `tgl_selesai_praktik` date NOT NULL,
   `jumlah_praktik` int(11) NOT NULL,
-  `file_praktik` text NOT NULL,
+  `surat_praktik` text NOT NULL,
   `id_spesifikasi_pdd` text NOT NULL,
   `id_jenjang_pdd` text NOT NULL,
   `id_jurusan_pdd` text NOT NULL,

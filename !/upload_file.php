@@ -12,10 +12,10 @@
 
     <form action="" method="POST" enctype="multipart/form-data">
         <div>
-            <label>File Gambar (JPEG)</label> <br>
-            <input type="file" name="jpeg" accept="image/jpeg"><br>
+            <label>File Gambar (JPG)</label> <br>
+            <input type="file" name="jpg"><br>
             <label>File Dokumen (PDF)</label> <br>
-            <input type="file" name="pdf" accept="application/pdf">
+            <input type="file" name="pdf">
         </div>
         <div style="margin-top: 1rem">
             <button>Upload</button>
@@ -39,25 +39,9 @@ if (!is_dir($folderUpload)) {
     mkdir($folderUpload, 0777, $rekursif = true);
 }
 
-$fileJPEG = (object) @$_FILES['jpeg'];
+$fileJPG = (object) @$_FILES['jpg'];
 $filePDF = (object) @$_FILES['pdf'];
 
-if ($fileJPEG->size > 1000 * 2000) {
-    die("File JPEG tidak boleh lebih dari 2MB");
-} elseif ($fileJPEG->type !== 'image/jpeg') {
-    die("File harus JPEG!");
-} else {
-    $uploadJPEGSukses = move_uploaded_file(
-        $fileJPEG->tmp_name,
-        "{$folderUpload}/{$fileJPEG->name}"
-    );
-
-    if ($uploadJPEGSukses) {
-        $link = "{$folderUpload}/{$fileJPEG->name}";
-        echo "Sukses Upload JPEG: <a href='{$link}'>{$fileJPEG->name}</a>";
-        echo "<br>";
-    }
-}
 
 if ($filePDF->size > 1000 * 10) {
     die("File PDF tidak boleh lebih dari 10KB");
@@ -72,6 +56,23 @@ if ($filePDF->size > 1000 * 10) {
     if ($uploadPDFSukses) {
         $link = "{$folderUpload}/{$filePDF->name}";
         echo "Sukses Upload PDF: <a href='{$link}'>{$filePDF->name}</a>";
+        echo "<br>";
+    }
+}
+
+if ($fileJPG->size > 1000 * 2000) {
+    die("File JPG tidak boleh lebih dari 2MB");
+} elseif ($fileJPG->type !== 'image/jpg') {
+    die("File harus JPG!");
+} else {
+    $uploadJPGSukses = move_uploaded_file(
+        $fileJPG->tmp_name,
+        "{$folderUpload}/{$fileJPG->name}"
+    );
+
+    if ($uploadJPGSukses) {
+        $link = "{$folderUpload}/{$fileJPG->name}";
+        echo "Sukses Upload JPG: <a href='{$link}'>{$fileJPG->name}</a>";
         echo "<br>";
     }
 }

@@ -12,3 +12,10 @@ JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
 JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
 JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
 JOIN tb_user ON tb_mou.id_user = tb_user.id_user
+
+git status
+git add .
+git add .
+git commit -m ""
+git pull
+git push

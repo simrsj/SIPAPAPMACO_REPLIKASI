@@ -195,8 +195,8 @@
                     </div>
                     <div class="col-lg-3">
                         Unggah Surat : <span style="color:red">*</span><br>
-                        <input type="file" name="file_praktik" accept="application/pdf">
-                        <br><i style='font-size:12px;'>Data unggah harus PDF, Maksimal 5 MB</i>
+                        <input type="file" name="surat_praktik" accept="application/pdf">
+                        <br><i style='font-size:12px;'>Data unggah harus PDF, Maksimal 1 MB</i>
                     </div>
                 </div>
                 <hr>
@@ -238,13 +238,51 @@
 </div>
 <?php
 if (isset($_POST['simpan_praktik'])) {
+
+
+    //alamat file surat masuk
+    $alamat_surat_praktik = "./_file/praktikan";
+
+    //pembuatan alamat bila tidak ada
+    if (!is_dir($alamat_surat_praktik)) {
+        mkdir($alamat_surat_praktik, 0777, $rekursif = true);
+    }
+
+    $file_surat_praktik = (object) @$_FILES['surat_praktik'];
+
+    //mulai upload file
+    if ($file_surat_praktik->size > 1000 * 1000) {
+?>
+        <script>
+            alert("File tidak boleh lebih dari 1 MB");
+        </script>
+    <?php
+    } elseif ($file_surat_praktik->type !== 'application/pdf') {
+    ?>
+        <script>
+            alert("File ktp harus PDF!");
+        </script>
+    <?php
+    } else {
+        $unggah_surat_praktik = move_uploaded_file(
+            $file_surat_praktik->tmp_name,
+            "{$alamat_surat_praktik}/{$file_surat_praktik->name}"
+        );
+    }
+
+    // if ($unggah_surat_praktik) {
+    //     $link = "{$alamat_surat_praktik}/{$file_surat_praktik->name}";
+    //     echo "Sukses Upload Foto: <a href='{$link}'>{$file_surat_praktik->name}</a>";
+    //     echo "<br>";
+    // }
+
     $sql_insert = " INSERT INTO tb_praktik (
         id_mou,
         id_institusi,
         nama_praktik,  
         tgl_mulai_praktik,
         tgl_selesai_praktik, 
-        file_praktik, 
+        surat_praktik, 
         id_spesifikasi_pdd,
         id_jenjang_pdd, 
         id_jurusan_pdd,
@@ -260,7 +298,7 @@ if (isset($_POST['simpan_praktik'])) {
         '" . $_POST['nama_praktik'] . "',
         '" . $_POST['tgl_mulai_praktik'] . "',
         '" . $_POST['tgl_selesai_praktik'] . "',  
-        '" . $_POST['file_praktik'] . "',        
+        '" . $unggah_surat . "',        
         '" . $_POST['id_spesifikasi_pdd'] . "',
         '" . $_POST['id_jenjang_pdd'] . "',
         '" . $_POST['id_jurusan_pdd'] . "',
@@ -273,7 +311,7 @@ if (isset($_POST['simpan_praktik'])) {
     )";
     echo $sql_insert;
     // $conn->query($sql_insert);
-?>
+    ?>
     <!-- <script type="text/javascript">
         document.location.href = "?mou";
     </script> -->
