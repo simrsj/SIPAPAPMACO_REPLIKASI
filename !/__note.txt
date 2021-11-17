@@ -16,6 +16,6 @@ JOIN tb_user ON tb_mou.id_user = tb_user.id_user
 git status
 git add .
 git add .
-git commit -m "UP DB, upload success"
+git commit -m "-"
 git pull
 git push
