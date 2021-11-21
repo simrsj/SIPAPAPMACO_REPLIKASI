@@ -21,6 +21,7 @@
             <button>Upload</button>
         </div>
     </form>
+    <?php echo date('Y-m-d'); ?>
 </body>
 
 </html>
@@ -28,10 +29,20 @@
 <?php
 error_reporting(0);
 
-//diusahakan file form dan uploda di pisahs
+//diusahakan file form dan uploda di pisah
 
 //alamat File
 $folderUpload = "./_file";
+
+//Rumah Nama File
+$nama_pdf = "BUJAAANG";
+$_FILES['pdf']['name'] = $nama_pdf . ".pdf";
+$files = $_FILES;
+
+//Cek Variable File
+echo "<pre>";
+print_r($files);
+echo "</pre>";
 
 # periksa apakah folder sudah ada
 if (!is_dir($folderUpload)) {
@@ -47,10 +58,12 @@ if ($fileJPEG->size > 1000 * 2000) {
 } elseif ($fileJPEG->type !== 'image/jpeg') {
     die("File harus JPEG!");
 } else {
+
     $uploadJPEGSukses = move_uploaded_file(
         $fileJPEG->tmp_name,
         "{$folderUpload}/{$fileJPEG->name}"
     );
+
 
     if ($uploadJPEGSukses) {
         $link = "{$folderUpload}/{$fileJPEG->name}";
@@ -58,23 +71,5 @@ if ($fileJPEG->size > 1000 * 2000) {
         echo "<br>";
     }
 }
-
-if ($filePDF->size > 1000 * 10) {
-    die("File PDF tidak boleh lebih dari 10KB");
-} elseif ($filePDF->type !== 'application/pdf') {
-    die("File harus PDF!");
-} else {
-    $uploadPDFSukses = move_uploaded_file(
-        $filePDF->tmp_name,
-        "{$folderUpload}/{$filePDF->name}"
-    );
-
-    if ($uploadPDFSukses) {
-        $link = "{$folderUpload}/{$filePDF->name}";
-        echo "Sukses Upload PDF: <a href='{$link}'>{$filePDF->name}</a>";
-        echo "<br>";
-    }
-}
-
 
 ?>

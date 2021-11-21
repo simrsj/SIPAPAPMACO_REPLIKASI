@@ -36,14 +36,16 @@
                                         <option class="text-wrap form-control form-control-user" required>--<i> Pilih Institusi</i>--</option>
 
                                         <?php
-                                        $sql_mou = "SELECT * FROM tb_mou order by institusi_mou ASC";
+                                        $sql_mou = "SELECT * FROM tb_mou 
+                                        JOIN tb_institusi ON tb_mou.id_institusi= tb_institusi.id_institusi
+                                        order by tb_institusi.nama_institusi ASC";
 
                                         $q_mou = $conn->query($sql_mou);
                                         $r_mou = $q_mou->rowCount();
 
                                         while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
-                                            <option class='text-wrap' value='<?php echo $d_mou['id_mou']; ?> '> <?php echo $d_mou['institusi_mou']; ?> </option>
+                                            <option class='text-wrap' value='<?php echo $d_mou['id_institusi']; ?> '> <?php echo $d_mou['nama_institusi']; ?> </option>
                                         <?php
                                             $no++;
                                         }

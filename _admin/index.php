@@ -3,7 +3,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 ?>
 
 	<body id="page-top">
-
 		<!-- Page Wrapper -->
 		<div id="wrapper">
 
@@ -71,6 +70,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							<i class="fas fa-fw fa-table"></i>
 							<span>Jurusan</span>
 						</a>
+						<a class="nav-link" href="?jjg">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Jenjang</span>
+						</a>
 						<a class="nav-link" href="?mes">
 							<i class="fas fa-fw fa-table"></i>
 							<span>Mess</span>
@@ -129,6 +132,14 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/update/u_jurusan.php";
 						} else {
 							include "_admin/view/v_jurusan.php";
+						}
+					} elseif (isset($_GET['jjg'])) {
+						if (isset($_GET['i'])) {
+							include "_admin/insert/i_jenjang.php";
+						} elseif (isset($_GET['u'])) {
+							include "_admin/update/u_jenjang.php";
+						} else {
+							include "_admin/view/v_jenjang.php";
 						}
 					} elseif (isset($_GET['pmb'])) {
 						if (isset($_GET['i'])) {

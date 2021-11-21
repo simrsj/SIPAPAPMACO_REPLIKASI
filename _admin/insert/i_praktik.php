@@ -50,8 +50,8 @@
                         ?>
                     </div>
                     <div class="col-lg-6">
-                        Nama Praktikan : <span style="color:red">*</span><br>
-                        <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Nama Praktikan" required>
+                        Periode Praktik : <span style="color:red">*</span><br>
+                        <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Periode Praktik" required>
                     </div>
                 </div>
                 <br>
@@ -243,6 +243,9 @@ if (isset($_POST['simpan_praktik'])) {
     //alamat file surat masuk
     $alamat_surat_praktik = "./_file/praktikan";
 
+    //ubah Nama File PDF
+    $_FILES['surat_praktik']['name'] = "praktik_" . $_POST['id_mou'] . date('Y-m-d') . ".pdf";
+
     //pembuatan alamat bila tidak ada
     if (!is_dir($alamat_surat_praktik)) {
         mkdir($alamat_surat_praktik, 0777, $rekursif = true);
@@ -253,21 +256,28 @@ if (isset($_POST['simpan_praktik'])) {
     //mulai upload file
     if ($file_surat_praktik->size > 1000 * 1000) {
 ?>
-        <script>
-            alert("File tidak boleh lebih dari 1 MB");
-        </script>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>File Unggah Surat</strong>Harus Kurang dari 1 MB
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     <?php
-    } elseif ($file_surat_praktik->type !== 'application/pdf') {
+        die();
+    } elseif ($file_surat_prqaktik->type !== 'application/pdf') {
+        die("File ktp harus PDF!");
     ?>
         <script>
             alert("File ktp harus PDF!");
         </script>
     <?php
+        die();
     } else {
         $unggah_surat_praktik = move_uploaded_file(
             $file_surat_praktik->tmp_name,
             "{$alamat_surat_praktik}/{$file_surat_praktik->name}"
         );
+        //$link_surat_praktik = "{$folderUpload}/{$fileJPEG->name}";
     }
 
     // if ($unggah_surat_praktik) {
@@ -280,6 +290,7 @@ if (isset($_POST['simpan_praktik'])) {
         id_mou,
         id_institusi,
         nama_praktik,  
+        tgl_input_praktik,
         tgl_mulai_praktik,
         tgl_selesai_praktik, 
         surat_praktik, 
@@ -296,9 +307,10 @@ if (isset($_POST['simpan_praktik'])) {
         '" . $_POST['id_mou'] . "',
         '" . $_POST['id_mou'] . "',
         '" . $_POST['nama_praktik'] . "',
+        '" . date('Y-m-d') . "',
         '" . $_POST['tgl_mulai_praktik'] . "',
         '" . $_POST['tgl_selesai_praktik'] . "',  
-        '" . $unggah_surat . "',        
+        '" . $link_surat_praktik . "',        
         '" . $_POST['id_spesifikasi_pdd'] . "',
         '" . $_POST['id_jenjang_pdd'] . "',
         '" . $_POST['id_jurusan_pdd'] . "',
