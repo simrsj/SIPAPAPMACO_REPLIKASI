@@ -90,7 +90,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							<i class="fas fa-fw fa-table"></i>
 							<span>Spesifikasi</span>
 						</a>
-						<a class="nav-link" href="?spf">
+						<a class="nav-link" href="?uni">
 							<i class="fas fa-fw fa-table"></i>
 							<span>Unit</span>
 						</a>
@@ -115,7 +115,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div id="content">
 					<?php
 					include "_admin/_nav.php";
-					if (isset($_GET['mou'])) {
+					if (isset($_GET['akr'])) {
+						include "_admin/view/v_akreditasi.php";
+					} elseif (isset($_GET['mou'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_mou.php";
 						} elseif (isset($_GET['u'])) {
@@ -125,22 +127,20 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						} else {
 							include "_admin/view/v_mou.php";
 						}
+					} elseif (isset($_GET['ins'])) {
+						if (isset($_GET['i'])) {
+							include "_admin/insert/i_institusi.php";
+						} elseif (isset($_GET['u'])) {
+							include "_admin/update/u_institusi.php";
+						} elseif (isset($_GET['d'])) {
+							include "_admin/delete/d_institusi.php";
+						} else {
+							include "_admin/view/v_institusi.php";
+						}
 					} elseif (isset($_GET['jrs'])) {
-						if (isset($_GET['i'])) {
-							include "_admin/insert/i_jurusan.php";
-						} elseif (isset($_GET['u'])) {
-							include "_admin/update/u_jurusan.php";
-						} else {
-							include "_admin/view/v_jurusan.php";
-						}
+						include "_admin/view/v_jurusan.php";
 					} elseif (isset($_GET['jjg'])) {
-						if (isset($_GET['i'])) {
-							include "_admin/insert/i_jenjang.php";
-						} elseif (isset($_GET['u'])) {
-							include "_admin/update/u_jenjang.php";
-						} else {
-							include "_admin/view/v_jenjang.php";
-						}
+						include "_admin/view/v_jenjang.php";
 					} elseif (isset($_GET['pmb'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_pembimbing.php";
@@ -156,15 +156,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/view/v_praktik.php";
 						}
 					} elseif (isset($_GET['spf'])) {
-						if (isset($_GET['u'])) {
-							include "_admin/update/u_spesifikasi.php";
-						} elseif (isset($_GET['d'])) {
-							include "_admin/delete/d_spesifikasi.php";
-						} elseif (isset($_GET['i'])) {
-							include "_admin/insert/i_spesifikasi.php";
-						} else {
-							include "_admin/view/v_spesifikasi.php";
-						}
+						include "_admin/view/v_spesifikasi.php";
 					}
 					?>
 				</div>

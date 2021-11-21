@@ -244,7 +244,7 @@ if (isset($_POST['simpan_praktik'])) {
     $alamat_surat_praktik = "./_file/praktikan";
 
     //ubah Nama File PDF
-    $_FILES['surat_praktik']['name'] = "praktik_" . $_POST['id_mou'] . date('Y-m-d') . ".pdf";
+    $_FILES['surat_praktik']['name'] = "praktik_" . $_POST['id_mou'] . "_" . date('Y-m-d') . ".pdf";
 
     //pembuatan alamat bila tidak ada
     if (!is_dir($alamat_surat_praktik)) {
@@ -264,14 +264,13 @@ if (isset($_POST['simpan_praktik'])) {
         </div>
     <?php
         die();
-    } elseif ($file_surat_prqaktik->type !== 'application/pdf') {
-        die("File ktp harus PDF!");
+    } elseif ($file_surat_praktik->type !== 'application/pdf') {
     ?>
         <script>
-            alert("File ktp harus PDF!");
+            alert("File asdasd harus PDF!");
         </script>
     <?php
-        die();
+        // die();
     } else {
         $unggah_surat_praktik = move_uploaded_file(
             $file_surat_praktik->tmp_name,
@@ -280,11 +279,15 @@ if (isset($_POST['simpan_praktik'])) {
         //$link_surat_praktik = "{$folderUpload}/{$fileJPEG->name}";
     }
 
-    // if ($unggah_surat_praktik) {
-    //     $link = "{$alamat_surat_praktik}/{$file_surat_praktik->name}";
-    //     echo "Sukses Upload Foto: <a href='{$link}'>{$file_surat_praktik->name}</a>";
-    //     echo "<br>";
-    // }
+    if ($unggah_surat_praktik) {
+        $link = "{$alamat_surat_praktik}/{$file_surat_praktik->name}";
+        echo "Sukses Upload Foto: <a href='{$link}'>{$file_surat_praktik->name}</a>";
+        echo "<br>";
+    }
+
+    print_r($_FILES);
+
+    echo "<br><br>";
 
     $sql_insert = " INSERT INTO tb_praktik (
         id_mou,
