@@ -1,0 +1,37 @@
+Institusional Fee;Per siswa/periode;50000;BIAYA ADMINISTRASI;1
+Management Fee;Per siswa/periode;75000;BIAYA ADMINISTRASI;1
+Alat Tulis Kantor;Per siswa/periode;5000;BIAYA ADMINISTRASI;1
+Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/ periode;5000;BIAYA BAHAN HABIS PAKAI;1
+Orientasi Keselamatan Pasien;Per siswa/periode;10.000,00;BIAYA OVERHEAD OPERASIONAL;1
+Log Book (dibayar 1 kali);Per siswa/periode;20.000,00;BIAYA OVERHEAD OPERASIONAL;1
+Name Tag (dibayar 1 kali);Per siswa/periode;5.000,00;BIAYA OVERHEAD OPERASIONAL;1
+Clinical science session (CSS);Per siswa/kali;37.500,00;BIAYA PEMBELAJARAN;1
+Case report session (CRS);Per siswa/kali;37.500,00;BIAYA PEMBELAJARAN;1
+Case base Discusion (CBD);Per siswa/kali;37.500,00;BIAYA PEMBELAJARAN;1
+Pengayaan ? Observasi;Per siswa/kali;37.500,00;BIAYA PEMBELAJARAN;1
+RPS (Resource Person Session);Per siswa/kali;37.500,00;BIAYA PEMBELAJARAN;1
+Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Dokter Umum di IGD;Per siswa/kali;37.500,00;BIAYA PEMBELAJARAN;1
+Mini Clinical Examination  Evaluation (Mini CeX);Per siswa/kali;150.000,00;BIAYA UJIAN;1
+Ujian;Per siswa/kali;150.000,00;BIAYA UJIAN;1
+Makan Pembimbing Ujian;Per siswa/kali;20.000,00;BIAYA UJIAN;1
+Standar Pasien;Per siswa/kali;100.000,00;BIAYA UJIAN;1
+Institusional Fee;Per siswa/periode;20.000,00;BIAYA ADMINISTRASI;2
+Management Fee;Per siswa/periode;20.000,00;BIAYA ADMINISTRASI;2
+Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/ periode;20.000,00;BIAYA BAHAN HABIS PAKAI;2
+Orientasi ;Per periode / Kali;75.000,00;BIAYA OVERHEAD OPERASIONAL;2
+Keselamatan Pasien;Per periode / Kali;150.000,00;BIAYA OVERHEAD OPERASIONAL;2
+Log Book (dibayar 1 kali);Per siswa/periode;20.000,00;BIAYA OVERHEAD OPERASIONAL;2
+Name Tag (dibayar 1 kali);Per siswa/periode;10.000,00;BIAYA OVERHEAD OPERASIONAL;2
+RPS (Resource Person Session);Per periode/kali;150.000,00;BIAYA PEMBELAJARAN;2
+Bed side teaching (BST) D3;Per siswa/kali;50.000,00;BIAYA PEMBELAJARAN;2
+Bed side teaching (BST) S1/Profesi;Per siswa/kali;75.000,00;BIAYA PEMBELAJARAN;2
+Materi (TAK, Komunikasi Terapeutik, Dokumentasi Keperawatan) ;Per periode/kali;150.000,00;BIAYA PEMBELAJARAN;2
+Ujian;Per siswa/hari;150.000,00;BIAYA UJIAN;2
+Makan dan Snack Penguji;Per penguji/kali;20.000,00;BIAYA UJIAN;2
+Bahan Habis Pakai Ujian;Per siswa/kali;100.000,00;BIAYA UJIAN;2
+Institusional Fee Ujian;Per siswa/periode ujian;150.000,00;BIAYA UJIAN;2
+Management Fee Ujian;Per siswa/periode ujian;20.000,00;BIAYA UJIAN;2
+Aula Utama;Per hari/keg;1.000.000,00;BIAYA TEMPAT;
+Aula NAPZA;Per hari/keg;750.000,00;BIAYA TEMPAT;
+Ruang SPI;Per hari/keg;500.000,00;BIAYA TEMPAT;
+Ruang R. Komite Medik;Per hari/keg;750.000,00;BIAYA TEMPAT;
