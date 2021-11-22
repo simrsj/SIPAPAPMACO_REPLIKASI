@@ -45,6 +45,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				if ($_SESSION['level_user'] == 1) {
 				?>
 					<li class="nav-item">
+						<a class="nav-link" href="?test">
+							<i class="fas fa-fw fa-table"></i>
+							<span>TEST</span>
+						</a>
 						<a class="nav-link" href="?akr">
 							<i class="fas fa-fw fa-table"></i>
 							<span>Akreditasi</span>
