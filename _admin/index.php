@@ -157,6 +157,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						}
 					} elseif (isset($_GET['spf'])) {
 						include "_admin/view/v_spesifikasi.php";
+					} elseif (isset($_GET['uni'])) {
+						include "_admin/view/v_unit.php";
+					} else {
+						include "_admin/home.php";
 					}
 					?>
 				</div>

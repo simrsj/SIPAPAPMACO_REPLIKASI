@@ -267,7 +267,7 @@ if (isset($_POST['simpan_praktik'])) {
     } elseif ($file_surat_praktik->type !== 'application/pdf') {
     ?>
         <script>
-            alert("File asdasd harus PDF!");
+            alert("File Surat Harus PDF!");
         </script>
     <?php
         // die();
@@ -318,7 +318,7 @@ if (isset($_POST['simpan_praktik'])) {
         '" . $_POST['id_jenjang_pdd'] . "',
         '" . $_POST['id_jurusan_pdd'] . "',
         '" . $_POST['id_akreditasi'] . "',
-        '" . $_POST['id_user'] . "',
+        '" . $_SESSION['id_user'] . "',
         '" . $_POST['nama_mentor_praktik'] . "',
         '" . $_POST['email_mentor_praktik'] . "',
         '" . $_POST['telp_mentor_praktik'] . "'
