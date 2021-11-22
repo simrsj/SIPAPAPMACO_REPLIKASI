@@ -6,7 +6,7 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form action="" class="form-group" method="POST">
+            <form action="" class="form-group" method="post" enctype="multipart/form-data">
                 <!-- Data Praktikan -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -27,7 +27,7 @@
                         if ($r_mou > 0) {
                             $no = 1;
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_mou' required>
+                            <select class='form-control' aria-label='Default select example' name='id_mou' requiredx>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-lg-6">
                         Periode Praktik : <span style="color:red">*</span><br>
-                        <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Periode Praktik" required>
+                        <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Periode Praktik" requiredx>
                     </div>
                 </div>
                 <br>
@@ -67,7 +67,7 @@
 
                         if ($r_jurusan_pdd > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_jurusan_pdd' required>
+                            <select class='form-control' aria-label='Default select example' name='id_jurusan_pdd' requiredx>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -97,7 +97,7 @@
 
                         if ($r_jenjang_pdd > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd' required>
+                            <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd' requiredx>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -127,7 +127,7 @@
 
                         if ($r_spesifikasi_pdd > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd' required>
+                            <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd' requiredx>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -157,7 +157,7 @@
 
                         if ($r_akreditasi > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_akreditasi' required>
+                            <select class='form-control' aria-label='Default select example' name='id_akreditasi' requiredx>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
@@ -183,15 +183,15 @@
                 <div class="row">
                     <div class="col-lg-3">
                         Jumlah Praktikan : <span style="color:red">*</span><br>
-                        <input type="number" class="form-control" name="jumlah_praktik" min="1" required>
+                        <input type="number" class="form-control" name="jumlah_praktik" min="1" requiredx>
                     </div>
                     <div class="col-lg-3">
                         Tanggal Mulai : <span style="color:red">*</span><br>
-                        <input type="date" class="form-control" name="tgl_mulai_praktik" required>
+                        <input type="date" class="form-control" name="tgl_mulai_praktik" requiredx>
                     </div>
                     <div class="col-lg-3">
                         Tanggal Akhir : <span style="color:red">*</span><br>
-                        <input type="date" class="form-control" name="tgl_selesai_praktik" required>
+                        <input type="date" class="form-control" name="tgl_selesai_praktik" requiredx>
                     </div>
                     <div class="col-lg-3">
                         Unggah Surat : <span style="color:red">*</span><br>
@@ -213,7 +213,7 @@
                     ?>
                     <div class="col-lg-4">
                         Nama : <span style="color:red">*</span><br>
-                        <input type="text" class="form-control" name="nama_mentor_praktik" value="<?php echo $d_user['nama_user']; ?>" required>
+                        <input type="text" class="form-control" name="nama_mentor_praktik" value="<?php echo $d_user['nama_user']; ?>" requiredx>
                     </div>
                     <div class="col-lg-4">
                         Email :<br>
@@ -221,7 +221,7 @@
                     </div>
                     <div class="col-lg-4">
                         Telpon : <span style="color:red">*</span><br>
-                        <input type="number" class="form-control" name="telp_mentor_praktik" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
+                        <input type="number" class="form-control" name="telp_mentor_praktik" min="1" value="<?php echo $d_user['no_telp_user']; ?>" requiredx>
                         <i style='font-size:12px;'>Isian hanya berupa angka</i>
                     </div>
                 </div>
@@ -238,57 +238,67 @@
 </div>
 <?php
 if (isset($_POST['simpan_praktik'])) {
-
-
-    //alamat file surat masuk
-    $alamat_surat_praktik = "./_file/praktikan";
-
-    //ubah Nama File PDF
-    $_FILES['surat_praktik']['name'] = "praktik_" . $_POST['id_mou'] . "_" . date('Y-m-d') . ".pdf";
-
-    //pembuatan alamat bila tidak ada
-    if (!is_dir($alamat_surat_praktik)) {
-        mkdir($alamat_surat_praktik, 0777, $rekursif = true);
+    $q_praktik = $conn->query("SELECT id_praktik FROM tb_praktik ORDER BY id_praktik ASC");
+    $no_id_praktik = 1;
+    //mencari data id_praktikan yg belum ada
+    while ($d_pratik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+        if ($no_id_praktik != $d_praktik[0]) {
+            $no_id_praktik = $d_praktik[0] + 1;
+            break;
+        } elseif ($no_id_praktik == 0) {
+            $no_id_praktik;
+            break;
+        }
+        $no_id_praktik = $d_praktik[0] + 1;
     }
 
-    $file_surat_praktik = (object) @$_FILES['surat_praktik'];
+    //unggah surat praktik
+    if (!is_null($_FILES['surat_praktik'])) {
+        //alamat file surat masuk
+        $alamat_surat_praktik = "./_file/praktikan";
 
-    //mulai upload file
-    if ($file_surat_praktik->size > 1000 * 1000) {
-?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>File Unggah Surat</strong>Harus Kurang dari 1 MB
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php
-        die();
-    } elseif ($file_surat_praktik->type !== 'application/pdf') {
-    ?>
-        <script>
-            alert("File Surat Harus PDF!");
-        </script>
-    <?php
-        // die();
-    } else {
-        $unggah_surat_praktik = move_uploaded_file(
-            $file_surat_praktik->tmp_name,
-            "{$alamat_surat_praktik}/{$file_surat_praktik->name}"
-        );
-        //$link_surat_praktik = "{$folderUpload}/{$fileJPEG->name}";
+        //ubah Nama File PDF
+        $_FILES['surat_praktik']['name'] = "praktik_" . $no_id_praktik . "_" . date('Y-m-d') . ".pdf";
+
+        //pembuatan alamat bila tidak ada
+        if (!is_dir($alamat_surat_praktik)) {
+            mkdir($alamat_surat_praktik, 0777, $rekursif = true);
+        }
+
+        $file_surat_praktik = (object) @$_FILES['surat_praktik'];
+
+        //mulai upload file
+        if ($file_surat_praktik->size > 1000 * 1000) {
+            echo "
+            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                <strong>File Unggah Surat</strong>Harus Kurang dari 1 MB
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            ";
+            die();
+        } elseif ($file_surat_praktik->type !== 'application/pdf') {
+            echo "
+            <script>
+                alert('File Surat Harus PDF!');
+            </script>
+            ";
+            die();
+        } else {
+            $unggah_surat_praktik = move_uploaded_file(
+                $file_surat_praktik->tmp_name,
+                "{$alamat_surat_praktik}/{$file_surat_praktik->name}"
+            );
+            //$link_surat_praktik = "{$folderUpload}/{$fileJPEG->name}";
+        }
+
+        if ($unggah_surat_praktik) {
+            $link = "{$alamat_surat_praktik}/{$file_surat_praktik->name}";
+            echo "Sukses Upload Foto: <a href='{$link}'>{$file_surat_praktik->name}</a>";
+            echo "<br>";
+        }
     }
-
-    if ($unggah_surat_praktik) {
-        $link = "{$alamat_surat_praktik}/{$file_surat_praktik->name}";
-        echo "Sukses Upload Foto: <a href='{$link}'>{$file_surat_praktik->name}</a>";
-        echo "<br>";
-    }
-
-    print_r($_FILES);
-
-    echo "<br><br>";
-
     $sql_insert = " INSERT INTO tb_praktik (
         id_mou,
         id_institusi,
@@ -313,7 +323,7 @@ if (isset($_POST['simpan_praktik'])) {
         '" . date('Y-m-d') . "',
         '" . $_POST['tgl_mulai_praktik'] . "',
         '" . $_POST['tgl_selesai_praktik'] . "',  
-        '" . $link_surat_praktik . "',        
+        '" . $unggah_surat_praktik . "',        
         '" . $_POST['id_spesifikasi_pdd'] . "',
         '" . $_POST['id_jenjang_pdd'] . "',
         '" . $_POST['id_jurusan_pdd'] . "',
@@ -326,7 +336,7 @@ if (isset($_POST['simpan_praktik'])) {
     )";
     echo $sql_insert;
     // $conn->query($sql_insert);
-    ?>
+?>
     <!-- <script type="text/javascript">
         document.location.href = "?mou";
     </script> -->

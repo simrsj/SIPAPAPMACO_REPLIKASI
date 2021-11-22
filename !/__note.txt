@@ -28,3 +28,6 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/fajarrachmath/XXX.git
 git push -u origin main
+
+
+RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551

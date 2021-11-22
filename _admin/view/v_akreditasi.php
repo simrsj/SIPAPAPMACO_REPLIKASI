@@ -106,7 +106,7 @@
     <?php
                 } else {
     ?>
-        <h3> Data spesifikasi_pdd Tidak Ada</h3>
+        <h3> Data Akreditasi Tidak Ada</h3>
     <?php
                 }
     ?>

@@ -18,11 +18,9 @@
             <input type="file" name="pdf" accept="application/pdf">
         </div>
         <div style="margin-top: 1rem">
-
             <button>Upload</button>
         </div>
     </form>
-    <?php echo date('Y-m-d'); ?>
 </body>
 
 </html>

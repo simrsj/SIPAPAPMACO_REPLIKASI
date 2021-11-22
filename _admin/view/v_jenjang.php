@@ -4,7 +4,7 @@
             <h1 class="h3 mb-2 text-gray-800">Daftar Jenjang</h1>
         </div>
         <div class="col-lg-2">
-            <a class='btn btn-success btn-sm href=' #' data-toggle='modal' data-target='#jjg_i_m'>
+            <a class='btn btn-success btn-sm' href='#' data-toggle='modal' data-target='#jjg_i_m'>
                 <i class="fas fa-plus"></i> Tambah
             </a>
             <!-- modal tambah jurusan  -->
@@ -97,19 +97,20 @@
                                             </div>
                                         </div>
                                     </div>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
             </div>
         <?php
-                            }
-        ?>
-        </tbody>
-        </table>
-    <?php
                 } else {
-    ?>
-        <h3> Data jenjang_pdd Tidak Ada</h3>
-    <?php
+        ?>
+            <h3 class="text-center text-justify"> Data Jenjang Tidak Ada</h3>
+        <?php
                 }
-    ?>
+        ?>
         </div>
     </div>
 </div>
