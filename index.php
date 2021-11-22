@@ -34,7 +34,7 @@ if ($_SESSION['status_user'] == 'Y') {
     } elseif ($_SESSION['level_user'] == 1) {
         include "_admin/index.php";
     } elseif ($_SESSION['level_user'] == 2) {
-        include "_institusi/index.php";
+        include "_ip/index.php";
     }
 } elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) {
     if (isset($_GET['reg'])) {
