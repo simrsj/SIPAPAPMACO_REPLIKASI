@@ -66,9 +66,10 @@ if (empty($_SESSION['username_user'])) {
 					$_SESSION['id_user'] = $row['id_user'];
 					$_SESSION['status_user'] = $row['status_user'];
 					$_SESSION['level_user'] = $row['level_user'];
-					$_SESSION['id_mou'] = $row['id_mou'];
+					// $_SESSION['id_mou'] = $row['id_mou'];
 					$id_user = $row['id_user'];
 					$x_name_pass++;
+					// print_r($_SESSION);die;
 				}
 
 				if (!$exc_name_pass) {
