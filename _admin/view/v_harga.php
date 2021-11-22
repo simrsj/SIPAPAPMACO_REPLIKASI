@@ -44,16 +44,18 @@
 
     <div class="card shadow mb-4">
         <nav class="navbar navbar-expand-sm bg-light navbar-dark">
-
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link " href="#">Home</a>
+                    <a class="nav-link " href="#">Kedokteran</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="#">Keperawatan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" href="#">Nakes Lainnya</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Non Nakes Lainnya</a>
                 </li>
                 <li>
                     <span class="navbar-text"> Ini adalah Text </span>

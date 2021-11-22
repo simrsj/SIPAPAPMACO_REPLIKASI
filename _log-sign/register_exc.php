@@ -1,4 +1,5 @@
 <?PHP
+// print_r($_POST);die; 
 //$id_institusi=$_POST['id_institusi'];
 $id_mou = $_POST['id_mou'];
 $nama = $_POST['nama'];
@@ -20,7 +21,6 @@ if ($password != $ulangi_password) {
     if ($id_mou == 0) {
         $nama_ip = $_POST['nama_ip'];
         $sql_mou = "SELECT id_mou FROM tb_mou order by id_mou ASC";
-
         $q_mou = $conn->query($sql_mou);
         $r_mou = $q_mou->rowCount();
         while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
@@ -28,9 +28,27 @@ if ($password != $ulangi_password) {
         }
         $id_mou = $id_mou_baru;
 
+        
         $sql_insert_mou = "INSERT INTO `tb_mou` (`id_mou`,`institusi_mou`) VALUES (NULL, '$nama_ip')";
         //echo "<br> INSERT INTO `tb_mou` (`id_mou`,`institusi_mou`) VALUES (NULL, $nama_ip)";
         $conn->query($sql_insert_mou);
+
+        $sql_ip = "SELECT * FROM tb_institusi where nama_institusi = '$nama_ip'";
+        // var_dump($sql_ip);die;
+        $r_ip = $conn->query($sql_ip)->rowCount();
+        if($r_ip == 0){
+            //  $id_ip_baru = $d_ip['id_institusi'] + 1;
+           
+            //  $id_ip = $id_ip_baru;
+
+            
+            $sql_insert_ip = "INSERT INTO `tb_institusi` (`id_institusi`,`nama_institusi`) VALUES (NULL, '$nama_ip')";
+            //echo "<br> INSERT INTO `tb_mou` (`id_mou`,`institusi_mou`) VALUES (NULL, $nama_ip)";
+            $conn->query($sql_insert_ip);
+
+        }
+            
+
     }
     $sql_insert_user = "INSERT INTO tb_user (
     id_user, 
