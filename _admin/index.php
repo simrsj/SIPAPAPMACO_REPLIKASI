@@ -149,6 +149,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_praktik.php";
+						} elseif (isset($_GET['u'])) {
+							include "_admin/update/u_praktik.php";
 						} else {
 							include "_admin/view/v_praktik.php";
 						}
@@ -156,6 +158,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_spesifikasi.php";
 					} elseif (isset($_GET['uni'])) {
 						include "_admin/view/v_unit.php";
+					} elseif (isset($_GET['test'])) {
+						include "test.php";
 					} else {
 						include "_admin/home.php";
 					}

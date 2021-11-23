@@ -1,10 +1,8 @@
 1. seleksi username yang sama
-2. maximal data pdf unggah surat/proposal pdf saat praktikan
 3. harga mess pemondokan
 4. fungsi unggah file 
-
-
-
+5. path langsung dapat terlihat contoh : SM/_FILE/
+6. enkripsi link 
 
 SELECT * FROM tb_mou 
 JOIN tb_mou ON tb_mou.id_mou = tb_mou.id_mou 
@@ -13,6 +11,12 @@ JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spe
 JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
 JOIN tb_user ON tb_mou.id_user = tb_user.id_user
 
+SELECT * FROM tb_praktik 
+JOIN tb_praktik ON tb_mou.id_mou = tb_mou.id_mou 
+JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
+JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
+JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
+JOIN tb_user ON tb_mou.id_user = tb_user.id_user
 
 git status
 git add .
@@ -21,13 +25,11 @@ git commit -m "-"
 git pull
 git push
 
-
 git init
 git add README.md
 git commit -m "first commit"
 git branch -M mai
 git remote add origin https://github.com/fajarrachmath/XXX.git
 git push -u origin main
-
 
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
