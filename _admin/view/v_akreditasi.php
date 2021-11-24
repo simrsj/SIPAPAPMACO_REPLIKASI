@@ -28,13 +28,13 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="table-responsive">
-                <?php
-                $sql_akreditasi = "SELECT * FROM tb_akreditasi order by nama_akreditasi ASC";
-                $q_akreditasi = $conn->query($sql_akreditasi);
-                $r_akreditasi = $q_akreditasi->rowCount();
-                if ($r_akreditasi > 0) {
-                ?>
+            <?php
+            $sql_akreditasi = "SELECT * FROM tb_akreditasi order by nama_akreditasi ASC";
+            $q_akreditasi = $conn->query($sql_akreditasi);
+            $r_akreditasi = $q_akreditasi->rowCount();
+            if ($r_akreditasi > 0) {
+            ?>
+                <div class="table-responsive">
                     <table class='table table-striped'>
                         <thead>
                             <tr>
@@ -97,19 +97,20 @@
                                             </div>
                                         </div>
                                     </div>
-            </div>
-        <?php
+                                </tr>
+                            <?php
                             }
-        ?>
-        </tbody>
-        </table>
-    <?php
-                } else {
-    ?>
-        <h3> Data Akreditasi Tidak Ada</h3>
-    <?php
-                }
-    ?>
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php
+            } else {
+            ?>
+                <h3> Data Akreditasi Tidak Ada</h3>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>
