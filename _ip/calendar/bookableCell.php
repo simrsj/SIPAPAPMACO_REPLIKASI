@@ -23,6 +23,7 @@ class BookableCell
     public function update(Calendar $cal)
     {
         if ($this->isDateBooked($cal->getCurrentDate())) {
+            // var_dump ($this->isDateBooked($cal->getCurrentDate())):`;
             return $cal->cellContent =
                 $this->bookedCell($cal->getCurrentDate());
         }
@@ -31,6 +32,13 @@ class BookableCell
             return $cal->cellContent =
                 $this->openCell($cal->getCurrentDate());
         }
+
+        // //Data Hari Kemarin
+        // if () {
+        //     return $cal->cellContent =
+        //         $this->openCell($cal->getCurrentDate());
+        // }
+
     }
  
     public function routeActions()
@@ -60,7 +68,7 @@ class BookableCell
     }
  
     private function bookedDates()
-    {
+    {   
         return array_map(function ($record) {
             return $record['booking_date'];
         }, $this->booking->index());
@@ -92,7 +100,7 @@ class BookableCell
     {
         return
             '<form  method="post" action="' . $this->currentURL . '">' .
-            '<div style="font-size:10px; align:center;">'.$date.'</div>'.
+            '<div style="font-size:10px; align:center;">'.date('d', strtotime($date)).'</div>'.
             '<input type="hidden" name="add" />' .
             '<input type="hidden" name="date" value="' . $date . '" />' .
             '<input class="submit" type="submit" value="Book" />' .
@@ -106,6 +114,13 @@ class BookableCell
             '<input type="hidden" name="delete" />' .
             '<input type="hidden" name="id" value="' . $id . '" />' .
             '<input class="submit" type="submit" value="Delete" />' .
+            '</form>';
+    }
+    private function HiddenForm($id)
+    {
+        return
+            '<form  method="post" action="' . $this->currentURL . '">' .
+            '<div style="font-size:10px; align:center;">'.date('d', strtotime($date)).'</div>'.
             '</form>';
     }
 }
