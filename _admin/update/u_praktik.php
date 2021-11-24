@@ -1,15 +1,15 @@
 <?php
-$id_praktik = $_POST['id_praktik'];
+$id_praktik = $_GET['u'];
 
 $sql_praktik_join = "SELECT * FROM tb_praktik 
-JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
-JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
-JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-WHERE tb_praktik.id_praktik = $id_praktik
-ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+    JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
+    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
+    JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
+    JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
+    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
+    JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
+    WHERE tb_praktik.id_praktik = $id_praktik
+    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
 $q_praktik_join = $conn->query($sql_praktik_join);
 $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
@@ -36,8 +36,8 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                         Institusi : <span style="color:red">*</span><br>
                         <?php
                         $sql_mou = "SELECT * FROM tb_mou 
-                            JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi  
-                            WHERE tb_mou.tgl_selesai_mou >= CURDATE() ORDER BY tb_institusi.nama_institusi ASC";
+                                JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi  
+                                WHERE tb_mou.tgl_selesai_mou >= CURDATE() ORDER BY tb_institusi.nama_institusi ASC";
 
                         $q_mou = $conn->query($sql_mou);
                         $r_mou = $q_mou->rowCount();
@@ -106,7 +106,6 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                                             <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
                                         </option>
                                 <?php
-
                                     }
                                 }
                                 ?>
@@ -139,7 +138,6 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                                             <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
                                         </option>
                                     <?php
-
                                     }
                                     ?>
                                     <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
@@ -254,20 +252,20 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                 <!-- unggah berkas -->
                 <div class="row">
                     <div class="col-lg-6">
-                        Unggah Surat : <span style="color:red">*</span><br>
+                        Unggah Surat : <br>
                         <i style='font-size:12px;'>File Surat sebelumnya
                             <a href="<?php echo $d_praktik_join['surat_praktik'] ?>">Download</a>
                         </i><br>
-                        <input type="file" name="surat_praktik" accept="application/pdf" value="<?php echo $d_praktik_join['surat_praktik'] ?>" required>
+                        <input type="file" name="surat_praktik" accept="application/pdf" value="<?php echo $d_praktik_join['surat_praktik'] ?>" requiredX>
                         <br><i style='font-size:12px;'>Data unggah harus .pdf, Maksimal 1 MB</i>
                     </div>
                     <div class="col-lg-6">
-                        Unggah Data Praktikan : <span style="color:red">*</span>
+                        Unggah Data Praktikan :
                         <i style='font-size:12px;'><a href="./_file/format_data_praktikan.xlsx">Download Format</a></i><br>
                         <i style='font-size:12px;'>Data Praktikan sebelumnya
                             <a href="<?php echo $d_praktik_join['data_praktik'] ?>">Download</a>
                         </i><br>
-                        <input type="file" name="data_praktik" accept=".xls, .xlsx" value="<?php echo $d_praktik_join['data_praktik'] ?>" required>
+                        <input type="file" name="data_praktik" accept=".xls, .xlsx" value="<?php echo $d_praktik_join['data_praktik'] ?>" requiredX>
                         <br><i style='font-size:12px;'>Data unggah harus .xls .xlsx, Maksimal 1 MB</i>
                     </div>
                 </div>
@@ -290,14 +288,14 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <div class="col-lg-4">
                         Email :<br>
-                        <input type="text" class="form-control" name="email_mentor_praktik" vvalue="<?php echo $d_praktik_join['email_mentor_praktik']; ?>">
+                        <input type="text" class="form-control" name="email_mentor_praktik" value="<?php echo $d_praktik_join['email_mentor_praktik']; ?>">
                     </div>
                 </div>
                 <hr>
                 <!-- Simpan -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <input type="submit" name="simpan_praktik" value="Ubah" class="btn btn-success">
+                        <input type="submit" name="ubah_praktik" value="Ubah" class="btn btn-success">
                     </div>
                 </div>
             </form>
@@ -316,7 +314,7 @@ if (isset($_POST['ubah_praktik'])) {
     }
 
     //unggah data praktik
-    if (!is_null($_FILES['surat_praktik'])) {
+    if ($_FILES['surat_praktik']['size'] > 0) {
 
         //ubah nama file surat praktikan
         $_FILES['surat_praktik']['name'] = "surat_praktik_" . $id_praktik . "_" . date('Y-m-d') . ".pdf";
@@ -326,20 +324,20 @@ if (isset($_POST['ubah_praktik'])) {
         //mulai unggah file surat praktik
         if ($file_surat_praktik->size > 1000 * 1000) {
             echo "
-            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                <strong>File Unggah Surat</strong>Harus Kurang dari 1 MB
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                </button>
-            </div>
-            ";
+                <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                    <strong>File Unggah Surat</strong>Harus Kurang dari 1 MB
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                ";
             die();
         } elseif ($file_surat_praktik->type !== 'application/pdf') {
             echo "
-            <script>
-                alert('File Surat Harus .pdf');
-            </script>
-            ";
+                <script>
+                    alert('File Surat Harus .pdf');
+                </script>
+                ";
             die();
         } else {
             $unggah_surat_praktik = move_uploaded_file(
@@ -357,7 +355,7 @@ if (isset($_POST['ubah_praktik'])) {
     }
 
     //unggah data praktik
-    if (!is_null($_FILES['data_praktik'])) {
+    if ($_FILES['data_praktik']['size'] > 0) {
 
         //ubah nama file data praktikan
         $_FILES['data_praktik']['name'] = "data_praktik_" . $id_praktik . "_" . date('Y-m-d') . ".xlsx";
@@ -367,20 +365,20 @@ if (isset($_POST['ubah_praktik'])) {
         //mulai unggah file data praktik
         if ($file_data_praktik->size > 1000 * 1000) {
             echo "
-            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                <strong>File Unggah Data</strong>Harus Kurang dari 1 MB
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                </button>
-            </div>
-            ";
+                <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                    <strong>File Unggah Data</strong>Harus Kurang dari 1 MB
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                ";
             die();
         } elseif ($file_data_praktik->type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
             echo "
-            <script>
-                alert('File data Harus .xls .xlsx');
-            </script>
-            ";
+                <script>
+                    alert('File data Harus .xls .xlsx');
+                </script>
+                ";
             die();
         } else {
             $unggah_data_praktik = move_uploaded_file(
@@ -397,69 +395,53 @@ if (isset($_POST['ubah_praktik'])) {
         // }
     }
 
+    //bila file surat tidak diisi diambil dari sebelumnya
+    if ($_FILES['surat_praktik']['size'] == 0) {
+        $surat_praktik = $d_praktik_join['surat_praktik'];
+    } else {
+        $surat_praktik = $unggah_surat_praktik;
+    }
+
+    //bila file data tidak diisi diambil dari sebelumnya
+    if ($_FILES['data_praktik']['size'] == 0) {
+        $data_praktik = $d_praktik_join['data_praktik'];
+    } else {
+        $data_praktik = $unggah_data_praktik;
+    }
+
     $sql_update = " UPDATE `tb_praktik` SET
-    `id_mou` = '" . $_POST['id_mou'] . "', 
-    SET `id_instansi` = '" . $_POST['id_mou'] . "', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2', 
-    SET `nama_praktik` = 'Kelompok 2',
-    
-    WHERE `tb_praktik`.`id_praktik` = 4;
-    
-    
-    INSERT INTO tb_praktik (
-        id_mou,
-        id_institusi,
-        nama_praktik,  
-        tgl_input_praktik,
-        tgl_mulai_praktik,
-        tgl_selesai_praktik, 
-        jumlah_praktik, 
-        surat_praktik, 
-        data_praktik, 
-        id_spesifikasi_pdd,
-        id_jenjang_pdd, 
-        id_jurusan_pdd,
-        id_akreditasi,
-        id_user, 
-        nama_mentor_praktik, 
-        email_mentor_praktik,
-        telp_mentor_praktik,  
-        status_praktik
-    ) VALUE (
-        '',
-        '" . $_POST['id_mou'] . "',
-        '" . $_POST['nama_praktik'] . "',
-        '" . date('Y-m-d') . "',
-        '" . $_POST['tgl_mulai_praktik'] . "',
-        '" . $_POST['tgl_selesai_praktik'] . "',  
-        '" . $_POST['jumlah_praktik'] . "',     
-        '" . $link_surat_praktik . "',     
-        '" . $link_data_praktik . "',        
-        '" . $_POST['id_spesifikasi_pdd'] . "',
-        '" . $_POST['id_jenjang_pdd'] . "',
-        '" . $_POST['id_jurusan_pdd'] . "',
-        '" . $_POST['id_akreditasi'] . "',
-        '" . $_SESSION['id_user'] . "',
-        '" . $_POST['nama_mentor_praktik'] . "',
-        '" . $_POST['email_mentor_praktik'] . "',
-        '" . $_POST['telp_mentor_praktik'] . "',
-        'Y'
-    )";
-    // echo $sql_insert;
-    $conn->query($sql_insert);
+        `id_mou` = '" . $_POST['id_mou'] . "', 
+        `id_institusi` = '" . $d_praktik_join['id_institusi'] . "', 
+        `nama_praktik` = '" . $_POST['nama_praktik'] . "', 
+        `tgl_input_praktik` = '" . date('Y-m-d') . "', 
+        `tgl_mulai_praktik` = '" . $_POST['tgl_mulai_praktik'] . "', 
+        `tgl_selesai_praktik` = '" . $_POST['tgl_selesai_praktik'] . "', 
+        `jumlah_praktik` = '" . $_POST['jumlah_praktik'] . "', 
+        `surat_praktik` = '" . $surat_praktik . "', 
+        `data_praktik` = '" . $data_praktik . "', 
+        `id_spesifikasi_pdd` = '" . $_POST['id_spesifikasi_pdd'] . "', 
+        `id_jenjang_pdd` = '" . $_POST['id_jenjang_pdd'] . "', 
+        `id_jurusan_pdd` = '" . $_POST['id_jurusan_pdd'] . "', 
+        `id_akreditasi` = '" . $_POST['id_akreditasi'] . "', 
+        `id_user` = '" . $_SESSION['id_user'] . "',
+        `email_mentor_praktik` = '" . $_POST['email_mentor_praktik'] . "',
+        `telp_mentor_praktik` = '" . $_POST['telp_mentor_praktik'] . "'
+        WHERE `tb_praktik`.`id_praktik` = " . $id_praktik;
+
+    // echo $sql_update;
+    $conn->query($sql_update);
+    if (isset($_GET['a'])) {
 ?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
-    </script>
+        <script type="text/javascript">
+            document.location.href = "?prk&a";
+        </script>
+    <?php
+    } else {
+    ?>
+        <script type="text/javascript">
+            document.location.href = "?prk";
+        </script>
 <?php
+    }
 }
 ?>
