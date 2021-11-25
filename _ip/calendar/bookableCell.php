@@ -22,16 +22,41 @@ class BookableCell
  
     public function update(Calendar $cal)
     {
+         $cal->tgl1= date('Y-m-d');
+         $date= $cal->tgl1;
+         $date2= $cal->getCurrentDate();
+         $cek = $date > $date2;
+        // $cal->tgl2= date('Y-m-d',strtotime($cal->getCurrentDate()));
+        //  print_r($cek);die; 
+        // print_r($cal); 
+        // echo "<br/>";
+        // print_r($cal->getCurrentDate());die;
+    
         if ($this->isDateBooked($cal->getCurrentDate())) {
             // var_dump ($this->isDateBooked($cal->getCurrentDate())):`;
+            if(($date > $date2)){
+                return $cal->cellContent =
+                $this->hiddenCell($cal->getCurrentDate());
+
+             }else{
             return $cal->cellContent =
                 $this->bookedCell($cal->getCurrentDate());
+             }
         }
  
         if (!$this->isDateBooked($cal->getCurrentDate())) {
-            return $cal->cellContent =
+        
+            if(($date > $date2)){
+                return $cal->cellContent =
+                $this->hiddenCell($cal->getCurrentDate());
+
+             }else{
+                 return $cal->cellContent =
                 $this->openCell($cal->getCurrentDate());
+
+             }
         }
+
 
         // //Data Hari Kemarin
         // if () {
@@ -56,6 +81,10 @@ class BookableCell
     {
         return '<div class="open">' . $this->bookingForm($date) . '</div>';
     }
+    private function hiddenCell($date)
+    {
+        return '<div style="background:grey;">' . $this->hiddenForm($date) . '</div>';
+    }
  
     private function bookedCell($date)
     {
@@ -70,6 +99,8 @@ class BookableCell
     private function bookedDates()
     {   
         return array_map(function ($record) {
+            //  print_r($this->booking->index());
+            
             return $record['booking_date'];
         }, $this->booking->index());
     }
@@ -118,9 +149,10 @@ class BookableCell
     }
     private function HiddenForm($id)
     {
-        return
-            '<form  method="post" action="' . $this->currentURL . '">' .
-            '<div style="font-size:10px; align:center;">'.date('d', strtotime($date)).'</div>'.
+       return
+            '<form onsubmit="return confirm(\'Are you sure to cancel?\');" method="post" action="' . $this->currentURL . '">' .
+            '<input type="hidden" name="delete" />' .
+            '<input type="hidden" name="id" value="' . $id . '" />' .
             '</form>';
     }
 }
