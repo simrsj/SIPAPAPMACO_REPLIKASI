@@ -43,27 +43,41 @@
     </div>
 
     <div class="card shadow mb-4">
-        <nav class="navbar navbar-expand-sm bg-light navbar-dark">
+        <nav class="navbar justify-content-center">
+            <?php
+            if (isset($_POST[''])) {
+                $kedokteran = "class='nav-link active bg-primary' style='color:aliceblue'";
+            } else {
+                $kedokteran = "class='nav-link'";
+                $keperawatan = "class='nav-link'";
+                $nakes_lainnya = "class='nav-link'";
+                $nonnakes_lainnya = "class='nav-link'";
+            }
+            ?>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link " href="#">Kedokteran</a>
+                    <a <?php echo $kedokteran; ?> href="#">Kedokteran</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Keperawatan</a>
+                    <a <?php echo $keperawatan; ?> href="#">Keperawatan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Nakes Lainnya</a>
+                    <a <?php echo $nakes_lainnya; ?> href="#">Nakes Lainnya</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Non Nakes Lainnya</a>
-                </li>
-                <li>
-                    <span class="navbar-text"> Ini adalah Text </span>
+                    <a <?php echo $nonnakes_lainnya; ?> href="#">Non Nakes Lainnya</a>
                 </li>
             </ul>
         </nav>
         <div class="card-body">
-            <h3 class="text-center text-justify"> Data Harga Tidak Ada</h3>
+            <?php
+            if (isset($_POST[''])) {
+            } else {
+            ?>
+                <h4 class="text-center text-justify"> Silahkan pilih Menu diatas</h4>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>

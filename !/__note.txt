@@ -1,4 +1,4 @@
-1. seleksi username yang sama
+1. seleksi username yang sama saat daftar
 2. maximal data pdf unggah surat/proposal pdf saat praktikan
 3. harga mess pemondokan
 4. fungsi unggah file 
@@ -25,8 +25,8 @@ git push
 git init
 git add README.md
 git commit -m "first commit"
-git branch -M mai
-git remote add origin https://github.com/fajarrachmath/XXX.git
+git branch -M main
+git remote add origin https://github.com/fajarrachmath/codepolitan_bootstrap.git
 git push -u origin main
 
 
