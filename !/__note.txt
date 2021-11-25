@@ -1,9 +1,10 @@
-1. seleksi username yang sama
-3. harga mess pemondokan
-4. fungsi unggah file 
-5. path langsung dapat terlihat contoh : SM/_FILE/
-6. enkripsi link 
-6. pakai plugin table cari diinternet alternatif datatables
+- harga mess pemondokan
+- fungsi unggah file 
+- path langsung dapat terlihat contoh : SM/_FILE/
+- enkripsi link 
+- pakai plugin table cari diinternet alternatif datatables
+- inputan pilih jadwal praktikan dengan pilih tombol tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
+
 
 SELECT * FROM tb_mou 
 JOIN tb_mou ON tb_mou.id_mou = tb_mou.id_mou 
