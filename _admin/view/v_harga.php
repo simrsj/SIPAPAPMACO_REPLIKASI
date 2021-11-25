@@ -4,7 +4,7 @@
             <h1 class="h3 mb-2 text-gray-800">Daftar Harga</h1>
         </div>
         <div class="col-lg-2">
-            <a class='btn btn-success btn-sm' href=' #' data-toggle='modal' data-target='#hrg_i_m'>
+            <a class='btn btn-outline-success btn-sm' href=' #' data-toggle='modal' data-target='#hrg_i_m'>
                 <i class="fas fa-plus"></i> Tambah
             </a>
             <!-- modal tambah Harga  -->
@@ -41,41 +41,56 @@
             </div>
         </div>
     </div>
-
     <div class="card shadow mb-4">
+
+        <?php
+        if ($_GET['hrg'] == 1) {
+            $active_1 = "active";
+            $tipe_harga = "Kedokteran";
+        } elseif ($_GET['hrg'] == 2) {
+            $active_2 = "active";
+            $tipe_harga = "Keperawatan";
+        } elseif ($_GET['hrg'] == 3) {
+            $active_3 = "active";
+            $tipe_harga = "Keperawatan";
+        } elseif ($_GET['hrg'] == 0) {
+            $active_0 = "active";
+            $tipe_harga = "Fasilitas";
+        }
+        ?>
+
         <nav class="navbar navbar-expand-sm bg-light navbar-dark">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Kedokteran</a>
+                    <a class="nav-link <?php echo $active_1; ?>" href="?hrg=1">Kedokteran</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Keperawatan</a>
+                    <a class="nav-link <?php echo $active_2; ?>" href="?hrg=2">Keperawatan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Nakes Lainnya</a>
+                    <a class="nav-link <?php echo $active_3; ?>" href="?hrg=3">Nakes Lainnya</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Non Nakes Lainnya</a>
-                </li>
-                <li>
-                    <span class="navbar-text"> Ini adalah Text </span>
+                    <a class="nav-link <?php echo $active_0; ?>" href="?hrg=0">Fasilitas</a>
                 </li>
             </ul>
         </nav>
         <div class="card-body">
-
             <?php
-            $sql_harga = "SELECT * FROM tb_harga order by nama_harga ASC";
+            $sql_harga = "SELECT * FROM tb_harga WHERE tipe_harga = '$tipe_harga' ORDER BY nama_harga ASC";
             $q_harga = $conn->query($sql_harga);
             $r_harga = $q_harga->rowCount();
             if ($r_harga > 0) {
             ?>
                 <div class="table-responsive">
-                    <table class='table table-striped'>
+                    <table class='table table-hover table-striped'>
                         <thead>
                             <tr>
                                 <th scope='col'>No</th>
-                                <th>Nama Harga</th>
+                                <th width="30%">Nama</th>
+                                <th width="12%">Satuan</th>
+                                <th width="12%">Harga</th>
+                                <th>Jenis</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -88,8 +103,8 @@
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $d_harga['nama_harga']; ?></td>
                                     <td><?php echo $d_harga['satuan_harga']; ?></td>
-                                    <td><?php echo $d_harga['ket_harga']; ?></td>
-                                    <td><?php echo "Rp " . $d_harga['jumlah_harga']; ?></td>
+                                    <td><?php echo "Rp " . number_format($d_harga['jumlah_harga'], 0, ",", "."); ?></td>
+                                    <td><?php echo $d_harga['jenis_harga']; ?></td>
                                     <td>
                                         <a class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#hrg_u_m" . $d_harga['id_harga']; ?>'>
                                             Ubah

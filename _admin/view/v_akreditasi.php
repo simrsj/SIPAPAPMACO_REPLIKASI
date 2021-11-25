@@ -4,7 +4,7 @@
             <h1 class="h3 mb-2 text-gray-800">Daftar Akreditasi</h1>
         </div>
         <div class="col-lg-2">
-            <a class='btn btn-success btn-sm href=' #' data-toggle='modal' data-target='#akr_i_m'>
+            <a class='btn btn-outline-success btn-sm href=' #' data-toggle='modal' data-target='#akr_i_m'>
                 <i class="fas fa-plus"></i> Tambah
             </a>
             <!-- modal tambah Akreditasi  -->
@@ -25,7 +25,6 @@
             </div>
         </div>
     </div>
-
     <div class="card shadow mb-4">
         <div class="card-body">
             <?php
