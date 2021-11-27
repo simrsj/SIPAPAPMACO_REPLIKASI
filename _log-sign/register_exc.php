@@ -1,57 +1,70 @@
 <?PHP
-// print_r($_POST);die; 
-//$id_institusi=$_POST['id_institusi'];
-$id_mou = $_POST['id_mou'];
-$nama = $_POST['nama'];
-$no_kontak = $_POST['no_kontak'];
-$email = $_POST['email'];
-$password = $_POST['password'];
+$id_institusi = $_POST['id_institusi'];
+$nama_institusi = $_POST['nama_institusi'];
+$nama_user = $_POST['nama_user'];
+$no_telp_user = $_POST['no_telp_user'];
+$email_user = $_POST['email_user'];
+$password_user = $_POST['password_user'];
 $ulangi_password = $_POST['ulangi_password'];
-$tanggal_sekarang = date('Y-m-d');
 
-//echo $id_mou . "|" . $nama . "|" . $no_kontak . "|" . $email . "|" . $password . "|" . $ulangi_password . "|" . $tanggal_sekarang;
-if ($password != $ulangi_password) {
+$q_user = $conn->query("SELECT * FROM tb_user WHERE username_user = '" . $email_user . "'");
+$d_user = $q_user->fetch(PDO::FETCH_ASSOC);
+if ($password_user != $ulangi_password) {
 ?>
     <script>
         alert('Password tidak sesuai!');
         document.location.href = "?reg";
     </script>
 <?php
+} elseif ($d_user['email_user'] == $email_user) {
+?>
+    <script>
+        alert('Usename <?php echo $email_user; ?> sudah dipakai!');
+        document.location.href = "?reg";
+    </script>
+<?php
 } else {
-    if ($id_mou == 0) {
-        $nama_ip = $_POST['nama_ip'];
-        $sql_mou = "SELECT id_mou FROM tb_mou order by id_mou ASC";
-        $q_mou = $conn->query($sql_mou);
-        $r_mou = $q_mou->rowCount();
-        while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
-            $id_mou_baru = $d_mou['id_mou'] + 1;
+    if ($id_institusi == 0) {
+
+        //cari id_mou
+        $no = 1;
+        $sql_id_mou = "SELECT id_mou FROM tb_mou ORDER BY id_mou ASC";
+        $q_id_mou = $conn->query($sql_id_mou);
+        while ($d_id_mou = $q_id_mou->fetch(PDO::FETCH_ASSOC)) {
+            if ($d_id_mou['id_mou'] != $no) {
+                $id_mou = $no;
+                break;
+            }
+            $no++;
+            $id_mou = $no;
         }
-        $id_mou = $id_mou_baru;
 
-        
-        $sql_insert_mou = "INSERT INTO `tb_mou` (`id_mou`,`institusi_mou`) VALUES (NULL, '$nama_ip')";
-        //echo "<br> INSERT INTO `tb_mou` (`id_mou`,`institusi_mou`) VALUES (NULL, $nama_ip)";
-        $conn->query($sql_insert_mou);
-
-        $sql_ip = "SELECT * FROM tb_institusi where nama_institusi = '$nama_ip'";
-        // var_dump($sql_ip);die;
-        $r_ip = $conn->query($sql_ip)->rowCount();
-        if($r_ip == 0){
-            //  $id_ip_baru = $d_ip['id_institusi'] + 1;
-           
-            //  $id_ip = $id_ip_baru;
-
-            
-            $sql_insert_ip = "INSERT INTO `tb_institusi` (`id_institusi`,`nama_institusi`) VALUES (NULL, '$nama_ip')";
-            //echo "<br> INSERT INTO `tb_mou` (`id_mou`,`institusi_mou`) VALUES (NULL, $nama_ip)";
-            $conn->query($sql_insert_ip);
-
+        //cari id_institusi
+        $no = 1;
+        $sql_id_institusi = "SELECT id_institusi FROM tb_institusi ORDER BY id_institusi ASC";
+        $q_id_institusi = $conn->query($sql_id_institusi);
+        while ($d_id_institusi = $q_id_institusi->fetch(PDO::FETCH_ASSOC)) {
+            if ($d_id_institusi['id_institusi'] != $no) {
+                $id_institusi = $no;
+                break;
+            }
+            $no++;
+            $id_institusi = $no;
         }
-            
 
+
+        //tambah MoU baru
+        $sql_insert_mou = "INSERT INTO `tb_mou` (id_mou, id_institusi) VALUES ('$id_mou', '$id_institusi')";
+        // $conn->query($sql_insert_mou);
+        echo "<br>" . $sql_insert_mou;
+
+        //tambah institusi baru
+        $sql_insert_institusi = "INSERT INTO `tb_institusi` (id_institusi, nama_institusi) VALUES ('$id_institusi', '$nama_institusi')";
+        // $conn->query($sql_insert_institusi);
+        echo "<br>" . $sql_insert_institusi;
     }
+
     $sql_insert_user = "INSERT INTO tb_user (
-    id_user, 
     username_user, 
     password_user, 
     nama_user, 
@@ -61,23 +74,22 @@ if ($password != $ulangi_password) {
     tgl_buat_user, 
     status_user
     ) VALUES (
-        NULL, 
-        '$email', 
-        '$password', 
-        '$nama', 
-        '$email', 
+        '$email_user', 
+        '$password_user', 
+        '$nama_user', 
+        '$email_user', 
         '2', 
-        '$no_telp',
-        '$tanggal_sekarang', 
+        '$no_telp_user',
+        '" . date('Y-m-d') . "', 
         'Y'
     )";
-    $conn->query($sql_insert_user);
-    //echo "<br> $sql_insert_user";
+    // $conn->query($sql_insert_user);
+    echo "<br>" . $sql_insert_user;
 ?>
-    <script>
+    <!-- <script>
         alert('Data sudah disimpan silahkan login');
         document.location.href = "?lo";
-    </script>
+    </script> -->
 <?php
 }
 ?>

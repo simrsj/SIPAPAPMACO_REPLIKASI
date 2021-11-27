@@ -32,8 +32,8 @@
                             </div>
                             <form class="user" action="?reg_x" method="POST">
                                 <div class="form-group">
-                                    <select class="form-control-user" placeholder="Pilih Institusi" id="instansi" onChange='Bukains()' name="id_mou">
-                                        <option class="text-wrap form-control form-control-user" required>--<i> Pilih Institusi</i>--</option>
+                                    <select class="form-control" id="instansi" onChange='Bukains()' name="id_institusi" required>
+                                        <option value="">--<i> Pilih Institusi </i>--</option>
 
                                         <?php
                                         $sql_mou = "SELECT * FROM tb_mou 
@@ -50,26 +50,26 @@
                                             $no++;
                                         }
                                         ?>
-                                        <option class='text-warp' value='0'>LAINNYA</option>
+                                        <option value='0'>-- <i>LAINNYA</i> --</option>
                                     </select>
                                 </div>
-                                <div class="form-group" id="institusi">
+                                <div class="form-group" id="institusi_lainnya">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" placeholder="Nama Lengkap" name="nama">
+                                    <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama_user">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" placeholder="Alamat Email untuk username" name="email">
+                                    <input type="email" class="form-control" placeholder="Alamat Email untuk username" name="email_user">
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" class="form-control form-control-user" placeholder="No. Kontak" name="no_kontak">
+                                    <input type="number" class="form-control" placeholder="No. Telp" name="no_telp_user">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="password">
+                                        <input type="password" class="form-control" placeholder="Password" name="password_user">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="ulangi Password" name="ulangi_password">
+                                        <input type="password" class="form-control" placeholder="Ulangi Password" name="ulangi_password">
                                     </div>
                                 </div>
                                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Daftar">
@@ -83,9 +83,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -101,10 +99,10 @@
     <script>
         function Bukains() {
             if ($('#instansi').val() == '0') {
-                console.log("cek");
-                $('#institusi').append("<input type='text' class='form-control form-control-user' placeholder='Masukan Nama Instansi Anda' name='nama_ip'>").focus();
+                console.log("Pilih Institusi Lainnya");
+                $('#institusi_lainnya').append("<input type='text' class='form-control form-control' placeHolder='Isikan Nama Istitusi' name='nama_institusi'>").focus();
             } else {
-                console.log("cok");
+                console.log("Tidak Pilih Institusi Lainnya");
                 $('#institusi').empty();
             }
         }

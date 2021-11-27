@@ -4,7 +4,7 @@
             <h1 class="h3 mb-2 text-gray-800">Daftar Akreditasi</h1>
         </div>
         <div class="col-lg-2">
-            <a class='btn btn-success btn-sm href=' #' data-toggle='modal' data-target='#akr_i_m'>
+            <a class='btn btn-outline-success btn-sm href=' #' data-toggle='modal' data-target='#akr_i_m'>
                 <i class="fas fa-plus"></i> Tambah
             </a>
             <!-- modal tambah Akreditasi  -->
@@ -25,16 +25,15 @@
             </div>
         </div>
     </div>
-
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="table-responsive">
-                <?php
-                $sql_akreditasi = "SELECT * FROM tb_akreditasi order by nama_akreditasi ASC";
-                $q_akreditasi = $conn->query($sql_akreditasi);
-                $r_akreditasi = $q_akreditasi->rowCount();
-                if ($r_akreditasi > 0) {
-                ?>
+            <?php
+            $sql_akreditasi = "SELECT * FROM tb_akreditasi order by nama_akreditasi ASC";
+            $q_akreditasi = $conn->query($sql_akreditasi);
+            $r_akreditasi = $q_akreditasi->rowCount();
+            if ($r_akreditasi > 0) {
+            ?>
+                <div class="table-responsive">
                     <table class='table table-striped'>
                         <thead>
                             <tr>
@@ -97,19 +96,20 @@
                                             </div>
                                         </div>
                                     </div>
-            </div>
-        <?php
+                                </tr>
+                            <?php
                             }
-        ?>
-        </tbody>
-        </table>
-    <?php
-                } else {
-    ?>
-        <h3> Data Akreditasi Tidak Ada</h3>
-    <?php
-                }
-    ?>
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php
+            } else {
+            ?>
+                <h3> Data Akreditasi Tidak Ada</h3>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>

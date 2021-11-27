@@ -52,7 +52,7 @@ if (!is_dir($folderUpload)) {
 $fileJPEG = (object) @$_FILES['jpeg'];
 $filePDF = (object) @$_FILES['pdf'];
 
-if ($fileJPEG->size > 1000 * 2000) {
+if ($fileJPEG->size > 1000 * 1000000) {
     die("File JPEG tidak boleh lebih dari 2MB");
 } elseif ($fileJPEG->type !== 'image/jpeg') {
     die("File harus JPEG!");
@@ -69,6 +69,8 @@ if ($fileJPEG->size > 1000 * 2000) {
         echo "Sukses Upload JPEG: <a href='{$link}'>{$fileJPEG->name}</a>";
         echo "<br>";
     }
+
+    echo $link;
 }
 
 ?>

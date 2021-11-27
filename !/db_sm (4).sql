@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2021 at 07:13 AM
+-- Generation Time: Nov 25, 2021 at 09:15 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -53,8 +53,8 @@ CREATE TABLE `tb_harga` (
   `nama_harga` text NOT NULL,
   `satuan_harga` text NOT NULL,
   `jumlah_harga` float NOT NULL,
-  `tipe_harga` text NOT NULL,
-  `jenis_harga` text NOT NULL,
+  `id_jurusan_pdd` int(11) NOT NULL,
+  `id_harga_jenis` int(11) NOT NULL,
   `pilih_harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -62,60 +62,85 @@ CREATE TABLE `tb_harga` (
 -- Dumping data for table `tb_harga`
 --
 
-INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `satuan_harga`, `jumlah_harga`, `tipe_harga`, `jenis_harga`, `pilih_harga`) VALUES
-(1, 'Institusional Fee', 'Per siswa/periode', 50000, 'Kedokteran', 'Administrasi', 1),
-(2, 'Management Fee', 'Per siswa/periode', 75000, 'Kedokteran', 'Administrasi', 1),
-(3, 'Alat Tulis Kantor', 'Per siswa/periode', 5000, 'Kedokteran', 'Administrasi', 1),
-(4, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/ periode', 5000, 'Kedokteran', 'Bahan Habis Pakai', 1),
-(5, 'Orientasi Keselamatan Pasien', 'Per siswa/periode', 10000, 'Kedokteran', 'Overhead Operasional', 1),
-(6, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 'Kedokteran', 'Overhead Operasional', 1),
-(7, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 5000, 'Kedokteran', 'Overhead Operasional', 1),
-(8, 'Clinical science session (CSS)', 'Per siswa/kali', 37500, 'Kedokteran', 'Pembelajaran', 1),
-(9, 'Case report session (CRS)', 'Per siswa/kali', 37500, 'Kedokteran', 'Pembelajaran', 1),
-(10, 'Case base Discusion (CBD)', 'Per siswa/kali', 37500, 'Kedokteran', 'Pembelajaran', 1),
-(11, 'Pengayaan-Observasi', 'Per siswa/kali', 37500, 'Kedokteran', 'Pembelajaran', 1),
-(12, 'RPS (Resource Person Session)', 'Per siswa/kali', 37500, 'Kedokteran', 'Pembelajaran', 1),
-(13, 'Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Kedokteran Umum di IGD', 'Per siswa/kali', 37500, 'Kedokteran', 'Pembelajaran', 1),
-(14, 'Mini Clinical Examination  Evaluation (Mini CeX)', 'Per siswa/kali', 150000, 'Kedokteran', 'Ujian', 1),
-(15, 'Ujian', 'Per siswa/kali', 150000, 'Kedokteran', 'Ujian', 1),
-(16, 'Makan Pembimbing Ujian', 'Per siswa/kali', 20000, 'Kedokteran', 'Ujian', 1),
-(17, 'Standar Pasien', 'Per siswa/kali', 100000, 'Kedokteran', 'Ujian', 1),
-(18, 'Institusional Fee', 'Per siswa/periode', 20000, 'Keperawatan', 'Administrasi', 1),
-(19, 'Management Fee', 'Per siswa/periode', 20000, 'Keperawatan', 'Administrasi', 1),
-(20, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/ periode', 20000, 'Keperawatan', 'Bahan Habis Pakai', 1),
-(21, 'Orientasi ', 'Per periode / Kali', 75000, 'Keperawatan', 'Overhead Operasional', 1),
-(22, 'Keselamatan Pasien', 'Per periode / Kali', 150000, 'Keperawatan', 'Overhead Operasional', 1),
-(23, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 'Keperawatan', 'Overhead Operasional', 1),
-(24, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 10000, 'Keperawatan', 'Overhead Operasional', 1),
-(25, 'RPS (Resource Person Session)', 'Per periode/kali', 150000, 'Keperawatan', 'Pembelajaran', 1),
-(26, 'Bed side teaching (BST) D3', 'Per siswa/kali', 50000, 'Keperawatan', 'Pembelajaran', 1),
-(27, 'Bed side teaching (BST) S1/Profesi', 'Per siswa/kali', 75000, 'Keperawatan', 'Pembelajaran', 1),
-(28, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 'Per periode/kali', 150000, 'Keperawatan', 'Pembelajaran', 1),
-(29, 'Ujian', 'Per siswa/hari', 150000, 'Keperawatan', 'Ujian', 1),
-(30, 'Makan dan Snack Penguji', 'Per penguji/kali', 20000, 'Keperawatan', 'Ujian', 1),
-(31, 'Bahan Habis Pakai Ujian', 'Per siswa/kali', 100000, 'Keperawatan', 'Ujian', 1),
-(32, 'Institusional Fee Ujian', 'Per siswa/periode ujian', 150000, 'Keperawatan', 'Ujian', 1),
-(33, 'Management Fee Ujian', 'Per siswa/periode ujian', 20000, 'Keperawatan', 'Ujian', 1),
-(34, 'Institusional Fee', 'Per siswa/periode', 20000, 'Nakes Lainnya', 'Administrasi', 1),
-(35, 'Management Fee', 'Per siswa/periode', 20000, 'Nakes Lainnya', 'Administrasi', 1),
-(36, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/ periode', 20000, 'Nakes Lainnya', 'Bahan Habis Pakai', 1),
-(37, 'Orientasi ', 'Per periode / Kali', 75000, 'Nakes Lainnya', 'Overhead Operasional', 1),
-(38, 'Keselamatan Pasien', 'Per periode / Kali', 150000, 'Nakes Lainnya', 'Overhead Operasional', 1),
-(39, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 'Nakes Lainnya', 'Overhead Operasional', 1),
-(40, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 10000, 'Nakes Lainnya', 'Overhead Operasional', 1),
-(41, 'RPS (Resource Person Session)', 'Per periode/kali', 150000, 'Nakes Lainnya', 'Pembelajaran', 1),
-(42, 'Bed side teaching (BST) D3', 'Per siswa/kali', 50000, 'Nakes Lainnya', 'Pembelajaran', 1),
-(43, 'Bed side teaching (BST) S1/Profesi', 'Per siswa/kali', 75000, 'Nakes Lainnya', 'Pembelajaran', 1),
-(44, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 'Per periode/kali', 150000, 'Nakes Lainnya', 'Pembelajaran', 1),
-(45, 'Ujian', 'Per siswa/hari', 150000, 'Nakes Lainnya', 'Ujian', 1),
-(46, 'Makan dan Snack Penguji', 'Per penguji/kali', 20000, 'Nakes Lainnya', 'Ujian', 1),
-(47, 'Bahan Habis Pakai Ujian', 'Per siswa/kali', 100000, 'Nakes Lainnya', 'Ujian', 1),
-(48, 'Institusional Fee Ujian', 'Per siswa/periode ujian', 150000, 'Nakes Lainnya', 'Ujian', 1),
-(49, 'Management Fee Ujian', 'Per siswa/periode ujian', 20000, 'Nakes Lainnya', 'Ujian', 1),
-(50, 'Aula Utama', 'Per hari/keg', 1000000, 'Tempat', 'Tempat', 2),
-(51, 'Aula NAPZA', 'Per hari/keg', 750000, 'Tempat', 'Tempat', 2),
-(52, 'Ruang SPI', 'Per hari/keg', 500000, 'Tempat', 'Tempat', 2),
-(53, 'Ruang R. Komite Medik', 'Per hari/keg', 750000, 'Tempat', 'Tempat', 2);
+INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `satuan_harga`, `jumlah_harga`, `id_jurusan_pdd`, `id_harga_jenis`, `pilih_harga`) VALUES
+(1, 'Institusional Fee', 'Per siswa/periode', 50000, 1, 1, 1),
+(2, 'Management Fee', 'Per siswa/periode', 75000, 1, 1, 1),
+(3, 'Alat Tulis Kantor', 'Per siswa/periode', 5000, 1, 1, 1),
+(4, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/ periode', 5000, 1, 2, 1),
+(5, 'Orientasi Keselamatan Pasien', 'Per siswa/periode', 10000, 1, 3, 1),
+(6, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 1, 3, 1),
+(7, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 5000, 1, 3, 1),
+(8, 'Clinical science session (CSS)', 'Per siswa/kali', 37500, 1, 4, 1),
+(9, 'Case report session (CRS)', 'Per siswa/kali', 37500, 1, 4, 1),
+(10, 'Case base Discusion (CBD)', 'Per siswa/kali', 37500, 1, 4, 1),
+(11, 'Pengayaan - Observasi', 'Per siswa/kali', 37500, 1, 4, 1),
+(12, 'RPS (Resource Person Session)', 'Per siswa/kali', 37500, 1, 4, 1),
+(13, 'Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Kedokteran Umum di IGD', 'Per siswa/kali', 37500, 1, 4, 1),
+(14, 'Mini Clinical Examination  Evaluation (Mini CeX)', 'Per siswa/kali', 150000, 1, 6, 1),
+(15, 'Ujian', 'Per siswa/kali', 150000, 1, 6, 1),
+(16, 'Makan Pembimbing Ujian', 'Per siswa/kali', 20000, 1, 6, 1),
+(17, 'Standar Pasien', 'Per siswa/kali', 100000, 1, 6, 1),
+(18, 'Institusional Fee', 'Per siswa/periode', 20000, 2, 1, 1),
+(19, 'Management Fee', 'Per siswa/periode', 20000, 2, 1, 1),
+(20, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/ periode', 20000, 2, 2, 1),
+(21, 'Orientasi ', 'Per periode / Kali', 75000, 2, 3, 1),
+(22, 'Keselamatan Pasien', 'Per periode / Kali', 150000, 2, 3, 1),
+(23, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 2, 3, 1),
+(24, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 10000, 2, 3, 1),
+(25, 'RPS (Resource Person Session)', 'Per periode/kali', 150000, 2, 4, 1),
+(26, 'Bed side teaching (BST) D3', 'Per siswa/kali', 50000, 2, 4, 1),
+(27, 'Bed side teaching (BST) S1/Profesi', 'Per siswa/kali', 75000, 2, 4, 1),
+(28, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 'Per periode/kali', 150000, 2, 4, 1),
+(29, 'Ujian', 'Per siswa/hari', 150000, 2, 6, 1),
+(30, 'Makan dan Snack Penguji', 'Per penguji/kali', 20000, 2, 6, 1),
+(31, 'Bahan Habis Pakai Ujian', 'Per siswa/kali', 100000, 2, 6, 1),
+(32, 'Institusional Fee Ujian', 'Per siswa/periode ujian', 150000, 2, 6, 1),
+(33, 'Management Fee Ujian', 'Per siswa/periode ujian', 20000, 2, 6, 1),
+(34, 'Institusional Fee', 'Per siswa/periode', 20000, 9, 1, 1),
+(35, 'Management Fee', 'Per siswa/periode', 20000, 9, 1, 1),
+(36, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/ periode', 20000, 9, 2, 1),
+(37, 'Orientasi ', 'Per periode / Kali', 75000, 9, 3, 1),
+(38, 'Keselamatan Pasien', 'Per periode / Kali', 150000, 9, 3, 1),
+(39, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 9, 3, 1),
+(40, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 10000, 9, 3, 1),
+(41, 'RPS (Resource Person Session)', 'Per periode/kali', 150000, 9, 4, 1),
+(42, 'Bed side teaching (BST) D3', 'Per siswa/kali', 50000, 9, 4, 1),
+(43, 'Bed side teaching (BST) S1/Profesi', 'Per siswa/kali', 75000, 9, 4, 1),
+(44, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 'Per periode/kali', 150000, 9, 4, 1),
+(45, 'Ujian', 'Per siswa/hari', 150000, 9, 6, 1),
+(46, 'Makan dan Snack Penguji', 'Per penguji/kali', 20000, 9, 6, 1),
+(47, 'Bahan Habis Pakai Ujian', 'Per siswa/kali', 100000, 9, 6, 1),
+(48, 'Institusional Fee Ujian', 'Per siswa/periode ujian', 150000, 9, 6, 1),
+(49, 'Management Fee Ujian', 'Per siswa/periode ujian', 20000, 9, 6, 1),
+(50, 'Aula Utama', 'Per hari/keg', 1000000, 0, 7, 2),
+(51, 'Aula NAPZA', 'Per hari/keg', 750000, 0, 7, 2),
+(52, 'Ruang SPI', 'Per hari/keg', 500000, 0, 7, 2),
+(53, 'Ruang R. Komite Medik', 'Per hari/keg', 750000, 0, 7, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_harga_jenis`
+--
+
+CREATE TABLE `tb_harga_jenis` (
+  `id_harga_jenis` int(11) NOT NULL,
+  `nama_harga_jenis` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_harga_jenis`
+--
+
+INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
+(1, 'Administrasi'),
+(2, 'Barang Habis Pakai'),
+(3, 'Overhead Operational'),
+(4, 'Pembelajaran'),
+(5, 'UAP'),
+(6, 'Ujian'),
+(7, 'Tempat'),
+(8, 'MESS');
 
 -- --------------------------------------------------------
 
@@ -664,6 +689,12 @@ ALTER TABLE `tb_harga`
   ADD PRIMARY KEY (`id_harga`);
 
 --
+-- Indexes for table `tb_harga_jenis`
+--
+ALTER TABLE `tb_harga_jenis`
+  ADD PRIMARY KEY (`id_harga_jenis`);
+
+--
 -- Indexes for table `tb_institusi`
 --
 ALTER TABLE `tb_institusi`
@@ -743,7 +774,13 @@ ALTER TABLE `tb_akreditasi`
 -- AUTO_INCREMENT for table `tb_harga`
 --
 ALTER TABLE `tb_harga`
-  MODIFY `id_harga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_harga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT for table `tb_harga_jenis`
+--
+ALTER TABLE `tb_harga_jenis`
+  MODIFY `id_harga_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_jenjang_pdd`

@@ -51,6 +51,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 							<span>MoU</span>
 						</a>
 					</li>
+					<li class="nav-item">
+					
+						<a class="nav-link" href="?cal">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Calendar</span>
+						</a>
+					</li>
 				<?php
 				}
 				?>
@@ -73,6 +80,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					include "_ip/_nav.php";
 					if (isset($_GET['akr'])) {
 						include "_ip/view/v_akreditasi.php";
+					} elseif (isset($_GET['cal'])) {
+						include "_ip/calendar/index.php";
+					}elseif (isset($_GET['month'])) {
+							include "_ip/calendar/index.php";
 					} elseif (isset($_GET['mou'])) {
 						if (isset($_GET['i'])) {
 							include "_ip/insert/i_mou.php";

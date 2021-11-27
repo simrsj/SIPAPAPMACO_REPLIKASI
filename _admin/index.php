@@ -69,6 +69,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							<i class="fas fa-fw fa-table"></i>
 							<span>Jenjang</span>
 						</a>
+						<a class="nav-link" href="?mtr">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Mentor</span>
+						</a>
 						<a class="nav-link" href="?mes">
 							<i class="fas fa-fw fa-table"></i>
 							<span>Mess</span>
@@ -76,10 +80,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<a class="nav-link" href="?mou">
 							<i class="fas fa-fw fa-table"></i>
 							<span>MoU</span>
-						</a>
-						<a class="nav-link" href="?pmb">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Pembimbing</span>
 						</a>
 						<a class="nav-link" href="?spf">
 							<i class="fas fa-fw fa-table"></i>
@@ -138,17 +138,23 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_jurusan.php";
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
-					} elseif (isset($_GET['pmb'])) {
+					} elseif (isset($_GET['mtr'])) {
 						if (isset($_GET['i'])) {
-							include "_admin/insert/i_pembimbing.php";
+							include "_admin/insert/i_mentor.php";
 						} elseif (isset($_GET['u'])) {
-							include "_admin/update/u_pembimbing.php";
+							include "_admin/update/u_mentor.php";
 						} else {
-							include "_admin/view/v_pembimbing.php";
+							include "_admin/view/v_mentor.php";
 						}
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_praktik.php";
+						} elseif (isset($_GET['u'])) {
+							include "_admin/update/u_praktik.php";
+						} elseif (isset($_GET['dh'])) {
+							include "_admin/hide/dh_praktik.php";
+						} elseif (isset($_GET['a'])) {
+							include "_admin/view/v_praktik_arsip.php";
 						} else {
 							include "_admin/view/v_praktik.php";
 						}
@@ -156,6 +162,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_spesifikasi.php";
 					} elseif (isset($_GET['uni'])) {
 						include "_admin/view/v_unit.php";
+					} elseif (isset($_GET['test'])) {
+						include "test.php";
+					} elseif (isset($_GET['test1'])) {
+						include "test1.php";
 					} else {
 						include "_admin/home.php";
 					}
