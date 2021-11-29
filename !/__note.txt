@@ -23,7 +23,7 @@ JOIN tb_user ON tb_mou.id_user = tb_user.id_user
 git status
 git add .
 git add .
-git commit -m "proses pembuatan ubah harga"
+git commit -m "proses pembuatan input praktik harga"
 git pull
 git push
 
