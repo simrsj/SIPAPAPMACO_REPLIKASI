@@ -1,9 +1,10 @@
-- harga mess pemondokan
-- fungsi unggah file 
-- path langsung dapat terlihat contoh : SM/_FILE/
+- harga mess pemondokan 
+- Security path langsung dapat terlihat contoh : SM/_FILE/
 - enkripsi link 
 - pakai plugin table cari diinternet alternatif datatables
-- inputan pilih jadwal praktikan dengan pilih tombol tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
+- inputan pilih jadwal praktikan dengan pilih tombol radio button tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
+- buat tanggal inputan data dissetiap tabel yang ada inputan
+
 
 
 SELECT * FROM tb_mou 

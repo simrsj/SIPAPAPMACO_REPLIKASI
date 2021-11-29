@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2021 at 09:25 AM
+-- Generation Time: Nov 29, 2021 at 01:44 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -451,7 +451,6 @@ CREATE TABLE `tb_mou` (
 --
 
 INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mou`, `no_rsj_mou`, `no_institusi_mou`, `id_jurusan_pdd`, `id_spesifikasi_pdd`, `id_jenjang_pdd`, `id_akreditasi`, `ket_mou`, `institusi_mou`) VALUES
-(1, '1', '0000-00-00', '0000-00-00', '-', '-', '', '', '', '', '', ''),
 (2, '2', '2014-02-13', '2017-02-12', '- ', '-', '', '', '', '', '', ''),
 (3, '3', '2018-08-20', '2021-08-19', '119/14858/RSJ', '036/AKP/BK-A/VIII/2018', '', '', '', '', '', ''),
 (4, '4', '2017-12-22', '2020-12-21', '119/19834/RSJ', '355/PKS/AKBM/XII/2017', '', '', '', '', '', ''),
@@ -674,6 +673,18 @@ INSERT INTO `tb_user` (`id_user`, `username_user`, `password_user`, `nama_user`,
 CREATE TABLE `tb_user_detail` (
   `id_user` int(11) NOT NULL,
   `id_mou` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test`
+--
+
+CREATE TABLE `test` (
+  `int_test` int(11) NOT NULL,
+  `date_test` date NOT NULL,
+  `text_test` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

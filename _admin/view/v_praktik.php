@@ -108,7 +108,7 @@
                                 </div>
                                 <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
                                     <div class="card-body " style="font-size: small;">
-
+                                        <!-- data praktikan -->
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <b>JENJANG : </b><br>
@@ -144,6 +144,13 @@
                                                     </svg> Download
                                                 </a>
                                             </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <?php
+
+
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
