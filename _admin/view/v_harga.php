@@ -124,7 +124,7 @@
         } elseif ($_GET['hrg'] == 9) {
             $active_9 = "active";
             $id_jurusan_pdd = 9;
-        } elseif ($_GET['hrg'] == 0) {
+        } else {
             $active_0 = "active";
             $id_jurusan_pdd = 0;
         }
@@ -152,7 +152,7 @@
                 $sql_harga = "SELECT * FROM tb_harga 
                 JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis
                 WHERE tb_harga.id_jurusan_pdd = $id_jurusan_pdd ORDER BY nama_harga_jenis ASC, nama_harga ASC";
-            } else {
+            } elseif ($id_jurusan_pdd == 1 || $id_jurusan_pdd == 2) {
                 $sql_harga = "SELECT * FROM tb_harga 
                 JOIN tb_jurusan_pdd ON tb_harga.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                 JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis
@@ -358,7 +358,6 @@
             ?>
         </div>
     </div>
-    <input style="color: honeydew;">
 </div>
 
 <!-- js modal pilih jenis harga dan jurusan lainnya -->

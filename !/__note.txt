@@ -4,6 +4,7 @@
 - enkripsi link 
 - pakai plugin table cari diinternet alternatif datatables
 - inputan pilih jadwal praktikan dengan pilih tombol tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
+- ubah data harga perbaiki
 
 
 SELECT * FROM tb_mou 

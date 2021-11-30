@@ -22,8 +22,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <?php
-                if ($_SESSION['level_user'] == 1) {
-                    $sql_praktik = "SELECT * FROM tb_praktik 
+                $sql_praktik = "SELECT * FROM tb_praktik 
                     JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
                     JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
                     JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
@@ -32,9 +31,7 @@
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
                     WHERE tb_praktik.status_praktik = 'Y'
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
-                } else {
-                    $sql_praktik = "";
-                }
+
                 $q_praktik = $conn->query($sql_praktik);
                 $r_praktik = $q_praktik->rowCount();
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2021 at 10:03 AM
+-- Generation Time: Nov 30, 2021 at 11:33 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -141,9 +141,7 @@ INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
 (5, 'UAP'),
 (6, 'Ujian'),
 (7, 'Tempat'),
-(8, 'MESS'),
-(9, 'adadd'),
-(10, 'adadd');
+(8, 'MESS');
 
 -- --------------------------------------------------------
 
@@ -571,8 +569,8 @@ CREATE TABLE `tb_praktik` (
 --
 
 INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`, `tgl_input_praktik`, `tgl_mulai_praktik`, `tgl_selesai_praktik`, `jumlah_praktik`, `surat_praktik`, `data_praktik`, `id_spesifikasi_pdd`, `id_jenjang_pdd`, `id_jurusan_pdd`, `id_akreditasi`, `id_user`, `nama_mentor_praktik`, `email_mentor_praktik`, `telp_mentor_praktik`, `status_cek_praktik`, `status_praktik`) VALUES
-(4, 9, 9, 'Kelompok 2 Gelombang III', '2021-11-24', '2021-11-24', '2021-12-31', 12, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', '1', '3', '6', '1', '1', 'ADMIN', '-', '08123150000', '1', 'Y'),
-(5, 80, 80, 'Kelompok 3', '2021-11-24', '2021-12-31', '2021-12-31', 123, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', '1', '3', '4', '1', '1', 'ADMIN', '-', '08123150000', '1', 'Y');
+(4, 9, 9, 'Kelompok 2 Gelombang III', '2021-11-30', '2021-11-24', '2021-12-31', 12, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', '1', '3', '1', '1', '1', 'ADMIN', '-', '08123150000', '1', 'Y'),
+(5, 80, 80, 'Kelompok 3', '2021-11-30', '2021-12-31', '2021-12-31', 123, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', '1', '3', '1', '1', '1', 'ADMIN', '-', '08123150000', '1', 'Y');
 
 -- --------------------------------------------------------
 

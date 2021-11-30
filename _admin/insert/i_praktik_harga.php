@@ -22,43 +22,103 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
     </div>
     <div class="card shadow mb-4 ">
         <div class="card-body">
-            <?php
-            if (!is_null($id_praktik)) {
-                if ($d_praktik['id_jurusan_pdd'] == 1) {
-                    $id_praktik_harga = 1;
-                } else {
-                    $id_praktik_harga = 2;
-                }
-
-                $sql_harga = "SELECT * FROM tb_harga 
-                JOIN tb_harga_jenis ON tb_harga.id_harga_jenis=tb_harga_jenis.id_harga_jenis
-                WHERE id_jurusan_pdd = " . $id_praktik_harga;
-
-                $q_praktik = $conn->query($sql_praktik);
-                if (($d_praktik['id_jurusan_pdd'] == 2) || ($d_praktik['id_jurusan_pdd'] == 3)) {
-            ?>
-                    <div class="row">
-                        <div class="col-1 text-center">No</div>
-                        <div class="col-3 text-center">Nama Harga</div>
-                        <div class="col-3 text-center">Nama Harga</div>
-
-                        <?php
-                        while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
-                            asd
+            <div class="form-group">
+                <form method="post" action="">
                     <?php
+
+                    //seleksi jika harga ada
+                    if (!is_null($id_praktik)) {
+                        if ($d_praktik['id_jurusan_pdd'] == 1) {
+                            $id_praktik_harga = 1;
+                        } else {
+                            $id_praktik_harga = 2;
                         }
+
+                        //perulangan jenis harga (harga_jenis)
+                        $sql_harga_jenis = "SELECT * FROM tb_harga 
+                JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
+                WHERE id_jurusan_pdd = " . $id_praktik_harga;
+                        $q_harga_jenis = $conn->query($sql_harga_jenis);
+
+                        //perulangan Jenis harga
+                        $no_harga_jenis = 1;
+                        while ($d_harga_jenis = $q_harga_jenis->fetch(PDO::FETCH_ASSOC)) {
+                            if ($no_harga_jenis == 1) {
+                    ?>
+                                <div class="row">
+                                    <div class="col-md-12 bg-secondary text-center">
+                                        <b class="" style="color: white;"><?php echo strtoupper($d_harga_jenis['nama_harga_jenis']); ?></b>
+                                    </div>
+                                </div>
+                                <hr>
+                            <?php
+                            }
+                            $no_harga_jenis++;
+                            //perulangan nama harga
+                            $sql_nama_harga = "SELECT * FROM tb_harga 
+                        JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
+                        WHERE tb_harga.id_harga_jenis = " . $d_harga_jenis['id_harga_jenis'];
+
+                            $q_nama_harga = $conn->query($sql_nama_harga);
+                            ?>
+
+                            <!-- tabel baris harga -->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    No
+                                </div>
+                                <div class="col-md-2">
+                                    Nama Harga
+                                </div>
+                                <div class="col-md-2">
+                                    Satuan
+                                </div>
+                                <div class="col-md-2">
+                                    Harga
+                                </div>
+                            </div>
+                            <hr>
+                            <?php
+                            $no_harga = 1;
+                            while ($d_nama_harga = $q_nama_harga->fetch(PDO::FETCH_ASSOC)) {
+                                if (fmod($no_harga, 2) == 0) {
+                                    $bg_harga = "bg-warning";
+                                } else {
+                                    $bg_harga = "";
+                                }
+
+                            ?>
+                                <div class="row">
+                                    <div class="col-md-1 <?php echo $bg_harga; ?>">
+                                        <?php echo $no_harga; ?>
+                                    </div>
+                                    <div class="col-md-2 <?php echo $bg_harga; ?>">
+                                        <?php echo $d_nama_harga['nama_harga']; ?>
+                                    </div>
+                                    <div class="col-md-2 <?php echo $bg_harga; ?>">
+                                        <?php echo $d_nama_harga['satuan_harga']; ?>
+                                    </div>
+                                    <div class="col-md-2 <?php echo $bg_harga; ?>">
+                                        <?php echo "Rp " . number_format($d_nama_harga['jumlah_harga'], 0, ",", "."); ?>
+                                    </div>
+                                    <div class="col-md-1 <?php echo $bg_harga; ?>">
+                                        <input class="form-control" type="text" name="<?php echo "id_praktik" . $id_praktik . "-id_harga" . $d_nama_harga['id_harga']; ?>">
+                                    </div>
+                                </div>
+                        <?php
+                                $no_harga++;
+                            }
+                            break;
+                            $no_harga_jenis = 1;
+                        }
+                    } else {
+                        ?>
+                        <h3 class="text-center">DATA TIDAK ADA</h3>
+                    <?php
                     }
                     ?>
-                    </div>
-
-                <?php
-            } else {
-                ?>
-                    <h3 class="text-center">DATA TIDAK ADA</h3>
-                <?php
-            }
-                ?>
+                </form>
+            </div>
         </div>
     </div>
 </div>
