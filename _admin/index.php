@@ -3,6 +3,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 ?>
 
 	<body id="page-top">
+
 		<!-- Page Wrapper -->
 		<div id="wrapper">
 			<!-- Sidebar -->
@@ -157,6 +158,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/insert/i_praktik_harga.php";
 						} elseif (isset($_GET['i'])) {
 							include "_admin/insert/i_praktik.php";
+						} elseif (isset($_GET['m'])) {
+							include "_admin/insert/i_praktik_mess.php";
 						} elseif (isset($_GET['u'])) {
 							include "_admin/update/u_praktik.php";
 						} else {

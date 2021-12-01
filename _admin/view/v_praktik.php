@@ -42,8 +42,9 @@
                         while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
                         ?>
                             <div class="card">
-                                <div class="card-header" id="head">
+                                <div class="card-header" id="head"><br>
                                     <div class="row" style="font-size: small;">
+                                        <br><br>
                                         <div class="col-sm-3">
                                             <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                         </div>
@@ -53,36 +54,43 @@
                                         <div class="col-sm-2">
                                             <b>TANGGAL SELESAI : </b><br><?php echo date("d F Y", strtotime($d_praktik['tgl_selesai_praktik'])); ?>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2 text-center">
                                             <b>STATUS : </b><br>
                                             <?php
                                             if ($d_praktik['status_cek_praktik'] == 1) {
                                             ?>
-                                                <div class="bg-success text-justify text-center" style="color: white;">DAFTAR</div>
+                                                <div class="bg-success text-center" style="color: white;">DAFTAR</div>
                                             <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == 2) {
                                             ?>
-                                                <div class="bg-warning text-justify text-center" style="color: white;">MENU</div>
+                                                <div class="bg-warning text-center" style="color: white;">MENU</div>
                                             <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == 3) {
                                             ?>
-                                                <div class="bg-danger text-justify text-center" style="color: white;">BAYAR</div>
+                                                <div class="bg-danger text-center" style="color: white;">BAYAR</div>
                                             <?php
                                             }
                                             ?>
                                         </div>
                                         <div class="col-sm-1">
-                                            <!-- tombol pilih menu -->
-                                            <a href="?prk&ih=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm collapsed" title="Pilih Menu Pendidikan">
-                                                <i class="fas fa-clipboard-list"></i>
-                                            </a>
-                                            <!-- tombol bayar bukti -->
-                                            <a href="?prk&ibt=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-danger btn-sm collapsed" title="Kirim Bukti Pembayaran">
-                                                <svg width="16" height="16" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
-                                                    <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                                                    <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
-                                                </svg>
-                                            </a>
+
+                                            <!-- tombol dropdown pilih menu harga, mess, bukti bayar -->
+
+                                            <div class="dropdown text-gray-800">
+                                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-clipboard-list"></i>
+                                                    Pilih
+                                                </button>
+                                                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="?prk&ih=<?php echo $d_praktik['id_praktik']; ?>">Pilih Harga</a>
+                                                    <a class="dropdown-item" href="?prk&m=<?php echo $d_praktik['id_praktik']; ?>">Pilih Mess</a>
+                                                    <a class="dropdown-item" href="?prk&ibt=<?php echo $d_praktik['id_praktik']; ?>">Pembayaran</a>
+                                                </div>
+                                            </div>
+                                            <!-- <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-clipboard-list text-gray-300"></i>
+                                                Pilih
+                                            </button>
+                                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                            </div> -->
                                         </div>
                                         <div class="col-sm-2">
                                             <!-- tombol rincian -->
@@ -123,8 +131,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div><br>
                                 </div>
+
+
+                                <!-- collapse data praktikan -->
                                 <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
                                     <div class="card-body " style="font-size: small;">
                                         <!-- data praktikan -->
