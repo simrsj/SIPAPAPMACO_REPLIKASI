@@ -13,8 +13,18 @@
                     <div class="modal-content">
                         <form method="post" action="">
                             <div class="modal-body">
-                                <h6>Tambah Jurusan :</h6>
-                                <input class="form-control" name="nama_jurusan_pdd">
+                                <h5 class="font-weight-bold-bold">Tambah Jurusan :</h5>
+                                <h6>Nama Jurusan :</h6>
+                                <input class="form-control" name="nama_jurusan_pdd" required>
+                                <br>
+                                <h6>Jenis :</h6>
+                                <select class="form-control" name="jenis_jurusan_pdd" required>
+                                    <option value="">-- Pilih --</option>
+                                    <option value="Kedokteran">Kedokteran</option>
+                                    <option value="Keperawatan">Keperawatan</option>
+                                    <option value="Nakes Lainnya">Nakes Lainnya</option>
+                                    <option value="Non Nakes">Non Nakes</option>
+                                </select>
                                 <br>
                                 <button type="submit" class="btn btn-success" name="tambah">Tambah</button>
                                 <button class="btn btn-danger" type="button" data-dismiss="modal">Kembali</button>
@@ -40,6 +50,7 @@
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>Nama Jurusan</th>
+                                <th>Jenis Jurusan</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -51,6 +62,7 @@
                                 <tr>
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></td>
+                                    <td><?php echo $d_jurusan_pdd['jenis_jurusan_pdd']; ?></td>
                                     <td>
                                         <a class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#jrs_u_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
                                             Ubah
@@ -64,14 +76,25 @@
                                     <div class="modal fade" id="<?php echo "jrs_u_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                                <form method="post" action="">
+                                                <form method="post" class="form-group" action="">
                                                     <div class="modal-body">
                                                         <h5>Ubah Jurusan :</h5>
                                                         <input name="id_jurusan_pdd" value="<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>" hidden>
+                                                        <h6>Nama Jurusan :</h6>
                                                         <input class="form-control" name="nama_jurusan_pdd" value="<?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>">
                                                         <br>
-                                                        <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
+                                                        <h6>Jenis Jurusan :</h6>
+                                                        <select class="form-control" name="jenis_jurusan_pdd">
+                                                            <option value="">-- Pilih --</option>
+                                                            <option value="Kedokteran">Kedokteran</option>
+                                                            <option value="Keperawatan">Keperawatan</option>
+                                                            <option value="Nakes Lainnya">Nakes Lainnya</option>
+                                                            <option value="Non Nakes">Non Nakes</option><br>
+                                                        </select>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
+                                                        </div>
                                                     </div>
                                                 </form>
                                             </div>
@@ -116,14 +139,17 @@
 </div>
 <?php
 if (isset($_POST['ubah'])) {
-    $conn->query("UPDATE `tb_jurusan_pdd` SET `nama_jurusan_pdd` = '" . $_POST['nama_jurusan_pdd'] . "' WHERE `tb_jurusan_pdd`.`id_jurusan_pdd` = " . $_POST['id_jurusan_pdd']);
+    $conn->query("UPDATE `tb_jurusan_pdd` SET 
+    `nama_jurusan_pdd` = '" . $_POST['nama_jurusan_pdd'] . "',
+    `jenis_jurusan_pdd` = '" . $_POST['jenis_jurusan_pdd'] . "'
+    WHERE `tb_jurusan_pdd`.`id_jurusan_pdd` = " . $_POST['id_jurusan_pdd']);
 ?>
     <script>
         document.location.href = "?jrs";
     </script>
 <?php
 } elseif (isset($_POST['tambah'])) {
-    $conn->query("INSERT INTO `tb_jurusan_pdd` (`nama_jurusan_pdd`) VALUES ('" . $_POST['nama_jurusan_pdd'] . "')");
+    $conn->query("INSERT INTO `tb_jurusan_pdd` (`nama_jurusan_pdd`, jenis_jurusan_pdd) VALUES ('" . $_POST['nama_jurusan_pdd'] . "','" . $_POST['jenis_jurusan_pdd'] . "')");
 ?>
     <script>
         document.location.href = "?jrs";

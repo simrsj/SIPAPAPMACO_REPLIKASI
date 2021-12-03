@@ -139,6 +139,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_jurusan.php";
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
+					} elseif (isset($_GET['mes'])) {
+						include "_admin/view/v_mess.php";
 					} elseif (isset($_GET['mtr'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_mentor.php";

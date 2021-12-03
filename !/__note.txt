@@ -1,10 +1,12 @@
 - harga mess pemondokan
 - fungsi unggah file 
-- path langsung dapat terlihat contoh : SM/_FILE/
+- path langsung dapat terlihat contoh : SM/_FILE/ (beberapa sudah)
 - enkripsi link 
 - pakai plugin table cari diinternet alternatif datatables
 - inputan pilih jadwal praktikan dengan pilih tombol tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
 - ubah data harga perbaiki
+- ubah input jurusan (penambahan jenis_jurusan_pdd)
+
 
 
 SELECT * FROM tb_mou 

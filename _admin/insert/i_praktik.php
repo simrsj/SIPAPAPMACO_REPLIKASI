@@ -55,6 +55,7 @@
                     </div>
                 </div>
                 <br>
+
                 <!-- Jurusan, Jenjang, Spesifikasi dan Akreditasi -->
                 <div class="row">
                     <div class="col-lg-3">
@@ -88,7 +89,7 @@
                         ?>
                     </div>
                     <div class="col-lg-3">
-                        Pilih Jenjang : <span style="color:red">*</span><br>
+                        Pilih Jenjang :<br>
                         <?php
                         $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
 
@@ -97,7 +98,7 @@
 
                         if ($r_jenjang_pdd > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd' required>
+                            <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd'>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -109,6 +110,7 @@
                                 }
                                 ?>
                             </select>
+                            <i style='font-size:12px;'>Optional</i>
                         <?php
                         } else {
                         ?>
@@ -118,7 +120,7 @@
                         ?>
                     </div>
                     <div class="col-lg-3">
-                        Pilih Spesifikasi : <span style="color:red">*</span><br>
+                        Pilih Spesifikasi : <br>
                         <?php
                         $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
 
@@ -127,7 +129,7 @@
 
                         if ($r_spesifikasi_pdd > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd' required>
+                            <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd'>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -139,6 +141,7 @@
                                 }
                                 ?>
                             </select>
+                            <i style='font-size:12px;'>Optional</i>
                         <?php
                         } else {
                         ?>
@@ -235,6 +238,7 @@
                         <i style='font-size:12px;'>Isian hanya berupa angka</i>
                     </div>
                 </div>
+                <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
                 <hr>
                 <!-- Simpan -->
                 <div class="row">
@@ -366,6 +370,7 @@ if (isset($_POST['simpan_praktik'])) {
         nama_mentor_praktik, 
         email_mentor_praktik,
         telp_mentor_praktik,  
+        status_cek_praktik,
         status_praktik
     ) VALUE (
         '" . $_POST['id_mou'] . "',
@@ -385,6 +390,7 @@ if (isset($_POST['simpan_praktik'])) {
         '" . $_POST['nama_mentor_praktik'] . "',
         '" . $_POST['email_mentor_praktik'] . "',
         '" . $_POST['telp_mentor_praktik'] . "',
+        'Daftar',
         'Y'
     )";
     // echo $sql_insert;

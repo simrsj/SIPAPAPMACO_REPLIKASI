@@ -138,12 +138,13 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                                             <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
                                         </option>
                                     <?php
-                                    }
+                                    } else {
                                     ?>
-                                    <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
-                                        <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
-                                    </option>
+                                        <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
+                                            <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
+                                        </option>
                                 <?php
+                                    }
                                 }
                                 ?>
                             </select>
