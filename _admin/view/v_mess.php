@@ -1,30 +1,30 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10">
-            <h1 class="h3 mb-2 text-gray-800">Daftar Harga</h1>
+            <h1 class="h3 mb-2 text-gray-800">Daftar Mess</h1>
         </div>
         <div class="col-lg-2">
-            <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#hrg_i_m'>
+            <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#mes_i_m'>
                 <i class="fas fa-plus"></i> Tambah
             </a>
 
-            <!-- modal tambah Harga  -->
-            <div class="modal fade" id="hrg_i_m">
+            <!-- modal tambah Mess  -->
+            <div class="modal fade" id="mes_i_m">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form method="post" action="">
                             <div class="modal-header">
-                                <h4 style="color:black;">Tambah Harga :</h4>
+                                <h4 style="color:black;">Tambah Mess :</h4>
                             </div>
                             <div class="modal-body">
-                                Nama Harga : <span style="color:red">*</span><br>
+                                Nama Mess : <span style="color:red">*</span><br>
                                 <input class="form-control" name="nama_harga" required><br>
-                                Satuan Harga : <span style="color:red">*</span><br>
+                                Satuan Mess : <span style="color:red">*</span><br>
                                 <input class="form-control" name="satuan_harga" required><br>
-                                Jumlah Harga : <i style='font-size:12px;'>(Rp)</i><span style="color:red">*</span><br>
+                                Jumlah Mess : <i style='font-size:12px;'>(Rp)</i><span style="color:red">*</span><br>
                                 <input class="form-control" name="jumlah_harga" type="number" min="1" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i><br><br>
-                                Jenis Harga : <span style="color:red">*</span><br>
+                                Jenis Mess : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_harga_jenis = "SELECT * FROM tb_harga_jenis order by nama_harga_jenis ASC";
 
@@ -34,7 +34,7 @@
                                 if ($r_harga_jenis > 0) {
                                 ?>
                                     <select class="form-control text-center" name="id_harga_jenis" id="t_id_harga_jenis" onChange='t_s_id_harga_jenis()' required>
-                                        <option value="">-- Pilih Jenis Harga --</option>
+                                        <option value="">-- Pilih Jenis Mess --</option>
                                         <?php
                                         while ($d_harga_jenis = $q_harga_jenis->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
@@ -50,7 +50,7 @@
                                 <?php
                                 } else {
                                 ?>
-                                    <b><i>Data Jenis Harga Tidak Ada</i></b>
+                                    <b><i>Data Jenis Mess Tidak Ada</i></b>
                                 <?php
                                 }
                                 ?>
