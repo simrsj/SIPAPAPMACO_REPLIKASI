@@ -37,18 +37,18 @@
 
                 if ($r_praktik > 0) {
                 ?>
-                    <div id="accordion">
-                        <?php
-                        while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
+                    <?php
+                    while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                        <div id="accordion">
                             <div class="card">
-                                <div class="card-header" id="head"><br>
+                                <div class="card-header align-items-center bg-gray-100">
                                     <div class="row" style="font-size: small;">
                                         <br><br>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-2">
                                             <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <b>PERIODE PRAKTIK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                         </div>
                                         <div class="col-sm-2">
@@ -86,11 +86,6 @@
                                                     <a class="dropdown-item" href="?prk&ibt=<?php echo $d_praktik['id_praktik']; ?>">Pembayaran</a>
                                                 </div>
                                             </div>
-                                            <!-- <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-clipboard-list text-gray-300"></i>
-                                                Pilih
-                                            </button>
-                                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                                            </div> -->
                                         </div>
                                         <div class="col-sm-2">
                                             <!-- tombol rincian -->
@@ -131,7 +126,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div><br>
+                                    </div>
                                 </div>
 
 
@@ -188,10 +183,10 @@
                                     </div>
                                 </div>
                             </div>
-                        <?php
-                        }
-                        ?>
-                    </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 <?php
                 } else {
                 ?>

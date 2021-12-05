@@ -1,5 +1,5 @@
 <div class="card-header text-center bg-gray-500 text-gray-100">
-    <h4 class="m-0 font-weight-bold"><?php echo $d_harga['nama_jurusan_pdd']; ?></h4>
+    <h4 class="m-0 font-weight-bold">Semua Daftar Harga</h4>
 </div>
 <div class="card-body py-3 d-flex flex-row ">
     <div class="table-responsive">

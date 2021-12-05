@@ -142,9 +142,8 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-primary text-gray-100">
             <form class="form-inline" method="post" action="">
-                <button type="submit" class="btn btn-danger btn-sm mr-sm-2" name="cari_all_harga">Semua</button>
                 <button type="submit" class="btn btn-danger btn-sm mr-sm-2" name="cari_lain_harga">Lainnya</button>
-                <button type="submit" class="btn btn-danger btn-sm mr-sm-2" name="cari_mess_harga">Lainnya</button>
+                <button type="submit" class="btn btn-danger btn-sm mr-sm-2" name="cari_all_harga">Semua</button>
                 <button type="submit" class="btn btn-danger btn-sm mr-sm-2" name="cari_harga">Cari</button>
             </form>
         </div>
