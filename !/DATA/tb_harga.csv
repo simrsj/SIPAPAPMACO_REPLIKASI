@@ -1,3 +1,4 @@
+id_harga;nama_harga;satuan_harga;jumlah_harga;id_jurusan_pdd;id_jenjang_pdd;id_spesifikasi_pdd;id_harga_jenis;pilih_harga;tgl_input_harga
 1;Institusional Fee;Per siswa/periode;50000;1;NULL;1;1;1;NULL
 2;Management Fee;Per siswa/periode;75000;1;NULL;1;1;1;NULL
 3;Alat Tulis Kantor;Per siswa/periode;5000;1;NULL;1;1;1;NULL
