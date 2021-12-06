@@ -57,17 +57,23 @@
                                         <div class="col-sm-2 text-center">
                                             <b>STATUS : </b><br>
                                             <?php
-                                            if ($d_praktik['status_cek_praktik'] == 1) {
+                                            if ($d_praktik['status_cek_praktik'] == "DAFTAR") {
                                             ?>
-                                                <div class="bg-success text-center" style="color: white;">DAFTAR</div>
+                                                <div class="bg-success text-center" style="color: white;">
+                                                    <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                </div>
                                             <?php
-                                            } elseif ($d_praktik['status_cek_praktik'] == 2) {
+                                            } elseif ($d_praktik['status_cek_praktik'] == "MENU") {
                                             ?>
-                                                <div class="bg-warning text-center" style="color: white;">MENU</div>
+                                                <div class="bg-warning text-center" style="color: white;">
+                                                    <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                </div>
                                             <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == 3) {
                                             ?>
-                                                <div class="bg-danger text-center" style="color: white;">BAYAR</div>
+                                                <div class="bg-danger text-center" style="color: white;">
+                                                    <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                </div>
                                             <?php
                                             }
                                             ?>
@@ -75,15 +81,14 @@
                                         <div class="col-sm-1">
 
                                             <!-- tombol dropdown pilih menu harga, mess, bukti bayar -->
-
                                             <div class="dropdown text-gray-800">
-                                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-clipboard-list"></i>
+                                                <button class="btn btn-secondary btn-sm dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-clipboard-list"></i>
                                                     Pilih
                                                 </button>
                                                 <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="?prk&ih=<?php echo $d_praktik['id_praktik']; ?>">Pilih Harga</a>
-                                                    <a class="dropdown-item" href="?prk&m=<?php echo $d_praktik['id_praktik']; ?>">Pilih Mess</a>
-                                                    <a class="dropdown-item" href="?prk&ibt=<?php echo $d_praktik['id_praktik']; ?>">Pembayaran</a>
+                                                    <a class="dropdown-item btn btn-outline-secondary btn-sm" href="?prk&ih=<?php echo $d_praktik['id_praktik']; ?>">Pilih Harga</a>
+                                                    <a class="dropdown-item btn btn-secondary btn-sm" href="?prk&m=<?php echo $d_praktik['id_praktik']; ?>">Pilih Mess</a>
+                                                    <a class="btn btn-secondary btn-sm dropdown-item " href="?prk&ibt=<?php echo $d_praktik['id_praktik']; ?>">Pembayaran</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,7 +134,6 @@
                                     </div>
                                 </div>
 
-
                                 <!-- collapse data praktikan -->
                                 <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
                                     <div class="card-body " style="font-size: small;">
@@ -171,19 +175,40 @@
                                             </div>
                                         </div>
                                         <hr>
+                                        <!-- data menu harga yang dipilih -->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <?php
+                                                if ($d_praktik['status_cek_praktik'] == 'DAFTAR') {
+                                                ?>
+                                                    <div class="jumbotron jumbotron-fluid">
+                                                        <div class="container">
+                                                            <h1 class="display-4">Fluid jumbotron</h1>
+                                                            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == 'MENU') {
+                                                } elseif ($d_praktik['status_cek_praktik'] == 'BAYAR') {
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!-- data pembayaran -->
                                         <div class="row">
                                             <?php
-                                            if ($d_praktik['status_cek_praktik'] == 'Daftar') {
-                                            } elseif ($d_praktik['status_cek_praktik'] == 'Menu') {
-                                            } elseif ($d_praktik['status_cek_praktik'] == 'Bayar') {
+                                            if ($d_praktik['status_cek_praktik'] == 'DAFTAR') {
+                                            } elseif ($d_praktik['status_cek_praktik'] == 'MENU') {
+                                            } elseif ($d_praktik['status_cek_praktik'] == 'BAYAR') {
                                             }
-
                                             ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <hr>
                     <?php
                     }
                     ?>

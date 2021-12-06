@@ -89,7 +89,7 @@
                         ?>
                     </div>
                     <div class="col-lg-3">
-                        Pilih Jenjang :<br>
+                        Pilih Jenjang : <span style="color:red">*</span><br>
                         <?php
                         $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
 
@@ -98,7 +98,7 @@
 
                         if ($r_jenjang_pdd > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd'>
+                            <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd' required>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -110,7 +110,6 @@
                                 }
                                 ?>
                             </select>
-                            <i style='font-size:12px;'>Optional</i>
                         <?php
                         } else {
                         ?>
@@ -120,7 +119,7 @@
                         ?>
                     </div>
                     <div class="col-lg-3">
-                        Pilih Spesifikasi : <br>
+                        Pilih Spesifikasi : <span style="color:red">*</span><br>
                         <?php
                         $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
 
@@ -129,7 +128,7 @@
 
                         if ($r_spesifikasi_pdd > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd'>
+                            <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd' required>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -141,7 +140,6 @@
                                 }
                                 ?>
                             </select>
-                            <i style='font-size:12px;'>Optional</i>
                         <?php
                         } else {
                         ?>
@@ -187,6 +185,7 @@
                     <div class="col-lg-3">
                         Jumlah Praktikan : <span style="color:red">*</span><br>
                         <input type="number" class="form-control" name="jumlah_praktik" min="1" required>
+                        <i style="font-size:12px;">Isian hanya berupa angka</i>
                     </div>
                     <div class="col-lg-3">
                         Tanggal Mulai : <span style="color:red">*</span><br>
