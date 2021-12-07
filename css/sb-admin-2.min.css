@@ -9138,6 +9138,9 @@ a:focus {
 .text-xs {
   font-size: 0.7rem;
 }
+.text-md {
+  font-size: 0.9rem;
+}
 .text-lg {
   font-size: 1.2rem;
 }

@@ -22,253 +22,90 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
     </div>
     <div class="card shadow mb-4 ">
         <div class="card-body">
-            <div class="form-group">
-                <form method="post" action="">
-                    <?php
-
-                    //seleksi jika harga ada
-                    if (!is_null($id_praktik)) {
-                        if ($d_praktik['id_jurusan_pdd'] == 1) {
-                            $id_praktik_harga = 1;
-                        } else {
-                            $id_praktik_harga = 2;
-                        }
-
-                        //perulangan jenis harga (harga_jenis)
-                        $sql_harga_jenis = "SELECT * FROM tb_harga 
-                JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
-                WHERE id_jurusan_pdd = " . $id_praktik_harga;
-                        $q_harga_jenis = $conn->query($sql_harga_jenis);
-
-                        //perulangan Jenis harga
-                        $no_harga_jenis = 1;
-                        while ($d_harga_jenis = $q_harga_jenis->fetch(PDO::FETCH_ASSOC)) {
-                            if ($no_harga_jenis == 1) {
-                    ?>
-                                <div class="row">
-                                    <div class="col-md-12 bg-secondary text-center">
-                                        <b class="" style="color: white;"><?php echo strtoupper($d_harga_jenis['nama_harga_jenis']); ?></b>
-                                    </div>
-                                </div>
-                                <hr>
-                            <?php
-                            }
-                            $no_harga_jenis++;
-                            //perulangan nama harga
-                            $sql_nama_harga = "SELECT * FROM tb_harga 
-                        JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
-                        WHERE tb_harga.id_harga_jenis = " . $d_harga_jenis['id_harga_jenis'];
-
-                            $q_nama_harga = $conn->query($sql_nama_harga);
-                            ?>
-
-                            <!-- tabel baris harga -->
-                            <div class="row">
-                                <div class="col-md-1">
-                                    No
-                                </div>
-                                <div class="col-md-2">
-                                    Nama Harga
-                                </div>
-                                <div class="col-md-2">
-                                    Satuan
-                                </div>
-                                <div class="col-md-2">
-                                    Harga
-                                </div>
-                            </div>
-                            <hr>
-                            <?php
-                            $no_harga = 1;
-                            while ($d_nama_harga = $q_nama_harga->fetch(PDO::FETCH_ASSOC)) {
-                                if (fmod($no_harga, 2) == 0) {
-                                    $bg_harga = "bg-warning";
-                                } else {
-                                    $bg_harga = "";
-                                }
-
-                            ?>
-                                <div class="row">
-                                    <div class="col-md-1 <?php echo $bg_harga; ?>">
-                                        <?php echo $no_harga; ?>
-                                    </div>
-                                    <div class="col-md-2 <?php echo $bg_harga; ?>">
-                                        <?php echo $d_nama_harga['nama_harga']; ?>
-                                    </div>
-                                    <div class="col-md-2 <?php echo $bg_harga; ?>">
-                                        <?php echo $d_nama_harga['satuan_harga']; ?>
-                                    </div>
-                                    <div class="col-md-2 <?php echo $bg_harga; ?>">
-                                        <?php echo "Rp " . number_format($d_nama_harga['jumlah_harga'], 0, ",", "."); ?>
-                                    </div>
-                                    <div class="col-md-1 <?php echo $bg_harga; ?>">
-                                        <input class="form-control" type="text" name="<?php echo "id_praktik" . $id_praktik . "-id_harga" . $d_nama_harga['id_harga']; ?>">
-                                    </div>
-                                </div>
-                        <?php
-                                $no_harga++;
-                            }
-                            break;
-                            $no_harga_jenis = 1;
-                        }
-                    } else {
-                        ?>
-                        <h3 class="text-center">DATA TIDAK ADA</h3>
-                    <?php
-                    }
-                    ?>
-                </form>
+            <div class="text-gray-700">
+                <h5 class="font-weight-bold">Menu Harga <?php echo $d_praktik['nama_jurusan_pdd']; ?></h5>
             </div>
+            <?php
+
+            $sql_harga = " SELECT * FROM tb_harga 
+            JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
+            JOIN tb_jurusan_pdd ON tb_harga.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd 
+            JOIN tb_jenjang_pdd ON tb_harga.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd 
+            JOIN tb_spesifikasi_pdd ON tb_harga.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd 
+            WHERE id_jurusan_pdd = " . $d_praktik['id_jurusan_pdd'] . " AND 
+            id_jenjang_pdd = " . $d_praktik['id_jenjang_pdd'] . " AND  
+            id_spesifikasi_pdd = " . $d_praktik['id_jenjang_pdd'] . " 
+            ORDER BY nam_harga_jenis ASC, nama_jurusan_pdd ASC, nama_jenjang_pdd ASC, nama_spesifikasi_pdd ASC
+            ";
+            echo "<pre>";
+            echo $sql_harga;
+            echo "</pre>";
+            $q_harga = $conn->query($sql_harga);
+            $r_harga = $q_harga->rowCount();
+
+            if ($r_harga > 0) {
+
+            ?>
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Jenis</th>
+                            <th scope="col">Nama Harga</th>
+                            <th scope="col">Satuan</th>
+                            <th scope="col">Harga</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php
+                            $no = 1;
+                            while ($d_harga = $q_harga->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <th scope="row"><?php echo $no; ?></th>
+                                <td><?php echo $d_harga['nama_harga_jenis']; ?></td>
+                                <td><?php echo $d_harga['nama_harga']; ?></td>
+                                <td><?php echo $d_harga['status_harga']; ?></td>
+                                <td><?php echo "Rp " . number_format($d_harga['jumlah_harga'], 0, ",", "."); ?></td>
+                                <td><?php echo $d_harga['nama_harga_jenis']; ?></td>
+                            <?php
+                                $no++;
+                            }
+                            ?>
+                        </tr>
+                    </tbody>
+                </table>
+            <?php
+            } else {
+            ?>
+                <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
+                    <h5 class="text-center">Data Harga Tidak Ada</h5>
+                </div>
+            <?php
+            } ?>
+            <hr>
+            <div class="text-gray-700">
+                <h5 class="font-weight-bold">Menu Harga Lainnya</h5>
+            </div>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-<?php
-if (isset($_POST['simpan_praktik'])) {
-    $q_praktik = $conn->query("SELECT id_praktik FROM tb_praktik ORDER BY id_praktik ASC");
-    $no_id_praktik = 1;
-    //mencari data id_praktikan yg belum ada
-    while ($d_pratik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-        if ($no_id_praktik != $d_praktik[0]) {
-            $no_id_praktik = $d_praktik[0] + 1;
-            break;
-        } elseif ($no_id_praktik == 0) {
-            $no_id_praktik;
-            break;
-        }
-        $no_id_praktik = $d_praktik[0] + 1;
-    }
-    //ubah Nama File PDF
-    $_FILES['surat_praktik']['name'] = "surat_praktik_" . $no_id_praktik . "_" . date('Y-m-d') . ".pdf";
-    $_FILES['data_praktik']['name'] = "data_praktik_" . $no_id_praktik . "_" . date('Y-m-d') . ".xlsx";
-
-    //alamat file surat masuk
-    $alamat_unggah = "./_file/praktikan";
-
-    //print_r($_FILES);
-
-    //pembuatan alamat bila tidak ada
-    if (!is_dir($alamat_unggah)) {
-        mkdir($alamat_unggah, 0777, $rekursif = true);
-    }
-
-    //unggah surat dan data praktik
-    if (!is_null($_FILES['surat_praktik'])) {
-        $file_surat_praktik = (object) @$_FILES['surat_praktik'];
-
-        //mulai unggah file surat praktik
-        if ($file_surat_praktik->size > 1000 * 1000) {
-            echo "
-            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                <strong>File Unggah Surat</strong>Harus Kurang dari 1 MB
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                </button>
-            </div>
-            ";
-            die();
-        } elseif ($file_surat_praktik->type !== 'application/pdf') {
-            echo "
-            <script>
-                alert('File Surat Harus .pdf');
-            </script>
-            ";
-            die();
-        } else {
-            $unggah_surat_praktik = move_uploaded_file(
-                $file_surat_praktik->tmp_name,
-                "{$alamat_unggah}/{$file_surat_praktik->name}"
-            );
-            $link_surat_praktik = "{$alamat_unggah}/{$file_surat_praktik->name}";
-
-            // if ($unggah_data_praktik) {
-            //     $link = "{$alamat_unggah}/{$file_data_praktik->name}";
-            //     echo "Sukses unggah data praktik: <a href='{$link}'>{$file_data_praktik->name}</a>";
-            //     echo "<br>";
-            // }
-        }
-    }
-
-    if (!is_null($_FILES['data_praktik'])) {
-        $file_data_praktik = (object) @$_FILES['data_praktik'];
-
-        //mulai unggah file data praktik
-        if ($file_data_praktik->size > 1000 * 1000) {
-            echo "
-            <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                <strong>File Unggah Data</strong>Harus Kurang dari 1 MB
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                </button>
-            </div>
-            ";
-            die();
-        } elseif ($file_data_praktik->type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-            echo "
-            <script>
-                alert('File data Harus .xls .xlsx');
-            </script>
-            ";
-            die();
-        } else {
-            $unggah_data_praktik = move_uploaded_file(
-                $file_data_praktik->tmp_name,
-                "{$alamat_unggah}/{$file_data_praktik->name}"
-            );
-            $link_data_praktik = "{$alamat_unggah}/{$file_data_praktik->name}";
-        }
-
-        // if ($unggah_data_praktik) {
-        //     $link = "{$alamat_unggah}/{$file_data_praktik->name}";
-        //     echo "Sukses unggah data praktik: <a href='{$link}'>{$file_data_praktik->name}</a>";
-        //     echo "<br>";
-        // }
-    }
-
-    $sql_insert = " INSERT INTO tb_praktik (
-        id_mou,
-        id_institusi,
-        nama_praktik,  
-        tgl_input_praktik,
-        tgl_mulai_praktik,
-        tgl_selesai_praktik, 
-        jumlah_praktik, 
-        surat_praktik, 
-        data_praktik, 
-        id_spesifikasi_pdd,
-        id_jenjang_pdd, 
-        id_jurusan_pdd,
-        id_akreditasi,
-        id_user, 
-        nama_mentor_praktik, 
-        email_mentor_praktik,
-        telp_mentor_praktik,  
-        status_praktik
-    ) VALUE (
-        '" . $_POST['id_mou'] . "',
-        '" . $_POST['id_mou'] . "',
-        '" . $_POST['nama_praktik'] . "',
-        '" . date('Y-m-d') . "',
-        '" . $_POST['tgl_mulai_praktik'] . "',
-        '" . $_POST['tgl_selesai_praktik'] . "',  
-        '" . $_POST['jumlah_praktik'] . "',     
-        '" . $link_surat_praktik . "',     
-        '" . $link_data_praktik . "',        
-        '" . $_POST['id_spesifikasi_pdd'] . "',
-        '" . $_POST['id_jenjang_pdd'] . "',
-        '" . $_POST['id_jurusan_pdd'] . "',
-        '" . $_POST['id_akreditasi'] . "',
-        '" . $_SESSION['id_user'] . "',
-        '" . $_POST['nama_mentor_praktik'] . "',
-        '" . $_POST['email_mentor_praktik'] . "',
-        '" . $_POST['telp_mentor_praktik'] . "',
-        'Y'
-    )";
-    // echo $sql_insert;
-    $conn->query($sql_insert);
-?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
-    </script>
-<?php
-}
-?>

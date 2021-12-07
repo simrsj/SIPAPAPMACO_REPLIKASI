@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2021 at 09:47 AM
+-- Generation Time: Dec 07, 2021 at 09:35 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -368,13 +368,13 @@ INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `satuan_harga`, `jumlah_harga`
 (300, 'Bahan Habis Pakai Ujian', 'Per siswa/kali', 100000, 6, 6, 0, 6, 1, NULL),
 (301, 'Institusional Fee Ujian', 'Per siswa/periode ujian', 150000, 6, 6, 0, 6, 1, NULL),
 (302, 'Management Fee Ujian', 'Per siswa/periode ujian', 20000, 6, 6, 0, 6, 1, NULL),
-(303, 'Aula Utama', 'Per hari/keg', 1000000, 0, 0, NULL, 7, 2, NULL),
-(304, 'Aula NAPZA', 'Per hari/keg', 750000, 0, 0, NULL, 7, 2, NULL),
-(305, 'Ruang SPI', 'Per hari/keg', 500000, 0, 0, NULL, 7, 2, NULL),
-(306, 'Ruang R. Komite Medik', 'Per hari/keg', 750000, 0, 0, NULL, 7, 2, NULL),
-(307, 'Mess Praktikan (Tanpa Makan)', 'Per Siswa / Hari', 20000, 0, 0, NULL, 8, 3, NULL),
+(303, 'Aula Utama', 'Per hari/keg', 1000000, 0, 0, 0, 7, 2, NULL),
+(304, 'Aula NAPZA', 'Per hari/keg', 750000, 0, 0, 0, 7, 2, NULL),
+(305, 'Ruang SPI', 'Per hari/keg', 500000, 0, 0, 0, 7, 2, NULL),
+(306, 'Ruang R. Komite Medik', 'Per hari/keg', 750000, 0, 0, 0, 7, 2, NULL),
+(307, 'Mess Praktikan (Tanpa Makan)', 'Per Siswa / Hari', 20000, 0, 0, 0, 8, 3, NULL),
 (308, 'Mess Praktikan (3x Makan)', 'Per Siswa / Hari', 100000, 0, 0, 0, 8, 3, NULL),
-(309, 'Ruang Kelas / Ruang Diskusi', 'Per Siswa / Hari', 30000, 0, 0, NULL, 7, 1, NULL);
+(309, 'Ruang Kelas / Ruang Diskusi', 'Per Siswa / Hari', 30000, 0, 0, 0, 7, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -570,13 +570,37 @@ CREATE TABLE `tb_jurusan_pdd` (
 --
 
 INSERT INTO `tb_jurusan_pdd` (`id_jurusan_pdd`, `nama_jurusan_pdd`, `jenis_jurusan_pdd`) VALUES
-(0, '-- Lainnya --', '-- Lainnya --'),
-(1, 'Kedokteran', 'Kedokteran'),
-(2, 'Keperawatan', 'Keperawatan'),
-(3, 'Psikologi', 'Nakes Lainnya'),
-(4, 'Farmasi', 'Nakes Lainnya'),
-(5, 'Pekerja Sosial', 'Non Nakes'),
-(6, 'Rekam Medis', 'Nakes Lainnya');
+(0, '-- Lainnya --', '0'),
+(1, 'Kedokteran', '1'),
+(2, 'Keperawatan', '2'),
+(3, 'Psikologi', '3'),
+(4, 'Farmasi', '3'),
+(5, 'Pekerja Sosial', '3'),
+(6, 'Rekam Medis', '3'),
+(7, 'IT', '4'),
+(15, 'SMA/SMK/MA Sederajat', '4');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_jurusan_pdd_jenis`
+--
+
+CREATE TABLE `tb_jurusan_pdd_jenis` (
+  `id_jurusan_pdd_jenis` int(11) NOT NULL,
+  `nama_jurusan_pdd_jenis` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_jurusan_pdd_jenis`
+--
+
+INSERT INTO `tb_jurusan_pdd_jenis` (`id_jurusan_pdd_jenis`, `nama_jurusan_pdd_jenis`) VALUES
+(0, '-- Lainnya --'),
+(1, 'Kedokteran'),
+(2, 'Keperawatan'),
+(3, 'Nakes Lainnya'),
+(4, 'Non Nakes');
 
 -- --------------------------------------------------------
 
@@ -832,9 +856,10 @@ CREATE TABLE `tb_praktik` (
   `jumlah_praktik` int(11) NOT NULL,
   `surat_praktik` text NOT NULL,
   `data_praktik` text NOT NULL,
-  `id_spesifikasi_pdd` text DEFAULT NULL,
-  `id_jenjang_pdd` text DEFAULT NULL,
+  `id_jurusan_pdd_jenis` int(11) NOT NULL,
   `id_jurusan_pdd` text DEFAULT NULL,
+  `id_jenjang_pdd` text DEFAULT NULL,
+  `id_spesifikasi_pdd` text DEFAULT NULL,
   `id_akreditasi` text NOT NULL,
   `id_user` text NOT NULL,
   `nama_mentor_praktik` text NOT NULL,
@@ -848,11 +873,11 @@ CREATE TABLE `tb_praktik` (
 -- Dumping data for table `tb_praktik`
 --
 
-INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`, `tgl_input_praktik`, `tgl_ubah_praktik`, `tgl_mulai_praktik`, `tgl_selesai_praktik`, `jumlah_praktik`, `surat_praktik`, `data_praktik`, `id_spesifikasi_pdd`, `id_jenjang_pdd`, `id_jurusan_pdd`, `id_akreditasi`, `id_user`, `nama_mentor_praktik`, `email_mentor_praktik`, `telp_mentor_praktik`, `status_cek_praktik`, `status_praktik`) VALUES
-(4, 9, 9, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-06', '2021-11-24', '2021-12-31', 12, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
-(5, 80, 80, 'Kelompok 3', '2021-12-05', NULL, '2021-12-31', '2021-12-31', 123, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', '0', '3', '2', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
-(6, 5, 5, 'Kelompok 3 Gel. III', '2021-12-03', NULL, '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', '0', '3', '4', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y'),
-(7, 78, 78, 'Periodik', '2021-12-06', NULL, '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', '0', '5', '3', '2', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y');
+INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`, `tgl_input_praktik`, `tgl_ubah_praktik`, `tgl_mulai_praktik`, `tgl_selesai_praktik`, `jumlah_praktik`, `surat_praktik`, `data_praktik`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_akreditasi`, `id_user`, `nama_mentor_praktik`, `email_mentor_praktik`, `telp_mentor_praktik`, `status_cek_praktik`, `status_praktik`) VALUES
+(4, 9, 9, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-06', '2021-11-24', '2021-12-31', 12, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
+(5, 80, 80, 'Kelompok 3', '2021-12-05', NULL, '2021-12-31', '2021-12-31', 123, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 2, '2', '3', '0', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
+(6, 5, 5, 'Kelompok 3 Gel. III', '2021-12-03', NULL, '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', 3, '4', '3', '0', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y'),
+(7, 78, 78, 'Periodik', '2021-12-06', NULL, '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '5', '0', '2', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y');
 
 -- --------------------------------------------------------
 
@@ -1001,6 +1026,12 @@ ALTER TABLE `tb_jurusan_pdd`
   ADD PRIMARY KEY (`id_jurusan_pdd`);
 
 --
+-- Indexes for table `tb_jurusan_pdd_jenis`
+--
+ALTER TABLE `tb_jurusan_pdd_jenis`
+  ADD PRIMARY KEY (`id_jurusan_pdd_jenis`);
+
+--
 -- Indexes for table `tb_mentor_rsj`
 --
 ALTER TABLE `tb_mentor_rsj`
@@ -1074,7 +1105,13 @@ ALTER TABLE `tb_jenjang_pdd`
 -- AUTO_INCREMENT for table `tb_jurusan_pdd`
 --
 ALTER TABLE `tb_jurusan_pdd`
-  MODIFY `id_jurusan_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_jurusan_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tb_jurusan_pdd_jenis`
+--
+ALTER TABLE `tb_jurusan_pdd_jenis`
+  MODIFY `id_jurusan_pdd_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_mess`
