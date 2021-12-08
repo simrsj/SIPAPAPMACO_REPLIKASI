@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost";
+$servername = "127.0.0.1";
 $database = "db_sm";
 $username = "root";
 $password = "";
@@ -11,6 +11,7 @@ try {
 		$password
 	);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 	//echo "Connected successfully";
 } catch (PDOException $e) {
 	echo "Connection failed: " . $e->getMessage();

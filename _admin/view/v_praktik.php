@@ -42,7 +42,7 @@
                     ?>
                         <div id="accordion">
                             <div class="card">
-                                <div class="card-header align-items-center bg-gray-100">
+                                <div class="card-header align-items-center bg-gray-200">
                                     <div class="row" style="font-size: small;">
                                         <br><br>
                                         <div class="col-sm-2">
@@ -59,21 +59,15 @@
                                             <?php
                                             if ($d_praktik['status_cek_praktik'] == "DAFTAR") {
                                             ?>
-                                                <div class="bg-success text-center" style="color: white;">
-                                                    <?php echo $d_praktik['status_cek_praktik']; ?>
-                                                </div>
+                                                <span class="badge badge-danger text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                             <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == "MENU") {
                                             ?>
-                                                <div class="bg-warning text-center" style="color: white;">
-                                                    <?php echo $d_praktik['status_cek_praktik']; ?>
-                                                </div>
+                                                <span class="badge badge-warning text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                             <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == 3) {
                                             ?>
-                                                <div class="bg-danger text-center" style="color: white;">
-                                                    <?php echo $d_praktik['status_cek_praktik']; ?>
-                                                </div>
+                                                <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                             <?php
                                             }
                                             ?>
@@ -138,12 +132,16 @@
                                 <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
                                     <div class="card-body " style="font-size: small;">
                                         <!-- data praktikan -->
+                                        <div class="text-gray-700">
+                                            <h4 class="font-weight-bold">DATA PRAKTIKAN</h4>
+                                        </div>
+                                        <hr style="color: gray;">
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <b>JENJANG : </b><br>
-                                                <?php echo $d_praktik['nama_jenjang_pdd']; ?><br>
                                                 <b>JURUSAN : </b><br>
                                                 <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
+                                                <b>JENJANG : </b><br>
+                                                <?php echo $d_praktik['nama_jenjang_pdd']; ?><br>
                                                 <b>SPESIFIKASI : </b><br>
                                                 <?php echo $d_praktik['nama_spesifikasi_pdd']; ?><br>
                                                 <b>JUMLAH PRAKTIKAN : </b><br>
@@ -175,35 +173,61 @@
                                             </div>
                                         </div>
                                         <hr>
+
                                         <!-- data menu harga yang dipilih -->
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <?php
-                                                if ($d_praktik['status_cek_praktik'] == 'DAFTAR') {
-                                                ?>
-                                                    <div class="jumbotron jumbotron-fluid">
-                                                        <div class="container">
-                                                            <h1 class="display-4">Fluid jumbotron</h1>
-                                                            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-                                                        </div>
-                                                    </div>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == 'MENU') {
-                                                } elseif ($d_praktik['status_cek_praktik'] == 'BAYAR') {
-                                                }
-                                                ?>
+                                        <div class="text-gray-700">
+                                            <h4 class="font-weight-bold">DATA MENU HARGA</h4>
+                                        </div>
+                                        <?php
+                                        if ($d_praktik['status_cek_praktik'] == 'DAFTAR') {
+                                        ?>
+                                            <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
+                                                <h5 class="text-center">Data Menu Harga Tidak Ada</h5>
                                             </div>
-                                        </div>
+                                        <?php
+                                        } else {
+                                        ?>
+                                        <?php
+                                        }
+                                        ?>
                                         <hr>
-                                        <!-- data pembayaran -->
-                                        <div class="row">
-                                            <?php
-                                            if ($d_praktik['status_cek_praktik'] == 'DAFTAR') {
-                                            } elseif ($d_praktik['status_cek_praktik'] == 'MENU') {
-                                            } elseif ($d_praktik['status_cek_praktik'] == 'BAYAR') {
-                                            }
-                                            ?>
+
+                                        <!-- data MESS -->
+                                        <div class="text-gray-700">
+                                            <h4 class="font-weight-bold">DATA MESS</h4>
                                         </div>
+                                        <?php
+                                        if ($d_praktik['status_cek_praktik'] == 'DAFTAR' || 'MESS') {
+                                        ?>
+                                            <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
+                                                <h5 class="text-center">Data MESS Tidak Ada</h5>
+                                            </div>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            DATA
+                                        <?php
+                                        }
+                                        ?>
+                                        <hr>
+
+                                        <!-- data pembayaran -->
+                                        <div class="text-gray-700">
+                                            <h4 class="font-weight-bold">DATA PEMBAYARAN</h4>
+                                        </div>
+                                        <?php
+                                        if ($d_praktik['status_cek_praktik'] == 'DAFTAR' || 'MESS') {
+                                        ?>
+                                            <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
+                                                <h5 class="text-center">Data Pembayaran Tidak Ada</h5>
+                                            </div>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            DATA
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
