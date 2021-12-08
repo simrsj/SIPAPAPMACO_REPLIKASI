@@ -16,288 +16,67 @@ id_harga;nama_harga;satuan_harga;jumlah_harga;id_jurusan_pdd_jenis;id_jurusan_pd
 15;Ujian;Per siswa/kali;150000;1;1;0;0;6;1;NULL
 16;Makan Pembimbing Ujian;Per siswa/kali;20000;1;1;0;0;6;1;NULL
 17;Standar Pasien;Per siswa/kali;100000;1;1;0;0;6;1;NULL
-18;Institusional Fee;Per siswa/periode;50000;2;0;0;0;1;1;NULL
-19;Management Fee;Per siswa/periode;75000;2;0;0;0;1;1;NULL
-20;Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/ periode;20000;2;0;0;0;2;1;NULL
-21;Orientasi ;Per periode/Kali;75000;2;0;0;0;3;1;NULL
-22;Keselamatan Pasien;Per periode/Kali;150000;2;0;0;0;3;1;NULL
-23;Log Book (dibayar 1 kali);Per siswa/periode;20000;2;0;0;0;3;1;NULL
-24;Name Tag (dibayar 1 kali);Per siswa/periode;10000;2;0;0;0;3;1;NULL
-25;RPS (Resource Person Session);Per periode/kali;150000;2;0;0;0;4;1;NULL
-26;Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ;Per periode/kali;150000;2;0;0;0;4;1;NULL
-27;Ujian;Per siswa/hari;150000;2;0;0;0;6;1;NULL
-28;Makan dan Snack Penguji;Per penguji/kali;20000;2;0;0;0;6;1;NULL
-29;Bahan Habis Pakai Ujian;Per siswa/kali;100000;2;0;0;0;6;1;NULL
-30;Institusional Fee Ujian;Per siswa/periode ujian;150000;2;0;0;0;6;1;NULL
-31;Management Fee Ujian;Per siswa/periode ujian;20000;2;0;0;0;6;1;NULL
-32;Institusional Fee;Per siswa/periode;50000;3;0;0;0;1;1;NULL
-33;Management Fee;Per siswa/periode;75000;3;0;0;0;1;1;NULL
-34;Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/ periode;20000;3;0;0;0;2;1;NULL
-35;Orientasi ;Per periode/Kali;75000;3;0;0;0;3;1;NULL
-36;Keselamatan Pasien;Per periode/Kali;150000;3;0;0;0;3;1;NULL
-37;Log Book (dibayar 1 kali);Per siswa/periode;20000;3;0;0;0;3;1;NULL
-38;Name Tag (dibayar 1 kali);Per siswa/periode;10000;3;0;0;0;3;1;NULL
-39;RPS (Resource Person Session);Per periode/kali;150000;3;0;0;0;4;1;NULL
-40;Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ;Per periode/kali;150000;3;0;0;0;4;1;NULL
-41;Ujian;Per siswa/hari;150000;3;0;0;0;6;1;NULL
-42;Makan dan Snack Penguji;Per penguji/kali;20000;3;0;0;0;6;1;NULL
-43;Bahan Habis Pakai Ujian;Per siswa/kali;100000;3;0;0;0;6;1;NULL
-44;Institusional Fee Ujian;Per siswa/periode ujian;150000;3;0;0;0;6;1;NULL
-45;Management Fee Ujian;Per siswa/periode ujian;20000;3;0;0;0;6;1;NULL
-46;;;;;;;;;;
-47;;;;;;;;;;
-48;;;;;;;;;;
-49;;;;;;;;;;
-50;;;;;;;;;;
-51;;;;;;;;;;
-52;;;;;;;;;;
-53;;;;;;;;;;
-54;;;;;;;;;;
-55;;;;;;;;;;
-56;;;;;;;;;;
-57;;;;;;;;;;
-58;;;;;;;;;;
-59;;;;;;;;;;
-60;;;;;;;;;;
-61;;;;;;;;;;
-62;;;;;;;;;;
-63;;;;;;;;;;
-64;;;;;;;;;;
-65;;;;;;;;;;
-66;;;;;;;;;;
-67;;;;;;;;;;
-68;;;;;;;;;;
-69;;;;;;;;;;
-70;;;;;;;;;;
-71;;;;;;;;;;
-72;;;;;;;;;;
-73;;;;;;;;;;
-74;;;;;;;;;;
-75;;;;;;;;;;
-76;;;;;;;;;;
-77;;;;;;;;;;
-78;;;;;;;;;;
-79;;;;;;;;;;
-80;;;;;;;;;;
-81;;;;;;;;;;
-82;;;;;;;;;;
-83;;;;;;;;;;
-84;;;;;;;;;;
-85;;;;;;;;;;
-86;;;;;;;;;;
-87;;;;;;;;;;
-88;;;;;;;;;;
-89;;;;;;;;;;
-90;;;;;;;;;;
-91;;;;;;;;;;
-92;;;;;;;;;;
-93;;;;;;;;;;
-94;;;;;;;;;;
-95;;;;;;;;;;
-96;;;;;;;;;;
-97;;;;;;;;;;
-98;;;;;;;;;;
-99;;;;;;;;;;
-100;;;;;;;;;;
-101;;;;;;;;;;
-102;;;;;;;;;;
-103;;;;;;;;;;
-104;;;;;;;;;;
-105;;;;;;;;;;
-106;;;;;;;;;;
-107;;;;;;;;;;
-108;;;;;;;;;;
-109;;;;;;;;;;
-110;;;;;;;;;;
-111;;;;;;;;;;
-112;;;;;;;;;;
-113;;;;;;;;;;
-114;;;;;;;;;;
-115;;;;;;;;;;
-116;;;;;;;;;;
-117;;;;;;;;;;
-118;;;;;;;;;;
-119;;;;;;;;;;
-120;;;;;;;;;;
-121;;;;;;;;;;
-122;;;;;;;;;;
-123;;;;;;;;;;
-124;;;;;;;;;;
-125;;;;;;;;;;
-126;;;;;;;;;;
-127;;;;;;;;;;
-128;;;;;;;;;;
-129;;;;;;;;;;
-130;;;;;;;;;;
-131;;;;;;;;;;
-132;;;;;;;;;;
-133;;;;;;;;;;
-134;;;;;;;;;;
-135;;;;;;;;;;
-136;;;;;;;;;;
-137;;;;;;;;;;
-138;;;;;;;;;;
-139;;;;;;;;;;
-140;;;;;;;;;;
-141;;;;;;;;;;
-142;;;;;;;;;;
-143;;;;;;;;;;
-144;;;;;;;;;;
-145;;;;;;;;;;
-146;;;;;;;;;;
-147;;;;;;;;;;
-148;;;;;;;;;;
-149;;;;;;;;;;
-150;;;;;;;;;;
-151;;;;;;;;;;
-152;;;;;;;;;;
-153;;;;;;;;;;
-154;;;;;;;;;;
-155;;;;;;;;;;
-156;;;;;;;;;;
-157;;;;;;;;;;
-158;;;;;;;;;;
-159;;;;;;;;;;
-160;;;;;;;;;;
-161;;;;;;;;;;
-162;;;;;;;;;;
-163;;;;;;;;;;
-164;;;;;;;;;;
-165;;;;;;;;;;
-166;;;;;;;;;;
-167;;;;;;;;;;
-168;;;;;;;;;;
-169;;;;;;;;;;
-170;;;;;;;;;;
-171;;;;;;;;;;
-172;;;;;;;;;;
-173;;;;;;;;;;
-174;;;;;;;;;;
-175;;;;;;;;;;
-176;;;;;;;;;;
-177;;;;;;;;;;
-178;;;;;;;;;;
-179;;;;;;;;;;
-180;;;;;;;;;;
-181;;;;;;;;;;
-182;;;;;;;;;;
-183;;;;;;;;;;
-184;;;;;;;;;;
-185;;;;;;;;;;
-186;;;;;;;;;;
-187;;;;;;;;;;
-188;;;;;;;;;;
-189;;;;;;;;;;
-190;;;;;;;;;;
-191;;;;;;;;;;
-192;;;;;;;;;;
-193;;;;;;;;;;
-194;;;;;;;;;;
-195;;;;;;;;;;
-196;;;;;;;;;;
-197;;;;;;;;;;
-198;;;;;;;;;;
-199;;;;;;;;;;
-200;;;;;;;;;;
-201;;;;;;;;;;
-202;;;;;;;;;;
-203;;;;;;;;;;
-204;;;;;;;;;;
-205;;;;;;;;;;
-206;;;;;;;;;;
-207;;;;;;;;;;
-208;;;;;;;;;;
-209;;;;;;;;;;
-210;;;;;;;;;;
-211;;;;;;;;;;
-212;;;;;;;;;;
-213;;;;;;;;;;
-214;;;;;;;;;;
-215;;;;;;;;;;
-216;;;;;;;;;;
-217;;;;;;;;;;
-218;;;;;;;;;;
-219;;;;;;;;;;
-220;;;;;;;;;;
-221;;;;;;;;;;
-222;;;;;;;;;;
-223;;;;;;;;;;
-224;;;;;;;;;;
-225;;;;;;;;;;
-226;;;;;;;;;;
-227;;;;;;;;;;
-228;;;;;;;;;;
-229;;;;;;;;;;
-230;;;;;;;;;;
-231;;;;;;;;;;
-232;;;;;;;;;;
-233;;;;;;;;;;
-234;;;;;;;;;;
-235;;;;;;;;;;
-236;;;;;;;;;;
-237;;;;;;;;;;
-238;;;;;;;;;;
-239;;;;;;;;;;
-240;;;;;;;;;;
-241;;;;;;;;;;
-242;;;;;;;;;;
-243;;;;;;;;;;
-244;;;;;;;;;;
-245;;;;;;;;;;
-246;;;;;;;;;;
-247;;;;;;;;;;
-248;;;;;;;;;;
-249;;;;;;;;;;
-250;;;;;;;;;;
-251;;;;;;;;;;
-252;;;;;;;;;;
-253;;;;;;;;;;
-254;;;;;;;;;;
-255;;;;;;;;;;
-256;;;;;;;;;;
-257;;;;;;;;;;
-258;;;;;;;;;;
-259;;;;;;;;;;
-260;;;;;;;;;;
-261;;;;;;;;;;
-262;;;;;;;;;;
-263;;;;;;;;;;
-264;;;;;;;;;;
-265;;;;;;;;;;
-266;;;;;;;;;;
-267;;;;;;;;;;
-268;;;;;;;;;;
-269;;;;;;;;;;
-270;;;;;;;;;;
-271;;;;;;;;;;
-272;;;;;;;;;;
-273;;;;;;;;;;
-274;;;;;;;;;;
-275;;;;;;;;;;
-276;;;;;;;;;;
-277;;;;;;;;;;
-278;;;;;;;;;;
-279;;;;;;;;;;
-280;;;;;;;;;;
-281;;;;;;;;;;
-282;;;;;;;;;;
-283;;;;;;;;;;
-284;;;;;;;;;;
-285;;;;;;;;;;
-286;;;;;;;;;;
-287;;;;;;;;;;
-288;;;;;;;;;;
-289;;;;;;;;;;
-290;;;;;;;;;;
-291;;;;;;;;;;
-292;;;;;;;;;;
-293;;;;;;;;;;
-294;;;;;;;;;;
-295;;;;;;;;;;
-296;;;;;;;;;;
-297;;;;;;;;;;
-298;;;;;;;;;;
-299;;;;;;;;;;
-300;;;;;;;;;;
-301;;;;;;;;;;
-302;;;;;;;;;;
+18;Institusional Fee;Per siswa/periode;50000;2;2;0;0;1;1;NULL
+19;Management Fee;Per siswa/periode;75000;2;2;0;0;1;1;NULL
+20;Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/periode;20000;2;2;0;0;2;1;NULL
+21;Orientasi ;Per periode/Kali;75000;2;2;0;0;3;1;NULL
+22;Keselamatan Pasien;Per periode/Kali;150000;2;2;0;0;3;1;NULL
+23;Log Book (dibayar 1 kali);Per siswa/periode;20000;2;2;0;0;3;1;NULL
+24;Name Tag (dibayar 1 kali);Per siswa/periode;10000;2;2;0;0;3;1;NULL
+25;RPS (Resource Person Session);Per periode/kali;150000;2;2;0;0;4;1;NULL
+26;Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ;Per periode/kali;150000;2;2;0;0;4;1;NULL
+27;Ujian;Per siswa/hari;150000;2;2;0;0;6;1;NULL
+28;Makan dan Snack Penguji;Per penguji/kali;20000;2;2;0;0;6;1;NULL
+29;Bahan Habis Pakai Ujian;Per siswa/kali;100000;2;2;0;0;6;1;NULL
+30;Institusional Fee Ujian;Per siswa/periode ujian;150000;2;2;0;0;6;1;NULL
+31;Management Fee Ujian;Per siswa/periode ujian;20000;2;2;0;0;6;1;NULL
+32;Institusional Fee;Per siswa/periode;50000;3;3;0;0;1;1;NULL
+33;Management Fee;Per siswa/periode;75000;3;3;0;0;1;1;NULL
+34;Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/ periode;20000;3;3;0;0;2;1;NULL
+35;Orientasi ;Per periode/Kali;75000;3;3;0;0;3;1;NULL
+36;Keselamatan Pasien;Per periode/Kali;150000;3;3;0;0;3;1;NULL
+37;Log Book (dibayar 1 kali);Per siswa/periode;20000;3;3;0;0;3;1;NULL
+38;Name Tag (dibayar 1 kali);Per siswa/periode;10000;3;3;0;0;3;1;NULL
+39;RPS (Resource Person Session);Per periode/kali;150000;3;3;0;0;4;1;NULL
+40;Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ;Per periode/kali;150000;3;3;0;0;4;1;NULL
+41;Ujian;Per siswa/hari;150000;3;3;0;0;6;1;NULL
+42;Makan dan Snack Penguji;Per penguji/kali;20000;3;3;0;0;6;1;NULL
+43;Bahan Habis Pakai Ujian;Per siswa/kali;100000;3;3;0;0;6;1;NULL
+44;Institusional Fee Ujian;Per siswa/periode ujian;150000;3;3;0;0;6;1;NULL
+45;Management Fee Ujian;Per siswa/periode ujian;20000;3;3;0;0;6;1;NULL
+46;Institusional Fee;Per siswa/periode;50000;4;0;0;0;1;1;NULL
+47;Management Fee;Per siswa/periode;75000;4;0;0;0;1;1;NULL
+48;Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/ periode;20000;4;0;0;0;2;1;NULL
+49;Orientasi ;Per periode/Kali;75000;4;0;0;0;3;1;NULL
+50;Keselamatan Pasien;Per periode/Kali;150000;4;0;0;0;3;1;NULL
+51;Log Book (dibayar 1 kali);Per siswa/periode;20000;4;0;0;0;3;1;NULL
+52;Name Tag (dibayar 1 kali);Per siswa/periode;10000;4;0;0;0;3;1;NULL
+53;RPS (Resource Person Session);Per periode/kali;150000;4;0;0;0;4;1;NULL
+54;Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ;Per periode/kali;150000;4;0;0;0;4;1;NULL
+55;Ujian;Per siswa/hari;150000;4;0;0;0;6;1;NULL
+56;Makan dan Snack Penguji;Per penguji/kali;20000;4;0;0;0;6;1;NULL
+57;Bahan Habis Pakai Ujian;Per siswa/kali;100000;4;0;0;0;6;1;NULL
+58;Institusional Fee Ujian;Per siswa/periode ujian;150000;4;0;0;0;6;1;NULL
+59;Management Fee Ujian;Per siswa/periode ujian;20000;4;0;0;0;6;1;NULL
+60;Bed side teaching (BST);Per siswa/kali;50000;0;0;3;0;4;2;NULL
+61;Bed side teaching (BST);Per siswa/kali;75000;0;0;4;0;4;2;NULL
+62;Bed side teaching (BST);Per siswa/kali;75000;0;0;5;0;4;2;NULL
+63;Bed side teaching (BST);Per siswa/kali;75000;0;0;10;2;4;2;NULL
+64;Mess Praktikan (3x Makan);Per Siswa / Hari;100000;0;0;0;0;8;3;NULL
+65;Mess Praktikan (Tanpa Makan);Per Siswa / Hari;20000;0;0;0;0;8;3;NULL
+66;Ruang R. Komite Medik;Per hari/keg;750000;0;0;0;0;7;2;NULL
+67;Ruang SPI;Per hari/keg;500000;0;0;0;0;7;2;NULL
+68;Ruang Kelas / Ruang Diskusi;Per Siswa / Hari;30000;0;0;0;0;7;1;NULL
+69;Aula NAPZA;Per hari/keg;750000;0;0;0;0;7;2;NULL
+70;Aula Utama;Per hari/keg;1000000;0;0;0;0;7;2;NULL
+71;Praktik Kerja Lapangan (PKL);Per Minggu/orang;100000;0;0;1;0;9;1;NULL
+72;Praktik Kerja Lapangan (PKL);Per Minggu/orang;100000;0;0;2;0;9;1;NULL
+73;Praktik Kerja Lapangan (PKL);Per Minggu/orang;100000;0;0;3;0;9;1;NULL
+74;Praktik Kerja Lapangan (PKL);Per Minggu/orang;200000;0;0;4;0;9;1;NULL
+75;Praktik Kerja Lapangan (PKL);Per Minggu/orang;200000;0;0;5;0;9;1;NULL
+76;Praktik Kerja Lapangan (PKL);Per Minggu/orang;200000;0;0;6;0;9;1;NULL
+77;Praktik Kerja Lapangan (PKL);Per Minggu/orang;250000;0;0;7;0;9;1;NULL
+78;Praktik Kerja Lapangan (PKL);Per Minggu/orang;250000;0;0;8;0;9;1;NULL
+79;Praktik Kerja Lapangan (PKL);Per Minggu/orang;350000;0;0;9;0;9;1;NULL
+80;Praktik Kerja Lapangan (PKL);Per Minggu/orang;350000;0;0;10;0;9;1;NULL
+81;Praktik Kerja Lapangan (PKL);Per Minggu/orang;250000;0;0;11;0;9;1;NULL
