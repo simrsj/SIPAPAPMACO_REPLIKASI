@@ -279,8 +279,8 @@
                     </div>
                 </div>
             </div>
-            <a href="?hrg&cl" type="submit" class="btn btn-danger btn-sm mr-sm-2">Lainnya</a>
-            <a href="?hrg&cs" class="btn btn-danger btn-sm mr-sm-2" name="cari_all_harga">Semua</a>
+            <a href="?hrg&cl" class="btn btn-danger btn-sm mr-sm-2">Lainnya</a>
+            <a href="?hrg&cs" class="btn btn-danger btn-sm mr-sm-2">Semua</a>
             </form>
         </div>
         <?php
