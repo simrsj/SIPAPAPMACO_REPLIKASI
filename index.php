@@ -23,7 +23,7 @@ include "_add-ons/date.php";
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <?php
-error_reporting(0);
+// error_reporting(0);
 include "_add-ons/connection.php";
 include "_add-ons/date.php";
 

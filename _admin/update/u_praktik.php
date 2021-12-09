@@ -119,7 +119,7 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                         ?>
                     </div>
                     <div class="col-lg-3">
-                        Pilih Jenjang : <span style="color:red">*</span><br>
+                        Pilih Jenjang : <br>
                         <?php
                         $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
 
@@ -128,7 +128,7 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
 
                         if ($r_jenjang_pdd > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd' required>
+                            <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd'>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -138,12 +138,13 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                                             <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
                                         </option>
                                     <?php
-                                    }
+                                    } else {
                                     ?>
-                                    <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
-                                        <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
-                                    </option>
+                                        <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
+                                            <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
+                                        </option>
                                 <?php
+                                    }
                                 }
                                 ?>
                             </select>
@@ -156,7 +157,7 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                         ?>
                     </div>
                     <div class="col-lg-3">
-                        Pilih Spesifikasi : <span style="color:red">*</span><br>
+                        Pilih Spesifikasi : <br>
                         <?php
                         $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
 
@@ -165,7 +166,7 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
 
                         if ($r_spesifikasi_pdd > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd' required>
+                            <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd'>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -413,7 +414,7 @@ if (isset($_POST['ubah_praktik'])) {
         `id_mou` = '" . $_POST['id_mou'] . "', 
         `id_institusi` = '" . $d_praktik_join['id_institusi'] . "', 
         `nama_praktik` = '" . $_POST['nama_praktik'] . "', 
-        `tgl_input_praktik` = '" . date('Y-m-d') . "', 
+        `tgl_ubah_praktik` = '" . date('Y-m-d') . "', 
         `tgl_mulai_praktik` = '" . $_POST['tgl_mulai_praktik'] . "', 
         `tgl_selesai_praktik` = '" . $_POST['tgl_selesai_praktik'] . "', 
         `jumlah_praktik` = '" . $_POST['jumlah_praktik'] . "', 

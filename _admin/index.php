@@ -3,6 +3,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 ?>
 
 	<body id="page-top">
+
 		<!-- Page Wrapper -->
 		<div id="wrapper">
 			<!-- Sidebar -->
@@ -14,14 +15,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</div>
 					<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 				</a>
-				<!-- Divider -->
-				<hr class="sidebar-divider my-0">
-				<!-- Nav Item - Dashboard -->
-				<li class="nav-item active">
-					<a class="nav-link" href="?">
-						<i class="fas fa-fw fa-tachometer-alt"></i>
-						<span>Dashboard</span></a>
-				</li>
 				<!-- Divider -->
 				<hr class="sidebar-divider">
 				<!-- Heading -->
@@ -138,6 +131,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_jurusan.php";
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
+					} elseif (isset($_GET['mes'])) {
+						include "_admin/view/v_mess.php";
 					} elseif (isset($_GET['mtr'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_mentor.php";
@@ -147,14 +142,20 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/view/v_mentor.php";
 						}
 					} elseif (isset($_GET['prk'])) {
-						if (isset($_GET['i'])) {
-							include "_admin/insert/i_praktik.php";
-						} elseif (isset($_GET['u'])) {
-							include "_admin/update/u_praktik.php";
+						if (isset($_GET['a'])) {
+							include "_admin/view/v_praktik_arsip.php";
+						} elseif (isset($_GET['ibt'])) {
+							include "_admin/insert/i_praktik_bukti_trasfer.php";
 						} elseif (isset($_GET['dh'])) {
 							include "_admin/hide/dh_praktik.php";
-						} elseif (isset($_GET['a'])) {
-							include "_admin/view/v_praktik_arsip.php";
+						} elseif (isset($_GET['ih'])) {
+							include "_admin/insert/i_praktik_harga.php";
+						} elseif (isset($_GET['i'])) {
+							include "_admin/insert/i_praktik.php";
+						} elseif (isset($_GET['m'])) {
+							include "_admin/insert/i_praktik_mess.php";
+						} elseif (isset($_GET['u'])) {
+							include "_admin/update/u_praktik.php";
 						} else {
 							include "_admin/view/v_praktik.php";
 						}

@@ -1,0 +1,82 @@
+id_harga;nama_harga;satuan_harga;jumlah_harga;id_jurusan_pdd_jenis;id_jurusan_pdd;id_jenjang_pdd;id_spesifikasi_pdd;id_harga_jenis;pilih_harga;tgl_input_harga
+1;Institusional Fee;Per siswa/periode;50000;1;1;0;0;1;1;NULL
+2;Management Fee;Per siswa/periode;75000;1;1;0;0;1;1;NULL
+3;Alat Tulis Kantor;Per siswa/periode;5000;1;1;0;0;1;1;NULL
+4;Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/periode;5000;1;1;0;0;2;1;NULL
+5;Orientasi Keselamatan Pasien;Per siswa/periode;10000;1;1;0;0;3;1;NULL
+6;Log Book (dibayar 1 kali);Per siswa/periode;20000;1;1;0;0;3;1;NULL
+7;Name Tag (dibayar 1 kali);Per siswa/periode;5000;1;1;0;0;3;1;NULL
+8;Clinical science session (CSS);Per siswa/kali;37500;1;1;0;0;4;1;NULL
+9;Case report session (CRS);Per siswa/kali;37500;1;1;0;0;4;1;NULL
+10;Case base Discusion (CBD);Per siswa/kali;37500;1;1;0;0;4;1;NULL
+11;Pengayaan - Observasi;Per siswa/kali;37500;1;1;0;0;4;1;NULL
+12;RPS (Resource Person Session);Per siswa/kali;37500;1;1;0;0;4;1;NULL
+13;Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Kedokteran Umum di IGD;Per siswa/kali;37500;1;1;0;0;4;1;NULL
+14;Mini Clinical Examination  Evaluation (Mini CeX);Per siswa/kali;150000;1;1;0;0;6;1;NULL
+15;Ujian;Per siswa/kali;150000;1;1;0;0;6;1;NULL
+16;Makan Pembimbing Ujian;Per siswa/kali;20000;1;1;0;0;6;1;NULL
+17;Standar Pasien;Per siswa/kali;100000;1;1;0;0;6;1;NULL
+18;Institusional Fee;Per siswa/periode;50000;2;2;0;0;1;1;NULL
+19;Management Fee;Per siswa/periode;75000;2;2;0;0;1;1;NULL
+20;Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/periode;20000;2;2;0;0;2;1;NULL
+21;Orientasi ;Per periode/Kali;75000;2;2;0;0;3;1;NULL
+22;Keselamatan Pasien;Per periode/Kali;150000;2;2;0;0;3;1;NULL
+23;Log Book (dibayar 1 kali);Per siswa/periode;20000;2;2;0;0;3;1;NULL
+24;Name Tag (dibayar 1 kali);Per siswa/periode;10000;2;2;0;0;3;1;NULL
+25;RPS (Resource Person Session);Per periode/kali;150000;2;2;0;0;4;1;NULL
+26;Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ;Per periode/kali;150000;2;2;0;0;4;1;NULL
+27;Ujian;Per siswa/hari;150000;2;2;0;0;6;1;NULL
+28;Makan dan Snack Penguji;Per penguji/kali;20000;2;2;0;0;6;1;NULL
+29;Bahan Habis Pakai Ujian;Per siswa/kali;100000;2;2;0;0;6;1;NULL
+30;Institusional Fee Ujian;Per siswa/periode ujian;150000;2;2;0;0;6;1;NULL
+31;Management Fee Ujian;Per siswa/periode ujian;20000;2;2;0;0;6;1;NULL
+32;Institusional Fee;Per siswa/periode;50000;3;3;0;0;1;1;NULL
+33;Management Fee;Per siswa/periode;75000;3;3;0;0;1;1;NULL
+34;Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/ periode;20000;3;3;0;0;2;1;NULL
+35;Orientasi ;Per periode/Kali;75000;3;3;0;0;3;1;NULL
+36;Keselamatan Pasien;Per periode/Kali;150000;3;3;0;0;3;1;NULL
+37;Log Book (dibayar 1 kali);Per siswa/periode;20000;3;3;0;0;3;1;NULL
+38;Name Tag (dibayar 1 kali);Per siswa/periode;10000;3;3;0;0;3;1;NULL
+39;RPS (Resource Person Session);Per periode/kali;150000;3;3;0;0;4;1;NULL
+40;Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ;Per periode/kali;150000;3;3;0;0;4;1;NULL
+41;Ujian;Per siswa/hari;150000;3;3;0;0;6;1;NULL
+42;Makan dan Snack Penguji;Per penguji/kali;20000;3;3;0;0;6;1;NULL
+43;Bahan Habis Pakai Ujian;Per siswa/kali;100000;3;3;0;0;6;1;NULL
+44;Institusional Fee Ujian;Per siswa/periode ujian;150000;3;3;0;0;6;1;NULL
+45;Management Fee Ujian;Per siswa/periode ujian;20000;3;3;0;0;6;1;NULL
+46;Institusional Fee;Per siswa/periode;50000;4;0;0;0;1;1;NULL
+47;Management Fee;Per siswa/periode;75000;4;0;0;0;1;1;NULL
+48;Untuk Keselamatan Kerja (Handrub, tisue, sabun);Per siswa/ periode;20000;4;0;0;0;2;1;NULL
+49;Orientasi ;Per periode/Kali;75000;4;0;0;0;3;1;NULL
+50;Keselamatan Pasien;Per periode/Kali;150000;4;0;0;0;3;1;NULL
+51;Log Book (dibayar 1 kali);Per siswa/periode;20000;4;0;0;0;3;1;NULL
+52;Name Tag (dibayar 1 kali);Per siswa/periode;10000;4;0;0;0;3;1;NULL
+53;RPS (Resource Person Session);Per periode/kali;150000;4;0;0;0;4;1;NULL
+54;Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ;Per periode/kali;150000;4;0;0;0;4;1;NULL
+55;Ujian;Per siswa/hari;150000;4;0;0;0;6;1;NULL
+56;Makan dan Snack Penguji;Per penguji/kali;20000;4;0;0;0;6;1;NULL
+57;Bahan Habis Pakai Ujian;Per siswa/kali;100000;4;0;0;0;6;1;NULL
+58;Institusional Fee Ujian;Per siswa/periode ujian;150000;4;0;0;0;6;1;NULL
+59;Management Fee Ujian;Per siswa/periode ujian;20000;4;0;0;0;6;1;NULL
+60;Bed side teaching (BST);Per siswa/kali;50000;0;0;3;0;4;2;NULL
+61;Bed side teaching (BST);Per siswa/kali;75000;0;0;4;0;4;2;NULL
+62;Bed side teaching (BST);Per siswa/kali;75000;0;0;5;0;4;2;NULL
+63;Bed side teaching (BST);Per siswa/kali;75000;0;0;10;2;4;2;NULL
+64;Mess Praktikan (3x Makan);Per Siswa / Hari;100000;0;0;0;0;8;3;NULL
+65;Mess Praktikan (Tanpa Makan);Per Siswa / Hari;20000;0;0;0;0;8;3;NULL
+66;Ruang R. Komite Medik;Per hari/keg;750000;0;0;0;0;7;2;NULL
+67;Ruang SPI;Per hari/keg;500000;0;0;0;0;7;2;NULL
+68;Ruang Kelas / Ruang Diskusi;Per Siswa / Hari;30000;0;0;0;0;7;1;NULL
+69;Aula NAPZA;Per hari/keg;750000;0;0;0;0;7;2;NULL
+70;Aula Utama;Per hari/keg;1000000;0;0;0;0;7;2;NULL
+71;Praktik Kerja Lapangan (PKL);Per Minggu/orang;100000;0;0;1;0;9;1;NULL
+72;Praktik Kerja Lapangan (PKL);Per Minggu/orang;100000;0;0;2;0;9;1;NULL
+73;Praktik Kerja Lapangan (PKL);Per Minggu/orang;100000;0;0;3;0;9;1;NULL
+74;Praktik Kerja Lapangan (PKL);Per Minggu/orang;200000;0;0;4;0;9;1;NULL
+75;Praktik Kerja Lapangan (PKL);Per Minggu/orang;200000;0;0;5;0;9;1;NULL
+76;Praktik Kerja Lapangan (PKL);Per Minggu/orang;200000;0;0;6;0;9;1;NULL
+77;Praktik Kerja Lapangan (PKL);Per Minggu/orang;250000;0;0;7;0;9;1;NULL
+78;Praktik Kerja Lapangan (PKL);Per Minggu/orang;250000;0;0;8;0;9;1;NULL
+79;Praktik Kerja Lapangan (PKL);Per Minggu/orang;350000;0;0;9;0;9;1;NULL
+80;Praktik Kerja Lapangan (PKL);Per Minggu/orang;350000;0;0;10;0;9;1;NULL
+81;Praktik Kerja Lapangan (PKL);Per Minggu/orang;250000;0;0;11;0;9;1;NULL

@@ -55,6 +55,7 @@
                     </div>
                 </div>
                 <br>
+
                 <!-- Jurusan, Jenjang, Spesifikasi dan Akreditasi -->
                 <div class="row">
                     <div class="col-lg-3">
@@ -184,6 +185,7 @@
                     <div class="col-lg-3">
                         Jumlah Praktikan : <span style="color:red">*</span><br>
                         <input type="number" class="form-control" name="jumlah_praktik" min="1" required>
+                        <i style="font-size:12px;">Isian hanya berupa angka</i>
                     </div>
                     <div class="col-lg-3">
                         Tanggal Mulai : <span style="color:red">*</span><br>
@@ -235,6 +237,7 @@
                         <i style='font-size:12px;'>Isian hanya berupa angka</i>
                     </div>
                 </div>
+                <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
                 <hr>
                 <!-- Simpan -->
                 <div class="row">
@@ -248,9 +251,10 @@
 </div>
 <?php
 if (isset($_POST['simpan_praktik'])) {
+
+    //mencari data id_praktikan yg belum ada
     $q_praktik = $conn->query("SELECT id_praktik FROM tb_praktik ORDER BY id_praktik ASC");
     $no_id_praktik = 1;
-    //mencari data id_praktikan yg belum ada
     while ($d_pratik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
         if ($no_id_praktik != $d_praktik[0]) {
             $no_id_praktik = $d_praktik[0] + 1;
@@ -348,6 +352,10 @@ if (isset($_POST['simpan_praktik'])) {
         // }
     }
 
+    //mencari data id_jurusan_pdd_jenis
+    $q_jurusan_pdd = $conn->query("SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $_POST['id_jurusan_pdd']);
+    $d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC);
+
     $sql_insert = " INSERT INTO tb_praktik (
         id_mou,
         id_institusi,
@@ -358,14 +366,16 @@ if (isset($_POST['simpan_praktik'])) {
         jumlah_praktik, 
         surat_praktik, 
         data_praktik, 
-        id_spesifikasi_pdd,
-        id_jenjang_pdd, 
+        id_jurusan_pdd_jenis,
         id_jurusan_pdd,
+        id_jenjang_pdd, 
+        id_spesifikasi_pdd,
         id_akreditasi,
         id_user, 
         nama_mentor_praktik, 
         email_mentor_praktik,
         telp_mentor_praktik,  
+        status_cek_praktik,
         status_praktik
     ) VALUE (
         '" . $_POST['id_mou'] . "',
@@ -377,14 +387,16 @@ if (isset($_POST['simpan_praktik'])) {
         '" . $_POST['jumlah_praktik'] . "',     
         '" . $link_surat_praktik . "',     
         '" . $link_data_praktik . "',        
-        '" . $_POST['id_spesifikasi_pdd'] . "',
-        '" . $_POST['id_jenjang_pdd'] . "',
+        '" . $d_jenjang_pdd['id_jurusan_pdd_jenis'] . "',
         '" . $_POST['id_jurusan_pdd'] . "',
+        '" . $_POST['id_jenjang_pdd'] . "',
+        '" . $_POST['id_spesifikasi_pdd'] . "',
         '" . $_POST['id_akreditasi'] . "',
         '" . $_SESSION['id_user'] . "',
         '" . $_POST['nama_mentor_praktik'] . "',
         '" . $_POST['email_mentor_praktik'] . "',
         '" . $_POST['telp_mentor_praktik'] . "',
+        'Daftar',
         'Y'
     )";
     // echo $sql_insert;

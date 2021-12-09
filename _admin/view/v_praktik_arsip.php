@@ -167,7 +167,7 @@
                 <?php
                 } else {
                 ?>
-                    <h3 class='text-center'> Data Praktikan Anda Tidak Ada</h3>
+                    <h3 class='text-center'> Data Arsip Praktikan Anda Tidak Ada</h3>
                 <?php
                 }
                 ?>
