@@ -3,6 +3,13 @@
     <link href="css/calendar.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+
+<form action="booking" method="POST">
+<input type="date" name="tgl1" >
+<input type="text" name="jml" placeholder="Jumlah">
+<input type="submit" name="jml" placeholder="Jumlah">
+
+</form>
 <?php
 include 'Calendar.php';
 include 'Booking.php';
