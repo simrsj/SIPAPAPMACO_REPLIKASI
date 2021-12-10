@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2021 at 09:28 AM
+-- Generation Time: Dec 10, 2021 at 07:11 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -51,7 +51,8 @@ INSERT INTO `tb_akreditasi` (`id_akreditasi`, `nama_akreditasi`) VALUES
 CREATE TABLE `tb_harga` (
   `id_harga` int(11) NOT NULL,
   `nama_harga` text NOT NULL,
-  `satuan_harga` text NOT NULL,
+  `id_harga_satuan` int(11) NOT NULL,
+  `ket_harga` int(11) DEFAULT NULL,
   `jumlah_harga` float NOT NULL,
   `id_jurusan_pdd_jenis` int(11) NOT NULL,
   `id_jurusan_pdd` int(11) NOT NULL,
@@ -66,88 +67,88 @@ CREATE TABLE `tb_harga` (
 -- Dumping data for table `tb_harga`
 --
 
-INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `satuan_harga`, `jumlah_harga`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_harga_jenis`, `pilih_harga`, `tgl_input_harga`) VALUES
-(1, 'Institusional Fee', 'Per siswa/periode', 50000, 1, 1, 0, 0, 1, 1, NULL),
-(2, 'Management Fee', 'Per siswa/periode', 75000, 1, 1, 0, 0, 1, 1, NULL),
-(3, 'Alat Tulis Kantor', 'Per siswa/periode', 5000, 1, 1, 0, 0, 1, 1, NULL),
-(4, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/periode', 5000, 1, 1, 0, 0, 2, 1, NULL),
-(5, 'Orientasi Keselamatan Pasien', 'Per siswa/periode', 10000, 1, 1, 0, 0, 3, 1, NULL),
-(6, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 1, 1, 0, 0, 3, 1, NULL),
-(7, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 5000, 1, 1, 0, 0, 3, 1, NULL),
-(8, 'Clinical science session (CSS)', 'Per siswa/kali', 37500, 1, 1, 0, 0, 4, 1, NULL),
-(9, 'Case report session (CRS)', 'Per siswa/kali', 37500, 1, 1, 0, 0, 4, 1, NULL),
-(10, 'Case base Discusion (CBD)', 'Per siswa/kali', 37500, 1, 1, 0, 0, 4, 1, NULL),
-(11, 'Pengayaan - Observasi', 'Per siswa/kali', 37500, 1, 1, 0, 0, 4, 1, NULL),
-(12, 'RPS (Resource Person Session)', 'Per siswa/kali', 37500, 1, 1, 0, 0, 4, 1, NULL),
-(13, 'Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Kedokteran Umum di IGD', 'Per siswa/kali', 37500, 1, 1, 0, 0, 4, 1, NULL),
-(14, 'Mini Clinical Examination  Evaluation (Mini CeX)', 'Per siswa/kali', 150000, 1, 1, 0, 0, 6, 1, NULL),
-(15, 'Ujian', 'Per siswa/kali', 150000, 1, 1, 0, 0, 6, 1, NULL),
-(16, 'Makan Pembimbing Ujian', 'Per siswa/kali', 20000, 1, 1, 0, 0, 6, 1, NULL),
-(17, 'Standar Pasien', 'Per siswa/kali', 100000, 1, 1, 0, 0, 6, 1, NULL),
-(18, 'Institusional Fee', 'Per siswa/periode', 50000, 2, 2, 0, 0, 1, 1, NULL),
-(19, 'Management Fee', 'Per siswa/periode', 75000, 2, 2, 0, 0, 1, 1, NULL),
-(20, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/periode', 20000, 2, 2, 0, 0, 2, 1, NULL),
-(21, 'Orientasi ', 'Per periode/Kali', 75000, 2, 2, 0, 0, 3, 1, NULL),
-(22, 'Keselamatan Pasien', 'Per periode/Kali', 150000, 2, 2, 0, 0, 3, 1, NULL),
-(23, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 2, 2, 0, 0, 3, 1, NULL),
-(24, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 10000, 2, 2, 0, 0, 3, 1, NULL),
-(25, 'RPS (Resource Person Session)', 'Per periode/kali', 150000, 2, 2, 0, 0, 4, 1, NULL),
-(26, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 'Per periode/kali', 150000, 2, 2, 0, 0, 4, 1, NULL),
-(27, 'Ujian', 'Per siswa/hari', 150000, 2, 2, 0, 0, 6, 1, NULL),
-(28, 'Makan dan Snack Penguji', 'Per penguji/kali', 20000, 2, 2, 0, 0, 6, 1, NULL),
-(29, 'Bahan Habis Pakai Ujian', 'Per siswa/kali', 100000, 2, 2, 0, 0, 6, 1, NULL),
-(30, 'Institusional Fee Ujian', 'Per siswa/periode ujian', 150000, 2, 2, 0, 0, 6, 1, NULL),
-(31, 'Management Fee Ujian', 'Per siswa/periode ujian', 20000, 2, 2, 0, 0, 6, 1, NULL),
-(32, 'Institusional Fee', 'Per siswa/periode', 50000, 3, 3, 0, 0, 1, 1, NULL),
-(33, 'Management Fee', 'Per siswa/periode', 75000, 3, 3, 0, 0, 1, 1, NULL),
-(34, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/ periode', 20000, 3, 3, 0, 0, 2, 1, NULL),
-(35, 'Orientasi ', 'Per periode/Kali', 75000, 3, 3, 0, 0, 3, 1, NULL),
-(36, 'Keselamatan Pasien', 'Per periode/Kali', 150000, 3, 3, 0, 0, 3, 1, NULL),
-(37, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 3, 3, 0, 0, 3, 1, NULL),
-(38, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 10000, 3, 3, 0, 0, 3, 1, NULL),
-(39, 'RPS (Resource Person Session)', 'Per periode/kali', 150000, 3, 3, 0, 0, 4, 1, NULL),
-(40, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 'Per periode/kali', 150000, 3, 3, 0, 0, 4, 1, NULL),
-(41, 'Ujian', 'Per siswa/hari', 150000, 3, 3, 0, 0, 6, 1, NULL),
-(42, 'Makan dan Snack Penguji', 'Per penguji/kali', 20000, 3, 3, 0, 0, 6, 1, NULL),
-(43, 'Bahan Habis Pakai Ujian', 'Per siswa/kali', 100000, 3, 3, 0, 0, 6, 1, NULL),
-(44, 'Institusional Fee Ujian', 'Per siswa/periode ujian', 150000, 3, 3, 0, 0, 6, 1, NULL),
-(45, 'Management Fee Ujian', 'Per siswa/periode ujian', 20000, 3, 3, 0, 0, 6, 1, NULL),
-(46, 'Institusional Fee', 'Per siswa/periode', 50000, 4, 0, 0, 0, 1, 1, NULL),
-(47, 'Management Fee', 'Per siswa/periode', 75000, 4, 0, 0, 0, 1, 1, NULL),
-(48, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 'Per siswa/ periode', 20000, 4, 0, 0, 0, 2, 1, NULL),
-(49, 'Orientasi ', 'Per periode/Kali', 75000, 4, 0, 0, 0, 3, 1, NULL),
-(50, 'Keselamatan Pasien', 'Per periode/Kali', 150000, 4, 0, 0, 0, 3, 1, NULL),
-(51, 'Log Book (dibayar 1 kali)', 'Per siswa/periode', 20000, 4, 0, 0, 0, 3, 1, NULL),
-(52, 'Name Tag (dibayar 1 kali)', 'Per siswa/periode', 10000, 4, 0, 0, 0, 3, 1, NULL),
-(53, 'RPS (Resource Person Session)', 'Per periode/kali', 150000, 4, 0, 0, 0, 4, 1, NULL),
-(54, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 'Per periode/kali', 150000, 4, 0, 0, 0, 4, 1, NULL),
-(55, 'Ujian', 'Per siswa/hari', 150000, 4, 0, 0, 0, 6, 1, NULL),
-(56, 'Makan dan Snack Penguji', 'Per penguji/kali', 20000, 4, 0, 0, 0, 6, 1, NULL),
-(57, 'Bahan Habis Pakai Ujian', 'Per siswa/kali', 100000, 4, 0, 0, 0, 6, 1, NULL),
-(58, 'Institusional Fee Ujian', 'Per siswa/periode ujian', 150000, 4, 0, 0, 0, 6, 1, NULL),
-(59, 'Management Fee Ujian', 'Per siswa/periode ujian', 20000, 4, 0, 0, 0, 6, 1, NULL),
-(60, 'Bed side teaching (BST)', 'Per siswa/kali', 50000, 0, 0, 3, 0, 4, 2, NULL),
-(61, 'Bed side teaching (BST)', 'Per siswa/kali', 75000, 0, 0, 4, 0, 4, 2, NULL),
-(62, 'Bed side teaching (BST)', 'Per siswa/kali', 75000, 0, 0, 5, 0, 4, 2, NULL),
-(63, 'Bed side teaching (BST)', 'Per siswa/kali', 75000, 0, 0, 10, 2, 4, 2, NULL),
-(64, 'Mess Praktikan (3x Makan)', 'Per Siswa / Hari', 100000, 0, 0, 0, 0, 8, 3, NULL),
-(65, 'Mess Praktikan (Tanpa Makan)', 'Per Siswa / Hari', 20000, 0, 0, 0, 0, 8, 3, NULL),
-(66, 'Ruang R. Komite Medik', 'Per hari/keg', 750000, 0, 0, 0, 0, 7, 2, NULL),
-(67, 'Ruang SPI', 'Per hari/keg', 500000, 0, 0, 0, 0, 7, 2, NULL),
-(68, 'Ruang Kelas / Ruang Diskusi', 'Per Siswa / Hari', 30000, 0, 0, 0, 0, 7, 1, NULL),
-(69, 'Aula NAPZA', 'Per hari/keg', 750000, 0, 0, 0, 0, 7, 2, NULL),
-(70, 'Aula Utama', 'Per hari/keg', 1000000, 0, 0, 0, 0, 7, 2, NULL),
-(71, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 100000, 0, 0, 1, 0, 9, 1, NULL),
-(72, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 100000, 0, 0, 2, 0, 9, 1, NULL),
-(73, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 100000, 0, 0, 3, 0, 9, 1, NULL),
-(74, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 200000, 0, 0, 4, 0, 9, 1, NULL),
-(75, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 200000, 0, 0, 5, 0, 9, 1, NULL),
-(76, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 200000, 0, 0, 6, 0, 9, 1, NULL),
-(77, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 250000, 0, 0, 7, 0, 9, 1, NULL),
-(78, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 250000, 0, 0, 8, 0, 9, 1, NULL),
-(79, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 350000, 0, 0, 9, 0, 9, 1, NULL),
-(80, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 350000, 0, 0, 10, 0, 9, 1, NULL),
-(81, 'Praktik Kerja Lapangan (PKL)', 'Per Minggu/orang', 250000, 0, 0, 11, 0, 9, 1, NULL);
+INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`, `jumlah_harga`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_harga_jenis`, `pilih_harga`, `tgl_input_harga`) VALUES
+(1, 'Institusional Fee', 1, NULL, 50000, 1, 1, 0, 0, 1, 1, NULL),
+(2, 'Management Fee', 1, NULL, 75000, 1, 1, 0, 0, 1, 1, NULL),
+(3, 'Alat Tulis Kantor', 1, NULL, 5000, 1, 1, 0, 0, 1, 1, NULL),
+(4, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 1, NULL, 5000, 1, 1, 0, 0, 2, 1, NULL),
+(5, 'Orientasi Keselamatan Pasien', 1, NULL, 10000, 1, 1, 0, 0, 3, 1, NULL),
+(6, 'Log Book (dibayar 1 kali)', 1, NULL, 20000, 1, 1, 0, 0, 3, 1, NULL),
+(7, 'Name Tag (dibayar 1 kali)', 1, NULL, 5000, 1, 1, 0, 0, 3, 1, NULL),
+(8, 'Clinical science session (CSS)', 2, NULL, 37500, 1, 1, 0, 0, 4, 1, NULL),
+(9, 'Case report session (CRS)', 2, NULL, 37500, 1, 1, 0, 0, 4, 1, NULL),
+(10, 'Case base Discusion (CBD)', 2, NULL, 37500, 1, 1, 0, 0, 4, 1, NULL),
+(11, 'Pengayaan - Observasi', 2, NULL, 37500, 1, 1, 0, 0, 4, 1, NULL),
+(12, 'RPS (Resource Person Session)', 2, NULL, 37500, 1, 1, 0, 0, 4, 1, NULL),
+(13, 'Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Kedokteran Umum di IGD', 2, NULL, 37500, 1, 1, 0, 0, 4, 1, NULL),
+(14, 'Mini Clinical Examination  Evaluation (Mini CeX)', 2, NULL, 150000, 1, 1, 0, 0, 6, 1, NULL),
+(15, 'Ujian', 2, NULL, 150000, 1, 1, 0, 0, 6, 1, NULL),
+(16, 'Makan Pembimbing Ujian', 2, NULL, 20000, 1, 1, 0, 0, 6, 1, NULL),
+(17, 'Standar Pasien', 2, NULL, 100000, 1, 1, 0, 0, 6, 1, NULL),
+(18, 'Institusional Fee', 1, NULL, 50000, 2, 2, 0, 0, 1, 1, NULL),
+(19, 'Management Fee', 1, NULL, 75000, 2, 2, 0, 0, 1, 1, NULL),
+(20, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 1, NULL, 20000, 2, 2, 0, 0, 2, 1, NULL),
+(21, 'Orientasi ', 3, NULL, 75000, 2, 2, 0, 0, 3, 1, NULL),
+(22, 'Keselamatan Pasien', 3, NULL, 150000, 2, 2, 0, 0, 3, 1, NULL),
+(23, 'Log Book (dibayar 1 kali)', 1, NULL, 20000, 2, 2, 0, 0, 3, 1, NULL),
+(24, 'Name Tag (dibayar 1 kali)', 1, NULL, 10000, 2, 2, 0, 0, 3, 1, NULL),
+(25, 'RPS (Resource Person Session)', 3, NULL, 150000, 2, 2, 0, 0, 4, 1, NULL),
+(26, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 3, NULL, 150000, 2, 2, 0, 0, 4, 1, NULL),
+(27, 'Ujian', 4, NULL, 150000, 2, 2, 0, 0, 6, 1, NULL),
+(28, 'Makan dan Snack Penguji', 5, NULL, 20000, 2, 2, 0, 0, 6, 1, NULL),
+(29, 'Bahan Habis Pakai Ujian', 2, NULL, 100000, 2, 2, 0, 0, 6, 1, NULL),
+(30, 'Institusional Fee Ujian', 6, NULL, 150000, 2, 2, 0, 0, 6, 1, NULL),
+(31, 'Management Fee Ujian', 6, NULL, 20000, 2, 2, 0, 0, 6, 1, NULL),
+(32, 'Institusional Fee', 1, NULL, 50000, 3, 3, 0, 0, 1, 1, NULL),
+(33, 'Management Fee', 1, NULL, 75000, 3, 3, 0, 0, 1, 1, NULL),
+(34, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 1, NULL, 20000, 3, 3, 0, 0, 2, 1, NULL),
+(35, 'Orientasi ', 3, NULL, 75000, 3, 3, 0, 0, 3, 1, NULL),
+(36, 'Keselamatan Pasien', 3, NULL, 150000, 3, 3, 0, 0, 3, 1, NULL),
+(37, 'Log Book (dibayar 1 kali)', 1, NULL, 20000, 3, 3, 0, 0, 3, 1, NULL),
+(38, 'Name Tag (dibayar 1 kali)', 1, NULL, 10000, 3, 3, 0, 0, 3, 1, NULL),
+(39, 'RPS (Resource Person Session)', 3, NULL, 150000, 3, 3, 0, 0, 4, 1, NULL),
+(40, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 3, NULL, 150000, 3, 3, 0, 0, 4, 1, NULL),
+(41, 'Ujian', 4, NULL, 150000, 3, 3, 0, 0, 6, 1, NULL),
+(42, 'Makan dan Snack Penguji', 5, NULL, 20000, 3, 3, 0, 0, 6, 1, NULL),
+(43, 'Bahan Habis Pakai Ujian', 2, NULL, 100000, 3, 3, 0, 0, 6, 1, NULL),
+(44, 'Institusional Fee Ujian', 6, NULL, 150000, 3, 3, 0, 0, 6, 1, NULL),
+(45, 'Management Fee Ujian', 6, NULL, 20000, 3, 3, 0, 0, 6, 1, NULL),
+(46, 'Institusional Fee', 1, NULL, 50000, 4, 0, 0, 0, 1, 1, NULL),
+(47, 'Management Fee', 1, NULL, 75000, 4, 0, 0, 0, 1, 1, NULL),
+(48, 'Untuk Keselamatan Kerja (Handrub, tisue, sabun)', 1, NULL, 20000, 4, 0, 0, 0, 2, 1, NULL),
+(49, 'Orientasi ', 3, NULL, 75000, 4, 0, 0, 0, 3, 1, NULL),
+(50, 'Keselamatan Pasien', 3, NULL, 150000, 4, 0, 0, 0, 3, 1, NULL),
+(51, 'Log Book (dibayar 1 kali)', 1, NULL, 20000, 4, 0, 0, 0, 3, 1, NULL),
+(52, 'Name Tag (dibayar 1 kali)', 1, NULL, 10000, 4, 0, 0, 0, 3, 1, NULL),
+(53, 'RPS (Resource Person Session)', 3, NULL, 150000, 4, 0, 0, 0, 4, 1, NULL),
+(54, 'Materi (TAK, Komunikasi Terapeutik, Dokumentasi KeKeperawatanan) ', 3, NULL, 150000, 4, 0, 0, 0, 4, 1, NULL),
+(55, 'Ujian', 4, NULL, 150000, 4, 0, 0, 0, 6, 1, NULL),
+(56, 'Makan dan Snack Penguji', 5, NULL, 20000, 4, 0, 0, 0, 6, 1, NULL),
+(57, 'Bahan Habis Pakai Ujian', 2, NULL, 100000, 4, 0, 0, 0, 6, 1, NULL),
+(58, 'Institusional Fee Ujian', 6, NULL, 150000, 4, 0, 0, 0, 6, 1, NULL),
+(59, 'Management Fee Ujian', 6, NULL, 20000, 4, 0, 0, 0, 6, 1, NULL),
+(60, 'Bed side teaching (BST)', 2, NULL, 50000, 0, 0, 6, 0, 4, 2, NULL),
+(61, 'Bed side teaching (BST)', 2, NULL, 75000, 0, 0, 7, 0, 4, 2, NULL),
+(62, 'Bed side teaching (BST)', 2, NULL, 75000, 0, 0, 8, 0, 4, 2, NULL),
+(63, 'Bed side teaching (BST)', 2, NULL, 75000, 0, 0, 10, 0, 4, 2, NULL),
+(64, 'Mess Praktikan (3x Makan)', 4, NULL, 100000, 0, 0, 0, 0, 8, 3, NULL),
+(65, 'Mess Praktikan (Tanpa Makan)', 4, NULL, 20000, 0, 0, 0, 0, 8, 3, NULL),
+(66, 'Ruang R. Komite Medik', 7, NULL, 750000, 0, 0, 0, 0, 7, 2, NULL),
+(67, 'Ruang SPI', 7, NULL, 500000, 0, 0, 0, 0, 7, 2, NULL),
+(68, 'Ruang Kelas / Ruang Diskusi', 4, NULL, 30000, 0, 0, 0, 0, 7, 1, NULL),
+(69, 'Aula NAPZA', 7, NULL, 750000, 0, 0, 0, 0, 7, 2, NULL),
+(70, 'Aula Utama', 7, NULL, 1000000, 0, 0, 0, 0, 7, 2, NULL),
+(71, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 100000, 0, 0, 1, 0, 9, 1, NULL),
+(72, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 100000, 0, 0, 2, 0, 9, 1, NULL),
+(73, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 100000, 0, 0, 3, 0, 9, 1, NULL),
+(74, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 200000, 0, 0, 4, 0, 9, 1, NULL),
+(75, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 200000, 0, 0, 5, 0, 9, 1, NULL),
+(76, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 200000, 0, 0, 6, 0, 9, 1, NULL),
+(77, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 250000, 0, 0, 7, 0, 9, 1, NULL),
+(78, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 250000, 0, 0, 8, 0, 9, 1, NULL),
+(79, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 350000, 0, 0, 9, 0, 9, 1, NULL),
+(80, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 350000, 0, 0, 10, 0, 9, 1, NULL),
+(81, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 250000, 0, 0, 11, 0, 9, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -188,6 +189,32 @@ CREATE TABLE `tb_harga_pilih` (
   `id_harga_harga_pilih` int(11) DEFAULT NULL,
   `tgl_input_harga_pilih` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_harga_satuan`
+--
+
+CREATE TABLE `tb_harga_satuan` (
+  `id_harga_satuan` int(11) NOT NULL,
+  `nama_harga_satuan` text NOT NULL,
+  `ket_harga_satuan` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_harga_satuan`
+--
+
+INSERT INTO `tb_harga_satuan` (`id_harga_satuan`, `nama_harga_satuan`, `ket_harga_satuan`) VALUES
+(1, 'Per siswa/periode', NULL),
+(2, 'Per siswa/kali', NULL),
+(3, 'Per periode/kali', NULL),
+(4, 'Per siswa/hari', NULL),
+(5, 'Per penguji/kali', NULL),
+(6, 'Per siswa/periode ujian', NULL),
+(7, 'Per hari/keg', NULL),
+(8, 'Per minggu/orang', NULL);
 
 -- --------------------------------------------------------
 
@@ -354,23 +381,23 @@ INSERT INTO `tb_jenjang_pdd` (`id_jenjang_pdd`, `nama_jenjang_pdd`) VALUES
 CREATE TABLE `tb_jurusan_pdd` (
   `id_jurusan_pdd` int(11) NOT NULL,
   `nama_jurusan_pdd` text NOT NULL,
-  `jenis_jurusan_pdd` text NOT NULL
+  `id_jurusan_pdd_jenis` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_jurusan_pdd`
 --
 
-INSERT INTO `tb_jurusan_pdd` (`id_jurusan_pdd`, `nama_jurusan_pdd`, `jenis_jurusan_pdd`) VALUES
-(0, '-- Lainnya --', '0'),
-(1, 'Kedokteran', '1'),
-(2, 'Keperawatan', '2'),
-(3, 'Psikologi', '3'),
-(4, 'Farmasi', '3'),
-(5, 'Pekerja Sosial', '3'),
-(6, 'Rekam Medis', '3'),
-(7, 'IT', '4'),
-(15, 'SMA/SMK/MA Sederajat', '4');
+INSERT INTO `tb_jurusan_pdd` (`id_jurusan_pdd`, `nama_jurusan_pdd`, `id_jurusan_pdd_jenis`) VALUES
+(0, '-- Lainnya --', 0),
+(1, 'Kedokteran', 1),
+(2, 'Keperawatan', 2),
+(3, 'Psikologi', 3),
+(4, 'Farmasi', 3),
+(5, 'Pekerja Sosial', 3),
+(6, 'Rekam Medis', 3),
+(7, 'IT', 4),
+(15, 'SMA/SMK/MA Sederajat', 4);
 
 -- --------------------------------------------------------
 
@@ -802,6 +829,12 @@ ALTER TABLE `tb_harga_pilih`
   ADD PRIMARY KEY (`id_harga_pilih`);
 
 --
+-- Indexes for table `tb_harga_satuan`
+--
+ALTER TABLE `tb_harga_satuan`
+  ADD PRIMARY KEY (`id_harga_satuan`);
+
+--
 -- Indexes for table `tb_institusi`
 --
 ALTER TABLE `tb_institusi`
@@ -900,6 +933,12 @@ ALTER TABLE `tb_harga_jenis`
 --
 ALTER TABLE `tb_harga_pilih`
   MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_harga_satuan`
+--
+ALTER TABLE `tb_harga_satuan`
+  MODIFY `id_harga_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_jenjang_pdd`

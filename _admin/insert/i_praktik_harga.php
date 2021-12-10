@@ -27,14 +27,15 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
             <form class="form-group" method="post">
                 <!-- Menu Harga disesuaikan dengan jenis jurusan -->
                 <div class="text-gray-700">
-                    <h5 class="font-weight-bold">Menu Harga <?php echo $d_praktik['nama_jurusan_pdd']; ?></h5>
+                    <h5 class="font-weight-bold">Menu Harga Wajib <?php echo $d_praktik['nama_jurusan_pdd']; ?></h5>
                 </div>
                 <?php
                 $sql_harga_jurusan = " SELECT * FROM tb_harga 
                     JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
                     JOIN tb_jurusan_pdd_jenis ON tb_harga.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
-                    WHERE tb_harga.id_jurusan_pdd_jenis = " . $d_praktik['id_jurusan_pdd_jenis'] . " 
-                    ORDER BY nama_harga_jenis ASC, nama_harga ASC
+                    JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan  
+                    WHERE tb_harga.id_jurusan_pdd_jenis = " . $d_praktik['id_jurusan_pdd_jenis'] . " AND tb_harga.id_harga_jenis BETWEEN 1 AND 5
+                    ORDER BY nama_harga_jenis ASC, nama_harga ASC 
                     ";
 
                 $q_harga_jurusan = $conn->query($sql_harga_jurusan);
@@ -43,15 +44,17 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                 if ($r_harga_jurusan > 0) {
 
                 ?>
-                    <table class="table">
+                    <table class="table  table-hover">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nama Jenis</th>
                                 <th scope="col">Nama Harga</th>
                                 <th scope="col">Satuan</th>
+                                <th scope="col">Keterangan</th>
                                 <th scope="col">Harga</th>
-                                <th scope="col"></th>
+                                <th scope="col">Kuantitas</th>
+                                <th scope="col">Total Harga</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,14 +66,21 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <th scope="row"><?php echo $no; ?></th>
                                     <td><?php echo $d_harga_jurusan['nama_harga_jenis']; ?></td>
                                     <td><?php echo $d_harga_jurusan['nama_harga']; ?></td>
-                                    <td><?php echo $d_harga_jurusan['satuan_harga']; ?></td>
+                                    <td><?php echo $d_harga_jurusan['nama_harga_satuan']; ?></td>
+                                    <td><?php echo $d_harga_jurusan['ket_harga']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?></td>
-                                    <td><input class="form-control" type="text" name="<?php echo "harga_" . $d_harga_jurusan['id_harga']; ?>" value="<?php echo $d_praktik['jumlah_praktik']; ?>"></td>
+                                    <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
+                                    <td><?php echo "Rp " . number_format($d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?></td>
                                 </tr>
                             <?php
+                                $jumlah_total_harga = ($d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga']) + $jumlah_total_harga;
                                 $no++;
                             }
                             ?>
+                            <tr>
+                                <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
+                                <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_harga, 0, ",", "."); ?></td>
+                            </tr>
                         </tbody>
                     </table>
                 <?php
@@ -92,6 +102,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                 $sql_harga = " SELECT * FROM tb_harga 
                     JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
                     JOIN tb_jenjang_pdd ON tb_harga.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
+                    JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan 
                     WHERE tb_harga.id_jenjang_pdd = " . $d_praktik['id_jenjang_pdd'] . " AND tb_harga.id_harga_jenis BETWEEN 1 AND 6
                     ORDER BY nama_jenjang_pdd ASC
                     ";
@@ -108,8 +119,10 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                 <th scope="col">Nama Jenis</th>
                                 <th scope="col">Nama Harga</th>
                                 <th scope="col">Satuan</th>
+                                <th scope="col">Keterangan</th>
                                 <th scope="col">Harga</th>
-                                <th scope="col"></th>
+                                <th scope="col">Kuantitas</th>
+                                <th scope="col">Total Harga</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -121,14 +134,20 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <th scope="row"><?php echo $no; ?></th>
                                     <td><?php echo $d_harga['nama_harga_jenis']; ?></td>
                                     <td><?php echo $d_harga['nama_harga']; ?></td>
-                                    <td><?php echo $d_harga['satuan_harga']; ?></td>
+                                    <td><?php echo $d_harga['nama_harga_satuan']; ?></td>
+                                    <td><?php echo $d_harga['ket_harga']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga['jumlah_harga'], 0, ",", "."); ?></td>
                                     <td><input class="form-control" type="text" name="<?php echo "harga_" . $d_harga['id_harga']; ?>" value="<?php echo $d_praktik['jumlah_praktik']; ?>"></td>
                                 </tr>
                             <?php
+                                $jumlah_total_harga = ($d_praktik['jumlah_praktik'] * $d_harga['jumlah_harga']) + $jumlah_total_harga;
                                 $no++;
                             }
                             ?>
+                            <tr>
+                                <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
+                                <td class="font-weight-bold">---</td>
+                            </tr>
                         </tbody>
                     </table>
                 <?php
