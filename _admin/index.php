@@ -223,3 +223,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 	header("Refresh:0; url=?ls");
 }
 ?>
+
+  
+<script type="text/javascript"  src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>

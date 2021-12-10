@@ -35,7 +35,7 @@
                 $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
                 if ($r_jenjang_pdd > 0) {
                 ?>
-                    <table class='table table-striped'>
+                    <table class='table table-striped' id="myTable">
                         <thead>
                             <tr>
                                 <th scope='col'>No</th>
@@ -137,3 +137,11 @@ if (isset($_POST['ubah'])) {
     </script>
 <?php
 }
+?>
+<script type="text/javascript"  src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>

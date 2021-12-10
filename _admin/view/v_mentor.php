@@ -26,22 +26,21 @@
                 $r_mentor_rsj = $q_mentor_rsj->rowCount();
                 $d_mentor_rsj = $q_mentor_rsj->fetch(PDO::FETCH_ASSOC);
 
-                if ($r_mentor_rsj > 0) {
-                    echo "
-                                        <table class='table table-striped'>
-                                            <thead>
-                                                <tr>
-                                                    <th scope='col'>No</th>
-                                                    <th>NIP/NIPK</th>
-                                                    <th>Nama Pembimbing</th>
-                                                    <th>Unit</th>
-                                                    <th>Status</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                    ";
+                if ($r_mentor_rsj > 0) { ?>
+                    <table class="table table-striped" id="myTable">
+                    <thead>
+                        <tr>
+                            <th scope='col'>No</th>
+                            <th>NIP/NIPK</th>
+                            <th>Nama Pembimbing</th>
+                            <th>Unit</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
+                    <?php
                     $q_mentor_rsj_a = $conn->query($sql_mentor_rsj);
 
                     $no = 1;
@@ -197,3 +196,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+         console.log("hai");
+    } );
+</script>
+
+<script type="text/javascript"  src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>

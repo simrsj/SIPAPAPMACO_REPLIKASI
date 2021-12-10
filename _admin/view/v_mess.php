@@ -277,3 +277,11 @@ if (isset($_POST['ubah_harga'])) {
     </script>
 <?php
 }
+?>
+<script type="text/javascript"  src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
