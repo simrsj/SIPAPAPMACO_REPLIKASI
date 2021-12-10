@@ -28,8 +28,8 @@
 
                             if ($r_mou > 0) {
                             ?>
-                                <div class='table-responsive'>
-                                    <table class='table table-striped table-hover' id='dataTable' width='100%' cellspacing='0'>
+                                <div class='table-responsive' >
+                                    <table class='table table-striped table-hover' id="myTable" width='100%' cellspacing='0'>
                                         <thead>
                                             <tr>
                                                 <th scope='col'>No</th>
@@ -97,3 +97,14 @@
                     </div>
                 </div>
                 <!-- /.container-fluid -->
+
+
+<script type="text/javascript"  src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
+
+                

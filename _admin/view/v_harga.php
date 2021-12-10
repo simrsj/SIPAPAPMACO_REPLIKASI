@@ -307,7 +307,7 @@
             <?php
             } else {
             ?>
-                <table class="table">
+                <table class="table" id="myTable">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">No</th>
@@ -582,6 +582,7 @@
         </div>
     </div>
 </div>
+
 <?php
 if (isset($_POST['tambah_harga'])) {
 
@@ -688,4 +689,16 @@ if (isset($_POST['tambah_harga'])) {
         document.location.href = "?hrg&dhs";
     </script>
 <?php
+
 }
+
+
+?>
+
+<script type="text/javascript"  src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
