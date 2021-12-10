@@ -353,8 +353,8 @@ if (isset($_POST['simpan_praktik'])) {
     }
 
     //mencari data id_jurusan_pdd_jenis
-    $q_jurusan_pdd = $conn->query("SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $_POST['id_jurusan_pdd']);
-    $d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC);
+    $q_jurusan_pdd_jenis = $conn->query("SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $_POST['id_jurusan_pdd']);
+    $d_jurusan_pdd_jenis = $q_jurusan_pdd_jenis->fetch(PDO::FETCH_ASSOC);
 
     $sql_insert = " INSERT INTO tb_praktik (
         id_mou,
@@ -387,7 +387,7 @@ if (isset($_POST['simpan_praktik'])) {
         '" . $_POST['jumlah_praktik'] . "',     
         '" . $link_surat_praktik . "',     
         '" . $link_data_praktik . "',        
-        '" . $d_jenjang_pdd['id_jurusan_pdd_jenis'] . "',
+        '" . $d_jenjang_pdd_jenis['id_jurusan_pdd_jenis'] . "',
         '" . $_POST['id_jurusan_pdd'] . "',
         '" . $_POST['id_jenjang_pdd'] . "',
         '" . $_POST['id_spesifikasi_pdd'] . "',

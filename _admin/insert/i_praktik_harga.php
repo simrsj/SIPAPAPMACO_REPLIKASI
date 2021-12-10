@@ -10,7 +10,7 @@ $sql_praktik = "SELECT * FROM tb_praktik
     JOIN tb_jurusan_pdd_jenis ON tb_praktik.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
     WHERE tb_praktik.id_praktik = " . $id_praktik;
-
+echo $sql_praktik;
 $q_praktik = $conn->query($sql_praktik);
 $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 
@@ -165,10 +165,12 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                     <h5 class="font-weight-bold">Menu Harga Lainnya</h5>
                 </div>
                 <?php
+                if (!$d_praktik['id_spesifikasi_pdd'] != 6) {
+                }
                 $sql_harga = " SELECT * FROM tb_harga 
                     JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
                     JOIN tb_jurusan_pdd_jenis ON tb_harga.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
-                    WHERE tb_harga.id_jurusan_pdd_jenis = " . $d_praktik['id_jurusan_pdd_jenis'] . " 
+                    WHERE tb_harga.id_jurusan_pdd_jenis = " . $d_praktik['id_jurusan_pdd_jenis'] . " AND tb_harga.id_harga_jenis 
                     ORDER BY nama_harga_jenis ASC, nama_harga ASC
                     ";
 
