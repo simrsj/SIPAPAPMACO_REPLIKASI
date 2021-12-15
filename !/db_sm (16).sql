@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2021 at 09:08 AM
+-- Generation Time: Dec 14, 2021 at 09:28 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -81,7 +81,7 @@ INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`
 (11, 'Pengayaan - Observasi', 2, NULL, 37500, 1, 1, 0, 0, 4, 1, NULL),
 (12, 'RPS (Resource Person Session)', 2, NULL, 37500, 1, 1, 0, 0, 4, 1, NULL),
 (13, 'Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Kedokteran Umum di IGD', 2, NULL, 37500, 1, 1, 0, 0, 4, 1, NULL),
-(14, 'Mini Clinical Examination  Evaluation (Mini CeX)', 2, NULL, 150000, 1, 1, 0, 0, 6, 1, NULL),
+(14, 'Mini Clinical Examination  Evaluation (Mini CeX)', 2, NULL, 150000, 0, 1, 0, 0, 6, 1, NULL),
 (15, 'Ujian', 2, NULL, 150000, 1, 1, 0, 0, 6, 1, NULL),
 (16, 'Makan Pembimbing Ujian', 2, NULL, 20000, 1, 1, 0, 0, 6, 1, NULL),
 (17, 'Standar Pasien', 2, NULL, 100000, 1, 1, 0, 0, 6, 1, NULL),
@@ -133,9 +133,9 @@ INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`
 (63, 'Bed side teaching (BST)', 2, NULL, 75000, 0, 0, 10, 0, 4, 2, NULL),
 (64, 'Mess Praktikan (3x Makan)', 4, NULL, 100000, 0, 0, 0, 0, 8, 3, NULL),
 (65, 'Mess Praktikan (Tanpa Makan)', 4, NULL, 20000, 0, 0, 0, 0, 8, 3, NULL),
-(66, 'Ruang R. Komite Medik', 7, NULL, 750000, 0, 0, 0, 0, 7, 2, NULL),
+(66, 'Ruang R. Komite Medik', 7, NULL, 750000, 1, 1, 0, 0, 7, 2, NULL),
 (67, 'Ruang SPI', 7, NULL, 500000, 0, 0, 0, 0, 7, 2, NULL),
-(68, 'Ruang Kelas / Ruang Diskusi', 4, NULL, 30000, 0, 0, 0, 0, 7, 1, NULL),
+(68, 'Ruang Kelas / Ruang Diskusi', 4, NULL, 30000, 1, 1, 0, 0, 7, 1, NULL),
 (69, 'Aula NAPZA', 7, NULL, 750000, 0, 0, 0, 0, 7, 2, NULL),
 (70, 'Aula Utama', 7, NULL, 1000000, 0, 0, 0, 0, 7, 2, NULL),
 (71, 'Praktik Kerja Lapangan (PKL)', 8, NULL, 100000, 0, 0, 1, 0, 9, 1, NULL),
@@ -186,8 +186,10 @@ INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
 CREATE TABLE `tb_harga_pilih` (
   `id_harga_pilih` int(11) NOT NULL,
   `id_praktik_harga_pilih` int(11) DEFAULT NULL,
-  `id_harga_harga_pilih` int(11) DEFAULT NULL,
-  `tgl_input_harga_pilih` date DEFAULT NULL
+  `id_harga` int(11) DEFAULT NULL,
+  `tgl_input_harga_pilih` date DEFAULT NULL,
+  `kuantitas_harga_pilih` int(11) NOT NULL,
+  `jumlah_harga_pilih` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -522,27 +524,59 @@ CREATE TABLE `tb_mess` (
   `nama_mess` text DEFAULT NULL,
   `jumlah_l_mess` int(11) DEFAULT NULL,
   `jumlah_p_mess` int(11) DEFAULT NULL,
-  `jumlah_total_mess` int(11) DEFAULT NULL,
+  `kapasitas_total_mess` int(11) DEFAULT NULL,
   `alamat_mess` text DEFAULT NULL,
   `nama_pemilik_mess` text DEFAULT NULL,
   `no_pemilik_mess` text DEFAULT NULL,
-  `email_pemilik_mess` text DEFAULT NULL
+  `email_pemilik_mess` text DEFAULT NULL,
+  `harga_tanpa_makan_mess` int(11) NOT NULL,
+  `harga_dengan_makan_mess` int(11) NOT NULL,
+  `jumlah_terisi_mess` int(11) DEFAULT NULL,
+  `ket_mess` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_mess`
 --
 
-INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `jumlah_l_mess`, `jumlah_p_mess`, `jumlah_total_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`) VALUES
-(1, 'Mess RSJ 1 Lama', NULL, NULL, 16, NULL, '', '', NULL),
-(2, 'Mess RSJ 2 Baru', NULL, NULL, 16, NULL, '', '', NULL),
-(3, 'Asrama Rifa Corporate', NULL, NULL, 100, NULL, '', '', NULL),
-(4, 'Asrama Rifa Corporate', NULL, NULL, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', ''),
-(5, 'Pondokan H. Ating', NULL, NULL, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '', ''),
-(6, 'Wisma Anugrah Ibu Nanik', NULL, NULL, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Hj. Nanik Susiani', '081320719652', ''),
-(7, NULL, NULL, NULL, 0, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'dr. Hj. Meutia Laksminingrum', '', ''),
-(8, 'Pondokan Oyo', NULL, NULL, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Oyo Suharya', '', ''),
-(9, 'Pondokan Tatang', NULL, NULL, 28, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Tatang', '089531804825', '');
+INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `jumlah_l_mess`, `jumlah_p_mess`, `kapasitas_total_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `jumlah_terisi_mess`, `ket_mess`) VALUES
+(1, 'Mess RSJ 1 Lama', NULL, NULL, 16, NULL, '', '', NULL, 0, 20000, NULL, NULL),
+(2, 'Mess RSJ 2 Baru', NULL, NULL, 16, NULL, '', '', NULL, 0, 20000, NULL, NULL),
+(3, 'Asrama Rifa Corporate', NULL, NULL, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 0, 0, NULL, NULL),
+(4, 'Pondokan H. Ating', NULL, NULL, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '', '', 0, 0, NULL, NULL),
+(5, 'Wisma Anugrah Ibu Nanik', NULL, NULL, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Hj. Nanik Susiani', '081320719652', '', 0, 0, NULL, NULL),
+(6, 'Pondokan dr. Hj. Meutia Laksminingrum', NULL, NULL, 0, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'dr. Hj. Meutia Laksminingrum', '', '', 0, 0, NULL, NULL),
+(7, 'Pondokan Oyo', NULL, NULL, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Oyo Suharya', '', '', 0, 0, NULL, NULL),
+(8, 'Pondokan Tatang', NULL, NULL, 28, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Tatang', '089531804825', '', 0, 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_mess_detail`
+--
+
+CREATE TABLE `tb_mess_detail` (
+  `id_mess_detail` int(11) NOT NULL,
+  `id_mess` int(11) NOT NULL,
+  `harga_mess_detail` int(11) DEFAULT NULL,
+  `ket_mess_detail` text DEFAULT NULL,
+  `jumlah_mess_detail` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_mess_detail`
+--
+
+INSERT INTO `tb_mess_detail` (`id_mess_detail`, `id_mess`, `harga_mess_detail`, `ket_mess_detail`, `jumlah_mess_detail`) VALUES
+(1, 1, 20000, 'Tanpa Makan', 0),
+(3, 1, 100000, 'Makan 3x Sehari', 0),
+(4, 2, 20000, 'Tanpa Makan', 0),
+(5, 2, 100000, 'Makan 3x Sehari', 0),
+(6, 3, 20000, 'Tanpa Makan', 0),
+(8, 3, 20000, 'Tanpa Makan', 0),
+(9, 5, 15000, 'Tanpa Makan', 0),
+(10, 5, 70000, 'Makan 3x Sehari', 0),
+(11, 8, 20000, 'Tanpa Makan', 0);
 
 -- --------------------------------------------------------
 
@@ -877,6 +911,12 @@ ALTER TABLE `tb_mess`
   ADD PRIMARY KEY (`id_mess`);
 
 --
+-- Indexes for table `tb_mess_detail`
+--
+ALTER TABLE `tb_mess_detail`
+  ADD PRIMARY KEY (`id_mess_detail`);
+
+--
 -- Indexes for table `tb_mou`
 --
 ALTER TABLE `tb_mou`
@@ -963,6 +1003,12 @@ ALTER TABLE `tb_jurusan_pdd_jenis`
 --
 ALTER TABLE `tb_mess`
   MODIFY `id_mess` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `tb_mess_detail`
+--
+ALTER TABLE `tb_mess_detail`
+  MODIFY `id_mess_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_mou`
