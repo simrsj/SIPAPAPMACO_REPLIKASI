@@ -177,8 +177,8 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <td><?php echo $d_harga_ujian['nama_harga_satuan']; ?></td>
                                     <td><?php echo $d_harga_ujian['ket_harga']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga_ujian['jumlah_harga'], 0, ",", "."); ?></td>
-                                    <td><input class="form-control" type="text" id="<?php echo "harga_tertentu" . $d_harga_ujian['id_harga']; ?>" name="<?php echo "harga_tertentu" . $d_harga['id_harga']; ?>" value="<?php echo $d_praktik['jumlah_praktik']; ?>" onchange="hargatertentu(<?php echo $d_harga['id_harga']; ?>, <?php echo $d_harga['id_harga']; ?>, <?php echo $d_harga['jumlah_harga'] ?>)"></td>
-                                    <td><input class="form-control" type="hidden" name="<?php echo "jumlah_harga_tertentu" . $d_harga_ujian['id_harga']; ?>" id="<?php echo "jumlah_harga_" . $d_harga['id_harga']; ?>">
+                                    <td><input class="form-control" type="text" id="<?php echo "harga_tertentu" . $d_harga_ujian['id_harga']; ?>" name="<?php echo "harga_tertentu" . $d_harga_ujian['id_harga']; ?>" value="<?php echo $d_praktik['jumlah_praktik']; ?>" onchange="hargatertentu(<?php echo $d_harga_ujian['id_harga']; ?>, <?php echo $d_harga_ujian['id_harga']; ?>, <?php echo $d_harga_ujian['jumlah_harga'] ?>)"></td>
+                                    <td><input class="form-control" type="hidden" name="<?php echo "jumlah_harga_tertentu" . $d_harga_ujian['id_harga']; ?>" id="<?php echo "jumlah_harga_" . $d_harga_ujian['id_harga']; ?>">
                                         <span id="<?php echo "jht_" . $d_harga_ujian['id_harga']; ?>"></span>
                                     </td>
                                 </tr>
@@ -251,8 +251,8 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <td><?php echo $d_harga_lainnya['nama_harga_satuan']; ?></td>
                                     <td><?php echo $d_harga_lainnya['ket_harga']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga_lainnya['jumlah_harga'], 0, ",", "."); ?></td>
-                                    <td><input class="form-control" type="text" id="<?php echo "harga_lainnya" . $d_harga_lainnya['id_harga']; ?>" name="<?php echo "harga_" . $d_harga['id_harga']; ?>" value="<?php echo $d_praktik['jumlah_praktik']; ?>" onchange="hargalainnya(<?php echo $d_harga['id_harga']; ?>, <?php echo $d_harga['id_harga']; ?>, <?php echo $d_harga['jumlah_harga'] ?>)"></td>
-                                    <td><input class="form-control" type="hidden" name="<?php echo "jumlah_harga_lainnya" . $d_harga_lainnya['id_harga']; ?>" id="<?php echo "jumlah_harga_" . $d_harga['id_harga']; ?>">
+                                    <td><input class="form-control" type="text" id="<?php echo "harga_lainnya" . $d_harga_lainnya['id_harga']; ?>" name="<?php echo "harga_" . $d_harga_lainnya['id_harga']; ?>" value="<?php echo $d_praktik['jumlah_praktik']; ?>" onchange="hargalainnya(<?php echo $d_harga_lainnya['id_harga']; ?>, <?php echo $d_harga_lainnya['id_harga']; ?>, <?php echo $d_harga_lainnya['jumlah_harga'] ?>)"></td>
+                                    <td><input class="form-control" type="hidden" name="<?php echo "jumlah_harga_lainnya" . $d_harga_lainnya['id_harga']; ?>" id="<?php echo "jumlah_harga_" . $d_harga_lainnya['id_harga']; ?>">
                                         <span id="<?php echo "jhl_" . $d_harga_lainnya['id_harga']; ?>"></span>
                                     </td>
                                             
