@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 09:28 AM
+-- Generation Time: Dec 15, 2021 at 09:17 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -131,8 +131,6 @@ INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`
 (61, 'Bed side teaching (BST)', 2, NULL, 75000, 0, 0, 7, 0, 4, 2, NULL),
 (62, 'Bed side teaching (BST)', 2, NULL, 75000, 0, 0, 8, 0, 4, 2, NULL),
 (63, 'Bed side teaching (BST)', 2, NULL, 75000, 0, 0, 10, 0, 4, 2, NULL),
-(64, 'Mess Praktikan (3x Makan)', 4, NULL, 100000, 0, 0, 0, 0, 8, 3, NULL),
-(65, 'Mess Praktikan (Tanpa Makan)', 4, NULL, 20000, 0, 0, 0, 0, 8, 3, NULL),
 (66, 'Ruang R. Komite Medik', 7, NULL, 750000, 1, 1, 0, 0, 7, 2, NULL),
 (67, 'Ruang SPI', 7, NULL, 500000, 0, 0, 0, 0, 7, 2, NULL),
 (68, 'Ruang Kelas / Ruang Diskusi', 4, NULL, 30000, 1, 1, 0, 0, 7, 1, NULL),
@@ -522,16 +520,16 @@ INSERT INTO `tb_mentor_rsj` (`id_mentor_rsj`, `nip_nipk_mentor_rsj`, `name_mento
 CREATE TABLE `tb_mess` (
   `id_mess` int(11) NOT NULL,
   `nama_mess` text DEFAULT NULL,
-  `jumlah_l_mess` int(11) DEFAULT NULL,
-  `jumlah_p_mess` int(11) DEFAULT NULL,
-  `kapasitas_total_mess` int(11) DEFAULT NULL,
+  `kapasitas_l_mess` int(11) NOT NULL,
+  `kapasitas_p_mess` int(11) NOT NULL,
+  `kapasitas_t_mess` int(11) NOT NULL,
   `alamat_mess` text DEFAULT NULL,
   `nama_pemilik_mess` text DEFAULT NULL,
   `no_pemilik_mess` text DEFAULT NULL,
   `email_pemilik_mess` text DEFAULT NULL,
   `harga_tanpa_makan_mess` int(11) NOT NULL,
   `harga_dengan_makan_mess` int(11) NOT NULL,
-  `jumlah_terisi_mess` int(11) DEFAULT NULL,
+  `kapasitas_terisi_mess` int(11) DEFAULT NULL,
   `ket_mess` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -539,15 +537,15 @@ CREATE TABLE `tb_mess` (
 -- Dumping data for table `tb_mess`
 --
 
-INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `jumlah_l_mess`, `jumlah_p_mess`, `kapasitas_total_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `jumlah_terisi_mess`, `ket_mess`) VALUES
-(1, 'Mess RSJ 1 Lama', NULL, NULL, 16, NULL, '', '', NULL, 0, 20000, NULL, NULL),
-(2, 'Mess RSJ 2 Baru', NULL, NULL, 16, NULL, '', '', NULL, 0, 20000, NULL, NULL),
-(3, 'Asrama Rifa Corporate', NULL, NULL, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 0, 0, NULL, NULL),
-(4, 'Pondokan H. Ating', NULL, NULL, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '', '', 0, 0, NULL, NULL),
-(5, 'Wisma Anugrah Ibu Nanik', NULL, NULL, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Hj. Nanik Susiani', '081320719652', '', 0, 0, NULL, NULL),
-(6, 'Pondokan dr. Hj. Meutia Laksminingrum', NULL, NULL, 0, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'dr. Hj. Meutia Laksminingrum', '', '', 0, 0, NULL, NULL),
-(7, 'Pondokan Oyo', NULL, NULL, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Oyo Suharya', '', '', 0, 0, NULL, NULL),
-(8, 'Pondokan Tatang', NULL, NULL, 28, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Tatang', '089531804825', '', 0, 0, NULL, NULL);
+INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_mess`, `kapasitas_t_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `kapasitas_terisi_mess`, `ket_mess`) VALUES
+(1, 'Mess RSJ 1 Lama', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '0', '', 20000, 100000, NULL, 'Makan 3x Sehari'),
+(2, 'Mess RSJ 2 Baru', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '0', '', 20000, 100000, NULL, ''),
+(3, 'Asrama Rifa Corporate', 0, 0, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 20000, 80000, NULL, 'Dengan Makan 3x Sehari'),
+(4, 'Pondokan H. Ating', 0, 0, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '0', '', 0, 0, NULL, ''),
+(5, 'Wisma Anugrah Ibu Nanik', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Hj. Nanik Susiani', '081320719652', '', 15000, 70000, NULL, ''),
+(6, 'Pondokan dr. Hj. Meutia Laksminingrum', 0, 0, 0, '-', 'dr. Hj. Meutia Laksminingrum', '0', '', 0, 0, NULL, ''),
+(7, 'Galuh Pakuan', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Oyo Suharya', '081320113399', '', 20000, 0, NULL, ''),
+(8, 'Pondokan Tatang', 0, 0, 30, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Tatang', '089531804825', '', 20000, 80000, NULL, 'Dengan Makan 3x Sehari');
 
 -- --------------------------------------------------------
 
@@ -1002,7 +1000,7 @@ ALTER TABLE `tb_jurusan_pdd_jenis`
 -- AUTO_INCREMENT for table `tb_mess`
 --
 ALTER TABLE `tb_mess`
-  MODIFY `id_mess` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_mess` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_mess_detail`

@@ -97,74 +97,78 @@
                                         <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#mes_d_m" . $d_mess['id_mess']; ?>'>
                                             Hapus
                                         </a>
-                                    </td>
-                                    <?php $no++; ?>
-                                    <!-- modal ubah Mess  -->
-                                    <div class="modal fade" id="<?php echo "mes_u_m" . $d_mess['id_mess']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <form method="post" action="">
-                                                    <div class="modal-header">
-                                                        <b>UBAH MESS</b>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Nama Mess : <span style="color:red">*</span><br>
-                                                        <input type="text" class="form-control" name="nama_mess" value="<?php echo $d_mess['nama_mess']; ?>" required><br>
-                                                        Nama Pemilik : <span style="color:red">*</span><br>
-                                                        <input type="text" class="form-control" name="nama_pemilik_mess" value="<?php echo $d_mess['nama_pemilik_mess']; ?>" required><br>
-                                                        No Pemilik : <span style="color:red">*</span><br>
-                                                        <input type="number" class="form-control" name="no_pemilik_mess" value="<?php echo $d_mess['no_pemilik_mess']; ?>" required><br>
-                                                        E-Mail Pemilik : <br>
-                                                        <input type="emial" class="form-control" name="email_pemilik_mess" value="<?php echo $d_mess['email_pemilik_mess']; ?>"><br>
-                                                        Harga Tanpa Makan : (Rp)<span style="color:red">*</span><br>
-                                                        <input type="number" class="form-control" name="harga_tanpa_makan_mess" value="<?php echo $d_mess['harga_tanpa_makan_mess']; ?>" required><br>
-                                                        Harga Dengan Makan : (Rp)<span style="color:red">*</span><br>
-                                                        <input type="number" class="form-control" name="harga_dengan_makan_mess" value="<?php echo $d_mess['harga_dengan_makan_mess']; ?>" required><br>
-                                                        Alamat Mess : <span style="color:red">*</span><br>
-                                                        <textarea class="form-control" name="alamat_mess" required><?php echo $d_mess['alamat_mess']; ?></textarea><br>
-                                                        Keterangan Mess : <br>
-                                                        <textarea class="form-control" name="ket_mess"><?php echo $d_mess['ket_mess']; ?></textarea>
-                                                        <hr>
-                                                        <b>KAPASITAS MESS</b><br>
-                                                        <!-- Laki-Laki :
-                                                        <input type="number" class="form-control" name="kapasitas_l_mess" value="<?php echo $d_mess['kapasitas_l_mess']; ?>">
-                                                        Perempuan :
-                                                        <input type="number" class="form-control" name="kapasitas_p_mess" value="<?php echo $d_mess['kapasitas_p_mess']; ?>"> -->
-                                                        Kapasitas Total : <span style="color:red">*</span><br>
-                                                        <input type="number" class="form-control" name="kapasitas_t_mess" value="<?php echo $d_mess['kapasitas_t_mess']; ?>" required>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
-                                                        <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
-                                                        <button class="btn btn-danger" type="button" data-dismiss="modal">Kembali</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="modal fade" id="<?php echo "mes_d_m" . $d_mess['id_mess']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <form method="post" action="">
-                                                    <div class="modal-header">
-                                                        <h5>HAPUS MESS ?</h5>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Nama Mess :
-                                                        <h6><b><?php echo $d_mess['nama_mess']; ?></b></h6>
-                                                        Nama Pemilik :
-                                                        <h6><b><?php echo $d_mess['nama_pemilik_mess']; ?></b></h6>
-                                                        <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-danger" name="hapus">Ya</button>
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-                                                    </div>
-                                                </form>
+                                        <!-- modal ubah Mess  -->
+                                        <div class="modal fade" id="<?php echo "mes_u_m" . $d_mess['id_mess']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <form method="post" action="">
+                                                        <div class="modal-header">
+                                                            <b>UBAH MESS</b>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Nama Mess : <span style="color:red">*</span><br>
+                                                            <input type="text" class="form-control" name="nama_mess" value="<?php echo $d_mess['nama_mess']; ?>" required><br>
+                                                            Nama Pemilik : <span style="color:red">*</span><br>
+                                                            <input type="text" class="form-control" name="nama_pemilik_mess" value="<?php echo $d_mess['nama_pemilik_mess']; ?>" required><br>
+                                                            No Pemilik : <span style="color:red">*</span><br>
+                                                            <input type="number" class="form-control" name="no_pemilik_mess" value="<?php echo $d_mess['no_pemilik_mess']; ?>" required><br>
+                                                            E-Mail Pemilik : <br>
+                                                            <input type="emial" class="form-control" name="email_pemilik_mess" value="<?php echo $d_mess['email_pemilik_mess']; ?>"><br>
+                                                            Harga Tanpa Makan : (Rp)<span style="color:red">*</span><br>
+                                                            <input type="number" class="form-control" name="harga_tanpa_makan_mess" value="<?php echo $d_mess['harga_tanpa_makan_mess']; ?>" required><br>
+                                                            Harga Dengan Makan : (Rp)<span style="color:red">*</span><br>
+                                                            <input type="number" class="form-control" name="harga_dengan_makan_mess" value="<?php echo $d_mess['harga_dengan_makan_mess']; ?>" required><br>
+                                                            Alamat Mess : <span style="color:red">*</span><br>
+                                                            <textarea class="form-control" name="alamat_mess" required><?php echo $d_mess['alamat_mess']; ?></textarea><br>
+                                                            Keterangan Mess : <br>
+                                                            <textarea class="form-control" name="ket_mess"><?php echo $d_mess['ket_mess']; ?></textarea>
+                                                            <hr>
+                                                            <b>KAPASITAS MESS</b><br>
+                                                            <!-- Laki-Laki :
+                                                            <input type="number" class="form-control" name="kapasitas_l_mess" value="<?php echo $d_mess['kapasitas_l_mess']; ?>">
+                                                            Perempuan :
+                                                            <input type="number" class="form-control" name="kapasitas_p_mess" value="<?php echo $d_mess['kapasitas_p_mess']; ?>"> -->
+                                                            Kapasitas Total : <span style="color:red">*</span><br>
+                                                            <input type="number" class="form-control" name="kapasitas_t_mess" value="<?php echo $d_mess['kapasitas_t_mess']; ?>" required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
+                                                            <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
+                                                            <button class="btn btn-danger" type="button" data-dismiss="modal">Kembali</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <!-- modal hapus Mess -->
+                                        <div class="modal fade" id="<?php echo "mes_d_m" . $d_mess['id_mess']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <form method="post" action="">
+                                                        <div class="modal-header">
+                                                            <h5>HAPUS MESS ?</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Nama Mess :
+                                                            <h6><b><?php echo $d_mess['nama_mess']; ?></b></h6>
+                                                            Nama Pemilik :
+                                                            <h6><b><?php echo $d_mess['nama_pemilik_mess']; ?></b></h6>
+                                                            <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-danger" name="hapus">Ya</button>
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <?php
+                                    $no++;
+                                    ?>
                                 </tr>
                             <?php
                             }
