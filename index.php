@@ -60,4 +60,10 @@ if ($_SESSION['status_user'] == 'Y') {
 <!-- Page Icons -->
 <script src="vendor/fontawesome-free/css/v4-shims-min.css"></script>
 
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+</script>
+
 </html>
