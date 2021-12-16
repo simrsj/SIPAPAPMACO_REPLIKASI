@@ -39,7 +39,7 @@
                 if ($r_unit > 0) {
                 ?>
                     <table class='table table-striped' id="myTable">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>Nama Unit</th>
@@ -55,11 +55,11 @@
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $d_unit['nama_unit']; ?></td>
                                     <td>
-                                        <a class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#uni_u_m" . $d_unit['id_unit']; ?>'>
-                                            Ubah
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#uni_u_m" . $d_unit['id_unit']; ?>'>
+                                            <i class="fas fa-edit"></i>
                                         </a>
-                                        <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#uni_d_m" . $d_unit['id_unit']; ?>'>
-                                            Hapus
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#uni_d_m" . $d_unit['id_unit']; ?>'>
+                                            <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                     <?php $no++; ?>
