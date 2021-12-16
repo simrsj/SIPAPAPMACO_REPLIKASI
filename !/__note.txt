@@ -1,27 +1,13 @@
-- harga mess pemondokan 
 - Security path langsung dapat terlihat contoh : SM/_FILE/
 - enkripsi link 
-- pakai plugin table cari diinternet alternatif datatables
 - inputan pilih jadwal praktikan dengan pilih tombol radio button tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
 - buat tanggal inputan data dissetiap tabel yang ada inputan
-
-SELECT * FROM tb_mou 
-JOIN tb_mou ON tb_mou.id_mou = tb_mou.id_mou 
-JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
-JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-JOIN tb_user ON tb_mou.id_user = tb_user.id_user
-
-SELECT * FROM tb_praktik 
-JOIN tb_praktik ON tb_mou.id_mou = tb_mou.id_mou 
-JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
-JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-JOIN tb_user ON tb_mou.id_user = tb_user.id_user
+- buat CRUD eksekusi tanpa loading (cek : https://dewankomputer.com/2019/01/23/crud-create-read-update-delete-dengan-ajax-tanpa-loading-part-1-menampilkan-data/)
+- perbaiki CRUD Menu MoU 
 
 git status
 git add .
-git commit -m "note"
+git commit -m "data mentor proses"
 git pull
 git push
 

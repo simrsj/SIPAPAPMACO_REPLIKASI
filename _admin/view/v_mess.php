@@ -42,8 +42,8 @@
                                 <input type="number" class="form-control" name="kapasitas_t_mess" required>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-success" name="tambah">Tambah</button>
-                                <button class="btn btn-danger" type="button" data-dismiss="modal">Kembali</button>
+                                <button type="submit" class="btn btn-success btn-sm" name="tambah">Tambah</button>
+                                <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
                             </div>
                         </form>
                     </div>
@@ -72,6 +72,7 @@
                                 <th>Kapasitas Terisi</th>
                                 <th>Harga Tanpa Makan</th>
                                 <th>Harga Dengan Makan</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -91,11 +92,32 @@
                                     <td><?php echo "Rp " . number_format($d_mess['harga_tanpa_makan_mess'], 0, ",", "."); ?></td>
                                     <td><?php echo "Rp " . number_format($d_mess['harga_dengan_makan_mess'], 0, ",", "."); ?></td>
                                     <td>
-                                        <a class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#mes_u_m" . $d_mess['id_mess']; ?>'>
-                                            Ubah
+                                        <form method="post" action="">
+                                            <?php
+                                            switch ($d_mess['status_mess']) {
+                                                case "Aktif":
+                                                    $btn_status_mess = "success";
+                                                    $icon_status_mess = "<i class='fa fa-check-circle' aria-hidden='true'></i>";
+                                                    break;
+                                                case "Tidak Aktif":
+                                                    $btn_status_mess = "danger";
+                                                    $icon_status_mess = "<i class='fa fa-times-circle' aria-hidden='true'></i>";
+                                                    break;
+                                            }
+                                            ?>
+                                            <input name='id_mess' value="<?php echo $d_mess['id_mess']; ?>" hidden>
+                                            <input name='status_mess' value='<?php echo $d_mess['status_mess']; ?>' hidden>
+                                            <button title="<?php echo $d_mess['status_mess']; ?>" type="submit" name="ubah_status_mess" class="<?php echo "btn btn-" . $btn_status_mess . " btn-sm"; ?>">
+                                                <?php echo $icon_status_mess; ?>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#mes_u_m" . $d_mess['id_mess']; ?>'>
+                                            <i class="fas fa-edit"></i>
                                         </a>
-                                        <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#mes_d_m" . $d_mess['id_mess']; ?>'>
-                                            Hapus
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#mes_d_m" . $d_mess['id_mess']; ?>'>
+                                            <i class="fas fa-trash-alt"></i>
                                         </a>
 
                                         <!-- modal ubah Mess  -->
@@ -134,8 +156,10 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
-                                                            <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
-                                                            <button class="btn btn-danger" type="button" data-dismiss="modal">Kembali</button>
+                                                            <button type="submit" class="btn btn-success btn-sm" name="ubah">Ubah</button>
+                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">
+                                                                Kembali
+                                                            </button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -158,8 +182,8 @@
                                                             <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-danger" name="hapus">Ya</button>
-                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+                                                            <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>
+                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Tidak</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -213,8 +237,8 @@ if (isset($_POST['tambah'])) {
         '" . $_POST['harga_dengan_makan_mess'] . "', 
         '" . $_POST['ket_mess'] . "'
     )";
-    echo $sql_tambah;
-    // $conn->query($sql_tambah);
+    // echo $sql_tambah;
+    $conn->query($sql_tambah);
 ?>
     <script>
         document.location.href = "?mes";
@@ -234,7 +258,7 @@ if (isset($_POST['tambah'])) {
     `harga_dengan_makan_mess` = '" . $_POST['harga_dengan_makan_mess'] . "' ,
     `ket_mess` = '" . $_POST['ket_mess'] . "'
     WHERE `tb_mess`.`id_mess` = " . $_POST['id_mess'];
-    echo $sql_ubah;
+    // echo $sql_ubah;
     $conn->query($sql_ubah);
 ?>
     <script>
@@ -243,6 +267,24 @@ if (isset($_POST['tambah'])) {
 <?php
 } elseif (isset($_POST['hapus'])) {
     $conn->query("DELETE FROM `tb_mess` WHERE `id_mess` = " . $_POST['id_mess']);
+?>
+    <script>
+        document.location.href = "?mes";
+    </script>
+<?php
+} elseif (isset($_POST['ubah_status_mess'])) {
+    switch ($_POST['status_mess']) {
+        case "Aktif":
+            $ubah_status_mess = "Tidak Aktif";
+            break;
+        case "Tidak Aktif":
+            $ubah_status_mess = "Aktif";
+            break;
+    }
+    $sql_status_mess =
+        "UPDATE `tb_mess` SET `status_mess` = '$ubah_status_mess' WHERE `id_mess` = '" . $_POST['id_mess'] . "'";
+    // echo $sql_status_mess;
+    $conn->query($sql_status_mess);
 ?>
     <script>
         document.location.href = "?mes";

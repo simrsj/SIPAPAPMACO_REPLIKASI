@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2021 at 09:17 AM
+-- Generation Time: Dec 16, 2021 at 08:42 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -183,7 +183,7 @@ INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
 
 CREATE TABLE `tb_harga_pilih` (
   `id_harga_pilih` int(11) NOT NULL,
-  `id_praktik_harga_pilih` int(11) DEFAULT NULL,
+  `id_praktik` int(11) DEFAULT NULL,
   `id_harga` int(11) DEFAULT NULL,
   `tgl_input_harga_pilih` date DEFAULT NULL,
   `kuantitas_harga_pilih` int(11) NOT NULL,
@@ -442,74 +442,73 @@ CREATE TABLE `tb_mentor_rsj` (
 --
 
 INSERT INTO `tb_mentor_rsj` (`id_mentor_rsj`, `nip_nipk_mentor_rsj`, `name_mentor_rsj`, `unit_mentor_rsj`, `info_mentor_rsj`, `pdd_mentor_rsj`, `status_mentor_rsj`) VALUES
-(1, '197905022005012012', 'Aam Amalia, S.Kep., Ners', '-', 'CI', 'S1', '0'),
-(2, '197905022005012012', 'Aam Amalia, S.Kep., Ners (Struktural)', '-', 'CI', 'S1', '0'),
-(3, '197301072005011007', 'Abdul Aziz, AMK', 'RUANG KASUARI ATAS', 'CI', 'D3', '1'),
-(4, '197812182006042017', 'Adah Saadah, S.Kep., Ners', 'INSTALASI REHABILITASI PSIKOSOSIAL', 'CI', 'S1', '1'),
-(5, '197405121997032004', 'Ade Carnisem, S.Kep., Ners', 'RUANG MURAI', 'CI', 'S1', '1'),
-(6, '196607161991032004', 'Ade Saromah, S.Kep., Ners', '-', 'CI', 'S1', '0'),
-(7, '197211201991031001', 'Agus Krisno, AMK', 'INSTALASI RAWAT JALAN', 'CI', 'D3', '1'),
-(8, '198109282005011007', 'Agus Kusnandar, S.Kep., Ners', 'INSTALASI REHABILITASI PSIKOSOSIAL', 'CI', 'S1', '1'),
-(9, '197503081997032002', 'Ai Sriyati, S.Kep., Ners', 'RUANG NAPZA', 'CI', 'S1', '1'),
-(10, '197911152000032004', 'Hj. Arimbi Nurwiyanti P, S.Kep.Ners', 'RUANG KESWARA', 'CI', 'S1', '1'),
-(11, '198107202006042020', 'Ani Maryani, S.Kep., Ners', 'RUANG MERPATI', 'CI', 'S1', '1'),
-(12, '198110272006042014', 'Butet Berlina, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', '1'),
-(13, '197610012005011010', 'Dedi Nurhasan, S.Kep., Ners', '-', 'CI', 'S1', '0'),
-(14, '197601311999031001', 'H. Dedi Rahmadi, S.Kep.Ners', 'RUANG MERAK', 'CI', 'S1', '1'),
-(15, '196705161991031004', 'Dedi Suhaedi, AMK', 'RUANG RAJAWALI', 'CI', 'D3', '1'),
-(16, '197909052006042016', 'Hj. Devie Fitriyani, S.Kep.Ners', 'RUANG RAJAWALI', 'CI', 'S1', '1'),
-(17, '196904071993032008', 'Dewi Shinta Maria, AMK', 'INSTALASI RAWAT JALAN', 'CI', 'D3', '1'),
-(18, '197507041999032005', 'Dian Ratnaningsih, S.Kep., Ners', 'RUANG MURAI', 'CI', 'S1', '1'),
-(19, '197209081998031009', 'Edi Junaedi, AMK', 'RUANG KASUARI ATAS', 'CI', 'D3', '1'),
-(20, '197609212000032001', 'Elsie Rodini, AMK', 'RUANG GARUDA', 'CI', 'D3', '1'),
-(21, '196411011998032001', 'Eny Budiasih, S.Kep., Ners', '-', 'CI', 'S1', '0'),
-(22, '196901062000122001', 'Eri Suciati, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', '1'),
-(23, '197901212005012013', 'Ester Suryani Tampubolon, S.Kep., Ners', 'RUANG KASUARI BAWAH', 'CI', 'S1', '1'),
-(24, '197303291999032002', 'Ettie Hikmawati, S.Kep., Ners', 'KLINIK GRHA ATMA', 'CI', 'S1', '1'),
-(25, '196812261996032001', 'Hj. Nenti Siti Kuraesin, S.Kep., Ners', 'RUANG NURI', 'CI', 'S1', '1'),
-(26, '197807042009022004', 'Hj. Icih Susanti, S.Kep.Ners', 'RUANG GELATIK', 'CI', 'S1', '1'),
-(27, '197612242000031004', 'H. Moch. Jimi Dirgantara, S.Kep.Ners', 'INSTALASI GAWAT DARURAT', 'CI', 'S1', '1'),
-(28, '197707041997031004', 'Yulforman Rotua Manalu, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', '1'),
-(29, '197902112006042015', 'Kokom Komalasari, S.Kep., Ners', 'RUANG PERKUTUT', 'CI', 'S1', '1'),
-(30, '196607151990032013', 'Komaryati, S.Kep., Ners', '-', 'CI', 'S1', '0'),
-(31, '198307172009022001', 'Neng Goniah, S.Kep., Ners', 'RUANG NURI', 'CI', 'S1', '1'),
-(32, '197608072005012005', 'Nenih Nuraenih, S.Kep., Ners', 'RUANG NURI', 'CI', 'S1', '1'),
-(33, '197011111996032003', 'Ni Luh Nyoman S Puspowati, S.Kep., Ners', 'RUANG MERPATI', 'CI', 'S1', '1'),
-(34, '197004221998032004', 'Nirna Julaeha, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', '1'),
-(35, '197911232005012017', 'Novita Sari, S.Kep., Ners', 'RUANG KASUARI ATAS', 'CI', 'S1', '1'),
-(36, '198010212005012011', 'Siti Romlah, S.Kep., Ners', 'RUANG MERAK', 'CI', 'S1', '1'),
-(37, '196908311998032005', 'Sri Kurniyati, S.Kep., Ners', '-', 'CI', 'S1', '0'),
-(38, '196805271992032004', 'Sri Yani, S.Kep., Ners', '-', 'CI', 'S1', '0'),
-(39, '198212302006042015', 'Tanti Heryani, S.Kep., Ners', 'RUANG MERPATI', 'CI', 'S1', '1'),
-(40, '198103082005012006', 'Winda Ratna Wulan, S.Kep. Ners., M.Kep.,Sp.Kep.J  ', '-', 'CI', 'S1', '0'),
-(41, '196707151987032002', 'Yusi Yustiah, AMK', 'INSTALASI REHABILITASI PSIKOSOSIAL', 'CI', 'D3', '1'),
-(42, '196712151990032007', 'Yuyun Yunara, S.Kep., Ners', 'RUANG GELATIK', 'CI', 'S1', '1'),
-(43, '197212271996031003', 'H. Zaenurohman, S.Kep.Ners', 'RUANG RAJAWALI', 'CI', 'S1', '1'),
-(44, '196608141991022004', 'dr. Hj. Elly Marliyani, Sp.KJ., M.K.M', '-', 'PSPD', '-', '1'),
-(45, '196805271998032004', 'dr. Lenny Irawati Yohosua, Sp.KJ.', '-', 'PSPD', '-', '1'),
-(46, '196607132007012005', 'dr. Hj. Meutia Laksaminingrum, Sp.KJ.', '-', 'PSPD', '-', '1'),
-(47, '198302142015031001', 'dr. Ade Kurnia Surawijawa, Sp.KJ.', '-', 'PSPD', '-', '1'),
-(48, '197507072005012006', 'dr. Lina Budiyanti, Sp.KJ. (K)', '-', 'PSPD', '-', '1'),
-(49, '197707272006042026', 'dr. Dhian Indriasari, Sp.KJ.', '-', 'PSPD', '-', '1'),
-(50, '197506082006041013', 'dr. Yunyun Setiawan, Sp.KJ.', '-', 'PSPD', '-', '1'),
-(51, '196208081990011001', 'dr. H. Riza Putra, Sp.KJ.', '-', 'PSPD', '-', '1'),
-(52, '201401065', 'dr. Hj. Lelly Resna N, Sp.KJ. (K)', '-', 'PSPD', '-', '1'),
-(53, '198601052020122005', 'dr. Hilda Puspa Indah, Sp.KJ.', '-', 'PSPD', '-', '1'),
-(54, '202101228', 'Hasrini Rowawi, dr., Sp.KJ (K)., MHA', '-', 'PPDS', '-', '1'),
-(55, '197507072005012006', 'Lina Budiyanti, dr. Sp.KJ (K)', '-', 'PPDS', '-', '1'),
-(56, '196805271998032004', 'Lenny Irawati Yohosua, dr. Sp.KJ.', '-', 'PPDS', '-', '1'),
-(57, '198302142015031001', 'Ade Kurnia Surawijaya, dr. Sp.KJ.', '-', 'PPDS', '-', '1'),
-(58, '197707272006042026', 'Dhian Indriasari, dr. Sp.KJ.', '-', 'PPDS', '-', '1'),
-(59, '198103252011012004', 'Ekaprasetyawati, S.Si, Apt', 'FARMASI', 'CIL', '-', '1'),
-(60, '196409251992031006', 'Drs. Tavip Budiawan, Apt', 'FARMASI', 'CIL', '-', '1'),
-(61, '198601082010012013', 'Ema Marlina, Amd. PK', 'REKAM MEDIK', 'CIL', '-', '1'),
-(62, '198102122005012013', 'Yeni Susanti, Amd. PK', 'REKAM MEDIK', 'CIL', '-', '1'),
-(63, '196508051995022002', 'Dra. Resmi Prasetyani, Psi', 'PSIKOLOGI', 'CIL', '-', '1'),
-(64, '197105071997032005', 'Dra. Lismaniar, Psi., M.Psi', 'PSIKOLOGI', 'CIL', '-', '1'),
-(65, '198805212011011003', 'Irfan Arief Sulistyawan, Amd', 'KESLING', 'CIL', '-', '1'),
-(66, '197308081999032005', 'Yuyum Rohmulyanawati, S.Sos, MPSSp', 'PEKSOS', 'CIL', '-', '1'),
-(67, '198010022006042015', 'Ani Kartini, ST', 'IT', 'CIL', '-', '1'),
-(68, '197902192011012001', 'Indah Kusuma Dewi, dr., SpKJ', '-', 'PSPD', '-', '1');
+(2, '197905022005012012', 'Aam Amalia, S.Kep., Ners (Struktural)', '-', 'CI', 'S1', 'Aktif'),
+(3, '197301072005011007', 'Abdul Aziz, AMK', 'RUANG KASUARI ATAS', 'CI', 'D3', 'Tidak Aktif'),
+(4, '197812182006042017', 'Adah Saadah, S.Kep., Ners', 'INSTALASI REHABILITASI PSIKOSOSIAL', 'CI', 'S1', 'Tidak Aktif'),
+(5, '197405121997032004', 'Ade Carnisem, S.Kep., Ners', 'RUANG MURAI', 'CI', 'S1', 'Tidak Aktif'),
+(6, '196607161991032004', 'Ade Saromah, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
+(7, '197211201991031001', 'Agus Krisno, AMK', 'INSTALASI RAWAT JALAN', 'CI', 'D3', 'Tidak Aktif'),
+(8, '198109282005011007', 'Agus Kusnandar, S.Kep., Ners', 'INSTALASI REHABILITASI PSIKOSOSIAL', 'CI', 'S1', 'Tidak Aktif'),
+(9, '197503081997032002', 'Ai Sriyati, S.Kep., Ners', 'RUANG NAPZA', 'CI', 'S1', 'Tidak Aktif'),
+(10, '197911152000032004', 'Hj. Arimbi Nurwiyanti P, S.Kep.Ners', 'RUANG KESWARA', 'CI', 'S1', 'Tidak Aktif'),
+(11, '198107202006042020', 'Ani Maryani, S.Kep., Ners', 'RUANG MERPATI', 'CI', 'S1', 'Tidak Aktif'),
+(12, '198110272006042014', 'Butet Berlina, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', 'Tidak Aktif'),
+(13, '197610012005011010', 'Dedi Nurhasan, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
+(14, '197601311999031001', 'H. Dedi Rahmadi, S.Kep.Ners', 'RUANG MERAK', 'CI', 'S1', 'Tidak Aktif'),
+(15, '196705161991031004', 'Dedi Suhaedi, AMK', 'RUANG RAJAWALI', 'CI', 'D3', 'Tidak Aktif'),
+(16, '197909052006042016', 'Hj. Devie Fitriyani, S.Kep.Ners', 'RUANG RAJAWALI', 'CI', 'S1', 'Tidak Aktif'),
+(17, '196904071993032008', 'Dewi Shinta Maria, AMK', 'INSTALASI RAWAT JALAN', 'CI', 'D3', 'Tidak Aktif'),
+(18, '197507041999032005', 'Dian Ratnaningsih, S.Kep., Ners', 'RUANG MURAI', 'CI', 'S1', 'Tidak Aktif'),
+(19, '197209081998031009', 'Edi Junaedi, AMK', 'RUANG KASUARI ATAS', 'CI', 'D3', 'Tidak Aktif'),
+(20, '197609212000032001', 'Elsie Rodini, AMK', 'RUANG GARUDA', 'CI', 'D3', 'Tidak Aktif'),
+(21, '196411011998032001', 'Eny Budiasih, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
+(22, '196901062000122001', 'Eri Suciati, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', 'Tidak Aktif'),
+(23, '197901212005012013', 'Ester Suryani Tampubolon, S.Kep., Ners', 'RUANG KASUARI BAWAH', 'CI', 'S1', 'Tidak Aktif'),
+(24, '197303291999032002', 'Ettie Hikmawati, S.Kep., Ners', 'KLINIK GRHA ATMA', 'CI', 'S1', 'Tidak Aktif'),
+(25, '196812261996032001', 'Hj. Nenti Siti Kuraesin, S.Kep., Ners', 'RUANG NURI', 'CI', 'S1', 'Tidak Aktif'),
+(26, '197807042009022004', 'Hj. Icih Susanti, S.Kep.Ners', 'RUANG GELATIK', 'CI', 'S1', 'Tidak Aktif'),
+(27, '197612242000031004', 'H. Moch. Jimi Dirgantara, S.Kep.Ners', 'INSTALASI GAWAT DARURAT', 'CI', 'S1', 'Tidak Aktif'),
+(28, '197707041997031004', 'Yulforman Rotua Manalu, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', 'Tidak Aktif'),
+(29, '197902112006042015', 'Kokom Komalasari, S.Kep., Ners', 'RUANG PERKUTUT', 'CI', 'S1', 'Tidak Aktif'),
+(30, '196607151990032013', 'Komaryati, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
+(31, '198307172009022001', 'Neng Goniah, S.Kep., Ners', 'RUANG NURI', 'CI', 'S1', 'Tidak Aktif'),
+(32, '197608072005012005', 'Nenih Nuraenih, S.Kep., Ners', 'RUANG NURI', 'CI', 'S1', 'Tidak Aktif'),
+(33, '197011111996032003', 'Ni Luh Nyoman S Puspowati, S.Kep., Ners', 'RUANG MERPATI', 'CI', 'S1', 'Tidak Aktif'),
+(34, '197004221998032004', 'Nirna Julaeha, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', 'Tidak Aktif'),
+(35, '197911232005012017', 'Novita Sari, S.Kep., Ners', 'RUANG KASUARI ATAS', 'CI', 'S1', 'Tidak Aktif'),
+(36, '198010212005012011', 'Siti Romlah, S.Kep., Ners', 'RUANG MERAK', 'CI', 'S1', 'Tidak Aktif'),
+(37, '196908311998032005', 'Sri Kurniyati, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
+(38, '196805271992032004', 'Sri Yani, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
+(39, '198212302006042015', 'Tanti Heryani, S.Kep., Ners', 'RUANG MERPATI', 'CI', 'S1', 'Tidak Aktif'),
+(40, '198103082005012006', 'Winda Ratna Wulan, S.Kep. Ners., M.Kep.,Sp.Kep.J  ', '-', 'CI', 'S1', 'Aktif'),
+(41, '196707151987032002', 'Yusi Yustiah, AMK', 'INSTALASI REHABILITASI PSIKOSOSIAL', 'CI', 'D3', 'Tidak Aktif'),
+(42, '196712151990032007', 'Yuyun Yunara, S.Kep., Ners', 'RUANG GELATIK', 'CI', 'S1', 'Tidak Aktif'),
+(43, '197212271996031003', 'H. Zaenurohman, S.Kep.Ners', 'RUANG RAJAWALI', 'CI', 'S1', 'Tidak Aktif'),
+(44, '196608141991022004', 'dr. Hj. Elly Marliyani, Sp.KJ., M.K.M', '-', 'PSPD', '-', 'Tidak Aktif'),
+(45, '196805271998032004', 'dr. Lenny Irawati Yohosua, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
+(46, '196607132007012005', 'dr. Hj. Meutia Laksaminingrum, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
+(47, '198302142015031001', 'dr. Ade Kurnia Surawijawa, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
+(48, '197507072005012006', 'dr. Lina Budiyanti, Sp.KJ. (K)', '-', 'PSPD', '-', 'Tidak Aktif'),
+(49, '197707272006042026', 'dr. Dhian Indriasari, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
+(50, '197506082006041013', 'dr. Yunyun Setiawan, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
+(51, '196208081990011001', 'dr. H. Riza Putra, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
+(52, '201401065', 'dr. Hj. Lelly Resna N, Sp.KJ. (K)', '-', 'PSPD', '-', 'Tidak Aktif'),
+(53, '198601052020122005', 'dr. Hilda Puspa Indah, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
+(54, '202101228', 'Hasrini Rowawi, dr., Sp.KJ (K)., MHA', '-', 'PPDS', '-', 'Tidak Aktif'),
+(55, '197507072005012006', 'Lina Budiyanti, dr. Sp.KJ (K)', '-', 'PPDS', '-', 'Tidak Aktif'),
+(56, '196805271998032004', 'Lenny Irawati Yohosua, dr. Sp.KJ.', '-', 'PPDS', '-', 'Tidak Aktif'),
+(57, '198302142015031001', 'Ade Kurnia Surawijaya, dr. Sp.KJ.', '-', 'PPDS', '-', 'Tidak Aktif'),
+(58, '197707272006042026', 'Dhian Indriasari, dr. Sp.KJ.', '-', 'PPDS', '-', 'Tidak Aktif'),
+(59, '198103252011012004', 'Ekaprasetyawati, S.Si, Apt', 'FARMASI', 'CIL', '-', 'Tidak Aktif'),
+(60, '196409251992031006', 'Drs. Tavip Budiawan, Apt', 'FARMASI', 'CIL', '-', 'Tidak Aktif'),
+(61, '198601082010012013', 'Ema Marlina, Amd. PK', 'REKAM MEDIK', 'CIL', '-', 'Tidak Aktif'),
+(62, '198102122005012013', 'Yeni Susanti, Amd. PK', 'REKAM MEDIK', 'CIL', '-', 'Tidak Aktif'),
+(63, '196508051995022002', 'Dra. Resmi Prasetyani, Psi', 'PSIKOLOGI', 'CIL', '-', 'Tidak Aktif'),
+(64, '197105071997032005', 'Dra. Lismaniar, Psi., M.Psi', 'PSIKOLOGI', 'CIL', '-', 'Tidak Aktif'),
+(65, '198805212011011003', 'Irfan Arief Sulistyawan, Amd', 'KESLING', 'CIL', '-', 'Tidak Aktif'),
+(66, '197308081999032005', 'Yuyum Rohmulyanawati, S.Sos, MPSSp', 'PEKSOS', 'CIL', '-', 'Tidak Aktif'),
+(67, '198010022006042015', 'Ani Kartini, ST', 'IT', 'CIL', '-', 'Tidak Aktif'),
+(68, '197902192011012001', 'Indah Kusuma Dewi, dr., SpKJ', '-', 'PSPD', '-', 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
@@ -529,23 +528,24 @@ CREATE TABLE `tb_mess` (
   `email_pemilik_mess` text DEFAULT NULL,
   `harga_tanpa_makan_mess` int(11) NOT NULL,
   `harga_dengan_makan_mess` int(11) NOT NULL,
-  `kapasitas_terisi_mess` int(11) DEFAULT NULL,
-  `ket_mess` text DEFAULT NULL
+  `kapasitas_terisi_mess` int(11) NOT NULL,
+  `ket_mess` text DEFAULT NULL,
+  `status_mess` enum('Aktif','Tidak Aktif') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_mess`
 --
 
-INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_mess`, `kapasitas_t_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `kapasitas_terisi_mess`, `ket_mess`) VALUES
-(1, 'Mess RSJ 1 Lama', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '0', '', 20000, 100000, NULL, 'Makan 3x Sehari'),
-(2, 'Mess RSJ 2 Baru', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '0', '', 20000, 100000, NULL, ''),
-(3, 'Asrama Rifa Corporate', 0, 0, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 20000, 80000, NULL, 'Dengan Makan 3x Sehari'),
-(4, 'Pondokan H. Ating', 0, 0, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '0', '', 0, 0, NULL, ''),
-(5, 'Wisma Anugrah Ibu Nanik', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Hj. Nanik Susiani', '081320719652', '', 15000, 70000, NULL, ''),
-(6, 'Pondokan dr. Hj. Meutia Laksminingrum', 0, 0, 0, '-', 'dr. Hj. Meutia Laksminingrum', '0', '', 0, 0, NULL, ''),
-(7, 'Galuh Pakuan', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Oyo Suharya', '081320113399', '', 20000, 0, NULL, ''),
-(8, 'Pondokan Tatang', 0, 0, 30, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Tatang', '089531804825', '', 20000, 80000, NULL, 'Dengan Makan 3x Sehari');
+INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_mess`, `kapasitas_t_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `kapasitas_terisi_mess`, `ket_mess`, `status_mess`) VALUES
+(1, 'Mess RSJ 1 Lama', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 0, 'Makan 3x Sehari', 'Aktif'),
+(2, 'Mess RSJ 2 Baru', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 0, '', 'Aktif'),
+(3, 'Asrama Rifa Corporate', 0, 0, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 20000, 80000, 0, 'Dengan Makan 3x Sehari', 'Aktif'),
+(4, 'Pondokan H. Ating', 0, 0, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '0', '', 0, 0, 0, '', 'Aktif'),
+(5, 'Wisma Anugrah Ibu Nanik', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Hj. Nanik Susiani', '081320719652', '', 15000, 70000, 0, '', 'Aktif'),
+(6, 'Pondokan dr. Hj. Meutia Laksminingrum', 0, 0, 0, '-', 'dr. Hj. Meutia Laksminingrum', '0', '', 0, 0, 0, '', 'Aktif'),
+(7, 'Galuh Pakuan', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Oyo Suharya', '081320113399', '', 20000, 0, 0, '', 'Aktif'),
+(8, 'Pondokan Tatang', 0, 0, 30, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Tatang', '089531804825', '', 20000, 80000, 0, 'Dengan Makan 3x Sehari', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -575,6 +575,20 @@ INSERT INTO `tb_mess_detail` (`id_mess_detail`, `id_mess`, `harga_mess_detail`, 
 (9, 5, 15000, 'Tanpa Makan', 0),
 (10, 5, 70000, 'Makan 3x Sehari', 0),
 (11, 8, 20000, 'Tanpa Makan', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_mess_pilih`
+--
+
+CREATE TABLE `tb_mess_pilih` (
+  `id_mess_pilih` int(11) NOT NULL,
+  `id_praktik` int(11) NOT NULL,
+  `id_mess` int(11) NOT NULL,
+  `makan_mess_pilih` text NOT NULL,
+  `jumlah_mess_pilih` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -773,11 +787,10 @@ INSERT INTO `tb_unit` (`id_unit`, `nama_unit`) VALUES
 (3, 'Instalasi Gawat Darurat'),
 (4, 'Instalasi Rawat Jalan'),
 (5, 'Instalasi Rehabilitasi Psikososial'),
-(6, 'IT'),
-(7, 'Kesling'),
+(6, 'Instalasi SIMRS'),
+(7, 'Kesehatan Lingkungan (Kesling)'),
 (8, 'Klinik Graha Atma'),
-(9, 'Peksos'),
-(10, 'Psikologi'),
+(10, 'Poli Psikologi'),
 (11, 'Rekam Medik'),
 (12, 'Ruang Garuda'),
 (13, 'Ruang Gelatik'),
@@ -915,6 +928,12 @@ ALTER TABLE `tb_mess_detail`
   ADD PRIMARY KEY (`id_mess_detail`);
 
 --
+-- Indexes for table `tb_mess_pilih`
+--
+ALTER TABLE `tb_mess_pilih`
+  ADD PRIMARY KEY (`id_mess_pilih`);
+
+--
 -- Indexes for table `tb_mou`
 --
 ALTER TABLE `tb_mou`
@@ -988,7 +1007,7 @@ ALTER TABLE `tb_jenjang_pdd`
 -- AUTO_INCREMENT for table `tb_jurusan_pdd`
 --
 ALTER TABLE `tb_jurusan_pdd`
-  MODIFY `id_jurusan_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_jurusan_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tb_jurusan_pdd_jenis`
@@ -1009,6 +1028,12 @@ ALTER TABLE `tb_mess_detail`
   MODIFY `id_mess_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `tb_mess_pilih`
+--
+ALTER TABLE `tb_mess_pilih`
+  MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tb_mou`
 --
 ALTER TABLE `tb_mou`
@@ -1024,7 +1049,7 @@ ALTER TABLE `tb_praktik`
 -- AUTO_INCREMENT for table `tb_spesifikasi_pdd`
 --
 ALTER TABLE `tb_spesifikasi_pdd`
-  MODIFY `id_spesifikasi_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_spesifikasi_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_user`

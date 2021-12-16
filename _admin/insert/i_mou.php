@@ -7,10 +7,26 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <form action="" method="POST" class="form-group">
+
+                <!-- Nama, MoU RSJ dan Institusi -->
                 <div class="row">
                     <div class="col-sm-4">
                         Nama Institusi<span style="color:red">*</span><br>
-                        <input class="form-control" type="text" name="nama_institusi" required>
+                        <select class="form-control" name="nama_institusi" required>
+                            <option value="">-- Pilih --</option>
+                            <?php
+                            $sql_institusi = "SELECT * FROM tb_institusi ORDER BY nama_institusi ASC";
+                            $q_institusi = $conn->query($sql_institusi);
+
+                            while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <option value="<?php echo $d_institusi['id_institusi']; ?>">
+                                    <?php echo $d_institusi['nama_institusi']; ?>
+                                </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="col-sm-4">
                         No. MoU RSJ<span style="color:red">*</span><br>
@@ -22,6 +38,8 @@
                     </div>
                 </div>
                 <hr>
+
+                <!-- Jurusan, Spesifikasi, Jenjang, dan Akreditasi -->
                 <div class="row">
                     <div class="col-sm-3">
                         Jurusan Pendidikan <span style="color:red">*</span><br>
@@ -82,6 +100,8 @@
                     </div>
                 </div>
                 <hr>
+
+                <!-- Tanggal Mulai, Tanggal Akhir, File, dan Keterangan -->
                 <div class="row">
                     <div class="col-sm-2">
                         Tanggal Mulai MoU<span style=" color:red">*</span><br>
@@ -92,16 +112,16 @@
                         <input class="form-control" type="date" name="tgl_akhir_mou" required>
                     </div>
                     <div class="col-sm-4">
-                        File MoU <br>
-                        <input type="file" accept="application/pdf" name="file_mou">
-                    </div>
-                    <div class="col-sm-4">
                         Keterangan<br>
                         <textarea name="ket_mou" class="form-control"></textarea>
                     </div>
+                    <div class="col-sm-4">
+                        File MoU <br>
+                        <input type="file" accept="application/pdf" name="file_mou">
+                    </div>
                 </div>
                 <hr>
-                <input class="btn btn-success" type="submit" name="SIMPAN" value="SIMPAN">
+                <input class="btn btn-success btn-sm" type="submit" name="SIMPAN" value="SIMPAN">
             </form>
         </div>
     </div>

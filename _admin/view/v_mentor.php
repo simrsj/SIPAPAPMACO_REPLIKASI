@@ -48,28 +48,30 @@
                             ?>
                                 <tr>
                                     <td><?php echo $no; ?></td>
-                                    <td style='font-size:14px'><?php echo $d_mentor_rsj['nip_nipk_mentor_rsj']; ?></td>
-                                    <td style='font-size:14px; width:20%'><?php echo $d_mentor_rsj['name_mentor_rsj']; ?></td>
-                                    <td style='font-size:14px; width:15%'><?php echo $d_mentor_rsj['unit_mentor_rsj']; ?></td>
-                                    <?php
-                                    if ($d_mentor_rsj['status_mentor_rsj'] == 0) {
-                                    ?>
-                                        <td style='font-size:14px'>
-                                            <button class='btn btn-danger btn-sm'>
-                                                Tidak Aktif
+                                    <td><?php echo $d_mentor_rsj['nip_nipk_mentor_rsj']; ?></td>
+                                    <td><?php echo $d_mentor_rsj['name_mentor_rsj']; ?></td>
+                                    <td><?php echo $d_mentor_rsj['unit_mentor_rsj']; ?></td>
+                                    <td>
+                                        <form method="post" action="">
+                                            <?php
+                                            switch ($d_mentor_rsj['status_mentor_rsj']) {
+                                                case "Aktif":
+                                                    $btn_status_mentor_rsj = "success";
+                                                    $icon_status_mentor_rsj = "<i class='fa fa-check-circle' aria-hidden='true'></i>";
+                                                    break;
+                                                case "Tidak Aktif":
+                                                    $btn_status_mentor_rsj = "danger";
+                                                    $icon_status_mentor_rsj = "<i class='fa fa-times-circle' aria-hidden='true'></i>";
+                                                    break;
+                                            }
+                                            ?>
+                                            <input name='id_mentor_rsj' value="<?php echo $d_mentor_rsj['id_mentor_rsj']; ?>" hidden>
+                                            <input name='status_mentor_rsj' value='<?php echo $d_mentor_rsj['status_mentor_rsj']; ?>' hidden>
+                                            <button type="submit" name="ubah_status_mentor_rsj" class="<?php echo "btn btn-" . $btn_status_mentor_rsj . " btn-sm"; ?>">
+                                                <?php echo $icon_status_mentor_rsj; ?>
                                             </button>
-                                        </td>
-                                    <?php
-                                    } elseif ($d_mentor_rsj['status_mentor_rsj'] == 1) {
-                                    ?>
-                                        <td style='font-size:14px'>
-                                            <button class='btn btn-success btn-sm'>
-                                                Aktif
-                                            </button>
-                                        </td>
-                                    <?php
-                                    }
-                                    ?>
+                                        </form>
+                                    </td>
                                     <td>
                                         <a class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#mtr_u_m" . $d_mentor_rsj['id_mentor_rsj']; ?>'>
                                             Ubah

@@ -6,97 +6,174 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
-            <?php
-            $sql_mou = "SELECT * FROM tb_mou where id_mou=" . $_GET['u'];
-            $q_mou = $conn->query($sql_mou);
-            $r_mou = $q_mou->rowCount();
-            $d_mou = $q_mou->fetch(PDO::FETCH_ASSOC);
-            ?>
             <form action="" method="POST" class="form-group">
-                <label>Nama Institusi</label><br>
-                <input class="form-control" type="text" value="<?php echo $d_mou['institute_mou']; ?>" name="nama_institusi"><br>
-                <label>Tanggal Mulai MoU</label><br>
-                <input class="form-control" type="date" value="<?php echo $d_mou['start_date_mou']; ?>" name="tgl_mulai_mou"><br>
-                <label>Tanggal Akhir MoU</label><br>
-                <input class="form-control" type="date" value="<?php echo $d_mou['end_date_mou']; ?>" name="tgl_akhir_mou"><br>
-                <label>No. MoU RSJ</label><br>
-                <input class="form-control" type="text" value="<?php echo $d_mou['no_rsj_mou']; ?>" name="no_rsj_mou"><br>
-                <label>No. MoU Institusi</label><br>
-                <input class="form-control" type="text" value="<?php echo $d_mou['no_institute_mou']; ?>" name="no_institut_mou"><br>
-                <label>Jurusan Pendidikan</label><br>
-                <select class="form-control" name="jurusan_mou">
-                    <?php
-                    $x_jurusan = $conn->query("SELECT * FROM tb_major order by name_major ASC");
-                    while ($d_jurusan = $x_jurusan->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <option value="<?php echo $d_jurusan['name_major']; ?> "><?php echo $d_jurusan['name_major']; ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-                <label>Spesifikasi Pendidikan</label><br>
-                <select class="form-control" name="spek_pendidikan_mou">
-                    <?php
-                    $x_spek = $conn->query("SELECT * FROM tb_specialist order by name_specialist ASC");
-                    while ($d_spek = $x_spek->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <option value="<?php echo $d_spek['name_specialist']; ?> "><?php echo $d_spek['name_specialist']; ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-                <label>Jenjang Pendidikan</label><br>
-                <select class="form-control" name="jenjang_pendidikan_mou">
-                    <?php
-                    $x_jenjang = $conn->query("SELECT * FROM tb_level order by name_level ASC");
-                    while ($d_jenjang = $x_jenjang->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <option value="<?php echo $d_jenjang['name_level']; ?> "><?php echo $d_jenjang['name_level']; ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-                <label>Akreditasi</label><br>
-                <select class="form-control" name="akreditasi_mou">
-                    <?php
-                    $x_akreditasi = $conn->query("SELECT * FROM tb_accreditation");
-                    while ($d_akreditasi = $x_akreditasi->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <option value="<?php echo $d_akreditasi['name_accreditation']; ?> "><?php echo $d_akreditasi['name_accreditation']; ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-                <label>Keterangan</label><br>
-                <textarea name="ket_mou" class="form-control"><?php echo $d_mou['ket_mou']; ?></textarea>
-                <br>
-                <input class="btn btn-success" type="submit" name="UBAH" value="UBAH">
-                <?php
-                // echo "$sql_insert";
-                ?>
+
+                <!-- Nama, MoU RSJ dan Institusi -->
+                <div class="row">
+                    <div class="col-sm-4">
+                        Nama Institusi<span style="color:red">*</span><br>
+                        <select class="form-control" name="nama_institusi" required>
+                            <option value="">-- Pilih --</option>
+                            <?php
+                            $sql_institusi = "SELECT * FROM tb_institusi ORDER BY nama_institusi ASC";
+                            $q_institusi = $conn->query($sql_institusi);
+
+                            while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <option value="<?php echo $d_institusi['id_institusi']; ?>">
+                                    <?php echo $d_institusi['nama_institusi']; ?>
+                                </option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        No. MoU RSJ<span style="color:red">*</span><br>
+                        <input class="form-control" type="text" name="no_rsj_mou" required>
+                    </div>
+                    <div class="col-sm-4">
+                        No. MoU Institusi <span style="color:red">*</span><br>
+                        <input class="form-control" type="text" name="no_institut_mou" required>
+                    </div>
+                </div>
+                <hr>
+
+                <!-- Jurusan, Spesifikasi, Jenjang, dan Akreditasi -->
+                <div class="row">
+                    <div class="col-sm-3">
+                        Jurusan Pendidikan <span style="color:red">*</span><br>
+                        <select class="form-control" name="id_jurusan_pdd" required>
+                            <option value="">-- Pilih --</option>
+                            <?php
+                            $x_jurusan = $conn->query("SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC");
+                            while ($d_jurusan = $x_jurusan->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <option value="<?php echo $d_jurusan['id_jurusan_pdd']; ?> "><?php echo $d_jurusan['nama_jurusan_pdd']; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        Spesifikasi Pendidikan <span style="color:red">*</span><br>
+                        <select class="form-control" name="id_spesifikasi_pdd" required>
+                            <option value="">-- Pilih --</option>
+                            <?php
+                            $x_spek = $conn->query("SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC");
+                            while ($d_spek = $x_spek->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <option value="<?php echo $d_spek['id_spesifikasi_pdd']; ?> "><?php echo $d_spek['nama_spesifikasi_pdd']; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+
+                    </div>
+                    <div class="col-sm-3">
+                        Jenjang Pendidikan <span style="color:red">*</span><br>
+                        <select class="form-control" name="id_jenjang_pdd" required>
+                            <option value="">-- Pilih --</option>
+                            <?php
+                            $x_jenjang = $conn->query("SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC");
+                            while ($d_jenjang = $x_jenjang->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <option value="<?php echo $d_jenjang['id_jenjang_pdd']; ?> "><?php echo $d_jenjang['nama_jenjang_pdd']; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        Akreditasi<span style="color:red">*</span><br>
+                        <select class="form-control" name="id_akreditasi" required>
+                            <option value="">-- Pilih --</option>
+                            <?php
+                            $x_akreditasi = $conn->query("SELECT * FROM tb_akreditasi");
+                            while ($d_akreditasi = $x_akreditasi->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <option value="<?php echo $d_akreditasi['id_akreditasi']; ?> "><?php echo $d_akreditasi['nama_akreditasi']; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+
+                <!-- Tanggal Mulai, Tanggal Akhir, File, dan Keterangan -->
+                <div class="row">
+                    <div class="col-sm-2">
+                        Tanggal Mulai MoU<span style=" color:red">*</span><br>
+                        <input class="form-control" type="date" name="tgl_mulai_mou" required>
+                    </div>
+                    <div class="col-sm-2">
+                        Tanggal Akhir MoU<span style="color:red">*</span><br>
+                        <input class="form-control" type="date" name="tgl_akhir_mou" required>
+                    </div>
+                    <div class="col-sm-4">
+                        Keterangan<br>
+                        <textarea name="ket_mou" class="form-control"></textarea>
+                    </div>
+                    <div class="col-sm-4">
+                        File MoU <br>
+                        <input type="file" accept="application/pdf" name="file_mou">
+                    </div>
+                </div>
+                <hr>
+
+                <input class="btn btn-success btn-sm" type="submit" name="SIMPAN" value="SIMPAN">
             </form>
         </div>
     </div>
 </div>
 <?php
-if (isset($_POST['UBAH'])) {
+if (isset($_POST['SIMPAN'])) {
 
-    $sql_update = " UPDATE tb_mou SET 
-    institute_mou = '" . $_POST['nama_institusi'] . "',
-    start_date_mou = '" . $_POST['tgl_mulai_mou'] . "',
-    end_date_mou = '" . $_POST['tgl_akhir_mou'] . "',
-    no_rsj_mou = '" . $_POST['no_rsj_mou'] . "',
-    no_institute_mou = '" . $_POST['no_institut_mou'] . "',
-    jurusan_mou = '" . $_POST['jurusan_mou'] . "',
-    spek_pendidikan_mou = '" . $_POST['spek_pendidikan_mou'] . "',
-    jenjang_pendidikan_mou = '" . $_POST['jenjang_pendidikan_mou'] . "',
-    akreditasi_mou = '" . $_POST['akreditasi_mou'] . "',
-    ket_mou = '" . $_POST['ket_mou'] . "'
-    WHERE id_mou = 4";
-    $conn->query($sql_update);
+    $no_id_institusi = 0;
+    while ($d_institusi = $conn->query("SELECT id_institusi FROM tb_institusi ORDER BY id_institusi ASC")->fetch(PDO::FETCH_ASSOC)) {
+        if ($no_id_institusi != $d_institusi[0]) {
+            $no_id_institusi = $d_institusi[0] + 1;
+            break;
+        } elseif ($no_id_institusi == 0) {
+            $no_id_institusi;
+            break;
+        }
+        $no_id_institusi = $d_institusi[0] + 1;
+    }
+    echo $no_id_institusi;
+    $sql_insert_institusi = " INSERT INTO tb_institusi (id_institusi,nama_institusi) VALUE ('" . $no_id_institusi . "', '" . $_POST['nama_institusi'] . "')";
+    $sql_insert_mou = " INSERT INTO tb_mou (
+        id_institusi,
+        tgl_mulai_mou, 
+        tgl_akhir_mou, 
+        no_rsj_mou, 
+        no_institusi_mou,
+        id_jurusan_pdd,
+        id_spesifikasi_pdd,
+        id_jenjang_pdd,
+        id_akreditasi,
+        ket_mou
+    ) VALUE (
+        '" . $no_id_institusi . "'
+        '" . $_POST['tgl_mulai_mou'] . "',
+        '" . $_POST['tgl_akhir_mou'] . "',        
+        '" . $_POST['no_rsj_mou'] . "',
+        '" . $_POST['no_institusi_mou'] . "',
+        '" . $_POST['id_jurusan_pdd'] . "',
+        '" . $_POST['id_spesifikasi_pdd'] . "',
+        '" . $_POST['id_jenjang_pdd'] . "',
+        '" . $_POST['id_akreditasi'] . "',
+        '" . $_POST['ket_mou'] . "'
+    )";
+    echo $sql_insert_institusi . "<br>";
+    echo $sql_insert_mou;
+    //$conn->query($sql_insert_institusi);
+    //$conn->query($sql_insert_mou);
 ?>
     <script type="text/javascript">
-        document.location.href = "?mou";
+        // alert('Data Sudah Disimpan');    
+        // document.location.href = "?mou";
     </script>
 <?php
 }

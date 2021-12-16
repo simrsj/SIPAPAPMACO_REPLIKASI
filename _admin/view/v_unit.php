@@ -4,7 +4,7 @@
             <h1 class="h3 mb-2 text-gray-800">Daftar Unit</h1>
         </div>
         <div class="col-lg-2">
-            <a class='btn btn-success btn-sm' href='#' data-toggle='modal' data-target='#uni_i_m'>
+            <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#uni_i_m'>
                 <i class="fas fa-plus"></i> Tambah
             </a>
             <!-- modal tambah Unit  -->
@@ -12,12 +12,15 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form method="post" action="">
+                            <div class="modal-header">
+                                Tambah Unit :
+                            </div>
                             <div class="modal-body">
-                                <h6>Tambah Unit :</h6>
                                 <input class="form-control" name="nama_unit">
-                                <br>
-                                <button type="submit" class="btn btn-success" name="tambah">Tambah</button>
-                                <button class="btn btn-danger" type="button" data-dismiss="modal">Kembali</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-sm" name="tambah">Tambah</button>
+                                <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
                             </div>
                         </form>
                     </div>
@@ -138,12 +141,10 @@ if (isset($_POST['ubah'])) {
 <?php
 }
 ?>
-<script type="text/javascript"  src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script>
-    $(document).ready( function () {
+    $(document).ready(function() {
         $('#myTable').DataTable();
-    } );
+    });
 </script>
-
-                

@@ -4,7 +4,7 @@
             <h1 class="h3 mb-2 text-gray-800">Daftar Spesifikasi</h1>
         </div>
         <div class="col-lg-2">
-            <a class='btn btn-success btn-sm' href='#' data-toggle='modal' data-target='#spf_i_m'>
+            <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#spf_i_m'>
                 <i class="fas fa-plus"></i> Tambah
             </a>
             <!-- modal tambah spesifikasi  -->
@@ -12,12 +12,16 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form method="post" action="">
+                            <div class="modal-header">
+                                Tambah Spesifikasi
+                            </div>
                             <div class="modal-body">
-                                <h6>Tambah Spesifikasi :</h6>
                                 <input class="form-control" name="nama_spesifikasi_pdd">
                                 <br>
-                                <button type="submit" class="btn btn-success" name="tambah">Tambah</button>
-                                <button class="btn btn-danger" type="button" data-dismiss="modal">Kembali</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-sm" name="tambah">Tambah</button>
+                                <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
                             </div>
                         </form>
                     </div>
@@ -36,7 +40,7 @@
                 if ($r_spesifikasi_pdd > 0) {
                 ?>
                     <table class='table table-striped' id="myTable">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>Nama Spesifikasi</th>
@@ -52,11 +56,11 @@
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?></td>
                                     <td>
-                                        <a class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#spf_u_m" . $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
-                                            Ubah
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#spf_u_m" . $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
+                                            <i class="fas fa-edit"></i>
                                         </a>
-                                        <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#spf_d_m" . $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
-                                            Hapus
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#spf_d_m" . $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
+                                            <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                     <?php $no++; ?>
@@ -65,11 +69,14 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
+                                                    <div class="modal-header">
+                                                        Ubah Spesifikasi
+                                                    </div>
                                                     <div class="modal-body">
-                                                        <h5>Ubah Spesifikasi :</h5>
                                                         <input name="id_spesifikasi_pdd" value="<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>" hidden>
                                                         <input class="form-control" name="nama_spesifikasi_pdd" value="<?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>">
-                                                        <br>
+                                                    </div>
+                                                    <div class="modal-footer">
                                                         <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
                                                     </div>
@@ -90,8 +97,8 @@
                                                         <input name="id_spesifikasi_pdd" value="<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>" hidden>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-danger" name="hapus">Ya</button>
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>
+                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Tidak</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -138,13 +145,3 @@ if (isset($_POST['ubah'])) {
 <?php
 }
 ?>
-
-<script type="text/javascript"  src="vendor/jquery/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready( function () {
-        $('#myTable').DataTable();
-    } );
-</script>
-
-                

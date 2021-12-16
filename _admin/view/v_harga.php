@@ -17,7 +17,7 @@
                         <div class="modal-content">
                             <form method="post" action="">
                                 <div class="modal-header">
-                                    <h4 style="color:black;">Tambah Harga :</h4>
+                                    Tambah Harga :
                                 </div>
                                 <div class="modal-body">
                                     Nama Harga : <span style="color:red">*</span><br>
@@ -164,8 +164,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <input type="submit" class="btn btn-success" name="tambah_harga" value="Tambah">
-                                    <input class="btn btn-secondary" type="button" data-dismiss="modal" value="Kembali">
+                                    <input type="submit" class="btn btn-success btn-sm" name="tambah_harga" value="Tambah">
+                                    <input class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal" value="Kembali">
                                 </div>
                             </form>
                         </div>
@@ -174,11 +174,10 @@
 
                 <!-- tambah satuan harga -->
                 <a class="btn btn-outline-success btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Satuan
+                    <i class="fas fa-ruler-horizontal"></i> Satuan
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
                     <a class='dropdown-item' href='#' data-toggle='modal' data-target='#ish_i_m'>
                         Tambah Satuan
                     </a>
@@ -194,7 +193,7 @@
                     <div class="modal-content">
                         <form method="post" action="">
                             <div class="modal-header">
-                                <h4 style="color:black;">Tambah Satuan Harga :</h4>
+                                Tambah Satuan Harga :
                             </div>
                             <div class="modal-body">
                                 Nama Satuan Harga : <span style="color:red">*</span><br>
@@ -203,8 +202,8 @@
                                 <input class="form-control" name="ket_harga_satuan"><br>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-success" name="tambah_harga_satuan" value="Tambah">
-                                <input class="btn btn-secondary" type="button" data-dismiss="modal" value="Kembali">
+                                <input type="submit" class="btn btn-success btn-sm" name="tambah_harga_satuan" value="Tambah">
+                                <input class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal" value="Kembali">
                             </div>
                         </form>
                     </div>
@@ -214,118 +213,122 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
-            <?php
-            if (isset($_GET['dhs'])) {
-            ?>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Satuan Harga</th>
-                            <th scope="col">Keterangan harga</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-
-                        $sql_harga_satuan = "SELECT * FROm tb_harga_satuan ORDER BY nama_harga_satuan ASC";
-
-                        $q_harga_satuan = $conn->query($sql_harga_satuan);
-                        $r_harga_satuan = $q_harga_satuan->rowCount();
-
-                        $no = 1;
-                        while ($d_harga_satuan = $q_harga_satuan->fetch(PDO::FETCH_ASSOC)) {
-
-                        ?>
+            <div class="table-responsive">
+                <?php
+                if (isset($_GET['dhs'])) {
+                ?>
+                    <table class="table table-striped" id="myTable">
+                        <thead class="thead-dark">
                             <tr>
-                                <th scope="row"><?php echo $no; ?></th>
-                                <td><?php echo $d_harga_satuan['nama_harga_satuan']; ?></td>
-                                <td><?php echo $d_harga_satuan['ket_harga_satuan']; ?></td>
-                                <td>
-                                    <a class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dhs_u_m" . $d_harga_satuan['id_harga_satuan']; ?>'>
-                                        Ubah
-                                    </a>
-                                    <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dhs_d_m" . $d_harga_satuan['id_harga_satuan']; ?>'>
-                                        Hapus
-                                    </a>
-                                </td>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Satuan Harga</th>
+                                <th scope="col">Keterangan harga</th>
+                                <th scope="col"></th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            <?php
 
-                            <!-- modal ubah Satuan Harga  -->
-                            <div class="modal fade" id="<?php echo "dhs_u_m" . $d_harga_satuan['id_harga_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <form method="post" action="" class="form-group">
-                                            <div class="modal-body">
-                                                <h5>Ubah Harga :</h5>
+                            $sql_harga_satuan = "SELECT * FROm tb_harga_satuan ORDER BY nama_harga_satuan ASC";
 
-                                                <!-- id_harga_satuan -->
-                                                <input name="id_harga_satuan" value="<?php echo $d_harga_satuan['id_harga_satuan']; ?>" hidden>
+                            $q_harga_satuan = $conn->query($sql_harga_satuan);
+                            $r_harga_satuan = $q_harga_satuan->rowCount();
 
-                                                Nama Harga Satuan : <span style="color:red">*</span><br>
-                                                <input class="form-control" name="nama_harga_satuan" value="<?php echo $d_harga_satuan['nama_harga_satuan']; ?>" required><br>
+                            $no = 1;
+                            while ($d_harga_satuan = $q_harga_satuan->fetch(PDO::FETCH_ASSOC)) {
 
-                                                Keterangan Harga Satuan : <br>
-                                                <input class="form-control" name="ket_harga_satuan" value="<?php echo $d_harga_satuan['ket_harga_satuan']; ?>"><br>
+                            ?>
+                                <tr>
+                                    <th scope="row"><?php echo $no; ?></th>
+                                    <td><?php echo $d_harga_satuan['nama_harga_satuan']; ?></td>
+                                    <td><?php echo $d_harga_satuan['ket_harga_satuan']; ?></td>
+                                    <td>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dhs_u_m" . $d_harga_satuan['id_harga_satuan']; ?>'>
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dhs_d_m" . $d_harga_satuan['id_harga_satuan']; ?>'>
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
 
-                                                <br>
-                                                <input type="submit" class="btn btn-success" name="ubah_harga_satuan" value="Ubah">
-                                                <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Kembali">
-                                            </div>
-                                        </form>
+                                <!-- modal ubah Satuan Harga  -->
+                                <div class="modal fade" id="<?php echo "dhs_u_m" . $d_harga_satuan['id_harga_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="post" action="" class="form-group">
+                                                <div class="modal-header">
+                                                    <h5>Ubah Harga :</h5>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <!-- id_harga_satuan -->
+                                                    <input name="id_harga_satuan" value="<?php echo $d_harga_satuan['id_harga_satuan']; ?>" hidden>
+
+                                                    Nama Harga Satuan : <span style="color:red">*</span><br>
+                                                    <input class="form-control" name="nama_harga_satuan" value="<?php echo $d_harga_satuan['nama_harga_satuan']; ?>" required><br>
+
+                                                    Keterangan Harga Satuan : <br>
+                                                    <input class="form-control" name="ket_harga_satuan" value="<?php echo $d_harga_satuan['ket_harga_satuan']; ?>"><br>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <br>
+                                                    <input type="submit" class="btn btn-success btn-sm" name="ubah_harga_satuan" value="Ubah">
+                                                    <input type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal" value="Kembali">
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- modal hapus satuan harga  -->
-                            <div class="modal fade" id="<?php echo "dhs_d_m" . $d_harga_satuan['id_harga_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <form method="post" action="">
-                                            <div class="modal-header">
-                                                <h5>Hapus Data</h5>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h6><b><?php echo $d_harga_satuan['nama_harga_satuan']; ?></b></h6>
-                                                <input name="id_harga_satuan" value="<?php echo $d_harga_satuan['id_harga_satuan']; ?>" hidden>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger" name="hapus_harga_satuan">Ya</button>
-                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-                                            </div>
-                                        </form>
+                                <!-- modal hapus satuan harga  -->
+                                <div class="modal fade" id="<?php echo "dhs_d_m" . $d_harga_satuan['id_harga_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="post" action="">
+                                                <div class="modal-header">
+                                                    <h5>Hapus Data</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h6><b><?php echo $d_harga_satuan['nama_harga_satuan']; ?></b></h6>
+                                                    <input name="id_harga_satuan" value="<?php echo $d_harga_satuan['id_harga_satuan']; ?>" hidden>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger btn-sm" name="hapus_harga_satuan">Ya</button>
+                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Tidak</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php
-                            $no++;
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            <?php
-            } else {
-            ?>
-                <table class="table" id="myTable">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Jenis</th>
-                            <th scope="col">Nama Jurusan</th>
-                            <th scope="col">Nama Jenjang</th>
-                            <th scope="col">Nama Spesiikasi</th>
-                            <th scope="col">Nama Harga</th>
-                            <th scope="col">Satuan Harga</th>
-                            <th scope="col">Keterangan Harga</th>
-                            <th scope="col">Jumlah Harga</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+                            <?php
+                                $no++;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                <?php
+                } else {
+                ?>
+                    <table class="table table-striped" id="myTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Jenis</th>
+                                <th scope="col">Nama Jurusan</th>
+                                <th scope="col">Nama Jenjang</th>
+                                <th scope="col">Nama Spesifikasi</th>
+                                <th scope="col">Nama Harga</th>
+                                <th scope="col">Satuan Harga</th>
+                                <th scope="col">Keterangan Harga</th>
+                                <th scope="col">Jumlah Harga</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
 
-                        $sql_harga = "SELECT * FROm tb_harga 
+                            $sql_harga = "SELECT * FROm tb_harga 
                     JOIN tb_jurusan_pdd_jenis ON tb_harga.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
                     JOIN tb_jenjang_pdd ON tb_harga.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_spesifikasi_pdd ON tb_harga.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
@@ -333,252 +336,255 @@
                     ORDER BY tb_harga.id_jurusan_pdd_jenis ASC
                     ";
 
-                        $q_harga = $conn->query($sql_harga);
-                        $r_harga = $q_harga->rowCount();
+                            $q_harga = $conn->query($sql_harga);
+                            $r_harga = $q_harga->rowCount();
 
-                        $no = 1;
-                        while ($d_harga = $q_harga->fetch(PDO::FETCH_ASSOC)) {
+                            $no = 1;
+                            while ($d_harga = $q_harga->fetch(PDO::FETCH_ASSOC)) {
 
-                        ?>
-                            <tr>
-                                <th scope="row"><?php echo $no; ?></th>
-                                <td><?php echo $d_harga['nama_jurusan_pdd_jenis']; ?></td>
-                                <td><?php echo $d_harga['nama_jenjang_pdd']; ?></td>
-                                <td><?php echo $d_harga['nama_spesifikasi_pdd']; ?></td>
-                                <td><?php echo $d_harga['nama_spesifikasi_pdd']; ?></td>
-                                <td><?php echo $d_harga['nama_harga']; ?></td>
-                                <td><?php echo $d_harga['nama_harga_satuan']; ?></td>
-                                <td><?php echo $d_harga['ket_harga']; ?></td>
-                                <td><?php echo "Rp " . number_format($d_harga['jumlah_harga'], 0, ",", "."); ?></td>
-                                <td>
-                                    <a class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#hrg_u_m" . $d_harga['id_harga']; ?>'>
-                                        Ubah
-                                    </a>
-                                    <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#hrg_d_m" . $d_harga['id_harga']; ?>'>
-                                        Hapus
-                                    </a>
-                                </td>
-                            </tr>
+                            ?>
+                                <tr>
+                                    <th scope="row"><?php echo $no; ?></th>
+                                    <td><?php echo $d_harga['nama_jurusan_pdd_jenis']; ?></td>
+                                    <td><?php echo $d_harga['nama_jenjang_pdd']; ?></td>
+                                    <td><?php echo $d_harga['nama_spesifikasi_pdd']; ?></td>
+                                    <td><?php echo $d_harga['nama_spesifikasi_pdd']; ?></td>
+                                    <td><?php echo $d_harga['nama_harga']; ?></td>
+                                    <td><?php echo $d_harga['nama_harga_satuan']; ?></td>
+                                    <td><?php echo $d_harga['ket_harga']; ?></td>
+                                    <td><?php echo "Rp " . number_format($d_harga['jumlah_harga'], 0, ",", "."); ?></td>
+                                    <td>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#hrg_u_m" . $d_harga['id_harga']; ?>'>
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#hrg_d_m" . $d_harga['id_harga']; ?>'>
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
 
-                            <!-- modal ubah Harga  -->
-                            <div class="modal fade" id="<?php echo "hrg_u_m" . $d_harga['id_harga']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <form method="post" action="" class="form-group">
-                                            <div class="modal-body">
-                                                <h5>Ubah Harga :</h5>
+                                <!-- modal ubah Harga  -->
+                                <div class="modal fade" id="<?php echo "hrg_u_m" . $d_harga['id_harga']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="post" action="" class="form-group">
+                                                <div class="modal-header">
+                                                    <h5>Ubah Harga :</h5>
+                                                </div>
+                                                <div class="modal-body">
 
-                                                <!-- id_harga -->
-                                                <input name="id_harga" value="<?php echo $d_harga['id_harga']; ?>" hidden>
+                                                    <!-- id_harga -->
+                                                    <input name="id_harga" value="<?php echo $d_harga['id_harga']; ?>" hidden>
 
-                                                Nama Harga : <span style="color:red">*</span><br>
-                                                <input class="form-control" name="nama_harga" value="<?php echo $d_harga['nama_harga']; ?>" required><br>
+                                                    Nama Harga : <span style="color:red">*</span><br>
+                                                    <input class="form-control" name="nama_harga" value="<?php echo $d_harga['nama_harga']; ?>" required><br>
 
-                                                Satuan Harga : <span style="color:red">*</span><br>
-                                                <input class="form-control" name="satuan_harga" value="<?php echo $d_harga['satuan_harga']; ?>" required><br>
+                                                    Satuan Harga : <span style="color:red">*</span><br>
+                                                    <input class="form-control" name="satuan_harga" value="<?php echo $d_harga['satuan_harga']; ?>" required><br>
 
-                                                Jumlah Harga : <i style='font-size:12px;'>(Rp)</i><span style="color:red">*</span><br>
-                                                <input class="form-control" name="jumlah_harga" type="number" min="1" value="<?php echo $d_harga['jumlah_harga']; ?>" required>
-                                                <i style='font-size:12px;'>Isian hanya berupa angka</i><br><br>
+                                                    Jumlah Harga : <i style='font-size:12px;'>(Rp)</i><span style="color:red">*</span><br>
+                                                    <input class="form-control" name="jumlah_harga" type="number" min="1" value="<?php echo $d_harga['jumlah_harga']; ?>" required>
+                                                    <i style='font-size:12px;'>Isian hanya berupa angka</i><br><br>
 
-                                                Jenis Harga : <span style="color:red">*</span><br>
-                                                <?php
-                                                $sql_harga_jenis = "SELECT * FROM tb_harga_jenis order by nama_harga_jenis ASC";
-                                                $q_harga_jenis = $conn->query($sql_harga_jenis);
-                                                $r_harga_jenis = $q_harga_jenis->rowCount();
-                                                if ($r_harga_jenis > 0) {
-                                                ?>
-                                                    <select class="form-control text-center" name="id_harga_jenis" required>
-                                                        <option value="">-- Pilih Jenis Harga --</option>
-                                                        <?php
-                                                        while ($d_harga_jenis = $q_harga_jenis->fetch(PDO::FETCH_ASSOC)) {
-                                                            if ($d_harga['id_harga_jenis'] == $d_harga_jenis['id_harga_jenis']) {
-                                                                $selected = "selected";
-                                                            } else {
-                                                                $selected = "";
-                                                            }
-                                                        ?>
-                                                            <option value='<?php echo $d_harga_jenis['id_harga_jenis']; ?>' <?php echo $selected; ?>>
-                                                                <?php echo $d_harga_jenis['nama_harga_jenis']; ?>
-                                                            </option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <b><i>Data Jenis Harga Tidak Ada</i></b>
-                                                <?php
-                                                }
-                                                ?>
-                                                <br>
-
-                                                Jurusan : <span style="color:red">*</span><br>
-                                                <?php
-                                                $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC";
-                                                $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
-                                                $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
-                                                if ($r_jurusan_pdd > 0) {
-                                                ?>
-                                                    <select class="form-control text-center" name="id_jurusan_pdd" required>
-                                                        <option value="">-- Pilih Jenis Harga --</option>
-                                                        <?php
-                                                        while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                                            if ($d_harga['id_jurusan_pdd'] == $d_jurusan_pdd['id_jurusan_pdd']) {
-                                                                $selected = "selected";
-                                                            } else {
-                                                                $selected = "";
-                                                            }
-                                                        ?>
-                                                            <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>' <?php echo $selected; ?>>
-                                                                <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
-                                                            </option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <b><i>Data Jurusan Tidak Ada</i></b>
-                                                <?php
-                                                }
-                                                ?>
-                                                <div id="u_i_id_jurusan_pdd<?php echo $d_harga['id_harga']; ?>">
-                                                </div><br>
-
-                                                Jenjang : <span style="color:red">*</span><br>
-                                                <?php
-                                                $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
-                                                $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
-                                                $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
-                                                if ($r_jenjang_pdd > 0) {
-                                                ?>
-                                                    <select class="form-control text-center" name="id_jenjang_pdd" required>
-                                                        <option value="">-- Pilih Jenis Harga --</option>
-                                                        <?php
-                                                        while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                                            if ($d_harga['id_jenjang_pdd'] == $d_jenjang_pdd['id_jenjang_pdd']) {
-                                                                $selected = "selected";
-                                                            } else {
-                                                                $selected = "";
-                                                            }
-                                                        ?>
-                                                            <option value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>' <?php echo $selected; ?>>
-                                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
-                                                            </option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <b><i>Data jenjang Tidak Ada</i></b>
-                                                <?php
-                                                }
-                                                ?>
-                                                <br>
-
-                                                spesifikasi : <span style="color:red">*</span><br>
-                                                <?php
-                                                $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
-                                                $q_spesifikasi_pdd = $conn->query($sql_spesifikasi_pdd);
-                                                $r_spesifikasi_pdd = $q_spesifikasi_pdd->rowCount();
-                                                if ($r_spesifikasi_pdd > 0) {
-                                                ?>
-                                                    <select class="form-control text-center" name="id_spesifikasi_pdd" required>
-                                                        <option value="">-- Pilih Jenis Harga --</option>
-                                                        <?php
-                                                        while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                                            if ($d_harga['id_spesifikasi_pdd'] == $d_spesifikasi_pdd['id_spesifikasi_pdd']) {
-                                                                $selected = "selected";
-                                                            } else {
-                                                                $selected = "";
-                                                            }
-                                                        ?>
-                                                            <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>' <?php echo $selected; ?>>
-                                                                <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
-                                                            </option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <b><i>Data spesifikasi Tidak Ada</i></b>
-                                                <?php
-                                                }
-                                                ?>
-                                                <br>
-
-                                                Pilihan : <span style="color:red">*</span><br>
-                                                <div class="form-check">
+                                                    Jenis Harga : <span style="color:red">*</span><br>
                                                     <?php
-                                                    if ($d_harga['pilih_harga'] == 1) {
-                                                        $pilih_harga_1 = "checked";
-                                                    } elseif ($d_harga['pilih_harga'] == 2) {
-                                                        $pilih_harga_2 = "checked";
-                                                    } elseif ($d_harga['pilih_harga'] == 3) {
-                                                        $pilih_harga_3 = "checked";
+                                                    $sql_harga_jenis = "SELECT * FROM tb_harga_jenis order by nama_harga_jenis ASC";
+                                                    $q_harga_jenis = $conn->query($sql_harga_jenis);
+                                                    $r_harga_jenis = $q_harga_jenis->rowCount();
+                                                    if ($r_harga_jenis > 0) {
+                                                    ?>
+                                                        <select class="form-control text-center" name="id_harga_jenis" required>
+                                                            <option value="">-- Pilih Jenis Harga --</option>
+                                                            <?php
+                                                            while ($d_harga_jenis = $q_harga_jenis->fetch(PDO::FETCH_ASSOC)) {
+                                                                if ($d_harga['id_harga_jenis'] == $d_harga_jenis['id_harga_jenis']) {
+                                                                    $selected = "selected";
+                                                                } else {
+                                                                    $selected = "";
+                                                                }
+                                                            ?>
+                                                                <option value='<?php echo $d_harga_jenis['id_harga_jenis']; ?>' <?php echo $selected; ?>>
+                                                                    <?php echo $d_harga_jenis['nama_harga_jenis']; ?>
+                                                                </option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <b><i>Data Jenis Harga Tidak Ada</i></b>
+                                                    <?php
                                                     }
                                                     ?>
-                                                    <input class="form-check-input" type="radio" name="pilih_harga" value="1" required <?php echo $pilih_harga_1; ?>>
-                                                    <label class="form-check-label">
-                                                        Harus
-                                                    </label><br>
-                                                    <input class="form-check-input" type="radio" name="pilih_harga" value="2" <?php echo $pilih_harga_2; ?>>
-                                                    <label class="form-check-label">
-                                                        Pilih Salah Satu
-                                                    </label><br>
-                                                    <input class="form-check-input" type="radio" name="pilih_harga" value="3" <?php echo $pilih_harga_3; ?>>
-                                                    <label class="form-check-label">
-                                                        Opsional
-                                                    </label>
+                                                    <br>
+
+                                                    Jurusan : <span style="color:red">*</span><br>
+                                                    <?php
+                                                    $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC";
+                                                    $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
+                                                    $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
+                                                    if ($r_jurusan_pdd > 0) {
+                                                    ?>
+                                                        <select class="form-control text-center" name="id_jurusan_pdd" required>
+                                                            <option value="">-- Pilih Jenis Harga --</option>
+                                                            <?php
+                                                            while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
+                                                                if ($d_harga['id_jurusan_pdd'] == $d_jurusan_pdd['id_jurusan_pdd']) {
+                                                                    $selected = "selected";
+                                                                } else {
+                                                                    $selected = "";
+                                                                }
+                                                            ?>
+                                                                <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>' <?php echo $selected; ?>>
+                                                                    <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                                                                </option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <b><i>Data Jurusan Tidak Ada</i></b>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <div id="u_i_id_jurusan_pdd<?php echo $d_harga['id_harga']; ?>">
+                                                    </div><br>
+
+                                                    Jenjang : <span style="color:red">*</span><br>
+                                                    <?php
+                                                    $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
+                                                    $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
+                                                    $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
+                                                    if ($r_jenjang_pdd > 0) {
+                                                    ?>
+                                                        <select class="form-control text-center" name="id_jenjang_pdd" required>
+                                                            <option value="">-- Pilih Jenis Harga --</option>
+                                                            <?php
+                                                            while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
+                                                                if ($d_harga['id_jenjang_pdd'] == $d_jenjang_pdd['id_jenjang_pdd']) {
+                                                                    $selected = "selected";
+                                                                } else {
+                                                                    $selected = "";
+                                                                }
+                                                            ?>
+                                                                <option value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>' <?php echo $selected; ?>>
+                                                                    <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
+                                                                </option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <b><i>Data jenjang Tidak Ada</i></b>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <br>
+
+                                                    spesifikasi : <span style="color:red">*</span><br>
+                                                    <?php
+                                                    $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
+                                                    $q_spesifikasi_pdd = $conn->query($sql_spesifikasi_pdd);
+                                                    $r_spesifikasi_pdd = $q_spesifikasi_pdd->rowCount();
+                                                    if ($r_spesifikasi_pdd > 0) {
+                                                    ?>
+                                                        <select class="form-control text-center" name="id_spesifikasi_pdd" required>
+                                                            <option value="">-- Pilih Jenis Harga --</option>
+                                                            <?php
+                                                            while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
+                                                                if ($d_harga['id_spesifikasi_pdd'] == $d_spesifikasi_pdd['id_spesifikasi_pdd']) {
+                                                                    $selected = "selected";
+                                                                } else {
+                                                                    $selected = "";
+                                                                }
+                                                            ?>
+                                                                <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>' <?php echo $selected; ?>>
+                                                                    <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
+                                                                </option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <b><i>Data spesifikasi Tidak Ada</i></b>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <br>
+
+                                                    Pilihan : <span style="color:red">*</span><br>
+                                                    <div class="form-check">
+                                                        <?php
+                                                        if ($d_harga['pilih_harga'] == 1) {
+                                                            $pilih_harga_1 = "checked";
+                                                        } elseif ($d_harga['pilih_harga'] == 2) {
+                                                            $pilih_harga_2 = "checked";
+                                                        } elseif ($d_harga['pilih_harga'] == 3) {
+                                                            $pilih_harga_3 = "checked";
+                                                        }
+                                                        ?>
+                                                        <input class="form-check-input" type="radio" name="pilih_harga" value="1" required <?php echo $pilih_harga_1; ?>>
+                                                        <label class="form-check-label">
+                                                            Harus
+                                                        </label><br>
+                                                        <input class="form-check-input" type="radio" name="pilih_harga" value="2" <?php echo $pilih_harga_2; ?>>
+                                                        <label class="form-check-label">
+                                                            Pilih Salah Satu
+                                                        </label><br>
+                                                        <input class="form-check-input" type="radio" name="pilih_harga" value="3" <?php echo $pilih_harga_3; ?>>
+                                                        <label class="form-check-label">
+                                                            Opsional
+                                                        </label>
+                                                    </div>
                                                 </div>
-
-                                                <br>
-                                                <input name="cari" value="cs" hidden>
-                                                <input type="submit" class="btn btn-success" name="ubah_harga" value="Ubah">
-                                                <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Kembali">
-                                            </div>
-                                        </form>
+                                                <div class="modal-footer">
+                                                    <input name="cari" value="cs" hidden>
+                                                    <input type="submit" class="btn btn-success btn-sm" name="ubah_harga" value="Ubah">
+                                                    <input type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal" value="Kembali">
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- modal hapus Harga  -->
-                            <div class="modal fade" id="<?php echo "hrg_d_m" . $d_harga['id_harga']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <form method="post" action="">
-                                            <div class="modal-header">
-                                                <h5>Hapus Data</h5>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h6><b><?php echo $d_harga['nama_harga']; ?></b></h6>
-                                                <input name="id_harga" value="<?php echo $d_harga['id_harga']; ?>" hidden>
-                                                <input name="cari" value="cs" hidden>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger" name="hapus_harga">Ya</button>
-                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-                                            </div>
-                                        </form>
+                                <!-- modal hapus Harga  -->
+                                <div class="modal fade" id="<?php echo "hrg_d_m" . $d_harga['id_harga']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="post" action="">
+                                                <div class="modal-header">
+                                                    <h5>Hapus Data</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h6><b><?php echo $d_harga['nama_harga']; ?></b></h6>
+                                                    <input name="id_harga" value="<?php echo $d_harga['id_harga']; ?>" hidden>
+                                                    <input name="cari" value="cs" hidden>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger btn-sm" name="hapus_harga">Ya</button>
+                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Tidak</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php
-                            $no++;
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            <?php
-            }
-            ?>
+                            <?php
+                                $no++;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                <?php
+                }
+                ?>
+            </div>
         </div>
     </div>
 </div>

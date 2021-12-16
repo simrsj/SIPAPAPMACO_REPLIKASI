@@ -12,12 +12,15 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form method="post" action="">
+                            <div class="modal-header">
+                                Tambah Akreditasi :
+                            </div>
                             <div class="modal-body">
-                                <h6>Tambah Akreditasi :</h6>
                                 <input class="form-control" name="nama_akreditasi">
-                                <br>
-                                <button type="submit" class="btn btn-success" name="tambah">Tambah</button>
-                                <button class="btn btn-danger" type="button" data-dismiss="modal">Kembali</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-sm" name="tambah">Tambah</button>
+                                <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
                             </div>
                         </form>
                     </div>
@@ -35,7 +38,7 @@
             ?>
                 <div class="table-responsive">
                     <table class="table table-striped" id="myTable">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>Nama Akreditasi</th>
@@ -51,11 +54,11 @@
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $d_akreditasi['nama_akreditasi']; ?></td>
                                     <td>
-                                        <a class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_akreditasi['id_akreditasi']; ?>'>
-                                            Ubah
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_akreditasi['id_akreditasi']; ?>'>
+                                            <i class="fas fa-edit"></i>
                                         </a>
-                                        <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_d_m" . $d_akreditasi['id_akreditasi']; ?>'>
-                                            Hapus
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_d_m" . $d_akreditasi['id_akreditasi']; ?>'>
+                                            <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                     <?php $no++; ?>
@@ -64,13 +67,16 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
+                                                    <div class="modal-header">
+                                                        Ubah Akreditasi :
+                                                    </div>
                                                     <div class="modal-body">
-                                                        <h5>Ubah Akreditasi :</h5>
                                                         <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
                                                         <input class="form-control" name="nama_akreditasi" value="<?php echo $d_akreditasi['nama_akreditasi']; ?>">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary btn-sm" name="ubah">Ubah</button>
+                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -82,15 +88,15 @@
                                             <div class="modal-content">
                                                 <form method="post" action="">
                                                     <div class="modal-header">
-                                                        <h5>Hapus Data</h5>
+                                                        Hapus Data
                                                     </div>
                                                     <div class="modal-body">
                                                         <h6><b><?php echo $d_akreditasi['nama_akreditasi']; ?></b></h6>
                                                         <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-danger" name="hapus">Ya</button>
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>
+                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Tidak</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -137,10 +143,10 @@ if (isset($_POST['ubah'])) {
 <?php
 }
 ?>
-<script type="text/javascript"  src="vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script>
-    $(document).ready( function () {
+    $(document).ready(function() {
         $('#myTable').DataTable();
-    } );
+    });
 </script>
