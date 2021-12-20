@@ -28,7 +28,7 @@
 
                 if ($r_mentor_rsj > 0) { ?>
                     <table class="table table-striped" id="myTable">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>NIP/NIPK</th>
@@ -52,6 +52,8 @@
                                     <td><?php echo $d_mentor_rsj['name_mentor_rsj']; ?></td>
                                     <td><?php echo $d_mentor_rsj['unit_mentor_rsj']; ?></td>
                                     <td>
+
+                                        <!-- Aktivasi status Mentor -->
                                         <form method="post" action="">
                                             <?php
                                             switch ($d_mentor_rsj['status_mentor_rsj']) {
