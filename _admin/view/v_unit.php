@@ -68,13 +68,16 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
+                                                    <div class="modal-header">
+                                                        Ubah Unit
+                                                    </div>
                                                     <div class="modal-body">
-                                                        <h5>Ubah Unit :</h5>
                                                         <input name="id_unit" value="<?php echo $d_unit['id_unit']; ?>" hidden>
                                                         <input class="form-control" name="nama_unit" value="<?php echo $d_unit['nama_unit']; ?>">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success btn-sm" name="ubah">Ubah</button>
+                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
                                                     </div>
                                                 </form>
                                             </div>

@@ -4,7 +4,7 @@ $nama_institusi = $_POST['nama_institusi'];
 $nama_user = $_POST['nama_user'];
 $no_telp_user = $_POST['no_telp_user'];
 $email_user = $_POST['email_user'];
-$password_user = $_POST['password_user'];
+$password_user = MD5($_POST['password_user']);
 $ulangi_password = $_POST['ulangi_password'];
 
 $q_user = $conn->query("SELECT * FROM tb_user WHERE username_user = '" . $email_user . "'");

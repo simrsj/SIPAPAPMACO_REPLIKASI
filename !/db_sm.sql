@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2021 at 08:42 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.13
+-- Waktu pembuatan: 20 Des 2021 pada 10.54
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_akreditasi`
+-- Struktur dari tabel `tb_akreditasi`
 --
 
 CREATE TABLE `tb_akreditasi` (
@@ -33,7 +33,7 @@ CREATE TABLE `tb_akreditasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_akreditasi`
+-- Dumping data untuk tabel `tb_akreditasi`
 --
 
 INSERT INTO `tb_akreditasi` (`id_akreditasi`, `nama_akreditasi`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `tb_akreditasi` (`id_akreditasi`, `nama_akreditasi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_harga`
+-- Struktur dari tabel `tb_harga`
 --
 
 CREATE TABLE `tb_harga` (
@@ -64,7 +64,7 @@ CREATE TABLE `tb_harga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_harga`
+-- Dumping data untuk tabel `tb_harga`
 --
 
 INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`, `jumlah_harga`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_harga_jenis`, `pilih_harga`, `tgl_input_harga`) VALUES
@@ -151,7 +151,7 @@ INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_harga_jenis`
+-- Struktur dari tabel `tb_harga_jenis`
 --
 
 CREATE TABLE `tb_harga_jenis` (
@@ -160,7 +160,7 @@ CREATE TABLE `tb_harga_jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_harga_jenis`
+-- Dumping data untuk tabel `tb_harga_jenis`
 --
 
 INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
@@ -178,7 +178,7 @@ INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_harga_pilih`
+-- Struktur dari tabel `tb_harga_pilih`
 --
 
 CREATE TABLE `tb_harga_pilih` (
@@ -193,7 +193,7 @@ CREATE TABLE `tb_harga_pilih` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_harga_satuan`
+-- Struktur dari tabel `tb_harga_satuan`
 --
 
 CREATE TABLE `tb_harga_satuan` (
@@ -203,7 +203,7 @@ CREATE TABLE `tb_harga_satuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_harga_satuan`
+-- Dumping data untuk tabel `tb_harga_satuan`
 --
 
 INSERT INTO `tb_harga_satuan` (`id_harga_satuan`, `nama_harga_satuan`, `ket_harga_satuan`) VALUES
@@ -219,7 +219,7 @@ INSERT INTO `tb_harga_satuan` (`id_harga_satuan`, `nama_harga_satuan`, `ket_harg
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_institusi`
+-- Struktur dari tabel `tb_institusi`
 --
 
 CREATE TABLE `tb_institusi` (
@@ -231,7 +231,7 @@ CREATE TABLE `tb_institusi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_institusi`
+-- Dumping data untuk tabel `tb_institusi`
 --
 
 INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `logo_institusi`, `alamat_institusi`, `ket_institusi`) VALUES
@@ -325,7 +325,7 @@ INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `logo_institusi`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jenis_mentor`
+-- Struktur dari tabel `tb_jenis_mentor`
 --
 
 CREATE TABLE `tb_jenis_mentor` (
@@ -334,7 +334,7 @@ CREATE TABLE `tb_jenis_mentor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_jenis_mentor`
+-- Dumping data untuk tabel `tb_jenis_mentor`
 --
 
 INSERT INTO `tb_jenis_mentor` (`id_jenis_mentor`, `nama_jenis_mentor`) VALUES
@@ -346,7 +346,7 @@ INSERT INTO `tb_jenis_mentor` (`id_jenis_mentor`, `nama_jenis_mentor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jenjang_pdd`
+-- Struktur dari tabel `tb_jenjang_pdd`
 --
 
 CREATE TABLE `tb_jenjang_pdd` (
@@ -355,7 +355,7 @@ CREATE TABLE `tb_jenjang_pdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_jenjang_pdd`
+-- Dumping data untuk tabel `tb_jenjang_pdd`
 --
 
 INSERT INTO `tb_jenjang_pdd` (`id_jenjang_pdd`, `nama_jenjang_pdd`) VALUES
@@ -375,7 +375,7 @@ INSERT INTO `tb_jenjang_pdd` (`id_jenjang_pdd`, `nama_jenjang_pdd`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jurusan_pdd`
+-- Struktur dari tabel `tb_jurusan_pdd`
 --
 
 CREATE TABLE `tb_jurusan_pdd` (
@@ -385,7 +385,7 @@ CREATE TABLE `tb_jurusan_pdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_jurusan_pdd`
+-- Dumping data untuk tabel `tb_jurusan_pdd`
 --
 
 INSERT INTO `tb_jurusan_pdd` (`id_jurusan_pdd`, `nama_jurusan_pdd`, `id_jurusan_pdd_jenis`) VALUES
@@ -402,7 +402,7 @@ INSERT INTO `tb_jurusan_pdd` (`id_jurusan_pdd`, `nama_jurusan_pdd`, `id_jurusan_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jurusan_pdd_jenis`
+-- Struktur dari tabel `tb_jurusan_pdd_jenis`
 --
 
 CREATE TABLE `tb_jurusan_pdd_jenis` (
@@ -411,7 +411,7 @@ CREATE TABLE `tb_jurusan_pdd_jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_jurusan_pdd_jenis`
+-- Dumping data untuk tabel `tb_jurusan_pdd_jenis`
 --
 
 INSERT INTO `tb_jurusan_pdd_jenis` (`id_jurusan_pdd_jenis`, `nama_jurusan_pdd_jenis`) VALUES
@@ -424,96 +424,118 @@ INSERT INTO `tb_jurusan_pdd_jenis` (`id_jurusan_pdd_jenis`, `nama_jurusan_pdd_je
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mentor_rsj`
+-- Struktur dari tabel `tb_mentor`
 --
 
-CREATE TABLE `tb_mentor_rsj` (
-  `id_mentor_rsj` int(11) NOT NULL,
-  `nip_nipk_mentor_rsj` text NOT NULL,
-  `name_mentor_rsj` text NOT NULL,
-  `unit_mentor_rsj` text NOT NULL,
-  `info_mentor_rsj` text NOT NULL,
-  `pdd_mentor_rsj` text NOT NULL,
-  `status_mentor_rsj` text NOT NULL
+CREATE TABLE `tb_mentor` (
+  `id_mentor` int(11) NOT NULL,
+  `nip_nipk_mentor` text NOT NULL,
+  `nama_mentor` text NOT NULL,
+  `id_unit` text NOT NULL,
+  `id_mentor_jenis` int(11) NOT NULL,
+  `id_jenjang_pdd` int(11) NOT NULL,
+  `status_mentor` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_mentor_rsj`
+-- Dumping data untuk tabel `tb_mentor`
 --
 
-INSERT INTO `tb_mentor_rsj` (`id_mentor_rsj`, `nip_nipk_mentor_rsj`, `name_mentor_rsj`, `unit_mentor_rsj`, `info_mentor_rsj`, `pdd_mentor_rsj`, `status_mentor_rsj`) VALUES
-(2, '197905022005012012', 'Aam Amalia, S.Kep., Ners (Struktural)', '-', 'CI', 'S1', 'Aktif'),
-(3, '197301072005011007', 'Abdul Aziz, AMK', 'RUANG KASUARI ATAS', 'CI', 'D3', 'Tidak Aktif'),
-(4, '197812182006042017', 'Adah Saadah, S.Kep., Ners', 'INSTALASI REHABILITASI PSIKOSOSIAL', 'CI', 'S1', 'Tidak Aktif'),
-(5, '197405121997032004', 'Ade Carnisem, S.Kep., Ners', 'RUANG MURAI', 'CI', 'S1', 'Tidak Aktif'),
-(6, '196607161991032004', 'Ade Saromah, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
-(7, '197211201991031001', 'Agus Krisno, AMK', 'INSTALASI RAWAT JALAN', 'CI', 'D3', 'Tidak Aktif'),
-(8, '198109282005011007', 'Agus Kusnandar, S.Kep., Ners', 'INSTALASI REHABILITASI PSIKOSOSIAL', 'CI', 'S1', 'Tidak Aktif'),
-(9, '197503081997032002', 'Ai Sriyati, S.Kep., Ners', 'RUANG NAPZA', 'CI', 'S1', 'Tidak Aktif'),
-(10, '197911152000032004', 'Hj. Arimbi Nurwiyanti P, S.Kep.Ners', 'RUANG KESWARA', 'CI', 'S1', 'Tidak Aktif'),
-(11, '198107202006042020', 'Ani Maryani, S.Kep., Ners', 'RUANG MERPATI', 'CI', 'S1', 'Tidak Aktif'),
-(12, '198110272006042014', 'Butet Berlina, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', 'Tidak Aktif'),
-(13, '197610012005011010', 'Dedi Nurhasan, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
-(14, '197601311999031001', 'H. Dedi Rahmadi, S.Kep.Ners', 'RUANG MERAK', 'CI', 'S1', 'Tidak Aktif'),
-(15, '196705161991031004', 'Dedi Suhaedi, AMK', 'RUANG RAJAWALI', 'CI', 'D3', 'Tidak Aktif'),
-(16, '197909052006042016', 'Hj. Devie Fitriyani, S.Kep.Ners', 'RUANG RAJAWALI', 'CI', 'S1', 'Tidak Aktif'),
-(17, '196904071993032008', 'Dewi Shinta Maria, AMK', 'INSTALASI RAWAT JALAN', 'CI', 'D3', 'Tidak Aktif'),
-(18, '197507041999032005', 'Dian Ratnaningsih, S.Kep., Ners', 'RUANG MURAI', 'CI', 'S1', 'Tidak Aktif'),
-(19, '197209081998031009', 'Edi Junaedi, AMK', 'RUANG KASUARI ATAS', 'CI', 'D3', 'Tidak Aktif'),
-(20, '197609212000032001', 'Elsie Rodini, AMK', 'RUANG GARUDA', 'CI', 'D3', 'Tidak Aktif'),
-(21, '196411011998032001', 'Eny Budiasih, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
-(22, '196901062000122001', 'Eri Suciati, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', 'Tidak Aktif'),
-(23, '197901212005012013', 'Ester Suryani Tampubolon, S.Kep., Ners', 'RUANG KASUARI BAWAH', 'CI', 'S1', 'Tidak Aktif'),
-(24, '197303291999032002', 'Ettie Hikmawati, S.Kep., Ners', 'KLINIK GRHA ATMA', 'CI', 'S1', 'Tidak Aktif'),
-(25, '196812261996032001', 'Hj. Nenti Siti Kuraesin, S.Kep., Ners', 'RUANG NURI', 'CI', 'S1', 'Tidak Aktif'),
-(26, '197807042009022004', 'Hj. Icih Susanti, S.Kep.Ners', 'RUANG GELATIK', 'CI', 'S1', 'Tidak Aktif'),
-(27, '197612242000031004', 'H. Moch. Jimi Dirgantara, S.Kep.Ners', 'INSTALASI GAWAT DARURAT', 'CI', 'S1', 'Tidak Aktif'),
-(28, '197707041997031004', 'Yulforman Rotua Manalu, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', 'Tidak Aktif'),
-(29, '197902112006042015', 'Kokom Komalasari, S.Kep., Ners', 'RUANG PERKUTUT', 'CI', 'S1', 'Tidak Aktif'),
-(30, '196607151990032013', 'Komaryati, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
-(31, '198307172009022001', 'Neng Goniah, S.Kep., Ners', 'RUANG NURI', 'CI', 'S1', 'Tidak Aktif'),
-(32, '197608072005012005', 'Nenih Nuraenih, S.Kep., Ners', 'RUANG NURI', 'CI', 'S1', 'Tidak Aktif'),
-(33, '197011111996032003', 'Ni Luh Nyoman S Puspowati, S.Kep., Ners', 'RUANG MERPATI', 'CI', 'S1', 'Tidak Aktif'),
-(34, '197004221998032004', 'Nirna Julaeha, S.Kep., Ners', 'INSTALASI RAWAT JALAN', 'CI', 'S1', 'Tidak Aktif'),
-(35, '197911232005012017', 'Novita Sari, S.Kep., Ners', 'RUANG KASUARI ATAS', 'CI', 'S1', 'Tidak Aktif'),
-(36, '198010212005012011', 'Siti Romlah, S.Kep., Ners', 'RUANG MERAK', 'CI', 'S1', 'Tidak Aktif'),
-(37, '196908311998032005', 'Sri Kurniyati, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
-(38, '196805271992032004', 'Sri Yani, S.Kep., Ners', '-', 'CI', 'S1', 'Aktif'),
-(39, '198212302006042015', 'Tanti Heryani, S.Kep., Ners', 'RUANG MERPATI', 'CI', 'S1', 'Tidak Aktif'),
-(40, '198103082005012006', 'Winda Ratna Wulan, S.Kep. Ners., M.Kep.,Sp.Kep.J  ', '-', 'CI', 'S1', 'Aktif'),
-(41, '196707151987032002', 'Yusi Yustiah, AMK', 'INSTALASI REHABILITASI PSIKOSOSIAL', 'CI', 'D3', 'Tidak Aktif'),
-(42, '196712151990032007', 'Yuyun Yunara, S.Kep., Ners', 'RUANG GELATIK', 'CI', 'S1', 'Tidak Aktif'),
-(43, '197212271996031003', 'H. Zaenurohman, S.Kep.Ners', 'RUANG RAJAWALI', 'CI', 'S1', 'Tidak Aktif'),
-(44, '196608141991022004', 'dr. Hj. Elly Marliyani, Sp.KJ., M.K.M', '-', 'PSPD', '-', 'Tidak Aktif'),
-(45, '196805271998032004', 'dr. Lenny Irawati Yohosua, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
-(46, '196607132007012005', 'dr. Hj. Meutia Laksaminingrum, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
-(47, '198302142015031001', 'dr. Ade Kurnia Surawijawa, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
-(48, '197507072005012006', 'dr. Lina Budiyanti, Sp.KJ. (K)', '-', 'PSPD', '-', 'Tidak Aktif'),
-(49, '197707272006042026', 'dr. Dhian Indriasari, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
-(50, '197506082006041013', 'dr. Yunyun Setiawan, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
-(51, '196208081990011001', 'dr. H. Riza Putra, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
-(52, '201401065', 'dr. Hj. Lelly Resna N, Sp.KJ. (K)', '-', 'PSPD', '-', 'Tidak Aktif'),
-(53, '198601052020122005', 'dr. Hilda Puspa Indah, Sp.KJ.', '-', 'PSPD', '-', 'Tidak Aktif'),
-(54, '202101228', 'Hasrini Rowawi, dr., Sp.KJ (K)., MHA', '-', 'PPDS', '-', 'Tidak Aktif'),
-(55, '197507072005012006', 'Lina Budiyanti, dr. Sp.KJ (K)', '-', 'PPDS', '-', 'Tidak Aktif'),
-(56, '196805271998032004', 'Lenny Irawati Yohosua, dr. Sp.KJ.', '-', 'PPDS', '-', 'Tidak Aktif'),
-(57, '198302142015031001', 'Ade Kurnia Surawijaya, dr. Sp.KJ.', '-', 'PPDS', '-', 'Tidak Aktif'),
-(58, '197707272006042026', 'Dhian Indriasari, dr. Sp.KJ.', '-', 'PPDS', '-', 'Tidak Aktif'),
-(59, '198103252011012004', 'Ekaprasetyawati, S.Si, Apt', 'FARMASI', 'CIL', '-', 'Tidak Aktif'),
-(60, '196409251992031006', 'Drs. Tavip Budiawan, Apt', 'FARMASI', 'CIL', '-', 'Tidak Aktif'),
-(61, '198601082010012013', 'Ema Marlina, Amd. PK', 'REKAM MEDIK', 'CIL', '-', 'Tidak Aktif'),
-(62, '198102122005012013', 'Yeni Susanti, Amd. PK', 'REKAM MEDIK', 'CIL', '-', 'Tidak Aktif'),
-(63, '196508051995022002', 'Dra. Resmi Prasetyani, Psi', 'PSIKOLOGI', 'CIL', '-', 'Tidak Aktif'),
-(64, '197105071997032005', 'Dra. Lismaniar, Psi., M.Psi', 'PSIKOLOGI', 'CIL', '-', 'Tidak Aktif'),
-(65, '198805212011011003', 'Irfan Arief Sulistyawan, Amd', 'KESLING', 'CIL', '-', 'Tidak Aktif'),
-(66, '197308081999032005', 'Yuyum Rohmulyanawati, S.Sos, MPSSp', 'PEKSOS', 'CIL', '-', 'Tidak Aktif'),
-(67, '198010022006042015', 'Ani Kartini, ST', 'IT', 'CIL', '-', 'Tidak Aktif'),
-(68, '197902192011012001', 'Indah Kusuma Dewi, dr., SpKJ', '-', 'PSPD', '-', 'Tidak Aktif');
+INSERT INTO `tb_mentor` (`id_mentor`, `nip_nipk_mentor`, `nama_mentor`, `id_unit`, `id_mentor_jenis`, `id_jenjang_pdd`, `status_mentor`) VALUES
+(1, '199409102020121008', 'Rizki Egi Purnama, S.Pd', '6', 2, 8, 'Aktif'),
+(2, '197905022005012012', 'Aam Amalia, S.Kep., Ners (Struktural)', '0', 1, 8, 'Tidak Aktif'),
+(3, '197301072005011007', 'Abdul Aziz, AMK', '14', 1, 6, 'Tidak Aktif'),
+(4, '197812182006042017', 'Adah Saadah, S.Kep., Ners', '5', 1, 8, 'Aktif'),
+(5, '197405121997032004', 'Ade Carnisem, S.Kep., Ners', '19', 1, 8, 'Aktif'),
+(6, '196607161991032004', 'Ade Saromah, S.Kep., Ners', '0', 1, 8, 'Aktif'),
+(7, '197211201991031001', 'Agus Krisno, AMK', '4', 1, 6, 'Tidak Aktif'),
+(8, '198109282005011007', 'Agus Kusnandar, S.Kep., Ners', '5', 1, 8, 'Aktif'),
+(9, '197503081997032002', 'Ai Sriyati, S.Kep., Ners', '20', 1, 8, 'Aktif'),
+(10, '197911152000032004', 'Hj. Arimbi Nurwiyanti P, S.Kep.Ners', '16', 1, 8, 'Tidak Aktif'),
+(11, '198107202006042020', 'Ani Maryani, S.Kep., Ners', '18', 1, 8, 'Aktif'),
+(12, '198110272006042014', 'Butet Berlina, S.Kep., Ners', '4', 1, 8, 'Aktif'),
+(13, '197610012005011010', 'Dedi Nurhasan, S.Kep., Ners', '0', 1, 8, 'Aktif'),
+(14, '197601311999031001', 'H. Dedi Rahmadi, S.Kep.Ners', '17', 1, 8, 'Tidak Aktif'),
+(15, '196705161991031004', 'Dedi Suhaedi, AMK', '23', 1, 6, 'Aktif'),
+(16, '197909052006042016', 'Hj. Devie Fitriyani, S.Kep.Ners', '23', 1, 8, 'Tidak Aktif'),
+(17, '196904071993032008', 'Dewi Shinta Maria, AMK', '4', 1, 6, 'Tidak Aktif'),
+(18, '197507041999032005', 'Dian Ratnaningsih, S.Kep., Ners', '19', 1, 8, 'Tidak Aktif'),
+(19, '197209081998031009', 'Edi Junaedi, AMK', '14', 1, 6, 'Tidak Aktif'),
+(20, '197609212000032001', 'Elsie Rodini, AMK', '12', 1, 6, 'Tidak Aktif'),
+(21, '196411011998032001', 'Eny Budiasih, S.Kep., Ners', '0', 1, 8, 'Aktif'),
+(22, '196901062000122001', 'Eri Suciati, S.Kep., Ners', '4', 1, 8, 'Tidak Aktif'),
+(23, '197901212005012013', 'Ester Suryani Tampubolon, S.Kep., Ners', '15', 1, 8, 'Tidak Aktif'),
+(24, '197303291999032002', 'Ettie Hikmawati, S.Kep., Ners', '8', 1, 8, 'Tidak Aktif'),
+(25, '196812261996032001', 'Hj. Nenti Siti Kuraesin, S.Kep., Ners', '21', 1, 8, 'Tidak Aktif'),
+(26, '197807042009022004', 'Hj. Icih Susanti, S.Kep.Ners', '13', 1, 8, 'Tidak Aktif'),
+(27, '197612242000031004', 'H. Moch. Jimi Dirgantara, S.Kep.Ners', '3', 1, 8, 'Tidak Aktif'),
+(28, '197707041997031004', 'Yulforman Rotua Manalu, S.Kep., Ners', '4', 1, 8, 'Aktif'),
+(29, '197902112006042015', 'Kokom Komalasari, S.Kep., Ners', '22', 1, 8, 'Tidak Aktif'),
+(30, '196607151990032013', 'Komaryati, S.Kep., Ners', '0', 1, 8, 'Aktif'),
+(31, '198307172009022001', 'Neng Goniah, S.Kep., Ners', '21', 1, 8, 'Tidak Aktif'),
+(32, '197608072005012005', 'Nenih Nuraenih, S.Kep., Ners', '21', 1, 8, 'Tidak Aktif'),
+(33, '197011111996032003', 'Ni Luh Nyoman S Puspowati, S.Kep., Ners', '18', 1, 8, 'Tidak Aktif'),
+(34, '197004221998032004', 'Nirna Julaeha, S.Kep., Ners', '4', 1, 8, 'Aktif'),
+(35, '197911232005012017', 'Novita Sari, S.Kep., Ners', '14', 1, 8, 'Tidak Aktif'),
+(36, '198010212005012011', 'Siti Romlah, S.Kep., Ners', '17', 1, 8, 'Tidak Aktif'),
+(37, '196908311998032005', 'Sri Kurniyati, S.Kep., Ners', '0', 1, 8, 'Aktif'),
+(38, '196805271992032004', 'Sri Yani, S.Kep., Ners', '0', 1, 8, 'Aktif'),
+(39, '198212302006042015', 'Tanti Heryani, S.Kep., Ners', '18', 1, 8, 'Aktif'),
+(40, '198103082005012006', 'Winda Ratna Wulan, S.Kep. Ners., M.Kep.,Sp.Kep.J  ', '0', 1, 8, 'Aktif'),
+(41, '196707151987032002', 'Yusi Yustiah, AMK', '5', 1, 6, 'Aktif'),
+(42, '196712151990032007', 'Yuyun Yunara, S.Kep., Ners', '13', 1, 8, 'Aktif'),
+(43, '197212271996031003', 'H. Zaenurohman, S.Kep.Ners', '23', 1, 8, 'Tidak Aktif'),
+(44, '196608141991022004', 'dr. Hj. Elly Marliyani, Sp.KJ., M.K.M', '0', 3, 0, 'Tidak Aktif'),
+(45, '196805271998032004', 'dr. Lenny Irawati Yohosua, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
+(46, '196607132007012005', 'dr. Hj. Meutia Laksaminingrum, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
+(47, '198302142015031001', 'dr. Ade Kurnia Surawijawa, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
+(48, '197507072005012006', 'dr. Lina Budiyanti, Sp.KJ. (K)', '0', 3, 0, 'Tidak Aktif'),
+(49, '197707272006042026', 'dr. Dhian Indriasari, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
+(50, '197506082006041013', 'dr. Yunyun Setiawan, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
+(51, '196208081990011001', 'dr. H. Riza Putra, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
+(52, '201401065', 'dr. Hj. Lelly Resna N, Sp.KJ. (K)', '0', 3, 0, 'Tidak Aktif'),
+(53, '198601052020122005', 'dr. Hilda Puspa Indah, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
+(54, '202101228', 'Hasrini Rowawi, dr., Sp.KJ (K)., MHA', '0', 4, 0, 'Tidak Aktif'),
+(55, '197507072005012006', 'Lina Budiyanti, dr. Sp.KJ (K)', '0', 4, 0, 'Tidak Aktif'),
+(56, '196805271998032004', 'Lenny Irawati Yohosua, dr. Sp.KJ.', '0', 4, 0, 'Tidak Aktif'),
+(57, '198302142015031001', 'Ade Kurnia Surawijaya, dr. Sp.KJ.', '0', 4, 0, 'Aktif'),
+(58, '197707272006042026', 'Dhian Indriasari, dr. Sp.KJ.', '0', 4, 0, 'Tidak Aktif'),
+(59, '198103252011012004', 'Ekaprasetyawati, S.Si, Apt', '2', 2, 0, 'Tidak Aktif'),
+(60, '196409251992031006', 'Drs. Tavip Budiawan, Apt', '2', 2, 0, 'Tidak Aktif'),
+(61, '198601082010012013', 'Ema Marlina, Amd. PK', '11', 2, 0, 'Tidak Aktif'),
+(62, '198102122005012013', 'Yeni Susanti, Amd. PK', '11', 2, 0, 'Aktif'),
+(63, '196508051995022002', 'Dra. Resmi Prasetyani, Psi', '10', 2, 0, 'Tidak Aktif'),
+(64, '197105071997032005', 'Dra. Lismaniar, Psi., M.Psi', '10', 2, 0, 'Tidak Aktif'),
+(65, '198805212011011003', 'Irfan Arief Sulistyawan, Amd', '7', 2, 0, 'Tidak Aktif'),
+(66, '197308081999032005', 'Yuyum Rohmulyanawati, S.Sos, MPSSp', '24', 2, 0, 'Aktif'),
+(67, '198010022006042015', 'Ani Kartini, ST', '6', 2, 0, 'Aktif'),
+(68, '197902192011012001', 'Indah Kusuma Dewi, dr., SpKJ', '0', 3, 0, 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mess`
+-- Struktur dari tabel `tb_mentor_jenis`
+--
+
+CREATE TABLE `tb_mentor_jenis` (
+  `id_mentor_jenis` int(11) NOT NULL,
+  `nama_mentor_jenis` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_mentor_jenis`
+--
+
+INSERT INTO `tb_mentor_jenis` (`id_mentor_jenis`, `nama_mentor_jenis`) VALUES
+(1, 'CI'),
+(2, 'CIL'),
+(3, 'PSPD'),
+(4, 'PPDS');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_mess`
 --
 
 CREATE TABLE `tb_mess` (
@@ -534,7 +556,7 @@ CREATE TABLE `tb_mess` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_mess`
+-- Dumping data untuk tabel `tb_mess`
 --
 
 INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_mess`, `kapasitas_t_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `kapasitas_terisi_mess`, `ket_mess`, `status_mess`) VALUES
@@ -550,7 +572,7 @@ INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mess_detail`
+-- Struktur dari tabel `tb_mess_detail`
 --
 
 CREATE TABLE `tb_mess_detail` (
@@ -562,7 +584,7 @@ CREATE TABLE `tb_mess_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_mess_detail`
+-- Dumping data untuk tabel `tb_mess_detail`
 --
 
 INSERT INTO `tb_mess_detail` (`id_mess_detail`, `id_mess`, `harga_mess_detail`, `ket_mess_detail`, `jumlah_mess_detail`) VALUES
@@ -579,7 +601,7 @@ INSERT INTO `tb_mess_detail` (`id_mess_detail`, `id_mess`, `harga_mess_detail`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mess_pilih`
+-- Struktur dari tabel `tb_mess_pilih`
 --
 
 CREATE TABLE `tb_mess_pilih` (
@@ -593,7 +615,7 @@ CREATE TABLE `tb_mess_pilih` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mou`
+-- Struktur dari tabel `tb_mou`
 --
 
 CREATE TABLE `tb_mou` (
@@ -612,7 +634,7 @@ CREATE TABLE `tb_mou` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_mou`
+-- Dumping data untuk tabel `tb_mou`
 --
 
 INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mou`, `no_rsj_mou`, `no_institusi_mou`, `id_jurusan_pdd`, `id_spesifikasi_pdd`, `id_jenjang_pdd`, `id_akreditasi`, `ket_mou`, `institusi_mou`) VALUES
@@ -706,7 +728,7 @@ INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_praktik`
+-- Struktur dari tabel `tb_praktik`
 --
 
 CREATE TABLE `tb_praktik` (
@@ -735,7 +757,7 @@ CREATE TABLE `tb_praktik` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_praktik`
+-- Dumping data untuk tabel `tb_praktik`
 --
 
 INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`, `tgl_input_praktik`, `tgl_ubah_praktik`, `tgl_mulai_praktik`, `tgl_selesai_praktik`, `jumlah_praktik`, `surat_praktik`, `data_praktik`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_akreditasi`, `id_user`, `nama_mentor_praktik`, `email_mentor_praktik`, `telp_mentor_praktik`, `status_cek_praktik`, `status_praktik`) VALUES
@@ -747,7 +769,7 @@ INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_spesifikasi_pdd`
+-- Struktur dari tabel `tb_spesifikasi_pdd`
 --
 
 CREATE TABLE `tb_spesifikasi_pdd` (
@@ -756,7 +778,7 @@ CREATE TABLE `tb_spesifikasi_pdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_spesifikasi_pdd`
+-- Dumping data untuk tabel `tb_spesifikasi_pdd`
 --
 
 INSERT INTO `tb_spesifikasi_pdd` (`id_spesifikasi_pdd`, `nama_spesifikasi_pdd`) VALUES
@@ -769,7 +791,7 @@ INSERT INTO `tb_spesifikasi_pdd` (`id_spesifikasi_pdd`, `nama_spesifikasi_pdd`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_unit`
+-- Struktur dari tabel `tb_unit`
 --
 
 CREATE TABLE `tb_unit` (
@@ -778,18 +800,18 @@ CREATE TABLE `tb_unit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_unit`
+-- Dumping data untuk tabel `tb_unit`
 --
 
 INSERT INTO `tb_unit` (`id_unit`, `nama_unit`) VALUES
-(1, '-'),
-(2, 'Farmasi'),
+(0, '-- Lainnya --'),
+(2, 'Instalasi Farmasi'),
 (3, 'Instalasi Gawat Darurat'),
 (4, 'Instalasi Rawat Jalan'),
 (5, 'Instalasi Rehabilitasi Psikososial'),
 (6, 'Instalasi SIMRS'),
 (7, 'Kesehatan Lingkungan (Kesling)'),
-(8, 'Klinik Graha Atma'),
+(8, 'Klinik Graha Atma (GA)'),
 (10, 'Poli Psikologi'),
 (11, 'Rekam Medik'),
 (12, 'Ruang Garuda'),
@@ -803,18 +825,19 @@ INSERT INTO `tb_unit` (`id_unit`, `nama_unit`) VALUES
 (20, 'Ruang Napza'),
 (21, 'Ruang Nuri'),
 (22, 'Ruang Perkutut'),
-(23, 'Ruang Rajawali');
+(23, 'Ruang Rajawali'),
+(24, 'Kesehatan Jiwa Masyarakat (KESWAMAS)');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE `tb_user` (
   `id_user` int(11) NOT NULL,
   `username_user` text NOT NULL,
-  `password_user` varchar(18) NOT NULL,
+  `password_user` varchar(255) NOT NULL,
   `nama_user` varchar(20) NOT NULL,
   `email_user` text NOT NULL,
   `level_user` int(11) NOT NULL,
@@ -825,19 +848,17 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_user`
+-- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`id_user`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `no_telp_user`, `terakhir_login_user`, `tgl_buat_user`, `status_user`) VALUES
-(1, 'admin', 'admin', 'ADMIN', '-', 1, '08123145645', '0000-00-00', '2021-03-29', 'Y'),
-(9, 'fajar', '1234', 'Fajar', 'fajar.rachmat.h@gmail.com', 2, '', '0000-00-00', '2021-11-11', 'Y'),
-(13, 'ip@ip', '1234', 'ip', 'ip@ip', 2, '', '0000-00-00', '2021-11-24', 'Y'),
-(14, '1@1', '1', 'asdasd', '1@1', 2, '651561', '0000-00-00', '2021-11-24', 'Y');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ADMIN', '-', 1, '08123145645', '0000-00-00', '2021-03-29', 'Y'),
+(9, 'fajar', '81dc9bdb52d04dc20036dbd8313ed055', 'Fajar Rachmat H.', 'fajar.rachmat.h@gmail.com', 2, '', '0000-00-00', '2021-11-11', 'Y');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user_detail`
+-- Struktur dari tabel `tb_user_detail`
 --
 
 CREATE TABLE `tb_user_detail` (
@@ -850,209 +871,209 @@ CREATE TABLE `tb_user_detail` (
 --
 
 --
--- Indexes for table `tb_akreditasi`
+-- Indeks untuk tabel `tb_akreditasi`
 --
 ALTER TABLE `tb_akreditasi`
   ADD PRIMARY KEY (`id_akreditasi`);
 
 --
--- Indexes for table `tb_harga`
+-- Indeks untuk tabel `tb_harga`
 --
 ALTER TABLE `tb_harga`
   ADD PRIMARY KEY (`id_harga`);
 
 --
--- Indexes for table `tb_harga_jenis`
+-- Indeks untuk tabel `tb_harga_jenis`
 --
 ALTER TABLE `tb_harga_jenis`
   ADD PRIMARY KEY (`id_harga_jenis`);
 
 --
--- Indexes for table `tb_harga_pilih`
+-- Indeks untuk tabel `tb_harga_pilih`
 --
 ALTER TABLE `tb_harga_pilih`
   ADD PRIMARY KEY (`id_harga_pilih`);
 
 --
--- Indexes for table `tb_harga_satuan`
+-- Indeks untuk tabel `tb_harga_satuan`
 --
 ALTER TABLE `tb_harga_satuan`
   ADD PRIMARY KEY (`id_harga_satuan`);
 
 --
--- Indexes for table `tb_institusi`
+-- Indeks untuk tabel `tb_institusi`
 --
 ALTER TABLE `tb_institusi`
   ADD PRIMARY KEY (`id_institusi`);
 
 --
--- Indexes for table `tb_jenis_mentor`
+-- Indeks untuk tabel `tb_jenis_mentor`
 --
 ALTER TABLE `tb_jenis_mentor`
   ADD PRIMARY KEY (`id_jenis_mentor`);
 
 --
--- Indexes for table `tb_jenjang_pdd`
+-- Indeks untuk tabel `tb_jenjang_pdd`
 --
 ALTER TABLE `tb_jenjang_pdd`
   ADD PRIMARY KEY (`id_jenjang_pdd`);
 
 --
--- Indexes for table `tb_jurusan_pdd`
+-- Indeks untuk tabel `tb_jurusan_pdd`
 --
 ALTER TABLE `tb_jurusan_pdd`
   ADD PRIMARY KEY (`id_jurusan_pdd`);
 
 --
--- Indexes for table `tb_jurusan_pdd_jenis`
+-- Indeks untuk tabel `tb_jurusan_pdd_jenis`
 --
 ALTER TABLE `tb_jurusan_pdd_jenis`
   ADD PRIMARY KEY (`id_jurusan_pdd_jenis`);
 
 --
--- Indexes for table `tb_mentor_rsj`
+-- Indeks untuk tabel `tb_mentor`
 --
-ALTER TABLE `tb_mentor_rsj`
-  ADD PRIMARY KEY (`id_mentor_rsj`);
+ALTER TABLE `tb_mentor`
+  ADD PRIMARY KEY (`id_mentor`);
 
 --
--- Indexes for table `tb_mess`
+-- Indeks untuk tabel `tb_mess`
 --
 ALTER TABLE `tb_mess`
   ADD PRIMARY KEY (`id_mess`);
 
 --
--- Indexes for table `tb_mess_detail`
+-- Indeks untuk tabel `tb_mess_detail`
 --
 ALTER TABLE `tb_mess_detail`
   ADD PRIMARY KEY (`id_mess_detail`);
 
 --
--- Indexes for table `tb_mess_pilih`
+-- Indeks untuk tabel `tb_mess_pilih`
 --
 ALTER TABLE `tb_mess_pilih`
   ADD PRIMARY KEY (`id_mess_pilih`);
 
 --
--- Indexes for table `tb_mou`
+-- Indeks untuk tabel `tb_mou`
 --
 ALTER TABLE `tb_mou`
   ADD PRIMARY KEY (`id_mou`);
 
 --
--- Indexes for table `tb_praktik`
+-- Indeks untuk tabel `tb_praktik`
 --
 ALTER TABLE `tb_praktik`
   ADD PRIMARY KEY (`id_praktik`);
 
 --
--- Indexes for table `tb_spesifikasi_pdd`
+-- Indeks untuk tabel `tb_spesifikasi_pdd`
 --
 ALTER TABLE `tb_spesifikasi_pdd`
   ADD PRIMARY KEY (`id_spesifikasi_pdd`);
 
 --
--- Indexes for table `tb_unit`
+-- Indeks untuk tabel `tb_unit`
 --
 ALTER TABLE `tb_unit`
   ADD PRIMARY KEY (`id_unit`);
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_akreditasi`
+-- AUTO_INCREMENT untuk tabel `tb_akreditasi`
 --
 ALTER TABLE `tb_akreditasi`
   MODIFY `id_akreditasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tb_harga`
+-- AUTO_INCREMENT untuk tabel `tb_harga`
 --
 ALTER TABLE `tb_harga`
   MODIFY `id_harga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
--- AUTO_INCREMENT for table `tb_harga_jenis`
+-- AUTO_INCREMENT untuk tabel `tb_harga_jenis`
 --
 ALTER TABLE `tb_harga_jenis`
   MODIFY `id_harga_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tb_harga_pilih`
+-- AUTO_INCREMENT untuk tabel `tb_harga_pilih`
 --
 ALTER TABLE `tb_harga_pilih`
   MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_harga_satuan`
+-- AUTO_INCREMENT untuk tabel `tb_harga_satuan`
 --
 ALTER TABLE `tb_harga_satuan`
   MODIFY `id_harga_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `tb_jenjang_pdd`
+-- AUTO_INCREMENT untuk tabel `tb_jenjang_pdd`
 --
 ALTER TABLE `tb_jenjang_pdd`
   MODIFY `id_jenjang_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `tb_jurusan_pdd`
+-- AUTO_INCREMENT untuk tabel `tb_jurusan_pdd`
 --
 ALTER TABLE `tb_jurusan_pdd`
   MODIFY `id_jurusan_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `tb_jurusan_pdd_jenis`
+-- AUTO_INCREMENT untuk tabel `tb_jurusan_pdd_jenis`
 --
 ALTER TABLE `tb_jurusan_pdd_jenis`
   MODIFY `id_jurusan_pdd_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `tb_mess`
+-- AUTO_INCREMENT untuk tabel `tb_mess`
 --
 ALTER TABLE `tb_mess`
   MODIFY `id_mess` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tb_mess_detail`
+-- AUTO_INCREMENT untuk tabel `tb_mess_detail`
 --
 ALTER TABLE `tb_mess_detail`
   MODIFY `id_mess_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tb_mess_pilih`
+-- AUTO_INCREMENT untuk tabel `tb_mess_pilih`
 --
 ALTER TABLE `tb_mess_pilih`
   MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_mou`
+-- AUTO_INCREMENT untuk tabel `tb_mou`
 --
 ALTER TABLE `tb_mou`
   MODIFY `id_mou` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
--- AUTO_INCREMENT for table `tb_praktik`
+-- AUTO_INCREMENT untuk tabel `tb_praktik`
 --
 ALTER TABLE `tb_praktik`
   MODIFY `id_praktik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tb_spesifikasi_pdd`
+-- AUTO_INCREMENT untuk tabel `tb_spesifikasi_pdd`
 --
 ALTER TABLE `tb_spesifikasi_pdd`
   MODIFY `id_spesifikasi_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `tb_user`
+-- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
