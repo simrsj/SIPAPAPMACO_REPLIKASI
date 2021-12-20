@@ -40,7 +40,7 @@ if (empty($_SESSION['username_user'])) {
 			<?php
 			if (isset($_POST['Login'])) {
 				$username_user = $_POST['username_user'];
-				$password_user = $_POST['password_user'];
+				$password_user = MD5($_POST['password_user']);
 				$sql_name = "SELECT * from `tb_user` where `username_user`='$username_user'";
 				$sql_pass = "SELECT * from `tb_user` where `password_user`='$password_user'";
 				$sql_name_pass = "SELECT * from `tb_user` where `username_user`='$username_user' 

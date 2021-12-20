@@ -7,7 +7,7 @@
 
 git status
 git add .
-git commit -m "data mentor proses"
+git commit -m "Proses input Mess"
 git pull
 git push
 

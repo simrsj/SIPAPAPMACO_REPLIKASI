@@ -134,13 +134,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['mes'])) {
 						include "_admin/view/v_mess.php";
 					} elseif (isset($_GET['mtr'])) {
-						if (isset($_GET['i'])) {
-							include "_admin/insert/i_mentor.php";
-						} elseif (isset($_GET['u'])) {
-							include "_admin/update/u_mentor.php";
-						} else {
-							include "_admin/view/v_mentor.php";
-						}
+						include "_admin/view/v_mentor.php";
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_admin/view/v_praktik_arsip.php";

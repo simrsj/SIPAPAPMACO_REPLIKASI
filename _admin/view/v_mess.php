@@ -97,11 +97,11 @@
                                             switch ($d_mess['status_mess']) {
                                                 case "Aktif":
                                                     $btn_status_mess = "success";
-                                                    $icon_status_mess = "<i class='fa fa-check-circle' aria-hidden='true'></i>";
+                                                    $icon_status_mess = "Aktif";
                                                     break;
                                                 case "Tidak Aktif":
                                                     $btn_status_mess = "danger";
-                                                    $icon_status_mess = "<i class='fa fa-times-circle' aria-hidden='true'></i>";
+                                                    $icon_status_mess = "Non Aktif";
                                                     break;
                                             }
                                             ?>
