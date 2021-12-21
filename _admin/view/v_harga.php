@@ -380,7 +380,37 @@
                                                     <input class="form-control" name="nama_harga" value="<?php echo $d_harga['nama_harga']; ?>" required><br>
 
                                                     Satuan Harga : <span style="color:red">*</span><br>
-                                                    <input class="form-control" name="satuan_harga" value="<?php echo $d_harga['satuan_harga']; ?>" required><br>
+                                                    <?php
+                                                    $sql_harga_satuan = "SELECT * FROM tb_harga_satuan ORDER BY nama_harga_satuan ASC";
+                                                    $q_harga_satuan = $conn->query($sql_harga_satuan);
+                                                    $r_harga_satuan = $q_harga_satuan->rowCount();
+                                                    if ($r_harga_satuan > 0) {
+                                                    ?>
+                                                        <select class="form-control text-center" name="id_harga_satuan" required>
+                                                            <option value="">-- Pilih Jenis Harga --</option>
+                                                            <?php
+                                                            while ($d_harga_satuan = $q_harga_satuan->fetch(PDO::FETCH_ASSOC)) {
+                                                                if ($d_harga['id_harga_satuan'] == $d_harga_satuan['id_harga_satuan']) {
+                                                                    $selected = "selected";
+                                                                } else {
+                                                                    $selected = "";
+                                                                }
+                                                            ?>
+                                                                <option value='<?php echo $d_harga_satuan['id_harga_satuan']; ?>' <?php echo $selected; ?>>
+                                                                    <?php echo $d_harga_satuan['nama_harga_satuan']; ?>
+                                                                </option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <b><i>Data Satuan Harga Tidak Ada</i></b>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <br>
 
                                                     Jumlah Harga : <i style='font-size:12px;'>(Rp)</i><span style="color:red">*</span><br>
                                                     <input class="form-control" name="jumlah_harga" type="number" min="1" value="<?php echo $d_harga['jumlah_harga']; ?>" required>
@@ -641,25 +671,17 @@ if (isset($_POST['tambah_harga'])) {
 } elseif (isset($_POST['ubah_harga'])) {
     $sql_ubah = "UPDATE `tb_harga` SET 
     `nama_harga` = '" . $_POST['nama_harga'] . "',
-    `satuan_harga` = '" . $_POST['satuan_harga'] . "',
+    `id_harga_satuan` = '" . $_POST['id_harga_satuan'] . "',
     `jumlah_harga` = '" . $_POST['jumlah_harga'] . "',
     `id_harga_jenis` = '" . $_POST['id_harga_jenis'] . "',
     `id_jurusan_pdd` = '" . $_POST['id_jurusan_pdd'] . "',
     `id_jenjang_pdd` = '" . $_POST['id_jenjang_pdd'] . "',
     `id_spesifikasi_pdd` = '" . $_POST['id_spesifikasi_pdd'] . "',
+    `tgl_harga` = '" . date('Y-m-d') . "',
     `pilih_harga` = '" . $_POST['pilih_harga'] . "'
     WHERE `tb_harga`.`id_harga` = " . $_POST['id_harga'];
     $conn->query($sql_ubah);
-    // echo $sql_ubah;
-    if ($_POST['cari'] == 'c') {
-        $link_cari = "c";
-    } elseif ($_POST['cari'] == 'cl') {
-        $link_cari = "cl";
-    } elseif ($_POST['cari'] == 'cs') {
-        $link_cari = "cs";
-    }
-    $link = "?hrg&" . $link_cari;
-
+    $link = "?hrg";
 ?>
     <script>
         document.location.href = "<?php echo $link; ?>";
@@ -673,7 +695,6 @@ if (isset($_POST['tambah_harga'])) {
 
     // echo $sql_ubah;
     $conn->query($sql_ubah);
-
 ?>
     <script>
         document.location.href = "?hrg&dhs";

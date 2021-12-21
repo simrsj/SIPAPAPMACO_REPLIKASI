@@ -396,7 +396,7 @@ if (isset($_POST['simpan_praktik'])) {
         '" . $_POST['nama_mentor_praktik'] . "',
         '" . $_POST['email_mentor_praktik'] . "',
         '" . $_POST['telp_mentor_praktik'] . "',
-        'Daftar',
+        'DAFTAR',
         'Y'
     )";
     // echo $sql_insert;
