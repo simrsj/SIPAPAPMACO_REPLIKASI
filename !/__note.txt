@@ -7,7 +7,7 @@
 
 git status
 git add .
-git commit -m "Proses input Mess"
+git commit -m "Proses input Harga"
 git pull
 git push
 
