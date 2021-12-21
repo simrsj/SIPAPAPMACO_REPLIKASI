@@ -171,6 +171,8 @@
                                     <td><?php echo $d_mentor['nama_mentor']; ?></td>
                                     <td><?php echo $d_mentor['nama_unit']; ?></td>
                                     <td>
+
+                                        <!-- Aktivasi status Mentor -->
                                         <form method="post" action="">
                                             <?php
                                             switch ($d_mentor['status_mentor']) {
