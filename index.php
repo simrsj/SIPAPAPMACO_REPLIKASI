@@ -1,8 +1,8 @@
 <?php
 error_reporting(0);
 session_start();
-include "_add-ons/connection.php";
-include "_add-ons/date.php";
+include "_add-ons/koneksi.php";
+include "_add-ons/tanggal.php";
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -21,6 +21,7 @@ include "_add-ons/date.php";
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/tata-master/dist/index.css">
 </head>
 <?php
 if ($_SESSION['status_user'] == 'Y') {
@@ -56,8 +57,10 @@ if ($_SESSION['status_user'] == 'Y') {
 <!-- Page level plugins -->
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="vendor/tata-master/dist/tata.js"></script>
+<script src="vendor/tata-master/dist/index.js"></script>
 
-<!-- Page Icons -->
+<!-- Page Icons -->s
 <script src="vendor/fontawesome-free/css/v4-shims-min.css"></script>
 
 <script>

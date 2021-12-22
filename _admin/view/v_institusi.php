@@ -125,21 +125,21 @@ if (isset($_POST['ubah'])) {
     $conn->query("UPDATE `tb_institusi` SET `nama_institusi` = '" . $_POST['nama_institusi'] . "' WHERE `tb_institusi`.`id_institusi` = " . $_POST['id_institusi']);
 ?>
     <script>
-        document.location.href = "?akr";
+        document.location.href = "?ins";
     </script>
 <?php
 } elseif (isset($_POST['tambah'])) {
     $conn->query("INSERT INTO `tb_institusi` (`nama_institusi`) VALUES ('" . $_POST['nama_institusi'] . "')");
 ?>
     <script>
-        document.location.href = "?akr";
+        document.location.href = "?ins";
     </script>
 <?php
 } elseif (isset($_POST['hapus'])) {
     $conn->query("DELETE FROM `tb_institusi` WHERE `id_institusi` = " . $_POST['id_institusi']);
 ?>
     <script>
-        document.location.href = "?akr";
+        document.location.href = "?ins";
     </script>
 <?php
 }

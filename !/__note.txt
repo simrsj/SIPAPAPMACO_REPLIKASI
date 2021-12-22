@@ -4,10 +4,11 @@
 - buat tanggal inputan data dissetiap tabel yang ada inputan
 - buat CRUD eksekusi tanpa loading (cek : https://dewankomputer.com/2019/01/23/crud-create-read-update-delete-dengan-ajax-tanpa-loading-part-1-menampilkan-data/)
 - perbaiki CRUD Menu MoU 
+- perbaiki CRUD Menu Tambah Praktik
 
 git status
 git add .
-git commit -m "Proses input Harga"
+git commit -m "Proses Modal MoU"
 git pull
 git push
 

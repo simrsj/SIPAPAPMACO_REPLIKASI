@@ -45,7 +45,25 @@
                                             <b>TANGGAL SELESAI : </b><br><?php echo date("d F Y", strtotime($d_praktik['tgl_selesai_praktik'])); ?>
                                         </div>
                                         <div class="col-md-2">
-                                            <b>STATUS : </b><br><?php echo date("d F Y", strtotime($d_praktik['tgl_selesai_praktik'])); ?>
+                                            <b>TANGGAL ARSIP : </b><br><?php echo $d_praktik['tgl_arsip_praktik']; ?>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b>STATUS : </b><br>
+                                            <?php
+                                            if ($d_praktik['status_cek_praktik'] == "DAFTAR") {
+                                            ?>
+                                                <span class="badge badge-danger text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "MENU") {
+                                            ?>
+                                                <span class="badge badge-warning text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == 3) {
+                                            ?>
+                                                <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                         <div class="col-md-1">
                                             <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>">
@@ -54,19 +72,13 @@
                                         </div>
                                         <div class="col-md-3">
                                             <!-- tombol ubah -->
-                                            <a href="?prk&u=<?php echo $d_praktik['id_praktik']; ?>&a" class="btn btn-primary btn-sm" title="Ubah">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                                </svg> Ubah
+                                            <a title="Ubah" href="?prk&u=<?php echo $d_praktik['id_praktik']; ?>&a" class="btn btn-primary btn-sm" title="Ubah">
+                                                <i class="far fa-edit"></i>
                                             </a>
 
                                             <!-- tombol restore -->
-                                            <a href='#' data-toggle='modal' data-target='#prk_r_<?php echo $d_praktik['id_praktik']; ?>' class="btn btn-success btn-sm" title="Restore">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
-                                                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
-                                                </svg> Restore
+                                            <a title="Restore" href='#' data-toggle='modal' data-target='#prk_r_<?php echo $d_praktik['id_praktik']; ?>' class="btn btn-success btn-sm" title="Restore">
+                                                <i class="fas fa-trash-restore"></i>
                                             </a>
 
                                             <!-- modal restore -->
@@ -92,8 +104,8 @@
                                             </div>
 
                                             <!-- tombol hapus -->
-                                            <a class="btn btn-danger btn-sm" href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="Hapus">
-                                                <i class="fas fa-trash"></i> Hapus
+                                            <a title="Hapus" class="btn btn-danger btn-sm" href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="Hapus">
+                                                <i class="fas fa-trash"></i>
                                             </a>
                                             </button>
 
