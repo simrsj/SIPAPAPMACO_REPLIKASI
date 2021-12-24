@@ -13,40 +13,42 @@ if (isset($_POST['simpan_mou'])) {
         }
         $no_id_mou = $d_mou[0] + 1;
     }
-    //ubah Nama File PDF
-    $_FILES['file_mou']['name'] = "mou_" . $no_id_mou . "_" . date('Y-m-d') . ".pdf";
+    if ($_POST['file_mou'] != NULL || "") {
+        //ubah Nama File PDF
+        $_FILES['file_mou']['name'] = "mou_" . $no_id_mou . "_" . date('Y-m-d') . ".pdf";
 
-    //alamat file surat masuk
-    $alamat_unggah = "./_file/mou";
+        //alamat file surat masuk
+        $alamat_unggah = "./_file/mou";
 
-    //pembuatan alamat bila tidak ada
-    if (!is_dir($alamat_unggah)) {
-        mkdir($alamat_unggah, 0777, $rekursif = true);
-    }
+        //pembuatan alamat bila tidak ada
+        if (!is_dir($alamat_unggah)) {
+            mkdir($alamat_unggah, 0777, $rekursif = true);
+        }
 
-    //unggah surat dan data praktik
-    if (!is_null($_FILES['file_mou'])) {
-        $file_file_mou = (object) @$_FILES['file_mou'];
+        //unggah surat dan data praktik
+        if (!is_null($_FILES['file_mou'])) {
+            $file_file_mou = (object) @$_FILES['file_mou'];
 
-        //mulai unggah file surat praktik
-        if ($file_file_mou->size > 1000 * 10000) {
-?>
-            <script>
-                alert('File Surat Harus dibawah 10 Mb');
-            </script>
-        <?php
-        } elseif ($file_file_mou->type !== 'application/pdf') {
-        ?>
-            <script>
-                alert('File Surat Harus .pdf');
-            </script>
-    <?php
-        } else {
-            $unggah_file_mou = move_uploaded_file(
-                $file_file_mou->tmp_name,
-                "{$alamat_unggah}/{$file_file_mou->name}"
-            );
-            $link_file_mou = "{$alamat_unggah}/{$file_file_mou->name}";
+            //mulai unggah file surat praktik
+            if ($file_file_mou->size > 1000 * 10000) {
+                echo "
+                <script>
+                    alert('File Surat Harus dibawah 10 Mb');
+                </script>
+                ";
+            } elseif ($file_file_mou->type !== 'application/pdf') {
+                echo "
+                <script>
+                    alert('File Surat Harus .pdf');
+                </script>
+                    ";
+            } else {
+                $unggah_file_mou = move_uploaded_file(
+                    $file_file_mou->tmp_name,
+                    "{$alamat_unggah}/{$file_file_mou->name}"
+                );
+                $link_file_mou = "{$alamat_unggah}/{$file_file_mou->name}";
+            }
         }
     }
 
@@ -85,9 +87,9 @@ if (isset($_POST['simpan_mou'])) {
 
     // echo $sql_insert_mou;
     $conn->query($sql_insert_mou);
-    ?>
+?>
     <script type="text/javascript">
-        document.location.href = "?prk";
+        document.location.href = "?mou";
     </script>
 <?php
 } else {
@@ -128,7 +130,7 @@ if (isset($_POST['simpan_mou'])) {
                         </div>
                         <div class="col-sm-4">
                             No. MoU Institusi <span style="color:red">*</span><br>
-                            <input class="form-control" type="text" name="no_institut_mou" required>
+                            <input class="form-control" type="text" name="no_institusi_mou" required>
                         </div>
                     </div>
                     <hr>

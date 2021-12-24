@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 session_start();
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal.php";
@@ -16,12 +16,17 @@ include "_add-ons/tanggal.php";
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
+
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="vendor/tata-master/dist/index.css">
+
+    <!-- Add-ons -->
+    <link href="vendor/select2-develop/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="vendor/fontawesome-free/css/v4-shims-min.css" rel="stylesheet" />
 </head>
 <?php
 if ($_SESSION['status_user'] == 'Y') {
@@ -59,13 +64,20 @@ if ($_SESSION['status_user'] == 'Y') {
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="vendor/tata-master/dist/tata.js"></script>
 <script src="vendor/tata-master/dist/index.js"></script>
-
-<!-- Page Icons -->s
-<script src="vendor/fontawesome-free/css/v4-shims-min.css"></script>
+<script src="vendor/select2-develop/dist/js/select2.min.js"></script>
 
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable();
+    });
+
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+
+    $(".js-example-placeholder-single").select2({
+        placeholder: "Pilih",
+        allowClear: true
     });
 </script>
 

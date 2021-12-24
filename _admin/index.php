@@ -11,7 +11,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<!-- Sidebar - Brand -->
 				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="?">
 					<div class="sidebar-brand-icon">
-						<i class="fas fa-laugh-wink"></i>
+						<i class="fas fa-book-reader"></i>
 					</div>
 					<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 				</a>
