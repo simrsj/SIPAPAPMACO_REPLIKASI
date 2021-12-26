@@ -1,8 +1,10 @@
 <?php
 if (isset($_POST['ubah_mou'])) {
 
+    //file_mou diubah
     if ($_POST['file_mou'] != NULL || "") {
-        echo "asd";
+
+
         //ubah Nama File PDF
         $_FILES['file_mou']['name'] = "mou_" . $_POST['id_mou'] . "_" . date('Y-m-d') . ".pdf";
 
@@ -37,8 +39,13 @@ if (isset($_POST['ubah_mou'])) {
                     "{$alamat_unggah}/{$file_file_mou->name}"
                 );
                 $link_file_mou = "{$alamat_unggah}/{$file_file_mou->name}";
+                $file_mou = "file_mou = '" . $link_file_mou . "',";
             }
         }
+    } else {
+
+        //file_mou tidak diubah
+        $file_mou = "";
     }
 
     $sql_update_mou = " UPDATE tb_mou SET 
@@ -51,21 +58,21 @@ if (isset($_POST['ubah_mou'])) {
     id_spesifikasi_pdd = '" . $_POST['id_spesifikasi_pdd'] . "',
     id_jenjang_pdd = '" . $_POST['id_jenjang_pdd'] . "', 
     id_akreditasi = '" . $_POST['id_akreditasi'] . "',
-    file_mou = '" . $link_file_mou . "',
+    " . $file_mou . "
     ket_mou = '" . $_POST['ket_mou'] . "'
     WHERE id_mou = " . $_POST['id_mou'];
 
 
-    echo "<pre>";
-    print_r($_FILES);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
 
-    echo $sql_update_mou;
-    // $conn->query($sql_update_mou);
+    // echo $sql_update_mou;
+    $conn->query($sql_update_mou);
 ?>
     <script type="text/javascript">
-        // alert('Data Sudah Disimpan');
-        // document.location.href = "?mou";
+        alert('Data Sudah Disimpan');
+        document.location.href = "?mou";
     </script>
 <?php
 } else {
