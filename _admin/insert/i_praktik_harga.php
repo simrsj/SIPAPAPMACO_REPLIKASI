@@ -21,11 +21,12 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
             <h1 class="h3 mb-2 text-gray-800">Daftar Menu Praktikan <?php echo $d_praktik['nama_jurusan_pdd']; ?></h1>
         </div>
     </div>
-    <div class="card shadow mb-4 ">
-        <div class="card-body">
-            <form class="form-group" method="post">
 
-                <!-- Menu Harga disesuaikan dengan jenis jurusan -->
+    <form class="form-group" method="post">
+
+        <!-- Menu Harga disesuaikan dengan jenis jurusan -->
+        <div class="card shadow mb-4 ">
+            <div class="card-body">
                 <div class="text-gray-700">
                     <h5 class="font-weight-bold">Menu Harga Wajib <?php echo $d_praktik['nama_jurusan_pdd']; ?></h5>
                 </div>
@@ -123,9 +124,12 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                 <?php
                 }
                 ?>
-                <hr>
+            </div>
+        </div>
 
-                <!-- Menu Harga Ujian disesuaikan dengan Jenis Jurusan -->
+        <!-- Menu Harga Ujian disesuaikan dengan Jenis Jurusan -->
+        <div class="card shadow mb-4 ">
+            <div class="card-body">
                 <div class="text-gray-700">
                     <h5 class="font-weight-bold">Menu Harga Ujian <?php echo $d_praktik['nama_jurusan_pdd_jenis']; ?></h5>
                 </div>
@@ -199,9 +203,12 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                     </div>
                 <?php
                 } ?>
-                <hr>
+            </div>
+        </div>
 
-                <!-- Menu Harga Lainnya -->
+        <!-- Menu Harga Lainnya -->
+        <div class="card shadow mb-4 ">
+            <div class="card-body">
                 <div class="text-gray-700">
                     <h5 class="font-weight-bold">Menu Harga Ruangan dan Tempat</h5>
                 </div>
@@ -272,11 +279,18 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                     </div>
                 <?php
                 } ?>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4 ">
+            <div class="card-body">
                 <input name="id_praktik" value="<?php echo $_GET['ih'] ?>" hidden>
                 <input type="submit" class="form-control btn btn-success btn-sm" name='pilih_harga' value="SIMPAN">
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
+</div>
+</div>
 </div>
 <?php
 if (isset($_POST['pilih_harga'])) {
@@ -316,29 +330,3 @@ if (isset($_POST['pilih_harga'])) {
     ";
 }
 ?>
-
-<script>
-    function hargalainnya(id, value, hs) {
-        //console.log(id);
-        var harga = $('#harga_lainnya' + id).val();
-        var jml = harga * hs;
-        //console.log(jml);
-        $('#jumlah_harga_lainnya' + id).val(jml);
-        jml = numberWithCommas(jml)
-        document.getElementById('jhl_' + id).innerHTML = "Rp " + jml;
-    }
-
-    function hargatertentu(id, value, hs) {
-        //  console.log(id);
-        var harga = $('#harga_tertentu' + id).val();
-        var jml = harga * hs;
-        //  console.log(jml);
-        $('#jumlah_harga_tertentu' + id).val(jml);
-        jml = numberWithCommas(jml);
-        document.getElementById('jht_' + id).innerHTML = "Rp " + jml;
-    }
-
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
-</script>
