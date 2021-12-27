@@ -29,13 +29,22 @@ include "_add-ons/tanggal.php";
     <!-- <link rel="stylesheet" href="vendor/tata-master/dist/index.css"> -->
 </head>
 <?php
-if ($_SESSION['status_user'] == 'Y') {
-    if (isset($_GET['lo'])) {
+
+if (isset($_SESSION['status_user'])) {
+    if ($_SESSION['status_user'] == 'Y') {
+        if (isset($_GET['lo'])) {
+        } elseif ($_SESSION['level_user'] == 1) {
+            include "_admin/index.php";
+        } elseif ($_SESSION['level_user'] == 2) {
+            include "_ip/index.php";
+        }
+    } elseif ($_SESSION['status_user'] == 'N') {
+?>
+        <script>
+            alert('Akun Sudah Tidak Aktif');
+        </script>
+<?php
         include "_log-sign/log_out.php";
-    } elseif ($_SESSION['level_user'] == 1) {
-        include "_admin/index.php";
-    } elseif ($_SESSION['level_user'] == 2) {
-        include "_ip/index.php";
     }
 } elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) {
     if (isset($_GET['reg'])) {

@@ -238,8 +238,8 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 
                 if ($r_harga_lainnya > 0) {
                 ?>
-                    <table class="table datatable">
-                        <thead class="thead-light">
+                    <table class="table">
+                        <thead class="thead-dark">
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nama Jenis</th>
