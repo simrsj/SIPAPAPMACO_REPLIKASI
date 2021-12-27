@@ -19,14 +19,14 @@ include "_add-ons/tanggal.php";
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="vendor/tata-master/dist/index.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Add-ons -->
     <link href="vendor/select2-develop/dist/css/select2.min.css" rel="stylesheet" />
     <link href="vendor/fontawesome-free/css/v4-shims-min.css" rel="stylesheet" />
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="vendor/tata-master/dist/index.css"> -->
 </head>
 <?php
 if ($_SESSION['status_user'] == 'Y') {
@@ -62,8 +62,8 @@ if ($_SESSION['status_user'] == 'Y') {
 <!-- Page level plugins -->
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="vendor/tata-master/dist/tata.js"></script>
-<script src="vendor/tata-master/dist/index.js"></script>
+<!-- <script src="vendor/tata-master/dist/tata.js"></script>
+<script src="vendor/tata-master/dist/index.js"></script> -->
 <script src="vendor/select2-develop/dist/js/select2.min.js"></script>
 
 <script>

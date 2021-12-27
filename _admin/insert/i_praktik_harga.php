@@ -46,19 +46,21 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                 if ($r_harga_jurusan > 0) {
                 ?>
                     <table class="table table-hover">
-                        <thead class="thead-light">
+                        <thead class="thead-dark">
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nama Jenis</th>
                                 <th scope="col">Nama Harga</th>
                                 <th scope="col">Satuan</th>
                                 <th scope="col">Harga</th>
+                                <th scope="col">Frekuensi</th>
                                 <th scope="col">Kuantitas</th>
                                 <th scope="col">Total Harga</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
+                            $jumlah_total_harga = 0;
                             $no = 1;
                             while ($d_harga_jurusan = $q_harga_jurusan->fetch(PDO::FETCH_ASSOC)) {
                             ?>
@@ -69,9 +71,14 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <td><?php echo $d_harga_jurusan['nama_harga_satuan']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?></td>
                                     <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?></td>
+                                    <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
+                                    <td>
+                                        <?php echo "Rp " . number_format($d_praktik['jumlah_praktik'] * $d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?>
+                                    </td>
                                     <?php
-                                    $jumlah_total_harga = ($d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga']) + $jumlah_total_harga;
+                                    $jumlah_total_harga =
+                                        ($d_praktik['jumlah_praktik'] * $d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga'])
+                                        + $jumlah_total_harga;
                                     $no++;
                                     ?>
                                 </tr>
@@ -110,7 +117,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                             }
                             ?>
                             <tr>
-                                <td colspan="6" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
+                                <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
                                 <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_harga, 0, ",", "."); ?></td>
                             </tr>
                         </tbody>
@@ -153,18 +160,20 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                 if ($r_harga_ujian > 0) {
                 ?>
                     <table class="table">
-                        <thead class="thead-light">
-                            <tr>
+                        <thead class="thead-dark">
+                            <tre>
                                 <th scope="col">No</th>
                                 <th scope="col">Nama Jenis</th>
                                 <th scope="col">Nama Harga</th>
                                 <th scope="col">Satuan</th>
                                 <th scope="col">Harga</th>
+                                <th scope="col">Frekuensi</th>
                                 <th scope="col">Kuantitas</th>
-                            </tr>
+                            </tre>
                         </thead>
                         <tbody>
                             <?php
+                            $jumlah_total_ujian = 0;
                             $no = 1;
                             while ($d_harga_ujian = $q_harga_ujian->fetch(PDO::FETCH_ASSOC)) {
                             ?>
@@ -173,11 +182,11 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <td><?php echo $d_harga_ujian['nama_harga_jenis']; ?></td>
                                     <td><?php echo $d_harga_ujian['nama_harga']; ?></td>
                                     <td><?php echo $d_harga_ujian['nama_harga_satuan']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_harga_ujian['jumlah_harga'], 0, ",", "."); ?></td>
+                                    <td> <?php echo "Rp " . number_format($d_harga_ujian['jumlah_harga'], 0, ",", "."); ?></td>
                                     <td>
-                                        <input class="form-control" type="text" id="<?php echo "harga_tertentu" . $d_harga_ujian['id_harga']; ?>" name="<?php echo "harga_tertentu" . $d_harga_ujian['id_harga']; ?>" value="<?php echo $d_praktik['jumlah_praktik']; ?>" onchange="hargatertentu(<?php echo $d_harga_ujian['id_harga']; ?>, 
-                                        <?php echo $d_harga_ujian['id_harga']; ?>, 
-                                        <?php echo $d_harga_ujian['jumlah_harga'] ?>)">
+                                        <?php
+
+                                        ?>
                                     </td>
                                     <td>
                                         <input class="form-control" type="hidden" name="<?php echo "jumlah_harga_tertentu" . $d_harga_ujian['id_harga']; ?>" id="<?php echo "jumlah_harga_" . $d_harga_ujian['id_harga']; ?>">
@@ -191,7 +200,6 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                             ?>
                             <tr>
                                 <td colspan="5" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
-                                <td class="font-weight-bold"><?= $jumlah_total_ujian; ?><span id="totalhargatertentu"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -282,6 +290,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
 
+        <!-- tombol submit -->
         <div class="card shadow mb-4 ">
             <div class="card-body">
                 <input name="id_praktik" value="<?php echo $_GET['ih'] ?>" hidden>

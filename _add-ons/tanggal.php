@@ -32,3 +32,9 @@ function tanggal($tanggal)
 
 	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
+function tanggal_between($tgl_awal, $tgl_akhir)
+{
+	$tgl_kalkulasi = $tgl_akhir - $tgl_awal;
+
+	echo round($tgl_kalkulasi / (60 * 60 * 24));
+}

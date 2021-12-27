@@ -1,15 +1,15 @@
-<select class="js-example-placeholder-single js-states form-control">
-    <option></option>
-    <option>asd</option>
-    <option>123343</option>
-    <option>dc</option>
-    <option>da</option>
-    <option>12e</option>
-</select>
-
-<script>
-    $(".js-example-placeholder-single").select2({
-        placeholder: "Select a state",
-        allowClear: true
-    });
-</script>
+<!-- Radio Buttons -->
+<div class="boxed-check-group">
+    <label class="boxed-check">
+        <input class="boxed-check-input" type="radio" name="radio-overview" checked>
+        <div class="boxed-check-label">Normal</div>
+    </label>
+    <label class="boxed-check">
+        <input class="boxed-check-input" type="radio" name="radio-overview">
+        <div class="boxed-check-label">Normal</div>
+    </label>
+    <label class="boxed-check">
+        <input class="boxed-check-input" type="radio" name="radio-overview" disabled>
+        <div class="boxed-check-label">Disabled</div>
+    </label>
+</div>
