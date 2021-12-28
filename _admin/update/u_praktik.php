@@ -43,7 +43,7 @@ $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
                         $r_mou = $q_mou->rowCount();
                         if ($r_mou > 0) {
                         ?>
-                            <select class='form-control' aria-label='Default select example' name='id_mou' required>
+                            <select class='form-control' aria-label='Default select example' name='id_institusi' required>
                                 <option value="">-- <i>Pilih</i>--</option>
                                 <?php
                                 while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
@@ -411,8 +411,8 @@ if (isset($_POST['ubah_praktik'])) {
     }
 
     $sql_update = " UPDATE `tb_praktik` SET
-        `id_mou` = '" . $_POST['id_mou'] . "', 
-        `id_institusi` = '" . $d_praktik_join['id_institusi'] . "', 
+        `id_mou` = '" . $_POST['id_institusi'] . "', 
+        `id_institusi` = '" . $_POST['id_institusi'] . "', 
         `nama_praktik` = '" . $_POST['nama_praktik'] . "', 
         `tgl_ubah_praktik` = '" . date('Y-m-d') . "', 
         `tgl_mulai_praktik` = '" . $_POST['tgl_mulai_praktik'] . "', 
@@ -431,18 +431,10 @@ if (isset($_POST['ubah_praktik'])) {
 
     // echo $sql_update;
     $conn->query($sql_update);
-    if (isset($_GET['a'])) {
 ?>
-        <script type="text/javascript">
-            document.location.href = "?prk&a";
-        </script>
-    <?php
-    } else {
-    ?>
-        <script type="text/javascript">
-            document.location.href = "?prk";
-        </script>
+    <script type="text/javascript">
+        document.location.href = "?prk";
+    </script>
 <?php
-    }
 }
 ?>

@@ -80,7 +80,8 @@
                                                 <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item btn btn-outline-secondary btn-sm" href="?prk&ih=<?php echo $d_praktik['id_praktik']; ?>">Pilih Harga</a>
                                                     <a class="dropdown-item btn btn-secondary btn-sm" href="?prk&m=<?php echo $d_praktik['id_praktik']; ?>">Pilih Mess</a>
-                                                    <a class="btn btn-secondary btn-sm dropdown-item " href="?prk&ibt=<?php echo $d_praktik['id_praktik']; ?>">Pembayaran</a>
+                                                    <a class="btn btn-secondary btn-sm dropdown-item " href="#" data-toggle="modal" data-target="#bayar_<?php echo $d_praktik['id_praktik']; ?>">Pembayaran</a>
+
                                                 </div>
                                             </div>
                                         </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Des 2021 pada 10.16
+-- Waktu pembuatan: 28 Des 2021 pada 10.51
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.34
 
@@ -608,7 +608,7 @@ CREATE TABLE `tb_mess_pilih` (
   `id_mess_pilih` int(11) NOT NULL,
   `id_praktik` int(11) NOT NULL,
   `id_mess` int(11) NOT NULL,
-  `makan_mess_pilih` text NOT NULL,
+  `makan_mess_pilih` enum('Y','T') NOT NULL,
   `jumlah_mess_pilih` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -762,11 +762,10 @@ CREATE TABLE `tb_praktik` (
 --
 
 INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`, `tgl_input_praktik`, `tgl_ubah_praktik`, `tgl_mulai_praktik`, `tgl_selesai_praktik`, `jumlah_praktik`, `surat_praktik`, `data_praktik`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_akreditasi`, `id_user`, `nama_mentor_praktik`, `email_mentor_praktik`, `telp_mentor_praktik`, `status_cek_praktik`, `status_praktik`) VALUES
-(4, 9, 9, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-06', '2021-11-24', '2021-12-31', 12, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
+(4, 20, 20, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-28', '2021-11-24', '2021-12-31', 10, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
 (5, 80, 80, 'Kelompok 3', '2021-12-05', '2021-12-21', '2021-12-31', '2021-12-31', 20, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 2, '2', '6', '0', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
 (6, 5, 5, 'Kelompok 3 Gel. III', '2021-12-03', NULL, '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', 3, '4', '6', '0', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y'),
-(7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y'),
-(8, 20, 20, 'Grup 2-2020', '2021-12-21', NULL, '2021-12-21', '2021-12-25', 10, './_file/praktikan/surat_praktik_1_2021-12-21.pdf', './_file/praktikan/data_praktik_1_2021-12-21.xlsx', 0, '1', '8', '15', '2', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'T');
+(7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y');
 
 -- --------------------------------------------------------
 
@@ -789,7 +788,7 @@ INSERT INTO `tb_spesifikasi_pdd` (`id_spesifikasi_pdd`, `nama_spesifikasi_pdd`) 
 (2, 'Profesi Ners'),
 (3, 'Praktek Kerja Lapangan (PKL)'),
 (4, 'Magang'),
-(15, 'Program Studi Pendidikan Dokter (PSPD) / co-ass');
+(15, 'Program Studi Pendidikan Dokter (PSPD) / Co-ass');
 
 -- --------------------------------------------------------
 

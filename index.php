@@ -33,6 +33,7 @@ include "_add-ons/tanggal.php";
 if (isset($_SESSION['status_user'])) {
     if ($_SESSION['status_user'] == 'Y') {
         if (isset($_GET['lo'])) {
+            include "_log-sign/log_out.php";
         } elseif ($_SESSION['level_user'] == 1) {
             include "_admin/index.php";
         } elseif ($_SESSION['level_user'] == 2) {
