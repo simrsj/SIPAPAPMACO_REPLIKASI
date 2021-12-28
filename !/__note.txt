@@ -8,7 +8,7 @@
 
 git status
 git add .
-git commit -m "Proses harga"
+git commit -m "Proses INPUT MESS"
 git pull
 git push
  
@@ -18,5 +18,12 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/fajarrachmath/codepolitan_bootstrap.git
 git push -u origin main
+
+DAFTAR
+HARGA
+MESS
+PEMBAYARAN (Merah)
+PEMBAYARAN (Biru)
+AKTIF (HIJAU)
 
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551

@@ -22,9 +22,9 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-    <form class="form-group" method="post">
+    <form class="form-group" method="post" action="">
 
-        <!-- Menu Harga disesuaikan dengan jenis jurusan -->
+        <!-- Menu Harga wajib disesuaikan dengan jenis jurusan -->
         <div class="card shadow mb-4 ">
             <div class="card-body">
                 <div class="text-gray-700">
@@ -70,14 +70,34 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <td><?php echo $d_harga_jurusan['nama_harga']; ?></td>
                                     <td><?php echo $d_harga_jurusan['nama_harga_satuan']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?></td>
-                                    <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
+                                    <td>
+                                        <?php
+
+                                        if ($d_harga_jurusan['tipe_harga'] == 'SEKALI') {
+                                            $ferkuensi = 1;
+                                        } elseif ($d_harga_jurusan['tipe_harga'] == 'INPUT') {
+                                        ?>
+                                            <input class="form-control" name="<?php echo $d_praktik['id_praktik'] . "-" . $d_harga_jurusan['id_harga'] ?>">
+                                        <?php
+                                        } elseif ($d_harga_jurusan['tipe_harga'] == 'HARGA-') {
+                                            $ferkuensi = tanggal_between_nonweekend($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                                        } elseif ($d_harga_jurusan['tipe_harga'] == 'HARGA+') {
+                                            $ferkuensi = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                                        } elseif ($d_harga_jurusan['tipe_harga'] == 'MINGGUAN') {
+                                            $ferkuensi = tanggal_between_week($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                                        } else {
+                                            $ferkuensi = $d_harga_jurusan['tipe_harga'];
+                                        }
+                                        echo $ferkuensi;
+                                        ?>
+                                    </td>
                                     <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
                                     <td>
-                                        <?php echo "Rp " . number_format($d_praktik['jumlah_praktik'] * $d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?>
+                                        <?php echo "Rp " . number_format($ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?>
                                     </td>
                                     <?php
                                     $jumlah_total_harga =
-                                        ($d_praktik['jumlah_praktik'] * $d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga'])
+                                        ($ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga'])
                                         + $jumlah_total_harga;
                                     $no++;
                                     ?>
@@ -107,11 +127,32 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                         <td><?php echo $d_harga_jenjang['nama_harga']; ?></td>
                                         <td><?php echo $d_harga_jenjang['nama_harga_satuan']; ?></td>
                                         <td><?php echo "Rp " . number_format($d_harga_jenjang['jumlah_harga'], 0, ",", "."); ?></td>
+                                        <td>
+                                            <?php
+
+                                            if ($d_harga_jenjang['tipe_harga'] == 'SEKALI') {
+                                                $ferkuensi = 1;
+                                            } elseif ($d_harga_jenjang['tipe_harga'] == 'INPUT') {
+                                            ?>
+                                                <input class="form-control" name="<?php echo $d_praktik['id_praktik'] . "-" . $d_harga_jenjang['id_harga'] ?>">
+                                            <?php
+                                            } elseif ($d_harga_jenjang['tipe_harga'] == 'HARGA-') {
+                                                $ferkuensi = tanggal_between_nonweekend($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                                            } elseif ($d_harga_jenjang['tipe_harga'] == 'HARGA+') {
+                                                $ferkuensi = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                                            } elseif ($d_harga_jenjang['tipe_harga'] == 'MINGGUAN') {
+                                                $ferkuensi = tanggal_between_week($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                                            } else {
+                                                $ferkuensi = $d_harga_jenjang['tipe_harga'];
+                                            }
+                                            echo $ferkuensi;
+                                            ?>
+                                        </td>
                                         <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
-                                        <td><?php echo "Rp " . number_format($d_praktik['jumlah_praktik'] * $d_harga_jenjang['jumlah_harga'], 0, ",", "."); ?></td>
+                                        <td><?php echo "Rp " . number_format($ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_jenjang['jumlah_harga'], 0, ",", "."); ?></td>
                                     </tr>
                             <?php
-                                    $jumlah_total_harga = ($d_praktik['jumlah_praktik'] * $d_harga_jenjang['jumlah_harga']) + $jumlah_total_harga;
+                                    $jumlah_total_harga = ($ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_jenjang['jumlah_harga']) + $jumlah_total_harga;
                                     $no++;
                                 }
                             }
@@ -140,6 +181,26 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                 <div class="text-gray-700">
                     <h5 class="font-weight-bold">Menu Harga Ujian <?php echo $d_praktik['nama_jurusan_pdd_jenis']; ?></h5>
                 </div>
+                <div class="boxed-check-group boxed-check-success">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label class="boxed-check">
+                                <input class="boxed-check-input" type="radio" name="cek_harga_ujian" value="y" required>
+                                <div class="boxed-check-label" style="text-align:center;">
+                                    Pakai Ujian
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            <label class="boxed-check">
+                                <input class="boxed-check-input" type="radio" name="cek_harga_ujian" value="t" required>
+                                <div class="boxed-check-label" style="text-align:center;">
+                                    Tidak Pakai Ujian
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <?php
                 if ($d_praktik['id_jurusan_pdd_jenis'] == 1) {
                     $sql = "AND tb_harga.id_harga_jenis = 1";
@@ -159,7 +220,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 
                 if ($r_harga_ujian > 0) {
                 ?>
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead class="thead-dark">
                             <tre>
                                 <th scope="col">No</th>
@@ -169,6 +230,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                 <th scope="col">Harga</th>
                                 <th scope="col">Frekuensi</th>
                                 <th scope="col">Kuantitas</th>
+                                <th scope="col">Total Harga</th>
                             </tre>
                         </thead>
                         <tbody>
@@ -186,20 +248,35 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <td>
                                         <?php
 
+                                        if ($d_harga_ujian['tipe_harga'] == 'SEKALI') {
+                                            $ferkuensi = 1;
+                                        } elseif ($d_harga_ujian['tipe_harga'] == 'INPUT') {
+                                        ?>
+                                            <input class="form-control" name="<?php echo $d_praktik['id_praktik'] . "-" . $d_harga_ujian['id_harga'] ?>">
+                                        <?php
+                                        } elseif ($d_harga_ujian['tipe_harga'] == 'HARGA-') {
+                                            $ferkuensi = tanggal_between_nonweekend($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                                        } elseif ($d_harga_ujian['tipe_harga'] == 'HARGA+') {
+                                            $ferkuensi = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                                        } elseif ($d_harga_ujian['tipe_harga'] == 'MINGGUAN') {
+                                            $ferkuensi = tanggal_between_week($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                                        } else {
+                                            $ferkuensi = $d_harga_ujian['tipe_harga'];
+                                        }
+                                        echo $ferkuensi;
                                         ?>
                                     </td>
-                                    <td>
-                                        <input class="form-control" type="hidden" name="<?php echo "jumlah_harga_tertentu" . $d_harga_ujian['id_harga']; ?>" id="<?php echo "jumlah_harga_" . $d_harga_ujian['id_harga']; ?>">
-                                        <span id="<?php echo "jht_" . $d_harga_ujian['id_harga']; ?>"></span>
-                                    </td>
+                                    <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
+                                    <td><?php echo "Rp " . number_format($ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_ujian['jumlah_harga'], 0, ",", "."); ?></td>
                                 </tr>
                             <?php
-                                $jumlah_total_ujian = ($d_praktik['jumlah_praktik'] * $d_harga_ujian['jumlah_harga']) + $jumlah_total_ujian;
+                                $jumlah_total_ujian = ($ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_ujian['jumlah_harga']) + $jumlah_total_ujian;
                                 $no++;
                             }
                             ?>
                             <tr>
-                                <td colspan="5" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
+                                <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
+                                <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_ujian, 0, ",", "."); ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -246,8 +323,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                 <th scope="col">Nama Harga</th>
                                 <th scope="col">Satuan</th>
                                 <th scope="col">Harga</th>
-                                <th scope="col">Kuantitas</th>
-                                <th scope="col">Total Harga</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -262,21 +338,20 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <td><?php echo $d_harga_lainnya['nama_harga_satuan']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga_lainnya['jumlah_harga'], 0, ",", "."); ?></td>
                                     <td>
-                                        <input class="form-control" type="text" id="<?php echo "harga_lainnya" . $d_harga_lainnya['id_harga']; ?>" name="<?php echo "harga_" . $d_harga_lainnya['id_harga']; ?>" value="<?php echo $d_praktik['jumlah_praktik']; ?>" onchange="hargalainnya(<?php echo $d_harga_lainnya['id_harga']; ?>, <?php echo $d_harga_lainnya['id_harga']; ?>, <?php echo $d_harga_lainnya['jumlah_harga'] ?>)">
-                                    </td>
-                                    <td>
-                                        <input class="form-control" type="hidden" name="<?php echo "jumlah_harga_lainnya" . $d_harga_lainnya['id_harga']; ?>" id="<?php echo "jumlah_harga_" . $d_harga_lainnya['id_harga']; ?>">
-                                        <span id="<?php echo "jhl_" . $d_harga_lainnya['id_harga']; ?>"></span>
+                                        <div class="boxed-check-group boxed-check-success">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="sewa_tempat_harga" value="<?php echo $d_harga_lainnya['id_harga']; ?>" required>
+                                                <div class="boxed-check-label" style="text-align:center;">
+                                                    Pilih
+                                                </div>
+                                            </label>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php
                                 $no++;
                             }
                             ?>
-                            <tr>
-                                <td colspan="6" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
-                                <td class="font-weight-bold">---</td>
-                            </tr>
                         </tbody>
                     </table>
                 <?php
@@ -294,12 +369,10 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
         <div class="card shadow mb-4 ">
             <div class="card-body">
                 <input name="id_praktik" value="<?php echo $_GET['ih'] ?>" hidden>
-                <input type="submit" class="form-control btn btn-success btn-sm" name='pilih_harga' value="SIMPAN">
+                <button type="submit" class="form-control btn btn-success btn-sm" name='pilih_harga'>SIMPAN</button>
             </div>
         </div>
     </form>
-</div>
-</div>
 </div>
 <?php
 if (isset($_POST['pilih_harga'])) {
@@ -308,34 +381,195 @@ if (isset($_POST['pilih_harga'])) {
 
     //SQL Praktikan
     $sql_praktik = "SELECT * FROM tb_praktik 
-    JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
-    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-    JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
-    JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-    JOIN tb_jurusan_pdd_jenis ON tb_praktik.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
-    JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
     WHERE tb_praktik.id_praktik = " . $id_praktik;
-    // echo $sql_praktik;
+
     $q_praktik = $conn->query($sql_praktik);
     $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 
-    //SQL HARGA sesauikan dengan Jurusan dan Jenis Jurusan
+    //SQL HARGA Wajib sesauikan dengan Jurusan dan Jenis Jurusan
     $sql_harga_jurusan = " SELECT * FROM tb_harga 
     JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
     JOIN tb_jurusan_pdd_jenis ON tb_harga.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
-    JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan  
     WHERE tb_harga.id_jurusan_pdd_jenis = " . $d_praktik['id_jurusan_pdd_jenis'] . " AND tb_harga.id_harga_jenis BETWEEN 1 AND 5
     ORDER BY nama_harga_jenis ASC, nama_harga ASC 
     ";
 
-    //SQL HARGA sesuaikan dengan Jenjang
-    $sql_harga_jenjang = " SELECT * FROM tb_harga 
-    JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
-    JOIN tb_jenjang_pdd ON tb_harga.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-    JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan 
-    WHERE tb_harga.id_jenjang_pdd = " . $d_praktik['id_jenjang_pdd'] . " AND tb_harga.id_harga_jenis BETWEEN 1 AND 6
-    ORDER BY nama_jenjang_pdd ASC
+    $q_harga_jurusan = $conn->query($sql_harga_jurusan);
+    while ($d_harga_jurusan = $q_harga_jurusan->fetch(PDO::FETCH_ASSOC)) {
+
+        if ($d_harga_jurusan['tipe_harga'] == 'SEKALI') {
+            $ferkuensi = 1;
+        } elseif ($d_harga_jurusan['tipe_harga'] == 'INPUT') {
+            echo "INPUT";
+        } elseif ($d_harga_jurusan['tipe_harga'] == 'HARGA-') {
+            $ferkuensi = tanggal_between_nonweekend($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+        } elseif ($d_harga_jurusan['tipe_harga'] == 'HARGA+') {
+            $ferkuensi = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+        } elseif ($d_harga_jurusan['tipe_harga'] == 'MINGGUAN') {
+            $ferkuensi = tanggal_between_week($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+        } else {
+            $ferkuensi = $d_harga_jurusan['tipe_harga'];
+        }
+        $sql_insert_harga_jurusan = " INSERT INTO tb_harga_pilih (
+            id_praktik, 
+            id_harga, 
+            tgl_input_harga_pilih, 
+            frekuensi_harga_pilih,
+            kuantitas_harga_pilih,
+            jumlah_harga_pilih)
+        VALUES (
+            '" . $id_praktik . "', 
+            '" . $d_harga_jurusan['id_harga'] . "', 
+            '" . date('Y-m-d') . "', 
+            '" . $ferkuensi . "', 
+            '" . $d_praktik['jumlah_praktik'] . "', 
+            '" . $ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_jurusan['jumlah_harga'] . "'
+        )";
+
+        // echo $sql_insert_harga_jurusan . "<br>";
+        $conn->query($sql_insert_harga_jurusan);
+    }
+
+    //SQL BST Eksekusi bila jurusan selain dari kedokteran
+    if ($d_praktik['id_jurusan_pdd_jenis'] != 1) {
+        $sql_harga_jenjang = " SELECT * FROM tb_harga 
+        JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
+        JOIN tb_jenjang_pdd ON tb_harga.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
+        WHERE tb_harga.id_jenjang_pdd = " . $d_praktik['id_jenjang_pdd'] . " AND tb_harga.id_harga_jenis BETWEEN 1 AND 6
+        ORDER BY nama_jenjang_pdd ASC
+        ";
+
+        $q_harga_jenjang = $conn->query($sql_harga_jenjang);
+
+        while ($d_harga_jenjang = $q_harga_jenjang->fetch(PDO::FETCH_ASSOC)) {
+            if ($d_harga_jenjang['tipe_harga'] == 'SEKALI') {
+                $ferkuensi = 1;
+            } elseif ($d_harga_jenjang['tipe_harga'] == 'INPUT') {
+                echo "INPUT";
+            } elseif ($d_harga_jenjang['tipe_harga'] == 'HARGA-') {
+                $ferkuensi = tanggal_between_nonweekend($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+            } elseif ($d_harga_jenjang['tipe_harga'] == 'HARGA+') {
+                $ferkuensi = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+            } elseif ($d_harga_jenjang['tipe_harga'] == 'MINGGUAN') {
+                $ferkuensi = tanggal_between_week($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+            } else {
+                $ferkuensi = $d_harga_jenjang['tipe_harga'];
+            }
+
+            $sql_insert_harga_jenjang = " INSERT INTO tb_harga_pilih (
+                id_praktik, 
+                id_harga, 
+                tgl_input_harga_pilih, 
+                frekuensi_harga_pilih,
+                kuantitas_harga_pilih,
+                jumlah_harga_pilih)
+            VALUES (
+                '" . $id_praktik . "', 
+                '" . $d_harga_jenjang['id_harga'] . "', 
+                '" . date('Y-m-d') . "', 
+                '" . $ferkuensi . "', 
+                '" . $d_praktik['jumlah_praktik'] . "', 
+                '" . $ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_jenjang['jumlah_harga'] . "'
+            )";
+
+            // echo $sql_insert_harga_jenjang . "<br>";
+            $conn->query($sql_insert_harga_jenjang);
+        }
+    }
+    echo "<br><br>";
+
+    //SQL Harga Ujian 
+    $cek_harga_ujian = $_POST['cek_harga_ujian'];
+    if ($cek_harga_ujian == 'y') {
+        if ($d_praktik['id_jurusan_pdd_jenis'] == 1) {
+            $sql = "AND tb_harga.id_harga_jenis = 1";
+        } else {
+            $sql = "AND tb_harga.id_jurusan_pdd_jenis BETWEEN 2 AND 4";
+        }
+        $sql_harga_ujian = " SELECT * FROM tb_harga 
+            JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
+            JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan 
+            WHERE tb_harga.id_harga_jenis = 6 AND tb_harga.id_jurusan_pdd_jenis = " . $d_praktik['id_jurusan_pdd_jenis'] . "
+            ORDER BY nama_harga_jenis ASC
+        ";
+
+        $q_harga_ujian = $conn->query($sql_harga_ujian);
+
+        while ($d_harga_ujian = $q_harga_ujian->fetch(PDO::FETCH_ASSOC)) {
+            if ($d_harga_ujian['tipe_harga'] == 'SEKALI') {
+                $ferkuensi = 1;
+            } elseif ($d_harga_ujian['tipe_harga'] == 'INPUT') {
+                echo "INPUT";
+            } elseif ($d_harga_ujian['tipe_harga'] == 'HARGA-') {
+                $ferkuensi = tanggal_between_nonweekend($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+            } elseif ($d_harga_ujian['tipe_harga'] == 'HARGA+') {
+                $ferkuensi = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+            } elseif ($d_harga_ujian['tipe_harga'] == 'MINGGUAN') {
+                $ferkuensi = tanggal_between_week($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+            } else {
+                $ferkuensi = $d_harga_ujian['tipe_harga'];
+            }
+
+            $sql_insert_harga_ujian = " INSERT INTO tb_harga_pilih (
+                id_praktik, 
+                id_harga, 
+                tgl_input_harga_pilih, 
+                frekuensi_harga_pilih,
+                kuantitas_harga_pilih,
+                jumlah_harga_pilih)
+            VALUES (
+                '" . $id_praktik . "', 
+                '" . $d_harga_ujian['id_harga'] . "', 
+                '" . date('Y-m-d') . "', 
+                '" . $ferkuensi . "', 
+                '" . $d_praktik['jumlah_praktik'] . "', 
+                '" . $ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_ujian['jumlah_harga'] . "'
+            )";
+
+            // echo $sql_insert_harga_ujian . "<br>";
+            $conn->query($sql_insert_harga_ujian);
+        }
+    }
+    echo "<br><br>";
+
+    //SQL Harga Lainnya
+    $sewa_tempat_harga = $_POST['sewa_tempat_harga'];
+    $sql_harga_lainnya = " SELECT * FROM tb_harga 
+    JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis
+    JOIN tb_jurusan_pdd_jenis ON tb_harga.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
+    WHERE tb_harga.id_harga = $sewa_tempat_harga
     ";
-}
+
+    $q_harga_lainnya = $conn->query($sql_harga_lainnya);
+    $d_harga_lainnya = $q_harga_lainnya->fetch(PDO::FETCH_ASSOC);
+
+    $sql_insert_harga_lainnya = " INSERT INTO tb_harga_pilih (
+            id_praktik, 
+            id_harga, 
+            tgl_input_harga_pilih, 
+            frekuensi_harga_pilih,
+            kuantitas_harga_pilih,
+            jumlah_harga_pilih)
+        VALUES (
+            '" . $id_praktik . "', 
+            '" . $d_harga_lainnya['id_harga'] . "', 
+            '" . date('Y-m-d') . "', 
+            '1', 
+            '1', 
+            '" . $d_harga_lainnya['jumlah_harga'] . "'
+        )";
+
+    // echo $sql_insert_harga_lainnya . "<br>";
+    $conn->query($sql_insert_harga_lainnya);
+
+    //SQL ubah status praktik
+    $sql_ubah_status_praktik = "UPDATE tb_praktik
+    SET status_cek_praktik = 'HARGA'
+    WHERE id_praktik = " . $d_praktik['id_praktik'];
+    $conn->query($sql_insert_harga_lainnya);
 ?>
+    <script type="text/javascript">
+        document.location.href = "?prk";
+    </script>
+<?php
+}

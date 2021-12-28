@@ -22,8 +22,34 @@
                                 <div class="modal-body">
                                     Nama Harga : <span style="color:red">*</span><br>
                                     <input class="form-control" name="nama_harga" required><br>
-                                    Satuan Harga : <span style="color:red">*</span><br>
-                                    <input class="form-control" name="satuan_harga" required><br>
+                                    Satuan Harga : <span style="color:red">*</span><br><?php
+                                                                                        $sql_harga_satuan = "SELECT * FROM tb_harga_satuan order by nama_harga_satuan ASC";
+
+                                                                                        $q_harga_satuan = $conn->query($sql_harga_satuan);
+                                                                                        $r_harga_satuan = $q_harga_satuan->rowCount();
+
+                                                                                        if ($r_harga_satuan > 0) {
+                                                                                        ?>
+                                        <select class="form-control text-center" name="id_harga_satuan" required>
+                                            <option value="">-- Pilih Jenis Harga --</option>
+                                            <?php
+                                                                                            while ($d_harga_satuan = $q_harga_satuan->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                                <option value='<?php echo $d_harga_satuan['id_harga_satuan']; ?>'>
+                                                    <?php echo $d_harga_satuan['nama_harga_satuan']; ?>
+                                                </option>
+                                            <?php
+                                                                                            }
+                                            ?>
+                                        </select>
+                                    <?php
+                                                                                        } else {
+                                    ?>
+                                        <b><i>Data Jenis Harga Tidak Ada</i></b>
+                                    <?php
+                                                                                        }
+                                    ?>
+                                    <br>
                                     Jumlah Harga : <i style='font-size:12px;'>(Rp)</i><span style="color:red">*</span><br>
                                     <input class="form-control" name="jumlah_harga" type="number" min="1" required>
                                     <i style='font-size:12px;'>Isian hanya berupa angka</i><br><br>
@@ -147,6 +173,16 @@
                                     ?>
                                     <br>
 
+                                    Tipe : <span style="color:red">*</span><br>
+                                    <select class="form-control text-center" name="tipe_harga" required>
+                                        <option value="">-- Pilih --</option>
+                                        <option value="SEKALI">Sekali</option>
+                                        <option value="INPUT">Diinput Manual</option>
+                                        <option value="HARI-">Harian Tidak Termasuk Sabtu Minggu</option>
+                                        <option value="HARI+">Harian Termasuk Sabtu Minggu</option>
+                                        <option value="MINGGU">Mingguan</option>
+                                    </select><br>
+
                                     Pilihan : <span style="color:red">*</span><br>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="pilih_harga" value="1" required>
@@ -215,6 +251,8 @@
         <div class="card-body">
             <div class="table-responsive">
                 <?php
+
+                // data satuan Harga
                 if (isset($_GET['dhs'])) {
                 ?>
                     <table class="table table-striped" id="myTable">
@@ -308,7 +346,9 @@
                         </tbody>
                     </table>
                 <?php
-                } else {
+                }
+                //data harga
+                else {
                 ?>
                     <table class="table table-striped" id="myTable">
                         <thead class="thead-dark">
@@ -549,9 +589,41 @@
                                                     ?>
                                                     <br>
 
+                                                    Tipe : <span style="color:red">*</span><br>
+                                                    <select class="form-control text-center" name="tipe_harga" required>
+                                                        <option value="">-- Pilih --</option>
+                                                        <?php
+                                                        $cek1 = '';
+                                                        $cek2 = '';
+                                                        $cek3 = '';
+                                                        $cek4 = '';
+                                                        $cek5 = '';
+                                                        if ($d_harga['tipe_harga'] == 'SEKALI') {
+                                                            $cek1 = 'selected';
+                                                        } elseif ($d_harga['tipe_harga'] == 'INPUT') {
+                                                            $cek2 = 'selected';
+                                                        } elseif ($d_harga['tipe_harga'] == 'HARI-') {
+                                                            $cek3 = 'selected';
+                                                        } elseif ($d_harga['tipe_harga'] == 'HARI+') {
+                                                            $cek4 = 'selected';
+                                                        } elseif ($d_harga['tipe_harga'] == 'MINGGUAN') {
+                                                            $cek5 = 'selected';
+                                                        }
+
+                                                        ?>
+                                                        <option value="SEKALI" <?php echo $cek1; ?>>Sekali</option>
+                                                        <option value="INPUT" <?php echo $cek2; ?>>Diinput Manual</option>
+                                                        <option value="HARI-" <?php echo $cek3; ?>>Harian Tidak Termasuk Sabtu Minggu</option>
+                                                        <option value="HARI+" <?php echo $cek4; ?>>Harian Termasuk Sabtu Minggu</option>
+                                                        <option value="MINGGUAN" <?php echo $cek5; ?>>Mingguan</option>
+                                                    </select><br>
+
                                                     Pilihan : <span style="color:red">*</span><br>
                                                     <div class="form-check">
                                                         <?php
+                                                        $pilih_harga_1 = '';
+                                                        $pilih_harga_2 = '';
+                                                        $pilih_harga_3 = '';
                                                         if ($d_harga['pilih_harga'] == 1) {
                                                             $pilih_harga_1 = "checked";
                                                         } elseif ($d_harga['pilih_harga'] == 2) {
@@ -624,8 +696,9 @@ if (isset($_POST['tambah_harga'])) {
 
     $sql_insert_harga =  "INSERT INTO tb_harga (
         nama_harga,
-        satuan_harga,
+        id_harga_satuan,
         jumlah_harga,
+        tipe_harga,
         id_jurusan_pdd,
         id_jenjang_pdd,
         id_spesifikasi_pdd,
@@ -633,8 +706,9 @@ if (isset($_POST['tambah_harga'])) {
         pilih_harga
         ) VALUES (
             '" . $_POST['nama_harga'] . "',
-            '" . $_POST['satuan_harga'] . "',
+            '" . $_POST['id_harga_satuan'] . "',
             '" . $_POST['jumlah_harga'] . "',
+            '" . $_POST['tipe_harga'] . "',
             '" . $_POST['id_jurusan_pdd'] . "',
             '" . $_POST['id_jenjang_pdd'] . "',
             '" . $_POST['id_spesifikasi_pdd'] . "',
@@ -673,6 +747,7 @@ if (isset($_POST['tambah_harga'])) {
     `nama_harga` = '" . $_POST['nama_harga'] . "',
     `id_harga_satuan` = '" . $_POST['id_harga_satuan'] . "',
     `jumlah_harga` = '" . $_POST['jumlah_harga'] . "',
+    `tipe_harga` = '" . $_POST['tipe_harga'] . "',
     `id_harga_jenis` = '" . $_POST['id_harga_jenis'] . "',
     `id_jurusan_pdd` = '" . $_POST['id_jurusan_pdd'] . "',
     `id_jenjang_pdd` = '" . $_POST['id_jenjang_pdd'] . "',
@@ -718,11 +793,3 @@ if (isset($_POST['tambah_harga'])) {
 <?php
 }
 ?>
-
-<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#myTable').DataTable();
-    });
-</script>

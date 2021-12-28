@@ -20,7 +20,8 @@
         <div class="card-body">
             <div class="table-responsive">
                 <?php
-                $sql_praktik = "SELECT * FROM tb_praktik 
+                if ($_SESSION['level_user'] == 1) {
+                    $sql_praktik = "SELECT * FROM tb_praktik 
                     JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
                     JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
                     JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
@@ -29,7 +30,17 @@
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
                     WHERE tb_praktik.status_praktik = 'Y'
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
-
+                } else {
+                    $sql_praktik = "SELECT * FROM tb_praktik 
+                    JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
+                    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
+                    JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
+                    JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
+                    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
+                    JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
+                    WHERE tb_praktik.status_praktik = 'Y' AND id_user = " . $_SESSION['id_user'] . "
+                    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+                }
                 $q_praktik = $conn->query($sql_praktik);
                 $r_praktik = $q_praktik->rowCount();
 
@@ -59,11 +70,23 @@
                                             ?>
                                                 <span class="badge badge-danger text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                             <?php
-                                            } elseif ($d_praktik['status_cek_praktik'] == "MENU") {
+                                            } elseif ($d_praktik['status_cek_praktik'] == "HARGA") {
                                             ?>
-                                                <span class="badge badge-warning text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                <span class="badge badge-danger text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                             <?php
-                                            } elseif ($d_praktik['status_cek_praktik'] == 3) {
+                                            } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+                                            ?>
+                                                <span class="badge badge-danger  text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN-") {
+                                            ?>
+                                                <span class="badge badge-danger text-md">PEMBAYARAN</span>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN+") {
+                                            ?>
+                                                <span class="badge badge-primary text-md">PEMBAYARAN</span>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "AKTIF") {
                                             ?>
                                                 <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                             <?php
@@ -73,17 +96,63 @@
                                         <div class="col-sm-1">
 
                                             <!-- tombol dropdown pilih menu harga, mess, bukti bayar -->
-                                            <div class="dropdown text-gray-800">
-                                                <button class="btn btn-secondary btn-sm dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-clipboard-list"></i>
-                                                    Pilih
-                                                </button>
-                                                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item btn btn-outline-secondary btn-sm" href="?prk&ih=<?php echo $d_praktik['id_praktik']; ?>">Pilih Harga</a>
-                                                    <a class="dropdown-item btn btn-secondary btn-sm" href="?prk&m=<?php echo $d_praktik['id_praktik']; ?>">Pilih Mess</a>
-                                                    <a class="btn btn-secondary btn-sm dropdown-item " href="#" data-toggle="modal" data-target="#bayar_<?php echo $d_praktik['id_praktik']; ?>">Pembayaran</a>
+                                            <?php
+                                            if ($d_praktik['status_cek_praktik'] == "DAFTAR") {
+                                            ?>
+                                                <a class="btn btn-outline-danger btn-sm" href="?prk&ih=<?php echo $d_praktik['id_praktik']; ?>">Pilih Harga</a>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "HARGA") {
+                                            ?>
+                                                <a class="btn btn-outline-danger btn-sm" href="?prk&m=<?php echo $d_praktik['id_praktik']; ?>">Pilih Mess</a>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+                                            ?>
+                                                <span class="badge badge-primary text-md">VALIDASI ADMIN</span>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN-") {
+                                            ?>
+                                                <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#bayar_<?php echo $d_praktik['id_praktik']; ?>">Pembayaran</a>
 
+                                                <!-- modal bayar -->
+                                                <div class="modal fade" id="bayar_<?php echo $d_praktik['id_praktik']; ?>">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                MASUKAN DATA PEMBAYARAN
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form class="form-group" method="post" enctype="multipart/form-data">
+                                                                    <b>Atas Nama : </b><br>
+                                                                    <input class="form-control" type="text" nama="nama_bayar"><br>
+                                                                    <b>No. Rekening/Lainnya : </b><br>
+                                                                    <input class="form-control" type="number" nama="no_rek_bayar"><br>
+                                                                    <b>Pembayaran Melalui : </b><br>
+                                                                    <input class="form-control" type="text" nama="melalui_bayar"><br>
+                                                                    <b>Unggah File : </b><br>
+                                                                    <input class="form-control" type="file" nama="file_bayar"><br>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-success btn-sm" type="button" data-dismiss="modal">Batal</button>
+                                                                <form method="post">
+                                                                    <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
+                                                                    <input type="submit" name="simpan_bayar" value="Kirim" class="btn btn-danger btn-sm">
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN+") {
+                                            ?>
+                                                <span class="badge badge-primary text-md">VALIDASI ADMIN</span>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "AKTIF") {
+                                            ?>
+                                                <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                            <?php
+                                            }
+                                            ?>
+
                                         </div>
                                         <div class="col-sm-2">
                                             <!-- tombol rincian -->
@@ -91,10 +160,7 @@
                                             </button>
                                             <!-- tombol ubah -->
                                             <a href="?prk&u=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-primary btn-sm" title="Ubah">
-                                                <svg width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                                </svg>
+                                                <i class="fas fa-edit"></i>
                                             </a>
 
                                             <!-- tombol arsip -->
@@ -169,85 +235,165 @@
 
                                         <!-- data menu harga yang dipilih -->
                                         <div class="text-gray-700">
-                                            <h4 class="font-weight-bold">DATA MENU HARGA</h4>
-                                        </div>
-                                        <?php
-                                        if ($d_praktik['status_cek_praktik'] == 'DAFTAR') {
-                                        ?>
-                                            <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
-                                                <h5 class="text-center">Data Menu Harga Tidak Ada</h5>
+                                            <div class="row">
+                                                <div class="col-lg-11">
+                                                    <h4 class="font-weight-bold">
+                                                        DATA MENU HARGA
+                                                        <?php
+                                                        if ($_SESSION['level_user'] == 1) {
+                                                        ?>
+                                                            <a title="Ubah Harga" class="btn btn-primary btn-sm" href="?prk&uh=<?php echo $d_praktik['id_praktik'] ?>">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </h4>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                </div>
                                             </div>
-                                        <?php
-                                        } else {
-                                        ?>
-                                        <?php
-                                        }
-                                        ?>
-                                        <hr>
+                                            <?php
+                                            $sql_harga_pilih = "SELECT * FROM tb_harga_pilih
+                                        JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
+                                        JOIN tb_Praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
+                                        WHERE tb_harga_pilih.id_praktik = " . $d_praktik['id_praktik'] . "
+                                        ORDER BY tb_harga.id_harga_jenis , tb_harga.nama_harga ASC";
 
-                                        <!-- data MESS -->
-                                        <div class="text-gray-700">
-                                            <h4 class="font-weight-bold">DATA MESS</h4>
-                                        </div>
-                                        <?php
-                                        if ($d_praktik['status_cek_praktik'] == 'DAFTAR' || 'MESS') {
-                                        ?>
-                                            <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
-                                                <h5 class="text-center">Data MESS Tidak Ada</h5>
-                                            </div>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            DATA
-                                        <?php
-                                        }
-                                        ?>
-                                        <hr>
 
-                                        <!-- data pembayaran -->
-                                        <div class="text-gray-700">
-                                            <h4 class="font-weight-bold">DATA PEMBAYARAN</h4>
-                                        </div>
-                                        <?php
-                                        if ($d_praktik['status_cek_praktik'] == 'DAFTAR' || 'MESS') {
-                                        ?>
-                                            <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
-                                                <h5 class="text-center">Data Pembayaran Tidak Ada</h5>
+                                            $q_harga_pilih = $conn->query($sql_harga_pilih);
+                                            $r_harga_pilih = $q_harga_pilih->rowCount();
+                                            if ($r_praktik > 0) {
+                                            ?>
+
+                                                <table class="table table-striped" id="myTable">
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th scope="col">No</th>
+                                                            <th scope="col">Tanggal Input</th>
+                                                            <th scope="col">Tanggal Ubah</th>
+                                                            <th scope="col">Nama Harga</th>
+                                                            <th scope="col">Jumlah Harga</th>
+                                                            <th scope="col">Frekuensi</th>
+                                                            <th scope="col">Kuantitas</th>
+                                                            <th scope="col">Total Harga</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+
+                                                        $no = 1;
+                                                        while ($d_harga_pilih = $q_harga_pilih->fetch(PDO::FETCH_ASSOC)) {
+
+                                                        ?>
+                                                            <tr>
+                                                                <th scope="row"><?php echo $no; ?></th>
+                                                                <td><?php echo tanggal($d_harga_pilih['tgl_input_harga_pilih']); ?></td>
+                                                                <td>
+                                                                    <?php
+                                                                    if ($d_harga_pilih['tgl_ubah_harga_pilih'] != NULL) {
+                                                                        echo tanggal($d_harga_pilih['tgl_ubah_harga_pilih']);
+                                                                    } else {
+                                                                        echo "-";
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                                <td><?php echo $d_harga_pilih['nama_harga']; ?></td>
+                                                                <td><?php echo "Rp " . number_format($d_harga_pilih['jumlah_harga'], 0, ",", "."); ?></td>
+                                                                <td><?php echo $d_harga_pilih['frekuensi_harga_pilih']; ?></td>
+                                                                <td><?php echo $d_harga_pilih['kuantitas_harga_pilih']; ?></td>
+                                                                <td><?php echo "Rp " . number_format($d_harga_pilih['jumlah_harga_pilih'], 0, ",", "."); ?></td>
+                                                            </tr>
+                                                        <?php
+                                                            $no++;
+                                                        }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
+                                                    <h5 class="text-center">Data Menu Harga Tidak Ada</h5>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
+                                            <hr>
+
+                                            <!-- data MESS -->
+                                            <div class="text-gray-700">
+                                                <h4 class="font-weight-bold">DATA MESS</h4>
                                             </div>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            DATA
-                                        <?php
-                                        }
-                                        ?>
+                                            <?php
+                                            $sql_harga_pilih = "SELECT * FROM tb_harga_pilih
+                                        JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
+                                        JOIN tb_Praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
+                                        WHERE tb_harga_pilih.id_praktik = " . $d_praktik['id_praktik'] . "
+                                        ORDER BY tb_harga.id_harga_jenis , tb_harga.nama_harga ASC";
+
+
+                                            $q_harga_pilih = $conn->query($sql_harga_pilih);
+                                            $r_harga_pilih = $q_harga_pilih->rowCount();
+                                            if ($r_praktik > 0) {
+                                            } else {
+                                            ?>
+                                                <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
+                                                    <h5 class="text-center">Data Menu Harga Tidak Ada</h5>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
+                                            <hr>
+
+                                            <!-- data pembayaran -->
+                                            <div class="text-gray-700">
+                                                <h4 class="font-weight-bold">DATA PEMBAYARAN</h4>
+                                            </div>
+                                            <?php
+                                            $sql_harga_pilih = "SELECT * FROM tb_harga_pilih
+                                        JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
+                                        JOIN tb_Praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
+                                        WHERE tb_harga_pilih.id_praktik = " . $d_praktik['id_praktik'] . "
+                                        ORDER BY tb_harga.id_harga_jenis , tb_harga.nama_harga ASC";
+
+
+                                            $q_harga_pilih = $conn->query($sql_harga_pilih);
+                                            $r_harga_pilih = $q_harga_pilih->rowCount();
+                                            if ($r_praktik > 0) {
+                                            } else {
+                                            ?>
+                                                <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
+                                                    <h5 class="text-center">Data Menu Harga Tidak Ada</h5>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr>
-                    <?php
+                            <hr>
+                        <?php
                     }
-                    ?>
-                <?php
                 } else {
-                ?>
-                    <h3 class='text-center'> Data Praktikan Anda Tidak Ada</h3>
-                <?php
+                        ?>
+                        <h3 class='text-center'> Data Praktikan Anda Tidak Ada</h3>
+                    <?php
                 }
-                ?>
+                    ?>
+                        </div>
             </div>
         </div>
     </div>
-</div>
-<!-- /.container-fluid -->
-<?php
-if (isset($_POST['arsip_praktik'])) {
-    $conn->query("UPDATE `tb_praktik` SET status_praktik = 'T' WHERE id_praktik = " . $_POST['id_praktik']);
-?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
-    </script>
-<?php
-}
-?>
+    <!-- /.container-fluid -->
+    <?php
+    if (isset($_POST['arsip_praktik'])) {
+        $conn->query("UPDATE `tb_praktik` SET status_praktik = 'T' WHERE id_praktik = " . $_POST['id_praktik']);
+    ?>
+        <script type="text/javascript">
+            document.location.href = "?prk";
+        </script>
+    <?php
+    }
+    ?>
