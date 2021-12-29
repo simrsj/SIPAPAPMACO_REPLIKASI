@@ -250,15 +250,13 @@
                                                         ?>
                                                     </h4>
                                                 </div>
-                                                <div class="col-lg-1">
-                                                </div>
                                             </div>
                                             <?php
                                             $sql_harga_pilih = "SELECT * FROM tb_harga_pilih
-                                        JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
-                                        JOIN tb_Praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
-                                        WHERE tb_harga_pilih.id_praktik = " . $d_praktik['id_praktik'] . "
-                                        ORDER BY tb_harga.id_harga_jenis , tb_harga.nama_harga ASC";
+                                            JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
+                                            JOIN tb_Praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
+                                            WHERE tb_harga_pilih.id_praktik = " . $d_praktik['id_praktik'] . "
+                                            ORDER BY tb_harga.id_harga_jenis , tb_harga.nama_harga ASC";
 
 
                                             $q_harga_pilih = $conn->query($sql_harga_pilih);
@@ -327,10 +325,10 @@
                                             </div>
                                             <?php
                                             $sql_harga_pilih = "SELECT * FROM tb_harga_pilih
-                                        JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
-                                        JOIN tb_Praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
-                                        WHERE tb_harga_pilih.id_praktik = " . $d_praktik['id_praktik'] . "
-                                        ORDER BY tb_harga.id_harga_jenis , tb_harga.nama_harga ASC";
+                                                JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
+                                                JOIN tb_Praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
+                                                WHERE tb_harga_pilih.id_praktik = " . $d_praktik['id_praktik'] . "
+                                                ORDER BY tb_harga.id_harga_jenis , tb_harga.nama_harga ASC";
 
 
                                             $q_harga_pilih = $conn->query($sql_harga_pilih);
