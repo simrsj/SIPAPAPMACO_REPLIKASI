@@ -8,7 +8,7 @@
 
 git status
 git add .
-git commit -m "Proses edit DATA HARGA"
+git commit -m "Proses CRUD DATA HARGA PENDAFTARAN"
 git pull
 git push
  
