@@ -137,8 +137,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_admin/view/v_praktik_arsip.php";
-						} elseif (isset($_GET['ibt'])) {
-							include "_admin/insert/i_praktik_bukti_trasfer.php";
+						} elseif (isset($_GET['ib'])) {
+							include "_admin/insert/i_praktik_bayar.php";
 						} elseif (isset($_GET['dh'])) {
 							include "_admin/hide/dh_praktik.php";
 						} elseif (isset($_GET['ih'])) {
@@ -149,6 +149,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/insert/i_praktik_mess.php";
 						} elseif (isset($_GET['u'])) {
 							include "_admin/update/u_praktik.php";
+						} elseif (isset($_GET['ub'])) {
+							include "_admin/update/u_praktik_bayar.php";
+						} elseif (isset($_GET['uh'])) {
+							include "_admin/update/u_praktik_harga.php";
+						} elseif (isset($_GET['um'])) {
+							include "_admin/update/u_praktik_mess.php";
 						} else {
 							include "_admin/view/v_praktik.php";
 						}

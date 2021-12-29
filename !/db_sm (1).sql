@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2021 at 12:46 AM
+-- Generation Time: Dec 30, 2021 at 12:41 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -41,6 +41,22 @@ INSERT INTO `tb_akreditasi` (`id_akreditasi`, `nama_akreditasi`) VALUES
 (1, 'A'),
 (2, 'B'),
 (3, 'C');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_bayar`
+--
+
+CREATE TABLE `tb_bayar` (
+  `id_bayar` int(11) NOT NULL,
+  `id_praktik` int(11) NOT NULL,
+  `atas_nama_bayar` text NOT NULL,
+  `no_bayar` text NOT NULL,
+  `melalui_bayar` text NOT NULL,
+  `tgl_bayar` date NOT NULL,
+  `file_bayar` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -198,22 +214,22 @@ CREATE TABLE `tb_harga_pilih` (
 --
 
 INSERT INTO `tb_harga_pilih` (`id_harga_pilih`, `id_praktik`, `id_harga`, `tgl_input_harga_pilih`, `tgl_ubah_harga_pilih`, `frekuensi_harga_pilih`, `kuantitas_harga_pilih`, `jumlah_harga_pilih`) VALUES
-(8, 7, 32, '2021-12-28', NULL, 1, 2, 40000),
-(9, 7, 33, '2021-12-28', NULL, 1, 2, 40000),
-(10, 7, 34, '2021-12-28', NULL, 1, 2, 40000),
-(11, 7, 36, '2021-12-28', NULL, 1, 2, 300000),
-(12, 7, 37, '2021-12-28', NULL, 1, 2, 40000),
-(13, 7, 38, '2021-12-28', NULL, 1, 2, 20000),
-(14, 7, 35, '2021-12-28', NULL, 1, 2, 150000),
-(15, 7, 40, '2021-12-28', NULL, 3, 2, 900000),
-(16, 7, 39, '2021-12-28', NULL, 1, 2, 300000),
-(17, 7, 62, '2021-12-28', NULL, 1, 2, 150000),
-(18, 7, 41, '2021-12-28', NULL, 1, 2, 300000),
-(19, 7, 42, '2021-12-28', NULL, 1, 2, 40000),
-(20, 7, 43, '2021-12-28', NULL, 1, 2, 200000),
-(21, 7, 44, '2021-12-28', NULL, 1, 2, 300000),
-(22, 7, 45, '2021-12-28', NULL, 1, 2, 40000),
-(23, 7, 70, '2021-12-28', NULL, 1, 1, 1000000);
+(46, 7, 32, '2021-12-29', NULL, 1, 2, 40000),
+(47, 7, 33, '2021-12-29', NULL, 1, 2, 40000),
+(48, 7, 34, '2021-12-29', NULL, 1, 2, 40000),
+(49, 7, 36, '2021-12-29', NULL, 1, 2, 300000),
+(50, 7, 37, '2021-12-29', NULL, 1, 2, 40000),
+(51, 7, 38, '2021-12-29', NULL, 1, 2, 20000),
+(52, 7, 35, '2021-12-29', NULL, 1, 2, 150000),
+(53, 7, 40, '2021-12-29', NULL, 3, 2, 900000),
+(54, 7, 39, '2021-12-29', NULL, 1, 2, 300000),
+(55, 7, 62, '2021-12-29', NULL, 1, 2, 150000),
+(56, 7, 41, '2021-12-29', NULL, 1, 2, 300000),
+(57, 7, 42, '2021-12-29', NULL, 1, 2, 40000),
+(58, 7, 43, '2021-12-29', NULL, 1, 2, 200000),
+(59, 7, 44, '2021-12-29', NULL, 1, 2, 300000),
+(60, 7, 45, '2021-12-29', NULL, 1, 2, 40000),
+(61, 7, 69, '2021-12-29', NULL, 1, 1, 750000);
 
 -- --------------------------------------------------------
 
@@ -587,7 +603,7 @@ CREATE TABLE `tb_mess` (
 INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_mess`, `kapasitas_t_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `kapasitas_terisi_mess`, `ket_mess`, `status_mess`) VALUES
 (1, 'Mess RSJ 1 Lama', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 0, 'Makan 3x Sehari', 'Aktif'),
 (2, 'Mess RSJ 2 Baru', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 0, '', 'Aktif'),
-(3, 'Asrama Rifa Corporate', 0, 0, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 20000, 80000, 0, 'Dengan Makan 3x Sehari', 'Aktif'),
+(3, 'Asrama Rifa Corporate', 0, 0, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 20000, 80000, 2, 'Dengan Makan 3x Sehari', 'Aktif'),
 (4, 'Pondokan H. Ating', 0, 0, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '0', '', 0, 0, 0, '', 'Aktif'),
 (5, 'Wisma Anugrah Ibu Nanik', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Hj. Nanik Susiani', '081320719652', '', 15000, 70000, 0, '', 'Aktif'),
 (6, 'Pondokan dr. Hj. Meutia Laksminingrum', 0, 0, 0, '-', 'dr. Hj. Meutia Laksminingrum', '0', '', 0, 0, 0, '', 'Aktif'),
@@ -633,9 +649,17 @@ CREATE TABLE `tb_mess_pilih` (
   `id_mess_pilih` int(11) NOT NULL,
   `id_praktik` int(11) NOT NULL,
   `id_mess` int(11) NOT NULL,
-  `makan_mess_pilih` enum('Y','T') NOT NULL,
-  `jumlah_mess_pilih` int(11) NOT NULL
+  `makan_mess_pilih` enum('Ya','Tidak') NOT NULL,
+  `jumlah_mess_pilih` int(11) NOT NULL,
+  `Total_harga_mess_pilih` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_mess_pilih`
+--
+
+INSERT INTO `tb_mess_pilih` (`id_mess_pilih`, `id_praktik`, `id_mess`, `makan_mess_pilih`, `jumlah_mess_pilih`, `Total_harga_mess_pilih`) VALUES
+(4, 7, 3, 'Ya', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -790,7 +814,7 @@ INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`
 (4, 20, 20, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-28', '2021-11-24', '2021-12-31', 10, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
 (5, 80, 80, 'Kelompok 3', '2021-12-05', '2021-12-21', '2021-12-31', '2021-12-31', 20, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 2, '2', '6', '0', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
 (6, 5, 5, 'Kelompok 3 Gel. III', '2021-12-03', NULL, '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', 3, '4', '6', '0', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y'),
-(7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'HARGA', 'Y');
+(7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'MESS', 'Y');
 
 -- --------------------------------------------------------
 
@@ -902,6 +926,12 @@ CREATE TABLE `tb_user_detail` (
 --
 ALTER TABLE `tb_akreditasi`
   ADD PRIMARY KEY (`id_akreditasi`);
+
+--
+-- Indexes for table `tb_bayar`
+--
+ALTER TABLE `tb_bayar`
+  ADD PRIMARY KEY (`id_bayar`);
 
 --
 -- Indexes for table `tb_harga`
@@ -1022,6 +1052,12 @@ ALTER TABLE `tb_akreditasi`
   MODIFY `id_akreditasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `tb_bayar`
+--
+ALTER TABLE `tb_bayar`
+  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `tb_harga`
 --
 ALTER TABLE `tb_harga`
@@ -1037,7 +1073,7 @@ ALTER TABLE `tb_harga_jenis`
 -- AUTO_INCREMENT for table `tb_harga_pilih`
 --
 ALTER TABLE `tb_harga_pilih`
-  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `tb_harga_satuan`
@@ -1079,7 +1115,7 @@ ALTER TABLE `tb_mess_detail`
 -- AUTO_INCREMENT for table `tb_mess_pilih`
 --
 ALTER TABLE `tb_mess_pilih`
-  MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_mou`

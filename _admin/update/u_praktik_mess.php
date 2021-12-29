@@ -1,48 +1,51 @@
 <?php
-if (isset($_POST['tambah_mess'])) {
-    $sql_insert_pilih_mess = "INSERT INTO tb_mess_pilih (
-        id_praktik,
-        id_mess,
-        makan_mess_pilih,
-        jumlah_mess_pilih
-        ) VALUES (
-            '" . $_POST['id_praktik'] . "',
-            '" . $_POST['id_mess'] . "',
-            '" . $_POST['makan_mess_pilih'] . "',
-            '" . $_POST['jumlah_mess_pilih'] . "'
-            )";
+if (isset($_POST['ubah_mess'])) {
 
-    // echo $sql_insert_pilih_mess . "<br>";
-    $conn->query($sql_insert_pilih_mess);
+    $d_mess_pilih = $conn->query("SELECT * FROM tb_mess_pilih WHERE id_praktik = " . $_POST['id_praktik'])->fetch(PDO::FETCH_ASSOC);
 
-    $q_mess = $conn->query("SELECT * FROM tb_mess WHERE id_mess = " . $_POST['id_mess']);
-    $d_mess = $q_mess->fetch(PDO::FETCH_ASSOC);
-    $total_terisi_mess = $d_mess['kapasitas_terisi_mess'] + $_POST['jumlah_mess_pilih'];
 
-    $sql_update_mess = "UPDATE tb_mess SET  
-    kapasitas_terisi_mess = $total_terisi_mess
+    //Pengurangan Kapasitas yg terisi
+    $q_mess_kurang = $conn->query("SELECT * FROM tb_mess WHERE id_mess = " . $d_mess_pilih['id_mess']);
+    $d_mess_kurang = $q_mess_kurang->fetch(PDO::FETCH_ASSOC);
+    $total_terisi_mess_kurang = $d_mess_kurang['kapasitas_terisi_mess'] - $_POST['jumlah_mess_pilih'];
+
+    $sql_update_mess_kurang = "UPDATE tb_mess SET  
+    kapasitas_terisi_mess = $total_terisi_mess_kurang
+    WHERE id_mess = " . $d_mess_pilih['id_mess'];
+
+    echo $sql_update_mess_kurang . "<br>";
+    $conn->query($sql_update_mess_kurang);
+
+    //Penambahan Kapasitas yg terisi
+    $q_mess_tambah = $conn->query("SELECT * FROM tb_mess WHERE id_mess = " . $_POST['id_mess']);
+    $d_mess_tambah = $q_mess_tambah->fetch(PDO::FETCH_ASSOC);
+    $total_terisi_mess_tambah = $d_mess_tambah['kapasitas_terisi_mess'] + $_POST['jumlah_mess_pilih'];
+
+    $sql_update_mess_tambah = "UPDATE tb_mess SET  
+    kapasitas_terisi_mess = $total_terisi_mess_tambah
     WHERE id_mess = " . $_POST['id_mess'];
 
-    // echo $sql_update_mess . "<br>";
-    $conn->query($sql_update_mess);
+    echo $sql_update_mess_tambah . "<br>";
+    $conn->query($sql_update_mess_tambah);
 
 
-    //SQL ubah status praktik
-    $sql_ubah_status_praktik = "UPDATE tb_praktik
-    SET status_cek_praktik = 'MESS'
-    WHERE id_praktik = " . $_POST['id_praktik'];
+    //Ubah data pilih mess
+    $sql_ubah_pilih_mess = " UPDATE tb_mess_pilih SET
+        id_mess = '" . $_POST['id_mess'] . "',
+        makan_mess_pilih = '" . $_POST['makan_mess_pilih'] . "'
+        WHERE id_mess_pilih = " . $d_mess_pilih['id_mess_pilih'];
 
-    // echo $sql_ubah_status_praktik . "<br>";
-    $conn->query($sql_ubah_status_praktik);
+    echo $sql_ubah_pilih_mess . "<br>";
+    $conn->query($sql_ubah_pilih_mess);
 
 ?>
     <script>
-        alert('Data Mess Sudah Disimpan');
+        alert('Data Mess Sudah Diubah');
         document.location.href = "?prk";
     </script>
 <?php
 } else {
-    $id_praktik = $_GET['m'];
+    $id_praktik = $_GET['um'];
     $q_praktik = $conn->query("SELECT * FROM tb_praktik WHERE id_praktik = $id_praktik");
     $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
     $jumlah_praktik = $d_praktik['jumlah_praktik'];
@@ -51,19 +54,25 @@ if (isset($_POST['tambah_mess'])) {
     <div class="container-fluid">
         <div class="col-lg-4 card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center">
-                <div class="h3 mb-2 text-gray-800">Pilih Mess</div>
+                <div class="h3 mb-2 text-gray-800">Ubah Mess</div>
             </div>
             <div class="card-body">
+                <?php $d_mess_pilih = $conn->query("SELECT * FROM tb_mess_pilih WHERE id_praktik = $id_praktik")->fetch(PDO::FETCH_ASSOC); ?>
                 <form action="" method="POST" class="form-group">
                     <fieldset class="fieldset">
                         <legend class="legend-fieldset">Nama Mess <span style="color:red">*</span></legend>
                         <select class="form-control" name="id_mess" required>
                             <option value="">-- Pilih --</option>
                             <?php
-                            $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE ((kapasitas_t_mess - kapasitas_terisi_mess) >= $jumlah_praktik) ORDER BY nama_mess ASC");
-                            while ($d_jurusan = $q_jurusan->fetch(PDO::FETCH_ASSOC)) {
+                            $q_mess = $conn->query("SELECT * FROM tb_mess WHERE ((kapasitas_t_mess - kapasitas_terisi_mess) >= $jumlah_praktik) ORDER BY nama_mess ASC");
+                            while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+                                if ($d_mess['id_mess'] == $d_mess_pilih['id_mess']) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
+                                }
                             ?>
-                                <option value="<?php echo $d_jurusan['id_mess']; ?>"><?php echo $d_jurusan['nama_mess']; ?></option>
+                                <option value="<?php echo $d_mess['id_mess']; ?>" <?php echo $selected; ?>><?php echo $d_mess['nama_mess']; ?></option>
                             <?php
                             }
                             ?>
@@ -72,13 +81,22 @@ if (isset($_POST['tambah_mess'])) {
                     <hr>
                     <fieldset class="fieldset">
                         <legend class="legend-fieldset">Makan Mess <span style="color:red">*</span></legend>
-                        <input type="radio" name="makan_mess_pilih" value="Ya" required> Tanpa Makan <br>
-                        <input type="radio" name="makan_mess_pilih" value="Tidak"> Dengan Makan (3x Sehari)
+                        <?php
+                        $cek1 = "";
+                        $cek2 = "";
+                        if ($d_mess_pilih['makan_mess_pilih'] == "Y") {
+                            $cek1 = "checked";
+                        } else {
+                            $cek2 = "checked";
+                        }
+                        ?>
+                        <input type="radio" name="makan_mess_pilih" value="Ya" required <?php echo $cek1; ?>> Tanpa Makan <br>
+                        <input type="radio" name="makan_mess_pilih" value="Tidak" <?php echo $cek2; ?>> Dengan Makan (3x Sehari)
                     </fieldset>
                     <hr>
                     <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
                     <input name="jumlah_mess_pilih" value="<?php echo $d_praktik['jumlah_praktik'] ?>" hidden>
-                    <input class="btn btn-success" type="submit" name="tambah_mess" value="SIMPAN">
+                    <input class="btn btn-success" type="submit" name="ubah_mess" value="UBAH">
                 </form>
             </div>
         </div>
