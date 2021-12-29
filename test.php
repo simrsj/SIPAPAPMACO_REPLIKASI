@@ -1,23 +1,73 @@
-<div class="boxed-check-group boxed-check-success">
-    <label class="boxed-check">
-        <input class="boxed-check-input" type="radio" name="radio-overview-custom">
-        <div class="boxed-check-label" style="text-align:center;">
-            <h2>Breakfast</h2>
-            <span>Good Morning</span>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File</title>
+</head>
+
+<body>
+    <h1>Belajar Upload File</h1>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div>
+            <label>File Gambar (JPEG)</label> <br>
+            <input type="file" name="jpeg" accept="image/jpeg"><br>
         </div>
-    </label>
-    <label class="boxed-check">
-        <input class="boxed-check-input" type="radio" name="radio-overview-custom">
-        <div class="boxed-check-label" style="text-align:center;">
-            <h2>Lunch</h2>
-            <span>Good Afternoon</span>
+        <div style="margin-top: 1rem">
+            <button>Upload</button>
         </div>
-    </label>
-    <label class="boxed-check">
-        <input class="boxed-check-input" type="radio" name="radio-overview-custom">
-        <div class="boxed-check-label" style="text-align:center;">
-            <h2>Supper</h2>
-            <span>Good Evening</span>
-        </div>
-    </label>
-</div>
+    </form>
+</body>
+
+</html>
+
+<?php
+error_reporting(0);
+
+//diusahakan file form dan uploda di pisah
+
+//alamat File
+$folderUpload = "./_file";
+
+//Rumah Nama File
+$nama_pdf = "BUJAAANG";
+$_FILES['jpeg']['name'] = $nama_pdf . ".jpeg";
+$files = $_FILES;
+
+//Cek Variable File
+echo "<pre>";
+print_r($files);
+echo "</pre>";
+
+# periksa apakah folder sudah ada
+if (!is_dir($folderUpload)) {
+    # jika tidak maka folder harus dibuat terlebih dahulu
+    mkdir($folderUpload, 0777, $rekursif = true);
+}
+
+$fileJPEG = (object) @$_FILES['jpeg'];
+
+if ($fileJPEG->size > 1000 * 1000000) {
+    die("File JPEG tidak boleh lebih dari 2MB");
+} elseif ($fileJPEG->type !== 'image/jpeg') {
+    die("File harus JPEG!");
+} else {
+
+    $uploadJPEGSukses = move_uploaded_file(
+        $fileJPEG->tmp_name,
+        "{$folderUpload}/{$fileJPEG->name}"
+    );
+
+
+    if ($uploadJPEGSukses) {
+        $link = "{$folderUpload}/{$fileJPEG->name}";
+        echo "Sukses Upload JPEG: <a href='{$link}'>{$fileJPEG->name}</a>";
+        echo "<br>";
+    }
+
+    echo $link;
+}
+
+?>

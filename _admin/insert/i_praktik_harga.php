@@ -566,7 +566,7 @@ if (isset($_POST['pilih_harga'])) {
     $sql_ubah_status_praktik = "UPDATE tb_praktik
     SET status_cek_praktik = 'HARGA'
     WHERE id_praktik = " . $d_praktik['id_praktik'];
-    $conn->query($sql_insert_harga_lainnya);
+    $conn->query($sql_ubah_status_praktik);
 ?>
     <script type="text/javascript">
         document.location.href = "?prk";

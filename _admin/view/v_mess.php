@@ -153,6 +153,8 @@
                                                             <input type="number" class="form-control" name="kapasitas_p_mess" value="<?php echo $d_mess['kapasitas_p_mess']; ?>"> -->
                                                             Kapasitas Total : <span style="color:red">*</span><br>
                                                             <input type="number" class="form-control" name="kapasitas_t_mess" value="<?php echo $d_mess['kapasitas_t_mess']; ?>" required>
+                                                            Kapasitas Terisi : <span style="color:red">*</span><br>
+                                                            <input type="number" class="form-control" name="kapasitas_terisi_mess" value="<?php echo $d_mess['kapasitas_terisi_mess']; ?>" required>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
@@ -256,6 +258,7 @@ if (isset($_POST['tambah'])) {
     `email_pemilik_mess` = '" . $_POST['email_pemilik_mess'] . "' ,
     `harga_tanpa_makan_mess` = '" . $_POST['harga_tanpa_makan_mess'] . "' ,
     `harga_dengan_makan_mess` = '" . $_POST['harga_dengan_makan_mess'] . "' ,
+    `kapasitas_terisi_mess` = '" . $_POST['kapasitas_terisi_mess'] . "' ,
     `ket_mess` = '" . $_POST['ket_mess'] . "'
     WHERE `tb_mess`.`id_mess` = " . $_POST['id_mess'];
     // echo $sql_ubah;

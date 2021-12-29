@@ -149,6 +149,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/insert/i_praktik_mess.php";
 						} elseif (isset($_GET['u'])) {
 							include "_admin/update/u_praktik.php";
+						} elseif (isset($_GET['uh'])) {
+							include "_admin/update/u_praktik_harga.php";
 						} else {
 							include "_admin/view/v_praktik.php";
 						}

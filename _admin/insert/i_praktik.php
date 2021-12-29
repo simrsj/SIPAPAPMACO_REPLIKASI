@@ -155,7 +155,7 @@ if (isset($_POST['simpan_praktik'])) {
         </div>
         <div class="card shadow mb-4">
             <div class="card-body">
-                <form action="" class="form-group text-gray-900" method="post" enctype="multipart/form-data" cla>
+                <form action="" class="form-group text-gray-900" method="post" enctype="multipart/form-data">
                     <!-- Data Praktikan -->
                     <div class="row">
                         <div class="col-lg-12">

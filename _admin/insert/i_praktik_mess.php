@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['tambah_mess'])) {
-    $sql_insert = "INSERT INTO tb_mess_pilih (
+    $sql_insert_pilih_mess = "INSERT INTO tb_mess_pilih (
         id_praktik,
         id_mess,
         makan_mess_pilih,
@@ -12,14 +12,33 @@ if (isset($_POST['tambah_mess'])) {
             '" . $_POST['jumlah_mess_pilih'] . "'
             )";
 
+    // echo $sql_insert_pilih_mess . "<br>";
+    $conn->query($sql_insert_pilih_mess);
 
-    echo $sql_insert . "<br>";
-    // $conn->query($sql_tambah);
+    $q_mess = $conn->query("SELECT * FROM tb_mess WHERE id_mess = " . $_POST['id_mess']);
+    $d_mess = $q_mess->fetch(PDO::FETCH_ASSOC);
+    $total_terisi_mess = $d_mess['kapasitas_terisi_mess'] + $_POST['jumlah_mess_pilih'];
+
+    $sql_update_mess = "UPDATE tb_mess SET  
+    kapasitas_terisi_mess = $total_terisi_mess
+    WHERE id_mess = " . $_POST['id_mess'];
+
+    // echo $sql_update_mess . "<br>";
+    $conn->query($sql_update_mess);
+
+
+    //SQL ubah status praktik
+    $sql_ubah_status_praktik = "UPDATE tb_praktik
+    SET status_cek_praktik = 'PEMBAYARAN'
+    WHERE id_praktik = " . $_POST['id_praktik'];
+
+    // echo $sql_ubah_status_praktik . "<br>";
+    $conn->query($sql_ubah_status_praktik);
 
 ?>
     <script>
-        // alert('Data Mess Sudah Disimpan');
-        // document.location.href = "?prk";
+        alert('Data Mess Sudah Disimpan');
+        document.location.href = "?prk";
     </script>
 <?php
 } else {

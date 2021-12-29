@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2021 at 12:46 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.13
+-- Waktu pembuatan: 29 Des 2021 pada 10.07
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_akreditasi`
+-- Struktur dari tabel `tb_akreditasi`
 --
 
 CREATE TABLE `tb_akreditasi` (
@@ -33,7 +33,7 @@ CREATE TABLE `tb_akreditasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_akreditasi`
+-- Dumping data untuk tabel `tb_akreditasi`
 --
 
 INSERT INTO `tb_akreditasi` (`id_akreditasi`, `nama_akreditasi`) VALUES
@@ -45,7 +45,23 @@ INSERT INTO `tb_akreditasi` (`id_akreditasi`, `nama_akreditasi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_harga`
+-- Struktur dari tabel `tb_bayar`
+--
+
+CREATE TABLE `tb_bayar` (
+  `id_bayar` int(11) NOT NULL,
+  `id_praktik` int(11) NOT NULL,
+  `atas_nama_bayar` text NOT NULL,
+  `no_bayar` text NOT NULL,
+  `melalui_bayar` text NOT NULL,
+  `tgl_bayar` int(11) NOT NULL,
+  `file_bayar` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_harga`
 --
 
 CREATE TABLE `tb_harga` (
@@ -65,7 +81,7 @@ CREATE TABLE `tb_harga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_harga`
+-- Dumping data untuk tabel `tb_harga`
 --
 
 INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`, `jumlah_harga`, `tipe_harga`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_harga_jenis`, `pilih_harga`, `tgl_harga`) VALUES
@@ -152,7 +168,7 @@ INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_harga_jenis`
+-- Struktur dari tabel `tb_harga_jenis`
 --
 
 CREATE TABLE `tb_harga_jenis` (
@@ -161,7 +177,7 @@ CREATE TABLE `tb_harga_jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_harga_jenis`
+-- Dumping data untuk tabel `tb_harga_jenis`
 --
 
 INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
@@ -179,7 +195,7 @@ INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_harga_pilih`
+-- Struktur dari tabel `tb_harga_pilih`
 --
 
 CREATE TABLE `tb_harga_pilih` (
@@ -194,31 +210,26 @@ CREATE TABLE `tb_harga_pilih` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_harga_pilih`
+-- Dumping data untuk tabel `tb_harga_pilih`
 --
 
 INSERT INTO `tb_harga_pilih` (`id_harga_pilih`, `id_praktik`, `id_harga`, `tgl_input_harga_pilih`, `tgl_ubah_harga_pilih`, `frekuensi_harga_pilih`, `kuantitas_harga_pilih`, `jumlah_harga_pilih`) VALUES
-(8, 7, 32, '2021-12-28', NULL, 1, 2, 40000),
-(9, 7, 33, '2021-12-28', NULL, 1, 2, 40000),
-(10, 7, 34, '2021-12-28', NULL, 1, 2, 40000),
-(11, 7, 36, '2021-12-28', NULL, 1, 2, 300000),
-(12, 7, 37, '2021-12-28', NULL, 1, 2, 40000),
-(13, 7, 38, '2021-12-28', NULL, 1, 2, 20000),
-(14, 7, 35, '2021-12-28', NULL, 1, 2, 150000),
-(15, 7, 40, '2021-12-28', NULL, 3, 2, 900000),
-(16, 7, 39, '2021-12-28', NULL, 1, 2, 300000),
-(17, 7, 62, '2021-12-28', NULL, 1, 2, 150000),
-(18, 7, 41, '2021-12-28', NULL, 1, 2, 300000),
-(19, 7, 42, '2021-12-28', NULL, 1, 2, 40000),
-(20, 7, 43, '2021-12-28', NULL, 1, 2, 200000),
-(21, 7, 44, '2021-12-28', NULL, 1, 2, 300000),
-(22, 7, 45, '2021-12-28', NULL, 1, 2, 40000),
-(23, 7, 70, '2021-12-28', NULL, 1, 1, 1000000);
+(24, 7, 32, '2021-12-29', NULL, 1, 2, 40000),
+(25, 7, 33, '2021-12-29', NULL, 1, 2, 40000),
+(26, 7, 34, '2021-12-29', NULL, 1, 2, 40000),
+(27, 7, 36, '2021-12-29', NULL, 1, 2, 300000),
+(28, 7, 37, '2021-12-29', NULL, 1, 2, 40000),
+(29, 7, 38, '2021-12-29', NULL, 1, 2, 20000),
+(30, 7, 35, '2021-12-29', NULL, 1, 2, 150000),
+(31, 7, 40, '2021-12-29', NULL, 3, 2, 900000),
+(32, 7, 39, '2021-12-29', NULL, 1, 2, 300000),
+(33, 7, 62, '2021-12-29', NULL, 1, 2, 150000),
+(34, 7, 69, '2021-12-29', NULL, 1, 1, 750000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_harga_satuan`
+-- Struktur dari tabel `tb_harga_satuan`
 --
 
 CREATE TABLE `tb_harga_satuan` (
@@ -228,7 +239,7 @@ CREATE TABLE `tb_harga_satuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_harga_satuan`
+-- Dumping data untuk tabel `tb_harga_satuan`
 --
 
 INSERT INTO `tb_harga_satuan` (`id_harga_satuan`, `nama_harga_satuan`, `ket_harga_satuan`) VALUES
@@ -244,7 +255,7 @@ INSERT INTO `tb_harga_satuan` (`id_harga_satuan`, `nama_harga_satuan`, `ket_harg
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_institusi`
+-- Struktur dari tabel `tb_institusi`
 --
 
 CREATE TABLE `tb_institusi` (
@@ -256,7 +267,7 @@ CREATE TABLE `tb_institusi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_institusi`
+-- Dumping data untuk tabel `tb_institusi`
 --
 
 INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `logo_institusi`, `alamat_institusi`, `ket_institusi`) VALUES
@@ -350,7 +361,7 @@ INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `logo_institusi`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jenis_mentor`
+-- Struktur dari tabel `tb_jenis_mentor`
 --
 
 CREATE TABLE `tb_jenis_mentor` (
@@ -359,7 +370,7 @@ CREATE TABLE `tb_jenis_mentor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_jenis_mentor`
+-- Dumping data untuk tabel `tb_jenis_mentor`
 --
 
 INSERT INTO `tb_jenis_mentor` (`id_jenis_mentor`, `nama_jenis_mentor`) VALUES
@@ -371,7 +382,7 @@ INSERT INTO `tb_jenis_mentor` (`id_jenis_mentor`, `nama_jenis_mentor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jenjang_pdd`
+-- Struktur dari tabel `tb_jenjang_pdd`
 --
 
 CREATE TABLE `tb_jenjang_pdd` (
@@ -380,7 +391,7 @@ CREATE TABLE `tb_jenjang_pdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_jenjang_pdd`
+-- Dumping data untuk tabel `tb_jenjang_pdd`
 --
 
 INSERT INTO `tb_jenjang_pdd` (`id_jenjang_pdd`, `nama_jenjang_pdd`) VALUES
@@ -400,7 +411,7 @@ INSERT INTO `tb_jenjang_pdd` (`id_jenjang_pdd`, `nama_jenjang_pdd`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jurusan_pdd`
+-- Struktur dari tabel `tb_jurusan_pdd`
 --
 
 CREATE TABLE `tb_jurusan_pdd` (
@@ -410,7 +421,7 @@ CREATE TABLE `tb_jurusan_pdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_jurusan_pdd`
+-- Dumping data untuk tabel `tb_jurusan_pdd`
 --
 
 INSERT INTO `tb_jurusan_pdd` (`id_jurusan_pdd`, `nama_jurusan_pdd`, `id_jurusan_pdd_jenis`) VALUES
@@ -427,7 +438,7 @@ INSERT INTO `tb_jurusan_pdd` (`id_jurusan_pdd`, `nama_jurusan_pdd`, `id_jurusan_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jurusan_pdd_jenis`
+-- Struktur dari tabel `tb_jurusan_pdd_jenis`
 --
 
 CREATE TABLE `tb_jurusan_pdd_jenis` (
@@ -436,7 +447,7 @@ CREATE TABLE `tb_jurusan_pdd_jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_jurusan_pdd_jenis`
+-- Dumping data untuk tabel `tb_jurusan_pdd_jenis`
 --
 
 INSERT INTO `tb_jurusan_pdd_jenis` (`id_jurusan_pdd_jenis`, `nama_jurusan_pdd_jenis`) VALUES
@@ -449,7 +460,7 @@ INSERT INTO `tb_jurusan_pdd_jenis` (`id_jurusan_pdd_jenis`, `nama_jurusan_pdd_je
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mentor`
+-- Struktur dari tabel `tb_mentor`
 --
 
 CREATE TABLE `tb_mentor` (
@@ -463,7 +474,7 @@ CREATE TABLE `tb_mentor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_mentor`
+-- Dumping data untuk tabel `tb_mentor`
 --
 
 INSERT INTO `tb_mentor` (`id_mentor`, `nip_nipk_mentor`, `nama_mentor`, `id_unit`, `id_mentor_jenis`, `id_jenjang_pdd`, `status_mentor`) VALUES
@@ -539,7 +550,7 @@ INSERT INTO `tb_mentor` (`id_mentor`, `nip_nipk_mentor`, `nama_mentor`, `id_unit
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mentor_jenis`
+-- Struktur dari tabel `tb_mentor_jenis`
 --
 
 CREATE TABLE `tb_mentor_jenis` (
@@ -548,7 +559,7 @@ CREATE TABLE `tb_mentor_jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_mentor_jenis`
+-- Dumping data untuk tabel `tb_mentor_jenis`
 --
 
 INSERT INTO `tb_mentor_jenis` (`id_mentor_jenis`, `nama_mentor_jenis`) VALUES
@@ -560,7 +571,7 @@ INSERT INTO `tb_mentor_jenis` (`id_mentor_jenis`, `nama_mentor_jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mess`
+-- Struktur dari tabel `tb_mess`
 --
 
 CREATE TABLE `tb_mess` (
@@ -581,7 +592,7 @@ CREATE TABLE `tb_mess` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_mess`
+-- Dumping data untuk tabel `tb_mess`
 --
 
 INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_mess`, `kapasitas_t_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `kapasitas_terisi_mess`, `ket_mess`, `status_mess`) VALUES
@@ -597,7 +608,7 @@ INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mess_detail`
+-- Struktur dari tabel `tb_mess_detail`
 --
 
 CREATE TABLE `tb_mess_detail` (
@@ -609,7 +620,7 @@ CREATE TABLE `tb_mess_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_mess_detail`
+-- Dumping data untuk tabel `tb_mess_detail`
 --
 
 INSERT INTO `tb_mess_detail` (`id_mess_detail`, `id_mess`, `harga_mess_detail`, `ket_mess_detail`, `jumlah_mess_detail`) VALUES
@@ -626,7 +637,7 @@ INSERT INTO `tb_mess_detail` (`id_mess_detail`, `id_mess`, `harga_mess_detail`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mess_pilih`
+-- Struktur dari tabel `tb_mess_pilih`
 --
 
 CREATE TABLE `tb_mess_pilih` (
@@ -640,7 +651,7 @@ CREATE TABLE `tb_mess_pilih` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_mou`
+-- Struktur dari tabel `tb_mou`
 --
 
 CREATE TABLE `tb_mou` (
@@ -660,7 +671,7 @@ CREATE TABLE `tb_mou` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_mou`
+-- Dumping data untuk tabel `tb_mou`
 --
 
 INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mou`, `no_rsj_mou`, `no_institusi_mou`, `id_jurusan_pdd`, `id_spesifikasi_pdd`, `id_jenjang_pdd`, `id_akreditasi`, `file_mou`, `ket_mou`, `institusi_mou`) VALUES
@@ -754,7 +765,7 @@ INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_praktik`
+-- Struktur dari tabel `tb_praktik`
 --
 
 CREATE TABLE `tb_praktik` (
@@ -783,7 +794,7 @@ CREATE TABLE `tb_praktik` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_praktik`
+-- Dumping data untuk tabel `tb_praktik`
 --
 
 INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`, `tgl_input_praktik`, `tgl_ubah_praktik`, `tgl_mulai_praktik`, `tgl_selesai_praktik`, `jumlah_praktik`, `surat_praktik`, `data_praktik`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_akreditasi`, `id_user`, `nama_mentor_praktik`, `email_mentor_praktik`, `telp_mentor_praktik`, `status_cek_praktik`, `status_praktik`) VALUES
@@ -795,7 +806,7 @@ INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_spesifikasi_pdd`
+-- Struktur dari tabel `tb_spesifikasi_pdd`
 --
 
 CREATE TABLE `tb_spesifikasi_pdd` (
@@ -804,7 +815,7 @@ CREATE TABLE `tb_spesifikasi_pdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_spesifikasi_pdd`
+-- Dumping data untuk tabel `tb_spesifikasi_pdd`
 --
 
 INSERT INTO `tb_spesifikasi_pdd` (`id_spesifikasi_pdd`, `nama_spesifikasi_pdd`) VALUES
@@ -818,7 +829,7 @@ INSERT INTO `tb_spesifikasi_pdd` (`id_spesifikasi_pdd`, `nama_spesifikasi_pdd`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_unit`
+-- Struktur dari tabel `tb_unit`
 --
 
 CREATE TABLE `tb_unit` (
@@ -827,7 +838,7 @@ CREATE TABLE `tb_unit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_unit`
+-- Dumping data untuk tabel `tb_unit`
 --
 
 INSERT INTO `tb_unit` (`id_unit`, `nama_unit`) VALUES
@@ -858,7 +869,7 @@ INSERT INTO `tb_unit` (`id_unit`, `nama_unit`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -875,7 +886,7 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_user`
+-- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`id_user`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `no_telp_user`, `terakhir_login_user`, `tgl_buat_user`, `status_user`) VALUES
@@ -885,7 +896,7 @@ INSERT INTO `tb_user` (`id_user`, `username_user`, `password_user`, `nama_user`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user_detail`
+-- Struktur dari tabel `tb_user_detail`
 --
 
 CREATE TABLE `tb_user_detail` (
@@ -898,209 +909,221 @@ CREATE TABLE `tb_user_detail` (
 --
 
 --
--- Indexes for table `tb_akreditasi`
+-- Indeks untuk tabel `tb_akreditasi`
 --
 ALTER TABLE `tb_akreditasi`
   ADD PRIMARY KEY (`id_akreditasi`);
 
 --
--- Indexes for table `tb_harga`
+-- Indeks untuk tabel `tb_bayar`
+--
+ALTER TABLE `tb_bayar`
+  ADD PRIMARY KEY (`id_bayar`);
+
+--
+-- Indeks untuk tabel `tb_harga`
 --
 ALTER TABLE `tb_harga`
   ADD PRIMARY KEY (`id_harga`);
 
 --
--- Indexes for table `tb_harga_jenis`
+-- Indeks untuk tabel `tb_harga_jenis`
 --
 ALTER TABLE `tb_harga_jenis`
   ADD PRIMARY KEY (`id_harga_jenis`);
 
 --
--- Indexes for table `tb_harga_pilih`
+-- Indeks untuk tabel `tb_harga_pilih`
 --
 ALTER TABLE `tb_harga_pilih`
   ADD PRIMARY KEY (`id_harga_pilih`);
 
 --
--- Indexes for table `tb_harga_satuan`
+-- Indeks untuk tabel `tb_harga_satuan`
 --
 ALTER TABLE `tb_harga_satuan`
   ADD PRIMARY KEY (`id_harga_satuan`);
 
 --
--- Indexes for table `tb_institusi`
+-- Indeks untuk tabel `tb_institusi`
 --
 ALTER TABLE `tb_institusi`
   ADD PRIMARY KEY (`id_institusi`);
 
 --
--- Indexes for table `tb_jenis_mentor`
+-- Indeks untuk tabel `tb_jenis_mentor`
 --
 ALTER TABLE `tb_jenis_mentor`
   ADD PRIMARY KEY (`id_jenis_mentor`);
 
 --
--- Indexes for table `tb_jenjang_pdd`
+-- Indeks untuk tabel `tb_jenjang_pdd`
 --
 ALTER TABLE `tb_jenjang_pdd`
   ADD PRIMARY KEY (`id_jenjang_pdd`);
 
 --
--- Indexes for table `tb_jurusan_pdd`
+-- Indeks untuk tabel `tb_jurusan_pdd`
 --
 ALTER TABLE `tb_jurusan_pdd`
   ADD PRIMARY KEY (`id_jurusan_pdd`);
 
 --
--- Indexes for table `tb_jurusan_pdd_jenis`
+-- Indeks untuk tabel `tb_jurusan_pdd_jenis`
 --
 ALTER TABLE `tb_jurusan_pdd_jenis`
   ADD PRIMARY KEY (`id_jurusan_pdd_jenis`);
 
 --
--- Indexes for table `tb_mentor`
+-- Indeks untuk tabel `tb_mentor`
 --
 ALTER TABLE `tb_mentor`
   ADD PRIMARY KEY (`id_mentor`);
 
 --
--- Indexes for table `tb_mess`
+-- Indeks untuk tabel `tb_mess`
 --
 ALTER TABLE `tb_mess`
   ADD PRIMARY KEY (`id_mess`);
 
 --
--- Indexes for table `tb_mess_detail`
+-- Indeks untuk tabel `tb_mess_detail`
 --
 ALTER TABLE `tb_mess_detail`
   ADD PRIMARY KEY (`id_mess_detail`);
 
 --
--- Indexes for table `tb_mess_pilih`
+-- Indeks untuk tabel `tb_mess_pilih`
 --
 ALTER TABLE `tb_mess_pilih`
   ADD PRIMARY KEY (`id_mess_pilih`);
 
 --
--- Indexes for table `tb_mou`
+-- Indeks untuk tabel `tb_mou`
 --
 ALTER TABLE `tb_mou`
   ADD PRIMARY KEY (`id_mou`);
 
 --
--- Indexes for table `tb_praktik`
+-- Indeks untuk tabel `tb_praktik`
 --
 ALTER TABLE `tb_praktik`
   ADD PRIMARY KEY (`id_praktik`);
 
 --
--- Indexes for table `tb_spesifikasi_pdd`
+-- Indeks untuk tabel `tb_spesifikasi_pdd`
 --
 ALTER TABLE `tb_spesifikasi_pdd`
   ADD PRIMARY KEY (`id_spesifikasi_pdd`);
 
 --
--- Indexes for table `tb_unit`
+-- Indeks untuk tabel `tb_unit`
 --
 ALTER TABLE `tb_unit`
   ADD PRIMARY KEY (`id_unit`);
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_akreditasi`
+-- AUTO_INCREMENT untuk tabel `tb_akreditasi`
 --
 ALTER TABLE `tb_akreditasi`
   MODIFY `id_akreditasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tb_harga`
+-- AUTO_INCREMENT untuk tabel `tb_bayar`
+--
+ALTER TABLE `tb_bayar`
+  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_harga`
 --
 ALTER TABLE `tb_harga`
   MODIFY `id_harga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
--- AUTO_INCREMENT for table `tb_harga_jenis`
+-- AUTO_INCREMENT untuk tabel `tb_harga_jenis`
 --
 ALTER TABLE `tb_harga_jenis`
   MODIFY `id_harga_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tb_harga_pilih`
+-- AUTO_INCREMENT untuk tabel `tb_harga_pilih`
 --
 ALTER TABLE `tb_harga_pilih`
-  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `tb_harga_satuan`
+-- AUTO_INCREMENT untuk tabel `tb_harga_satuan`
 --
 ALTER TABLE `tb_harga_satuan`
   MODIFY `id_harga_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `tb_jenjang_pdd`
+-- AUTO_INCREMENT untuk tabel `tb_jenjang_pdd`
 --
 ALTER TABLE `tb_jenjang_pdd`
   MODIFY `id_jenjang_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `tb_jurusan_pdd`
+-- AUTO_INCREMENT untuk tabel `tb_jurusan_pdd`
 --
 ALTER TABLE `tb_jurusan_pdd`
   MODIFY `id_jurusan_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `tb_jurusan_pdd_jenis`
+-- AUTO_INCREMENT untuk tabel `tb_jurusan_pdd_jenis`
 --
 ALTER TABLE `tb_jurusan_pdd_jenis`
   MODIFY `id_jurusan_pdd_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `tb_mess`
+-- AUTO_INCREMENT untuk tabel `tb_mess`
 --
 ALTER TABLE `tb_mess`
   MODIFY `id_mess` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tb_mess_detail`
+-- AUTO_INCREMENT untuk tabel `tb_mess_detail`
 --
 ALTER TABLE `tb_mess_detail`
   MODIFY `id_mess_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tb_mess_pilih`
+-- AUTO_INCREMENT untuk tabel `tb_mess_pilih`
 --
 ALTER TABLE `tb_mess_pilih`
-  MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `tb_mou`
+-- AUTO_INCREMENT untuk tabel `tb_mou`
 --
 ALTER TABLE `tb_mou`
   MODIFY `id_mou` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
--- AUTO_INCREMENT for table `tb_praktik`
+-- AUTO_INCREMENT untuk tabel `tb_praktik`
 --
 ALTER TABLE `tb_praktik`
   MODIFY `id_praktik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `tb_spesifikasi_pdd`
+-- AUTO_INCREMENT untuk tabel `tb_spesifikasi_pdd`
 --
 ALTER TABLE `tb_spesifikasi_pdd`
   MODIFY `id_spesifikasi_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `tb_user`
+-- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;

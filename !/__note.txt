@@ -8,7 +8,7 @@
 
 git status
 git add .
-git commit -m "Proses INPUT MESS"
+git commit -m "Proses edit DATA HARGA"
 git pull
 git push
  
@@ -16,7 +16,7 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/fajarrachmath/codepolitan_bootstrap.git
+git remote add origin https://github.com/fajarrachmath/training_cisarua.git
 git push -u origin main
 
 DAFTAR
