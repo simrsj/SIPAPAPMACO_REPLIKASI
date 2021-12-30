@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['arsip_praktik']) || isset($_POST['arsip_praktik'])) {
+if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     $conn->query("UPDATE `tb_praktik` SET status_praktik = 'T' WHERE id_praktik = " . $_POST['id_praktik']);
 ?>
     <script type="text/javascript">
@@ -143,8 +143,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['arsip_praktik'])) {
             <div class="card-body">
                 <div class="table-responsive">
                     <?php
-                    if ($_SESSION['level_user'] == 1) {
-                        $sql_praktik = "SELECT * FROM tb_praktik 
+                    $sql_praktik = "SELECT * FROM tb_praktik 
                     JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
                     JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
                     JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
@@ -153,17 +152,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['arsip_praktik'])) {
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
                     WHERE tb_praktik.status_praktik = 'Y'
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
-                    } else {
-                        $sql_praktik = "SELECT * FROM tb_praktik 
-                    JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
-                    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
-                    JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-                    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                    JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    WHERE tb_praktik.status_praktik = 'Y' AND id_user = " . $_SESSION['id_user'] . "
-                    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
-                    }
+
                     $q_praktik = $conn->query($sql_praktik);
                     $r_praktik = $q_praktik->rowCount();
 
@@ -377,13 +366,33 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['arsip_praktik'])) {
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <b>FILE SURAT : </b><br>
-                                                    <a href="<?php echo $d_praktik['surat_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-file-download"></i> Download
-                                                    </a><br><br>
+                                                    <?php
+                                                    if ($d_praktik['surat_praktik'] == '') {
+                                                    ?>
+                                                        <span class="badge badge-danger text-md">DATA BELUM DI UPLOAD</span>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <a href="<?php echo $d_praktik['surat_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                            <i class="fas fa-file-download"></i> Download
+                                                        </a>
+                                                    <?php
+                                                    }
+                                                    ?><br><br>
                                                     <b>DATA PRAKTIKAN :</b><br>
-                                                    <a href="<?php echo $d_praktik['data_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-file-download"></i> Download
-                                                    </a>
+                                                    <?php
+                                                    if ($d_praktik['data_praktik'] == '') {
+                                                    ?>
+                                                        <span class="badge badge-danger text-md">DATA BELUM DI UPLOAD</span>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <a href="<?php echo $d_praktik['data_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                            <i class="fas fa-file-download"></i> Download
+                                                        </a>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                             <hr>
@@ -394,18 +403,26 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['arsip_praktik'])) {
                                                     <div class="col-lg-11">
                                                         <h4 class="font-weight-bold">
                                                             DATA HARGA
-                                                            <?php
-                                                            if ($_SESSION['level_user'] == 1) {
-                                                            ?>
-                                                                <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&uh=<?php echo $d_praktik['id_praktik']; ?>'>
-                                                                    <i class="fas fa-edit"></i>
-                                                                </a>
-                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hh=<?php echo $d_praktik['id_praktik']; ?>'>
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </a>
-                                                            <?php
-                                                            }
-                                                            ?>
+                                                            <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&uh=<?php echo $d_praktik['id_praktik']; ?>'>
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                            <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_h_m<?php echo $d_praktik['id_praktik']; ?>'>
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                            <!-- modal hapus harga -->
+                                                            <div class="modal fade text-left" id="h_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4>HAPUS DATA HARGA ?</h4>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <a title="Hapus Harga" class="btn btn-danger btn-sm" href='?prk&hh=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </h4>
                                                     </div>
                                                 </div>
@@ -491,33 +508,27 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['arsip_praktik'])) {
                                                             <div class="col-lg-11">
                                                                 <h4 class="font-weight-bold">
                                                                     DATA MESS
-                                                                    <?php
-                                                                    if ($_SESSION['level_user'] == 1) {
-                                                                    ?>
-                                                                        <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?prk&um=<?php echo $d_praktik['id_praktik']; ?>'>
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </a>
-                                                                        <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?php echo $d_praktik['id_praktik']; ?>">
-                                                                            <i class=" fas fa-trash-alt"></i>
-                                                                        </a>
+                                                                    <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?prk&um=<?php echo $d_praktik['id_praktik']; ?>'>
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+                                                                    <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                        <i class=" fas fa-trash-alt"></i>
+                                                                    </a>
 
-                                                                        <!-- modal hapus bayar -->
-                                                                        <div class="modal fade text-left" id="m_h_m<?php echo $d_praktik['id_praktik']; ?>">
-                                                                            <div class="modal-dialog" role="document">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h4>HAPUS DATA MESS ?</h4>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hm=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
-                                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
-                                                                                    </div>
+                                                                    <!-- modal hapus bayar -->
+                                                                    <div class="modal fade text-left" id="m_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h4>HAPUS DATA MESS ?</h4>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hm=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    <?php
-                                                                    }
-                                                                    ?>
+                                                                    </div>
                                                                 </h4>
                                                             </div>
                                                         </div>
@@ -581,34 +592,28 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['arsip_praktik'])) {
                                                             <div class="col-lg-11">
                                                                 <h4 class="font-weight-bold">
                                                                     DATA PEMBAYARAN
-                                                                    <?php
-                                                                    if ($_SESSION['level_user'] == 1) {
-                                                                    ?>
-                                                                        <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&ub=<?php echo $d_praktik['id_praktik']; ?>'>
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </a>
-                                                                        <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#b_h_m<?php echo $d_praktik['id_praktik']; ?>">
-                                                                            <i class=" fas fa-trash-alt"></i>
-                                                                        </a>
+                                                                    <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&ub=<?php echo $d_praktik['id_praktik']; ?>'>
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+                                                                    <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#b_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                        <i class=" fas fa-trash-alt"></i>
+                                                                    </a>
 
-                                                                        <!-- modal hapus bayar -->
-                                                                        <div class="modal fade text-left" id="b_h_m<?php echo $d_praktik['id_praktik']; ?>">
-                                                                            <div class="modal-dialog" role="document">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h4>HAPUS PEMBAYARAN ?</h4>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hb=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS
-                                                                                        </a>
-                                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
-                                                                                    </div>
+                                                                    <!-- modal hapus bayar -->
+                                                                    <div class="modal fade text-left" id="b_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h4>HAPUS PEMBAYARAN ?</h4>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hb=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS
+                                                                                    </a>
+                                                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    <?php
-                                                                    }
-                                                                    ?>
+                                                                    </div>
                                                                 </h4>
                                                             </div>
                                                         </div>

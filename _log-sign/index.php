@@ -105,7 +105,13 @@ if (empty($_SESSION['username_user'])) {
 			<?php
 					}
 				} else {
-					header("Refresh:0");
+					echo "
+					<script>			
+						document.location.href='?';
+					</script>
+					";
+					// header("Refresh:0"); 
+					// Warning: Cannot modify header information - headers already sent by (output started at C:\xampp7\htdocs\SM\_log-sign\index.php:4) in C:\xampp7\htdocs\SM\_log-sign\index.php on line 108
 				}
 			}
 			?>

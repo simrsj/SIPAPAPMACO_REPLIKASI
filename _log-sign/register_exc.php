@@ -19,7 +19,7 @@ if ($password_user != $ulangi_password) {
 } elseif ($d_user['email_user'] == $email_user) {
 ?>
     <script>
-        alert('Usename <?php echo $email_user; ?> sudah dipakai!');
+        alert('Alamat email/username <?php echo $email_user; ?> sudah dipakai!');
         document.location.href = "?reg";
     </script>
 <?php
@@ -65,6 +65,7 @@ if ($password_user != $ulangi_password) {
     }
 
     $sql_insert_user = "INSERT INTO tb_user (
+    id_insitusi, 
     username_user, 
     password_user, 
     nama_user, 
@@ -74,12 +75,13 @@ if ($password_user != $ulangi_password) {
     tgl_buat_user, 
     status_user
     ) VALUES (
-        '$email_user', 
-        '$password_user', 
-        '$nama_user', 
-        '$email_user', 
+        '.$id_insitusi.', 
+        '.$email_user.', 
+        '.$password_user.', 
+        '.$nama_user.', 
+        '.$email_user.', 
         '2', 
-        '$no_telp_user',
+        '.$no_telp_user.',
         '" . date('Y-m-d') . "', 
         'Y'
     )";

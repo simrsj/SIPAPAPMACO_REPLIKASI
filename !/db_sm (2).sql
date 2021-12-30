@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2021 at 12:41 AM
+-- Generation Time: Dec 31, 2021 at 12:52 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -54,7 +54,7 @@ CREATE TABLE `tb_bayar` (
   `atas_nama_bayar` text NOT NULL,
   `no_bayar` text NOT NULL,
   `melalui_bayar` text NOT NULL,
-  `tgl_bayar` date NOT NULL,
+  `tgl_input_bayar` date NOT NULL,
   `file_bayar` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -214,22 +214,17 @@ CREATE TABLE `tb_harga_pilih` (
 --
 
 INSERT INTO `tb_harga_pilih` (`id_harga_pilih`, `id_praktik`, `id_harga`, `tgl_input_harga_pilih`, `tgl_ubah_harga_pilih`, `frekuensi_harga_pilih`, `kuantitas_harga_pilih`, `jumlah_harga_pilih`) VALUES
-(46, 7, 32, '2021-12-29', NULL, 1, 2, 40000),
-(47, 7, 33, '2021-12-29', NULL, 1, 2, 40000),
-(48, 7, 34, '2021-12-29', NULL, 1, 2, 40000),
-(49, 7, 36, '2021-12-29', NULL, 1, 2, 300000),
-(50, 7, 37, '2021-12-29', NULL, 1, 2, 40000),
-(51, 7, 38, '2021-12-29', NULL, 1, 2, 20000),
-(52, 7, 35, '2021-12-29', NULL, 1, 2, 150000),
-(53, 7, 40, '2021-12-29', NULL, 3, 2, 900000),
-(54, 7, 39, '2021-12-29', NULL, 1, 2, 300000),
-(55, 7, 62, '2021-12-29', NULL, 1, 2, 150000),
-(56, 7, 41, '2021-12-29', NULL, 1, 2, 300000),
-(57, 7, 42, '2021-12-29', NULL, 1, 2, 40000),
-(58, 7, 43, '2021-12-29', NULL, 1, 2, 200000),
-(59, 7, 44, '2021-12-29', NULL, 1, 2, 300000),
-(60, 7, 45, '2021-12-29', NULL, 1, 2, 40000),
-(61, 7, 69, '2021-12-29', NULL, 1, 1, 750000);
+(73, 7, 32, '2021-12-30', NULL, 1, 2, 40000),
+(74, 7, 33, '2021-12-30', NULL, 1, 2, 40000),
+(75, 7, 34, '2021-12-30', NULL, 1, 2, 40000),
+(76, 7, 36, '2021-12-30', NULL, 1, 2, 300000),
+(77, 7, 37, '2021-12-30', NULL, 1, 2, 40000),
+(78, 7, 38, '2021-12-30', NULL, 1, 2, 20000),
+(79, 7, 35, '2021-12-30', NULL, 1, 2, 150000),
+(80, 7, 40, '2021-12-30', NULL, 3, 2, 900000),
+(81, 7, 39, '2021-12-30', NULL, 1, 2, 300000),
+(82, 7, 62, '2021-12-30', NULL, 1, 2, 150000),
+(83, 7, 70, '2021-12-30', NULL, 1, 1, 1000000);
 
 -- --------------------------------------------------------
 
@@ -410,8 +405,7 @@ INSERT INTO `tb_jenjang_pdd` (`id_jenjang_pdd`, `nama_jenjang_pdd`) VALUES
 (7, 'D4'),
 (8, 'S1'),
 (9, 'S2'),
-(10, 'Profesi'),
-(11, 'Magang');
+(10, 'Profesi');
 
 -- --------------------------------------------------------
 
@@ -654,13 +648,6 @@ CREATE TABLE `tb_mess_pilih` (
   `Total_harga_mess_pilih` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_mess_pilih`
---
-
-INSERT INTO `tb_mess_pilih` (`id_mess_pilih`, `id_praktik`, `id_mess`, `makan_mess_pilih`, `jumlah_mess_pilih`, `Total_harga_mess_pilih`) VALUES
-(4, 7, 3, 'Ya', 2, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -786,13 +773,13 @@ CREATE TABLE `tb_praktik` (
   `id_mou` int(11) NOT NULL,
   `id_institusi` int(11) NOT NULL,
   `nama_praktik` text NOT NULL,
-  `tgl_input_praktik` date NOT NULL,
+  `tgl_input_praktik` date DEFAULT NULL,
   `tgl_ubah_praktik` date DEFAULT NULL,
-  `tgl_mulai_praktik` date NOT NULL,
-  `tgl_selesai_praktik` date NOT NULL,
+  `tgl_mulai_praktik` date DEFAULT NULL,
+  `tgl_selesai_praktik` date DEFAULT NULL,
   `jumlah_praktik` int(11) NOT NULL,
-  `surat_praktik` text NOT NULL,
-  `data_praktik` text NOT NULL,
+  `surat_praktik` text DEFAULT NULL,
+  `data_praktik` text DEFAULT NULL,
   `id_jurusan_pdd_jenis` int(11) NOT NULL,
   `id_jurusan_pdd` text DEFAULT NULL,
   `id_jenjang_pdd` text DEFAULT NULL,
@@ -811,10 +798,11 @@ CREATE TABLE `tb_praktik` (
 --
 
 INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`, `tgl_input_praktik`, `tgl_ubah_praktik`, `tgl_mulai_praktik`, `tgl_selesai_praktik`, `jumlah_praktik`, `surat_praktik`, `data_praktik`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_akreditasi`, `id_user`, `nama_mentor_praktik`, `email_mentor_praktik`, `telp_mentor_praktik`, `status_cek_praktik`, `status_praktik`) VALUES
+(2, 71, 71, 'Vitae nihil libero s', '2021-12-30', '2021-12-30', '1978-10-18', '1996-03-11', 73, './_file/praktikan/surat_praktik_2_2021-12-30.pdf', './_file/praktikan/data_praktik_2_2021-12-30.xlsx', 1, '1', '9', '4', '2', '1', 'Aut ut necessitatibu', 'juduqeca@mailinator.com', '19', 'DAFTAR', 'T'),
 (4, 20, 20, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-28', '2021-11-24', '2021-12-31', 10, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
 (5, 80, 80, 'Kelompok 3', '2021-12-05', '2021-12-21', '2021-12-31', '2021-12-31', 20, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 2, '2', '6', '0', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
 (6, 5, 5, 'Kelompok 3 Gel. III', '2021-12-03', NULL, '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', 3, '4', '6', '0', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y'),
-(7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'MESS', 'Y');
+(7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'HARGA', 'Y');
 
 -- --------------------------------------------------------
 
@@ -887,6 +875,7 @@ INSERT INTO `tb_unit` (`id_unit`, `nama_unit`) VALUES
 
 CREATE TABLE `tb_user` (
   `id_user` int(11) NOT NULL,
+  `id_institusi` int(11) NOT NULL,
   `username_user` text NOT NULL,
   `password_user` varchar(255) NOT NULL,
   `nama_user` varchar(20) NOT NULL,
@@ -902,9 +891,9 @@ CREATE TABLE `tb_user` (
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`id_user`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `no_telp_user`, `terakhir_login_user`, `tgl_buat_user`, `status_user`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ADMIN', '-', 1, '08123145645', '0000-00-00', '2021-03-29', 'Y'),
-(9, 'fajar', '81dc9bdb52d04dc20036dbd8313ed055', 'Fajar Rachmat H.', 'fajar.rachmat.h@gmail.com', 2, '', '0000-00-00', '2021-11-11', 'Y');
+INSERT INTO `tb_user` (`id_user`, `id_institusi`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `no_telp_user`, `terakhir_login_user`, `tgl_buat_user`, `status_user`) VALUES
+(1, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ADMIN', '-', 1, '08123145645', '0000-00-00', '2021-03-29', 'Y'),
+(9, 7, 'fajar', '81dc9bdb52d04dc20036dbd8313ed055', 'Fajar Rachmat H.', 'fajar.rachmat.h@gmail.com', 2, '091273098y123', '0000-00-00', '2021-11-11', 'Y');
 
 -- --------------------------------------------------------
 
@@ -1055,7 +1044,7 @@ ALTER TABLE `tb_akreditasi`
 -- AUTO_INCREMENT for table `tb_bayar`
 --
 ALTER TABLE `tb_bayar`
-  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_harga`
@@ -1073,7 +1062,7 @@ ALTER TABLE `tb_harga_jenis`
 -- AUTO_INCREMENT for table `tb_harga_pilih`
 --
 ALTER TABLE `tb_harga_pilih`
-  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `tb_harga_satuan`
@@ -1127,7 +1116,7 @@ ALTER TABLE `tb_mou`
 -- AUTO_INCREMENT for table `tb_praktik`
 --
 ALTER TABLE `tb_praktik`
-  MODIFY `id_praktik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_praktik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_spesifikasi_pdd`

@@ -31,45 +31,6 @@ include "_add-ons/tanggal.php";
     <!-- <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet"> -->
     <!-- <link rel="stylesheet" href="vendor/tata-master/dist/index.css"> -->
 
-    <!-- JS -->
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <!-- <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
-    <script src="vendor/datatables-all/datatables.min.js"></script>
-    <!-- <script src="vendor/tata-master/dist/tata.js"></script>
-    <script src="vendor/tata-master/dist/index.js"></script> -->
-    <script src="vendor/select2-develop/dist/js/select2.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
-            });
-        });
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-        });
-
-        $(".js-example-placeholder-single").select2({
-            placeholder: "Pilih",
-            allowClear: true
-        });
-    </script>
-
 </head>
 <?php
 
@@ -102,5 +63,44 @@ if (isset($_SESSION['status_user'])) {
     }
 }
 ?>
+
+<!-- JS -->
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<!-- <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
+<script src="vendor/datatables-all/datatables.min.js"></script>
+<!-- <script src="vendor/tata-master/dist/tata.js"></script>
+    <script src="vendor/tata-master/dist/index.js"></script> -->
+<script src="vendor/select2-develop/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+
+    $(".js-example-placeholder-single").select2({
+        placeholder: "Pilih",
+        allowClear: true
+    });
+</script>
 
 </html>

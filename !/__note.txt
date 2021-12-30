@@ -3,12 +3,16 @@
 - inputan pilih jadwal praktikan dengan pilih tombol radio button tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
 - buat tanggal inputan data dissetiap tabel yang ada inputan
 - buat CRUD eksekusi tanpa loading (cek : https://dewankomputer.com/2019/01/23/crud-create-read-update-delete-dengan-ajax-tanpa-loading-part-1-menampilkan-data/)
-- perbaiki CRUD Menu MoU 
-- perbaiki CRUD Menu Tambah Praktik
+- perbaiki cari id manual setiap modul 
+- perbaiki harga, mess dan pembayaran kedokteran (alurnya beda)
+- buat akun user
+- buat dastboard
+- buat Invoice
+- search disetiap select
 
 git status
 git add .
-git commit -m "Alur Proses Status, ->proses Cetak Invoice"
+git commit -m "Alur Proses Status, ->cetak Invoice, ->akun dada institusinya"
 git pull
 git push
  
