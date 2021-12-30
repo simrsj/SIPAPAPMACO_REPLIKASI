@@ -8,7 +8,7 @@
 
 git status
 git add .
-git commit -m "Proses CRUD DATA HARGA PENDAFTARAN"
+git commit -m "Alur Proses Status, ->proses Cetak Invoice"
 git pull
 git push
  
