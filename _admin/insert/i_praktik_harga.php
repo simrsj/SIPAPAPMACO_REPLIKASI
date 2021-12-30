@@ -193,7 +193,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                         </div>
                         <div class="col-lg-2">
                             <label class="boxed-check">
-                                <input class="boxed-check-input" type="radio" name="cek_harga_ujian" value="t" required>
+                                <input class="boxed-check-input" type="radio" name="cek_harga_ujian" value="t">
                                 <div class="boxed-check-label" style="text-align:center;">
                                     Tidak Pakai Ujian
                                 </div>

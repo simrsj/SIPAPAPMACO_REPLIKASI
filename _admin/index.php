@@ -14,6 +14,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</div>
 					<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 				</a>
+				<!-- Nav Item - Dashboard -->
+				<li class="nav-item active">
+					<a class="nav-link" href="?ds">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Dashboard</span></a>
+				</li>
+
 				<!-- Divider -->
 				<hr class="sidebar-divider">
 				<!-- Heading -->
@@ -167,7 +174,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['test1'])) {
 						include "test1.php";
 					} else {
-						include "_admin/home.php";
+						include "_admin/dashboard.php";
 					}
 					?>
 				</div>

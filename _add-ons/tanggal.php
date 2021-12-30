@@ -32,12 +32,34 @@ function tanggal($tanggal)
 
 	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
+function tanggal_bulan($tanggal)
+{
+	$bulan = array(
+		1 =>   'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	// variabel pecahkan 0 = tanggal
+	// variabel pecahkan 1 = bulan
+	// variabel pecahkan 2 = tahun
+
+	return $bulan[$tanggal];
+}
 
 function tanggal_between($tgl_awal, $tgl_akhir)
 {
-	$tgl_kalkulasi = $tgl_akhir - $tgl_awal;
+	$tgl_kalkulasi = strtotime($tgl_akhir) - strtotime($tgl_awal);
 
-	echo round($tgl_kalkulasi / (60 * 60 * 24));
+	return round($tgl_kalkulasi / (60 * 60 * 24)) + 1;
 }
 
 

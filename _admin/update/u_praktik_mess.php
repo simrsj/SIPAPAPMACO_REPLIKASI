@@ -28,10 +28,10 @@ if (isset($_POST['ubah_mess'])) {
     echo $sql_update_mess_tambah . "<br>";
     $conn->query($sql_update_mess_tambah);
 
-
     //Ubah data pilih mess
     $sql_ubah_pilih_mess = " UPDATE tb_mess_pilih SET
         id_mess = '" . $_POST['id_mess'] . "',
+        tgl_ubah_mess_pilih = '" . date('Y-m-d') . "',
         makan_mess_pilih = '" . $_POST['makan_mess_pilih'] . "'
         WHERE id_mess_pilih = " . $d_mess_pilih['id_mess_pilih'];
 
@@ -84,14 +84,32 @@ if (isset($_POST['ubah_mess'])) {
                         <?php
                         $cek1 = "";
                         $cek2 = "";
-                        if ($d_mess_pilih['makan_mess_pilih'] == "Y") {
+                        if ($d_mess_pilih['makan_mess_pilih'] == "Ya") {
                             $cek1 = "checked";
-                        } else {
+                        } elseif ($d_mess_pilih['makan_mess_pilih'] == "Tidak") {
                             $cek2 = "checked";
                         }
                         ?>
-                        <input type="radio" name="makan_mess_pilih" value="Ya" required <?php echo $cek1; ?>> Tanpa Makan <br>
-                        <input type="radio" name="makan_mess_pilih" value="Tidak" <?php echo $cek2; ?>> Dengan Makan (3x Sehari)
+                        <div class="boxed-check-group boxed-check-success">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <label class="boxed-check">
+                                        <input class="boxed-check-input" type="radio" name="makan_mess_pilih" value="Ya" <?php echo $cek1; ?> required>
+                                        <div class="boxed-check-label" style="text-align:center;">
+                                            Dengan Makan (3x Sehari)
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label class="boxed-check">
+                                        <input class="boxed-check-input" type="radio" name="makan_mess_pilih" value="Tidak" <?php echo $cek2; ?>>
+                                        <div class="boxed-check-label" style="text-align:center;">
+                                            Tanpa Makan
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </fieldset>
                     <hr>
                     <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>

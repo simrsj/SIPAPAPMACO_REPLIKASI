@@ -1,27 +1,46 @@
 <?php
 if (isset($_POST['tambah_mess'])) {
+
+    $sql_mess = "SELECT * FROM tb_mess WHERE id_mess = " . $_POST['id_mess'];
+    $d_mess = $conn->query($sql_mess)->fetch(PDO::FETCH_ASSOC);
+    $sql_praktik = "SELECT * FROM tb_praktik WHERE id_praktik = " . $_POST['id_praktik'];
+    $d_praktik = $conn->query($sql_praktik)->fetch(PDO::FETCH_ASSOC);
+
+    // echo $sql_mess . "<br>";
+    // echo $sql_praktik . "<br>";
+
+    $jumlah_hari_praktik = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+    if ($_POST['makan_mess_pilih'] == "Ya") {
+        $total_harga_mess_pilih = $jumlah_hari_praktik * $d_mess['harga_dengan_makan_mess'] * $d_praktik['jumlah_praktik'];
+    } elseif ($_POST['makan_mess_pilih'] == "Tidak") {
+        $total_harga_mess_pilih = $jumlah_hari_praktik * $d_mess['harga_tanpa_makan_mess'] * $d_praktik['jumlah_praktik'];
+    } else {
+        $total_harga_mess_pilih = 0;
+    }
     $sql_insert_pilih_mess = "INSERT INTO tb_mess_pilih (
         id_praktik,
         id_mess,
+        tgl_input_mess_pilih,
         makan_mess_pilih,
-        jumlah_mess_pilih
+        jumlah_praktik_mess_pilih,
+        jumlah_hari_mess_pilih,
+        total_harga_mess_pilih
         ) VALUES (
             '" . $_POST['id_praktik'] . "',
             '" . $_POST['id_mess'] . "',
+            '" . date('Y-m-d') . "',
             '" . $_POST['makan_mess_pilih'] . "',
-            '" . $_POST['jumlah_mess_pilih'] . "'
+            '" . $d_praktik['jumlah_praktik'] . "',
+            '" . $jumlah_hari_praktik . "',
+            '" . $total_harga_mess_pilih . "'
             )";
 
     // echo $sql_insert_pilih_mess . "<br>";
     $conn->query($sql_insert_pilih_mess);
 
-    $q_mess = $conn->query("SELECT * FROM tb_mess WHERE id_mess = " . $_POST['id_mess']);
-    $d_mess = $q_mess->fetch(PDO::FETCH_ASSOC);
-    $total_terisi_mess = $d_mess['kapasitas_terisi_mess'] + $_POST['jumlah_mess_pilih'];
+    $total_terisi_mess = $d_mess['kapasitas_terisi_mess'] + $d_praktik['jumlah_praktik'];
 
-    $sql_update_mess = "UPDATE tb_mess SET  
-    kapasitas_terisi_mess = $total_terisi_mess
-    WHERE id_mess = " . $_POST['id_mess'];
+    $sql_update_mess = "UPDATE tb_mess SET kapasitas_terisi_mess = $total_terisi_mess WHERE id_mess = " . $_POST['id_mess'];
 
     // echo $sql_update_mess . "<br>";
     $conn->query($sql_update_mess);
@@ -72,12 +91,26 @@ if (isset($_POST['tambah_mess'])) {
                     <hr>
                     <fieldset class="fieldset">
                         <legend class="legend-fieldset">Makan Mess <span style="color:red">*</span></legend>
-                        <input type="radio" name="makan_mess_pilih" value="Ya" required> Tanpa Makan <br>
-                        <input type="radio" name="makan_mess_pilih" value="Tidak"> Dengan Makan (3x Sehari)
+                        <div class="boxed-check-group boxed-check-success text-center">
+                            <div class="row">
+
+                                <label class="boxed-check" style="margin-left: auto; margin-right: auto;">
+                                    <input class="boxed-check-input" type="radio" name="makan_mess_pilih" value="Ya" required>
+                                    <div class="boxed-check-label" style="text-align:center;">
+                                        Dengan Makan (3x Sehari)
+                                    </div>
+                                </label>
+                                <label class="boxed-check" style="margin-left: auto; margin-right: auto;">
+                                    <input class="boxed-check-input" type="radio" name="makan_mess_pilih" value="Tidak">
+                                    <div class="boxed-check-label" style="text-align:center;">
+                                        Tanpa Makan
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
                     </fieldset>
                     <hr>
                     <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
-                    <input name="jumlah_mess_pilih" value="<?php echo $d_praktik['jumlah_praktik'] ?>" hidden>
                     <input class="btn btn-success" type="submit" name="tambah_mess" value="SIMPAN">
                 </form>
             </div>

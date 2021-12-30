@@ -24,9 +24,52 @@ include "_add-ons/tanggal.php";
     <!-- Add-ons -->
     <link href="vendor/select2-develop/dist/css/select2.min.css" rel="stylesheet" />
     <link href="vendor/fontawesome-free/css/v4-shims-min.css" rel="stylesheet" />
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
+    <!-- <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
+    <link href="vendor/datatables-all/datatables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css" rel="stylesheet">
+    <!-- <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet"> -->
     <!-- <link rel="stylesheet" href="vendor/tata-master/dist/index.css"> -->
+
+    <!-- JS -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <!-- <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
+    <script src="vendor/datatables-all/datatables.min.js"></script>
+    <!-- <script src="vendor/tata-master/dist/tata.js"></script>
+    <script src="vendor/tata-master/dist/index.js"></script> -->
+    <script src="vendor/select2-develop/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+
+        $(".js-example-placeholder-single").select2({
+            placeholder: "Pilih",
+            allowClear: true
+        });
+    </script>
+
 </head>
 <?php
 
@@ -40,11 +83,11 @@ if (isset($_SESSION['status_user'])) {
             include "_ip/index.php";
         }
     } elseif ($_SESSION['status_user'] == 'N') {
-?>
-        <script>
-            alert('Akun Sudah Tidak Aktif');
-        </script>
-<?php
+        echo "
+            <script>
+                alert('Akun Sudah Tidak Aktif');
+            </script>
+        ";
         include "_log-sign/log_out.php";
     }
 } elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) {
@@ -59,36 +102,5 @@ if (isset($_SESSION['status_user'])) {
     }
 }
 ?>
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<!-- <script src="vendor/tata-master/dist/tata.js"></script>
-<script src="vendor/tata-master/dist/index.js"></script> -->
-<script src="vendor/select2-develop/dist/js/select2.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#myTable').DataTable();
-    });
-
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-
-    $(".js-example-placeholder-single").select2({
-        placeholder: "Pilih",
-        allowClear: true
-    });
-</script>
 
 </html>
