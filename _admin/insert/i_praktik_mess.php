@@ -35,6 +35,7 @@ if (isset($_POST['tambah_mess'])) {
             '" . $total_harga_mess_pilih . "'
             )";
 
+
     // echo $sql_insert_pilih_mess . "<br>";
     $conn->query($sql_insert_pilih_mess);
 
@@ -42,8 +43,8 @@ if (isset($_POST['tambah_mess'])) {
 
     $sql_update_mess = "UPDATE tb_mess SET kapasitas_terisi_mess = $total_terisi_mess WHERE id_mess = " . $_POST['id_mess'];
 
-    // echo $sql_update_mess . "<br>";
-    $conn->query($sql_update_mess);
+    echo $sql_update_mess . "<br>";
+    // $conn->query($sql_update_mess);
 
 
     //SQL ubah status praktik
@@ -51,8 +52,8 @@ if (isset($_POST['tambah_mess'])) {
     SET status_cek_praktik = 'MESS'
     WHERE id_praktik = " . $_POST['id_praktik'];
 
-    // echo $sql_ubah_status_praktik . "<br>";
-    $conn->query($sql_ubah_status_praktik);
+    echo $sql_ubah_status_praktik . "<br>";
+    // $conn->query($sql_ubah_status_praktik);
 
 ?>
     <script>
@@ -173,7 +174,6 @@ if (isset($_POST['tambah_mess'])) {
                 <?php
                 }
                 ?>
-
             </div>
         </div>
     </div>

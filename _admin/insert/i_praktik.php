@@ -205,8 +205,8 @@ if (isset($_POST['simpan_praktik'])) {
                             ?>
                         </div>
                         <div class="col-lg-6">
-                            Kelompok/Gelombang Praktik: <span style="color:red">*</span><br>
-                            <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Kelompok/Gelombang Praktik" required>
+                            Gelombang/Kelompok : <span style="color:red">*</span><br>
+                            <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" required>
                         </div>
                     </div>
                     <br>

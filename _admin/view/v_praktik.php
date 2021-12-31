@@ -1,11 +1,11 @@
 <?php
 if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     $conn->query("UPDATE `tb_praktik` SET status_praktik = 'T' WHERE id_praktik = " . $_POST['id_praktik']);
-?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
-    </script>
-<?php
+    echo "
+        <script type='text/javascript'>
+            document.location.href = '?prk';
+        </script>
+    ";
 } elseif (isset($_GET['vd'])) {
     if ($_GET['vd'] == 'y') {
         $sql_ubah_status_praktik = "UPDATE tb_praktik
@@ -30,28 +30,27 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
         $conn->query($sql_delete_bayar);
         $conn->query($sql_ubah_status_praktik);
     }
-?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
-    </script>
-    <?php
+    echo "
+        <script type='text/javascript'>
+            document.location.href = '?prk';
+        </script>
+    ";
 } elseif (isset($_GET['hh'])) {
     $r_mess_pilih = $conn->query("SELECT *FROM tb_mess_pilih WHERE id_praktik = " . $_GET['hh'])->rowCount();
     $r_bayar = $conn->query("SELECT *FROM tb_bayar WHERE id_praktik = " . $_GET['hh'])->rowCount();
 
     if ($r_bayar > 0) {
-    ?>
-        <script type="text/javascript">
-            alert('Hapus Data Pembayaran Terlebih Dahulu');
-        </script>
-    <?php
+        echo "
+            <script type='text/javascript'>
+                alert('Hapus Data Pembayaran Terlebih Dahulu');
+            </script>
+        ";
     } elseif ($r_mess_pilih > 0) {
-    ?>
-        <script type="text/javascript">
-            alert('Hapus Data Mess Terlebih Dahulu');
-        </script>
-    <?php
-
+        echo "
+            <script type='text/javascript'>
+                alert('Hapus Data Mess Terlebih Dahulu');
+            </script>
+        ";
     } else {
         $sql_delete_harga = "DELETE FROM `tb_harga_pilih` WHERE `tb_harga_pilih`.`id_praktik` = " . $_GET['hh'];
 
@@ -63,21 +62,20 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
         $conn->query($sql_delete_harga);
         $conn->query($sql_ubah_status_praktik);
     }
-
-    ?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
-    </script>
-    <?php
+    echo "
+        <script type='text/javascript'>
+            document.location.href = '?prk';
+        </script>
+    ";
 } elseif (isset($_GET['hm'])) {
     $r_bayar = $conn->query("SELECT *FROM tb_bayar WHERE id_praktik = " . $_GET['hm'])->rowCount();
 
     if ($r_bayar > 0) {
-    ?>
-        <script type="text/javascript">
-            alert('Hapus Data Pembayaran Terlebih Dahulu');
-        </script>
-    <?php
+        echo "
+            <script type='text/javascript'>
+                alert('Hapus Data Pembayaran Terlebih Dahulu');
+            </script>
+        ";
     } else {
 
         $d_mess_pilih = $conn->query("SELECT * FROM tb_mess_pilih WHERE id_praktik = " . $_GET['hm'])->fetch(PDO::FETCH_ASSOC);
@@ -95,12 +93,11 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
         $conn->query($sql_delete_mess_pilih);
         $conn->query($sql_update_status_praktik);
     }
-
-    ?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
-    </script>
-<?php
+    echo "
+        <script type='text/javascript'>
+            document.location.href = '?prk';
+        </script>
+    ";
 } elseif (isset($_GET['hb'])) {
     $d_bayar = $conn->query("SELECT * FROM tb_bayar WHERE id_praktik = " . $_GET['hb'])->fetch(PDO::FETCH_ASSOC);
     unlink($d_bayar['file_bayar']);
@@ -114,12 +111,11 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     // echo $sql_ubah_status_praktik . "<br>";
     $conn->query($sql_delete_bayar);
     $conn->query($sql_ubah_status_praktik);
-
-?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
-    </script>
-<?php
+    echo "
+        <script type='text/javascript'>
+            document.location.href = '?prk';
+        </script>
+    ";
 } else {
 ?>
     <div class="container-fluid">
@@ -170,7 +166,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                 <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                             </div>
                                             <div class="col-sm-2">
-                                                <b>PERIODE PRAKTIK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
+                                                <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                             </div>
                                             <div class="col-sm-2">
                                                 <b>TANGGAL SELESAI : </b>
@@ -260,6 +256,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                     }
                                                 } elseif ($d_praktik['status_cek_praktik'] == "MESS" || $d_praktik['status_cek_praktik'] == "DITOLAK") {
                                                     ?>
+                                                    <a class="btn btn-primary btn-sm" href="?prk&p_i=<?php echo $d_praktik['id_praktik']; ?>" title="Invoice"><i class="fas fa-file-invoice-dollar"></i></a>
                                                     <a class="btn btn-outline-danger btn-sm" href="?prk&ib=<?php echo $d_praktik['id_praktik']; ?>">PEMBAYARAN</a>
                                                     <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN") {

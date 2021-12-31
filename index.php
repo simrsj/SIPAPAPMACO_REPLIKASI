@@ -24,7 +24,7 @@ include "_add-ons/tanggal.php";
     <!-- Add-ons -->
     <link href="vendor/select2-develop/dist/css/select2.min.css" rel="stylesheet" />
     <link href="vendor/fontawesome-free/css/v4-shims-min.css" rel="stylesheet" />
-    <!-- <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/datatables-all/datatables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css" rel="stylesheet">
@@ -34,7 +34,9 @@ include "_add-ons/tanggal.php";
 </head>
 <?php
 
-if (isset($_SESSION['status_user'])) {
+if (isset($_GET['dashboard'])) {
+    include "dashboard.php";
+} elseif (isset($_SESSION['status_user'])) {
     if ($_SESSION['status_user'] == 'Y') {
         if (isset($_GET['lo'])) {
             include "_log-sign/log_out.php";
@@ -78,7 +80,7 @@ if (isset($_SESSION['status_user'])) {
 
 <!-- Page level plugins -->
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<!-- <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="vendor/datatables-all/datatables.min.js"></script>
 <!-- <script src="vendor/tata-master/dist/tata.js"></script>
     <script src="vendor/tata-master/dist/index.js"></script> -->
@@ -86,7 +88,7 @@ if (isset($_SESSION['status_user'])) {
 
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable({
+        $('#myTable').dataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'

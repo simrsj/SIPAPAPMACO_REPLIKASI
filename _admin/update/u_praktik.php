@@ -205,8 +205,8 @@ if (isset($_POST['ubah_praktik'])) {
                             ?>
                         </div>
                         <div class="col-lg-6">
-                            Periode Praktik : <span style="color:red">*</span><br>
-                            <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Periode Praktik" value="<?php echo $d_praktik_join['nama_praktik']; ?>" required>
+                            Gelombang/Kelompok : <span style="color:red">*</span><br>
+                            <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" value="<?php echo $d_praktik_join['nama_praktik']; ?>" required>
                         </div>
                     </div>
                     <br>
