@@ -1,6 +1,0 @@
-1. Instansi Melakukan Login dan Masuk Ke halaman utama 
-2. Instansi Melakukan Pendaftaran bila MOU masih berlaku melanjutkan prose
-3. Menginputkan data" perkatikan, data menu pilihan, memilih tanggal praktikan
-4. Instansi mendapatkan data pembayaran
-5. Instansi memebayarkan pembayaran ke no rekening yg tertera 
-6. dan Instansi berhasil Melakkukan Prose Pendaftaran a
