@@ -181,17 +181,26 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                 <div class="text-gray-700">
                     <h5 class="font-weight-bold">Menu Harga Ujian <?php echo $d_praktik['nama_jurusan_pdd_jenis']; ?></h5>
                 </div>
-                <br>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="cek_harga_ujian1" name="cek_harga_ujian" value="y" class="custom-control-input" required>
-                    <label class="custom-control-label" for="cek_harga_ujian1">Pakai Ujian</label>
+                <div class="boxed-check-group boxed-check-success">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label class="boxed-check">
+                                <input class="boxed-check-input" type="radio" name="cek_harga_ujian" value="y" required>
+                                <div class="boxed-check-label" style="text-align:center;">
+                                    Pakai Ujian
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            <label class="boxed-check">
+                                <input class="boxed-check-input" type="radio" name="cek_harga_ujian" value="t">
+                                <div class="boxed-check-label" style="text-align:center;">
+                                    Tidak Pakai Ujian
+                                </div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="cek_harga_ujian2" name="cek_harga_ujian" value="t" class="custom-control-input" required>
-                    <label class="custom-control-label" for="cek_harga_ujian2">Tidak Pakai Ujian</label>
-                </div>
-                <br>
-
                 <?php
                 if ($d_praktik['id_jurusan_pdd_jenis'] == 1) {
                     $sql = "AND tb_harga.id_harga_jenis = 1";
@@ -329,9 +338,13 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                                     <td><?php echo $d_harga_lainnya['nama_harga_satuan']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga_lainnya['jumlah_harga'], 0, ",", "."); ?></td>
                                     <td>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="sewa_tempat_harga<?php echo $d_harga_lainnya['id_harga']; ?>" name="sewa_tempat_harga" value="<?php echo $d_harga_lainnya['id_harga']; ?>" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="sewa_tempat_harga<?php echo $d_harga_lainnya['id_harga']; ?>">Pilih <?php echo $d_harga_lainnya['nama_harga']; ?></label>
+                                        <div class="boxed-check-group boxed-check-success">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="sewa_tempat_harga" value="<?php echo $d_harga_lainnya['id_harga']; ?>" required>
+                                                <div class="boxed-check-label" style="text-align:center;">
+                                                    Pilih
+                                                </div>
+                                            </label>
                                         </div>
                                     </td>
                                 </tr>
