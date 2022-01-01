@@ -6,6 +6,8 @@ include_once "tanggal.php";
 
 $id_praktik = $_GET['id'];
 echo $id_praktik . "<br>";
+
+#data harga pilih
 $sql_praktik = "SELECT * FROM tb_harga_pilih
 JOIN tb_praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
 JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
@@ -16,6 +18,7 @@ $q_praktik = $conn->query($sql_praktik);
 
 $data = array();
 $no = 1;
+$total_harga = 0;
 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
     array_push(
         $data,
@@ -29,6 +32,35 @@ while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
             "Rp " . number_format($d_praktik['jumlah_harga_pilih'], 0, ",", ".")
         )
     );
+    $total_harga = $total_harga + $d_praktik['jumlah_harga_pilih'];
+    $no++;
+}
+#data mess pilih
+$sql_mess = "SELECT * FROM tb_praktik 
+JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik 
+JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess 
+WHERE tb_praktik.id_praktik = '" . $id_praktik . "'";
+$q_mess = $conn->query($sql_mess);
+
+while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+    array_push(
+        $data,
+        array(
+            $no,
+            $d_mess['nama_mess'] . " (Mess)",
+            "Hari/Orang",
+            "Rp " . number_format(
+                $d_mess['total_harga_mess_pilih'] / ($d_mess['jumlah_praktik'] * $d_mess['jumlah_hari_mess_pilih']),
+                0,
+                ",",
+                "."
+            ),
+            $d_mess['jumlah_praktik'],
+            $d_mess['jumlah_hari_mess_pilih'],
+            "Rp " . number_format($d_mess['total_harga_mess_pilih'], 0, ",", ".")
+        )
+    );
+    $total_harga = $total_harga + $d_mess['total_harga_mess_pilih'];
     $no++;
 }
 
@@ -39,8 +71,8 @@ $header = array(
     array("label" => "Nama Harga", "length" => 100, "align" => "C"),
     array("label" => "Satuan", "length" => 40, "align" => "C"),
     array("label" => "Harga", "length" => 40, "align" => "C"),
-    array("label" => "FREK", "length" => 15, "align" => "C"),
-    array("label" => "MH", "length" => 15, "align" => "C"),
+    array("label" => "Frek.", "length" => 15, "align" => "C"),
+    array("label" => "Ktt.", "length" => 15, "align" => "C"),
     array("label" => "Total Harga", "length" => 55, "align" => "C")
 );
 

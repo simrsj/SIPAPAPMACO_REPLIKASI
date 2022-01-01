@@ -189,13 +189,20 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <span class="badge badge-warning text-md">DAFTAR</span> : Sudah Melakukan Pendaftaran, dilanjutkan Pilih Harga<br><br>
-                                                                <span class="badge badge-warning text-md">HARGA</span> : Harga Sudah Dipilih, dilanjutkan Pemilihan Mess Oleh Admin<br><br>
-                                                                <span class="badge badge-primary text-md">MESS</span> : Mess Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses Pembayaran <br><br>
-                                                                <span class="badge badge-warning text-md">PEMBAYARAN</span> : Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
-                                                                <span class="badge badge-success text-md">AKTIF</span> : Pembayaran Sudah terverifikasi oleh Admin, Pendaftaran Selesai <br><br>
-                                                                <span class="badge badge-danger text-md">DITOLAK</span> : Pembayaran ditolak oleh Admin, revisi pembayaran<br><br>
-                                                                <span class="badge badge-dark text-md">SELESAI</span> : Praktikan Sudah Selesai
+                                                                <span class="badge badge-warning text-md">DAFTAR</span> <br>
+                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih Harga<br><br>
+                                                                <span class="badge badge-warning text-md">HARGA</span><br>
+                                                                Harga Sudah Dipilih, dilanjutkan Pemilihan Mess Oleh Admin<br><br>
+                                                                <span class="badge badge-primary text-md">MESS</span><br>
+                                                                Mess Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses Pembayaran. <br>
+                                                                <b> Cek Invoice</b> untuk jumlah transaksi <br><br>
+                                                                <span class="badge badge-warning text-md">PEMBAYARAN</span><br>
+                                                                Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
+                                                                <span class="badge badge-danger text-md">DITOLAK</span><br>
+                                                                Pembayaran ditolak oleh Admin, revisi pembayaran<br><br>
+                                                                <span class="badge badge-success text-md">AKTIF</span><br>
+                                                                Pembayaran Sudah terverifikasi oleh Admin, Pendaftaran Selesai <br><br>
+                                                                <span class="badge badge-dark text-md">SELESAI</span><br> Praktikan Sudah Selesai
                                                             </div>
                                                         </div>
                                                     </div>
@@ -265,7 +272,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                     }
                                                 } elseif ($d_praktik['status_cek_praktik'] == "MESS" || $d_praktik['status_cek_praktik'] == "DITOLAK") {
                                                     ?>
-                                                    <a class="btn btn-primary btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>" title="Invoice" target="_blank"><i class="fas fa-file-invoice-dollar"></i></a>
+                                                    <a class="btn btn-outline-warning btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>" title="Invoice" target="_blank">INVOICE</a>
                                                     <a class="btn btn-outline-danger btn-sm" href="?prk&ib=<?php echo $d_praktik['id_praktik']; ?>">PEMBAYARAN</a>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN") {

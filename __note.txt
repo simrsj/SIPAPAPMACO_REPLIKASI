@@ -12,7 +12,7 @@
 
 git status
 git add .
-git commit -m "Alur Proses Status, ->cetak Invoice, ->akun ada institusinya"
+git commit -m "Data Praktikan, ->cetak Invoice, ->aData Jadwal"
 git pull
 git push
  
@@ -23,11 +23,5 @@ git branch -M main
 git remote add origin https://github.com/fajarrachmath/training_cisarua.git
 git push -u origin main
 
-DAFTAR
-HARGA
-MESS
-PEMBAYARAN (Merah)
-PEMBAYARAN (Biru)
-AKTIF (HIJAU)
 
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551

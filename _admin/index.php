@@ -35,6 +35,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="?trs">
+						<i class="fas fa-fw fa-wallet"></i>
+						<span>Data Pembayaran</span>
+					</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="?ptk">
 						<i class="fas fa-fw fa-user-graduate"></i>
 						<span>Nama Praktikan</span>
@@ -121,12 +127,24 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						</div>
 					</div>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="?acu">
+						<i class="fas fa-fw fa-user-cog"></i>
+						<span>Pengaturan Akun</span>
+					</a>
+				</li>
+
 				<!-- Divider -->
 				<hr class="sidebar-divider d-none d-md-block">
 
 				<!-- Sidebar Toggler (Sidebar) -->
 				<div class="text-center d-none d-md-inline">
 					<button class="rounded-circle border-0" id="sidebarToggle"></button>
+				</div>
+				<div class="sidebar-card">
+					<i class="fas fa-3x fa-exclamation-circle"></i>
+					<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
+					<a class="btn btn-success btn-sm" href="?LAPOR">Lapor !</a>
 				</div>
 			</ul>
 			<!-- End of Sidebar -->
@@ -138,7 +156,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div id="content">
 					<?php
 					include "_admin/_nav.php";
-					if (isset($_GET['akr'])) {
+					if (isset($_GET['acu'])) {
+						include "_admin/view/v_akun.php";
+					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
 					} elseif (isset($_GET['ptk'])) {
 						include "_admin/view/v_praktikan.php";
@@ -208,6 +228,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "test.php";
 					} elseif (isset($_GET['test1'])) {
 						include "test1.php";
+					} elseif (isset($_GET['trs'])) {
+						if (isset($_GET['dtl'])) {
+							include "_admin/view/v_transaksi_detail.php";
+						} else {
+							include "_admin/view/v_transaksi.php";
+						}
 					} else {
 						include "_admin/dashboard.php";
 					}
