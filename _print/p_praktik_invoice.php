@@ -35,6 +35,7 @@ while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
     $total_harga = $total_harga + $d_praktik['jumlah_harga_pilih'];
     $no++;
 }
+
 #data mess pilih
 $sql_mess = "SELECT * FROM tb_praktik 
 JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik 
