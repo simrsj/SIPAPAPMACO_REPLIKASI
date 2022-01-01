@@ -30,8 +30,20 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<!-- Nav Item - Pages Collapse Menu -->
 				<li class="nav-item">
 					<a class="nav-link" href="?prk">
-						<i class="fas fa-fw fa-chart-area"></i>
-						<span>Praktikan</span>
+						<i class="fas fa-fw fa-users"></i>
+						<span>Pendaftaran</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="?ptk">
+						<i class="fas fa-fw fa-user-graduate"></i>
+						<span>Nama Praktikan</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="?jpk">
+						<i class="far fa-fw fa-calendar"></i>
+						<span>Jadwal Praktikan</span>
 					</a>
 				</li>
 				<!-- Divider -->
@@ -40,58 +52,75 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div class="sidebar-heading">
 					Data
 				</div>
-				<?php
-				if ($_SESSION['level_user'] == 1) {
-				?>
-					<li class="nav-item">
-						<a class="nav-link" href="?test">
-							<i class="fas fa-fw fa-table"></i>
-							<span>TEST</span>
-						</a>
-						<a class="nav-link" href="?akr">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Akreditasi</span>
-						</a>
-						<a class="nav-link" href="?hrg">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Harga</span>
-						</a>
-						<a class="nav-link" href="?ins">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Institusi</span>
-						</a>
-						<a class="nav-link" href="?jrs">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Jurusan</span>
-						</a>
-						<a class="nav-link" href="?jjg">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Jenjang</span>
-						</a>
-						<a class="nav-link" href="?mtr">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Mentor</span>
-						</a>
-						<a class="nav-link" href="?mes">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Mess</span>
-						</a>
-						<a class="nav-link" href="?mou">
-							<i class="fas fa-fw fa-table"></i>
-							<span>MoU</span>
-						</a>
-						<a class="nav-link" href="?spf">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Spesifikasi</span>
-						</a>
-						<a class="nav-link" href="?uni">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Unit</span>
-						</a>
-					</li>
-				<?php
-				}
-				?>
+
+				<li class="nav-item">
+					<a class="nav-link" href="?test">
+						<i class="fas fa-fw fa-table"></i>
+						<span>TEST</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						<i class="fas fa-fw fa-cog"></i>
+						<span>Data Pendukung</span>
+					</a>
+					<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header">Daftar Data Pendukung :</h6>
+							<a class="collapse-item" href="?hrg">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Harga</span>
+							</a>
+							<a class="collapse-item" href="?ins">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Institusi</span>
+							</a>
+							<a class="collapse-item" href="?mtr">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Mentor/Pembimbing</span>
+							</a>
+							<a class="collapse-item" href="?mes">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Mess</span>
+							</a>
+							<a class="collapse-item" href="?mou">
+								<i class="fas fa-fw fa-table"></i>
+								<span>MoU</span>
+							</a>
+							<a class="collapse-item" href="?uni">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Unit</span>
+							</a>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+						<i class="fas fa-fw fa-cog"></i>
+						<span>Basis Data</span>
+					</a>
+					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header">Daftar Basis Data :</h6>
+							<a class="collapse-item" href="?akr">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Akreditasi</span>
+							</a>
+							<a class="collapse-item" href="?jjg">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Jenjang Pendidikan</span>
+							</a>
+							<a class="collapse-item" href="?jrs">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Jurusan Pendidikan</span>
+							</a>
+							<a class="collapse-item" href="?spf">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Spesifikasi Pendidikan</span>
+							</a>
+						</div>
+					</div>
+				</li>
 				<!-- Divider -->
 				<hr class="sidebar-divider d-none d-md-block">
 
@@ -111,6 +140,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					include "_admin/_nav.php";
 					if (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
+					} elseif (isset($_GET['ptk'])) {
+						include "_admin/view/v_praktikan.php";
 					} elseif (isset($_GET['mou'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_mou.php";
@@ -135,6 +166,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						}
 					} elseif (isset($_GET['jrs'])) {
 						include "_admin/view/v_jurusan.php";
+					} elseif (isset($_GET['jpk'])) {
+						include "_admin/view/v_praktikan_jadwal.php";
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
 					} elseif (isset($_GET['mes'])) {
@@ -154,6 +187,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/insert/i_praktik.php";
 						} elseif (isset($_GET['m'])) {
 							include "_admin/insert/i_praktik_mess.php";
+						} elseif (isset($_GET['p_i'])) {
+							include "_print/p_praktik_invoice.php";
 						} elseif (isset($_GET['u'])) {
 							include "_admin/update/u_praktik.php";
 						} elseif (isset($_GET['ub'])) {

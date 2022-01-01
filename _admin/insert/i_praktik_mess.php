@@ -10,6 +10,9 @@ if (isset($_POST['tambah_mess'])) {
     // echo $sql_praktik . "<br>";
 
     $jumlah_hari_praktik = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+
+    // echo $jumlah_hari_praktik . "<br>";
+
     if ($_POST['makan_mess_pilih'] == "Ya") {
         $total_harga_mess_pilih = $jumlah_hari_praktik * $d_mess['harga_dengan_makan_mess'] * $d_praktik['jumlah_praktik'];
     } elseif ($_POST['makan_mess_pilih'] == "Tidak") {
@@ -17,6 +20,9 @@ if (isset($_POST['tambah_mess'])) {
     } else {
         $total_harga_mess_pilih = 0;
     }
+
+    // echo $total_harga_mess_pilih . "<br>";
+
     $sql_insert_pilih_mess = "INSERT INTO tb_mess_pilih (
         id_praktik,
         id_mess,
@@ -36,24 +42,23 @@ if (isset($_POST['tambah_mess'])) {
             )";
 
 
-    // echo $sql_insert_pilih_mess . "<br>";
-    $conn->query($sql_insert_pilih_mess);
 
     $total_terisi_mess = $d_mess['kapasitas_terisi_mess'] + $d_praktik['jumlah_praktik'];
 
     $sql_update_mess = "UPDATE tb_mess SET kapasitas_terisi_mess = $total_terisi_mess WHERE id_mess = " . $_POST['id_mess'];
-
-    echo $sql_update_mess . "<br>";
-    // $conn->query($sql_update_mess);
-
 
     //SQL ubah status praktik
     $sql_ubah_status_praktik = "UPDATE tb_praktik
     SET status_cek_praktik = 'MESS'
     WHERE id_praktik = " . $_POST['id_praktik'];
 
-    echo $sql_ubah_status_praktik . "<br>";
-    // $conn->query($sql_ubah_status_praktik);
+    //Eksekusi Query 
+    // echo $sql_insert_pilih_mess . "<br>";
+    // echo $sql_update_mess . "<br>";
+    // echo $sql_ubah_status_praktik . "<br>";
+    $conn->query($sql_insert_pilih_mess);
+    $conn->query($sql_update_mess);
+    $conn->query($sql_ubah_status_praktik);
 
 ?>
     <script>
@@ -69,51 +74,46 @@ if (isset($_POST['tambah_mess'])) {
 ?>
 
     <div class="container-fluid">
-        <div class="col-lg-4 card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center">
-                <div class="h3 mb-2 text-gray-800">Pilih Mess</div>
-            </div>
-            <div class="card-body">
-                <form action="" method="POST" class="form-group">
-                    <fieldset class="fieldset">
-                        <legend class="legend-fieldset">Nama Mess <span style="color:red">*</span></legend>
-                        <select class="form-control" name="id_mess" required>
-                            <option value="">-- Pilih --</option>
-                            <?php
-                            $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE ((kapasitas_t_mess - kapasitas_terisi_mess) >= $jumlah_praktik) ORDER BY nama_mess ASC");
-                            while ($d_jurusan = $q_jurusan->fetch(PDO::FETCH_ASSOC)) {
-                            ?>
-                                <option value="<?php echo $d_jurusan['id_mess']; ?>"><?php echo $d_jurusan['nama_mess']; ?></option>
-                            <?php
-                            }
-                            ?>
-                        </select>
-                    </fieldset>
-                    <hr>
-                    <fieldset class="fieldset">
-                        <legend class="legend-fieldset">Makan Mess <span style="color:red">*</span></legend>
-                        <div class="boxed-check-group boxed-check-success text-center">
-                            <div class="row">
-
-                                <label class="boxed-check" style="margin-left: auto; margin-right: auto;">
-                                    <input class="boxed-check-input" type="radio" name="makan_mess_pilih" value="Ya" required>
-                                    <div class="boxed-check-label" style="text-align:center;">
-                                        Dengan Makan (3x Sehari)
-                                    </div>
-                                </label>
-                                <label class="boxed-check" style="margin-left: auto; margin-right: auto;">
-                                    <input class="boxed-check-input" type="radio" name="makan_mess_pilih" value="Tidak">
-                                    <div class="boxed-check-label" style="text-align:center;">
-                                        Tanpa Makan
-                                    </div>
-                                </label>
+        <div class="row">
+            <div class="col-md-3 card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center">
+                    <div class="h4 text-gray-800">
+                        Pilih Mess : <i style='font-size:14px;'>(Jumlah Praktik <b><?php echo $d_praktik['jumlah_praktik']; ?></b>)</i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST" class="form-group">
+                        <fieldset class="fieldset">
+                            <legend class="legend-fieldset">Nama Mess <span style="color:red">*</span></legend>
+                            <select class="form-control" name="id_mess" required>
+                                <option value="">-- Pilih --</option>
+                                <?php
+                                $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE ((kapasitas_t_mess - kapasitas_terisi_mess) >= $jumlah_praktik) ORDER BY nama_mess ASC");
+                                while ($d_jurusan = $q_jurusan->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
+                                    <option value="<?php echo $d_jurusan['id_mess']; ?>"><?php echo $d_jurusan['nama_mess']; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </fieldset>
+                        <hr>
+                        <fieldset class="fieldset">
+                            <legend class="legend-fieldset">Makan Mess <span style="color:red">*</span></legend>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="makan_mess_pilih1" name="makan_mess_pilih" value="Ya" class="custom-control-input" required>
+                                <label class="custom-control-label" for="makan_mess_pilih1">Pakai Makan (3x Sehari)</label>
                             </div>
-                        </div>
-                    </fieldset>
-                    <hr>
-                    <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
-                    <input class="btn btn-success" type="submit" name="tambah_mess" value="SIMPAN">
-                </form>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="makan_mess_pilih2" name="makan_mess_pilih" value="t" class="custom-control-input" required>
+                                <label class="custom-control-label" for="makan_mess_pilih2">Tidak Pakai Makan</label>
+                            </div>
+                        </fieldset>
+                        <hr>
+                        <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
+                        <input class="btn btn-success" type="submit" name="tambah_mess" value="SIMPAN">
+                    </form>
+                </div>
             </div>
         </div>
 

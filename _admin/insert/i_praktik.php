@@ -66,6 +66,10 @@ if (isset($_POST['simpan_praktik'])) {
     }
 
     if ($_FILES['data_praktik']['size'] > 0) {
+
+        //ubah Nama File xlsx
+        $_FILES['data_praktik']['name'] = "data_praktik_" . $no_id_praktik . "_" . date('Y-m-d') . ".xlsx";
+
         $file_data_praktik = (object) @$_FILES['data_praktik'];
 
         //mulai unggah file data praktik
@@ -195,7 +199,7 @@ if (isset($_POST['simpan_praktik'])) {
                                     }
                                     ?>
                                 </select>
-                                <i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i>
+                                <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
                             <?php
                             } else {
                             ?>

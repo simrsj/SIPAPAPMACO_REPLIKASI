@@ -73,7 +73,7 @@
                 $('#institusi_lainnya').append("<input type='text' class='form-control form-control' placeHolder='Isikan Nama Istitusi' name='nama_institusi'>").focus();
             } else {
                 console.log("Tidak Pilih Institusi Lainnya");
-                $('#institusi').empty();
+                $('#institusi_lainnya').empty();
             }
         }
     </script>

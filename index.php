@@ -19,15 +19,13 @@ include "_add-ons/tanggal.php";
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> -->
 
     <!-- Add-ons -->
     <link href="vendor/select2-develop/dist/css/select2.min.css" rel="stylesheet" />
     <link href="vendor/fontawesome-free/css/v4-shims-min.css" rel="stylesheet" />
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="vendor/datatables-all/datatables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css" rel="stylesheet">
+    <!-- <link href="vendor/datatables-all/datatables.min.css" rel="stylesheet"> -->
     <!-- <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet"> -->
     <!-- <link rel="stylesheet" href="vendor/tata-master/dist/index.css"> -->
 
@@ -81,19 +79,14 @@ if (isset($_GET['dashboard'])) {
 <!-- Page level plugins -->
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="vendor/datatables-all/datatables.min.js"></script>
+<!-- <script type="text/javascript" src="vendor/datatables-all/datatables.min.js"></script> -->
 <!-- <script src="vendor/tata-master/dist/tata.js"></script>
     <script src="vendor/tata-master/dist/index.js"></script> -->
 <script src="vendor/select2-develop/dist/js/select2.min.js"></script>
 
 <script>
     $(document).ready(function() {
-        $('#myTable').dataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
+        $('#myTable').dataTable();
     });
     $(document).ready(function() {
         $('.js-example-basic-single').select2();

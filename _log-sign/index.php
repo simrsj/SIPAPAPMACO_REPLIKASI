@@ -60,17 +60,19 @@ if (empty($_SESSION['username_user'])) {
 				while ($row_pass = $exc_pass->fetch(PDO::FETCH_ASSOC)) {
 					$x_pass++;
 				}
-				while ($row = $exc_name_pass->fetch(PDO::FETCH_ASSOC)) {
+				while ($row = $exc_name_pass->fetch(PDO::FETCH_ASSOC)) {;
 					$_SESSION['username_user'] = $row['username_user'];
 					$_SESSION['nama_user'] = $row['nama_user'];
 					$_SESSION['id_user'] = $row['id_user'];
+					$_SESSION['id_institusi'] = $row['id_institusi'];
+					$_SESSION['id_mou'] = $row['id_mou'];
 					$_SESSION['status_user'] = $row['status_user'];
 					$_SESSION['level_user'] = $row['level_user'];
 					// $_SESSION['id_mou'] = $row['id_mou'];
 					$id_user = $row['id_user'];
 					$x_name_pass++;
-					// print_r($_SESSION);die;
 				}
+				// print_r($_SESSION);die;
 
 				if (!$exc_name_pass) {
 			?>
@@ -105,11 +107,20 @@ if (empty($_SESSION['username_user'])) {
 			<?php
 					}
 				} else {
+					$sql_update_login = "UPDATE tb_user
+					SET terakhir_login_user = '" . date('Y-m-d') . "'
+					WHERE id_user ='" . $_SESSION['id_user'] . "'";
+
+					echo $sql_update_login . "<br>";
+
+					$conn->query($sql_update_login);
+
 					echo "
 					<script>			
 						document.location.href='?';
 					</script>
 					";
+
 					// header("Refresh:0"); 
 					// Warning: Cannot modify header information - headers already sent by (output started at C:\xampp7\htdocs\SM\_log-sign\index.php:4) in C:\xampp7\htdocs\SM\_log-sign\index.php on line 108
 				}

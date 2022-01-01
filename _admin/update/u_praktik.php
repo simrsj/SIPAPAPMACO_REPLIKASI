@@ -105,7 +105,7 @@ if (isset($_POST['ubah_praktik'])) {
     }
 
     $sql_update = " UPDATE `tb_praktik` SET
-        `id_mou` = '" . $_POST['id_institusi'] . "', 
+        `id_mou` = '" . $_POST['id_mou'] . "', 
         `id_institusi` = '" . $_POST['id_institusi'] . "', 
         `nama_praktik` = '" . $_POST['nama_praktik'] . "', 
         `tgl_ubah_praktik` = '" . date('Y-m-d') . "', 
@@ -123,11 +123,11 @@ if (isset($_POST['ubah_praktik'])) {
         `telp_mentor_praktik` = '" . $_POST['telp_mentor_praktik'] . "'
         WHERE `tb_praktik`.`id_praktik` = " . $id_praktik;
 
-    echo $sql_update;
+    // echo $sql_update;
     $conn->query($sql_update);
 ?>
     <script type="text/javascript">
-        // document.location.href = "?prk";
+        document.location.href = "?prk";
     </script>
 <?php
 } else {
@@ -167,9 +167,15 @@ if (isset($_POST['ubah_praktik'])) {
                         <div class="col-lg-6">
                             Institusi : <span style="color:red">*</span><br>
                             <?php
+
+                            #MOU yang aktif
+                            // $sql_mou = "SELECT * FROM tb_mou 
+                            //     JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi  
+                            //     WHERE tb_mou.tgl_selesai_mou >= CURDATE() ORDER BY tb_institusi.nama_institusi ASC";
+
                             $sql_mou = "SELECT * FROM tb_mou 
                                 JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi  
-                                WHERE tb_mou.tgl_selesai_mou >= CURDATE() ORDER BY tb_institusi.nama_institusi ASC";
+                                ORDER BY tb_institusi.nama_institusi ASC";
 
                             $q_mou = $conn->query($sql_mou);
                             $r_mou = $q_mou->rowCount();
@@ -179,15 +185,15 @@ if (isset($_POST['ubah_praktik'])) {
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
-                                        if ($d_praktik_join['id_mou'] == $d_mou['id_mou']) {
+                                        if ($d_praktik_join['id_institusi'] == $d_mou['id_institusi']) {
                                     ?>
-                                            <option value='<?php echo $d_mou['id_mou']; ?>' selected>
+                                            <option value='<?php echo $d_mou['id_institusi']; ?>' selected>
                                                 <?php echo $d_mou['nama_institusi']; ?>
                                             </option>
                                         <?php
                                         } else {
                                         ?>
-                                            <option value='<?php echo $d_mou['id_mou']; ?>'>
+                                            <option value='<?php echo $d_mou['id_institusi']; ?>'>
                                                 <?php echo $d_mou['nama_institusi']; ?>
                                             </option>
                                     <?php
@@ -195,7 +201,7 @@ if (isset($_POST['ubah_praktik'])) {
                                     }
                                     ?>
                                 </select>
-                                <i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i>
+                                <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
                             <?php
                             } else {
                             ?>

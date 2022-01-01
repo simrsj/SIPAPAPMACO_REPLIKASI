@@ -10,18 +10,17 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<!-- Sidebar - Brand -->
 				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="?">
 					<div class="sidebar-brand-icon">
-						<i class="fas fa-laugh-wink"></i>
+						<i class="fas fa-book-reader"></i>
 					</div>
-					<div class="sidebar-brand-text mx-3">SIPAPAP MACO - IP</div>
+					<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 				</a>
-				<!-- Divider -->
-				<hr class="sidebar-divider my-0">
 				<!-- Nav Item - Dashboard -->
 				<li class="nav-item active">
-					<a class="nav-link" href="?">
+					<a class="nav-link" href="?ds">
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
 				</li>
+
 				<!-- Divider -->
 				<hr class="sidebar-divider">
 				<!-- Heading -->
@@ -38,29 +37,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<!-- Divider -->
 				<hr class="sidebar-divider">
 				<!-- Heading -->
-				<div class="sidebar-heading">
-					Data Institusi Pendidikan
-				</div>
-				<?php
-				if ($_SESSION['level_user'] == 2) {
-				?>
-					<li class="nav-item">
-					
-						<a class="nav-link" href="?mou">
-							<i class="fas fa-fw fa-table"></i>
-							<span>MoU</span>
-						</a>
-					</li>
-					<li class="nav-item">
-					
-						<a class="nav-link" href="?cal">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Calendar</span>
-						</a>
-					</li>
-				<?php
-				}
-				?>
+
 				<!-- Divider -->
 				<hr class="sidebar-divider d-none d-md-block">
 
@@ -77,59 +54,25 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<!-- Main Content -->
 				<div id="content">
 					<?php
-					include "_ip/_nav.php";
-					if (isset($_GET['akr'])) {
-						include "_ip/view/v_akreditasi.php";
-					} elseif (isset($_GET['cal'])) {
-						include "_ip/calendar/index.php";
-					}elseif (isset($_GET['month'])) {
-							include "_ip/calendar/index.php";
-					} elseif (isset($_GET['mou'])) {
-						if (isset($_GET['i'])) {
-							include "_ip/insert/i_mou.php";
-						} elseif (isset($_GET['u'])) {
-							include "_ip/update/u_mou.php";
-						} elseif (isset($_GET['d'])) {
-							include "_ip/delete/d_mou.php";
-						} else {
-							include "_ip/view/v_mou.php";
-						}
-					} elseif (isset($_GET['hrg'])) {
-						include "_ip/view/v_harga.php";
-					} elseif (isset($_GET['ins'])) {
-						if (isset($_GET['i'])) {
-							include "_ip/insert/i_institusi.php";
-						} elseif (isset($_GET['u'])) {
-							include "_ip/update/u_institusi.php";
-						} elseif (isset($_GET['d'])) {
-							include "_ip/delete/d_institusi.php";
-						} else {
-							include "_ip/view/v_institusi.php";
-						}
-					} elseif (isset($_GET['jrs'])) {
-						include "_ip/view/v_jurusan.php";
-					} elseif (isset($_GET['jjg'])) {
-						include "_ip/view/v_jenjang.php";
-					} elseif (isset($_GET['pmb'])) {
-						if (isset($_GET['i'])) {
-							include "_ip/insert/i_pembimbing.php";
-						} elseif (isset($_GET['u'])) {
-							include "_ip/update/u_pembimbing.php";
-						} else {
-							include "_ip/view/v_pembimbing.php";
-						}
-					} elseif (isset($_GET['prk'])) {
-						if (isset($_GET['i'])) {
+					include "_admin/_nav.php";
+					if (isset($_GET['prk'])) {
+						if (isset($_GET['a'])) {
+							include "_ip/view/v_praktik_arsip.php";
+						} elseif (isset($_GET['i'])) {
 							include "_ip/insert/i_praktik.php";
+						} elseif (isset($_GET['ib'])) {
+							include "_ip/insert/i_praktik_bayar.php";
+						} elseif (isset($_GET['ih'])) {
+							include "_ip/insert/i_praktik_harga.php";
 						} else {
 							include "_ip/view/v_praktik.php";
 						}
-					} elseif (isset($_GET['spf'])) {
-						include "_ip/view/v_spesifikasi.php";
-					} elseif (isset($_GET['uni'])) {
-						include "_ip/view/v_unit.php";
+					} elseif (isset($_GET['test'])) {
+						include "test.php";
+					} elseif (isset($_GET['test1'])) {
+						include "test1.php";
 					} else {
-						include "_ip/home.php";
+						include "_admin/dashboard.php";
 					}
 					?>
 				</div>
@@ -156,23 +99,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 			<i class="fas fa-angle-up"></i>
 		</a>
 
-		<!-- Logout Modal-->
-		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
-						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-						<a class="btn btn-danger" href="?lo">Ya</a>
-					</div>
-				</div>
-			</div>
-		</div>
 	</body>
 <?php
 } else {
