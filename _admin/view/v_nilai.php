@@ -3,7 +3,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     $conn->query("UPDATE `tb_praktik` SET status_praktik = 'T' WHERE id_praktik = " . $_POST['id_praktik']);
     echo "
         <script type='text/javascript'>
-            document.location.href = '?ptk';
+            document.location.href = '?nil';
         </script>
     ";
 } elseif (isset($_POST['tambah_praktikan'])) {
@@ -24,7 +24,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     }
     echo "
         <script type='text/javascript'>
-            document.location.href = '?ptk';
+            document.location.href = '?nil';
         </script>
     ";
 } elseif (isset($_POST['hapus_praktikan'])) {
@@ -41,7 +41,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     $conn->query($sql_ubah_status_praktikan);
     echo "
         <script type='text/javascript'>
-            document.location.href = '?ptk';
+            document.location.href = '?nil';
         </script>
     ";
 } elseif (isset($_POST['tambah_data_praktikan'])) {
@@ -73,24 +73,27 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     $conn->query($sql_ubah_status_praktikan);
     echo "
         <script type='text/javascript'>
-            document.location.href = '?ptk';
+            document.location.href = '?nil';
         </script>
     ";
 } elseif (isset($_POST['ubah_data_praktikan'])) {
-    $sql_ubah_data_praktikan = "UPDATE tb_praktikan_detail SET
-        no_id_praktikan_detail = '" . $_POST['no_id_praktikan_detail'] . "',
-        nama_praktikan_detail = '" . $_POST['nama_praktikan_detail'] . "',
-        tgl_lahir_praktikan_detail = '" . $_POST['tgl_lahir_praktikan_detail'] . "',
-        telp_praktikan_detail = '" . $_POST['telp_praktikan_detail'] . "',
-        email_praktikan_detail = '" . $_POST['email_praktikan_detail'] . "',
-        tgl_ubah_praktikan_detail = '" . date('Y-m-d') . "'
+    $sql_ubah_data_praktikan = "UPDATE tb_nilai SET
+        ip = '" . $_POST['ip'] . "',
+        sptk = '" . $_POST['sptk'] . "',
+        prepost = '" . $_POST['prepost'] . "',
+        dokep = '" . $_POST['dokep'] . "',
+        komter = '" . $_POST['komter'] . "',
+        tak = '" . $_POST['tak'] . "',
+        penyuluhan = '" . $_POST['penyuluhan'] . "',
+        presentasi = '" . $_POST['presentasi'] . "',
+        sikap = '" . $_POST['sikap'] . "'
         WHERE id_praktikan_detail = '" . $_POST['id_praktikan_detail'] . "'
     ";
-    // echo $sql_ubah_data_praktikan . "<br>";
+     echo $sql_ubah_data_praktikan . "<br>";
     $conn->query($sql_ubah_data_praktikan);
     echo "
         <script type='text/javascript'>
-            document.location.href = '?ptk';
+            document.location.href = '?nil';
         </script>
     ";
 } elseif (isset($_POST['hapus_data_praktikan'])) {
@@ -114,7 +117,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     }
     echo "
         <script type='text/javascript'>
-            document.location.href = '?ptk';
+            document.location.href = '?nil';
         </script>
     ";
 } else {
@@ -125,9 +128,9 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                 <h1 class="h3 mb-2 text-gray-800">Daftar Nilai</h1>
             </div>
             <div class="col-lg-2">
-                <a href="#" data-toggle="modal" data-target="#tambah_praktikan" class="btn btn-outline-success btn-sm">
+                <!-- <a href="#" data-toggle="modal" data-target="#tambah_praktikan" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
-                </a>
+                </a> -->
 
                 <!-- modal tambah data praktikan -->
                 <div class="modal fade text-left" id="tambah_praktikan">
@@ -177,11 +180,11 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                     </div>
                 </div>
 
-                <a href="?dpk&a" class="btn btn-outline-info btn-sm">
+                <!-- <a href="?dpk&a" class="btn btn-outline-info btn-sm">
                     <i>
                         <i class="fas fa-archive"></i>
                     </i>Arsip
-                </a>
+                </a> -->
             </div>
         </div>
 
@@ -217,6 +220,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                         <div class="col-sm-2">
                                             <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                         </div>
+                                        
                                         <div class="col-sm-2">
                                             <b>TANGGAL SELESAI : </b>
                                             <br>
@@ -271,10 +275,10 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                             </button>
                                         </div>
                                         <div class="col-sm-2">
-                                            <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="arsip">
+                                            <!-- <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="arsip">
                                                 <i class="fas fa-archive"> </i>
                                                 Arsipkan
-                                            </a>
+                                            </a> -->
 
                                             <!-- modal arsip -->
                                             <div class="modal fade" id="prk_dh_<?php echo $d_praktik['id_praktik']; ?>">
@@ -316,11 +320,11 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                     </h4>
                                                 </div>
                                                 <div class="col-lg-1">
-                                                    <a title="Tambah Data Praktikan" class="btn btn-success btn-sm" data-toggle='modal' data-target='#t_p_m<?php echo $d_praktik['id_praktikan']; ?>'>
+                                                    <!-- <a title="Tambah Data Praktikan" class="btn btn-success btn-sm" data-toggle='modal' data-target='#t_p_m<?php echo $d_praktik['id_praktikan']; ?>'>
                                                         <i class="fas fa-plus"></i>
-                                                    </a>
+                                                    </a> -->
                                                     <!-- modal tambah data praktikan -->
-                                                    <div class="modal fade text-left" id="t_p_m<?php echo $d_praktik['id_praktikan']; ?>">
+                                                    <div class="modal fade text-left" id="t_p_m<?php echo $d_praktik['id_praktikan_detail']; ?>">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <form class="form-group" method="post">
@@ -328,19 +332,25 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                         <h4>TAMBAH DATA PRAKTIKAN ?</h4>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        ID Praktikan : <span style="color:red">*</span><br>
-                                                                        <input class="form-control" type="text" name="no_id_praktikan_detail" required><br>
-                                                                        Nama Praktikan : <span style="color:red">*</span><br>
-                                                                        <input class="form-control" type="text" name="nama_praktikan_detail" required><br>
-                                                                        Tanggal Lahir : <span style="color:red">*</span><br>
-                                                                        <input class="form-control" type="date" name="tgl_lahir_praktikan_detail" required><br>
-                                                                        No. Telp. : <span style="color:red">*</span><br>
-                                                                        <input class="form-control" type="number" min="1" name="telp_praktikan_detail" required><br>
-                                                                        E-Mail: <br>
-                                                                        <input class="form-control" type="email" name="email_praktikan_detail">
+                                                                        IP : <span style="color:red">*</span><br>
+                                                                        <input class="form-control" type="number" name="ip" required><br>
+                                                                        SPTK : <span style="color:red">*</span><br>
+                                                                        <input class="form-control" type="number" name="sptk" required><br>
+                                                                        Prepost : <span style="color:red">*</span><br>
+                                                                        <input class="form-control" type="number" name="prepost" required><br>
+                                                                        Dokep : <span style="color:red">*</span><br>
+                                                                        <input class="form-control" type="number" name="dokep" required><br>
+                                                                        Tak <br>
+                                                                        <input class="form-control" type="number" name="tak">
+                                                                        Penyuluhan <br>
+                                                                        <input class="form-control" type="number" name="penyuluhan">
+                                                                        Prestasi <br>
+                                                                        <input class="form-control" type="number" name="prestasi">
+                                                                        Sikap <br>
+                                                                        <input class="form-control" type="number" name="sikap">
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <input name="id_praktikan" value="<?php echo $d_praktik['id_praktikan']; ?>" hidden>
+                                                                        <input name="id_praktikan" value="<?php echo $d_praktik['id_praktikan_detail']; ?>" hidden>
                                                                         <button class="btn btn-success btn-sm" type="submit" name="tambah_data_praktikan">TAMBAH</button>
                                                                         <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                     </div>
@@ -348,9 +358,9 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <a title="Hapus Data Praktikan" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_p_m<?php echo $d_praktik['id_praktikan']; ?>'>
+                                                    <!-- <a title="Hapus Data Praktikan" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_p_m<?php echo $d_praktik['id_praktikan']; ?>'>
                                                         <i class="fas fa-trash-alt"></i>
-                                                    </a>
+                                                    </a> -->
                                                     <!-- modal hapus data praktikan -->
                                                     <div class="modal fade text-left" id="h_p_m<?php echo $d_praktik['id_praktikan']; ?>">
                                                         <div class="modal-dialog" role="document">
@@ -376,6 +386,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                             <?php
                                             $sql_praktikan_detail = "SELECT * FROM tb_praktikan
                                                     JOIN tb_praktikan_detail ON tb_praktikan.id_praktikan = tb_praktikan_detail.id_praktikan
+                                                    JOIN tb_nilai on tb_nilai.id_praktikan_detail = tb_praktikan_detail.id_praktikan_detail
                                                     WHERE tb_praktikan_detail.id_praktikan = " . $d_praktik['id_praktikan'] . "
                                                     ORDER BY nama_praktikan_detail ASC";
                                             // echo $sql_praktikan_detail . "<br>";
@@ -389,9 +400,16 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                             <th scope="col">No</th>
                                                             <th scope="col">NO ID</th>
                                                             <th scope="col">Nama Praktikan</th>
-                                                            <th scope="col">Tanggal Lahir</th>
-                                                            <th scope="col">No. Telpon</th>
-                                                            <th scope="col">E-Mail</th>
+                                                            <th scope="col">IP</th>
+                                                            <th scope="col">SPTK</th>
+                                                            <th scope="col">PREPOST</th>
+                                                            <th scope="col">DOKEP</th>
+                                                            <th scope="col">KOMTER</th>
+                                                            <th scope="col">TAK</th>
+                                                            <th scope="col">PENYULUHAN</th>
+                                                            <th scope="col">PRESENTASI</th>
+                                                            <th scope="col">SIKAP</th>
+                                                            
                                                             <th scope="col"></th>
                                                         </tr>
                                                     </thead>
@@ -405,9 +423,15 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                 <th scope="row"><?php echo $no; ?></th>
                                                                 <td><?php echo $d_praktikan_detail['no_id_praktikan_detail']; ?></td>
                                                                 <td><?php echo $d_praktikan_detail['nama_praktikan_detail']; ?></td>
-                                                                <td><?php echo tanggal($d_praktikan_detail['tgl_lahir_praktikan_detail']); ?></td>
-                                                                <td><?php echo $d_praktikan_detail['telp_praktikan_detail']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['email_praktikan_detail']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['ip']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['sptk']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['prepost']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['dokep']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['komter']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['tak']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['penyuluhan']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['presentasi']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['sikap']; ?></td>
                                                                 <td>
 
                                                                     <a title="Ubah Data Praktikan" class="btn btn-primary btn-sm" href='#' data-toggle='modal' data-target='#u_dp_m<?php echo $d_praktikan_detail['id_praktikan_detail']; ?>'>
@@ -419,25 +443,36 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                             <div class="modal-content">
                                                                                 <form class="form-group" method="post">
                                                                                     <div class="modal-header">
-                                                                                        <h4>UBAH DATA PRAKTIKAN ?</h4>
+                                                                                        <h4>MASUKAN DATA NILAI ?</h4>
                                                                                     </div>
                                                                                     <div class="modal-body">
                                                                                         <?php
-                                                                                        $sql_data_praktikan = "SELECT * FROM tb_praktikan_detail WHERE id_praktikan_detail = '" . $d_praktikan_detail['id_praktikan_detail'] . "'";
+                                                                                        $sql_data_praktikan = "SELECT * FROM tb_nilai WHERE id_praktikan_detail = '" . $d_praktikan_detail['id_praktikan_detail'] . "'";
                                                                                         $q_data_praktikan = $conn->query($sql_data_praktikan);
                                                                                         $d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC);
+                                                                                        // var_dump($d_data_praktikan['ip']);
                                                                                         ?>
-                                                                                        ID Praktikan : <span style="color:red">*</span><br>
-                                                                                        <input class="form-control" type="text" name="no_id_praktikan_detail" value="<?php echo $d_data_praktikan['no_id_praktikan_detail']; ?>" required><br>
-                                                                                        Nama Praktikan : <span style="color:red">*</span><br>
-                                                                                        <input class="form-control" type="text" name="nama_praktikan_detail" value="<?php echo $d_data_praktikan['nama_praktikan_detail']; ?>" required><br>
-                                                                                        Tanggal Lahir : <span style="color:red">*</span><br>
-                                                                                        <input class="form-control" type="date" name="tgl_lahir_praktikan_detail" value="<?php echo $d_data_praktikan['tgl_lahir_praktikan_detail']; ?>" required><br>
-                                                                                        No. Telp. : <span style="color:red">*</span><br>
-                                                                                        <input class="form-control" type="number" min="1" name="telp_praktikan_detail" value="<?php echo $d_data_praktikan['telp_praktikan_detail']; ?>" required><br>
-                                                                                        E-Mail: <br>
-                                                                                        <input class="form-control" type="email" name="email_praktikan_detail" value="<?php echo $d_data_praktikan['email_praktikan_detail']; ?>">
-                                                                                    </div>
+                                                                                        
+                                                                                            IP : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="ip" value="<?php if(is_null($d_data_praktikan['ip'])){ echo 0; } else{ echo $d_data_praktikan['ip'];} ?>" required><br>
+                                                                                            SPTK : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="sptk" value="<?php if(is_null($d_data_praktikan['sptk'])){ echo 0; } else{  echo $d_data_praktikan['sptk']; } ?>" required><br>
+                                                                                            Prepost : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="prepost" value="<?php if(is_null($d_data_praktikan['prepost'])){ echo 0; } else{  echo $d_data_praktikan['prepost']; } ?>" required><br>
+                                                                                            Dokep : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="dokep" value="<?php if(is_null($d_data_praktikan['dokep'])){ echo 0; } else{  echo $d_data_praktikan['dokep']; } ?>" required><br>
+                                                                                            Komter : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="komter" value="<?php if(is_null($d_data_praktikan['komter'])){ echo 0; } else{  echo $d_data_praktikan['komter']; } ?>" required><br>
+                                                                                            Tak <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="tak" value="<?php if(is_null($d_data_praktikan['tak'])){ echo 0; } else{  echo $d_data_praktikan['tak']; } ?>" required><br>
+                                                                                            Penyuluhan <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="penyuluhan" value="<?php if(is_null($d_data_praktikan['penyuluhan'])){ echo 0; } else{  echo $d_data_praktikan['penyuluhan'];} ?>" required><br>
+                                                                                            Presentasi <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="presentasi" value="<?php if(is_null($d_data_praktikan['presentasi'])){ echo 0; } else{  echo $d_data_praktikan['presentasi']; } ?>" required><br>
+                                                                                            Sikap <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="sikap" value="<?php if(is_null($d_data_praktikan['sikap'])){ echo 0; } else{  echo $d_data_praktikan['sikap'];} ?>" required><br>
+                                                                                       
+                                                                                           </div>
                                                                                     <div class="modal-footer">
                                                                                         <input name="id_praktikan_detail" value="<?php echo $d_data_praktikan['id_praktikan_detail']; ?>" hidden>
                                                                                         <button class="btn btn-primary btn-sm" type="submit" name="ubah_data_praktikan">UBAH</button>
@@ -447,9 +482,9 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <a title="Hapus Data Praktikan" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_dp_m<?php echo $d_data_praktikan['id_praktikan_detail']; ?>'>
+                                                                    <!-- <a title="Hapus Data Praktikan" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_dp_m<?php echo $d_data_praktikan['id_praktikan_detail']; ?>'>
                                                                         <i class="fas fa-trash-alt"></i>
-                                                                    </a>
+                                                                    </a> -->
                                                                     <!-- modal hapus harga -->
                                                                     <div class="modal fade text-left" id="h_dp_m<?php echo $d_data_praktikan['id_praktikan_detail']; ?>">
                                                                         <div class="modal-dialog" role="document">
