@@ -12,7 +12,7 @@
 
 git status
 git add .
-git commit -m "Data Pengaturan Akun, ->cetak Invoice ->Data Jadwal ->lapor ->dashboard"
+git commit -m "Data dashboard, ->Data Jadwal ->Data Jadwal"
 git pull
 git push
  

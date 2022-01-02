@@ -89,16 +89,16 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					<div id="collapseLap" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<h6 class="collapse-header">Daftar Data Laporan :</h6>
-							<a class="collapse-item" href="_print/p_praktik_invoice.php?id=3" target="_blank">
+							<a class="collapse-item" href="_print/p_mou.php" target="_blank">
 								<i class="fas fa-fw fa-table"></i>
 								<span>Laporan MOU</span>
 							</a>
-							<a class="collapse-item" href="?lappem">
+							<a class="collapse-item" href="_print/p_pembimbing.php" target="_blank">
 								<i class="fas fa-fw fa-table"></i>
 								<span>Laporan Pembimbing</span>
 							</a>
 
-							<a class="collapse-item" href="?lapmes">
+							<a class="collapse-item" href="_print/p_mess.php" target="_blank">
 								<i class="fas fa-fw fa-table"></i>
 								<span>Laporan Mess</span>
 
