@@ -144,7 +144,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="?acu">
+					<a class="nav-link" href="?aku">
 						<i class="fas fa-fw fa-user-cog"></i>
 						<span>Pengaturan Akun</span>
 					</a>
@@ -172,7 +172,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div id="content">
 					<?php
 					include "_admin/_nav.php";
-					if (isset($_GET['acu'])) {
+					if (isset($_GET['aku'])) {
 						include "_admin/view/v_akun.php";
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";

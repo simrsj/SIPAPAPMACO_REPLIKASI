@@ -52,6 +52,11 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?php echo "Rp " . number_format($total_harga, 0, '.', '.'); ?>
                             </div>
+                            <div class="text-md font-weight-bold text-success text-uppercase mb-1">
+                                Bulan <?php echo tanggal_bulan(date('n')); ?>: </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo "Rp " . number_format($total_harga_bulan, 0, '.', '.'); ?>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-3x text-gray-300">Rp</i>
@@ -68,20 +73,12 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col">
                             <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
-                                TOTAL DIKLAT : <b><?php echo $data_dps; ?></b>
+                                <b>DATA MOU : </b>
+                                <span class="label label-danger"><b><?php echo $data_ma; ?></b></span>
                             </div>
-                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
-                                PROSES : <b><?php echo $data_dpp; ?></b>
+                            <div class="col-auto">
+                                <i class="fas fa-handshake fa-3x text-gray-400"></i>
                             </div>
-                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
-                                AKTIF : <b><?php echo $data_dpa; ?></b>
-                            </div>
-                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
-                                NON-AKTIF : <b><?php echo $data_dpn; ?></b>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-graduate fa-3x text-gray-400"></i>
                         </div>
                     </div>
                 </div>

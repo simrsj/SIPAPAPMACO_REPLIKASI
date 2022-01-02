@@ -111,7 +111,7 @@ if (empty($_SESSION['username_user'])) {
 					SET terakhir_login_user = '" . date('Y-m-d') . "'
 					WHERE id_user ='" . $_SESSION['id_user'] . "'";
 
-					echo $sql_update_login . "<br>";
+					// echo $sql_update_login . "<br>";
 
 					$conn->query($sql_update_login);
 
