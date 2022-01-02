@@ -34,9 +34,35 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						<span>Praktikan</span>
 					</a>
 				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" href="?trs">
+						<i class="fas fa-fw fa-wallet"></i>
+						<span>Data Pembayaran</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="?ptk">
+						<i class="fas fa-fw fa-user-graduate"></i>
+						<span>Nama Praktikan</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="?jpk">
+						<i class="far fa-fw fa-calendar"></i>
+						<span>Jadwal Praktikan</span>
+					</a>
+				</li>
 				<!-- Divider -->
 				<hr class="sidebar-divider">
 				<!-- Heading -->
+
+				<li class="nav-item">
+					<a class="nav-link" href="?aku">
+						<i class="fas fa-fw fa-user-cog"></i>
+						<span>Pengaturan Akun</span>
+					</a>
+				</li>
 
 				<!-- Divider -->
 				<hr class="sidebar-divider d-none d-md-block">
@@ -44,6 +70,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<!-- Sidebar Toggler (Sidebar) -->
 				<div class="text-center d-none d-md-inline">
 					<button class="rounded-circle border-0" id="sidebarToggle"></button>
+				</div>
+				<div class="sidebar-card">
+					<i class="fas fa-3x fa-exclamation-circle"></i>
+					<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
+					<a class="btn btn-success btn-sm" href="?LAPOR">Lapor !</a>
 				</div>
 			</ul>
 			<!-- End of Sidebar -->
@@ -66,6 +97,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 							include "_ip/insert/i_praktik_harga.php";
 						} else {
 							include "_ip/view/v_praktik.php";
+						}
+					} elseif (isset($_GET['trs'])) {
+						if (isset($_GET['dtl'])) {
+							include "_admin/view/v_transaksi_detail.php";
+						} else {
+							include "_admin/view/v_transaksi.php";
 						}
 					} elseif (isset($_GET['test'])) {
 						include "test.php";
