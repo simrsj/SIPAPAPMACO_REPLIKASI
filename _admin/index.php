@@ -97,11 +97,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 								<i class="fas fa-fw fa-table"></i>
 								<span>Laporan Pembimbing</span>
 							</a>
-							
+
 							<a class="collapse-item" href="?lapmes">
 								<i class="fas fa-fw fa-table"></i>
 								<span>Laporan Mess</span>
-						
+
 						</div>
 					</div>
 				</li>
@@ -200,8 +200,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_akun.php";
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
-					} elseif (isset($_GET['ptk'])) {
-						include "_admin/view/v_praktikan.php";
 					} elseif (isset($_GET['mou'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_mou.php";
@@ -234,6 +232,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_mess.php";
 					} elseif (isset($_GET['mtr'])) {
 						include "_admin/view/v_mentor.php";
+					} elseif (isset($_GET['nil'])) {
+						include "_admin/view/v_nilai.php";
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_admin/view/v_praktik_arsip.php";
@@ -260,6 +260,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						} else {
 							include "_admin/view/v_praktik.php";
 						}
+					} elseif (isset($_GET['ptk'])) {
+						include "_admin/view/v_praktikan.php";
 					} elseif (isset($_GET['spf'])) {
 						include "_admin/view/v_spesifikasi.php";
 					} elseif (isset($_GET['uni'])) {

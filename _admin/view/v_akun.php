@@ -67,8 +67,6 @@ if (isset($_POST['tambah_user'])) {
     </script>
     ";
 } elseif (isset($_POST['ubah_user'])) {
-
-
     $sql_ubah_user = "UPDATE tb_user SET 
     username_user = '" . $_POST['username_user'] . "',
     password_user = '" . md5($_POST['password_user']) . "',

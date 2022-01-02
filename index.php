@@ -83,6 +83,8 @@ if (isset($_GET['dashboard'])) {
 <!-- <script src="vendor/tata-master/dist/tata.js"></script>
     <script src="vendor/tata-master/dist/index.js"></script> -->
 <script src="vendor/select2-develop/dist/js/select2.min.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
 
 <script>
     $(document).ready(function() {

@@ -1,26 +1,8 @@
 <?php
-
-//////////////////// DATA MOU TOTAL ////////////////////
-$sql_dmt = "SELECT * FROM tb_mou ";
-$q_dmt = $conn->query($sql_dmt);
-$data_dmt = $q_dmt->rowCount();
-
-//////////////////// DATA MOU BERAKHIR ////////////////////
-$sql_dmb = "SELECT * FROM tb_mou 
-WHERE tgl_selesai_mou > CURDATE()";
-$q_dmb = $conn->query($sql_dmb);
-$data_dmb = $q_dmb->rowCount();
-
-//////////////////// DATA MOU AKTIF ////////////////////
-$sql_dma = "SELECT * FROM tb_mou 
-WHERE tgl_selesai_mou <= CURDATE()";
-$q_dma = $conn->query($sql_dma);
-$data_dma = $q_dma->rowCount();
-
 //////////////////// DATA PRAKTIK SEMUA ////////////////////
 $sql_dps = "SELECT * FROM tb_praktik";
 $q_dps = $conn->query($sql_dps);
-$data_dps = $q_dps->rowCount();
+$data_dps = $r_dps = $q_dps->rowCount();
 
 //////////////////// DATA PRAKTIKAN PROSES ////////////////////
 $sql_dpp = "SELECT * FROM tb_praktik
@@ -34,19 +16,20 @@ OR status_cek_praktik = 'DITOLAK'
 )
 AND status_praktik='Y'";
 $q_dpp = $conn->query($sql_dpp);
-$data_dpp = $q_dpp->rowCount();
+$data_dpp = $r_dpp = $q_dpp->rowCount();
 
 //////////////////// DATA PRAKTIKAN AKTIF ////////////////////
 $sql_dpa = "SELECT * FROM tb_praktik
 WHERE status_cek_praktik = 'AKTIF'";
 $q_dpa = $conn->query($sql_dpa);
-$data_dpa = $q_dpa->rowCount();
+$data_dpa = $r_dpa = $q_dpa->rowCount();
 
 //////////////////// DATA PRAKTIKAN NON-AKTIF ////////////////////
 $sql_dpn = "SELECT * FROM tb_praktik
 WHERE status_praktik = 'T'";
 $q_dpn = $conn->query($sql_dpn);
-$data_dpn = $q_dpn->rowCount();
+$data_dpn = $r_dpn = $q_dpn->rowCount();
+
 //////////////////// DATA PRAKTIKAN JUMLAH ////////////////////
 $sql_dpj = "SELECT * FROM tb_praktik";
 $q_dpj = $conn->query($sql_dpj);

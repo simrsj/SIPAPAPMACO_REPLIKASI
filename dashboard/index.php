@@ -1,8 +1,8 @@
 <?php
 // error_reporting(0);
 session_start();
-include "./_add-ons/koneksi.php";
-include "./_add-ons/tanggal.php";
+include "koneksi.php";
+include "tanggal.php";
 ?>
 <!DOCTYPE html>
 <html lang="id">
