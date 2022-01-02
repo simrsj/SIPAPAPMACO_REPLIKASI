@@ -60,7 +60,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</li>
 				<hr class="sidebar-divider">
 				<li class="nav-item active">
-					<a class="nav-link" href="?survey">
+					<a class="nav-link" href="http://192.168.7.89/kuesioner/survey.php" target="_blank">
 						<i class="fas fa-fw fa-list-ul"></i>
 						<span>Survey</span>
 					</a>
@@ -179,7 +179,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div class="sidebar-card">
 					<i class="fas fa-3x fa-exclamation-circle"></i>
 					<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
-					<a class="btn btn-success btn-sm" href="?LAPOR">Lapor !</a>
+					<a class="btn btn-success btn-sm" href="?lapor">Lapor !</a>
 				</div>
 			</ul>
 			<!-- End of Sidebar -->
@@ -195,16 +195,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_akun.php";
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
-					} elseif (isset($_GET['mou'])) {
-						if (isset($_GET['i'])) {
-							include "_admin/insert/i_mou.php";
-						} elseif (isset($_GET['u'])) {
-							include "_admin/update/u_mou.php";
-						} elseif (isset($_GET['d'])) {
-							include "_admin/delete/d_mou.php";
-						} else {
-							include "_admin/view/v_mou.php";
-						}
 					} elseif (isset($_GET['hrg'])) {
 						include "_admin/view/v_harga.php";
 					} elseif (isset($_GET['ins'])) {
@@ -223,8 +213,20 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_praktikan_jadwal.php";
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
+					} elseif (isset($_GET['lapor'])) {
+						include "_admin/view/v_lapor.php";
 					} elseif (isset($_GET['mes'])) {
 						include "_admin/view/v_mess.php";
+					} elseif (isset($_GET['mou'])) {
+						if (isset($_GET['i'])) {
+							include "_admin/insert/i_mou.php";
+						} elseif (isset($_GET['u'])) {
+							include "_admin/update/u_mou.php";
+						} elseif (isset($_GET['d'])) {
+							include "_admin/delete/d_mou.php";
+						} else {
+							include "_admin/view/v_mou.php";
+						}
 					} elseif (isset($_GET['mtr'])) {
 						include "_admin/view/v_mentor.php";
 					} elseif (isset($_GET['nil'])) {
