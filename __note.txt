@@ -9,6 +9,9 @@
 - buat dastboard
 - buat Invoice
 - search disetiap select
+- cek rsj praktik error edit
+- daftar akun tanggal mounya diisi
+- dashboard pendapatan di cek ulang kalkulasinya
 
 git status
 git add .

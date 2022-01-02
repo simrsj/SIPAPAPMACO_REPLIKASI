@@ -33,7 +33,7 @@ include "_add-ons/tanggal.php";
 <?php
 
 if (isset($_GET['dashboard'])) {
-    include "dashboard.php";
+    include "dashboard/dashboard.php";
 } elseif (isset($_SESSION['status_user'])) {
     if ($_SESSION['status_user'] == 'Y') {
         if (isset($_GET['lo'])) {
