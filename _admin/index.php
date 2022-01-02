@@ -82,6 +82,30 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseLap" aria-expanded="true" aria-controls="collapseOne">
+						<i class="fas fa-fw fa-cog"></i>
+						<span>Laporan</span>
+					</a>
+					<div id="collapseLap" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header">Daftar Data Laporan :</h6>
+							<a class="collapse-item" href="_print/p_praktik_invoice.php?id=3" target="_blank">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Laporan MOU</span>
+							</a>
+							<a class="collapse-item" href="?lappem">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Laporan Pembimbing</span>
+							</a>
+							
+							<a class="collapse-item" href="?lapmes">
+								<i class="fas fa-fw fa-table"></i>
+								<span>Laporan Mess</span>
+						
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 						<i class="fas fa-fw fa-cog"></i>
 						<span>Data Pendukung</span>
