@@ -1,6 +1,6 @@
 <?php
 $sql_data_praktik = "SELECT * FROM tb_praktik 
-JOIN tb_institusi ON tb_praktik.id_institusi = tb_praktik.id_institusi
+JOIN tb_institusi ON tb_institusi.id_institusi = tb_praktik.id_institusi
 WHERE tb_praktik.id_praktik ='" . $_GET['dtl'] . "'";
 
 $q_data_praktik = $conn->query($sql_data_praktik);

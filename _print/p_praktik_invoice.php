@@ -40,8 +40,11 @@ while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
 $sql_mess = "SELECT * FROM tb_praktik 
 JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik 
 JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess 
+JOIN tb_institusi on tb_institusi.id_institusi = tb_praktik.id_institusi
 WHERE tb_praktik.id_praktik = '" . $id_praktik . "'";
 $q_mess = $conn->query($sql_mess);
+
+
 
 while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
     array_push(
@@ -64,6 +67,14 @@ while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
     $total_harga = $total_harga + $d_mess['total_harga_mess_pilih'];
     $no++;
 }
+#data detail di atas INVOICE
+$sql_mess = "SELECT * FROM tb_praktik 
+JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik 
+JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess 
+JOIN tb_institusi on tb_institusi.id_institusi = tb_praktik.id_institusi
+WHERE tb_praktik.id_praktik = '" . $id_praktik . "'";
+$con_mess = $conn->query($sql_mess);
+$detail = $con_mess->fetch(PDO::FETCH_ASSOC);
 
 
 #header tabel
@@ -117,9 +128,42 @@ $pdf->Cell(0, 5, $judul, '0', 1, 'C');
 $pdf->Image('logo.png', 10, 6, 30);
 
 #garis
-$pdf->Line(10, 45, 210 - 10, 45); // 50mm from each edge
+$pdf->Line(0, 45, 300, 45); // 50mm from each edge
 
 $pdf->Ln(8);
+$judul = "INVOICE ";
+$pdf->SetFont('Arial', '', '16');
+$pdf->Cell(0, 5, $judul, '0', 1, 'C');
+// print_r($detail);die;
+$pdf->Ln(4);
+
+$judul = "Nama Institusi : ";
+$nama = $detail['nama_institusi'];
+$pdf->SetFont('Arial', '', '12');
+$pdf->Cell(0, 0, $judul.' '.$nama, '0', 1, 'L');
+$pdf->Ln(4);
+
+$judul = "Nama Praktik : ";
+$nama = $detail['nama_praktik'];
+$pdf->SetFont('Arial', '', '12');
+$pdf->Cell(0, 0, $judul.' '.$nama, '0', 1, 'L');
+$pdf->Ln(4);
+
+$judul = "Tanggal Mulai : ";
+$nama = tanggal($detail['tgl_mulai_praktik']);
+$pdf->SetFont('Arial', '', '12');
+$pdf->Cell(0, 0, $judul.' '.$nama, '0', 1, 'L');
+$pdf->Ln(4);
+
+$judul = "Tanggal Selesai : ";
+$nama = tanggal($detail['tgl_selesai_praktik']);
+$pdf->SetFont('Arial', '', '12');
+$pdf->Cell(0, 0, $judul.' '.$nama, '0', 1, 'L');
+$pdf->Ln(4);
+
+
+
+
 
 #buat header tabel
 $pdf->SetFont('Arial', 'B', '10');
@@ -160,7 +204,45 @@ foreach ($data as $baris) {
     $fill = !$fill;
     $pdf->Ln();
 }
+$pdf->Ln();
+$judul = "Jumlah Total : ";
+$nama = $total_harga;
+$pdf->SetFont('Arial', '', '12');
+$pdf->Cell(0, 0, $judul.' Rp '.number_format($nama, 2, ',', '.'), '0', 1, 'R');
+$pdf->Ln(4);
 
+//  .
+$judul = "Perlu kami informasikan pembayaran dapat ditransfer pada Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD) dengan nomor : ";
+$pdf->SetFont('Arial', '', '12');
+$pdf->write(5,$judul,'');
+$judul = "BJB-0063028738002. ";
+$pdf->SetFont('Arial', 'B', '12');
+$pdf->write(5,$judul,'');
+$judul = "Bukti transfer dapat dikirim melalui email diklit.rsj.jabarprov@gmail.com dan nomor WA Bendahara Penerimaan RSJ (081321412643)";
+$pdf->SetFont('Arial', '', '12');
+$pdf->write(5,$judul,'');
+$pdf->Ln(8);
+
+
+$judul = "DIREKTUR RS JIWA PROVINSI JAWA BARAT ";
+$pdf->SetFont('Arial', '', '12');
+$pdf->Cell(0, 0, $judul, '0', 1, 'R');
+$pdf->Ln(25);
+
+$judul = "Hj. Elly Marliyani, dr., Sp.Kj, M.KM ";
+$pdf->SetFont('Arial', '', '12');
+$pdf->Cell(0, 0, $judul, '0', 1, 'R');
+$pdf->Ln(4);
+
+$judul = "PEMBINA UTAMA MADYA";
+$pdf->SetFont('Arial', '', '12');
+$pdf->Cell(0, 0, $judul, '0', 1, 'R');
+$pdf->Ln(4);
+
+$judul = "NIP. 196608141991022004";
+$pdf->SetFont('Arial', '', '12');
+$pdf->Cell(0, 0, $judul, '0', 1, 'R');
+$pdf->Ln(4);
 #output file PDF
 ob_end_clean();
 $pdf->Output();
