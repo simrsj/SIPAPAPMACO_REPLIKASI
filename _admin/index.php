@@ -16,7 +16,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</a>
 				<!-- Nav Item - Dashboard -->
 				<li class="nav-item active">
-					<a class="nav-link" href="?ds">
+					<a class="nav-link" href="?">
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
 				</li>
@@ -52,9 +52,25 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<span>Jadwal Praktikan</span>
 					</a>
 				</li>
-				<!-- Divider -->
 				<hr class="sidebar-divider">
-				<!-- Heading -->
+				<div class="sidebar-heading">
+					Laporan
+				</div>
+				<!-- Nav Item - Pages Collapse Menu -->
+				<li class="nav-item">
+					<a class="nav-link" href="?prk">
+						<i class="fas fa-fw ">Rp</i>
+						<span>Pendapatan</span>
+					</a>
+				</li>
+				<hr class="sidebar-divider">
+				<li class="nav-item active">
+					<a class="nav-link" href="?survey">
+						<i class="fas fa-fw fa-list-ul"></i>
+						<span>Survey</span>
+					</a>
+				</li>
+				<hr class="sidebar-divider">
 				<div class="sidebar-heading">
 					Data
 				</div>

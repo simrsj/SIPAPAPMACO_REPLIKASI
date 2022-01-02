@@ -43,7 +43,7 @@ if (isset($_GET['dashboard'])) {
         } elseif ($_SESSION['level_user'] == 2) {
             include "_ip/index.php";
         }
-    } elseif ($_SESSION['status_user'] == 'N') {
+    } elseif ($_SESSION['status_user'] == 'T') {
         echo "
             <script>
                 alert('Akun Sudah Tidak Aktif');

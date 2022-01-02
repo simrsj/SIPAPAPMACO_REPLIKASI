@@ -67,25 +67,34 @@ while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
     $no++;
 }
 
-// echo "<pre>";
-print_r($data_harga);
-// echo "</pre>";
+// // echo "<pre>";
+// print_r($data_harga);
+// // echo "</pre>";
+
 ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-11">
             <h1 class="h3 mb-2 text-gray-800">Daftar Transaksi</h1>
+        </div>
+        <div class="col-lg-1">
+            <a class="btn btn-outline-dark btn-sm" href="?trs">
+                <i class="fas fa-arrow-circle-left"></i>
+                Kembali
+            </a>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <div class="card shadow mb-4">
-                <div class="card-body">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
                     <b>Nama Institusi :</b><br>
                     <?php echo $d_data_praktik['nama_institusi']; ?><br><br>
                     <b>Nama Praktik :</b><br>
                     <?php echo $d_data_praktik['nama_praktik']; ?><br><br>
+                </div>
+                <div class="col-lg-6">
                     <b>Tanggal Mulai :</b><br>
                     <?php echo tanggal($d_data_praktik['tgl_mulai_praktik']); ?><br><br>
                     <b>Tanggal Selesai :</b><br>
@@ -115,21 +124,11 @@ print_r($data_harga);
                         <?php
 
                         foreach ($data_harga as $baris) {
-                            $i = 0;
-                            foreach ($baris as $isi) {
-                        ?>
-                                <tr>
-                                    <td><?php echo $isi[$i][0]; ?></td>
-                                    <td><?php echo $isi[$i][1]; ?></td>
-                                    <td><?php echo $isi[$i][2]; ?></td>
-                                    <td><?php echo $isi[$i][3]; ?></td>
-                                    <td><?php echo $isi[$i][4]; ?></td>
-                                    <td><?php echo $isi[$i][5]; ?></td>
-                                    <td><?php echo $isi[$i][6]; ?></td>
-                                </tr>
-                        <?php
-                                $i++;
+                            echo "<tr>";
+                            foreach ($baris as $b) {
+                                echo "<td>" . $b . "</td>";
                             }
+                            echo "</tr>";
                         }
                         ?>
                     </tbody>

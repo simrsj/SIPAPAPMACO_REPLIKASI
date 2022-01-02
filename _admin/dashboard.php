@@ -1,7 +1,5 @@
-<?php
-include "dashboard_data.php";
-?>
-<!-- Begin Page Content -->
+<?php include "./_add-ons/dashboard_data.php"; ?>
+
 <div class="container-fluid">
 
     <!-- Page Heading -->
@@ -16,30 +14,23 @@ include "dashboard_data.php";
     <!-- Content Row -->
     <div class="row">
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Data Diklat -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Diklat Proses Daftar :
-                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                    <?php echo data_praktik_proses(); ?> -
-                                </div>
+                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
+                                TOTAL DIKLAT : <b><?php echo $data_dps; ?></b>
                             </div>
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Diklat Aktif :
-                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                    <?php echo data_praktik_aktif(); ?> -
-                                </div>
+                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
+                                PROSES : <b><?php echo $data_dpp; ?></b>
                             </div>
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Diklat Non-Aktif :
-                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-
-                                    <?php echo data_praktik_nonaktif(); ?> -
-                                </div>
+                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
+                                AKTIF : <b><?php echo $data_dpa; ?></b>
+                            </div>
+                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
+                                NON-AKTIF : <b><?php echo $data_dpn; ?></b>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -50,18 +41,20 @@ include "dashboard_data.php";
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Pendapatan -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                DATA 2</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                            <div class="text-md font-weight-bold text-success text-uppercase mb-1">
+                                TOTAL PENDAPATAN : </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo "Rp " . number_format($total_harga, 0, '.', '.'); ?>
+                            </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-3x text-gray-300">Rp</i>
                         </div>
                     </div>
                 </div>
@@ -70,27 +63,25 @@ include "dashboard_data.php";
 
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
+            <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">DATA 3
+                        <div class="col">
+                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
+                                TOTAL DIKLAT : <b><?php echo $data_dps; ?></b>
                             </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
+                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
+                                PROSES : <b><?php echo $data_dpp; ?></b>
                             </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">-</div>
-                                </div>
+                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
+                                AKTIF : <b><?php echo $data_dpa; ?></b>
+                            </div>
+                            <div class="text-md font-weight-bold text-uppercase text-primary mb-1">
+                                NON-AKTIF : <b><?php echo $data_dpn; ?></b>
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            <i class="fas fa-user-graduate fa-3x text-gray-400"></i>
                         </div>
                     </div>
                 </div>
@@ -125,7 +116,7 @@ include "dashboard_data.php";
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Data Praktian Bulan <?php echo tanggal_bulan(date('m')); ?></h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Data Praktian Bulan <?php echo tanggal_bulan(date('n')); ?></h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
