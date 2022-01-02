@@ -52,15 +52,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<span>Jadwal Praktikan</span>
 					</a>
 				</li>
-				<hr class="sidebar-divider">
-				<div class="sidebar-heading">
-					Laporan
-				</div>
-				<!-- Nav Item - Pages Collapse Menu -->
 				<li class="nav-item">
-					<a class="nav-link" href="?prk">
-						<i class="fas fa-fw ">Rp</i>
-						<span>Pendapatan</span>
+					<a class="nav-link" href="?nil">
+						<i class="far fa-fw fa-star"></i>
+						<span>Data Nilai</span>
 					</a>
 				</li>
 				<hr class="sidebar-divider">

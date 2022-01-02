@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Jan 2022 pada 05.30
+-- Waktu pembuatan: 02 Jan 2022 pada 08.32
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.34
 
@@ -556,21 +556,21 @@ INSERT INTO `tb_mentor` (`id_mentor`, `nip_nipk_mentor`, `nama_mentor`, `id_unit
 (41, '196707151987032002', 'Yusi Yustiah, AMK', '5', 1, 6, 'Aktif'),
 (42, '196712151990032007', 'Yuyun Yunara, S.Kep., Ners', '13', 1, 8, 'Aktif'),
 (43, '197212271996031003', 'H. Zaenurohman, S.Kep.Ners', '23', 1, 8, 'Tidak Aktif'),
-(44, '196608141991022004', 'dr. Hj. Elly Marliyani, Sp.KJ., M.K.M', '0', 3, 0, 'Tidak Aktif'),
-(45, '196805271998032004', 'dr. Lenny Irawati Yohosua, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
-(46, '196607132007012005', 'dr. Hj. Meutia Laksaminingrum, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
-(47, '198302142015031001', 'dr. Ade Kurnia Surawijawa, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
-(48, '197507072005012006', 'dr. Lina Budiyanti, Sp.KJ. (K)', '0', 3, 0, 'Tidak Aktif'),
-(49, '197707272006042026', 'dr. Dhian Indriasari, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
-(50, '197506082006041013', 'dr. Yunyun Setiawan, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
-(51, '196208081990011001', 'dr. H. Riza Putra, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
-(52, '201401065', 'dr. Hj. Lelly Resna N, Sp.KJ. (K)', '0', 3, 0, 'Tidak Aktif'),
-(53, '198601052020122005', 'dr. Hilda Puspa Indah, Sp.KJ.', '0', 3, 0, 'Tidak Aktif'),
-(54, '202101228', 'Hasrini Rowawi, dr., Sp.KJ (K)., MHA', '0', 4, 0, 'Tidak Aktif'),
-(55, '197507072005012006', 'Lina Budiyanti, dr. Sp.KJ (K)', '0', 4, 0, 'Tidak Aktif'),
-(56, '196805271998032004', 'Lenny Irawati Yohosua, dr. Sp.KJ.', '0', 4, 0, 'Tidak Aktif'),
-(57, '198302142015031001', 'Ade Kurnia Surawijaya, dr. Sp.KJ.', '0', 4, 0, 'Aktif'),
-(58, '197707272006042026', 'Dhian Indriasari, dr. Sp.KJ.', '0', 4, 0, 'Tidak Aktif'),
+(44, '196608141991022004', 'dr. Hj. Elly Marliyani, Sp.KJ., M.K.M', '25', 3, 0, 'Tidak Aktif'),
+(45, '196805271998032004', 'dr. Lenny Irawati Yohosua, Sp.KJ.', '25', 3, 0, 'Tidak Aktif'),
+(46, '196607132007012005', 'dr. Hj. Meutia Laksaminingrum, Sp.KJ.', '25', 3, 0, 'Tidak Aktif'),
+(47, '198302142015031001', 'dr. Ade Kurnia Surawijawa, Sp.KJ.', '25', 3, 0, 'Tidak Aktif'),
+(48, '197507072005012006', 'dr. Lina Budiyanti, Sp.KJ. (K)', '25', 3, 0, 'Tidak Aktif'),
+(49, '197707272006042026', 'dr. Dhian Indriasari, Sp.KJ.', '25', 3, 0, 'Tidak Aktif'),
+(50, '197506082006041013', 'dr. Yunyun Setiawan, Sp.KJ.', '25', 3, 0, 'Tidak Aktif'),
+(51, '196208081990011001', 'dr. H. Riza Putra, Sp.KJ.', '25', 3, 0, 'Tidak Aktif'),
+(52, '201401065', 'dr. Hj. Lelly Resna N, Sp.KJ. (K)', '25', 3, 0, 'Tidak Aktif'),
+(53, '198601052020122005', 'dr. Hilda Puspa Indah, Sp.KJ.', '25', 3, 0, 'Tidak Aktif'),
+(54, '202101228', 'Hasrini Rowawi, dr., Sp.KJ (K)., MHA', '25', 4, 0, 'Tidak Aktif'),
+(55, '197507072005012006', 'Lina Budiyanti, dr. Sp.KJ (K)', '25', 4, 0, 'Tidak Aktif'),
+(56, '196805271998032004', 'Lenny Irawati Yohosua, dr. Sp.KJ.', '25', 4, 0, 'Tidak Aktif'),
+(57, '198302142015031001', 'Ade Kurnia Surawijaya, dr. Sp.KJ.', '25', 4, 0, 'Aktif'),
+(58, '197707272006042026', 'Dhian Indriasari, dr. Sp.KJ.', '25', 4, 0, 'Tidak Aktif'),
 (59, '198103252011012004', 'Ekaprasetyawati, S.Si, Apt', '2', 2, 0, 'Tidak Aktif'),
 (60, '196409251992031006', 'Drs. Tavip Budiawan, Apt', '2', 2, 0, 'Tidak Aktif'),
 (61, '198601082010012013', 'Ema Marlina, Amd. PK', '11', 2, 0, 'Tidak Aktif'),
@@ -580,7 +580,7 @@ INSERT INTO `tb_mentor` (`id_mentor`, `nip_nipk_mentor`, `nama_mentor`, `id_unit
 (65, '198805212011011003', 'Irfan Arief Sulistyawan, Amd', '7', 2, 0, 'Tidak Aktif'),
 (66, '197308081999032005', 'Yuyum Rohmulyanawati, S.Sos, MPSSp', '24', 2, 0, 'Aktif'),
 (67, '198010022006042015', 'Ani Kartini, ST', '6', 2, 0, 'Aktif'),
-(68, '197902192011012001', 'Indah Kusuma Dewi, dr., SpKJ', '0', 3, 0, 'Tidak Aktif');
+(68, '197902192011012001', 'Indah Kusuma Dewi, dr., SpKJ', '25', 3, 0, 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
@@ -953,7 +953,8 @@ INSERT INTO `tb_unit` (`id_unit`, `nama_unit`) VALUES
 (21, 'Ruang Nuri'),
 (22, 'Ruang Perkutut'),
 (23, 'Ruang Rajawali'),
-(24, 'Kesehatan Jiwa Masyarakat (KESWAMAS)');
+(24, 'Kesehatan Jiwa Masyarakat (KESWAMAS)'),
+(25, 'Kedokteran');
 
 -- --------------------------------------------------------
 
