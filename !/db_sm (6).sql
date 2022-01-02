@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2022 at 12:32 AM
+-- Generation Time: Jan 03, 2022 at 12:36 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -939,7 +939,7 @@ INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`
 (2, 71, 71, 'Vitae nihil libero s', '2021-12-30', '2021-12-30', '1978-10-18', '1996-03-11', 73, './_file/praktikan/surat_praktik_2_2021-12-30.pdf', './_file/praktikan/data_praktik_2_2021-12-30.xlsx', 1, '1', '9', '4', '2', '1', 'Aut ut necessitatibu', 'juduqeca@mailinator.com', '19', 'DAFTAR', 'T'),
 (3, 0, 87, 'Consequatur eos nihi', '2021-12-31', '2021-12-31', '2021-01-01', '2021-02-19', 64, './_file/praktikan/surat_praktik_3_2021-12-31.pdf', './_file/praktikan/data_praktik_3_2021-12-31.xlsx', 4, '7', '8', '0', '0', '1', 'Repellendus Aut por', 'zisepiz@mailinator.com', '71', 'AKTIF', 'Y'),
 (4, 20, 20, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-28', '2021-11-24', '2021-12-31', 10, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y'),
-(5, 0, 80, 'Kelompok 3', '2021-12-05', '2022-01-02', '2021-12-31', '2022-01-06', 20, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 2, '2', '6', '0', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y'),
+(5, 0, 80, 'Kelompok 3', '2021-12-05', '2022-01-02', '2021-12-31', '2022-01-06', 20, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 3, '4', '6', '0', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y'),
 (6, 0, 23, 'Kelompok 3 Gel. III', '2021-12-03', '2022-01-03', '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', 3, '1', '8', '1', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'T'),
 (7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'MESS', 'Y'),
 (8, 23, 23, 'Kelompok 4', '2022-01-03', NULL, '2022-01-07', '2022-01-27', 5, '', '', 1, '1', '8', '1', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y');
