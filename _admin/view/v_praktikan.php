@@ -21,10 +21,12 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
 
         // echo $sql_insert_praktikan;
         $conn->query($sql_insert_praktikan);
+
+        
     }
     echo "
         <script type='text/javascript'>
-            document.location.href = '?ptk';
+            //document.location.href = '?ptk';
         </script>
     ";
 } elseif (isset($_POST['hapus_praktikan'])) {
@@ -71,6 +73,21 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     // echo $sql_ubah_status_praktikan . "<br>";
     $conn->query($sql_insert_data_praktikan);
     $conn->query($sql_ubah_status_praktikan);
+
+    $q_praktikan = $conn->query("SELECT * FROM tb_praktikan_detail 
+                                JOIN tb_praktikan on tb_praktikan.id_praktikan = tb_praktikan_detail.id_praktikan
+                                JOIN tb_praktik on tb_praktik.id_praktik = tb_praktikan.id_praktik 
+    ORDER BY id_praktikan_detail DESC LIMIT 1");
+    $data = $q_praktikan->fetch(PDO::FETCH_ASSOC);
+    if($data['id_jurusan_pdd_jenis']==1){
+        echo "ini dokter";
+        // $sql_insert_nilai = "INSERT INTO tb_nilai (id_praktikan_detail)  VALUES (".$data['id_praktikan_detail'].")";
+    }else{
+        $sql_insert_nilai = "INSERT INTO tb_nilai (id_praktikan_detail)  VALUES (".$data['id_praktikan_detail'].")";
+    }
+
+    // echo $sql_insert_nilai;die;
+    $conn->query($sql_insert_nilai);
     echo "
         <script type='text/javascript'>
             document.location.href = '?ptk';
