@@ -39,6 +39,7 @@ if (isset($_POST['restore_praktik'])) {
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
                     WHERE tb_praktik.status_praktik = 'T'
+                    AND tb_praktik.id_institusi = '" . $_SESSION['id_institusi'] . "' 
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                     $q_praktik = $conn->query($sql_praktik);

@@ -85,7 +85,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<!-- Main Content -->
 				<div id="content">
 					<?php
-					include "_admin/_nav.php";
+					include "_ip/_nav.php";
 					if (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_ip/view/v_praktik_arsip.php";
@@ -100,16 +100,16 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						}
 					} elseif (isset($_GET['trs'])) {
 						if (isset($_GET['dtl'])) {
-							include "_admin/view/v_transaksi_detail.php";
+							include "_ip/view/v_transaksi_detail.php";
 						} else {
-							include "_admin/view/v_transaksi.php";
+							include "_ip/view/v_transaksi.php";
 						}
 					} elseif (isset($_GET['test'])) {
 						include "test.php";
 					} elseif (isset($_GET['test1'])) {
 						include "test1.php";
 					} else {
-						include "_admin/dashboard.php";
+						include "_ip/dashboard.php";
 					}
 					?>
 				</div>

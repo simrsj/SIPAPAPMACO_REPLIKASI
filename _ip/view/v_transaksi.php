@@ -8,9 +8,12 @@
         <div class="card-body">
             <?php
             $sql_praktik = "SELECT * FROM tb_praktik
-                                    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                                    WHERE tb_praktik.status_cek_praktik = 'AKTIF' OR tb_praktik.status_cek_praktik = 'SELESAI'
-                                    ORDER BY tb_institusi.nama_institusi ASC";
+            JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
+            WHERE 
+            (tb_praktik.status_cek_praktik = 'AKTIF' 
+            OR tb_praktik.status_cek_praktik = 'SELESAI')
+            AND tb_praktik.id_institusi = '" . $_SESSION['id_institusi'] . "' 
+            ORDER BY tb_institusi.nama_institusi ASC";
 
             $q_praktik = $conn->query($sql_praktik);
             $r_praktik = $q_praktik->rowCount();

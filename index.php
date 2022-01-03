@@ -91,6 +91,9 @@ if (isset($_GET['dashboard'])) {
         $('#myTable').dataTable();
     });
     $(document).ready(function() {
+        $('#myTable_2').dataTable();
+    });
+    $(document).ready(function() {
         $('.js-example-basic-single').select2();
     });
 
