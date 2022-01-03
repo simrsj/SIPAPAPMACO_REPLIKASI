@@ -16,7 +16,12 @@
                                 Tambah Institusi :
                             </div>
                             <div class="modal-body">
-                                <input class="form-control" name="nama_institusi">
+                                Nama Institusi :
+                                <input class="form-control" name="nama_institusi"><br>
+                                Akronim Institusi :
+                                <input class="form-control" name="akronim_institusi"><br>
+                                Logo Institusi :
+                                <input type="file" name="logo_institusi" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-success btn-sm" name="tambah">Tambah</button>
@@ -43,6 +48,7 @@
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>Nama Institusi</th>
+                                <th>Akronim Institusi</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -54,6 +60,7 @@
                                 <tr>
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $d_institusi['nama_institusi']; ?></td>
+                                    <td><?php echo $d_institusi['akronim_institusi']; ?></td>
                                     <td>
                                         <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_institusi['id_institusi']; ?>'>
                                             <i class="fas fa-edit"></i>
@@ -67,13 +74,19 @@
                                     <div class="modal fade" id="<?php echo "akr_u_m" . $d_institusi['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                                <form method="post" action="">
+                                                <form method="post" action="" enctype="multipart/form-data">
                                                     <div class="modal-header">
                                                         Ubah Institusi :
                                                     </div>
                                                     <div class="modal-body">
                                                         <input name="id_institusi" value="<?php echo $d_institusi['id_institusi']; ?>" hidden>
-                                                        <input class="form-control" name="nama_institusi" value="<?php echo $d_institusi['nama_institusi']; ?>">
+                                                        NAMA INSTITUSI :
+                                                        <input class="form-control" name="nama_institusi" value="<?php echo $d_institusi['nama_institusi']; ?>" required><br>
+                                                        AKRONIM INSTITUSI :
+                                                        <i style='font-size:12px;'>Maximal 10 Karakter</i><span style="color:red">*</span>
+                                                        <input class="form-control" name="akronim_institusi" value="<?php echo $d_institusi['akronim_institusi']; ?>"><br>
+                                                        LOGO INSTITUSI :<br>
+                                                        <input type="file" name="logo_institusi" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-success btn-sm" name="ubah">Ubah</button>
@@ -122,14 +135,145 @@
 </div>
 <?php
 if (isset($_POST['ubah'])) {
-    $conn->query("UPDATE `tb_institusi` SET `nama_institusi` = '" . $_POST['nama_institusi'] . "' WHERE `tb_institusi`.`id_institusi` = " . $_POST['id_institusi']);
+
+    if ($_FILES['logo_institusi']['size'] > 0) {
+        //ubah Nama File PDF
+        $_FILES['logo_institusi']['name'] = $_POST['id_institusi'] . "." . substr($_FILES['logo_institusi']['type'], 6);
+
+        // echo "<pre>";
+        // print_r($_FILES);
+        // echo "</pre>";
+
+        //alamat file surat masuk
+        $alamat_unggah = "./_img/logo_institusi";
+
+        //pembuatan alamat bila tidak ada
+        if (!is_dir($alamat_unggah)) {
+            mkdir($alamat_unggah, 0777, $rekursif = true);
+        }
+
+        //unggah surat dan data praktik
+        if (!is_null($_FILES['logo_institusi'])) {
+            $logo_institusi = (object) @$_FILES['logo_institusi'];
+
+            //mulai unggah file surat praktik
+            if ($logo_institusi->size > 1000 * 1000) {
+                echo "
+                <script>
+                    alert('File Logo dibawah 1 Mb');
+                    document.location.href = '?ins';
+                </script>
+                ";
+            } elseif (substr($_FILES['logo_institusi']['type'], 6) != ('png' || 'gif' || 'jpeg' || 'jpg')) {
+                echo "
+                <script>
+                    alert('File Surat Harus .png, .gif, jpeg, jpg');
+                    document.location.href = '?ins';
+                </script>
+                    ";
+            } else {
+                $unggah_logo_institusi = move_uploaded_file(
+                    $logo_institusi->tmp_name,
+                    "{$alamat_unggah}/{$logo_institusi->name}"
+                );
+                $link_logo_institusi = "{$alamat_unggah}/{$logo_institusi->name}";
+            }
+        } else {
+            $link_logo_institusi = "";
+        }
+    }
+
+    $sql_ubah = "UPDATE `tb_institusi` SET 
+    `nama_institusi` = '" . $_POST['nama_institusi'] . "',
+    `akronim_institusi` = '" . $_POST['akronim_institusi'] . "',
+    `logo_institusi` = '" . $link_logo_institusi . "'
+     WHERE `tb_institusi`.`id_institusi` = " . $_POST['id_institusi'];
+
+    // echo $sql_ubah . "<br>";
+    $conn->query($sql_ubah);
 ?>
     <script>
         document.location.href = "?ins";
     </script>
 <?php
 } elseif (isset($_POST['tambah'])) {
-    $conn->query("INSERT INTO `tb_institusi` (`nama_institusi`) VALUES ('" . $_POST['nama_institusi'] . "')");
+
+    $no_id_institusi = 0;
+    while ($d_institusi = $conn->query("SELECT id_institusi FROM tb_institusi ORDER BY id_institusi ASC")->fetch(PDO::FETCH_ASSOC)) {
+        if ($no_id_institusi != $d_institusi[0]) {
+            $no_id_institusi = $d_institusi[0] + 1;
+            break;
+        } elseif ($no_id_institusi == 0) {
+            $no_id_institusi;
+            break;
+        }
+        $no_id_institusi = $d_institusi[0] + 1;
+    }
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
+    $link_logo_institusi = '';
+    if ($_FILES['logo_institusi']['size'] > 0) {
+        //ubah Nama File PDF
+        $_FILES['logo_institusi']['name'] = $no_id_institusi . "." . substr($_FILES['logo_institusi']['type'], 6);
+
+        // echo "<pre>";
+        // print_r($_FILES);
+        // echo "</pre>";
+
+        //alamat file surat masuk
+        $alamat_unggah = "./_img/logo_institusi";
+
+        //pembuatan alamat bila tidak ada
+        if (!is_dir($alamat_unggah)) {
+            mkdir($alamat_unggah, 0777, $rekursif = true);
+        }
+
+        //unggah surat dan data praktik
+        if (!is_null($_FILES['logo_institusi'])) {
+            $logo_institusi = (object) @$_FILES['logo_institusi'];
+
+            //mulai unggah file surat praktik
+            if ($logo_institusi->size > 1000 * 1000) {
+                echo "
+                <script>
+                    alert('File Logo dibawah 1 Mb');
+                    document.location.href = '?ins';
+                </script>
+                ";
+            } elseif (substr($_FILES['logo_institusi']['type'], 6) != ('png' || 'gif' || 'jpeg' || 'jpg')) {
+                echo "
+                <script>
+                    alert('File Surat Harus .png, .gif, jpeg, jpg');
+                    document.location.href = '?ins';
+                </script>
+                    ";
+            } else {
+                $unggah_logo_institusi = move_uploaded_file(
+                    $logo_institusi->tmp_name,
+                    "{$alamat_unggah}/{$logo_institusi->name}"
+                );
+                $link_logo_institusi = "{$alamat_unggah}/{$logo_institusi->name}";
+            }
+        } else {
+            $link_logo_institusi = "";
+        }
+    }
+    $sql_institusi = "INSERT INTO `tb_institusi` (
+    `nama_institusi`, 
+    akronim_institusi, 
+    logo_institusi
+    ) VALUES (
+        '" . $_POST['nama_institusi'] . "',
+        '" . $_POST['akronim_institusi'] . "',
+        '" . $link_logo_institusi . "'
+    )";
+
+
+    // echo $sql_institusi . "<br>";
+    $conn->query($sql_institusi);
+
+
 ?>
     <script>
         document.location.href = "?ins";

@@ -168,9 +168,8 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                 <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                             </div>
                                             <div class="col-sm-2">
-                                                <b>TANGGAL SELESAI : </b>
-                                                <br>
-                                                <?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
+                                                <b>TANGGAL SELESAI : </b><?php echo tanggal_minimal($d_praktik['tgl_selesai_praktik']); ?>
+                                                <b>TANGGAL MULAI : </b><?php echo tanggal_minimal($d_praktik['tgl_mulai_praktik']); ?>
                                             </div>
                                             <div class="col-sm-2 text-center">
                                                 <b>STATUS : </b>
@@ -194,15 +193,18 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                 <span class="badge badge-warning text-md">HARGA</span><br>
                                                                 Harga Sudah Dipilih, dilanjutkan Pemilihan Mess Oleh Admin<br><br>
                                                                 <span class="badge badge-primary text-md">MESS</span><br>
-                                                                Mess Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses Pembayaran. <br>
-                                                                <b> Cek Invoice</b> untuk jumlah transaksi <br><br>
+                                                                Mess Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses Pembayaran.
+                                                                <a href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik'] ?>" target="_blank" class="text-primary text-uppercase font-weight-bold">
+                                                                    Cek Invoice
+                                                                </a> untuk jumlah transaksi <br><br>
                                                                 <span class="badge badge-warning text-md">PEMBAYARAN</span><br>
                                                                 Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
                                                                 <span class="badge badge-danger text-md">DITOLAK</span><br>
                                                                 Pembayaran ditolak oleh Admin, revisi pembayaran<br><br>
                                                                 <span class="badge badge-success text-md">AKTIF</span><br>
                                                                 Pembayaran Sudah terverifikasi oleh Admin, Pendaftaran Selesai <br><br>
-                                                                <span class="badge badge-dark text-md">SELESAI</span><br> Praktikan Sudah Selesai
+                                                                <span class="badge badge-dark text-md">SELESAI</span><br> Praktikan Sudah Selesai<br><br>
+                                                                <span class="badge badge-danger text-md">ERROR</span><br> Terjadi kesalahan sistem, segera <a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -272,7 +274,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                     }
                                                 } elseif ($d_praktik['status_cek_praktik'] == "MESS" || $d_praktik['status_cek_praktik'] == "DITOLAK") {
                                                     ?>
-                                                    <a class="btn btn-outline-warning btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>" title="Invoice" target="_blank">INVOICE</a>
+                                                    <a class="btn btn-outline-primary btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>" title="Invoice" target="_blank">INVOICE</a>
                                                     <a class="btn btn-outline-danger btn-sm" href="?prk&ib=<?php echo $d_praktik['id_praktik']; ?>">PEMBAYARAN</a>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN") {
@@ -311,9 +313,44 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                 <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian"><i class="fas fa-info-circle"></i>
                                                 </button>
                                                 <!-- tombol ubah -->
-                                                <a href="?prk&u=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-primary btn-sm" title="Ubah">
+                                                <?php
+                                                if (($d_praktik['status_cek_praktik'] == "AKTIF") || ($d_praktik['status_cek_praktik'] == "SELESAI")) {
+                                                    $link_ubah = "href='#' data-toggle='modal' data-target='#prk_u_" . $d_praktik['id_praktik'] . "'";
+                                                } else {
+                                                    $link_ubah = "href='?prk&u=" . $d_praktik['id_praktik'] . "'";
+                                                }
+                                                ?>
+                                                <a <?php echo $link_ubah; ?> class="btn btn-primary btn-sm" title="Ubah">
                                                     <i class="fas fa-edit"></i>
-                                                </a><!-- tombol arsip -->
+                                                </a>
+
+                                                <!-- modal ubah alert -->
+                                                <div class="modal fade" id="prk_u_<?php echo $d_praktik['id_praktik']; ?>">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content text-center text-lg font-weight-bold">
+                                                            <div class="modal-body">
+                                                                DATA TIDAK BISA DIRUBAH<br>
+                                                                <?php
+                                                                if ($d_praktik['status_cek_praktik'] == 'AKTIF') {
+                                                                ?>
+                                                                    <span class="badge badge-success">PRAKTIKAN AKTIF</span>
+                                                                <?php
+                                                                } elseif ($d_praktik['status_cek_praktik'] == 'SELESAI') {
+                                                                ?>
+                                                                    <span class="badge badge-dark">PRAKTIKAN SELESAI</span>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form method="post">
+                                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- tombol arsip -->
                                                 <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="arsip">
                                                     <i class="fas fa-archive"></i>
                                                 </a>

@@ -12,17 +12,17 @@ if (isset($_POST['tambah_lapor'])) {
         }
         $no_id_lapor = $d_lapor[0] + 1;
     }
-    echo "<pre>";
-    print_r($_FILES);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
     $link_file_lapor = '';
     if ($_FILES['file_lapor']['size'] > 0) {
         //ubah Nama File PDF
-        $_FILES['file_lapor']['name'] = "mou_" . $no_id_lapor . "_" . date('Y-m-d') . "." . substr($_FILES['file_lapor']['type'], 6);
+        $_FILES['file_lapor']['name'] = "lapor_" . $no_id_lapor . "_" . date('Y-m-d') . "." . substr($_FILES['file_lapor']['type'], 6);
 
-        echo "<pre>";
-        print_r($_FILES);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($_FILES);
+        // echo "</pre>";
 
         //alamat file surat masuk
         $alamat_unggah = "./_file/lapor";
@@ -41,14 +41,14 @@ if (isset($_POST['tambah_lapor'])) {
                 echo "
                 <script>
                     alert('File Surat Harus dibawah 1 Mb');
-                    // document.location.href = '?lapor';
+                    document.location.href = '?lapor';
                 </script>
                 ";
-            } elseif ($file_lapor->type !== 'image/png, image/gif, image/jpeg, image/jpg') {
+            } elseif (substr($_FILES['file_lapor']['type'], 6) != ('png' || 'gif' || 'jpeg' || 'jpg')) {
                 echo "
                 <script>
                     alert('File Surat Harus .png, .gif, jpeg, jpg');
-                    // document.location.href = '?lapor';
+                    document.location.href = '?lapor';
                 </script>
                     ";
             } else {
@@ -63,21 +63,24 @@ if (isset($_POST['tambah_lapor'])) {
         }
     }
     $sql_tambah_lapor = "INSERT INTO tb_lapor (
-        id_lapor
+        id_lapor,
         judul_lapor,
         deskripsi_lapor,
         level_lapor, 
         tgl_lapor,
         nama_lapor,
         link_lapor,
+        status_lapor,
         file_lapor
     ) VALUES (
+        '" . $no_id_lapor . "',
         '" . $_POST['judul_lapor'] . "',
         '" . $_POST['deskripsi_lapor'] . "',
         '" . $_POST['level_lapor'] . "',
         '" . date('Y-m-d') . "',
         '" . $_POST['nama_lapor'] . "',
         '" . $_POST['link_lapor'] . "',
+        'cek',
         '" . $link_file_lapor . "'
     )";
 
@@ -188,10 +191,44 @@ if (isset($_POST['tambah_lapor'])) {
                                         <td><?php echo $no; ?></td>
                                         <td><?php echo $d_lapor['nama_lapor']; ?></td>
                                         <td><?php echo $d_lapor['judul_lapor']; ?></td>
-                                        <td><?php echo $d_lapor['tgl_lapor']; ?></td>
-                                        <td><?php echo $d_usd_laporer['level_lapor']; ?></td>
-                                        <td><?php echo $d_lapor['status_lapor']; ?></td>
                                         <td>
+                                            <?php
+                                            if ($d_lapor['level_lapor'] == 'rendah') {
+                                            ?>
+                                                <span class="badge badge-danger text-md">RENDAH</span>
+                                            <?php
+                                            } elseif ($d_lapor['level_lapor'] == 'sedang') {
+                                            ?>
+                                                <span class="badge badge-danger text-md">SEDANG</span>
+                                            <?php
+                                            } elseif ($d_lapor['level_lapor'] == 'tinggi') {
+                                            ?>
+                                                <span class="badge badge-danger text-md">TINGGI</span>
+                                            <?php
+                                            }
+                                            ?>
+                                        </td>
+                                        <td><?php echo tanggal($d_lapor['tgl_lapor']); ?></td>
+                                        <td>
+                                            <?php
+                                            if ($d_lapor['status_lapor'] == 'cek') {
+                                            ?>
+                                                <span class="badge badge-warning text-md">CEK</span>
+                                            <?php
+                                            } elseif ($d_lapor['status_lapor'] == 'proses') {
+                                            ?>
+                                                <span class="badge badge-primary text-md">PROSES</span>
+                                            <?php
+                                            } elseif ($d_lapor['status_lapor'] == 'selesai') {
+                                            ?>
+                                                <span class="badge badge-success text-md">SELESAI</span>
+                                            <?php
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <a href="?lapor$dtl=<?php echo $d_lapor['id_lapor']; ?>" class="btn btn-info btn-sm" title="Detail Rincian"><i class="fas fa-info-circle"></i>
+                                            </a>
                                             <a href="#" class="btn btn-primary btn-sm" title="Ubah Akun" data-toggle="modal" data-target="#ubah_<?php echo $d_lapor['id_lapor']; ?>">
                                                 <i class="fas fa-edit"></i>
                                             </a>
@@ -222,9 +259,9 @@ if (isset($_POST['tambah_lapor'])) {
                                                                 <b>Judul Laporan : </b><br>
                                                                 <input class="form-control" type="text" name="username_user" value="<?php echo $d_lapor['judul_lapor']; ?>" required><br>
                                                                 <b>Dekripsi Laporan : </b><br>
-                                                                <textarea name="deskripsi_lapor"><?php echo $d_lapor['deskripsi_lapor']; ?></textarea><br>
+                                                                <textarea class="form-control" name="deskripsi_lapor"><?php echo $d_lapor['deskripsi_lapor']; ?></textarea><br>
                                                                 <b>Link <i class="font-weight-bold">ERROR</i> : </b><br>
-                                                                <textarea name="link_lapor"><?php echo $d_lapor['link_lapor']; ?></textarea><br>
+                                                                <textarea class="form-control" name="link_lapor"><?php echo $d_lapor['link_lapor']; ?></textarea><br>
                                                                 <b>Level : </b><br>
                                                                 <?php
                                                                 $level1 = '';
@@ -238,27 +275,24 @@ if (isset($_POST['tambah_lapor'])) {
                                                                     $level3 = 'checked';
                                                                 }
                                                                 ?>
-                                                                <div class="custom-control custom-radio">
+                                                                <div class="custom-control custom-radio text-uppercase">
                                                                     <input type="radio" id="level1" name="level_lapor" value="rendah" class="custom-control-input" required <?php echo $level1; ?>>
                                                                     <label class="custom-control-label" for="level1">
-                                                                        <span class="badge badge-primary text-lg">Rendah</span>
+                                                                        <span class="badge badge-success text-md">Rendah</span>
                                                                     </label>
                                                                 </div>
-                                                                <div class="custom-control custom-radio">
+                                                                <div class="custom-control custom-radio text-uppercase">
                                                                     <input type="radio" id="level2" name="level_lapor" value="sedang" class="custom-control-input" required <?php echo $level2; ?>>
-                                                                    <label class="custom-control-label" for="level2">Sedang</label>
+                                                                    <label class="custom-control-label" for="level2">
+                                                                        <span class="badge badge-warning text-md">Sedang</span>
+                                                                    </label>
                                                                 </div>
-                                                                <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="level3" name="level_user" value="tinggi" class="custom-control-input" required <?php echo $level3; ?>>
-                                                                    <label class="custom-control-label" for="level3">Tinggi</label>
+                                                                <div class="custom-control custom-radio text-uppercase">
+                                                                    <input type="radio" id="level3" name="level_lapor" value="tinggi" class="custom-control-input" required <?php echo $level3; ?>>
+                                                                    <label class="custom-control-label" for="level3">
+                                                                        <span class="badge badge-danger text-md">Tinggi</span>
+                                                                    </label>
                                                                 </div><br>
-                                                                <hr>
-                                                                <select name="status_lapor">
-                                                                    <option value="cek">Cek</option>
-                                                                    <option value="proses">Proses</option>
-                                                                    <option value="selesai">Selesai</option>
-                                                                    <option value="tidak">Tidak Bisa</option>
-                                                                </select>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <input name="id_lapor" value="<?php echo $d_akun['id_lapor']; ?>" hidden>

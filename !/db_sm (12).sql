@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Jan 2022 pada 11.28
+-- Waktu pembuatan: 03 Jan 2022 pada 04.43
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.34
 
@@ -64,7 +64,12 @@ CREATE TABLE `tb_bayar` (
 
 INSERT INTO `tb_bayar` (`id_bayar`, `id_praktik`, `atas_nama_bayar`, `no_bayar`, `melalui_bayar`, `tgl_input_bayar`, `file_bayar`) VALUES
 (6, 3, 'Ali Mustopa', '002891264981263', 'Bank BJB', '2022-01-01', './_file/bayar/bayar_0_3-2022-01-01.pdf'),
-(7, 5, 'asdasd', 'asd', 'asd', '2022-01-02', './_file/bayar/bayar_0_5-2022-01-02.pdf');
+(7, 5, 'asdasd', 'asd', 'asd', '2022-01-02', './_file/bayar/bayar_0_5-2022-01-02.pdf'),
+(8, 4, 'asd', 'asdas', 'asd', '2022-01-03', './_file/bayar/bayar_0_4-2022-01-03.pdf'),
+(9, 8, 'sdfaqf', 'qwfqwf', 'qwf', '2022-01-03', './_file/bayar/bayar_0_8-2022-01-03.pdf'),
+(11, 9, 'Lukman', '02855545245', 'Bank BJB', '2022-01-03', './_file/bayar/bayar_0_9-2022-01-03.pdf'),
+(12, 10, 'Lukman', '02855545245', 'Bank BJB', '2022-01-03', './_file/bayar/bayar_0_10-2022-01-03.pdf'),
+(13, 7, 'asdasd', 'asd', 'asd', '2022-01-03', './_file/bayar/bayar_0_7-2022-01-03.pdf');
 
 -- --------------------------------------------------------
 
@@ -233,33 +238,96 @@ INSERT INTO `tb_harga_pilih` (`id_harga_pilih`, `id_praktik`, `id_harga`, `tgl_i
 (81, 7, 39, '2021-12-30', NULL, 1, 2, 300000),
 (82, 7, 62, '2021-12-30', NULL, 1, 2, 150000),
 (83, 7, 70, '2021-12-30', NULL, 1, 1, 1000000),
-(84, 3, 46, '2021-12-31', '2021-12-31', 1, 1, 50000),
-(85, 3, 47, '2021-12-31', '2021-12-31', 1, 1, 75000),
-(86, 3, 48, '2021-12-31', '2021-12-31', 1, 1, 20000),
-(87, 3, 50, '2021-12-31', '2021-12-31', 1, 1, 150000),
-(88, 3, 51, '2021-12-31', '2021-12-31', 1, 1, 20000),
-(89, 3, 52, '2021-12-31', '2021-12-31', 1, 1, 10000),
-(90, 3, 49, '2021-12-31', '2021-12-31', 1, 1, 75000),
-(91, 3, 54, '2021-12-31', '2021-12-31', 3, 1, 450000),
-(92, 3, 53, '2021-12-31', '2021-12-31', 1, 1, 150000),
-(93, 3, 62, '2021-12-31', '2021-12-31', 4, 1, 300000),
-(94, 3, 55, '2021-12-31', '2021-12-31', 1, 1, 150000),
-(95, 3, 56, '2021-12-31', '2021-12-31', 1, 1, 20000),
-(96, 3, 57, '2021-12-31', '2021-12-31', 1, 1, 100000),
-(97, 3, 58, '2021-12-31', '2021-12-31', 1, 1, 150000),
-(98, 3, 59, '2021-12-31', '2021-12-31', 1, 1, 20000),
-(99, 3, 69, '2021-12-31', '2021-12-31', 1, 1, 750000),
-(100, 5, 18, '2022-01-02', NULL, 1, 20, 1000000),
-(101, 5, 19, '2022-01-02', NULL, 1, 20, 1500000),
-(102, 5, 20, '2022-01-02', NULL, 1, 20, 400000),
-(103, 5, 22, '2022-01-02', NULL, 1, 20, 3000000),
-(104, 5, 23, '2022-01-02', NULL, 1, 20, 400000),
-(105, 5, 24, '2022-01-02', NULL, 1, 20, 200000),
-(106, 5, 21, '2022-01-02', NULL, 1, 20, 1500000),
-(107, 5, 26, '2022-01-02', NULL, 3, 20, 9000000),
-(108, 5, 25, '2022-01-02', NULL, 1, 20, 3000000),
-(109, 5, 60, '2022-01-02', NULL, 0, 20, 0),
-(110, 5, 70, '2022-01-02', NULL, 1, 1, 1000000);
+(84, 3, 46, '2021-12-31', '2022-01-02', 1, 1, 50000),
+(85, 3, 47, '2021-12-31', '2022-01-02', 1, 1, 75000),
+(86, 3, 48, '2021-12-31', '2022-01-02', 1, 1, 20000),
+(87, 3, 50, '2021-12-31', '2022-01-02', 1, 1, 150000),
+(88, 3, 51, '2021-12-31', '2022-01-02', 1, 1, 20000),
+(89, 3, 52, '2021-12-31', '2022-01-02', 1, 1, 10000),
+(90, 3, 49, '2021-12-31', '2022-01-02', 1, 1, 75000),
+(91, 3, 54, '2021-12-31', '2022-01-02', 3, 1, 450000),
+(92, 3, 53, '2021-12-31', '2022-01-02', 1, 1, 150000),
+(93, 3, 62, '2021-12-31', '2022-01-02', 4, 1, 300000),
+(94, 3, 55, '2021-12-31', '2022-01-02', 1, 1, 150000),
+(95, 3, 56, '2021-12-31', '2022-01-02', 1, 1, 20000),
+(96, 3, 57, '2021-12-31', '2022-01-02', 1, 1, 100000),
+(97, 3, 58, '2021-12-31', '2022-01-02', 1, 1, 150000),
+(98, 3, 59, '2021-12-31', '2022-01-02', 1, 1, 20000),
+(99, 3, 69, '2021-12-31', '2022-01-02', 1, 1, 750000),
+(100, 5, 18, '2022-01-02', '2022-01-02', 1, 20, 1000000),
+(101, 5, 19, '2022-01-02', '2022-01-02', 1, 20, 1500000),
+(102, 5, 20, '2022-01-02', '2022-01-02', 1, 20, 400000),
+(103, 5, 22, '2022-01-02', '2022-01-02', 1, 20, 3000000),
+(104, 5, 23, '2022-01-02', '2022-01-02', 1, 20, 400000),
+(105, 5, 24, '2022-01-02', '2022-01-02', 1, 20, 200000),
+(106, 5, 21, '2022-01-02', '2022-01-02', 1, 20, 1500000),
+(107, 5, 26, '2022-01-02', '2022-01-02', 3, 20, 9000000),
+(108, 5, 25, '2022-01-02', '2022-01-02', 1, 20, 3000000),
+(109, 5, 60, '2022-01-02', '2022-01-02', 1, 20, 1000000),
+(110, 5, 70, '2022-01-02', '2022-01-02', 1, 1, 1000000),
+(111, 4, 3, '2022-01-03', NULL, 1, 10, 50000),
+(112, 4, 1, '2022-01-03', NULL, 1, 10, 500000),
+(113, 4, 2, '2022-01-03', NULL, 1, 10, 750000),
+(114, 4, 4, '2022-01-03', NULL, 1, 10, 50000),
+(115, 4, 6, '2022-01-03', NULL, 1, 10, 200000),
+(116, 4, 7, '2022-01-03', NULL, 1, 10, 50000),
+(117, 4, 5, '2022-01-03', NULL, 1, 10, 100000),
+(118, 4, 13, '2022-01-03', NULL, 0, 10, 0),
+(119, 4, 10, '2022-01-03', NULL, 0, 10, 0),
+(120, 4, 9, '2022-01-03', NULL, 0, 10, 0),
+(121, 4, 8, '2022-01-03', NULL, 0, 10, 0),
+(122, 4, 11, '2022-01-03', NULL, 0, 10, 0),
+(123, 4, 12, '2022-01-03', NULL, 1, 10, 375000),
+(124, 4, 66, '2022-01-03', NULL, 1, 1, 750000),
+(125, 8, 3, '2022-01-03', NULL, 1, 5, 25000),
+(126, 8, 1, '2022-01-03', NULL, 1, 5, 250000),
+(127, 8, 2, '2022-01-03', NULL, 1, 5, 375000),
+(128, 8, 4, '2022-01-03', NULL, 1, 5, 25000),
+(129, 8, 6, '2022-01-03', NULL, 1, 5, 100000),
+(130, 8, 7, '2022-01-03', NULL, 1, 5, 25000),
+(131, 8, 5, '2022-01-03', NULL, 1, 5, 50000),
+(132, 8, 13, '2022-01-03', NULL, 0, 5, 0),
+(133, 8, 10, '2022-01-03', NULL, 0, 5, 0),
+(134, 8, 9, '2022-01-03', NULL, 0, 5, 0),
+(135, 8, 8, '2022-01-03', NULL, 0, 5, 0),
+(136, 8, 11, '2022-01-03', NULL, 0, 5, 0),
+(137, 8, 12, '2022-01-03', NULL, 1, 5, 187500),
+(138, 8, 15, '2022-01-03', NULL, 1, 5, 750000),
+(139, 8, 16, '2022-01-03', NULL, 1, 5, 100000),
+(140, 8, 17, '2022-01-03', NULL, 1, 5, 500000),
+(141, 8, 68, '2022-01-03', NULL, 1, 1, 30000),
+(142, 9, 46, '2022-01-03', NULL, 1, 5, 250000),
+(143, 9, 47, '2022-01-03', NULL, 1, 5, 375000),
+(144, 9, 48, '2022-01-03', NULL, 1, 5, 100000),
+(145, 9, 50, '2022-01-03', NULL, 1, 5, 750000),
+(146, 9, 51, '2022-01-03', NULL, 1, 5, 100000),
+(147, 9, 52, '2022-01-03', NULL, 1, 5, 50000),
+(148, 9, 49, '2022-01-03', NULL, 1, 5, 375000),
+(149, 9, 54, '2022-01-03', NULL, 3, 5, 2250000),
+(150, 9, 53, '2022-01-03', NULL, 1, 5, 750000),
+(151, 9, 62, '2022-01-03', NULL, 4, 5, 1500000),
+(152, 9, 55, '2022-01-03', NULL, 1, 5, 750000),
+(153, 9, 56, '2022-01-03', NULL, 1, 5, 100000),
+(154, 9, 57, '2022-01-03', NULL, 1, 5, 500000),
+(155, 9, 58, '2022-01-03', NULL, 1, 5, 750000),
+(156, 9, 59, '2022-01-03', NULL, 1, 5, 100000),
+(157, 9, 67, '2022-01-03', NULL, 1, 1, 500000),
+(158, 10, 32, '2022-01-03', NULL, 1, 8, 160000),
+(159, 10, 33, '2022-01-03', NULL, 1, 8, 160000),
+(160, 10, 34, '2022-01-03', NULL, 1, 8, 160000),
+(161, 10, 36, '2022-01-03', NULL, 1, 8, 1200000),
+(162, 10, 37, '2022-01-03', NULL, 1, 8, 160000),
+(163, 10, 38, '2022-01-03', NULL, 1, 8, 80000),
+(164, 10, 35, '2022-01-03', NULL, 1, 8, 600000),
+(165, 10, 40, '2022-01-03', NULL, 3, 8, 3600000),
+(166, 10, 39, '2022-01-03', NULL, 1, 8, 1200000),
+(167, 10, 62, '2022-01-03', NULL, 3, 8, 1800000),
+(168, 10, 41, '2022-01-03', NULL, 1, 8, 1200000),
+(169, 10, 42, '2022-01-03', NULL, 1, 8, 160000),
+(170, 10, 43, '2022-01-03', NULL, 1, 8, 800000),
+(171, 10, 44, '2022-01-03', NULL, 1, 8, 1200000),
+(172, 10, 45, '2022-01-03', NULL, 1, 8, 160000),
+(173, 10, 69, '2022-01-03', NULL, 1, 1, 750000);
 
 -- --------------------------------------------------------
 
@@ -296,6 +364,7 @@ INSERT INTO `tb_harga_satuan` (`id_harga_satuan`, `nama_harga_satuan`, `ket_harg
 CREATE TABLE `tb_institusi` (
   `id_institusi` int(11) NOT NULL,
   `nama_institusi` text NOT NULL,
+  `akronim_institusi` text NOT NULL,
   `logo_institusi` text NOT NULL,
   `alamat_institusi` text NOT NULL,
   `ket_institusi` text NOT NULL
@@ -305,94 +374,94 @@ CREATE TABLE `tb_institusi` (
 -- Dumping data untuk tabel `tb_institusi`
 --
 
-INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `logo_institusi`, `alamat_institusi`, `ket_institusi`) VALUES
-(1, 'AKADEMI PEREKEM MEDIS DAN INFORMATIKA KESEHATAN (APIKES) BANDUNG', '', '', ''),
-(2, 'AKPER AL-MA\'ARIF BATURAJA', '', '', ''),
-(3, 'AKPER BHAKTI KENCANA BANDUNG', '', '', ''),
-(4, 'AKPER BIDARA MUKTI GARUT', '', '', ''),
-(5, 'AKPER BUNTET PESANTREN CIREBON', '', '', ''),
-(6, 'AKPER DUSTIRA CIMAHI', '', '', ''),
-(7, 'AKPER PEMERINTAH KABUPATEN CIANJUR', '', '', ''),
-(8, 'AKPER KEBONJATI', '', '', ''),
-(9, 'AKPER LUWUK', '', '', ''),
-(10, 'AKPER PEMBINA PALEMBANG', '', '', ''),
-(11, 'AKPER PEMDA KOLAKA', '', '', ''),
-(12, 'AKPER PEMKAB LAHAT', '', '', ''),
-(13, 'AKPER RS. EFARINA PURWAKARTA', '', '', ''),
-(14, 'AKPER SAIFUDDIN ZUHRI INDRAMAYU', '', '', ''),
-(15, 'AKPER SAWERIGADING PEMDA LUWU RAYA PALOPO', '', '', ''),
-(16, 'AKPER SINTANG', '', '', ''),
-(17, 'AKPER TOLITOLI', '', '', ''),
-(18, 'AKPER YPDR JAKARTA', '', '', ''),
-(19, 'FAKULTAS KEDOKTERAN MARANATHA', '', '', ''),
-(20, 'FAKULTAS KEDOKTERAN UKRIDA', '', '', ''),
-(21, 'FAKULTAS KEDOKTERAN UNIVERSITAS ISLAM BANDUNG', '', '', ''),
-(22, 'FAKULTAS KEDOKTERAN UNIVERSITAS JENDERAL AHMAD YANI CIMAHI', '', '', ''),
-(23, 'FAKULTAS KEDOKTERAN UNPAD', '', '', ''),
-(24, 'FAKULTAS KEPERAWATAN UNPAD', '', '', ''),
-(25, 'FAKULTAS PSIKOLOGI UNJANI', '', '', ''),
-(26, 'POLTEKKES KEMENKES BANDUNG KEPERAWATAN', '', '', ''),
-(27, 'POLTEKKES TNI AU CIUMBULEUIT BANDUNG', '', '', ''),
-(28, 'POLTEKKES BANTEN', '', '', ''),
-(29, 'POLTEKKES KEMENKES MAKASSAR', '', '', ''),
-(30, 'PROGRAM PASCA SARJANA UNIVERSITAS ISLAM BANDUNG', '', '', ''),
-(31, 'STIKES AISYIYAH BANDUNG', '', '', ''),
-(32, 'STIKES BANI SALEH', '', '', ''),
-(33, 'STIKES BHAKTI PERTIWI LUWU RAYA PALOPO', '', '', ''),
-(34, 'STIKES BINA PUTERA BANJAR', '', '', ''),
-(35, 'STIKES BORNEO TARAKAN', '', '', ''),
-(36, 'STIKES BUDILUHUR CIMAHI', '', '', ''),
-(37, 'STIKES CIREBON', '', '', ''),
-(38, 'STIKES DEHASEN BENGKULU', '', '', ''),
-(39, 'STIKES DHARMA HUSADA BANDUNG', '', '', ''),
-(40, 'STIKES FALETEHAN', '', '', ''),
-(41, 'STIKES FORT DE KOCK', '', '', ''),
-(42, 'STIKES IMMANUEL BANDUNG', '', '', ''),
-(43, 'STIKES JENDERAL AHMAD YANI', '', '', ''),
-(44, 'STIKES KARSA HUSADA GARUT', '', '', ''),
-(45, 'STIKES KOTA SUKABUMI', '', '', ''),
-(46, 'STIKES KUNINGAN', '', '', ''),
-(47, 'STIKES MAHARDIKA CIREBON', '', '', ''),
-(48, 'STIKES MEDIKA CIKARANG / IMDS', '', '', ''),
-(49, 'STIKES MITRA KENCANA TASIKMALAYA', '', '', ''),
-(50, 'STIKES MUHAMADIYAH CIAMIS', '', '', ''),
-(51, 'STIKES NAN TONGGA LUBUK ALUNG', '', '', ''),
-(52, 'STIKES PPNI JAWA BARAT', '', '', ''),
-(53, 'STIKES RAJAWALI', '', '', ''),
-(54, 'STIKES SANTO BORROMEUS', '', '', ''),
-(55, 'STIKES SEBELAS APRIL SUMEDANG', '', '', ''),
-(56, 'STIKES SYEDZA SAINTIKA PADANG', '', '', ''),
-(57, 'STIKES TANA TORAJA', '', '', ''),
-(58, 'STIKES YARSI BUKIT TINGGI', '', '', ''),
-(59, 'STIKES YARSI PONTIANAK', '', '', ''),
-(60, 'STIKES YPIB MAJALENGKA', '', '', ''),
-(61, 'UNIVERSITAS ADVENT INDONESIA BANDUNG', '', '', ''),
-(62, 'UNIVERSITAS BALE BANDUNG', '', '', ''),
-(63, 'UNIVERSITAS BSI BANDUNG', '', '', ''),
-(64, 'UNIVERSITAS GALUH CIAMIS', '', '', ''),
-(65, 'UNIVERSITAS MUHAMMADIYAH SUKABUMI', '', '', ''),
-(66, 'UNIVERSITAS NEGERI GORONTALO', '', '', ''),
-(67, 'UNIVERSITAS PENDIDIKAN INDONESIA KAMPUS SUMEDANG', '', '', ''),
-(68, 'UNIVERSITAS PENDIDIKAN INDONESIA KAMPUS SETIABUDI', '', '', ''),
-(69, 'UNIVERSITAS RESPATI INDONESIA', '', '', ''),
-(70, 'UNIVERSITAS SAMRATULANGI', '', '', ''),
-(71, 'UNIVERSITAS SULTAN AGENG TIRTAYASA (UNTIRTA)', '', '', ''),
-(72, 'POLITEKNIK TEDC BANDUNG', '', '', ''),
-(73, 'UNIVERSITAS PELITA HARAPAN', '', '', ''),
-(74, 'POLTEKKES YAPKESBI SUKABUMI', '', '', ''),
-(75, 'AKPER YPIB MAJALENGKA', '', '', ''),
-(76, 'UNIVERSITAS MUHAMMADIYAH TASIKMALAYA', '', '', ''),
-(77, 'POLTEKKES KEMENKES BANDUNG FARMASI', '', '', ''),
-(78, 'POLITEKNIK NEGERI SUBANG', '', '', ''),
-(79, 'MAGISTER PSIKOLOGI PROFESI UNISBA', '', '', ''),
-(80, 'FAKULTAS FARMASI UNIVERSITAS JENDERAL AHMAD YANI', '', '', ''),
-(81, 'SEKOLAH TINGGI ILMU KESEHATAN INDONESIA MAJU', '', '', ''),
-(82, 'UNIVERSITAS BHAKTI KENCANA (UBK)', '', '', ''),
-(83, 'POLTEKKES KEMENKES JAYAPURA', '', '', ''),
-(84, 'POLITEKNIK NEGERI INDRAMAYU', '', '', ''),
-(85, 'UNIVERSITAS KRISTEN SATYA WACANA SALATIGA (PSIKOLOGI)', '', '', ''),
-(86, 'FAKULTAS PSIKOLOGI MARANATHA', '', '', ''),
-(87, 'RS JIWA PROVINSI JAWA BARAT', '', '', '');
+INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `akronim_institusi`, `logo_institusi`, `alamat_institusi`, `ket_institusi`) VALUES
+(1, 'AKADEMI PEREKEM MEDIS DAN INFORMATIKA KESEHATAN (APIKES) BANDUNG', '', '', '', ''),
+(2, 'AKPER AL-MA\'ARIF BATURAJA', '', '', '', ''),
+(3, 'AKPER BHAKTI KENCANA BANDUNG', '', '', '', ''),
+(4, 'AKPER BIDARA MUKTI GARUT', '', '', '', ''),
+(5, 'AKPER BUNTET PESANTREN CIREBON', '', '', '', ''),
+(6, 'AKPER DUSTIRA CIMAHI', '', '', '', ''),
+(7, 'AKPER PEMERINTAH KABUPATEN CIANJUR', '', '', '', ''),
+(8, 'AKPER KEBONJATI', '', '', '', ''),
+(9, 'AKPER LUWUK', '', '', '', ''),
+(10, 'AKPER PEMBINA PALEMBANG', '', '', '', ''),
+(11, 'AKPER PEMDA KOLAKA', '', '', '', ''),
+(12, 'AKPER PEMKAB LAHAT', '', '', '', ''),
+(13, 'AKPER RS. EFARINA PURWAKARTA', '', '', '', ''),
+(14, 'AKPER SAIFUDDIN ZUHRI INDRAMAYU', '', '', '', ''),
+(15, 'AKPER SAWERIGADING PEMDA LUWU RAYA PALOPO', '', '', '', ''),
+(16, 'AKPER SINTANG', '', '', '', ''),
+(17, 'AKPER TOLITOLI', '', '', '', ''),
+(18, 'AKPER YPDR JAKARTA', '', '', '', ''),
+(19, 'FAKULTAS KEDOKTERAN MARANATHA', '', '', '', ''),
+(20, 'FAKULTAS KEDOKTERAN UKRIDA', 'FK UKRIDA', './_img/logo_institusi/20.png', '', ''),
+(21, 'FAKULTAS KEDOKTERAN UNIVERSITAS ISLAM BANDUNG', '', '', '', ''),
+(22, 'FAKULTAS KEDOKTERAN UNIVERSITAS JENDERAL AHMAD YANI CIMAHI', '', '', '', ''),
+(23, 'FAKULTAS KEDOKTERAN UNPAD', 'FK. UNPAD', './_img/logo_institusi/23.png', '', ''),
+(24, 'FAKULTAS KEPERAWATAN UNPAD', '', '', '', ''),
+(25, 'FAKULTAS PSIKOLOGI UNJANI', '', '', '', ''),
+(26, 'POLTEKKES KEMENKES BANDUNG KEPERAWATAN', '', '', '', ''),
+(27, 'POLTEKKES TNI AU CIUMBULEUIT BANDUNG', '', '', '', ''),
+(28, 'POLTEKKES BANTEN', '', '', '', ''),
+(29, 'POLTEKKES KEMENKES MAKASSAR', '', '', '', ''),
+(30, 'PROGRAM PASCA SARJANA UNIVERSITAS ISLAM BANDUNG', '', '', '', ''),
+(31, 'STIKES AISYIYAH BANDUNG', '', '', '', ''),
+(32, 'STIKES BANI SALEH', '', '', '', ''),
+(33, 'STIKES BHAKTI PERTIWI LUWU RAYA PALOPO', '', '', '', ''),
+(34, 'STIKES BINA PUTERA BANJAR', '', '', '', ''),
+(35, 'STIKES BORNEO TARAKAN', '', '', '', ''),
+(36, 'STIKES BUDILUHUR CIMAHI', '', '', '', ''),
+(37, 'STIKES CIREBON', '', '', '', ''),
+(38, 'STIKES DEHASEN BENGKULU', '', '', '', ''),
+(39, 'STIKES DHARMA HUSADA BANDUNG', '', '', '', ''),
+(40, 'STIKES FALETEHAN', '', '', '', ''),
+(41, 'STIKES FORT DE KOCK', '', '', '', ''),
+(42, 'STIKES IMMANUEL BANDUNG', '', '', '', ''),
+(43, 'STIKES JENDERAL AHMAD YANI', '', '', '', ''),
+(44, 'STIKES KARSA HUSADA GARUT', '', '', '', ''),
+(45, 'STIKES KOTA SUKABUMI', '', '', '', ''),
+(46, 'STIKES KUNINGAN', '', '', '', ''),
+(47, 'STIKES MAHARDIKA CIREBON', '', '', '', ''),
+(48, 'STIKES MEDIKA CIKARANG / IMDS', '', '', '', ''),
+(49, 'STIKES MITRA KENCANA TASIKMALAYA', '', '', '', ''),
+(50, 'STIKES MUHAMADIYAH CIAMIS', '', '', '', ''),
+(51, 'STIKES NAN TONGGA LUBUK ALUNG', '', '', '', ''),
+(52, 'STIKES PPNI JAWA BARAT', '', '', '', ''),
+(53, 'STIKES RAJAWALI', '', '', '', ''),
+(54, 'STIKES SANTO BORROMEUS', '', '', '', ''),
+(55, 'STIKES SEBELAS APRIL SUMEDANG', '', '', '', ''),
+(56, 'STIKES SYEDZA SAINTIKA PADANG', '', '', '', ''),
+(57, 'STIKES TANA TORAJA', '', '', '', ''),
+(58, 'STIKES YARSI BUKIT TINGGI', '', '', '', ''),
+(59, 'STIKES YARSI PONTIANAK', '', '', '', ''),
+(60, 'STIKES YPIB MAJALENGKA', '', '', '', ''),
+(61, 'UNIVERSITAS ADVENT INDONESIA BANDUNG', '', '', '', ''),
+(62, 'UNIVERSITAS BALE BANDUNG', '', '', '', ''),
+(63, 'UNIVERSITAS BSI BANDUNG', '', '', '', ''),
+(64, 'UNIVERSITAS GALUH CIAMIS', '', '', '', ''),
+(65, 'UNIVERSITAS MUHAMMADIYAH SUKABUMI', '', '', '', ''),
+(66, 'UNIVERSITAS NEGERI GORONTALO', '', '', '', ''),
+(67, 'UNIVERSITAS PENDIDIKAN INDONESIA KAMPUS SUMEDANG', '', '', '', ''),
+(68, 'UNIVERSITAS PENDIDIKAN INDONESIA KAMPUS SETIABUDI', 'UPI STB', './_img/logo_institusi/68.png', '', ''),
+(69, 'UNIVERSITAS RESPATI INDONESIA', '', '', '', ''),
+(70, 'UNIVERSITAS SAMRATULANGI', '', '', '', ''),
+(71, 'UNIVERSITAS SULTAN AGENG TIRTAYASA (UNTIRTA)', '', '', '', ''),
+(72, 'POLITEKNIK TEDC BANDUNG', '', '', '', ''),
+(73, 'UNIVERSITAS PELITA HARAPAN', '', '', '', ''),
+(74, 'POLTEKKES YAPKESBI SUKABUMI', '', '', '', ''),
+(75, 'AKPER YPIB MAJALENGKA', '', '', '', ''),
+(76, 'UNIVERSITAS MUHAMMADIYAH TASIKMALAYA', '', '', '', ''),
+(77, 'POLTEKKES KEMENKES BANDUNG FARMASI', '', '', '', ''),
+(78, 'POLITEKNIK NEGERI SUBANG', '', '', '', ''),
+(79, 'MAGISTER PSIKOLOGI PROFESI UNISBA', '', '', '', ''),
+(80, 'FAKULTAS FARMASI UNIVERSITAS JENDERAL AHMAD YANI', 'F. Far. UNJANI', './_img/logo_institusi/80.png', '', ''),
+(81, 'SEKOLAH TINGGI ILMU KESEHATAN INDONESIA MAJU', '', '', '', ''),
+(82, 'UNIVERSITAS BHAKTI KENCANA (UBK)', 'UNV BHAKTI', './_img/logo_institusi/82.png', '', ''),
+(83, 'POLTEKKES KEMENKES JAYAPURA', '', '', '', ''),
+(84, 'POLITEKNIK NEGERI INDRAMAYU', '', '', '', ''),
+(85, 'UNIVERSITAS KRISTEN SATYA WACANA SALATIGA (PSIKOLOGI)', '', '', '', ''),
+(86, 'FAKULTAS PSIKOLOGI MARANATHA', 'F. Psi. MARANATHA', '', '', ''),
+(87, 'RS JIWA PROVINSI JAWA BARAT', 'RS JIWA', './_img/logo_institusi/87.png', '', '');
 
 -- --------------------------------------------------------
 
@@ -502,13 +571,20 @@ CREATE TABLE `tb_lapor` (
   `id_lapor` int(11) NOT NULL,
   `judul_lapor` text NOT NULL,
   `deskripsi_lapor` text NOT NULL,
-  `level_lapor` int(11) NOT NULL,
+  `level_lapor` text NOT NULL,
   `tgl_lapor` date DEFAULT NULL,
   `status_lapor` text NOT NULL,
   `nama_lapor` text NOT NULL,
   `link_lapor` text NOT NULL,
   `file_lapor` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_lapor`
+--
+
+INSERT INTO `tb_lapor` (`id_lapor`, `judul_lapor`, `deskripsi_lapor`, `level_lapor`, `tgl_lapor`, `status_lapor`, `nama_lapor`, `link_lapor`, `file_lapor`) VALUES
+(1, 'Atque odit nostrum n', 'Mollitia laudantium', 'sedang', '2022-01-02', 'cek', 'Repudiandae fuga Re', 'Voluptates dignissim', './_file/lapor/lapor_0_2022-01-02.jpeg');
 
 -- --------------------------------------------------------
 
@@ -649,14 +725,14 @@ CREATE TABLE `tb_mess` (
 --
 
 INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_mess`, `kapasitas_t_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `kapasitas_terisi_mess`, `ket_mess`, `status_mess`) VALUES
-(1, 'Mess RSJ 1 Lama', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 0, 'Makan 3x Sehari', 'Aktif'),
-(2, 'Mess RSJ 2 Baru', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 0, '', 'Aktif'),
-(3, 'Asrama Rifa Corporate', 0, 0, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 20000, 80000, 66, 'Dengan Makan 3x Sehari', 'Aktif'),
-(4, 'Pondokan H. Ating', 0, 0, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '0', '', 20000, 80000, 0, '', 'Aktif'),
+(1, 'Mess RSJ 1 Lama', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 10, 'Makan 3x Sehari', 'Aktif'),
+(2, 'Mess RSJ 2 Baru', 0, 0, 16, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 5, '', 'Aktif'),
+(3, 'Asrama Rifa Corporate', 0, 0, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 20000, 80000, 64, 'Dengan Makan 3x Sehari', 'Aktif'),
+(4, 'Pondokan H. Ating', 0, 0, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '0', '', 20000, 80000, 8, '', 'Aktif'),
 (5, 'Wisma Anugrah Ibu Nanik', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Hj. Nanik Susiani', '081320719652', '', 15000, 70000, 0, '', 'Aktif'),
-(6, 'Pondokan dr. Hj. Meutia Laksminingrum', 0, 0, 0, '-', 'dr. Hj. Meutia Laksminingrum', '0', '', 0, 0, 0, '', 'Aktif'),
+(6, 'Pondokan dr. Hj. Meutia Laksminingrum', 0, 0, 0, '-', 'dr. Hj. Meutia Laksminingrum', '0', '', 0, 0, 0, '', 'Tidak Aktif'),
 (7, 'Galuh Pakuan', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Oyo Suharya', '081320113399', '', 20000, 80000, 20, '', 'Aktif'),
-(8, 'Pondokan Tatang', 0, 0, 30, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Tatang', '089531804825', '', 20000, 80000, 0, 'Dengan Makan 3x Sehari', 'Aktif');
+(8, 'Pondokan Tatang', 0, 0, 30, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Tatang', '089531804825', '', 20000, 80000, 5, 'Dengan Makan 3x Sehari', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -710,8 +786,11 @@ CREATE TABLE `tb_mess_pilih` (
 
 INSERT INTO `tb_mess_pilih` (`id_mess_pilih`, `id_praktik`, `id_mess`, `tgl_input_mess_pilih`, `makan_mess_pilih`, `jumlah_praktik_mess_pilih`, `jumlah_hari_mess_pilih`, `total_harga_mess_pilih`) VALUES
 (5, 3, 3, '2021-12-31', 'Ya', 64, 50, 256000000),
-(6, 7, 3, '2022-01-01', 'Ya', 2, 8, 1280000),
-(7, 5, 7, '2022-01-02', 'Ya', 20, 1, 1600000);
+(7, 5, 7, '2022-01-02', 'Ya', 20, 1, 1600000),
+(8, 4, 1, '2022-01-03', 'Ya', 10, 38, 38000000),
+(9, 8, 8, '2022-01-03', '', 5, 21, 0),
+(10, 9, 2, '2022-01-03', 'Ya', 5, 29, 14500000),
+(11, 10, 4, '2022-01-03', 'Ya', 8, 28, 17920000);
 
 -- --------------------------------------------------------
 
@@ -859,6 +938,30 @@ INSERT INTO `tb_nilai` (`id_nilai`, `id_praktikan_detail`, `ip`, `sptk`, `prepos
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_nilai_dokter`
+--
+
+CREATE TABLE `tb_nilai_dokter` (
+  `id_nilai` int(100) NOT NULL,
+  `id_praktikan_detail` int(11) NOT NULL,
+  `css1` decimal(10,0) DEFAULT NULL,
+  `css2` decimal(10,0) DEFAULT NULL,
+  `bst1` decimal(10,0) DEFAULT NULL,
+  `bst2` decimal(10,0) DEFAULT NULL,
+  `bst3` decimal(10,0) DEFAULT NULL,
+  `bst4` decimal(10,0) DEFAULT NULL,
+  `bst5` decimal(10,0) DEFAULT NULL,
+  `bst6` decimal(10,0) DEFAULT NULL,
+  `crs1` decimal(10,0) DEFAULT NULL,
+  `crs2` decimal(10,0) NOT NULL,
+  `minicex` decimal(10,0) NOT NULL,
+  `ujian_akhir` decimal(10,0) NOT NULL,
+  `keterangan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_praktik`
 --
 
@@ -895,10 +998,13 @@ INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`
 (1, 0, 0, 'Autem fugiat qui sed', '2021-12-31', NULL, '2016-10-23', '1980-11-26', 6, './_file/praktikan/surat_praktik_1_2021-12-31.pdf', './_file/praktikan/data_praktik_2_2021-12-30.xlsx', 4, '7', '8', '0', '1', '15', 'Ex magni veniam qui', 'limux@mailinator.com', '74', 'DAFTAR', 'Y'),
 (2, 71, 71, 'Vitae nihil libero s', '2021-12-30', '2021-12-30', '1978-10-18', '1996-03-11', 73, './_file/praktikan/surat_praktik_2_2021-12-30.pdf', './_file/praktikan/data_praktik_2_2021-12-30.xlsx', 1, '1', '9', '4', '2', '1', 'Aut ut necessitatibu', 'juduqeca@mailinator.com', '19', 'DAFTAR', 'T'),
 (3, 0, 87, 'Consequatur eos nihi', '2021-12-31', '2021-12-31', '2021-01-01', '2021-02-19', 64, './_file/praktikan/surat_praktik_3_2021-12-31.pdf', './_file/praktikan/data_praktik_3_2021-12-31.xlsx', 4, '7', '8', '0', '0', '1', 'Repellendus Aut por', 'zisepiz@mailinator.com', '71', 'AKTIF', 'Y'),
-(4, 20, 20, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-28', '2021-11-24', '2021-12-31', 10, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'DAFTAR', 'Y'),
-(5, 80, 80, 'Kelompok 3', '2021-12-05', '2021-12-21', '2021-12-31', '2021-12-31', 20, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 2, '2', '6', '0', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y'),
-(6, 5, 5, 'Kelompok 3 Gel. III', '2021-12-03', NULL, '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', 3, '4', '6', '0', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'Y'),
-(7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'MESS', 'Y');
+(4, 20, 20, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-28', '2021-11-24', '2021-12-31', 10, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y'),
+(5, 0, 80, 'Kelompok 3', '2021-12-05', '2022-01-02', '2021-12-31', '2022-01-06', 20, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 3, '4', '6', '0', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y'),
+(6, 0, 23, 'Kelompok 3 Gel. III', '2021-12-03', '2022-01-03', '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', 3, '1', '8', '1', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'T'),
+(7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'AKTIF', 'Y'),
+(8, 23, 23, 'Kelompok 4', '2022-01-03', NULL, '2022-01-07', '2022-01-27', 5, '', '', 1, '1', '8', '1', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y'),
+(9, 82, 82, 'thyfgt', '2022-01-03', NULL, '2022-01-10', '2022-02-07', 5, '', '', 4, '7', '8', '3', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y'),
+(10, 68, 68, 'Kelompok 2', '2022-01-03', NULL, '2022-01-04', '2022-01-31', 8, '', '', 3, '3', '8', '3', '1', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y');
 
 -- --------------------------------------------------------
 
@@ -917,7 +1023,8 @@ CREATE TABLE `tb_praktikan` (
 --
 
 INSERT INTO `tb_praktikan` (`id_praktikan`, `id_praktik`, `status_praktikan`) VALUES
-(3, 3, 'INPUT PRAKTIKAN');
+(3, 3, 'INPUT PRAKTIKAN'),
+(4, 5, 'INPUT NILAI');
 
 -- --------------------------------------------------------
 
@@ -1029,7 +1136,7 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `id_mou`, `id_institusi`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `no_telp_user`, `terakhir_login_user`, `tgl_buat_user`, `tgl_ubah_user`, `status_user`) VALUES
-(1, 0, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '1', '08123145645', '2022-01-02', '2021-03-29', '2022-01-02', 'Y'),
+(1, 0, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '1', '08123145645', '2022-01-03', '2021-03-29', '2022-01-02', 'Y'),
 (15, 1, 87, 'institusi', '81dc9bdb52d04dc20036dbd8313ed055', 'institusi', 'asd@asd', '2', '091273', '2022-01-02', '2021-12-31', '2022-01-02', 'Y');
 
 -- --------------------------------------------------------
@@ -1156,6 +1263,12 @@ ALTER TABLE `tb_nilai`
   ADD PRIMARY KEY (`id_nilai`);
 
 --
+-- Indeks untuk tabel `tb_nilai_dokter`
+--
+ALTER TABLE `tb_nilai_dokter`
+  ADD PRIMARY KEY (`id_nilai`);
+
+--
 -- Indeks untuk tabel `tb_praktik`
 --
 ALTER TABLE `tb_praktik`
@@ -1205,7 +1318,7 @@ ALTER TABLE `tb_akreditasi`
 -- AUTO_INCREMENT untuk tabel `tb_bayar`
 --
 ALTER TABLE `tb_bayar`
-  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_harga`
@@ -1223,7 +1336,7 @@ ALTER TABLE `tb_harga_jenis`
 -- AUTO_INCREMENT untuk tabel `tb_harga_pilih`
 --
 ALTER TABLE `tb_harga_pilih`
-  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_harga_satuan`
@@ -1253,7 +1366,7 @@ ALTER TABLE `tb_jurusan_pdd_jenis`
 -- AUTO_INCREMENT untuk tabel `tb_lapor`
 --
 ALTER TABLE `tb_lapor`
-  MODIFY `id_lapor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_lapor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_mess`
@@ -1271,7 +1384,7 @@ ALTER TABLE `tb_mess_detail`
 -- AUTO_INCREMENT untuk tabel `tb_mess_pilih`
 --
 ALTER TABLE `tb_mess_pilih`
-  MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_mou`
@@ -1286,16 +1399,22 @@ ALTER TABLE `tb_nilai`
   MODIFY `id_nilai` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_nilai_dokter`
+--
+ALTER TABLE `tb_nilai_dokter`
+  MODIFY `id_nilai` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_praktik`
 --
 ALTER TABLE `tb_praktik`
-  MODIFY `id_praktik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_praktik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_praktikan`
 --
 ALTER TABLE `tb_praktikan`
-  MODIFY `id_praktikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_praktikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_praktikan_detail`
