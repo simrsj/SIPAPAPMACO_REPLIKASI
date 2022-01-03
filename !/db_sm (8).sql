@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jan 2022 pada 10.13
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.2.34
+-- Generation Time: Jan 04, 2022 at 12:39 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_akreditasi`
+-- Table structure for table `tb_akreditasi`
 --
 
 CREATE TABLE `tb_akreditasi` (
@@ -33,7 +33,7 @@ CREATE TABLE `tb_akreditasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_akreditasi`
+-- Dumping data for table `tb_akreditasi`
 --
 
 INSERT INTO `tb_akreditasi` (`id_akreditasi`, `nama_akreditasi`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `tb_akreditasi` (`id_akreditasi`, `nama_akreditasi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_bayar`
+-- Table structure for table `tb_bayar`
 --
 
 CREATE TABLE `tb_bayar` (
@@ -59,7 +59,7 @@ CREATE TABLE `tb_bayar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_bayar`
+-- Dumping data for table `tb_bayar`
 --
 
 INSERT INTO `tb_bayar` (`id_bayar`, `id_praktik`, `atas_nama_bayar`, `no_bayar`, `melalui_bayar`, `tgl_input_bayar`, `file_bayar`) VALUES
@@ -74,7 +74,7 @@ INSERT INTO `tb_bayar` (`id_bayar`, `id_praktik`, `atas_nama_bayar`, `no_bayar`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_harga`
+-- Table structure for table `tb_harga`
 --
 
 CREATE TABLE `tb_harga` (
@@ -94,7 +94,7 @@ CREATE TABLE `tb_harga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_harga`
+-- Dumping data for table `tb_harga`
 --
 
 INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`, `jumlah_harga`, `tipe_harga`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_harga_jenis`, `pilih_harga`, `tgl_harga`) VALUES
@@ -105,12 +105,12 @@ INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`
 (5, 'Orientasi Keselamatan Pasien', 1, NULL, 10000, 'SEKALI', 1, 1, 0, 0, 3, 1, NULL),
 (6, 'Log Book (dibayar 1 kali)', 1, NULL, 20000, 'SEKALI', 1, 1, 0, 0, 3, 1, NULL),
 (7, 'Name Tag (dibayar 1 kali)', 1, NULL, 5000, 'SEKALI', 1, 1, 0, 0, 3, 1, NULL),
-(8, 'Clinical science session (CSS)', 2, NULL, 37500, 'INPUT', 1, 1, 0, 0, 4, 1, NULL),
-(9, 'Case report session (CRS)', 2, NULL, 37500, 'INPUT', 1, 1, 0, 0, 4, 1, NULL),
-(10, 'Case base Discusion (CBD)', 2, NULL, 37500, 'INPUT', 1, 1, 0, 0, 4, 1, NULL),
-(11, 'Pengayaan - Observasi', 2, NULL, 37500, 'INPUT', 1, 1, 0, 0, 4, 1, NULL),
+(8, 'Clinical science session (CSS)', 2, NULL, 37500, 'SEKALI', 1, 1, 0, 0, 4, 1, NULL),
+(9, 'Case report session (CRS)', 2, NULL, 37500, 'SEKALI', 1, 1, 0, 0, 4, 1, NULL),
+(10, 'Case base Discusion (CBD)', 2, NULL, 37500, 'SEKALI', 1, 1, 0, 0, 4, 1, NULL),
+(11, 'Pengayaan - Observasi', 2, NULL, 37500, 'SEKALI', 1, 1, 0, 0, 4, 1, NULL),
 (12, 'RPS (Resource Person Session)', 2, NULL, 37500, 'SEKALI', 1, 1, 0, 0, 4, 1, NULL),
-(13, 'Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Kedokteran Umum di IGD', 2, NULL, 37500, 'HARI-', 1, 1, 0, 0, 4, 1, NULL),
+(13, 'Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Kedokteran Umum di IGD', 2, NULL, 37500, 'SEKALI', 1, 1, 0, 0, 4, 1, NULL),
 (14, 'Mini Clinical Examination  Evaluation (Mini CeX)', 2, NULL, 150000, 'SEKALI', 0, 1, 0, 0, 6, 1, NULL),
 (15, 'Ujian', 2, NULL, 150000, 'SEKALI', 1, 1, 0, 0, 6, 1, NULL),
 (16, 'Makan Pembimbing Ujian', 2, NULL, 20000, 'SEKALI', 1, 1, 0, 0, 6, 1, NULL),
@@ -181,7 +181,7 @@ INSERT INTO `tb_harga` (`id_harga`, `nama_harga`, `id_harga_satuan`, `ket_harga`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_harga_jenis`
+-- Table structure for table `tb_harga_jenis`
 --
 
 CREATE TABLE `tb_harga_jenis` (
@@ -190,7 +190,7 @@ CREATE TABLE `tb_harga_jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_harga_jenis`
+-- Dumping data for table `tb_harga_jenis`
 --
 
 INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
@@ -208,7 +208,7 @@ INSERT INTO `tb_harga_jenis` (`id_harga_jenis`, `nama_harga_jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_harga_pilih`
+-- Table structure for table `tb_harga_pilih`
 --
 
 CREATE TABLE `tb_harga_pilih` (
@@ -223,7 +223,7 @@ CREATE TABLE `tb_harga_pilih` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_harga_pilih`
+-- Dumping data for table `tb_harga_pilih`
 --
 
 INSERT INTO `tb_harga_pilih` (`id_harga_pilih`, `id_praktik`, `id_harga`, `tgl_input_harga_pilih`, `tgl_ubah_harga_pilih`, `frekuensi_harga_pilih`, `kuantitas_harga_pilih`, `jumlah_harga_pilih`) VALUES
@@ -327,12 +327,29 @@ INSERT INTO `tb_harga_pilih` (`id_harga_pilih`, `id_praktik`, `id_harga`, `tgl_i
 (170, 10, 43, '2022-01-03', NULL, 1, 8, 800000),
 (171, 10, 44, '2022-01-03', NULL, 1, 8, 1200000),
 (172, 10, 45, '2022-01-03', NULL, 1, 8, 160000),
-(173, 10, 69, '2022-01-03', NULL, 1, 1, 750000);
+(173, 10, 69, '2022-01-03', NULL, 1, 1, 750000),
+(174, 11, 3, '2022-01-03', '2022-01-03', 1, 5, 25000),
+(175, 11, 1, '2022-01-03', '2022-01-03', 1, 5, 250000),
+(176, 11, 2, '2022-01-03', '2022-01-03', 1, 5, 375000),
+(177, 11, 4, '2022-01-03', '2022-01-03', 1, 5, 25000),
+(178, 11, 6, '2022-01-03', '2022-01-03', 1, 5, 100000),
+(179, 11, 7, '2022-01-03', '2022-01-03', 1, 5, 25000),
+(180, 11, 5, '2022-01-03', '2022-01-03', 1, 5, 50000),
+(181, 11, 13, '2022-01-03', '2022-01-03', 1, 5, 187500),
+(182, 11, 10, '2022-01-03', '2022-01-03', 1, 5, 187500),
+(183, 11, 9, '2022-01-03', '2022-01-03', 1, 5, 187500),
+(184, 11, 8, '2022-01-03', '2022-01-03', 1, 5, 187500),
+(185, 11, 11, '2022-01-03', '2022-01-03', 1, 5, 187500),
+(186, 11, 12, '2022-01-03', '2022-01-03', 1, 5, 187500),
+(187, 11, 15, '2022-01-03', '2022-01-03', 1, 5, 750000),
+(188, 11, 16, '2022-01-03', '2022-01-03', 1, 5, 100000),
+(189, 11, 17, '2022-01-03', '2022-01-03', 1, 5, 500000),
+(190, 11, 68, '2022-01-03', '2022-01-03', 1, 1, 30000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_harga_satuan`
+-- Table structure for table `tb_harga_satuan`
 --
 
 CREATE TABLE `tb_harga_satuan` (
@@ -342,7 +359,7 @@ CREATE TABLE `tb_harga_satuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_harga_satuan`
+-- Dumping data for table `tb_harga_satuan`
 --
 
 INSERT INTO `tb_harga_satuan` (`id_harga_satuan`, `nama_harga_satuan`, `ket_harga_satuan`) VALUES
@@ -358,7 +375,7 @@ INSERT INTO `tb_harga_satuan` (`id_harga_satuan`, `nama_harga_satuan`, `ket_harg
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_institusi`
+-- Table structure for table `tb_institusi`
 --
 
 CREATE TABLE `tb_institusi` (
@@ -371,7 +388,7 @@ CREATE TABLE `tb_institusi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_institusi`
+-- Dumping data for table `tb_institusi`
 --
 
 INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `akronim_institusi`, `logo_institusi`, `alamat_institusi`, `ket_institusi`) VALUES
@@ -395,7 +412,7 @@ INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `akronim_institusi
 (18, 'AKPER YPDR JAKARTA', '', '', '', ''),
 (19, 'FAKULTAS KEDOKTERAN MARANATHA', '', '', '', ''),
 (20, 'FAKULTAS KEDOKTERAN UKRIDA', 'FK UKRIDA', './_img/logo_institusi/20.png', '', ''),
-(21, 'FAKULTAS KEDOKTERAN UNIVERSITAS ISLAM BANDUNG', '', '', '', ''),
+(21, 'FAKULTAS KEDOKTERAN UNIVERSITAS ISLAM BANDUNG', 'FK. UNISBA', './_img/logo_institusi/21.png', '', ''),
 (22, 'FAKULTAS KEDOKTERAN UNIVERSITAS JENDERAL AHMAD YANI CIMAHI', '', '', '', ''),
 (23, 'FAKULTAS KEDOKTERAN UNPAD', 'FK. UNPAD', './_img/logo_institusi/23.png', '', ''),
 (24, 'FAKULTAS KEPERAWATAN UNPAD', '', '', '', ''),
@@ -462,12 +479,12 @@ INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `akronim_institusi
 (85, 'UNIVERSITAS KRISTEN SATYA WACANA SALATIGA (PSIKOLOGI)', '', '', '', ''),
 (86, 'FAKULTAS PSIKOLOGI MARANATHA', 'F. Psi. MARANATHA', '', '', ''),
 (87, 'RS JIWA PROVINSI JAWA BARAT', 'RS JIWA*', './_img/logo_institusi/87.png', '', ''),
-(88, 'Universitas Komputer Indonesia', 'UNIKOM', './_img/logo_institusi/0.png', '', '');
+(88, 'UNIVERSITAS KOMPUTER INDONESIA', 'UNIKOM', './_img/logo_institusi/0.png', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_jenis_mentor`
+-- Table structure for table `tb_jenis_mentor`
 --
 
 CREATE TABLE `tb_jenis_mentor` (
@@ -476,7 +493,7 @@ CREATE TABLE `tb_jenis_mentor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_jenis_mentor`
+-- Dumping data for table `tb_jenis_mentor`
 --
 
 INSERT INTO `tb_jenis_mentor` (`id_jenis_mentor`, `nama_jenis_mentor`) VALUES
@@ -488,7 +505,7 @@ INSERT INTO `tb_jenis_mentor` (`id_jenis_mentor`, `nama_jenis_mentor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_jenjang_pdd`
+-- Table structure for table `tb_jenjang_pdd`
 --
 
 CREATE TABLE `tb_jenjang_pdd` (
@@ -497,7 +514,7 @@ CREATE TABLE `tb_jenjang_pdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_jenjang_pdd`
+-- Dumping data for table `tb_jenjang_pdd`
 --
 
 INSERT INTO `tb_jenjang_pdd` (`id_jenjang_pdd`, `nama_jenjang_pdd`) VALUES
@@ -516,7 +533,7 @@ INSERT INTO `tb_jenjang_pdd` (`id_jenjang_pdd`, `nama_jenjang_pdd`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_jurusan_pdd`
+-- Table structure for table `tb_jurusan_pdd`
 --
 
 CREATE TABLE `tb_jurusan_pdd` (
@@ -526,7 +543,7 @@ CREATE TABLE `tb_jurusan_pdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_jurusan_pdd`
+-- Dumping data for table `tb_jurusan_pdd`
 --
 
 INSERT INTO `tb_jurusan_pdd` (`id_jurusan_pdd`, `nama_jurusan_pdd`, `id_jurusan_pdd_jenis`) VALUES
@@ -543,7 +560,7 @@ INSERT INTO `tb_jurusan_pdd` (`id_jurusan_pdd`, `nama_jurusan_pdd`, `id_jurusan_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_jurusan_pdd_jenis`
+-- Table structure for table `tb_jurusan_pdd_jenis`
 --
 
 CREATE TABLE `tb_jurusan_pdd_jenis` (
@@ -552,7 +569,7 @@ CREATE TABLE `tb_jurusan_pdd_jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_jurusan_pdd_jenis`
+-- Dumping data for table `tb_jurusan_pdd_jenis`
 --
 
 INSERT INTO `tb_jurusan_pdd_jenis` (`id_jurusan_pdd_jenis`, `nama_jurusan_pdd_jenis`) VALUES
@@ -565,7 +582,7 @@ INSERT INTO `tb_jurusan_pdd_jenis` (`id_jurusan_pdd_jenis`, `nama_jurusan_pdd_je
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_lapor`
+-- Table structure for table `tb_lapor`
 --
 
 CREATE TABLE `tb_lapor` (
@@ -581,16 +598,17 @@ CREATE TABLE `tb_lapor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_lapor`
+-- Dumping data for table `tb_lapor`
 --
 
 INSERT INTO `tb_lapor` (`id_lapor`, `judul_lapor`, `deskripsi_lapor`, `level_lapor`, `tgl_lapor`, `status_lapor`, `nama_lapor`, `link_lapor`, `file_lapor`) VALUES
-(1, 'Atque odit nostrum n', 'Mollitia laudantium', 'sedang', '2022-01-02', 'cek', 'Repudiandae fuga Re', 'Voluptates dignissim', './_file/lapor/lapor_0_2022-01-02.jpeg');
+(1, 'Data Institusi', 'Data Institusi berbeda saat pendaftaran', 'tinggi', '2022-01-02', 'SELESAI', 'Ade Ihsan', '192.168.7.89/sm/?prk', './_file/lapor/lapor_1_2022-01-03.png'),
+(3, 'Data Harga', 'Data Harga Tidak Sesuai jurusan', 'sedang', '2022-01-03', 'PROSES', 'Rani Riffani', '192.168.7.88/sm/?trk&dtl=1', './_file/lapor/lapor_3_2022-01-03.png');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_mentor`
+-- Table structure for table `tb_mentor`
 --
 
 CREATE TABLE `tb_mentor` (
@@ -604,7 +622,7 @@ CREATE TABLE `tb_mentor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_mentor`
+-- Dumping data for table `tb_mentor`
 --
 
 INSERT INTO `tb_mentor` (`id_mentor`, `nip_nipk_mentor`, `nama_mentor`, `id_unit`, `id_mentor_jenis`, `id_jenjang_pdd`, `status_mentor`) VALUES
@@ -680,7 +698,7 @@ INSERT INTO `tb_mentor` (`id_mentor`, `nip_nipk_mentor`, `nama_mentor`, `id_unit
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_mentor_jenis`
+-- Table structure for table `tb_mentor_jenis`
 --
 
 CREATE TABLE `tb_mentor_jenis` (
@@ -689,7 +707,7 @@ CREATE TABLE `tb_mentor_jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_mentor_jenis`
+-- Dumping data for table `tb_mentor_jenis`
 --
 
 INSERT INTO `tb_mentor_jenis` (`id_mentor_jenis`, `nama_mentor_jenis`) VALUES
@@ -701,7 +719,7 @@ INSERT INTO `tb_mentor_jenis` (`id_mentor_jenis`, `nama_mentor_jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_mess`
+-- Table structure for table `tb_mess`
 --
 
 CREATE TABLE `tb_mess` (
@@ -722,14 +740,14 @@ CREATE TABLE `tb_mess` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_mess`
+-- Dumping data for table `tb_mess`
 --
 
 INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_mess`, `kapasitas_t_mess`, `alamat_mess`, `nama_pemilik_mess`, `no_pemilik_mess`, `email_pemilik_mess`, `harga_tanpa_makan_mess`, `harga_dengan_makan_mess`, `kapasitas_terisi_mess`, `ket_mess`, `status_mess`) VALUES
 (1, 'Mess RSJ 1 Lama', 0, 0, 20, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 10, 'Makan 3x Sehari', 'Aktif'),
-(2, 'Mess RSJ 2 Baru', 0, 0, 92, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 5, '', 'Aktif'),
-(3, 'Asrama Rifa Corporate', 0, 0, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 20000, 80000, 64, 'Dengan Makan 3x Sehari', 'Aktif'),
-(4, 'Pondokan H. Ating', 0, 0, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '0', '', 20000, 80000, 8, '', 'Aktif'),
+(2, 'Mess RSJ 2 Baru', 0, 0, 92, 'Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551', 'RS Jiwa Provinsi Jawa Barat', '081321329101', '', 20000, 100000, 10, '', 'Aktif'),
+(3, 'Asrama Rifa Corporate', 0, 0, 100, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Ibu Ai', '081322629909', '', 20000, 80000, 0, 'Dengan Makan 3x Sehari', 'Aktif'),
+(4, 'Pondokan H. Ating', 0, 0, 100, 'Kp. Barukai Timur RT. 04 RW. 13 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'H. Ating / Hj. Siti Sutiah', '0', '', 20000, 80000, 10, '', 'Aktif'),
 (5, 'Wisma Anugrah Ibu Nanik', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Hj. Nanik Susiani', '081320719652', '', 15000, 70000, 0, '', 'Aktif'),
 (6, 'Pondokan dr. Hj. Meutia Laksminingrum', 0, 0, 0, '-', 'dr. Hj. Meutia Laksminingrum', '0', '', 0, 0, 0, '', 'Tidak Aktif'),
 (7, 'Galuh Pakuan', 0, 0, 70, 'Kp. Panyandaan RT. 01 RW. 14 Desa Jambudipa Kecamatan Cisarua Kab. Bandung Barat', 'Oyo Suharya', '081320113399', '', 20000, 80000, 20, '', 'Aktif'),
@@ -738,7 +756,7 @@ INSERT INTO `tb_mess` (`id_mess`, `nama_mess`, `kapasitas_l_mess`, `kapasitas_p_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_mess_detail`
+-- Table structure for table `tb_mess_detail`
 --
 
 CREATE TABLE `tb_mess_detail` (
@@ -750,7 +768,7 @@ CREATE TABLE `tb_mess_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_mess_detail`
+-- Dumping data for table `tb_mess_detail`
 --
 
 INSERT INTO `tb_mess_detail` (`id_mess_detail`, `id_mess`, `harga_mess_detail`, `ket_mess_detail`, `jumlah_mess_detail`) VALUES
@@ -767,7 +785,7 @@ INSERT INTO `tb_mess_detail` (`id_mess_detail`, `id_mess`, `harga_mess_detail`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_mess_pilih`
+-- Table structure for table `tb_mess_pilih`
 --
 
 CREATE TABLE `tb_mess_pilih` (
@@ -782,21 +800,23 @@ CREATE TABLE `tb_mess_pilih` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_mess_pilih`
+-- Dumping data for table `tb_mess_pilih`
 --
 
 INSERT INTO `tb_mess_pilih` (`id_mess_pilih`, `id_praktik`, `id_mess`, `tgl_input_mess_pilih`, `makan_mess_pilih`, `jumlah_praktik_mess_pilih`, `jumlah_hari_mess_pilih`, `total_harga_mess_pilih`) VALUES
 (5, 3, 3, '2021-12-31', 'Ya', 64, 50, 256000000),
 (7, 5, 7, '2022-01-02', 'Ya', 20, 1, 1600000),
 (8, 4, 1, '2022-01-03', 'Ya', 10, 38, 38000000),
-(9, 8, 8, '2022-01-03', '', 5, 21, 0),
+(9, 8, 8, '2022-01-03', 'Tidak', 5, 21, 2100000),
 (10, 9, 2, '2022-01-03', 'Ya', 5, 29, 14500000),
-(11, 10, 4, '2022-01-03', 'Ya', 8, 28, 17920000);
+(11, 10, 4, '2022-01-03', 'Ya', 8, 28, 17920000),
+(12, 11, 2, '2022-01-03', 'Ya', 5, 32, 16000000),
+(13, 7, 4, '2022-01-06', 'Ya', 2, 8, 1280000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_mou`
+-- Table structure for table `tb_mou`
 --
 
 CREATE TABLE `tb_mou` (
@@ -816,7 +836,7 @@ CREATE TABLE `tb_mou` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_mou`
+-- Dumping data for table `tb_mou`
 --
 
 INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mou`, `no_rsj_mou`, `no_institusi_mou`, `id_jurusan_pdd`, `id_spesifikasi_pdd`, `id_jenjang_pdd`, `id_akreditasi`, `file_mou`, `ket_mou`, `institusi_mou`) VALUES
@@ -911,7 +931,7 @@ INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mo
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_nilai`
+-- Table structure for table `tb_nilai`
 --
 
 CREATE TABLE `tb_nilai` (
@@ -929,17 +949,20 @@ CREATE TABLE `tb_nilai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_nilai`
+-- Dumping data for table `tb_nilai`
 --
 
 INSERT INTO `tb_nilai` (`id_nilai`, `id_praktikan_detail`, `ip`, `sptk`, `prepost`, `dokep`, `komter`, `tak`, `penyuluhan`, `presentasi`, `sikap`) VALUES
 (1, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 13, '0', '0', '0', '0', '10', '0', '0', '2', '4');
+(2, 13, '0', '0', '0', '0', '10', '0', '0', '2', '4'),
+(3, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_nilai_dokter`
+-- Table structure for table `tb_nilai_dokter`
 --
 
 CREATE TABLE `tb_nilai_dokter` (
@@ -963,13 +986,15 @@ CREATE TABLE `tb_nilai_dokter` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_praktik`
+-- Table structure for table `tb_praktik`
 --
 
 CREATE TABLE `tb_praktik` (
   `id_praktik` int(11) NOT NULL,
   `id_mou` int(11) NOT NULL,
   `id_institusi` int(11) NOT NULL,
+  `id_mentor` int(11) DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
   `nama_praktik` text NOT NULL,
   `tgl_input_praktik` date DEFAULT NULL,
   `tgl_ubah_praktik` date DEFAULT NULL,
@@ -988,29 +1013,31 @@ CREATE TABLE `tb_praktik` (
   `email_mentor_praktik` text NOT NULL,
   `telp_mentor_praktik` text NOT NULL,
   `status_cek_praktik` text NOT NULL,
-  `status_praktik` enum('Y','T') NOT NULL
+  `status_praktik` enum('Y','T') NOT NULL,
+  `ket_tolak_praktik` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_praktik`
+-- Dumping data for table `tb_praktik`
 --
 
-INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `nama_praktik`, `tgl_input_praktik`, `tgl_ubah_praktik`, `tgl_mulai_praktik`, `tgl_selesai_praktik`, `jumlah_praktik`, `surat_praktik`, `data_praktik`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_akreditasi`, `id_user`, `nama_mentor_praktik`, `email_mentor_praktik`, `telp_mentor_praktik`, `status_cek_praktik`, `status_praktik`) VALUES
-(1, 0, 88, 'Kelompok Mantap', '2022-01-03', NULL, '2022-01-04', '2022-02-24', 5, './_file/praktikan/surat_praktik_1_2022-01-03.pdf', './_file/praktikan/data_praktik_1_2022-01-03.xlsx', 4, '7', '8', '0', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'DAFTAR', 'Y'),
-(2, 71, 71, 'Vitae nihil libero s', '2021-12-30', '2021-12-30', '1978-10-18', '1996-03-11', 73, './_file/praktikan/surat_praktik_2_2021-12-30.pdf', './_file/praktikan/data_praktik_2_2021-12-30.xlsx', 1, '1', '9', '4', '2', '1', 'Aut ut necessitatibu', 'juduqeca@mailinator.com', '19', 'DAFTAR', 'T'),
-(3, 0, 87, 'Consequatur eos nihi', '2021-12-31', '2021-12-31', '2021-01-01', '2021-02-19', 64, './_file/praktikan/surat_praktik_3_2021-12-31.pdf', './_file/praktikan/data_praktik_3_2021-12-31.xlsx', 4, '7', '8', '0', '0', '1', 'Repellendus Aut por', 'zisepiz@mailinator.com', '71', 'SELESAI', 'Y'),
-(4, 20, 20, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-28', '2021-11-24', '2021-12-31', 10, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y'),
-(5, 0, 80, 'Kelompok 3', '2021-12-05', '2022-01-02', '2021-12-31', '2022-01-06', 20, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 3, '4', '6', '0', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y'),
-(6, 0, 23, 'Kelompok 3 Gel. III', '2021-12-03', '2022-01-03', '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', 3, '1', '8', '1', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'T'),
-(7, 78, 78, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'AKTIF', 'Y'),
-(8, 23, 23, 'Kelompok 4', '2022-01-03', NULL, '2022-01-07', '2022-01-27', 5, '', '', 1, '1', '8', '1', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y'),
-(9, 82, 82, 'thyfgt', '2022-01-03', NULL, '2022-01-10', '2022-02-07', 5, '', '', 4, '7', '8', '3', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y'),
-(10, 68, 68, 'Kelompok 2', '2022-01-03', NULL, '2022-01-04', '2022-01-31', 8, '', '', 3, '3', '8', '3', '1', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y');
+INSERT INTO `tb_praktik` (`id_praktik`, `id_mou`, `id_institusi`, `id_mentor`, `id_unit`, `nama_praktik`, `tgl_input_praktik`, `tgl_ubah_praktik`, `tgl_mulai_praktik`, `tgl_selesai_praktik`, `jumlah_praktik`, `surat_praktik`, `data_praktik`, `id_jurusan_pdd_jenis`, `id_jurusan_pdd`, `id_jenjang_pdd`, `id_spesifikasi_pdd`, `id_akreditasi`, `id_user`, `nama_mentor_praktik`, `email_mentor_praktik`, `telp_mentor_praktik`, `status_cek_praktik`, `status_praktik`, `ket_tolak_praktik`) VALUES
+(1, 0, 88, 0, 0, 'Kelompok Mantap', '2022-01-03', NULL, '2022-01-04', '2022-02-24', 5, './_file/praktikan/surat_praktik_1_2022-01-03.pdf', './_file/praktikan/data_praktik_1_2022-01-03.xlsx', 4, '7', '8', '0', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'DAFTAR', 'Y', ''),
+(2, 71, 71, 0, 0, 'Vitae nihil libero s', '2021-12-30', '2021-12-30', '1978-10-18', '1996-03-11', 73, './_file/praktikan/surat_praktik_2_2021-12-30.pdf', './_file/praktikan/data_praktik_2_2021-12-30.xlsx', 1, '1', '9', '4', '2', '1', 'Aut ut necessitatibu', 'juduqeca@mailinator.com', '19', 'DAFTAR', 'T', ''),
+(3, 0, 87, 0, 0, 'Consequatur eos nihi', '2021-12-31', '2021-12-31', '2021-01-01', '2021-02-19', 64, './_file/praktikan/surat_praktik_3_2021-12-31.pdf', './_file/praktikan/data_praktik_3_2021-12-31.xlsx', 4, '7', '8', '0', '0', '1', 'Repellendus Aut por', 'zisepiz@mailinator.com', '71', 'SELESAI', 'T', ''),
+(4, 20, 20, 0, 0, 'Kelompok 2 Gelombang III', '2021-12-05', '2021-12-28', '2021-11-24', '2021-12-31', 10, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 1, '1', '0', '1', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y', ''),
+(5, 0, 80, 0, 0, 'Kelompok 3', '2021-12-05', '2022-01-02', '2021-12-31', '2022-01-06', 20, './_file/praktikan/surat_praktik_1_2021-11-23.pdf', './_file/praktikan/data_praktik_1_2021-11-23.xlsx', 3, '4', '6', '0', '1', '1', 'ADMIN', '-', '08123150000', 'AKTIF', 'Y', ''),
+(6, 0, 23, 0, 0, 'Kelompok 3 Gel. III', '2021-12-03', '2022-01-03', '2021-12-13', '2022-01-13', 25, './_file/praktikan/surat_praktik_1_2021-12-03.pdf', './_file/praktikan/data_praktik_1_2021-12-03.xlsx', 3, '1', '8', '1', '1', '1', 'ADMIN', '-', '08123145645', 'DAFTAR', 'T', ''),
+(7, 78, 78, 0, 0, 'Grup 2-2020', '2021-12-06', '2021-12-21', '2021-12-02', '2021-12-09', 2, './_file/praktikan/surat_praktik_1_2021-12-06.pdf', './_file/praktikan/data_praktik_1_2021-12-06.xlsx', 3, '3', '8', '0', '2', '1', 'ADMIN', '-', '08123145645', 'AKTIF', 'Y', ''),
+(8, 23, 23, 0, 0, 'Kelompok 4', '2022-01-03', NULL, '2022-01-07', '2022-01-27', 5, '', '', 1, '1', '8', '1', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y', ''),
+(9, 82, 82, 0, 0, 'thyfgt', '2022-01-03', NULL, '2022-01-10', '2022-02-07', 5, '', '', 4, '7', '8', '3', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y', ''),
+(10, 68, 68, 0, 0, 'Kelompok 2', '2022-01-03', NULL, '2022-01-04', '2022-01-31', 8, '', '', 3, '3', '8', '3', '1', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y', ''),
+(11, 0, 21, NULL, NULL, 'Kelompok 3 Gel. I', '2022-01-03', NULL, '2022-01-06', '2022-02-06', 5, './_file/praktikan/surat_praktik_11_2022-01-03.pdf', './_file/praktikan/data_praktik_11_2022-01-03.xlsx', 1, '1', '8', '1', '2', '1', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '08123145645', 'AKTIF', 'Y', 'Salah Nama Institusi');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_praktikan`
+-- Table structure for table `tb_praktikan`
 --
 
 CREATE TABLE `tb_praktikan` (
@@ -1020,17 +1047,23 @@ CREATE TABLE `tb_praktikan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_praktikan`
+-- Dumping data for table `tb_praktikan`
 --
 
 INSERT INTO `tb_praktikan` (`id_praktikan`, `id_praktik`, `status_praktikan`) VALUES
 (3, 3, 'INPUT PRAKTIKAN'),
-(4, 5, 'INPUT NILAI');
+(4, 5, 'INPUT PRAKTIKAN'),
+(5, 7, 'PRAKTIKAN ADA'),
+(6, 8, 'INPUT PRAKTIKAN'),
+(7, 9, 'INPUT PRAKTIKAN'),
+(8, 10, 'INPUT PRAKTIKAN'),
+(9, 11, 'INPUT PRAKTIKAN'),
+(10, 4, 'INPUT PRAKTIKAN');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_praktikan_detail`
+-- Table structure for table `tb_praktikan_detail`
 --
 
 CREATE TABLE `tb_praktikan_detail` (
@@ -1046,10 +1079,17 @@ CREATE TABLE `tb_praktikan_detail` (
   `status_praktikan_detail` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_praktikan_detail`
+--
+
+INSERT INTO `tb_praktikan_detail` (`id_praktikan_detail`, `id_praktikan`, `no_id_praktikan_detail`, `nama_praktikan_detail`, `tgl_lahir_praktikan_detail`, `telp_praktikan_detail`, `email_praktikan_detail`, `tgl_input_praktikan_detail`, `tgl_ubah_praktikan_detail`, `status_praktikan_detail`) VALUES
+(7, 5, '2r3', 'x12', '2022-01-14', '123', '1x23@adsf', '2022-01-04', NULL, '');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_spesifikasi_pdd`
+-- Table structure for table `tb_spesifikasi_pdd`
 --
 
 CREATE TABLE `tb_spesifikasi_pdd` (
@@ -1058,7 +1098,7 @@ CREATE TABLE `tb_spesifikasi_pdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_spesifikasi_pdd`
+-- Dumping data for table `tb_spesifikasi_pdd`
 --
 
 INSERT INTO `tb_spesifikasi_pdd` (`id_spesifikasi_pdd`, `nama_spesifikasi_pdd`) VALUES
@@ -1072,7 +1112,7 @@ INSERT INTO `tb_spesifikasi_pdd` (`id_spesifikasi_pdd`, `nama_spesifikasi_pdd`) 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_unit`
+-- Table structure for table `tb_unit`
 --
 
 CREATE TABLE `tb_unit` (
@@ -1081,7 +1121,7 @@ CREATE TABLE `tb_unit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_unit`
+-- Dumping data for table `tb_unit`
 --
 
 INSERT INTO `tb_unit` (`id_unit`, `nama_unit`) VALUES
@@ -1113,7 +1153,7 @@ INSERT INTO `tb_unit` (`id_unit`, `nama_unit`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_user`
+-- Table structure for table `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -1126,6 +1166,7 @@ CREATE TABLE `tb_user` (
   `email_user` text NOT NULL,
   `level_user` enum('1','2') NOT NULL,
   `no_telp_user` text NOT NULL,
+  `foto_user` text DEFAULT NULL,
   `terakhir_login_user` date DEFAULT NULL,
   `tgl_buat_user` date NOT NULL,
   `tgl_ubah_user` date DEFAULT NULL,
@@ -1133,17 +1174,17 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_user`
+-- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`id_user`, `id_mou`, `id_institusi`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `no_telp_user`, `terakhir_login_user`, `tgl_buat_user`, `tgl_ubah_user`, `status_user`) VALUES
-(1, 0, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '1', '08123145645', '2022-01-03', '2021-03-29', '2022-01-02', 'Y'),
-(15, 1, 87, 'institusi', '81dc9bdb52d04dc20036dbd8313ed055', 'institusi', 'asd@asd', '2', '091273', '2022-01-03', '2021-12-31', '2022-01-02', 'Y');
+INSERT INTO `tb_user` (`id_user`, `id_mou`, `id_institusi`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `no_telp_user`, `foto_user`, `terakhir_login_user`, `tgl_buat_user`, `tgl_ubah_user`, `status_user`) VALUES
+(1, 0, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '1', '08123145645', NULL, '2022-01-03', '2021-03-29', '2022-01-02', 'Y'),
+(15, 1, 87, 'institusi', '81dc9bdb52d04dc20036dbd8313ed055', 'institusi', 'asd@asd', '2', '091273', NULL, '2022-01-03', '2021-12-31', '2022-01-02', 'Y');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_user_detail`
+-- Table structure for table `tb_user_detail`
 --
 
 CREATE TABLE `tb_user_detail` (
@@ -1156,281 +1197,281 @@ CREATE TABLE `tb_user_detail` (
 --
 
 --
--- Indeks untuk tabel `tb_akreditasi`
+-- Indexes for table `tb_akreditasi`
 --
 ALTER TABLE `tb_akreditasi`
   ADD PRIMARY KEY (`id_akreditasi`);
 
 --
--- Indeks untuk tabel `tb_bayar`
+-- Indexes for table `tb_bayar`
 --
 ALTER TABLE `tb_bayar`
   ADD PRIMARY KEY (`id_bayar`);
 
 --
--- Indeks untuk tabel `tb_harga`
+-- Indexes for table `tb_harga`
 --
 ALTER TABLE `tb_harga`
   ADD PRIMARY KEY (`id_harga`);
 
 --
--- Indeks untuk tabel `tb_harga_jenis`
+-- Indexes for table `tb_harga_jenis`
 --
 ALTER TABLE `tb_harga_jenis`
   ADD PRIMARY KEY (`id_harga_jenis`);
 
 --
--- Indeks untuk tabel `tb_harga_pilih`
+-- Indexes for table `tb_harga_pilih`
 --
 ALTER TABLE `tb_harga_pilih`
   ADD PRIMARY KEY (`id_harga_pilih`);
 
 --
--- Indeks untuk tabel `tb_harga_satuan`
+-- Indexes for table `tb_harga_satuan`
 --
 ALTER TABLE `tb_harga_satuan`
   ADD PRIMARY KEY (`id_harga_satuan`);
 
 --
--- Indeks untuk tabel `tb_institusi`
+-- Indexes for table `tb_institusi`
 --
 ALTER TABLE `tb_institusi`
   ADD PRIMARY KEY (`id_institusi`);
 
 --
--- Indeks untuk tabel `tb_jenis_mentor`
+-- Indexes for table `tb_jenis_mentor`
 --
 ALTER TABLE `tb_jenis_mentor`
   ADD PRIMARY KEY (`id_jenis_mentor`);
 
 --
--- Indeks untuk tabel `tb_jenjang_pdd`
+-- Indexes for table `tb_jenjang_pdd`
 --
 ALTER TABLE `tb_jenjang_pdd`
   ADD PRIMARY KEY (`id_jenjang_pdd`);
 
 --
--- Indeks untuk tabel `tb_jurusan_pdd`
+-- Indexes for table `tb_jurusan_pdd`
 --
 ALTER TABLE `tb_jurusan_pdd`
   ADD PRIMARY KEY (`id_jurusan_pdd`);
 
 --
--- Indeks untuk tabel `tb_jurusan_pdd_jenis`
+-- Indexes for table `tb_jurusan_pdd_jenis`
 --
 ALTER TABLE `tb_jurusan_pdd_jenis`
   ADD PRIMARY KEY (`id_jurusan_pdd_jenis`);
 
 --
--- Indeks untuk tabel `tb_lapor`
+-- Indexes for table `tb_lapor`
 --
 ALTER TABLE `tb_lapor`
   ADD PRIMARY KEY (`id_lapor`);
 
 --
--- Indeks untuk tabel `tb_mentor`
+-- Indexes for table `tb_mentor`
 --
 ALTER TABLE `tb_mentor`
   ADD PRIMARY KEY (`id_mentor`);
 
 --
--- Indeks untuk tabel `tb_mess`
+-- Indexes for table `tb_mess`
 --
 ALTER TABLE `tb_mess`
   ADD PRIMARY KEY (`id_mess`);
 
 --
--- Indeks untuk tabel `tb_mess_detail`
+-- Indexes for table `tb_mess_detail`
 --
 ALTER TABLE `tb_mess_detail`
   ADD PRIMARY KEY (`id_mess_detail`);
 
 --
--- Indeks untuk tabel `tb_mess_pilih`
+-- Indexes for table `tb_mess_pilih`
 --
 ALTER TABLE `tb_mess_pilih`
   ADD PRIMARY KEY (`id_mess_pilih`);
 
 --
--- Indeks untuk tabel `tb_mou`
+-- Indexes for table `tb_mou`
 --
 ALTER TABLE `tb_mou`
   ADD PRIMARY KEY (`id_mou`);
 
 --
--- Indeks untuk tabel `tb_nilai`
+-- Indexes for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
   ADD PRIMARY KEY (`id_nilai`);
 
 --
--- Indeks untuk tabel `tb_nilai_dokter`
+-- Indexes for table `tb_nilai_dokter`
 --
 ALTER TABLE `tb_nilai_dokter`
   ADD PRIMARY KEY (`id_nilai`);
 
 --
--- Indeks untuk tabel `tb_praktik`
+-- Indexes for table `tb_praktik`
 --
 ALTER TABLE `tb_praktik`
   ADD PRIMARY KEY (`id_praktik`);
 
 --
--- Indeks untuk tabel `tb_praktikan`
+-- Indexes for table `tb_praktikan`
 --
 ALTER TABLE `tb_praktikan`
   ADD PRIMARY KEY (`id_praktikan`);
 
 --
--- Indeks untuk tabel `tb_praktikan_detail`
+-- Indexes for table `tb_praktikan_detail`
 --
 ALTER TABLE `tb_praktikan_detail`
   ADD PRIMARY KEY (`id_praktikan_detail`);
 
 --
--- Indeks untuk tabel `tb_spesifikasi_pdd`
+-- Indexes for table `tb_spesifikasi_pdd`
 --
 ALTER TABLE `tb_spesifikasi_pdd`
   ADD PRIMARY KEY (`id_spesifikasi_pdd`);
 
 --
--- Indeks untuk tabel `tb_unit`
+-- Indexes for table `tb_unit`
 --
 ALTER TABLE `tb_unit`
   ADD PRIMARY KEY (`id_unit`);
 
 --
--- Indeks untuk tabel `tb_user`
+-- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_akreditasi`
+-- AUTO_INCREMENT for table `tb_akreditasi`
 --
 ALTER TABLE `tb_akreditasi`
   MODIFY `id_akreditasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_bayar`
+-- AUTO_INCREMENT for table `tb_bayar`
 --
 ALTER TABLE `tb_bayar`
-  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_harga`
+-- AUTO_INCREMENT for table `tb_harga`
 --
 ALTER TABLE `tb_harga`
   MODIFY `id_harga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_harga_jenis`
+-- AUTO_INCREMENT for table `tb_harga_jenis`
 --
 ALTER TABLE `tb_harga_jenis`
   MODIFY `id_harga_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_harga_pilih`
+-- AUTO_INCREMENT for table `tb_harga_pilih`
 --
 ALTER TABLE `tb_harga_pilih`
-  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `id_harga_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_harga_satuan`
+-- AUTO_INCREMENT for table `tb_harga_satuan`
 --
 ALTER TABLE `tb_harga_satuan`
   MODIFY `id_harga_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_jenjang_pdd`
+-- AUTO_INCREMENT for table `tb_jenjang_pdd`
 --
 ALTER TABLE `tb_jenjang_pdd`
   MODIFY `id_jenjang_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_jurusan_pdd`
+-- AUTO_INCREMENT for table `tb_jurusan_pdd`
 --
 ALTER TABLE `tb_jurusan_pdd`
   MODIFY `id_jurusan_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_jurusan_pdd_jenis`
+-- AUTO_INCREMENT for table `tb_jurusan_pdd_jenis`
 --
 ALTER TABLE `tb_jurusan_pdd_jenis`
   MODIFY `id_jurusan_pdd_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_lapor`
+-- AUTO_INCREMENT for table `tb_lapor`
 --
 ALTER TABLE `tb_lapor`
-  MODIFY `id_lapor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_lapor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_mess`
+-- AUTO_INCREMENT for table `tb_mess`
 --
 ALTER TABLE `tb_mess`
   MODIFY `id_mess` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_mess_detail`
+-- AUTO_INCREMENT for table `tb_mess_detail`
 --
 ALTER TABLE `tb_mess_detail`
   MODIFY `id_mess_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_mess_pilih`
+-- AUTO_INCREMENT for table `tb_mess_pilih`
 --
 ALTER TABLE `tb_mess_pilih`
-  MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_mess_pilih` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_mou`
+-- AUTO_INCREMENT for table `tb_mou`
 --
 ALTER TABLE `tb_mou`
   MODIFY `id_mou` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_nilai`
+-- AUTO_INCREMENT for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
-  MODIFY `id_nilai` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_nilai` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_nilai_dokter`
+-- AUTO_INCREMENT for table `tb_nilai_dokter`
 --
 ALTER TABLE `tb_nilai_dokter`
   MODIFY `id_nilai` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_praktik`
+-- AUTO_INCREMENT for table `tb_praktik`
 --
 ALTER TABLE `tb_praktik`
   MODIFY `id_praktik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_praktikan`
+-- AUTO_INCREMENT for table `tb_praktikan`
 --
 ALTER TABLE `tb_praktikan`
-  MODIFY `id_praktikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_praktikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_praktikan_detail`
+-- AUTO_INCREMENT for table `tb_praktikan_detail`
 --
 ALTER TABLE `tb_praktikan_detail`
-  MODIFY `id_praktikan_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_praktikan_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_spesifikasi_pdd`
+-- AUTO_INCREMENT for table `tb_spesifikasi_pdd`
 --
 ALTER TABLE `tb_spesifikasi_pdd`
   MODIFY `id_spesifikasi_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_user`
+-- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;

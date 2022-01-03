@@ -145,13 +145,14 @@ if (isset($_POST['simpan_praktik'])) {
             'DAFTAR',
             'Y'
         )";
-    echo $sql_insert;
-    // $conn->query($sql_insert);
-?>
-    <script type="text/javascript">
-        // document.location.href = "?prk";
+    // echo $sql_insert;
+    $conn->query($sql_insert);
+    echo "
+    <script type='text/javascript'>
+        alert('Data sudah Disimpan');
+        document.location.href = '?prk';
     </script>
-<?php
+    ";
 } else {
 ?>
     <div class="container-fluid">

@@ -96,15 +96,10 @@ if (isset($_GET['dashboard'])) {
     });
 
     $(document).ready(function() {
-        $('.js-example-basic-single').select2({
+        $('.js-example-placeholder-single').select2({
             placeholder: "Pilih",
             allowClear: true
         });
-    });
-
-    $(".js-example-placeholder-single").select2({
-        placeholder: "Pilih",
-        allowClear: true
     });
 </script>
 

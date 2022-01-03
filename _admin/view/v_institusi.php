@@ -61,7 +61,17 @@
                                 <tr>
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $d_institusi['nama_institusi']; ?></td>
-                                    <td><?php echo $d_institusi['akronim_institusi']; ?></td>
+                                    <td>
+                                        <?php
+                                        if ($d_institusi['akronim_institusi'] == '') {
+                                        ?>
+                                            <span class="badge badge-danger text-lg">Tidak Ada</span>
+                                        <?php
+                                        } else {
+                                            echo $d_institusi['akronim_institusi'];
+                                        }
+                                        ?>
+                                    </td>
                                     <td class="text-center">
                                         <?php
                                         if ($d_institusi['logo_institusi'] == '') {

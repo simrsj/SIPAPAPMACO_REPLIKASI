@@ -1,24 +1,104 @@
 <?php
 if (isset($_POST['tambah_lapor'])) {
 
-    $no_id_lapor = 0;
-    while ($d_lapor = $conn->query("SELECT id_lapor FROM tb_lapor ORDER BY id_lapor ASC")->fetch(PDO::FETCH_ASSOC)) {
-        if ($no_id_lapor != $d_lapor[0]) {
-            $no_id_lapor = $d_lapor[0] + 1;
-            break;
-        } elseif ($no_id_lapor == 0) {
-            $no_id_lapor;
+
+    $no = 1;
+    $sql = "SELECT id_lapor FROM tb_lapor ORDER BY id_lapor ASC";
+    $q = $conn->query($sql);
+    while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
+        if ($no != $d['id_lapor']) {
+            $no = $d['id_lapor'] + 1;
             break;
         }
-        $no_id_lapor = $d_lapor[0] + 1;
+        $no++;
     }
+
     // echo "<pre>";
     // print_r($_FILES);
     // echo "</pre>";
     $link_file_lapor = '';
     if ($_FILES['file_lapor']['size'] > 0) {
         //ubah Nama File PDF
-        $_FILES['file_lapor']['name'] = "lapor_" . $no_id_lapor . "_" . date('Y-m-d') . "." . substr($_FILES['file_lapor']['type'], 6);
+        $_FILES['file_lapor']['name'] = "lapor_" . $no . "_" . date('Y-m-d') . "." . substr($_FILES['file_lapor']['type'], 6);
+
+        // echo "<pre>";
+        // print_r($_FILES);
+        // echo "</pre>";
+
+        //alamat file surat masuk
+        $alamat_unggah = "./_file/lapor";
+
+        //pembuatan alamat bila tidak ada
+        if (!is_dir($alamat_unggah)) {
+            mkdir($alamat_unggah, 0777, $rekursif = true);
+        }
+
+        //unggah surat dan data praktik
+        if (!is_null($_FILES['file_lapor'])) {
+            $file_lapor = (object) @$_FILES['file_lapor'];
+
+            //mulai unggah file surat praktik
+            if ($file_lapor->size > 1000 * 1000) {
+                echo "
+                <script>
+                    alert('File Lapor Harus dibawah 1 Mb');
+                    document.location.href = '?lapor';
+                </script>
+                ";
+            } elseif (substr($_FILES['file_lapor']['type'], 6) != ('png' || 'gif' || 'jpeg' || 'jpg')) {
+                echo "
+                <script>
+                    alert('File Lapor Harus .png, .gif, jpeg, jpg');
+                    document.location.href = '?lapor';
+                </script>
+                    ";
+            } else {
+                $unggah_file_lapor = move_uploaded_file(
+                    $file_lapor->tmp_name,
+                    "{$alamat_unggah}/{$file_lapor->name}"
+                );
+                $link_file_lapor = "{$alamat_unggah}/{$file_lapor->name}";
+            }
+        } else {
+            $link_file_lapor = "";
+        }
+    }
+    $sql_tambah_lapor = "INSERT INTO tb_lapor (
+        id_lapor,
+        judul_lapor,
+        deskripsi_lapor,
+        level_lapor, 
+        tgl_lapor,
+        nama_lapor,
+        link_lapor,
+        status_lapor,
+        file_lapor
+    ) VALUES (
+        '" . $no . "',
+        '" . $_POST['judul_lapor'] . "',
+        '" . $_POST['deskripsi_lapor'] . "',
+        '" . $_POST['level_lapor'] . "',
+        '" . date('Y-m-d') . "',
+        '" . $_POST['nama_lapor'] . "',
+        '" . $_POST['link_lapor'] . "',
+        'cek',
+        '" . $link_file_lapor . "'
+    )";
+
+    // echo $sql_tambah_lapor . "<br>";
+    $conn->query($sql_tambah_lapor);
+    echo "
+    <script>
+        alert('Data Lapor Sudah Tersimpan');
+        document.location.href = '?lapor';
+    </script>
+    ";
+} elseif (isset($_POST['ubah_lapor'])) {
+
+    //jika foto diupload
+    if ($_FILES['file_lapor']['size'] > 0) {
+        //ubah Nama File PDF
+        $_FILES['file_lapor']['name'] = "lapor_" . $_POST['id_lapor'] . "_" . date('Y-m-d') . "." . substr($_FILES['file_lapor']['type'], 6);
 
         // echo "<pre>";
         // print_r($_FILES);
@@ -62,38 +142,54 @@ if (isset($_POST['tambah_lapor'])) {
             $link_file_lapor = "";
         }
     }
-    $sql_tambah_lapor = "INSERT INTO tb_lapor (
-        id_lapor,
-        judul_lapor,
-        deskripsi_lapor,
-        level_lapor, 
-        tgl_lapor,
-        nama_lapor,
-        link_lapor,
-        status_lapor,
-        file_lapor
-    ) VALUES (
-        '" . $no_id_lapor . "',
-        '" . $_POST['judul_lapor'] . "',
-        '" . $_POST['deskripsi_lapor'] . "',
-        '" . $_POST['level_lapor'] . "',
-        '" . date('Y-m-d') . "',
-        '" . $_POST['nama_lapor'] . "',
-        '" . $_POST['link_lapor'] . "',
-        'cek',
-        '" . $link_file_lapor . "'
-    )";
 
-    echo $sql_tambah_lapor . "<br>";
-    // $conn->query($sql_tambah_lapor);
+    //jika foto tidak diupload, ambil dari database
+
+    //jika logo tidak file_lapor ambil dari sebelumya
+    if ($_FILES['file_lapor']['size'] == 0) {
+        $sql = "SELECT file_lapor FROM tb_lapor WHERE id_lapor='" . $_POST['id_lapor'] . "'";
+        $d = $conn->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $link_file_lapor = $d['file_lapor'];
+    }
+
+    $sql_ubah = "UPDATE tb_lapor SET
+        judul_lapor = '" . $_POST['judul_lapor'] . "',
+        deskripsi_lapor = '" . $_POST['deskripsi_lapor'] . "',
+        level_lapor = '" . $_POST['level_lapor'] . "',
+        nama_lapor = '" . $_POST['nama_lapor'] . "',
+        link_lapor = '" . $_POST['link_lapor'] . "',
+        file_lapor = '" . $link_file_lapor . "'
+        WHERE id_lapor ='" . $_POST['id_lapor']  . "'";
+    // echo $sql_ubah . "<br>";
+    $conn->query($sql_ubah);
+
     echo "
     <script>
-        // alert('Data Sudah Lapor Sudah Tersimpan');
-        // document.location.href = '?lapor';
+        alert('Data lapor sudah diubah');
+        document.location.href = '?lapor';
     </script>
     ";
-} elseif (isset($_POST['ubah_lapor'])) {
 } elseif (isset($_POST['hapus_lapor'])) {
+    $conn->query("DELETE FROM `tb_lapor` WHERE `id_lapor` = " . $_POST['id_lapor']);
+    echo "
+    <script>
+        alert('Data lapor sudah dihapus!');
+        document.location.href = '?lapor';
+    </script>
+    ";
+} elseif (isset($_POST['ubah_status'])) {
+    $sql_ubah = "UPDATE tb_lapor SET
+        status_lapor = '" . $_POST['ubah_status'] . "'
+        WHERE id_lapor ='" . $_POST['id_lapor']  . "'";
+    // echo $sql_ubah . "<br>";
+    $conn->query($sql_ubah);
+
+    echo "
+    <script>
+        alert('Status lapor sudah diubah');
+        document.location.href = '?lapor';
+    </script>
+    ";
 } else {
 ?>
     <div class="container-fluid">
@@ -121,31 +217,13 @@ if (isset($_POST['tambah_lapor'])) {
                                     <input class="form-control" type="text" name="nama_lapor" required><br>
                                     <b>Judul Laporan : </b><br>
                                     <input class="form-control" type="text" name="judul_lapor" required><br>
-                                    <b>Dekripsi Laporan : </b><br>
+                                    <b>Deskripsi Laporan : </b><br>
                                     <textarea class="form-control" name="deskripsi_lapor"></textarea><br>
                                     <b>Link <i class="font-weight-bold">ERROR</i> : </b><br>
                                     <textarea class="form-control" name="link_lapor"></textarea><br>
-                                    <b>File <i class="font-weight-bold">ERROR</i> : </b><br>
+                                    <i>Screenshot ERROR : </i><br>
                                     <input type="file" name="file_lapor" accept="image/png, image/gif, image/jpeg, image/jpg"><br><br>
                                     <b>Level : </b><br>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="level1" name="level_lapor" value="rendah" class="custom-control-input" required>
-                                        <label class="custom-control-label" for="level1">
-                                            <span class="badge badge-success text-md">Rendah</span>
-                                        </label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="level2" name="level_lapor" value="sedang" class="custom-control-input" required>
-                                        <label class="custom-control-label" for="level2">
-                                            <span class="badge badge-warning text-md">Sedang</span>
-                                        </label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="level3" name="level_lapor" value="tinggi" class="custom-control-input" required>
-                                        <label class="custom-control-label" for="level3">
-                                            <span class="badge badge-danger text-md">Tinggi</span>
-                                        </label>
-                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Kembali</button>
@@ -161,8 +239,7 @@ if (isset($_POST['tambah_lapor'])) {
         <div class="card shadow mb-4">
             <div class="card-body">
                 <?php
-                $sql_lapor = "SELECT * FROM tb_lapor
-                ORDER BY tb_lapor.tgl_lapor ASC";
+                $sql_lapor = "SELECT * FROM tb_lapor ORDER BY tgl_lapor ASC";
 
                 $q_lapor = $conn->query($sql_lapor);
                 $r_lapor = $q_lapor->rowCount();
@@ -174,32 +251,34 @@ if (isset($_POST['tambah_lapor'])) {
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">No</th>
+                                    <th scope="col">Tanggal Lapor</th>
                                     <th scope="col">Nama Pelapor</th>
                                     <th scope="col">Judul</th>
                                     <th scope="col">Level Pelapor</th>
-                                    <th scope="col">Tanggal Lapor</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Detail</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-sm">
                                 <?php
                                 $no = 1;
                                 while ($d_lapor = $q_lapor->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
                                         <td><?php echo $no; ?></td>
+                                        <td><?php echo tanggal_minimal($d_lapor['tgl_lapor']); ?></td>
                                         <td><?php echo $d_lapor['nama_lapor']; ?></td>
                                         <td><?php echo $d_lapor['judul_lapor']; ?></td>
                                         <td>
                                             <?php
                                             if ($d_lapor['level_lapor'] == 'rendah') {
                                             ?>
-                                                <span class="badge badge-danger text-md">RENDAH</span>
+                                                <span class="badge badge-success text-md">RENDAH</span>
                                             <?php
                                             } elseif ($d_lapor['level_lapor'] == 'sedang') {
                                             ?>
-                                                <span class="badge badge-danger text-md">SEDANG</span>
+                                                <span class="badge badge-warning text-md">SEDANG</span>
                                             <?php
                                             } elseif ($d_lapor['level_lapor'] == 'tinggi') {
                                             ?>
@@ -208,39 +287,82 @@ if (isset($_POST['tambah_lapor'])) {
                                             }
                                             ?>
                                         </td>
-                                        <td><?php echo tanggal($d_lapor['tgl_lapor']); ?></td>
                                         <td>
                                             <?php
-                                            if ($d_lapor['status_lapor'] == 'cek') {
+                                            if ($d_lapor['status_lapor'] == 'CEK') {
                                             ?>
                                                 <span class="badge badge-warning text-md">CEK</span>
                                             <?php
-                                            } elseif ($d_lapor['status_lapor'] == 'proses') {
+                                            } elseif ($d_lapor['status_lapor'] == 'PROSES') {
                                             ?>
                                                 <span class="badge badge-primary text-md">PROSES</span>
                                             <?php
-                                            } elseif ($d_lapor['status_lapor'] == 'selesai') {
+                                            } elseif ($d_lapor['status_lapor'] == 'SELESAI') {
                                             ?>
                                                 <span class="badge badge-success text-md">SELESAI</span>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <span class="badge badge-danger text-md">ERROR</span>
                                             <?php
                                             }
                                             ?>
                                         </td>
                                         <td>
-                                            <a href="?lapor$dtl=<?php echo $d_lapor['id_lapor']; ?>" class="btn btn-info btn-sm" title="Detail Rincian"><i class="fas fa-info-circle"></i>
+                                            <!-- tombol ubah lapor -->
+                                            <a href="#" class="btn btn-info btn-sm" title="Lihat Detail" data-toggle="modal" data-target="#lihat_<?php echo $d_lapor['id_lapor']; ?>">
+                                                <i class="fas fa-eye"></i> Detail
                                             </a>
+
+                                            <!-- modal cek -->
+                                            <div class="modal fade" id="lihat_<?php echo $d_lapor['id_lapor']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-7 text-center">
+                                                                    <img src="<?php echo $d_lapor['file_lapor']; ?>" class="img-fluid" alt="Responsive image"><br>
+                                                                    <a href="<?php echo $d_lapor['file_lapor']; ?>" class="btn btn-success btn-sm" target="_blank"><i class="fas fa-search"></i> Perbesar</a>
+
+                                                                </div>
+                                                                <div class="col-lg-5">
+                                                                    <fieldset class="fieldset">
+                                                                        <legend class="legend-fieldset">Rincian</legend>
+                                                                        <b>Judul : </b><br>
+                                                                        <?php echo $d_lapor['judul_lapor']; ?><br><br>
+                                                                        <b>Link ERROR : </b><br>
+                                                                        <?php echo $d_lapor['link_lapor']; ?><br><br>
+                                                                        <b>Deskripsi : </b><br>
+                                                                        <?php echo $d_lapor['deskripsi_lapor']; ?><br><br>
+                                                                        <form method="post">
+                                                                            <input name="id_lapor" value="<?php echo $d_lapor['id_lapor']; ?>" hidden>
+                                                                            <input class="btn btn-warning btn-sm" type="submit" name="ubah_status" value="CEK">
+                                                                            <input class="btn btn-primary btn-sm" type="submit" name="ubah_status" value="PROSES">
+                                                                            <input class="btn btn-success btn-sm" type="submit" name="ubah_status" value="SELESAI">
+                                                                        </form>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Kembali</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+
+                                            <!-- tombol ubah lapor -->
                                             <a href="#" class="btn btn-primary btn-sm" title="Ubah Akun" data-toggle="modal" data-target="#ubah_<?php echo $d_lapor['id_lapor']; ?>">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="" class="btn btn-danger btn-sm" title="Hapus Akun">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
 
-                                            <!-- modal ubah akun -->
+                                            <!-- modal ubah lapor -->
                                             <div class="modal fade" id="ubah_<?php echo $d_lapor['id_lapor']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
-                                                        <form class="form-group" method="POST">
+                                                        <form class="form-group" method="POST" enctype="multipart/form-data">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="staticBackdropLabel">Ubah Lapor</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -249,55 +371,85 @@ if (isset($_POST['tambah_lapor'])) {
                                                             </div>
                                                             <div class="modal-body">
                                                                 <?php
-                                                                $sql_lapor = "SELECT * FROM tb_lapor WHERE id_lapor = '" . $d_lapor['id_lapor'] . "'";
+                                                                $sql_lapor_ubah = "SELECT * FROM tb_lapor WHERE id_lapor = '" . $d_lapor['id_lapor'] . "'";
 
-                                                                $q_lapor = $conn->query($sql_lapor);
-                                                                $d_lapor = $q_lapor->fetch(PDO::FETCH_ASSOC);
+                                                                $q_lapor_ubah = $conn->query($sql_lapor_ubah);
+                                                                $d_lapor_ubah = $q_lapor_ubah->fetch(PDO::FETCH_ASSOC);
                                                                 ?>
                                                                 <b>Nama Pelapor : </b><br>
-                                                                <input class="form-control" type="text" name="username_user" value="<?php echo $d_lapor['nama_lapor']; ?>" required><br>
+                                                                <input class="form-control" type="text" name="nama_lapor" value="<?php echo $d_lapor_ubah['nama_lapor']; ?>" required><br>
                                                                 <b>Judul Laporan : </b><br>
-                                                                <input class="form-control" type="text" name="username_user" value="<?php echo $d_lapor['judul_lapor']; ?>" required><br>
-                                                                <b>Dekripsi Laporan : </b><br>
-                                                                <textarea class="form-control" name="deskripsi_lapor"><?php echo $d_lapor['deskripsi_lapor']; ?></textarea><br>
+                                                                <input class="form-control" type="text" name="judul_lapor" value="<?php echo $d_lapor_ubah['judul_lapor']; ?>" required><br>
+                                                                <b>Deskripsi Laporan : </b><br>
+                                                                <textarea class="form-control" name="deskripsi_lapor"><?php echo $d_lapor_ubah['deskripsi_lapor']; ?></textarea><br>
                                                                 <b>Link <i class="font-weight-bold">ERROR</i> : </b><br>
-                                                                <textarea class="form-control" name="link_lapor"><?php echo $d_lapor['link_lapor']; ?></textarea><br>
+                                                                <textarea class="form-control" name="link_lapor"><?php echo $d_lapor_ubah['link_lapor']; ?></textarea><br>
+                                                                <i>Screenshot ERROR : </i><br>
+                                                                <input type="file" name="file_lapor" accept="image/png, image/gif, image/jpeg, image/jpg"><br><br>
                                                                 <b>Level : </b><br>
                                                                 <?php
                                                                 $level1 = '';
                                                                 $level2 = '';
                                                                 $level3 = '';
-                                                                if ($d_lapor['level_lapor'] == 'rendah') {
+                                                                if ($d_lapor_ubah['level_lapor'] == 'rendah') {
                                                                     $level1 = 'checked';
-                                                                } elseif ($d_lapor['level_lapor'] == 'sedang') {
+                                                                } elseif ($d_lapor_ubah['level_lapor'] == 'sedang') {
                                                                     $level2 = 'checked';
-                                                                } elseif ($d_lapor['level_lapor'] == 'tinggi') {
+                                                                } elseif ($d_lapor_ubah['level_lapor'] == 'tinggi') {
                                                                     $level3 = 'checked';
                                                                 }
                                                                 ?>
                                                                 <div class="custom-control custom-radio text-uppercase">
-                                                                    <input type="radio" id="level1" name="level_lapor" value="rendah" class="custom-control-input" required <?php echo $level1; ?>>
-                                                                    <label class="custom-control-label" for="level1">
+                                                                    <input type="radio" id="1<?php echo $d_lapor['id_lapor']; ?>" name="level_lapor" value="rendah" class="custom-control-input" required <?php echo $level1; ?>>
+                                                                    <label class="custom-control-label" for="1<?php echo $d_lapor['id_lapor']; ?>">
                                                                         <span class="badge badge-success text-md">Rendah</span>
                                                                     </label>
                                                                 </div>
                                                                 <div class="custom-control custom-radio text-uppercase">
-                                                                    <input type="radio" id="level2" name="level_lapor" value="sedang" class="custom-control-input" required <?php echo $level2; ?>>
-                                                                    <label class="custom-control-label" for="level2">
+                                                                    <input type="radio" id="2<?php echo $d_lapor['id_lapor']; ?>" name="level_lapor" value="sedang" class="custom-control-input" <?php echo $level2; ?>>
+                                                                    <label class="custom-control-label" for="2<?php echo $d_lapor['id_lapor']; ?>">
                                                                         <span class="badge badge-warning text-md">Sedang</span>
                                                                     </label>
                                                                 </div>
                                                                 <div class="custom-control custom-radio text-uppercase">
-                                                                    <input type="radio" id="level3" name="level_lapor" value="tinggi" class="custom-control-input" required <?php echo $level3; ?>>
-                                                                    <label class="custom-control-label" for="level3">
+                                                                    <input type="radio" id="3<?php echo $d_lapor['id_lapor']; ?>" name="level_lapor" value="tinggi" class="custom-control-input" <?php echo $level3; ?>>
+                                                                    <label class="custom-control-label" for="3<?php echo $d_lapor['id_lapor']; ?>">
                                                                         <span class="badge badge-danger text-md">Tinggi</span>
                                                                     </label>
                                                                 </div><br>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <input name="id_lapor" value="<?php echo $d_akun['id_lapor']; ?>" hidden>
+                                                                <input name="id_lapor" value="<?php echo $d_lapor_ubah['id_lapor']; ?>" hidden>
                                                                 <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Kembali</button>
-                                                                <button type="submit" class="btn btn-primary btn-sm" name="ubah_user">Ubah</button>
+                                                                <button type="submit" class="btn btn-primary btn-sm" name="ubah_lapor">Ubah</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <!-- tombol ubah lapor -->
+                                            <a href="#" class="btn btn-danger btn-sm" title="Hapus Lapor" data-toggle="modal" data-target="#hapus_<?php echo $d_lapor['id_lapor']; ?>">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+
+                                            <!-- modal ubah lapor -->
+                                            <div class="modal fade" id="hapus_<?php echo $d_lapor['id_lapor']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form class="form-group" method="POST">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticBackdropLabel">Yakin Hapus Lapor ?</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input name="id_lapor" value="<?php echo $d_lapor['id_lapor']; ?>" hidden>
+                                                                <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Kembali</button>
+                                                                <button type="submit" class="btn btn-danger btn-sm" name="hapus_lapor">hapus</button>
                                                             </div>
                                                         </form>
                                                     </div>

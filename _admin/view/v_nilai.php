@@ -89,7 +89,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
         sikap = '" . $_POST['sikap'] . "'
         WHERE id_praktikan_detail = '" . $_POST['id_praktikan_detail'] . "'
     ";
-     echo $sql_ubah_data_praktikan . "<br>";
+    echo $sql_ubah_data_praktikan . "<br>";
     $conn->query($sql_ubah_data_praktikan);
     echo "
         <script type='text/javascript'>
@@ -214,19 +214,19 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                 <div class="card-header align-items-center bg-gray-200">
                                     <div class="row" style="font-size: small;">
                                         <br><br>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2 my-auto">
                                             <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2 my-auto">
                                             <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                         </div>
-                                        
-                                        <div class="col-sm-2">
+
+                                        <div class="col-sm-2 my-auto">
                                             <b>TANGGAL SELESAI : </b>
                                             <br>
                                             <?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                         </div>
-                                        <div class="col-sm-2 text-center">
+                                        <div class="col-sm-2 text-center my-auto">
                                             <b>STATUS : </b>
                                             <a href="#" data-toggle="modal" data-target="#info_status">
                                                 <i class="fas fa-info-circle" style="font-size: 14px;"></i>
@@ -267,14 +267,14 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                             }
                                             ?>
                                         </div>
-                                        <div class="col-sm-2 text-center">
+                                        <div class="col-sm-2 text-center my-auto">
                                             <!-- tombol rincian -->
                                             <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                                 <i class="fas fa-info-circle"> </i>
                                                 Rincian
                                             </button>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2 text-center my-auto">
                                             <!-- <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="arsip">
                                                 <i class="fas fa-archive"> </i>
                                                 Arsipkan
@@ -409,7 +409,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                             <th scope="col">PENYULUHAN</th>
                                                             <th scope="col">PRESENTASI</th>
                                                             <th scope="col">SIKAP</th>
-                                                            
+
                                                             <th scope="col"></th>
                                                         </tr>
                                                     </thead>
@@ -452,27 +452,63 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                                         $d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC);
                                                                                         // var_dump($d_data_praktikan['ip']);
                                                                                         ?>
-                                                                                        
-                                                                                            IP : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="ip" value="<?php if(is_null($d_data_praktikan['ip'])){ echo 0; } else{ echo $d_data_praktikan['ip'];} ?>" required><br>
-                                                                                            SPTK : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="sptk" value="<?php if(is_null($d_data_praktikan['sptk'])){ echo 0; } else{  echo $d_data_praktikan['sptk']; } ?>" required><br>
-                                                                                            Prepost : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="prepost" value="<?php if(is_null($d_data_praktikan['prepost'])){ echo 0; } else{  echo $d_data_praktikan['prepost']; } ?>" required><br>
-                                                                                            Dokep : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="dokep" value="<?php if(is_null($d_data_praktikan['dokep'])){ echo 0; } else{  echo $d_data_praktikan['dokep']; } ?>" required><br>
-                                                                                            Komter : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="komter" value="<?php if(is_null($d_data_praktikan['komter'])){ echo 0; } else{  echo $d_data_praktikan['komter']; } ?>" required><br>
-                                                                                            Tak <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="tak" value="<?php if(is_null($d_data_praktikan['tak'])){ echo 0; } else{  echo $d_data_praktikan['tak']; } ?>" required><br>
-                                                                                            Penyuluhan <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="penyuluhan" value="<?php if(is_null($d_data_praktikan['penyuluhan'])){ echo 0; } else{  echo $d_data_praktikan['penyuluhan'];} ?>" required><br>
-                                                                                            Presentasi <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="presentasi" value="<?php if(is_null($d_data_praktikan['presentasi'])){ echo 0; } else{  echo $d_data_praktikan['presentasi']; } ?>" required><br>
-                                                                                            Sikap <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="sikap" value="<?php if(is_null($d_data_praktikan['sikap'])){ echo 0; } else{  echo $d_data_praktikan['sikap'];} ?>" required><br>
-                                                                                       
-                                                                                           </div>
+
+                                                                                        IP : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="ip" value="<?php if (is_null($d_data_praktikan['ip'])) {
+                                                                                                                                                        echo 0;
+                                                                                                                                                    } else {
+                                                                                                                                                        echo $d_data_praktikan['ip'];
+                                                                                                                                                    } ?>" required><br>
+                                                                                        SPTK : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="sptk" value="<?php if (is_null($d_data_praktikan['sptk'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['sptk'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        Prepost : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="prepost" value="<?php if (is_null($d_data_praktikan['prepost'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['prepost'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        Dokep : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="dokep" value="<?php if (is_null($d_data_praktikan['dokep'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['dokep'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        Komter : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="komter" value="<?php if (is_null($d_data_praktikan['komter'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['komter'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        Tak <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="tak" value="<?php if (is_null($d_data_praktikan['tak'])) {
+                                                                                                                                                        echo 0;
+                                                                                                                                                    } else {
+                                                                                                                                                        echo $d_data_praktikan['tak'];
+                                                                                                                                                    } ?>" required><br>
+                                                                                        Penyuluhan <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="penyuluhan" value="<?php if (is_null($d_data_praktikan['penyuluhan'])) {
+                                                                                                                                                                echo 0;
+                                                                                                                                                            } else {
+                                                                                                                                                                echo $d_data_praktikan['penyuluhan'];
+                                                                                                                                                            } ?>" required><br>
+                                                                                        Presentasi <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="presentasi" value="<?php if (is_null($d_data_praktikan['presentasi'])) {
+                                                                                                                                                                echo 0;
+                                                                                                                                                            } else {
+                                                                                                                                                                echo $d_data_praktikan['presentasi'];
+                                                                                                                                                            } ?>" required><br>
+                                                                                        Sikap <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="sikap" value="<?php if (is_null($d_data_praktikan['sikap'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['sikap'];
+                                                                                                                                                        } ?>" required><br>
+
+                                                                                    </div>
                                                                                     <div class="modal-footer">
                                                                                         <input name="id_praktikan_detail" value="<?php echo $d_data_praktikan['id_praktikan_detail']; ?>" hidden>
                                                                                         <button class="btn btn-primary btn-sm" type="submit" name="ubah_data_praktikan">UBAH</button>
@@ -529,6 +565,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                 </div>
                             </div>
                         </div>
+                        <hr>
                     <?php
                     }
                 } else {

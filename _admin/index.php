@@ -270,7 +270,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
 					} elseif (isset($_GET['lapor'])) {
-						include "_admin/view/v_lapor.php";
+						if (isset($_GET['dtl'])) {
+							include "_admin/view/v_lapor_detail.php";
+						} else {
+							include "_admin/view/v_lapor.php";
+						}
 					} elseif (isset($_GET['mes'])) {
 						include "_admin/view/v_mess.php";
 					} elseif (isset($_GET['mou'])) {

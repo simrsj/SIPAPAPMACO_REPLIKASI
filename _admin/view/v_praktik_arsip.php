@@ -80,19 +80,39 @@ if (isset($_POST['restore_praktik'])) {
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <span class="badge badge-warning text-md">DAFTAR</span> : Sudah Melakukan Pendaftaran, dilanjutkan Pilih Harga<br><br>
-                                                                <span class="badge badge-warning text-md">HARGA</span> : Harga Sudah Dipilih, dilanjutkan Pemilihan Mess Oleh Admin<br><br>
-                                                                <span class="badge badge-primary text-md">MESS</span> : Mess Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses Pembayaran <br><br>
-                                                                <span class="badge badge-warning text-md">PEMBAYARAN</span> : Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
-                                                                <span class="badge badge-success text-md">AKTIF</span> : Pembayaran Sudah terverifikasi oleh Admin, Pendaftaran Selesai <br><br>
-                                                                <span class="badge badge-danger text-md">DITOLAK</span> : Pembayaran ditolak oleh Admin, revisi pembayaran<br><br>
-                                                                <span class="badge badge-dark text-md">SELESAI</span> : Praktikan Sudah Selesai
+                                                            <div class="modal-body text-center">
+                                                                <span class="badge badge-warning text-md">DAFTAR</span> <br>
+                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih Harga<br><br>
+                                                                <span class="badge badge-warning text-md">HARGA</span><br>
+                                                                Harga Sudah Dipilih, dilanjutkan Validasi Data Pendaftaran dan Harga serta Pemilihan Mess Oleh Admin<br><br>
+                                                                <span class="badge badge-primary text-md">MESS</span><br>
+                                                                Mess Sudah didaftarkan oleh Admin dan Sudah Memvalidasi Data Daftar dan Harga, dilanjutkan Melakukan Proses Pembayaran.
+                                                                <?php
+                                                                if ($d_praktik['status_cek_praktik'] == 'MESS') {
+                                                                ?>
+                                                                    <a href="./_print/p_praktik_invoice.php?id=<?php $d_praktik['id_praktik']; ?>" target="_blank" class="text-primary text-uppercase font-weight-bold">
+                                                                        <b>CEK INVOICE</b>
+                                                                    </a>
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <div class="text-primary font-weight-bold">CEK INVOICE</div>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                                <br>
+                                                                <span class="badge badge-warning text-md">PEMBAYARAN</span><br>
+                                                                Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
+                                                                <span class="badge badge-danger text-md">DITOLAK</span><br>
+                                                                Pembayaran ditolak oleh Admin, <div class="text-danger font-weight-bold">CEK KETERANGAN</div><br>
+                                                                <span class="badge badge-success text-md">AKTIF</span><br>
+                                                                Pembayaran Sudah terverifikasi oleh Admin, Pendaftaran Selesai <br><br>
+                                                                <span class="badge badge-dark text-md">SELESAI</span><br> Praktikan Sudah Selesai<br><br>
+                                                                <span class="badge badge-danger text-md">ERROR</span><br> Terjadi kesalahan sistem, <br><a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <br>
                                                 <?php
                                                 if ($d_praktik['status_cek_praktik'] == "DAFTAR") {
@@ -117,7 +137,30 @@ if (isset($_POST['restore_praktik'])) {
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "DITOLAK") {
                                                 ?>
-                                                    <span class="badge badge-danger text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <a href="#" class="badge badge-danger text-md" data-toggle="modal" data-target="#ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
+                                                        KET. <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                    </a>
+
+                                                    <!-- Modal Pembayaran Diterima-->
+                                                    <div class="modal fade text-left" id="ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content text-lg text-center">
+                                                                <div class="modal-header">
+                                                                    <h4>Keterangan Penolakan</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <?php echo $d_praktik['ket_tolak_praktik']; ?>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "SELESAI") {
+                                                ?>
+                                                    <span class="badge badge-secondary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                                 <?php
                                                 } else {
                                                 ?>

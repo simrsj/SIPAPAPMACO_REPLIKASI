@@ -30,23 +30,23 @@
 <?php
 if (isset($_POST['simpan_bayar'])) {
 
-    $no_id_bayar = 0;
-    while ($d_bayar = $conn->query("SELECT id_bayar FROM tb_bayar ORDER BY id_bayar ASC")->fetch(PDO::FETCH_ASSOC)) {
-        if ($no_id_bayar != $d_bayar[0]) {
-            $no_id_bayar = $d_bayar[0] + 1;
-            break;
-        } elseif ($no_id_bayar == 0) {
-            $no_id_bayar;
+
+    $no = 1;
+    $sql = "SELECT id_bayar FROM tb_bayar ORDER BY id_bayar ASC";
+    $q = $conn->query($sql);
+    while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
+        if ($no != $d['id_bayar']) {
+            $no = $d['id_bayar'] + 1;
             break;
         }
-        $no_id_bayar = $d_bayar[0] + 1;
+        $no++;
     }
 
     //alamat file surat masuk
     $alamat_unggah = "./_file/bayar";
 
     //ubah Nama File
-    $_FILES['file_bayar']['name'] = "bayar_" . $no_id_bayar . "_" . $_POST['id_praktik'] . "-" . date('Y-m-d') . ".pdf";
+    $_FILES['file_bayar']['name'] = "bayar_" . $no . "_" . $_POST['id_praktik'] . "-" . date('Y-m-d') . ".pdf";
 
     // echo "<pre>";
     // print_r($_FILES);
@@ -91,7 +91,7 @@ if (isset($_POST['simpan_bayar'])) {
                 tgl_input_bayar, 
                 file_bayar
                 ) VALUE (
-                    '" . $no_id_bayar . "',
+                    '" . $no . "',
                     '" . $_POST['id_praktik'] . "',
                     '" . $_POST['atas_nama_bayar'] . "',
                     '" . $_POST['no_bayar'] . "',        
@@ -100,7 +100,7 @@ if (isset($_POST['simpan_bayar'])) {
                     '" . $link_file_bayar . "'
                 )";
             // echo $sql_insert_bayar . "<br>";
-            $conn->query($sql_insert_bayar);
+            // $conn->query($sql_insert_bayar);
 
 
             //SQL ubah status praktik
@@ -113,6 +113,7 @@ if (isset($_POST['simpan_bayar'])) {
 
             echo "
                 <script>
+                    alert('Data Pembayaran Sudah Disimpan');
                     document.location.href = '?prk';
                 </script>
             ";

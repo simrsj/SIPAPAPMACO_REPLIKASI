@@ -71,7 +71,16 @@
                                 <td><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?></td>
                                 <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
                                 <td><?php echo "Rp " . number_format($total_harga, 0, '.', ','); ?></td>
-                                <td><?php echo $d_praktik['status_cek_praktik']; ?></td>
+                                <td>
+                                    <?php
+                                    if ($d_praktik['status_cek_praktik'] == 'AKTIF') {
+                                        $badge = "badge badge-success text-md";
+                                    } else {
+                                        $badge = "badge badge-secondary text-md";
+                                    }
+                                    ?>
+                                    <span class="<?php echo $badge; ?>"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                </td>
                                 <td>
                                     <a title="Cetak Invoice" target="_blank" class="btn btn-warning btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>">
                                         <i class="fas fa-print"></i>

@@ -15,15 +15,6 @@ function tanggal($tanggal)
 		'November',
 		'Desember'
 	);
-	$hari = array(
-		1 =>   'Senin',
-		'Selasa',
-		'Rabu',
-		'Kamis',
-		"Jum'at",
-		'Sabtu',
-		'Minggu'
-	);
 	$pecahkan = explode('-', $tanggal);
 
 	// variabel pecahkan 0 = tanggal

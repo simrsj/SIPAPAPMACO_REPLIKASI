@@ -37,7 +37,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                 ORDER BY nama_harga_jenis ASC, nama_harga ASC 
                 ";
 
-                // echo $sql_harga_jurusan . "<br>";
+                echo $sql_harga_jurusan . "<br>";
                 $q_harga_jurusan = $conn->query($sql_harga_jurusan);
                 $r_harga_jurusan = $q_harga_jurusan->rowCount();
 
@@ -552,9 +552,10 @@ if (isset($_POST['pilih_harga'])) {
     SET status_cek_praktik = 'HARGA'
     WHERE id_praktik = " . $d_praktik['id_praktik'];
     $conn->query($sql_ubah_status_praktik);
-?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
+    echo "
+    <script type='text/javascript'>
+        alert('Data Harga Sudah Disimpan');
+        document.location.href = '?prk';
     </script>
-<?php
+    ";
 }

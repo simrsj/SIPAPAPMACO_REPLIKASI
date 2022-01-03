@@ -1,60 +1,16 @@
-<div class="p-3">
-    <div class="text-center">
-        <div class="h5 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA PRAKTIKAN</span></div>
-    </div>
-    <hr>
+<?php
 
-    <?php
-    $q_logo = $conn->query("SELECT logo_institusi FROM tb_institusi WHERE id_institusi ='" . 20 . "'");
-    $d_logo = $q_logo->fetch(PDO::FETCH_ASSOC);
-    $link_logo_institusi = $d_logo['logo_institusi'];
-    echo $link_logo_institusi;
-    $sql_praktik = "SELECT * FROM tb_praktik 
-                    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                    WHERE tb_praktik.status_cek_praktik  = 'AKTIF' AND tb_praktik.status_praktik = 'Y'
-                    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
-    $q_praktik = $conn->query($sql_praktik);
-    $r_praktik = $q_praktik->rowCount();
-    $round_col = ceil(12 / $r_praktik);
 
-    // echo $cal . "-" . $r_praktik . "-" . $round_col . "<br>";
-    ?>
+$sql_u_praktik = "UPDATE `tb_praktik` SET status_cek_praktik = 'SELESAI' WHERE id_praktik = '" . 3 . "'";
+$sql_s_praktik = "SELECT * FROM tb_praktik
+    JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik
+    JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess
+    WHERE tb_praktik.id_praktik = '" . 3 . "'";
 
-    <?php
-    $no = 1;
-    while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-        if ($no == 1) {
-            echo "<div class='row'>";
-        }
-    ?>
-        <div class="col-md-<?php echo $round_col; ?> text-center">
-            <b>
-                <?php
-                if ($d_praktik['akronim_institusi'] == NULL) {
-                    echo $d_praktik['nama_institusi'];
-                } else {
-                    echo $d_praktik['akronim_institusi'];
-                }
-                ?>
-            </b><br>
-            <?php
-            if ($d_praktik['logo_institusi'] == '') {
-                $link_logo_institusi = "./_img/logo_institusi/default.png";
-            } else {
-                $link_logo_institusi = $d_praktik['logo_institusi'];
-            }
-            ?>
-            <img src="<?php echo $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="100px" height="100px"><br>
-            <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
-            <?php echo $d_praktik['jumlah_praktik']; ?> Orang
-        </div>
-    <?php
-        if ($no == 1) {
-            "</div>";
-        }
-        $no++;
-    }
-    ?>
-    <hr />
-</div>
+$q = $conn->query($sql_s_praktik);
+$d = $q->fetch(PDO::FETCH_ASSOC);
+echo $d['kapasitas_terisi_mess'] . "-" . $d['jumlah_praktik'];
+$selisih = $d['kapasitas_terisi_mess'] - $d['jumlah_praktik'];
+$sql_u_mess = "UPDATE `tb_mess` SET kapasitas_terisi_mess = '" . $selisih . "' WHERE id_praktik = '" . 3 . "'";
+echo $sql_u_praktik . "<br>";
+echo $sql_u_mess . "<br>";
