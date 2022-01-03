@@ -12,7 +12,8 @@
             <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
             <img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="2%">
             <img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="3%">
-            DASHBOARD PRAKTIKAN DAN MESS - RS JIWA PROVINSI JAWA BARAT <div id="kanan2"><? echo date("d M Y"); ?>, <span id="jam">asdasdasd</span>
+            DASHBOARD PRAKTIKAN DAN MESS - RS JIWA PROVINSI JAWA BARAT 
+            <div id="kanan2"><?php echo date("d M Y"); ?>, <span id="jam"></span>
             </div>
           </a>
         </li>
@@ -160,4 +161,5 @@
     var h = formattedNumber = ("0" + d.getHours()).slice(-2);
     span.textContent = h + ":" + m + ":" + s;
   }
+  setInterval(time, 1000);
 </script>
