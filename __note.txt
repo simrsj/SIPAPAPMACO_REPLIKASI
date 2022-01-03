@@ -12,7 +12,7 @@
 
 git status
 git add .
-git commit -m "Data Lapor, ->Data Jadwal ->Data Harga Kedokteran"
+git commit -m "Data Lapor , ->Data Jadwal ->Data Harga Kedokteran"
 git pull
 git push
  
