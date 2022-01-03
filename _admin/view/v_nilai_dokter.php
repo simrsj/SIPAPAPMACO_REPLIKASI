@@ -3,7 +3,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     $conn->query("UPDATE `tb_praktik` SET status_praktik = 'T' WHERE id_praktik = " . $_POST['id_praktik']);
     echo "
         <script type='text/javascript'>
-            document.location.href = '?nil';
+            document.location.href = '?nildok';
         </script>
     ";
 } elseif (isset($_POST['tambah_praktikan'])) {
@@ -24,7 +24,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     }
     echo "
         <script type='text/javascript'>
-            document.location.href = '?nil';
+            document.location.href = '?nildok';
         </script>
     ";
 } elseif (isset($_POST['hapus_praktikan'])) {
@@ -41,7 +41,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     $conn->query($sql_ubah_status_praktikan);
     echo "
         <script type='text/javascript'>
-            document.location.href = '?nil';
+            document.location.href = '?nildok';
         </script>
     ";
 } elseif (isset($_POST['tambah_data_praktikan'])) {
@@ -73,27 +73,31 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     $conn->query($sql_ubah_status_praktikan);
     echo "
         <script type='text/javascript'>
-            document.location.href = '?nil';
+            document.location.href = '?nildok';
         </script>
     ";
 } elseif (isset($_POST['ubah_data_praktikan'])) {
-    $sql_ubah_data_praktikan = "UPDATE tb_nilai SET
-        ip = '" . $_POST['ip'] . "',
-        sptk = '" . $_POST['sptk'] . "',
-        prepost = '" . $_POST['prepost'] . "',
-        dokep = '" . $_POST['dokep'] . "',
-        komter = '" . $_POST['komter'] . "',
-        tak = '" . $_POST['tak'] . "',
-        penyuluhan = '" . $_POST['penyuluhan'] . "',
-        presentasi = '" . $_POST['presentasi'] . "',
-        sikap = '" . $_POST['sikap'] . "'
+    $sql_ubah_data_praktikan = "UPDATE tb_nilai_dokter SET
+        css1 = '" . $_POST['css1'] . "',
+        css2 = '" . $_POST['css2'] . "',
+        bst1 = '" . $_POST['bst1'] . "',
+        bst2 = '" . $_POST['bst2'] . "',
+        bst3 = '" . $_POST['bst3'] . "',
+        bst4 = '" . $_POST['bst4'] . "',
+        bst5 = '" . $_POST['bst5'] . "',
+        bst6 = '" . $_POST['bst6'] . "',
+        crs1 = '" . $_POST['crs1'] . "',
+        crs2 = '" . $_POST['crs2'] . "',
+        minicex = '" . $_POST['minicex'] . "',
+        ujian_akhir = '" . $_POST['ujian_akhir'] . "',
+        keterangan = '" . $_POST['keterangan'] . "'
         WHERE id_praktikan_detail = '" . $_POST['id_praktikan_detail'] . "'
     ";
      echo $sql_ubah_data_praktikan . "<br>";
     $conn->query($sql_ubah_data_praktikan);
     echo "
         <script type='text/javascript'>
-            document.location.href = '?nil';
+            document.location.href = '?nildok';
         </script>
     ";
 } elseif (isset($_POST['hapus_data_praktikan'])) {
@@ -117,7 +121,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     }
     echo "
         <script type='text/javascript'>
-            document.location.href = '?nil';
+            document.location.href = '?nildok';
         </script>
     ";
 } else {
@@ -125,7 +129,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Daftar Nilai Keperawatan</h1>
+                <h1 class="h3 mb-2 text-gray-800">Daftar Nilai Kedokteran</h1>
             </div>
             <div class="col-lg-2">
                 <!-- <a href="#" data-toggle="modal" data-target="#tambah_praktikan" class="btn btn-outline-success btn-sm">
@@ -198,7 +202,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                     JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    WHERE tb_praktik.status_praktik = 'Y' 
+                    WHERE tb_praktik.status_praktik = 'Y' and tb_praktik.id_jurusan_pdd_jenis =1
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                 $q_praktik = $conn->query($sql_praktik);
@@ -387,7 +391,9 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                             $sql_praktikan_detail = "SELECT * FROM tb_praktikan
                                                     JOIN tb_praktikan_detail ON tb_praktikan.id_praktikan = tb_praktikan_detail.id_praktikan
                                                     JOIN tb_nilai on tb_nilai.id_praktikan_detail = tb_praktikan_detail.id_praktikan_detail
-                                                    WHERE tb_praktikan_detail.id_praktikan = " . $d_praktik['id_praktikan'] . "
+                                                    JOIN tb_praktik on tb_praktik.id_praktik = tb_praktikan.id_praktik
+                                                    WHERE tb_praktikan_detail.id_praktikan = " . $d_praktik['id_praktikan'] . " 
+                                                    -- AND id_jurusan_pdd_jenis = 1
                                                     ORDER BY nama_praktikan_detail ASC";
                                             // echo $sql_praktikan_detail . "<br>";
                                             $q_praktikan_detail = $conn->query($sql_praktikan_detail);
@@ -400,15 +406,19 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                             <th scope="col">No</th>
                                                             <th scope="col">NO ID</th>
                                                             <th scope="col">Nama Praktikan</th>
-                                                            <th scope="col">IP</th>
-                                                            <th scope="col">SPTK</th>
-                                                            <th scope="col">PREPOST</th>
-                                                            <th scope="col">DOKEP</th>
-                                                            <th scope="col">KOMTER</th>
-                                                            <th scope="col">TAK</th>
-                                                            <th scope="col">PENYULUHAN</th>
-                                                            <th scope="col">PRESENTASI</th>
-                                                            <th scope="col">SIKAP</th>
+                                                            <th scope="col">CSS1</th>
+                                                            <th scope="col">CSS2</th>
+                                                            <th scope="col">BST1</th>
+                                                            <th scope="col">BST2</th>
+                                                            <th scope="col">BST3</th>
+                                                            <th scope="col">BST4</th>
+                                                            <th scope="col">BST5</th>
+                                                            <th scope="col">BST6</th>
+                                                            <th scope="col">CRS1</th>
+                                                            <th scope="col">CRS2</th>
+                                                            <th scope="col">MINICEX</th>
+                                                            <th scope="col">UJIAN AKHIR</th>
+                                                            <th scope="col">KETERANGAN</th>
                                                             
                                                             <th scope="col"></th>
                                                         </tr>
@@ -423,15 +433,19 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                 <th scope="row"><?php echo $no; ?></th>
                                                                 <td><?php echo $d_praktikan_detail['no_id_praktikan_detail']; ?></td>
                                                                 <td><?php echo $d_praktikan_detail['nama_praktikan_detail']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['ip']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['sptk']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['prepost']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['dokep']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['komter']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['tak']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['penyuluhan']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['presentasi']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['sikap']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['css1']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['css2']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['bst1']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['bst2']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['bst3']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['bst4']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['bst5']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['bst6']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['crs1']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['crs2']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['minicex']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['ujian_akhir']; ?></td>
+                                                                <td><?php echo $d_praktikan_detail['keterangan']; ?></td>
                                                                 <td>
 
                                                                     <a title="Ubah Data Praktikan" class="btn btn-primary btn-sm" href='#' data-toggle='modal' data-target='#u_dp_m<?php echo $d_praktikan_detail['id_praktikan_detail']; ?>'>
@@ -443,34 +457,42 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                             <div class="modal-content">
                                                                                 <form class="form-group" method="post">
                                                                                     <div class="modal-header">
-                                                                                        <h4>MASUKAN DATA NILAI ?</h4>
+                                                                                        <h4>MASUKAN DATA NILAI DOKTER ?</h4>
                                                                                     </div>
                                                                                     <div class="modal-body">
                                                                                         <?php
-                                                                                        $sql_data_praktikan = "SELECT * FROM tb_nilai WHERE id_praktikan_detail = '" . $d_praktikan_detail['id_praktikan_detail'] . "'";
+                                                                                        $sql_data_praktikan = "SELECT * FROM tb_nilai_dokter WHERE id_praktikan_detail = '" . $d_praktikan_detail['id_praktikan_detail'] . "'";
                                                                                         $q_data_praktikan = $conn->query($sql_data_praktikan);
                                                                                         $d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC);
                                                                                         // var_dump($d_data_praktikan['ip']);
                                                                                         ?>
                                                                                         
-                                                                                            IP : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="ip" value="<?php if(is_null($d_data_praktikan['ip'])){ echo 0; } else{ echo $d_data_praktikan['ip'];} ?>" required><br>
-                                                                                            SPTK : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="sptk" value="<?php if(is_null($d_data_praktikan['sptk'])){ echo 0; } else{  echo $d_data_praktikan['sptk']; } ?>" required><br>
-                                                                                            Prepost : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="prepost" value="<?php if(is_null($d_data_praktikan['prepost'])){ echo 0; } else{  echo $d_data_praktikan['prepost']; } ?>" required><br>
-                                                                                            Dokep : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="dokep" value="<?php if(is_null($d_data_praktikan['dokep'])){ echo 0; } else{  echo $d_data_praktikan['dokep']; } ?>" required><br>
-                                                                                            Komter : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="komter" value="<?php if(is_null($d_data_praktikan['komter'])){ echo 0; } else{  echo $d_data_praktikan['komter']; } ?>" required><br>
-                                                                                            Tak <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="tak" value="<?php if(is_null($d_data_praktikan['tak'])){ echo 0; } else{  echo $d_data_praktikan['tak']; } ?>" required><br>
-                                                                                            Penyuluhan <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="penyuluhan" value="<?php if(is_null($d_data_praktikan['penyuluhan'])){ echo 0; } else{  echo $d_data_praktikan['penyuluhan'];} ?>" required><br>
-                                                                                            Presentasi <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="presentasi" value="<?php if(is_null($d_data_praktikan['presentasi'])){ echo 0; } else{  echo $d_data_praktikan['presentasi']; } ?>" required><br>
-                                                                                            Sikap <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="sikap" value="<?php if(is_null($d_data_praktikan['sikap'])){ echo 0; } else{  echo $d_data_praktikan['sikap'];} ?>" required><br>
+                                                                                            css1 : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="css1" value="<?php if(is_null($d_data_praktikan['css1'])){ echo 0; } else{ echo $d_data_praktikan['css1'];} ?>" required><br>
+                                                                                            css2 : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="css2" value="<?php if(is_null($d_data_praktikan['css2'])){ echo 0; } else{  echo $d_data_praktikan['css2']; } ?>" required><br>
+                                                                                            bst1 : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="bst1" value="<?php if(is_null($d_data_praktikan['bst1'])){ echo 0; } else{  echo $d_data_praktikan['bst1']; } ?>" required><br>
+                                                                                            bst2 : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="bst2" value="<?php if(is_null($d_data_praktikan['bst2'])){ echo 0; } else{  echo $d_data_praktikan['bst2']; } ?>" required><br>
+                                                                                            bst3 : <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="bst3" value="<?php if(is_null($d_data_praktikan['bst3'])){ echo 0; } else{  echo $d_data_praktikan['bst3']; } ?>" required><br>
+                                                                                            bst4 <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="bst4" value="<?php if(is_null($d_data_praktikan['bst4'])){ echo 0; } else{  echo $d_data_praktikan['bst4']; } ?>" required><br>
+                                                                                            bst5 <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="bst5" value="<?php if(is_null($d_data_praktikan['bst5'])){ echo 0; } else{  echo $d_data_praktikan['bst5'];} ?>" required><br>
+                                                                                            bst6 <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="bst5" value="<?php if(is_null($d_data_praktikan['bst5'])){ echo 0; } else{  echo $d_data_praktikan['bst5'];} ?>" required><br>
+                                                                                            crs1 <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="crs1" value="<?php if(is_null($d_data_praktikan['crs1'])){ echo 0; } else{  echo $d_data_praktikan['crs1'];} ?>" required><br>
+                                                                                            crs2 <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="crs2" value="<?php if(is_null($d_data_praktikan['crs2'])){ echo 0; } else{  echo $d_data_praktikan['crs2'];} ?>" required><br>
+                                                                                            minicex <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="minicex" value="<?php if(is_null($d_data_praktikan['minicex'])){ echo 0; } else{  echo $d_data_praktikan['minicex'];} ?>" required><br>
+                                                                                            Ujian Akhir <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="ujian_akhir" value="<?php if(is_null($d_data_praktikan['ujian_akhir'])){ echo 0; } else{  echo $d_data_praktikan['ujian_akhir'];} ?>" required><br>
+                                                                                            keterangan <span style="color:red">*</span><br>
+                                                                                            <input class="form-control" type="number" name="keterangan" value="<?php if(is_null($d_data_praktikan['keterangan'])){ echo 0; } else{  echo $d_data_praktikan['keterangan']; } ?>" required><br>
                                                                                        
                                                                                            </div>
                                                                                     <div class="modal-footer">
