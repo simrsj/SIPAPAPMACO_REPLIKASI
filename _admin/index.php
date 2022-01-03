@@ -55,7 +55,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<li class="nav-item">
 					<a class="nav-link" href="?nil">
 						<i class="far fa-fw fa-star"></i>
-						<span>Data Nilai</span>
+						<span>Data Nilai Keperawatan</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="?nildok">
+						<i class="far fa-fw fa-star"></i>
+						<span>Data Nilai Kedokteran</span>
 					</a>
 				</li>
 				<hr class="sidebar-divider">
@@ -229,6 +235,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_mentor.php";
 					} elseif (isset($_GET['nil'])) {
 						include "_admin/view/v_nilai.php";
+					} elseif (isset($_GET['nildok'])) {
+						include "_admin/view/v_nilai_dokter.php";
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_admin/view/v_praktik_arsip.php";
