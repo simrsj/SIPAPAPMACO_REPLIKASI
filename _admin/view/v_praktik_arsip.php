@@ -126,18 +126,48 @@ if (isset($_POST['restore_praktik'])) {
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-2">
                                                 <!-- tombol rincian -->
                                                 <a class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                                     <i class="fas fa-info-circle"></i>
                                                     Rincian
                                                 </a>
-                                                <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="Hapus">
-                                                    <i class="fas fa-trash"></i>
-                                                    Hapus Permanen
+                                            </div>
+                                            <div class="col-sm-2">
+
+                                                <!-- tombol restore  -->
+                                                <a class="btn btn-info btn-sm collapsed" data-toggle="modal" data-target="#res_<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                                    <i class="fas fa-trash-restore"></i>
                                                 </a>
 
-                                                <!-- modal arsip -->
+                                                <!-- modal restore -->
+                                                <div class="modal fade" id="res_<?php echo $d_praktik['id_praktik']; ?>">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body">
+                                                                <h5>RESTORE DATA ? :</h5>
+                                                                <b>Nama Institusi </b><br>
+                                                                <?php echo $d_praktik['nama_institusi']; ?><br>
+                                                                <b>Periode Praktik </b> : <br>
+                                                                <?php echo $d_praktik['nama_praktik']; ?>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form method="post">
+                                                                    <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
+                                                                    <input type="submit" name="restore_praktik" value="Restore" class="btn btn-info btn-sm">
+                                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- tombol hapus permanen -->
+                                                <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="Hapus">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+
+                                                <!-- modal hapus permanen -->
                                                 <div class="modal fade" id="prk_dh_<?php echo $d_praktik['id_praktik']; ?>">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">

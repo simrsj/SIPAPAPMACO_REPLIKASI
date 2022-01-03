@@ -1,5 +1,5 @@
 <body class="bg-gradient-primary">
-  <meta http-equiv="refresh" content="1000">
+  <meta http-equiv="refresh" content="10">
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,9 +12,9 @@
             <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
             <img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="2%">
             <img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="3%">
-            DASHBOARD PRAKTIKAN DAN MESS - RS JIWA PROVINSI JAWA BARAT 
-            <div id="kanan2"><?php echo date("d M Y"); ?>, <span id="jam"></span>
-            </div>
+            DASHBOARD PRAKTIKAN DAN MESS - RS JIWA PROVINSI JAWA BARAT
+            <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
+
           </a>
         </li>
       </ul>
@@ -76,7 +76,7 @@
                       $link_logo_institusi = $d_praktik['logo_institusi'];
                     }
                     ?>
-                    <img src="<?php echo $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="100px" height="100px"><br>
+                    <img src="<?php echo $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="75px" height="75px"><br>
                     <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
                     <?php echo $d_praktik['jumlah_praktik']; ?> Orang
                   </div>
@@ -111,12 +111,13 @@
               <div class="table-responsive">
                 <table class="table table-hover table-striped">
                   <thead class="table-light">
-                    <tr>
-                      <th scope='col'>No</th>
-                      <th>Nama Mess</th>
-                      <th>Nama Pemilik</th>
-                      <th>Kapasitas Total</th>
-                      <th>Kapasitas Terisi</th>
+                    <tr class="font-weight-bold text-center">
+                      <th scope='col'>NO</th>
+                      <th>NAMA MESS</th>
+                      <th>NAMA PEMILIK</th>
+                      <th>KAPASITAS TOTAL</th>
+                      <th>KAPASITAS TERISI</th>
+                      <th>KAPASITAS SISA</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -128,8 +129,9 @@
                         <td><?php echo $no; ?></td>
                         <td><?php echo $d_mess['nama_mess']; ?></td>
                         <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
-                        <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                        <td><?php echo $d_mess['kapasitas_terisi_mess']; ?></td>
+                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
+                        <td class="text-center"><?php echo $d_mess['kapasitas_terisi_mess']; ?></td>
+                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $d_mess['kapasitas_terisi_mess']; ?></td>
                         <?php
                         $no++;
                         ?>

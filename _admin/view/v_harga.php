@@ -198,6 +198,8 @@
                                             Opsional
                                         </label>
                                     </div>
+                                    Keterangan : <br>
+                                    <textarea name="ket_harga" class="form-control"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <input type="submit" class="btn btn-success btn-sm" name="tambah_harga" value="Tambah">
@@ -360,7 +362,6 @@
                                 <th scope="col">Nama Spesifikasi</th>
                                 <th scope="col">Nama Harga</th>
                                 <th scope="col">Satuan Harga</th>
-                                <th scope="col">Keterangan Harga</th>
                                 <th scope="col">Jumlah Harga</th>
                                 <th scope="col"></th>
                             </tr>
@@ -391,7 +392,6 @@
                                     <td><?php echo $d_harga['nama_spesifikasi_pdd']; ?></td>
                                     <td><?php echo $d_harga['nama_harga']; ?></td>
                                     <td><?php echo $d_harga['nama_harga_satuan']; ?></td>
-                                    <td><?php echo $d_harga['ket_harga']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga['jumlah_harga'], 0, ",", "."); ?></td>
                                     <td>
                                         <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#hrg_u_m" . $d_harga['id_harga']; ?>'>
@@ -645,6 +645,9 @@
                                                             Opsional
                                                         </label>
                                                     </div>
+
+                                                    Keteranga : <br>
+                                                    <textarea class="form-control" name="ket_harga"><?php echo $d_harga['ket_harga'] ?></textarea>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input name="cari" value="cs" hidden>
@@ -703,6 +706,7 @@ if (isset($_POST['tambah_harga'])) {
         id_jenjang_pdd,
         id_spesifikasi_pdd,
         id_harga_jenis,
+        ket_harga,
         pilih_harga
         ) VALUES (
             '" . $_POST['nama_harga'] . "',
@@ -713,6 +717,7 @@ if (isset($_POST['tambah_harga'])) {
             '" . $_POST['id_jenjang_pdd'] . "',
             '" . $_POST['id_spesifikasi_pdd'] . "',
             '" . $_POST['id_harga_jenis'] . "',
+            '" . $_POST['ket_harga'] . "',
             '" . $_POST['pilih_harga'] . "'
             )";
 
@@ -753,6 +758,7 @@ if (isset($_POST['tambah_harga'])) {
     `id_jenjang_pdd` = '" . $_POST['id_jenjang_pdd'] . "',
     `id_spesifikasi_pdd` = '" . $_POST['id_spesifikasi_pdd'] . "',
     `tgl_harga` = '" . date('Y-m-d') . "',
+    `ket_harga` = '" . $_POST['ket_harga'] . "',
     `pilih_harga` = '" . $_POST['pilih_harga'] . "'
     WHERE `tb_harga`.`id_harga` = " . $_POST['id_harga'];
     $conn->query($sql_ubah);

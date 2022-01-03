@@ -49,7 +49,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<li class="nav-item">
 					<a class="nav-link" href="?jpk">
 						<i class="far fa-fw fa-calendar"></i>
-						<span>Jadwal Praktikan</span>
+						<span>Pembimbing Praktikan</span>
 					</a>
 				</li>
 				<li class="nav-item">

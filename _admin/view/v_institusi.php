@@ -16,11 +16,11 @@
                                 Tambah Institusi :
                             </div>
                             <div class="modal-body">
-                                Nama Institusi :
-                                <input class="form-control" name="nama_institusi"><br>
+                                Nama Institusi : <span class="text-danger">*</span>
+                                <input class="form-control" name="nama_institusi" required><br>
                                 Akronim Institusi :
                                 <input class="form-control" name="akronim_institusi"><br>
-                                Logo Institusi :
+                                Logo Institusi :<br>
                                 <input type="file" name="logo_institusi" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
                             </div>
                             <div class="modal-footer">
@@ -49,6 +49,7 @@
                                 <th scope='col'>No</th>
                                 <th>Nama Institusi</th>
                                 <th>Akronim Institusi</th>
+                                <th>Logo Institusi</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -61,6 +62,32 @@
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $d_institusi['nama_institusi']; ?></td>
                                     <td><?php echo $d_institusi['akronim_institusi']; ?></td>
+                                    <td class="text-center">
+                                        <?php
+                                        if ($d_institusi['logo_institusi'] == '') {
+                                        ?>
+                                            <span class="badge badge-danger text-lg">Tidak Ada</span>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <a title="Lihat Logo" class='btn btn-info btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#see_" . $d_institusi['id_institusi']; ?>'>
+                                                <i class="fas fa-eye"></i> Lihat
+                                            </a>
+
+                                            <!-- Lihat Logo  -->
+                                            <div class="modal fade" id="<?php echo "see_" . $d_institusi['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <img src="<?php echo $d_institusi['logo_institusi']; ?>" width="250px" height="250px">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+                                    </td>
                                     <td>
                                         <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_institusi['id_institusi']; ?>'>
                                             <i class="fas fa-edit"></i>
@@ -80,12 +107,12 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <input name="id_institusi" value="<?php echo $d_institusi['id_institusi']; ?>" hidden>
-                                                        NAMA INSTITUSI :
+                                                        Nama Institusi :
                                                         <input class="form-control" name="nama_institusi" value="<?php echo $d_institusi['nama_institusi']; ?>" required><br>
-                                                        AKRONIM INSTITUSI :
+                                                        Akronim Institusi :
                                                         <i style='font-size:12px;'>Maximal 10 Karakter</i><span style="color:red">*</span>
                                                         <input class="form-control" name="akronim_institusi" value="<?php echo $d_institusi['akronim_institusi']; ?>"><br>
-                                                        LOGO INSTITUSI :<br>
+                                                        Logo Institusi:<br>
                                                         <input type="file" name="logo_institusi" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
                                                     </div>
                                                     <div class="modal-footer">
@@ -136,6 +163,7 @@
 <?php
 if (isset($_POST['ubah'])) {
 
+    //jika logo diupload
     if ($_FILES['logo_institusi']['size'] > 0) {
         //ubah Nama File PDF
         $_FILES['logo_institusi']['name'] = $_POST['id_institusi'] . "." . substr($_FILES['logo_institusi']['type'], 6);
@@ -183,6 +211,12 @@ if (isset($_POST['ubah'])) {
         }
     }
 
+    //jika logo tidak dupload ambil dari sebelumya
+    if ($_FILES['logo_institusi']['size'] == 0) {
+        $sql_institusi = "SELECT logo_institusi FROM tb_institusi WHERE id_institusi ='" . $_POST['id_institusi'] . "'";
+        $d_logo = $conn->query($sql_institusi)->fetch(PDO::FETCH_ASSOC);
+        $link_logo_institusi = $d_logo['logo_institusi'];
+    }
     $sql_ubah = "UPDATE `tb_institusi` SET 
     `nama_institusi` = '" . $_POST['nama_institusi'] . "',
     `akronim_institusi` = '" . $_POST['akronim_institusi'] . "',
@@ -198,7 +232,7 @@ if (isset($_POST['ubah'])) {
 <?php
 } elseif (isset($_POST['tambah'])) {
 
-    $no_id_institusi = 0;
+    $no_id_institusi = 1;
     while ($d_institusi = $conn->query("SELECT id_institusi FROM tb_institusi ORDER BY id_institusi ASC")->fetch(PDO::FETCH_ASSOC)) {
         if ($no_id_institusi != $d_institusi[0]) {
             $no_id_institusi = $d_institusi[0] + 1;

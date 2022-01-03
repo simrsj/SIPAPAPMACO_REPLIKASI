@@ -3,7 +3,12 @@
         <div class="h5 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA PRAKTIKAN</span></div>
     </div>
     <hr>
+
     <?php
+    $q_logo = $conn->query("SELECT logo_institusi FROM tb_institusi WHERE id_institusi ='" . 20 . "'");
+    $d_logo = $q_logo->fetch(PDO::FETCH_ASSOC);
+    $link_logo_institusi = $d_logo['logo_institusi'];
+    echo $link_logo_institusi;
     $sql_praktik = "SELECT * FROM tb_praktik 
                     JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd

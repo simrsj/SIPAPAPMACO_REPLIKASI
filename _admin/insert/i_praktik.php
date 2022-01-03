@@ -25,7 +25,6 @@ if (isset($_POST['simpan_praktik'])) {
     //alamat file surat masuk
     $alamat_unggah = "./_file/praktikan";
 
-
     //pembuatan alamat bila tidak ada
     if (!is_dir($alamat_unggah)) {
         mkdir($alamat_unggah, 0777, $rekursif = true);
@@ -105,7 +104,6 @@ if (isset($_POST['simpan_praktik'])) {
 
     $sql_insert = " INSERT INTO tb_praktik (
         id_praktik,
-        id_mou,
         id_institusi,
         nama_praktik,  
         tgl_input_praktik,
@@ -127,8 +125,7 @@ if (isset($_POST['simpan_praktik'])) {
         status_praktik
         ) VALUE (
             '" . $no_id_praktik . "',
-            '" . $_POST['id_mou'] . "',
-            '" . $_POST['id_mou'] . "',
+            '" . $_POST['id_institusi'] . "',
             '" . $_POST['nama_praktik'] . "',
             '" . date('Y-m-d') . "',
             '" . $_POST['tgl_mulai_praktik'] . "',
@@ -148,11 +145,11 @@ if (isset($_POST['simpan_praktik'])) {
             'DAFTAR',
             'Y'
         )";
-    // echo $sql_insert;
-    $conn->query($sql_insert);
+    echo $sql_insert;
+    // $conn->query($sql_insert);
 ?>
     <script type="text/javascript">
-        document.location.href = "?prk";
+        // document.location.href = "?prk";
     </script>
 <?php
 } else {
@@ -177,22 +174,25 @@ if (isset($_POST['simpan_praktik'])) {
                         <div class="col-lg-6 ">
                             Institusi : <span style="color:red">*</span><br>
                             <?php
-                            $sql_mou = "SELECT * FROM tb_mou 
-                            JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi  
-                            WHERE tb_mou.tgl_selesai_mou >= CURDATE() ORDER BY tb_institusi.nama_institusi ASC";
+                            $sql_institusi = "SELECT * FROM tb_institusi
+                            ORDER BY tb_institusi.nama_institusi ASC";
 
-                            $q_mou = $conn->query($sql_mou);
-                            $r_mou = $q_mou->rowCount();
-                            if ($r_mou > 0) {
+                            $q_institusi = $conn->query($sql_institusi);
+                            $r_institusi = $q_institusi->rowCount();
+                            if ($r_institusi > 0) {
                                 $no = 1;
                             ?>
-                                <select class='form-control' aria-label='Default select example' name='id_mou' required>
+                                <select class='js-example-placeholder-single form-control' aria-label='Default select example' name='id_institusi' required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
-                                    while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
+                                    while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <option value='<?php echo $d_mou['id_mou']; ?>'>
-                                            <?php echo $d_mou['nama_institusi']; ?>
+                                        <option value='<?php echo $d_institusi['id_institusi']; ?>'>
+                                            <?php echo $d_institusi['nama_institusi'];
+                                            if ($d_institusi['akronim_institusi'] != '') {
+                                                echo " (" . $d_institusi['akronim_institusi'] . ")";
+                                            }
+                                            ?>
                                         </option>
                                     <?php
                                         $no++;
@@ -227,7 +227,7 @@ if (isset($_POST['simpan_praktik'])) {
 
                             if ($r_jurusan_pdd > 0) {
                             ?>
-                                <select class='form-control' aria-label='Default select example' name='id_jurusan_pdd' required>
+                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -257,7 +257,7 @@ if (isset($_POST['simpan_praktik'])) {
 
                             if ($r_jenjang_pdd > 0) {
                             ?>
-                                <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd' required>
+                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jenjang_pdd' required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -287,7 +287,7 @@ if (isset($_POST['simpan_praktik'])) {
 
                             if ($r_spesifikasi_pdd > 0) {
                             ?>
-                                <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd' required>
+                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_spesifikasi_pdd' required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -299,6 +299,7 @@ if (isset($_POST['simpan_praktik'])) {
                                     }
                                     ?>
                                 </select>
+                                <i style='font-size:12px;'>Isikan <b>-- Lainnya --</b> bila tidak ada</i>
                             <?php
                             } else {
                             ?>
@@ -317,7 +318,7 @@ if (isset($_POST['simpan_praktik'])) {
 
                             if ($r_akreditasi > 0) {
                             ?>
-                                <select class='form-control' aria-label='Default select example' name='id_akreditasi' required>
+                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_akreditasi' required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
