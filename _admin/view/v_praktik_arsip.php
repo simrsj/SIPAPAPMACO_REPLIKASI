@@ -32,7 +32,6 @@ if (isset($_POST['restore_praktik'])) {
                 <div class="table-responsive">
                     <?php
                     $sql_praktik = "SELECT * FROM tb_praktik 
-                    JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
                     JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
                     JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
                     JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd

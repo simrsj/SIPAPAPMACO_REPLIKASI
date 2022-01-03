@@ -66,7 +66,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</li>
 				<hr class="sidebar-divider">
 				<li class="nav-item active">
-					<a class="nav-link" href="?survey">
+					<a class="nav-link" href="http://192.168.7.89/kuesioner/survey.php" target="_blank">
 						<i class="fas fa-fw fa-list-ul"></i>
 						<span>Survey</span>
 					</a>
@@ -185,7 +185,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div class="sidebar-card">
 					<i class="fas fa-3x fa-exclamation-circle"></i>
 					<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
-					<a class="btn btn-success btn-sm" href="?LAPOR">Lapor !</a>
+					<a class="btn btn-success btn-sm" href="?lapor">Lapor !</a>
 				</div>
 			</ul>
 			<!-- End of Sidebar -->
@@ -195,22 +195,62 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 
 				<!-- Main Content -->
 				<div id="content">
+					<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+						<!-- Sidebar Toggle (Topbar) -->
+						<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+							<i class="fa fa-bars"></i>
+						</button>
+
+						<!-- Topbar Navbar -->
+						<ul class="navbar-nav ml-auto">
+
+							<!-- Nav Item - User Information -->
+							<li class="nav-item dropdown no-arrow">
+								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nama_user']; ?></span>
+									<i class="far fa-user"></i>
+								</a>
+								<!-- Dropdown - User Information -->
+								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+									<a class="dropdown-item" href="?aku">
+										<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+										Pengaturan
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="?lo">
+										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+										Logout
+									</a>
+
+									<!-- Logout Modal-->
+									<div class="modal fade" id="log-out" tabindex="-1" role="dialog" aria-labelledby="log-out" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
+													<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+													<a class="btn btn-danger" href="?lo">Ya</a>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</li>
+						</ul>
+					</nav>
+
 					<?php
-					include "_admin/_nav.php";
 					if (isset($_GET['aku'])) {
 						include "_admin/view/v_akun.php";
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
-					} elseif (isset($_GET['mou'])) {
-						if (isset($_GET['i'])) {
-							include "_admin/insert/i_mou.php";
-						} elseif (isset($_GET['u'])) {
-							include "_admin/update/u_mou.php";
-						} elseif (isset($_GET['d'])) {
-							include "_admin/delete/d_mou.php";
-						} else {
-							include "_admin/view/v_mou.php";
-						}
 					} elseif (isset($_GET['hrg'])) {
 						include "_admin/view/v_harga.php";
 					} elseif (isset($_GET['ins'])) {
@@ -229,8 +269,20 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_praktikan_jadwal.php";
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
+					} elseif (isset($_GET['lapor'])) {
+						include "_admin/view/v_lapor.php";
 					} elseif (isset($_GET['mes'])) {
 						include "_admin/view/v_mess.php";
+					} elseif (isset($_GET['mou'])) {
+						if (isset($_GET['i'])) {
+							include "_admin/insert/i_mou.php";
+						} elseif (isset($_GET['u'])) {
+							include "_admin/update/u_mou.php";
+						} elseif (isset($_GET['d'])) {
+							include "_admin/delete/d_mou.php";
+						} else {
+							include "_admin/view/v_mou.php";
+						}
 					} elseif (isset($_GET['mtr'])) {
 						include "_admin/view/v_mentor.php";
 					} elseif (isset($_GET['nil'])) {

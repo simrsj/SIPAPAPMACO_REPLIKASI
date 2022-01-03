@@ -9,10 +9,13 @@
 - buat dastboard
 - buat Invoice
 - search disetiap select
+- cek rsj praktik error edit
+- daftar akun tanggal mounya diisi
+- dashboard pendapatan di cek ulang kalkulasinya
 
 git status
 git add .
-git commit -m "Data dashboard, ->Data Jadwal ->Data Jadwal"
+git commit -m "Database, ->Data Jadwal ->Data Harga Kedokteran ->tb_mess terisi di join kan ke tb_mess_pilih"
 git pull
 git push
  
