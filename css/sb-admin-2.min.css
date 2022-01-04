@@ -8,6 +8,11 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) 
  */
+
+select.pm{
+  width:150px;   
+}
+
 fieldset.fieldset {
   border: 1px groove gray !important;
   border-radius: 5px;

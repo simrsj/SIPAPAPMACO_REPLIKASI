@@ -17,7 +17,7 @@
 
 git status
 git add .
-git commit -m "data Nama praktikan , ->arsip  ->Data Jadwal-arsip,  -> data nilai-arsip ->Data Harga Kedokteran-arsip"  
+git commit -m "Cek Alur Keseluruhan"  
 git pull
 git push
  

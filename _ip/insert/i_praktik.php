@@ -25,7 +25,6 @@ if (isset($_POST['simpan_praktik'])) {
     //alamat file surat masuk
     $alamat_unggah = "./_file/praktikan";
 
-
     //pembuatan alamat bila tidak ada
     if (!is_dir($alamat_unggah)) {
         mkdir($alamat_unggah, 0777, $rekursif = true);
@@ -105,7 +104,6 @@ if (isset($_POST['simpan_praktik'])) {
 
     $sql_insert = " INSERT INTO tb_praktik (
         id_praktik,
-        id_mou,
         id_institusi,
         nama_praktik,  
         tgl_input_praktik,
@@ -127,8 +125,7 @@ if (isset($_POST['simpan_praktik'])) {
         status_praktik
         ) VALUE (
             '" . $no_id_praktik . "',
-            '" . $_SESSION['id_mou'] . "',
-            '" . $_SESSION['id_institusi'] . "',
+            '" . $_POST['id_institusi'] . "',
             '" . $_POST['nama_praktik'] . "',
             '" . date('Y-m-d') . "',
             '" . $_POST['tgl_mulai_praktik'] . "',
@@ -148,13 +145,14 @@ if (isset($_POST['simpan_praktik'])) {
             'DAFTAR',
             'Y'
         )";
-    echo $sql_insert;
-    // $conn->query($sql_insert);
-?>
-    <script type="text/javascript">
-        // document.location.href = "?prk";
+    // echo $sql_insert;
+    $conn->query($sql_insert);
+    echo "
+    <script type='text/javascript'>
+        alert('Data sudah Disimpan');
+        document.location.href = '?prk';
     </script>
-<?php
+    ";
 } else {
 ?>
     <div class="container-fluid">
@@ -177,12 +175,39 @@ if (isset($_POST['simpan_praktik'])) {
                         <div class="col-lg-6 ">
                             Institusi : <span style="color:red">*</span><br>
                             <?php
-                            $sql_insitusi = "SELECT * FROM tb_institusi
-                            WHERE id_institusi = '" . $_SESSION['id_institusi'] . "'";
-                            $q_institusi = $conn->query($sql_insitusi);
-                            $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
+                            $sql_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = '" . $_SESSION['id_institusi'] . "'
+                            ORDER BY tb_institusi.nama_institusi ASC";
+
+                            $q_institusi = $conn->query($sql_institusi);
+                            $r_institusi = $q_institusi->rowCount();
+                            if ($r_institusi > 0) {
+                                $no = 1;
                             ?>
-                            <h4 class="font-weight-bold"><?php echo $d_institusi['nama_institusi']; ?></h4>
+                                <select class='js-example-placeholder-single form-control' aria-label='Default select example' name='id_institusi' required>
+                                    <option value="">-- <i>Pilih</i>--</option>
+                                    <?php
+                                    while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                        <option value='<?php echo $d_institusi['id_institusi']; ?>'>
+                                            <?php echo $d_institusi['nama_institusi'];
+                                            if ($d_institusi['akronim_institusi'] != '') {
+                                                echo " (" . $d_institusi['akronim_institusi'] . ")";
+                                            }
+                                            ?>
+                                        </option>
+                                    <?php
+                                        $no++;
+                                    }
+                                    ?>
+                                </select>
+                                <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
+                            <?php
+                            } else {
+                            ?>
+                                <b><i>Data MoU Tidak Ada</i></b>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <div class="col-lg-6">
                             Gelombang/Kelompok : <span style="color:red">*</span><br>
@@ -203,7 +228,7 @@ if (isset($_POST['simpan_praktik'])) {
 
                             if ($r_jurusan_pdd > 0) {
                             ?>
-                                <select class='form-control' aria-label='Default select example' name='id_jurusan_pdd' required>
+                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -233,7 +258,7 @@ if (isset($_POST['simpan_praktik'])) {
 
                             if ($r_jenjang_pdd > 0) {
                             ?>
-                                <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd' required>
+                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jenjang_pdd' required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -263,7 +288,7 @@ if (isset($_POST['simpan_praktik'])) {
 
                             if ($r_spesifikasi_pdd > 0) {
                             ?>
-                                <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd' required>
+                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_spesifikasi_pdd' required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -275,6 +300,7 @@ if (isset($_POST['simpan_praktik'])) {
                                     }
                                     ?>
                                 </select>
+                                <i style='font-size:12px;'>Isikan <b>-- Lainnya --</b> bila tidak ada</i>
                             <?php
                             } else {
                             ?>
@@ -293,7 +319,7 @@ if (isset($_POST['simpan_praktik'])) {
 
                             if ($r_akreditasi > 0) {
                             ?>
-                                <select class='form-control' aria-label='Default select example' name='id_akreditasi' required>
+                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_akreditasi' required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
@@ -335,14 +361,14 @@ if (isset($_POST['simpan_praktik'])) {
                     <!-- unggah berkas -->
                     <div class="row">
                         <div class="col-lg-6">
-                            Unggah Surat : <br>
-                            <input type="file" name="surat_praktik" accept="application/pdf">
+                            Unggah Surat : <span style="color:red">*</span><br>
+                            <input type="file" name="surat_praktik" accept="application/pdf" required>
                             <br><i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 MB</i>
                         </div>
                         <div class="col-lg-6">
-                            Unggah Data Praktikan :
+                            Unggah Data Praktikan :<span style="color:red">*</span>
                             <i style='font-size:12px;'><a href="./_file/format_data_praktikan.xlsx">Download Format</a></i><br>
-                            <input type="file" name="data_praktik" accept=".xlsx">
+                            <input type="file" name="data_praktik" accept=".xlsx" required>
                             <br><i style='font-size:12px;'>Data unggah harus .xlsx dan maksimal ukuran file 1 MB</i>
                         </div>
                     </div>

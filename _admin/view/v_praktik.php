@@ -13,7 +13,7 @@ if (isset($_POST['arsip_praktik'])) {
         JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess
         WHERE tb_praktik.id_praktik = '" . $_POST['id_praktik'] . "'";
 
-    $q = $conn->query($sql_s_prakitk);
+    $q = $conn->query($sql_s_praktik);
     $d = $q->fetch(PDO::FETCH_ASSOC);
 
     $selisih = $d['kapasitas_terisi_mess'] - $d['jumlah_praktik'];
@@ -198,7 +198,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                 <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                             </div>
                                             <div class="col-sm-2">
-                                                <b>TANGGAL SELESAI : </b><?php echo tanggal_minimal($d_praktik['tgl_selesai_praktik']); ?>
+                                                <b>TANGGAL SELESAI : </b><?php echo tanggal_minimal($d_praktik['tgl_selesai_praktik']); ?><br>
                                                 <b>TANGGAL MULAI : </b><?php echo tanggal_minimal($d_praktik['tgl_mulai_praktik']); ?>
                                             </div>
                                             <div class="col-sm-2 text-center my-auto">

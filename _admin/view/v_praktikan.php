@@ -24,7 +24,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     }
     echo "
         <script type='text/javascript'>
-            //document.location.href = '?ptk';
+            document.location.href = '?ptk';
         </script>
     ";
 } elseif (isset($_POST['hapus_praktikan'])) {
@@ -158,7 +158,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                     JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    WHERE tb_praktik.status_praktik = 'Y' 
+                    WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.status_cek_praktik ='AKTIF'
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                 $q_praktik = $conn->query($sql_praktik);
@@ -174,16 +174,17 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                 <div class="card-header align-items-center bg-gray-200">
                                     <div class="row" style="font-size: small;">
                                         <br><br>
-                                        <div class="col-sm-2 my-auto">
+                                        <div class="col-sm-3 my-auto">
                                             <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                         </div>
                                         <div class="col-sm-2 my-auto">
                                             <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                         </div>
-                                        <div class="col-sm-2 my-auto">
-                                            <b>TANGGAL SELESAI : </b>
+                                        <div class="col-sm-3 my-auto">
+                                            <b>TANGGAL SELESAI : </b><?php echo tanggal_minimal($d_praktik['tgl_selesai_praktik']); ?>
                                             <br>
-                                            <?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
+                                            <b>TANGGAL MULAI : </b><?php echo tanggal_minimal($d_praktik['tgl_mulai_praktik']); ?>
+
                                         </div>
                                         <div class="col-sm-2 text-center my-auto">
                                             <b>STATUS : </b>
@@ -206,6 +207,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                             Lakukan proses Tambah untuk memasukan data praktikan<br><br>
                                                             <span class="badge badge-primary text-md">PRAKTIKAN ADA</span><br>
                                                             data praktikan sudah diinputkan<br><br>
+                                                            <span class="badge badge-danger text-md">ERROR</span><br> Terjadi kesalahan sistem, <br><a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -234,36 +236,6 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                 <i class="fas fa-info-circle"> </i>
                                                 Rincian
                                             </button>
-                                        </div>
-                                        <div class="col-sm-2 text-center my-auto">
-                                            <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="arsip">
-                                                <i class="fas fa-archive"> </i>
-                                                Arsipkan
-                                            </a>
-
-                                            <!-- modal arsip -->
-                                            <div class="modal fade" id="prk_dh_<?php echo $d_praktik['id_praktik']; ?>">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5>ARSIP KAN DATA :</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <b>Nama Institusi </b><br>
-                                                            <?php echo $d_praktik['nama_institusi']; ?><br>
-                                                            <b>Periode Praktik </b> : <br>
-                                                            <?php echo $d_praktik['nama_praktik']; ?>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form method="post">
-                                                                <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
-                                                                <input type="submit" name="arsip_praktik" value="Hapus" class="btn btn-danger btn-sm">
-                                                                <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

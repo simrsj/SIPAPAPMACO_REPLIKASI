@@ -29,6 +29,7 @@ if (isset($_POST['tambah_user'])) {
         echo "
         <script>
             alert('PASSWORD TIDAK SESUAI');
+            document.location.href = '?aku';
         </script>
         ";
     } else {
@@ -67,27 +68,35 @@ if (isset($_POST['tambah_user'])) {
     </script>
     ";
 } elseif (isset($_POST['ubah_user'])) {
-    $sql_ubah_user = "UPDATE tb_user SET 
-    username_user = '" . $_POST['username_user'] . "',
-    password_user = '" . md5($_POST['password_user']) . "',
-    nama_user = '" . $_POST['nama_user'] . "',
-    email_user = '" . $_POST['email_user'] . "',
-    level_user = '" . $_POST['level_user'] . "',
-    no_telp_user = '" . $_POST['no_telp_user'] . "',
-    tgl_ubah_user = '" . date('Y-m-d') . "',
-    status_user = '" . $_POST['status_user'] . "'
+    if ($_POST['password_user'] != $_POST['ulangi_password_user']) {
+        echo "
+        <script>
+            alert('PASSWORD TIDAK SESUAI');
+            document.location.href = '?aku';
+        </script>
+        ";
+    } else {
+        $sql_ubah_user = "UPDATE tb_user SET 
+            username_user = '" . $_POST['username_user'] . "',
+            password_user = '" . md5($_POST['password_user']) . "',
+            nama_user = '" . $_POST['nama_user'] . "',
+            email_user = '" . $_POST['email_user'] . "',
+            level_user = '" . $_POST['level_user'] . "',
+            no_telp_user = '" . $_POST['no_telp_user'] . "',
+            tgl_ubah_user = '" . date('Y-m-d') . "',
+            status_user = '" . $_POST['status_user'] . "'
+            WHERE id_user = '" . $_POST['id_user'] . "'";
 
-    WHERE id_user = '" . $_POST['id_user'] . "'";
+        // echo $sql_ubah_user . "<br";
+        $conn->query($sql_ubah_user);
 
-    // echo $sql_ubah_user . "<br";
-    $conn->query($sql_ubah_user);
-
-    echo "
-    <script>
-        alert('DATA AKUN SUDAH DIRUBAH');
-        document.location.href = '?aku';
-    </script>
+        echo "
+        <script>
+            alert('DATA AKUN SUDAH DIRUBAH');
+            document.location.href = '?aku';
+        </script>
     ";
+    }
 } elseif (isset($_POST['hapus_user'])) {
 } else {
 ?>
@@ -271,8 +280,16 @@ if (isset($_POST['tambah_user'])) {
                                                                 ?>
                                                                 <b>Username : </b><br>
                                                                 <input class="form-control" type="text" name="username_user" value="<?php echo $d_akun['username_user']; ?>" required><br>
-                                                                <b>Password : </b><br>
-                                                                <input class="form-control" type="password" name="password_user" value="<?php echo $d_akun['password_user']; ?>" required><br>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <b>Password : </b><br>
+                                                                        <input class="form-control" type="password" name="password_user" required=""><br>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <b>Ulangi Password : </b><br>
+                                                                        <input class="form-control" type="password" name="ulangi_password_user" required=""><br>
+                                                                    </div>
+                                                                </div>
                                                                 <b>Nama Akun : </b><br>
                                                                 <input class="form-control" type="text" name="nama_user" value="<?php echo $d_akun['nama_user']; ?>" required><br>
                                                                 <?php
@@ -320,12 +337,12 @@ if (isset($_POST['tambah_user'])) {
                                                                 }
                                                                 ?>
                                                                 <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="level1" name="level_user" value="1" class="custom-control-input" required <?php echo $level1; ?>>
-                                                                    <label class="custom-control-label" for="level1">ADMIN</label>
+                                                                    <input type="radio" id="1<?php echo $d_akun['id_user']; ?>" name="level_user" value="1" class="custom-control-input" required <?php echo $level1; ?>>
+                                                                    <label class="custom-control-label" for="1<?php echo $d_akun['id_user']; ?>">ADMIN</label>
                                                                 </div>
                                                                 <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="level2" name="level_user" value="2" class="custom-control-input" required <?php echo $level2; ?>>
-                                                                    <label class="custom-control-label" for="level2">INSITUSI</label>
+                                                                    <input type="radio" id="2<?php echo $d_akun['id_user']; ?>" name="level_user" value="2" class="custom-control-input" required <?php echo $level2; ?>>
+                                                                    <label class="custom-control-label" for="2<?php echo $d_akun['id_user']; ?>">INSITUSI</label>
                                                                 </div><br>
                                                                 <b>Status : </b><br>
                                                                 <?php
@@ -338,12 +355,12 @@ if (isset($_POST['tambah_user'])) {
                                                                 }
                                                                 ?>
                                                                 <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="status1" name="status_user" value="Y" class="custom-control-input" required <?php echo $status1; ?>>
-                                                                    <label class="custom-control-label" for="status1">Aktif</label>
+                                                                    <input type="radio" id="1<?php echo $d_akun['id_user']; ?>" name="status_user" value="Y" class="custom-control-input" required <?php echo $status1; ?>>
+                                                                    <label class="custom-control-label" for="1<?php echo $d_akun['id_user']; ?>">Aktif</label>
                                                                 </div>
                                                                 <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="status2" name="status_user" value="T" class="custom-control-input" required <?php echo $status2; ?>>
-                                                                    <label class="custom-control-label" for="status2">Non-Aktif</label>
+                                                                    <input type="radio" id="2<?php echo $d_akun['id_user']; ?>" name="status_user" value="T" class="custom-control-input" required <?php echo $status2; ?>>
+                                                                    <label class="custom-control-label" for="2<?php echo $d_akun['id_user']; ?>">Non-Aktif</label>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">

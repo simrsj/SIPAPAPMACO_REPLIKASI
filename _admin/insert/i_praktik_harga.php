@@ -37,7 +37,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
                 ORDER BY nama_harga_jenis ASC, nama_harga ASC 
                 ";
 
-                echo $sql_harga_jurusan . "<br>";
+                // echo $sql_harga_jurusan . "<br>";
                 $q_harga_jurusan = $conn->query($sql_harga_jurusan);
                 $r_harga_jurusan = $q_harga_jurusan->rowCount();
 

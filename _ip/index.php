@@ -48,9 +48,15 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="?jpk">
-						<i class="far fa-fw fa-calendar"></i>
-						<span>Jadwal Praktikan</span>
+					<a class="nav-link" href="?ppt">
+						<i class="fas fa-fw fa-house-user"></i>
+						<span>Pembimbing dan Tempat</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="?nil">
+						<i class="far fa-fw fa-star"></i>
+						<span>Data Nilai</span>
 					</a>
 				</li>
 				<!-- Divider -->
@@ -74,7 +80,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<div class="sidebar-card">
 					<i class="fas fa-3x fa-exclamation-circle"></i>
 					<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
-					<a class="btn btn-success btn-sm" href="?LAPOR">Lapor !</a>
+					<a class="btn btn-success btn-sm" href="?lapor">Lapor !</a>
 				</div>
 			</ul>
 			<!-- End of Sidebar -->
@@ -86,7 +92,15 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<div id="content">
 					<?php
 					include "_ip/_nav.php";
-					if (isset($_GET['prk'])) {
+					if (isset($_GET['aku'])) {
+						include "_ip/view/v_akun.php";
+					} elseif (isset($_GET['lapor'])) {
+						include "_ip/view/v_lapor.php";
+					} elseif (isset($_GET['nil'])) {
+						include "_ip/view/v_nilai.php";
+					} elseif (isset($_GET['ppt'])) {
+						include "_ip/view/v_praktikan_pemb_temp.php";
+					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_ip/view/v_praktik_arsip.php";
 						} elseif (isset($_GET['i'])) {
@@ -95,9 +109,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 							include "_ip/insert/i_praktik_bayar.php";
 						} elseif (isset($_GET['ih'])) {
 							include "_ip/insert/i_praktik_harga.php";
+						} elseif (isset($_GET['m'])) {
+							include "_ip/insert/i_praktik_mess.php";
 						} else {
 							include "_ip/view/v_praktik.php";
 						}
+					} elseif (isset($_GET['ptk'])) {
+						include "_ip/view/v_praktikan.php";
 					} elseif (isset($_GET['trs'])) {
 						if (isset($_GET['dtl'])) {
 							include "_ip/view/v_transaksi_detail.php";

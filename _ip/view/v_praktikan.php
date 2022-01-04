@@ -24,7 +24,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     }
     echo "
         <script type='text/javascript'>
-            document.location.href = '?ptk';
+            //document.location.href = '?ptk';
         </script>
     ";
 } elseif (isset($_POST['hapus_praktikan'])) {
@@ -71,6 +71,21 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     // echo $sql_ubah_status_praktikan . "<br>";
     $conn->query($sql_insert_data_praktikan);
     $conn->query($sql_ubah_status_praktikan);
+
+    $q_praktikan = $conn->query("SELECT * FROM tb_praktikan_detail 
+                                JOIN tb_praktikan on tb_praktikan.id_praktikan = tb_praktikan_detail.id_praktikan
+                                JOIN tb_praktik on tb_praktik.id_praktik = tb_praktikan.id_praktik 
+    ORDER BY id_praktikan_detail DESC LIMIT 1");
+    $data = $q_praktikan->fetch(PDO::FETCH_ASSOC);
+    if ($data['id_jurusan_pdd_jenis'] == 1) {
+        echo "ini dokter";
+        // $sql_insert_nilai = "INSERT INTO tb_nilai (id_praktikan_detail)  VALUES (".$data['id_praktikan_detail'].")";
+    } else {
+        $sql_insert_nilai = "INSERT INTO tb_nilai (id_praktikan_detail)  VALUES (" . $data['id_praktikan_detail'] . ")";
+    }
+
+    // echo $sql_insert_nilai;die;
+    $conn->query($sql_insert_nilai);
     echo "
         <script type='text/javascript'>
             document.location.href = '?ptk';
@@ -124,65 +139,13 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
             <div class="col-lg-10">
                 <h1 class="h3 mb-2 text-gray-800">Daftar Praktikan</h1>
             </div>
-            <div class="col-lg-2">
-                <a href="#" data-toggle="modal" data-target="#tambah_praktikan" class="btn btn-outline-success btn-sm">
-                    <i class="fas fa-plus"></i> Tambah
-                </a>
-
-                <!-- modal tambah data praktikan -->
-                <div class="modal fade text-left" id="tambah_praktikan">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <form class="form-group" method="post">
-                                <div class="modal-header">
-                                    <h4>TAMBAH DATA PRAKTIKAN</h4>
-                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Daftar Praktikan : <br>
-                                    <?php
-                                    $sql_praktik = "SELECT * FROM tb_praktik 
-                                            JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi 
-                                            WHERE status_cek_praktik = 'AKTIF'";
-                                    $q_praktik = $conn->query($sql_praktik);
-                                    $r_praktik = $q_praktik->rowCount();
-                                    if ($r_praktik > 0) {
-                                    ?>
-                                        <select class="form-control" name="id_praktik" required>
-                                            <option value="">-- Pilih --</option>
-                                            <?php
-                                            while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-                                            ?>
-                                                <option value="<?php echo $d_praktik['id_praktik']; ?>"><?php echo $d_praktik['nama_institusi']; ?> (<?php echo tanggal($d_praktik['tgl_input_praktik']) ?>)</option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <span class="badge badge-warning text-md">DATA TIDAK ADA<br>
-                                        <?php
-                                    }
-                                        ?>
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="submit" name="tambah_praktikan" value="Tambah" class="btn btn-success btn-sm">
-                                    <input type="button" value="Kembali" class="btn btn-outline-dark btn-sm" data-dismiss="modal">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
+            <!-- <div class="col-lg-2 text-right">
                 <a href="?dpk&a" class="btn btn-outline-info btn-sm">
                     <i>
                         <i class="fas fa-archive"></i>
                     </i>Arsip
-                </a>
-            </div>
+                </a> -->
+            <!-- </div> -->
         </div>
 
         <div class="card shadow mb-4">
@@ -195,7 +158,8 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                     JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    WHERE tb_praktik.status_praktik = 'Y' 
+                    WHERE 
+                    tb_praktik.status_praktik = 'Y' AND tb_praktik.status_cek_praktik ='AKTIF' AND tb_institusi.id_institusi = '" . $_SESSION['id_institusi'] . "'
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                 $q_praktik = $conn->query($sql_praktik);
@@ -211,18 +175,19 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                 <div class="card-header align-items-center bg-gray-200">
                                     <div class="row" style="font-size: small;">
                                         <br><br>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3 my-auto">
                                             <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2 my-auto">
                                             <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <b>TANGGAL SELESAI : </b>
+                                        <div class="col-sm-3 my-auto">
+                                            <b>TANGGAL SELESAI : </b><?php echo tanggal_minimal($d_praktik['tgl_selesai_praktik']); ?>
                                             <br>
-                                            <?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
+                                            <b>TANGGAL MULAI : </b><?php echo tanggal_minimal($d_praktik['tgl_mulai_praktik']); ?>
+
                                         </div>
-                                        <div class="col-sm-2 text-center">
+                                        <div class="col-sm-2 text-center my-auto">
                                             <b>STATUS : </b>
                                             <a href="#" data-toggle="modal" data-target="#info_status">
                                                 <i class="fas fa-info-circle" style="font-size: 14px;"></i>
@@ -238,9 +203,12 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                 <span aria-hidden="true">×</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <span class="badge badge-warning text-md">INPUT PRAKTIKAN</span> : Lakukan proses Tambah untuk memasukan data praktikan<br><br>
-                                                            <span class="badge badge-primary text-md">PRAKTIKAN ADA</span> : data praktikan sudah diinputkan<br><br>
+                                                        <div class="modal-body text-center">
+                                                            <span class="badge badge-warning text-md">INPUT PRAKTIKAN</span><br>
+                                                            Lakukan proses Tambah untuk memasukan data praktikan<br><br>
+                                                            <span class="badge badge-primary text-md">PRAKTIKAN ADA</span><br>
+                                                            data praktikan sudah diinputkan<br><br>
+                                                            <span class="badge badge-danger text-md">ERROR</span><br> Terjadi kesalahan sistem, <br><a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -263,42 +231,12 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                             }
                                             ?>
                                         </div>
-                                        <div class="col-sm-2 text-center">
+                                        <div class="col-sm-2 text-center my-auto">
                                             <!-- tombol rincian -->
                                             <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                                 <i class="fas fa-info-circle"> </i>
                                                 Rincian
                                             </button>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="arsip">
-                                                <i class="fas fa-archive"> </i>
-                                                Arsipkan
-                                            </a>
-
-                                            <!-- modal arsip -->
-                                            <div class="modal fade" id="prk_dh_<?php echo $d_praktik['id_praktik']; ?>">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5>ARSIP KAN DATA :</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <b>Nama Institusi </b><br>
-                                                            <?php echo $d_praktik['nama_institusi']; ?><br>
-                                                            <b>Periode Praktik </b> : <br>
-                                                            <?php echo $d_praktik['nama_praktik']; ?>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form method="post">
-                                                                <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
-                                                                <input type="submit" name="arsip_praktik" value="Hapus" class="btn btn-danger btn-sm">
-                                                                <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -494,6 +432,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                 </div>
                             </div>
                         </div>
+                        <hr>
                     <?php
                     }
                 } else {

@@ -40,30 +40,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<span>Data Pembayaran</span>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="?ptk">
-						<i class="fas fa-fw fa-user-graduate"></i>
-						<span>Nama Praktikan</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="?jpk">
-						<i class="far fa-fw fa-calendar"></i>
-						<span>Pembimbing Praktikan</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="?nil">
-						<i class="far fa-fw fa-star"></i>
-						<span>Data Nilai Keperawatan</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="?nildok">
-						<i class="far fa-fw fa-star"></i>
-						<span>Data Nilai Kedokteran</span>
-					</a>
-				</li>
 				<hr class="sidebar-divider">
 				<li class="nav-item active">
 					<a class="nav-link" href="http://192.168.7.89/kuesioner/login.php" target="_blank">
@@ -76,12 +52,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					Data
 				</div>
 
-				<li class="nav-item">
-					<a class="nav-link" href="?test">
-						<i class="fas fa-fw fa-table"></i>
-						<span>TEST</span>
-					</a>
-				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseLap" aria-expanded="true" aria-controls="collapseOne">
 						<i class="fas fa-fw fa-cog"></i>
@@ -265,8 +235,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						}
 					} elseif (isset($_GET['jrs'])) {
 						include "_admin/view/v_jurusan.php";
-					} elseif (isset($_GET['jpk'])) {
-						include "_admin/view/v_praktikan_jadwal.php";
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
 					} elseif (isset($_GET['lapor'])) {
@@ -291,8 +259,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_mentor.php";
 					} elseif (isset($_GET['nil'])) {
 						include "_admin/view/v_nilai.php";
-					} elseif (isset($_GET['nildok'])) {
-						include "_admin/view/v_nilai_dokter.php";
+					} elseif (isset($_GET['ppt'])) {
+						include "_admin/view/v_praktikan_pemb_temp.php";
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_admin/view/v_praktik_arsip.php";

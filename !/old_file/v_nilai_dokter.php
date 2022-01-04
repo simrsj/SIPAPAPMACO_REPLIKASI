@@ -93,7 +93,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
         keterangan = '" . $_POST['keterangan'] . "'
         WHERE id_praktikan_detail = '" . $_POST['id_praktikan_detail'] . "'
     ";
-     echo $sql_ubah_data_praktikan . "<br>";
+    echo $sql_ubah_data_praktikan . "<br>";
     $conn->query($sql_ubah_data_praktikan);
     echo "
         <script type='text/javascript'>
@@ -224,7 +224,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                         <div class="col-sm-2">
                                             <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                         </div>
-                                        
+
                                         <div class="col-sm-2">
                                             <b>TANGGAL SELESAI : </b>
                                             <br>
@@ -419,7 +419,6 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                             <th scope="col">MINICEX</th>
                                                             <th scope="col">UJIAN AKHIR</th>
                                                             <th scope="col">KETERANGAN</th>
-                                                            
                                                             <th scope="col"></th>
                                                         </tr>
                                                     </thead>
@@ -466,35 +465,87 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                                         $d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC);
                                                                                         // var_dump($d_data_praktikan['ip']);
                                                                                         ?>
-                                                                                        
-                                                                                            css1 : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="css1" value="<?php if(is_null($d_data_praktikan['css1'])){ echo 0; } else{ echo $d_data_praktikan['css1'];} ?>" required><br>
-                                                                                            css2 : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="css2" value="<?php if(is_null($d_data_praktikan['css2'])){ echo 0; } else{  echo $d_data_praktikan['css2']; } ?>" required><br>
-                                                                                            bst1 : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="bst1" value="<?php if(is_null($d_data_praktikan['bst1'])){ echo 0; } else{  echo $d_data_praktikan['bst1']; } ?>" required><br>
-                                                                                            bst2 : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="bst2" value="<?php if(is_null($d_data_praktikan['bst2'])){ echo 0; } else{  echo $d_data_praktikan['bst2']; } ?>" required><br>
-                                                                                            bst3 : <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="bst3" value="<?php if(is_null($d_data_praktikan['bst3'])){ echo 0; } else{  echo $d_data_praktikan['bst3']; } ?>" required><br>
-                                                                                            bst4 <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="bst4" value="<?php if(is_null($d_data_praktikan['bst4'])){ echo 0; } else{  echo $d_data_praktikan['bst4']; } ?>" required><br>
-                                                                                            bst5 <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="bst5" value="<?php if(is_null($d_data_praktikan['bst5'])){ echo 0; } else{  echo $d_data_praktikan['bst5'];} ?>" required><br>
-                                                                                            bst6 <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="bst5" value="<?php if(is_null($d_data_praktikan['bst5'])){ echo 0; } else{  echo $d_data_praktikan['bst5'];} ?>" required><br>
-                                                                                            crs1 <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="crs1" value="<?php if(is_null($d_data_praktikan['crs1'])){ echo 0; } else{  echo $d_data_praktikan['crs1'];} ?>" required><br>
-                                                                                            crs2 <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="crs2" value="<?php if(is_null($d_data_praktikan['crs2'])){ echo 0; } else{  echo $d_data_praktikan['crs2'];} ?>" required><br>
-                                                                                            minicex <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="minicex" value="<?php if(is_null($d_data_praktikan['minicex'])){ echo 0; } else{  echo $d_data_praktikan['minicex'];} ?>" required><br>
-                                                                                            Ujian Akhir <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="ujian_akhir" value="<?php if(is_null($d_data_praktikan['ujian_akhir'])){ echo 0; } else{  echo $d_data_praktikan['ujian_akhir'];} ?>" required><br>
-                                                                                            keterangan <span style="color:red">*</span><br>
-                                                                                            <input class="form-control" type="number" name="keterangan" value="<?php if(is_null($d_data_praktikan['keterangan'])){ echo 0; } else{  echo $d_data_praktikan['keterangan']; } ?>" required><br>
-                                                                                       
-                                                                                           </div>
+
+                                                                                        css1 : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="css1" value="<?php if (is_null($d_data_praktikan['css1'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['css1'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        css2 : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="css2" value="<?php if (is_null($d_data_praktikan['css2'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['css2'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        bst1 : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="bst1" value="<?php if (is_null($d_data_praktikan['bst1'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['bst1'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        bst2 : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="bst2" value="<?php if (is_null($d_data_praktikan['bst2'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['bst2'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        bst3 : <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="bst3" value="<?php if (is_null($d_data_praktikan['bst3'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['bst3'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        bst4 <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="bst4" value="<?php if (is_null($d_data_praktikan['bst4'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['bst4'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        bst5 <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="bst5" value="<?php if (is_null($d_data_praktikan['bst5'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['bst5'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        bst6 <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="bst5" value="<?php if (is_null($d_data_praktikan['bst5'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['bst5'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        crs1 <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="crs1" value="<?php if (is_null($d_data_praktikan['crs1'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['crs1'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        crs2 <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="crs2" value="<?php if (is_null($d_data_praktikan['crs2'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['crs2'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        minicex <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="minicex" value="<?php if (is_null($d_data_praktikan['minicex'])) {
+                                                                                                                                                            echo 0;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $d_data_praktikan['minicex'];
+                                                                                                                                                        } ?>" required><br>
+                                                                                        Ujian Akhir <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="ujian_akhir" value="<?php if (is_null($d_data_praktikan['ujian_akhir'])) {
+                                                                                                                                                                echo 0;
+                                                                                                                                                            } else {
+                                                                                                                                                                echo $d_data_praktikan['ujian_akhir'];
+                                                                                                                                                            } ?>" required><br>
+                                                                                        keterangan <span style="color:red">*</span><br>
+                                                                                        <input class="form-control" type="number" name="keterangan" value="<?php if (is_null($d_data_praktikan['keterangan'])) {
+                                                                                                                                                                echo 0;
+                                                                                                                                                            } else {
+                                                                                                                                                                echo $d_data_praktikan['keterangan'];
+                                                                                                                                                            } ?>" required><br>
+
+                                                                                    </div>
                                                                                     <div class="modal-footer">
                                                                                         <input name="id_praktikan_detail" value="<?php echo $d_data_praktikan['id_praktikan_detail']; ?>" hidden>
                                                                                         <button class="btn btn-primary btn-sm" type="submit" name="ubah_data_praktikan">UBAH</button>
@@ -502,27 +553,6 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                                     </div>
                                                                                 </form>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- <a title="Hapus Data Praktikan" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_dp_m<?php echo $d_data_praktikan['id_praktikan_detail']; ?>'>
-                                                                        <i class="fas fa-trash-alt"></i>
-                                                                    </a> -->
-                                                                    <!-- modal hapus harga -->
-                                                                    <div class="modal fade text-left" id="h_dp_m<?php echo $d_data_praktikan['id_praktikan_detail']; ?>">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <form method="post" action="">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h4>HAPUS DATA PRAKTIKAN ?</h4>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <input name="id_praktikan_detail" value="<?php echo $d_data_praktikan['id_praktikan_detail']; ?>" hidden>
-                                                                                        <input name="id_praktikan" value="<?php echo $d_data_praktikan['id_praktikan']; ?>" hidden>
-                                                                                        <button class="btn btn-danger btn-sm" type="submit" name="hapus_data_praktikan">HAPUS</button>
-                                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
                                                                         </div>
                                                                     </div>
                                                                 </td>

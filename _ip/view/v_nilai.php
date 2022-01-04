@@ -71,7 +71,7 @@ if (isset($_POST['ubah_nilai'])) {
                                     <?php
                                     $sql_praktik = "SELECT * FROM tb_praktik 
                                             JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi 
-                                            WHERE status_cek_praktik = 'AKTIF'";
+                                            WHERE status_cek_praktik = 'AKTIF' AND tb_praktik.id_institusi = '" . $_SESSION . "'";
                                     $q_praktik = $conn->query($sql_praktik);
                                     $r_praktik = $q_praktik->rowCount();
                                     if ($r_praktik > 0) {
@@ -125,6 +125,7 @@ if (isset($_POST['ubah_nilai'])) {
                     WHERE tb_praktik.status_praktik = 'Y'
                     AND tb_praktik.status_cek_praktik = 'AKTIF' 
                     AND tb_praktikan.status_pemb_temp_praktikan ='PEMB. TEMP. ADA'
+                    AND tb_institusi.id_institusi = '" . $_SESSION['id_institusi'] . "'
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                 $q_praktik = $conn->query($sql_praktik);
@@ -557,7 +558,7 @@ if (isset($_POST['ubah_nilai'])) {
                                                     <div class="jumbotron">
                                                         <div class="jumbotron-fluid">
                                                             <div class="text-gray-700" style="padding-bottom: 2px; padding-top: 5px;">
-                                                                <h5 class="text-center">DATA PRAKTIKAN BELUM DIINPUTKAN</h5>
+                                                                <h5 class="text-center">DATA TEMPAT BELUM DIINPUTKAN</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -575,7 +576,7 @@ if (isset($_POST['ubah_nilai'])) {
                     }
                 } else {
                     ?>
-                    <h3 class='text-center'> Data Pembimbing dan Tempat/Unit Diinputkan</h3>
+                    <h3 class='text-center'> Data Pembimbing dan Tempat/Unit Belum Diinputkan</h3>
                 <?php
                 }
                 ?>

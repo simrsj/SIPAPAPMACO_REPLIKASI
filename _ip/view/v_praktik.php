@@ -1,8 +1,30 @@
 <?php
-if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
+if (isset($_POST['arsip_praktik'])) {
     $conn->query("UPDATE `tb_praktik` SET status_praktik = 'T' WHERE id_praktik = " . $_POST['id_praktik']);
     echo "
         <script type='text/javascript'>
+            document.location.href = '?prk';
+        </script>
+    ";
+} elseif (isset($_POST['selesai_praktik'])) {
+    $sql_u_praktik = "UPDATE `tb_praktik` SET status_cek_praktik = 'SELESAI' WHERE id_praktik = '" . $_POST['id_praktik'] . "'";
+    $sql_s_praktik = "SELECT * FROM tb_praktik
+        JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik
+        JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess
+        WHERE tb_praktik.id_praktik = '" . $_POST['id_praktik'] . "'";
+
+    $q = $conn->query($sql_s_prakitk);
+    $d = $q->fetch(PDO::FETCH_ASSOC);
+
+    $selisih = $d['kapasitas_terisi_mess'] - $d['jumlah_praktik'];
+    $sql_u_mess = "UPDATE `tb_mess` SET kapasitas_terisi_mess = '" . $selisih . "' WHERE id_praktik = '" . $_POST['id_praktik'] . "'";
+    // echo $sql_u_praktik . "<br>";
+    // echo $sql_u_mess . "<br>";
+    $conn->query($sql_u_praktik);
+    $conn->query($sql_u_mess);
+    echo "
+        <script type='text/javascript'>
+            alert('Praktikan Sudah Selesai');
             document.location.href = '?prk';
         </script>
     ";
@@ -14,22 +36,111 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
 
         // echo $sql_ubah_status_praktik . "<br>";
         $conn->query($sql_ubah_status_praktik);
-    } elseif ($_GET['vd'] == 't') {
+    }
+    echo "
+        <script type='text/javascript'>
+            document.location.href = '?prk';
+        </script>
+    ";
+} elseif (isset($_POST['ket_tolak'])) {
+    $sql_ubah_status_praktik = "UPDATE tb_praktik
+        SET 
+        status_cek_praktik = 'DITOLAK',
+        ket_tolak_praktik = '" . $_POST['ket_tolak_praktik'] . "'
+        WHERE id_praktik = " . $_POST['id_praktik'];
+
+    $d_bayar = $conn->query("SELECT * FROM tb_bayar WHERE id_praktik = " . $_POST['id_praktik'])->fetch(PDO::FETCH_ASSOC);
+    unlink($d_bayar['file_bayar']);
+
+    $sql_delete_bayar = "DELETE FROM `tb_bayar` WHERE id_praktik = " . $_POST['id_praktik'];
+
+    // echo $sql_ubah_status_praktik . "<br>";
+    // echo $sql_delete_bayar . "<br>";
+    $conn->query($sql_delete_bayar);
+    $conn->query($sql_ubah_status_praktik);
+
+    echo "
+            <script type='text/javascript'>
+                alert('Penolakan Disimpan');
+                document.location.href = '?prk';
+            </script>
+        ";
+} elseif (isset($_GET['hh'])) {
+    $r_mess_pilih = $conn->query("SELECT *FROM tb_mess_pilih WHERE id_praktik = " . $_GET['hh'])->rowCount();
+    $r_bayar = $conn->query("SELECT *FROM tb_bayar WHERE id_praktik = " . $_GET['hh'])->rowCount();
+
+    if ($r_bayar > 0) {
+        echo "
+            <script type='text/javascript'>
+                alert('Hapus Data Pembayaran Terlebih Dahulu');
+            </script>
+        ";
+    } elseif ($r_mess_pilih > 0) {
+        echo "
+            <script type='text/javascript'>
+                alert('Hapus Data Mess Terlebih Dahulu');
+            </script>
+        ";
+    } else {
+        $sql_delete_harga = "DELETE FROM `tb_harga_pilih` WHERE `tb_harga_pilih`.`id_praktik` = " . $_GET['hh'];
+
         $sql_ubah_status_praktik = "UPDATE tb_praktik
-            SET status_cek_praktik = 'DITOLAK'
-            WHERE id_praktik = " . $_GET['id'];
+        SET status_cek_praktik = 'DAFTAR'
+        WHERE id_praktik = " .  $_GET['hh'];
 
-
-        $d_bayar = $conn->query("SELECT * FROM tb_bayar WHERE id_praktik = " . $_GET['id'])->fetch(PDO::FETCH_ASSOC);
-        unlink($d_bayar['file_bayar']);
-        $sql_delete_bayar = "DELETE FROM `tb_bayar` WHERE id_praktik = " . $_GET['id'];
-
-
-        // echo $sql_delete_bayar . "<br>";
         // echo $sql_ubah_status_praktik . "<br>";
-        $conn->query($sql_delete_bayar);
+        $conn->query($sql_delete_harga);
         $conn->query($sql_ubah_status_praktik);
     }
+    echo "
+        <script type='text/javascript'>
+            document.location.href = '?prk';
+        </script>
+    ";
+} elseif (isset($_GET['hm'])) {
+    $r_bayar = $conn->query("SELECT *FROM tb_bayar WHERE id_praktik = " . $_GET['hm'])->rowCount();
+
+    if ($r_bayar > 0) {
+        echo "
+            <script type='text/javascript'>
+                alert('Hapus Data Pembayaran Terlebih Dahulu');
+            </script>
+        ";
+    } else {
+
+        $d_mess_pilih = $conn->query("SELECT * FROM tb_mess_pilih WHERE id_praktik = " . $_GET['hm'])->fetch(PDO::FETCH_ASSOC);
+        $d_mess = $conn->query("SELECT * FROM tb_mess WHERE id_mess = " . $d_mess_pilih['id_mess'])->fetch(PDO::FETCH_ASSOC);
+        $terisi_mess = $d_mess['kapasitas_terisi_mess'] - $d_mess_pilih['jumlah_praktik_mess_pilih'];
+
+        $sql_ubah_terisi_mess =  "UPDATE tb_mess SET kapasitas_terisi_mess = '" . $terisi_mess  . "' WHERE id_mess = " . $d_mess_pilih['id_mess'];
+        $sql_delete_mess_pilih = "DELETE FROM `tb_mess_pilih` WHERE id_praktik = " . $_GET['hm'];
+        $sql_update_status_praktik = "UPDATE tb_praktik SET status_cek_praktik = 'HARGA' WHERE id_praktik = " . $_GET['hm'];
+        // echo $sql_ubah_terisi_mess . "<br>";
+        // echo $sql_delete_mess_pilih . "<br>";
+        // echo $sql_update_status_praktik . "<br>";
+
+        $conn->query($sql_ubah_terisi_mess);
+        $conn->query($sql_delete_mess_pilih);
+        $conn->query($sql_update_status_praktik);
+    }
+    echo "
+        <script type='text/javascript'>
+            document.location.href = '?prk';
+        </script>
+    ";
+} elseif (isset($_GET['hb'])) {
+    $d_bayar = $conn->query("SELECT * FROM tb_bayar WHERE id_praktik = " . $_GET['hb'])->fetch(PDO::FETCH_ASSOC);
+    unlink($d_bayar['file_bayar']);
+    $sql_delete_bayar = "DELETE FROM `tb_bayar` WHERE id_praktik = " . $_GET['hb'];
+
+    $sql_ubah_status_praktik = "UPDATE tb_praktik
+        SET status_cek_praktik = 'MESS'
+        WHERE id_praktik = " . $_GET['hb'];
+
+    // echo $sql_delete_bayar . "<br>";
+    // echo $sql_ubah_status_praktik . "<br>";
+    $conn->query($sql_delete_bayar);
+    $conn->query($sql_ubah_status_praktik);
     echo "
         <script type='text/javascript'>
             document.location.href = '?prk';
@@ -40,16 +151,11 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Daftar Praktikan</h1>
+                <h1 class="h3 mb-2 text-gray-800">Pendaftaran Praktik</h1>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 text-right">
                 <a href="?prk&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
-                </a>
-                <a href="?prk&a" class="btn btn-outline-info btn-sm">
-                    <i>
-                        <i class="fas fa-archive"></i>
-                    </i>Arsip
                 </a>
             </div>
         </div>
@@ -64,10 +170,9 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                     JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.id_institusi = '" . $_SESSION['id_institusi'] . "'
+                    WHERE tb_praktik.status_praktik = 'Y' AND tb_institusi.id_institusi = '" . $_SESSION['id_institusi'] . "'
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
-                    // echo $sql_praktik . "<br>";
                     $q_praktik = $conn->query($sql_praktik);
                     $r_praktik = $q_praktik->rowCount();
 
@@ -84,15 +189,14 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                             <div class="col-sm-2">
                                                 <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                 <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                             </div>
                                             <div class="col-sm-2">
-                                                <b>TANGGAL SELESAI : </b>
-                                                <br>
-                                                <?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
+                                                <b>TANGGAL SELESAI : </b><?php echo tanggal_minimal($d_praktik['tgl_selesai_praktik']); ?>
+                                                <b>TANGGAL MULAI : </b><?php echo tanggal_minimal($d_praktik['tgl_mulai_praktik']); ?>
                                             </div>
-                                            <div class="col-sm-2 text-center">
+                                            <div class="col-sm-2 text-center my-auto">
                                                 <b>STATUS : </b>
                                                 <a href="#" data-toggle="modal" data-target="#info_status">
                                                     <i class="fas fa-info-circle" style="font-size: 14px;"></i>
@@ -108,19 +212,39 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <span class="badge badge-warning text-md">DAFTAR</span> : Sudah Melakukan Pendaftaran, dilanjutkan Pilih Harga<br><br>
-                                                                <span class="badge badge-warning text-md">HARGA</span> : Harga Sudah Dipilih, dilanjutkan Pemilihan Mess Oleh Admin<br><br>
-                                                                <span class="badge badge-primary text-md">MESS</span> : Mess Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses Pembayaran <br><br>
-                                                                <span class="badge badge-warning text-md">PEMBAYARAN</span> : Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
-                                                                <span class="badge badge-success text-md">AKTIF</span> : Pembayaran Sudah terverifikasi oleh Admin, Pendaftaran Selesai <br><br>
-                                                                <span class="badge badge-danger text-md">DITOLAK</span> : Pembayaran ditolak oleh Admin, revisi pembayaran<br><br>
-                                                                <span class="badge badge-dark text-md">SELESAI</span> : Praktikan Sudah Selesai
+                                                            <div class="modal-body text-center">
+                                                                <span class="badge badge-warning text-md">DAFTAR</span> <br>
+                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih Harga<br><br>
+                                                                <span class="badge badge-warning text-md">HARGA</span><br>
+                                                                Harga Sudah Dipilih, dilanjutkan Validasi Data Pendaftaran dan Harga serta Pemilihan Mess Oleh Admin<br><br>
+                                                                <span class="badge badge-primary text-md">MESS</span><br>
+                                                                Mess Sudah didaftarkan oleh Admin dan Sudah Memvalidasi Data Daftar dan Harga, dilanjutkan Melakukan Proses Pembayaran.
+                                                                <?php
+                                                                if ($d_praktik['status_cek_praktik'] == 'MESS') {
+                                                                ?>
+                                                                    <a href="./_print/p_praktik_invoice.php?id=<?php $d_praktik['id_praktik']; ?>" target="_blank" class="text-primary text-uppercase font-weight-bold">
+                                                                        <b>CEK INVOICE</b>
+                                                                    </a>
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <div class="text-primary font-weight-bold">CEK INVOICE</div>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                                <br>
+                                                                <span class="badge badge-warning text-md">PEMBAYARAN</span><br>
+                                                                Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
+                                                                <span class="badge badge-danger text-md">DITOLAK</span><br>
+                                                                Pembayaran ditolak oleh Admin, <div class="text-danger font-weight-bold">CEK KETERANGAN</div><br>
+                                                                <span class="badge badge-success text-md">AKTIF</span><br>
+                                                                Pembayaran Sudah terverifikasi oleh Admin, Pendaftaran Selesai <br><br>
+                                                                <span class="badge badge-dark text-md">SELESAI</span><br> Praktikan Sudah Selesai<br><br>
+                                                                <span class="badge badge-danger text-md">ERROR</span><br> Terjadi kesalahan sistem, <br><a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <br>
                                                 <?php
                                                 if ($d_praktik['status_cek_praktik'] == "DAFTAR") {
@@ -145,7 +269,30 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "DITOLAK") {
                                                 ?>
-                                                    <span class="badge badge-danger text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <a href="#" class="badge badge-danger text-md" data-toggle="modal" data-target="#ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
+                                                        KET. <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                    </a>
+
+                                                    <!-- Modal Pembayaran Diterima-->
+                                                    <div class="modal fade text-left" id="ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content text-lg text-center">
+                                                                <div class="modal-header">
+                                                                    <h4>Keterangan Penolakan</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <?php echo $d_praktik['ket_tolak_praktik']; ?>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "SELESAI") {
+                                                ?>
+                                                    <span class="badge badge-secondary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                                 <?php
                                                 } else {
                                                 ?>
@@ -154,47 +301,34 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="col-sm-2 text-center">
-                                                <?php
-                                                if ($d_praktik['status_cek_praktik'] == ("HARGA" && "PEMBAYARAN")) {
-                                                ?>
-                                                    <b>PROSES : </b><br>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <b>PILIH : </b><br>
-                                                <?php
-                                                }
-                                                ?>
+                                            <div class="col-sm-2 text-center my-auto">
+
                                                 <!-- tombol dropdown pilih menu harga, mess, bukti bayar -->
                                                 <?php
                                                 if ($d_praktik['status_cek_praktik'] == "DAFTAR") {
                                                 ?>
+                                                    <b>PILIH : </b><br>
                                                     <a class="btn btn-outline-danger btn-sm" href="?prk&ih=<?php echo $d_praktik['id_praktik']; ?>">HARGA</a>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "HARGA") {
                                                 ?>
-                                                    <span class="badge badge-primary text-md">PEMILIHAN MESS ADMIN</span>
+                                                    <b>PILIH : </b><br>
+                                                    <a class="btn btn-outline-danger btn-sm" href="?prk&m=<?php echo $d_praktik['id_praktik']; ?>">MESS</a>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "MESS" || $d_praktik['status_cek_praktik'] == "DITOLAK") {
                                                 ?>
-                                                    <a class="btn btn-primary btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>" title="Invoice"><i class="fas fa-file-invoice-dollar"></i></a>
+                                                    <b>PILIH : </b><br>
+                                                    <a class="btn btn-outline-primary btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>" title="Invoice" target="_blank">INVOICE</a>
                                                     <a class="btn btn-outline-danger btn-sm" href="?prk&ib=<?php echo $d_praktik['id_praktik']; ?>">PEMBAYARAN</a>
-                                                    <?php
+                                                <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN") {
-                                                    if ($_SESSION['level_user'] == 1) {
-                                                    ?>
-                                                        <a title="Pembayaran Diterima" href="?prk&vd=y&id=<?php echo $d_praktik['id_praktik'] ?>" class="btn btn-success"><i class="fas fa-check"></i></a>
-                                                        <a title="Pembayaran Ditolak" href="?prk&vd=t&id=<?php echo $d_praktik['id_praktik'] ?>" class="btn btn-danger"><i class="fas fa-times"></i></a>
-                                                    <?php
-                                                    } else {
-                                                    ?>
-                                                        <span class="badge badge-primary text-md">PEMBAYARAN VALIDASI ADMIN</span>
-                                                    <?php
-                                                    }
+                                                ?>
+                                                    <div class="badge badge-primary text-md">VALIDASI PEMBAYARAN <br>ADMIN</div>
+                                                <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "AKTIF") {
-                                                    ?>
-                                                    <a title="Praktik Selesai ?" href="#" class="btn btn-outline-primary btn-sm font-weight-bold" data-toggle='modal' data-target='#end_<?php echo $d_praktik['id_praktik']; ?>'>SELESAIKAN <i class="fas fa-question"></i></a>
+                                                ?>
+                                                    <b>PILIH : </b><br>
+                                                    <a title="Praktik Selesai ?" href="#" class="btn btn-outline-primary btn-sm" data-toggle='modal' data-target='#end_<?php echo $d_praktik['id_praktik']; ?>'>SELESAIKAN</a>
 
                                                     <!-- modal praktik selesai -->
                                                     <div class="modal fade text-left" id="end_<?php echo $d_praktik['id_praktik']; ?>">
@@ -214,13 +348,17 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                                                         </div>
                                                     </div>
                                                 <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "SELESAI") {
+                                                ?>
+                                                    <span class="badge badge-secondary text-md ">PRAKTIKAN SELESAI</span>
+                                                <?php
                                                 }
                                                 ?>
-
                                             </div>
-                                            <div class="col-sm-1">
+                                            <div class="col-sm-2 my-auto text-center">
                                                 <!-- tombol rincian -->
-                                                <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>"><i class="fas fa-info-circle"></i> Rincian
+                                                <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian"><i class="fas fa-info-circle"></i>
+                                                    Rincian
                                                 </button>
                                             </div>
                                         </div>
@@ -500,7 +638,7 @@ if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
                         }
                     } else {
                         ?>
-                        <h3 class='text-center'> Data Praktikan Anda Tidak Ada</h3>
+                        <h3 class='text-center'> Data Pendaftaran Praktikan Anda Tidak Ada</h3>
                     <?php
                     }
                     ?>
