@@ -1,12 +1,12 @@
 <body class="bg-gradient-primary">
-  <meta http-equiv="refresh" content="10">
+  <meta http-equiv="refresh" content="120">
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse h5 font-weight-bold" id="navbarsExample03">
-      <ul class="navbar-nav">
+    <div class="collapse navbar-collapse h5 font-weight-bold row">
+      <ul class="navbar-nav col">
         <li class="nav-item active">
           <a class="nav-link" href="#">
             <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
@@ -18,16 +18,11 @@
           </a>
         </li>
       </ul>
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav col-auto">
         <a class="btn btn-success btn-sm" href="http://192.168.7.89/kuesioner/survey.php" target="_blank"><i class="fas fa-clipboard-check"></i> SURVEY</a>&nbsp;
         <a class="btn btn-info btn-sm" href="?reg" target="_blank"><i class="fas fa-user-plus"></i> DAFTAR</a>&nbsp;
         <a class="btn btn-primary btn-sm" href="?lo" target="_blank"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
       </ul>
-
-      <br>
-      <br>
-
-
     </div>
   </nav>
 
@@ -50,40 +45,53 @@
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
               $q_praktik = $conn->query($sql_praktik);
               $r_praktik = $q_praktik->rowCount();
-              $round_col = ceil(12 / $r_praktik);
 
               // echo $cal . "-" . $r_praktik . "-" . $round_col . "<br>";
+              if ($r_praktik > 0) {
+                $round_col = ceil(12 / $r_praktik);
               ?>
-
-              <div class="row">
-                <?php
-                while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-                ?>
-                  <div class="col-md-<?php echo $round_col; ?> text-center">
-                    <b>
+                <div class="row">
+                  <?php
+                  while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+                  ?>
+                    <div class="col-md-<?php echo $round_col; ?> text-center">
+                      <b>
+                        <?php
+                        if ($d_praktik['akronim_institusi'] == NULL) {
+                          echo $d_praktik['nama_institusi'];
+                        } else {
+                          echo $d_praktik['akronim_institusi'];
+                        }
+                        ?>
+                      </b><br>
                       <?php
-                      if ($d_praktik['akronim_institusi'] == NULL) {
-                        echo $d_praktik['nama_institusi'];
+                      if ($d_praktik['logo_institusi'] == '') {
+                        $link_logo_institusi = "./_img/logo_institusi/default.png";
                       } else {
-                        echo $d_praktik['akronim_institusi'];
+                        $link_logo_institusi = $d_praktik['logo_institusi'];
                       }
                       ?>
-                    </b><br>
-                    <?php
-                    if ($d_praktik['logo_institusi'] == '') {
-                      $link_logo_institusi = "./_img/logo_institusi/default.png";
-                    } else {
-                      $link_logo_institusi = $d_praktik['logo_institusi'];
-                    }
-                    ?>
-                    <img src="<?php echo $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="75px" height="75px"><br>
-                    <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
-                    <?php echo $d_praktik['jumlah_praktik']; ?> Orang
-                  </div>
-                <?php
-                }
-                ?>
-              </div>
+                      <img src="<?php echo $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="75px" height="75px"><br>
+                      <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
+                      <?php echo $d_praktik['jumlah_praktik']; ?> Orang
+                    </div>
+                  <?php
+                  }
+                  ?>
+                </div>
+              <?php
+              } else {
+              ?>
+                <div class="jumbotron text-center my-auto">
+                  <div class="display-4 my-auto text-lg">Praktikan Tidak Ada <i class="far fa-sad-tear"></i></div>
+                  <hr class="my-2">
+                  <p class="lead">
+                    <a class="btn btn-outline-success btn-lg" href="?reg" role="button">Ayo Daftar !!! </a>
+                  </p>
+                </div>
+              <?php
+              }
+              ?>
               <hr />
             </div>
           </div>

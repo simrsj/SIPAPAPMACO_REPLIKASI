@@ -17,7 +17,7 @@
 
 git status
 git add .
-git commit -m "Cek Alur Keseluruhan"  
+git commit -m "Modul MoU, Alur Pendaftaran dan Validasi"  
 git pull
 git push
  

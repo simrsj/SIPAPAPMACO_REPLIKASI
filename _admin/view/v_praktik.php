@@ -17,7 +17,7 @@ if (isset($_POST['arsip_praktik'])) {
     $d = $q->fetch(PDO::FETCH_ASSOC);
 
     $selisih = $d['kapasitas_terisi_mess'] - $d['jumlah_praktik'];
-    $sql_u_mess = "UPDATE `tb_mess` SET kapasitas_terisi_mess = '" . $selisih . "' WHERE id_praktik = '" . $_POST['id_praktik'] . "'";
+    $sql_u_mess = "UPDATE `tb_mess` SET kapasitas_terisi_mess = '" . $selisih . "' WHERE id_mess = '" . $_POST['id_praktik'] . "'";
     // echo $sql_u_praktik . "<br>";
     // echo $sql_u_mess . "<br>";
     $conn->query($sql_u_praktik);
