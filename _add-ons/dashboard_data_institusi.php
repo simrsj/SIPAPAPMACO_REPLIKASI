@@ -1,24 +1,28 @@
 <?php
 
 //////////////////// DATA MOU TOTAL ////////////////////
-$sql_dmt = "SELECT * FROM tb_mou ";
+$sql_dmt = "SELECT * FROM tb_mou WHERE id_institusi = " . $_SESSION['id_institusi'];
+// echo $sql_dmt . "<br>";
 $q_dmt = $conn->query($sql_dmt);
 $data_dmt = $q_dmt->rowCount();
 
 //////////////////// DATA MOU BERAKHIR ////////////////////
 $sql_dmb = "SELECT * FROM tb_mou 
-WHERE tgl_selesai_mou > CURDATE()";
+WHERE tgl_selesai_mou > CURDATE() AND id_institusi = " . $_SESSION['id_institusi'];
 $q_dmb = $conn->query($sql_dmb);
 $data_dmb = $q_dmb->rowCount();
 
 //////////////////// DATA MOU AKTIF ////////////////////
 $sql_dma = "SELECT * FROM tb_mou 
-WHERE tgl_selesai_mou <= CURDATE()";
+WHERE tgl_selesai_mou <= CURDATE()
+AND status_mou = 'aktif'
+AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
+echo $sql_dma . "<br>";
 $q_dma = $conn->query($sql_dma);
 $data_dma = $q_dma->rowCount();
 
 //////////////////// DATA PRAKTIK SEMUA ////////////////////
-$sql_dps = "SELECT * FROM tb_praktik";
+$sql_dps = "SELECT * FROM tb_praktik WHERE id_institusi = " . $_SESSION['id_institusi'];
 $q_dps = $conn->query($sql_dps);
 $data_dps = $q_dps->rowCount();
 
@@ -32,23 +36,26 @@ OR status_cek_praktik = 'MESS'
 OR status_cek_praktik = 'PEMBAYARAN'
 OR status_cek_praktik = 'DITOLAK'
 )
-AND status_praktik='Y'";
+AND status_praktik='Y'
+AND id_institusi = " . $_SESSION['id_institusi'];
 $q_dpp = $conn->query($sql_dpp);
 $data_dpp = $q_dpp->rowCount();
 
 //////////////////// DATA PRAKTIKAN AKTIF ////////////////////
-$sql_dpa = "SELECT * FROM tb_praktik
-WHERE status_cek_praktik = 'AKTIF'";
+$sql_dpa = "SELECT * FROM tb_praktik 
+WHERE status_cek_praktik = 'AKTIF'
+AND id_institusi = " . $_SESSION['id_institusi'];
 $q_dpa = $conn->query($sql_dpa);
 $data_dpa = $q_dpa->rowCount();
 
 //////////////////// DATA PRAKTIKAN NON-AKTIF ////////////////////
 $sql_dpn = "SELECT * FROM tb_praktik
-WHERE status_praktik = 'T'";
+WHERE status_praktik = 'T'
+AND id_institusi = " . $_SESSION['id_institusi'];
 $q_dpn = $conn->query($sql_dpn);
 $data_dpn = $q_dpn->rowCount();
 //////////////////// DATA PRAKTIKAN JUMLAH ////////////////////
-$sql_dpj = "SELECT * FROM tb_praktik";
+$sql_dpj = "SELECT * FROM tb_praktik WHERE id_institusi = " . $_SESSION['id_institusi'];
 $q_dpj = $conn->query($sql_dpj);
 
 $jumlah_praktik_total = 0;

@@ -1,8 +1,12 @@
 <?php
 if (isset($_POST['ubah_mou'])) {
 
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
+
     //file_mou diubah
-    if ($_POST['file_mou'] != NULL || "") {
+    if ($_FILES['file_mou']['size'] > 0) {
 
 
         //ubah Nama File PDF
@@ -21,16 +25,18 @@ if (isset($_POST['ubah_mou'])) {
             $file_file_mou = (object) @$_FILES['file_mou'];
 
             //mulai unggah file surat praktik
-            if ($file_file_mou->size > 1000 * 10000) {
+            if ($file_file_mou->size > 1000 * 1000) {
                 echo "
                 <script>
-                    alert('File Surat Harus dibawah 10 Mb');
+                    alert('File Surat Harus dibawah 1 Mb');
+                    document.location.href = '?mou';
                 </script>
                 ";
             } elseif ($file_file_mou->type !== 'application/pdf') {
                 echo "
                 <script>
                     alert('File Surat Harus .pdf');
+                    document.location.href = '?mou';
                 </script>
                     ";
             } else {
@@ -69,12 +75,12 @@ if (isset($_POST['ubah_mou'])) {
 
     // echo $sql_update_mou;
     $conn->query($sql_update_mou);
-?>
-    <script type="text/javascript">
-        alert('Data Sudah Disimpan');
-        document.location.href = "?mou";
-    </script>
-<?php
+    echo "
+        <script>
+            alert('Data Sudah Disimpan');
+            document.location.href = '?mou';
+        </script>
+    ";
 } else {
     $id_mou = $_GET['u'];
 
@@ -142,7 +148,7 @@ if (isset($_POST['ubah_mou'])) {
                                     if ($d_jurusan['id_jurusan_pdd'] == $d_mou['id_jurusan_pdd']) {
                                         $selected = 'selected';
                                     } else {
-                                        $selected = 'dasdas';
+                                        $selected = '';
                                     }
                                 ?>
                                     <option value="<?php echo $d_jurusan['id_jurusan_pdd']; ?>" <?php echo $selected; ?>>
@@ -193,7 +199,7 @@ if (isset($_POST['ubah_mou'])) {
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            Akreditasi<span style="color:red">*</span><br>
+                            Akreditasi Institusi : <span style="color:red">*</span><br>
                             <select class="js-example-placeholder-single js-states form-control" name="id_akreditasi" required>
                                 <option value="">-- Pilih --</option>
                                 <?php
@@ -235,7 +241,8 @@ if (isset($_POST['ubah_mou'])) {
                             <i style='font-size:12px;'>File MoU Sebelumnya
                                 <a href="<?php echo $d_mou['file_mou']; ?>">Download</a>
                             </i><br>
-                            <input type="file" accept="application/pdf" name="file_mou">
+                            <input type="file" accept="application/pdf" name="file_mou"><br>
+                            <span class="text-xs font-italic">File MoU harus .pdf dan ukurannya kurang dari 1 Mb</span>
                         </div>
                     </div>
                     <hr>

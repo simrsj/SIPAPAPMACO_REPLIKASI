@@ -1,18 +1,18 @@
-- Security path langsung dapat terlihat contoh : SM/_FILE/
 - enkripsi link 
 - inputan pilih jadwal praktikan dengan pilih tombol radio button tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
 - buat tanggal inputan data dissetiap tabel yang ada inputan
 - buat CRUD eksekusi tanpa loading (cek : https://dewankomputer.com/2019/01/23/crud-create-read-update-delete-dengan-ajax-tanpa-loading-part-1-menampilkan-data/)
-- perbaiki cari id manual setiap modul 
 - perbaiki harga, mess dan pembayaran kedokteran (alurnya beda)
-- buat akun user
-- buat dastboard
-- buat Invoice
-- search disetiap select
-- cek rsj praktik error edit
-- daftar akun tanggal mounya diisi
-- dashboard pendapatan di cek ulang kalkulasinya
-
+- perbaiki isian akun institusi
+- perbaiki dastboard institusi
+- perbaiki dastboard admin
+- perbaiki Invoice pembayaran
+- Perbaiki modul mou perpanjang dan baru
+- perbaikian harga TAK sesuaikan dengan frekuensi sebelum input pembayaran
+- dashboard user tampil mounya dengan judul perpanjang / baru MoU
+- Perbaiki Pendaftaran kedokteran
+- Perbaiki Pendaftaran keperawatan
+- Perbaiki Pendaftaran Nakes Lainnya / Non-Nakes
 
 
 git status

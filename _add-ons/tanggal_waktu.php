@@ -24,22 +24,32 @@ function tanggal($tanggal)
 	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
 
-function tanggal_hari($tanggal)
+function tanggal_min_alt($tanggal)
 {
-	$hari = array(
-		1 =>   'Senin',
-		'Selasa',
-		'Rabu',
-		'Kamis',
-		"Jum'at",
-		'Sabtu',
-		'Minggu'
+	$bulan = array(
+		1 =>   'Jan',
+		'Feb',
+		'Mar',
+		'Apr',
+		'Mei',
+		'Jun',
+		'Jul',
+		'Agu',
+		'Sep',
+		'Okt',
+		'Nov',
+		'Des'
 	);
+	$pecahkan = explode('-', $tanggal);
 
-	return $hari[$tanggal];
+	// variabel pecahkan 0 = tanggal
+	// variabel pecahkan 1 = bulan
+	// variabel pecahkan 2 = tahun
+
+	return $pecahkan[0] . '-' . $bulan[(int)$pecahkan[1]] . '-' . $pecahkan[2];
 }
 
-function tanggal_minimal($tanggal)
+function tanggal_min($tanggal)
 {
 	$bulan = array(
 		1 =>   'Jan',
@@ -63,6 +73,22 @@ function tanggal_minimal($tanggal)
 
 	return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
+
+function tanggal_hari($tanggal)
+{
+	$hari = array(
+		1 =>   'Senin',
+		'Selasa',
+		'Rabu',
+		'Kamis',
+		"Jum'at",
+		'Sabtu',
+		'Minggu'
+	);
+
+	return $hari[$tanggal];
+}
+
 function tanggal_bulan($tanggal)
 {
 	$bulan = array(
@@ -79,9 +105,6 @@ function tanggal_bulan($tanggal)
 		'November',
 		'Desember'
 	);
-	// variabel pecahkan 0 = tanggal
-	// variabel pecahkan 1 = bulan
-	// variabel pecahkan 2 = tahun
 
 	return $bulan[$tanggal];
 }
@@ -121,4 +144,26 @@ function tanggal_between_week($tgl_awal, $tgl_akhir)
 	if ($tgl_awal > $tgl_akhir)
 		return tanggal_between_week($tgl_akhir, $tgl_awal);
 	return floor($mulai->diff($selesai)->days / 7);
+}
+
+function tanggal_sisa($tgl_awal, $tgl_akhir)
+{
+	$d1 = new DateTime($tgl_awal);
+	$d2 = new DateTime($tgl_akhir);
+	$interval = $d1->diff($d2);
+	$diffInDays    = $interval->d;
+	$diffInMonths  = $interval->m;
+	$diffInYears   = $interval->y;
+	return $diffInYears . " Tahun " . $diffInMonths . " Bulan " . $diffInDays . " Hari";
+}
+
+function waktu_sisa($waktu_awal, $waktu_akhir)
+{
+	$d1 = new DateTime($waktu_awal);
+	$d2 = new DateTime($waktu_akhir);
+	$interval = $d1->diff($d2);
+	$diffInSeconds = $interval->s;
+	$diffInMinutes = $interval->i;
+	$diffInHours   = $interval->h;
+	return $diffInHours . " Jam " . $diffInMinutes . " Menit " . $diffInSeconds . " Detik";
 }
