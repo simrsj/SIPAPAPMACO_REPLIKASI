@@ -16,9 +16,20 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</a>
 				<!-- Nav Item - Dashboard -->
 				<li class="nav-item active">
+					<a class="nav-link" href="?test">
+						<i class="fas fa-fw fa-bug"></i>
+						<span>TEST</span></a>
+				</li>
+				<!-- Nav Item - Dashboard -->
+				<li class="nav-item active">
 					<a class="nav-link" href="?">
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="<?php echo md5("?mou_k"); ?>">
+						<i class="fas fa-handshake fa-3x text-gray-400"></i>
+						<span>MoU/Kerjasama</span></a>
 				</li>
 
 				<!-- Divider -->

@@ -1,16 +1,24 @@
-<?php
+<!DOCTYPE html>
+<html>
 
+<body>
 
-$sql_u_praktik = "UPDATE `tb_praktik` SET status_cek_praktik = 'SELESAI' WHERE id_praktik = '" . 3 . "'";
-$sql_s_praktik = "SELECT * FROM tb_praktik
-    JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik
-    JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess
-    WHERE tb_praktik.id_praktik = '" . 3 . "'";
+    <p>Click the radio button to toggle between password visibility:</p>
 
-$q = $conn->query($sql_s_praktik);
-$d = $q->fetch(PDO::FETCH_ASSOC);
-echo $d['kapasitas_terisi_mess'] . "-" . $d['jumlah_praktik'];
-$selisih = $d['kapasitas_terisi_mess'] - $d['jumlah_praktik'];
-$sql_u_mess = "UPDATE `tb_mess` SET kapasitas_terisi_mess = '" . $selisih . "' WHERE id_praktik = '" . 3 . "'";
-echo $sql_u_praktik . "<br>";
-echo $sql_u_mess . "<br>";
+    Password: <input type="password" value="FakePSW" id="myInput"><br><br>
+    <input type="checkbox" onclick="myFunction()">Show Password
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

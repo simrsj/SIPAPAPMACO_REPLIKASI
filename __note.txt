@@ -13,8 +13,6 @@
 - daftar akun tanggal mounya diisi
 - dashboard pendapatan di cek ulang kalkulasinya
 
-
-
 git status
 git add .
 git commit -m "Modul MoU, Alur Pendaftaran dan Validasi"  
