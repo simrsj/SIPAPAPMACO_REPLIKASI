@@ -10,15 +10,18 @@ if (isset($_POST['hapus_mou'])) {
 ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-11">
+            <div class="col-lg-10">
                 <h1 class="h4 mb-2 text-gray-800">MoU Kerjasama</h1>
             </div>
-            <div class="col-lg-1">
+            <div class="col-lg-2 text-right my-auto">
                 <a href="?mou&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
+                <a href="?mou&i" class="btn btn-outline-warning btn-sm">
+                    <i class="fas fa-handshake"></i> Pengajuan
+                </a>
             </div>
-        </div>
+        </div><br>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
@@ -32,7 +35,7 @@ if (isset($_POST['hapus_mou'])) {
                     WHERE tb_institusi.id_institusi = " . $_SESSION['id_institusi'] . "
                     ORDER BY tb_institusi.nama_institusi ASC";
 
-                echo $sql_mou . "<br>";
+                // echo $sql_mou . "<br>";
 
                 $q_mou = $conn->query($sql_mou);
                 $r_mou = $q_mou->rowCount();

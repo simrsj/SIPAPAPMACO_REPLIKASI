@@ -23,19 +23,19 @@
                             <div class="text-md font-weight-bold  text-primary mb-1">
                                 JUMLAH DIKLAT PROSES :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?php echo $data_dpp; ?></b> Kelompok
+                                    <b><?php echo $dashboard_dpp; ?></b> Kelompok
                                 </div>
                             </div>
                             <div class="text-md font-weight-bold text-primary mb-1">
                                 JUMLAH DIKLAT AKTIF :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?php echo $data_dpa; ?></b> Kelompok
+                                    <b><?php echo $dashboard_dpa; ?></b> Kelompok
                                 </div>
                             </div>
                             <div class="text-md font-weight-bold text-primary mb-1">
                                 JUMLAH DIKLAT NON-AKTIF :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?php echo $data_dpn; ?></b> Kelompok
+                                    <b><?php echo $dashboard_dpn; ?></b> Kelompok
                                 </div>
                             </div>
                         </div>
@@ -56,15 +56,15 @@
                             <div class="text-md font-weight-bold text-danger mb-1">
                                 <b>TOTAL MOU : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="badge badge-primary text-lg"><?php echo $data_dmt; ?></span>
+                                    <span class="badge badge-primary text-lg"><?php echo $dashboard_dmt; ?></span>
                                 </div>
                                 <b>MOU BERAKHIR : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="badge badge-danger text-lg"><?php echo $data_dmb; ?></span>
+                                    <span class="badge badge-danger text-lg"><?php echo $dashboard_dmb; ?></span>
                                 </div>
                                 <b>MOU AKTIF : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="badge badge-success text-lg"><?php echo $data_dma; ?></span>
+                                    <span class="badge badge-success text-lg"><?php echo $dashboard_dma; ?></span>
                                 </div>
                             </div>
                         </div>

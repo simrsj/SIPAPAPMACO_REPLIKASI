@@ -14,7 +14,7 @@ if (isset($_POST['hapus_mou'])) {
             <div class="col-lg-11">
                 <h1 class="h4 mb-2 text-gray-800">MoU Kerjasama</h1>
             </div>
-            <div class="col-lg-1">
+            <div class="col-lg-1 text-right my-auto">
                 <a href="?mou&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>

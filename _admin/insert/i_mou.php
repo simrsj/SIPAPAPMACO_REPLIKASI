@@ -2,20 +2,20 @@
 if (isset($_POST['simpan_mou'])) {
 
     //mencari data id_mou yg belum ada
-    $no_id_mou = 0;
-    while ($d_mou = $conn->query("SELECT id_mou FROM tb_mou ORDER BY id_mou ASC")->fetch(PDO::FETCH_ASSOC)) {
-        if ($no_id_mou != $d_mou[0]) {
-            $no_id_mou = $d_mou[0] + 1;
-            break;
-        } elseif ($no_id_mou == 0) {
-            $no_id_mou;
+    $no = 1;
+    $sql = "SELECT id_mou FROM tb_mou ORDER BY id_mou ASC";
+    $q = $conn->query($sql);
+    while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
+        if ($no != $d['id_lapor']) {
+            $no = $d['id_lapor'] + 1;
             break;
         }
-        $no_id_mou = $d_mou[0] + 1;
+        $no++;
     }
-    if ($_POST['file_mou'] != NULL || "") {
+
+    if ($_FILES['file_mou']['size'] > 0) {
         //ubah Nama File PDF
-        $_FILES['file_mou']['name'] = "mou_" . $no_id_mou . "_" . date('Y-m-d') . ".pdf";
+        $_FILES['file_mou']['name'] = "mou_" . $no . "_" . date('Y-m-d') . ".pdf";
 
         //alamat file surat masuk
         $alamat_unggah = "./_file/mou";
@@ -66,7 +66,7 @@ if (isset($_POST['simpan_mou'])) {
             file_mou,
             ket_mou
         ) VALUE (
-            '" . $no_id_mou . "',
+            '" . $no . "',
             '" . $_POST['id_institusi'] . "',
             '" . $_POST['tgl_mulai_mou'] . "',
             '" . $_POST['tgl_selesai_mou'] . "',        
@@ -106,9 +106,9 @@ if (isset($_POST['simpan_mou'])) {
 
                     <!-- Nama Institusi, MoU RSJ dan Institusi -->
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             Nama Institusi<span style="color:red">*</span><br>
-                            <select class="form-control" name="id_institusi" required>
+                            <select class="form-control js-example-placeholder-single" name="id_institusi" required>
                                 <option value="">-- Pilih --</option>
                                 <?php
                                 $sql_institusi = "SELECT * FROM tb_institusi ORDER BY nama_institusi ASC";
@@ -124,13 +124,21 @@ if (isset($_POST['simpan_mou'])) {
                                 ?>
                             </select>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             No. MoU RSJ<span style="color:red">*</span><br>
                             <input class="form-control" type="text" name="no_rsj_mou" required>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             No. MoU Institusi <span style="color:red">*</span><br>
                             <input class="form-control" type="text" name="no_institusi_mou" required>
+                        </div>
+                        <div class="col-sm-2">
+                            Tanggal Mulai MoU<span style=" color:red">*</span><br>
+                            <input class="form-control" type="date" name="tgl_mulai_mou" required>
+                        </div>
+                        <div class="col-sm-3">
+                            File MoU <br>
+                            <input type="file" accept="application/pdf" name="file_mou">
                         </div>
                     </div>
                     <hr>
@@ -139,7 +147,7 @@ if (isset($_POST['simpan_mou'])) {
                     <div class="row">
                         <div class="col-sm-3">
                             Jurusan Pendidikan <span style="color:red">*</span><br>
-                            <select class="form-control" name="id_jurusan_pdd" required>
+                            <select class="form-control js-example-placeholder-single" name="id_jurusan_pdd" required>
                                 <option value="">-- Pilih --</option>
                                 <?php
                                 $x_jurusan = $conn->query("SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC");
@@ -153,7 +161,7 @@ if (isset($_POST['simpan_mou'])) {
                         </div>
                         <div class="col-sm-3">
                             Spesifikasi Pendidikan <span style="color:red">*</span><br>
-                            <select class="form-control" name="id_spesifikasi_pdd" required>
+                            <select class="form-control js-example-placeholder-single" name="id_spesifikasi_pdd" required>
                                 <option value="">-- Pilih --</option>
                                 <?php
                                 $x_spek = $conn->query("SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC");
@@ -168,7 +176,7 @@ if (isset($_POST['simpan_mou'])) {
                         </div>
                         <div class="col-sm-3">
                             Jenjang Pendidikan <span style="color:red">*</span><br>
-                            <select class="form-control" name="id_jenjang_pdd" required>
+                            <select class="form-control js-example-placeholder-single" name="id_jenjang_pdd" required>
                                 <option value="">-- Pilih --</option>
                                 <?php
                                 $x_jenjang = $conn->query("SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC");
@@ -182,7 +190,7 @@ if (isset($_POST['simpan_mou'])) {
                         </div>
                         <div class="col-sm-3">
                             Akreditasi<span style="color:red">*</span><br>
-                            <select class="form-control" name="id_akreditasi" required>
+                            <select class="form-control js-example-placeholder-single" name="id_akreditasi" required>
                                 <option value="">-- Pilih --</option>
                                 <?php
                                 $x_akreditasi = $conn->query("SELECT * FROM tb_akreditasi");
@@ -199,25 +207,10 @@ if (isset($_POST['simpan_mou'])) {
 
                     <!-- Tanggal Mulai, Tanggal Akhir, Keterangan dan File -->
                     <div class="row">
-                        <div class="col-sm-2">
-                            Tanggal Mulai MoU<span style=" color:red">*</span><br>
-                            <input class="form-control" type="date" name="tgl_mulai_mou" required>
-                        </div>
-                        <div class="col-sm-2">
-                            Tanggal Akhir MoU<span style="color:red">*</span><br>
-                            <input class="form-control" type="date" name="tgl_selesai_mou" required>
-                        </div>
-                        <div class="col-sm-4">
-                            Keterangan<br>
-                            <textarea name="ket_mou" class="form-control"></textarea>
-                        </div>
-                        <div class="col-sm-4">
-                            File MoU <br>
-                            <input type="file" accept="application/pdf" name="file_mou">
+                        <div class="col-lg-12 text-right my-auto">
+                            <input class="btn btn-success btn-sm" type="submit" name="simpan_mou" value="SIMPAN">
                         </div>
                     </div>
-                    <hr>
-                    <input class="btn btn-success btn-sm" type="submit" name="simpan_mou" value="SIMPAN">
                 </form>
             </div>
         </div>
