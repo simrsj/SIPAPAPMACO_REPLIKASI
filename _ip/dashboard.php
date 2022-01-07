@@ -13,7 +13,7 @@
 
     <!-- Content Row -->
     <div class="row">
-        <!-- Area Chart -->
+        <!-- Data Praktik -->
         <div class="col-xl-6 col-md-6">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
