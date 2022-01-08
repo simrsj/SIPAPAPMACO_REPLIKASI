@@ -20,6 +20,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
 				</li>
+				<!-- Nav Item - Dashboard -->
+				<li class="nav-item active">
+					<a class="nav-link" href="?mou">
+						<i class="fas fa-fw fa-handshake"></i>
+						<span>MoU-Kerjasama</span></a>
+				</li>
 
 				<!-- Divider -->
 				<hr class="sidebar-divider">
@@ -96,6 +102,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						include "_ip/view/v_akun.php";
 					} elseif (isset($_GET['lapor'])) {
 						include "_ip/view/v_lapor.php";
+					} elseif (isset($_GET['mou'])) {
+						if (isset($_GET['i'])) {
+							include "_ip/insert/i_mou.php";
+						} else {
+							include "_ip/view/v_mou.php";
+						}
 					} elseif (isset($_GET['nil'])) {
 						include "_ip/view/v_nilai.php";
 					} elseif (isset($_GET['ppt'])) {

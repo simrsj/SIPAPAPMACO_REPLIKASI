@@ -2,7 +2,7 @@
 // error_reporting(0);
 session_start();
 include "_add-ons/koneksi.php";
-include "_add-ons/tanggal.php";
+include "_add-ons/tanggal_waktu.php";
 ?>
 <!DOCTYPE html>
 <html lang="id">

@@ -6,50 +6,11 @@ if (isset($_POST['simpan_mou'])) {
     $sql = "SELECT id_mou FROM tb_mou ORDER BY id_mou ASC";
     $q = $conn->query($sql);
     while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
-        if ($no != $d['id_lapor']) {
-            $no = $d['id_lapor'] + 1;
+        if ($no != $d['id_mou']) {
+            $no = $d['id_mou'] + 1;
             break;
         }
         $no++;
-    }
-
-    if ($_FILES['file_mou']['size'] > 0) {
-        //ubah Nama File PDF
-        $_FILES['file_mou']['name'] = "mou_" . $no . "_" . date('Y-m-d') . ".pdf";
-
-        //alamat file surat masuk
-        $alamat_unggah = "./_file/mou";
-
-        //pembuatan alamat bila tidak ada
-        if (!is_dir($alamat_unggah)) {
-            mkdir($alamat_unggah, 0777, $rekursif = true);
-        }
-
-        //unggah surat dan data praktik
-        if (!is_null($_FILES['file_mou'])) {
-            $file_file_mou = (object) @$_FILES['file_mou'];
-
-            //mulai unggah file surat praktik
-            if ($file_file_mou->size > 1000 * 10000) {
-                echo "
-                <script>
-                    alert('File Surat Harus dibawah 10 Mb');
-                </script>
-                ";
-            } elseif ($file_file_mou->type !== 'application/pdf') {
-                echo "
-                <script>
-                    alert('File Surat Harus .pdf');
-                </script>
-                    ";
-            } else {
-                $unggah_file_mou = move_uploaded_file(
-                    $file_file_mou->tmp_name,
-                    "{$alamat_unggah}/{$file_file_mou->name}"
-                );
-                $link_file_mou = "{$alamat_unggah}/{$file_file_mou->name}";
-            }
-        }
     }
 
     $sql_insert_mou = " INSERT INTO tb_mou (
@@ -62,9 +23,7 @@ if (isset($_POST['simpan_mou'])) {
             id_jurusan_pdd,
             id_spesifikasi_pdd,
             id_jenjang_pdd,
-            id_akreditasi,
-            file_mou,
-            ket_mou
+            id_akreditasi
         ) VALUE (
             '" . $no . "',
             '" . $_POST['id_institusi'] . "',
@@ -75,9 +34,7 @@ if (isset($_POST['simpan_mou'])) {
             '" . $_POST['id_jurusan_pdd'] . "',
             '" . $_POST['id_spesifikasi_pdd'] . "',
             '" . $_POST['id_jenjang_pdd'] . "',
-            '" . $_POST['id_akreditasi'] . "',
-            '" . $link_file_mou . "',
-            '" . $_POST['ket_mou'] . "'
+            '" . $_POST['id_akreditasi'] . "'
         )";
 
 
@@ -104,9 +61,9 @@ if (isset($_POST['simpan_mou'])) {
             <div class="card-body">
                 <form action="" method="post" class="form-group" enctype="multipart/form-data">
 
-                    <!-- Nama Institusi, MoU RSJ dan Institusi -->
+                    <!-- Nama Institusi, MoU RSJ dan Institusi, Tanggal Mulai, Tanggal Akhir,-->
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             Nama Institusi<span style="color:red">*</span><br>
                             <select class="form-control js-example-placeholder-single" name="id_institusi" required>
                                 <option value="">-- Pilih --</option>
@@ -132,13 +89,14 @@ if (isset($_POST['simpan_mou'])) {
                             No. MoU Institusi <span style="color:red">*</span><br>
                             <input class="form-control" type="text" name="no_institusi_mou" required>
                         </div>
+
                         <div class="col-sm-2">
                             Tanggal Mulai MoU<span style=" color:red">*</span><br>
                             <input class="form-control" type="date" name="tgl_mulai_mou" required>
                         </div>
-                        <div class="col-sm-3">
-                            File MoU <br>
-                            <input type="file" accept="application/pdf" name="file_mou">
+                        <div class="col-sm-2">
+                            Tanggal Akhir MoU<span style="color:red">*</span><br>
+                            <input class="form-control" type="date" name="tgl_selesai_mou" required>
                         </div>
                     </div>
                     <hr>
@@ -160,6 +118,20 @@ if (isset($_POST['simpan_mou'])) {
                             </select>
                         </div>
                         <div class="col-sm-3">
+                            Jenjang Pendidikan <span style="color:red">*</span><br>
+                            <select class="form-control js-example-placeholder-single" name="id_jenjang_pdd" required>
+                                <option value="">-- Pilih --</option>
+                                <?php
+                                $x_jenjang = $conn->query("SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC");
+                                while ($d_jenjang = $x_jenjang->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
+                                    <option value="<?php echo $d_jenjang['id_jenjang_pdd']; ?> "><?php echo $d_jenjang['nama_jenjang_pdd']; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
                             Spesifikasi Pendidikan <span style="color:red">*</span><br>
                             <select class="form-control js-example-placeholder-single" name="id_spesifikasi_pdd" required>
                                 <option value="">-- Pilih --</option>
@@ -175,21 +147,7 @@ if (isset($_POST['simpan_mou'])) {
 
                         </div>
                         <div class="col-sm-3">
-                            Jenjang Pendidikan <span style="color:red">*</span><br>
-                            <select class="form-control js-example-placeholder-single" name="id_jenjang_pdd" required>
-                                <option value="">-- Pilih --</option>
-                                <?php
-                                $x_jenjang = $conn->query("SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC");
-                                while ($d_jenjang = $x_jenjang->fetch(PDO::FETCH_ASSOC)) {
-                                ?>
-                                    <option value="<?php echo $d_jenjang['id_jenjang_pdd']; ?> "><?php echo $d_jenjang['nama_jenjang_pdd']; ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            Akreditasi<span style="color:red">*</span><br>
+                            Akreditasi Insitutsi : <span style="color:red">*</span><br>
                             <select class="form-control js-example-placeholder-single" name="id_akreditasi" required>
                                 <option value="">-- Pilih --</option>
                                 <?php
@@ -204,13 +162,7 @@ if (isset($_POST['simpan_mou'])) {
                         </div>
                     </div>
                     <hr>
-
-                    <!-- Tanggal Mulai, Tanggal Akhir, Keterangan dan File -->
-                    <div class="row">
-                        <div class="col-lg-12 text-right my-auto">
-                            <input class="btn btn-success btn-sm" type="submit" name="simpan_mou" value="SIMPAN">
-                        </div>
-                    </div>
+                    <input class="btn btn-success btn-sm" type="submit" name="simpan_mou" value="SIMPAN">
                 </form>
             </div>
         </div>

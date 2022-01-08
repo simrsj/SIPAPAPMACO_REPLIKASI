@@ -310,7 +310,7 @@ if (isset($_POST['simpan_praktik'])) {
                             ?>
                         </div>
                         <div class="col-lg-3">
-                            Akreditasi : <span style="color:red">*</span><br>
+                            Akreditasi Institusi : <span style="color:red">*</span><br>
                             <?php
                             $sql_akreditasi = "SELECT * FROM tb_akreditasi";
 

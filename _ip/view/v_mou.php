@@ -1,7 +1,6 @@
 <?php
 if (isset($_POST['hapus_mou'])) {
     $conn->query("DELETE FROM `tb_mou` WHERE `id_mou` = " . $_POST['id_mou']);
-
     echo "
     <script>
         document.location.href = '?mou';
@@ -11,43 +10,19 @@ if (isset($_POST['hapus_mou'])) {
 ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-11">
+            <div class="col-lg-10">
                 <h1 class="h4 mb-2 text-gray-800">MoU Kerjasama</h1>
             </div>
-            <div class="col-lg-1 text-right my-auto">
+            <div class="col-lg-2 text-right my-auto">
                 <a href="?mou&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
+                <a href="?mou&i" class="btn btn-outline-warning btn-sm">
+                    <i class="fas fa-handshake"></i> Pengajuan
+                </a>
             </div>
-        </div>
-        <!-- Data Tabel MoU -->
-        <div class="card shadow mb-4">
-            <div class="card-body text-center text-lg">
-                <div class="row fieldset">
-                    <div class="col-md-2">
-                        Berlaku (Aktif) : <br>
-                        <span class="badge badge-success text-lg"><?php echo $dashboard_dma; ?></span>
-                    </div>
-                    <div class="col-md-3">
-                        Tidak Berlaku (Non-Aktif) : <br>
-                        <span class="badge badge-danger text-lg"><?php echo $dashboard_dmb; ?></span>
-                    </div>
-                    <div class="col-md-2">
-                        Belum Perpanjang : <br>
-                        <span class="badge badge-danger text-lg"><?php echo $dashboard_dmbp; ?></span>
-                    </div>
-                    <div class="col-md-2">
-                        Pengajuan Baru : <br>
-                        <span class="badge badge-primary text-lg"><?php echo $dashboard_dmpb; ?></span>
-                    </div>
-                    <div class="col-md-3">
-                        Pengajuan Perpanjang : <br>
-                        <span class="badge badge-primary text-lg"><?php echo $dashboard_dmpl; ?></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Data Tabel MoU -->
+        </div><br>
+        <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
                 <?php
@@ -57,7 +32,10 @@ if (isset($_POST['hapus_mou'])) {
                     JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
                     JOIN tb_akreditasi ON tb_mou.id_akreditasi = tb_akreditasi.id_akreditasi
+                    WHERE tb_institusi.id_institusi = " . $_SESSION['id_institusi'] . "
                     ORDER BY tb_institusi.nama_institusi ASC";
+
+                // echo $sql_mou . "<br>";
 
                 $q_mou = $conn->query($sql_mou);
                 $r_mou = $q_mou->rowCount();
@@ -71,9 +49,9 @@ if (isset($_POST['hapus_mou'])) {
                                 <tr>
                                     <th scope='col'>No</th>
                                     <th>Tanggal Akhir MoU</th>
+                                    <th>Berlaku /<br>Tidak Berlaku</th>
                                     <th>Nama Institusi</th>
-                                    <th>No Mou Institusi</th>
-                                    <th>No Mou RSJ</th>
+                                    <th>Keterangan</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -82,29 +60,35 @@ if (isset($_POST['hapus_mou'])) {
                                 $q_mou_a = $conn->query($sql_mou);
 
                                 $no = 1;
+
                                 while ($d_mou = $q_mou_a->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
                                         <td class="text-center my-auto"><?php echo $no; ?></td>
-                                        <td class="text-center text-capitalize my-auto">
+                                        <td class="text-center my-auto"><?php echo tanggal_int($d_mou['tgl_selesai_mou']); ?></td>
+                                        <td class="text-center my-auto">
                                             <?php
-                                            echo tanggal_min_alt($d_mou['tgl_selesai_mou']) . "<br>";
                                             $date_end = strtotime($d_mou['tgl_selesai_mou']);
                                             $date_now = strtotime(date('Y-m-d'));
                                             $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
 
                                             if ($date_diff <= 0) {
                                             ?>
-                                                <span class="badge badge-success text-xs">
-                                                    <?php echo tanggal_sisa($d_mou['tgl_selesai_mou'], date('Y-m-d')); ?>
-                                                </span>
+                                                <span class="badge badge-success text-xs">Belaku</span>
                                             <?php
                                             } elseif ($date_diff > 0) {
                                             ?>
                                                 <span class="badge badge-danger text-xs">Tidak Berlaku</span>
                                             <?php
                                             }
-                                            echo "<br>";
+                                            ?>
+                                        </td>
+                                        <td><?php echo $d_mou['nama_institusi']; ?></td>
+                                        <td class="text-center my-auto text-capitalize">
+                                            <?php
+                                            $date_end = strtotime($d_mou['tgl_selesai_mou']);
+                                            $date_now = strtotime(date('Y-m-d'));
+                                            $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
 
                                             if ($d_mou['status_mou'] == 'belum pengajuan') {
                                             ?>
@@ -114,7 +98,7 @@ if (isset($_POST['hapus_mou'])) {
                                             ?>
                                                 <span class="badge badge-primary text-xs"><?php echo $d_mou['status_mou']; ?></span>
                                             <?php
-                                            } elseif ($d_mou['status_mou'] == 'proses pengajuan perpanjang') {
+                                            } elseif ($d_mou['status_mou'] == 'proses pengajuan baru') {
                                             ?>
                                                 <span class="badge badge-primary text-xs"><?php echo $d_mou['status_mou']; ?></span>
                                             <?php
@@ -129,9 +113,6 @@ if (isset($_POST['hapus_mou'])) {
                                             }
                                             ?>
                                         </td>
-                                        <td><?php echo $d_mou['nama_institusi']; ?></td>
-                                        <td><?php echo $d_mou['no_institusi_mou']; ?></td>
-                                        <td><?php echo $d_mou['no_rsj_mou']; ?></td>
                                         <td class="text-center my-auto">
 
                                             <!-- tombol rincian -->
@@ -322,7 +303,7 @@ if (isset($_POST['hapus_mou'])) {
                 <?php
                 } else {
                 ?>
-                    <h3> Data MoU Tidak Ada</h3>
+                    <h3 class="text-center"> Data MoU Anda Tidak Ada</h3>
                 <?php
                 }
                 ?>

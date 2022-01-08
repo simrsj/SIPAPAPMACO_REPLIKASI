@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jan 2022 pada 10.08
+-- Waktu pembuatan: 07 Jan 2022 pada 10.43
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.34
 
@@ -50,6 +50,7 @@ INSERT INTO `tb_akreditasi` (`id_akreditasi`, `nama_akreditasi`) VALUES
 
 CREATE TABLE `tb_bayar` (
   `id_bayar` int(11) NOT NULL,
+  `id_mou` int(11) DEFAULT NULL,
   `id_praktik` int(11) NOT NULL,
   `atas_nama_bayar` text NOT NULL,
   `no_bayar` text NOT NULL,
@@ -734,17 +735,17 @@ CREATE TABLE `tb_mou` (
   `id_jenjang_pdd` int(11) DEFAULT NULL,
   `id_akreditasi` int(11) DEFAULT NULL,
   `file_mou` text DEFAULT NULL,
-  `ket_mou` text NOT NULL,
-  `institusi_mou` varchar(255) NOT NULL
+  `ket_mou` enum('belum pengajuan','proses pengajuan baru','proses pengajuan perpanjang','aktif') DEFAULT NULL,
+  `status_mou` enum('Y','T') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tb_mou`
 --
 
-INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mou`, `no_rsj_mou`, `no_institusi_mou`, `id_jurusan_pdd`, `id_spesifikasi_pdd`, `id_jenjang_pdd`, `id_akreditasi`, `file_mou`, `ket_mou`, `institusi_mou`) VALUES
-(1, '87', '2022-01-05', '2023-08-18', '', '', NULL, NULL, NULL, NULL, NULL, '', ''),
-(2, '2', '2014-02-13', '2017-02-12', '- ', '-', 0, 0, 0, 0, NULL, '', ''),
+INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mou`, `no_rsj_mou`, `no_institusi_mou`, `id_jurusan_pdd`, `id_spesifikasi_pdd`, `id_jenjang_pdd`, `id_akreditasi`, `file_mou`, `ket_mou`, `status_mou`) VALUES
+(1, '87', '2022-01-05', '2023-08-18', '-', '-', NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(2, '2', '2014-02-13', '2022-01-05', '- ', '-', 0, 0, 0, 0, NULL, '', ''),
 (3, '3', '2018-08-20', '2021-08-19', '119/14858/RSJ', '036/AKP/BK-A/VIII/2018', 0, 0, 0, 0, NULL, '', ''),
 (4, '4', '2017-12-22', '2020-12-21', '119/19834/RSJ', '355/PKS/AKBM/XII/2017', 0, 0, 0, 0, NULL, '', ''),
 (5, '5', '2019-06-19', '2022-06-18', '073/10582/RSJ', 'B. 167/AKPER BPC/VI/2019', 0, 0, 0, 0, NULL, '', ''),
@@ -766,7 +767,7 @@ INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mo
 (21, '21', '2019-09-17', '2022-09-16', '119/15675/RSJ', '445/1318/UHP-RS Ihsan\nDan\n108/Dek/FK/IX/2019', 0, 0, 0, 0, NULL, '', ''),
 (22, '22', '2015-10-29', '2018-10-28', '07313324/RSJ/2015', '005/KS-FK UNJANI/X/2015', 0, 0, 0, 0, NULL, '', ''),
 (23, '23', '2020-07-01', '2023-07-01', '119/10058/RSJ', 'HK.03.01/X.4.2.1/14120/2020\ndan 677/UN6.C/PKS/2020', 0, 0, 0, 0, NULL, '', ''),
-(24, '24', '2014-11-14', '2017-11-13', '-', '-', 0, 0, 0, 0, NULL, '', ''),
+(24, '24', '2021-12-06', '2024-12-05', '119/16520/RSJ', '1358/UN6.L/PKS/2021', 2, 2, 10, 1, NULL, '', ''),
 (25, '25', '2014-03-10', '2017-03-09', '-', '-', 0, 0, 0, 0, NULL, '', ''),
 (26, '26', '2018-11-19', '2021-11-18', '119/209634/RSJ', 'HK.05.01/1.6/5004/2018', 0, 0, 0, 0, NULL, '', ''),
 (27, '27', '2020-01-08', '2023-01-07', '075/0409/RSJ/I/2020', '016/POLTEKKES/I/2020', 0, 0, 0, 0, NULL, '', ''),
@@ -829,7 +830,7 @@ INSERT INTO `tb_mou` (`id_mou`, `id_institusi`, `tgl_mulai_mou`, `tgl_selesai_mo
 (84, '84', '2020-07-30', '2023-07-30', '073/11662/RSJ', '888/PL42/KS/2020', 0, 0, 0, 0, NULL, '', ''),
 (85, '85', '2020-11-18', '2023-11-18', '073/18973/RSJ', '247/PKS/UKSW/XI/2020', 0, 0, 0, 0, NULL, '', ''),
 (86, '86', '2020-11-02', '2023-11-02', '073/16336/RSJ', '037/PKS/DN/FKUKMXI/2020', 0, 0, 0, 0, NULL, '', ''),
-(126, '1', '2022-01-02', '2024-01-02', '-', '-', 1, 1, 8, 1, '', '-', '');
+(126, '1', '2022-01-02', '2024-01-02', '-', '-', 1, 1, 8, 1, NULL, '', '');
 
 -- --------------------------------------------------------
 
@@ -1041,8 +1042,8 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `id_mou`, `id_institusi`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `no_telp_user`, `foto_user`, `terakhir_login_user`, `tgl_buat_user`, `tgl_ubah_user`, `status_user`) VALUES
-(1, 0, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '1', '08123145645', NULL, '2022-01-05', '2021-03-29', '2022-01-02', 'Y'),
-(15, 1, 87, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'USER INSTITUSI', 'asd@asd', '2', '091273', NULL, '2022-01-04', '2021-12-31', '2022-01-04', 'Y'),
+(1, 0, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '1', '08123145645', NULL, '2022-01-07', '2021-03-29', '2022-01-02', 'Y'),
+(15, 1, 87, 'user', '202cb962ac59075b964b07152d234b70', 'USER INSTITUSI', 'asd@asd', '2', '091273', NULL, '2022-01-07', '2021-12-31', '2022-01-06', 'Y'),
 (16, 0, 5, 'asalajah@gmail.com', 'e66ed49f9432f4ef78d0910ab7e31f57', 'Melly', 'asalajah@gmail.com', '2', '081123456789', NULL, '2022-01-05', '2022-01-05', NULL, 'Y'),
 (17, 0, 3, 'diklit.rsj.jabarprov@gmail.com', '39b1f688752f9edb7e1283a4649f05a4', 'Rani', 'diklit.rsj.jabarprov@gmail.com', '2', '081320510201', NULL, '2022-01-05', '2022-01-05', NULL, 'Y');
 

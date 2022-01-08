@@ -1,4 +1,4 @@
-<?php include "./_add-ons/dashboard_data.php"; ?>
+<?php include "./_add-ons/dashboard_data_institusi.php"; ?>
 
 <div class="container-fluid">
 
@@ -11,6 +11,72 @@
         </a> -->
     </div>
 
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Diklat -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-md font-weight-bold  text-primary mb-1">
+                                JUMLAH DIKLAT PROSES :
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <b><?php echo $dashboard_dpp; ?></b> Kelompok
+                                </div>
+                            </div>
+                            <div class="text-md font-weight-bold text-primary mb-1">
+                                JUMLAH DIKLAT AKTIF :
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <b><?php echo $dashboard_dpa; ?></b> Kelompok
+                                </div>
+                            </div>
+                            <div class="text-md font-weight-bold text-primary mb-1">
+                                JUMLAH DIKLAT NON-AKTIF :
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <b><?php echo $dashboard_dpn; ?></b> Kelompok
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-graduate fa-3x text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MoU -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-md font-weight-bold text-danger mb-1">
+                                <b>TOTAL MOU : </b>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <span class="badge badge-primary text-lg"><?php echo $dashboard_dmt; ?></span>
+                                </div>
+                                <b>MOU BERAKHIR : </b>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <span class="badge badge-danger text-lg"><?php echo $dashboard_dmb; ?></span>
+                                </div>
+                                <b>MOU AKTIF : </b>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <span class="badge badge-success text-lg"><?php echo $dashboard_dma; ?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-handshake fa-3x text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <!-- Content Row -->
     <div class="row">
         <!-- Data Praktik -->

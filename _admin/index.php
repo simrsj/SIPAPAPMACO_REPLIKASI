@@ -18,7 +18,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<li class="nav-item active">
 					<a class="nav-link" href="?test">
 						<i class="fas fa-fw fa-bug"></i>
-						<span>TEST</span></a>
+						<span>Testing</span></a>
 				</li>
 				<!-- Nav Item - Dashboard -->
 				<li class="nav-item active">
@@ -26,10 +26,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
 				</li>
+				<!-- Nav Item - Dashboard -->
 				<li class="nav-item active">
-					<a class="nav-link" href="<?php echo md5("?mou_k"); ?>">
-						<i class="fas fa-handshake fa-3x text-gray-400"></i>
-						<span>MoU/Kerjasama</span></a>
+					<a class="nav-link" href="?mou">
+						<i class="fas fa-fw fa-handshake"></i>
+						<span>MoU-Kerjasama</span></a>
 				</li>
 
 				<!-- Divider -->
@@ -38,12 +39,33 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div class="sidebar-heading">
 					Kediklatan
 				</div>
-				<!-- Nav Item - Pages Collapse Menu -->
 				<li class="nav-item">
-					<a class="nav-link" href="?prk">
+					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
 						<i class="fas fa-fw fa-users"></i>
 						<span>Pendaftaran</span>
 					</a>
+					<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="?prk&ked">
+								<i class="fas fa-user-md"></i>
+								<span>Kedokteran</span>
+							</a>
+							<a class="collapse-item" href="?prk&kep">
+								<i class="fas fa-user-nurse"></i>
+								<span>Keperawatan</span>
+							</a>
+							<a class="collapse-item" href="?prk&nkn">
+								<div class="row">
+									<div class="col-md-1">
+										<i class="fas fa-hospital-user"></i>
+									</div>
+									<div class="col-auto">
+										<span>Nakes Lainnya<br>Non Nakes</span>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="?trs">
@@ -65,7 +87,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 
 				<li class="nav-item">
 					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseLap" aria-expanded="true" aria-controls="collapseOne">
-						<i class="fas fa-fw fa-cog"></i>
+						<i class="far fa-fw fa-file-alt"></i>
 						<span>Laporan</span>
 					</a>
 					<div id="collapseLap" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
@@ -96,27 +118,23 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<div class="bg-white py-2 collapse-inner rounded">
 							<h6 class="collapse-header">Daftar Data Pendukung :</h6>
 							<a class="collapse-item" href="?hrg">
-								<i class="fas fa-fw fa-table"></i>
+								<i class="fas fa-fw fa-money-bill-wave"></i>
 								<span>Harga</span>
 							</a>
 							<a class="collapse-item" href="?ins">
-								<i class="fas fa-fw fa-table"></i>
+								<i class="fas fa-fw fa-university"></i>
 								<span>Institusi</span>
 							</a>
 							<a class="collapse-item" href="?mtr">
-								<i class="fas fa-fw fa-table"></i>
+								<i class="fas fa-fw fa-portrait"></i>
 								<span>Mentor/Pembimbing</span>
 							</a>
 							<a class="collapse-item" href="?mes">
-								<i class="fas fa-fw fa-table"></i>
+								<i class="fas fa-fw fa-bed"></i>
 								<span>Mess</span>
 							</a>
-							<a class="collapse-item" href="?mou">
-								<i class="fas fa-fw fa-table"></i>
-								<span>MoU</span>
-							</a>
 							<a class="collapse-item" href="?uni">
-								<i class="fas fa-fw fa-table"></i>
+								<i class="fas fa-fw fa-house-user"></i>
 								<span>Unit</span>
 							</a>
 						</div>
@@ -131,7 +149,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<div class="bg-white py-2 collapse-inner rounded">
 							<h6 class="collapse-header">Daftar Basis Data :</h6>
 							<a class="collapse-item" href="?akr">
-								<i class="fas fa-fw fa-table"></i>
+								<i class="fas fa-fw fa-award"></i>
 								<span>Akreditasi</span>
 							</a>
 							<a class="collapse-item" href="?jjg">
@@ -199,35 +217,37 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 										Pengaturan
 									</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="?lo">
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#log-out">
 										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 										Logout
 									</a>
 
-									<!-- Logout Modal-->
-									<div class="modal fade" id="log-out" tabindex="-1" role="dialog" aria-labelledby="log-out" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
-													<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">×</span>
-													</button>
-												</div>
-												<div class="modal-footer">
-													<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-													<a class="btn btn-danger" href="?lo">Ya</a>
-												</div>
-											</div>
-										</div>
-									</div>
 
 								</div>
 							</li>
 						</ul>
 					</nav>
 
+					<!-- Logout Modal-->
+					<div class="modal fade" id="log-out" tabindex="-1" role="dialog" aria-labelledby="log-out" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+									<a class="btn btn-danger" href="?lo">Ya</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<?php
+					include "_add-ons/dashboard_data_admin.php";
 					if (isset($_GET['aku'])) {
 						include "_admin/view/v_akun.php";
 					} elseif (isset($_GET['akr'])) {
@@ -283,8 +303,14 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/insert/i_praktik_harga.php";
 						} elseif (isset($_GET['i'])) {
 							include "_admin/insert/i_praktik.php";
+						} elseif (isset($_GET['ked'])) {
+							include "_admin/view/v_praktik_ked.php";
+						} elseif (isset($_GET['kep'])) {
+							include "_admin/view/v_praktik_kep.php";
 						} elseif (isset($_GET['m'])) {
 							include "_admin/insert/i_praktik_mess.php";
+						} elseif (isset($_GET['nkn'])) {
+							include "_admin/view/v_praktik_nkn.php";
 						} elseif (isset($_GET['p_i'])) {
 							include "_print/p_praktik_invoice.php";
 						} elseif (isset($_GET['u'])) {
@@ -296,7 +322,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						} elseif (isset($_GET['um'])) {
 							include "_admin/update/u_praktik_mess.php";
 						} else {
-							include "_admin/view/v_praktik.php";
+							include "_error/index.php";
 						}
 					} elseif (isset($_GET['ptk'])) {
 						include "_admin/view/v_praktikan.php";
