@@ -11,15 +11,104 @@ if (isset($_POST['hapus_mou'])) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h4 mb-2 text-gray-800">MoU Kerjasama</h1>
+                <div class="h4 text-gray-800 my-auto">MoU Kerjasama</div>
             </div>
             <div class="col-lg-2 text-right my-auto">
-                <a href="?mou&i" class="btn btn-outline-success btn-sm">
-                    <i class="fas fa-plus"></i> Tambah
-                </a>
-                <a href="?mou&i" class="btn btn-outline-warning btn-sm">
-                    <i class="fas fa-handshake"></i> Pengajuan
-                </a>
+                <div class="dropdown">
+                    <button class="btn btn-outline-warning btn-sm dropdown-toggle text-gray-800" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-handshake"></i> Pengajuan
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#pb">Pengajuan Baru</a>
+
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#pp">Pengajuan Perpanjang</a>
+                    </div>
+
+                    <!-- modal pengajuan baru-->
+                    <div class="modal fade text-center" id="pb" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form method="post" action="" class="form-group">
+                                    <div class="modal-header">
+                                        <h4>Pengajuan Baru</h4>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <b>Nama Institusi : </b><br>
+                                        <?php
+                                        $sql_cari_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = '" . $_SESSION['id_institusi'] . "'";
+                                        $q_cari_institusi = $conn->query($sql_cari_institusi);
+                                        $d_cari_institusi = $q_cari_institusi->fetch(PDO::FETCH_ASSOC);
+
+                                        echo $d_cari_institusi['nama_institusi'];
+
+                                        ?>
+                                        <br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" name="pb" class="btn btn-primary btn-sm" value="Ajukan">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- modal pengajuan perpanjang-->
+                    <div class="modal fade text-center  " id="pp" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form method="post" action="" class="form-group">
+                                    <div class="modal-header">
+                                        <h4>Pengajuan Perpanjang</h4>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <b>Nama Institusi : </b><br>
+                                        <?php
+                                        $sql_cari_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = '" . $_SESSION['id_institusi'] . "'";
+                                        $q_cari_institusi = $conn->query($sql_cari_institusi);
+                                        $d_cari_institusi = $q_cari_institusi->fetch(PDO::FETCH_ASSOC);
+
+                                        echo $d_cari_institusi['nama_institusi'];
+
+                                        ?>
+                                        <br><br>
+                                        <b>Pilih No. MoU: </b><br>
+                                        <?php
+                                        $sql_cari_institusi = "SELECT * FROM tb_institusi 
+                                        JOIN tb_mou ON tb_institusi.id_institusi = tb_mou.id_institusi 
+                                        WHERE tb_institusi.id_institusi = '" . $_SESSION['id_institusi'] . "'";
+                                        $q_cari_institusi = $conn->query($sql_cari_institusi);
+                                        ?>
+                                        <select class="js-example-placeholder-single" name="id_mou">
+                                            <option value=""></option>
+                                            <?php
+                                            while ($d_cari_institusi = $q_cari_institusi->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                                <option value="<?php echo $d_cari_institusi['id_mou']; ?>">
+                                                    <?php
+                                                    echo $d_cari_institusi['no_rsj_mou'] . "-" . $d_cari_institusi['no_institusi_mou'];
+                                                    ?>
+                                                </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select><br>
+                                        <span class="font-italic text-xs">Format No. MoU : No MoU RSJ_No MoU Institusi</span>
+                                        <br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" name="pp" class="btn btn-primary btn-sm" value="Ajukan">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div><br>
         <!-- DataTales Example -->

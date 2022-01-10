@@ -49,7 +49,7 @@ function tanggal_min_alt($tanggal)
 	return $pecahkan[0] . '-' . $bulan[(int)$pecahkan[1]] . '-' . $pecahkan[2];
 }
 
-function tanggal_min($tanggal)
+function tanggal_minimal($tanggal)
 {
 	$bulan = array(
 		1 =>   'Jan',

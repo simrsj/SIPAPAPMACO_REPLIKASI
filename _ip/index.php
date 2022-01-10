@@ -103,8 +103,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					} elseif (isset($_GET['lapor'])) {
 						include "_ip/view/v_lapor.php";
 					} elseif (isset($_GET['mou'])) {
-						if (isset($_GET['i'])) {
-							include "_ip/insert/i_mou.php";
+						if (isset($_GET['ipb'])) {
+							include "_ip/insert/i_mou_baru.php";
+						} elseif (isset($_GET['ipp'])) {
+							include "_ip/insert/i_mou_perpanjang.php";
 						} else {
 							include "_ip/view/v_mou.php";
 						}
