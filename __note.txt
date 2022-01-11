@@ -19,7 +19,7 @@ git add .
 git commit -m "Modul MoU, Alur Pendaftaran dan Validasi"  
 git pull
 git push
- 
+
 git init
 git add README.md
 git commit -m "first commit"

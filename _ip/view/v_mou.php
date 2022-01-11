@@ -36,6 +36,23 @@ if (isset($_POST['hapus_mou'])) {
                                         </button>
                                     </div>
                                     <div class="modal-body">
+                                        <?php
+
+                                        // cari data mou yang sudah punya
+                                        $sql_mou_ada = "SELECT * FROM tb_mou 
+                                        WHERE id_institusi = '" . $_SESSION['id_institusi'] . "'
+                                        AND status_mou";
+                                        $q_mou_ada = $conn->query($sql_mou_ada);
+                                        $r_mou_ada = $q_mou_ada->rowCount();
+                                        if ($r_mou_ada > 0) {
+                                        ?>
+                                            <fieldset class="fieldset font-weight-bold">
+                                                Anda mempunyai Data MoU sebelumnya
+                                            </fieldset>
+                                        <?php
+                                        }
+                                        ?>
+
                                         <b>Nama Institusi : </b><br>
                                         <?php
                                         $sql_cari_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = '" . $_SESSION['id_institusi'] . "'";

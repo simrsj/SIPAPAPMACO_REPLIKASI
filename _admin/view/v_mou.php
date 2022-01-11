@@ -91,9 +91,9 @@ if (isset($_POST['hapus_mou'])) {
                                     <th scope='col'>No</th>
                                     <th>Tanggal Akhir MoU</th>
                                     <th>Nama Institusi</th>
-                                    <th>No Mou Institusi</th>
-                                    <th>No Mou RSJ</th>
-                                    <th width="125px"></th>
+                                    <th>No <br> Mou Institusi</th>
+                                    <th>No <br>Mou RSJ</th>
+                                    <th width="150px"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -125,25 +125,21 @@ if (isset($_POST['hapus_mou'])) {
                                             }
                                             echo "<br>";
 
-                                            if ($d_mou['status_mou'] == 'belum pengajuan') {
+                                            if ($date_diff > 0 && $d_mou['ket_mou'] == NULL) {
                                             ?>
-                                                <span class="badge badge-danger text-xs"><?php echo $d_mou['status_mou']; ?></span>
+                                                <span class="badge badge-danger text-xs">Belum Pengajuan</span>
                                             <?php
-                                            } elseif ($d_mou['status_mou'] == 'proses pengajuan baru') {
+                                            } elseif ($d_mou['ket_mou'] == 'proses pengajuan baru') {
                                             ?>
-                                                <span class="badge badge-primary text-xs"><?php echo $d_mou['status_mou']; ?></span>
+                                                <span class="badge badge-primary text-xs"><?php echo $d_mou['ket_mou']; ?></span>
                                             <?php
-                                            } elseif ($d_mou['status_mou'] == 'proses pengajuan perpanjang') {
+                                            } elseif ($d_mou['ket_mou'] == 'proses pengajuan perpanjang') {
                                             ?>
-                                                <span class="badge badge-primary text-xs"><?php echo $d_mou['status_mou']; ?></span>
-                                            <?php
-                                            } elseif ($d_mou['status_mou'] == 'aktif') {
-                                            ?>
-                                                <span class="badge badge-success text-xs"><?php echo $d_mou['status_mou']; ?></span>
+                                                <span class="badge badge-primary text-xs"><?php echo $d_mou['ket_mou']; ?></span>
                                             <?php
                                             } else {
                                             ?>
-                                                <span class="badge badge-danger text-xs">"ERROR"</span>
+                                                <span class="badge badge-danger text-xs"></span>
                                             <?php
                                             }
                                             ?>

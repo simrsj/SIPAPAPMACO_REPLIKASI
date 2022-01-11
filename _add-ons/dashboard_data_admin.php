@@ -7,31 +7,31 @@ $dashboard_dmt = $q_dmt->rowCount();
 
 //////////////////// DATA MOU BERAKHIR ////////////////////
 $sql_dmb = "SELECT * FROM tb_mou 
-WHERE tgl_selesai_mou > CURDATE()";
+WHERE tgl_selesai_mou < CURDATE()";
 $q_dmb = $conn->query($sql_dmb);
 $dashboard_dmb = $q_dmb->rowCount();
 
 //////////////////// DATA MOU AKTIF ////////////////////
 $sql_dma = "SELECT * FROM tb_mou 
-WHERE tgl_selesai_mou <= CURDATE()";
+WHERE tgl_selesai_mou >= CURDATE()";
 $q_dma = $conn->query($sql_dma);
 $dashboard_dma = $q_dma->rowCount();
 
 //////////////////// DATA MOU BELUM PENGAJUAN ////////////////////
 $sql_dmbp = "SELECT * FROM tb_mou 
-WHERE status_mou = 'belum pengajuan'";
+WHERE tgl_selesai_mou < CURDATE()";
 $q_dmbp = $conn->query($sql_dmbp);
 $dashboard_dmbp = $q_dmbp->rowCount();
 
 //////////////////// DATA MOU PENGAJUAN BARU ////////////////////
 $sql_dmpb = "SELECT * FROM tb_mou 
-WHERE status_mou = 'proses pengajuan baru'";
+WHERE ket_mou = 'proses pengajuan baru'";
 $q_dmpb = $conn->query($sql_dmpb);
 $dashboard_dmpb = $q_dmpb->rowCount();
 
 //////////////////// DATA MOU PENGAJUAN LAMA ////////////////////
 $sql_dmpl = "SELECT * FROM tb_mou 
-WHERE status_mou = 'proses pengajuan perpanjang'";
+WHERE ket_mou = 'proses pengajuan perpanjang'";
 $q_dmpl = $conn->query($sql_dmpl);
 $dashboard_dmpl = $q_dmpl->rowCount();
 
