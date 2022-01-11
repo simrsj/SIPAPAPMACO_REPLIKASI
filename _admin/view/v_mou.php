@@ -12,41 +12,60 @@ if (isset($_POST['hapus_mou'])) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-11">
-                <h1 class="h4 mb-2 text-gray-800">MoU Kerjasama</h1>
+                <h1 class="h4 text-gray-800">MoU Kerjasama</h1>
             </div>
             <div class="col-lg-1 text-right my-auto">
                 <a href="?mou&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
             </div>
-        </div>
-        <!-- Data Tabel MoU -->
-        <div class="card shadow mb-4">
-            <div class="card-body text-center text-lg">
-                <div class="row fieldset">
-                    <div class="col-md-2">
-                        Berlaku (Aktif) : <br>
-                        <span class="badge badge-success text-lg"><?php echo $dashboard_dma; ?></span>
+        </div><br>
+
+
+        <!-- Data Jumlah MoU -->
+        <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-5 col-md-6 mb-4">
+                <div class="card  shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center text-center">
+                            <div class="col">
+                                Berlaku (Aktif) : <br>
+                                <span class="badge badge-success text-lg"><?php echo $dashboard_dma; ?></span>
+                            </div>
+                            <div class="col">
+                                Tidak Berlaku (Non-Aktif) : <br>
+                                <span class="badge badge-danger text-lg"><?php echo $dashboard_dmb; ?></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        Tidak Berlaku (Non-Aktif) : <br>
-                        <span class="badge badge-danger text-lg"><?php echo $dashboard_dmb; ?></span>
-                    </div>
-                    <div class="col-md-2">
-                        Belum Perpanjang : <br>
-                        <span class="badge badge-danger text-lg"><?php echo $dashboard_dmbp; ?></span>
-                    </div>
-                    <div class="col-md-2">
-                        Pengajuan Baru : <br>
-                        <span class="badge badge-primary text-lg"><?php echo $dashboard_dmpb; ?></span>
-                    </div>
-                    <div class="col-md-3">
-                        Pengajuan Perpanjang : <br>
-                        <span class="badge badge-primary text-lg"><?php echo $dashboard_dmpl; ?></span>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-7 col-md-6 mb-4">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center text-center">
+                            <div class="col">
+                                Belum Perpanjang : <br>
+                                <span class="badge badge-danger text-lg"><?php echo $dashboard_dmbp; ?></span>
+                            </div>
+                            <div class="col">
+                                Pengajuan Baru : <br>
+                                <span class="badge badge-primary text-lg"><?php echo $dashboard_dmpb; ?></span>
+                            </div>
+                            <div class="col">
+                                Pengajuan Perpanjang : <br>
+                                <span class="badge badge-primary text-lg"><?php echo $dashboard_dmpl; ?></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Data Tabel MoU -->
         <div class="card shadow mb-4">
             <div class="card-body">
@@ -74,7 +93,7 @@ if (isset($_POST['hapus_mou'])) {
                                     <th>Nama Institusi</th>
                                     <th>No Mou Institusi</th>
                                     <th>No Mou RSJ</th>
-                                    <th></th>
+                                    <th width="125px"></th>
                                 </tr>
                             </thead>
                             <tbody>
