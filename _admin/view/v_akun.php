@@ -147,7 +147,7 @@ if (isset($_POST['tambah_user'])) {
 
                                     <b>Institusi : </b><br>
                                     <i style="font-size:12px;">Pilih "-- ADMIN --", bila memilih level user ADMIN</i>
-                                    <select class='form-control' aria-label='Default select example' name='id_institusi' required>
+                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_institusi' required>
                                         <option value="">-- pilih --</option>
                                         <option value="0">-- ADMIN --</option>
                                         <?php
@@ -262,7 +262,7 @@ if (isset($_POST['tambah_user'])) {
 
                                             <!-- modal ubah akun -->
                                             <div class="modal fade" id="ubah_<?php echo $d_user['id_user']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                                <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
                                                         <form class="form-group" method="POST">
                                                             <div class="modal-header">
@@ -300,25 +300,35 @@ if (isset($_POST['tambah_user'])) {
                                                                 if ($d_akun['level_user'] != 1) {
                                                                 ?>
                                                                     <b>Institusi : </b><br>
-                                                                    <select class='form-control' aria-label='Default select example' name='id_institusi' required>
+                                                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_institusi' required>
                                                                         <?php
                                                                         while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
                                                                             if ($d_akun['id_institusi'] == $d_institusi['id_institusi']) {
                                                                         ?>
                                                                                 <option value='<?php echo $d_institusi['id_institusi']; ?>' selected>
-                                                                                    <?php echo $d_institusi['nama_institusi']; ?>
+                                                                                    <?php
+                                                                                    echo $d_institusi['nama_institusi'];
+                                                                                    if (!is_null($d_institusi['akronim_institusi'])) {
+                                                                                        echo "(" . $d_institusi['akronim_institusi'] . ")";
+                                                                                    }
+                                                                                    ?>
                                                                                 </option>
                                                                             <?php
                                                                             } else {
                                                                             ?>
                                                                                 <option value='<?php echo $d_institusi['id_institusi']; ?>'>
-                                                                                    <?php echo $d_institusi['nama_institusi']; ?>
+                                                                                    <?php
+                                                                                    echo $d_institusi['nama_institusi'];
+                                                                                    if (!is_null($d_institusi['akronim_institusi'])) {
+                                                                                        echo "(" . $d_institusi['akronim_institusi'] . ")";
+                                                                                    }
+                                                                                    ?>
                                                                                 </option>
                                                                         <?php
                                                                             }
                                                                         }
                                                                         ?>
-                                                                    </select><br>
+                                                                    </select><br><br>
                                                                 <?php
                                                                 }
                                                                 ?>

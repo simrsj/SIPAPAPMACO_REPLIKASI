@@ -55,7 +55,8 @@ if (isset($_POST['hapus_mou'])) {
 
                                         <b>Nama Institusi : </b><br>
                                         <?php
-                                        $sql_cari_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = '" . $_SESSION['id_institusi'] . "'";
+                                        $sql_cari_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = " . $_SESSION['id_institusi'];
+                                        echo $sql_cari_institusi . "<br>";
                                         $q_cari_institusi = $conn->query($sql_cari_institusi);
                                         $d_cari_institusi = $q_cari_institusi->fetch(PDO::FETCH_ASSOC);
 
@@ -171,7 +172,7 @@ if (isset($_POST['hapus_mou'])) {
                                 ?>
                                     <tr>
                                         <td class="text-center my-auto"><?php echo $no; ?></td>
-                                        <td class="text-center my-auto"><?php echo tanggal_int($d_mou['tgl_selesai_mou']); ?></td>
+                                        <td class="text-center my-auto"><?php echo tanggal_min_alt($d_mou['tgl_selesai_mou']); ?></td>
                                         <td class="text-center my-auto">
                                             <?php
                                             $date_end = strtotime($d_mou['tgl_selesai_mou']);
