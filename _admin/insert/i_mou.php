@@ -6,8 +6,8 @@ if (isset($_POST['simpan_mou'])) {
     $sql = "SELECT id_mou FROM tb_mou ORDER BY id_mou ASC";
     $q = $conn->query($sql);
     while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
-        if ($no != $d['id_lapor']) {
-            $no = $d['id_lapor'] + 1;
+        if ($no != $d['id_mou']) {
+            $no = $d['id_mou'] + 1;
             break;
         }
         $no++;

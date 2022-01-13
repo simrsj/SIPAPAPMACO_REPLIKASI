@@ -72,11 +72,16 @@ if (isset($_POST['tambah_user'])) {
         echo "
         <script>
             alert('PASSWORD TIDAK SESUAI');
-            document.location.href = '?aku';
         </script>
         ";
     } else {
+        if ($_POST['level_user'] != 1) {
+            $id_institusi = $_POST['id_institusi'];
+        } else {
+            $id_institusi = 0;
+        }
         $sql_ubah_user = "UPDATE tb_user SET 
+            id_institusi = '" . $id_institusi . "',
             username_user = '" . $_POST['username_user'] . "',
             password_user = '" . md5($_POST['password_user']) . "',
             nama_user = '" . $_POST['nama_user'] . "',
@@ -93,22 +98,26 @@ if (isset($_POST['tambah_user'])) {
         echo "
         <script>
             alert('DATA AKUN SUDAH DIRUBAH');
-            document.location.href = '?aku';
         </script>
     ";
     }
+    echo "
+    <script>
+        document.location.href = '?aku';
+    </script>
+    ";
 } elseif (isset($_POST['hapus_user'])) {
 } else {
 ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-11">
                 <h1 class="h3 mb-2 text-gray-800">Daftar Akun</h1>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-1">
 
                 <!-- tambah harga -->
-                <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#aku_i_m'>
+                <a class='btn btn-outline-success btn-sm ' href='#' data-toggle='modal' data-target='#aku_i_m'>
                     <i class="fas fa-plus"></i> Tambah
                 </a>
 
@@ -147,7 +156,7 @@ if (isset($_POST['tambah_user'])) {
 
                                     <b>Institusi : </b><br>
                                     <i style="font-size:12px;">Pilih "-- ADMIN --", bila memilih level user ADMIN</i>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_institusi' required>
+                                    <select class='form-control js-example-placeholder-single' name='id_institusi' required>
                                         <option value="">-- pilih --</option>
                                         <option value="0">-- ADMIN --</option>
                                         <?php
@@ -159,7 +168,8 @@ if (isset($_POST['tambah_user'])) {
                                         <?php
                                         }
                                         ?>
-                                    </select><br>
+                                    </select>
+                                    <br>
 
                                     <b>No. Telp. : </b><br>
                                     <input class="form-control" type="number" name="no_telp_user"><br>
@@ -202,7 +212,7 @@ if (isset($_POST['tambah_user'])) {
                     <div class="table-responsive">
                         <table class="table table-striped" id="myTable">
                             <thead class="thead-dark">
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col">No</th>
                                     <th scope="col">Nama Akun</th>
                                     <th scope="col">Institusi</th>
@@ -211,7 +221,7 @@ if (isset($_POST['tambah_user'])) {
                                     <th scope="col">Tanggal Daftar</th>
                                     <th scope="col">Terakhir Login</th>
                                     <th scope="col">Level</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col" width="80px"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -237,9 +247,9 @@ if (isset($_POST['tambah_user'])) {
                                         </td>
                                         <td><?php echo $d_user['no_telp_user']; ?></td>
                                         <td><?php echo $d_user['email_user']; ?></td>
-                                        <td><?php echo tanggal($d_user['tgl_buat_user']); ?></td>
-                                        <td><?php echo tanggal($d_user['terakhir_login_user']); ?></td>
-                                        <td>
+                                        <td><?php echo tanggal_minimal($d_user['tgl_buat_user']); ?></td>
+                                        <td><?php echo tanggal_minimal($d_user['terakhir_login_user']); ?></td>
+                                        <td class="text-center">
                                             <?php
                                             if ($d_user['level_user'] == 1) {
                                             ?>
@@ -252,7 +262,7 @@ if (isset($_POST['tambah_user'])) {
                                             }
                                             ?>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <a href="#" class="btn btn-primary btn-sm" title="Ubah Akun" data-toggle="modal" data-target="#ubah_<?php echo $d_user['id_user']; ?>">
                                                 <i class="fas fa-edit"></i>
                                             </a>
@@ -261,7 +271,7 @@ if (isset($_POST['tambah_user'])) {
                                             </a>
 
                                             <!-- modal ubah akun -->
-                                            <div class="modal fade" id="ubah_<?php echo $d_user['id_user']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal fade text-left" id="ubah_<?php echo $d_user['id_user']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
                                                         <form class="form-group" method="POST">
@@ -300,7 +310,8 @@ if (isset($_POST['tambah_user'])) {
                                                                 if ($d_akun['level_user'] != 1) {
                                                                 ?>
                                                                     <b>Institusi : </b><br>
-                                                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_institusi' required>
+                                                                    <select class='form-control js-example-placeholder-single-long' aria-label='Default select example' name='id_institusi' required>
+                                                                        <option value="">-- Pilih --</option>
                                                                         <?php
                                                                         while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
                                                                             if ($d_akun['id_institusi'] == $d_institusi['id_institusi']) {
@@ -319,8 +330,8 @@ if (isset($_POST['tambah_user'])) {
                                                                                 <option value='<?php echo $d_institusi['id_institusi']; ?>'>
                                                                                     <?php
                                                                                     echo $d_institusi['nama_institusi'];
-                                                                                    if (!is_null($d_institusi['akronim_institusi'])) {
-                                                                                        echo "(" . $d_institusi['akronim_institusi'] . ")";
+                                                                                    if ($d_institusi['akronim_institusi'] != null) {
+                                                                                        echo " (" . $d_institusi['akronim_institusi'] . ")";
                                                                                     }
                                                                                     ?>
                                                                                 </option>
@@ -328,7 +339,8 @@ if (isset($_POST['tambah_user'])) {
                                                                             }
                                                                         }
                                                                         ?>
-                                                                    </select><br><br>
+                                                                    </select>
+                                                                    <br><br>
                                                                 <?php
                                                                 }
                                                                 ?>

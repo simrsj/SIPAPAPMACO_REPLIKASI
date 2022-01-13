@@ -28,18 +28,18 @@ if ($password_user != $ulangi_password) {
     if ($id_institusi == 0) {
 
         $nama_institusi = $_POST['nama_institusi'];
-        //cari id_mou
-        $no = 1;
-        $sql_id_mou = "SELECT id_mou FROM tb_mou ORDER BY id_mou ASC";
-        $q_id_mou = $conn->query($sql_id_mou);
-        while ($d_id_mou = $q_id_mou->fetch(PDO::FETCH_ASSOC)) {
-            if ($d_id_mou['id_mou'] != $no) {
-                $id_mou = $no;
-                break;
-            }
-            $no++;
-            $id_mou = $no;
-        }
+        // //cari id_mou
+        // $no = 1;
+        // $sql_id_mou = "SELECT id_mou FROM tb_mou ORDER BY id_mou ASC";
+        // $q_id_mou = $conn->query($sql_id_mou);
+        // while ($d_id_mou = $q_id_mou->fetch(PDO::FETCH_ASSOC)) {
+        //     if ($d_id_mou['id_mou'] != $no) {
+        //         $id_mou = $no;
+        //         break;
+        //     }
+        //     $no++;
+        //     $id_mou = $no;
+        // }
 
         //cari id_institusi
         $no = 1;
@@ -54,10 +54,10 @@ if ($password_user != $ulangi_password) {
             $id_institusi = $no;
         }
 
-        //tambah MoU baru
-        $sql_insert_mou = "INSERT INTO `tb_mou` (id_mou, id_institusi) VALUES ('$id_mou', '$id_institusi')";
-        $conn->query($sql_insert_mou);
-        // echo "<br>" . $sql_insert_mou;
+        // //tambah MoU baru
+        // $sql_insert_mou = "INSERT INTO `tb_mou` (id_mou, id_institusi) VALUES ('$id_mou', '$id_institusi')";
+        // $conn->query($sql_insert_mou);
+        // // echo "<br>" . $sql_insert_mou;
 
         //tambah institusi baru
         $sql_insert_institusi = "INSERT INTO `tb_institusi` (id_institusi, nama_institusi) VALUES ('$id_institusi', '$nama_institusi')";

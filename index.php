@@ -82,8 +82,15 @@ if (isset($_GET['dashboard'])) {
     });
 
     $(document).ready(function() {
+        $('.js-example-placeholder-single-long').select2({
+            placeholder: "-------------- Pilih --------------",
+            allowClear: true
+        });
+    });
+
+    $(document).ready(function() {
         $('.js-example-placeholder-single').select2({
-            placeholder: "Pilih",
+            placeholder: "-- Pilih --",
             allowClear: true
         });
     });

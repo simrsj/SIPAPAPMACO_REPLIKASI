@@ -19,7 +19,7 @@ if (isset($_POST['hapus_mou'])) {
                         <i class="fas fa-handshake"></i> Pengajuan
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#pb">Pengajuan Baru</a>
+                        <a class="dropdown-item" href="?mou&ipb">Pengajuan Baru</a>
 
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#pp">Pengajuan Perpanjang</a>
                     </div>
@@ -56,7 +56,7 @@ if (isset($_POST['hapus_mou'])) {
                                         <b>Nama Institusi : </b><br>
                                         <?php
                                         $sql_cari_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = " . $_SESSION['id_institusi'];
-                                        echo $sql_cari_institusi . "<br>";
+                                        // echo $sql_cari_institusi . "<br>";
                                         $q_cari_institusi = $conn->query($sql_cari_institusi);
                                         $d_cari_institusi = $q_cari_institusi->fetch(PDO::FETCH_ASSOC);
 
@@ -155,7 +155,7 @@ if (isset($_POST['hapus_mou'])) {
                             <thead class="thead-dark text-center">
                                 <tr>
                                     <th scope='col'>No</th>
-                                    <th>Tanggal Akhir MoU</th>
+                                    <th>Tanggal Akhir MoU<br> (Status)</th>
                                     <th>Berlaku /<br>Tidak Berlaku</th>
                                     <th>Nama Institusi</th>
                                     <th>Keterangan</th>
@@ -172,7 +172,44 @@ if (isset($_POST['hapus_mou'])) {
                                 ?>
                                     <tr>
                                         <td class="text-center my-auto"><?php echo $no; ?></td>
-                                        <td class="text-center my-auto"><?php echo tanggal_min_alt($d_mou['tgl_selesai_mou']); ?></td>
+                                        <td class="text-center text-capitalize my-auto">
+                                            <?php
+
+                                            if ($d_mou['tgl_selesai_mou'] == NULL) {
+                                            ?>
+                                                <span class="badge badge-primary text-xs"><?php echo $d_mou['ket_mou']; ?></span>
+                                                <?php
+                                            } else {
+                                                echo tanggal_min_alt($d_mou['tgl_selesai_mou']) . "<br>";
+                                                $date_end = strtotime($d_mou['tgl_selesai_mou']);
+                                                $date_now = strtotime(date('Y-m-d'));
+                                                $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
+
+                                                if ($date_diff <= 0) {
+                                                ?>
+                                                    <span class="badge badge-success text-xs">
+                                                        <?php echo tanggal_sisa($d_mou['tgl_selesai_mou'], date('Y-m-d')); ?>
+                                                    </span>
+                                                <?php
+                                                } elseif ($date_diff > 0) {
+                                                ?>
+                                                    <span class="badge badge-danger text-xs">Tidak Berlaku</span>
+                                                <?php
+                                                }
+                                                echo "<br>";
+
+                                                if ($date_diff > 0 && $d_mou['ket_mou'] == NULL) {
+                                                ?>
+                                                    <span class="badge badge-danger text-xs">Belum Pengajuan</span>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <span class="badge badge-danger text-xs"></span>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                        </td>
                                         <td class="text-center my-auto">
                                             <?php
                                             $date_end = strtotime($d_mou['tgl_selesai_mou']);
@@ -190,7 +227,14 @@ if (isset($_POST['hapus_mou'])) {
                                             }
                                             ?>
                                         </td>
-                                        <td><?php echo $d_mou['nama_institusi']; ?></td>
+                                        <td>
+                                            <?php
+                                            echo $d_mou['nama_institusi'];
+                                            if ($d_mou['akronim_institusi'] != NULL) {
+                                                echo " (" . $d_mou['akronim_institusi'] . ")";
+                                            }
+                                            ?>
+                                        </td>
                                         <td class="text-center my-auto text-capitalize">
                                             <?php
                                             $date_end = strtotime($d_mou['tgl_selesai_mou']);
