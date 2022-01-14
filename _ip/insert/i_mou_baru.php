@@ -81,6 +81,7 @@ if (isset($_POST['ajukan_mou'])) {
     $conn->query($sql_insert_mou);
 ?>
     <script type="text/javascript">
+        alert('Data Pengajuan Baru Sudah Disimpan');
         document.location.href = "?mou";
     </script>
 <?php
@@ -111,8 +112,8 @@ if (isset($_POST['ajukan_mou'])) {
                             ?>
                         </div>
                         <div class="col-lg-6">
-                            Surat Pengajuan Baru MoU : <br>
-                            <input type="file" accept="application/pdf" name="file_surat_pb_mou">
+                            Surat Pengajuan Baru MoU : <span style="color:red">*</span><br>
+                            <input type="file" accept="application/pdf" name="file_surat_pb_mou" required>
                         </div>
                     </div>
                     <hr>
@@ -132,6 +133,7 @@ if (isset($_POST['ajukan_mou'])) {
                                 }
                                 ?>
                             </select>
+                            <span class="font-italic text-xs">Pilih <b>-- Lainnya --</b> bila tidak diisi</span>
                         </div>
                         <div class="col-lg-3">
                             Spesifikasi Pendidikan : <span style="color:red">*</span><br>

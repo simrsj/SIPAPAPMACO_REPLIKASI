@@ -113,6 +113,17 @@ if (isset($_POST['hapus_mou'])) {
                                                 <span class="badge badge-primary text-xs">
                                                     <?php echo $d_mou['ket_mou']; ?>
                                                 </span>
+                                                <form method="POST">
+                                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                        <button type="button" class="btn btn-outline-dark">Validasi : </button>
+                                                        <button type="submit" class="btn btn-outline-success" name="terima_pengajuan_mou">
+                                                            <i class="fas fa-check"></i>
+                                                        </button>
+                                                        <button type="submit" class="btn btn-outline-danger" name="tolak_pengajuan_mou">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </form>
                                                 <?php
                                             } else {
                                                 echo tanggal_min_alt($d_mou['tgl_selesai_mou']) . "<br>";
@@ -121,8 +132,7 @@ if (isset($_POST['hapus_mou'])) {
                                                 $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
 
                                                 if ($date_diff <= 0) {
-                                                ?>
-                                                    <span class="badge badge-success text-xs">
+                                                ?> <span class="badge badge-success text-xs">
                                                         <?php echo tanggal_sisa($d_mou['tgl_selesai_mou'], date('Y-m-d')); ?>
                                                     </span>
                                                 <?php
@@ -188,9 +198,22 @@ if (isset($_POST['hapus_mou'])) {
                                                             <b>Akreditasi Institusi : </b>
                                                             <?php echo $d_mou['nama_akreditasi']; ?><br><br>
                                                             <b>Tangga Mulai MoU : </b>
-                                                            <?php echo tanggal($d_mou['tgl_mulai_mou']); ?><br><br>
+                                                            <?php
+                                                            if ($d_mou['tgl_mulai_mou'] == NULL) {
+                                                                echo "-";
+                                                            } else {
+                                                                echo tanggal($d_mou['tgl_mulai_mou']);
+                                                            }
+                                                            ?>
+                                                            <br><br>
                                                             <b>Tangga Selesai MoU : </b>
-                                                            <?php echo tanggal($d_mou['tgl_selesai_mou']); ?><br><br>
+                                                            <?php
+                                                            if ($d_mou['tgl_selesai_mou'] == NULL) {
+                                                                echo "-";
+                                                            } else {
+                                                                echo tanggal($d_mou['tgl_selesai_mou']);
+                                                            }
+                                                            ?><br><br>
                                                             <b>Status MoU : </b>
                                                             <?php
                                                             $date_end = strtotime($d_mou['tgl_selesai_mou']);
@@ -204,6 +227,34 @@ if (isset($_POST['hapus_mou'])) {
                                                             } elseif ($date_diff > 0) {
                                                             ?>
                                                                 <span class="badge badge-danger text-md">TIDAK BERLAKU</span>
+                                                            <?php
+                                                            }
+                                                            ?><br><br>
+                                                            <b>Surat Pengajuan Baru : </b>
+                                                            <?php
+                                                            if ($d_mou['file_surat_pb_mou'] == NULL) {
+                                                            ?>
+                                                                <span class="badge badge-danger text-md">DATA FILE TIDAK ADA</span>
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <a href="<?php echo $d_mou['file_surat_pb_mou']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                                    <i class="fas fa-file-download"></i> Download
+                                                                </a>
+                                                            <?php
+                                                            }
+                                                            ?><br><br>
+                                                            <b>Surat Pengajuan Perpanjang : </b>
+                                                            <?php
+                                                            if ($d_mou['file_surat_pp_mou'] == NULL) {
+                                                            ?>
+                                                                <span class="badge badge-danger text-md">DATA FILE TIDAK ADA</span>
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <a href="<?php echo $d_mou['file_surat_pp_mou']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                                    <i class="fas fa-file-download"></i> Download
+                                                                </a>
                                                             <?php
                                                             }
                                                             ?><br><br>
