@@ -72,7 +72,7 @@ if (isset($_GET['dashboard'])) {
 <script src="vendor/chart.js/Chart.min.js"></script>
 <script src="js/demo/chart-pie-demo.js"></script>
 
-
+<!-- SCRIPT JS  -->
 <script>
     $(document).ready(function() {
         $('#myTable').dataTable();
@@ -94,15 +94,6 @@ if (isset($_GET['dashboard'])) {
             allowClear: true
         });
     });
-
-    function myFunction() {
-        var x = document.getElementById("password");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
 </script>
 
 </html>

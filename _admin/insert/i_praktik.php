@@ -161,9 +161,9 @@ if (isset($_POST['simpan_praktik'])) {
                 <h1 class="h3 mb-2 text-gray-800">Tambah Data Praktikan</h1>
             </div>
         </div>
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                <form action="" class="form-group text-gray-900" method="post" enctype="multipart/form-data">
+        <form action="" class="form-group text-gray-900" method="post" enctype="multipart/form-data">
+            <div class="card shadow mb-4">
+                <div class="card-body">
                     <!-- Data Praktikan -->
                     <div class="row">
                         <div class="col-lg-12">
@@ -199,7 +199,7 @@ if (isset($_POST['simpan_praktik'])) {
                                         $no++;
                                     }
                                     ?>
-                                </select>
+                                </select><br>
                                 <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
                             <?php
                             } else {
@@ -400,15 +400,67 @@ if (isset($_POST['simpan_praktik'])) {
                     </div>
                     <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
                     <hr>
-                    <!-- Simpan -->
+                    <!-- Lanjut -->
                     <div class="row">
-                        <div class="col-lg-12">
-                            <input type="submit" name="simpan_praktik" value="Simpan" class="btn btn-success">
+                        <div class="col-lg-12 text-center">
+                            <nav id="navbar-harga" class="navbar">\
+                                <li class="nav-item">
+                                    <a href="#harga" class="nav-link btn btn-success" id="tombol_lanjut" onclick="data_harga()">
+                                        <i class="fas fa-chevron-circle-down"></i> LANJUT <i class="fas fa-chevron-circle-down"></i>
+                                        <input id="lanjut" value="lanjut_ked" hidden>
+                                    </a>
+                                </li>
+                            </nav>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+
+            <div data-spy="scroll" data-target="#navbar-harga" data-offset="0">
+                <div id="harga">@fat</div>
+                <div id="data_pilih_harga">
+                </div>
+            </div>
+        </form>
     </div>
+
+
+    <script>
+        function data_harga(data_praktik) {
+            if ($('#lanjut').val() == 'lanjut_ked') {
+                // $("#tombol_lanjut").click(function() {
+                //     $(this).hide('slow');
+                // });
+                $("#tombol_lanjut").fadeOut('slow');
+                $('#data_pilih_harga').append(
+                    "<div class='card shadow mb-4'><div class='card-body'><p>DATA HARGA KEDOKTERAN</p></div></div>"
+                ).focus();
+            } else if ($('#lanjut').val() == 'lanjut_kep') {
+                $('#data_pilih_harga').append(
+                    "<div class='card shadow mb-4'><div class='card-body'>DATA HARGA KEPERAWATAN</div></div>"
+                ).focus();
+            } else if ($('#lanjut').val() == 'lanjut_nkn') {
+                $('#data_pilih_harga').append(
+                    "<div class='card shadow mb-4'><div class='card-body'>DATA HARGA NAKES LAINNYA DAN NON-NAKES</div></div>"
+                ).focus();
+            }
+        }
+
+        function showUser() {
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("txtHint").innerHTML = this.responseText;
+                }
+            }
+            xmlhttp.open("GET", "test1.php?ih=" + str, true);
+            xmlhttp.send();
+        }
+    </script>
 <?php
 }
+?>

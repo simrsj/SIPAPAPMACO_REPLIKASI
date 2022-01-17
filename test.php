@@ -1,22 +1,35 @@
-<?php
-$d1 = new DateTime("2022-05-10");
-$d2 = new DateTime(date('Y-m-d'));
-$interval = $d1->diff($d2);
-$diffInSeconds = $interval->s; //45
-$diffInMinutes = $interval->i; //23
-$diffInHours   = $interval->h; //8
-$diffInDays    = $interval->d; //21
-$diffInMonths  = $interval->m; //4
-$diffInYears   = $interval->y; //1
+<script>
+</script>
+</head>
 
-//or get Date difference as total difference
-$d1 = strtotime("2018-01-10 00:00:00");
-$d2 = strtotime("2019-05-18 01:23:45");
-$totalSecondsDiff = abs($d1 - $d2); //42600225
-$totalMinutesDiff = $totalSecondsDiff / 60; //710003.75
-$totalHoursDiff   = $totalSecondsDiff / 60 / 60; //11833.39
-$totalDaysDiff    = $totalSecondsDiff / 60 / 60 / 24; //493.05
-$totalMonthsDiff  = $totalSecondsDiff / 60 / 60 / 24 / 30; //16.43
-$totalYearsDiff   = $totalSecondsDiff / 60 / 60 / 24 / 365; //1.35
+<body>
 
-echo $diffInYears . " Tahun " . $diffInMonths . " Bulan " . $diffInDays . " Hari";
+    <form>
+        <select name="users" onchange="showUser(this.value)">
+            <option value="">Select a person:</option>
+            <option value="1">Peter Griffin</option>
+            <option value="2">Lois Griffin</option>
+            <option value="3">Joseph Swanson</option>
+            <option value="4">Glenn Quagmire</option>
+        </select>
+    </form>
+    <br>
+    <div id="txtHint"><b>Person info will be listed here.</b></div>
+
+
+    <nav id="navbar-harga" class="navbar text-center">
+        <button class="btn btn-success">Lanjut</button>
+    </nav>
+    <div data-spy="scroll" data-target="#navbar-example2" data-offset="5">
+        <h4 id="fat">@fat</h4>
+        <p>...</p>
+        <h4 id="mdo">@mdo</h4>
+        <p>...</p>
+        <h4 id="one">one</h4>
+        <p>...</p>
+        <h4 id="two">two</h4>
+        <p>...</p>
+        <h4 id="three">three</h4>
+        <p>...</p>
+    </div>
+</body>

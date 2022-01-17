@@ -16,9 +16,8 @@
                                         <option value="">--<i> Pilih Institusi </i>--</option>
 
                                         <?php
-                                        $sql_mou = "SELECT * FROM tb_mou 
-                                        JOIN tb_institusi ON tb_mou.id_institusi= tb_institusi.id_institusi
-                                        order by tb_institusi.nama_institusi ASC";
+                                        $sql_mou = "SELECT * FROM tb_institusi
+                                        ORDER BY tb_institusi.nama_institusi ASC";
 
                                         $q_mou = $conn->query($sql_mou);
                                         $r_mou = $q_mou->rowCount();
@@ -70,7 +69,7 @@
         function Bukains() {
             if ($('#instansi').val() == '0') {
                 console.log("Pilih Institusi Lainnya");
-                $('#institusi_lainnya').append("<input type='text' class='form-control form-control' placeHolder='Isikan Nama Istitusi' name='nama_institusi'>").focus();
+                $('#institusi_lainnya').append("<input type='text' class='form-control form-control' placeHolder='Isikan Nama Institusi' name='nama_institusi'>").focus();
             } else {
                 console.log("Tidak Pilih Institusi Lainnya");
                 $('#institusi_lainnya').empty();
