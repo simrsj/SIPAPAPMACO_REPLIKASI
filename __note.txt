@@ -16,7 +16,7 @@
 
 git status
 git add .
-git commit -m "Modul Pendaftaran Kedokteran, Alur Pendaftaran dan Validasi"  
+git commit -m "Modul Insert Pendaftaran Kedokteran, Alur Pendaftaran dan Validasi"  
 git pull
 git push
 
