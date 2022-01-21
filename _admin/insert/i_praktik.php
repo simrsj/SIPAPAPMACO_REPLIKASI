@@ -139,7 +139,7 @@ if (isset($_POST['simpan_praktik'])) {
 
                             if ($r_spesifikasi_pdd > 0) {
                             ?>
-                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_spesifikasi_pdd'>
+                                <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_spesifikasi_pdd' id="spesifikasi">
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php
                                     while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -197,9 +197,9 @@ if (isset($_POST['simpan_praktik'])) {
                         <div class="col-lg-3">
                             Jumlah Praktikan : <span style="color:red">*</span><br>
                             <input type="number" class="form-control" name="jumlah_praktik" min="1" id="jumlah" required>
-                            <i style="font-size:12px;">Isian hanya berupa angka</i>
+                            <i style="font-size:12px;">Isian hanya berupa angka</i><br>
                             <span class="text-danger font-italic text-md" id="err_jumlah"></span>
-                        </div>s
+                        </div>
                         <div class="col-lg-3">
                             Tanggal Mulai : <span style="color:red">*</span><br>
                             <input type="date" class="form-control" name="tgl_mulai_praktik" id="tgl_mulai" required>
@@ -207,8 +207,8 @@ if (isset($_POST['simpan_praktik'])) {
                         </div>
                         <div class="col-lg-3">
                             Tanggal Akhir : <span style="color:red">*</span><br>
-                            <input type="date" class="form-control" name="tgl_selesai_praktik" id="tgl_mulai" required>
-                            <span class="text-danger font-italic text-md" id="err_tgl_akhir"></span>
+                            <input type="date" class="form-control" name="tgl_selesai_praktik" id="tgl_selesai" required>
+                            <span class="text-danger font-italic text-md" id="err_tgl_selesai"></span>
                         </div>
                     </div>
                     <br>
@@ -216,16 +216,16 @@ if (isset($_POST['simpan_praktik'])) {
                     <div class="row">
                         <div class="col-lg-6">
                             Unggah Surat : <br>
-                            <input type="file" name="surat_praktik" accept="application/pdf">
+                            <input type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
                             <br><i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 MB</i>
-                            <span class="text-danger font-italic text-md" id="err_surat"></span>
+                            <br><span class="text-danger font-italic text-md" id="err_file_surat"></span>
                         </div>
                         <div class="col-lg-6">
                             Unggah Data Praktikan :
                             <i style='font-size:12px;'><a href="./_file/format_data_praktikan.xlsx">Download Format</a></i><br>
-                            <input type="file" name="data_praktik" accept=".xlsx">
+                            <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx" required>
                             <br><i style='font-size:12px;'>Data unggah harus .xlsx dan maksimal ukuran file 1 MB</i>
-                            <span class="text-danger font-italic text-md" id="err_data_praktikan"></span>
+                            <br><span class="text-danger font-italic text-md" id="err_file_data_praktikan"></span>
                         </div>
                     </div>
                     <hr>
@@ -242,16 +242,15 @@ if (isset($_POST['simpan_praktik'])) {
                         ?>
                         <div class="col-lg-4">
                             Nama : <span style="color:red">*</span><br>
-                            <input type="text" class="form-control" name="nama_mentor_praktik" value="<?php echo $d_user['nama_user']; ?>" required>
-                            <br><span class="text-danger font-italic text-md" id="err_nama_pembimbing"></span>
+                            <input type="text" class="form-control" name="nama_pembimbing_praktik" id="nama_pembimbing" placeholder="Isi Nama Pembimbing" value="<?php echo $d_user['nama_user']; ?>" required><span class="text-danger font-italic text-md" id="err_nama_pembimbing"></span>
                         </div>
                         <div class="col-lg-4">
                             Email :<br>
-                            <input type="text" class="form-control" name="email_mentor_praktik" value="<?php echo $d_user['email_user']; ?>">
+                            <input type="text" class="form-control" name="email_mentor_praktik" id="email_pembimbing" placeholder="Isi Email Pembimbing" value="<?php echo $d_user['email_user']; ?>">
                         </div>
                         <div class="col-lg-4">
                             Telpon : <span style="color:red">*</span><br>
-                            <input type="number" class="form-control" name="telp_mentor_praktik" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
+                            <input type="number" class="form-control" name="telp_mentor_praktik" id="telp_pembimbing" placeholder="Isi Telpon Pembimbing" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
                             <i style='font-size:12px;'>Isian hanya berupa angka</i>
                             <br><span class="text-danger font-italic text-md" id="err_telp_pembimbing"></span>
                         </div>
@@ -281,20 +280,6 @@ if (isset($_POST['simpan_praktik'])) {
 
     <script type="text/javascript">
         function data_harga() {
-            if ($('#lanjut').val() == 'lanjut_ked') {
-                $('#data_pilih_harga').append(
-                    "<div class='card shadow mb-4'><div class='card-body'><p>DATA HARGA KEDOKTERAN</p></div></div>"
-                ).focus();
-            } else if ($('#lanjut').val() == 'lanjut_kep') {
-                $('#data_pilih_harga').append(
-                    "<div class='card shadow mb-4'><div class='card-body'>DATA HARGA KEPERAWATAN</div></div>"
-                ).focus();
-            } else if ($('#lanjut').val() == 'lanjut_nkn') {
-                $('#data_pilih_harga').append(
-                    "<div class='card shadow mb-4'><div class='card-body'>DATA HARGA NAKES LAINNYA DAN NON-NAKES</div></div>"
-                ).focus();
-            }
-            $("#simpan_praktik").fadeOut('slow');
             // alert('Selesai Seleksi Harga');
             // $(document).ready(function() {
 
@@ -309,31 +294,116 @@ if (isset($_POST['simpan_praktik'])) {
             // $("#simpan_praktik").click(function() {
             // alert('Proses Seleksi Inputan Praktikan');
             var data = $('#form_praktik').serialize();
-            var nama_institusi = document.getElementById("nama_institusi").value;
-            var nama_praktik = document.getElementById("nama_praktik").value;
+            var institusi = document.getElementById("institusi").value;
+            var praktik = document.getElementById("praktik").value;
+            var jurusan = document.getElementById("jurusan").value;
+            var jenjang = document.getElementById("jenjang").value;
+            var spesifikasi = document.getElementById("spesifikasi").value;
+            var akreditasi = document.getElementById("akreditasi").value;
+            var jumlah = document.getElementById("jumlah").value;
+            var tgl_mulai = document.getElementById("tgl_mulai").value;
+            var tgl_selesai = document.getElementById("tgl_selesai").value;
+            var file_surat = document.getElementById("file_surat").value;
+            var file_data_praktikan = document.getElementById("file_data_praktikan").value;
+            var nama_pembimbing = document.getElementById("nama_pembimbing").value;
+            var email_pembimbing = document.getElementById("email_pembimbing").value;
+            var telp_pembimbing = document.getElementById("telp_pembimbing").value;
 
             //notif institusi 
-            if (nama_institusi == "") {
-                document.getElementById("err_nama_institusi").innerHTML = "Nama Institusi Harus Dipilih";
+            if (institusi == "") {
+                document.getElementById("err_institusi").innerHTML = "Institusi Harus Dipilih";
             } else {
-                document.getElementById("err_nama_institusi").innerHTML = "";
+                document.getElementById("err_institusi").innerHTML = "";
             }
 
             //notif praktik 
-            if (nama_praktik == "") {
-                document.getElementById("err_nama_praktik").innerHTML = "Nama Praktik Harus Diisi";
+            if (praktik == "") {
+                document.getElementById("err_praktik").innerHTML = "Nama Praktik Harus Diisi";
             } else {
-                document.getElementById("err_nama_praktik").innerHTML = "";
+                document.getElementById("err_praktik").innerHTML = "";
             }
 
             //notif jurusan 
-            if (nama_praktik == "") {
-                document.getElementById("err_nama_praktik").innerHTML = "Nama Praktik Harus Diisi";
+            if (jurusan == "") {
+                document.getElementById("err_jurusan").innerHTML = "Jurusan Harus Diisi";
             } else {
-                document.getElementById("err_nama_praktik").innerHTML = "";
+                document.getElementById("err_jurusan").innerHTML = "";
             }
 
-            if (nama_institusi != "" && nama_praktik != "") {
+            //notif jenjang 
+            if (jenjang == "") {
+                document.getElementById("err_jenjang").innerHTML = "Jenjang Harus Diisi";
+            } else {
+                document.getElementById("err_jenjang").innerHTML = "";
+            }
+
+            //notif akreditasi 
+            if (akreditasi == "") {
+                document.getElementById("err_akreditasi").innerHTML = "Akreditasi Harus Diisi";
+            } else {
+                document.getElementById("err_akreditasi").innerHTML = "";
+            }
+
+            //notif jumlah 
+            if (jumlah == "") {
+                document.getElementById("err_jumlah").innerHTML = "Jumlah Praktik Harus Diisi";
+            } else {
+                document.getElementById("err_jumlah").innerHTML = "";
+            }
+
+            //notif tgl_mulai 
+            if (tgl_mulai == "") {
+                document.getElementById("err_tgl_mulai").innerHTML = "Tanggal Mulai Praktik Harus Diisi";
+            } else {
+                document.getElementById("err_tgl_mulai").innerHTML = "";
+            }
+
+            //notif tgl_selesai 
+            if (tgl_selesai == "") {
+                document.getElementById("err_tgl_selesai").innerHTML = "Tanggal Selesai Praktik Harus Diisi";
+            } else {
+                document.getElementById("err_tgl_selesai").innerHTML = "";
+            }
+
+            //notif file_surat
+            if (file_surat == "") {
+                document.getElementById("err_file_surat").innerHTML = "File Surat Harus Diisi";
+            } else {
+                document.getElementById("err_file_surat").innerHTML = "";
+            }
+
+            //notif nama_pembimbing
+            if (file_data_praktikan == "") {
+                document.getElementById("err_file_data_praktikan").innerHTML = "File Data Praktikan Harus Diisi";
+            } else {
+                document.getElementById("err_file_data_praktikan").innerHTML = "";
+            }
+
+            //notif nama_pembimbing
+            if (nama_pembimbing == "") {
+                document.getElementById("err_nama_pembimbing").innerHTML = "Nama Pembimbing Harus Diisi";
+            } else {
+                document.getElementById("err_nama_pembimbing").innerHTML = "";
+            }
+
+            //notif telp_pembimbing
+            if (telp_pembimbing == "") {
+                document.getElementById("err_telp_pembimbing").innerHTML = "Telpon Pembimbing Harus Diisi";
+            } else {
+                document.getElementById("err_telp_pembimbing").innerHTML = "";
+            }
+
+            if (
+                institusi != "" &&
+                praktik != "" &&
+                jurusan != "" &&
+                akreditasi != "" &&
+                jumlah != "" &&
+                tgl_mulai != "" &&
+                tgl_selesai != "" &&
+                nama_pembimbing != "" &&
+                telp_pembimbing != ""
+            ) {
                 $.ajax({
                     type: 'POST',
                     url: "_admin/exc/i_praktik_exc.php",
@@ -347,24 +417,39 @@ if (isset($_POST['simpan_praktik'])) {
                         alert('eksekusi query gagal');
                     }
                 });
+
+                if ($('#lanjut').val() == 'lanjut_ked') {
+                    $('#data_pilih_harga').append(
+                        "<div class='card shadow mb-4'><div class='card-body'><p>DATA HARGA KEDOKTERAN</p></div></div>"
+                    ).focus();
+                } else if ($('#lanjut').val() == 'lanjut_kep') {
+                    $('#data_pilih_harga').append(
+                        "<div class='card shadow mb-4'><div class='card-body'>DATA HARGA KEPERAWATAN</div></div>"
+                    ).focus();
+                } else if ($('#lanjut').val() == 'lanjut_nkn') {
+                    $('#data_pilih_harga').append(
+                        "<div class='card shadow mb-4'><div class='card-body'>DATA HARGA NAKES LAINNYA DAN NON-NAKES</div></div>"
+                    ).focus();
+                }
+                $("#simpan_praktik").fadeOut('slow');
+
+                document.getElementById("institusi").disabled = true;
+                document.getElementById("praktik").disabled = true;
+                document.getElementById("jurusan").disabled = true;
+                document.getElementById("jenjang").disabled = true;
+                document.getElementById("spesifikasi").disabled = true;
+                document.getElementById("akreditasi").disabled = true;
+                document.getElementById("jumlah").disabled = true;
+                document.getElementById("tgl_mulai").disabled = true;
+                document.getElementById("tgl_selesai").disabled = true;
+                document.getElementById("nama_pembimbing").disabled = true;
+                document.getElementById("email_pembimbing").disabled = true;
+                document.getElementById("telp_pembimbing").disabled = true;
+                document.getElementById("jurusan").disabled = true;
+                document.getElementById("jurusan").disabled = true;
+                document.getElementById("jurusan").disabled = true;
             }
 
-            document.getElementById("nama_institusi").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
-            document.getElementById("nama_praktik").disabled = true;
             // });
             // });
         }
