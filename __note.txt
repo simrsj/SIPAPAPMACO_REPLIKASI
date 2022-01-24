@@ -10,11 +10,12 @@
 - dashboard user tampil mounya dengan judul perpanjang / baru MoU
 - Perbaiki Pendaftaran 
 - tanggal Selesai Pendaftaran tidak bisa input tanggal ≤ tanggal mulai
+- pelajari CSRF
 
 
 git status
 git add .
-git commit -m "Modul Insert Pendaftaran Kedokteran, Alur Pendaftaran dan Validasi"  
+git commit -m "Modul Insert Pendaftaran dan Harga, Alur Pendaftaran dan Validasi"  
 git pull
 git push
 

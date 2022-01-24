@@ -9,14 +9,16 @@ if (isset($_POST['simpan_praktik'])) {
             </div>
         </div>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
-            <div class="card shadow mb-4">
+            <!-- Data Pendaftaran Praktik  -->
+            <div class="card shadow mb-4" id="pendaftaran_praktik">
                 <div class="card-body">
                     <!-- Data Praktikan -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <b>Data Praktikan</b>
+                            <div class="text-lg font-weight-bold"> DATA PRAKTIKAN</div>
                         </div>
                     </div>
+
                     <!-- Nama Institusi dan Praktikan -->
                     <div class="row">
                         <div class="col-lg-5 ">
@@ -48,7 +50,7 @@ if (isset($_POST['simpan_praktik'])) {
                                     ?>
                                 </select><br>
                                 <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
-                                <div class="text-danger font-italic text-xs" id="err_institusi"></div>
+                                <div class="text-danger font-weight-bold  font-italic text-xs" id="err_institusi"></div>
                             <?php
                             } else {
                             ?>
@@ -64,7 +66,7 @@ if (isset($_POST['simpan_praktik'])) {
                                 Gelombang/Kelompok : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" id="praktik" required>
                             </div>
-                            <div class="text-danger font-italic text-xs" id="err_praktik"></div>
+                            <div class="text-danger font-weight-bold  font-italic text-xs" id="err_praktik"></div>
 
                         </div>
 
@@ -72,7 +74,7 @@ if (isset($_POST['simpan_praktik'])) {
                             Jumlah Praktikan : <span style="color:red">*</span><br>
                             <input type="number" class="form-control" name="jumlah_praktik" min="1" id="jumlah" required>
                             <i style="font-size:12px;">Isian hanya berupa angka</i><br>
-                            <span class="text-danger font-italic text-xs" id="err_jumlah"></span>
+                            <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jumlah"></span>
                         </div>
                     </div>
                     <br>
@@ -101,7 +103,7 @@ if (isset($_POST['simpan_praktik'])) {
                                     }
                                     ?>
                                 </select><br>
-                                <span class="text-danger font-italic text-xs" id="err_jurusan"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jurusan"></span>
                             <?php
                             } else {
                             ?>
@@ -132,7 +134,7 @@ if (isset($_POST['simpan_praktik'])) {
                                     }
                                     ?>
                                 </select><br>
-                                <span class="text-danger font-italic text-xs" id="err_jenjang"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jenjang"></span>
                             <?php
                             } else {
                             ?>
@@ -193,7 +195,7 @@ if (isset($_POST['simpan_praktik'])) {
                                     }
                                     ?>
                                 </select><br>
-                                <span class="text-danger font-italic text-xs" id="err_akreditasi"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_akreditasi"></span>
                             <?php
                             } else {
                             ?>
@@ -204,33 +206,35 @@ if (isset($_POST['simpan_praktik'])) {
                         </div>
                     </div>
                     <br><br>
+
                     <!-- Tanggal Mulai, Tanggal Selesai, Unggah Surat dan Data Praktikan -->
                     <div class="row">
                         <div class="col-lg-2">
                             Tanggal Mulai : <span style="color:red">*</span><br>
                             <input type="date" class="form-control" name="tgl_mulai_praktik" id="tgl_mulai" required>
-                            <span class="text-danger font-italic text-xs" id="err_tgl_mulai"></span>
+                            <span class="text-danger font-weight-bold  font-italic text-xs" id="err_tgl_mulai"></span>
                         </div>
                         <div class="col-lg-2">
                             Tanggal Akhir : <span style="color:red">*</span><br>
                             <input type="date" class="form-control" name="tgl_selesai_praktik" id="tgl_selesai" required>
-                            <span class="text-danger font-italic text-xs" id="err_tgl_selesai"></span>
+                            <span class="text-danger font-weight-bold  font-italic text-xs" id="err_tgl_selesai"></span>
                         </div>
                         <div class="col-lg-4">
                             Unggah Surat : <br>
                             <input type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
                             <br><i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 MB</i>
-                            <br><span class="text-danger font-italic text-xs" id="err_file_surat"></span>
+                            <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_file_surat"></span>
                         </div>
                         <div class="col-lg-4">
                             Unggah Data Praktikan :
                             <i style='font-size:12px;'><a href="./_file/format_data_praktikan.xlsx">Download Format</a></i><br>
                             <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx" required>
                             <br><i style='font-size:12px;'>Data unggah harus .xlsx dan maksimal ukuran file 1 MB</i>
-                            <br><span class="text-danger font-italic text-xs" id="err_file_data_praktikan"></span>
+                            <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_file_data_praktikan"></span>
                         </div>
                     </div>
                     <hr>
+
                     <!-- Penanggung Jawab/Pembimbing/Mentor -->
                     <div class=" row">
                         <div class="col-lg-12">
@@ -244,7 +248,7 @@ if (isset($_POST['simpan_praktik'])) {
                         ?>
                         <div class="col-lg-4">
                             Nama : <span style="color:red">*</span><br>
-                            <input type="text" class="form-control" name="nama_pembimbing_praktik" id="nama_pembimbing" placeholder="Isi Nama Pembimbing" value="<?php echo $d_user['nama_user']; ?>" required><span class="text-danger font-italic text-xs" id="err_nama_pembimbing"></span>
+                            <input type="text" class="form-control" name="nama_pembimbing_praktik" id="nama_pembimbing" placeholder="Isi Nama Pembimbing" value="<?php echo $d_user['nama_user']; ?>" required><span class="text-danger font-weight-bold  font-italic text-xs" id="err_nama_pembimbing"></span>
                         </div>
                         <div class="col-lg-4">
                             Email :<br>
@@ -254,26 +258,42 @@ if (isset($_POST['simpan_praktik'])) {
                             Telpon : <span style="color:red">*</span><br>
                             <input type="number" class="form-control" name="telp_mentor_praktik" id="telp_pembimbing" placeholder="Isi Telpon Pembimbing" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
                             <i style='font-size:12px;'>Isian hanya berupa angka</i>
-                            <br><span class="text-danger font-italic text-xs" id="err_telp_pembimbing"></span>
+                            <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_telp_pembimbing"></span>
                         </div>
                     </div>
                     <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
                     <hr>
+
                     <!-- Tombol Lanjut ke Daftar Harga-->
-                    <div class="text-center">
-                        <button type="button" href="#harga" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-primary" onclick="data_harga()">
-                            <i class="fas fa-chevron-circle-down"></i>
-                            Lanjut Ke Daftar Harga
-                            <i class="fas fa-chevron-circle-down"></i>
-                            <input id="lanjut" value="lanjut_ked" hidden>
-                        </button>
-                    </div>
+                    <nav id="navbar-example2" class="navbar justify-content-center">
+                        <a class="nav-link" href="#harga">
+                            <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-primary" onclick="data_harga()">
+                                <i class="fas fa-chevron-circle-down"></i>
+                                Lanjut Ke Daftar Harga
+                                <i class="fas fa-chevron-circle-down"></i>
+                            </button>
+                        </a>
+                    </nav>
                 </div>
             </div>
 
-            <div data-spy="scroll" data-target="#navbar-harga" data-offset="0">
-                <div id="harga">
-                    <div id="data_pilih_harga">
+            <!-- Data Harga Praktik  -->
+            <div class='card shadow mb-4' id="harga_praktik">
+                <div class='card-body'>
+                    <div class="text-lg font-weight-bold"> DATA HARGA</div>
+                    <div data-spy="scroll" data-target="#navbar-harga" data-offset="0">
+                        <div id="harga">
+                            <div id="data_pilih_harga">
+                                <div class="jumbotron" id="harga_praktik_nondata">
+                                    <div class="jumbotron-fluid text-center">
+                                        DATA PRAKTIK BELUM DIPILIH
+                                    </div>
+                                </div>
+                                <br>
+                                <div id="harga_praktik_data" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -286,11 +306,11 @@ if (isset($_POST['simpan_praktik'])) {
             // $(document).ready(function() {
 
             //Mengirimkan Token Keamanan
-            $.ajaxSetup({
-                headers: {
-                    'Csrf-Token': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+            // $.ajaxSetup({
+            //     headers: {
+            //         'Csrf-Token': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
 
             // alert('Awal Simpan Praktikan');
             // $("#simpan_praktik").click(function() {
@@ -399,7 +419,39 @@ if (isset($_POST['simpan_praktik'])) {
                 }
             }
 
-            //Simpan Daftar Praktik
+            //info Toast bila ada data wajib yg berlum terisi
+            if (
+                institusi == "" ||
+                praktik == "" ||
+                jurusan == "" ||
+                akreditasi == "" ||
+                jumlah == "" ||
+                tgl_mulai == "" ||
+                tgl_selesai == "" ||
+                // file_surat == "" ||
+                // file_data_praktikan == "" ||
+                nama_pembimbing == "" ||
+                telp_pembimbing == ""
+            ) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 6000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: '<center>DATA WAJIB ADA YANG BELUM TERISI</center>'
+                })
+            }
+
+            //Simpan Daftar Praktik dan Harga
             if (
                 institusi != "" &&
                 praktik != "" &&
@@ -419,7 +471,22 @@ if (isset($_POST['simpan_praktik'])) {
                     data: data,
                     success: function() {
                         document.getElementById("form_praktik");
-                        alert('Lanjutkan ke Data Harga Praktik');
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 6000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'info',
+                            title: '<div class="text-md text-center">LANJUTKAN KE DATA HARGA</div>'
+                        })
                     },
                     error: function(response) {
                         console.log(response.responseText);
@@ -427,20 +494,10 @@ if (isset($_POST['simpan_praktik'])) {
                     }
                 });
 
-                if ($('#lanjut').val() == 'lanjut_ked') {
-                    $('#data_pilih_harga').append(
-                        "<div class='card shadow mb-4'><div class='card-body'><p>DATA HARGA KEDOKTERAN</p></div></div>"
-                    ).focus();
-                } else if ($('#lanjut').val() == 'lanjut_kep') {
-                    $('#data_pilih_harga').append(
-                        "<div class='card shadow mb-4'><div class='card-body'>DATA HARGA KEPERAWATAN</div></div>"
-                    ).focus();
-                } else if ($('#lanjut').val() == 'lanjut_nkn') {
-                    $('#data_pilih_harga').append(
-                        "<div class='card shadow mb-4'><div class='card-body'>DATA HARGA NAKES LAINNYA DAN NON-NAKES</div></div>"
-                    ).focus();
-                }
                 $("#simpan_praktik").fadeOut('slow');
+                // $("#pendaftaran_praktik").fadeOut('fast');
+                $("#harga_praktik_nondata").fadeOut('fast');
+                $("#harga_praktik_data").fadeIn('slow');
 
                 //Ubah Tampilan Bila Disimpan
                 document.getElementById("institusi").disabled = true;
@@ -459,6 +516,19 @@ if (isset($_POST['simpan_praktik'])) {
                 document.getElementById("telp_pembimbing").disabled = true;
             }
 
+            // Kirim Parameter ke Data Harga 
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                document.getElementById("harga_praktik_data").innerHTML = this.responseText;
+            };
+            xmlhttp.open("GET", "_admin/insert/i_praktik_harga.php?jur=" + jurusan +
+                "&jen=" + jenjang +
+                "&tmp=" + tgl_mulai +
+                "&tsp=" + tgl_selesai +
+                "&jum=" + jumlah,
+                true
+            );
+            xmlhttp.send();
             // });
             // });
         }
