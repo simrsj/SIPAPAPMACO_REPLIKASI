@@ -1,6 +1,7 @@
 <?php
 
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
 //Mencari id_jurusan_pdd_jenis
 $id_jurusan_pdd = $_GET['jur'];
@@ -10,9 +11,9 @@ $d_jurusan_pdd_jenis = $q_jurusan_pdd_jenis->fetch(PDO::FETCH_ASSOC);
 
 //Mencari id_jenjang_pdd
 $id_jenjang_pdd = $_GET['jen'];
-$sql_jurusan_pdd_jenis = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $id_jurusan_pdd;
-$q_jurusan_pdd_jenis = $conn->query($sql_jurusan_pdd_jenis);
-$d_jurusan_pdd_jenis = $q_jurusan_pdd_jenis->fetch(PDO::FETCH_ASSOC);
+$sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd WHERE id_jenjang_pdd = " . $id_jenjang_pdd;
+$q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
+$d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC);
 
 $tgl_mulai_praktik = $_GET['tmp'];
 $tgl_selesai_praktik = $_GET['tsp'];
@@ -68,29 +69,32 @@ if ($r_harga_jurusan > 0) {
                         <?php
 
                         if ($d_harga_jurusan['tipe_harga'] == 'SEKALI') {
-                            $ferkuensi = 1;
+                            $frekuensi = 1;
                         } elseif ($d_harga_jurusan['tipe_harga'] == 'INPUT') {
                         ?>
                             <input class="form-control" name="<?php echo $d_harga_jurusan['id_harga'] ?>">
                         <?php
                         } elseif ($d_harga_jurusan['tipe_harga'] == 'HARGA-') {
-                            $ferkuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
+                            $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
                         } elseif ($d_harga_jurusan['tipe_harga'] == 'HARGA+') {
-                            $ferkuensi = tanggal_between($tgl_mulai_praktik, $tgl_selesai_praktik);
+                            $frekuensi = tanggal_between($tgl_mulai_praktik, $tgl_selesai_praktik);
                         } elseif ($d_harga_jurusan['tipe_harga'] == 'MINGGUAN') {
-                            $ferkuensi = tanggal_between_week($tgl_mulai_praktik, $tgl_selesai_praktik);
+                            $frekuensi = tanggal_between_week($tgl_mulai_praktik, $tgl_selesai_praktik);
                         } else {
-                            $ferkuensi = $d_harga_jurusan['tipe_harga'];
+                            $frekuensi = $d_harga_jurusan['tipe_harga'];
                         }
-                        echo $ferkuensi;
+                        if ($d_harga_jurusan['frekuensi_harga'] != NULL || $d_harga_jurusan['frekuensi_harga'] != 0) {
+                            $frekuensi = $d_harga_jurusan['frekuensi_harga'];
+                        }
+                        echo $frekuensi;
                         ?>
                     </td>
                     <td><?php echo $jumlah_praktik; ?></td>
                     <td>
-                        <?php echo "Rp " . number_format($ferkuensi * $jumlah_praktik * $d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?>
+                        <?php echo "Rp " . number_format($frekuensi * $jumlah_praktik * $d_harga_jurusan['jumlah_harga'], 0, ",", "."); ?>
                     </td>
                     <?php
-                    $jumlah_total_harga = ($ferkuensi * $jumlah_praktik * $d_harga_jurusan['jumlah_harga']) + $jumlah_total_harga;
+                    $jumlah_total_harga = ($frekuensi * $jumlah_praktik * $d_harga_jurusan['jumlah_harga']) + $jumlah_total_harga;
                     $no++;
                     ?>
                 </tr>
@@ -107,7 +111,7 @@ if ($r_harga_jurusan > 0) {
                                     ORDER BY nama_jenjang_pdd ASC
                                     ";
 
-                // echo "<br>" . $sql_harga_jenjang;
+                // echo $sql_harga_jenjang . "<br>";
                 $q_harga_jenjang = $conn->query($sql_harga_jenjang);
                 $r_harga_jenjang = $q_harga_jenjang->rowCount();
 
@@ -123,28 +127,28 @@ if ($r_harga_jurusan > 0) {
                             <?php
 
                             if ($d_harga_jenjang['tipe_harga'] == 'SEKALI') {
-                                $ferkuensi = 1;
+                                $frekuensi = 1;
                             } elseif ($d_harga_jenjang['tipe_harga'] == 'INPUT') {
                             ?>
                                 <input class="form-control" name="<?php echo $d_harga_jenjang['id_harga'] ?>">
                             <?php
                             } elseif ($d_harga_jenjang['tipe_harga'] == 'HARGA-') {
-                                $ferkuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
+                                $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
                             } elseif ($d_harga_jenjang['tipe_harga'] == 'HARGA+') {
-                                $ferkuensi = tanggal_between($tgl_mulai_praktik, $tgl_selesai_praktik);
+                                $frekuensi = tanggal_between($tgl_mulai_praktik, $tgl_selesai_praktik);
                             } elseif ($d_harga_jenjang['tipe_harga'] == 'MINGGUAN') {
-                                $ferkuensi = tanggal_between_week($tgl_mulai_praktik, $tgl_selesai_praktik);
+                                $frekuensi = tanggal_between_week($tgl_mulai_praktik, $tgl_selesai_praktik);
                             } else {
-                                $ferkuensi = $d_harga_jenjang['tipe_harga'];
+                                $frekuensi = $d_harga_jenjang['tipe_harga'];
                             }
-                            echo $ferkuensi;
+                            echo $frekuensi;
                             ?>
                         </td>
                         <td><?php echo $jumlah_praktik; ?></td>
-                        <td><?php echo "Rp " . number_format($ferkuensi * $jumlah_praktik * $d_harga_jenjang['jumlah_harga'], 0, ",", "."); ?></td>
+                        <td><?php echo "Rp " . number_format($frekuensi * $jumlah_praktik * $d_harga_jenjang['jumlah_harga'], 0, ",", "."); ?></td>
                     </tr>
             <?php
-                    $jumlah_total_harga = ($ferkuensi * $jumlah_praktik * $d_harga_jenjang['jumlah_harga']) + $jumlah_total_harga;
+                    $jumlah_total_harga = ($frekuensi * $jumlah_praktik * $d_harga_jenjang['jumlah_harga']) + $jumlah_total_harga;
                     $no++;
                 }
             }
@@ -162,16 +166,12 @@ if ($r_harga_jurusan > 0) {
         <h5 class="text-center">Data Harga Tidak Ada</h5>
     </div>
 <?php
-
-
-
-
 }
 ?>
 
 <!-- Menu Harga Ujian disesuaikan dengan Jenis Jurusan -->
 <div class="text-gray-700">
-    <h5 class="font-weight-bold">Menu Harga Ujian <?php echo $d_praktik['nama_jurusan_pdd_jenis']; ?></h5>
+    <h5 class="font-weight-bold">Menu Harga Ujian <?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd']; ?></h5>
 </div>
 <br>
 <div class="custom-control custom-radio">
@@ -182,10 +182,10 @@ if ($r_harga_jurusan > 0) {
     <input type="radio" id="cek_harga_ujian2" name="cek_harga_ujian" value="t" class="custom-control-input" required>
     <label class="custom-control-label" for="cek_harga_ujian2">Tidak Pakai Ujian</label>
 </div>
-<br>
+<span class="text-danger font-weight-bold  font-italic text-xs" id="err_cek_harga_ujian"></span>
 
 <?php
-if ($d_praktik['id_jurusan_pdd_jenis'] == 1) {
+if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] == 1) {
     $sql = "AND tb_harga.id_harga_jenis = 1";
 } else {
     $sql = "AND tb_harga.id_jurusan_pdd_jenis BETWEEN 2 AND 4";
@@ -193,7 +193,7 @@ if ($d_praktik['id_jurusan_pdd_jenis'] == 1) {
 $sql_harga_ujian = " SELECT * FROM tb_harga 
                 JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
                 JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan 
-                WHERE tb_harga.id_harga_jenis = 6 AND tb_harga.id_jurusan_pdd_jenis = " . $d_praktik['id_jurusan_pdd_jenis'] . "
+                WHERE tb_harga.id_harga_jenis = 6 AND tb_harga.id_jurusan_pdd_jenis = " . $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] . "
                 ORDER BY nama_harga_jenis ASC
                 ";
 
@@ -232,28 +232,28 @@ if ($r_harga_ujian > 0) {
                         <?php
 
                         if ($d_harga_ujian['tipe_harga'] == 'SEKALI') {
-                            $ferkuensi = 1;
+                            $frekuensi = 1;
                         } elseif ($d_harga_ujian['tipe_harga'] == 'INPUT') {
                         ?>
                             <input class="form-control" name="<?php echo $d_praktik['id_praktik'] . "-" . $d_harga_ujian['id_harga'] ?>">
                         <?php
                         } elseif ($d_harga_ujian['tipe_harga'] == 'HARGA-') {
-                            $ferkuensi = tanggal_between_nonweekend($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                            $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
                         } elseif ($d_harga_ujian['tipe_harga'] == 'HARGA+') {
-                            $ferkuensi = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                            $frekuensi = tanggal_between($tgl_mulai_praktik, $tgl_selesai_praktik);
                         } elseif ($d_harga_ujian['tipe_harga'] == 'MINGGUAN') {
-                            $ferkuensi = tanggal_between_week($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
+                            $frekuensi = tanggal_between_week($tgl_mulai_praktik, $tgl_selesai_praktik);
                         } else {
-                            $ferkuensi = $d_harga_ujian['tipe_harga'];
+                            $frekuensi = $d_harga_ujian['tipe_harga'];
                         }
-                        echo $ferkuensi;
+                        echo $frekuensi;
                         ?>
                     </td>
-                    <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
-                    <td><?php echo "Rp " . number_format($ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_ujian['jumlah_harga'], 0, ",", "."); ?></td>
+                    <td><?php echo $jumlah_praktik; ?></td>
+                    <td><?php echo "Rp " . number_format($frekuensi * $jumlah_praktik * $d_harga_ujian['jumlah_harga'], 0, ",", "."); ?></td>
                 </tr>
             <?php
-                $jumlah_total_ujian = ($ferkuensi * $d_praktik['jumlah_praktik'] * $d_harga_ujian['jumlah_harga']) + $jumlah_total_ujian;
+                $jumlah_total_ujian = ($frekuensi * $jumlah_praktik * $d_harga_ujian['jumlah_harga']) + $jumlah_total_ujian;
                 $no++;
             }
             ?>

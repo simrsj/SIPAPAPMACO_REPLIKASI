@@ -269,7 +269,7 @@
                         <tbody>
                             <?php
 
-                            $sql_harga_satuan = "SELECT * FROm tb_harga_satuan ORDER BY nama_harga_satuan ASC";
+                            $sql_harga_satuan = "SELECT * FROM tb_harga_satuan ORDER BY nama_harga_satuan ASC";
 
                             $q_harga_satuan = $conn->query($sql_harga_satuan);
                             $r_harga_satuan = $q_harga_satuan->rowCount();
@@ -369,7 +369,7 @@
                         <tbody>
                             <?php
 
-                            $sql_harga = "SELECT * FROm tb_harga 
+                            $sql_harga = "SELECT * FROM tb_harga 
                     JOIN tb_jurusan_pdd_jenis ON tb_harga.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
                     JOIN tb_jenjang_pdd ON tb_harga.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_spesifikasi_pdd ON tb_harga.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
@@ -455,6 +455,10 @@
                                                     Jumlah Harga : <i style='font-size:12px;'>(Rp)</i><span style="color:red">*</span><br>
                                                     <input class="form-control" name="jumlah_harga" type="number" min="1" value="<?php echo $d_harga['jumlah_harga']; ?>" required>
                                                     <i style='font-size:12px;'>Isian hanya berupa angka</i><br><br>
+
+                                                    Frekuensi Harga : <span style="color:red">*</span><br>
+                                                    <input class="form-control" name="frekuensi_harga" type="number" min="0" value="<?php echo $d_harga['frekuensi_harga']; ?>" required>
+                                                    <i style='font-size:12px;'>Isikan "0" bila frekuensi tidak ditentukan</i><br><br>
 
                                                     Jenis Harga : <span style="color:red">*</span><br>
                                                     <?php
@@ -556,7 +560,7 @@
                                                     ?>
                                                     <br>
 
-                                                    spesifikasi : <span style="color:red">*</span><br>
+                                                    Spesifikasi : <span style="color:red">*</span><br>
                                                     <?php
                                                     $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
                                                     $q_spesifikasi_pdd = $conn->query($sql_spesifikasi_pdd);
@@ -646,7 +650,7 @@
                                                         </label>
                                                     </div>
 
-                                                    Keteranga : <br>
+                                                    Keterangan : <br>
                                                     <textarea class="form-control" name="ket_harga"><?php echo $d_harga['ket_harga'] ?></textarea>
                                                 </div>
                                                 <div class="modal-footer">
@@ -752,6 +756,7 @@ if (isset($_POST['tambah_harga'])) {
     `nama_harga` = '" . $_POST['nama_harga'] . "',
     `id_harga_satuan` = '" . $_POST['id_harga_satuan'] . "',
     `jumlah_harga` = '" . $_POST['jumlah_harga'] . "',
+    `frekuensi_harga` = '" . $_POST['frekuensi_harga'] . "',
     `tipe_harga` = '" . $_POST['tipe_harga'] . "',
     `id_harga_jenis` = '" . $_POST['id_harga_jenis'] . "',
     `id_jurusan_pdd` = '" . $_POST['id_jurusan_pdd'] . "',
@@ -761,11 +766,11 @@ if (isset($_POST['tambah_harga'])) {
     `ket_harga` = '" . $_POST['ket_harga'] . "',
     `pilih_harga` = '" . $_POST['pilih_harga'] . "'
     WHERE `tb_harga`.`id_harga` = " . $_POST['id_harga'];
+    // echo $sql_ubah . "<br>";
     $conn->query($sql_ubah);
-    $link = "?hrg";
 ?>
     <script>
-        document.location.href = "<?php echo $link; ?>";
+        document.location.href = "?hrg";
     </script>
 <?php
 } elseif (isset($_POST['ubah_harga_satuan'])) {

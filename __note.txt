@@ -15,7 +15,7 @@
 
 git status
 git add .
-git commit -m "Modul Insert Pendaftaran dan Harga, Alur Pendaftaran dan Validasi"  
+git commit -m "Modul Simpan Pendaftaran dan Harga, Alur Pendaftaran dan Validasi"  
 git pull
 git push
 

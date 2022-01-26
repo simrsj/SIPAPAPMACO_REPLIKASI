@@ -1,11 +1,13 @@
-<nav id="navbar-example2" class="navbar navbar-light bg-light">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link" href="#fat">@fat</a>
-        </li>
-    </ul>
-</nav>
-<div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-    <h4 id="fat">@fat</h4>
-    <p>...</p>
+<div class="container">
+    <h1>Bootstrap Datepicker Disable Past Dates Example - itsolutionstuff.com</h1>
+    <strong>Current Date is 5/7/2020</strong>
+    <input type="text" name="date" class="form-control datepicker" autocomplete="off">
 </div>
+
+</body>
+
+<script type="text/javascript">
+    $('.datepicker').datepicker({
+        startDate: new Date()
+    });
+</script>
