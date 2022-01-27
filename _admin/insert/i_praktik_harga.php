@@ -23,8 +23,9 @@ $jumlah_praktik = $_GET['jum'];
 
 <!-- Menu Harga wajib disesuaikan dengan jenis jurusan -->
 <div class="text-gray-700">
-    <h5 class="font-weight-bold">Menu Harga Wajib <?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd']; ?></h5>
+    <div class="h5 font-weight-bold text-center mt-2">Menu Harga Wajib <?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd']; ?></div>
 </div>
+<hr>
 <?php
 $sql_harga_jurusan = " SELECT * FROM tb_harga 
                 JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
@@ -168,21 +169,26 @@ if ($r_harga_jurusan > 0) {
 <?php
 }
 ?>
-
+<hr>
 <!-- Menu Harga Ujian disesuaikan dengan Jenis Jurusan -->
 <div class="text-gray-700">
-    <h5 class="font-weight-bold">Menu Harga Ujian <?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd']; ?></h5>
+    <div class="h5 font-weight-bold text-center mt-3 mb-3">Menu Harga Ujian <?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd']; ?></div>
 </div>
-<br>
-<div class="custom-control custom-radio">
-    <input type="radio" id="cek_harga_ujian1" name="cek_harga_ujian" value="y" class="custom-control-input" required>
-    <label class="custom-control-label" for="cek_harga_ujian1">Pakai Ujian</label>
+<div class="justify-content-center text-center">
+    <span class="text-danger font-weight-bold font-italic text-lg" id="err_cek_pilih_ujian"></span>
 </div>
-<div class="custom-control custom-radio">
-    <input type="radio" id="cek_harga_ujian2" name="cek_harga_ujian" value="t" class="custom-control-input" required>
-    <label class="custom-control-label" for="cek_harga_ujian2">Tidak Pakai Ujian</label>
+<div class="row boxed-check-group boxed-check-primary justify-content-center">
+    <label class="boxed-check">
+        <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1">
+        <div class="boxed-check-label">Pakai Ujian</div>
+    </label>
+    &nbsp;
+    &nbsp;
+    <label class="boxed-check">
+        <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2">
+        <div class="boxed-check-label">Tidak Pakai Ujian</div>
+    </label>
 </div>
-<span class="text-danger font-weight-bold  font-italic text-xs" id="err_cek_harga_ujian"></span>
 
 <?php
 if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] == 1) {

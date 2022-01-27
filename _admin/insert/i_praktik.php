@@ -15,10 +15,10 @@ if (isset($_POST['simpan_praktik'])) {
                     <!-- Data Praktikan -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="text-lg font-weight-bold"> DATA PRAKTIKAN</div>
+                            <div class="text-lg font-weight-bold text-center"> DATA PRAKTIKAN</div>
                         </div>
                     </div>
-
+                    <hr>
                     <!-- Nama Institusi dan Praktikan -->
                     <div class="row">
                         <div class="col-lg-5 ">
@@ -165,7 +165,7 @@ if (isset($_POST['simpan_praktik'])) {
                                     }
                                     ?>
                                 </select><br>
-                                <span class="text-xs font-italic">Bila didalam pilihan tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span>
+                                <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span>
                             <?php
                             } else {
                             ?>
@@ -263,7 +263,6 @@ if (isset($_POST['simpan_praktik'])) {
                         </div>
                     </div>
                     <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
-                    <hr>
 
                     <!-- Tombol Lanjut ke Daftar Harga-->
                     <nav id="navbar-harga" class="navbar justify-content-center">
@@ -281,29 +280,26 @@ if (isset($_POST['simpan_praktik'])) {
             <!-- Data Harga Praktik  -->
             <div class='card shadow mb-4' id="harga_praktik">
                 <div class='card-body'>
-                    <div class="text-lg font-weight-bold"> DATA HARGA</div>
-                    <div data-spy="scroll" data-target="#navbar-harga" data-offset="0">
-                        <div id="harga">
-                            <div id="data_pilih_harga">
-                                <div class="jumbotron" id="harga_praktik_nondata">
-                                    <div class="jumbotron-fluid text-center">
-                                        DATA PRAKTIK BELUM DIPILIH
-                                    </div>
+                    <div class="text-lg font-weight-bold text-center">DATA HARGA</div>
+                    <div id="harga">
+                        <div id="data_pilih_harga">
+                            <div class="jumbotron" id="harga_praktik_nondata">
+                                <div class="jumbotron-fluid text-center">
+                                    DATA PRAKTIK BELUM DIPILIH
                                 </div>
-                                <br>
-                                <div id="harga_praktik_data" style="display: none;">
+                            </div>
+                            <div id="harga_praktik_data" style="display: none;">
 
-                                </div>
-                                <hr>
-                                <div id="simpan_praktik_harga" class="btn justify-content-center" style="display: none;">
-                                    <button type="submit" href="#harga" name="simpan_praktik" id="simpan_praktik" class="btn btn-success text-lg-center text-center" onclick="simpan_praktik_harga()">
-                                        <!-- <a class="nav-link" href="#harga"> -->
-                                        <i class="far fa-1x fa-save"></i>
-                                        --- Simpan ---
-                                        <i class="far fa-save"></i>
-                                        <!-- </a> -->
-                                    </button>
-                                </div>
+                            </div>
+                            <hr>
+                            <div id="simpan_praktik_harga" class="btn text-center" style="display: none;">
+                                <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-success text-lg-center text-center" onclick="simpan_praktik_harga()">
+                                    <!-- <a class="nav-link" href="#harga"> -->
+                                    <i class="far fa-1x fa-save"></i>
+                                    --- Simpan ---
+                                    <i class="far fa-save"></i>
+                                    <!-- </a> -->
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -462,6 +458,27 @@ if (isset($_POST['simpan_praktik'])) {
                 }
             }
 
+            //Alert jika Tanggal Selesai kurang dari tanggal mulai
+            if (tgl_selesai < tgl_mulai) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 6000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: '<center><b>Tanggal Selesai</b> Harus Kurang dari <b>Tanggal Mulai</b></center>'
+                })
+
+                document.getElementById("err_tgl_selesai").innerHTML = "<b>Tanggal Selesai</b> Harus Kurang dari <b>Tanggal Mulai</b>";
+            }
 
             //Simpan Daftar Praktik dan Harga
             if (
@@ -475,7 +492,8 @@ if (isset($_POST['simpan_praktik'])) {
                 // file_surat != "" &&
                 // file_data_praktikan != "" &&
                 nama_pembimbing != "" &&
-                telp_pembimbing != ""
+                telp_pembimbing != "" &&
+                tgl_selesai > tgl_mulai
             ) {
                 $.ajax({
                     type: 'POST',
@@ -548,27 +566,27 @@ if (isset($_POST['simpan_praktik'])) {
 
         function simpan_praktik_harga() {
 
-            if (document.getElementById("cek_harga_ujian1").checked == false && document.getElementById("cek_harga_ujian2").checked == false) {
-                document.getElementById("err_cek_harga_ujian").innerHTML = "Pilih Ujian";
+            if (document.getElementById("cek_pilih_ujian1").checked == false && document.getElementById("cek_pilih_ujian2").checked == false) {
+                document.getElementById("err_cek_pilih_ujian").innerHTML = "Pilih Ujian";
             } else {
-                document.getElementById("err_jenkel").innerHTML = "";
+                document.getElementById("err_cek_pilih_ujian").innerHTML = "";
             }
-            var data = $('#form_praktik').serialize();
-            var institusi = document.getElementById("institusi").value;
-            var praktik = document.getElementById("praktik").value;
-            var jurusan = document.getElementById("jurusan").value;
-            var jenjang = document.getElementById("jenjang").value;
-            var spesifikasi = document.getElementById("spesifikasi").value;
-            var akreditasi = document.getElementById("akreditasi").value;
-            var jumlah = document.getElementById("jumlah").value;
-            var tgl_mulai = document.getElementById("tgl_mulai").value;
-            var tgl_selesai = document.getElementById("tgl_selesai").value;
-            var file_surat = document.getElementById("file_surat").value;
-            var file_data_praktikan = document.getElementById("file_data_praktikan").value;
-            var nama_pembimbing = document.getElementById("nama_pembimbing").value;
-            var email_pembimbing = document.getElementById("email_pembimbing").value;
-            var telp_pembimbing = document.getElementById("telp_pembimbing").value;
-            var telp_pembimbing = document.getElementById("telp_pembimbing").value;
+            // var data = $('#form_praktik').serialize();
+            // var institusi = document.getElementById("institusi").value;
+            // var praktik = document.getElementById("praktik").value;
+            // var jurusan = document.getElementById("jurusan").value;
+            // var jenjang = document.getElementById("jenjang").value;
+            // var spesifikasi = document.getElementById("spesifikasi").value;
+            // var akreditasi = document.getElementById("akreditasi").value;
+            // var jumlah = document.getElementById("jumlah").value;
+            // var tgl_mulai = document.getElementById("tgl_mulai").value;
+            // var tgl_selesai = document.getElementById("tgl_selesai").value;
+            // var file_surat = document.getElementById("file_surat").value;
+            // var file_data_praktikan = document.getElementById("file_data_praktikan").value;
+            // var nama_pembimbing = document.getElementById("nama_pembimbing").value;
+            // var email_pembimbing = document.getElementById("email_pembimbing").value;
+            // var telp_pembimbing = document.getElementById("telp_pembimbing").value;
+            // var telp_pembimbing = document.getElementById("telp_pembimbing").value;
         }
     </script>
 <?php

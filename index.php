@@ -23,8 +23,7 @@ include '_add-ons/csrf_auth.php';
     <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="vendor/sw2/dist/sweetalert2.min.css">
     <!-- <link href="vendor/datatables-all/datatables.min.css" rel="stylesheet"> -->
-    <!-- <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="vendor/tata-master/dist/index.css"> -->
+    <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
 
 </head>
 <?php
