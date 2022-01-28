@@ -174,20 +174,21 @@ if ($r_harga_jurusan > 0) {
 <div class="text-gray-700">
     <div class="h5 font-weight-bold text-center mt-3 mb-3">Menu Harga Ujian <?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd']; ?></div>
 </div>
-<div class="justify-content-center text-center">
-    <span class="text-danger font-weight-bold font-italic text-lg" id="err_cek_pilih_ujian"></span>
-</div>
 <div class="row boxed-check-group boxed-check-primary justify-content-center">
     <label class="boxed-check">
-        <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1">
-        <div class="boxed-check-label">Pakai Ujian</div>
+        <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="y">
+        <div class="boxed-check-label">Ya</div>
     </label>
     &nbsp;
     &nbsp;
     <label class="boxed-check">
-        <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2">
-        <div class="boxed-check-label">Tidak Pakai Ujian</div>
+        <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="t">
+        <div class="boxed-check-label">Tidak</div>
     </label>
+</div>
+<div class="justify-content-center text-center">
+    <span class="text-danger font-weight-bold font-italic text-md" id="err_cek_pilih_ujian"></span>
+    <br>
 </div>
 
 <?php

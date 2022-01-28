@@ -154,7 +154,7 @@ if (isset($_POST['arsip_praktik'])) {
                 <h1 class="h3 mb-2 text-gray-800">Pendaftaran Praktik Nakes Lainnya dan Non-Nakes</h1>
             </div>
             <div class="col-lg-2 text-right">
-                <a href="?prk&i" class="btn btn-outline-success btn-sm">
+                <a href="?prk&i=nkn" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
                 <a href="?prk&a" class="btn btn-outline-info btn-sm">
