@@ -41,9 +41,10 @@ if (empty($_SESSION['username_user'])) {
 			if (isset($_POST['Login'])) {
 				$username_user = $_POST['username_user'];
 				$password_user = MD5($_POST['password_user']);
-				$sql_name = "SELECT * from `tb_user` where `username_user`='$username_user'";
-				$sql_pass = "SELECT * from `tb_user` where `password_user`='$password_user'";
-				$sql_name_pass = "SELECT * from `tb_user` where `username_user`='$username_user' 
+				$sql_name = "SELECT * from `tb_user` WHERE `username_user`='$username_user'";
+				$sql_pass = "SELECT * from `tb_user` WHERE `password_user`='$password_user'";
+				$sql_name_pass = "SELECT * from `tb_user` 
+				WHERE `username_user`='$username_user' 
 					AND `password_user`='$password_user' 
 					AND status_user = 'Y' ";
 

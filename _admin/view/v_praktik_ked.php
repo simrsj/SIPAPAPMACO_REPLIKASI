@@ -176,7 +176,7 @@ if (isset($_POST['arsip_praktik'])) {
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis = tb_jurusan_pdd.id_jurusan_pdd_jenis
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    WHERE tb_praktik.status_praktik = 'Y' AND tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis = 1 
+                    WHERE tb_praktik.status_praktik = 'Y' AND tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis = 1 AND tb_praktik.id_user = " . $_SESSION['id_user'] . "
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                     $q_praktik = $conn->query($sql_praktik);
@@ -219,10 +219,8 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body text-center">
-                                                                <span class="badge badge-warning text-md">DAFTAR</span> <br>
-                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih Harga<br><br>
-                                                                <span class="badge badge-warning text-md">HARGA</span><br>
-                                                                Harga Sudah Dipilih, dilanjutkan Validasi Data Pendaftaran dan Harga serta Pemilihan Mess Oleh Admin<br><br>
+                                                                <span class="badge badge-warning text-md">DATA PRAKTIK</span> <br>
+                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih <span class="badge badge-warning">DATA HARGA</span><br><br>
                                                                 <span class="badge badge-primary text-md">MESS</span><br>
                                                                 Mess Sudah didaftarkan oleh Admin dan Sudah Memvalidasi Data Daftar dan Harga, dilanjutkan Melakukan Proses Pembayaran.
                                                                 <?php
@@ -239,6 +237,8 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 }
                                                                 ?>
                                                                 <br>
+                                                                <span class="badge badge-warning text-md">DATA HARGA</span><br>
+                                                                Harga Sudah Dipilih, dilanjutkan proses <span class="badge badge-warning">PEMBAYARAN</span> <br><br>
                                                                 <span class="badge badge-warning text-md">PEMBAYARAN</span><br>
                                                                 Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
                                                                 <span class="badge badge-danger text-md">DITOLAK</span><br>
