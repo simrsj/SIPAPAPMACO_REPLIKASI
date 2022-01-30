@@ -1,0 +1,4 @@
+Data Pertanyaan : 
+1. Status Praktikan dalam setiap prosesnya dari Isi Data Praktik s.d Selesai Praktik
+2. Validasi untuk pembayaran seperti apa apakah keuangan perlu akunnya / konfirmasi pembayarannya secara manual antara diklat dengan keuangan
+3. 

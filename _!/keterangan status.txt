@@ -1,0 +1,28 @@
+A = dilakukan oleh ADMIN
+I = dilakukan oleh INSTITUSI
+
+- Status Selain Kedokteran
+
+1. DATA PRAKTIK -> I/A
+2. DATA HARGA -> I/A
+3. DATA TEMPAT -> A
+4. DATA MESS -> A
+5. PEMBAYARAN -> I/A
+5.1. PEMBAYARAN DITOLAK -> A, POINT 5
+5.2. PEMBAYARAN DITERIMA -> A, POINT 6
+6. AKTIF -> A
+7. SELESAI -> A
+
+--------------------------------------------------------------------
+
+- Status Kedokteran
+
+1. DATA PRAKTIK -> I/A
+2. DATA TEMPAT -> A
+3. DATA MESS -> A
+4. AKTIF -> A
+5. DATA HARGA -> I/A
+6. PEMBAYARAN -> I/A
+6.1. PEMBAYARAN DITOLAK -> A, POINT 6
+6.2. PEMBAYARAN DITERIMA -> A, POINT 7
+7. SELESAI -> A

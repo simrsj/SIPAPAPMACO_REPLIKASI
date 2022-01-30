@@ -1,0 +1,29 @@
+- enkripsi link 
+- inputan pilih jadwal praktikan dengan pilih tombol radio button tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
+- buat CRUD eksekusi tanpa loading (cek : https://dewankomputer.com/2019/01/23/crud-create-read-update-delete-dengan-ajax-tanpa-loading-part-1-menampilkan-data/)
+- perbaiki harga, mess dan pembayaran kedokteran (alurnya beda)
+- perbaiki isian akun institusi
+- perbaiki dastboard institusi
+- perbaiki dastboard admin
+- perbaiki Invoice pembayaran
+- Perbaiki modul mou perpanjang dan baru
+- dashboard user tampil mounya dengan judul perpanjang / baru MoU
+- Perbaiki Pendaftaran 
+- tanggal Selesai Pendaftaran tidak bisa input tanggal ≤ tanggal mulai
+- pelajari CSRF
+
+
+git status
+git commit -a -m "Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx"  
+git pull
+git push
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/fajarrachmath/training_cisarua.git
+git push -u origin main
+
+
+RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
