@@ -38,7 +38,8 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                             }
                             $id_praktik = $no;
                             ?>
-                            <input name="id_praktik" value="<?php echo $id_praktik; ?>" id="id" hidden>
+                            <input name="id" value="<?php echo $id_praktik; ?>" id="id" hidden>
+                            <input name="user" value="<?php echo $_SESSION['id_user']; ?>" id="id" hidden>
                             <div class="col-lg-5 ">
                                 Nama Institusi : <span style="color:red" id="input_institusi_">*</span><br>
                                 <?php
@@ -95,7 +96,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                             <div class="col-lg-3">
                                 Pilih Jurusan : <span style="color:red">*</span><br>
                                 <?php
-                                $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC";
+                                $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd != 0 ORDER BY nama_jurusan_pdd ASC";
 
                                 $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
                                 $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
@@ -126,7 +127,9 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                             <div class="col-lg-3">
                                 Pilih Jenjang : <span style="color:red">*</span><br>
                                 <?php
-                                $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
+                                $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd 
+                                WHERE (id_jenjang_pdd != 0 && id_jenjang_pdd != 11)
+                                ORDER BY id_jenjang_pdd ASC";
 
                                 $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
                                 $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
@@ -232,15 +235,15 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                                 <span class="text-danger font-weight-bold  font-italic text-xs" id="err_tgl_selesai"></span>
                             </div>
                             <div class="col-lg-4">
-                                Unggah Surat : <br>
+                                Unggah Surat : <span style="color:red">*</span><br>
                                 <input type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
                                 <br><i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 MB</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_file_surat"></span>
                             </div>
                             <div class="col-lg-4">
-                                Unggah Data Praktikan :
+                                Unggah Data Praktikan : <span style="color:red">*</span>
                                 <i style='font-size:12px;'><a href="./_file/format_data_praktikan.xlsx">Download Format</a></i><br>
-                                <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx" required>
+                                <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx">
                                 <br><i style='font-size:12px;'>Data unggah harus .xlsx dan maksimal ukuran file 1 MB</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_file_data_praktikan"></span>
                             </div>
@@ -249,10 +252,11 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
 
                         <!-- Penanggung Jawab/Pembimbing/Mentor -->
                         <div class=" row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 text-center">
                                 <b>Penanggung Jawab/Pembimbing/Mentor</b>
                             </div>
                         </div>
+                        <br>
                         <div class="row">
                             <?php
                             $q_user = $conn->query("SELECT * FROM tb_user WHERE id_user=" . $_SESSION['id_user']);
@@ -264,11 +268,11 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
-                                <input type="text" class="form-control" name="email_mentor_praktik" id="email_pembimbing" placeholder="Isi Email Pembimbing" value="<?php echo $d_user['email_user']; ?>">
+                                <input type="text" class="form-control" name="email_pembimbing_praktik" id="email_pembimbing" placeholder="Isi Email Pembimbing" value="<?php echo $d_user['email_user']; ?>">
                             </div>
                             <div class="col-lg-4">
                                 Telpon : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="telp_mentor_praktik" id="telp_pembimbing" placeholder="Isi Telpon Pembimbing" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
+                                <input type="number" class="form-control" name="telp_pembimbing_praktik" id="telp_pembimbing" placeholder="Isi Telpon Pembimbing" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_telp_pembimbing"></span>
                             </div>
@@ -304,9 +308,10 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                                 </div>
                             </div>
                             <div id="harga_praktik_data"></div>
+                            <span class="text-md font-italic font-weight-bold"><span class="text-danger">*</span>Kuantitas = Jumlah Praktikan</span>
                             <hr>
                             <div id="simpan_praktik_harga" class="nav btn justify-content-center text-md" style="display: none;">
-                                <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success" onclick="data_harga()">
+                                <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success" onclick="simpan_harga()">
                                     <!-- <a class="nav-link" href="#harga"> -->
                                     <i class="fas fa-check-circle"></i>
                                     Simpan Data Praktik dan Data Harga
@@ -323,7 +328,6 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
 
     <script type="text/javascript">
         function simpan_praktik() {
-            var data = $('#form_praktik').serialize();
             var id = document.getElementById("id").value;
             var institusi = document.getElementById("institusi").value;
             var praktik = document.getElementById("praktik").value;
@@ -335,10 +339,11 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
             var tgl_mulai = document.getElementById("tgl_mulai").value;
             var tgl_selesai = document.getElementById("tgl_selesai").value;
             var file_surat = document.getElementById("file_surat").value;
-            var file_data_praktikan = document.getElementById("file_data_praktikan").value;
+            var file_data_praktikan = document.getElementById("file_data_praktikan").files;
             var nama_pembimbing = document.getElementById("nama_pembimbing").value;
             var email_pembimbing = document.getElementById("email_pembimbing").value;
             var telp_pembimbing = document.getElementById("telp_pembimbing").value;
+
 
             //Notif Bila tidak diisi
             var notif_tidak_diisi = "";
@@ -349,7 +354,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 6000,
+                    timer: 10000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -418,19 +423,19 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                     document.getElementById("err_tgl_selesai").innerHTML = "";
                 }
 
-                //notif file_surat
-                // if (file_surat == "") {
-                //     document.getElementById("err_file_surat").innerHTML = "File Surat Harus Diisi";
-                // }  else {
-                //     document.getElementById("err_file_surat").innerHTML = "";
-                // }
+                // notif file_surat
+                if (file_surat == "") {
+                    document.getElementById("err_file_surat").innerHTML = "File Surat Harus Diisi";
+                } else {
+                    document.getElementById("err_file_surat").innerHTML = "";
+                }
 
-                //notif file_data_praktikan
-                // if (file_data_praktikan == "") {
-                //     document.getElementById("err_file_data_praktikan").innerHTML = "File Data Praktikan Harus Diisi";
-                // } else {
-                //     document.getElementById("err_file_data_praktikan").innerHTML = "";
-                // }
+                // notif file_data_praktikan
+                if (file_data_praktikan == "") {
+                    document.getElementById("err_file_data_praktikan").innerHTML = "File Data Praktikan Harus Diisi";
+                } else {
+                    document.getElementById("err_file_data_praktikan").innerHTML = "";
+                }
 
                 //notif nama_pembimbing
                 if (nama_pembimbing == "") {
@@ -448,12 +453,12 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
             }
 
             //Alert jika Tanggal Selesai kurang dari tanggal mulai
-            if (tgl_selesai <= tgl_mulai) {
+            if (tgl_selesai <= tgl_mulai && (tgl_mulai != "" && tgl_selesai != "")) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 6000,
+                    timer: 10000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -478,23 +483,25 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 jumlah != "" &&
                 tgl_mulai != "" &&
                 tgl_selesai != "" &&
-                // file_surat != "" &&
+                file_surat != "" &&
                 // file_data_praktikan != "" &&
                 nama_pembimbing != "" &&
                 telp_pembimbing != "" &&
                 tgl_selesai > tgl_mulai
             ) {
+
+                var data_praktik = $('#form_praktik').serialize();
                 $.ajax({
                     type: 'POST',
                     url: "_admin/exc/x_i_data_praktik.php",
-                    data: data,
+                    data: data_praktik,
                     success: function() {
                         document.getElementById("form_praktik");
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
                             showConfirmButton: false,
-                            timer: 5000,
+                            timer: 10000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -504,7 +511,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
 
                         Toast.fire({
                             icon: 'success',
-                            title: '<div class="text-md text-center">DATA BERHASIL TERSIMPAN</div>'
+                            title: '<div class="text-md text-center"><b>DATA PRAKTIK TERSIMPAN</b><br>LANJUTKAN KE <b>DATA HARGA</b></div>'
                         });
                     },
                     error: function(response) {
@@ -512,6 +519,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                         alert('eksekusi query gagal');
                     }
                 });
+
                 // $("#tombol_data_praktik").fadeOut('fast');
                 $("#harga_praktik_nondata").fadeOut('fast');
                 $("#harga_praktik_data").fadeIn('slow');
@@ -523,7 +531,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 //Memunculkan Data Praktik yang Disimpan
                 $("#data_praktik_simpan").fadeIn('fast');
 
-                // Kirim Parameter ke Data Praktik
+                // Kirim Parameter ke Data Praktik untuk ditampilkan kembali
                 var xmlhttp_data_praktik = new XMLHttpRequest();
                 xmlhttp_data_praktik.onreadystatechange = function() {
                     document.getElementById("data_praktik_simpan").innerHTML = this.responseText;
@@ -531,7 +539,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 xmlhttp_data_praktik.open("GET", "_admin/insert/data_praktik.php?id=" + id, true);
                 xmlhttp_data_praktik.send();
 
-                // Kirim Parameter ke Data Harga
+                // Kirim Parameter ke Data Harga untuk ditampilkan
                 var xmlhttp_data_harga = new XMLHttpRequest();
                 xmlhttp_data_harga.onreadystatechange = function() {
                     document.getElementById("harga_praktik_data").innerHTML = this.responseText;
@@ -547,7 +555,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
             }
         }
 
-        function data_harga() {
+        function simpan_harga() {
 
             //Notif dan Toast Bila Ujian Tidak dipilih
             if (document.getElementById("cek_pilih_ujian1").checked == false && document.getElementById("cek_pilih_ujian2").checked == false) {
@@ -555,7 +563,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 6000,
+                    timer: 10000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -572,33 +580,29 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
             //simpan data praktik dan data harga
             else {
                 document.getElementById("err_cek_pilih_ujian").innerHTML = "";
-                var data = $('#form_praktik').serialize();
-                var institusi = document.getElementById("institusi").value;
-                var praktik = document.getElementById("praktik").value;
-                var jurusan = document.getElementById("jurusan").value;
-                var jenjang = document.getElementById("jenjang").value;
-                var spesifikasi = document.getElementById("spesifikasi").value;
-                var akreditasi = document.getElementById("akreditasi").value;
-                var jumlah = document.getElementById("jumlah").value;
-                var tgl_mulai = document.getElementById("tgl_mulai").value;
-                var tgl_selesai = document.getElementById("tgl_selesai").value;
-                var file_surat = document.getElementById("file_surat").value;
-                var file_data_praktikan = document.getElementById("file_data_praktikan").value;
-                var nama_pembimbing = document.getElementById("nama_pembimbing").value;
-                var email_pembimbing = document.getElementById("email_pembimbing").value;
-                var telp_pembimbing = document.getElementById("telp_pembimbing").value;
-
+                var cek_pilih_ujian = "";
+                if (document.getElementById("cek_pilih_ujian1").checked == true) {
+                    cek_pilih_ujian = document.getElementById("cek_pilih_ujian1").value;
+                } else if (document.getElementById("cek_pilih_ujian2").checked == true) {
+                    cek_pilih_ujian = document.getElementById("cek_pilih_ujian2").value;
+                }
+                var data_praktik = $('#form_praktik').serializeArray();
+                data_praktik.push({
+                    name: 'cek_pilih_ujian',
+                    value: cek_pilih_ujian
+                });
+                // alert(cek_ujian + 'asdasd');
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_data_praktik_dan_data_harga.php",
-                    data: data,
+                    url: "_admin/exc/x_i_data_harga.php?",
+                    data: data_praktik,
                     success: function() {
                         document.getElementById("form_praktik");
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
                             showConfirmButton: false,
-                            timer: 5000,
+                            timer: 10000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)

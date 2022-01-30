@@ -1,94 +1,183 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
-// $id_institusi = $_POST['id_institusi'];
-// $nama_praktik = $_POST['nama_praktik'];
+$id_praktik = $_POST['id'];
 
-//Cari id_praktik
-$no = 1;
-$sql = "SELECT id_praktik FROM tb_praktik ORDER BY id_praktik ASC";
-$q = $conn->query($sql);
-if ($q->rowCount() > 0) {
-    while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
-        if ($no != $d['id_praktik']) {
-            $no = $d['id_praktik'] + 1;
-            break;
+//Mencari id_jurusan_pdd_jenis
+$id_jurusan_pdd = $_POST['id_jurusan_pdd'];
+$sql_jurusan_pdd_jenis = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $id_jurusan_pdd;
+$q_jurusan_pdd_jenis = $conn->query($sql_jurusan_pdd_jenis);
+$d_jurusan_pdd_jenis = $q_jurusan_pdd_jenis->fetch(PDO::FETCH_ASSOC);
+
+//Mencari id_jenjang_pdd
+$id_jenjang_pdd = $_POST['id_jenjang_pdd'];
+$sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd WHERE id_jenjang_pdd = " . $id_jenjang_pdd;
+$q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
+$d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC);
+
+$tgl_mulai_praktik = $_POST['tgl_mulai_praktik'];
+$tgl_selesai_praktik = $_POST['tgl_selesai_praktik'];
+$jumlah_praktik = $_POST['jumlah_praktik'];
+
+
+//SQL menentukan harga berdasarkan jenis jurusan
+$sql_harga_jurusan = " SELECT * FROM tb_harga 
+JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
+JOIN tb_jurusan_pdd_jenis ON tb_harga.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
+JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan
+WHERE tb_harga.id_jurusan_pdd_jenis = " . $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] . " AND tb_harga.id_harga_jenis BETWEEN 1 AND 5
+ORDER BY nama_harga_jenis ASC, nama_harga ASC 
+";
+
+$q_harga_jurusan = $conn->query($sql_harga_jurusan);
+while ($d_harga_jurusan = $q_harga_jurusan->fetch(PDO::FETCH_ASSOC)) {
+
+    if ($d_harga_jurusan['tipe_harga'] == 'SEKALI') {
+        $frekuensi = 1;
+    } elseif ($d_harga_jurusan['tipe_harga'] == 'INPUT') {
+        echo "INPUT";
+    } elseif ($d_harga_jurusan['tipe_harga'] == 'HARGA-') {
+        $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
+    } elseif ($d_harga_jurusan['tipe_harga'] == 'HARGA+') {
+        $frekuensi = tanggal_between($tgl_mulai_praktik, $tgl_selesai_praktik);
+    } elseif ($d_harga_jurusan['tipe_harga'] == 'MINGGUAN') {
+        $frekuensi = tanggal_between_week($tgl_mulai_praktik, $tgl_selesai_praktik);
+    } else {
+        $frekuensi = $d_harga_jurusan['tipe_harga'];
+    }
+
+    //bila ada data frekuensi di attribunya (tidak NULL/ tidak kososng - terisi)
+    if ($d_harga_jurusan['frekuensi_harga'] != NULL || $d_harga_jurusan['frekuensi_harga'] != 0) {
+        $frekuensi = $d_harga_jurusan['frekuensi_harga'];
+    }
+
+    $sql_insert = "INSERT INTO tb_harga_pilih (
+        id_praktik, 
+        id_harga,
+        tgl_input_harga_pilih,
+        frekuensi_harga_pilih,
+        kuantitas_harga_pilih,
+        jumlah_harga_pilih,
+        ) VALUES (
+            '" . $id_praktik . "', 
+            '" . $d_harga_jurusan['id_harga'] . "',
+            '" . date('Y-m-d') . "', 
+            '" . $frekuensi . "',
+            '" . $jumlah_praktik . "', 
+            '" . $frekuensi * $jumlah_praktik * $d_harga_jurusan['jumlah_harga'] . "'
+            )";
+    // $conn->query($sql_insert);
+    echo $sql_insert . "<br>";
+}
+echo "<br>";
+
+
+
+//SQL BST Eksekusi bila jurusan selain dari kedokteran
+if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] != 1) {
+    $sql_harga_jenjang = " SELECT * FROM tb_harga 
+        JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
+        JOIN tb_jenjang_pdd ON tb_harga.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
+        WHERE tb_harga.id_jenjang_pdd = " . $id_jenjang_pdd . " AND tb_harga.id_harga_jenis BETWEEN 1 AND 6
+        ORDER BY nama_jenjang_pdd ASC
+        ";
+
+    $q_harga_jenjang = $conn->query($sql_harga_jenjang);
+
+    while ($d_harga_jenjang = $q_harga_jenjang->fetch(PDO::FETCH_ASSOC)) {
+        if ($d_harga_jenjang['tipe_harga'] == 'SEKALI') {
+            $frekuensi = 1;
+        } elseif ($d_harga_jenjang['tipe_harga'] == 'INPUT') {
+            echo "INPUT";
+        } elseif ($d_harga_jenjang['tipe_harga'] == 'HARGA-') {
+            $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
+        } elseif ($d_harga_jenjang['tipe_harga'] == 'HARGA+') {
+            $frekuensi = tanggal_between($tgl_mulai_praktik, $tgl_selesai_praktik);
+        } elseif ($d_harga_jenjang['tipe_harga'] == 'MINGGUAN') {
+            $frekuensi = tanggal_between_week($tgl_mulai_praktik, $tgl_selesai_praktik);
+        } else {
+            $frekuensi = $d_harga_jenjang['tipe_harga'];
         }
-        $no++;
+
+        $sql_insert_harga_jenjang = " INSERT INTO tb_harga_pilih (
+                id_praktik, 
+                id_harga, 
+                tgl_input_harga_pilih, 
+                frekuensi_harga_pilih,
+                kuantitas_harga_pilih,
+                jumlah_harga_pilih)
+            VALUES (
+                '" . $id_praktik . "', 
+                '" . $d_harga_jenjang['id_harga'] . "', 
+                '" . date('Y-m-d') . "', 
+                '" . $frekuensi . "', 
+                '" . $jumlah_praktik . "', 
+                '" . $frekuensi * $jumlah_praktik * $d_harga_jenjang['jumlah_harga'] . "'
+            )";
+
+        echo $sql_insert_harga_jenjang . "<br>";
+        // $conn->query($sql_insert_harga_jenjang);
     }
 }
-$id_praktik = $no;
-echo $id_praktik . "<br>";
-//Data Praktik
+echo "<br><br>";
 
-// $_POST['id_institusi'];
-// $_POST['nama_praktik'];
-// $_POST['jumlah_praktik'];
-// $_POST['id_jurusan_pdd'];
-// $_POST['id_jenjang_pdd'];
-// $_POST['id_spesifikasi_pdd'];
-// $_POST['id_akreditasi'];
-// $_POST['tgl_mulai_praktik'];
-// $_POST['tgl_selesai_praktik'];
-// $_POST['surat_praktik'];
-// $_POST['data_praktik'];
-// $_POST['nama_pembimbing_praktik'];
-// $_POST['email_mentor_praktik'];
-// $_POST['telp_mentor_praktik'];
+//SQL Harga Ujian 
+$cek_pilih_ujian = $_POST['cek_pilih_ujian'];
 
-$id_institusi = stripslashes(strip_tags(htmlspecialchars($_POST['id_institusi'], ENT_QUOTES)));
-$nama_praktik = stripslashes(strip_tags(htmlspecialchars($_POST['nama_praktik'], ENT_QUOTES)));
-$jumlah_praktik = stripslashes(strip_tags(htmlspecialchars($_POST['jumlah_praktik'], ENT_QUOTES)));
-$id_jurusan_pdd = stripslashes(strip_tags(htmlspecialchars($_POST['id_jurusan_pdd'], ENT_QUOTES)));
-$id_jenjang_pdd = stripslashes(strip_tags(htmlspecialchars($_POST['id_jenjang_pdd'], ENT_QUOTES)));
-$id_spesifikasi_pdd = stripslashes(strip_tags(htmlspecialchars($_POST['id_spesifikasi_pdd'], ENT_QUOTES)));
-$id_akreditasi = stripslashes(strip_tags(htmlspecialchars($_POST['id_akreditasi'], ENT_QUOTES)));
-$tgl_mulai_praktik = stripslashes(strip_tags(htmlspecialchars($_POST['tgl_mulai_praktik'], ENT_QUOTES)));
-$tgl_selesai_praktik = stripslashes(strip_tags(htmlspecialchars($_POST['tgl_selesai_praktik'], ENT_QUOTES)));
-$surat_praktik = stripslashes(strip_tags(htmlspecialchars($_POST['surat_praktik'], ENT_QUOTES)));
-$data_praktik = stripslashes(strip_tags(htmlspecialchars($_POST['data_praktik'], ENT_QUOTES)));
-$nama_pembimbing_praktik = stripslashes(strip_tags(htmlspecialchars($_POST['nama_pembimbing_praktik'], ENT_QUOTES)));
-$email_mentor_praktik = stripslashes(strip_tags(htmlspecialchars($_POST['email_mentor_praktik'], ENT_QUOTES)));
-$telp_mentor_praktik = stripslashes(strip_tags(htmlspecialchars($_POST['telp_mentor_praktik'], ENT_QUOTES)));
-
-$sql_insert = "INSERT INTO tb_praktik (
-    id_institusi, 
-    nama_praktik,
-    jumlah_praktik,
-    id_jurusan_pdd,
-    id_jenjang_pdd,
-    id_spesifikasi_pdd,
-    id_akreditasi,
-    tgl_mulai_praktik,
-    tgl_selesai_praktik,
-    surat_praktik,
-    data_praktik,
-    nama_pembimbing_praktik,
-    email_mentor_praktik,
-    telp_mentor_praktik,
-    status_praktik
-    ) VALUES (
-        '" . $id_institusi . "', 
-        '" . $nama_praktik . "',
-        '" . $jumlah_praktik . "', 
-        '" . $id_jenjang_pdd . "',
-        '" . $id_spesifikasi_pdd . "', 
-        '" . $id_akreditasi . "',
-        '" . $tgl_mulai_praktik . "', 
-        '" . $tgl_selesai_praktik . "',
-        '" . $surat_praktik . "', 
-        '" . $data_praktik . "',
-        '" . $nama_pembimbing_praktik . "', 
-        '" . $email_mentor_praktik . "',
-        '" . $telp_mentor_praktik . "', 
-        'Y'
-        )";
-// $conn->query($sql_insert);
-echo $sql_insert . "<br>";
-echo json_encode(['success' => 'Berhasil Disimpan']);
-
-//--------------------------------------------------//
-
-$cek_pilih_ujian = stripslashes(strip_tags(htmlspecialchars($_POST['cek_pilih_ujian'], ENT_QUOTES)));
 echo $cek_pilih_ujian . "<br>";
+if ($cek_pilih_ujian == 'y') {
+    if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] == 1) {
+        $sql = "AND tb_harga.id_harga_jenis = 1";
+    } else {
+        $sql = "AND tb_harga.id_jurusan_pdd_jenis BETWEEN 2 AND 4";
+    }
+    $sql_harga_ujian = " SELECT * FROM tb_harga 
+            JOIN tb_harga_jenis ON tb_harga.id_harga_jenis = tb_harga_jenis.id_harga_jenis 
+            JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan 
+            WHERE tb_harga.id_harga_jenis = 6 AND tb_harga.id_jurusan_pdd_jenis = " . $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] . "
+            ORDER BY nama_harga_jenis ASC
+        ";
+
+    $q_harga_ujian = $conn->query($sql_harga_ujian);
+
+    while ($d_harga_ujian = $q_harga_ujian->fetch(PDO::FETCH_ASSOC)) {
+        if ($d_harga_ujian['tipe_harga'] == 'SEKALI') {
+            $frekuensi = 1;
+        } elseif ($d_harga_ujian['tipe_harga'] == 'INPUT') {
+            echo "INPUT";
+        } elseif ($d_harga_ujian['tipe_harga'] == 'HARGA-') {
+            $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
+        } elseif ($d_harga_ujian['tipe_harga'] == 'HARGA+') {
+            $frekuensi = tanggal_between($tgl_mulai_praktik, $tgl_selesai_praktik);
+        } elseif ($d_harga_ujian['tipe_harga'] == 'MINGGUAN') {
+            $frekuensi = tanggal_between_week($tgl_mulai_praktik, $tgl_selesai_praktik);
+        } else {
+            $frekuensi = $d_harga_ujian['tipe_harga'];
+        }
+
+        $sql_insert_harga_ujian = " INSERT INTO tb_harga_pilih (
+                id_praktik, 
+                id_harga, 
+                tgl_input_harga_pilih, 
+                frekuensi_harga_pilih,
+                kuantitas_harga_pilih,
+                jumlah_harga_pilih)
+            VALUES (
+                '" . $id_praktik . "', 
+                '" . $d_harga_ujian['id_harga'] . "', 
+                '" . date('Y-m-d') . "', 
+                '" . $frekuensi . "', 
+                '" . $jumlah_praktik . "', 
+                '" . $frekuensi * $jumlah_praktik * $d_harga_ujian['jumlah_harga'] . "'
+            )";
+
+        echo $sql_insert_harga_ujian . "<br>";
+        // $conn->query($sql_insert_harga_ujian);
+    }
+}
+echo "<br><br>";
+
+
+echo json_encode(['success' => 'Data Harga Berhasil Disimpan']);

@@ -359,7 +359,7 @@
                                 <th scope="col">Nama Jenis</th>
                                 <th scope="col">Nama Jurusan</th>
                                 <th scope="col">Nama Jenjang</th>
-                                <th scope="col">Nama Spesifikasi</th>
+                                <!-- <th scope="col">Nama Spesifikasi</th> -->
                                 <th scope="col">Nama Harga</th>
                                 <th scope="col">Satuan Harga</th>
                                 <th scope="col">Jumlah Harga</th>
@@ -370,12 +370,13 @@
                             <?php
 
                             $sql_harga = "SELECT * FROM tb_harga 
-                    JOIN tb_jurusan_pdd_jenis ON tb_harga.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
-                    JOIN tb_jenjang_pdd ON tb_harga.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-                    JOIN tb_spesifikasi_pdd ON tb_harga.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
-                    JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan
-                    ORDER BY tb_harga.id_jurusan_pdd_jenis ASC
-                    ";
+                            JOIN tb_jurusan_pdd ON tb_harga.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
+                            JOIN tb_jurusan_pdd_jenis ON tb_harga.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
+                            JOIN tb_jenjang_pdd ON tb_harga.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
+                            JOIN tb_spesifikasi_pdd ON tb_harga.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
+                            JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan
+                            ORDER BY tb_harga.id_jurusan_pdd_jenis ASC
+                            ";
 
                             $q_harga = $conn->query($sql_harga);
                             $r_harga = $q_harga->rowCount();
@@ -387,9 +388,9 @@
                                 <tr>
                                     <th scope="row"><?php echo $no; ?></th>
                                     <td><?php echo $d_harga['nama_jurusan_pdd_jenis']; ?></td>
+                                    <td><?php echo $d_harga['nama_jurusan_pdd']; ?></td>
                                     <td><?php echo $d_harga['nama_jenjang_pdd']; ?></td>
-                                    <td><?php echo $d_harga['nama_spesifikasi_pdd']; ?></td>
-                                    <td><?php echo $d_harga['nama_spesifikasi_pdd']; ?></td>
+                                    <!-- <td><?php echo $d_harga['nama_spesifikasi_pdd']; ?></td> -->
                                     <td><?php echo $d_harga['nama_harga']; ?></td>
                                     <td><?php echo $d_harga['nama_harga_satuan']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_harga['jumlah_harga'], 0, ",", "."); ?></td>
