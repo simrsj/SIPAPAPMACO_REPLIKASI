@@ -14,7 +14,8 @@
 
 
 git status
-git commit -a -m "Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx"  
+git add . 
+git commit -a -m "Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database"  
 git pull
 git push
 
