@@ -33,27 +33,21 @@ if ($_FILES['file']['size'] > 0) {
             );
             $link_file = "{$alamat_unggah}/{$file->name}";
         }
-        exit;
     }
 }
 /* 
 if (isset($_FILES['file']['name'])) {
     // file name
     $filename = $_FILES['file']['name'];
-
     // Location
     $location = './_file/test/' . $filename;
-
     // file extension
     $file_extension = pathinfo($location, PATHINFO_EXTENSION);
     echo $file_extension . "<br>";
     $file_extension = strtolower($file_extension);
     echo $file_extension . "<br>";
-
-
     // Valid extensions
     $valid_ext = array("pdf", "doc", "docx", "jpg", "png", "jpeg", "xlsx");
-
     $response = 0;
     if (in_array($file_extension, $valid_ext)) {
         // Upload file

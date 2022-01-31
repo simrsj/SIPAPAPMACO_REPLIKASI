@@ -521,21 +521,18 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
 
             // var files1;
 
-            // var files = document.getElementsByTagName("file").files;
 
             //eksekusi bila file surat terisi
             if (file_surat != "") {
-                // console.log('file surat')
                 //Cari ekstensi file surat yg diupload
                 var typeSurat = document.querySelector('#file_surat').value;
                 var getTypeSurat = typeSurat.split('.').pop();
 
                 //cari ukuran file surat yg diupload
-                var filez = document.getElementById("file_surat").files;
+                var files = document.getElementById("file_surat").files;
                 var getSizeSurat = document.getElementById("file_surat").files[0].size / 1024;
 
-                console.log("Size Surat : " + getSizeSurat);
-                console.log("Size Surat : " + filez);
+                // console.log("Size Surat : " + getSizeSurat);
 
                 //Toast bila upload file surat selain pdf
                 if (getTypeSurat != 'pdf') {
@@ -588,8 +585,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 var files = document.getElementById("file_data_praktikan").files;
                 var getSizeDataPraktikan = document.getElementById("file_data_praktikan").files[0].size / 1024;
 
-                console.log("Size Data Surat : " + getSizeDataPraktikan);
-                console.log("Size data Surat : " + files);
+                // console.log("Size Data Surat : " + getSizeDataPraktikan);
 
                 //Toast bila upload file data praktikan selain xlsx
                 if (getTypeDataPraktikan != 'xlsx') {
@@ -690,19 +686,32 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                     }
                 });
 
-                //ambil data file yang diupload
-                var data_file = new FormData();
-                data_file.append("file_surat", filez[0]);
-                data_file.append("file_data_praktikan", files[0]);
-                data_file.append("id", id);
+                console.log("asdasd");
 
-                var xhttp = new XMLHttpRequest();
+                //ambil data file yang diupload
+                var dataFileSurat = new FormData();
+                dataFileSurat.append("file_surat", files[0]);
+                dataFileSurat.append("id", id);
+
+                var xhttpDataFileSurat = new XMLHttpRequest();
 
                 // Set POST method and ajax file path
-                xhttp.open("POST", "_admin/exc/x_i_dataFileSuratDataPraktikan.php?id=" + id, true);
+                xhttpDataFileSurat.open("POST", "_admin/exc/x_i_dataFileSurat.php?id=" + id, true);
 
                 // Send request with data
-                xhttp.send(data_file);
+                xhttpDataFileSurat.send(dataFileSurat);
+
+                var dataFileDataPraktikan = new FormData();
+                dataFileDataPraktikan.append("file_data_praktikan", files[0]);
+                dataFileDataPraktikan.append("id", id);
+
+                var xhttpDataFileDataPraktikan = new XMLHttpRequest();
+
+                // Set POST method and ajax file path
+                xhttpDataFileDataPraktikan.open("POST", "_admin/exc/x_i_dataFileDataPraktikan.php?id=" + id, true);
+
+                // Send request with data
+                xhttpDataFileDataPraktikan.send(dataFileDataPraktikan);
 
                 // $("#tombol_data_praktik").fadeOut('fast');
                 $("#harga_praktik_nondata").fadeOut('fast');
