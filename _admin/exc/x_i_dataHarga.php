@@ -31,6 +31,10 @@ WHERE tb_harga.id_jurusan_pdd_jenis = " . $d_jurusan_pdd_jenis['id_jurusan_pdd_j
 ORDER BY nama_harga_jenis ASC, nama_harga ASC 
 ";
 
+echo "<br><br>";
+echo $sql_harga_jurusan;
+echo "<br><br>";
+
 $q_harga_jurusan = $conn->query($sql_harga_jurusan);
 while ($d_harga_jurusan = $q_harga_jurusan->fetch(PDO::FETCH_ASSOC)) {
 
@@ -59,7 +63,7 @@ while ($d_harga_jurusan = $q_harga_jurusan->fetch(PDO::FETCH_ASSOC)) {
         tgl_input_harga_pilih,
         frekuensi_harga_pilih,
         kuantitas_harga_pilih,
-        jumlah_harga_pilih,
+        jumlah_harga_pilih
         ) VALUES (
             '" . $id_praktik . "', 
             '" . $d_harga_jurusan['id_harga'] . "',
@@ -68,8 +72,10 @@ while ($d_harga_jurusan = $q_harga_jurusan->fetch(PDO::FETCH_ASSOC)) {
             '" . $jumlah_praktik . "', 
             '" . $frekuensi * $jumlah_praktik * $d_harga_jurusan['jumlah_harga'] . "'
             )";
-    // $conn->query($sql_insert);
-    echo $sql_insert . "<br>";
+
+    echo $sql_insert;
+    echo "<br>";
+    $conn->query($sql_insert);
 }
 echo "<br>";
 
@@ -107,8 +113,8 @@ if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] != 1) {
                 tgl_input_harga_pilih, 
                 frekuensi_harga_pilih,
                 kuantitas_harga_pilih,
-                jumlah_harga_pilih)
-            VALUES (
+                jumlah_harga_pilih
+            ) VALUES (
                 '" . $id_praktik . "', 
                 '" . $d_harga_jenjang['id_harga'] . "', 
                 '" . date('Y-m-d') . "', 
@@ -117,8 +123,9 @@ if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] != 1) {
                 '" . $frekuensi * $jumlah_praktik * $d_harga_jenjang['jumlah_harga'] . "'
             )";
 
-        echo $sql_insert_harga_jenjang . "<br>";
-        // $conn->query($sql_insert_harga_jenjang);
+        echo $sql_insert_harga_jenjang;
+        echo "<br>";
+        $conn->query($sql_insert_harga_jenjang);
     }
 }
 echo "<br><br>";
@@ -163,8 +170,8 @@ if ($cek_pilih_ujian == 'y') {
                 tgl_input_harga_pilih, 
                 frekuensi_harga_pilih,
                 kuantitas_harga_pilih,
-                jumlah_harga_pilih)
-            VALUES (
+                jumlah_harga_pilih
+            ) VALUES (
                 '" . $id_praktik . "', 
                 '" . $d_harga_ujian['id_harga'] . "', 
                 '" . date('Y-m-d') . "', 
@@ -173,11 +180,16 @@ if ($cek_pilih_ujian == 'y') {
                 '" . $frekuensi * $jumlah_praktik * $d_harga_ujian['jumlah_harga'] . "'
             )";
 
-        echo $sql_insert_harga_ujian . "<br>";
-        // $conn->query($sql_insert_harga_ujian);
+        echo $sql_insert_harga_ujian;
+        echo "<br>";
+        $conn->query($sql_insert_harga_ujian);
     }
 }
 echo "<br><br>";
 
+$sql_update_status_praktik = " UPDATE tb_praktik
+SET status_cek_praktik = 'DATA HARGA'
+WHERE id_praktik = $id_praktik";
 
+$conn->$sql_update_status_praktik;
 echo json_encode(['success' => 'Data Harga Berhasil Disimpan']);

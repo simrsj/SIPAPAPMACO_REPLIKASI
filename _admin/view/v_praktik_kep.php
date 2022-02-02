@@ -220,47 +220,42 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body text-center">
-                                                                <span class="badge badge-warning text-md">DAFTAR</span> <br>
-                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih Harga<br><br>
-                                                                <span class="badge badge-warning text-md">HARGA</span><br>
-                                                                Harga Sudah Dipilih, dilanjutkan Validasi Data Pendaftaran dan Harga serta Pemilihan Mess Oleh Admin<br><br>
+                                                                <span class="badge badge-warning text-md">DATA PRAKTIK</span> <br>
+                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih <span class="badge badge-warning">Data Harga</span><br><br>
+                                                                <span class="badge badge-warning text-md">DATA HARGA</span><br>
+                                                                Pendaftaran dan Harga Diklat Sudah Dipilih, dilanjutkan Validasi Data Pendaftaran dan Harga <br>
+                                                                serta Pemilihan Tempat dan Mess Oleh Admin<br><br>
                                                                 <span class="badge badge-primary text-md">MESS</span><br>
                                                                 Mess Sudah didaftarkan oleh Admin dan Sudah Memvalidasi Data Daftar dan Harga, dilanjutkan Melakukan Proses Pembayaran.
-                                                                <?php
-                                                                if ($d_praktik['status_cek_praktik'] == 'MESS') {
-                                                                ?>
-                                                                    <a href="./_print/p_praktik_invoice.php?id=<?php $d_praktik['id_praktik']; ?>" target="_blank" class="text-primary text-uppercase font-weight-bold">
-                                                                        <b>CEK INVOICE</b>
-                                                                    </a>
-                                                                <?php
-                                                                } else {
-                                                                ?>
-                                                                    <div class="text-primary font-weight-bold">CEK INVOICE</div>
-                                                                <?php
-                                                                }
-                                                                ?>
                                                                 <br>
                                                                 <span class="badge badge-warning text-md">PEMBAYARAN</span><br>
                                                                 Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
                                                                 <span class="badge badge-danger text-md">DITOLAK</span><br>
-                                                                Pembayaran ditolak oleh Admin, <div class="text-danger font-weight-bold">CEK KETERANGAN</div><br>
+                                                                Pembayaran ditolak oleh Admin, <span class="text-danger font-weight-bold">CEK KETERANGAN</span><br>
                                                                 <span class="badge badge-success text-md">AKTIF</span><br>
                                                                 Pembayaran Sudah terverifikasi oleh Admin, Pendaftaran Selesai <br><br>
-                                                                <span class="badge badge-dark text-md">SELESAI</span><br> Praktikan Sudah Selesai<br><br>
-                                                                <span class="badge badge-danger text-md">ERROR</span><br> Terjadi kesalahan sistem, <br><a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
+                                                                <span class="badge badge-dark text-md">SELESAI</span><br>
+                                                                Praktikan Sudah Selesai<br><br>
+                                                                <span class="badge badge-danger text-md">ERROR</span><br>
+                                                                Terjadi kesalahan sistem, <br>
+                                                                <a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <?php
-                                                if ($d_praktik['status_cek_praktik'] == "DAFTAR") {
+                                                if ($d_praktik['status_cek_praktik'] == "DATA PRAKTIK") {
                                                 ?>
-                                                    <span class="badge badge-warning text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <span class="badge badge-warning text-md">
+                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                    </span>
                                                 <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "HARGA") {
+                                                } elseif ($d_praktik['status_cek_praktik'] == "DATA HARGA") {
                                                 ?>
-                                                    <span class="badge badge-warning text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <span class="badge badge-warning text-md">
+                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                    </span>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
                                                 ?>
@@ -312,12 +307,14 @@ if (isset($_POST['arsip_praktik'])) {
 
                                                 <!-- tombol dropdown pilih menu harga, mess, bukti bayar -->
                                                 <?php
-                                                if ($d_praktik['status_cek_praktik'] == "DAFTAR") {
+                                                if ($d_praktik['status_cek_praktik'] == "DATA PRAKTIK") {
                                                 ?>
                                                     <b>PILIH : </b><br>
-                                                    <a class="btn btn-outline-danger btn-sm" href="?prk&ih=<?php echo $d_praktik['id_praktik']; ?>">HARGA</a>
+                                                    <a class="btn btn-outline-danger btn-sm" href="?prk&i=kep&id=<?php echo $d_praktik['id_praktik']; ?>">
+                                                        Pilih Harga
+                                                    </a>
                                                 <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "HARGA") {
+                                                } elseif ($d_praktik['status_cek_praktik'] == "DATA HARGA") {
                                                 ?>
                                                     <b>PILIH : </b><br>
                                                     <a class="btn btn-outline-danger btn-sm" href="?prk&m=<?php echo $d_praktik['id_praktik']; ?>">MESS</a>
