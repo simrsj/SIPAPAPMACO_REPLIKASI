@@ -347,15 +347,6 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
             var email_pembimbing = document.getElementById("email_pembimbing").value;
             var telp_pembimbing = document.getElementById("telp_pembimbing").value;
 
-            // //Cari ekstensi file data praktikan yg diupload
-            // var file_data_praktikan = document.querySelector('#file_data_praktikan').value;
-            // var type_data_praktikan = file_data_praktikan.split('.').pop();
-
-            // //cari ukuran file data praktikan yg diupload
-            // files = document.getElementById("file_data_praktikan").files;
-            // var size_data_praktikan = document.getElementById("file_data_praktikan").files[1].size / 1024;
-
-
             //Notif Bila tidak diisi
             var notif_tidak_diisi = "";
             if (
@@ -519,23 +510,19 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 document.getElementById("err_tgl_selesai").innerHTML = "<b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b>";
             }
 
-            // var files1;
-
-            // var files = document.getElementsByTagName("file").files;
-
             //eksekusi bila file surat terisi
             if (file_surat != "") {
-                // console.log('file surat')
+
                 //Cari ekstensi file surat yg diupload
                 var typeSurat = document.querySelector('#file_surat').value;
                 var getTypeSurat = typeSurat.split('.').pop();
 
                 //cari ukuran file surat yg diupload
-                var filez = document.getElementById("file_surat").files;
+                var fileSurat = document.getElementById("file_surat").files;
                 var getSizeSurat = document.getElementById("file_surat").files[0].size / 1024;
 
                 console.log("Size Surat : " + getSizeSurat);
-                console.log("Size Surat : " + filez);
+                console.log("Size Surat : " + fileSurat);
 
                 //Toast bila upload file surat selain pdf
                 if (getTypeSurat != 'pdf') {
@@ -580,16 +567,17 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
 
             //eksekusi bila file data praktikan terisi
             if (file_data_praktikan != "") {
+
                 //Cari ekstensi file data praktikan yg diupload
                 var typeDataPraktikan = document.querySelector('#file_data_praktikan').value;
                 var getTypeDataPraktikan = typeDataPraktikan.split('.').pop();
 
                 //cari ukuran file data praktikan yg diupload
-                var files = document.getElementById("file_data_praktikan").files;
+                var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
                 var getSizeDataPraktikan = document.getElementById("file_data_praktikan").files[0].size / 1024;
 
                 console.log("Size Data Surat : " + getSizeDataPraktikan);
-                console.log("Size data Surat : " + files);
+                console.log("Size data Surat : " + fileDataPraktikan);
 
                 //Toast bila upload file data praktikan selain xlsx
                 if (getTypeDataPraktikan != 'xlsx') {
@@ -632,6 +620,28 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 }
             }
 
+            if (
+                file_surat != "" &&
+                getTypeSurat == 'pdf' &&
+                getSizeSurat <= 1024 &&
+                file_data_praktikan != "" &&
+                getTypeDataPraktikan == 'xlsx' &&
+                getSizeDataPraktikan <= 1024
+            ) {
+                //ambil data file yang diupload
+                var data_file = new FormData();
+                var xhttp = new XMLHttpRequest();
+
+                data_file.append("file_surat", fileSurat[0]);
+                data_file.append("file_data_praktikan", fileDataPraktikan[0]);
+                data_file.append("id", id);
+
+                // Set POST method and ajax file path
+                xhttp.open("POST", "_admin/exc/x_i_dataFileSuratDataPraktikan.php", true);
+
+                // Send request with data
+                xhttp.send(data_file);
+            }
 
             //Simpan Data Praktik dan munculkan Data Harga
             if (
@@ -642,15 +652,15 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 jumlah != "" &&
                 tgl_mulai != "" &&
                 tgl_selesai != "" &&
+                nama_pembimbing != "" &&
+                telp_pembimbing != "" &&
+                tgl_selesai > tgl_mulai &&
                 file_surat != "" &&
                 getTypeSurat == 'pdf' &&
                 getSizeSurat <= 1024 &&
                 file_data_praktikan != "" &&
                 getTypeDataPraktikan == 'xlsx' &&
-                getSizeDataPraktikan <= 1024 &&
-                nama_pembimbing != "" &&
-                telp_pembimbing != "" &&
-                tgl_selesai > tgl_mulai
+                getSizeDataPraktikan <= 1024
             ) {
                 //data dari form_praktik
                 var data_praktik = $('#form_praktik').serializeArray();
@@ -658,13 +668,8 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
 
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_i_data_praktik.php",
-                    data: {
-                        data_praktik
-                    },
-                    contentType: false,
-                    processData: false,
-                    cache: false,
+                    url: "_admin/exc/x_i_dataPraktik.php",
+                    data: data_praktik,
                     success: function() {
                         document.getElementById("form_praktik");
                         const Toast = Swal.mixin({
@@ -689,20 +694,6 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                         alert('eksekusi query gagal');
                     }
                 });
-
-                //ambil data file yang diupload
-                var data_file = new FormData();
-                data_file.append("file_surat", filez[0]);
-                data_file.append("file_data_praktikan", files[0]);
-                data_file.append("id", id);
-
-                var xhttp = new XMLHttpRequest();
-
-                // Set POST method and ajax file path
-                xhttp.open("POST", "_admin/exc/x_i_dataFileSuratDataPraktikan.php?id=" + id, true);
-
-                // Send request with data
-                xhttp.send(data_file);
 
                 // $("#tombol_data_praktik").fadeOut('fast');
                 $("#harga_praktik_nondata").fadeOut('fast');

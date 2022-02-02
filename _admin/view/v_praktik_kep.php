@@ -174,8 +174,10 @@ if (isset($_POST['arsip_praktik'])) {
                     JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
                     JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
+                    JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
                     WHERE tb_praktik.status_praktik = 'Y'
+                        AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 2
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                     $q_praktik = $conn->query($sql_praktik);
