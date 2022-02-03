@@ -191,5 +191,5 @@ $sql_update_status_praktik = " UPDATE tb_praktik
 SET status_cek_praktik = 'DATA HARGA'
 WHERE id_praktik = $id_praktik";
 
-$conn->$sql_update_status_praktik;
+$conn->query($sql_update_status_praktik);
 echo json_encode(['success' => 'Data Harga Berhasil Disimpan']);

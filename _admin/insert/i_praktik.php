@@ -4,7 +4,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="h3 mb-2 text-gray-800">Tambah Data Praktikan</h1>
+                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pendaftaran Praktik</h1>
             </div>
         </div>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
@@ -56,7 +56,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                                 $id_praktik = $no;
                                 ?>
                                 <input name="id" value="<?php echo $id_praktik; ?>" id="id" hidden>
-                                <input name="user" value="<?php echo $_SESSION['id_user']; ?>" id="id" hidden>
+                                <input name="user" value="<?php echo $_SESSION['id_user']; ?>" id="user" hidden>
                                 <div class="col-lg-5 ">
                                     Nama Institusi : <span style="color:red" id="input_institusi_">*</span><br>
                                     <?php
@@ -175,7 +175,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                                     ?>
                                 </div>
                                 <div class="col-lg-3">
-                                    Pilih Spesifikasi : <br>
+                                    Pilih Spesifikasi : <span style="color:red">*</span><br>
                                     <?php
                                     $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
 
@@ -196,7 +196,8 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                                             }
                                             ?>
                                         </select><br>
-                                        <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span>
+                                        <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span><br>
+                                        <span class="text-danger font-weight-bold  font-italic text-xs" id="err_spesifikasi"></span>
                                     <?php
                                     } else {
                                     ?>
@@ -314,58 +315,17 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 </div>
             </div>
         </form>
-
-        <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_harga">
-            <!-- Data Harga Praktik  -->
-            <div class='card shadow mb-4' id="harga_praktik">
-                <div class='card-body'>
-                    <div class="text-lg font-weight-bold text-center">DATA HARGA</div>
-                    <div id="harga">
-                        <div id="data_pilih_harga">
-                            <div class="jumbotron" id="harga_praktik_nondata">
-                                <div class="jumbotron-fluid text-center">
-                                    DATA PRAKTIK BELUM DIPILIH
-                                </div>
-                            </div>
-                            <div id="harga_praktik_data"></div>
-                            <input type="hidden" name="path" id="path" value="<?php echo $_GET['i']; ?>">
-                            <span class="text-md font-italic font-weight-bold"><span class="text-danger">*</span>Kuantitas = Jumlah Praktikan</span>
-                            <hr>
-                            <div id="simpan_praktik_harga" class="nav btn justify-content-center text-md" style="display: none;">
-                                <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success" onclick="simpan_harga()">
-                                    <!-- <a class="nav-link" href="#harga"> -->
-                                    <i class="fas fa-check-circle"></i>
-                                    Simpan Data Praktik dan Data Harga
-                                    <i class="fas fa-check-circle"></i>
-                                    <!-- </a> -->
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+        <input type="hidden" name="path" value="<?php echo $_GET['i']; ?>" id="path">
+        <div id="harga_praktik_data"></div>
     </div>
 
     <!-- <pre id="whereToPrint"> ce :</pre> -->
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#asd").show();
-        });
-
-        // Kirim Parameter ke Data Praktik untuk ditampilkan kembali
-        var xmlhttp_data_praktik = new XMLHttpRequest();
-        xmlhttp_data_praktik.onreadystatechange = function() {
-            document.getElementById("asd").innerHTML = this.responseText;
-        };
-        xmlhttp_data_praktik.open("GET", "_admin/insert/data_praktik.php?id=" + id, true);
-        xmlhttp_data_praktik.send();
-
         function simpan_praktik() {
 
             var id = document.getElementById("id").value;
-            var user = document.getElementById("id_user").value;
+            var user = document.getElementById("user").value;
             var institusi = document.getElementById("institusi").value;
             var praktik = document.getElementById("praktik").value;
             var jurusan = document.getElementById("jurusan").value;
@@ -387,6 +347,8 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 institusi == "" ||
                 praktik == "" ||
                 jurusan == "" ||
+                jenjang == "" ||
+                spesifikasi == "" ||
                 akreditasi == "" ||
                 jumlah == "" ||
                 tgl_mulai == "" ||
@@ -463,6 +425,13 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                     document.getElementById("err_jenjang").innerHTML = "Jenjang Harus Diisi";
                 } else {
                     document.getElementById("err_jenjang").innerHTML = "";
+                }
+
+                //notif spesifikasi 
+                if (spesifikasi == "") {
+                    document.getElementById("err_spesifikasi").innerHTML = "Spesifikasi Harus Diisi";
+                } else {
+                    document.getElementById("err_spesifikasi").innerHTML = "";
                 }
 
                 //notif akreditasi 
@@ -661,21 +630,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 file_data_praktikan != "" &&
                 getTypeDataPraktikan == 'xlsx' &&
                 getSizeDataPraktikan <= 1024
-            ) {
-                //ambil data file yang diupload
-                var data_file = new FormData();
-                var xhttp = new XMLHttpRequest();
-
-                data_file.append("file_surat", fileSurat[0]);
-                data_file.append("file_data_praktikan", fileDataPraktikan[0]);
-                data_file.append("id", id);
-
-                // Set POST method and ajax file path
-                xhttp.open("POST", "_admin/exc/x_i_dataFileSuratDataPraktikan.php", true);
-
-                // Send request with data
-                xhttp.send(data_file);
-            }
+            ) {}
 
             //Simpan Data Praktik dan munculkan Data Harga
             if (
@@ -729,31 +684,47 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                     }
                 });
 
+
+                //ambil data file yang diupload
+                var data_file = new FormData();
+                var xhttp = new XMLHttpRequest();
+
+                data_file.append("file_surat", fileSurat[0]);
+                data_file.append("file_data_praktikan", fileDataPraktikan[0]);
+                data_file.append("id", id);
+
+                // Set POST method and ajax file path
+                xhttp.open("POST", "_admin/exc/x_i_dataFileSuratDataPraktikan.php", true);
+
+                // Send request with data
+                xhttp.send(data_file);
+
                 // $("#tombol_data_praktik").fadeOut('fast');
                 $("#harga_praktik_nondata").fadeOut('fast');
                 $("#harga_praktik_data").fadeIn('slow');
                 $("#simpan_praktik_harga").fadeIn('slow');
 
                 //Menghilangkan Inputan Form Data Praktik
-                $("#data_praktik_input").fadeOut('fast');
+                $("#form_praktik").fadeOut('fast');
 
-                //Memunculkan Data Praktik yang Disimpan
-                $("#data_praktik_simpan").fadeIn('fast');
+                // //Memunculkan Data Praktik yang Disimpan
+                // $("#data_praktik_simpan").fadeIn('fast');
 
-                // Kirim Parameter ke Data Praktik untuk ditampilkan kembali
-                var xmlhttp_data_praktik = new XMLHttpRequest();
-                xmlhttp_data_praktik.onreadystatechange = function() {
-                    document.getElementById("data_praktik_simpan").innerHTML = this.responseText;
-                };
-                xmlhttp_data_praktik.open("GET", "_admin/insert/data_praktik.php?id=" + id, true);
-                xmlhttp_data_praktik.send();
+                // // Kirim Parameter ke Data Praktik untuk ditampilkan kembali
+                // var xmlhttp_data_praktik = new XMLHttpRequest();
+                // xmlhttp_data_praktik.onreadystatechange = function() {
+                //     document.getElementById("data_praktik_simpan").innerHTML = this.responseText;
+                // };
+                // xmlhttp_data_praktik.open("GET", "_admin/insert/data_praktik.php?id=" + id, true);
+                // xmlhttp_data_praktik.send();
 
                 // Kirim Parameter ke Data Harga untuk ditampilkan
                 var xmlhttp_data_harga = new XMLHttpRequest();
                 xmlhttp_data_harga.onreadystatechange = function() {
                     document.getElementById("harga_praktik_data").innerHTML = this.responseText;
                 };
-                xmlhttp_data_harga.open("GET", "_admin/insert/data_harga.php?jur=" + jurusan +
+                xmlhttp_data_harga.open("GET", "_admin/insert/data_harga.php?id" + id +
+                    "&jur=" + jurusan +
                     "&jen=" + jenjang +
                     "&tmp=" + tgl_mulai +
                     "&tsp=" + tgl_selesai +
@@ -821,7 +792,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
 
                         Toast.fire({
                             icon: 'success',
-                            title: '<div class="text-md text-center">DATA BERHASIL TERSIMPAN</div>'
+                            title: '<div class="text-md text-center">DATA HARGA BERHASIL TERSIMPAN</div>'
                         });
                     },
                     error: function(response) {

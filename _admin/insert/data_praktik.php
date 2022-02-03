@@ -3,31 +3,6 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
-function tanggal($tanggal)
-{
-    $bulan = array(
-        1 =>   'Januari',
-        'Februari',
-        'Maret',
-        'April',
-        'Mei',
-        'Juni',
-        'Juli',
-        'Agustus',
-        'September',
-        'Oktober',
-        'November',
-        'Desember'
-    );
-    $pecahkan = explode('-', $tanggal);
-
-    // variabel pecahkan 0 = tanggal
-    // variabel pecahkan 1 = bulan
-    // variabel pecahkan 2 = tahun
-
-    return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-}
-
 $sql_data_praktik = "SELECT * FROM tb_praktik 
 JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
 JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
@@ -37,7 +12,7 @@ JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis = tb_juru
 JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
 WHERE tb_praktik.id_praktik = " . $_GET['id'];
 
-// echo $sql_data_praktik . "<br>";
+echo $sql_data_praktik . "<br>";
 
 $q_data_praktik = $conn->query($sql_data_praktik);
 $d_data_praktik = $q_data_praktik->fetch(PDO::FETCH_ASSOC);
@@ -55,11 +30,11 @@ $d_data_praktik = $q_data_praktik->fetch(PDO::FETCH_ASSOC);
     </div>
 
     <div class="col-lg-2">
-        Tanggal Mulai : <br><b><?php echo tanggal($d_data_praktik['tgl_mulai_praktik']); ?></b>
+        Tanggal Mulai : <br><b><?php echo $d_data_praktik['tgl_mulai_praktik']; ?></b>
 
     </div>
     <div class="col-lg-2">
-        Tanggal Selesai : <br><b><?php echo tanggal($d_data_praktik['tgl_selesai_praktik']); ?></b>
+        Tanggal Selesai : <br><b><?php echo $d_data_praktik['tgl_selesai_praktik']; ?></b>
     </div>
 </div>
 <hr>

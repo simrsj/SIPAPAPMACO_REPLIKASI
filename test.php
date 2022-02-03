@@ -1,1 +1,3 @@
-<?php echo tanggal('1986-12-06');
+
+<?php
+echo tanggal('2008-08-09');

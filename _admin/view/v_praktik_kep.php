@@ -200,18 +200,20 @@ if (isset($_POST['arsip_praktik'])) {
                                                 <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                             </div>
                                             <div class="col-sm-2">
-                                                <b>TANGGAL SELESAI : </b><?php echo tanggal_minimal($d_praktik['tgl_selesai_praktik']); ?><br>
-                                                <b>TANGGAL MULAI : </b><?php echo tanggal_minimal($d_praktik['tgl_mulai_praktik']); ?>
+                                                <b>TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
+                                                <b>TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                             </div>
+
+                                            <!-- Data Status  -->
                                             <div class="col-sm-2 text-center my-auto">
                                                 <b>STATUS : </b>
-                                                <a href="#" data-toggle="modal" data-target="#info_status">
+                                                <a href="#" data-toggle="modal" data-target="#info_status" title="Keterangan Status">
                                                     <i class="fas fa-info-circle" style="font-size: 14px;"></i>
                                                 </a>
 
                                                 <!-- modal info_status -->
-                                                <div class="modal fade text-left" id="info_status">
-                                                    <div class="modal-dialog" role="document">
+                                                <div class="modal fade" id="info_status">
+                                                    <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h4>INFO STATUS</h4>
@@ -219,30 +221,55 @@ if (isset($_POST['arsip_praktik'])) {
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body text-center">
-                                                                <span class="badge badge-warning text-md">DATA PRAKTIK</span> <br>
-                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih <span class="badge badge-warning">Data Harga</span><br><br>
-                                                                <span class="badge badge-warning text-md">DATA HARGA</span><br>
-                                                                Pendaftaran dan Harga Diklat Sudah Dipilih, dilanjutkan Validasi Data Pendaftaran dan Harga <br>
-                                                                serta Pemilihan Tempat dan Mess Oleh Admin<br><br>
-                                                                <span class="badge badge-primary text-md">MESS</span><br>
-                                                                Mess Sudah didaftarkan oleh Admin dan Sudah Memvalidasi Data Daftar dan Harga, dilanjutkan Melakukan Proses Pembayaran.
-                                                                <br>
-                                                                <span class="badge badge-warning text-md">PEMBAYARAN</span><br>
+                                                            <div class="modal-body">
+                                                                1. <span class="badge badge-warning text-md">DATA PRAKTIK</span> <br>
+                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih <span class="font-weight-bold text-warning">Data Harga</span><br><br>
+
+                                                                2. <span class="badge badge-warning text-md">DATA HARGA</span><br>
+                                                                Pendaftaran dan Harga Diklat Sudah Dipilih, dilanjutkan <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Harga </span><br><br>
+
+                                                                3. <span class="badge badge-primary text-md">Val. PRAKTIK & HARGA</span><br>
+                                                                Proses Validasi Data Praktikan dan Harga<br><br>
+
+                                                                3.1. <span class="badge badge-success text-md">Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i></span><br>
+                                                                Validasi Data Praktikan dan Harga <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan prose pemilihan <b class="text-warning">TEMPAT</b> oleh Admin<br><br>
+
+                                                                3.2. <span class="badge badge-danger text-md">Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i></span><br>
+                                                                Validasi Data Praktikan dan Harga <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+
+                                                                4. <span class="badge badge-warning text-md">TEMPAT</span><br>
+                                                                Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh <b>ADMIN</b><br><br>
+
+                                                                5. <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
+                                                                MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses <span class="font-weight-bold text-primary">PEMBAYARAN</span>
+                                                                <br><br>
+
+                                                                6. <span class="badge badge-primary text-md">PEMBAYARAN</span><br>
                                                                 Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
-                                                                <span class="badge badge-danger text-md">DITOLAK</span><br>
-                                                                Pembayaran ditolak oleh Admin, <span class="text-danger font-weight-bold">CEK KETERANGAN</span><br>
-                                                                <span class="badge badge-success text-md">AKTIF</span><br>
-                                                                Pembayaran Sudah terverifikasi oleh Admin, Pendaftaran Selesai <br><br>
-                                                                <span class="badge badge-dark text-md">SELESAI</span><br>
-                                                                Praktikan Sudah Selesai<br><br>
+
+                                                                6.1. <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
+                                                                Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
+
+                                                                6.2. <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
+                                                                Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+
+                                                                7. <span class="badge badge-primary text-md font-italic">WAITING LIST</span><br>
+                                                                Proses Pendaftaran Selesai dan dalam proses <span class="text-primary font-italic font-weight-bold">WAITING LIST</span><br>
+                                                                akan di <span class="text-success font-weight-bold">AKTIF</span>-kan oleh <b>ADMIN</b> sesuai dengan tanggal mulai praktiknya<br><br>
+
+                                                                8. <span class="badge badge-success text-md">AKTIF</span><br>
+                                                                Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span><br><br>
+
+                                                                9. <span class="badge badge-dark text-md">SELESAI</span><br>
+                                                                Praktikan Sudah <span class="text-dark font-weight-bold">SELESAI</span><br><br>
+
                                                                 <span class="badge badge-danger text-md">ERROR</span><br>
-                                                                Terjadi kesalahan sistem, <br>
-                                                                <a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
+                                                                Terjadi kesalahan sistem, <a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <br>
                                                 <?php
                                                 if ($d_praktik['status_cek_praktik'] == "DATA PRAKTIK") {
@@ -257,13 +284,47 @@ if (isset($_POST['arsip_praktik'])) {
                                                         <?php echo $d_praktik['status_cek_praktik']; ?>
                                                     </span>
                                                 <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+                                                } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA") {
+                                                ?>
+                                                    <span class="badge badge-warning text-md">
+                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                    </span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA Y") {
+                                                ?>
+                                                    <span class="badge badge-warning text-md">
+                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                    </span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA T") {
+                                                ?>
+                                                    <span class="badge badge-warning text-md">
+                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                    </span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "TEMPAT") {
+                                                ?>
+                                                    <span class="badge badge-primary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "MESS/PEMONDOKAN") {
                                                 ?>
                                                     <span class="badge badge-primary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN") {
                                                 ?>
                                                     <span class="badge badge-warning text-md">PEMBAYARAN</span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "PEMB. DITERIMA Y") {
+                                                ?>
+                                                    <span class="badge badge-warning text-md">PEMBAYARAN</span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "PEMB. DITERIMA T") {
+                                                ?>
+                                                    <span class="badge badge-warning text-md">PEMBAYARAN</span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "WAITING LIST") {
+                                                ?>
+                                                    <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "AKTIF") {
                                                 ?>
@@ -310,7 +371,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                 if ($d_praktik['status_cek_praktik'] == "DATA PRAKTIK") {
                                                 ?>
                                                     <b>PILIH : </b><br>
-                                                    <a class="btn btn-outline-danger btn-sm" href="?prk&i=kep&id=<?php echo $d_praktik['id_praktik']; ?>">
+                                                    <a class="btn btn-outline-danger btn-sm" href="<?php echo "?prk&i=kep&id=" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur"; ?>">
                                                         Pilih Harga
                                                     </a>
                                                 <?php
@@ -491,6 +552,8 @@ if (isset($_POST['arsip_praktik'])) {
                                             </div>
                                             <hr style="color: gray;">
                                             <div class="row">
+
+                                                <!-- Data Praktik  -->
                                                 <div class="col-sm-3">
                                                     <b>JURUSAN : </b><br>
                                                     <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
@@ -501,14 +564,18 @@ if (isset($_POST['arsip_praktik'])) {
                                                     <b>JUMLAH PRAKTIKAN : </b><br>
                                                     <?php echo $d_praktik['jumlah_praktik']; ?><br>
                                                 </div>
+
+                                                <!-- Data Pembimbing  -->
                                                 <div class="col-sm-3">
-                                                    <b>NAMA MENTOR : </b><br>
-                                                    <?php echo $d_praktik['nama_mentor_praktik']; ?><br>
-                                                    <b>NO. HP MENTOR : </b><br>
-                                                    <?php echo $d_praktik['telp_mentor_praktik']; ?><br>
-                                                    <b>EMAIL MENTOR : </b><br>
-                                                    <?php echo $d_praktik['email_mentor_praktik']; ?><br>
+                                                    <b>NAMA PEMBIMBING : </b><br>
+                                                    <?php echo $d_praktik['nama_pembimbing_praktik']; ?><br>
+                                                    <b>NO. HP PEMBIMBING : </b><br>
+                                                    <?php echo $d_praktik['telp_pembimbing_praktik']; ?><br>
+                                                    <b>EMAIL PEMBIMBING : </b><br>
+                                                    <?php echo $d_praktik['email_pembimbing_praktik']; ?><br>
                                                 </div>
+
+                                                <!-- Data File -->
                                                 <div class="col-sm-6">
                                                     <b>FILE SURAT : </b><br>
                                                     <?php
