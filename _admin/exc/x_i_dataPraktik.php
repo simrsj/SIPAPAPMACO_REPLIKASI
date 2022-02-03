@@ -39,6 +39,8 @@ $sql_insert = "INSERT INTO tb_praktik (
         'DATA PRAKTIK', 
         'Y'
         )";
+
 echo $sql_insert . "<br>";
-// $conn->query($sql_insert);
-echo json_encode(['success' => 'Data Praktik Berhasil Disimpan']);
+$conn->query($sql_insert);
+
+// echo json_encode(['success' => 'Data Praktik Berhasil Disimpan']);
