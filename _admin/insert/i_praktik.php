@@ -694,7 +694,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 data_file.append("id", id);
 
                 // Set POST method and ajax file path
-                xhttp.open("POST", "_admin/exc/x_i_dataFileSuratDataPraktikan.php", true);
+                xhttp.open("POST", "_admin/exc/x_i_dataFilePraktik.php", true);
 
                 // Send request with data
                 xhttp.send(data_file);

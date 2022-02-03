@@ -7,6 +7,8 @@ $id = $_POST['id'];
 //alamat file surat masuk
 $alamat_unggah = $_SERVER['DOCUMENT_ROOT'] . "/SM/_file/praktik";
 
+echo $alamat_unggah . "<br>";
+
 //pembuatan alamat bila tidak ada
 if (!is_dir($alamat_unggah)) {
     mkdir($alamat_unggah, 0777, $rekursif = true);
@@ -53,13 +55,13 @@ echo "<pre>";
 print_r($_FILES);
 echo "</pre>";
 
-// $sql_update = "UPDATE tb_praktik SET 
-//     surat_praktik = '$link_file_surat'
-//     -- data_praktik = '$link_file_data_praktikan'
-//     WHERE id_praktik = $id
-//     ";
+$sql_update = "UPDATE tb_praktik SET 
+    surat_praktik = '$link_file_surat'
+    data_praktik = '$link_file_data_praktikan'
+    WHERE id_praktik = $id
+    ";
 
-// echo $sql_update . "<br>";
-// $conn->query($sql_insert);
+echo $sql_update . "<br>";
+$conn->query($sql_update);
 
 // echo json_encode(['success' => 'Data Praktik Berhasil Disimpan']);
