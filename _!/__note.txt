@@ -27,4 +27,16 @@ git remote add origin https://github.com/fajarrachmath/training_cisarua.git
 git push -u origin main
 
 
+truncate tb_praktik;
+truncate tb_harga_pilih;
+truncate tb_mess_pilih;
+UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 1;
+UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 2;
+UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 3;
+UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 4;
+UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 5;
+UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 6;
+UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 7;
+UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 8;
+
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551

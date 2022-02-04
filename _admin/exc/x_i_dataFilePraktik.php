@@ -5,7 +5,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 $id = $_POST['id'];
 
 //alamat file surat masuk
-$alamat_unggah = $_SERVER['DOCUMENT_ROOT'] . "/SM/_file/praktik";
+$alamat_unggah = "./../../_file/praktik";
 
 echo $alamat_unggah . "<br>";
 
@@ -16,7 +16,7 @@ if (!is_dir($alamat_unggah)) {
 
 if ($_FILES['file_surat']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['file_surat']['name'] = "file_surat_" . $id . "_" . date('Y-m-d') . ".pdf";
+    $_FILES['file_surat']['name'] = "surat_" . $id . "_" . date('Y-m-d') . ".pdf";
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['file_surat'])) {
@@ -27,13 +27,14 @@ if ($_FILES['file_surat']['size'] > 0) {
             $file_surat->tmp_name,
             "{$alamat_unggah}/{$file_surat->name}"
         );
-        $link_file_surat = "{$alamat_unggah}/{$file_surat->name}";
+        $alamat_unggah_file_surat = "./_file/praktik";
+        $link_file_surat = "{$alamat_unggah_file_surat}/{$file_surat->name}";
     }
 }
 
 if ($_FILES['file_data_praktikan']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['file_data_praktikan']['name'] = "file_data_praktikan_" . date('Y-m-d') . ".xlsx";
+    $_FILES['file_data_praktikan']['name'] = "data_praktikan_" . $id . "_" . date('Y-m-d') . ".xlsx";
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['file_data_praktikan'])) {
@@ -44,7 +45,8 @@ if ($_FILES['file_data_praktikan']['size'] > 0) {
             $file_data_praktikan->tmp_name,
             "{$alamat_unggah}/{$file_data_praktikan->name}"
         );
-        $link_file_data_praktikan = "{$alamat_unggah}/{$file_data_praktikan->name}";
+        $alamat_unggah_file_data_praktikan = "./_file/praktik";
+        $link_file_data_praktikan = "{$alamat_unggah_file_data_praktikan}/{$file_data_praktikan->name}";
     }
 }
 
@@ -56,8 +58,8 @@ print_r($_FILES);
 echo "</pre>";
 
 $sql_update = "UPDATE tb_praktik SET 
-    surat_praktik = '$link_file_surat'
-    data_praktik = '$link_file_data_praktikan'
+    surat_praktik = '" . $link_file_surat . "',
+    data_praktik = '" . $link_file_data_praktikan . "'
     WHERE id_praktik = $id
     ";
 
