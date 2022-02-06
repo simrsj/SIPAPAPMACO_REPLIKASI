@@ -1,5 +1,5 @@
 <?php
-if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
+if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -315,7 +315,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                 </div>
             </div>
         </form>
-        <input type="hidden" name="path" value="<?php echo $_GET['i']; ?>" id="path">
+        <input type="hidden" name="path" value="<?php echo $_GET['prk']; ?>" id="path">
         <div id="harga_praktik_data"></div>
     </div>
 
@@ -771,7 +771,7 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                     name: 'cek_pilih_ujian',
                     value: cek_pilih_ujian
                 });
-                // alert(cek_ujian + 'asdasd');
+
                 $.ajax({
                     type: 'POST',
                     url: "_admin/exc/x_i_dataHarga.php?",
@@ -794,15 +794,15 @@ if ($_GET['i'] == 'ked' || $_GET['i'] == 'kep' || $_GET['i'] == 'nkn') {
                             icon: 'success',
                             title: '<div class="text-md text-center">DATA HARGA BERHASIL TERSIMPAN</div>'
                         });
+                        alert('Data Praktik dan Data Harga Berhasil Tersimpan');
+                        var path = document.getElementById('path').value;
+                        document.location.href = "?prk=" + path;
                     },
                     error: function(response) {
                         console.log(response.responseText);
                         alert('eksekusi query gagal');
                     }
                 });
-                var path = document.getElementById('path').value;
-
-                document.location.href = "?prk&" + path;
             }
         }
     </script>
