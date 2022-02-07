@@ -46,23 +46,21 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 					<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" href="?prk&ked">
-								<i class="fas fa-user-md"></i>
+							<a class="collapse-item" href="?prk=ked">
+								<i class="far fa-circle"></i>
 								<span>Kedokteran</span>
 							</a>
-							<a class="collapse-item" href="?prk&kep">
-								<i class="fas fa-user-nurse"></i>
+							<a class="collapse-item" href="?prk=kep">
+								<i class="far fa-circle"></i>
 								<span>Keperawatan</span>
 							</a>
-							<a class="collapse-item" href="?prk&nkn">
-								<div class="row">
-									<div class="col-md-1">
-										<i class="fas fa-hospital-user"></i>
-									</div>
-									<div class="col-auto">
-										<span>Nakes Lainnya<br>Non Nakes</span>
-									</div>
-								</div>
+							<a class="collapse-item" href="?prk=nkl">
+								<i class="far fa-circle"></i>
+								<span>Nakes Lainnya</span>
+							</a>
+							<a class="collapse-item" href="?prk=nnk">
+								<i class="far fa-circle"></i>
+								<span>Non Nakes</span>
 							</a>
 						</div>
 					</div>
@@ -303,14 +301,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/insert/i_praktik_harga.php";
 						} elseif (isset($_GET['i'])) {
 							include "_admin/insert/i_praktik.php";
-						} elseif (isset($_GET['ked'])) {
-							include "_admin/view/v_praktik_ked.php";
-						} elseif (isset($_GET['kep'])) {
-							include "_admin/view/v_praktik_kep.php";
 						} elseif (isset($_GET['m'])) {
 							include "_admin/insert/i_praktik_mess.php";
-						} elseif (isset($_GET['nkn'])) {
-							include "_admin/view/v_praktik_nkn.php";
 						} elseif (isset($_GET['p_i'])) {
 							include "_print/p_praktik_invoice.php";
 						} elseif (isset($_GET['u'])) {
@@ -322,7 +314,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						} elseif (isset($_GET['um'])) {
 							include "_admin/update/u_praktik_mess.php";
 						} else {
-							include "_error/index.php";
+							include "_admin/view/v_praktik.php";
 						}
 					} elseif (isset($_GET['ptk'])) {
 						include "_admin/view/v_praktikan.php";

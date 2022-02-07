@@ -154,7 +154,21 @@ if (isset($_POST['arsip_praktik'])) {
                 <h1 class="h3 mb-2 text-gray-800">Pendaftaran Praktik</h1>
             </div>
             <div class="col-lg-2 text-right">
-                <a href="?prk&i=kep" class="btn btn-outline-success btn-sm">
+
+                <?php
+                if ($_GET['prk'] == 'ked') {
+                    $tambah = "ked";
+                } elseif ($_GET['prk'] == 'kep') {
+                    $tambah = "kep";
+                } elseif ($_GET['prk'] == 'nkl') {
+                    $tambah = "nkl";
+                } elseif ($_GET['prk'] == 'nnk') {
+                    $tambah = "nnk";
+                } else {
+                    $tambah = "";
+                }
+                ?>
+                <a href="?prk=<?php echo $tambah; ?>&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
                 <a href="?prk&a" class="btn btn-outline-info btn-sm">
@@ -169,6 +183,17 @@ if (isset($_POST['arsip_praktik'])) {
             <div class="card-body">
                 <div class="table-responsive">
                     <?php
+                    if ($_GET['prk'] == 'ked') {
+                        $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 1 ";
+                    } elseif ($_GET['prk'] == 'kep') {
+                        $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 2 ";
+                    } elseif ($_GET['prk'] == 'nkl') {
+                        $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 3 ";
+                    } elseif ($_GET['prk'] == 'nnk') {
+                        $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 4 ";
+                    } else {
+                        $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 0 ";
+                    }
                     $sql_praktik = "SELECT * FROM tb_praktik 
                     JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
                     JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
@@ -176,8 +201,7 @@ if (isset($_POST['arsip_praktik'])) {
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    WHERE tb_praktik.status_praktik = 'Y'
-                        AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 2
+                    WHERE tb_praktik.status_praktik = 'Y' $jenis_jurusan
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                     $q_praktik = $conn->query($sql_praktik);
@@ -193,177 +217,459 @@ if (isset($_POST['arsip_praktik'])) {
                                     <div class="card-header align-items-center bg-gray-200">
                                         <div class="row" style="font-size: small;">
                                             <br><br>
+
                                             <div class="col-sm-2">
                                                 <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                             </div>
+
                                             <div class="col-sm-2">
                                                 <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                             </div>
+
                                             <div class="col-sm-2">
                                                 <b>TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
                                                 <b>TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                             </div>
+                                            <?php
+                                            if ($_GET['prk'] == 'ked') {
+                                            ?>
 
-                                            <!-- Data Status  -->
-                                            <div class="col-sm-2 text-center my-auto">
-                                                <b>STATUS : </b>
-                                                <a href="#" data-toggle="modal" data-target="#info_status" title="Keterangan Status">
-                                                    <i class="fas fa-info-circle" style="font-size: 14px;"></i>
-                                                </a>
-
-                                                <!-- modal info_status -->
-                                                <div class="modal fade" id="info_status">
-                                                    <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4>INFO STATUS</h4>
-                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">×</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                1. <span class="badge badge-warning text-md">DATA PRAKTIK</span> <br>
-                                                                Sudah Melakukan Pendaftaran, dilanjutkan Pilih <span class="font-weight-bold text-warning">Data Harga</span><br><br>
-
-                                                                2. <span class="badge badge-warning text-md">DATA HARGA</span><br>
-                                                                Pendaftaran dan Harga Diklat Sudah Dipilih, dilanjutkan <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Harga </span><br><br>
-
-                                                                3. <span class="badge badge-primary text-md">Val. PRAKTIK & HARGA</span><br>
-                                                                Proses Validasi Data Praktikan dan Harga<br><br>
-
-                                                                3.1. <span class="badge badge-success text-md">Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i></span><br>
-                                                                Validasi Data Praktikan dan Harga <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan prose pemilihan <b class="text-warning">TEMPAT</b> oleh Admin<br><br>
-
-                                                                3.2. <span class="badge badge-danger text-md">Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i></span><br>
-                                                                Validasi Data Praktikan dan Harga <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
-
-                                                                4. <span class="badge badge-warning text-md">TEMPAT</span><br>
-                                                                Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh <b>ADMIN</b><br><br>
-
-                                                                5. <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
-                                                                MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses <span class="font-weight-bold text-primary">PEMBAYARAN</span>
-                                                                <br><br>
-
-                                                                6. <span class="badge badge-primary text-md">PEMBAYARAN</span><br>
-                                                                Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
-
-                                                                6.1. <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
-                                                                Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
-
-                                                                6.2. <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
-                                                                Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
-
-                                                                7. <span class="badge badge-primary text-md font-italic">WAITING LIST</span><br>
-                                                                Proses Pendaftaran Selesai dan dalam proses <span class="text-primary font-italic font-weight-bold">WAITING LIST</span><br>
-                                                                akan di <span class="text-success font-weight-bold">AKTIF</span>-kan oleh <b>ADMIN</b> sesuai dengan tanggal mulai praktiknya<br><br>
-
-                                                                8. <span class="badge badge-success text-md">AKTIF</span><br>
-                                                                Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span><br><br>
-
-                                                                9. <span class="badge badge-dark text-md">SELESAI</span><br>
-                                                                Praktikan Sudah <span class="text-dark font-weight-bold">SELESAI</span><br><br>
-
-                                                                <span class="badge badge-danger text-md">ERROR</span><br>
-                                                                Terjadi kesalahan sistem, <a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <br>
-                                                <?php
-                                                if ($d_praktik['status_cek_praktik'] == "DATA PRAKTIK") {
-                                                ?>
-                                                    <span class="badge badge-warning text-md">
-                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
-                                                    </span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "DATA HARGA") {
-                                                ?>
-                                                    <span class="badge badge-warning text-md">
-                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
-                                                    </span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA") {
-                                                ?>
-                                                    <span class="badge badge-warning text-md">
-                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
-                                                    </span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA Y") {
-                                                ?>
-                                                    <span class="badge badge-warning text-md">
-                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
-                                                    </span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA T") {
-                                                ?>
-                                                    <span class="badge badge-warning text-md">
-                                                        <?php echo $d_praktik['status_cek_praktik']; ?>
-                                                    </span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "TEMPAT") {
-                                                ?>
-                                                    <span class="badge badge-primary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "MESS/PEMONDOKAN") {
-                                                ?>
-                                                    <span class="badge badge-primary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN") {
-                                                ?>
-                                                    <span class="badge badge-warning text-md">PEMBAYARAN</span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "PEMB. DITERIMA Y") {
-                                                ?>
-                                                    <span class="badge badge-warning text-md">PEMBAYARAN</span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "PEMB. DITERIMA T") {
-                                                ?>
-                                                    <span class="badge badge-warning text-md">PEMBAYARAN</span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "WAITING LIST") {
-                                                ?>
-                                                    <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "AKTIF") {
-                                                ?>
-                                                    <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "DITOLAK") {
-                                                ?>
-                                                    <a href="#" class="badge badge-danger text-md" data-toggle="modal" data-target="#ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
-                                                        KET. <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                <!-- Data Status  -->
+                                                <div class="col-sm-2 text-center my-auto">
+                                                    <b>STATUS : </b>
+                                                    <a href="#" data-toggle="modal" data-target="#info_status" title="Keterangan Status">
+                                                        <i class="fas fa-info-circle" style="font-size: 14px;"></i>
                                                     </a>
 
-                                                    <!-- Modal Pembayaran Diterima-->
-                                                    <div class="modal fade text-left" id="ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content text-lg text-center">
+                                                    <!-- modal info_status -->
+                                                    <div class="modal fade" id="info_status">
+                                                        <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                                                            <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4>Keterangan Penolakan</h4>
+                                                                    <h4>INFO STATUS</h4>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">×</span>
+                                                                    </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <?php echo $d_praktik['ket_tolak_praktik']; ?>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
+                                                                    1. <span class="badge badge-warning text-md">DATA PRAKTIK</span> <br>
+                                                                    Sudah Melakukan Pendaftaran, dilanjutkan Pilih <span class="font-weight-bold text-warning">Data Harga</span><br><br>
+
+                                                                    2. <span class="badge badge-warning text-md">DATA HARGA</span><br>
+                                                                    Pendaftaran dan Harga Diklat Sudah Dipilih, dilanjutkan <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Harga </span><br><br>
+
+                                                                    3. <span class="badge badge-primary text-md">Val. PRAKTIK & HARGA</span><br>
+                                                                    Proses Validasi Data Praktikan dan Harga<br><br>
+
+                                                                    3.1. <span class="badge badge-success text-md">Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i></span><br>
+                                                                    Validasi Data Praktikan dan Harga <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan prose pemilihan <b class="text-warning">TEMPAT</b> oleh Admin<br><br>
+
+                                                                    3.2. <span class="badge badge-danger text-md">Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i></span><br>
+                                                                    Validasi Data Praktikan dan Harga <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+
+                                                                    4. <span class="badge badge-warning text-md">TEMPAT</span><br>
+                                                                    Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh <b>ADMIN</b><br><br>
+
+                                                                    5. <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
+                                                                    MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses <span class="font-weight-bold text-primary">PEMBAYARAN</span>
+                                                                    <br><br>
+
+                                                                    6. <span class="badge badge-primary text-md">PEMBAYARAN</span><br>
+                                                                    Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
+
+                                                                    6.1. <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
+                                                                    Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
+
+                                                                    6.2. <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
+                                                                    Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+
+                                                                    7. <span class="badge badge-primary text-md font-italic">WAITING LIST</span><br>
+                                                                    Proses Pendaftaran Selesai dan dalam proses <span class="text-primary font-italic font-weight-bold">WAITING LIST</span><br>
+                                                                    akan di <span class="text-success font-weight-bold">AKTIF</span>-kan oleh <b>ADMIN</b> sesuai dengan tanggal mulai praktiknya<br><br>
+
+                                                                    8. <span class="badge badge-success text-md">AKTIF</span><br>
+                                                                    Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span><br><br>
+
+                                                                    9. <span class="badge badge-dark text-md">SELESAI</span><br>
+                                                                    Praktikan Sudah <span class="text-dark font-weight-bold">SELESAI</span><br><br>
+
+                                                                    <span class="badge badge-danger text-md">ERROR</span><br>
+                                                                    Terjadi kesalahan sistem, <a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "SELESAI") {
-                                                ?>
-                                                    <span class="badge badge-secondary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <span class="badge badge-danger text-md">ERROR</span>
-                                                <?php
-                                                }
-                                                ?>
-                                            </div>
+
+                                                    <br>
+                                                    <?php
+                                                    if ($d_praktik['status_cek_praktik'] == "DATA PRAKTIK") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "DATA HARGA") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA Y") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA T") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "TEMPAT") {
+                                                    ?>
+                                                        <span class="badge badge-primary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "MESS/PEMONDOKAN") {
+                                                    ?>
+                                                        <span class="badge badge-primary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">PEMBAYARAN</span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "PEMB. DITERIMA Y") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">PEMBAYARAN</span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "PEMB. DITERIMA T") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">PEMBAYARAN</span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "WAITING LIST") {
+                                                    ?>
+                                                        <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "AKTIF") {
+                                                    ?>
+                                                        <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "DITOLAK") {
+                                                    ?>
+                                                        <a href="#" class="badge badge-danger text-md" data-toggle="modal" data-target="#ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
+                                                            KET. <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </a>
+
+                                                        <!-- Modal Pembayaran Diterima-->
+                                                        <div class="modal fade text-left" id="ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content text-lg text-center">
+                                                                    <div class="modal-header">
+                                                                        <h4>Keterangan Penolakan</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <?php echo $d_praktik['ket_tolak_praktik']; ?>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "SELESAI") {
+                                                    ?>
+                                                        <span class="badge badge-secondary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <span class="badge badge-danger text-md">ERROR</span>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </div>
+
+                                                <!-- Tombol Link Data Status  -->
+                                                <div class="col-sm-2 text-center my-auto">
+
+                                                    <!-- tombol dropdown pilih menu harga, mess, bukti bayar -->
+                                                    <?php
+                                                    if ($d_praktik['status_cek_praktik'] == "DATA PRAKTIK") {
+                                                    ?>
+                                                        <b>PILIH : </b><br>
+                                                        <a class="btn btn-outline-danger btn-sm" href="<?php echo "?prk&i=kep&id=" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur" . $d_praktik['id_praktik'] . "&jur"; ?>">
+                                                            Pilih Harga
+                                                        </a>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "DATA HARGA") {
+                                                    ?>
+                                                        <b>PILIH : </b><br>
+                                                        <a class="btn btn-outline-danger btn-sm" href="?prk&m=<?php echo $d_praktik['id_praktik']; ?>">MESS</a>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "MESS" || $d_praktik['status_cek_praktik'] == "DITOLAK") {
+                                                    ?>
+                                                        <b>PILIH : </b><br>
+                                                        <a class="btn btn-outline-primary btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>" title="Invoice" target="_blank">INVOICE</a>
+                                                        <a class="btn btn-outline-danger btn-sm" href="?prk&ib=<?php echo $d_praktik['id_praktik']; ?>">PEMBAYARAN</a>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN") {
+                                                    ?>
+                                                        <b>VALIDASI : </b><br>
+                                                        <!-- Pembayaran Diterima  -->
+                                                        <a title="Pembayaran Diterima" href="#" class="btn btn-success" data-toggle='modal' data-target='#y_<?php echo $d_praktik['id_praktik']; ?>'>
+                                                            <i class="fas fa-check"></i>
+                                                        </a>
+
+                                                        <!-- Modal Pembayaran Diterima-->
+                                                        <div class="modal fade text-left" id="y_<?php echo $d_praktik['id_praktik']; ?>">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content text-lg text-center">
+                                                                    <div class="modal-header">
+                                                                        <h4>Pembayaran Diterima ?</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <h5 class="text-warning">Hati-Hati <i class="fas fa-exclamation-triangle"></i></h5>
+                                                                        Pembayaran yang sudah diterima, tidak bisa mengubah data <b>PENDAFTARAN</b>, <b> HARGA</b> dan <b>MESS</b>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
+                                                                        <a href="?prk&vd=y&id=<?php echo $d_praktik['id_praktik'] ?>" class="btn btn-success btn-sm">Diterima</a>
+                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pembayaran Ditolak -->
+                                                        <a title="Pembayaran Ditolak" href="#" class="btn btn-danger" data-toggle='modal' data-target='#t_<?php echo $d_praktik['id_praktik']; ?>'>
+                                                            <i class="fas fa-times"></i>
+                                                        </a>
+
+                                                        <!-- Modal Pembayaran Ditolak-->
+                                                        <div class="modal fade text-left" id="t_<?php echo $d_praktik['id_praktik']; ?>">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content text-lg text-center">
+                                                                    <form class="form-group" method="post">
+                                                                        <div class="modal-header">
+                                                                            <h4>Pembayaran Ditolak ?</h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <h5> Keterangan Penolakan : </h5>
+                                                                            <textarea class="form-control" name="ket_tolak_praktik" required></textarea>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
+                                                                            <button class="btn btn-danger btn-sm" name="ket_tolak" type="submit">Ditolak</button>
+                                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "AKTIF") {
+                                                    ?>
+                                                        <b>PILIH : </b><br>
+                                                        <a title="Praktik Selesai ?" href="#" class="btn btn-outline-primary btn-sm" data-toggle='modal' data-target='#end_<?php echo $d_praktik['id_praktik']; ?>'>SELESAIKAN</a>
+
+                                                        <!-- modal praktik selesai -->
+                                                        <div class="modal fade text-left" id="end_<?php echo $d_praktik['id_praktik']; ?>">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4>Praktikan Sudah Selesai ?</h4>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <form method="post">
+                                                                            <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
+                                                                            <button type="submit" name="selesai_praktik" value="Hapus" class="btn btn-primary btn-sm">Selesai</button>
+                                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "SELESAI") {
+                                                    ?>
+                                                        <span class="badge badge-secondary text-md ">PRAKTIKAN SELESAI</span>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <!-- Data Status  -->
+                                                <div class="col-sm-2 text-center my-auto">
+                                                    <b>STATUS : </b>
+                                                    <a href="#" data-toggle="modal" data-target="#info_status" title="Keterangan Status">
+                                                        <i class="fas fa-info-circle" style="font-size: 14px;"></i>
+                                                    </a>
+
+                                                    <!-- modal info_status -->
+                                                    <div class="modal fade" id="info_status">
+                                                        <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4>INFO STATUS</h4>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">×</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    1. <span class="badge badge-warning text-md">DATA PRAKTIK</span> <br>
+                                                                    Sudah Melakukan Pendaftaran, dilanjutkan Pilih <span class="font-weight-bold text-warning">Data Harga</span><br><br>
+
+                                                                    2. <span class="badge badge-warning text-md">DATA HARGA</span><br>
+                                                                    Pendaftaran dan Harga Diklat Sudah Dipilih, dilanjutkan <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Harga </span><br><br>
+
+                                                                    3. <span class="badge badge-primary text-md">Val. PRAKTIK & HARGA</span><br>
+                                                                    Proses Validasi Data Praktikan dan Harga<br><br>
+
+                                                                    3.1. <span class="badge badge-success text-md">Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i></span><br>
+                                                                    Validasi Data Praktikan dan Harga <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan prose pemilihan <b class="text-warning">TEMPAT</b> oleh Admin<br><br>
+
+                                                                    3.2. <span class="badge badge-danger text-md">Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i></span><br>
+                                                                    Validasi Data Praktikan dan Harga <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+
+                                                                    4. <span class="badge badge-warning text-md">TEMPAT</span><br>
+                                                                    Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh <b>ADMIN</b><br><br>
+
+                                                                    5. <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
+                                                                    MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses <span class="font-weight-bold text-primary">PEMBAYARAN</span>
+                                                                    <br><br>
+
+                                                                    6. <span class="badge badge-primary text-md">PEMBAYARAN</span><br>
+                                                                    Proses Pembayaran Belum Terverifikasi oleh Admin <br><br>
+
+                                                                    6.1. <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
+                                                                    Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
+
+                                                                    6.2. <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
+                                                                    Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+
+                                                                    7. <span class="badge badge-primary text-md font-italic">WAITING LIST</span><br>
+                                                                    Proses Pendaftaran Selesai dan dalam proses <span class="text-primary font-italic font-weight-bold">WAITING LIST</span><br>
+                                                                    akan di <span class="text-success font-weight-bold">AKTIF</span>-kan oleh <b>ADMIN</b> sesuai dengan tanggal mulai praktiknya<br><br>
+
+                                                                    8. <span class="badge badge-success text-md">AKTIF</span><br>
+                                                                    Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span><br><br>
+
+                                                                    9. <span class="badge badge-dark text-md">SELESAI</span><br>
+                                                                    Praktikan Sudah <span class="text-dark font-weight-bold">SELESAI</span><br><br>
+
+                                                                    <span class="badge badge-danger text-md">ERROR</span><br>
+                                                                    Terjadi kesalahan sistem, <a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <br>
+                                                    <?php
+                                                    if ($d_praktik['status_cek_praktik'] == "DATA PRAKTIK") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "DATA HARGA") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA Y") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "Val. PRAKTIK & HARGA T") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">
+                                                            <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "TEMPAT") {
+                                                    ?>
+                                                        <span class="badge badge-primary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "MESS/PEMONDOKAN") {
+                                                    ?>
+                                                        <span class="badge badge-primary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "PEMBAYARAN") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">PEMBAYARAN</span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "PEMB. DITERIMA Y") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">PEMBAYARAN</span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "PEMB. DITERIMA T") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">PEMBAYARAN</span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "WAITING LIST") {
+                                                    ?>
+                                                        <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "AKTIF") {
+                                                    ?>
+                                                        <span class="badge badge-success text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "DITOLAK") {
+                                                    ?>
+                                                        <a href="#" class="badge badge-danger text-md" data-toggle="modal" data-target="#ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
+                                                            KET. <?php echo $d_praktik['status_cek_praktik']; ?>
+                                                        </a>
+
+                                                        <!-- Modal Pembayaran Diterima-->
+                                                        <div class="modal fade text-left" id="ket_tolak_status<?php echo $d_praktik['id_praktik']; ?>">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content text-lg text-center">
+                                                                    <div class="modal-header">
+                                                                        <h4>Keterangan Penolakan</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <?php echo $d_praktik['ket_tolak_praktik']; ?>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "SELESAI") {
+                                                    ?>
+                                                        <span class="badge badge-secondary text-md"><?php echo $d_praktik['status_cek_praktik']; ?></span>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <span class="badge badge-danger text-md">ERROR</span>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                            <?php
+                                            }
+                                            ?>
+                                            <!-- Tombol Link Data Status  -->
                                             <div class="col-sm-2 text-center my-auto">
 
                                                 <!-- tombol dropdown pilih menu harga, mess, bukti bayar -->
@@ -471,6 +777,9 @@ if (isset($_POST['arsip_praktik'])) {
                                                 }
                                                 ?>
                                             </div>
+
+
+
                                             <div class="col-sm-2 my-auto text-center">
                                                 <!-- tombol rincian -->
                                                 <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian"><i class="fas fa-info-circle"></i>
@@ -881,7 +1190,7 @@ if (isset($_POST['arsip_praktik'])) {
                                     </div>
                                 </div>
                             </div>
-                            <hr>
+                            <hr class="bg-gray-800">
                         <?php
                         }
                     } else {
