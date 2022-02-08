@@ -292,12 +292,11 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                             </button>
                         </nav>
                     </div>
-                    <div id="data_praktik_simpan"></div>
                 </div>
             </div>
         </form>
         <input type="hidden" name="path" value="<?php echo $_GET['prk']; ?>" id="path">
-        <div id="harga_praktik_data"></div>
+        <div id="data_harga_input"></div>
     </div>
 
     <!-- <pre id="whereToPrint"> ce :</pre> -->
@@ -597,106 +596,31 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 getTypeDataPraktikan == 'xlsx' &&
                 getSizeDataPraktikan <= 1024
             ) {
+                // document.getElementById("err_institusi").innerHTML = "";
+                // document.getElementById("err_praktik").innerHTML = "";
+                // document.getElementById("err_jurusan").innerHTML = "";
+                // document.getElementById("err_jenjang").innerHTML = "";
+                // document.getElementById("err_spesifikasi").innerHTML = "";
+                // document.getElementById("err_akreditasi").innerHTML = "";
+                // document.getElementById("err_jumlah").innerHTML = "";
+                // document.getElementById("err_tgl_mulai").innerHTML = "";
+                // document.getElementById("err_tgl_selesai").innerHTML = "";
+                // document.getElementById("err_file_surat").innerHTML = "";
+                // document.getElementById("err_file_data_praktikan").innerHTML = "";
+                // document.getElementById("err_nama_pembimbing").innerHTML = "";
+                // document.getElementById("err_telp_pembimbing").innerHTML = "";
 
-                document.getElementById("err_institusi").innerHTML = "";
-                document.getElementById("err_praktik").innerHTML = "";
-                document.getElementById("err_jurusan").innerHTML = "";
-                document.getElementById("err_jenjang").innerHTML = "";
-                document.getElementById("err_spesifikasi").innerHTML = "";
-                document.getElementById("err_akreditasi").innerHTML = "";
-                document.getElementById("err_jumlah").innerHTML = "";
-                document.getElementById("err_tgl_mulai").innerHTML = "";
-                document.getElementById("err_tgl_selesai").innerHTML = "";
-                document.getElementById("err_file_surat").innerHTML = "";
-                document.getElementById("err_file_data_praktikan").innerHTML = "";
-                document.getElementById("err_nama_pembimbing").innerHTML = "";
-                document.getElementById("err_telp_pembimbing").innerHTML = "";
-
-                document.getElementById("institusi").readOnly = true;
-                document.getElementById("praktik").readOnly = true;
-                document.getElementById("jumlah").readOnly = true;
-                document.getElementById("jurusan").readOnly = true;
-                document.getElementById("jenjang").readOnly = true;
-                document.getElementById("spesifikasi").readOnly = true;
-                document.getElementById("akreditasi").readOnly = true;
-                document.getElementById("tgl_mulai").readOnly = true;
-                document.getElementById("tgl_selesai").readOnly = true;
-                document.getElementById("file_surat").readOnly = true;
-                document.getElementById("file_data_praktikan").readOnly = true;
-                document.getElementById("nama_pembimbing").readOnly = true;
-                document.getElementById("email_pembimbing").readOnly = true;
-                document.getElementById("telp_pembimbing").readOnly = true;
-
-                // //data dari form_praktik
-                // var data_praktik = $('#form_praktik').serializeArray();
+                //data dari form_praktik
+                var data_praktik = $('#form_praktik').serializeArray();
                 // // document.getElementById("whereToPrint").innerHTML = JSON.stringify(data_praktik, null, 4);
 
-                // $.ajax({
-                //     type: 'POST',
-                //     url: "_admin/exc/x_i_dataPraktik.php",
-                //     data: data_praktik,
-                //     success: function() {
-                //         document.getElementById("form_praktik");
-                //         const Toast = Swal.mixin({
-                //             toast: true,
-                //             position: 'top-end',
-                //             showConfirmButton: false,
-                //             timer: 10000,
-                //             timerProgressBar: true,
-                //             didOpen: (toast) => {
-                //                 toast.addEventListener('mouseenter', Swal.stopTimer)
-                //                 toast.addEventListener('mouseleave', Swal.resumeTimer)
-                //             }
-                //         });
-
-                //         Toast.fire({
-                //             icon: 'success',
-                //             title: '<div class="text-md text-center"><b>DATA PRAKTIK TERSIMPAN</b><br>LANJUTKAN KE <b>DATA HARGA</b></div>'
-                //         });
-                //     },
-                //     error: function(response) {
-                //         console.log(response.responseText);
-                //         alert('eksekusi query gagal');
-                //     }
-                // });
-
-                // //ambil data file yang diupload
-                // var data_file = new FormData();
-                // var xhttp = new XMLHttpRequest();
-
-                // data_file.append("file_surat", fileSurat[0]);
-                // data_file.append("file_data_praktikan", fileDataPraktikan[0]);
-                // data_file.append("id", id);
-
-                // // Set POST method and ajax file path
-                // xhttp.open("POST", "_admin/exc/x_i_dataFilePraktik.php", true);
-
-                // // Send request with data
-                // xhttp.send(data_file);
-
-                // // $("#tombol_data_praktik").fadeOut('fast');
-                // $("#harga_praktik_nondata").fadeOut('fast');
-                // $("#harga_praktik_data").fadeIn('slow');
-                // $("#simpan_praktik_harga").fadeIn('slow');
-
-                //Menghilangkan Inputan Form Data Praktik
-                // $("#form_praktik").fadeOut('fast');
-
-                // //Memunculkan Data Praktik yang Disimpan
-                // $("#data_praktik_simpan").fadeIn('fast');
-
-                // // Kirim Parameter ke Data Praktik untuk ditampilkan kembali
-                // var xmlhttp_data_praktik = new XMLHttpRequest();
-                // xmlhttp_data_praktik.onreadystatechange = function() {
-                //     document.getElementById("data_praktik_simpan").innerHTML = this.responseText;
-                // };
-                // xmlhttp_data_praktik.open("GET", "_admin/insert/data_praktik.php?id=" + id, true);
-                // xmlhttp_data_praktik.send();
+                $("#data_praktik_input").fadeOut('fast');
+                $("#data_harga_input").fadeIn('slow');
 
                 // Kirim Parameter ke Data Harga untuk ditampilkan
                 var xmlhttp_data_harga = new XMLHttpRequest();
                 xmlhttp_data_harga.onreadystatechange = function() {
-                    document.getElementById("harga_praktik_data").innerHTML = this.responseText;
+                    document.getElementById("data_harga_input").innerHTML = this.responseText;
                 };
                 xmlhttp_data_harga.open("GET", "_admin/insert/data_harga.php?id" + id +
                     "&jur=" + jurusan +
@@ -707,6 +631,24 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                     true
                 );
                 xmlhttp_data_harga.send();
+
+                //Toast Lanjut Ke Data Harga
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                Toast.fire({
+                    icon: 'info',
+                    title: '<div class="text-md text-center">LANJUTKAN KE <b>DATA HARGA</b></div>'
+                });
             }
         }
 
@@ -735,26 +677,28 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
             //simpan data praktik dan data harga
             else {
                 document.getElementById("err_cek_pilih_ujian").innerHTML = "";
+
                 var cek_pilih_ujian = "";
                 if (document.getElementById("cek_pilih_ujian1").checked == true) {
                     cek_pilih_ujian = document.getElementById("cek_pilih_ujian1").value;
                 } else if (document.getElementById("cek_pilih_ujian2").checked == true) {
                     cek_pilih_ujian = document.getElementById("cek_pilih_ujian2").value;
                 }
+
                 var data_praktik = $('#form_praktik').serializeArray();
                 data_praktik.push({
                     name: 'cek_pilih_ujian',
                     value: cek_pilih_ujian
                 });
 
+                //Simpan Data Praktik dan Harga
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_i_dataHarga.php?",
+                    url: "_admin/exc/x_i_dataPraktikHarga.php?",
                     data: data_praktik,
                     success: function() {
                         document.getElementById("form_praktik");
                         const Toast = Swal.mixin({
-                            toast: true,
                             position: 'top-end',
                             showConfirmButton: false,
                             timer: 10000,
@@ -767,17 +711,36 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
 
                         Toast.fire({
                             icon: 'success',
-                            title: '<div class="text-md text-center">DATA HARGA BERHASIL TERSIMPAN</div>'
+                            title: '<div class="text-md text-center"><b>DATA PRAKTIK </b> DAN <b>DATAHARGA</b> <br> BERHASIL TERSIMPAN </div>'
                         });
-                        alert('Data Praktik dan Data Harga Berhasil Tersimpan');
-                        var path = document.getElementById('path').value;
-                        document.location.href = "?prk=" + path;
+
                     },
                     error: function(response) {
                         console.log(response.responseText);
                         alert('eksekusi query gagal');
                     }
                 });
+
+                //ambil data file yang diupload
+                var data_file = new FormData();
+                var xhttp = new XMLHttpRequest();
+
+                var fileSurat = document.getElementById("file_surat").files;
+                data_file.append("file_surat", fileSurat[0]);
+
+                var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                data_file.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                var id = document.getElementById("id").value;
+                data_file.append("id", id);
+
+                xhttp.open("POST", "_admin/exc/x_i_dataFilePraktik.php", true);
+                xhttp.send(data_file);
+
+                var path = document.getElementById('path').value;
+                var timer = setTimeout(function() {
+                    window.location = '?prk=' + path
+                }, 10000);
             }
         }
     </script>
