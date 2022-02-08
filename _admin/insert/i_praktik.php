@@ -299,7 +299,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
 
                             <!-- Tombol Lanjut ke Daftar Harga-->
                             <nav id="navbar-harga" class="navbar justify-content-center">
-                                <button type="button" id="tombol_data_praktik" class="nav-link btn btn-outline-primary" onclick="simpan_praktik()">
+                                <button type="button" id="tombol_data_praktik" class="nav-link btn btn-outline-success" onclick="simpan_praktik()">
                                     <!-- <a class="nav-link" href="#harga"> -->
                                     <i class="fas fa-chevron-circle-down"></i>
                                     Lanjut Ke Daftar Harga
