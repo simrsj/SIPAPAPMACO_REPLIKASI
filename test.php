@@ -1,38 +1,35 @@
-<?php
-echo tanggal('2008-08-09');
-?>
-<div onload="cek();"></div>
-<button onclick="cek()"></button>
+<button onclick="cek()">CEK</button><br>
+<button onclick="cek1()">CEK1</button><br>
 <script>
     function cek() {
 
-        const Toast = Swal.mixin({
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 10000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-
-        Toast.fire({
-            icon: 'success',
-            title: '<div class="text-md text-center">DATA HARGA BERHASIL TERSIMPAN</div>'
-        });
-
+        // Swal.DismissReason.backdrop;
         Swal.fire({
-            position: 'top-end',
+            allowOutsideClick: false,
+            // isDismissed: false,
             icon: 'success',
-            title: 'Your work has been saved',
+            title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>HARGA</b><br>Berhasil Tersimpan',
             showConfirmButton: false,
-            timer: 1500
-        });
-
+            html: '<a href="?prk=' + asd + '" class="btn btn-outline-primary">OK</a>',
+        })
     }
 
-    var timer = setTimeout(function() {
-        window.location = '?'
-    }, 3000);
+    function cek1() {
+
+
+        Swal.fire({
+            title: '<strong>HTML <u>example</u></strong>',
+            icon: 'info',
+            timer: 1000,
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: 'Thumbs down',
+
+            html: window.location = '?',
+        })
+    }
 </script>

@@ -9,16 +9,16 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
         </div>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
             <!-- Data Pendaftaran Praktik  -->
-            <div class="card shadow mb-4">
-                <div class="card-body">
-                    <!-- Data Praktikan -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="text-lg font-weight-bold text-center"> DATA PRAKTIKAN</div>
+            <div id="data_praktik_input">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <!-- Data Praktikan -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text-lg font-weight-bold text-center"> DATA PRAKTIKAN</div>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div id="data_praktik_input">
+                        <hr>
                         <!-- Nama Institusi dan Praktikan -->
                         <div class="row">
                             <?php
@@ -291,6 +291,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                                 <!-- </a> -->
                             </button>
                         </nav>
+
                     </div>
                 </div>
             </div>
@@ -322,7 +323,6 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
             var telp_pembimbing = document.getElementById("telp_pembimbing").value;
 
             //Notif Bila tidak diisi
-            var notif_tidak_diisi = "";
             if (
                 institusi == "" ||
                 praktik == "" ||
@@ -382,16 +382,23 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 //notif institusi 
                 if (institusi == "") {
                     document.getElementById("err_institusi").innerHTML = "Institusi Harus Dipilih";
+                } else {
+                    document.getElementById("err_institusi").innerHTML = "";
                 }
 
                 //notif praktik 
                 if (praktik == "") {
                     document.getElementById("err_praktik").innerHTML = "Nama Praktik Harus Diisi";
+                } else {
+                    document.getElementById("err_praktik").innerHTML = "";
+
                 }
 
                 //notif jurusan 
                 if (jurusan == "") {
                     document.getElementById("err_jurusan").innerHTML = "Jurusan Harus Diisi";
+                } else {
+                    document.getElementById("err_jurusan").innerHTML = "";
                 }
 
                 //notif jenjang 
@@ -402,46 +409,64 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 //notif spesifikasi 
                 if (spesifikasi == "") {
                     document.getElementById("err_spesifikasi").innerHTML = "Spesifikasi Harus Diisi";
+                } else {
+                    document.getElementById("err_spesifikasi").innerHTML = "";
                 }
 
                 //notif akreditasi 
                 if (akreditasi == "") {
                     document.getElementById("err_akreditasi").innerHTML = "Akreditasi Harus Diisi";
+                } else {
+                    document.getElementById("err_akreditasi").innerHTML = "";
                 }
 
                 //notif jumlah 
                 if (jumlah == "") {
                     document.getElementById("err_jumlah").innerHTML = "Jumlah Praktik Harus Diisi";
+                } else {
+                    document.getElementById("err_jumlah").innerHTML = "";
                 }
 
                 //notif tgl_mulai 
                 if (tgl_mulai == "") {
                     document.getElementById("err_tgl_mulai").innerHTML = "Tanggal Mulai Praktik Harus Diisi";
+                } else {
+                    document.getElementById("err_tgl_mulai").innerHTML = "";
                 }
 
                 //notif tgl_selesai 
                 if (tgl_selesai == "") {
                     document.getElementById("err_tgl_selesai").innerHTML = "Tanggal Selesai Praktik Harus Diisi";
-                } else {}
+                } else {
+                    document.getElementById("err_tgl_selesai").innerHTML = "";
+                }
 
                 // notif file_surat
                 if (file_surat == "") {
                     document.getElementById("err_file_surat").innerHTML = "File Surat Harus Diisi";
+                } else {
+                    document.getElementById("err_file_surat").innerHTML = "";
                 }
 
                 // notif file_data_praktikan
                 if (file_data_praktikan == "") {
                     document.getElementById("err_file_data_praktikan").innerHTML = "File Data Praktikan Harus Diisi";
+                } else {
+                    document.getElementById("err_file_data_praktikan").innerHTML = "";
                 }
 
                 //notif nama_pembimbing
                 if (nama_pembimbing == "") {
                     document.getElementById("err_nama_pembimbing").innerHTML = "Nama Pembimbing Harus Diisi";
+                } else {
+                    document.getElementById("err_nama_pembimbing").innerHTML = "";
                 }
 
                 //notif telp_pembimbing
                 if (telp_pembimbing == "") {
                     document.getElementById("err_telp_pembimbing").innerHTML = "Telpon Pembimbing Harus Diisi";
+                } else {
+                    document.getElementById("err_telp_pembimbing").innerHTML = "";
                 }
             }
 
@@ -596,19 +621,19 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 getTypeDataPraktikan == 'xlsx' &&
                 getSizeDataPraktikan <= 1024
             ) {
-                // document.getElementById("err_institusi").innerHTML = "";
-                // document.getElementById("err_praktik").innerHTML = "";
-                // document.getElementById("err_jurusan").innerHTML = "";
-                // document.getElementById("err_jenjang").innerHTML = "";
-                // document.getElementById("err_spesifikasi").innerHTML = "";
-                // document.getElementById("err_akreditasi").innerHTML = "";
-                // document.getElementById("err_jumlah").innerHTML = "";
-                // document.getElementById("err_tgl_mulai").innerHTML = "";
-                // document.getElementById("err_tgl_selesai").innerHTML = "";
-                // document.getElementById("err_file_surat").innerHTML = "";
-                // document.getElementById("err_file_data_praktikan").innerHTML = "";
-                // document.getElementById("err_nama_pembimbing").innerHTML = "";
-                // document.getElementById("err_telp_pembimbing").innerHTML = "";
+                document.getElementById("err_institusi").innerHTML = "";
+                document.getElementById("err_praktik").innerHTML = "";
+                document.getElementById("err_jurusan").innerHTML = "";
+                document.getElementById("err_jenjang").innerHTML = "";
+                document.getElementById("err_spesifikasi").innerHTML = "";
+                document.getElementById("err_akreditasi").innerHTML = "";
+                document.getElementById("err_jumlah").innerHTML = "";
+                document.getElementById("err_tgl_mulai").innerHTML = "";
+                document.getElementById("err_tgl_selesai").innerHTML = "";
+                document.getElementById("err_file_surat").innerHTML = "";
+                document.getElementById("err_file_data_praktikan").innerHTML = "";
+                document.getElementById("err_nama_pembimbing").innerHTML = "";
+                document.getElementById("err_telp_pembimbing").innerHTML = "";
 
                 //data dari form_praktik
                 var data_praktik = $('#form_praktik').serializeArray();
@@ -701,6 +726,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                         const Toast = Swal.mixin({
                             position: 'top-end',
                             showConfirmButton: false,
+                            showCancelButton: true,
                             timer: 10000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
@@ -737,10 +763,19 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 xhttp.open("POST", "_admin/exc/x_i_dataFilePraktik.php", true);
                 xhttp.send(data_file);
 
-                var path = document.getElementById('path').value;
+                //cari jenis jurusan untuk dijadikan path
+                var xmlhttp_d = new XMLHttpRequest();
+                xmlhttp_data_harga.onreadystatechange = function() {
+                    var path = this.responseText;
+                };
+                xmlhttp_data_harga.open("GET", "_admin/insert/path.php?path" + id,
+                    true
+                );
+                xmlhttp_data_harga.send();
+
                 var timer = setTimeout(function() {
                     window.location = '?prk=' + path
-                }, 10000);
+                }, 100000000);
             }
         }
     </script>

@@ -2,6 +2,10 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
+echo "<pre>asd";
+print_r($_FILES);
+echo "</pre>";
+
 // --------------------------------------SIMPAN DATA PRAKTIK--------------------------------------------
 
 $sql_insert = "INSERT INTO tb_praktik (
