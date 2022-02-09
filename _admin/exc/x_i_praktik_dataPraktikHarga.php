@@ -1,10 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
-
-echo "<pre>asd";
-print_r($_FILES);
-echo "</pre>";
 
 // --------------------------------------SIMPAN DATA PRAKTIK--------------------------------------------
 
@@ -42,7 +39,7 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['nama_pembimbing_praktik'] . "', 
         '" . $_POST['email_pembimbing_praktik'] . "',
         '" . $_POST['telp_pembimbing_praktik'] . "', 
-        'DATA PRAKTIK', 
+        'DPH', 
         'D'
         )";
 

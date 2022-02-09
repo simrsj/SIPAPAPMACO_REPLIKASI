@@ -313,6 +313,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/update/u_praktik_harga.php";
 						} elseif (isset($_GET['um'])) {
 							include "_admin/update/u_praktik_mess.php";
+						} elseif (isset($_GET['t'])) {
+							include "_admin/insert/i_praktik_tempat.php";
 						} else {
 							include "_admin/view/v_praktik.php";
 						}

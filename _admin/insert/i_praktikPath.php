@@ -9,4 +9,4 @@ $q_jurusan_pdd_jenis = $conn->query($sql_jurusan_pdd_jenis);
 $d_jurusan_pdd_jenis = $q_jurusan_pdd_jenis->fetch(PDO::FETCH_ASSOC);
 
 $jenis_jurusan = $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'];
-echo json_encode(['jenis_jurusan' => '$jenis_jurusan']);
+echo json_encode(["jenis_jurusan" => "$jenis_jurusan"]);

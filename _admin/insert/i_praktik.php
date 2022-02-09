@@ -647,7 +647,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 xmlhttp_data_harga.onreadystatechange = function() {
                     document.getElementById("data_harga_input").innerHTML = this.responseText;
                 };
-                xmlhttp_data_harga.open("GET", "_admin/insert/data_harga.php?id" + id +
+                xmlhttp_data_harga.open("GET", "_admin/insert/i_praktikDataHarga.php?id" + id +
                     "&jur=" + jurusan +
                     "&jen=" + jenjang +
                     "&tmp=" + tgl_mulai +
@@ -701,8 +701,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
             }
             //simpan data praktik dan data harga
             else {
-                document.getElementById("err_cek_pilih_ujian").innerHTML = "";
-
+                var path = "";
                 var cek_pilih_ujian = "";
                 if (document.getElementById("cek_pilih_ujian1").checked == true) {
                     cek_pilih_ujian = document.getElementById("cek_pilih_ujian1").value;
@@ -716,66 +715,66 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                     value: cek_pilih_ujian
                 });
 
+                //cari jenis jurusan untuk dijadikan path
+
                 //Simpan Data Praktik dan Harga
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_i_dataPraktikHarga.php?",
+                    url: "_admin/exc/x_i_praktik_dataPraktikHarga.php?",
                     data: data_praktik,
                     success: function() {
-                        document.getElementById("form_praktik");
-                        const Toast = Swal.mixin({
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            showCancelButton: true,
-                            timer: 10000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        //ambil data file yang diupload
+                        var data_file = new FormData();
+                        var xhttp = new XMLHttpRequest();
+
+                        var fileSurat = document.getElementById("file_surat").files;
+                        data_file.append("file_surat", fileSurat[0]);
+
+                        var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                        data_file.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                        var id = document.getElementById("id").value;
+                        data_file.append("id", id);
+
+                        xhttp.open("POST", "_admin/exc/x_i_praktik_dataFilePraktik.php", true);
+                        xhttp.send(data_file);
+
+                        //Cari Jenis Jurusan
+                        var jur = document.getElementById('jurusan').value;
+                        var xmlhttp_path = new XMLHttpRequest();
+                        xmlhttp_path.onload = function() {
+                            var path = "";
+                            var pathResponse = JSON.parse(this.responseText);
+                            if (pathResponse.jenis_jurusan == 1) {
+                                path = "?prk=ked";
+                            } else if (pathResponse.jenis_jurusan == 2) {
+                                path = "?prk=kep";
+                            } else if (pathResponse.jenis_jurusan == 3) {
+                                path = "?prk=nkl";
+                            } else if (pathResponse.jenis_jurusan == 4) {
+                                path = "?prk=nnk";
+                            } else {
+                                path = "?";
                             }
-                        });
-
-                        Toast.fire({
-                            icon: 'success',
-                            title: '<div class="text-md text-center"><b>DATA PRAKTIK </b> DAN <b>DATAHARGA</b> <br> BERHASIL TERSIMPAN </div>'
-                        });
-
+                            Swal.fire({
+                                allowOutsideClick: false,
+                                // isDismissed: false,
+                                icon: 'success',
+                                title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>HARGA</b><br>Berhasil Tersimpan',
+                                showConfirmButton: false,
+                                html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
+                            });
+                        };
+                        xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
+                            true
+                        );
+                        xmlhttp_path.send();
                     },
                     error: function(response) {
                         console.log(response.responseText);
                         alert('eksekusi query gagal');
                     }
                 });
-
-                //ambil data file yang diupload
-                var data_file = new FormData();
-                var xhttp = new XMLHttpRequest();
-
-                var fileSurat = document.getElementById("file_surat").files;
-                data_file.append("file_surat", fileSurat[0]);
-
-                var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
-                data_file.append("file_data_praktikan", fileDataPraktikan[0]);
-
-                var id = document.getElementById("id").value;
-                data_file.append("id", id);
-
-                xhttp.open("POST", "_admin/exc/x_i_dataFilePraktik.php", true);
-                xhttp.send(data_file);
-
-                //cari jenis jurusan untuk dijadikan path
-                var xmlhttp_d = new XMLHttpRequest();
-                xmlhttp_data_harga.onreadystatechange = function() {
-                    var path = this.responseText;
-                };
-                xmlhttp_data_harga.open("GET", "_admin/insert/path.php?path" + id,
-                    true
-                );
-                xmlhttp_data_harga.send();
-
-                var timer = setTimeout(function() {
-                    window.location = '?prk=' + path
-                }, 100000000);
             }
         }
     </script>
