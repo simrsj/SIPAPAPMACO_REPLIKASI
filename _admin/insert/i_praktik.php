@@ -266,15 +266,15 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                             ?>
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_pembimbing_praktik" id="nama_pembimbing" placeholder="Isi Nama Pembimbing" value="<?php echo $d_user['nama_user']; ?>" required><span class="text-danger font-weight-bold  font-italic text-xs" id="err_nama_pembimbing"></span>
+                                <input type="text" class="form-control" name="nama_pembimbing_praktik" id="nama_pembimbing" placeholder="Isi Nama Pembimbing" required><span class="text-danger font-weight-bold  font-italic text-xs" id="err_nama_pembimbing"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
-                                <input type="text" class="form-control" name="email_pembimbing_praktik" id="email_pembimbing" placeholder="Isi Email Pembimbing" value="<?php echo $d_user['email_user']; ?>">
+                                <input type="text" class="form-control" name="email_pembimbing_praktik" id="email_pembimbing" placeholder="Isi Email Pembimbing">
                             </div>
                             <div class="col-lg-4">
                                 Telpon : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="telp_pembimbing_praktik" id="telp_pembimbing" placeholder="Isi Telpon Pembimbing" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
+                                <input type="number" class="form-control" name="telp_pembimbing_praktik" id="telp_pembimbing" placeholder="Isi Telpon Pembimbing" min="1" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_telp_pembimbing"></span>
                             </div>
@@ -404,6 +404,8 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 //notif jenjang 
                 if (jenjang == "") {
                     document.getElementById("err_jenjang").innerHTML = "Jenjang Harus Diisi";
+                } else {
+                    document.getElementById("err_jenjang").innerHTML = "";
                 }
 
                 //notif spesifikasi 
@@ -632,6 +634,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 document.getElementById("err_tgl_selesai").innerHTML = "";
                 document.getElementById("err_file_surat").innerHTML = "";
                 document.getElementById("err_file_data_praktikan").innerHTML = "";
+                // document.getElementById("err_akun_pembimbing").innerHTML = "";
                 document.getElementById("err_nama_pembimbing").innerHTML = "";
                 document.getElementById("err_telp_pembimbing").innerHTML = "";
 

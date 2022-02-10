@@ -1,5 +1,5 @@
 <body class="bg-gradient-primary">
-  <meta http-equiv="refresh" content="120">
+  <meta http-equiv="refresh" content="10">
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,14 +8,11 @@
     <div class="collapse navbar-collapse h5 font-weight-bold row">
       <ul class="navbar-nav col">
         <li class="nav-item active">
-          <a class="nav-link" href="#">
-            <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
-            <img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="2%">
-            <img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="3%">
-            DASHBOARD PRAKTIKAN DAN MESS - RS JIWA PROVINSI JAWA BARAT
-            <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
-
-          </a>
+          <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
+          <img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="2%">
+          <img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="3%">
+          DASHBOARD PRAKTIKAN DAN MESS/PEMONDOKAN - RS JIWA PROVINSI JAWA BARAT
+          <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
         </li>
       </ul>
       <ul class="navbar-nav col-auto">
@@ -83,10 +80,10 @@
               } else {
               ?>
                 <div class="jumbotron text-center my-auto">
-                  <div class="display-4 my-auto text-lg">Praktikan Tidak Ada <i class="far fa-sad-tear"></i></div>
+                  <div class="display-4 my-auto text-lg text-uppercase font-weight-bold">Praktikan Tidak Ada </div>
                   <hr class="my-2">
                   <p class="lead">
-                    <a class="btn btn-outline-success btn-lg" href="?reg" role="button">Ayo Daftar !!! </a>
+                    <a class="btn btn-outline-success btn-lg" href="?reg" target="_blank" role="button">Ayo Daftar !!! </a>
                   </p>
                 </div>
               <?php
@@ -112,7 +109,7 @@
               </div>
               <hr>
               <?php
-              $sql_mess = "SELECT * FROM tb_mess WHERE status_mess = 'AKTIF' ORDER BY nama_mess ASC";
+              $sql_mess = "SELECT * FROM tb_mess WHERE status_mess = 'AKTIF' AND nama_pemilik_mess = 'RS Jiwa Provinsi Jawa Barat' ORDER BY nama_mess ASC";
               $q_mess = $conn->query($sql_mess);
               $r_mess = $q_mess->rowCount();
               ?>
@@ -122,6 +119,65 @@
                     <tr class="font-weight-bold text-center">
                       <th scope='col'>NO</th>
                       <th>NAMA MESS</th>
+                      <th>NAMA PEMILIK</th>
+                      <th>KAPASITAS TOTAL</th>
+                      <th>KAPASITAS TERISI</th>
+                      <th>KAPASITAS SISA</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $no = 1;
+                    while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                      <tr>
+                        <td><?php echo $no; ?></td>
+                        <td><?php echo $d_mess['nama_mess']; ?></td>
+                        <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
+                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
+                        <td class="text-center"><?php echo $d_mess['kapasitas_terisi_mess']; ?></td>
+                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $d_mess['kapasitas_terisi_mess']; ?></td>
+                        <?php
+                        $no++;
+                        ?>
+                      </tr>
+                    <?php
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA PEMONDOKAN -->
+  <div class=" container">
+    <div class="card o-hidden border-0 shadow-lg my-3">
+      <div class="card-body p-0">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="p-3">
+              <div class="text-center">
+                <div class="h5 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA PEMONDOKAN</span></div>
+              </div>
+              <hr>
+              <?php
+              $sql_mess = "SELECT * FROM tb_mess WHERE status_mess = 'AKTIF' AND nama_pemilik_mess != 'RS Jiwa Provinsi Jawa Barat' ORDER BY nama_mess ASC";
+              $q_mess = $conn->query($sql_mess);
+              $r_mess = $q_mess->rowCount();
+              ?>
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead class="table-light">
+                    <tr class="font-weight-bold text-center">
+                      <th scope='col'>NO</th>
+                      <th>NAMA PEMONDOKAN</th>
                       <th>NAMA PEMILIK</th>
                       <th>KAPASITAS TOTAL</th>
                       <th>KAPASITAS TERISI</th>

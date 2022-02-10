@@ -158,7 +158,7 @@
                     $r_mess = $q_mess->rowCount();
                     ?>
                     <div class="table-responsive">
-                        <table class="table table-hover" id="myTable">
+                        <table class="table table-hover">
                             <thead class="table-dark">
                                 <tr>
                                     <th scope='col'>No</th>
