@@ -131,6 +131,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 								<i class="fas fa-fw fa-bed"></i>
 								<span>Mess</span>
 							</a>
+							<a class="collapse-item" href="?tmp">
+								<i class="fas fa-house"></i>
+								<span>Tempat</span>
+							</a>
 							<a class="collapse-item" href="?uni">
 								<i class="fas fa-fw fa-house-user"></i>
 								<span>Unit</span>
@@ -324,6 +328,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_spesifikasi.php";
 					} elseif (isset($_GET['uni'])) {
 						include "_admin/view/v_unit.php";
+					} elseif (isset($_GET['tmp'])) {
+						include "_admin/view/v_tempat.php";
 					} elseif (isset($_GET['test'])) {
 						include "test.php";
 					} elseif (isset($_GET['test1'])) {
