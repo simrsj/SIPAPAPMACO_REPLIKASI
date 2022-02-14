@@ -12,7 +12,6 @@
 - tanggal Selesai Pendaftaran tidak bisa input tanggal ≤ tanggal mulai
 - pelajari CSRF
 
-
 git status
 git add . 
 git commit -a -m "Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database"  
@@ -25,7 +24,6 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/fajarrachmath/training_cisarua.git
 git push -u origin main
-
 
 TRUNCATE tb_praktik;
 TRUNCATE tb_harga_pilih;
