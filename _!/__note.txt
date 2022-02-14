@@ -25,6 +25,7 @@ git branch -M main
 git remote add origin https://github.com/fajarrachmath/SM.git
 git push -u origin main
 
+
 TRUNCATE tb_praktik;
 TRUNCATE tb_harga_pilih;
 TRUNCATE tb_mess_pilih;
