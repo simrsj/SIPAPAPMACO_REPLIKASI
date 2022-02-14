@@ -1,22 +1,23 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10">
-            <h1 class="h3 mb-2 text-gray-800">Daftar Mess</h1>
+            <h1 class="h3 mb-2 text-gray-800">Daftar Mess/Pemondokan</h1>
         </div>
-        <div class="col-lg-2">
-            <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#mes_i_m'>
+        <div class="col-lg-2 text-right">
+            <a class='btn btn-outline-success btn-sm ' href='#' data-toggle='modal' data-target='#mes_i_m'>
                 <i class="fas fa-plus"></i> Tambah
             </a>
+
             <!-- modal tambah Mess  -->
-            <div class="modal fade" id="mes_i_m">
+            <div class="modal fade text-left " id="mes_i_m" data-backdrop="static">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form method="post" action="">
                             <div class="modal-header">
-                                <b>TAMBAH MESS</b>
+                                <b>TAMBAH MESS/PEMONDOKAN</b>
                             </div>
                             <div class="modal-body">
-                                Nama Mess : <span style="color:red">*</span><br>
+                                Nama Mess/Pemondokan : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control" name="nama_mess" required><br>
                                 Nama Pemilik : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control" name="nama_pemilik_mess" required><br>
@@ -24,6 +25,9 @@
                                 <input type="number" class="form-control" name="no_pemilik_mess"><br>
                                 E-Mail Pemilik : <br>
                                 <input type="emial" class="form-control" name="email_pemilik_mess"><br>
+                                Kepemilikan : <span style="color:red">*</span><br>
+                                <input type="radio" name="kepemilikan" value="dalam" required> Dalam (RSJ)<br>
+                                <input type="radio" name="kepemilikan" value="luar"> Luar<br><br>
                                 Harga Tanpa Makan : (Rp)<span style="color:red">*</span><br>
                                 <input type="number" class="form-control" name="harga_tanpa_makan_mess" required><br>
                                 Harga Dengan Makan : (Rp)<span style="color:red">*</span><br>
@@ -67,9 +71,8 @@
                                 <th>Nama Mess</th>
                                 <th>Nama Pemilik</th>
                                 <th>Kontak Pemilik</th>
-                                <th>Alamat Mess</th>
+                                <th>Kepemilikan</th>
                                 <th>Kapasitas Total</th>
-                                <th>Kapasitas Terisi</th>
                                 <th>Harga Tanpa Makan</th>
                                 <th>Harga Dengan Makan</th>
                                 <th>Status</th>
@@ -86,9 +89,16 @@
                                     <td><?php echo $d_mess['nama_mess']; ?></td>
                                     <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
                                     <td><?php echo $d_mess['no_pemilik_mess']; ?></td>
-                                    <td><?php echo $d_mess['alamat_mess']; ?></td>
+                                    <td class="text-center">
+                                        <?php
+                                        if ($d_mess['kepemilikan_mess'] == 'dalam') {
+                                            echo "<span class='badge badge-success text-uppercase'>" . $d_mess['kepemilikan_mess'] . "</span>";
+                                        } elseif ($d_mess['kepemilikan_mess'] == 'luar') {
+                                            echo "<span class='badge badge-primary text-uppercase'>" . $d_mess['kepemilikan_mess'] . "</span>";
+                                        }
+                                        ?>
+                                    </td>
                                     <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                                    <td><?php echo $d_mess['kapasitas_terisi_mess']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_mess['harga_tanpa_makan_mess'], 0, ",", "."); ?></td>
                                     <td><?php echo "Rp " . number_format($d_mess['harga_dengan_makan_mess'], 0, ",", "."); ?></td>
                                     <td>
@@ -137,6 +147,18 @@
                                                             <input type="number" class="form-control" name="no_pemilik_mess" value="<?php echo $d_mess['no_pemilik_mess']; ?>" required><br>
                                                             E-Mail Pemilik : <br>
                                                             <input type="emial" class="form-control" name="email_pemilik_mess" value="<?php echo $d_mess['email_pemilik_mess']; ?>"><br>
+                                                            <?php
+                                                            $km1 = "";
+                                                            $km2 = "";
+                                                            if ($d_mess['kepemilikan_mess'] == 'dalam') {
+                                                                $km1 = 'checked';
+                                                            } elseif ($d_mess['kepemilikan_mess'] == 'luar') {
+                                                                $km2 = 'checked';
+                                                            }
+                                                            ?>
+                                                            Kepemilikan : <span style="color:red">*</span><br>
+                                                            <input type="radio" name="kepemilikan" value="dalam" required <?php echo $km1; ?>> Dalam (RSJ)<br>
+                                                            <input type="radio" name="kepemilikan" value="luar" <?php echo $km1; ?>> Luar<br><br>
                                                             Harga Tanpa Makan : (Rp)<span style="color:red">*</span><br>
                                                             <input type="number" class="form-control" name="harga_tanpa_makan_mess" value="<?php echo $d_mess['harga_tanpa_makan_mess']; ?>" required><br>
                                                             Harga Dengan Makan : (Rp)<span style="color:red">*</span><br>
@@ -154,7 +176,7 @@
                                                             Kapasitas Total : <span style="color:red">*</span><br>
                                                             <input type="number" class="form-control" name="kapasitas_t_mess" value="<?php echo $d_mess['kapasitas_t_mess']; ?>" required>
                                                             Kapasitas Terisi : <span style="color:red">*</span><br>
-                                                            <input type="number" class="form-control" name="kapasitas_terisi_mess" value="<?php echo $d_mess['kapasitas_terisi_mess']; ?>" required>
+                                                            <input type="number" class="form-control" name="kapasitas_terisi_mess" value="<?php echo $d_mess['kapasitas_terisi_mess']; ?>">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
@@ -223,6 +245,7 @@ if (isset($_POST['tambah'])) {
         nama_pemilik_mess, 
         no_pemilik_mess, 
         email_pemilik_mess, 
+        kepemilikan_mess, 
         harga_tanpa_makan_mess, 
         harga_dengan_makan_mess,
         ket_mess
@@ -235,11 +258,12 @@ if (isset($_POST['tambah'])) {
         '" . $_POST['nama_pemilik_mess'] . "', 
         '" . $_POST['no_pemilik_mess'] . "', 
         '" . $_POST['email_pemilik_mess'] . "', 
+        '" . $_POST['kepemilikan'] . "', 
         '" . $_POST['harga_tanpa_makan_mess'] . "', 
         '" . $_POST['harga_dengan_makan_mess'] . "', 
         '" . $_POST['ket_mess'] . "'
     )";
-    // echo $sql_tambah;
+    echo $sql_tambah;
     $conn->query($sql_tambah);
 ?>
     <script>
@@ -256,6 +280,7 @@ if (isset($_POST['tambah'])) {
     `nama_pemilik_mess` = '" . $_POST['nama_pemilik_mess'] . "' ,
     `no_pemilik_mess` = '" . $_POST['no_pemilik_mess'] . "' ,
     `email_pemilik_mess` = '" . $_POST['email_pemilik_mess'] . "' ,
+    `kepemilikan_mess` = '" . $_POST['kepemilikan'] . "' ,
     `harga_tanpa_makan_mess` = '" . $_POST['harga_tanpa_makan_mess'] . "' ,
     `harga_dengan_makan_mess` = '" . $_POST['harga_dengan_makan_mess'] . "' ,
     `kapasitas_terisi_mess` = '" . $_POST['kapasitas_terisi_mess'] . "' ,

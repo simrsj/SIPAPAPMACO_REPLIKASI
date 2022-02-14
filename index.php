@@ -39,7 +39,7 @@ include '_add-ons/csrf_auth.php';
     <script src="vendor/select2/dist/js/select2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="https://kit.fontawesome.com/26550bb205.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/26550bb205.js" crossorigin="anonymous"></script> -->
 
     <!-- SCRIPT JS  -->
     <script>

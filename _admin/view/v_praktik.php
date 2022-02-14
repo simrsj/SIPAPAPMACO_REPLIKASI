@@ -147,26 +147,31 @@ if (isset($_POST['arsip_praktik'])) {
         </script>
     ";
 } else {
+
+    if ($_GET['prk'] == 'ked') {
+        $tambah = "ked";
+        $judul = "Kedokteran";
+    } elseif ($_GET['prk'] == 'kep') {
+        $tambah = "kep";
+        $judul = "Keperawatan";
+    } elseif ($_GET['prk'] == 'nkl') {
+        $tambah = "nkl";
+        $judul = "Nakes Lainnya";
+    } elseif ($_GET['prk'] == 'nnk') {
+        $tambah = "nnk";
+        $judul = "Non-Nakes";
+    } else {
+        $tambah = "";
+    }
 ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Pendaftaran Praktik</h1>
+                <h1 class="h3 mb-2 text-gray-800">Pendaftaran Praktik <?php echo $judul; ?></h1>
             </div>
             <div class="col-lg-2 text-right">
 
                 <?php
-                if ($_GET['prk'] == 'ked') {
-                    $tambah = "ked";
-                } elseif ($_GET['prk'] == 'kep') {
-                    $tambah = "kep";
-                } elseif ($_GET['prk'] == 'nkl') {
-                    $tambah = "nkl";
-                } elseif ($_GET['prk'] == 'nnk') {
-                    $tambah = "nnk";
-                } else {
-                    $tambah = "";
-                }
                 ?>
                 <a href="?prk=<?php echo $tambah; ?>&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
@@ -249,7 +254,7 @@ if (isset($_POST['arsip_praktik'])) {
 
                                                     <!-- modal info_status -->
                                                     <div class="modal fade" id="info_status" data-backdrop="static">
-                                                        <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                                                        <div class="modal-dialog modal-dialog-lable modal-md" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h4>INFO STATUS</h4>
@@ -269,7 +274,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                                     Validasi Data Praktikan dan Harga <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
 
                                                                     4. <span class="badge badge-warning text-md">TEMPAT</span><br>
-                                                                    Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh <b>ADMIN</b><br><br>
+                                                                    Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh Admin<br><br>
 
                                                                     5. <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
                                                                     MESS/PEMONDOKAN Sudah didaftarkan oleh Admin<br><br>
@@ -314,6 +319,10 @@ if (isset($_POST['arsip_praktik'])) {
                                                         <span class="badge badge-danger text-md">
                                                             Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i>
                                                         </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md"> TEMPAT </span>
                                                     <?php
                                                     }
                                                     ?>
@@ -397,6 +406,10 @@ if (isset($_POST['arsip_praktik'])) {
                                                             Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i>
                                                         </span>
                                                     <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md"> TEMPAT </span>
+                                                    <?php
                                                     }
                                                     ?>
                                                 </div>
@@ -450,6 +463,11 @@ if (isset($_POST['arsip_praktik'])) {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
+                                                ?>
+                                                    <b>PILIH : </b><br>
+                                                    <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
                                                 <?php
                                                 }
                                                 ?>

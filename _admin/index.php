@@ -129,7 +129,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							</a>
 							<a class="collapse-item" href="?mes">
 								<i class="fas fa-fw fa-bed"></i>
-								<span>Mess</span>
+								<span>Mess/Pemondokan</span>
 							</a>
 							<a class="collapse-item" href="?tmp">
 								<i class="fas fa-house"></i>
