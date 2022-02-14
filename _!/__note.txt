@@ -22,7 +22,7 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/fajarrachmath/training_cisarua.git
+git remote add origin https://github.com/fajarrachmath/SM.git
 git push -u origin main
 
 
