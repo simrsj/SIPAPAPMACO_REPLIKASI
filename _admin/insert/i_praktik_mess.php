@@ -14,7 +14,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         </div>
         <div class="card-body">
             <?php
-            $sql_mess = "SELECT * FROM tb_mess WHERE status_mess = 'Aktif' ORDER BY nama_mess ASC";
+            $sql_mess = "SELECT * FROM tb_mess WHERE status_mess = 'y' ORDER BY nama_mess ASC";
             $q_mess = $conn->query($sql_mess);
             $r_mess = $q_mess->rowCount();
             if ($r_mess > 0) {
@@ -77,14 +77,13 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <b>PILIH MESS/PEMONDOKAN</b>
                             </div>
                             <div class="modal-body">
-
                                 <fieldset class="fieldset">
                                     <legend class="legend-fieldset">Nama Mess <span style="color:red">*</span></legend>
                                     <div id="err_mess" class="text-danger text-xs font-italic"></div>
                                     <select class="form-control" name="id_mess" id="id_mess" required>
                                         <option value="">-- Pilih --</option>
                                         <?php
-                                        $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE ((kapasitas_t_mess - kapasitas_terisi_mess) >= $jumlah_praktik) ORDER BY nama_mess ASC");
+                                        $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE status_mess = 'y' ORDER BY nama_mess ASC");
                                         while ($d_jurusan = $q_jurusan->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
                                             <option value="<?php echo $d_jurusan['id_mess']; ?>"><?php echo $d_jurusan['nama_mess']; ?></option>
@@ -98,7 +97,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     <legend class="legend-fieldset">Makan Mess <span style="color:red">*</span></legend>
                                     <div id="err_makan" class="text-danger text-xs font-italic"></div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="makan_mess_pilih1" name="makan_mess_pilih" value="Ya" class="custom-control-input" required>
+                                        <input type="radio" id="makan_mess_pilih1" name="makan_mess_pilih" value="y" class="custom-control-input" required>
                                         <label class="custom-control-label" for="makan_mess_pilih1">Pakai Makan (3x Sehari)</label>
                                     </div>
                                     <div class="custom-control custom-radio">
@@ -129,9 +128,21 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             // console.log("masuk tambah");
             var path = document.getElementById('path').value;
             var mess = document.getElementById('id_mess').value;
+            // var makan1 = document.getElementById('makan_mess_pilih1').value;
+            // var makan2 = document.getElementById('makan_mess_pilih2').value;
+            var makan = $('input[name="makan_mess_pilih"]:checked').val();
+
+            // alert("path:" + path + " mess:" + mess + " makan1:" + makan1 + " makan2:" + makan2 + " makan:" + makan);
+
+            // if (makan == undefined) {
+            //     alert("makan:" + makan);
+            // }
+            // if (makan != undefined) {
+            //     alert("makan not:" + makan);
+            // }
 
             //Notif Bila tidak dipilih
-            if ($('input[name="makan_mess_pilih"]:checked').val() == undefined || mess == "") {
+            if (makan == undefined || mess == "") {
 
                 //warning Toast bila ada data wajib yg berlum terisi
                 const Toast = Swal.mixin({
@@ -153,21 +164,21 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
                 //notif makan tidak diisi
                 if (mess == "") {
-                    document.getElementById("err_makan").innerHTML = "Pilih Makan";
+                    document.getElementById("err_mess").innerHTML = "Pilih Makan";
                 } else {
-                    document.getElementById("err_makan").innerHTML = "";
+                    document.getElementById("err_mess").innerHTML = "";
                 }
 
                 //notif makan tidak diisi
-                if ($('input[name="makan_mess_pilih"]:checked').val() == undefined) {
-                    document.getElementById("err_mess").innerHTML = "Pilih Mess";
+                if (makan == undefined) {
+                    document.getElementById("err_makan").innerHTML = "Pilih Mess";
                 } else {
-                    document.getElementById("err_mess").innerHTML = "";
+                    document.getElementById("err_makan").innerHTML = "";
                 }
             }
 
             //tambah tempat
-            if ($('input[name="makan_mess_pilih"]:checked') != undefined && mess != "") {
+            if (makan != undefined && mess != "") {
                 var data_tMess = $('#form_sMess').serializeArray();
 
                 //Simpan Data Praktik dan Harga

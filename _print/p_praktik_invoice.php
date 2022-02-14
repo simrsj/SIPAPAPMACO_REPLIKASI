@@ -5,7 +5,7 @@ include_once "koneksi.php";
 include_once "tanggal.php";
 
 $id_praktik = $_GET['id'];
-echo $id_praktik . "<br>";
+// echo $id_praktik . "<br>";
 
 #data harga pilih
 $sql_praktik = "SELECT * FROM tb_harga_pilih
@@ -36,6 +36,32 @@ while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
     $no++;
 }
 
+#data tempat pilih
+$sql_tempat = "SELECT * FROM tb_praktik 
+JOIN tb_tempat_pilih ON tb_praktik.id_praktik = tb_tempat_pilih.id_praktik 
+JOIN tb_tempat ON tb_tempat_pilih.id_tempat = tb_tempat.id_tempat 
+JOIN tb_harga_satuan ON tb_tempat.id_harga_satuan = tb_harga_satuan.id_harga_satuan
+WHERE tb_praktik.id_praktik = '" . $id_praktik . "'";
+$q_tempat = $conn->query($sql_tempat);
+
+while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
+    array_push(
+        $data,
+        array(
+            $no,
+            $d_tempat['nama_tempat'] . " (Tempat)",
+            $d_tempat['nama_harga_satuan'],
+            "Rp " . number_format($d_tempat['harga_tempat'], 0, ",", "."),
+            $d_tempat['frek_tempat_pilih'],
+            $d_tempat['kuan_tempat_pilih'],
+            "Rp " . number_format($d_tempat['total_harga_tempat_pilih'], 0, ",", ".")
+        )
+    );
+    $total_harga = $total_harga + $d_tempat['total_harga_tempat_pilih'];
+    $no++;
+}
+
+
 #data mess pilih
 $sql_mess = "SELECT * FROM tb_praktik 
 JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik 
@@ -44,29 +70,35 @@ JOIN tb_institusi on tb_institusi.id_institusi = tb_praktik.id_institusi
 WHERE tb_praktik.id_praktik = '" . $id_praktik . "'";
 $q_mess = $conn->query($sql_mess);
 
-
-
 while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+    if ($d_mess['makan_mess_pilih'] == 'y') {
+        $makan = "(Dengan Makan)";
+    } elseif ($d_mess['makan_mess_pilih'] == 't') {
+        $makan = "(Tanpa Makan)";
+    } else {
+        $makan = "(<i><b>ERROR</b></i>)";
+    }
     array_push(
         $data,
         array(
             $no,
-            $d_mess['nama_mess'] . " (Mess)",
+            $d_mess['nama_mess'] . " (Mess) " . $makan,
             "Hari/Orang",
             "Rp " . number_format(
-                $d_mess['total_harga_mess_pilih'] / ($d_mess['jumlah_praktik'] * $d_mess['jumlah_hari_mess_pilih']),
+                $d_mess['total_harga_mess_pilih'] / ($d_mess['jumlah_praktik'] * $d_mess['total_hari_mess_pilih']),
                 0,
                 ",",
                 "."
             ),
             $d_mess['jumlah_praktik'],
-            $d_mess['jumlah_hari_mess_pilih'],
+            $d_mess['total_hari_mess_pilih'],
             "Rp " . number_format($d_mess['total_harga_mess_pilih'], 0, ",", ".")
         )
     );
     $total_harga = $total_harga + $d_mess['total_harga_mess_pilih'];
     $no++;
 }
+
 #data detail di atas INVOICE
 $sql_mess = "SELECT * FROM tb_praktik 
 JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik 
@@ -140,25 +172,25 @@ $pdf->Ln(4);
 $judul = "Nama Institusi : ";
 $nama = $detail['nama_institusi'];
 $pdf->SetFont('Arial', '', '12');
-$pdf->Cell(0, 0, $judul.' '.$nama, '0', 1, 'L');
+$pdf->Cell(0, 0, $judul . ' ' . $nama, '0', 1, 'L');
 $pdf->Ln(4);
 
 $judul = "Nama Praktik : ";
 $nama = $detail['nama_praktik'];
 $pdf->SetFont('Arial', '', '12');
-$pdf->Cell(0, 0, $judul.' '.$nama, '0', 1, 'L');
+$pdf->Cell(0, 0, $judul . ' ' . $nama, '0', 1, 'L');
 $pdf->Ln(4);
 
 $judul = "Tanggal Mulai : ";
 $nama = tanggal($detail['tgl_mulai_praktik']);
 $pdf->SetFont('Arial', '', '12');
-$pdf->Cell(0, 0, $judul.' '.$nama, '0', 1, 'L');
+$pdf->Cell(0, 0, $judul . ' ' . $nama, '0', 1, 'L');
 $pdf->Ln(4);
 
 $judul = "Tanggal Selesai : ";
 $nama = tanggal($detail['tgl_selesai_praktik']);
 $pdf->SetFont('Arial', '', '12');
-$pdf->Cell(0, 0, $judul.' '.$nama, '0', 1, 'L');
+$pdf->Cell(0, 0, $judul . ' ' . $nama, '0', 1, 'L');
 $pdf->Ln(4);
 
 
@@ -208,19 +240,19 @@ $pdf->Ln();
 $judul = "Jumlah Total : ";
 $nama = $total_harga;
 $pdf->SetFont('Arial', '', '12');
-$pdf->Cell(0, 0, $judul.' Rp '.number_format($nama, 2, ',', '.'), '0', 1, 'R');
+$pdf->Cell(0, 0, $judul . ' Rp ' . number_format($nama, 2, ',', '.'), '0', 1, 'R');
 $pdf->Ln(4);
 
 //  .
 $judul = "Perlu kami informasikan pembayaran dapat ditransfer pada Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD) dengan nomor : ";
 $pdf->SetFont('Arial', '', '12');
-$pdf->write(5,$judul,'');
+$pdf->write(5, $judul, '');
 $judul = "BJB-0063028738002. ";
 $pdf->SetFont('Arial', 'B', '12');
-$pdf->write(5,$judul,'');
+$pdf->write(5, $judul, '');
 $judul = "Bukti transfer dapat dikirim melalui email diklit.rsj.jabarprov@gmail.com dan nomor WA Bendahara Penerimaan RSJ (081321412643)";
 $pdf->SetFont('Arial', '', '12');
-$pdf->write(5,$judul,'');
+$pdf->write(5, $judul, '');
 $pdf->Ln(8);
 
 

@@ -1,20 +1,17 @@
 - enkripsi link 
-- inputan pilih jadwal praktikan dengan pilih tombol radio button tanggal cek : https://getbootstrap.com/docs/5.0/forms/checks-radios/#outlined-styles
-- buat CRUD eksekusi tanpa loading (cek : https://dewankomputer.com/2019/01/23/crud-create-read-update-delete-dengan-ajax-tanpa-loading-part-1-menampilkan-data/)
 - perbaiki harga, mess dan pembayaran kedokteran (alurnya beda)
 - perbaiki isian akun institusi
 - perbaiki dastboard institusi
 - perbaiki dastboard admin
-- perbaiki Invoice pembayaran
+- perbaiki Invoice pembayaran PDF
 - Perbaiki modul mou perpanjang dan baru
 - dashboard user tampil mounya dengan judul perpanjang / baru MoU
-- Perbaiki Pendaftaran 
 - tanggal Selesai Pendaftaran tidak bisa input tanggal ≤ tanggal mulai
 - pelajari CSRF
 
 git status
 git add . 
-git commit -a -m "Modul Tempat, proses simpan "  
+git commit -a -m "Perbaikan Modul Pembayaran, Perbaikan Info Status, Proses Modul Validasi Pembayaran, perbaikan Database "  
 git pull
 git push
 
@@ -29,13 +26,6 @@ git push -u origin main
 TRUNCATE tb_praktik;
 TRUNCATE tb_harga_pilih;
 TRUNCATE tb_mess_pilih;
-UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 1;
-UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 2;
-UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 3;
-UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 4;
-UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 5;
-UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 6;
-UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 7;
-UPDATE tb_mess SET kapasitas_terisi_mess = 0 WHERE id_mess = 8;
+TRUNCATE tb_tempat_pilih;
 
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551

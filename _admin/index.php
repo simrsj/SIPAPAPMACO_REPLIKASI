@@ -27,11 +27,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<span>Dashboard</span></a>
 				</li>
 				<!-- Nav Item - Dashboard -->
-				<li class="nav-item active">
+				<!-- <li class="nav-item active">
 					<a class="nav-link" href="?mou">
 						<i class="fas fa-fw fa-handshake"></i>
 						<span>MoU-Kerjasama</span></a>
-				</li>
+				</li> -->
 
 				<!-- Divider -->
 				<hr class="sidebar-divider">

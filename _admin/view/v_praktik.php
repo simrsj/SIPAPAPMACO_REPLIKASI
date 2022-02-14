@@ -162,6 +162,7 @@ if (isset($_POST['arsip_praktik'])) {
         $judul = "Non-Nakes";
     } else {
         $tambah = "";
+        $judul = "";
     }
 ?>
     <div class="container-fluid">
@@ -348,37 +349,41 @@ if (isset($_POST['arsip_praktik'])) {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    1. <span class="badge badge-warning text-md">DATA PRAKTIK & HARGA</span><br />
+                                                                    <span class="badge badge-warning text-md">DATA PRAKTIK & HARGA</span><br />
                                                                     Pendaftaran dan Harga Sudah Dipilih, dilanjutkan
                                                                     <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Harga </span>oleh ADMIN<br /><br />
 
-                                                                    2. <span class="badge badge-success text-md">Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i></span><br>
+                                                                    <span class="badge badge-success text-md">Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i></span><br>
                                                                     Validasi Data Praktikan dan Harga <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan proses pemilihan <b class="text-warning">TEMPAT</b> oleh ADMIN<br><br>
 
-                                                                    3. <span class="badge badge-danger text-md">Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i></span><br>
+                                                                    <span class="badge badge-danger text-md">Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i></span><br>
                                                                     Validasi Data Praktikan dan Harga <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
 
-                                                                    4. <span class="badge badge-warning text-md">TEMPAT</span><br>
+                                                                    <span class="badge badge-warning text-md">TEMPAT</span><br>
                                                                     Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh <b>ADMIN</b><br><br>
 
-                                                                    5. <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
+                                                                    <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
                                                                     MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses <span class="font-weight-bold text-primary">PEMBAYARAN</span>
                                                                     <br><br>
 
-                                                                    6. <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
-                                                                    Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
+                                                                    <span class="badge badge-primary text-md">PEMBAYARAN</span><br>
+                                                                    Melakukan Proses Validasi <span class="font-weight-bold text-primary">PEMBAYARAN</span>
+                                                                    <br><br>
 
-                                                                    7 <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
-                                                                    Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+                                                                    <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
+                                                                    Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
 
-                                                                    8. <span class="badge badge-primary text-md font-italic">WAITING LIST</span><br>
+                                                                    <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
+                                                                    Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+
+                                                                    <span class="badge badge-primary text-md font-italic">WAITING LIST</span><br>
                                                                     Proses Pendaftaran Selesai dan dalam proses <span class="text-primary font-italic font-weight-bold">WAITING LIST</span><br>
                                                                     akan di <span class="text-success font-weight-bold">AKTIF</span>-kan oleh <b>ADMIN</b> sesuai dengan tanggal mulai praktiknya<br><br>
 
-                                                                    9. <span class="badge badge-success text-md">AKTIF</span><br>
+                                                                    <span class="badge badge-success text-md">AKTIF</span><br>
                                                                     Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span><br><br>
 
-                                                                    10. <span class="badge badge-dark text-md">SELESAI</span><br>
+                                                                    <span class="badge badge-dark text-md">SELESAI</span><br>
                                                                     Praktikan Sudah <span class="text-dark font-weight-bold">SELESAI</span><br><br>
                                                                 </div>
                                                             </div>
@@ -409,6 +414,14 @@ if (isset($_POST['arsip_praktik'])) {
                                                     } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
                                                     ?>
                                                         <span class="badge badge-warning text-md"> TEMPAT </span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+                                                    ?>
+                                                        <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
+                                                    ?>
+                                                        <span class="badge badge-primary text-md">Val. PEMBAYARAN</span>
                                                     <?php
                                                     }
                                                     ?>
@@ -468,6 +481,19 @@ if (isset($_POST['arsip_praktik'])) {
                                                 ?>
                                                     <b>PILIH : </b><br>
                                                     <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+                                                ?>
+                                                    <b>PLIH : </b><br>
+                                                    <a class="btn btn-outline-danger btn-sm" href="?prk=<?php echo $_GET['prk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">PEMBAYARAN</a>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
+                                                ?>
+                                                    <b>VALIDASI : </b><br>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-outline-success btn-sm" onclick="valPembayaranDiterima()">Diterima</button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="valPembayaranDitolak()">Ditolak</button>
+                                                    </div>
                                                 <?php
                                                 }
                                                 ?>
@@ -775,14 +801,20 @@ if (isset($_POST['arsip_praktik'])) {
                                                                         <?php echo $d_mess_pilih['no_pemilik_mess']; ?><br><br>
                                                                         <h5 class="text-gray-800 font-weight-bold"> Alamat Mess : </h5>
                                                                         <?php echo $d_mess_pilih['alamat_mess']; ?><br><br>
-                                                                        <h5 class="text-gray-800 font-weight-bold"> Jumlah yang diisi :</h5>
-                                                                        <?php echo $d_mess_pilih['jumlah_praktik_mess_pilih']; ?><br><br>
+                                                                        <!-- <h5 class="text-gray-800 font-weight-bold"> Jumlah yang diisi :</h5>
+                                                                        <?php echo $d_mess_pilih['jumlah_praktik_mess_pilih']; ?><br><br> -->
                                                                         <h5 class="text-gray-800 font-weight-bold"> Jumlah Hari :</h5>
-                                                                        <?php echo $d_mess_pilih['jumlah_hari_mess_pilih']; ?><br><br>
-                                                                        <h5 class="text-gray-800 font-weight-bold"> Dengan Makan (3X Sehari) :</h5>
-                                                                        <?php echo $d_mess_pilih['makan_mess_pilih']; ?><br><br>
-                                                                        <h5 class="text-gray-800 font-weight-bold"> Total Harga :</h5>
-                                                                        <?php echo "Rp " . number_format($d_mess_pilih['total_harga_mess_pilih'], 0, ",", "."); ?>
+                                                                        <!-- <?php echo $d_mess_pilih['total_hari_mess_pilih']; ?><br><br>
+                                                                        <h5 class="text-gray-800 font-weight-bold"> Dengan Makan (3X Sehari) :</h5> -->
+                                                                        <?php
+                                                                        if ($d_mess_pilih['makan_mess_pilih'] == 'y') {
+                                                                            $makan = 'YA';
+                                                                        } else {
+                                                                            $makan = 'TIDAK';
+                                                                        }
+                                                                        echo $makan; ?>
+                                                                        <!-- <h5 class="text-gray-800 font-weight-bold"> Total Harga :</h5>
+                                                                        <?php echo "Rp " . number_format($d_mess_pilih['total_harga_mess_pilih'], 0, ",", "."); ?> -->
                                                                     </fieldset>
                                                                 </div>
                                                             </div>
@@ -906,7 +938,7 @@ if (isset($_POST['arsip_praktik'])) {
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
-                html: "<span class='text-success text-uppercase font-weight-bold'>Penerimaan</span> Data Praktikan dan Data Harga",
+                html: "<span class='text-success text-uppercase font-weight-bold'>DITERIMA</span> Data Praktikan dan Data Harga",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',
@@ -940,6 +972,92 @@ if (isset($_POST['arsip_praktik'])) {
         }
 
         function valDataPraktikHargaDitolak() {
+            console.log("valDataPraktikHargaDitolak");
+            Swal.fire({
+                position: 'top',
+                title: 'Yakin ?',
+                html: "<span class='text-danger text-uppercase font-weight-bold'>DITOLAK</span> Data Praktikan dan Data Harga",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1cc88a',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Ya',
+                allowOutsideClick: false,
+                input: 'text',
+                inputPlaceholder: 'Isi Keterangan Penolakan Disini...',
+                inputAttributes: {
+                    'aria-label': 'Isi Keterangan Penolakan Disini'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (text) {
+                        var id = document.getElementById('id').value;
+                        $.ajax({
+                            type: 'POST',
+                            url: "_admin/exc/x_v_praktik_valDataPraktikHargaDitolak.php?id=" + id,
+                            data: {
+                                'text': text
+                            },
+                            success: function() {
+                                Swal.fire({
+                                    allowOutsideClick: false,
+                                    // isDismissed: false,
+                                    icon: 'error',
+                                    title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITOLAK</b></div>',
+                                    showConfirmButton: false,
+                                    html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                });
+                            },
+                            error: function(response) {
+                                console.log(response.responseText);
+                                alert('eksekusi query gagal');
+                            }
+                        });
+                    }
+                }
+            })
+        }
+
+        function valPembayaranDiterima() {
+            console.log("valDataPraktikHargaDiterima");
+            Swal.fire({
+                position: 'top',
+                title: 'Yakin ?',
+                html: "<span class='text-success text-uppercase font-weight-bold'>Penerimaan</span> Data Praktikan dan Data Harga",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1cc88a',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Ya',
+                allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = document.getElementById('id').value;
+                    $.ajax({
+                        type: 'GET',
+                        url: "_admin/exc/x_v_praktik_valDataPraktikHargaDiterima.php?id=" + id,
+                        success: function() {
+                            Swal.fire({
+                                allowOutsideClick: false,
+                                // isDismissed: false,
+                                icon: 'success',
+                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITERIMA</b></div>',
+                                showConfirmButton: false,
+                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                            });
+                        },
+                        error: function(response) {
+                            console.log(response.responseText);
+                            alert('eksekusi query gagal');
+                        }
+                    });
+                }
+            })
+        }
+
+        function valPembayaranDitolak() {
             console.log("valDataPraktikHargaDitolak");
             Swal.fire({
                 position: 'top',
