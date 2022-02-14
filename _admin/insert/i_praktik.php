@@ -723,7 +723,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 //Simpan Data Praktik dan Harga
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_i_praktik_dataPraktikHarga.php?",
+                    url: "_admin/exc/x_i_praktik_sPraktikHarga.php?",
                     data: data_praktik,
                     success: function() {
                         //ambil data file yang diupload
@@ -739,7 +739,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                         var id = document.getElementById("id").value;
                         data_file.append("id", id);
 
-                        xhttp.open("POST", "_admin/exc/x_i_praktik_dataFilePraktik.php", true);
+                        xhttp.open("POST", "_admin/exc/x_i_praktik_sFilePraktik.php", true);
                         xhttp.send(data_file);
 
                         //Cari Jenis Jurusan
