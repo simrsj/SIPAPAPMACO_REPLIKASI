@@ -9,6 +9,13 @@
 - tanggal Selesai Pendaftaran tidak bisa input tanggal ≤ tanggal mulai
 - pelajari CSRF
 
+
+- membuat inputan uniq di pembayaran
+- penamaan judul tabel Invoice
+- membuat 5 akun sesuai dengan privilagenya
+- membuat format mout untuk diisi kang adi 
+- 
+
 git status
 git add . 
 git commit -a -m "Perbaikan Modul Pembayaran,  Proses Modul Validasi Pembayaran, perbaikan Database, pembuatan penerimaan dan penolakan pembayaran, pembuatan aktivasi prakti, pembuatan selesai praktik "  
