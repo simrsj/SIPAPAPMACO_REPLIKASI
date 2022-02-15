@@ -11,7 +11,7 @@
 
 git status
 git add . 
-git commit -a -m "Perbaikan Modul Pembayaran, Perbaikan Info Status, Proses Modul Validasi Pembayaran, perbaikan Database "  
+git commit -a -m "Perbaikan Modul Pembayaran,  Proses Modul Validasi Pembayaran, perbaikan Database, pembuatan penerimaan dan penolakan pembayaran, pembuatan aktivasi prakti, pembuatan selesai praktik "  
 git pull
 git push
 
