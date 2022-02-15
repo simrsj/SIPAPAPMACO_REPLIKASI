@@ -105,7 +105,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
 <script>
     $(document).ready(function() {
-
         $("#simpan_tempat").click(function() {
 
             // console.log("masuk tambah");

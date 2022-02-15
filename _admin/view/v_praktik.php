@@ -301,7 +301,6 @@ if (isset($_POST['arsip_praktik'])) {
                                                     </div>
 
                                                     <br>
-                                                    <input type="hidden" id="id" value="<?php echo $d_praktik['id_praktik']; ?>">
                                                     <?php
                                                     if ($d_praktik['status_cek_praktik'] == "DPH") {
                                                     ?>
@@ -391,7 +390,6 @@ if (isset($_POST['arsip_praktik'])) {
                                                     </div>
 
                                                     <br>
-                                                    <input type="hidden" id="id" value="<?php echo $d_praktik['id_praktik']; ?>">
                                                     <?php
                                                     if ($d_praktik['status_cek_praktik'] == "DPH") {
                                                     ?>
@@ -407,7 +405,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                     <?php
                                                     } elseif ($d_praktik['status_cek_praktik'] == "VPH_T") {
                                                     ?>
-                                                        <span class="badge badge-success text-md">
+                                                        <span class="badge badge-danger text-md">
                                                             Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i>
                                                         </span>
                                                     <?php
@@ -422,6 +420,24 @@ if (isset($_POST['arsip_praktik'])) {
                                                     } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
                                                     ?>
                                                         <span class="badge badge-primary text-md">Val. PEMBAYARAN</span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
+                                                    ?>
+                                                        <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span>
+                                                        <hr>
+                                                        <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "BYR_T") {
+                                                    ?>
+                                                        <span class="badge badge-danger text-md">Val. PEMBAYARAN <i class="fas fa-times-circle"></i></span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
+                                                    ?>
+                                                        <span class="badge badge-success text-md">AKTIF</span>
+                                                    <?php
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
+                                                    ?>
+                                                        <span class="badge badge-secondary text-md">SELESAI</span>
                                                     <?php
                                                     }
                                                     ?>
@@ -438,8 +454,8 @@ if (isset($_POST['arsip_praktik'])) {
                                                 ?>
                                                     <b>VALIDASI : </b><br>
                                                     <div class="btn-group">
-                                                        <button class="btn btn-outline-success btn-sm" onclick="valDataPraktikHargaDiterima()">Diterima</button>
-                                                        <button class="btn btn-outline-danger btn-sm" onclick="valDataPraktikHargaDitolak()">Ditolak</button>
+                                                        <button class="btn btn-outline-success btn-sm" onclick="valDataPraktikHargaDiterima(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="valDataPraktikHargaDitolak(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
                                                     </div>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "VPH_Y") {
@@ -451,27 +467,22 @@ if (isset($_POST['arsip_praktik'])) {
                                                 ?>
                                                     <b>CEK KETERANGAN : </b><br>
 
-                                                    <a href="#" data-toggle="modal" data-target="#ketTolakPraktikHarga<?php echo $d_praktik['id_praktik']; ?>" title="Keterangan Status">
-                                                        Cek Keterangan
+                                                    <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPraktikHarga<?php echo $d_praktik['id_praktik']; ?>" title="Keterangan Status">
+                                                        KETERANGAN
                                                     </a>
 
-                                                    <!-- modal info_status -->
+                                                    <!-- modal keterangan penolakan -->
                                                     <div class="modal fade" id="ketTolakPraktikHarga<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
                                                         <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4>INFO STATUS</h4>
+                                                                    <h4>Keterangan</h4>
                                                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">×</span>
                                                                     </button>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <?php
-                                                                    $sql_ketTolakPraktikHarga = "SELECT * FROM tb_praktik WHERE id_praktik = " . $d_praktik['id_praktik'];
-                                                                    $q_ketTolakPraktikHarga = $conn->query($sql_ketTolakPraktikHarga);
-                                                                    $d_ketTolakPraktikHarga = $q_ketTolakPraktikHarga->fetch(PDO::FETCH_ASSOC);
-                                                                    echo $d_ketTolakPraktikHarga['ket_tolakPraktikHarga_praktik'];
-                                                                    ?>
+                                                                <div class="modal-body text-lg">
+                                                                    <?php echo '"' . $d_praktik['ket_tolakPraktikHarga_praktik'] . '"'; ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -491,15 +502,52 @@ if (isset($_POST['arsip_praktik'])) {
                                                 ?>
                                                     <b>VALIDASI : </b><br>
                                                     <div class="btn-group">
-                                                        <button class="btn btn-outline-success btn-sm" onclick="valPembayaranDiterima()">Diterima</button>
-                                                        <button class="btn btn-outline-danger btn-sm" onclick="valPembayaranDitolak()">Ditolak</button>
+                                                        <button class="btn btn-outline-success btn-sm" onclick="valPembayaranDiterima(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="valPembayaranDitolak(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
                                                     </div>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
+                                                ?>
+                                                    <button class="btn btn-outline-success btn-sm" onclick="aktivasiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">AKTIFKAN <i class="fas fa-question-circle"></i></button>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "BYR_T") {
+                                                ?>
+
+                                                    <b>CEK KETERANGAN : </b><br>
+
+                                                    <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPembayaran<?php echo $d_praktik['id_praktik']; ?>" title="Keterangan Status">
+                                                        KETERANGAN
+                                                    </a>
+
+                                                    <!-- modal keterangan penolakan -->
+                                                    <div class="modal fade" id="ketTolakPembayaran<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+                                                        <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4>Keterangan</h4>
+                                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">×</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body text-lg">
+                                                                    <?php echo '"' . $d_praktik['ket_tolakPembayaran_praktik'] . '"'; ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
+                                                ?>
+                                                    <b>PILIH : </b><br>
+                                                    <button class="btn btn-outline-secondary btn-sm" onclick="selesaiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">SELESAIKAN <i class="fas fa-question-circle"></i></button>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
+                                                ?>
+                                                    <span class="badge badge-secondary text-md"> PRAKTIKAN SUDAH SELESAI</span>
                                                 <?php
                                                 }
                                                 ?>
                                             </div>
-
-
 
                                             <div class="col-sm-2 my-auto text-center">
                                                 <!-- tombol rincian -->
@@ -933,93 +981,7 @@ if (isset($_POST['arsip_praktik'])) {
     </div>
 
     <script>
-        function valDataPraktikHargaDiterima() {
-            console.log("valDataPraktikHargaDiterima");
-            Swal.fire({
-                position: 'top',
-                title: 'Yakin ?',
-                html: "<span class='text-success text-uppercase font-weight-bold'>DITERIMA</span> Data Praktikan dan Data Harga",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#1cc88a',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Kembali',
-                confirmButtonText: 'Ya',
-                allowOutsideClick: false,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var id = document.getElementById('id').value;
-                    $.ajax({
-                        type: 'GET',
-                        url: "_admin/exc/x_v_praktik_valDataPraktikHargaDiterima.php?id=" + id,
-                        success: function() {
-                            Swal.fire({
-                                allowOutsideClick: false,
-                                // isDismissed: false,
-                                icon: 'success',
-                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITERIMA</b></div>',
-                                showConfirmButton: false,
-                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
-                        },
-                        error: function(response) {
-                            console.log(response.responseText);
-                            alert('eksekusi query gagal');
-                        }
-                    });
-                }
-            })
-        }
-
-        function valDataPraktikHargaDitolak() {
-            console.log("valDataPraktikHargaDitolak");
-            Swal.fire({
-                position: 'top',
-                title: 'Yakin ?',
-                html: "<span class='text-danger text-uppercase font-weight-bold'>DITOLAK</span> Data Praktikan dan Data Harga",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#1cc88a',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Kembali',
-                confirmButtonText: 'Ya',
-                allowOutsideClick: false,
-                input: 'text',
-                inputPlaceholder: 'Isi Keterangan Penolakan Disini...',
-                inputAttributes: {
-                    'aria-label': 'Isi Keterangan Penolakan Disini'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    if (text) {
-                        var id = document.getElementById('id').value;
-                        $.ajax({
-                            type: 'POST',
-                            url: "_admin/exc/x_v_praktik_valDataPraktikHargaDitolak.php?id=" + id,
-                            data: {
-                                'text': text
-                            },
-                            success: function() {
-                                Swal.fire({
-                                    allowOutsideClick: false,
-                                    // isDismissed: false,
-                                    icon: 'error',
-                                    title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITOLAK</b></div>',
-                                    showConfirmButton: false,
-                                    html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                                });
-                            },
-                            error: function(response) {
-                                console.log(response.responseText);
-                                alert('eksekusi query gagal');
-                            }
-                        });
-                    }
-                }
-            })
-        }
-
-        function valPembayaranDiterima() {
+        function valDataPraktikHargaDiterima(id) {
             console.log("valDataPraktikHargaDiterima");
             Swal.fire({
                 position: 'top',
@@ -1034,7 +996,6 @@ if (isset($_POST['arsip_praktik'])) {
                 allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var id = document.getElementById('id').value;
                     $.ajax({
                         type: 'GET',
                         url: "_admin/exc/x_v_praktik_valDataPraktikHargaDiterima.php?id=" + id,
@@ -1057,13 +1018,56 @@ if (isset($_POST['arsip_praktik'])) {
             })
         }
 
-        function valPembayaranDitolak() {
+        function valDataPraktikHargaDitolak(id) {
             console.log("valDataPraktikHargaDitolak");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
-                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Harga",
-                html: "<input type='text' id=''",
+                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Harga" +
+                    '<input id="valDPHDitolak" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1cc88a',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Ya',
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var valDPHDitolak = document.getElementById('valDPHDitolak').value;
+                    $.ajax({
+                        type: 'POST',
+                        url: "_admin/exc/x_v_praktik_valDataPraktikHargaDitolak.php",
+                        data: {
+                            'id': id,
+                            'valDPHDitolak': valDPHDitolak
+                        },
+                        success: function() {
+                            Swal.fire({
+                                allowOutsideClick: false,
+                                // isDismissed: false,
+                                icon: 'error',
+                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITOLAK</b></div>',
+                                showConfirmButton: false,
+                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                            });
+                        },
+                        error: function(response) {
+                            console.log(response.responseText);
+                            alert('eksekusi query gagal');
+                        }
+                    });
+
+                }
+            });
+        }
+
+        function valPembayaranDiterima(id) {
+            console.log("valPembayaranDiterima");
+            Swal.fire({
+                position: 'top',
+                title: 'Yakin ?',
+                html: "<span class='text-success text-uppercase font-weight-bold'>Penerimaan</span> Data Pembayaran",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',
@@ -1071,37 +1075,144 @@ if (isset($_POST['arsip_praktik'])) {
                 cancelButtonText: 'Kembali',
                 confirmButtonText: 'Ya',
                 allowOutsideClick: false,
-                input: 'text',
-                inputPlaceholder: 'Isi Keterangan Penolakan Disini...',
-                inputAttributes: {
-                    'aria-label': 'Isi Keterangan Penolakan Disini'
-                }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    if (text) {
-                        var id = document.getElementById('id').value;
-                        $.ajax({
-                            type: 'POST',
-                            url: "_admin/exc/x_v_praktik_valDataPraktikHargaDitolak.php?id=" + id,
-                            data: {
-                                'text': text
-                            },
-                            success: function() {
-                                Swal.fire({
-                                    allowOutsideClick: false,
-                                    // isDismissed: false,
-                                    icon: 'error',
-                                    title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITOLAK</b></div>',
-                                    showConfirmButton: false,
-                                    html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                                });
-                            },
-                            error: function(response) {
-                                console.log(response.responseText);
-                                alert('eksekusi query gagal');
-                            }
-                        });
-                    }
+                    $.ajax({
+                        type: 'GET',
+                        url: "_admin/exc/x_v_praktik_valPembayaranDiterima.php?id=" + id,
+                        success: function() {
+                            Swal.fire({
+                                allowOutsideClick: false,
+                                // isDismissed: false,
+                                icon: 'success',
+                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITERIMA</b></div>',
+                                showConfirmButton: false,
+                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                            });
+                        },
+                        error: function(response) {
+                            console.log(response.responseText);
+                            alert('eksekusi query gagal');
+                        }
+                    });
+                }
+            })
+        }
+
+        function valPembayaranDitolak(id) {
+            console.log("valPembayaranDitolak");
+            Swal.fire({
+                position: 'top',
+                title: 'Yakin ?',
+                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Harga" +
+                    '<input id="valPDitolak" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1cc88a',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Ya',
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var valPDitolak = document.getElementById('valPDitolak').value;
+                    $.ajax({
+                        type: 'POST',
+                        url: "_admin/exc/x_v_praktik_valPembayaranDitolak.php",
+                        data: {
+                            'id': id,
+                            'valPDitolak': valPDitolak
+                        },
+                        success: function() {
+                            Swal.fire({
+                                allowOutsideClick: false,
+                                // isDismissed: false,
+                                icon: 'error',
+                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITOLAK</b></div>',
+                                showConfirmButton: false,
+                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                            });
+                        },
+                        error: function(response) {
+                            console.log(response.responseText);
+                            alert('eksekusi query gagal');
+                        }
+                    });
+
+                }
+            });
+        }
+
+        function aktivasiPraktik(id) {
+            console.log("aktivasiPraktik");
+            Swal.fire({
+                position: 'top',
+                title: 'Yakin ?',
+                html: "<span class='text-success text-uppercase font-weight-bold'>Aktivasi</span> Praktik",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1cc88a',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Ya',
+                allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "_admin/exc/x_v_praktik_aktivasiPraktik.php?id=" + id,
+                        success: function() {
+                            Swal.fire({
+                                allowOutsideClick: false,
+                                // isDismissed: false,
+                                icon: 'success',
+                                title: '<div class="text-md text-center">PRAKTIK SUDAH AKTIF</div>',
+                                showConfirmButton: false,
+                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                            });
+                        },
+                        error: function(response) {
+                            console.log(response.responseText);
+                            alert('eksekusi query gagal');
+                        }
+                    });
+                }
+            })
+        }
+
+        function selesaiPraktik(id) {
+            console.log("selesaiPraktik");
+            Swal.fire({
+                position: 'top',
+                title: 'Yakin ?',
+                html: "<span class='text-secondary text-uppercase font-weight-bold'>SELESAIKAN</span> Praktik",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1cc88a',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Ya',
+                allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "_admin/exc/x_v_praktik_selesaiPraktik.php?id=" + id,
+                        success: function() {
+                            Swal.fire({
+                                allowOutsideClick: false,
+                                // isDismissed: false,
+                                icon: 'success',
+                                title: '<div class="text-md text-center">PRAKTIK SUDAH SELESAI</div>',
+                                showConfirmButton: false,
+                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                            });
+                        },
+                        error: function(response) {
+                            console.log(response.responseText);
+                            alert('eksekusi query gagal');
+                        }
+                    });
                 }
             })
         }

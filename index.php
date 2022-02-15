@@ -26,39 +26,8 @@ include '_add-ons/csrf_auth.php';
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
 
 
-    <!-- JS -->
     <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="js/sb-admin-2.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <!-- <script type="text/javascript" src="vendor/datatables-all/datatables.min.js"></script> -->
-    <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
-    <script src="vendor/select2/dist/js/select2.min.js"></script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <!-- <script src="https://kit.fontawesome.com/26550bb205.js" crossorigin="anonymous"></script> -->
-
     <!-- SCRIPT JS  -->
-    <script>
-        $(document).ready(function() {
-            $('#myTable').dataTable();
-
-            $('#myTable_2').dataTable();
-
-            $('.js-example-placeholder-single-long').select2({
-                placeholder: "-------------- Pilih --------------",
-                allowClear: true
-            });
-
-            $('.js-example-placeholder-single').select2({
-                placeholder: "-- Pilih --",
-                allowClear: true
-            });
-        });
-    </script>
 </head>
 <?php
 
@@ -93,5 +62,37 @@ if (isset($_GET['dashboard'])) {
     }
 }
 ?>
+
+<!-- JS -->
+<!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="js/sb-admin-2.min.js"></script>
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- <script type="text/javascript" src="vendor/datatables-all/datatables.min.js"></script> -->
+<script src="vendor/sw2/dist/sweetalert2.min.js"></script>
+<script src="vendor/select2/dist/js/select2.min.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+<!-- <script src="https://kit.fontawesome.com/26550bb205.js" crossorigin="anonymous"></script> -->
+
+<script>
+    $(document).ready(function() {
+        $('#myTable').dataTable();
+
+        $('#myTable_2').dataTable();
+
+        $('.js-example-placeholder-single-long').select2({
+            placeholder: "-------------- Pilih --------------",
+            allowClear: true
+        });
+
+        $('.js-example-placeholder-single').select2({
+            placeholder: "-- Pilih --",
+            allowClear: true
+        });
+    });
+</script>
 
 </html>

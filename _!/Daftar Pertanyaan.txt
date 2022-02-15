@@ -3,7 +3,6 @@
 - Saat Validasi Praktik dan Harga Ditolak, Alur Selanjutnya apa?
 - Saat Pendaftaran Praktik oleh user bila dalam institusinya ada beberapa user, Data Praktik yang sudah dinputkan apakah cuma dapat dilihat oleh user yg menginputkan / semua user dalam institusi tersebut
 - Untuk Pemilihan Tempat apakah kedokteran diharuskan memilih Ruang Rapat Komite Medik
-- untuk Pembuatan Aplikasi Penelitian Seperti apa?
 
 
 ---------------------------- KEUANGAN------------------------------

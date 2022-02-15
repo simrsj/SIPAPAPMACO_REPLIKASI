@@ -191,7 +191,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             allowOutsideClick: false,
                             // isDismissed: false,
                             icon: 'success',
-                            title: '<span class"text-xs"><b>DATA TEMPAT</b><br>Berhasil Tersimpan',
+                            title: '<span class"text-xs"><b>DATA MESS</b><br>Berhasil Tersimpan',
                             showConfirmButton: false,
                             html: '<a href="?prk=' + path + '" class="btn btn-outline-primary">OK</a>',
                         });
