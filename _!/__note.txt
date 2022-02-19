@@ -9,7 +9,6 @@
 - tanggal Selesai Pendaftaran tidak bisa input tanggal ≤ tanggal mulai
 - pelajari CSRF
 
-
 - membuat inputan uniq di pembayaran
 - penamaan judul tabel Invoice
 - membuat 5 akun sesuai dengan privilagenya
@@ -18,7 +17,7 @@
 
 git status
 git add . 
-git commit -a -m "Ubah Harga jadi Tarif"  
+git commit -a -m "Path Save File"  
 git pull
 git push
 
