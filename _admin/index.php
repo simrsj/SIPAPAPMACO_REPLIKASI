@@ -115,10 +115,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<h6 class="collapse-header">Daftar Data Pendukung :</h6>
-							<a class="collapse-item" href="?hrg">
-								<i class="fas fa-fw fa-money-bill-wave"></i>
-								<span>Harga</span>
-							</a>
 							<a class="collapse-item" href="?ins">
 								<i class="fas fa-fw fa-university"></i>
 								<span>Institusi</span>
@@ -130,6 +126,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							<a class="collapse-item" href="?mes">
 								<i class="fas fa-fw fa-bed"></i>
 								<span>Mess/Pemondokan</span>
+							</a>
+							<a class="collapse-item" href="?trf">
+								<i class="fas fa-fw fa-money-bill-wave"></i>
+								<span>Tarif</span>
 							</a>
 							<a class="collapse-item" href="?tmp">
 								<i class="fas fa-house"></i>
@@ -254,8 +254,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_akun.php";
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
-					} elseif (isset($_GET['hrg'])) {
-						include "_admin/view/v_harga.php";
 					} elseif (isset($_GET['ins'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_institusi.php";
@@ -301,8 +299,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/insert/i_praktik_bayar.php";
 						} elseif (isset($_GET['dh'])) {
 							include "_admin/hide/dh_praktik.php";
-						} elseif (isset($_GET['ih'])) {
-							include "_admin/insert/i_praktik_harga.php";
 						} elseif (isset($_GET['i'])) {
 							include "_admin/insert/i_praktik.php";
 						} elseif (isset($_GET['m'])) {
@@ -314,7 +310,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						} elseif (isset($_GET['ub'])) {
 							include "_admin/update/u_praktik_bayar.php";
 						} elseif (isset($_GET['uh'])) {
-							include "_admin/update/u_praktik_harga.php";
+							include "_admin/update/u_praktik_tarif.php";
 						} elseif (isset($_GET['um'])) {
 							include "_admin/update/u_praktik_mess.php";
 						} elseif (isset($_GET['t'])) {
@@ -334,6 +330,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "test.php";
 					} elseif (isset($_GET['test1'])) {
 						include "test1.php";
+					} elseif (isset($_GET['trf'])) {
+						include "_admin/view/v_tarif.php";
 					} elseif (isset($_GET['trs'])) {
 						if (isset($_GET['dtl'])) {
 							include "_admin/view/v_transaksi_detail.php";

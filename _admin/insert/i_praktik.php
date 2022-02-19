@@ -4,11 +4,11 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pendaftaran Praktik</h1>
+                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik</h1>
             </div>
         </div>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
-            <!-- Data Pendaftaran Praktik  -->
+            <!-- Data Pengajuan Praktik  -->
             <div id="data_praktik_input">
                 <div class="card shadow mb-4">
                     <div class="card-body">
@@ -281,12 +281,12 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                         </div>
                         <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
 
-                        <!-- Tombol Lanjut ke Daftar Harga-->
-                        <nav id="navbar-harga" class="navbar justify-content-center">
+                        <!-- Tombol Lanjut ke Daftar Tarif-->
+                        <nav id="navbar-tarif" class="navbar justify-content-center">
                             <button type="button" id="tombol_data_praktik" class="nav-link btn btn-outline-primary" onclick="simpan_praktik()">
-                                <!-- <a class="nav-link" href="#harga"> -->
+                                <!-- <a class="nav-link" href="#tarif"> -->
                                 <i class="fas fa-chevron-circle-down"></i>
-                                Lanjut Ke Daftar Harga
+                                Lanjut Ke Daftar Tarif
                                 <i class="fas fa-chevron-circle-down"></i>
                                 <!-- </a> -->
                             </button>
@@ -297,7 +297,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
             </div>
         </form>
         <input type="hidden" name="path" value="<?php echo $_GET['prk']; ?>" id="path">
-        <div id="data_harga_input"></div>
+        <div id="data_tarif_input"></div>
     </div>
 
     <!-- <pre id="whereToPrint"> ce :</pre> -->
@@ -604,7 +604,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 }
             }
 
-            //Simpan Data Praktik dan munculkan Data Harga
+            //Simpan Data Praktik dan munculkan Data Tarif
             if (
                 institusi != "" &&
                 praktik != "" &&
@@ -643,14 +643,14 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 // // document.getElementById("whereToPrint").innerHTML = JSON.stringify(data_praktik, null, 4);
 
                 $("#data_praktik_input").fadeOut('fast');
-                $("#data_harga_input").fadeIn('slow');
+                $("#data_tarif_input").fadeIn('slow');
 
-                // Kirim Parameter ke Data Harga untuk ditampilkan
-                var xmlhttp_data_harga = new XMLHttpRequest();
-                xmlhttp_data_harga.onreadystatechange = function() {
-                    document.getElementById("data_harga_input").innerHTML = this.responseText;
+                // Kirim Parameter ke Data Tarif untuk ditampilkan
+                var xmlhttp_data_tarif = new XMLHttpRequest();
+                xmlhttp_data_tarif.onreadystatechange = function() {
+                    document.getElementById("data_tarif_input").innerHTML = this.responseText;
                 };
-                xmlhttp_data_harga.open("GET", "_admin/insert/i_praktikDataHarga.php?id" + id +
+                xmlhttp_data_tarif.open("GET", "_admin/insert/i_praktikDataTarif.php?id" + id +
                     "&jur=" + jurusan +
                     "&jen=" + jenjang +
                     "&tmp=" + tgl_mulai +
@@ -658,9 +658,9 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                     "&jum=" + jumlah,
                     true
                 );
-                xmlhttp_data_harga.send();
+                xmlhttp_data_tarif.send();
 
-                //Toast Lanjut Ke Data Harga
+                //Toast Lanjut Ke Data Tarif
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -675,12 +675,12 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
 
                 Toast.fire({
                     icon: 'info',
-                    title: '<div class="text-md text-center">LANJUTKAN KE <b>DATA HARGA</b></div>'
+                    title: '<div class="text-md text-center">LANJUTKAN KE <b>DATA TARIF</b></div>'
                 });
             }
         }
 
-        function simpan_harga() {
+        function simpan_tarif() {
 
             //Notif dan Toast Bila Ujian Tidak dipilih
             if (document.getElementById("cek_pilih_ujian1").checked == false && document.getElementById("cek_pilih_ujian2").checked == false) {
@@ -702,7 +702,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 });
                 document.getElementById("err_cek_pilih_ujian").innerHTML = "Pilih Ujian <br>";
             }
-            //simpan data praktik dan data harga
+            //simpan data praktik dan data tarif
             else {
                 var path = "";
                 var cek_pilih_ujian = "";
@@ -720,10 +720,10 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
 
                 //cari jenis jurusan untuk dijadikan path
 
-                //Simpan Data Praktik dan Harga
+                //Simpan Data Praktik dan Tarif
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_i_praktik_sPraktikHarga.php?",
+                    url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
                     data: data_praktik,
                     success: function() {
                         //ambil data file yang diupload
@@ -763,7 +763,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                                 allowOutsideClick: false,
                                 // isDismissed: false,
                                 icon: 'success',
-                                title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>HARGA</b><br>Berhasil Tersimpan',
+                                title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>TARIF</b><br>Berhasil Tersimpan',
                                 showConfirmButton: false,
                                 html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
                             });

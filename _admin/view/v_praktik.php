@@ -82,14 +82,14 @@ if (isset($_POST['arsip_praktik'])) {
             </script>
         ";
     } else {
-        $sql_delete_harga = "DELETE FROM `tb_harga_pilih` WHERE `tb_harga_pilih`.`id_praktik` = " . $_GET['hh'];
+        $sql_delete_tarif = "DELETE FROM `tb_tarif_pilih` WHERE `tb_tarif_pilih`.`id_praktik` = " . $_GET['hh'];
 
         $sql_ubah_status_praktik = "UPDATE tb_praktik
         SET status_cek_praktik = 'DAFTAR'
         WHERE id_praktik = " .  $_GET['hh'];
 
         // echo $sql_ubah_status_praktik . "<br>";
-        $conn->query($sql_delete_harga);
+        $conn->query($sql_delete_tarif);
         $conn->query($sql_ubah_status_praktik);
     }
     echo "
@@ -114,7 +114,7 @@ if (isset($_POST['arsip_praktik'])) {
 
         $sql_ubah_terisi_mess =  "UPDATE tb_mess SET kapasitas_terisi_mess = '" . $terisi_mess  . "' WHERE id_mess = " . $d_mess_pilih['id_mess'];
         $sql_delete_mess_pilih = "DELETE FROM `tb_mess_pilih` WHERE id_praktik = " . $_GET['hm'];
-        $sql_update_status_praktik = "UPDATE tb_praktik SET status_cek_praktik = 'HARGA' WHERE id_praktik = " . $_GET['hm'];
+        $sql_update_status_praktik = "UPDATE tb_praktik SET status_cek_praktik = 'TARIF' WHERE id_praktik = " . $_GET['hm'];
         // echo $sql_ubah_terisi_mess . "<br>";
         // echo $sql_delete_mess_pilih . "<br>";
         // echo $sql_update_status_praktik . "<br>";
@@ -264,15 +264,15 @@ if (isset($_POST['arsip_praktik'])) {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    1. <span class="badge badge-warning text-md">DATA PRAKTIK & HARGA</span><br />
-                                                                    Pendaftaran dan Harga Sudah Dipilih, dilanjutkan
-                                                                    <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Harga </span>oleh ADMIN<br /><br />
+                                                                    1. <span class="badge badge-warning text-md">DATA PRAKTIK & TARIF</span><br />
+                                                                    Pendaftaran dan Tarif Sudah Dipilih, dilanjutkan
+                                                                    <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Tarif </span>oleh ADMIN<br /><br />
 
-                                                                    2. <span class="badge badge-success text-md">Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i></span><br>
-                                                                    Validasi Data Praktikan dan Harga <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan proses pemilihan <b class="text-warning">TEMPAT</b> oleh ADMIN<br><br>
+                                                                    2. <span class="badge badge-success text-md">Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i></span><br>
+                                                                    Validasi Data Praktikan dan Tarif <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan proses pemilihan <b class="text-warning">TEMPAT</b> oleh ADMIN<br><br>
 
-                                                                    3. <span class="badge badge-danger text-md">Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i></span><br>
-                                                                    Validasi Data Praktikan dan Harga <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+                                                                    3. <span class="badge badge-danger text-md">Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i></span><br>
+                                                                    Validasi Data Praktikan dan Tarif <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
 
                                                                     4. <span class="badge badge-warning text-md">TEMPAT</span><br>
                                                                     Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh Admin<br><br>
@@ -305,19 +305,19 @@ if (isset($_POST['arsip_praktik'])) {
                                                     if ($d_praktik['status_cek_praktik'] == "DPH") {
                                                     ?>
                                                         <span class="badge badge-warning text-md">
-                                                            DATA <br>PRAKTIK & HARGA
+                                                            DATA <br>PRAKTIK & TARIF
                                                         </span>
                                                     <?php
                                                     } elseif ($d_praktik['status_cek_praktik'] == "VPH_Y") {
                                                     ?>
                                                         <span class="badge badge-success text-md">
-                                                            Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i>
+                                                            Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i>
                                                         </span>
                                                     <?php
                                                     } elseif ($d_praktik['status_cek_praktik'] == "VPH_T") {
                                                     ?>
                                                         <span class="badge badge-danger text-md">
-                                                            Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i>
+                                                            Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i>
                                                         </span>
                                                     <?php
                                                     } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
@@ -348,15 +348,15 @@ if (isset($_POST['arsip_praktik'])) {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <span class="badge badge-warning text-md">DATA PRAKTIK & HARGA</span><br />
-                                                                    Pendaftaran dan Harga Sudah Dipilih, dilanjutkan
-                                                                    <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Harga </span>oleh ADMIN<br /><br />
+                                                                    <span class="badge badge-warning text-md">DATA PRAKTIK & TARIF</span><br />
+                                                                    Pendaftaran dan Tarif Sudah Dipilih, dilanjutkan
+                                                                    <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Tarif </span>oleh ADMIN<br /><br />
 
-                                                                    <span class="badge badge-success text-md">Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i></span><br>
-                                                                    Validasi Data Praktikan dan Harga <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan proses pemilihan <b class="text-warning">TEMPAT</b> oleh ADMIN<br><br>
+                                                                    <span class="badge badge-success text-md">Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i></span><br>
+                                                                    Validasi Data Praktikan dan Tarif <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan proses pemilihan <b class="text-warning">TEMPAT</b> oleh ADMIN<br><br>
 
-                                                                    <span class="badge badge-danger text-md">Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i></span><br>
-                                                                    Validasi Data Praktikan dan Harga <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+                                                                    <span class="badge badge-danger text-md">Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i></span><br>
+                                                                    Validasi Data Praktikan dan Tarif <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
 
                                                                     <span class="badge badge-warning text-md">TEMPAT</span><br>
                                                                     Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh <b>ADMIN</b><br><br>
@@ -394,19 +394,19 @@ if (isset($_POST['arsip_praktik'])) {
                                                     if ($d_praktik['status_cek_praktik'] == "DPH") {
                                                     ?>
                                                         <span class="badge badge-warning text-md">
-                                                            DATA <br>PRAKTIK & HARGA
+                                                            DATA <br>PRAKTIK & TARIF
                                                         </span>
                                                     <?php
                                                     } elseif ($d_praktik['status_cek_praktik'] == "VPH_Y") {
                                                     ?>
                                                         <span class="badge badge-success text-md">
-                                                            Val. PRAKTIK & HARGA <i class="fas fa-check-circle"></i>
+                                                            Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i>
                                                         </span>
                                                     <?php
                                                     } elseif ($d_praktik['status_cek_praktik'] == "VPH_T") {
                                                     ?>
                                                         <span class="badge badge-danger text-md">
-                                                            Val. PRAKTIK & HARGA <i class="fas fa-times-circle"></i>
+                                                            Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i>
                                                         </span>
                                                     <?php
                                                     } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
@@ -448,7 +448,7 @@ if (isset($_POST['arsip_praktik'])) {
                                             <!-- Tombol Link Data Status  -->
                                             <div class="col-sm-2 text-center my-auto">
 
-                                                <!-- tombol dropdown pilih menu harga, mess, bukti bayar -->
+                                                <!-- tombol dropdown pilih menu tarif, mess, bukti bayar -->
                                                 <?php
                                                 if ($d_praktik['status_cek_praktik'] == "DPH") {
                                                 ?>
@@ -688,27 +688,27 @@ if (isset($_POST['arsip_praktik'])) {
                                             </div>
                                             <hr>
 
-                                            <!-- data menu harga wajib, ujian dan sewa tempat yang dipilih -->
+                                            <!-- data menu tarif wajib, ujian dan sewa tempat yang dipilih -->
                                             <div class="text-gray-700">
                                                 <div class="row">
                                                     <div class="col-lg-11">
                                                         <h4 class="font-weight-bold">
-                                                            DATA HARGA
+                                                            DATA TARIF
                                                             <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&uh=<?php echo $d_praktik['id_praktik']; ?>'>
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
                                                             <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_h_m<?php echo $d_praktik['id_praktik']; ?>'>
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </a>
-                                                            <!-- modal hapus harga -->
+                                                            <!-- modal hapus tarif -->
                                                             <div class="modal fade text-left" id="h_h_m<?php echo $d_praktik['id_praktik']; ?>">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h4>HAPUS DATA HARGA ?</h4>
+                                                                            <h4>HAPUS DATA TARIF ?</h4>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <a title="Hapus Harga" class="btn btn-danger btn-sm" href='?prk&hh=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                                                            <a title="Hapus Tarif" class="btn btn-danger btn-sm" href='?prk&hh=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
                                                                             <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                         </div>
                                                                     </div>
@@ -721,16 +721,16 @@ if (isset($_POST['arsip_praktik'])) {
                                             <br>
                                             <div>
                                                 <?php
-                                                $sql_harga_pilih = "SELECT * FROM tb_harga_pilih
-                                                    JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
-                                                    JOIN tb_praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
-                                                    WHERE tb_harga_pilih.id_praktik = " . $d_praktik['id_praktik'] . "
-                                                    ORDER BY tb_harga.id_harga_jenis , tb_harga.nama_harga ASC";
+                                                $sql_tarif_pilih = "SELECT * FROM tb_tarif_pilih
+                                                    JOIN tb_tarif ON tb_tarif_pilih.id_tarif = tb_tarif.id_tarif
+                                                    JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
+                                                    WHERE tb_tarif_pilih.id_praktik = " . $d_praktik['id_praktik'] . "
+                                                    ORDER BY tb_tarif.id_tarif_jenis , tb_tarif.nama_tarif ASC";
 
 
-                                                $q_harga_pilih = $conn->query($sql_harga_pilih);
-                                                $r_harga_pilih = $q_harga_pilih->rowCount();
-                                                if ($r_harga_pilih > 0) {
+                                                $q_tarif_pilih = $conn->query($sql_tarif_pilih);
+                                                $r_tarif_pilih = $q_tarif_pilih->rowCount();
+                                                if ($r_tarif_pilih > 0) {
                                                 ?>
                                                     <table class="table table-striped" id="myTable">
                                                         <thead class="thead-dark">
@@ -738,36 +738,36 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 <th scope="col">No</th>
                                                                 <th scope="col">Tanggal Input</th>
                                                                 <th scope="col">Tanggal Ubah</th>
-                                                                <th scope="col">Nama Harga</th>
-                                                                <th scope="col">Jumlah Harga</th>
+                                                                <th scope="col">Nama Tarif</th>
+                                                                <th scope="col">Jumlah Tarif</th>
                                                                 <th scope="col">Frekuensi</th>
                                                                 <th scope="col">Kuantitas</th>
-                                                                <th scope="col">Total Harga</th>
+                                                                <th scope="col">Total Tarif</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php
 
                                                             $no = 1;
-                                                            while ($d_harga_pilih = $q_harga_pilih->fetch(PDO::FETCH_ASSOC)) {
+                                                            while ($d_tarif_pilih = $q_tarif_pilih->fetch(PDO::FETCH_ASSOC)) {
                                                             ?>
                                                                 <tr>
                                                                     <th scope="row"><?php echo $no; ?></th>
-                                                                    <td><?php echo tanggal($d_harga_pilih['tgl_input_harga_pilih']); ?></td>
+                                                                    <td><?php echo tanggal($d_tarif_pilih['tgl_input_tarif_pilih']); ?></td>
                                                                     <td>
                                                                         <?php
-                                                                        if ($d_harga_pilih['tgl_ubah_harga_pilih'] != NULL) {
-                                                                            echo tanggal($d_harga_pilih['tgl_ubah_harga_pilih']);
+                                                                        if ($d_tarif_pilih['tgl_ubah_tarif_pilih'] != NULL) {
+                                                                            echo tanggal($d_tarif_pilih['tgl_ubah_tarif_pilih']);
                                                                         } else {
                                                                             echo "-";
                                                                         }
                                                                         ?>
                                                                     </td>
-                                                                    <td><?php echo $d_harga_pilih['nama_harga']; ?></td>
-                                                                    <td><?php echo "Rp " . number_format($d_harga_pilih['jumlah_harga'], 0, ",", "."); ?></td>
-                                                                    <td><?php echo $d_harga_pilih['frekuensi_harga_pilih']; ?></td>
-                                                                    <td><?php echo $d_harga_pilih['kuantitas_harga_pilih']; ?></td>
-                                                                    <td><?php echo "Rp " . number_format($d_harga_pilih['jumlah_harga_pilih'], 0, ",", "."); ?></td>
+                                                                    <td><?php echo $d_tarif_pilih['nama_tarif']; ?></td>
+                                                                    <td><?php echo "Rp " . number_format($d_tarif_pilih['jumlah_tarif'], 0, ",", "."); ?></td>
+                                                                    <td><?php echo $d_tarif_pilih['frekuensi_tarif_pilih']; ?></td>
+                                                                    <td><?php echo $d_tarif_pilih['kuantitas_tarif_pilih']; ?></td>
+                                                                    <td><?php echo "Rp " . number_format($d_tarif_pilih['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
                                                                 </tr>
                                                             <?php
                                                                 $no++;
@@ -861,8 +861,8 @@ if (isset($_POST['arsip_praktik'])) {
                                                                             $makan = 'TIDAK';
                                                                         }
                                                                         echo $makan; ?>
-                                                                        <!-- <h5 class="text-gray-800 font-weight-bold"> Total Harga :</h5>
-                                                                        <?php echo "Rp " . number_format($d_mess_pilih['total_harga_mess_pilih'], 0, ",", "."); ?> -->
+                                                                        <!-- <h5 class="text-gray-800 font-weight-bold"> Total Tarif :</h5>
+                                                                        <?php echo "Rp " . number_format($d_mess_pilih['total_tarif_mess_pilih'], 0, ",", "."); ?> -->
                                                                     </fieldset>
                                                                 </div>
                                                             </div>
@@ -986,7 +986,7 @@ if (isset($_POST['arsip_praktik'])) {
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
-                html: "<span class='text-success text-uppercase font-weight-bold'>Penerimaan</span> Data Praktikan dan Data Harga",
+                html: "<span class='text-success text-uppercase font-weight-bold'>Penerimaan</span> Data Praktikan dan Data Tarif",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',
@@ -1004,7 +1004,7 @@ if (isset($_POST['arsip_praktik'])) {
                                 allowOutsideClick: false,
                                 // isDismissed: false,
                                 icon: 'success',
-                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITERIMA</b></div>',
+                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                             });
@@ -1023,7 +1023,7 @@ if (isset($_POST['arsip_praktik'])) {
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
-                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Harga" +
+                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Tarif" +
                     '<input id="valDPHDitolak" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
                 icon: 'warning',
                 showCancelButton: true,
@@ -1047,7 +1047,7 @@ if (isset($_POST['arsip_praktik'])) {
                                 allowOutsideClick: false,
                                 // isDismissed: false,
                                 icon: 'error',
-                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITOLAK</b></div>',
+                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                             });
@@ -1085,7 +1085,7 @@ if (isset($_POST['arsip_praktik'])) {
                                 allowOutsideClick: false,
                                 // isDismissed: false,
                                 icon: 'success',
-                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITERIMA</b></div>',
+                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                             });
@@ -1104,7 +1104,7 @@ if (isset($_POST['arsip_praktik'])) {
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
-                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Harga" +
+                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Tarif" +
                     '<input id="valPDitolak" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
                 icon: 'warning',
                 showCancelButton: true,
@@ -1128,7 +1128,7 @@ if (isset($_POST['arsip_praktik'])) {
                                 allowOutsideClick: false,
                                 // isDismissed: false,
                                 icon: 'error',
-                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN HARGA <br> <b>DITOLAK</b></div>',
+                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                             });
