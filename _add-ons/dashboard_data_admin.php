@@ -45,7 +45,7 @@ $sql_dpp = "SELECT * FROM tb_praktik
 WHERE 
 (
 status_cek_praktik = 'DAFTAR' 
-OR status_cek_praktik = 'HARGA'
+OR status_cek_praktik = 'tarif'
 OR status_cek_praktik = 'MESS'
 OR status_cek_praktik = 'PEMBAYARAN'
 OR status_cek_praktik = 'DITOLAK'
@@ -80,7 +80,7 @@ $sql_dpjp = "SELECT * FROM tb_praktik
 WHERE 
 (
 status_cek_praktik = 'DAFTAR' 
-OR status_cek_praktik = 'HARGA'
+OR status_cek_praktik = 'tarif'
 OR status_cek_praktik = 'MESS'
 OR status_cek_praktik = 'PEMBAYARAN'
 OR status_cek_praktik = 'DITOLAK'
@@ -116,19 +116,19 @@ while ($d_dpjs = $q_dpjs->fetch(PDO::FETCH_ASSOC)) {
 
 //////////////////// PENDAPATAN SEMUA ////////////////////
 
-$total_harga = 0;
-$total_harga_pilih = 0;
+$total_tarif = 0;
+$total_tarif_pilih = 0;
 $total_mess = 0;
-#data harga pilih
-$sql_praktik = "SELECT * FROM tb_harga_pilih
-            JOIN tb_praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
+#data tarif pilih
+$sql_praktik = "SELECT * FROM tb_tarif_pilih
+            JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
             WHERE status_cek_praktik = ('AKTIF' OR 'SELESAI')";
 $q_praktik = $conn->query($sql_praktik);
 
-$total_harga = 0;
+$total_tarif = 0;
 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-    $total_harga = $total_harga + $d_praktik['jumlah_harga_pilih'];
-    $total_harga_pilih = $total_harga_pilih + $d_praktik['jumlah_harga_pilih'];
+    $total_tarif = $total_tarif + $d_praktik['jumlah_tarif_pilih'];
+    $total_tarif_pilih = $total_tarif_pilih + $d_praktik['jumlah_tarif_pilih'];
 }
 
 #data mess pilih
@@ -138,24 +138,24 @@ $sql_mess = "SELECT * FROM tb_mess_pilih
 $q_mess = $conn->query($sql_mess);
 
 while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-    $total_harga = $total_harga + $d_mess['total_harga_mess_pilih'];
-    $total_mess = $total_mess + $d_mess['total_harga_mess_pilih'];
+    $total_tarif = $total_tarif + $d_mess['total_tarif_mess_pilih'];
+    $total_mess = $total_mess + $d_mess['total_tarif_mess_pilih'];
 }
 
 //////////////////// PENDAPATAN BULANAN ////////////////////
-$total_harga = 0;
-$total_harga_pilih = 0;
+$total_tarif = 0;
+$total_tarif_pilih = 0;
 $total_mess = 0;
-#data harga pilih
-$sql_praktik = "SELECT * FROM tb_harga_pilih
-            JOIN tb_praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
+#data tarif pilih
+$sql_praktik = "SELECT * FROM tb_tarif_pilih
+            JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
             WHERE status_cek_praktik = ('AKTIF' OR 'SELESAI')";
 $q_praktik = $conn->query($sql_praktik);
 
-$total_harga = 0;
+$total_tarif = 0;
 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-    $total_harga = $total_harga + $d_praktik['jumlah_harga_pilih'];
-    $total_harga_pilih = $total_harga_pilih + $d_praktik['jumlah_harga_pilih'];
+    $total_tarif = $total_tarif + $d_praktik['jumlah_tarif_pilih'];
+    $total_tarif_pilih = $total_tarif_pilih + $d_praktik['jumlah_tarif_pilih'];
 }
 
 #data mess pilih
@@ -165,6 +165,6 @@ $sql_mess = "SELECT * FROM tb_mess_pilih
 $q_mess = $conn->query($sql_mess);
 
 while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-    $total_harga = $total_harga + $d_mess['total_harga_mess_pilih'];
-    $total_mess = $total_mess + $d_mess['total_harga_mess_pilih'];
+    $total_tarif = $total_tarif + $d_mess['total_tarif_mess_pilih'];
+    $total_mess = $total_mess + $d_mess['total_tarif_mess_pilih'];
 }

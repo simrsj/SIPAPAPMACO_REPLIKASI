@@ -53,7 +53,7 @@
                             <div class="text-md font-weight-bold text-success text-uppercase mb-1">
                                 TOTAL PENDAPATAN : </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo "Rp " . number_format($total_harga, 0, '.', '.'); ?>
+                                <?php echo "Rp " . number_format($total_tarif, 0, '.', '.'); ?>
                             </div>
                         </div>
                         <div class="col-auto">

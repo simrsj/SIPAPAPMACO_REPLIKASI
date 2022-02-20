@@ -23,12 +23,12 @@
                                     Kapasitas : <span style="color:red">*</span><br>
                                     <input type="number" min="1" class="form-control" name="kapasitas" id="kapasitas" placeholder="isikan kapasitas" required>
                                     <div id="err_kapasitas" class="text-danger text-xs font-italic"></div><br>
-                                    Harga : <span style="color:red">*</span><br>
-                                    <input type="number" min="1" class="form-control" name="harga" id="harga" placeholder="isikan harga" required>
-                                    <div id="err_harga" class="text-danger text-xs font-italic"></div><br>
+                                    Tarif : <span style="color:red">*</span><br>
+                                    <input type="number" min="1" class="form-control" name="tarif" id="tarif" placeholder="isikan tarif" required>
+                                    <div id="err_tarif" class="text-danger text-xs font-italic"></div><br>
                                     Satuan : <span style="color:red">*</span><br>
                                     <?php
-                                    $sql = "SELECT * FROM tb_harga_satuan ORDER BY nama_harga_satuan ASC";
+                                    $sql = "SELECT * FROM tb_tarif_satuan ORDER BY nama_tarif_satuan ASC";
                                     $q = $conn->query($sql);
                                     ?>
                                     <select class='js-example-placeholder-single form-control row col-6' name='satuan' id="satuan" required>
@@ -36,8 +36,8 @@
                                         <?php
                                         while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
-                                            <option value='<?php echo $d['id_harga_satuan']; ?>'>
-                                                <?php echo $d['nama_harga_satuan']; ?>
+                                            <option value='<?php echo $d['id_tarif_satuan']; ?>'>
+                                                <?php echo $d['nama_tarif_satuan']; ?>
                                             </option>
                                         <?php
                                             $no++;
@@ -84,7 +84,7 @@
                 <?php
                 $sql = "SELECT * FROM tb_tempat 
             JOIN tb_jurusan_pdd_jenis ON tb_tempat.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis 
-            JOIN tb_harga_satuan ON tb_tempat.id_harga_satuan = tb_harga_satuan.id_harga_satuan
+            JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
             WHERE status_tempat = 'y'
             ORDER BY nama_tempat ASC";
                 $q = $conn->query($sql);
@@ -99,7 +99,7 @@
                                     <th>Jenis Jurusan</th>
                                     <th>Kapasitas</th>
                                     <th>Satuan</th>
-                                    <th>Harga</th>
+                                    <th>Tarif</th>
                                     <th>Keterangan</th>
                                     <th>Tanggal Input</th>
                                     <th></th>
@@ -115,8 +115,8 @@
                                         <td><?php echo $d['nama_tempat']; ?></td>
                                         <td><?php echo $d['nama_jurusan_pdd_jenis']; ?></td>
                                         <td><?php echo $d['kapasitas_tempat']; ?></td>
-                                        <td><?php echo $d['nama_harga_satuan']; ?></td>
-                                        <td><?php echo "Rp " . number_format($d['harga_tempat'], 0, '.', '.'); ?></td>
+                                        <td><?php echo $d['nama_tarif_satuan']; ?></td>
+                                        <td><?php echo "Rp " . number_format($d['tarif_tempat'], 0, '.', '.'); ?></td>
                                         <td><?php echo $d['ket_tempat']; ?></td>
                                         <td><?php echo $d['tgl_input_tempat']; ?></td>
                                         <td>
@@ -143,26 +143,26 @@
                                                                 Kapasitas : <span style="color:red">*</span><br>
                                                                 <input type="number" min="1" class="form-control" name="kapasitas<?php echo $d['id_tempat']; ?>" id="kapasitas<?php echo $d['id_tempat']; ?>" value="<?php echo $d['kapasitas_tempat']; ?>" required>
                                                                 <div id="err_kapasitas<?php echo $d['id_tempat']; ?>" class="text-danger text-xs font-italic"></div><br>
-                                                                Harga : <span style="color:red">*</span><br>
-                                                                <input type="number" min="1" class="form-control" name="harga<?php echo $d['id_tempat']; ?>" id="harga<?php echo $d['id_tempat']; ?>" value="<?php echo $d['harga_tempat']; ?>" required>
-                                                                <div id="err_harga<?php echo $d['id_tempat']; ?>" class="text-danger text-xs font-italic"></div><br>
+                                                                Tarif : <span style="color:red">*</span><br>
+                                                                <input type="number" min="1" class="form-control" name="tarif<?php echo $d['id_tempat']; ?>" id="tarif<?php echo $d['id_tempat']; ?>" value="<?php echo $d['tarif_tempat']; ?>" required>
+                                                                <div id="err_tarif<?php echo $d['id_tempat']; ?>" class="text-danger text-xs font-italic"></div><br>
                                                                 Satuan : <span style="color:red">*</span><br>
                                                                 <?php
-                                                                $sql_satuan = "SELECT * FROM tb_harga_satuan ORDER BY nama_harga_satuan ASC";
+                                                                $sql_satuan = "SELECT * FROM tb_tarif_satuan ORDER BY nama_tarif_satuan ASC";
                                                                 $q_satuan = $conn->query($sql_satuan);
                                                                 ?>
                                                                 <select class='form-control' name='satuan<?php echo $d['id_tempat']; ?>' id="satuan<?php echo $d['id_tempat']; ?>" required>
                                                                     <option value="">-- <i>Pilih</i>--</option>
                                                                     <?php
                                                                     while ($d_satuan = $q_satuan->fetch(PDO::FETCH_ASSOC)) {
-                                                                        if ($d['id_harga_satuan'] == $d_satuan['id_harga_satuan']) {
+                                                                        if ($d['id_tarif_satuan'] == $d_satuan['id_tarif_satuan']) {
                                                                             $cek = 'selected';
                                                                         } else {
                                                                             $cek = '';
                                                                         }
                                                                     ?>
-                                                                        <option value='<?php echo $d_satuan['id_harga_satuan']; ?>' <?php echo $cek; ?>>
-                                                                            <?php echo $d_satuan['nama_harga_satuan']; ?>
+                                                                        <option value='<?php echo $d_satuan['id_tarif_satuan']; ?>' <?php echo $cek; ?>>
+                                                                            <?php echo $d_satuan['nama_tarif_satuan']; ?>
                                                                         </option>
                                                                     <?php
                                                                         $no++;
@@ -226,7 +226,7 @@
                                                         console.log("masuk ubah");
                                                         var nama = document.getElementById("nama<?php echo $d['id_tempat']; ?>").value;
                                                         var kapasitas = document.getElementById("kapasitas<?php echo $d['id_tempat']; ?>").value;
-                                                        var harga = document.getElementById("harga<?php echo $d['id_tempat']; ?>").value;
+                                                        var tarif = document.getElementById("tarif<?php echo $d['id_tempat']; ?>").value;
                                                         var satuan = document.getElementById("satuan<?php echo $d['id_tempat']; ?>").value;
                                                         var jj1 = document.getElementById("jenis_jurusan1<?php echo $d['id_tempat']; ?>").checked;
                                                         var jj2 = document.getElementById("jenis_jurusan2<?php echo $d['id_tempat']; ?>").checked;
@@ -237,7 +237,7 @@
                                                         if (
                                                             nama == "" ||
                                                             kapasitas == "" ||
-                                                            harga == "" ||
+                                                            tarif == "" ||
                                                             satuan == "" ||
                                                             (
                                                                 jj1 == false &&
@@ -247,7 +247,7 @@
                                                             )
                                                         ) {
 
-                                                            console.log("nama : " + nama + " | kapasitas : " + kapasitas + " | harga : " + harga + " | satuan : " + satuan);
+                                                            console.log("nama : " + nama + " | kapasitas : " + kapasitas + " | tarif : " + tarif + " | satuan : " + satuan);
                                                             console.log("jj1 : " + jj1 + " | jj2 : " + jj2 + " | jj3 : " + jj3 + " | jj4 : " + jj4);
                                                             //warning Toast bila ada data wajib yg berlum terisi
                                                             const Toast = Swal.mixin({
@@ -281,11 +281,11 @@
                                                                 document.getElementById("err_kapasitas<?php echo $d['id_tempat']; ?>").innerHTML = "";
                                                             }
 
-                                                            //notif harga 
-                                                            if (harga == "") {
-                                                                document.getElementById("err_harga<?php echo $d['id_tempat']; ?>").innerHTML = "Harga Harus Diisi";
+                                                            //notif tarif 
+                                                            if (tarif == "") {
+                                                                document.getElementById("err_tarif<?php echo $d['id_tempat']; ?>").innerHTML = "Tarif Harus Diisi";
                                                             } else {
-                                                                document.getElementById("err_harga<?php echo $d['id_tempat']; ?>").innerHTML = "";
+                                                                document.getElementById("err_tarif<?php echo $d['id_tempat']; ?>").innerHTML = "";
                                                             }
 
                                                             //notif satuan 
@@ -315,7 +315,7 @@
                                                                 value: <?php echo $d['id_tempat']; ?>
                                                             });
 
-                                                            //Simpan Data Praktik dan Harga
+                                                            //Simpan Data Praktik dan Tarif
                                                             $.ajax({
                                                                 type: 'POST',
                                                                 url: "_admin/exc/x_v_tempat_u.php?",
@@ -361,9 +361,9 @@
 
                                                                 Kapasitas : <?php echo $d['kapasitas_tempat']; ?><br><br>
 
-                                                                Harga : <?php echo "Rp " . number_format($d['harga_tempat'], 0, '.', '.'); ?><br><br>
+                                                                Tarif : <?php echo "Rp " . number_format($d['tarif_tempat'], 0, '.', '.'); ?><br><br>
 
-                                                                Satuan : <?php echo $d['nama_harga_satuan']; ?><br><br>
+                                                                Satuan : <?php echo $d['nama_tarif_satuan']; ?><br><br>
 
                                                                 Jenis Jurusan : <?php echo $d['nama_jurusan_pdd_jenis']; ?><br><br>
 
@@ -408,7 +408,7 @@
             // console.log("masuk tambah");
             var nama = document.getElementById("nama").value;
             var kapasitas = document.getElementById("kapasitas").value;
-            var harga = document.getElementById("harga").value;
+            var tarif = document.getElementById("tarif").value;
             var satuan = document.getElementById("satuan").value;
             var jj1 = document.getElementById("jenis_jurusan1").checked;
             var jj2 = document.getElementById("jenis_jurusan2").checked;
@@ -419,7 +419,7 @@
             if (
                 nama == "" ||
                 kapasitas == "" ||
-                harga == "" ||
+                tarif == "" ||
                 satuan == "" ||
                 (
                     jj1 == false &&
@@ -461,11 +461,11 @@
                     document.getElementById("err_kapasitas").innerHTML = "";
                 }
 
-                //notif harga 
-                if (harga == "") {
-                    document.getElementById("err_harga").innerHTML = "Harga Harus Diisi";
+                //notif tarif 
+                if (tarif == "") {
+                    document.getElementById("err_tarif").innerHTML = "Tarif Harus Diisi";
                 } else {
-                    document.getElementById("err_harga").innerHTML = "";
+                    document.getElementById("err_tarif").innerHTML = "";
                 }
 
                 //notif satuan 
@@ -491,7 +491,7 @@
             else {
                 var data_tTempat = $('#form_tTempat').serializeArray();
 
-                //Simpan Data Praktik dan Harga
+                //Simpan Data Praktik dan Tarif
                 $.ajax({
                     type: 'POST',
                     url: "_admin/exc/x_v_tempat_s.php?",

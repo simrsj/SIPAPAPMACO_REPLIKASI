@@ -18,7 +18,7 @@
 
 git status
 git add . 
-git commit -a -m ""  
+git commit -a -m "Database"  
 git pull
 git push
 
