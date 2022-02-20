@@ -17,7 +17,7 @@
 
 git status
 git add . 
-git commit -a -m "Cleaning"  
+git commit -a -m "Tombol Validasi Data Praktik-Tarif dan pembayaran"  
 git pull
 git push
 
