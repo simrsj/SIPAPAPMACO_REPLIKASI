@@ -302,19 +302,19 @@ if (isset($_POST['arsip_praktik'])) {
 
                                                     <br>
                                                     <?php
-                                                    if ($d_praktik['status_cek_praktik'] == "DPH") {
+                                                    if ($d_praktik['status_cek_praktik'] == "DPT") {
                                                     ?>
                                                         <span class="badge badge-warning text-md">
                                                             DATA <br>PRAKTIK & TARIF
                                                         </span>
                                                     <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPH_Y") {
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
                                                     ?>
                                                         <span class="badge badge-success text-md">
                                                             Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i>
                                                         </span>
                                                     <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPH_T") {
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
                                                     ?>
                                                         <span class="badge badge-danger text-md">
                                                             Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i>
@@ -391,19 +391,19 @@ if (isset($_POST['arsip_praktik'])) {
 
                                                     <br>
                                                     <?php
-                                                    if ($d_praktik['status_cek_praktik'] == "DPH") {
+                                                    if ($d_praktik['status_cek_praktik'] == "DPT") {
                                                     ?>
                                                         <span class="badge badge-warning text-md">
                                                             DATA <br>PRAKTIK & TARIF
                                                         </span>
                                                     <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPH_Y") {
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
                                                     ?>
                                                         <span class="badge badge-success text-md">
                                                             Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i>
                                                         </span>
                                                     <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPH_T") {
+                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
                                                     ?>
                                                         <span class="badge badge-danger text-md">
                                                             Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i>
@@ -450,20 +450,20 @@ if (isset($_POST['arsip_praktik'])) {
 
                                                 <!-- tombol dropdown pilih menu tarif, mess, bukti bayar -->
                                                 <?php
-                                                if ($d_praktik['status_cek_praktik'] == "DPH") {
+                                                if ($d_praktik['status_cek_praktik'] == "DPT") {
                                                 ?>
                                                     <b>VALIDASI : </b><br>
                                                     <div class="btn-group">
-                                                        <button class="btn btn-outline-success btn-sm" onclick="valDataPraktikHargaDiterima(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
-                                                        <button class="btn btn-outline-danger btn-sm" onclick="valDataPraktikHargaDitolak(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
+                                                        <button class="btn btn-outline-success btn-sm" onclick="valDataPraktikTarif_Y(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="valDataPraktikTarif_T(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
                                                     </div>
                                                 <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "VPH_Y") {
+                                                } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
                                                 ?>
                                                     <b>PILIH : </b><br>
                                                     <a href="?prk=<?php echo $_GET['prk']; ?>&t=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">TEMPAT</a>
                                                 <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "VPH_T") {
+                                                } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
                                                 ?>
                                                     <b>CEK KETERANGAN : </b><br>
 
@@ -502,8 +502,8 @@ if (isset($_POST['arsip_praktik'])) {
                                                 ?>
                                                     <b>VALIDASI : </b><br>
                                                     <div class="btn-group">
-                                                        <button class="btn btn-outline-success btn-sm" onclick="valPembayaranDiterima(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
-                                                        <button class="btn btn-outline-danger btn-sm" onclick="valPembayaranDitolak(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
+                                                        <button class="btn btn-outline-success btn-sm" onclick="valPembayaran_Y(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="valPembayaran_T(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
                                                     </div>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
@@ -981,8 +981,8 @@ if (isset($_POST['arsip_praktik'])) {
     </div>
 
     <script>
-        function valDataPraktikHargaDiterima(id) {
-            console.log("valDataPraktikHargaDiterima");
+        function valDataPraktikTarif_Y(id) {
+            console.log("valDataPraktikTarif_Y");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
@@ -997,8 +997,12 @@ if (isset($_POST['arsip_praktik'])) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        type: 'GET',
-                        url: "_admin/exc/x_v_praktik_valDataPraktikHargaDiterima.php?id=" + id,
+                        type: 'POST',
+                        url: "_admin/exc/x_v_praktik_valDataPraktikTarif.php?",
+                        data: {
+                            'id': id,
+                            'ket': 'y'
+                        },
                         success: function() {
                             Swal.fire({
                                 allowOutsideClick: false,
@@ -1018,13 +1022,13 @@ if (isset($_POST['arsip_praktik'])) {
             })
         }
 
-        function valDataPraktikHargaDitolak(id) {
-            console.log("valDataPraktikHargaDitolak");
+        function valDataPraktikTarif_T(id) {
+            console.log("valDataPraktikTarif_T");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
                 html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Tarif" +
-                    '<input id="valDPHDitolak" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
+                    '<input id="valDPT_T" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',
@@ -1034,13 +1038,14 @@ if (isset($_POST['arsip_praktik'])) {
                 allowOutsideClick: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var valDPHDitolak = document.getElementById('valDPHDitolak').value;
+                    var valDPT_T = document.getElementById('valDPT_T').value;
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_v_praktik_valDataPraktikHargaDitolak.php",
+                        url: "_admin/exc/x_v_praktik_valDataPraktikTarif.php",
                         data: {
                             'id': id,
-                            'valDPHDitolak': valDPHDitolak
+                            'ket': 't',
+                            'valDPT_T': valDPT_T
                         },
                         success: function() {
                             Swal.fire({
@@ -1062,8 +1067,8 @@ if (isset($_POST['arsip_praktik'])) {
             });
         }
 
-        function valPembayaranDiterima(id) {
-            console.log("valPembayaranDiterima");
+        function valPembayaran_Y(id) {
+            console.log("valPembayaran_Y");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
@@ -1078,8 +1083,12 @@ if (isset($_POST['arsip_praktik'])) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        type: 'GET',
-                        url: "_admin/exc/x_v_praktik_valPembayaranDiterima.php?id=" + id,
+                        type: 'POST',
+                        url: "_admin/exc/x_v_praktik_valPembayaranDiterima.php?",
+                        data: {
+                            "id": id,
+                            "ket": "y"
+                        },
                         success: function() {
                             Swal.fire({
                                 allowOutsideClick: false,
@@ -1099,13 +1108,13 @@ if (isset($_POST['arsip_praktik'])) {
             })
         }
 
-        function valPembayaranDitolak(id) {
-            console.log("valPembayaranDitolak");
+        function valPembayaran_T(id) {
+            console.log("valPembayaran_T");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
                 html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Tarif" +
-                    '<input id="valPDitolak" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
+                    '<input id="valP_T" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',
@@ -1115,13 +1124,14 @@ if (isset($_POST['arsip_praktik'])) {
                 allowOutsideClick: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var valPDitolak = document.getElementById('valPDitolak').value;
+                    var valP_T = document.getElementById('valP_T').value;
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_v_praktik_valPembayaranDitolak.php",
+                        url: "_admin/exc/x_v_praktik_valPembayaran.php",
                         data: {
                             'id': id,
-                            'valPDitolak': valPDitolak
+                            'ket': 't',
+                            'valP_T': valP_T
                         },
                         success: function() {
                             Swal.fire({
