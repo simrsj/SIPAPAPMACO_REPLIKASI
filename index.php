@@ -1,9 +1,11 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 session_start();
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
-// include '_add-ons/csrf_auth.php';
+
+//include '_add-ons/csrf_auth.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -12,7 +14,6 @@ include "_add-ons/tanggal_waktu.php";
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?>">
 
     <title>SIPAPAP MACO</title>
 

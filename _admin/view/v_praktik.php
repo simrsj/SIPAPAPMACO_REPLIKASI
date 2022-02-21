@@ -213,69 +213,69 @@ if (isset($_POST['arsip_praktik'])) {
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                            <?php
+                                                <<<<<<< HEAD=======>>>>>>> ce8a43725fa9efed97c97f484186708913719f18
+                                                <?php
                                             }
                                             if ($d_praktik['status_cek_praktik'] == "DPT") {
-                                            ?>
-                                                <span class="badge badge-warning text-md">
-                                                    DATA <br>PRAKTIK & TARIF
-                                                </span>
-                                            <?php
+                                                ?>
+                                                    <span class="badge badge-warning text-md">
+                                                        DATA <br>PRAKTIK & TARIF
+                                                    </span>
+                                                <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
-                                            ?>
-                                                <span class="badge badge-success text-md">
-                                                    Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i>
-                                                </span>
-                                            <?php
+                                                ?>
+                                                    <span class="badge badge-success text-md">
+                                                        Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i>
+                                                    </span>
+                                                <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
-                                            ?>
-                                                <span class="badge badge-danger text-md">
-                                                    Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i>
-                                                </span>
-                                            <?php
+                                                ?>
+                                                    <span class="badge badge-danger text-md">
+                                                        Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i>
+                                                    </span>
+                                                <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
-                                            ?>
-                                                <span class="badge badge-warning text-md"> TEMPAT </span>
-                                            <?php
+                                                ?>
+                                                    <span class="badge badge-warning text-md"> TEMPAT </span>
+                                                <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
-                                            ?>
-                                                <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
-                                                <?php
-                                                if ($_GET['prk'] == 'ked') {
                                                 ?>
-                                                    <hr>
-                                                    <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
+                                                    <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
+                                                    <?php
+                                                    if ($_GET['prk'] == 'ked') {
+                                                    ?>
+                                                        <hr>
+                                                        <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
+                                                    <?php
+                                                    }
+                                                } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
+                                                    ?>
+                                                    <span class="badge badge-primary text-md">Val. PEMBAYARAN</span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
+                                                ?>
+                                                    <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span>
+                                                    <?php
+                                                    if ($_GET['prk'] != 'ked') {
+                                                    ?>
+                                                        <hr>
+                                                        <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
+                                                    <?php
+                                                    }
+                                                } elseif ($d_praktik['status_cek_praktik'] == "BYR_T") {
+                                                    ?>
+                                                    <span class="badge badge-danger text-md">Val. PEMBAYARAN <i class="fas fa-times-circle"></i></span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
+                                                ?>
+                                                    <span class="badge badge-success text-md">AKTIF</span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
+                                                ?>
+                                                    <span class="badge badge-secondary text-md">SELESAI</span>
                                                 <?php
                                                 }
-                                            } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
                                                 ?>
-                                                <span class="badge badge-primary text-md">Val. PEMBAYARAN</span>
-                                            <?php
-                                            } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
-                                            ?>
-                                                <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span>
-                                                <?php
-                                                if ($_GET['prk'] != 'ked') {
-                                                ?>
-                                                    <hr>
-                                                    <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
-                                                <?php
-                                                }
-                                            } elseif ($d_praktik['status_cek_praktik'] == "BYR_T") {
-                                                ?>
-                                                <span class="badge badge-danger text-md">Val. PEMBAYARAN <i class="fas fa-times-circle"></i></span>
-                                            <?php
-                                            } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
-                                            ?>
-                                                <span class="badge badge-success text-md">AKTIF</span>
-                                            <?php
-                                            } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
-                                            ?>
-                                                <span class="badge badge-secondary text-md">SELESAI</span>
-                                            <?php
-                                            }
-                                            ?>
                                         </div>
 
                                         <!-- Tombol Link Data Status  -->
