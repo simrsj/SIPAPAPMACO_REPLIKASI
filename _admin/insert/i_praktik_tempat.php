@@ -8,13 +8,13 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 $jumlah_praktik = $d_praktik['jumlah_praktik'];
 ?>
 
-<!-- Menu Harga Lainnya -->
+<!-- Menu tarif Lainnya -->
 <div class="container-fluid">
     <div class="card shadow mb-4">
 
         <div class="card-header py-3 d-flex flex-row align-items-center">
             <div class="h4 text-gray-800 font-weight-bold">
-                Menu Harga Ruangan dan Tempat : <i style='font-size:14px;'>(Jumlah Praktik <b><?php echo $d_praktik['jumlah_praktik']; ?></b>)</i>
+                Menu Tarif Ruangan dan Tempat : <i style='font-size:14px;'>(Jumlah Praktik <b><?php echo $d_praktik['jumlah_praktik']; ?></b>)</i>
             </div>
         </div>
         <div class="card-body">
@@ -31,7 +31,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 }
                 $sql_tempat = "SELECT * FROM tb_tempat 
                     JOIN tb_jurusan_pdd_jenis ON tb_tempat.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis 
-                    JOIN tb_harga_satuan ON tb_tempat.id_harga_satuan = tb_harga_satuan.id_harga_satuan
+                    JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
                     WHERE $sql AND status_tempat = 'y'
                     ORDER BY nama_tempat ASC
                 ";
@@ -45,7 +45,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Harga</th>
+                                <th scope="col">Tarif</th>
                                 <th scope="col">Satuan</th>
                                 <th scope="col">Kapasitas</th>
                                 <th scope="col">Keterangan</th>
@@ -62,8 +62,8 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <tr>
                                     <th scope="row"><?php echo $no; ?></th>
                                     <td><?php echo $d_tempat['nama_tempat']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_tempat['harga_tempat'], 0, ",", "."); ?></td>
-                                    <td><?php echo $d_tempat['nama_harga_satuan']; ?></td>
+                                    <td><?php echo "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."); ?></td>
+                                    <td><?php echo $d_tempat['nama_tarif_satuan']; ?></td>
                                     <td><?php echo $d_tempat['kapasitas_tempat']; ?></td>
                                     <td><?php echo $d_tempat['ket_tempat']; ?></td>
                                     <td>
@@ -85,7 +85,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 } else {
                 ?>
                     <div class="bg-gray-500 text-gray-100" style="padding-bottom: 2px; padding-top: 5px;">
-                        <h5 class="text-center">Data Harga Tidak Ada</h5>
+                        <h5 class="text-center">Data Tarif Tempat Tidak Ada</h5>
                     </div>
                 <?php
                 }
@@ -93,7 +93,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
                 <input type="hidden" name="path" id="path" value="<?php echo $_GET['prk'] ?>">
                 <input type="hidden" name="id" id="id" value="<?php echo $_GET['t'] ?>">
-                <nav id="navbar-harga" class="navbar justify-content-center">
+                <nav id="navbar-tarif" class="navbar justify-content-center">
                     <button type="button" id="simpan_tempat" class="nav-link btn btn-outline-success">
                         SIMPAN
                     </button>
@@ -136,7 +136,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             else {
                 var data_tTempat = $('#form_tTempat').serializeArray();
 
-                //Simpan Data Praktik dan Harga
+                //Simpan Data Praktik dan tarif
                 $.ajax({
                     type: 'POST',
                     url: "_admin/exc/x_i_praktik_tempat_s.php?",
