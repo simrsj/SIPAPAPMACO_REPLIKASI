@@ -33,5 +33,6 @@ TRUNCATE tb_praktik;
 TRUNCATE tb_tarif_pilih;
 TRUNCATE tb_mess_pilih;
 TRUNCATE tb_tempat_pilih;
+TRUNCATE tb_bayar;
 
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551

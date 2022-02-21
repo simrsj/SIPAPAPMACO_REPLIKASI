@@ -86,7 +86,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                             </div>
                             <div class="col-lg-2">
                                 Jumlah Praktikan : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="jumlah_praktik" min="1" id="jumlah" required>
+                                <input type="number" class="form-control" name="jumlah_praktik" min="1" placeholder="Isi Jumlah Praktik" id="jumlah" required>
                                 <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jumlah"></span>
                             </div>
                         </div>

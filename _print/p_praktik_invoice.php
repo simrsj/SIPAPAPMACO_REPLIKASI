@@ -7,32 +7,32 @@ include_once "tanggal.php";
 $id_praktik = $_GET['id'];
 // echo $id_praktik . "<br>";
 
-#data harga pilih
-$sql_praktik = "SELECT * FROM tb_harga_pilih
-JOIN tb_praktik ON tb_harga_pilih.id_praktik = tb_praktik.id_praktik
-JOIN tb_harga ON tb_harga_pilih.id_harga = tb_harga.id_harga
-JOIN tb_harga_satuan ON tb_harga.id_harga_satuan = tb_harga_satuan.id_harga_satuan
+#data tarif pilih
+$sql_praktik = "SELECT * FROM tb_tarif_pilih
+JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
+JOIN tb_tarif ON tb_tarif_pilih.id_tarif = tb_tarif.id_tarif
+JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
 WHERE tb_praktik.id_praktik = '" . $id_praktik . "'
-ORDER BY nama_harga ASC";
+ORDER BY nama_tarif ASC";
 $q_praktik = $conn->query($sql_praktik);
 
 $data = array();
 $no = 1;
-$total_harga = 0;
+$total_tarif = 0;
 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
     array_push(
         $data,
         array(
             $no,
-            $d_praktik['nama_harga'],
-            $d_praktik['nama_harga_satuan'],
-            "Rp " . number_format($d_praktik['jumlah_harga'], 0, ",", "."),
-            $d_praktik['frekuensi_harga_pilih'],
-            $d_praktik['kuantitas_harga_pilih'],
-            "Rp " . number_format($d_praktik['jumlah_harga_pilih'], 0, ",", ".")
+            $d_praktik['nama_tarif'],
+            $d_praktik['nama_tarif_satuan'],
+            "Rp " . number_format($d_praktik['jumlah_tarif'], 0, ",", "."),
+            $d_praktik['frekuensi_tarif_pilih'],
+            $d_praktik['kuantitas_tarif_pilih'],
+            "Rp " . number_format($d_praktik['jumlah_tarif_pilih'], 0, ",", ".")
         )
     );
-    $total_harga = $total_harga + $d_praktik['jumlah_harga_pilih'];
+    $total_tarif = $total_tarif + $d_praktik['jumlah_tarif_pilih'];
     $no++;
 }
 
@@ -40,7 +40,7 @@ while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
 $sql_tempat = "SELECT * FROM tb_praktik 
 JOIN tb_tempat_pilih ON tb_praktik.id_praktik = tb_tempat_pilih.id_praktik 
 JOIN tb_tempat ON tb_tempat_pilih.id_tempat = tb_tempat.id_tempat 
-JOIN tb_harga_satuan ON tb_tempat.id_harga_satuan = tb_harga_satuan.id_harga_satuan
+JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
 WHERE tb_praktik.id_praktik = '" . $id_praktik . "'";
 $q_tempat = $conn->query($sql_tempat);
 
@@ -50,14 +50,14 @@ while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
         array(
             $no,
             $d_tempat['nama_tempat'] . " (Tempat)",
-            $d_tempat['nama_harga_satuan'],
-            "Rp " . number_format($d_tempat['harga_tempat'], 0, ",", "."),
+            $d_tempat['nama_tarif_satuan'],
+            "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."),
             $d_tempat['frek_tempat_pilih'],
             $d_tempat['kuan_tempat_pilih'],
-            "Rp " . number_format($d_tempat['total_harga_tempat_pilih'], 0, ",", ".")
+            "Rp " . number_format($d_tempat['total_tarif_tempat_pilih'], 0, ",", ".")
         )
     );
-    $total_harga = $total_harga + $d_tempat['total_harga_tempat_pilih'];
+    $total_tarif = $total_tarif + $d_tempat['total_tarif_tempat_pilih'];
     $no++;
 }
 
@@ -85,17 +85,17 @@ while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
             $d_mess['nama_mess'] . " (Mess) " . $makan,
             "Hari/Orang",
             "Rp " . number_format(
-                $d_mess['total_harga_mess_pilih'] / ($d_mess['jumlah_praktik'] * $d_mess['total_hari_mess_pilih']),
+                $d_mess['total_tarif_mess_pilih'] / ($d_mess['jumlah_praktik'] * $d_mess['total_hari_mess_pilih']),
                 0,
                 ",",
                 "."
             ),
             $d_mess['jumlah_praktik'],
             $d_mess['total_hari_mess_pilih'],
-            "Rp " . number_format($d_mess['total_harga_mess_pilih'], 0, ",", ".")
+            "Rp " . number_format($d_mess['total_tarif_mess_pilih'], 0, ",", ".")
         )
     );
-    $total_harga = $total_harga + $d_mess['total_harga_mess_pilih'];
+    $total_tarif = $total_tarif + $d_mess['total_tarif_mess_pilih'];
     $no++;
 }
 
@@ -112,12 +112,12 @@ $detail = $con_mess->fetch(PDO::FETCH_ASSOC);
 #header tabel
 $header = array(
     array("label" => "No", "length" => 10, "align" => "C"),
-    array("label" => "Nama Harga", "length" => 100, "align" => "C"),
+    array("label" => "Nama Tarif", "length" => 100, "align" => "C"),
     array("label" => "Satuan", "length" => 40, "align" => "C"),
-    array("label" => "Harga", "length" => 40, "align" => "C"),
+    array("label" => "Tarif", "length" => 40, "align" => "C"),
     array("label" => "Frek.", "length" => 15, "align" => "C"),
     array("label" => "Ktt.", "length" => 15, "align" => "C"),
-    array("label" => "Total Harga", "length" => 55, "align" => "C")
+    array("label" => "Total Tarif", "length" => 55, "align" => "C")
 );
 
 #header tabel
@@ -238,7 +238,7 @@ foreach ($data as $baris) {
 }
 $pdf->Ln();
 $judul = "Jumlah Total : ";
-$nama = $total_harga;
+$nama = $total_tarif;
 $pdf->SetFont('Arial', '', '12');
 $pdf->Cell(0, 0, $judul . ' Rp ' . number_format($nama, 2, ',', '.'), '0', 1, 'R');
 $pdf->Ln(4);
