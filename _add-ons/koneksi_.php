@@ -2,8 +2,7 @@
 $servername = "localhost";
 $database = "db_sm";
 $username = "root";
-// $password = "";
-$password = "simrs12345";
+$password = "";
 
 try {
 	$conn = new PDO(
