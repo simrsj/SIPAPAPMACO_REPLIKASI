@@ -1,11 +1,15 @@
 <?php
-// error_reporting(0);
+error_reporting(0);
 session_start();
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
+<<<<<<< HEAD
 
 //include '_add-ons/csrf_auth.php';
 
+=======
+// include '_add-ons/csrf_auth.php';
+>>>>>>> 5ab3e37eda9456b4090b5705b27d8822f16f1c8b
 ?>
 <!DOCTYPE html>
 <html lang="id">

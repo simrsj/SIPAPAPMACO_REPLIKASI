@@ -28,8 +28,8 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <th>Nama Pemilik</th>
                                 <th>Kontak Pemilik</th>
                                 <th>Kapasitas Total</th>
-                                <th>Harga Tanpa Makan</th>
-                                <th>Harga Dengan Makan</th>
+                                <th>Tarif Tanpa Makan</th>
+                                <th>Tarif Dengan Makan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,8 +43,8 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
                                     <td><?php echo $d_mess['no_pemilik_mess']; ?></td>
                                     <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_mess['harga_tanpa_makan_mess'], 0, ",", "."); ?></td>
-                                    <td><?php echo "Rp " . number_format($d_mess['harga_dengan_makan_mess'], 0, ",", "."); ?></td>
+                                    <td><?php echo "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?></td>
+                                    <td><?php echo "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?></td>
                                 </tr>
                             <?php
                                 $no++;
@@ -61,7 +61,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             }
             ?>
 
-            <nav id="navbar-harga" class="navbar justify-content-center">
+            <nav id="navbar-tarif" class="navbar justify-content-center">
                 <a class='nav-link btn btn-outline-success' href='#' data-toggle='modal' data-target='#pilih_mess'>
                     PILIH MESS/PEMONDOKAN
                 </a>
@@ -181,7 +181,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             if (makan != undefined && mess != "") {
                 var data_tMess = $('#form_sMess').serializeArray();
 
-                //Simpan Data Praktik dan Harga
+                //Simpan Data Praktik dan tarif
                 $.ajax({
                     type: 'POST',
                     url: "_admin/exc/x_i_praktik_mess_s.php?",

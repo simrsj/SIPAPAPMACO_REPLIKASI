@@ -243,11 +243,12 @@ if (isset($_POST['arsip_praktik'])) {
                                                 <b>TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
                                                 <b>TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                             </div>
-                                            <?php
-                                            if ($_GET['prk'] == 'ked') {
-                                            ?>
-                                                <!-- Data Status  -->
-                                                <div class="col-sm-2 text-center my-auto">
+
+                                            <!-- Data Status  -->
+                                            <div class="col-sm-2 text-center my-auto">
+                                                <?php
+                                                if ($_GET['prk'] == 'ked') {
+                                                ?>
                                                     <b>STATUS : </b>
                                                     <a href="#" data-toggle="modal" data-target="#info_status" title="Keterangan Status">
                                                         <i class="fas fa-info-circle" style="font-size: 14px;"></i>
@@ -264,74 +265,44 @@ if (isset($_POST['arsip_praktik'])) {
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    1. <span class="badge badge-warning text-md">DATA PRAKTIK & TARIF</span><br />
+                                                                    <span class="badge badge-warning text-md">DATA PRAKTIK & TARIF</span><br />
                                                                     Pendaftaran dan Tarif Sudah Dipilih, dilanjutkan
                                                                     <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Tarif </span>oleh ADMIN<br /><br />
 
-                                                                    2. <span class="badge badge-success text-md">Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i></span><br>
+                                                                    <span class="badge badge-success text-md">Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i></span><br>
                                                                     Validasi Data Praktikan dan Tarif <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan proses pemilihan <b class="text-warning">TEMPAT</b> oleh ADMIN<br><br>
 
-                                                                    3. <span class="badge badge-danger text-md">Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i></span><br>
+                                                                    <span class="badge badge-danger text-md">Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i></span><br>
                                                                     Validasi Data Praktikan dan Tarif <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
 
-                                                                    4. <span class="badge badge-warning text-md">TEMPAT</span><br>
+                                                                    <span class="badge badge-warning text-md">TEMPAT</span><br>
                                                                     Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh Admin<br><br>
 
-                                                                    5. <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
+                                                                    <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
                                                                     MESS/PEMONDOKAN Sudah didaftarkan oleh Admin<br><br>
 
-                                                                    6. <span class="badge badge-primary text-md font-italic">WAITING LIST</span><br>
+                                                                    <span class="badge badge-primary text-md font-italic">WAITING LIST</span><br>
                                                                     Proses Pendaftaran Selesai dan dalam proses <span class="text-primary font-italic font-weight-bold">WAITING LIST</span><br>
                                                                     akan di <span class="text-success font-weight-bold">AKTIF</span>-kan oleh <b>ADMIN</b> sesuai dengan tanggal mulai praktiknya<br><br>
 
-                                                                    7. <span class="badge badge-success text-md">AKTIF</span><br>
+                                                                    <span class="badge badge-success text-md">AKTIF</span><br>
                                                                     Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span>, dan bisa melakukan <span class="text-success font-weight-bold">Pembayaran</span><br><br>
 
-                                                                    8. <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
+                                                                    <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
                                                                     Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
 
-                                                                    9. <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
+                                                                    <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
                                                                     Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
 
-                                                                    10. <span class="badge badge-dark text-md">SELESAI</span><br>
+                                                                    <span class="badge badge-dark text-md">SELESAI</span><br>
                                                                     Praktikan Sudah <span class="text-dark font-weight-bold">SELESAI</span><br><br>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <br>
-                                                    <?php
-                                                    if ($d_praktik['status_cek_praktik'] == "DPH") {
-                                                    ?>
-                                                        <span class="badge badge-warning text-md">
-                                                            DATA <br>PRAKTIK & TARIF
-                                                        </span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPH_Y") {
-                                                    ?>
-                                                        <span class="badge badge-success text-md">
-                                                            Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i>
-                                                        </span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPH_T") {
-                                                    ?>
-                                                        <span class="badge badge-danger text-md">
-                                                            Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i>
-                                                        </span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
-                                                    ?>
-                                                        <span class="badge badge-warning text-md"> TEMPAT </span>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </div>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <!-- Data Status  -->
-                                                <div class="col-sm-2 text-center my-auto">
+                                                <?php
+                                                } else {
+                                                ?>
                                                     <b>STATUS : </b>
                                                     <a href="#" data-toggle="modal" data-target="#info_status" title="Keterangan Status">
                                                         <i class="fas fa-info-circle" style="font-size: 14px;"></i>
@@ -388,82 +359,89 @@ if (isset($_POST['arsip_praktik'])) {
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <br>
+                                                <?php
+                                                }
+                                                if ($d_praktik['status_cek_praktik'] == "DPT") {
+                                                ?>
+                                                    <span class="badge badge-warning text-md">
+                                                        DATA <br>PRAKTIK & TARIF
+                                                    </span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
+                                                ?>
+                                                    <span class="badge badge-success text-md">
+                                                        Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i>
+                                                    </span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
+                                                ?>
+                                                    <span class="badge badge-danger text-md">
+                                                        Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i>
+                                                    </span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
+                                                ?>
+                                                    <span class="badge badge-warning text-md"> TEMPAT </span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+                                                ?>
+                                                    <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
                                                     <?php
-                                                    if ($d_praktik['status_cek_praktik'] == "DPH") {
+                                                    if ($_GET['prk'] == 'ked') {
                                                     ?>
-                                                        <span class="badge badge-warning text-md">
-                                                            DATA <br>PRAKTIK & TARIF
-                                                        </span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPH_Y") {
-                                                    ?>
-                                                        <span class="badge badge-success text-md">
-                                                            Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i>
-                                                        </span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "VPH_T") {
-                                                    ?>
-                                                        <span class="badge badge-danger text-md">
-                                                            Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i>
-                                                        </span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
-                                                    ?>
-                                                        <span class="badge badge-warning text-md"> TEMPAT </span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
-                                                    ?>
-                                                        <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
-                                                    ?>
-                                                        <span class="badge badge-primary text-md">Val. PEMBAYARAN</span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
-                                                    ?>
-                                                        <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span>
                                                         <hr>
                                                         <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
                                                     <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "BYR_T") {
+                                                    }
+                                                } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
                                                     ?>
-                                                        <span class="badge badge-danger text-md">Val. PEMBAYARAN <i class="fas fa-times-circle"></i></span>
+                                                    <span class="badge badge-primary text-md">Val. PEMBAYARAN</span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
+                                                ?>
+                                                    <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span>
                                                     <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
+                                                    if ($_GET['prk'] != 'ked') {
                                                     ?>
-                                                        <span class="badge badge-success text-md">AKTIF</span>
-                                                    <?php
-                                                    } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
-                                                    ?>
-                                                        <span class="badge badge-secondary text-md">SELESAI</span>
+                                                        <hr>
+                                                        <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
                                                     <?php
                                                     }
+                                                } elseif ($d_praktik['status_cek_praktik'] == "BYR_T") {
                                                     ?>
-                                                </div>
-                                            <?php
-                                            }
-                                            ?>
+                                                    <span class="badge badge-danger text-md">Val. PEMBAYARAN <i class="fas fa-times-circle"></i></span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
+                                                ?>
+                                                    <span class="badge badge-success text-md">AKTIF</span>
+                                                <?php
+                                                } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
+                                                ?>
+                                                    <span class="badge badge-secondary text-md">SELESAI</span>
+                                                <?php
+                                                }
+                                                ?>
+                                            </div>
+
                                             <!-- Tombol Link Data Status  -->
                                             <div class="col-sm-2 text-center my-auto">
 
                                                 <!-- tombol dropdown pilih menu tarif, mess, bukti bayar -->
                                                 <?php
-                                                if ($d_praktik['status_cek_praktik'] == "DPH") {
+                                                if ($d_praktik['status_cek_praktik'] == "DPT") {
                                                 ?>
                                                     <b>VALIDASI : </b><br>
                                                     <div class="btn-group">
-                                                        <button class="btn btn-outline-success btn-sm" onclick="valDataPraktikHargaDiterima(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
-                                                        <button class="btn btn-outline-danger btn-sm" onclick="valDataPraktikHargaDitolak(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
+                                                        <button class="btn btn-outline-success btn-sm" onclick="valDataPraktikTarif_Y(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="valDataPraktikTarif_T(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
                                                     </div>
                                                 <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "VPH_Y") {
+                                                } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
                                                 ?>
                                                     <b>PILIH : </b><br>
                                                     <a href="?prk=<?php echo $_GET['prk']; ?>&t=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">TEMPAT</a>
                                                 <?php
-                                                } elseif ($d_praktik['status_cek_praktik'] == "VPH_T") {
+                                                } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
                                                 ?>
                                                     <b>CEK KETERANGAN : </b><br>
 
@@ -502,8 +480,8 @@ if (isset($_POST['arsip_praktik'])) {
                                                 ?>
                                                     <b>VALIDASI : </b><br>
                                                     <div class="btn-group">
-                                                        <button class="btn btn-outline-success btn-sm" onclick="valPembayaranDiterima(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
-                                                        <button class="btn btn-outline-danger btn-sm" onclick="valPembayaranDitolak(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
+                                                        <button class="btn btn-outline-success btn-sm" onclick="valPembayaran_Y(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="valPembayaran_T(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
                                                     </div>
                                                 <?php
                                                 } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
@@ -981,8 +959,8 @@ if (isset($_POST['arsip_praktik'])) {
     </div>
 
     <script>
-        function valDataPraktikHargaDiterima(id) {
-            console.log("valDataPraktikHargaDiterima");
+        function valDataPraktikTarif_Y(id) {
+            console.log("valDataPraktikTarif_Y");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
@@ -997,8 +975,12 @@ if (isset($_POST['arsip_praktik'])) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        type: 'GET',
-                        url: "_admin/exc/x_v_praktik_valDataPraktikHargaDiterima.php?id=" + id,
+                        type: 'POST',
+                        url: "_admin/exc/x_v_praktik_valDataPraktikTarif.php?",
+                        data: {
+                            'id': id,
+                            'ket': 'y'
+                        },
                         success: function() {
                             Swal.fire({
                                 allowOutsideClick: false,
@@ -1018,13 +1000,13 @@ if (isset($_POST['arsip_praktik'])) {
             })
         }
 
-        function valDataPraktikHargaDitolak(id) {
-            console.log("valDataPraktikHargaDitolak");
+        function valDataPraktikTarif_T(id) {
+            console.log("valDataPraktikTarif_T");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
                 html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Tarif" +
-                    '<input id="valDPHDitolak" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
+                    '<input id="valDPT_T" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',
@@ -1034,13 +1016,14 @@ if (isset($_POST['arsip_praktik'])) {
                 allowOutsideClick: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var valDPHDitolak = document.getElementById('valDPHDitolak').value;
+                    var valDPT_T = document.getElementById('valDPT_T').value;
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_v_praktik_valDataPraktikHargaDitolak.php",
+                        url: "_admin/exc/x_v_praktik_valDataPraktikTarif.php",
                         data: {
                             'id': id,
-                            'valDPHDitolak': valDPHDitolak
+                            'ket': 't',
+                            'valDPT_T': valDPT_T
                         },
                         success: function() {
                             Swal.fire({
@@ -1062,8 +1045,8 @@ if (isset($_POST['arsip_praktik'])) {
             });
         }
 
-        function valPembayaranDiterima(id) {
-            console.log("valPembayaranDiterima");
+        function valPembayaran_Y(id) {
+            console.log("valPembayaran_Y");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
@@ -1078,8 +1061,12 @@ if (isset($_POST['arsip_praktik'])) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        type: 'GET',
-                        url: "_admin/exc/x_v_praktik_valPembayaranDiterima.php?id=" + id,
+                        type: 'POST',
+                        url: "_admin/exc/x_v_praktik_valPembayaran.php?",
+                        data: {
+                            "id": id,
+                            "ket": "y"
+                        },
                         success: function() {
                             Swal.fire({
                                 allowOutsideClick: false,
@@ -1099,13 +1086,13 @@ if (isset($_POST['arsip_praktik'])) {
             })
         }
 
-        function valPembayaranDitolak(id) {
-            console.log("valPembayaranDitolak");
+        function valPembayaran_T(id) {
+            console.log("valPembayaran_T");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
                 html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Tarif" +
-                    '<input id="valPDitolak" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
+                    '<input id="valP_T" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',
@@ -1115,13 +1102,14 @@ if (isset($_POST['arsip_praktik'])) {
                 allowOutsideClick: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var valPDitolak = document.getElementById('valPDitolak').value;
+                    var valP_T = document.getElementById('valP_T').value;
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_v_praktik_valPembayaranDitolak.php",
+                        url: "_admin/exc/x_v_praktik_valPembayaran.php",
                         data: {
                             'id': id,
-                            'valPDitolak': valPDitolak
+                            'ket': 't',
+                            'valP_T': valP_T
                         },
                         success: function() {
                             Swal.fire({

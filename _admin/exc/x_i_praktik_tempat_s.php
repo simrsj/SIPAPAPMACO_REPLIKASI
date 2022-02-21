@@ -19,25 +19,25 @@ if ($d_praktik['id_jurusan_pdd_jenis'] == 1) {
 
     $frek = $d_praktik['jumlah_praktik'];
     $kuan = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
-    $total_harga = $frek * $kuan * $d_tempat['harga_tempat'];
+    $total_tarif = $frek * $kuan * $d_tempat['tarif_tempat'];
 } else {
     $frek = 1;
     $kuan = 1;
-    $total_harga = $frek * $kuan * $d_tempat['harga_tempat'];
+    $total_tarif = $frek * $kuan * $d_tempat['tarif_tempat'];
 }
 $sql_t = "INSERT INTO tb_tempat_pilih (
     id_tempat, 
     id_praktik,
     frek_tempat_pilih,
     kuan_tempat_pilih,
-    total_harga_tempat_pilih,
+    total_tarif_tempat_pilih,
     tgl_input_tempat_pilih
     ) VALUES (
         '" . $_POST['tempat'] . "', 
         '" . $_POST['id'] . "', 
         '" . $frek . "', 
         '" . $kuan . "', 
-        '" . $total_harga . "', 
+        '" . $total_tarif . "', 
         '" . date('Y-m-d') . "'
     )";
 $sql_u = "UPDATE tb_praktik SET

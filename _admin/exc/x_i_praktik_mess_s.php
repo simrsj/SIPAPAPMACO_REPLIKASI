@@ -16,14 +16,14 @@ $jumlah_hari_praktik = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_prakt
 // echo $jumlah_hari_praktik . "<br>";
 
 if ($_POST['makan_mess_pilih'] == "y") {
-    $total_harga_mess_pilih = $jumlah_hari_praktik * $d_mess['harga_dengan_makan_mess'] * $d_praktik['jumlah_praktik'];
+    $total_tarif_mess_pilih = $jumlah_hari_praktik * $d_mess['tarif_dengan_makan_mess'] * $d_praktik['jumlah_praktik'];
 } elseif ($_POST['makan_mess_pilih'] == "t") {
-    $total_harga_mess_pilih = $jumlah_hari_praktik * $d_mess['harga_tanpa_makan_mess'] * $d_praktik['jumlah_praktik'];
+    $total_tarif_mess_pilih = $jumlah_hari_praktik * $d_mess['tarif_tanpa_makan_mess'] * $d_praktik['jumlah_praktik'];
 } else {
-    $total_harga_mess_pilih = 0;
+    $total_tarif_mess_pilih = 0;
 }
 
-// echo $total_harga_mess_pilih . "<br>";
+// echo $total_tarif_mess_pilih . "<br>";
 
 $sql_insert_pilih_mess = "INSERT INTO tb_mess_pilih (
 id_praktik,
@@ -31,14 +31,14 @@ id_mess,
 tgl_input_mess_pilih,
 makan_mess_pilih,
 total_hari_mess_pilih,
-total_harga_mess_pilih
+total_tarif_mess_pilih
 ) VALUES (
 '" . $_POST['id'] . "',
 '" . $_POST['id_mess'] . "',
 '" . date('Y-m-d') . "',
 '" . $_POST['makan_mess_pilih'] . "',
 '" . $jumlah_hari_praktik . "',
-'" . $total_harga_mess_pilih . "'
+'" . $total_tarif_mess_pilih . "'
 )";
 
 //SQL ubah status praktik

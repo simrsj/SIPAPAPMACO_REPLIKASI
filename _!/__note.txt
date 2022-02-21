@@ -17,7 +17,11 @@
 
 git status
 git add . 
+<<<<<<< HEAD
 git commit -a -m "Koneksi Server"  
+=======
+git commit -a -m "Tombol Validasi Data Praktik-Tarif dan pembayaran"  
+>>>>>>> 5ab3e37eda9456b4090b5705b27d8822f16f1c8b
 git pull
 git push
 
@@ -33,5 +37,6 @@ TRUNCATE tb_praktik;
 TRUNCATE tb_tarif_pilih;
 TRUNCATE tb_mess_pilih;
 TRUNCATE tb_tempat_pilih;
+TRUNCATE tb_bayar;
 
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
