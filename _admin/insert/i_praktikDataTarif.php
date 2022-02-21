@@ -89,9 +89,9 @@ $jumlah_praktik = $_GET['jum'];
                                     } else {
                                         $frekuensi = $d_tarif_jurusan['tipe_tarif'];
                                     }
-                                    if ($d_tarif_jurusan['frekuensi_tarif'] != NULL || $d_tarif_jurusan['frekuensi_tarif'] != 0) {
-                                        $frekuensi = $d_tarif_jurusan['frekuensi_tarif'];
-                                    }
+                                    // if ($d_tarif_jurusan['frekuensi_tarif'] != NULL || $d_tarif_jurusan['frekuensi_tarif'] != 0) {
+                                    //     $frekuensi = $d_tarif_jurusan['frekuensi_tarif'];
+                                    // }
                                     echo $frekuensi;
                                     ?>
                                 </td>

@@ -252,10 +252,10 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                         </div>
                         <hr>
 
-                        <!-- Penanggung Jawab/Pembimbing/Mentor -->
+                        <!-- Koordinator -->
                         <div class=" row">
                             <div class="col-lg-12 text-center">
-                                <b>Penanggung Jawab/Pembimbing/Mentor</b>
+                                <b>Koordinator</b>
                             </div>
                         </div>
                         <br>
@@ -266,17 +266,17 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                             ?>
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_pembimbing_praktik" id="nama_pembimbing" placeholder="Isi Nama Pembimbing" required><span class="text-danger font-weight-bold  font-italic text-xs" id="err_nama_pembimbing"></span>
+                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" required><span class="text-danger font-weight-bold  font-italic text-xs" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
-                                <input type="text" class="form-control" name="email_pembimbing_praktik" id="email_pembimbing" placeholder="Isi Email Pembimbing">
+                                <input type="text" class="form-control" name="email_koordinator_praktik" id="email_koordinator" placeholder="Isi Email Koordinator">
                             </div>
                             <div class="col-lg-4">
                                 Telpon : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="telp_pembimbing_praktik" id="telp_pembimbing" placeholder="Isi Telpon Pembimbing" min="1" required>
+                                <input type="number" class="form-control" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_telp_pembimbing"></span>
+                                <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_telp_koordinator"></span>
                             </div>
                         </div>
                         <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
@@ -318,9 +318,9 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
             var tgl_selesai = document.getElementById("tgl_selesai").value;
             var file_surat = document.getElementById("file_surat").value;
             var file_data_praktikan = document.getElementById("file_data_praktikan").value;
-            var nama_pembimbing = document.getElementById("nama_pembimbing").value;
-            var email_pembimbing = document.getElementById("email_pembimbing").value;
-            var telp_pembimbing = document.getElementById("telp_pembimbing").value;
+            var nama_koordinator = document.getElementById("nama_koordinator").value;
+            var email_koordinator = document.getElementById("email_koordinator").value;
+            var telp_koordinator = document.getElementById("telp_koordinator").value;
 
             //Notif Bila tidak diisi
             if (
@@ -339,8 +339,8 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 file_data_praktikan == "" ||
                 // type_data_praktikan != "xlsx" ||
                 // size_data_praktikan > 1024 ||
-                nama_pembimbing == "" ||
-                telp_pembimbing == ""
+                nama_koordinator == "" ||
+                telp_koordinator == ""
             ) {
 
                 /* console.log(institusi + "--" +
@@ -356,9 +356,9 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                     file_data_praktikan + "--" +
                     // type_data_praktikan + "--" +
                     // size_data_praktikan + "--" +
-                    nama_pembimbing + "--" +
-                    email_pembimbing + "--" +
-                    telp_pembimbing
+                    nama_koordinator + "--" +
+                    email_koordinator + "--" +
+                    telp_koordinator
                 ); */
 
                 //warning Toast bila ada data wajib yg berlum terisi
@@ -457,18 +457,18 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                     document.getElementById("err_file_data_praktikan").innerHTML = "";
                 }
 
-                //notif nama_pembimbing
-                if (nama_pembimbing == "") {
-                    document.getElementById("err_nama_pembimbing").innerHTML = "Nama Pembimbing Harus Diisi";
+                //notif nama_koordinator
+                if (nama_koordinator == "") {
+                    document.getElementById("err_nama_koordinator").innerHTML = "Nama Koordinator Harus Diisi";
                 } else {
-                    document.getElementById("err_nama_pembimbing").innerHTML = "";
+                    document.getElementById("err_nama_koordinator").innerHTML = "";
                 }
 
-                //notif telp_pembimbing
-                if (telp_pembimbing == "") {
-                    document.getElementById("err_telp_pembimbing").innerHTML = "Telpon Pembimbing Harus Diisi";
+                //notif telp_koordinator
+                if (telp_koordinator == "") {
+                    document.getElementById("err_telp_koordinator").innerHTML = "Telpon Koordinator Harus Diisi";
                 } else {
-                    document.getElementById("err_telp_pembimbing").innerHTML = "";
+                    document.getElementById("err_telp_koordinator").innerHTML = "";
                 }
             }
 
@@ -613,8 +613,8 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 jumlah != "" &&
                 tgl_mulai != "" &&
                 tgl_selesai != "" &&
-                nama_pembimbing != "" &&
-                telp_pembimbing != "" &&
+                nama_koordinator != "" &&
+                telp_koordinator != "" &&
                 tgl_selesai > tgl_mulai &&
                 file_surat != "" &&
                 getTypeSurat == 'pdf' &&
@@ -634,9 +634,9 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 document.getElementById("err_tgl_selesai").innerHTML = "";
                 document.getElementById("err_file_surat").innerHTML = "";
                 document.getElementById("err_file_data_praktikan").innerHTML = "";
-                // document.getElementById("err_akun_pembimbing").innerHTML = "";
-                document.getElementById("err_nama_pembimbing").innerHTML = "";
-                document.getElementById("err_telp_pembimbing").innerHTML = "";
+                // document.getElementById("err_akun_koordinator").innerHTML = "";
+                document.getElementById("err_nama_koordinator").innerHTML = "";
+                document.getElementById("err_telp_koordinator").innerHTML = "";
 
                 //data dari form_praktik
                 var data_praktik = $('#form_praktik').serializeArray();

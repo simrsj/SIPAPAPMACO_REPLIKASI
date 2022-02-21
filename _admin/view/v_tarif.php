@@ -7,12 +7,12 @@
             <div class="dropdown show">
 
                 <!-- tambah tarif -->
-                <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#hrg_i_m'>
+                <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#trf_i_m'>
                     <i class="fas fa-plus"></i> Tambah
                 </a>
 
                 <!-- modal tambah Tarif  -->
-                <div class="modal fade" id="hrg_i_m">
+                <div class="modal fade" id="trf_i_m">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <form method="post" action="">
@@ -219,7 +219,7 @@
                     <a class='dropdown-item' href='#' data-toggle='modal' data-target='#ish_i_m'>
                         Tambah Satuan
                     </a>
-                    <a class='dropdown-item' href='?hrg&dhs'>
+                    <a class='dropdown-item' href='?trf&dts'>
                         Daftar Satuan
                     </a>
                 </div>
@@ -255,7 +255,7 @@
                 <?php
 
                 // data satuan Tarif
-                if (isset($_GET['dhs'])) {
+                if (isset($_GET['dts'])) {
                 ?>
                     <table class="table table-striped" id="myTable">
                         <thead class="thead-dark">
@@ -283,17 +283,17 @@
                                     <td><?php echo $d_tarif_satuan['nama_tarif_satuan']; ?></td>
                                     <td><?php echo $d_tarif_satuan['ket_tarif_satuan']; ?></td>
                                     <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dhs_u_m" . $d_tarif_satuan['id_tarif_satuan']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dts_u_m" . $d_tarif_satuan['id_tarif_satuan']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dhs_d_m" . $d_tarif_satuan['id_tarif_satuan']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dts_d_m" . $d_tarif_satuan['id_tarif_satuan']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>
 
                                 <!-- modal ubah Satuan Tarif  -->
-                                <div class="modal fade" id="<?php echo "dhs_u_m" . $d_tarif_satuan['id_tarif_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?php echo "dts_u_m" . $d_tarif_satuan['id_tarif_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method="post" action="" class="form-group">
@@ -322,7 +322,7 @@
                                 </div>
 
                                 <!-- modal hapus satuan tarif  -->
-                                <div class="modal fade" id="<?php echo "dhs_d_m" . $d_tarif_satuan['id_tarif_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?php echo "dts_d_m" . $d_tarif_satuan['id_tarif_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method="post" action="">
@@ -395,17 +395,17 @@
                                     <td><?php echo $d_tarif['nama_tarif_satuan']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_tarif['jumlah_tarif'], 0, ",", "."); ?></td>
                                     <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#hrg_u_m" . $d_tarif['id_tarif']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#trf_u_m" . $d_tarif['id_tarif']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#hrg_d_m" . $d_tarif['id_tarif']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#trf_d_m" . $d_tarif['id_tarif']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>
 
                                 <!-- modal ubah Tarif  -->
-                                <div class="modal fade" id="<?php echo "hrg_u_m" . $d_tarif['id_tarif']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?php echo "trf_u_m" . $d_tarif['id_tarif']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method="post" action="" class="form-group">
@@ -665,7 +665,7 @@
                                 </div>
 
                                 <!-- modal hapus Tarif  -->
-                                <div class="modal fade" id="<?php echo "hrg_d_m" . $d_tarif['id_tarif']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?php echo "trf_d_m" . $d_tarif['id_tarif']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method="post" action="">
@@ -731,7 +731,7 @@ if (isset($_POST['tambah_tarif'])) {
 
 ?>
     <script>
-        document.location.href = "?hrg";
+        document.location.href = "?trf";
     </script>
 <?php
 } elseif (isset($_POST['tambah_tarif_satuan'])) {
@@ -749,7 +749,7 @@ if (isset($_POST['tambah_tarif'])) {
 
 ?>
     <script>
-        document.location.href = "?hrg&dhs";
+        document.location.href = "?trf&dts";
     </script>
 <?php
 } elseif (isset($_POST['ubah_tarif'])) {
@@ -771,7 +771,7 @@ if (isset($_POST['tambah_tarif'])) {
     $conn->query($sql_ubah);
 ?>
     <script>
-        document.location.href = "?hrg";
+        document.location.href = "?trf";
     </script>
 <?php
 } elseif (isset($_POST['ubah_tarif_satuan'])) {
@@ -784,7 +784,7 @@ if (isset($_POST['tambah_tarif'])) {
     $conn->query($sql_ubah);
 ?>
     <script>
-        document.location.href = "?hrg&dhs";
+        document.location.href = "?trf&dts";
     </script>
 <?php
 } elseif (isset($_POST['hapus_tarif'])) {
@@ -792,7 +792,7 @@ if (isset($_POST['tambah_tarif'])) {
 
 ?>
     <script>
-        document.location.href = "?hrg";
+        document.location.href = "?trf";
     </script>
 <?php
 } elseif (isset($_POST['hapus_tarif_satuan'])) {
@@ -800,7 +800,7 @@ if (isset($_POST['tambah_tarif'])) {
 
 ?>
     <script>
-        document.location.href = "?hrg&dhs";
+        document.location.href = "?trf&dts";
     </script>
 <?php
 }
