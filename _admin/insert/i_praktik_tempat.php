@@ -36,6 +36,8 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                     ORDER BY nama_tempat ASC
                 ";
 
+                // echo $sql_tempat;
+
                 $q_tempat = $conn->query($sql_tempat);
                 $r_tempat = $q_tempat->rowCount();
                 if ($r_tempat > 0) {

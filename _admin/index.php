@@ -247,9 +247,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							</div>
 						</div>
 					</div>
-
 					<?php
-					include "_add-ons/dashboard_data_admin.php";
+
+					include "./_add-ons/dashboard_data_admin.php";
+
 					if (isset($_GET['aku'])) {
 						include "_admin/view/v_akun.php";
 					} elseif (isset($_GET['akr'])) {

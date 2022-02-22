@@ -122,7 +122,7 @@ $total_mess = 0;
 #data tarif pilih
 $sql_praktik = "SELECT * FROM tb_tarif_pilih
             JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_cek_praktik = ('AKTIF' OR 'SELESAI')";
+            WHERE status_cek_praktik = ('AKV' OR 'SLS')";
 $q_praktik = $conn->query($sql_praktik);
 
 $total_tarif = 0;
