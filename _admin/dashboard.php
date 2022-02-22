@@ -107,17 +107,17 @@
                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN PROSES: </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $jumlah_praktik_proses; ?> Orang
+                                <?php echo $dashboard_dpjp; ?> Orang
                             </div>
                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN AKTIF: </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $jumlah_praktik_aktif; ?> Orang
+                                <?php echo $dashboard_dpja; ?> Orang
                             </div>
                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN SELESAI: </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $jumlah_praktik_selesai; ?> Orang
+                                <?php echo $dashboard_dpjs; ?> Orang
                             </div>
                         </div>
                         <div class="col-auto">
@@ -177,16 +177,29 @@
                                         <td><?php echo $no; ?></td>
                                         <td><?php echo $d_mess['nama_mess']; ?></td>
                                         <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                                        <td><?php echo $d_mess['kapasitas_terisi_mess']; ?></td>
+                                        <td><?php 
+                                        // $sql_kapsTerisiMess = "SELECT * FROM tb_praktik 
+                                        // JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_mess_pilih
+                                        // WHERE tb_praktik.status_cek_praktik = 'BYR_Y' 
+                                        // AND tb_praktik.status_cek_praktik = 'AKV'
+                                        // AND tb_mess.id_mess = ".d_mess['id_mess'];                                      "; 
+
+                                        // $q_kapsTerisiMess = $conn->query($sql_kapsTerisiMess);
+                                        // while ($d_kapsTerisiMess = $q_kapsTerisiMess->fetch(PDO::FETCH_ASSOC)){
+                                        //     $d_kapsTerisiMess['jumlah_praktik'];
+                                        // }
+                                        // echo $d_kapsTerisiMess['jumlah_praktik']; 
+                                        ?>
+                                        </td>
                                         <td>
                                             <form method="post" action="">
                                                 <?php
                                                 switch ($d_mess['status_mess']) {
-                                                    case "Aktif":
+                                                    case "y":
                                                         $btn_status_mess = "success";
                                                         $icon_status_mess = "Aktif";
                                                         break;
-                                                    case "Tidak Aktif":
+                                                    case "t":
                                                         $btn_status_mess = "danger";
                                                         $icon_status_mess = "Non Aktif";
                                                         break;
