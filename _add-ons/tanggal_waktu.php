@@ -89,6 +89,21 @@ function tanggal_hari($tanggal)
 	return $hari[$tanggal];
 }
 
+function tanggal_hari_calender($tanggal)
+{
+	$hari = array(
+		'Sun' =>   'Minggu',
+		'Mon' =>   'Senin',
+		'Tue' =>   'Selasa',
+		'Wed' =>   'Rabu',
+		'Thu' =>   'Kamis',
+		'Fri' =>   "Jum'at",
+		'Sat' =>   'Sabtu'
+	);
+
+	return $hari[$tanggal];
+}
+
 function tanggal_bulan($tanggal)
 {
 	$bulan = array(

@@ -74,7 +74,7 @@ if (isset($_POST['arsip_praktik'])) {
                     $jenis_jurusan
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
-                // echo $sql_praktik;
+                echo $sql_praktik;
 
                 $q_praktik = $conn->query($sql_praktik);
                 $r_praktik = $q_praktik->rowCount();
