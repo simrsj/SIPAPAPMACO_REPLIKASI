@@ -17,7 +17,7 @@
 
 git status
 git add . 
-git commit -a -m "-"  
+git commit -a -m "proses cek migrasi ke server"  
 git pull
 git push
 
