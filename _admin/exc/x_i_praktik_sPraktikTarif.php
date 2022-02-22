@@ -26,9 +26,15 @@ $sql_insert = "INSERT INTO tb_praktik (
     id_spesifikasi_pdd,
     id_akreditasi,
     id_user,
+<<<<<<< HEAD
     nama_pj_praktik,
     email_pj_praktik,
     telp_pj_praktik,
+=======
+    nama_koordinator_praktik,
+    email_koordinator_praktik,
+    telp_koordinator_praktik,
+>>>>>>> c0c45558d6173cf54dd44816dae654999f7a7d06
     status_cek_praktik, 
     status_praktik
     ) VALUES (
@@ -45,9 +51,15 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['id_spesifikasi_pdd'] . "', 
         '" . $_POST['id_akreditasi'] . "',
         '" . $_POST['user'] . "',
+<<<<<<< HEAD
         '" . $_POST['nama_pj_praktik'] . "', 
         '" . $_POST['email_pj_praktik'] . "',
         '" . $_POST['telp_pj_praktik'] . "', 
+=======
+        '" . $_POST['nama_koordinator_praktik'] . "', 
+        '" . $_POST['email_koordinator_praktik'] . "',
+        '" . $_POST['telp_koordinator_praktik'] . "', 
+>>>>>>> c0c45558d6173cf54dd44816dae654999f7a7d06
         'DPT', 
         'D'
         )";

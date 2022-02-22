@@ -30,7 +30,7 @@ id_praktik,
 id_mess,
 tgl_input_mess_pilih,
 makan_mess_pilih,
-total_hari_mess_pilih,
+jumlah_hari_mess_pilih,
 total_tarif_mess_pilih
 ) VALUES (
 '" . $_POST['id'] . "',
