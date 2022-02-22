@@ -17,11 +17,7 @@
 
 git status
 git add . 
-<<<<<<< HEAD
 git commit -a -m "Koneksi Server"  
-=======
-git commit -a -m "Tombol Validasi Data Praktik-Tarif dan pembayaran"  
->>>>>>> 5ab3e37eda9456b4090b5705b27d8822f16f1c8b
 git pull
 git push
 
