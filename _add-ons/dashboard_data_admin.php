@@ -47,7 +47,7 @@ $dashboard_dpp = $q_dpp->rowCount();
 
 //////////////////// DATA PRAKTIKAN AKTIF ////////////////////
 $sql_dpa = "SELECT * FROM tb_praktik
-WHERE status_cek_praktik = 'AKTIF'";
+WHERE status_cek_praktik = 'AKV'";
 $q_dpa = $conn->query($sql_dpa);
 $dashboard_dpa = $q_dpa->rowCount();
 
@@ -133,7 +133,7 @@ $total_mess = 0;
 #data tarif pilih
 $sql_praktik = "SELECT * FROM tb_tarif_pilih
             JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_cek_praktik = ('AKTIF' OR 'SELESAI')";
+            WHERE status_cek_praktik = ('AKV' OR 'SLS')";
 $q_praktik = $conn->query($sql_praktik);
 
 $total_tarif = 0;
@@ -145,7 +145,7 @@ while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
 #data mess pilih
 $sql_mess = "SELECT * FROM tb_mess_pilih
             JOIN tb_praktik ON tb_mess_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_cek_praktik = ('AKTIF' OR 'SELESAI')";
+            WHERE status_cek_praktik = ('AKV' OR 'SLS')";
 $q_mess = $conn->query($sql_mess);
 
 while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {

@@ -3,17 +3,14 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
-//Mencari id_jurusan_pdd_jenis
+//Mencari Data Jurusan
 $id_jurusan_pdd = $_GET['jur'];
-$sql_jurusan_pdd_jenis = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $id_jurusan_pdd;
-$q_jurusan_pdd_jenis = $conn->query($sql_jurusan_pdd_jenis);
-$d_jurusan_pdd_jenis = $q_jurusan_pdd_jenis->fetch(PDO::FETCH_ASSOC);
+$sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $id_jurusan_pdd;
+$q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
+$d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC);
 
 //Mencari id_jenjang_pdd
 $id_jenjang_pdd = $_GET['jen'];
-$sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd WHERE id_jenjang_pdd = " . $id_jenjang_pdd;
-$q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
-$d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC);
 
 $tgl_mulai_praktik = $_GET['tmp'];
 $tgl_selesai_praktik = $_GET['tsp'];
@@ -28,15 +25,14 @@ $jumlah_praktik = $_GET['jum'];
             <input type="hidden" name="path" id="path" value="<?php echo $_GET['i']; ?>">
             <!-- Menu Tarif wajib disesuaikan dengan jenis jurusan -->
             <div class="text-gray-700">
-                <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd']; ?></div>
+                <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
             </div>
             <hr>
             <?php
             $sql_tarif_jurusan = " SELECT * FROM tb_tarif 
                 JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
-                JOIN tb_jurusan_pdd_jenis ON tb_tarif.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
                 JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan  
-                WHERE tb_tarif.id_jurusan_pdd_jenis = " . $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] . " AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5
+                WHERE tb_tarif.id_jurusan_pdd = $id_jurusan_pdd AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5 AND tb_tarif.id_jenjang_pdd = 0
                 ORDER BY nama_tarif_jenis ASC, nama_tarif ASC 
                 ";
 
@@ -55,7 +51,7 @@ $jumlah_praktik = $_GET['jum'];
                             <th scope="col">Satuan</th>
                             <th scope="col">Tarif</th>
                             <th scope="col">Frekuensi</th>
-                            <th scope="col">Kuantitas<span class="text-danger">*</span></th>
+                            <th scope="col">Kuantitas</th>
                             <th scope="col">Total Tarif</th>
                         </tr>
                     </thead>
@@ -89,18 +85,27 @@ $jumlah_praktik = $_GET['jum'];
                                     } else {
                                         $frekuensi = $d_tarif_jurusan['tipe_tarif'];
                                     }
-                                    // if ($d_tarif_jurusan['frekuensi_tarif'] != NULL || $d_tarif_jurusan['frekuensi_tarif'] != 0) {
-                                    //     $frekuensi = $d_tarif_jurusan['frekuensi_tarif'];
-                                    // }
+                                    if ($d_tarif_jurusan['frekuensi_tarif'] != 0) {
+                                        $frekuensi = $d_tarif_jurusan['frekuensi_tarif'];
+                                    }
                                     echo $frekuensi;
                                     ?>
                                 </td>
-                                <td><?php echo $jumlah_praktik; ?></td>
                                 <td>
-                                    <?php echo "Rp " . number_format($frekuensi * $jumlah_praktik * $d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?>
+                                    <?php
+                                    if ($d_tarif_jurusan['kuantitas_tarif'] != 0) {
+                                        $kuantitas = $d_tarif_jurusan['kuantitas_tarif'];
+                                    } else {
+                                        $kuantitas = $jumlah_praktik;
+                                    }
+                                    echo $kuantitas;
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php echo "Rp " . number_format($frekuensi * $kuantitas * $d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?>
                                 </td>
                                 <?php
-                                $jumlah_total_tarif = ($frekuensi * $jumlah_praktik * $d_tarif_jurusan['jumlah_tarif']) + $jumlah_total_tarif;
+                                $jumlah_total_tarif = ($frekuensi * $kuantitas * $d_tarif_jurusan['jumlah_tarif']) + $jumlah_total_tarif;
                                 $no++;
                                 ?>
                             </tr>
@@ -108,18 +113,17 @@ $jumlah_praktik = $_GET['jum'];
                         }
 
                         //eksekusi bila jurusan selain dari kedokteran
-                        if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] != 1) {
+                        if ($d_jurusan_pdd != 1) {
                             $sql_tarif_jenjang = " SELECT * FROM tb_tarif 
                                     JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
                                     JOIN tb_jenjang_pdd ON tb_tarif.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                                     JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 
-                                    WHERE tb_tarif.id_jenjang_pdd = " . $id_jenjang_pdd . " AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 6
+                                    WHERE tb_tarif.id_jurusan_pdd = " . $id_jurusan_pdd . " AND tb_tarif.id_jenjang_pdd = " . $id_jenjang_pdd . " AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 6
                                     ORDER BY nama_jenjang_pdd ASC
                                     ";
 
-                            // echo $sql_tarif_jenjang . "<br>";    
+                            echo $sql_tarif_jenjang . "<br>";
                             $q_tarif_jenjang = $conn->query($sql_tarif_jenjang);
-                            $r_tarif_jenjang = $q_tarif_jenjang->rowCount();
 
                             while ($d_tarif_jenjang = $q_tarif_jenjang->fetch(PDO::FETCH_ASSOC)) {
                             ?>
@@ -147,14 +151,27 @@ $jumlah_praktik = $_GET['jum'];
                                         } else {
                                             $frekuensi = $d_tarif_jenjang['tipe_tarif'];
                                         }
+
+                                        if ($d_tarif_jurusan['frekuensi_tarif'] != 0) {
+                                            $frekuensi = $d_tarif_jurusan['frekuensi_tarif'];
+                                        }
                                         echo $frekuensi;
                                         ?>
                                     </td>
-                                    <td><?php echo $jumlah_praktik; ?></td>
-                                    <td><?php echo "Rp " . number_format($frekuensi * $jumlah_praktik * $d_tarif_jenjang['jumlah_tarif'], 0, ",", "."); ?></td>
+                                    <td>
+                                        <?php
+                                        if ($d_tarif_jurusan['kuantitas_tarif'] != 0) {
+                                            $kuantitas = $d_tarif_jurusan['kuantitas_tarif'];
+                                        } else {
+                                            $kuantitas = $jumlah_praktik;
+                                        }
+                                        echo $kuantitas;
+                                        ?>
+                                    </td>
+                                    <td><?php echo "Rp " . number_format($frekuensi * $kuantitas * $d_tarif_jenjang['jumlah_tarif'], 0, ",", "."); ?></td>
                                 </tr>
                         <?php
-                                $jumlah_total_tarif = ($frekuensi * $jumlah_praktik * $d_tarif_jenjang['jumlah_tarif']) + $jumlah_total_tarif;
+                                $jumlah_total_tarif = ($frekuensi * $kuantitas * $d_tarif_jenjang['jumlah_tarif']) + $jumlah_total_tarif;
                                 $no++;
                             }
                         }
@@ -178,7 +195,7 @@ $jumlah_praktik = $_GET['jum'];
 
             <!-- Menu Tarif Ujian disesuaikan dengan Jenis Jurusan -->
             <div class="text-gray-700">
-                <div class="h5 font-weight-bold text-center mt-3 mb-3">Menu Tarif Ujian <?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd']; ?></div>
+                <div class="h5 font-weight-bold text-center mt-3 mb-3">Menu Tarif Ujian <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
             </div>
             <div class="row boxed-check-group boxed-check-primary justify-content-center">
                 <label class="boxed-check">
@@ -198,7 +215,7 @@ $jumlah_praktik = $_GET['jum'];
             </div>
 
             <?php
-            if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] == 1) {
+            if ($d_jurusan_pdd == 1) {
                 $sql = "AND tb_tarif.id_tarif_jenis = 1";
             } else {
                 $sql = "AND tb_tarif.id_jurusan_pdd_jenis BETWEEN 2 AND 4";
@@ -206,7 +223,7 @@ $jumlah_praktik = $_GET['jum'];
             $sql_tarif_ujian = " SELECT * FROM tb_tarif 
                 JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
                 JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 
-                WHERE tb_tarif.id_tarif_jenis = 6 AND tb_tarif.id_jurusan_pdd_jenis = " . $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] . "
+                WHERE tb_tarif.id_tarif_jenis = 6 AND tb_tarif.id_jurusan_pdd = " . $id_jurusan_pdd . "
                 ORDER BY nama_tarif_jenis ASC
                 ";
 
@@ -225,7 +242,7 @@ $jumlah_praktik = $_GET['jum'];
                             <th scope="col">Satuan</th>
                             <th scope="col">Tarif</th>
                             <th scope="col">Frekuensi</th>
-                            <th scope="col">Kuantitas<span class="text-danger">*</span></th>
+                            <th scope="col">Kuantitas</th>
                             <th scope="col">Total Tarif</th>
                         </tre>
                     </thead>
@@ -286,7 +303,6 @@ $jumlah_praktik = $_GET['jum'];
             }
             ?>
 
-            <span class="text-md font-italic font-weight-bold"><span class="text-danger">*</span>Kuantitas = Jumlah Praktikan</span>
             <hr>
             <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
                 <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success" onclick="simpan_tarif()">

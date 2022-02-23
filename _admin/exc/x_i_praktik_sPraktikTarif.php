@@ -26,15 +26,9 @@ $sql_insert = "INSERT INTO tb_praktik (
     id_spesifikasi_pdd,
     id_akreditasi,
     id_user,
-<<<<<<< HEAD
-    nama_pj_praktik,
-    email_pj_praktik,
-    telp_pj_praktik,
-=======
     nama_koordinator_praktik,
     email_koordinator_praktik,
     telp_koordinator_praktik,
->>>>>>> c0c45558d6173cf54dd44816dae654999f7a7d06
     status_cek_praktik, 
     status_praktik
     ) VALUES (
@@ -51,15 +45,9 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['id_spesifikasi_pdd'] . "', 
         '" . $_POST['id_akreditasi'] . "',
         '" . $_POST['user'] . "',
-<<<<<<< HEAD
-        '" . $_POST['nama_pj_praktik'] . "', 
-        '" . $_POST['email_pj_praktik'] . "',
-        '" . $_POST['telp_pj_praktik'] . "', 
-=======
         '" . $_POST['nama_koordinator_praktik'] . "', 
         '" . $_POST['email_koordinator_praktik'] . "',
         '" . $_POST['telp_koordinator_praktik'] . "', 
->>>>>>> c0c45558d6173cf54dd44816dae654999f7a7d06
         'DPT', 
         'D'
         )";
@@ -70,17 +58,14 @@ $conn->query($sql_insert);
 
 $id_praktik = $_POST['id'];
 
-//Mencari id_jurusan_pdd_jenis
+//Mencari Data Jurusan
 $id_jurusan_pdd = $_POST['id_jurusan_pdd'];
-$sql_jurusan_pdd_jenis = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $id_jurusan_pdd;
-$q_jurusan_pdd_jenis = $conn->query($sql_jurusan_pdd_jenis);
-$d_jurusan_pdd_jenis = $q_jurusan_pdd_jenis->fetch(PDO::FETCH_ASSOC);
+$sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $id_jurusan_pdd;
+$q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
+$d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC);
 
 //Mencari id_jenjang_pdd
 $id_jenjang_pdd = $_POST['id_jenjang_pdd'];
-$sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd WHERE id_jenjang_pdd = " . $id_jenjang_pdd;
-$q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
-$d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC);
 
 $tgl_mulai_praktik = $_POST['tgl_mulai_praktik'];
 $tgl_selesai_praktik = $_POST['tgl_selesai_praktik'];
@@ -89,12 +74,11 @@ $jumlah_praktik = $_POST['jumlah_praktik'];
 
 //SQL menentukan tarif berdasarkan jenis jurusan
 $sql_tarif_jurusan = " SELECT * FROM tb_tarif 
-JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
-JOIN tb_jurusan_pdd_jenis ON tb_tarif.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
-JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
-WHERE tb_tarif.id_jurusan_pdd_jenis = " . $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] . " AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5
-ORDER BY nama_tarif_jenis ASC, nama_tarif ASC 
-";
+            JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
+            JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan  
+            WHERE tb_tarif.id_jurusan_pdd = $id_jurusan_pdd AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5 AND tb_tarif.id_jenjang_pdd = 0
+            ORDER BY nama_tarif_jenis ASC, nama_tarif ASC 
+            ";
 
 echo "<br><br>";
 echo $sql_tarif_jurusan;
@@ -117,25 +101,35 @@ while ($d_tarif_jurusan = $q_tarif_jurusan->fetch(PDO::FETCH_ASSOC)) {
         $frekuensi = $d_tarif_jurusan['tipe_tarif'];
     }
 
-    //bila ada data frekuensi di attribunya (tidak NULL/ tidak kososng - terisi)
-    // if ($d_tarif_jurusan['frekuensi_tarif'] != NULL || $d_tarif_jurusan['frekuensi_tarif'] != 0) {
-    //     $frekuensi = $d_tarif_jurusan['frekuensi_tarif'];
-    // }
+    if ($d_tarif_jurusan['frekuensi_tarif'] != 0) {
+        $frekuensi = $d_tarif_jurusan['frekuensi_tarif'];
+    }
+
+    if ($d_tarif_jurusan['kuantitas_tarif'] != 0) {
+        $kuantitas = $d_tarif_jurusan['kuantitas_tarif'];
+    } else {
+        $kuantitas = $jumlah_praktik;
+    }
+    echo $kuantitas;
 
     $sql_insert = "INSERT INTO tb_tarif_pilih (
         id_praktik, 
-        id_tarif,
         tgl_input_tarif_pilih,
+        nama_tarif_jenis_pilih,
+        nama_tarif_pilih,
+        nominal_tarif_pilih,
         frekuensi_tarif_pilih,
         kuantitas_tarif_pilih,
         jumlah_tarif_pilih
         ) VALUES (
             '" . $id_praktik . "', 
-            '" . $d_tarif_jurusan['id_tarif'] . "',
-            '" . date('Y-m-d') . "', 
+            '" . date('Y-m-d') . "',
+            '" . $d_tarif_jurusan['nama_tarif_jenis'] . "', 
+            '" . $d_tarif_jurusan['nama_tarif'] . "', 
+            '" . $d_tarif_jurusan['jumlah_tarif'] . "',  
             '" . $frekuensi . "',
-            '" . $jumlah_praktik . "', 
-            '" . $frekuensi * $jumlah_praktik * $d_tarif_jurusan['jumlah_tarif'] . "'
+            '" . $kuantitas . "', 
+            '" . $frekuensi * $kuantitas * $d_tarif_jurusan['jumlah_tarif'] . "'
             )";
 
     echo $sql_insert;
@@ -147,13 +141,14 @@ echo "<br>";
 
 
 //SQL BST Eksekusi bila jurusan selain dari kedokteran
-if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] != 1) {
+if ($id_jurusan_pdd != 1) {
     $sql_tarif_jenjang = " SELECT * FROM tb_tarif 
-        JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
-        JOIN tb_jenjang_pdd ON tb_tarif.id_jenjang_pdd = tb_jenjang_pdd.    id_jenjang_pdd
-        WHERE tb_tarif.id_jenjang_pdd = " . $id_jenjang_pdd . " AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 6
-        ORDER BY nama_jenjang_pdd ASC
-        ";
+            JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
+            JOIN tb_jenjang_pdd ON tb_tarif.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
+            JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 
+            WHERE tb_tarif.id_jurusan_pdd = " . $id_jurusan_pdd . " AND tb_tarif.id_jenjang_pdd = " . $id_jenjang_pdd . " AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 6
+            ORDER BY nama_jenjang_pdd ASC
+            ";
 
     $q_tarif_jenjang = $conn->query($sql_tarif_jenjang);
 
@@ -172,20 +167,36 @@ if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] != 1) {
             $frekuensi = $d_tarif_jenjang['tipe_tarif'];
         }
 
+
+        if ($d_tarif_jenjang['frekuensi_tarif'] != 0) {
+            $frekuensi = $d_tarif_jenjang['frekuensi_tarif'];
+        }
+
+        if ($d_tarif_jenjang['kuantitas_tarif'] != 0) {
+            $kuantitas = $d_tarif_jenjang['kuantitas_tarif'];
+        } else {
+            $kuantitas = $jumlah_praktik;
+        }
+        echo $kuantitas;
+
         $sql_insert_tarif_jenjang = " INSERT INTO tb_tarif_pilih (
                 id_praktik, 
-                id_tarif, 
                 tgl_input_tarif_pilih, 
+                nama_tarif_jenis_pilih,
+                nama_tarif_pilih,
+                nominal_tarif_pilih,
                 frekuensi_tarif_pilih,
                 kuantitas_tarif_pilih,
                 jumlah_tarif_pilih
             ) VALUES (
                 '" . $id_praktik . "', 
-                '" . $d_tarif_jenjang['id_tarif'] . "', 
                 '" . date('Y-m-d') . "', 
+                '" . $d_tarif_jenjang['nama_tarif_jenis'] . "', 
+                '" . $d_tarif_jurusan['nama_tarif'] . "', 
+                '" . $d_tarif_jurusan['jumlah_tarif'] . "',  
                 '" . $frekuensi . "', 
-                '" . $jumlah_praktik . "', 
-                '" . $frekuensi * $jumlah_praktik * $d_tarif_jenjang['jumlah_tarif'] . "'
+                '" . $kuantitas . "', 
+                '" . $frekuensi * $kuantitas * $d_tarif_jenjang['jumlah_tarif'] . "'
             )";
 
         echo $sql_insert_tarif_jenjang;
@@ -200,17 +211,14 @@ $cek_pilih_ujian = $_POST['cek_pilih_ujian'];
 
 echo $cek_pilih_ujian . "<br>";
 if ($cek_pilih_ujian == 'y') {
-    if ($d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] == 1) {
-        $sql = "AND tb_tarif.id_tarif_jenis = 1";
-    } else {
-        $sql = "AND tb_tarif.id_jurusan_pdd_jenis BETWEEN 2 AND 4";
-    }
     $sql_tarif_ujian = " SELECT * FROM tb_tarif 
             JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
             JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 
-            WHERE tb_tarif.id_tarif_jenis = 6 AND tb_tarif.id_jurusan_pdd_jenis = " . $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] . "
+            WHERE tb_tarif.id_tarif_jenis = 6 AND tb_tarif.id_jurusan_pdd = " . $id_jurusan_pdd . "
             ORDER BY nama_tarif_jenis ASC
         ";
+
+    echo $sql_tarif_ujian;
 
     $q_tarif_ujian = $conn->query($sql_tarif_ujian);
 
@@ -229,20 +237,35 @@ if ($cek_pilih_ujian == 'y') {
             $frekuensi = $d_tarif_ujian['tipe_tarif'];
         }
 
+        if ($d_tarif_ujian['frekuensi_tarif'] != 0) {
+            $frekuensi = $d_tarif_ujian['frekuensi_tarif'];
+        }
+
+        if ($d_tarif_ujian['kuantitas_tarif'] != 0) {
+            $kuantitas = $d_tarif_ujian['kuantitas_tarif'];
+        } else {
+            $kuantitas = $jumlah_praktik;
+        }
+        echo $kuantitas;
+
         $sql_insert_tarif_ujian = " INSERT INTO tb_tarif_pilih (
                 id_praktik, 
-                id_tarif, 
                 tgl_input_tarif_pilih, 
+                nama_tarif_jenis_pilih,
+                nama_tarif_pilih,
+                nominal_tarif_pilih,
                 frekuensi_tarif_pilih,
                 kuantitas_tarif_pilih,
                 jumlah_tarif_pilih
             ) VALUES (
                 '" . $id_praktik . "', 
-                '" . $d_tarif_ujian['id_tarif'] . "', 
                 '" . date('Y-m-d') . "', 
+                '" . $d_tarif_ujian['nama_tarif_jenis'] . "', 
+                '" . $d_tarif_ujian['nama_tarif'] . "', 
+                '" . $d_tarif_ujian['jumlah_tarif'] . "',  
                 '" . $frekuensi . "', 
-                '" . $jumlah_praktik . "', 
-                '" . $frekuensi * $jumlah_praktik * $d_tarif_ujian['jumlah_tarif'] . "'
+                '" . $kuantitas . "', 
+                '" . $frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif'] . "'
             )";
 
         echo $sql_insert_tarif_ujian;

@@ -20,40 +20,56 @@
                                     Tambah Tarif :
                                 </div>
                                 <div class="modal-body">
-                                    Nama Tarif : <span style="color:red">*</span><br>
+                                    Nama Tarif : <span class="text-danger">*</span><br>
                                     <input class="form-control" name="nama_tarif" required><br>
-                                    Satuan Tarif : <span style="color:red">*</span><br><?php
-                                                                                        $sql_tarif_satuan = "SELECT * FROM tb_tarif_satuan order by nama_tarif_satuan ASC";
+                                    Satuan Tarif : <span class="text-danger">*</span><br>
+                                    <?php
+                                    $sql_tarif_satuan = "SELECT * FROM tb_tarif_satuan order by nama_tarif_satuan ASC";
 
-                                                                                        $q_tarif_satuan = $conn->query($sql_tarif_satuan);
-                                                                                        $r_tarif_satuan = $q_tarif_satuan->rowCount();
+                                    $q_tarif_satuan = $conn->query($sql_tarif_satuan);
+                                    $r_tarif_satuan = $q_tarif_satuan->rowCount();
 
-                                                                                        if ($r_tarif_satuan > 0) {
-                                                                                        ?>
+                                    if ($r_tarif_satuan > 0) {
+                                    ?>
                                         <select class="form-control text-center" name="id_tarif_satuan" required>
                                             <option value="">-- Pilih Jenis Tarif --</option>
                                             <?php
-                                                                                            while ($d_tarif_satuan = $q_tarif_satuan->fetch(PDO::FETCH_ASSOC)) {
+                                            while ($d_tarif_satuan = $q_tarif_satuan->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
                                                 <option value='<?php echo $d_tarif_satuan['id_tarif_satuan']; ?>'>
                                                     <?php echo $d_tarif_satuan['nama_tarif_satuan']; ?>
                                                 </option>
                                             <?php
-                                                                                            }
+                                            }
                                             ?>
                                         </select>
                                     <?php
-                                                                                        } else {
+                                    } else {
                                     ?>
-                                        <b><i>Data Jenis Tarif Tidak Ada</i></b>
+                                        <b><i>Data Satuan Tarif Tidak Ada</i></b>
                                     <?php
-                                                                                        }
+                                    }
                                     ?>
                                     <br>
-                                    Jumlah Tarif : <i style='font-size:12px;'>(Rp)</i><span style="color:red">*</span><br>
+
+                                    Tipe Tarif: <span class="text-danger">*</span><br>
+                                    <select class="form-control text-center" name="tipe_tarif" id="tambahTipeTarif" onChange='tambah_tipeTarif()' required>
+                                        <option value="">-- Pilih --</option>
+                                        <option value="SEKALI">Sekali</option>
+                                        <option value="INPUT">Diinput Manual</option>
+                                        <option value="HARI-">Harian Tidak Termasuk Sabtu Minggu</option>
+                                        <option value="HARI+">Harian Termasuk Sabtu Minggu</option>
+                                        <option value="MINGGU">Mingguan</option>
+                                        <option value="-- LAINNYA --">-- LAINNYA --</option>
+                                    </select>
+                                    <br>
+
+                                    <div id="tambahFrekKuanTarif"></div>
+
+                                    Jumlah Tarif : <i style='font-size:12px;'>(Rp)</i><span class="text-danger">*</span><br>
                                     <input class="form-control" name="jumlah_tarif" type="number" min="1" required>
                                     <i style='font-size:12px;'>Isian hanya berupa angka</i><br><br>
-                                    Jenis Tarif : <span style="color:red">*</span><br>
+                                    Jenis Tarif : <span class="text-danger">*</span><br>
                                     <?php
                                     $sql_tarif_jenis = "SELECT * FROM tb_tarif_jenis order by nama_tarif_jenis ASC";
 
@@ -83,7 +99,7 @@
                                     ?>
                                     <br>
 
-                                    Jurusan : <span style="color:red">*</span><br>
+                                    Jurusan : <span class="text-danger">*</span><br>
                                     <?php
                                     $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC";
 
@@ -113,7 +129,7 @@
                                     ?>
                                     <br>
 
-                                    Jenjang : <span style="color:red">*</span><br>
+                                    Jenjang : <span class="text-danger">*</span><br>
                                     <?php
                                     $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
 
@@ -143,7 +159,7 @@
                                     ?>
                                     <br>
 
-                                    Spesifikasi : <span style="color:red">*</span><br>
+                                    Spesifikasi : <span class="text-danger">*</span><br>
                                     <?php
                                     $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
 
@@ -173,17 +189,7 @@
                                     ?>
                                     <br>
 
-                                    Tipe : <span style="color:red">*</span><br>
-                                    <select class="form-control text-center" name="tipe_tarif" required>
-                                        <option value="">-- Pilih --</option>
-                                        <option value="SEKALI">Sekali</option>
-                                        <option value="INPUT">Diinput Manual</option>
-                                        <option value="HARI-">Harian Tidak Termasuk Sabtu Minggu</option>
-                                        <option value="HARI+">Harian Termasuk Sabtu Minggu</option>
-                                        <option value="MINGGU">Mingguan</option>
-                                    </select><br>
-
-                                    Pilihan : <span style="color:red">*</span><br>
+                                    Pilihan : <span class="text-danger">*</span><br>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="pilih_tarif" value="1" required>
                                         <label class="form-check-label">
@@ -234,9 +240,9 @@
                                 Tambah Satuan Tarif :
                             </div>
                             <div class="modal-body">
-                                Nama Satuan Tarif : <span style="color:red">*</span><br>
+                                Nama Satuan Tarif : <span class="text-danger">*</span><br>
                                 <input class="form-control" name="nama_tarif_satuan" required><br>
-                                Keterangan Tarif : <span style="color:red">*</span><br>
+                                Keterangan Tarif : <span class="text-danger">*</span><br>
                                 <input class="form-control" name="ket_tarif_satuan"><br>
                             </div>
                             <div class="modal-footer">
@@ -305,7 +311,7 @@
                                                     <!-- id_tarif_satuan -->
                                                     <input name="id_tarif_satuan" value="<?php echo $d_tarif_satuan['id_tarif_satuan']; ?>" hidden>
 
-                                                    Nama Tarif Satuan : <span style="color:red">*</span><br>
+                                                    Nama Tarif Satuan : <span class="text-danger">*</span><br>
                                                     <input class="form-control" name="nama_tarif_satuan" value="<?php echo $d_tarif_satuan['nama_tarif_satuan']; ?>" required><br>
 
                                                     Keterangan Tarif Satuan : <br>
@@ -356,14 +362,12 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Nama Jenis</th>
-                                <th scope="col">Nama Jurusan</th>
-                                <th scope="col">Nama Jenjang</th>
-                                <!-- <th scope="col">Nama Spesifikasi</th> -->
-                                <th scope="col">Nama Tarif</th>
-                                <th scope="col">Satuan Tarif</th>
+                                <th scope="col" width="150px">Nama Tarif</th>
+                                <th scope="col" width="120px">Satuan Tarif</th>
                                 <th scope="col">Jumlah Tarif</th>
-                                <th scope="col"></th>
+                                <th scope="col">Jurusan</th>
+                                <th scope="col">Jenjang</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -371,11 +375,11 @@
 
                             $sql_tarif = "SELECT * FROM tb_tarif 
                             JOIN tb_jurusan_pdd ON tb_tarif.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                            JOIN tb_jurusan_pdd_jenis ON tb_tarif.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
                             JOIN tb_jenjang_pdd ON tb_tarif.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                             JOIN tb_spesifikasi_pdd ON tb_tarif.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
                             JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
-                            ORDER BY tb_tarif.id_jurusan_pdd_jenis ASC
+                            WHERE tb_tarif.status_tarif = 'y'
+                            ORDER BY tb_tarif.id_jurusan_pdd ASC
                             ";
 
                             $q_tarif = $conn->query($sql_tarif);
@@ -387,19 +391,25 @@
                             ?>
                                 <tr>
                                     <th scope="row"><?php echo $no; ?></th>
-                                    <td><?php echo $d_tarif['nama_jurusan_pdd_jenis']; ?></td>
-                                    <td><?php echo $d_tarif['nama_jurusan_pdd']; ?></td>
-                                    <td><?php echo $d_tarif['nama_jenjang_pdd']; ?></td>
-                                    <!-- <td><?php echo $d_tarif['nama_spesifikasi_pdd']; ?></td> -->
                                     <td><?php echo $d_tarif['nama_tarif']; ?></td>
                                     <td><?php echo $d_tarif['nama_tarif_satuan']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_tarif['jumlah_tarif'], 0, ",", "."); ?></td>
+                                    <td><?php echo $d_tarif['nama_jurusan_pdd']; ?></td>
                                     <td>
+                                        <?php
+                                        if ($d_tarif['nama_jenjang_pdd'] == "-- Lainnya --") {
+                                            echo "-";
+                                        } else {
+                                            echo $d_tarif['nama_jenjang_pdd'];
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="text-center">
                                         <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#trf_u_m" . $d_tarif['id_tarif']; ?>'>
-                                            <i class="fas fa-edit"></i>
+                                            <i class="fas fa-edit"></i> UBAH
                                         </a>
                                         <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#trf_d_m" . $d_tarif['id_tarif']; ?>'>
-                                            <i class="fas fa-trash-alt"></i>
+                                            <i class="fas fa-trash-alt"></i> HAPUS
                                         </a>
                                     </td>
                                 </tr>
@@ -417,10 +427,10 @@
                                                     <!-- id_tarif -->
                                                     <input name="id_tarif" value="<?php echo $d_tarif['id_tarif']; ?>" hidden>
 
-                                                    Nama Tarif : <span style="color:red">*</span><br>
+                                                    Nama Tarif : <span class="text-danger">*</span><br>
                                                     <input class="form-control" name="nama_tarif" value="<?php echo $d_tarif['nama_tarif']; ?>" required><br>
 
-                                                    Satuan Tarif : <span style="color:red">*</span><br>
+                                                    Satuan Tarif : <span class="text-danger">*</span><br>
                                                     <?php
                                                     $sql_tarif_satuan = "SELECT * FROM tb_tarif_satuan ORDER BY nama_tarif_satuan ASC";
                                                     $q_tarif_satuan = $conn->query($sql_tarif_satuan);
@@ -453,15 +463,47 @@
                                                     ?>
                                                     <br>
 
-                                                    Jumlah Tarif : <i style='font-size:12px;'>(Rp)</i><span style="color:red">*</span><br>
+                                                    Tipe Tarif: <span class="text-danger">*</span><br>
+                                                    <select class="form-control text-center" id="ubahTipeTarif" name="tipe_tarif" onchange="ubah_tipeTarif()" required>
+                                                        <option value="">-- Pilih --</option>
+                                                        <?php
+                                                        $cek1 = '';
+                                                        $cek2 = '';
+                                                        $cek3 = '';
+                                                        $cek4 = '';
+                                                        $cek5 = '';
+                                                        $cek6 = '';
+                                                        if ($d_tarif['tipe_tarif'] == 'SEKALI') {
+                                                            $cek1 = 'selected';
+                                                        } elseif ($d_tarif['tipe_tarif'] == 'INPUT') {
+                                                            $cek2 = 'selected';
+                                                        } elseif ($d_tarif['tipe_tarif'] == 'HARI-') {
+                                                            $cek3 = 'selected';
+                                                        } elseif ($d_tarif['tipe_tarif'] == 'HARI+') {
+                                                            $cek4 = 'selected';
+                                                        } elseif ($d_tarif['tipe_tarif'] == 'MINGGUAN') {
+                                                            $cek5 = 'selected';
+                                                        } elseif ($d_tarif['tipe_tarif'] == '-- LAINNYA --') {
+                                                            $cek6 = 'selected';
+                                                        }
+
+                                                        ?>
+                                                        <option value="SEKALI" <?php echo $cek1; ?>>Sekali</option>
+                                                        <option value="INPUT" <?php echo $cek2; ?>>Diinput Manual</option>
+                                                        <option value="HARI-" <?php echo $cek3; ?>>Harian Tidak Termasuk Sabtu Minggu</option>
+                                                        <option value="HARI+" <?php echo $cek4; ?>>Harian Termasuk Sabtu Minggu</option>
+                                                        <option value="MINGGUAN" <?php echo $cek5; ?>>Mingguan</option>
+                                                        <option value="-- LAINNYA --" <?php echo $cek6; ?>>-- LAINNYA --</option>
+                                                    </select>
+                                                    <br>
+
+                                                    <div id="ubahFrekKuanTarif"></div>
+
+                                                    Jumlah Tarif : <i style='font-size:12px;'>(Rp)</i><span class="text-danger">*</span><br>
                                                     <input class="form-control" name="jumlah_tarif" type="number" min="1" value="<?php echo $d_tarif['jumlah_tarif']; ?>" required>
                                                     <i style='font-size:12px;'>Isian hanya berupa angka</i><br><br>
 
-                                                    Frekuensi Tarif : <span style="color:red">*</span><br>
-                                                    <input class="form-control" name="frekuensi_tarif" type="number" min="0" value="<?php echo $d_tarif['frekuensi_tarif']; ?>" required>
-                                                    <i style='font-size:12px;'>Isikan "0" bila frekuensi tidak ditentukan</i><br><br>
-
-                                                    Jenis Tarif : <span style="color:red">*</span><br>
+                                                    Jenis Tarif : <span class="text-danger">*</span><br>
                                                     <?php
                                                     $sql_tarif_jenis = "SELECT * FROM tb_tarif_jenis order by nama_tarif_jenis ASC";
                                                     $q_tarif_jenis = $conn->query($sql_tarif_jenis);
@@ -494,7 +536,7 @@
                                                     ?>
                                                     <br>
 
-                                                    Jurusan : <span style="color:red">*</span><br>
+                                                    Jurusan : <span class="text-danger">*</span><br>
                                                     <?php
                                                     $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC";
                                                     $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
@@ -528,7 +570,7 @@
                                                     <div id="u_i_id_jurusan_pdd<?php echo $d_tarif['id_tarif']; ?>">
                                                     </div><br>
 
-                                                    Jenjang : <span style="color:red">*</span><br>
+                                                    Jenjang : <span class="text-danger">*</span><br>
                                                     <?php
                                                     $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
                                                     $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
@@ -561,7 +603,7 @@
                                                     ?>
                                                     <br>
 
-                                                    Spesifikasi : <span style="color:red">*</span><br>
+                                                    Spesifikasi : <span class="text-danger">*</span><br>
                                                     <?php
                                                     $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
                                                     $q_spesifikasi_pdd = $conn->query($sql_spesifikasi_pdd);
@@ -594,36 +636,7 @@
                                                     ?>
                                                     <br>
 
-                                                    Tipe : <span style="color:red">*</span><br>
-                                                    <select class="form-control text-center" name="tipe_tarif" required>
-                                                        <option value="">-- Pilih --</option>
-                                                        <?php
-                                                        $cek1 = '';
-                                                        $cek2 = '';
-                                                        $cek3 = '';
-                                                        $cek4 = '';
-                                                        $cek5 = '';
-                                                        if ($d_tarif['tipe_tarif'] == 'SEKALI') {
-                                                            $cek1 = 'selected';
-                                                        } elseif ($d_tarif['tipe_tarif'] == 'INPUT') {
-                                                            $cek2 = 'selected';
-                                                        } elseif ($d_tarif['tipe_tarif'] == 'HARI-') {
-                                                            $cek3 = 'selected';
-                                                        } elseif ($d_tarif['tipe_tarif'] == 'HARI+') {
-                                                            $cek4 = 'selected';
-                                                        } elseif ($d_tarif['tipe_tarif'] == 'MINGGUAN') {
-                                                            $cek5 = 'selected';
-                                                        }
-
-                                                        ?>
-                                                        <option value="SEKALI" <?php echo $cek1; ?>>Sekali</option>
-                                                        <option value="INPUT" <?php echo $cek2; ?>>Diinput Manual</option>
-                                                        <option value="HARI-" <?php echo $cek3; ?>>Harian Tidak Termasuk Sabtu Minggu</option>
-                                                        <option value="HARI+" <?php echo $cek4; ?>>Harian Termasuk Sabtu Minggu</option>
-                                                        <option value="MINGGUAN" <?php echo $cek5; ?>>Mingguan</option>
-                                                    </select><br>
-
-                                                    Pilihan : <span style="color:red">*</span><br>
+                                                    Pilihan : <span class="text-danger">*</span><br>
                                                     <div class="form-check">
                                                         <?php
                                                         $pilih_tarif_1 = '';
@@ -698,7 +711,45 @@
         </div>
     </div>
 </div>
+<script>
+    function tambah_tipeTarif() {
+        if ($('#tambahTipeTarif').val() == '-- LAINNYA --') {
+            console.log("TambahTarif Lainnya");
+            $('#tambahFrekKuanTarif').append(
+                "<div class='row'>" +
+                "<div class='col'>" +
+                "<input type='number' class='form-control' placeHolder='Isikan Frekuensi Tarif' name='frekuensi_tarif'>" +
+                "</div>" +
+                "<div class='col'>" +
+                "<input type='number' class='form-control' placeHolder='Isikan Kuantitas Tarif' name='kuantitas_tarif'>" +
+                "</div>" +
+                "</div>" +
+                "<br>").focus();
+        } else {
+            console.log("Tidak Pilih Institusi Lainnya");
+            $('#tambahFrekKuanTarif').empty();
+        }
+    }
 
+    function ubah_tipeTarif() {
+        if ($('#ubahTipeTarif').val() == '-- LAINNYA --') {
+            console.log("Ubah Tarif Lainnya");
+            $('#tambahFrekKuanTarif').append(
+                "<div class='row'>" +
+                "<div class='col'>" +
+                "<input type='number' class='form-control' placeHolder='Isikan Frekuensi Tarif' name='frekuensi_tarif'>" +
+                "</div>" +
+                "<div class='col'>" +
+                "<input type='number' class='form-control' placeHolder='Isikan Kuantitas Tarif' name='kuantitas_tarif'>" +
+                "</div>" +
+                "</div>" +
+                "<br>").focus();
+        } else {
+            console.log("Tidak Pilih Institusi Lainnya");
+            $('#tambahFrekKuanTarif').empty();
+        }
+    }
+</script>
 <?php
 if (isset($_POST['tambah_tarif'])) {
 
@@ -707,23 +758,31 @@ if (isset($_POST['tambah_tarif'])) {
         id_tarif_satuan,
         jumlah_tarif,
         tipe_tarif,
+        frekuensi_tarif,
+        kuantitas_tarif,
         id_jurusan_pdd,
         id_jenjang_pdd,
         id_spesifikasi_pdd,
         id_tarif_jenis,
         ket_tarif,
-        pilih_tarif
+        pilih_tarif,
+        tgl_tambah_tarif,
+        status_tarif
         ) VALUES (
             '" . $_POST['nama_tarif'] . "',
             '" . $_POST['id_tarif_satuan'] . "',
             '" . $_POST['jumlah_tarif'] . "',
             '" . $_POST['tipe_tarif'] . "',
+            '" . $_POST['frekuensi_tarif'] . "',
+            '" . $_POST['kuantitas_tarif'] . "',
             '" . $_POST['id_jurusan_pdd'] . "',
             '" . $_POST['id_jenjang_pdd'] . "',
             '" . $_POST['id_spesifikasi_pdd'] . "',
             '" . $_POST['id_tarif_jenis'] . "',
             '" . $_POST['ket_tarif'] . "',
-            '" . $_POST['pilih_tarif'] . "'
+            '" . $_POST['pilih_tarif'] . "',
+            '" . date('Y-m-d') . "',
+            'y'
             )";
 
     // echo $sql_insert_tarif . "<br>";

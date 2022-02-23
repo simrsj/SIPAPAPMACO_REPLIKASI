@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 session_start();
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
@@ -25,6 +25,7 @@ include "_add-ons/tanggal_waktu.php";
     <link rel="stylesheet" href="vendor/sw2/dist/sweetalert2.min.css">
     <!-- <link href="vendor/datatables-all/datatables.min.css" rel="stylesheet"> -->
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
+    <script src="vendor/!custom/cssCustom.css"></script>
 
 
     <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -75,25 +76,8 @@ if (isset($_GET['dashboard'])) {
 <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
 <script src="vendor/select2/dist/js/select2.min.js"></script>
 <script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/!custom/jsCustom.js"></script>
 <script src="js/demo/chart-pie-demo.js"></script>
 <!-- <script src="https://kit.fontawesome.com/26550bb205.js" crossorigin="anonymous"></script> -->
-
-<script>
-    $(document).ready(function() {
-        $('#myTable').dataTable();
-
-        $('#myTable_2').dataTable();
-
-        $('.js-example-placeholder-single-long').select2({
-            placeholder: "-------------- Pilih --------------",
-            allowClear: true
-        });
-
-        $('.js-example-placeholder-single').select2({
-            placeholder: "-- Pilih --",
-            allowClear: true
-        });
-    });
-</script>
 
 </html>
