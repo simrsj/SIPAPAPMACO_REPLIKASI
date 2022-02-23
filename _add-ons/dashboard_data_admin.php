@@ -85,6 +85,8 @@ AND status_praktik='Y'";
 $q_dpja = $conn->query($sql_dpja);
 
 $jumlah_praktik_aktif = 0;
+$dashboard_dpja = 0;
+
 while ($d_dpja = $q_dpja->fetch(PDO::FETCH_ASSOC)) {
     $dashboard_dpja = $jumlah_praktik_aktif + $d_dpja['jumlah_praktik'];
 }
@@ -95,6 +97,8 @@ WHERE status_cek_praktik = 'SLS'";
 $q_dpjs = $conn->query($sql_dpjs);
 
 $jumlah_praktik_selesai = 0;
+$dashboard_dpjs = 0;
+
 while ($d_dpjs = $q_dpjs->fetch(PDO::FETCH_ASSOC)) {
     $dashboard_dpjs = $jumlah_praktik_selesai + $d_dpjs['jumlah_praktik'];
 }

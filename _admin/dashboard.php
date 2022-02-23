@@ -121,7 +121,7 @@
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            <i class="fas fa-users fa-3x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -177,19 +177,19 @@
                                         <td><?php echo $no; ?></td>
                                         <td><?php echo $d_mess['nama_mess']; ?></td>
                                         <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                                        <td><?php 
-                                        // $sql_kapsTerisiMess = "SELECT * FROM tb_praktik 
-                                        // JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_mess_pilih
-                                        // WHERE tb_praktik.status_cek_praktik = 'BYR_Y' 
-                                        // AND tb_praktik.status_cek_praktik = 'AKV'
-                                        // AND tb_mess.id_mess = ".d_mess['id_mess'];                                      "; 
+                                        <td><?php
+                                            // $sql_kapsTerisiMess = "SELECT * FROM tb_praktik 
+                                            // JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_mess_pilih
+                                            // WHERE tb_praktik.status_cek_praktik = 'BYR_Y' 
+                                            // AND tb_praktik.status_cek_praktik = 'AKV'
+                                            // AND tb_mess.id_mess = ".d_mess['id_mess'];                                      "; 
 
-                                        // $q_kapsTerisiMess = $conn->query($sql_kapsTerisiMess);
-                                        // while ($d_kapsTerisiMess = $q_kapsTerisiMess->fetch(PDO::FETCH_ASSOC)){
-                                        //     $d_kapsTerisiMess['jumlah_praktik'];
-                                        // }
-                                        // echo $d_kapsTerisiMess['jumlah_praktik']; 
-                                        ?>
+                                            // $q_kapsTerisiMess = $conn->query($sql_kapsTerisiMess);
+                                            // while ($d_kapsTerisiMess = $q_kapsTerisiMess->fetch(PDO::FETCH_ASSOC)){
+                                            //     $d_kapsTerisiMess['jumlah_praktik'];
+                                            // }
+                                            // echo $d_kapsTerisiMess['jumlah_praktik']; 
+                                            ?>
                                         </td>
                                         <td>
                                             <form method="post" action="">

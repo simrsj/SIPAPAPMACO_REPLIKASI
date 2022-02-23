@@ -11,6 +11,7 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 
 //data tempat
 $sql_tempat = "SELECT * FROM tb_tempat
+JOIN tb_
 WHERE tb_tempat.id_tempat = " . $_POST['tempat'];
 $q_tempat = $conn->query($sql_tempat);
 $d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC);
@@ -25,20 +26,26 @@ if ($d_praktik['id_jurusan_pdd_jenis'] == 1) {
     $kuan = 1;
     $total_tarif = $frek * $kuan * $d_tempat['tarif_tempat'];
 }
-$sql_t = "INSERT INTO tb_tempat_pilih (
-    id_tempat, 
-    id_praktik,
-    frek_tempat_pilih,
-    kuan_tempat_pilih,
-    total_tarif_tempat_pilih,
-    tgl_input_tempat_pilih
+$sql_t = "INSERT INTO tb_tarif_pilih (
+    id_praktik, 
+    tgl_input_tarif_pilih,
+    nama_jenis_tarif_pilih,
+    nama_tarif_pilih,
+    nominal_tarif_pilih,
+    nama_satuan_tarif_pilih,
+    frekuensi_tarif_pilih,
+    kuantitas_tarif_pilih,
+    jumlah_tarif_pilih
     ) VALUES (
-        '" . $_POST['tempat'] . "', 
         '" . $_POST['id'] . "', 
+            '" . date('Y-m-d') . "',
+            '" . $d_tempat['nama_tarif_jenis'] . "', 
+            '" . $d_tempat['nama_tarif'] . "', 
+            '" . $d_tempat['jumlah_tarif'] . "',  
+            '" . $d_tempat['nama_tarif_satuan'] . "',
         '" . $frek . "', 
         '" . $kuan . "', 
-        '" . $total_tarif . "', 
-        '" . date('Y-m-d') . "'
+        '" . $total_tarif . "'
     )";
 $sql_u = "UPDATE tb_praktik SET
 status_cek_praktik = 'TMP'

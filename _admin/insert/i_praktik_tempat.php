@@ -20,19 +20,9 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         <div class="card-body">
             <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_tTempat">
                 <?php
-                if ($d_praktik['id_jurusan_pdd_jenis'] == 1) {
-                    $sql = "tb_tempat.id_jurusan_pdd_jenis = 1 ";
-                } elseif ($d_praktik['id_jurusan_pdd_jenis'] == 2) {
-                    $sql = "tb_tempat.id_jurusan_pdd_jenis = 2 ";
-                } elseif ($d_praktik['id_jurusan_pdd_jenis'] == 3) {
-                    $sql = "tb_tempat.id_jurusan_pdd_jenis = 3 ";
-                } elseif ($d_praktik['id_jurusan_pdd_jenis'] == 4) {
-                    $sql = "tb_tempat.id_jurusan_pdd_jenis = 4";
-                }
                 $sql_tempat = "SELECT * FROM tb_tempat 
-                    JOIN tb_jurusan_pdd_jenis ON tb_tempat.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis 
                     JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
-                    WHERE $sql AND status_tempat = 'y'
+                    WHERE tb_tempat.id_jurusan_pdd_jenis = 0 AND status_tempat = 'y'
                     ORDER BY nama_tempat ASC
                 ";
 

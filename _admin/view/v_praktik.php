@@ -582,8 +582,10 @@ if (isset($_POST['arsip_praktik'])) {
                                                     <thead class="thead-dark">
                                                         <tr>
                                                             <th scope="col">No</th>
-                                                            <th scope="col">Nama Tarif</th>
-                                                            <th scope="col">Jumlah Tarif</th>
+                                                            <th scope="col">Nama Jenis</th>
+                                                            <th scope="col">Nama </th>
+                                                            <th scope="col">Tarif</th>
+                                                            <th scope="col">Satuan</th>
                                                             <th scope="col">Frekuensi</th>
                                                             <th scope="col">Kuantitas</th>
                                                             <th scope="col">Total Tarif</th>
@@ -597,18 +599,10 @@ if (isset($_POST['arsip_praktik'])) {
                                                         ?>
                                                             <tr>
                                                                 <th scope="row"><?php echo $no; ?></th>
-                                                                <td><?php echo tanggal($d_tarif_pilih['tgl_input_tarif_pilih']); ?></td>
-                                                                <td>
-                                                                    <?php
-                                                                    if ($d_tarif_pilih['tgl_ubah_tarif_pilih'] != NULL) {
-                                                                        echo tanggal($d_tarif_pilih['tgl_ubah_tarif_pilih']);
-                                                                    } else {
-                                                                        echo "-";
-                                                                    }
-                                                                    ?>
-                                                                </td>
-                                                                <td><?php echo $d_tarif_pilih['nama_tarif']; ?></td>
-                                                                <td><?php echo "Rp " . number_format($d_tarif_pilih['jumlah_tarif'], 0, ",", "."); ?></td>
+                                                                <td><?php echo $d_tarif_pilih['nama_jenis_tarif_pilih']; ?></td>
+                                                                <td><?php echo $d_tarif_pilih['nama_tarif_pilih']; ?></td>
+                                                                <td><?php echo "Rp " . number_format($d_tarif_pilih['nominal_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                <td><?php echo $d_tarif_pilih['nama_satuan_tarif_pilih']; ?></td>
                                                                 <td><?php echo $d_tarif_pilih['frekuensi_tarif_pilih']; ?></td>
                                                                 <td><?php echo $d_tarif_pilih['kuantitas_tarif_pilih']; ?></td>
                                                                 <td><?php echo "Rp " . number_format($d_tarif_pilih['jumlah_tarif_pilih'], 0, ",", "."); ?></td>

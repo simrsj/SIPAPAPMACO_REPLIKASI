@@ -122,7 +122,7 @@ $jumlah_praktik = $_GET['jum'];
                                     ORDER BY nama_jenjang_pdd ASC
                                     ";
 
-                            echo $sql_tarif_jenjang . "<br>";
+                            // echo $sql_tarif_jenjang . "<br>";
                             $q_tarif_jenjang = $conn->query($sql_tarif_jenjang);
 
                             while ($d_tarif_jenjang = $q_tarif_jenjang->fetch(PDO::FETCH_ASSOC)) {
@@ -152,16 +152,16 @@ $jumlah_praktik = $_GET['jum'];
                                             $frekuensi = $d_tarif_jenjang['tipe_tarif'];
                                         }
 
-                                        if ($d_tarif_jurusan['frekuensi_tarif'] != 0) {
-                                            $frekuensi = $d_tarif_jurusan['frekuensi_tarif'];
+                                        if ($d_tarif_jenjang['frekuensi_tarif'] != 0) {
+                                            $frekuensi = $d_tarif_jenjang['frekuensi_tarif'];
                                         }
                                         echo $frekuensi;
                                         ?>
                                     </td>
                                     <td>
                                         <?php
-                                        if ($d_tarif_jurusan['kuantitas_tarif'] != 0) {
-                                            $kuantitas = $d_tarif_jurusan['kuantitas_tarif'];
+                                        if ($d_tarif_jenjang['kuantitas_tarif'] != 0) {
+                                            $kuantitas = $d_tarif_jenjang['kuantitas_tarif'];
                                         } else {
                                             $kuantitas = $jumlah_praktik;
                                         }
@@ -276,14 +276,27 @@ $jumlah_praktik = $_GET['jum'];
                                     } else {
                                         $frekuensi = $d_tarif_ujian['tipe_tarif'];
                                     }
+
+                                    if ($d_tarif_ujian['frekuensi_tarif'] != 0) {
+                                        $frekuensi = $d_tarif_ujian['frekuensi_tarif'];
+                                    }
                                     echo $frekuensi;
                                     ?>
                                 </td>
-                                <td><?php echo $jumlah_praktik; ?></td>
-                                <td><?php echo "Rp " . number_format($frekuensi * $jumlah_praktik * $d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
+                                <td>
+                                    <?php
+                                    if ($d_tarif_ujian['kuantitas_tarif'] != 0) {
+                                        $kuantitas = $d_tarif_ujian['kuantitas_tarif'];
+                                    } else {
+                                        $kuantitas = $jumlah_praktik;
+                                    }
+                                    echo $kuantitas;
+                                    ?>
+                                </td>
+                                <td><?php echo "Rp " . number_format($frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
                             </tr>
                         <?php
-                            $jumlah_total_ujian = ($frekuensi * $jumlah_praktik * $d_tarif_ujian['jumlah_tarif']) + $jumlah_total_ujian;
+                            $jumlah_total_ujian = ($frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif']) + $jumlah_total_ujian;
                             $no++;
                         }
                         ?>

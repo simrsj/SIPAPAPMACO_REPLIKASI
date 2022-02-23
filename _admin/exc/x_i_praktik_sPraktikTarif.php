@@ -115,9 +115,10 @@ while ($d_tarif_jurusan = $q_tarif_jurusan->fetch(PDO::FETCH_ASSOC)) {
     $sql_insert = "INSERT INTO tb_tarif_pilih (
         id_praktik, 
         tgl_input_tarif_pilih,
-        nama_tarif_jenis_pilih,
+        nama_jenis_tarif_pilih,
         nama_tarif_pilih,
         nominal_tarif_pilih,
+        nama_satuan_tarif_pilih,
         frekuensi_tarif_pilih,
         kuantitas_tarif_pilih,
         jumlah_tarif_pilih
@@ -127,6 +128,7 @@ while ($d_tarif_jurusan = $q_tarif_jurusan->fetch(PDO::FETCH_ASSOC)) {
             '" . $d_tarif_jurusan['nama_tarif_jenis'] . "', 
             '" . $d_tarif_jurusan['nama_tarif'] . "', 
             '" . $d_tarif_jurusan['jumlah_tarif'] . "',  
+            '" . $d_tarif_jurusan['nama_tarif_satuan'] . "',
             '" . $frekuensi . "',
             '" . $kuantitas . "', 
             '" . $frekuensi * $kuantitas * $d_tarif_jurusan['jumlah_tarif'] . "'
@@ -182,9 +184,10 @@ if ($id_jurusan_pdd != 1) {
         $sql_insert_tarif_jenjang = " INSERT INTO tb_tarif_pilih (
                 id_praktik, 
                 tgl_input_tarif_pilih, 
-                nama_tarif_jenis_pilih,
+                nama_jenis_tarif_pilih,
                 nama_tarif_pilih,
                 nominal_tarif_pilih,
+                nama_satuan_tarif_pilih,
                 frekuensi_tarif_pilih,
                 kuantitas_tarif_pilih,
                 jumlah_tarif_pilih
@@ -192,8 +195,9 @@ if ($id_jurusan_pdd != 1) {
                 '" . $id_praktik . "', 
                 '" . date('Y-m-d') . "', 
                 '" . $d_tarif_jenjang['nama_tarif_jenis'] . "', 
-                '" . $d_tarif_jurusan['nama_tarif'] . "', 
-                '" . $d_tarif_jurusan['jumlah_tarif'] . "',  
+                '" . $d_tarif_jenjang['nama_tarif'] . "', 
+                '" . $d_tarif_jenjang['jumlah_tarif'] . "',  
+                '" . $d_tarif_jenjang['nama_tarif_satuan'] . "',
                 '" . $frekuensi . "', 
                 '" . $kuantitas . "', 
                 '" . $frekuensi * $kuantitas * $d_tarif_jenjang['jumlah_tarif'] . "'
@@ -251,9 +255,10 @@ if ($cek_pilih_ujian == 'y') {
         $sql_insert_tarif_ujian = " INSERT INTO tb_tarif_pilih (
                 id_praktik, 
                 tgl_input_tarif_pilih, 
-                nama_tarif_jenis_pilih,
+                nama_jenis_tarif_pilih,
                 nama_tarif_pilih,
                 nominal_tarif_pilih,
+                nama_satuan_tarif_pilih,
                 frekuensi_tarif_pilih,
                 kuantitas_tarif_pilih,
                 jumlah_tarif_pilih
@@ -263,6 +268,7 @@ if ($cek_pilih_ujian == 'y') {
                 '" . $d_tarif_ujian['nama_tarif_jenis'] . "', 
                 '" . $d_tarif_ujian['nama_tarif'] . "', 
                 '" . $d_tarif_ujian['jumlah_tarif'] . "',  
+                '" . $d_tarif_ujian['nama_tarif_satuan'] . "',  
                 '" . $frekuensi . "', 
                 '" . $kuantitas . "', 
                 '" . $frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif'] . "'
