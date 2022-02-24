@@ -244,7 +244,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                             </div>
                             <div class="col-lg-4">
                                 Unggah Data Praktikan : <span style="color:red">*</span>
-                                <i style='font-size:12px;'><a href="./_file/format_data_praktikan.xlsx">Download Format</a></i><br>
+                                <i style='font-size:12px;'><a href="./_file/__format_data_praktikan.xlsx">Download Format</a></i><br>
                                 <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx">
                                 <br><i style='font-size:12px;'>Data unggah harus .xlsx dan maksimal ukuran file 1 Mb</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_file_data_praktikan"></span>

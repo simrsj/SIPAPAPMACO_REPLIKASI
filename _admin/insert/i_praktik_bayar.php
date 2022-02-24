@@ -10,39 +10,9 @@ $id = $_GET['ib'];
         </div>
     </div>
     <div class="row">
-        <!-- Bukti Data Pembayaran -->
-        <div class="col-lg-3">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center ">
-                    <div class="h5 text-gray-800 font-weight-bold text-center">
-                        Bukti Data Pembayaran
-                    </div>
-                </div>
-                <div class="card-body">
-                    <form enctype="multipart/form-data" class="form-group" method="post" action="">
-                        <b>Atas Nama : </b><span style="color:red">*</span><br>
-                        <input class="form-control" type="text" name="atas_nama_bayar" required><br>
-                        <b>No. Rekening/Lainnya : </b><span style="color:red">*</span><br>
-                        <input class="form-control" type="text" name="no_bayar" required><br>
-                        <b>Pembayaran Melalui : </b><span style="color:red">*</span><br>
-                        <input class="form-control" type="text" name="melalui_bayar" required><br>
-                        <b>Unggah File : </b><span style="color:red">*</span><br>
-                        <input type="file" name="file_bayar" accept="application/pdf" required><br>
-                        <i style='font-size:12px;'>Data unggah harus .pdf, Maksimal 1 MB</i>
-                        <input name="id_praktik" value="<?php echo $id; ?>" hidden><br>
-                        <hr>
-                        <nav id="navbar-tarif" class="navbar justify-content-center">
-                            <button type="submit" name="simpan_bayar" class="nav-link btn btn-success btn-sm">
-                                <i class="fas fa-paper-plane"></i> Kirim Data Pembayaran
-                            </button>
-                        </nav>
-                    </form>
-                </div>
-            </div>
-        </div>
 
-        <!-- Area Chart -->
-        <div class="col-lg-9">
+        <!-- Data Rincian Pembayaran Chart -->
+        <div class="col-md-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between ">
                     <div class="h5 text-gray-800 font-weight-bold text-center">
@@ -60,10 +30,11 @@ $id = $_GET['ib'];
                     #data tarif pilih
                     $sql_praktik = "SELECT * FROM tb_tarif_pilih
                         JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
-                        JOIN tb_tarif ON tb_tarif_pilih.id_tarif = tb_tarif.id_tarif
-                        JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
                         WHERE tb_praktik.id_praktik = '" . $id_praktik . "'
-                        ORDER BY nama_tarif ASC";
+                        ORDER BY nama_jenis_tarif_pilih ASC";
+
+                    // echo $sql_praktik;
+
                     $q_praktik = $conn->query($sql_praktik);
 
                     $data = array();
@@ -74,77 +45,15 @@ $id = $_GET['ib'];
                             $data,
                             array(
                                 $no,
-                                $d_praktik['nama_tarif'],
-                                $d_praktik['nama_tarif_satuan'],
-                                "Rp " . number_format($d_praktik['jumlah_tarif'], 0, ",", "."),
+                                $d_praktik['nama_tarif_pilih'],
+                                $d_praktik['nama_satuan_tarif_pilih'],
+                                "Rp " . number_format($d_praktik['jumlah_tarif_pilih'], 0, ",", "."),
                                 $d_praktik['frekuensi_tarif_pilih'],
                                 $d_praktik['kuantitas_tarif_pilih'],
                                 "Rp " . number_format($d_praktik['jumlah_tarif_pilih'], 0, ",", ".")
                             )
                         );
                         $total_tarif = $total_tarif + $d_praktik['jumlah_tarif_pilih'];
-                        $no++;
-                    }
-
-                    #data tempat pilih
-                    $sql_tempat = "SELECT * FROM tb_praktik 
-                        JOIN tb_tempat_pilih ON tb_praktik.id_praktik = tb_tempat_pilih.id_praktik 
-                        JOIN tb_tempat ON tb_tempat_pilih.id_tempat = tb_tempat.id_tempat 
-                        JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
-                        WHERE tb_praktik.id_praktik = '" . $id_praktik . "'";
-                    $q_tempat = $conn->query($sql_tempat);
-
-                    while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
-                        array_push(
-                            $data,
-                            array(
-                                $no,
-                                $d_tempat['nama_tempat'] . " (Tempat)",
-                                $d_tempat['nama_tarif_satuan'],
-                                "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."),
-                                $d_tempat['frek_tempat_pilih'],
-                                $d_tempat['kuan_tempat_pilih'],
-                                "Rp " . number_format($d_tempat['total_tarif_tempat_pilih'], 0, ",", ".")
-                            )
-                        );
-                        $total_tarif = $total_tarif + $d_tempat['total_tarif_tempat_pilih'];
-                        $no++;
-                    }
-
-                    #data mess pilih
-                    $sql_mess = "SELECT * FROM tb_praktik 
-                        JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik 
-                        JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess 
-                        JOIN tb_institusi on tb_institusi.id_institusi = tb_praktik.id_institusi
-                        WHERE tb_praktik.id_praktik = '" . $id_praktik . "'";
-                    $q_mess = $conn->query($sql_mess);
-
-                    while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-                        if ($d_mess['makan_mess_pilih'] == 'y') {
-                            $makan = "(Dengan Makan)";
-                        } elseif ($d_mess['makan_mess_pilih'] == 't') {
-                            $makan = "(Tanpa Makan)";
-                        } else {
-                            $makan = "(<i><b>ERROR</b></i>)";
-                        }
-                        array_push(
-                            $data,
-                            array(
-                                $no,
-                                $d_mess['nama_mess'] . " (Mess) " . $makan,
-                                "Hari/Orang",
-                                "Rp " . number_format(
-                                    $d_mess['total_tarif_mess_pilih'] / ($d_mess['jumlah_praktik'] * $d_mess['total_hari_mess_pilih']),
-                                    0,
-                                    ",",
-                                    "."
-                                ),
-                                $d_mess['jumlah_praktik'],
-                                $d_mess['total_hari_mess_pilih'],
-                                "Rp " . number_format($d_mess['total_tarif_mess_pilih'], 0, ",", ".")
-                            )
-                        );
-                        $total_tarif = $total_tarif + $d_mess['total_tarif_mess_pilih'];
                         $no++;
                     }
 
@@ -156,8 +65,22 @@ $id = $_GET['ib'];
                             </div>
                             <br>
                             <div class="h5 text-gray-700">
-                                Perlu kami informasikan pembayaran dapat ditransfer pada <br>
-                                <b>Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD)</b> dengan nomor : <b>BJB - 0063028738002</b>.
+                                <?php
+
+                                $sql_praktik1 = "SELECT * FROM tb_praktik
+                                    WHERE id_praktik = " . $id_praktik;
+
+                                $q_praktik1 = $conn->query($sql_praktik1);
+                                $d_praktik1 = $q_praktik1->fetch(PDO::FETCH_ASSOC);
+                                ?>
+                                <center>
+                                    <div class="text-danger font-weight-bold">
+                                        Kode Pembayaran : <?php echo "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>
+                                    </div>
+                                    <br>
+                                    Perlu kami informasikan pembayaran dapat ditransfer pada <br>
+                                    <b>Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD)</b> dengan nomor : <br> <b>BJB - 0063028738002</b>.
+                                </center>
                                 <br>Bukti transfer dikirim juga melalui :
                                 <br> <i class="fas fa-envelope"></i> Email diklit.rsj.jabarprov@gmail.com
                                 <br> <i class="fab fa-whatsapp"></i> Nomor WA Bendahara Penerimaan RSJ (081321412643)<br>
@@ -165,7 +88,7 @@ $id = $_GET['ib'];
                         </div>
                     </div>
                     <br>
-                    <div class="table-responsive text-sm">
+                    <div class="table-responsive">
                         <table class="table table-hover" id="myTable">
                             <thead class="table-dark">
                                 <tr>
@@ -175,7 +98,7 @@ $id = $_GET['ib'];
                                     <th>Tarif</th>
                                     <th>Frek.</th>
                                     <th>Ktt.</th>
-                                    <th>Total Tarif</th>
+                                    <th width="150px">Total Tarif</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -194,14 +117,60 @@ $id = $_GET['ib'];
                         </table>
                     </div>
                 </div>
+
+                <!-- tombol Bukti Data Pembayaran -->
+                <nav id="navbar-tarif" class="navbar justify-content-center">
+                    <a class='nav-link btn btn-outline-success' href='#' data-toggle='modal' data-target='#pilih_bayar'>
+                        <i class="fas fa-paper-plane"></i> Input Data Pembayaran
+                    </a>
+                </nav>
+
+                <!-- modal Bukti Data Pembayaran -->
+                <div class="modal fade text-left " id="pilih_bayar" data-backdrop="static">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_sbayar">
+                                <div class="modal-header">
+                                    <b>BUKTI DATA PEMABAYARAN</b>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form enctype="multipart/form-data" class="form-group" method="post" action="">
+                                        <b>Kode Pembayaran : </b><span style="color:red">*</span><br>
+                                        <input class="form-control" type="text" name="kode_bayar" required><br>
+                                        <b>Atas Nama : </b><span style="color:red">*</span><br>
+                                        <input class="form-control" type="text" name="atas_nama_bayar" required><br>
+                                        <b>No. Rekening/Lainnya : </b><span style="color:red">*</span><br>
+                                        <input class="form-control" type="text" name="noRek_bayar" required><br>
+                                        <b>Pembayaran Melalui : </b><span style="color:red">*</span><br>
+                                        <input class="form-control" type="text" name="melalui_bayar" required><br>
+                                        <b>Tanggal Transfer : </b><span style="color:red">*</span><br>
+                                        <input class="form-control" type="date" name="tgl_bayar" required><br>
+                                        <b>Unggah File : </b><span style="color:red">*</span><br>
+                                        <input type="file" name="file_bayar" accept="application/pdf" required><br>
+                                        <i style='font-size:12px;'>Data unggah harus .pdf, Maksimal 1 MB</i>
+                                        <input name="id_praktik" value="<?php echo $id; ?>" hidden><br>
+                                        <hr>
+                                        <nav id="navbar-tarif" class="navbar justify-content-center">
+                                            <button type="submit" name="simpan_bayar" class="nav-link btn btn-success btn-sm">
+                                                <i class="fas fa-paper-plane"></i> Kirim Data Pembayaran
+                                            </button>
+                                        </nav>
+                                    </form>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-
     </div>
 </div>
 <?php
 if (isset($_POST['simpan_bayar'])) {
-
 
     $no = 1;
     $sql = "SELECT id_bayar FROM tb_bayar ORDER BY id_bayar ASC";
@@ -218,7 +187,7 @@ if (isset($_POST['simpan_bayar'])) {
     $alamat_unggah = "./_file/bayar";
 
     //ubah Nama File
-    $_FILES['file_bayar']['name'] = "bayar_" . $no . "_" . $_POST['id_praktik'] . "-" . date('Y-m-d') . ".pdf";
+    $_FILES['file_bayar']['name'] = "bayar_" . $_POST['id_praktik'] . "_" . date('Y-m-d') . ".pdf";
 
     // echo "<pre>";
     // print_r($_FILES);
@@ -257,17 +226,21 @@ if (isset($_POST['simpan_bayar'])) {
             $sql_insert_bayar = " INSERT INTO tb_bayar (
                 id_bayar, 
                 id_praktik,
+                kode_bayar,
                 atas_nama_bayar, 
-                no_bayar, 
+                noRek_bayar, 
                 melalui_bayar,
+                tgl_bayar, 
                 tgl_input_bayar, 
                 file_bayar
                 ) VALUE (
                     '" . $no . "',
                     '" . $_POST['id_praktik'] . "',
+                    '" . $_POST['kode_bayar'] . "',
                     '" . $_POST['atas_nama_bayar'] . "',
-                    '" . $_POST['no_bayar'] . "',        
-                    '" . $_POST['melalui_bayar'] . "',   
+                    '" . $_POST['noRek_bayar'] . "',        
+                    '" . $_POST['melalui_bayar'] . "',           
+                    '" . $_POST['tgl_bayar'] . "',   
                     '" . date('Y-m-d') . "',
                     '" . $link_file_bayar . "'
                 )";

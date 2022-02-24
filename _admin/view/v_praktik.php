@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['arsip_praktik'])) {
-    $conn->query("UPDATE `tb_praktik` SET status_praktik = 'T' WHERE id_praktik = " . $_POST['id_praktik']);
+    $conn->query("UPDATE `tb_praktik` SET status_praktik = 'A' WHERE id_praktik = " . $_POST['id_praktik']);
     echo "
         <script type='text/javascript'>
             document.location.href = '?prk';
@@ -28,7 +28,7 @@ if (isset($_POST['arsip_praktik'])) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Pendaftaran Praktik <?php echo $judul; ?></h1>
+                <h1 class="h3 mb-2 text-gray-800">Daftar Praktik <?php echo $judul; ?></h1>
             </div>
             <div class="col-lg-2 text-right">
 
@@ -37,11 +37,11 @@ if (isset($_POST['arsip_praktik'])) {
                 <a href="?prk=<?php echo $tambah; ?>&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
-                <a href="?prk&a" class="btn btn-outline-info btn-sm">
+                <!-- <a href="?prk&a" class="btn btn-outline-info btn-sm">
                     <i>
                         <i class="fas fa-archive"></i>
                     </i>Arsip
-                </a>
+                </a> -->
             </div>
         </div>
 
@@ -396,9 +396,11 @@ if (isset($_POST['arsip_praktik'])) {
                                             ?>
                                         </div>
 
+                                        <!-- tombol aksi/info proses  -->
                                         <div class="col-sm-2 my-auto text-center">
                                             <!-- tombol rincian -->
-                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian"><i class="fas fa-info-circle"></i>
+                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                                <i class="fas fa-info-circle"></i> Rincian
                                             </button>
                                             <!-- tombol ubah -->
                                             <?php
@@ -408,63 +410,6 @@ if (isset($_POST['arsip_praktik'])) {
                                                 $link_ubah = "href='?prk&u=" . $d_praktik['id_praktik'] . "'";
                                             }
                                             ?>
-                                            <a <?php echo $link_ubah; ?> class="btn btn-primary btn-sm" title="Ubah">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-
-                                            <!-- modal ubah -->
-                                            <div class="modal fade" id="prk_u_<?php echo $d_praktik['id_praktik']; ?>">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content text-center text-lg font-weight-bold">
-                                                        <div class="modal-body">
-                                                            DATA TIDAK BISA DIRUBAH<br>
-                                                            <?php
-                                                            if ($d_praktik['status_cek_praktik'] == 'AKV') {
-                                                            ?>
-                                                                <span class="badge badge-success">PRAKTIKAN AKTIF</span>
-                                                            <?php
-                                                            } elseif ($d_praktik['status_cek_praktik'] == 'SLS') {
-                                                            ?>
-                                                                <span class="badge badge-dark">PRAKTIKAN SELESAI</span>
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- tombol arsip -->
-                                            <a class='btn btn-outline-info btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="arsip">
-                                                <i class="fas fa-archive"></i>
-                                            </a>
-
-                                            <!-- modal arsip -->
-                                            <div class="modal fade" id="prk_dh_<?php echo $d_praktik['id_praktik']; ?>">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5>ARSIP KAN DATA :</h5>
-                                                        </div>
-                                                        <div class="modal-body text-left text-md">
-                                                            <b>Nama Institusi </b><br>
-                                                            <?php echo $d_praktik['nama_institusi']; ?><br>
-                                                            <b>Periode Praktik </b> : <br>
-                                                            <?php echo $d_praktik['nama_praktik']; ?>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form method="post">
-                                                                <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
-                                                                <input type="submit" name="arsip_praktik" value="Arsipkan" class="btn btn-info btn-sm">
-                                                                <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -477,60 +422,63 @@ if (isset($_POST['arsip_praktik'])) {
                                             <h4 class="font-weight-bold">DATA PRAKTIKAN</h4>
                                         </div>
                                         <hr style="color: gray;">
-                                        <div class="row">
+                                        <div class="jumbotron">
+                                            <div class="jumbotron-fluid">
+                                                <div class="row">
+                                                    <!-- Data Praktik  -->
+                                                    <div class="col-sm-4">
+                                                        <b>JURUSAN : </b><br>
+                                                        <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
+                                                        <b>JENJANG : </b><br>
+                                                        <?php echo $d_praktik['nama_jenjang_pdd']; ?><br>
+                                                        <b>SPESIFIKASI : </b><br>
+                                                        <?php echo $d_praktik['nama_spesifikasi_pdd']; ?><br>
+                                                        <b>JUMLAH PRAKTIKAN : </b><br>
+                                                        <?php echo $d_praktik['jumlah_praktik']; ?><br>
+                                                    </div>
 
-                                            <!-- Data Praktik  -->
-                                            <div class="col-sm-3">
-                                                <b>JURUSAN : </b><br>
-                                                <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
-                                                <b>JENJANG : </b><br>
-                                                <?php echo $d_praktik['nama_jenjang_pdd']; ?><br>
-                                                <b>SPESIFIKASI : </b><br>
-                                                <?php echo $d_praktik['nama_spesifikasi_pdd']; ?><br>
-                                                <b>JUMLAH PRAKTIKAN : </b><br>
-                                                <?php echo $d_praktik['jumlah_praktik']; ?><br>
-                                            </div>
+                                                    <!-- Data Koordinator  -->
+                                                    <div class="col-sm-4">
+                                                        <b>NAMA KOORDINATOR : </b><br>
+                                                        <?php echo $d_praktik['nama_koordinator_praktik']; ?><br>
+                                                        <b>NO. HP KOORDINATOR : </b><br>
+                                                        <?php echo $d_praktik['telp_koordinator_praktik']; ?><br>
+                                                        <b>EMAIL KOORDINATOR : </b><br>
+                                                        <?php echo $d_praktik['email_koordinator_praktik']; ?><br>
+                                                    </div>
 
-                                            <!-- Data Koordinator  -->
-                                            <div class="col-sm-3">
-                                                <b>NAMA KOORDINATOR : </b><br>
-                                                <?php echo $d_praktik['nama_koordinator_praktik']; ?><br>
-                                                <b>NO. HP KOORDINATOR : </b><br>
-                                                <?php echo $d_praktik['telp_koordinator_praktik']; ?><br>
-                                                <b>EMAIL KOORDINATOR : </b><br>
-                                                <?php echo $d_praktik['email_koordinator_praktik']; ?><br>
-                                            </div>
-
-                                            <!-- Data File -->
-                                            <div class="col-sm-6">
-                                                <b>FILE SURAT : </b><br>
-                                                <?php
-                                                if ($d_praktik['surat_praktik'] == '') {
-                                                ?>
-                                                    <span class="badge badge-danger text-md">DATA BELUM DI UPLOAD</span>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <a href="<?php echo $d_praktik['surat_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-file-download"></i> Download
-                                                    </a>
-                                                <?php
-                                                }
-                                                ?><br><br>
-                                                <b>DATA PRAKTIKAN :</b><br>
-                                                <?php
-                                                if ($d_praktik['data_praktik'] == '') {
-                                                ?>
-                                                    <span class="badge badge-danger text-md">DATA BELUM DI UPLOAD</span>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <a href="<?php echo $d_praktik['data_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-file-download"></i> Download
-                                                    </a>
-                                                <?php
-                                                }
-                                                ?>
+                                                    <!-- Data File -->
+                                                    <div class="col-sm-4">
+                                                        <b>FILE SURAT : </b><br>
+                                                        <?php
+                                                        if ($d_praktik['surat_praktik'] == '') {
+                                                        ?>
+                                                            <span class="badge badge-danger text-md">DATA BELUM DI UPLOAD</span>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <a href="<?php echo $d_praktik['surat_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                                <i class="fas fa-file-download"></i> Download
+                                                            </a>
+                                                        <?php
+                                                        }
+                                                        ?><br><br>
+                                                        <b>DATA PRAKTIKAN :</b><br>
+                                                        <?php
+                                                        if ($d_praktik['data_praktik'] == '') {
+                                                        ?>
+                                                            <span class="badge badge-danger text-md">DATA BELUM DI UPLOAD</span>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <a href="<?php echo $d_praktik['data_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                                <i class="fas fa-file-download"></i> Download
+                                                            </a>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <hr>
@@ -538,17 +486,18 @@ if (isset($_POST['arsip_praktik'])) {
                                         <!-- data menu tarif wajib, ujian dan sewa tempat yang dipilih -->
                                         <div class="text-gray-700">
                                             <div class="row">
-                                                <div class="col-lg-11">
+                                                <div class="col-md-12">
                                                     <h4 class="font-weight-bold">
                                                         DATA TARIF
-                                                        <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&uh=<?php echo $d_praktik['id_praktik']; ?>'>
+                                                        <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&uh=<?php echo $d_praktik['id_praktik']; ?>'>
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                         <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_h_m<?php echo $d_praktik['id_praktik']; ?>'>
                                                             <i class="fas fa-trash-alt"></i>
-                                                        </a>
+                                                        </a> -->
+
                                                         <!-- modal hapus tarif -->
-                                                        <div class="modal fade text-left" id="h_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                        <!-- <div class="modal fade text-left" id="h_h_m<?php echo $d_praktik['id_praktik']; ?>">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -560,7 +509,8 @@ if (isset($_POST['arsip_praktik'])) {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
+
                                                     </h4>
                                                 </div>
                                             </div>
@@ -584,16 +534,16 @@ if (isset($_POST['arsip_praktik'])) {
                                                             <th scope="col">No</th>
                                                             <th scope="col">Nama Jenis</th>
                                                             <th scope="col">Nama </th>
-                                                            <th scope="col">Tarif</th>
-                                                            <th scope="col">Satuan</th>
-                                                            <th scope="col">Frekuensi</th>
+                                                            <th scope="col" width="80px">Tarif</th>
+                                                            <th scope="col" width="25px">Satuan</th>
+                                                            <th scope="col" width="25px">Frekuensi</th>
                                                             <th scope="col">Kuantitas</th>
-                                                            <th scope="col">Total Tarif</th>
+                                                            <th scope="col" width="125px">Total Tarif</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php
-
+                                                        $total_jumlah_tarif = 0;
                                                         $no = 1;
                                                         while ($d_tarif_pilih = $q_tarif_pilih->fetch(PDO::FETCH_ASSOC)) {
                                                         ?>
@@ -608,18 +558,23 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 <td><?php echo "Rp " . number_format($d_tarif_pilih['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
                                                             </tr>
                                                         <?php
+                                                            $total_jumlah_tarif += $d_tarif_pilih['jumlah_tarif_pilih'];
                                                             $no++;
                                                         }
                                                         ?>
                                                     </tbody>
                                                 </table>
+                                                <br>
+                                                <div class="text-center text-lg font-weight-bold text-gray-800">
+                                                    JUMLAH TOTAL : <?php echo "Rp " . number_format($total_jumlah_tarif, 0, ",", "."); ?>
+                                                </div>
                                             <?php
                                             } else {
                                             ?>
                                                 <div class="jumbotron">
                                                     <div class="jumbotron-fluid">
                                                         <div class="text-gray-700" style="padding-bottom: 2px; padding-top: 5px;">
-                                                            <h5 class="text-center">Data Tidak Ada</h5>
+                                                            <h5 class="text-center">Data Tarif Tidak Ada</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -629,113 +584,24 @@ if (isset($_POST['arsip_praktik'])) {
                                         </div>
                                         <hr>
 
+                                        <!-- Data Pembayaran -->
                                         <div class="row">
-                                            <div class="col-lg-6">
-                                                <!-- data mess yang dipilih -->
-                                                <div class="text-gray-700">
-                                                    <div class="row">
-                                                        <div class="col-lg-11">
-                                                            <h4 class="font-weight-bold">
-                                                                DATA MESS
-                                                                <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?prk&um=<?php echo $d_praktik['id_praktik']; ?>'>
-                                                                    <i class="fas fa-edit"></i>
-                                                                </a>
-                                                                <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?php echo $d_praktik['id_praktik']; ?>">
-                                                                    <i class=" fas fa-trash-alt"></i>
-                                                                </a>
-
-                                                                <!-- modal hapus bayar -->
-                                                                <div class="modal fade text-left" id="m_h_m<?php echo $d_praktik['id_praktik']; ?>">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h4>HAPUS DATA MESS ?</h4>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hm=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
-                                                                                <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div style="font-size: medium;">
-                                                    <?php
-
-                                                    $sql_mess_pilih = "SELECT * FROM tb_mess_pilih
-                                                        JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess
-                                                        WHERE tb_mess_pilih.id_praktik = " . $d_praktik['id_praktik'];
-
-                                                    $q_mess_pilih = $conn->query($sql_mess_pilih);
-                                                    $r_mess_pilih = $q_mess_pilih->rowCount();
-                                                    if ($r_mess_pilih > 0) {
-
-                                                        $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
-                                                    ?>
-                                                        <div class="jumbotron jumbotron-fluid">
-                                                            <div class="container">
-                                                                <fieldset class="fieldset">
-                                                                    <h5 class="text-gray-800 font-weight-bold">Nama Mess :</h5>
-                                                                    <?php echo $d_mess_pilih['nama_mess']; ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold"> Nama Pemilik :</h5>
-                                                                    <?php echo $d_mess_pilih['nama_pemilik_mess']; ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold">No Pemilik :</h5>
-                                                                    <?php echo $d_mess_pilih['no_pemilik_mess']; ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold"> Alamat Mess : </h5>
-                                                                    <?php echo $d_mess_pilih['alamat_mess']; ?><br><br>
-                                                                    <!-- <h5 class="text-gray-800 font-weight-bold"> Jumlah yang diisi :</h5>
-                                                                        <?php echo $d_mess_pilih['jumlah_praktik_mess_pilih']; ?><br><br> -->
-                                                                    <h5 class="text-gray-800 font-weight-bold"> Jumlah Hari :</h5>
-                                                                    <!-- <?php echo $d_mess_pilih['total_hari_mess_pilih']; ?><br><br>
-                                                                        <h5 class="text-gray-800 font-weight-bold"> Dengan Makan (3X Sehari) :</h5> -->
-                                                                    <?php
-                                                                    if ($d_mess_pilih['makan_mess_pilih'] == 'y') {
-                                                                        $makan = 'YA';
-                                                                    } else {
-                                                                        $makan = 'TIDAK';
-                                                                    }
-                                                                    echo $makan; ?>
-                                                                    <!-- <h5 class="text-gray-800 font-weight-bold"> Total Tarif :</h5>
-                                                                        <?php echo "Rp " . number_format($d_mess_pilih['total_tarif_mess_pilih'], 0, ",", "."); ?> -->
-                                                                </fieldset>
-                                                            </div>
-                                                        </div>
-                                                    <?php
-                                                    } else {
-                                                    ?>
-                                                        <div class="jumbotron">
-                                                            <div class="jumbotron-fluid">
-                                                                <div class="text-gray-700" style="padding-bottom: 2px; padding-top: 5px;">
-                                                                    <h5 class="text-center">Data Tidak Ada</h5>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6">
+                                            <div class="col-md-12">
                                                 <!-- data pembayaran -->
                                                 <div class="text-gray-700">
                                                     <div class="row">
                                                         <div class="col-lg-11">
                                                             <h4 class="font-weight-bold">
                                                                 DATA PEMBAYARAN
-                                                                <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&ub=<?php echo $d_praktik['id_praktik']; ?>'>
+                                                                <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&ub=<?php echo $d_praktik['id_praktik']; ?>'>
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                                 <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#b_h_m<?php echo $d_praktik['id_praktik']; ?>">
                                                                     <i class=" fas fa-trash-alt"></i>
-                                                                </a>
+                                                                </a> -->
 
                                                                 <!-- modal hapus bayar -->
-                                                                <div class="modal fade text-left" id="b_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                <!-- <div class="modal fade text-left" id="b_h_m<?php echo $d_praktik['id_praktik']; ?>">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -748,13 +614,14 @@ if (isset($_POST['arsip_praktik'])) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
+
                                                             </h4>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <br>
-                                                <div style="font-size: medium;">
+                                                <div>
                                                     <?php
 
                                                     $sql_bayar = "SELECT * FROM tb_bayar WHERE id_praktik = " . $d_praktik['id_praktik'];
@@ -762,27 +629,45 @@ if (isset($_POST['arsip_praktik'])) {
                                                     $q_bayar = $conn->query($sql_bayar);
                                                     $r_bayar = $q_bayar->rowCount();
                                                     if ($r_bayar > 0) {
-                                                        $d_bayar = $q_bayar->fetch(PDO::FETCH_ASSOC);
                                                     ?>
-                                                        <div class="jumbotron jumbotron-fluid">
-                                                            <div class="container">
-                                                                <fieldset class="fieldset">
-                                                                    <h5 class="text-gray-800 font-weight-bold">Atas Nama Bayar:</h5>
-                                                                    <?php echo $d_bayar['atas_nama_bayar']; ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold"> No Rekening/Lainnya :</h5>
-                                                                    <?php echo $d_bayar['no_bayar']; ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold">Pembayaran Melalui :</h5>
-                                                                    <?php echo $d_bayar['melalui_bayar']; ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold"> Tanggal Pembayaran : </h5>
-                                                                    <?php echo tanggal($d_bayar['tgl_input_bayar']); ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold">
-                                                                        File Pembayaran :
-                                                                        <a title='Download File Pembayaran' href='<?php echo $d_bayar['file_bayar']; ?>' target="_blank" class="btn btn-success btn-sm">
-                                                                            <i class="fas fa-file-download"></i> Download
-                                                                        </a>
-                                                                    </h5>
-                                                                </fieldset>
-                                                            </div>
+                                                        <table class="table table-striped" id="myTable_2">
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th scope="col">No</th>
+                                                                    <th scope="col">Atas Nama Pembayaran</th>
+                                                                    <th scope="col">No Rekening/Lainnya</th>
+                                                                    <th scope="col">Pembayaran Melalui</th>
+                                                                    <th scope="col">Tanggal Transfer</th>
+                                                                    <th scope="col">File Pembayaran</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                $no = 1;
+                                                                while ($d_bayar = $q_bayar->fetch(PDO::FETCH_ASSOC)) {
+                                                                ?>
+                                                                    <tr>
+                                                                        <th scope="row"><?php echo $no; ?></th>
+                                                                        <td><?php echo $d_bayar['atas_nama_bayar']; ?></td>
+                                                                        <td><?php echo $d_bayar['noRek_bayar']; ?></td>
+                                                                        <td><?php echo $d_bayar['melalui_bayar']; ?></td>
+                                                                        <td><?php echo tanggal($d_bayar['tgl_input_bayar']); ?></td>
+                                                                        <td>
+                                                                            <a href="<?php echo $d_bayar['file_bayar']; ?>" class="btn btn-success btn-sm" target="_blank">
+                                                                                <i class="fas fa-file-download"></i> Download
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php
+                                                                    $kode_bayar = $d_bayar['kode_bayar'];
+                                                                    $no++;
+                                                                }
+                                                                ?>
+
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="text-center text-lg font-weight-bold text-gray-800">
+                                                            KODE BAYAR : <?php echo $kode_bayar; ?>
                                                         </div>
                                                     <?php
                                                     } else {
@@ -790,7 +675,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                         <div class="jumbotron">
                                                             <div class="jumbotron-fluid">
                                                                 <div class="text-gray-700" style="padding-bottom: 2px; padding-top: 5px;">
-                                                                    <h5 class="text-center">Data Tidak Ada</h5>
+                                                                    <h5 class="text-center">Data Pembayaran Tidak Ada</h5>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -800,6 +685,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                 </div>
                                             </div>
                                         </div>
+                                        <hr>
                                     </div>
                                 </div>
                             </div>

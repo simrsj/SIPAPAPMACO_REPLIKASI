@@ -11,7 +11,8 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 
 //data tempat
 $sql_tempat = "SELECT * FROM tb_tempat
-JOIN tb_
+JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
+JOIN tb_tarif_jenis ON tb_tempat.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis
 WHERE tb_tempat.id_tempat = " . $_POST['tempat'];
 $q_tempat = $conn->query($sql_tempat);
 $d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC);
@@ -40,8 +41,8 @@ $sql_t = "INSERT INTO tb_tarif_pilih (
         '" . $_POST['id'] . "', 
             '" . date('Y-m-d') . "',
             '" . $d_tempat['nama_tarif_jenis'] . "', 
-            '" . $d_tempat['nama_tarif'] . "', 
-            '" . $d_tempat['jumlah_tarif'] . "',  
+            '" . $d_tempat['nama_tempat'] . "', 
+            '" . $d_tempat['tarif_tempat'] . "',  
             '" . $d_tempat['nama_tarif_satuan'] . "',
         '" . $frek . "', 
         '" . $kuan . "', 

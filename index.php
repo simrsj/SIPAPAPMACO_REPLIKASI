@@ -22,10 +22,10 @@ include "_add-ons/tanggal_waktu.php";
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="vendor/sw2/dist/sweetalert2.min.css">
+    <link href="vendor/sw2/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- <link href="vendor/datatables-all/datatables.min.css" rel="stylesheet"> -->
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
-    <script src="vendor/!custom/cssCustom.css"></script>
+    <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
 
 
     <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
