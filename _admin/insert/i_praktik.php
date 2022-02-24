@@ -781,6 +781,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
             }
         }
     </script>
+
 <?php
 } else {
 ?>

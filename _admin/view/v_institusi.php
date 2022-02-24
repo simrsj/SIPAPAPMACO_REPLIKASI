@@ -19,7 +19,7 @@
                                 Nama Institusi : <span class="text-danger">*</span>
                                 <input class="form-control" name="nama_institusi" required><br>
                                 Akronim Institusi :
-                                <input class="form-control" name="akronim_institusi"><br>
+                                <input type='text' class="form-control" name="akronim_institusi" maxlength="10"><br>
                                 Logo Institusi :<br>
                                 <input type="file" name="logo_institusi" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
                             </div>
@@ -121,7 +121,7 @@
                                                         <input class="form-control" name="nama_institusi" value="<?php echo $d_institusi['nama_institusi']; ?>" required><br>
                                                         Akronim Institusi :
                                                         <i style='font-size:12px;'>Maximal 10 Karakter</i><span style="color:red">*</span>
-                                                        <input class="form-control" name="akronim_institusi" value="<?php echo $d_institusi['akronim_institusi']; ?>"><br>
+                                                        <input type='text' class="form-control" name="akronim_institusi" maxlength="10" value="<?php echo $d_institusi['akronim_institusi']; ?>"><br>
                                                         Logo Institusi:<br>
                                                         <input type="file" name="logo_institusi" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
                                                     </div>

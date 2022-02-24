@@ -411,7 +411,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body text-lg">
-                                                                <?php echo '"' . $d_praktik['ket_tolakPraktikHarga_praktik'] . '"'; ?>
+                                                                <?php echo '"' . $d_praktik['ket_tolakPraktikTarif_praktik'] . '"'; ?>
                                                             </div>
                                                         </div>
                                                     </div>

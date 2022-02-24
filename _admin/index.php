@@ -127,6 +127,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 								<i class="fas fa-fw fa-bed"></i>
 								<span>Mess/Pemondokan</span>
 							</a>
+							<a class="collapse-item" href="?mou">
+								<i class="fas fa-fw fa-handshake"></i>
+								<span>MoU</span>
+							</a>
 							<a class="collapse-item" href="?trf">
 								<i class="fas fa-fw fa-money-bill-wave"></i>
 								<span>Tarif</span>
@@ -183,11 +187,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div class="text-center d-none d-md-inline">
 					<button class="rounded-circle border-0" id="sidebarToggle"></button>
 				</div>
-				<div class="sidebar-card">
+				<!-- <div class="sidebar-card">
 					<i class="fas fa-3x fa-exclamation-circle"></i>
 					<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
 					<a class="btn btn-success btn-sm" href="?lapor">Lapor !</a>
-				</div>
+				</div> -->
 			</ul>
 			<!-- End of Sidebar -->
 
