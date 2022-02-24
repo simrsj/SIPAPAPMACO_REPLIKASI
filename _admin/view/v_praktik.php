@@ -6,6 +6,99 @@ if (isset($_POST['arsip_praktik'])) {
             document.location.href = '?prk';
         </script>
     ";
+} elseif (isset($_POST['simpan_bayar'])) {
+
+    $no = 1;
+    $sql = "SELECT id_bayar FROM tb_bayar ORDER BY id_bayar ASC";
+    $q = $conn->query($sql);
+    while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
+        if ($no != $d['id_bayar']) {
+            $no = $d['id_bayar'] + 1;
+            break;
+        }
+        $no++;
+    }
+
+    //alamat file surat masuk
+    $alamat_unggah = "./_file/bayar";
+
+    //ubah Nama File
+    $_FILES['file_bayar']['name'] = "bayar_" . $no . "_" .  $_POST['id_praktik'] . "_" . date('Y-m-d') . ".pdf";
+
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
+
+    //pembuatan alamat bila tidak ada
+    if (!is_dir($alamat_unggah)) {
+        mkdir($alamat_unggah, 0777, $rekursif = true);
+    }
+
+    //unggah surat dan data praktik
+    if (!is_null($_FILES['file_bayar'])) {
+        $file_bayar = (object) @$_FILES['file_bayar'];
+
+        //mulai unggah file surat praktik
+        if ($file_bayar->size > 1000 * 1000) {
+            echo "
+                <script>
+                    alert('File Harus dibawah 1 Mb');
+                </script>
+                ";
+            $link_file_bayar = "";
+        } elseif ($file_bayar->type !== 'application/pdf') {
+            echo "
+                <script>
+                    alert('File Surat Harus .pdf');
+                </script>
+            ";
+            $link_file_bayar = "";
+        } else {
+            $unggah_file_bayar = move_uploaded_file(
+                $file_bayar->tmp_name,
+                "{$alamat_unggah}/{$file_bayar->name}"
+            );
+            $link_file_bayar = "{$alamat_unggah}/{$file_bayar->name}";
+            $sql_insert_bayar = " INSERT INTO tb_bayar (
+                id_bayar, 
+                id_praktik,
+                kode_bayar,
+                atas_nama_bayar, 
+                noRek_bayar, 
+                melalui_bayar,
+                tgl_bayar, 
+                tgl_input_bayar, 
+                file_bayar
+                ) VALUE (
+                    '" . $no . "',
+                    '" . $_POST['id_praktik'] . "',
+                    '" . $_POST['kode_bayar'] . "',
+                    '" . $_POST['atas_nama_bayar'] . "',
+                    '" . $_POST['noRek_bayar'] . "',        
+                    '" . $_POST['melalui_bayar'] . "',           
+                    '" . $_POST['tgl_bayar'] . "',   
+                    '" . date('Y-m-d') . "',
+                    '" . $link_file_bayar . "'
+                )";
+            // echo $sql_insert_bayar . "<br>";
+            $conn->query($sql_insert_bayar);
+
+            //SQL ubah status praktik
+            $sql_ubah_status_praktik = "UPDATE tb_praktik
+            SET status_cek_praktik = 'BYR'
+            WHERE id_praktik = " . $_POST['id_praktik'];
+
+            // echo $sql_ubah_status_praktik . "<br>";
+            $conn->query($sql_ubah_status_praktik);
+
+?>
+            <script>
+                alert('Data Pembayaran Sudah Disimpan');
+                document.location.href = '?prk=<?php echo $_GET['prk']; ?>';
+            </script>
+    <?php
+        }
+    }
 } else {
 
     if ($_GET['prk'] == 'ked') {
@@ -24,7 +117,7 @@ if (isset($_POST['arsip_praktik'])) {
         $tambah = "";
         $judul = "";
     }
-?>
+    ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
@@ -190,15 +283,17 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses <span class="font-weight-bold text-primary">PEMBAYARAN</span>
                                                                 <br><br>
 
-                                                                <span class="badge badge-primary text-md">PEMBAYARAN</span><br>
-                                                                Melakukan Proses Validasi <span class="font-weight-bold text-primary">PEMBAYARAN</span>
+                                                                <span class="badge badge-primary text-md">Val. PEMBAYARAN</span><br>
+                                                                Melakukan Proses Validasi <span class="font-weight-bold text-primary">PEMBAYARAN</span> oleh Admin
                                                                 <br><br>
 
-                                                                <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
+                                                                <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span><br>
                                                                 Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
 
-                                                                <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
-                                                                Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+                                                                <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span><br>
+                                                                Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <br>
+                                                                Karena Kurang Transfer Pembayaran. <br>
+                                                                Lakukan kembali transfer sesuai dengan <b>KEKURANGAN PEMBAYARAN</b><br><br>
 
                                                                 <span class="badge badge-primary text-md font-italic">WAITING LIST</span><br>
                                                                 Proses Pendaftaran Selesai dan dalam proses <span class="text-primary font-italic font-weight-bold">WAITING LIST</span><br>
@@ -263,9 +358,9 @@ if (isset($_POST['arsip_praktik'])) {
                                                     <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
                                                 <?php
                                                 }
-                                            } elseif ($d_praktik['status_cek_praktik'] == "BYR_T") {
+                                            } elseif ($d_praktik['status_cek_praktik'] == "BYR_T_K") {
                                                 ?>
-                                                <span class="badge badge-danger text-md">Val. PEMBAYARAN <i class="fas fa-times-circle"></i></span>
+                                                <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span>
                                             <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
                                             ?>
@@ -350,27 +445,64 @@ if (isset($_POST['arsip_praktik'])) {
                                             ?>
                                                 <button class="btn btn-outline-success btn-sm" onclick="aktivasiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">AKTIFKAN <i class="fas fa-question-circle"></i></button>
                                             <?php
-                                            } elseif ($d_praktik['status_cek_praktik'] == "BYR_T") {
+                                            } elseif ($d_praktik['status_cek_praktik'] == "BYR_T_K") {
                                             ?>
 
-                                                <b>CEK KETERANGAN : </b><br>
+                                                <b>PILIH : </b><br>
 
-                                                <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPembayaran<?php echo $d_praktik['id_praktik']; ?>" title="Keterangan Status">
-                                                    KETERANGAN
+                                                <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPembayaran<?php echo $d_praktik['id_praktik']; ?>" title="PEMBAYARAN">
+                                                    PEMBAYARAN
                                                 </a>
 
-                                                <!-- modal keterangan penolakan -->
+                                                <!-- modal pembayaran ulang -->
                                                 <div class="modal fade" id="ketTolakPembayaran<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
                                                     <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4>Keterangan</h4>
+                                                            <div class="modal-header h5">
+                                                                <b>PEMABAYARAN ULANG</b>
                                                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body text-lg">
-                                                                <?php echo '"' . $d_praktik['ket_tolakPembayaran_praktik'] . '"'; ?>
+                                                            <div class="modal-body">
+                                                                <div class="jumbotron">
+                                                                    <div class="jumbotron-fluid h6 text-gray-800 font-weight-bold">
+                                                                        JUMLAH KEKURANGAN :
+                                                                        <?php
+                                                                        $sql_bayar_ulang = "SELECT * FROM tb_bayar 
+                                                                        JOIN tb_praktik ON tb_bayar.id_praktik = tb_praktik.id_praktik
+                                                                        WHERE tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+
+                                                                        $q_bayar_ulang = $conn->query($sql_bayar_ulang);
+
+                                                                        $d_bayar_ulang = $q_bayar_ulang->fetch(PDO::FETCH_ASSOC);
+                                                                        echo "Rp " . number_format($d_bayar_ulang['kurang_tf_praktik'], 0, ",", ".");
+                                                                        ?>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <form enctype="multipart/form-data" class="form-group" method="post" action="">
+                                                                    <b>Kode Pembayaran : </b><span style="color:red">*</span><br>
+                                                                    <input class="form-control" type="text" name="kode_bayar" value="<?php echo $d_bayar_ulang['kode_bayar'] ?>" required readonly><br>
+                                                                    <b>Atas Nama : </b><span style="color:red">*</span><br>
+                                                                    <input class="form-control" type="text" name="atas_nama_bayar" required><br>
+                                                                    <b>No. Rekening/Lainnya : </b><span style="color:red">*</span><br>
+                                                                    <input class="form-control" type="text" name="noRek_bayar" required><br>
+                                                                    <b>Pembayaran Melalui : </b><span style="color:red">*</span><br>
+                                                                    <input class="form-control" type="text" name="melalui_bayar" required><br>
+                                                                    <b>Tanggal Transfer : </b><span style="color:red">*</span><br>
+                                                                    <input class="form-control" type="date" name="tgl_bayar" required><br>
+                                                                    <b>Unggah File : </b><span style="color:red">*</span><br>
+                                                                    <input type="file" name="file_bayar" accept="application/pdf" required><br>
+                                                                    <i style='font-size:12px;'>Data unggah harus .pdf, Maksimal 1 MB</i>
+                                                                    <input name="id_praktik" value="<?php echo $d_praktik['id_praktik']; ?>" hidden><br>
+                                                                    <hr>
+                                                                    <nav id="navbar-tarif" class="navbar justify-content-center">
+                                                                        <button type="submit" name="simpan_bayar" class="nav-link btn btn-success btn-sm">
+                                                                            <i class="fas fa-paper-plane"></i> Kirim Data Pembayaran
+                                                                        </button>
+                                                                    </nav>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -384,7 +516,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <b>PILIH : </b><br>
+                                                    <b>PILIH :</b><br>
                                                     <button class="btn btn-outline-secondary btn-sm" onclick="selesaiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">SELESAIKAN<i class="fas fa-question-circle"></i></button>
                                                 <?php
                                                 }
@@ -651,7 +783,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                                         <td><?php echo $d_bayar['atas_nama_bayar']; ?></td>
                                                                         <td><?php echo $d_bayar['noRek_bayar']; ?></td>
                                                                         <td><?php echo $d_bayar['melalui_bayar']; ?></td>
-                                                                        <td><?php echo tanggal($d_bayar['tgl_input_bayar']); ?></td>
+                                                                        <td><?php echo tanggal($d_bayar['tgl_bayar']); ?></td>
                                                                         <td>
                                                                             <a href="<?php echo $d_bayar['file_bayar']; ?>" class="btn btn-success btn-sm" target="_blank">
                                                                                 <i class="fas fa-file-download"></i> Download
@@ -837,8 +969,8 @@ if (isset($_POST['arsip_praktik'])) {
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
-                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Tarif" +
-                    '<input id="valP_T" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
+                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Pembayaran Kurang Transfer" +
+                    '<input id="valP_T" class="swal2-input" type="number" min="10000" placeHolder="Isi Kekurangan Transfer">',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',
