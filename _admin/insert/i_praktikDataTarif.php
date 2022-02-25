@@ -235,7 +235,7 @@ $jumlah_praktik = $_GET['jum'];
             ?>
                 <table class="table table-hover">
                     <thead class="thead-dark">
-                        <tre>
+                        <tr>
                             <th scope="col">No</th>
                             <th scope="col">Nama Jenis</th>
                             <th scope="col">Nama Tarif</th>
@@ -244,7 +244,7 @@ $jumlah_praktik = $_GET['jum'];
                             <th scope="col">Frekuensi</th>
                             <th scope="col">Kuantitas</th>
                             <th scope="col">Total Tarif</th>
-                        </tre>
+                        </tr>
                     </thead>
                     <tbody>
                         <?php

@@ -1,7 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // cari jenis jurusan 
-$sql = "SELECT * FROM tb_praktik";
+$sql = "SELECT * FROM tb_praktik WHERE id_praktik = " . $_POST['id'];
 $q = $conn->query($sql);
 $d = $q->fetch(PDO::FETCH_ASSOC);
 if ($d['id_jurusan_pdd_jenis'] == 1) {

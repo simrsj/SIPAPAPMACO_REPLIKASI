@@ -238,7 +238,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 akan di <span class="text-success font-weight-bold">AKTIF</span>-kan oleh <b>ADMIN</b> sesuai dengan tanggal mulai praktiknya<br><br>
 
                                                                 <span class="badge badge-success text-md">AKTIF</span><br>
-                                                                Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span>, dan bisa melakukan <span class="text-success font-weight-bold">Pembayaran</span><br><br>
+                                                                Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span>, dan bisa melakukan input <span class="text-warning font-weight-bold">Data Tarif</span><br><br>
 
                                                                 <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
                                                                 Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
@@ -524,7 +524,9 @@ if (isset($_POST['arsip_praktik'])) {
                                                 if ($_GET['prk'] == 'ked') {
                                                 ?>
                                                     <b>PLIH : </b><br>
-                                                    <a class="btn btn-outline-danger btn-sm" href="?prk=<?php echo $_GET['prk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">PEMBAYARAN</a>
+                                                    <a class="btn btn-outline-warning btn-sm" href="?prk=<?php echo $_GET['prk'] ?>&it_ked=<?php echo $d_praktik['id_praktik']; ?>">
+                                                        ISI TARIF
+                                                    </a>
                                                 <?php
                                                 } else {
                                                 ?>

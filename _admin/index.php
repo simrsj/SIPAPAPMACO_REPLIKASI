@@ -310,6 +310,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							} else {
 								include "_admin/insert/i_praktik.php";
 							}
+						} elseif (isset($_GET['it_ked'])) {
+							include "_admin/insert/i_tarif_kedokteran.php";
 						} elseif (isset($_GET['m'])) {
 							include "_admin/insert/i_praktik_mess.php";
 						} elseif (isset($_GET['p_i'])) {

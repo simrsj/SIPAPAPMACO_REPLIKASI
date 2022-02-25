@@ -670,24 +670,12 @@ if ($_GET['prk'] == 'ked') {
                         var jur = document.getElementById('jurusan').value;
                         var xmlhttp_path = new XMLHttpRequest();
                         xmlhttp_path.onload = function() {
-                            var path = "";
-                            var pathResponse = JSON.parse(this.responseText);
-                            if (pathResponse.jenis_jurusan == 1) {
-                                path = "?prk=ked";
-                            } else if (pathResponse.jenis_jurusan == 2) {
-                                path = "?prk=kep";
-                            } else if (pathResponse.jenis_jurusan == 3) {
-                                path = "?prk=nkl";
-                            } else if (pathResponse.jenis_jurusan == 4) {
-                                path = "?prk=nnk";
-                            } else {
-                                path = "?";
-                            }
+                            var path = "?prk=ked";
                             Swal.fire({
                                 allowOutsideClick: false,
                                 // isDismissed: false,
                                 icon: 'success',
-                                title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>TARIF</b><br>Berhasil Tersimpan',
+                                title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                 showConfirmButton: false,
                                 html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
                             });
