@@ -560,40 +560,39 @@ if (isset($_POST['arsip_praktik'])) {
 
                                 <!-- collapse data praktikan -->
                                 <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
-                                    <div class="card-body " style="font-size: small;">
+                                    <div class="card-body " style="font-size: medium;">
                                         <!-- data praktikan -->
                                         <div class="text-gray-700">
-                                            <h4 class="font-weight-bold">DATA PRAKTIKAN</h4>
+                                            <h4 class="font-weight-bold">DATA PRAKTIK</h4>
                                         </div>
-                                        <hr style="color: gray;">
                                         <div class="jumbotron">
                                             <div class="jumbotron-fluid">
                                                 <div class="row">
                                                     <!-- Data Praktik  -->
                                                     <div class="col-sm-4">
-                                                        <b>JURUSAN : </b><br>
-                                                        <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
-                                                        <b>JENJANG : </b><br>
-                                                        <?php echo $d_praktik['nama_jenjang_pdd']; ?><br>
-                                                        <b>SPESIFIKASI : </b><br>
-                                                        <?php echo $d_praktik['nama_spesifikasi_pdd']; ?><br>
-                                                        <b>JUMLAH PRAKTIKAN : </b><br>
-                                                        <?php echo $d_praktik['jumlah_praktik']; ?><br>
+                                                        <h5 class="text-gray-800 font-weight-bold">JURUSAN : </h5>
+                                                        <?php echo $d_praktik['nama_jurusan_pdd']; ?><br><br>
+                                                        <h5 class="text-gray-800 font-weight-bold">JENJANG : </h5>
+                                                        <?php echo $d_praktik['nama_jenjang_pdd']; ?><br><br>
+                                                        <h5 class="text-gray-800 font-weight-bold">SPESIFIKASI : </h5>
+                                                        <?php echo $d_praktik['nama_spesifikasi_pdd']; ?><br><br>
+                                                        <h5 class="text-gray-800 font-weight-bold">JUMLAH PRAKTIKAN : </h5>
+                                                        <?php echo $d_praktik['jumlah_praktik']; ?><br><br>
                                                     </div>
 
                                                     <!-- Data Koordinator  -->
                                                     <div class="col-sm-4">
-                                                        <b>NAMA KOORDINATOR : </b><br>
-                                                        <?php echo $d_praktik['nama_koordinator_praktik']; ?><br>
-                                                        <b>NO. HP KOORDINATOR : </b><br>
-                                                        <?php echo $d_praktik['telp_koordinator_praktik']; ?><br>
-                                                        <b>EMAIL KOORDINATOR : </b><br>
-                                                        <?php echo $d_praktik['email_koordinator_praktik']; ?><br>
+                                                        <h5 class="text-gray-800 font-weight-bold">NAMA KOORDINATOR : </h5>
+                                                        <?php echo $d_praktik['nama_koordinator_praktik']; ?><br><br>
+                                                        <h5 class="text-gray-800 font-weight-bold">NO. HP KOORDINATOR : </h5>
+                                                        <?php echo $d_praktik['telp_koordinator_praktik']; ?><br><br>
+                                                        <h5 class="text-gray-800 font-weight-bold">EMAIL KOORDINATOR : </h5>
+                                                        <?php echo $d_praktik['email_koordinator_praktik']; ?><br><br>
                                                     </div>
 
                                                     <!-- Data File -->
                                                     <div class="col-sm-4">
-                                                        <b>FILE SURAT : </b><br>
+                                                        <h5 class="text-gray-800 font-weight-bold">FILE SURAT : </h5>
                                                         <?php
                                                         if ($d_praktik['surat_praktik'] == '') {
                                                         ?>
@@ -607,7 +606,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                         <?php
                                                         }
                                                         ?><br><br>
-                                                        <b>DATA PRAKTIKAN :</b><br>
+                                                        <h5 class="text-gray-800 font-weight-bold">DATA PRAKTIKAN :</h5>
                                                         <?php
                                                         if ($d_praktik['data_praktik'] == '') {
                                                         ?>
@@ -644,7 +643,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 </a> -->
 
                                                                 <!-- modal hapus bayar -->
-                                                                <div class="modal fade text-left" id="m_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                <!-- <div class="modal fade text-left" id="m_h_m<?php echo $d_praktik['id_praktik']; ?>">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -656,12 +655,11 @@ if (isset($_POST['arsip_praktik'])) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                             </h4>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <br>
                                                 <div style="font-size: medium;">
                                                     <?php
 
@@ -675,32 +673,40 @@ if (isset($_POST['arsip_praktik'])) {
 
                                                         $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
                                                     ?>
-                                                        <div class="jumbotron jumbotron-fluid">
-                                                            <div class="container">
-                                                                <fieldset class="fieldset">
-                                                                    <h5 class="text-gray-800 font-weight-bold">Nama Mess :</h5>
-                                                                    <?php echo $d_mess_pilih['nama_mess']; ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold"> Nama Pemilik :</h5>
-                                                                    <?php echo $d_mess_pilih['nama_pemilik_mess']; ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold">No Pemilik :</h5>
-                                                                    <?php echo $d_mess_pilih['no_pemilik_mess']; ?><br><br>
-                                                                    <h5 class="text-gray-800 font-weight-bold"> Alamat Mess : </h5>
-                                                                    <?php echo $d_mess_pilih['alamat_mess']; ?><br><br>
-                                                                    <!-- <h5 class="text-gray-800 font-weight-bold"> Jumlah yang diisi :</h5>
-                                                                      <?php echo $d_mess_pilih['jumlah_praktik_mess_pilih']; ?><br><br> -->
-                                                                    <h5 class="text-gray-800 font-weight-bold"> Jumlah Hari :</h5>
-                                                                    <!-- <?php echo $d_mess_pilih['total_hari_mess_pilih']; ?><br><br>
-                                                                      <h5 class="text-gray-800 font-weight-bold"> Dengan Makan (3X Sehari) :</h5> -->
-                                                                    <?php
-                                                                    if ($d_mess_pilih['makan_mess_pilih'] == 'y') {
-                                                                        $makan = 'YA';
-                                                                    } else {
-                                                                        $makan = 'TIDAK';
-                                                                    }
-                                                                    echo $makan; ?>
-                                                                    <!-- <h5 class="text-gray-800 font-weight-bold"> Total Tarif :</h5>
-                                                                      <?php echo "Rp " . number_format($d_mess_pilih['total_tarif_mess_pilih'], 0, ",", "."); ?> -->
-                                                                </fieldset>
+                                                        <div class="jumbotron">
+                                                            <div class="jumbotron-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <h5 class="text-gray-800 font-weight-bold">Nama Mess :</h5>
+                                                                        <?php echo $d_mess_pilih['nama_mess']; ?><br><br>
+                                                                        <h5 class="text-gray-800 font-weight-bold"> Nama Pemilik :</h5>
+                                                                        <?php echo $d_mess_pilih['nama_pemilik_mess']; ?><br><br>
+                                                                        <h5 class="text-gray-800 font-weight-bold">No Pemilik :</h5>
+                                                                        <?php echo $d_mess_pilih['no_pemilik_mess']; ?><br><br>
+                                                                        <h5 class="text-gray-800 font-weight-bold"> Alamat Mess : </h5>
+                                                                        <?php echo $d_mess_pilih['alamat_mess']; ?><br><br>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <h5 class="text-gray-800 font-weight-bold"> Jumlah Hari :</h5>
+                                                                        <?php echo $d_mess_pilih['jumlah_hari_mess_pilih']; ?><br><br>
+                                                                        <h5 class="text-gray-800 font-weight-bold">
+                                                                            Dengan Makan (3X Sehari) :
+                                                                        </h5>
+                                                                        <?php
+                                                                        if ($d_mess_pilih['makan_mess_pilih'] == 'y') {
+                                                                            $makan = 'YA';
+                                                                        } else {
+                                                                            $makan = 'TIDAK';
+                                                                        }
+                                                                        echo $makan;
+                                                                        ?>
+                                                                        <br><br>
+                                                                        <h5 class="text-gray-800 font-weight-bold"> Total Tarif Mess:</h5>
+                                                                        <?php
+                                                                        echo "Rp " . number_format($d_mess_pilih['total_tarif_mess_pilih'], 0, ",", ".");
+                                                                        ?>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     <?php
@@ -753,7 +759,6 @@ if (isset($_POST['arsip_praktik'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <br>
                                         <div>
                                             <?php
                                             $sql_tarif_pilih = "SELECT * FROM tb_tarif_pilih
@@ -803,9 +808,11 @@ if (isset($_POST['arsip_praktik'])) {
                                                     </tbody>
                                                 </table>
                                                 <br>
-                                                <div class="text-center text-lg font-weight-bold text-gray-800">
-                                                    JUMLAH TOTAL : <?php echo "Rp " . number_format($total_jumlah_tarif, 0, ",", "."); ?>
-                                                </div>
+                                                <center>
+                                                    <div class="text-lg badge badge-primary">
+                                                        JUMLAH TOTAL : <?php echo "Rp " . number_format($total_jumlah_tarif, 0, ",", "."); ?>
+                                                    </div>
+                                                </center>
                                             <?php
                                             } else {
                                             ?>
@@ -858,7 +865,6 @@ if (isset($_POST['arsip_praktik'])) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <br>
                                                 <div>
                                                     <?php
 
@@ -904,9 +910,11 @@ if (isset($_POST['arsip_praktik'])) {
 
                                                             </tbody>
                                                         </table>
-                                                        <div class="text-center text-lg font-weight-bold text-gray-800">
-                                                            KODE BAYAR : <?php echo $kode_bayar; ?>
-                                                        </div>
+                                                        <center>
+                                                            <div class="text-lg badge badge-danger">
+                                                                KODE BAYAR : <?php echo $kode_bayar; ?>
+                                                            </div>
+                                                        </center>
                                                     <?php
                                                     } else {
                                                     ?>
@@ -923,7 +931,6 @@ if (isset($_POST['arsip_praktik'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr>
                                     </div>
                                 </div>
                             </div>

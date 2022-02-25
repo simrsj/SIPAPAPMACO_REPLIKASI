@@ -64,13 +64,15 @@ $sql_insert_pilih_mess = "INSERT INTO tb_mess_pilih (
     id_mess,
     tgl_input_mess_pilih,
     makan_mess_pilih,
-    jumlah_hari_mess_pilih
+    jumlah_hari_mess_pilih,
+    total_tarif_mess_pilih
 ) VALUES (
         '" . $_POST['id'] . "', 
         '" . $_POST['id_mess'] . "', 
         '" . date('Y-m-d') . "', 
         '" . $_POST['makan_mess_pilih'] . "',
-        '" . $jumlah_hari_praktik . "'
+        '" . $jumlah_hari_praktik . "',
+        '" . $total_tarif_mess_pilih . "'
 )";
 
 //SQL ubah status praktik
