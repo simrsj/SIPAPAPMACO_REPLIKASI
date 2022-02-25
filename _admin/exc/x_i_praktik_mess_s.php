@@ -35,7 +35,8 @@ if ($_POST['makan_mess_pilih'] == "y") {
 
 // echo $total_tarif_mess_pilih . "<br>";
 
-$sql_insert_pilih_mess = "INSERT INTO tb_tarif_pilih (
+//tambah ke tb_tarif_pilih
+$sql_insert_tarif_mess = "INSERT INTO tb_tarif_pilih (
     id_praktik, 
     tgl_input_tarif_pilih,
     nama_jenis_tarif_pilih,
@@ -57,13 +58,30 @@ $sql_insert_pilih_mess = "INSERT INTO tb_tarif_pilih (
         '" . $total_tarif_mess_pilih . "'
 )";
 
+//tambah ke tb_mess_pilih
+$sql_insert_pilih_mess = "INSERT INTO tb_mess_pilih (
+    id_praktik, 
+    id_mess,
+    tgl_input_mess_pilih,
+    makan_mess_pilih,
+    jumlah_hari_mess_pilih
+) VALUES (
+        '" . $_POST['id'] . "', 
+        '" . $_POST['id_mess'] . "', 
+        '" . date('Y-m-d') . "', 
+        '" . $_POST['makan_mess_pilih'] . "',
+        '" . $jumlah_hari_praktik . "'
+)";
+
 //SQL ubah status praktik
 $sql_ubah_status_praktik = "UPDATE tb_praktik
 SET status_cek_praktik = 'MESS'
 WHERE id_praktik = " . $_POST['id'];
 
 //Eksekusi Query
+// echo $sql_insert_tarif_mess . "<br>";
 // echo $sql_insert_pilih_mess . "<br>";
 // echo $sql_ubah_status_praktik . "<br>";
+$conn->query($sql_insert_tarif_mess);
 $conn->query($sql_insert_pilih_mess);
 $conn->query($sql_ubah_status_praktik);

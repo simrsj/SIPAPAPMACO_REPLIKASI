@@ -1,5 +1,5 @@
 <?php
-if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
+if ($_GET['prk'] == 'ked') {
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -287,15 +287,16 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                         <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
 
                         <!-- Tombol Lanjut ke Daftar Tarif-->
-                        <nav id="navbar-tarif" class="navbar justify-content-center">
-                            <button type="button" id="tombol_data_praktik" class="nav-link btn btn-outline-primary" onclick="simpan_praktik()">
+
+                        <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
+                            <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success" onclick="simpan_ked()">
                                 <!-- <a class="nav-link" href="#tarif"> -->
-                                <i class="fas fa-chevron-circle-down"></i>
-                                Lanjut Ke Daftar Tarif
-                                <i class="fas fa-chevron-circle-down"></i>
+                                <i class="fas fa-check-circle"></i>
+                                Simpan Data Praktik
+                                <i class="fas fa-check-circle"></i>
                                 <!-- </a> -->
                             </button>
-                        </nav>
+                        </div>
 
                     </div>
                 </div>
@@ -308,7 +309,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
     <!-- <pre id="whereToPrint"> ce :</pre> -->
 
     <script type="text/javascript">
-        function simpan_praktik() {
+        function simpan_ked() {
 
             var id = document.getElementById("id").value;
             var user = document.getElementById("user").value;
@@ -452,7 +453,7 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
 
                 //notif no_surat 
                 if (no_surat == "") {
-                    document.getElementById("err_no_surat").innerHTML = "No. Surat Praktik Harus Diisi";
+                    document.getElementById("err_no_surat").innerHTML = "No. Surat Institusi Harus Diisi";
                 } else {
                     document.getElementById("err_no_surat").innerHTML = "";
                 }
@@ -617,8 +618,8 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                     document.getElementById("err_file_data_praktikan").innerHTML = "File Data Praktikan Harus Kurang dari 1 Mb";
                 }
             }
+            //simpan data praktik dan data tarif
 
-            //Simpan Data Praktik dan munculkan Data Tarif
             if (
                 institusi != "" &&
                 praktik != "" &&
@@ -638,101 +639,8 @@ if ($_GET['prk'] == 'ked' || $_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $
                 getTypeDataPraktikan == 'xlsx' &&
                 getSizeDataPraktikan <= 1024
             ) {
-                document.getElementById("err_institusi").innerHTML = "";
-                document.getElementById("err_praktik").innerHTML = "";
-                document.getElementById("err_jurusan").innerHTML = "";
-                document.getElementById("err_jenjang").innerHTML = "";
-                document.getElementById("err_spesifikasi").innerHTML = "";
-                document.getElementById("err_akreditasi").innerHTML = "";
-                document.getElementById("err_jumlah").innerHTML = "";
-                document.getElementById("err_tgl_mulai").innerHTML = "";
-                document.getElementById("err_tgl_selesai").innerHTML = "";
-                document.getElementById("err_no_surat").innerHTML = "";
-                document.getElementById("err_file_surat").innerHTML = "";
-                document.getElementById("err_file_data_praktikan").innerHTML = "";
-                // document.getElementById("err_akun_koordinator").innerHTML = "";
-                document.getElementById("err_nama_koordinator").innerHTML = "";
-                document.getElementById("err_telp_koordinator").innerHTML = "";
-
-                //data dari form_praktik
-                var data_praktik = $('#form_praktik').serializeArray();
-                // // document.getElementById("whereToPrint").innerHTML = JSON.stringify(data_praktik, null, 4);
-
-                $("#data_praktik_input").fadeOut('fast');
-                $("#data_tarif_input").fadeIn('slow');
-
-                // Kirim Parameter ke Data Tarif untuk ditampilkan
-                var xmlhttp_data_tarif = new XMLHttpRequest();
-                xmlhttp_data_tarif.onreadystatechange = function() {
-                    document.getElementById("data_tarif_input").innerHTML = this.responseText;
-                };
-                xmlhttp_data_tarif.open("GET", "_admin/insert/i_praktikDataTarif.php?id" + id +
-                    "&jur=" + jurusan +
-                    "&jen=" + jenjang +
-                    "&tmp=" + tgl_mulai +
-                    "&tsp=" + tgl_selesai +
-                    "&jum=" + jumlah,
-                    true
-                );
-                xmlhttp_data_tarif.send();
-
-                //Toast Lanjut Ke Data Tarif
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'info',
-                    title: '<div class="text-md text-center">LANJUTKAN KE <b>DATA TARIF</b></div>'
-                });
-            }
-        }
-
-        function simpan_tarif() {
-
-            //Notif dan Toast Bila Ujian Tidak dipilih
-            if (document.getElementById("cek_pilih_ujian1").checked == false && document.getElementById("cek_pilih_ujian2").checked == false) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<center>Pilih Ujian <b>Ya</b> atau <b>Tidak</b></center>'
-                });
-                document.getElementById("err_cek_pilih_ujian").innerHTML = "Pilih Ujian <br>";
-            }
-            //simpan data praktik dan data tarif
-            else {
                 var path = "";
-                var cek_pilih_ujian = "";
-                if (document.getElementById("cek_pilih_ujian1").checked == true) {
-                    cek_pilih_ujian = document.getElementById("cek_pilih_ujian1").value;
-                } else if (document.getElementById("cek_pilih_ujian2").checked == true) {
-                    cek_pilih_ujian = document.getElementById("cek_pilih_ujian2").value;
-                }
-
                 var data_praktik = $('#form_praktik').serializeArray();
-                data_praktik.push({
-                    name: 'cek_pilih_ujian',
-                    value: cek_pilih_ujian
-                });
 
                 //cari jenis jurusan untuk dijadikan path
 

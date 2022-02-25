@@ -217,18 +217,18 @@ if (isset($_POST['arsip_praktik'])) {
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <span class="badge badge-warning text-md">DATA PRAKTIK & TARIF</span><br />
-                                                                Pendaftaran dan Tarif Sudah Dipilih, dilanjutkan
-                                                                <span class="font-weight-bold text-primary">Validasi Data Pendaftaran dan Tarif </span>oleh ADMIN<br /><br />
+                                                                <span class="badge badge-warning text-md">DATA PRAKTIK</span><br />
+                                                                Penagajuan Sudah Dipilih, dilanjutkan
+                                                                <span class="font-weight-bold text-primary">Validasi Data Praktik </span>oleh ADMIN<br /><br />
 
-                                                                <span class="badge badge-success text-md">Val. PRAKTIK & TARIF <i class="fas fa-check-circle"></i></span><br>
-                                                                Validasi Data Praktikan dan Tarif <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan proses pemilihan <b class="text-warning">TEMPAT</b> oleh ADMIN<br><br>
+                                                                <span class="badge badge-success text-md">Val. PRAKTIK <i class="fas fa-check-circle"></i></span><br>
+                                                                Validasi Data Praktik <span class="font-weight-bold text-success">DITERIMA</span>, Dilanjutkan proses pemilihan <b class="text-warning">MESS/PEMONDOKAN</b> oleh ADMIN<br><br>
 
-                                                                <span class="badge badge-danger text-md">Val. PRAKTIK & TARIF <i class="fas fa-times-circle"></i></span><br>
-                                                                Validasi Data Praktikan dan Tarif <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+                                                                <span class="badge badge-danger text-md">Val. PRAKTIK <i class="fas fa-times-circle"></i></span><br>
+                                                                Validasi Data Praktik <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
 
-                                                                <span class="badge badge-warning text-md">TEMPAT</span><br>
-                                                                Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh Admin<br><br>
+                                                                <!-- <span class="badge badge-warning text-md">TEMPAT</span><br>
+                                                                Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh Admin<br><br> -->
 
                                                                 <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
                                                                 MESS/PEMONDOKAN Sudah didaftarkan oleh Admin<br><br>
@@ -318,6 +318,12 @@ if (isset($_POST['arsip_praktik'])) {
                                                     DATA <br>PRAKTIK & TARIF
                                                 </span>
                                             <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "DPT_KED") {
+                                            ?>
+                                                <span class="badge badge-warning text-md">
+                                                    DATA PRAKTIK
+                                                </span>
+                                            <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
                                             ?>
                                                 <span class="badge badge-success text-md">
@@ -333,6 +339,12 @@ if (isset($_POST['arsip_praktik'])) {
                                             } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
                                             ?>
                                                 <span class="badge badge-warning text-md"> TEMPAT </span>
+                                            <?php
+                                            } elseif ($d_praktik['status_cek_praktik'] == "TMP_KED") {
+                                            ?>
+                                                <span class="badge badge-success text-md">
+                                                    Val. PRAKTIK <i class="fas fa-check-circle"></i>
+                                                </span>
                                             <?php
                                             } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
                                             ?>
@@ -379,7 +391,7 @@ if (isset($_POST['arsip_praktik'])) {
 
                                             <!-- tombol dropdown pilih menu tarif, mess, bukti bayar -->
                                             <?php
-                                            if ($d_praktik['status_cek_praktik'] == "DPT") {
+                                            if ($d_praktik['status_cek_praktik'] == "DPT" || $d_praktik['status_cek_praktik'] == "DPT_KED") {
                                             ?>
                                                 <b>VALIDASI : </b><br>
                                                 <div class="btn-group">
@@ -417,7 +429,7 @@ if (isset($_POST['arsip_praktik'])) {
                                                     </div>
                                                 </div>
                                             <?php
-                                            } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
+                                            } elseif ($d_praktik['status_cek_praktik'] == "TMP" || $d_praktik['status_cek_praktik'] == "TMP_KED") {
                                             ?>
                                                 <b>PILIH : </b><br>
                                                 <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
@@ -610,6 +622,100 @@ if (isset($_POST['arsip_praktik'])) {
                                                         }
                                                         ?>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <!-- Data Mess  -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- data mess yang dipilih -->
+                                                <div class="text-gray-700">
+                                                    <div class="row">
+                                                        <div class="col-lg-11">
+                                                            <h4 class="font-weight-bold">
+                                                                DATA MESS
+                                                                <!-- <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?prk&um=<?php echo $d_praktik['id_praktik']; ?>'>
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                    <i class=" fas fa-trash-alt"></i>
+                                                                </a> -->
+
+                                                                <!-- modal hapus bayar -->
+                                                                <div class="modal fade text-left" id="m_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4>HAPUS DATA MESS ?</h4>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hm=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                                                                <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div style="font-size: medium;">
+                                                    <?php
+
+                                                    $sql_mess_pilih = "SELECT * FROM tb_mess_pilih
+                                                      JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess
+                                                      WHERE tb_mess_pilih.id_praktik = " . $d_praktik['id_praktik'];
+
+                                                    $q_mess_pilih = $conn->query($sql_mess_pilih);
+                                                    $r_mess_pilih = $q_mess_pilih->rowCount();
+                                                    if ($r_mess_pilih > 0) {
+
+                                                        $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
+                                                    ?>
+                                                        <div class="jumbotron jumbotron-fluid">
+                                                            <div class="container">
+                                                                <fieldset class="fieldset">
+                                                                    <h5 class="text-gray-800 font-weight-bold">Nama Mess :</h5>
+                                                                    <?php echo $d_mess_pilih['nama_mess']; ?><br><br>
+                                                                    <h5 class="text-gray-800 font-weight-bold"> Nama Pemilik :</h5>
+                                                                    <?php echo $d_mess_pilih['nama_pemilik_mess']; ?><br><br>
+                                                                    <h5 class="text-gray-800 font-weight-bold">No Pemilik :</h5>
+                                                                    <?php echo $d_mess_pilih['no_pemilik_mess']; ?><br><br>
+                                                                    <h5 class="text-gray-800 font-weight-bold"> Alamat Mess : </h5>
+                                                                    <?php echo $d_mess_pilih['alamat_mess']; ?><br><br>
+                                                                    <!-- <h5 class="text-gray-800 font-weight-bold"> Jumlah yang diisi :</h5>
+                                                                      <?php echo $d_mess_pilih['jumlah_praktik_mess_pilih']; ?><br><br> -->
+                                                                    <h5 class="text-gray-800 font-weight-bold"> Jumlah Hari :</h5>
+                                                                    <!-- <?php echo $d_mess_pilih['total_hari_mess_pilih']; ?><br><br>
+                                                                      <h5 class="text-gray-800 font-weight-bold"> Dengan Makan (3X Sehari) :</h5> -->
+                                                                    <?php
+                                                                    if ($d_mess_pilih['makan_mess_pilih'] == 'y') {
+                                                                        $makan = 'YA';
+                                                                    } else {
+                                                                        $makan = 'TIDAK';
+                                                                    }
+                                                                    echo $makan; ?>
+                                                                    <!-- <h5 class="text-gray-800 font-weight-bold"> Total Tarif :</h5>
+                                                                      <?php echo "Rp " . number_format($d_mess_pilih['total_tarif_mess_pilih'], 0, ",", "."); ?> -->
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <div class="jumbotron">
+                                                            <div class="jumbotron-fluid">
+                                                                <div class="text-gray-700" style="padding-bottom: 2px; padding-top: 5px;">
+                                                                    <h5 class="text-center">Data Tidak Ada</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>

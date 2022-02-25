@@ -77,34 +77,34 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <b>PILIH MESS/PEMONDOKAN</b>
                             </div>
                             <div class="modal-body">
-                                <fieldset class="fieldset">
-                                    <legend class="legend-fieldset">Nama Mess <span style="color:red">*</span></legend>
-                                    <div id="err_mess" class="text-danger text-xs font-italic"></div>
-                                    <select class="form-control" name="id_mess" id="id_mess" required>
-                                        <option value="">-- Pilih --</option>
-                                        <?php
-                                        $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE status_mess = 'y' ORDER BY nama_mess ASC");
-                                        while ($d_jurusan = $q_jurusan->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                            <option value="<?php echo $d_jurusan['id_mess']; ?>"><?php echo $d_jurusan['nama_mess']; ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </fieldset>
+                                <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
+                                <div id="err_mess" class="text-danger text-xs font-italic"></div>
+                                <select class="form-control" name="id_mess" id="id_mess" required>
+                                    <option value="">-- Pilih --</option>
+                                    <?php
+                                    $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE status_mess = 'y' ORDER BY nama_mess ASC");
+                                    while ($d_jurusan = $q_jurusan->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                        <option value="<?php echo $d_jurusan['id_mess']; ?>"><?php echo $d_jurusan['nama_mess']; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
                                 <hr>
-                                <fieldset class="fieldset">
-                                    <legend class="legend-fieldset">Makan Mess <span style="color:red">*</span></legend>
-                                    <div id="err_makan" class="text-danger text-xs font-italic"></div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="makan_mess_pilih1" name="makan_mess_pilih" value="y" class="custom-control-input" required>
-                                        <label class="custom-control-label" for="makan_mess_pilih1">Pakai Makan (3x Sehari)</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="makan_mess_pilih2" name="makan_mess_pilih" value="t" class="custom-control-input" required>
-                                        <label class="custom-control-label" for="makan_mess_pilih2">Tidak Pakai Makan</label>
-                                    </div>
-                                </fieldset>
+                                <span class="text-lg font-weight-bold">Makan Mess <span style="color:red">*</span></span>
+                                <div id="err_makan" class="text-danger text-xs font-italic"></div>
+                                <div class="boxed-check-group boxed-check-primary boxed-check-sm text-center">
+                                    <label class="boxed-check">
+                                        <input class="boxed-check-input" type="radio" name="makan_mess_pilih" id="makan_mess_pilih1" value="y" required>
+                                        <span class="boxed-check-label">Pakai Makan (3x Sehari)</span>
+                                    </label>
+                                </div>
+                                <div class="boxed-check-group boxed-check-primary boxed-check-sm text-center">
+                                    <label class="boxed-check">
+                                        <input class="boxed-check-input" type="radio" name="makan_mess_pilih" id="makan_mess_pilih2" value="t" required>
+                                        <span class="boxed-check-label">Tidak Pakai Makan</span>
+                                    </label>
+                                </div>
                                 <input type="hidden" name="path" id="path" value="<?php echo $_GET['prk'] ?>">
                                 <input type="hidden" name="id" id="id" value="<?php echo $_GET['m'] ?>">
                             </div>

@@ -305,7 +305,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						} elseif (isset($_GET['dh'])) {
 							include "_admin/hide/dh_praktik.php";
 						} elseif (isset($_GET['i'])) {
-							include "_admin/insert/i_praktik.php";
+							if ($_GET['prk'] == 'ked') {
+								include "_admin/insert/i_praktik_kedokteran.php";
+							} else {
+								include "_admin/insert/i_praktik.php";
+							}
 						} elseif (isset($_GET['m'])) {
 							include "_admin/insert/i_praktik_mess.php";
 						} elseif (isset($_GET['p_i'])) {

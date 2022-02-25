@@ -105,29 +105,17 @@ while ($d_dpjs = $q_dpjs->fetch(PDO::FETCH_ASSOC)) {
 
 //////////////////// PENDAPATAN SEMUA ////////////////////
 
-$total_tarif = 0;
 $total_tarif_pilih = 0;
 $total_mess = 0;
 #data tarif pilih
 $sql_praktik = "SELECT * FROM tb_tarif_pilih
             JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_cek_praktik = ('AKV' OR 'SLS')";
+            WHERE status_cek_praktik = 'AKV' OR status_cek_praktik =  'SLS'";
 $q_praktik = $conn->query($sql_praktik);
 $total_tarif = 0;
 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
     $total_tarif = $total_tarif + $d_praktik['jumlah_tarif_pilih'];
     $total_tarif_pilih = $total_tarif_pilih + $d_praktik['jumlah_tarif_pilih'];
-}
-
-#data mess pilih
-$sql_mess = "SELECT * FROM tb_mess_pilih
-            JOIN tb_praktik ON tb_mess_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_cek_praktik = ('AKV' OR 'SLS')";
-$q_mess = $conn->query($sql_mess);
-
-while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-    $total_tarif = $total_tarif + $d_mess['total_tarif_mess_pilih'];
-    $total_mess = $total_mess + $d_mess['total_tarif_mess_pilih'];
 }
 
 //////////////////// PENDAPATAN BULANAN ////////////////////
@@ -137,22 +125,11 @@ $total_mess = 0;
 #data tarif pilih
 $sql_praktik = "SELECT * FROM tb_tarif_pilih
             JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_cek_praktik = ('AKV' OR 'SLS')";
+            WHERE status_cek_praktik = 'AKV' OR status_cek_praktik =  'SLS'";
 $q_praktik = $conn->query($sql_praktik);
 
 $total_tarif = 0;
 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
     $total_tarif = $total_tarif + $d_praktik['jumlah_tarif_pilih'];
     $total_tarif_pilih = $total_tarif_pilih + $d_praktik['jumlah_tarif_pilih'];
-}
-
-#data mess pilih
-$sql_mess = "SELECT * FROM tb_mess_pilih
-            JOIN tb_praktik ON tb_mess_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_cek_praktik = ('AKV' OR 'SLS')";
-$q_mess = $conn->query($sql_mess);
-
-while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-    $total_tarif = $total_tarif + $d_mess['total_tarif_mess_pilih'];
-    $total_mess = $total_mess + $d_mess['total_tarif_mess_pilih'];
 }
