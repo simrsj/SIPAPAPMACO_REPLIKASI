@@ -53,11 +53,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col" width="200">Nama Jenis</th>
-                                    <th scope="col" width="300">Nama Tarif</th>
+                                    <th scope="col">Nama Tarif</th>
                                     <th scope="col" width="150">Satuan</th>
                                     <th scope="col" width="150">Tarif</th>
-                                    <th scope="col">Frekuensi</th>
-                                    <th scope="col">Kuantitas</th>
+                                    <th scope="col" width="50">Frekuensi</th>
+                                    <th scope="col" width="50">Kuantitas</th>
                                     <th scope="col">Total Tarif</th>
                                 </tr>
                             </thead>
