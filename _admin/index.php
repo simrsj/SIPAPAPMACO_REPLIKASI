@@ -42,7 +42,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<li class="nav-item">
 					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
 						<i class="fas fa-fw fa-users"></i>
-						<span>Pendaftaran</span>
+						<span>Pengajuan</span>
 					</a>
 					<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
@@ -166,9 +166,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 								<i class="fas fa-fw fa-table"></i>
 								<span>Jurusan Pendidikan</span>
 							</a>
-							<a class="collapse-item" href="?spf">
+							<a class="collapse-item" href="?pfs">
 								<i class="fas fa-fw fa-table"></i>
-								<span>Spesifikasi Pendidikan</span>
+								<span>Profesi Pendidikan</span>
 							</a>
 						</div>
 					</div>
@@ -331,8 +331,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						}
 					} elseif (isset($_GET['ptk'])) {
 						include "_admin/view/v_praktikan.php";
-					} elseif (isset($_GET['spf'])) {
-						include "_admin/view/v_spesifikasi.php";
+					} elseif (isset($_GET['pfs'])) {
+						include "_admin/view/v_profesi.php";
 					} elseif (isset($_GET['uni'])) {
 						include "_admin/view/v_unit.php";
 					} elseif (isset($_GET['tmp'])) {

@@ -15,7 +15,7 @@ if ($_GET['prk'] == 'ked') {
                         <!-- Data Praktikan -->
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="text-lg font-weight-bold text-center"> DATA PRAKTIKAN</div>
+                                <div class="text-lg font-weight-bold text-center"> DATA PRAKTIK</div>
                             </div>
                         </div>
                         <hr>
@@ -70,7 +70,7 @@ if ($_GET['prk'] == 'ked') {
                                         ?>
                                     </select><br>
                                     <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
-                                    <div class="text-danger font-weight-bold  font-italic text-xs" id="err_institusi"></div>
+                                    <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_institusi"></div>
                                 <?php
                                 } else {
                                 ?>
@@ -82,110 +82,58 @@ if ($_GET['prk'] == 'ked') {
                             <div class="col-lg-5">
                                 Gelombang/Kelompok : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" id="praktik" required>
-                                <div class="text-danger font-weight-bold  font-italic text-xs" id="err_praktik"></div>
+                                <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_praktik"></div>
                             </div>
                             <div class="col-lg-2">
                                 Jumlah Praktikan : <span style="color:red">*</span><br>
                                 <input type="number" class="form-control" name="jumlah_praktik" min="1" placeholder="Isi Jumlah Praktik" id="jumlah" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jumlah"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_jumlah"></span>
                             </div>
                         </div>
                         <br>
 
-                        <!-- Jurusan, Jenjang, Spesifikasi dan Akreditasi -->
+                        <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
                         <div class="row">
-                            <div class="col-lg-3">
-                                Pilih Jurusan : <span style="color:red">*</span><br>
-                                <?php
-                                $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd != 0 ORDER BY nama_jurusan_pdd ASC";
-
-                                $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
-                                $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
-
-                                if ($r_jurusan_pdd > 0) {
-                                ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" required>
-                                        <option value="">-- <i>Pilih</i>--</option>
-                                        <?php
-                                        while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                            <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
-                                                <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
-                                            </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jurusan"></span>
-                                <?php
-                                } else {
-                                ?>
-                                    <b><i>Data Jurusan Tidak Ada</i></b>
-                                <?php
-                                }
-                                ?>
+                            <div class="col-lg-2">
+                                Jurusan : <br>
+                                <b>Kedokteran</b>
+                                <input type="hidden" name='id_jurusan_pdd' id="jurusan" value="1">
                             </div>
-                            <div class="col-lg-3">
-                                Pilih Jenjang : <span style="color:red">*</span><br>
-                                <?php
-                                $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd 
-                                        WHERE (id_jenjang_pdd != 0 && id_jenjang_pdd != 11)
-                                        ORDER BY id_jenjang_pdd ASC";
-
-                                $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
-                                $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
-
-                                if ($r_jenjang_pdd > 0) {
-                                ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jenjang_pdd' id="jenjang" required>
-                                        <option value="">-- <i>Pilih</i>--</option>
-                                        <?php
-                                        while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                            <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
-                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
-                                            </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jenjang"></span>
-                                <?php
-                                } else {
-                                ?>
-                                    <b><i>Data Jurusan Tidak Ada</i></b>
-                                <?php
-                                }
-                                ?>
+                            <div class="col-lg-2">
+                                Jenjang : <br>
+                                <b>Profesi</b>
+                                <input type="hidden" name='id_jenjang_pdd' id="jenjang" value="10">
                             </div>
-                            <div class="col-lg-3">
-                                Pilih Spesifikasi : <span style="color:red">*</span><br>
+                            <div class="col-lg-5">
+                                Pilih Profesi : <span style="color:red">*</span><br>
                                 <?php
-                                $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
+                                $sql_spek = "SELECT * FROM tb_jurusan_pdd_profesi 
+                                JOIN tb_profesi_pdd ON tb_jurusan_pdd_profesi.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd
+                                WHERE tb_jurusan_pdd_profesi.id_jurusan_pdd = 1
+                                ORDER BY tb_profesi_pdd.nama_profesi_pdd ASC";
 
-                                $q_spesifikasi_pdd = $conn->query($sql_spesifikasi_pdd);
-                                $r_spesifikasi_pdd = $q_spesifikasi_pdd->rowCount();
+                                $q_spek = $conn->query($sql_spek);
+                                $r_spek = $q_spek->rowCount();
 
-                                if ($r_spesifikasi_pdd > 0) {
+                                if ($r_spek > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_spesifikasi_pdd' id="spesifikasi">
+                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_profesi_pdd' id="profesi">
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
-                                        while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
+                                        while ($d_spek = $q_spek->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
-                                            <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
-                                                <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
+                                            <option value='<?php echo $d_spek['id_profesi_pdd']; ?>'>
+                                                <?php echo $d_spek['nama_profesi_pdd']; ?>
                                             </option>
                                         <?php
                                         }
                                         ?>
                                     </select><br>
-                                    <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs" id="err_spesifikasi"></span>
+                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_profesi"></span>
                                 <?php
                                 } else {
                                 ?>
-                                    <b><i>Data Spesifikasi Tidak Ada</i></b>
+                                    <b><i>Data Profesi Tidak Ada</i></b>
                                 <?php
                                 }
                                 ?>
@@ -212,7 +160,7 @@ if ($_GET['prk'] == 'ked') {
                                         }
                                         ?>
                                     </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs" id="err_akreditasi"></span>
+                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_akreditasi"></span>
                                 <?php
                                 } else {
                                 ?>
@@ -229,30 +177,30 @@ if ($_GET['prk'] == 'ked') {
                             <div class="col-lg-2">
                                 Tanggal Mulai : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control" name="tgl_mulai_praktik" id="tgl_mulai" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_tgl_mulai"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_tgl_mulai"></span>
                             </div>
                             <div class="col-lg-2">
                                 Tanggal Selesai : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control" name="tgl_selesai_praktik" id="tgl_selesai" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_tgl_selesai"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_tgl_selesai"></span>
                             </div>
                             <div class="col-lg-2">
                                 No. Surat Institusi : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control" name="no_surat" placeholder="Isi no Surat Institusi" id="no_surat" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_no_surat"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_no_surat"></span>
                             </div>
                             <div class="col-lg-3">
                                 Unggah Surat : <span style="color:red">*</span><br>
                                 <input type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
                                 <br><i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_file_surat"></span>
+                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_surat"></span>
                             </div>
                             <div class="col-lg-3">
                                 Unggah Data Praktikan : <span style="color:red">*</span>
                                 <i style='font-size:12px;'><a href="./_file/__format_data_praktikan.xlsx">Download Format</a></i><br>
                                 <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx">
                                 <br><i style='font-size:12px;'>Data unggah harus .xlsx dan maksimal ukuran file 1 Mb</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_file_data_praktikan"></span>
+                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_data_praktikan"></span>
                             </div>
                         </div>
                         <hr>
@@ -260,7 +208,7 @@ if ($_GET['prk'] == 'ked') {
                         <!-- Koordinator -->
                         <div class=" row">
                             <div class="col-lg-12 text-center">
-                                <b>Koordinator</b>
+                                <b>KOORDINATOR</b>
                             </div>
                         </div>
                         <br>
@@ -271,7 +219,7 @@ if ($_GET['prk'] == 'ked') {
                             ?>
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" required><span class="text-danger font-weight-bold  font-italic text-xs" id="err_nama_koordinator"></span>
+                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
@@ -281,9 +229,33 @@ if ($_GET['prk'] == 'ked') {
                                 Telpon : <span style="color:red">*</span><br>
                                 <input type="number" class="form-control" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_telp_koordinator"></span>
+                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_telp_koordinator"></span>
                             </div>
                         </div>
+
+                        <hr>
+                        <div class="text-gray-700">
+                            <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                                Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
+                                <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)</span>
+                            </div>
+                            <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                                <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
+                            </div>
+                        </div>
+                        <div class="row boxed-check-group boxed-check-primary justify-content-center">
+                            <label class="boxed-check">
+                                <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="y">
+                                <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
+                            </label>
+                            &nbsp;
+                            &nbsp;
+                            <label class="boxed-check">
+                                <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
+                                <div class="boxed-check-label">Tanpa Makan</div>
+                            </label>
+                        </div>
+                        <hr>
                         <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
 
                         <!-- Tombol Lanjut ke Daftar Tarif-->
@@ -317,7 +289,7 @@ if ($_GET['prk'] == 'ked') {
             var praktik = document.getElementById("praktik").value;
             var jurusan = document.getElementById("jurusan").value;
             var jenjang = document.getElementById("jenjang").value;
-            var spesifikasi = document.getElementById("spesifikasi").value;
+            var profesi = document.getElementById("profesi").value;
             var akreditasi = document.getElementById("akreditasi").value;
             var jumlah = document.getElementById("jumlah").value;
             var tgl_mulai = document.getElementById("tgl_mulai").value;
@@ -335,7 +307,7 @@ if ($_GET['prk'] == 'ked') {
                 praktik == "" ||
                 jurusan == "" ||
                 jenjang == "" ||
-                spesifikasi == "" ||
+                profesi == "" ||
                 akreditasi == "" ||
                 jumlah == "" ||
                 tgl_mulai == "" ||
@@ -402,25 +374,25 @@ if ($_GET['prk'] == 'ked') {
 
                 }
 
-                //notif jurusan 
-                if (jurusan == "") {
-                    document.getElementById("err_jurusan").innerHTML = "Jurusan Harus Diisi";
-                } else {
-                    document.getElementById("err_jurusan").innerHTML = "";
-                }
+                // //notif jurusan 
+                // if (jurusan == "") {
+                //     document.getElementById("err_jurusan").innerHTML = "Jurusan Harus Diisi";
+                // } else {
+                //     document.getElementById("err_jurusan").innerHTML = "";
+                // }
 
-                //notif jenjang 
-                if (jenjang == "") {
-                    document.getElementById("err_jenjang").innerHTML = "Jenjang Harus Diisi";
-                } else {
-                    document.getElementById("err_jenjang").innerHTML = "";
-                }
+                // //notif jenjang 
+                // if (jenjang == "") {
+                //     document.getElementById("err_jenjang").innerHTML = "Jenjang Harus Diisi";
+                // } else {
+                //     document.getElementById("err_jenjang").innerHTML = "";
+                // }
 
-                //notif spesifikasi 
-                if (spesifikasi == "") {
-                    document.getElementById("err_spesifikasi").innerHTML = "Spesifikasi Harus Diisi";
+                //notif profesi 
+                if (profesi == "") {
+                    document.getElementById("err_profesi").innerHTML = "Profesi Harus Diisi";
                 } else {
-                    document.getElementById("err_spesifikasi").innerHTML = "";
+                    document.getElementById("err_profesi").innerHTML = "";
                 }
 
                 //notif akreditasi 
@@ -639,57 +611,105 @@ if ($_GET['prk'] == 'ked') {
                 getTypeDataPraktikan == 'xlsx' &&
                 getSizeDataPraktikan <= 1024
             ) {
-                var path = "";
-                var data_praktik = $('#form_praktik').serializeArray();
+                document.getElementById("err_institusi").innerHTML = "";
+                document.getElementById("err_praktik").innerHTML = "";
+                document.getElementById("err_jurusan").innerHTML = "";
+                document.getElementById("err_jenjang").innerHTML = "";
+                document.getElementById("err_profesi").innerHTML = "";
+                document.getElementById("err_akreditasi").innerHTML = "";
+                document.getElementById("err_jumlah").innerHTML = "";
+                document.getElementById("err_tgl_mulai").innerHTML = "";
+                document.getElementById("err_tgl_selesai").innerHTML = "";
+                document.getElementById("err_no_surat").innerHTML = "";
+                document.getElementById("err_file_surat").innerHTML = "";
+                document.getElementById("err_file_data_praktikan").innerHTML = "";
+                // document.getElementById("err_akun_koordinator").innerHTML = "";
+                document.getElementById("err_nama_koordinator").innerHTML = "";
+                document.getElementById("err_telp_koordinator").innerHTML = "";
+                if (document.getElementById("makan_mess1").checked == false && document.getElementById("makan_mess2").checked == false) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
 
-                //cari jenis jurusan untuk dijadikan path
+                    Toast.fire({
+                        icon: 'warning',
+                        title: '<center>Pilih <b>MAKAN MESS</b></center>'
+                    });
+                    document.getElementById("err_makan_mess").innerHTML = "Pilih Makan Mess <br>";
+                } //eksekusi simpadn data praktik dan pilih makan mess
+                else {
+                    var path = "";
+                    var data_praktik = $('#form_praktik').serializeArray();
 
-                //Simpan Data Praktik dan Tarif
-                $.ajax({
-                    type: 'POST',
-                    url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
-                    data: data_praktik,
-                    success: function() {
-                        //ambil data file yang diupload
-                        var data_file = new FormData();
-                        var xhttp = new XMLHttpRequest();
-
-                        var fileSurat = document.getElementById("file_surat").files;
-                        data_file.append("file_surat", fileSurat[0]);
-
-                        var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
-                        data_file.append("file_data_praktikan", fileDataPraktikan[0]);
-
-                        var id = document.getElementById("id").value;
-                        data_file.append("id", id);
-
-                        xhttp.open("POST", "_admin/exc/x_i_praktik_sFilePraktik.php", true);
-                        xhttp.send(data_file);
-
-                        //Cari Jenis Jurusan
-                        var jur = document.getElementById('jurusan').value;
-                        var xmlhttp_path = new XMLHttpRequest();
-                        xmlhttp_path.onload = function() {
-                            var path = "?prk=ked";
-                            Swal.fire({
-                                allowOutsideClick: false,
-                                // isDismissed: false,
-                                icon: 'success',
-                                title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
-                                showConfirmButton: false,
-                                html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
-                            });
-                        };
-                        xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
-                            true
-                        );
-                        xmlhttp_path.send();
-                    },
-                    error: function(response) {
-                        console.log(response.responseText);
-                        alert('eksekusi query gagal');
+                    //cek data makan_mess
+                    var makan_mess = "";
+                    if (document.getElementById("makan_mess1").checked == true) {
+                        makan_mess = document.getElementById("makan_mess1").value;
+                    } else if (document.getElementById("makan_mess2").checked == true) {
+                        makan_mess = document.getElementById("makan_mess2").value;
                     }
-                });
+
+                    //push data makan_mess    
+                    data_praktik.push({
+                        name: 'makan_mess',
+                        value: makan_mess
+                    });
+
+                    //Simpan Data Praktik dan Tarif
+                    $.ajax({
+                        type: 'POST',
+                        url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
+                        data: data_praktik,
+                        success: function() {
+                            //ambil data file yang diupload
+                            var data_file = new FormData();
+                            var xhttp = new XMLHttpRequest();
+
+                            var fileSurat = document.getElementById("file_surat").files;
+                            data_file.append("file_surat", fileSurat[0]);
+
+                            var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                            data_file.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                            var id = document.getElementById("id").value;
+                            data_file.append("id", id);
+
+                            xhttp.open("POST", "_admin/exc/x_i_praktik_sFilePraktik.php", true);
+                            xhttp.send(data_file);
+
+                            //Cari Jenis Jurusan
+                            var jur = document.getElementById('jurusan').value;
+                            var xmlhttp_path = new XMLHttpRequest();
+                            xmlhttp_path.onload = function() {
+                                var path = "?prk=ked";
+                                Swal.fire({
+                                    allowOutsideClick: false,
+                                    // isDismissed: false,
+                                    icon: 'success',
+                                    title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
+                                    showConfirmButton: false,
+                                    html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
+                                });
+                            };
+                            xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
+                                true
+                            );
+                            xmlhttp_path.send();
+                        },
+                        error: function(response) {
+                            console.log(response.responseText);
+                            alert('eksekusi query gagal');
+                        }
+                    });
+                }
             }
         }
     </script>

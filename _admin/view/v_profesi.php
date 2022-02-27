@@ -1,22 +1,22 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10">
-            <h1 class="h3 mb-2 text-gray-800">Daftar Spesifikasi</h1>
+            <h1 class="h3 mb-2 text-gray-800">Daftar Profesi</h1>
         </div>
         <div class="col-lg-2">
-            <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#spf_i_m'>
+            <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#pfs_i_m'>
                 <i class="fas fa-plus"></i> Tambah
             </a>
-            <!-- modal tambah spesifikasi  -->
-            <div class="modal fade" id="spf_i_m">
+            <!-- modal tambah profesi  -->
+            <div class="modal fade" id="pfs_i_m">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form method="post" action="">
                             <div class="modal-header">
-                                Tambah Spesifikasi
+                                Tambah Profesi
                             </div>
                             <div class="modal-body">
-                                <input class="form-control" name="nama_spesifikasi_pdd">
+                                <input class="form-control" name="nama_profesi_pdd">
                                 <br>
                             </div>
                             <div class="modal-footer">
@@ -34,47 +34,47 @@
         <div class="card-body">
             <div class="table-responsive">
                 <?php
-                $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
-                $q_spesifikasi_pdd = $conn->query($sql_spesifikasi_pdd);
-                $r_spesifikasi_pdd = $q_spesifikasi_pdd->rowCount();
-                if ($r_spesifikasi_pdd > 0) {
+                $sql_profesi_pdd = "SELECT * FROM tb_profesi_pdd order by nama_profesi_pdd ASC";
+                $q_profesi_pdd = $conn->query($sql_profesi_pdd);
+                $r_profesi_pdd = $q_profesi_pdd->rowCount();
+                if ($r_profesi_pdd > 0) {
                 ?>
                     <table class='table table-striped' id="myTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
-                                <th>Nama Spesifikasi</th>
+                                <th>Nama Profesi</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $no = 1;
-                            while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
+                            while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
                                     <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?></td>
+                                    <td><?php echo $d_profesi_pdd['nama_profesi_pdd']; ?></td>
                                     <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#spf_u_m" . $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#pfs_u_m" . $d_profesi_pdd['id_profesi_pdd']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#spf_d_m" . $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#pfs_d_m" . $d_profesi_pdd['id_profesi_pdd']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                     <?php $no++; ?>
-                                    <!-- modal ubah spesifikasi  -->
-                                    <div class="modal fade" id="<?php echo "spf_u_m" . $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <!-- modal ubah profesi  -->
+                                    <div class="modal fade" id="<?php echo "pfs_u_m" . $d_profesi_pdd['id_profesi_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
                                                     <div class="modal-header">
-                                                        Ubah Spesifikasi
+                                                        Ubah Profesi
                                                     </div>
                                                     <div class="modal-body">
-                                                        <input name="id_spesifikasi_pdd" value="<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>" hidden>
-                                                        <input class="form-control" name="nama_spesifikasi_pdd" value="<?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>">
+                                                        <input name="id_profesi_pdd" value="<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>" hidden>
+                                                        <input class="form-control" name="nama_profesi_pdd" value="<?php echo $d_profesi_pdd['nama_profesi_pdd']; ?>">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="<?php echo "spf_d_m" . $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?php echo "pfs_d_m" . $d_profesi_pdd['id_profesi_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
@@ -93,8 +93,8 @@
                                                         <h5>Hapus Data</h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h6><b><?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?></b></h6>
-                                                        <input name="id_spesifikasi_pdd" value="<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>" hidden>
+                                                        <h6><b><?php echo $d_profesi_pdd['nama_profesi_pdd']; ?></b></h6>
+                                                        <input name="id_profesi_pdd" value="<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>" hidden>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>
@@ -114,7 +114,7 @@
         <?php
                 } else {
         ?>
-            <h3 class="text-center text-justify"> Data Spesifikasi Tidak Ada</h3>
+            <h3 class="text-center text-justify"> Data Profesi Tidak Ada</h3>
         <?php
                 }
         ?>
@@ -123,24 +123,24 @@
 </div>
 <?php
 if (isset($_POST['ubah'])) {
-    $conn->query("UPDATE `tb_spesifikasi_pdd` SET `nama_spesifikasi_pdd` = '" . $_POST['nama_spesifikasi_pdd'] . "' WHERE `tb_spesifikasi_pdd`.`id_spesifikasi_pdd` = " . $_POST['id_spesifikasi_pdd']);
+    $conn->query("UPDATE `tb_profesi_pdd` SET `nama_profesi_pdd` = '" . $_POST['nama_profesi_pdd'] . "' WHERE `tb_profesi_pdd`.`id_profesi_pdd` = " . $_POST['id_profesi_pdd']);
 ?>
     <script>
-        document.location.href = "?spf";
+        document.location.href = "?pfs";
     </script>
 <?php
 } elseif (isset($_POST['tambah'])) {
-    $conn->query("INSERT INTO `tb_spesifikasi_pdd` (`nama_spesifikasi_pdd`) VALUES ('" . $_POST['nama_spesifikasi_pdd'] . "')");
+    $conn->query("INSERT INTO `tb_profesi_pdd` (`nama_profesi_pdd`) VALUES ('" . $_POST['nama_profesi_pdd'] . "')");
 ?>
     <script>
-        document.location.href = "?spf";
+        document.location.href = "?pfs";
     </script>
 <?php
 } elseif (isset($_POST['hapus'])) {
-    $conn->query("DELETE FROM `tb_spesifikasi_pdd` WHERE `id_spesifikasi_pdd` = " . $_POST['id_spesifikasi_pdd']);
+    $conn->query("DELETE FROM `tb_profesi_pdd` WHERE `id_profesi_pdd` = " . $_POST['id_profesi_pdd']);
 ?>
     <script>
-        document.location.href = "?spf";
+        document.location.href = "?pfs";
     </script>
 <?php
 }

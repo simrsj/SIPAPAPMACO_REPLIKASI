@@ -17,7 +17,7 @@
 
 git status
 git add . 
-git commit -a -m "pilih option materi UPIP NAPZA dan ket mess"  
+git commit -a -m "ubah nama spesifikasi ke profesi, proses kesesuian pengajuan berdasarkan jurusan"  
 git pull
 git push
 

@@ -1,5 +1,12 @@
 <?php
 if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
+    if ($_GET['prk'] == 'kep') {
+        $jenis_jurusan = 2;
+    } elseif ($_GET['prk'] == 'nkl') {
+        $jenis_jurusan = 3;
+    } elseif ($_GET['prk'] == 'nnk') {
+        $jenis_jurusan = 4;
+    }
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -92,13 +99,14 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                         </div>
                         <br>
 
-                        <!-- Jurusan, Jenjang, Spesifikasi dan Akreditasi -->
+                        <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 Pilih Jurusan : <span style="color:red">*</span><br>
                                 <?php
-                                $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd != 0 ORDER BY nama_jurusan_pdd ASC";
 
+                                $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd_jenis = $jenis_jurusan ORDER BY nama_jurusan_pdd ASC";
+                                // echo $sql_jurusan_pdd;
                                 $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
                                 $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
 
@@ -125,7 +133,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 }
                                 ?>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                                 Pilih Jenjang : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd 
@@ -158,34 +166,34 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 }
                                 ?>
                             </div>
-                            <div class="col-lg-3">
-                                Pilih Spesifikasi : <span style="color:red">*</span><br>
+                            <div class="col-lg-5">
+                                Pilih Profesi : <span style="color:red">*</span><br>
                                 <?php
-                                $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
+                                $sql_profesi_pdd = "SELECT * FROM tb_profesi_pdd order by nama_profesi_pdd ASC";
 
-                                $q_spesifikasi_pdd = $conn->query($sql_spesifikasi_pdd);
-                                $r_spesifikasi_pdd = $q_spesifikasi_pdd->rowCount();
+                                $q_profesi_pdd = $conn->query($sql_profesi_pdd);
+                                $r_profesi_pdd = $q_profesi_pdd->rowCount();
 
-                                if ($r_spesifikasi_pdd > 0) {
+                                if ($r_profesi_pdd > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_spesifikasi_pdd' id="spesifikasi">
+                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_profesi_pdd' id="profesi">
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
-                                        while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
+                                        while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
-                                            <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
-                                                <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
+                                            <option value='<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>'>
+                                                <?php echo $d_profesi_pdd['nama_profesi_pdd']; ?>
                                             </option>
                                         <?php
                                         }
                                         ?>
                                     </select><br>
                                     <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_spesifikasi"></span>
+                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_profesi"></span>
                                 <?php
                                 } else {
                                 ?>
-                                    <b><i>Data Spesifikasi Tidak Ada</i></b>
+                                    <b><i>Data Profesi Tidak Ada</i></b>
                                 <?php
                                 }
                                 ?>
@@ -316,7 +324,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             var praktik = document.getElementById("praktik").value;
             var jurusan = document.getElementById("jurusan").value;
             var jenjang = document.getElementById("jenjang").value;
-            var spesifikasi = document.getElementById("spesifikasi").value;
+            var profesi = document.getElementById("profesi").value;
             var akreditasi = document.getElementById("akreditasi").value;
             var jumlah = document.getElementById("jumlah").value;
             var tgl_mulai = document.getElementById("tgl_mulai").value;
@@ -334,7 +342,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 praktik == "" ||
                 jurusan == "" ||
                 jenjang == "" ||
-                spesifikasi == "" ||
+                profesi == "" ||
                 akreditasi == "" ||
                 jumlah == "" ||
                 tgl_mulai == "" ||
@@ -415,11 +423,11 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                     document.getElementById("err_jenjang").innerHTML = "";
                 }
 
-                //notif spesifikasi 
-                if (spesifikasi == "") {
-                    document.getElementById("err_spesifikasi").innerHTML = "Spesifikasi Harus Diisi";
+                //notif profesi 
+                if (profesi == "") {
+                    document.getElementById("err_profesi").innerHTML = "Profesi Harus Diisi";
                 } else {
-                    document.getElementById("err_spesifikasi").innerHTML = "";
+                    document.getElementById("err_profesi").innerHTML = "";
                 }
 
                 //notif akreditasi 
@@ -642,7 +650,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 document.getElementById("err_praktik").innerHTML = "";
                 document.getElementById("err_jurusan").innerHTML = "";
                 document.getElementById("err_jenjang").innerHTML = "";
-                document.getElementById("err_spesifikasi").innerHTML = "";
+                document.getElementById("err_profesi").innerHTML = "";
                 document.getElementById("err_akreditasi").innerHTML = "";
                 document.getElementById("err_jumlah").innerHTML = "";
                 document.getElementById("err_tgl_mulai").innerHTML = "";
@@ -782,7 +790,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                     value: materi_napza
                 });
 
-                //cek data ujian
+                //cek data makan_mess
                 var makan_mess = "";
                 if (document.getElementById("makan_mess1").checked == true) {
                     makan_mess = document.getElementById("makan_mess1").value;
