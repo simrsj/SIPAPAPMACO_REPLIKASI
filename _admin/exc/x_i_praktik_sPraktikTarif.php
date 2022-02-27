@@ -11,11 +11,27 @@ WHERE id_jurusan_pdd = " . $_POST['id_jurusan_pdd'];
 
 $q_jenis_jurusan = $conn->query($sql_jenis_jurusan);
 $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
+
 if ($_POST['id_jurusan_pdd'] == 1) {
     $status_cek_praktik = "DPT_KED";
 } else {
     $status_cek_praktik = "DPT";
 }
+
+//cek materi_upip
+if ($_POST['materi_upip'] == 'y') {
+    $materi_upip = 'y';
+} else {
+    $materi_upip = 't';
+}
+
+//cek materi_napza
+if ($_POST['materi_napza'] == 'y') {
+    $materi_napza = 'y';
+} else {
+    $materi_napza = 't';
+}
+
 $sql_insert = "INSERT INTO tb_praktik (
     id_praktik, 
     id_institusi, 
@@ -35,7 +51,10 @@ $sql_insert = "INSERT INTO tb_praktik (
     email_koordinator_praktik,
     telp_koordinator_praktik,
     status_cek_praktik, 
-    status_praktik
+    status_praktik,
+    makan_mess_praktik,
+    materi_upip_praktik,
+    materi_napza_praktik
     ) VALUES (
         '" . $_POST['id'] . "', 
         '" . $_POST['id_institusi'] . "', 
@@ -55,7 +74,10 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['email_koordinator_praktik'] . "',
         '" . $_POST['telp_koordinator_praktik'] . "', 
         '" . $status_cek_praktik . "', 
-        'D'
+        'D',
+        '" . $_POST['makan_mess'] . "',
+        '" . $materi_upip . "',
+        '" . $materi_napza . "'
         )";
 
 echo $sql_insert . "<br>";
@@ -97,8 +119,6 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
 
         if ($d_tarif_jurusan['tipe_tarif'] == 'SEKALI') {
             $frekuensi = 1;
-        } elseif ($d_tarif_jurusan['tipe_tarif'] == 'INPUT') {
-            echo "INPUT";
         } elseif ($d_tarif_jurusan['tipe_tarif'] == 'TARIF-') {
             $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
         } elseif ($d_tarif_jurusan['tipe_tarif'] == 'TARIF+') {
@@ -120,6 +140,27 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
         }
         echo $kuantitas;
 
+        //eksekiso jiga salah satu materi dipilih (upip dan-atau napza)
+        if ($d_tarif_jurusan['nama_tarif'] == 'Materi') {
+            $ket_tarif = $d_tarif_jurusan['ket_tarif'];
+
+            //eksekusi jika materi upip dipilih
+            if ($materi_upip == 'y') {
+                $ket_tarif = $d_tarif_jurusan['ket_tarif'] . ", UPIP";
+                $frekuensi += 1;
+            }
+
+            //eksekusi jika materi napza dipilih
+            if ($materi_napza == 'y') {
+                $ket_tarif =  $ket_tarif . ", NAPZA";
+                $frekuensi += 1;
+            }
+
+            $nama_tarif = $d_tarif_jurusan['nama_tarif'] . " (" . $ket_tarif . ")";
+        } else {
+            $nama_tarif = $d_tarif_jurusan['nama_tarif'];
+        }
+
         $sql_insert = "INSERT INTO tb_tarif_pilih (
         id_praktik, 
         tgl_input_tarif_pilih,
@@ -134,7 +175,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
             '" . $id_praktik . "', 
             '" . date('Y-m-d') . "',
             '" . $d_tarif_jurusan['nama_tarif_jenis'] . "', 
-            '" . $d_tarif_jurusan['nama_tarif'] . "', 
+            '" . $nama_tarif . "', 
             '" . $d_tarif_jurusan['jumlah_tarif'] . "',  
             '" . $d_tarif_jurusan['nama_tarif_satuan'] . "',
             '" . $frekuensi . "',
@@ -165,8 +206,6 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
         while ($d_tarif_jenjang = $q_tarif_jenjang->fetch(PDO::FETCH_ASSOC)) {
             if ($d_tarif_jenjang['tipe_tarif'] == 'SEKALI') {
                 $frekuensi = 1;
-            } elseif ($d_tarif_jenjang['tipe_tarif'] == 'INPUT') {
-                echo "INPUT";
             } elseif ($d_tarif_jenjang['tipe_tarif'] == 'TARIF-') {
                 $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
             } elseif ($d_tarif_jenjang['tipe_tarif'] == 'TARIF+') {

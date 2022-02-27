@@ -23,6 +23,7 @@ $jumlah_praktik = $_GET['jum'];
         <div class='card-body'>
             <div class="text-lg font-weight-bold text-center">DATA TARIF</div>
             <input type="hidden" name="path" id="path" value="<?php echo $_GET['i']; ?>">
+
             <!-- Menu Tarif wajib disesuaikan dengan jenis jurusan -->
             <div class="text-gray-700">
                 <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
@@ -35,6 +36,8 @@ $jumlah_praktik = $_GET['jum'];
                 WHERE tb_tarif.id_jurusan_pdd = $id_jurusan_pdd AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5 AND tb_tarif.id_jenjang_pdd = 0
                 ORDER BY nama_tarif_jenis ASC, nama_tarif ASC 
                 ";
+
+
 
             // echo $sql_tarif_jurusan . "<br>";
             $q_tarif_jurusan = $conn->query($sql_tarif_jurusan);
@@ -72,10 +75,6 @@ $jumlah_praktik = $_GET['jum'];
 
                                     if ($d_tarif_jurusan['tipe_tarif'] == 'SEKALI') {
                                         $frekuensi = 1;
-                                    } elseif ($d_tarif_jurusan['tipe_tarif'] == 'INPUT') {
-                                    ?>
-                                        <input class="form-control" name="<?php echo $d_tarif_jurusan['id_tarif'] ?>">
-                                    <?php
                                     } elseif ($d_tarif_jurusan['tipe_tarif'] == 'TARIF-') {
                                         $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
                                     } elseif ($d_tarif_jurusan['tipe_tarif'] == 'TARIF+') {
@@ -138,10 +137,6 @@ $jumlah_praktik = $_GET['jum'];
 
                                         if ($d_tarif_jenjang['tipe_tarif'] == 'SEKALI') {
                                             $frekuensi = 1;
-                                        } elseif ($d_tarif_jenjang['tipe_tarif'] == 'INPUT') {
-                                        ?>
-                                            <input class="form-control" name="<?php echo $d_tarif_jenjang['id_tarif'] ?>">
-                                        <?php
                                         } elseif ($d_tarif_jenjang['tipe_tarif'] == 'TARIF-') {
                                             $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
                                         } elseif ($d_tarif_jenjang['tipe_tarif'] == 'TARIF+') {
@@ -193,9 +188,60 @@ $jumlah_praktik = $_GET['jum'];
             ?>
             <hr>
 
+            <!-- Menu Tambah Materi disesuaikan dengan Jenis Jurusan -->
+            <div class="text-gray-700">
+                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                    Tambahan Materi <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                    <span class="font-italic font-weight-bold text-xs">(Optional)</span>
+                </div>
+            </div>
+            <div class="row boxed-check-group boxed-check-primary justify-content-center">
+                <label class="boxed-check">
+                    <input class="boxed-check-input" type="checkbox" name="materi_upip" id="materi_upip" value="y">
+                    <div class="boxed-check-label">UPIP</div>
+                </label>
+                &nbsp;
+                &nbsp;
+                <label class="boxed-check">
+                    <input class="boxed-check-input" type="checkbox" name="materi_napza" id="materi_napza" value="y">
+                    <div class="boxed-check-label">Napza</div>
+                </label>
+            </div>
+            <hr>
+
+            <!-- Menu Tambah Materi disesuaikan dengan Jenis Jurusan -->
+            <div class="text-gray-700">
+                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                    Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
+                    <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)</span>
+                </div>
+                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                    <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
+                </div>
+            </div>
+            <div class="row boxed-check-group boxed-check-primary justify-content-center">
+                <label class="boxed-check">
+                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="y">
+                    <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
+                </label>
+                &nbsp;
+                &nbsp;
+                <label class="boxed-check">
+                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
+                    <div class="boxed-check-label">Tanpa Makan</div>
+                </label>
+            </div>
+            <hr>
+
+
             <!-- Menu Tarif Ujian disesuaikan dengan Jenis Jurusan -->
             <div class="text-gray-700">
-                <div class="h5 font-weight-bold text-center mt-3 mb-3">Menu Tarif Ujian <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
+                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                    Menu Tarif Ujian <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?> <span class="text-danger">*</span>
+                </div>
+                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                    <span class="text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></span>
+                </div>
             </div>
             <div class="row boxed-check-group boxed-check-primary justify-content-center">
                 <label class="boxed-check">
@@ -209,10 +255,7 @@ $jumlah_praktik = $_GET['jum'];
                     <div class="boxed-check-label">Tidak</div>
                 </label>
             </div>
-            <div class="justify-content-center text-center">
-                <span class="text-danger font-weight-bold font-italic text-md" id="err_cek_pilih_ujian"></span>
-                <br>
-            </div>
+            <br>
 
             <?php
             if ($d_jurusan_pdd == 1) {

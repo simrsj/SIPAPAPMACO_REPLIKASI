@@ -70,7 +70,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                         ?>
                                     </select><br>
                                     <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
-                                    <div class="text-danger font-weight-bold  font-italic text-xs" id="err_institusi"></div>
+                                    <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_institusi"></div>
                                 <?php
                                 } else {
                                 ?>
@@ -82,12 +82,12 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                             <div class="col-lg-5">
                                 Gelombang/Kelompok : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" id="praktik" required>
-                                <div class="text-danger font-weight-bold  font-italic text-xs" id="err_praktik"></div>
+                                <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_praktik"></div>
                             </div>
                             <div class="col-lg-2">
                                 Jumlah Praktikan : <span style="color:red">*</span><br>
                                 <input type="number" class="form-control" name="jumlah_praktik" min="1" placeholder="Isi Jumlah Praktik" id="jumlah" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jumlah"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_jumlah"></span>
                             </div>
                         </div>
                         <br>
@@ -116,7 +116,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                         }
                                         ?>
                                     </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jurusan"></span>
+                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_jurusan"></span>
                                 <?php
                                 } else {
                                 ?>
@@ -149,7 +149,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                         }
                                         ?>
                                     </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs" id="err_jenjang"></span>
+                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_jenjang"></span>
                                 <?php
                                 } else {
                                 ?>
@@ -181,7 +181,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                         ?>
                                     </select><br>
                                     <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs" id="err_spesifikasi"></span>
+                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_spesifikasi"></span>
                                 <?php
                                 } else {
                                 ?>
@@ -212,7 +212,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                         }
                                         ?>
                                     </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs" id="err_akreditasi"></span>
+                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_akreditasi"></span>
                                 <?php
                                 } else {
                                 ?>
@@ -229,30 +229,30 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                             <div class="col-lg-2">
                                 Tanggal Mulai : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control" name="tgl_mulai_praktik" id="tgl_mulai" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_tgl_mulai"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_tgl_mulai"></span>
                             </div>
                             <div class="col-lg-2">
                                 Tanggal Selesai : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control" name="tgl_selesai_praktik" id="tgl_selesai" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_tgl_selesai"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_tgl_selesai"></span>
                             </div>
                             <div class="col-lg-2">
                                 No. Surat Institusi : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control" name="no_surat" placeholder="Isi no Surat Institusi" id="no_surat" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs" id="err_no_surat"></span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_no_surat"></span>
                             </div>
                             <div class="col-lg-3">
                                 Unggah Surat : <span style="color:red">*</span><br>
                                 <input type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
                                 <br><i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_file_surat"></span>
+                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_surat"></span>
                             </div>
                             <div class="col-lg-3">
                                 Unggah Data Praktikan : <span style="color:red">*</span>
                                 <i style='font-size:12px;'><a href="./_file/__format_data_praktikan.xlsx">Download Format</a></i><br>
                                 <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx">
                                 <br><i style='font-size:12px;'>Data unggah harus .xlsx dan maksimal ukuran file 1 Mb</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_file_data_praktikan"></span>
+                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_data_praktikan"></span>
                             </div>
                         </div>
                         <hr>
@@ -271,7 +271,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                             ?>
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" required><span class="text-danger font-weight-bold  font-italic text-xs" id="err_nama_koordinator"></span>
+                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
@@ -281,7 +281,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 Telpon : <span style="color:red">*</span><br>
                                 <input type="number" class="form-control" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs" id="err_telp_koordinator"></span>
+                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_telp_koordinator"></span>
                             </div>
                         </div>
                         <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
@@ -699,7 +699,26 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
         function simpan_tarif() {
 
             //Notif dan Toast Bila Ujian Tidak dipilih
-            if (document.getElementById("cek_pilih_ujian1").checked == false && document.getElementById("cek_pilih_ujian2").checked == false) {
+            if (document.getElementById("makan_mess1").checked == false && document.getElementById("makan_mess2").checked == false) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: '<center>Pilih <b>MAKAN MESS</b></center>'
+                });
+                document.getElementById("err_makan_mess").innerHTML = "Pilih Makan Mess <br>";
+            } //Notif dan Toast Bila Ujian Tidak dipilih
+            else if (document.getElementById("cek_pilih_ujian1").checked == false && document.getElementById("cek_pilih_ujian2").checked == false) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -716,11 +735,16 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                     icon: 'warning',
                     title: '<center>Pilih Ujian <b>Ya</b> atau <b>Tidak</b></center>'
                 });
+                document.getElementById("err_makan_mess").innerHTML = "";
                 document.getElementById("err_cek_pilih_ujian").innerHTML = "Pilih Ujian <br>";
             }
             //simpan data praktik dan data tarif
             else {
-                var path = "";
+
+                //ambil data dari tag from form_praktik
+                var data_praktik = $('#form_praktik').serializeArray();
+
+                //cek data ujian
                 var cek_pilih_ujian = "";
                 if (document.getElementById("cek_pilih_ujian1").checked == true) {
                     cek_pilih_ujian = document.getElementById("cek_pilih_ujian1").value;
@@ -728,13 +752,49 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                     cek_pilih_ujian = document.getElementById("cek_pilih_ujian2").value;
                 }
 
-                var data_praktik = $('#form_praktik').serializeArray();
+                //push data ujian    
                 data_praktik.push({
                     name: 'cek_pilih_ujian',
                     value: cek_pilih_ujian
                 });
 
-                //cari jenis jurusan untuk dijadikan path
+                //cek data materi upip
+                var materi_upip = "";
+                if (document.getElementById("materi_upip").checked == true) {
+                    materi_upip = document.getElementById("materi_upip").value;
+                }
+
+                //data materi upip
+                data_praktik.push({
+                    name: 'materi_upip',
+                    value: materi_upip
+                });
+
+                //cek data materi napza
+                var materi_napza = "";
+                if (document.getElementById("materi_napza").checked == true) {
+                    materi_napza = document.getElementById("materi_napza").value;
+                }
+
+                //data materi napza
+                data_praktik.push({
+                    name: 'materi_napza',
+                    value: materi_napza
+                });
+
+                //cek data ujian
+                var makan_mess = "";
+                if (document.getElementById("makan_mess1").checked == true) {
+                    makan_mess = document.getElementById("makan_mess1").value;
+                } else if (document.getElementById("makan_mess2").checked == true) {
+                    makan_mess = document.getElementById("makan_mess2").value;
+                }
+
+                //push data makan_mess    
+                data_praktik.push({
+                    name: 'makan_mess',
+                    value: makan_mess
+                });
 
                 //Simpan Data Praktik dan Tarif
                 $.ajax({

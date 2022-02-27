@@ -78,7 +78,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             </div>
                             <div class="modal-body">
                                 <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
-                                <div id="err_mess" class="text-danger text-xs font-italic"></div>
+                                <div id="err_mess" class="text-danger text-xs font-italic blink"></div>
                                 <select class="form-control" name="id_mess" id="id_mess" required>
                                     <option value="">-- Pilih --</option>
                                     <?php
@@ -92,17 +92,31 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 </select>
                                 <hr>
                                 <span class="text-lg font-weight-bold">Makan Mess <span style="color:red">*</span></span>
-                                <div id="err_makan" class="text-danger text-xs font-italic"></div>
+                                <?php
+
+                                //cari data makan mess
+                                $sql_makan_mass = "SELECT * FROM tb_praktik WHERE id_praktik = " . $_GET['m'];
+                                $q_makan_mess = $conn->query($sql_makan_mass);
+                                $d_makan_mess = $q_makan_mess->fetch(PDO::FETCH_ASSOC);
+
+                                if ($d_makan_mess['makan_mess_praktik'] == 'y') {
+                                    $makan_mess = "Dengan Makan";
+                                } else {
+                                    $makan_mess = "Tanpa Makan";
+                                }
+                                ?>
+                                <span class="text-xs font-intalic">(Praktik memilih <b><?php echo $makan_mess; ?></b>)</span>
+                                <div id="err_makan" class="text-danger text-xs font-italic blink"></div>
                                 <div class="boxed-check-group boxed-check-primary boxed-check-sm text-center">
                                     <label class="boxed-check">
                                         <input class="boxed-check-input" type="radio" name="makan_mess_pilih" id="makan_mess_pilih1" value="y" required>
-                                        <span class="boxed-check-label">Pakai Makan (3x Sehari)</span>
+                                        <span class="boxed-check-label">Dengan Makan(3x Sehari)</span>
                                     </label>
                                 </div>
                                 <div class="boxed-check-group boxed-check-primary boxed-check-sm text-center">
                                     <label class="boxed-check">
                                         <input class="boxed-check-input" type="radio" name="makan_mess_pilih" id="makan_mess_pilih2" value="t" required>
-                                        <span class="boxed-check-label">Tidak Pakai Makan</span>
+                                        <span class="boxed-check-label">Tanpa Makan</span>
                                     </label>
                                 </div>
                                 <input type="hidden" name="path" id="path" value="<?php echo $_GET['prk'] ?>">
