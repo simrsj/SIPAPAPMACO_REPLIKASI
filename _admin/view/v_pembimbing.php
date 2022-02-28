@@ -63,10 +63,10 @@ if (isset($_POST['pilih_pemb_temp'])) {
                 $sql_praktik = "SELECT * FROM tb_praktikan
                     JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik
                     JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
+                    JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd
                     JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                    WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.status_cek_praktik ='AKTIF'
+                    WHERE tb_praktik.status_praktik = 'Y'
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                 $q_praktik = $conn->query($sql_praktik);

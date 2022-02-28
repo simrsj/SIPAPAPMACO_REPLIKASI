@@ -20,18 +20,16 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<i class="fas fa-fw fa-bug"></i>
 						<span>Testing</span></a>
 				</li>
-				<!-- Nav Item - Dashboard -->
 				<li class="nav-item active">
 					<a class="nav-link" href="?">
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
 				</li>
-				<!-- Nav Item - Dashboard -->
-				<!-- <li class="nav-item active">
+				<li class="nav-item active">
 					<a class="nav-link" href="?mou">
 						<i class="fas fa-fw fa-handshake"></i>
 						<span>MoU-Kerjasama</span></a>
-				</li> -->
+				</li>
 
 				<!-- Divider -->
 				<hr class="sidebar-divider">
@@ -39,7 +37,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div class="sidebar-heading">
 					Kediklatan
 				</div>
-				<li class="nav-item">
+				<li class="nav-item active">
+					<a class="nav-link" href="?info_diklat">
+						<i class="fas fa-fw fa-info-circle"></i>
+						<span>Informasi</span>
+					</a>
+				</li>
+				<li class="nav-item ">
 					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
 						<i class="fas fa-fw fa-users"></i>
 						<span>Pengajuan</span>
@@ -65,7 +69,25 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						</div>
 					</div>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item active">
+					<a class="nav-link" href="?praktikan">
+						<i class="fas fa-fw fa-info-circle"></i>
+						<span>Data Praktikan</span>
+					</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="?pmbb">
+						<i class="fas fa-fw fa-info-circle"></i>
+						<span>Pembimbing</span>
+					</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="?nil">
+						<i class="fas fa-fw fa-info-circle"></i>
+						<span>Data Nilai</span>
+					</a>
+				</li>
+				<li class="nav-item active">
 					<a class="nav-link" href="?trs">
 						<i class="fas fa-fw fa-wallet"></i>
 						<span>Data Pembayaran</span>
@@ -259,6 +281,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_akun.php";
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
+					} elseif (isset($_GET['info_diklat'])) {
+						include "_admin/view/v_info_diklat.php";
 					} elseif (isset($_GET['ins'])) {
 						if (isset($_GET['i'])) {
 							include "_admin/insert/i_institusi.php";
@@ -295,8 +319,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_mentor.php";
 					} elseif (isset($_GET['nil'])) {
 						include "_admin/view/v_nilai.php";
-					} elseif (isset($_GET['ppt'])) {
-						include "_admin/view/v_praktikan_pemb_temp.php";
+					} elseif (isset($_GET['praktikan'])) {
+						include "_admin/view/v_praktikan.php";
+					} elseif (isset($_GET['pmbb'])) {
+						include "_admin/view/v_pembimbing.php";
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_admin/view/v_praktik_arsip.php";

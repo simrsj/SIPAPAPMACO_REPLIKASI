@@ -12,7 +12,7 @@ if (isset($_POST['hapus_mou'])) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-11">
-                <h1 class="h4 text-gray-800">MoU Kerjasama</h1>
+                <h1 class="h4 text-gray-800">Informasi Kediklatan</h1>
             </div>
             <div class="col-lg-1 text-right my-auto">
                 <a href="?mou&i" class="btn btn-outline-success btn-sm">

@@ -117,11 +117,11 @@ if (isset($_POST['ubah_nilai'])) {
                 $sql_praktik = "SELECT * FROM tb_praktikan
                     JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik
                     JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
+                    JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd
                     JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    JOIN tb_mentor ON tb_praktik.id_mentor = tb_mentor.id_mentor 
+                    JOIN tb_pembimbing ON tb_praktik.id_pembimbing = tb_pembimbing.id_pembimbing 
                     WHERE tb_praktik.status_praktik = 'Y'
                     AND tb_praktik.status_cek_praktik = 'AKTIF' 
                     AND tb_praktikan.status_pemb_temp_praktikan ='PEMB. TEMP. ADA'
@@ -157,7 +157,7 @@ if (isset($_POST['ubah_nilai'])) {
 
                                         <div class="col-sm-2 text-center my-auto">
                                             <b>Nama Pembimbing : </b><br>
-                                            <?php echo $d_praktik['nama_mentor']; ?>
+                                            <?php echo $d_praktik['nama_pembimbing']; ?>
                                         </div>
 
                                         <div class="col-sm-2 text-center my-auto">
