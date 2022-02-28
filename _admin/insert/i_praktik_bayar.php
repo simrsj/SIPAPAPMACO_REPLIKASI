@@ -139,7 +139,7 @@ $id = $_GET['ib'];
                                 <div class="modal-body">
                                     <form enctype="multipart/form-data" class="form-group" method="post" action="">
                                         <b>Kode Pembayaran : </b><span style="color:red">*</span><br>
-                                        <input class="form-control" type="text" name="kode_bayar" required><br>
+                                        <input class="form-control" type="text" name="kode_bayar" value="<?php echo "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>" required readonly><br>
                                         <b>Atas Nama : </b><span style="color:red">*</span><br>
                                         <input class="form-control" type="text" name="atas_nama_bayar" required><br>
                                         <b>No. Rekening/Lainnya : </b><span style="color:red">*</span><br>

@@ -17,7 +17,7 @@
 
 git status
 git add . 
-git commit -a -m "ubah nama spesifikasi ke profesi, proses kesesuian pengajuan berdasarkan jurusan"  
+git commit -a -m "perbaiki keterangan kekurangan pembayaran"  
 git pull
 git push
 

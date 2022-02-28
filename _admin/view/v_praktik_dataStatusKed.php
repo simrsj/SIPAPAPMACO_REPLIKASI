@@ -56,8 +56,9 @@
                     <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
                     Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
 
-                    <span class="badge badge-danger text-md">PEMB. DITOLAK <i class="fas fa-times-circle"></i></span><br>
-                    Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, <span class="font-weight-bold text-danger">CEK KETERANGAN</span><br><br>
+                    <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span><br>
+                    Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, karena jumlah transfer kurang<br>
+                    Lakukan kembali pembayaran, seusai dengan jumlah kekurangan cek <span class="font-weight-bold text-danger">KETERANGAN</span>
 
                     <span class="badge badge-dark text-md">SELESAI</span><br>
                     Praktikan Sudah <span class="text-dark font-weight-bold">SELESAI</span><br><br>
@@ -119,6 +120,47 @@
     } elseif ($d_praktik['status_cek_praktik'] == "BYR_T_K") {
     ?>
         <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span>
+        <hr>
+        <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" title="KETERANGAN">
+            KETERANGAN
+        </a>
+
+        <!-- modal pembayaran ulang -->
+        <div class="modal fade" id="ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header h5">
+                        <b>KETERANGAN KEKURANGAN TRANSFER</b>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="jumbotron">
+                            <div class="jumbotron-fluid h6 text-gray-800">
+                                ANDA MEMLIKI KEKURANGAN TRANSFER SENILAI : <br>
+                                <?php
+                                $sql_bayar_ulang = "SELECT * FROM tb_bayar ";
+                                $sql_bayar_ulang .= " JOIN tb_praktik ON tb_bayar.id_praktik = tb_praktik.id_praktik";
+                                $sql_bayar_ulang .= " WHERE tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+
+                                $q_bayar_ulang = $conn->query($sql_bayar_ulang);
+
+                                $d_bayar_ulang = $q_bayar_ulang->fetch(PDO::FETCH_ASSOC);
+                                ?>
+                                <span class="h5 font-weight-bold">
+                                    <?php
+                                    echo "Rp " . number_format($d_bayar_ulang['kurang_tf_praktik'], 0, ",", ".");
+                                    ?>
+                                </span>
+                                <br><br>
+                                <span class="text-danger font-weight-bold">LAKUKAN SEGERAN PEMBAYARAN ULANG..!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
     ?>
@@ -205,7 +247,6 @@
     ?>
 
         <b>PILIH : </b><br>
-
         <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPembayaran<?php echo $d_praktik['id_praktik']; ?>" title="PEMBAYARAN">
             PEMBAYARAN
         </a>
@@ -215,7 +256,7 @@
             <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header h5">
-                        <b>PEMABAYARAN ULANG</b>
+                        <b>PEMBAYARAN ULANG</b>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
