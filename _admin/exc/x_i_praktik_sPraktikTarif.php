@@ -80,7 +80,7 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $materi_napza . "'
         )";
 
-echo $sql_insert . "<br>";
+// echo $sql_insert . "<br>";
 $conn->query($sql_insert);
 // --------------------------------------SIMPAN DATA TARIF--------------------------------------------
 
@@ -188,8 +188,6 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
         $conn->query($sql_insert);
     }
     echo "<br>";
-
-
 
     //SQL BST Eksekusi bila jurusan selain dari kedokteran
     if ($id_jurusan_pdd != 1) {
@@ -334,5 +332,4 @@ WHERE id_praktik = $id_praktik";
 
     $conn->query($sql_update_status_praktik);
     echo json_encode(['success' => 'Data Tarif Berhasil Disimpan']);
-    // echo json_encode(['success' => 'Data Praktik Berhasil Disimpan']);
 }

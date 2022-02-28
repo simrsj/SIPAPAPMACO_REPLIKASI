@@ -28,6 +28,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             <div class='card-body'>
                 <div class="text-lg font-weight-bold text-center">DATA TARIF</div>
                 <input type="hidden" name="path" id="path" value="<?php echo $_GET['prk']; ?>">
+                <input type="hidden" name="id" id="id" value="<?php echo $_GET['it_ked']; ?>">
                 <!-- Menu Tarif wajib disesuaikan dengan jenis jurusan -->
                 <div class="text-gray-700">
                     <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
@@ -48,7 +49,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 if ($r_tarif_jurusan > 0) {
                 ?>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover table-striped">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">No</th>
@@ -58,12 +59,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     <th scope="col" width="150">Tarif</th>
                                     <th scope="col" width="50">Frekuensi</th>
                                     <th scope="col" width="50">Kuantitas</th>
-                                    <th scope="col">Total Tarif</th>
+                                    <!-- <th scope="col">Total Tarif</th> -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $jumlah_total_tarif = 0;
                                 $no = 1;
                                 while ($d_tarif_jurusan = $q_tarif_jurusan->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
@@ -73,9 +73,13 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                         <td><?php echo $d_tarif_jurusan['nama_tarif']; ?></td>
                                         <td><?php echo $d_tarif_jurusan['nama_tarif_satuan']; ?></td>
                                         <td><?php echo "Rp " . number_format($d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?></td>
-                                        <td><input class="form-control" type="number" min="0" name="ferk<?php echo $d_tarif_jurusan['id_tarif'] ?>"></td>
-                                        <td><input class="form-control" type="number" min="0" name="ktt<?php echo $d_tarif_jurusan['id_tarif'] ?>"></td>
-                                        <td>asdasdasdasda</td>
+                                        <td>
+                                            <input class="form-control tw" type="number" min="0" name="frek<?php echo $d_tarif_jurusan['id_tarif']; ?>" id="frek<?php echo $d_tarif_jurusan['id_tarif']; ?>">
+                                        </td>
+                                        <td>
+                                            <input class="form-control tw" type="number" min="0" name="ktt<?php echo $d_tarif_jurusan['id_tarif']; ?>" id="ktt<?php echo $d_tarif_jurusan['id_tarif']; ?>">
+                                        </td>
+                                        <!-- <td><span id="jumlah_tw"></span></td> -->
                                         <?php
                                         $no++;
                                         ?>
@@ -83,10 +87,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <?php
                                 }
                                 ?>
-                                <tr>
-                                    <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
-                                    <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_tarif, 0, ",", "."); ?></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -97,7 +97,12 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
                 <!-- Menu Tarif Ujian disesuaikan dengan Jenis Jurusan -->
                 <div class="text-gray-700">
-                    <div class="h5 font-weight-bold text-center mt-3 mb-3">Menu Tarif Ujian <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
+                    <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                        Pakai Tarif Ujian <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?> <span class="text-danger">*</span>
+                    </div>
+                    <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                        <span class="text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></span>
+                    </div>
                 </div>
                 <div class="row boxed-check-group boxed-check-primary justify-content-center">
                     <label class="boxed-check">
@@ -107,27 +112,18 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                     &nbsp;
                     &nbsp;
                     <label class="boxed-check">
-                        <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="t">
+                        <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="t" onclick="pilihUjian_t()">
                         <div class="boxed-check-label">Tidak</div>
                     </label>
                 </div>
-                <div class="justify-content-center text-center">
-                    <span class="text-danger font-weight-bold font-italic text-md" id="err_cek_pilih_ujian"></span>
-                    <br>
-                </div>
-
+                <br>
                 <?php
-                if ($d_jurusan_pdd == 1) {
-                    $sql = "AND tb_tarif.id_tarif_jenis = 1";
-                } else {
-                    $sql = "AND tb_tarif.id_jurusan_pdd_jenis BETWEEN 2 AND 4";
-                }
                 $sql_tarif_ujian = " SELECT * FROM tb_tarif 
-                JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
-                JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 
-                WHERE tb_tarif.id_tarif_jenis = 6 AND tb_tarif.id_jurusan_pdd = " . $d_praktik['id_jurusan_pdd'] . "
-                ORDER BY nama_tarif_jenis ASC
-                ";
+                                JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
+                                JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 
+                                WHERE tb_tarif.id_tarif_jenis = 6 AND tb_tarif.id_jurusan_pdd = " . $d_praktik['id_jurusan_pdd'] . "
+                                ORDER BY nama_tarif_jenis ASC
+                                ";
 
                 // echo $sql_tarif_ujian;
                 $q_tarif_ujian = $conn->query($sql_tarif_ujian);
@@ -146,12 +142,10 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     <th scope="col" width="150">Tarif</th>
                                     <th scope="col">Frekuensi</th>
                                     <th scope="col">Kuantitas</th>
-                                    <th scope="col">Total Tarif</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $jumlah_total_ujian = 0;
                                 $no = 1;
                                 while ($d_tarif_ujian = $q_tarif_ujian->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
@@ -161,41 +155,105 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                         <td><?php echo $d_tarif_ujian['nama_tarif']; ?></td>
                                         <td><?php echo $d_tarif_ujian['nama_tarif_satuan']; ?></td>
                                         <td> <?php echo "Rp " . number_format($d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
-                                        <td><input class="form-control" type="number" min="0" name="ferk<?php echo $d_tarif_ujian['id_tarif'] ?>"></td>
+                                        <td><input class="form-control" type="number" min="0" name="frek<?php echo $d_tarif_ujian['id_tarif'] ?>"></td>
                                         <td><input class="form-control" type="number" min="0" name="ktt<?php echo $d_tarif_ujian['id_tarif'] ?>"></td>
-                                        <td>asdasdasdasda</td>
                                     </tr>
                                 <?php
                                     $no++;
                                 }
                                 ?>
-                                <tr>
-                                    <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
-                                    <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_ujian, 0, ",", "."); ?></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                 <?php
                 }
                 ?>
-
                 <hr>
+                <div class="text-gray-700">
+                    <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                        Menu Tarif Ruang Belajar/Diskusi <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                    </div>
+                </div>
+                <?php
+                $sql_tempat = " SELECT * FROM tb_tempat
+                                JOIN tb_tarif_jenis ON tb_tempat.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
+                                JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 
+                                WHERE tb_tempat.id_tarif_jenis = 7 AND tb_tempat.id_jurusan_pdd_jenis = " . $d_praktik['id_jurusan_pdd_jenis'] . "
+                                ORDER BY tb_tempat.nama_tempat ASC
+                                ";
+
+                // echo $sql_tempat;
+                $q_tempat = $conn->query($sql_tempat);
+                $r_tempat = $q_tempat->rowCount();
+
+                if ($r_tempat > 0) {
+                ?>
+                    <div class="table-responsive" id="tabel_tempat">
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama Jenis</th>
+                                    <th scope="col" width="380">Nama Tarif</th>
+                                    <th scope="col" width="150">Satuan</th>
+                                    <th scope="col" width="150">Tarif</th>
+                                    <th scope="col">Frekuensi</th>
+                                    <th scope="col">Kuantitas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
+                                    <tr>
+                                        <th scope="row"><?php echo $no; ?></th>
+                                        <td><?php echo $d_tempat['nama_tarif_jenis']; ?></td>
+                                        <td><?php echo $d_tempat['nama_tempat']; ?></td>
+                                        <td><?php echo $d_tempat['nama_tarif_satuan']; ?></td>
+                                        <td> <?php echo "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."); ?></td>
+                                        <td><input class="form-control" type="number" min="0" name="frek<?php echo $d_tempat['id_tempat'] ?>"></td>
+                                        <td><input class="form-control" type="number" min="0" name="ktt<?php echo $d_tempat['id_tempat'] ?>"></td>
+                                    </tr>
+                                <?php
+                                    $no++;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php
+                }
+                ?>
+                <hr>
+
+                <!-- tombol simpan tarif  -->
                 <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
-                    <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success" onclick="pilihUjian()">
+                    <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-primary" onclick="cekDataTarif()">
                         <!-- <a class="nav-link" href="#tarif"> -->
                         <i class="fas fa-check-circle"></i>
-                        Simpan Data Praktik dan Data Tarif
+                        Proses Data Tarif
                         <i class="fas fa-check-circle"></i>
                         <!-- </a> -->
                     </button>
                 </div>
             </div>
         </div>
+        <div id="cek_data_tarif"></div>
     </form>
 </div>
 <script>
-    function pilihUjian() {
+    function pilihUjian_y() {
+        console.log('pilihUjian_y');
+        $("#tabel_ujian").fadeIn('fast');
+    }
+
+    function pilihUjian_t() {
+        console.log('pilihUjian_t');
+        $("#tabel_ujian").fadeOut('fast');
+    }
+
+    function cekDataTarif() {
         if (document.getElementById("cek_pilih_ujian1").checked == false && document.getElementById("cek_pilih_ujian2").checked == false) {
             const Toast = Swal.mixin({
                 toast: true,
@@ -215,7 +273,8 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             });
             document.getElementById("err_cek_pilih_ujian").innerHTML = "Pilih Ujian <br>";
         } else {
-            var path = "";
+            document.getElementById("err_cek_pilih_ujian").innerHTML = "";
+
             var cek_pilih_ujian = "";
             if (document.getElementById("cek_pilih_ujian1").checked == true) {
                 cek_pilih_ujian = document.getElementById("cek_pilih_ujian1").value;
@@ -223,17 +282,76 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 cek_pilih_ujian = document.getElementById("cek_pilih_ujian2").value;
             }
 
-            var data_praktik = $('#form_tarif').serializeArray();
-            data_praktik.push({
-                name: 'cek_pilih_ujian',
-                value: cek_pilih_ujian
-            });
+
+            $("#tarif_praktik").fadeOut('slow');
+            $("#cek_data_tarif").fadeIn('slow');
+
+
+            // Kirim Parameter ke Data Tarif untuk ditampilkan
+            var xmlhttp_data_tarif = new XMLHttpRequest();
+            var data_tarif = new FormData(document.getElementById("form_tarif"));
+            // var data_tarif = $('#form_tarif').serializeArray();
+
+            data_tarif.append(
+                'cek_pilih_ujian',
+                cek_pilih_ujian
+            );
+            data_tarif.append(
+                'id',
+                document.getElementById("id").value
+            );
+
+            // console.log("id : " + document.getElementById("id").value + " " + id);
+
+            xmlhttp_data_tarif.onreadystatechange = function() {
+                document.getElementById("cek_data_tarif").innerHTML = this.responseText;
+            };
+            xmlhttp_data_tarif.open("POST", "_admin/insert/i_praktikDataTarifKed.php?",
+                true
+            );
+            xmlhttp_data_tarif.send(data_tarif);
         }
     }
 
-    function pilihUjian_y() {
-        if (document.getElementById("cek_pilih_ujian2").checked == false) {
-            $("#tabel_ujian").fadeOut('fast');
+    function simpanDataTarif() {
+
+        //Simpan Data Praktik dan Tarif
+        // Kirim Parameter ke Data Tarif untuk ditampilkan
+        // var data_tarif = new FormData(document.getElementById("form_tarif"));
+        var data_tarif = $('#form_tarif').serializeArray();
+
+        var cek_pilih_ujian = "";
+        if (document.getElementById("cek_pilih_ujian1").checked == true) {
+            cek_pilih_ujian = document.getElementById("cek_pilih_ujian1").value;
+        } else if (document.getElementById("cek_pilih_ujian2").checked == true) {
+            cek_pilih_ujian = document.getElementById("cek_pilih_ujian2").value;
         }
+        data_tarif.push({
+            name: 'cek_pilih_ujian',
+            value: cek_pilih_ujian
+        }, {
+            name: 'id',
+            value: document.getElementById("id").value
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: "_admin/exc/x_i_praktik_sPraktikTarifKed.php?",
+            data: data_tarif,
+            success: function() {
+                Swal.fire({
+                    allowOutsideClick: false,
+                    // isDismissed: false,
+                    icon: 'success',
+                    title: '<span class"text-xs"><b>DATA TARIF</b><br>Berhasil Tersimpan',
+                    showConfirmButton: false,
+                    html: '<a href="?prk=' + document.getElementById("path").value + '" class="btn btn-outline-primary">OK</a>',
+                });
+            },
+            error: function(response) {
+                console.log(response.responseText);
+                alert('eksekusi query gagal');
+            }
+        });
     }
 </script>

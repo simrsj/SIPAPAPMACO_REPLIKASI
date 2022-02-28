@@ -613,8 +613,8 @@ if ($_GET['prk'] == 'ked') {
             ) {
                 document.getElementById("err_institusi").innerHTML = "";
                 document.getElementById("err_praktik").innerHTML = "";
-                document.getElementById("err_jurusan").innerHTML = "";
-                document.getElementById("err_jenjang").innerHTML = "";
+                // document.getElementById("err_jurusan").innerHTML = "";
+                // document.getElementById("err_jenjang").innerHTML = "";
                 document.getElementById("err_profesi").innerHTML = "";
                 document.getElementById("err_akreditasi").innerHTML = "";
                 document.getElementById("err_jumlah").innerHTML = "";

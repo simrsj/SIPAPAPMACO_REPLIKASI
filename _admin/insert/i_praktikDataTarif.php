@@ -209,7 +209,7 @@ $jumlah_praktik = $_GET['jum'];
             </div>
             <hr>
 
-            <!-- Menu Tambah Materi disesuaikan dengan Jenis Jurusan -->
+            <!-- Menu Mess/Pemondokan dengan Makan -->
             <div class="text-gray-700">
                 <div class="h5 font-weight-bold text-center mt-3 mb-3">
                     Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
@@ -258,11 +258,6 @@ $jumlah_praktik = $_GET['jum'];
             <br>
 
             <?php
-            if ($d_jurusan_pdd == 1) {
-                $sql = "AND tb_tarif.id_tarif_jenis = 1";
-            } else {
-                $sql = "AND tb_tarif.id_jurusan_pdd_jenis BETWEEN 2 AND 4";
-            }
             $sql_tarif_ujian = " SELECT * FROM tb_tarif 
                 JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
                 JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 

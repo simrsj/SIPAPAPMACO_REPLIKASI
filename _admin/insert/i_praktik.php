@@ -112,13 +112,20 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
 
                                 if ($r_jurusan_pdd > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" required>
+                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" onChange="getJenjang()" required>
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
                                             <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
-                                                <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                                                <?php
+                                                if ($d_jurusan_pdd['akronim_jurusan_pdd'] != "") {
+                                                    $nama_jurusan =  $d_jurusan_pdd['nama_jurusan_pdd'] . " (" . $d_jurusan_pdd['akronim_jurusan_pdd'] . ")";
+                                                } else {
+                                                    $nama_jurusan =  $d_jurusan_pdd['nama_jurusan_pdd'];
+                                                }
+                                                echo $nama_jurusan;
+                                                ?>
                                             </option>
                                         <?php
                                         }
@@ -150,18 +157,15 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                         <?php
                                         while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
-                                            <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
-                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
+                                            <option value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
+                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd'] ?>
                                             </option>
                                         <?php
                                         }
                                         ?>
                                     </select><br>
+
                                     <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_jenjang"></span>
-                                <?php
-                                } else {
-                                ?>
-                                    <b><i>Data Jurusan Tidak Ada</i></b>
                                 <?php
                                 }
                                 ?>
@@ -182,7 +186,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                         while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
                                             <option value='<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>'>
-                                                <?php echo $d_profesi_pdd['nama_profesi_pdd']; ?>
+                                                <?php echo $d_profesi_pdd['nama_profesi_pdd'] ?>
                                             </option>
                                         <?php
                                         }
@@ -316,6 +320,18 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
     <!-- <pre id="whereToPrint"> ce :</pre> -->
 
     <script type="text/javascript">
+        function getJenjang() {
+            console.log("getJenjang");
+            var xmlhttp_data_jenjang = new XMLHttpRequest();
+            xmlhttp_data_jenjang.onreadystatechange = function() {
+                document.getElementById("dataJenjang").innerHTML = this.responseText;
+            };
+            xmlhttp_data_jenjang.open("GET", "_admin/insert/i_praktikDataJenjang.php?id" + document.getElementById("id"),
+                true
+            );
+            xmlhttp_data_jenjang.send();
+        }
+
         function simpan_praktik() {
 
             var id = document.getElementById("id").value;
@@ -674,7 +690,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 xmlhttp_data_tarif.onreadystatechange = function() {
                     document.getElementById("data_tarif_input").innerHTML = this.responseText;
                 };
-                xmlhttp_data_tarif.open("GET", "_admin/insert/i_praktikDataTarif.php?id" + id +
+                xmlhttp_data_tarif.open("GET", "_admin/insert/i_praktikDataTarif.php?id=" + id +
                     "&jur=" + jurusan +
                     "&jen=" + jenjang +
                     "&tmp=" + tgl_mulai +
