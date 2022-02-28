@@ -112,7 +112,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
 
                                 if ($r_jurusan_pdd > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" onChange="getJenjang()" required>
+                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" required>
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -320,17 +320,17 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
     <!-- <pre id="whereToPrint"> ce :</pre> -->
 
     <script type="text/javascript">
-        function getJenjang() {
-            console.log("getJenjang");
-            var xmlhttp_data_jenjang = new XMLHttpRequest();
-            xmlhttp_data_jenjang.onreadystatechange = function() {
-                document.getElementById("dataJenjang").innerHTML = this.responseText;
-            };
-            xmlhttp_data_jenjang.open("GET", "_admin/insert/i_praktikDataJenjang.php?id" + document.getElementById("id"),
-                true
-            );
-            xmlhttp_data_jenjang.send();
-        }
+        // function getJenjang() {
+        //     console.log("getJenjang");
+        //     var xmlhttp_data_jenjang = new XMLHttpRequest();
+        //     xmlhttp_data_jenjang.onreadystatechange = function() {
+        //         document.getElementById("dataJenjang").innerHTML = this.responseText;
+        //     };
+        //     xmlhttp_data_jenjang.open("GET", "_admin/insert/i_praktikDataJenjang.php?id" + document.getElementById("id"),
+        //         true
+        //     );
+        //     xmlhttp_data_jenjang.send();
+        // }
 
         function simpan_praktik() {
 
@@ -783,28 +783,33 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 });
 
                 //cek data materi upip
-                var materi_upip = "";
-                if (document.getElementById("materi_upip").checked == true) {
-                    materi_upip = document.getElementById("materi_upip").value;
-                }
+                if (document.getElementById("jurusan") == 2) {
 
-                //data materi upip
-                data_praktik.push({
-                    name: 'materi_upip',
-                    value: materi_upip
-                });
+                    var materi_upip = "";
+                    if (document.getElementById("materi_upip").checked == true) {
+                        materi_upip = document.getElementById("materi_upip").value;
+                    }
+
+                    //data materi upip
+                    data_praktik.push({
+                        name: 'materi_upip',
+                        value: materi_upip
+                    });
+                }
 
                 //cek data materi napza
-                var materi_napza = "";
-                if (document.getElementById("materi_napza").checked == true) {
-                    materi_napza = document.getElementById("materi_napza").value;
-                }
+                if (document.getElementById("jurusan") == 2) {
+                    var materi_napza = "";
+                    if (document.getElementById("materi_napza").checked == true) {
+                        materi_napza = document.getElementById("materi_napza").value;
+                    }
 
-                //data materi napza
-                data_praktik.push({
-                    name: 'materi_napza',
-                    value: materi_napza
-                });
+                    //data materi napza
+                    data_praktik.push({
+                        name: 'materi_napza',
+                        value: materi_napza
+                    });
+                }
 
                 //cek data makan_mess
                 var makan_mess = "";

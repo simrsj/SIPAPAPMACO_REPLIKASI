@@ -189,26 +189,31 @@ $jumlah_praktik = $_GET['jum'];
             <hr>
 
             <!-- Menu Tambah Materi disesuaikan dengan Jenis Jurusan -->
-            <div class="text-gray-700">
-                <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                    Tambahan Materi <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
-                    <span class="font-italic font-weight-bold text-xs">(Optional)</span>
+            <?php
+            if ($id_jurusan_pdd == 2) {
+            ?>
+                <div class="text-gray-700">
+                    <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                        Tambahan Materi <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                        <span class="font-italic font-weight-bold text-xs">(Optional)</span>
+                    </div>
                 </div>
-            </div>
-            <div class="row boxed-check-group boxed-check-primary justify-content-center">
-                <label class="boxed-check">
-                    <input class="boxed-check-input" type="checkbox" name="materi_upip" id="materi_upip" value="y">
-                    <div class="boxed-check-label">UPIP</div>
-                </label>
-                &nbsp;
-                &nbsp;
-                <label class="boxed-check">
-                    <input class="boxed-check-input" type="checkbox" name="materi_napza" id="materi_napza" value="y">
-                    <div class="boxed-check-label">Napza</div>
-                </label>
-            </div>
-            <hr>
-
+                <div class="row boxed-check-group boxed-check-primary justify-content-center">
+                    <label class="boxed-check">
+                        <input class="boxed-check-input" type="checkbox" name="materi_upip" id="materi_upip" value="y">
+                        <div class="boxed-check-label">UPIP</div>
+                    </label>
+                    &nbsp;
+                    &nbsp;
+                    <label class="boxed-check">
+                        <input class="boxed-check-input" type="checkbox" name="materi_napza" id="materi_napza" value="y">
+                        <div class="boxed-check-label">Napza</div>
+                    </label>
+                </div>
+                <hr>
+            <?php
+            }
+            ?>
             <!-- Menu Mess/Pemondokan dengan Makan -->
             <div class="text-gray-700">
                 <div class="h5 font-weight-bold text-center mt-3 mb-3">
