@@ -13,7 +13,11 @@ $q_jenis_jurusan = $conn->query($sql_jenis_jurusan);
 $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
 
 if ($_POST['id_jurusan_pdd'] == 1) {
-    $status_cek_praktik = "DPT_KED";
+    if ($_POST['id_profesi_pdd'] == 1) {
+        $status_cek_praktik = "DPT_KED_PPDS";
+    } else {
+        $status_cek_praktik = "DPT_KED";
+    }
 } else {
     $status_cek_praktik = "DPT";
 }

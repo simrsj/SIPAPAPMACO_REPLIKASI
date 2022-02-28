@@ -67,112 +67,119 @@
             </div>
         </div>
     </div>
+    <div>
+        <?php
+        //keterangan status
+        if ($d_praktik['status_cek_praktik'] == "DPT_KED" || $d_praktik['status_cek_praktik'] == "DPT_KED_PPDS") {
+        ?>
+            <span class="badge badge-warning text-md">DATA PRAKTIK</span>
+            <hr>
+            <span class="badge badge-primary text-md">Val. PRAKTIK</span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "DTR_KED") {
+        ?>
+            <span class="badge badge-warning text-md">DATA TARIF</span>
+            <hr>
+            <span class="badge badge-danger text-md">PEMBAYARAN</span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
+        ?>
+            <span class="badge badge-success text-md">
+                Val. PRAKTIK <i class="fas fa-check-circle"></i>
+            </span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y_PPDS") {
+        ?>
+            <span class="badge badge-success text-md">Val. PRAKTIK <i class="fas fa-check-circle"></i></span>
+            <hr>
+            <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
+        ?>
+            <span class="badge badge-danger text-md">
+                Val. PRAKTIK <i class="fas fa-times-circle"></i>
+            </span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
+        ?>
+            <span class="badge badge-warning text-md"> TEMPAT </span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "TMP_KED") {
+        ?>
+            <span class="badge badge-success text-md">
+                Val. PRAKTIK <i class="fas fa-check-circle"></i>
+            </span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+        ?>
+            <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
+            <hr>
+            <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
+        ?>
+            <span class="badge badge-primary text-md">Val. PEMBAYARAN</span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y_KED") {
+        ?>
+            <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "BYR_T_K") {
+        ?>
+            <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span>
+            <hr>
+            <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" title="KETERANGAN">
+                KETERANGAN
+            </a>
 
-    <?php
-    //keterangan status
-    if ($d_praktik['status_cek_praktik'] == "DPT_KED") {
-    ?>
-        <span class="badge badge-warning text-md">DATA PRAKTIK</span>
-        <hr>
-        <span class="badge badge-primary text-md">Val. PRAKTIK</span>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "DTR_KED") {
-    ?>
-        <span class="badge badge-warning text-md">DATA TARIF</span>
-        <hr>
-        <span class="badge badge-danger text-md">PEMBAYARAN</span>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
-    ?>
-        <span class="badge badge-success text-md">
-            Val. PRAKTIK <i class="fas fa-check-circle"></i>
-        </span>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
-    ?>
-        <span class="badge badge-danger text-md">
-            Val. PRAKTIK <i class="fas fa-times-circle"></i>
-        </span>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "TMP") {
-    ?>
-        <span class="badge badge-warning text-md"> TEMPAT </span>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "TMP_KED") {
-    ?>
-        <span class="badge badge-success text-md">
-            Val. PRAKTIK <i class="fas fa-check-circle"></i>
-        </span>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
-    ?>
-        <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
-        <hr>
-        <b><span class="badge badge-primary font-italic text-md"> WAITING LIST</span></b><br>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
-    ?>
-        <span class="badge badge-primary text-md">Val. PEMBAYARAN</span>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y_KED") {
-    ?>
-        <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "BYR_T_K") {
-    ?>
-        <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span>
-        <hr>
-        <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" title="KETERANGAN">
-            KETERANGAN
-        </a>
-
-        <!-- modal pembayaran ulang -->
-        <div class="modal fade" id="ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
-            <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header h5">
-                        <b>KETERANGAN KEKURANGAN TRANSFER</b>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="jumbotron">
-                            <div class="jumbotron-fluid h6 text-gray-800">
-                                ANDA MEMLIKI KEKURANGAN TRANSFER SENILAI : <br>
-                                <?php
-                                $sql_bayar_ulang = "SELECT * FROM tb_bayar ";
-                                $sql_bayar_ulang .= " JOIN tb_praktik ON tb_bayar.id_praktik = tb_praktik.id_praktik";
-                                $sql_bayar_ulang .= " WHERE tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
-
-                                $q_bayar_ulang = $conn->query($sql_bayar_ulang);
-
-                                $d_bayar_ulang = $q_bayar_ulang->fetch(PDO::FETCH_ASSOC);
-                                ?>
-                                <span class="h5 font-weight-bold">
+            <!-- modal pembayaran ulang -->
+            <div class="modal fade" id="ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+                <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header h5">
+                            <b>KETERANGAN KEKURANGAN TRANSFER</b>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="jumbotron">
+                                <div class="jumbotron-fluid h6 text-gray-800">
+                                    ANDA MEMLIKI KEKURANGAN TRANSFER SENILAI : <br>
                                     <?php
-                                    echo "Rp " . number_format($d_bayar_ulang['kurang_tf_praktik'], 0, ",", ".");
+                                    $sql_bayar_ulang = "SELECT * FROM tb_bayar ";
+                                    $sql_bayar_ulang .= " JOIN tb_praktik ON tb_bayar.id_praktik = tb_praktik.id_praktik";
+                                    $sql_bayar_ulang .= " WHERE tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+
+                                    $q_bayar_ulang = $conn->query($sql_bayar_ulang);
+
+                                    $d_bayar_ulang = $q_bayar_ulang->fetch(PDO::FETCH_ASSOC);
                                     ?>
-                                </span>
-                                <br><br>
-                                <span class="text-danger font-weight-bold">LAKUKAN SEGERAN PEMBAYARAN ULANG..!</span>
+                                    <span class="h5 font-weight-bold">
+                                        <?php
+                                        echo "Rp " . number_format($d_bayar_ulang['kurang_tf_praktik'], 0, ",", ".");
+                                        ?>
+                                    </span>
+                                    <br><br>
+                                    <span class="text-danger font-weight-bold">LAKUKAN SEGERAN PEMBAYARAN ULANG..!</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
-    ?>
-        <span class="badge badge-success text-md">AKTIF</span>
-    <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
-    ?>
-        <span class="badge badge-secondary text-md">SELESAI</span>
-    <?php
-    }
-    ?>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "AKV" || $d_praktik['status_cek_praktik'] == "AKV_PPDS") {
+        ?>
+            <span class="badge badge-success text-md">AKTIF</span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
+        ?>
+            <span class="badge badge-secondary text-md">SELESAI</span>
+        <?php
+        }
+        ?>
+    </div>
 </div>
 
 <!-- Tombol Link Data Status  -->
@@ -180,7 +187,7 @@
 
     <!-- tombol dropdown pilih menu tarif, mess, bukti bayar -->
     <?php
-    if ($d_praktik['status_cek_praktik'] == "DPT_KED") {
+    if ($d_praktik['status_cek_praktik'] == "DPT_KED" || $d_praktik['status_cek_praktik'] == "DPT_KED_PPDS") {
     ?>
         <b>VALIDASI : </b><br>
         <div class="btn-group">
@@ -232,6 +239,10 @@
     ?>
         <button class="btn btn-outline-success btn-sm" onclick="aktivasiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">AKTIFKAN <i class="fas fa-question-circle"></i></button>
     <?php
+    } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y_PPDS") {
+    ?>
+        <button class="btn btn-outline-success btn-sm" onclick="aktivasiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">AKTIFKAN <i class="fas fa-question-circle"></i></button>
+    <?php
     } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
     ?>
         <b>VALIDASI : </b><br>
@@ -240,7 +251,7 @@
             <button class="btn btn-outline-danger btn-sm" onclick="valPembayaran_T(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
         </div>
     <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y_KED") {
+    } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y_KED" || $d_praktik['status_cek_praktik'] == "AKV_PPDS") {
     ?>
         <b>PILIH :</b><br>
         <button class="btn btn-outline-secondary btn-sm" onclick="selesaiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">SELESAIKAN<i class="fas fa-question-circle"></i></button>

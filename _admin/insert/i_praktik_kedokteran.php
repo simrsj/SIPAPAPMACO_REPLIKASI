@@ -237,7 +237,8 @@ if ($_GET['prk'] == 'ked') {
                         <div class="text-gray-700">
                             <div class="h5 font-weight-bold text-center mt-3 mb-3">
                                 Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
-                                <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)</span>
+                                <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)<br>
+                                    (Wajib dipilih jika <b>Profesi</b> memilih <b>PSPD/Co-Ass</b>)</span>
                             </div>
                             <div class="h5 font-weight-bold text-center mt-3 mb-3">
                                 <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
@@ -590,12 +591,13 @@ if ($_GET['prk'] == 'ked') {
                     document.getElementById("err_file_data_praktikan").innerHTML = "File Data Praktikan Harus Kurang dari 1 Mb";
                 }
             }
-            //simpan data praktik dan data tarif
 
+            //simpan data praktik dan data tarif
             if (
                 institusi != "" &&
                 praktik != "" &&
                 jurusan != "" &&
+                profesi != "" &&
                 akreditasi != "" &&
                 jumlah != "" &&
                 tgl_mulai != "" &&
@@ -626,42 +628,12 @@ if ($_GET['prk'] == 'ked') {
                 // document.getElementById("err_akun_koordinator").innerHTML = "";
                 document.getElementById("err_nama_koordinator").innerHTML = "";
                 document.getElementById("err_telp_koordinator").innerHTML = "";
-                if (document.getElementById("makan_mess1").checked == false && document.getElementById("makan_mess2").checked == false) {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
 
-                    Toast.fire({
-                        icon: 'warning',
-                        title: '<center>Pilih <b>MAKAN MESS</b></center>'
-                    });
-                    document.getElementById("err_makan_mess").innerHTML = "Pilih Makan Mess <br>";
-                } //eksekusi simpadn data praktik dan pilih makan mess
-                else {
+                //eksekusi jika kedokteran PPDS
+                if (profesi == 1) {
+
                     var path = "";
                     var data_praktik = $('#form_praktik').serializeArray();
-
-                    //cek data makan_mess
-                    var makan_mess = "";
-                    if (document.getElementById("makan_mess1").checked == true) {
-                        makan_mess = document.getElementById("makan_mess1").value;
-                    } else if (document.getElementById("makan_mess2").checked == true) {
-                        makan_mess = document.getElementById("makan_mess2").value;
-                    }
-
-                    //push data makan_mess    
-                    data_praktik.push({
-                        name: 'makan_mess',
-                        value: makan_mess
-                    });
 
                     //Simpan Data Praktik dan Tarif
                     $.ajax({
@@ -709,6 +681,92 @@ if ($_GET['prk'] == 'ked') {
                             alert('eksekusi query gagal');
                         }
                     });
+                } else {
+                    if (document.getElementById("makan_mess1").checked == false && document.getElementById("makan_mess2").checked == false) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 10000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+
+                        Toast.fire({
+                            icon: 'warning',
+                            title: '<center>Pilih <b>MAKAN MESS</b></center>'
+                        });
+                        document.getElementById("err_makan_mess").innerHTML = "Pilih Makan Mess <br>";
+                    } //eksekusi simpadn data praktik dan pilih makan mess
+                    else {
+                        var path = "";
+                        var data_praktik = $('#form_praktik').serializeArray();
+
+                        //cek data makan_mess
+                        var makan_mess = "";
+                        if (document.getElementById("makan_mess1").checked == true) {
+                            makan_mess = document.getElementById("makan_mess1").value;
+                        } else if (document.getElementById("makan_mess2").checked == true) {
+                            makan_mess = document.getElementById("makan_mess2").value;
+                        }
+
+                        //push data makan_mess    
+                        data_praktik.push({
+                            name: 'makan_mess',
+                            value: makan_mess
+                        });
+
+                        //Simpan Data Praktik dan Tarif
+                        $.ajax({
+                            type: 'POST',
+                            url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
+                            data: data_praktik,
+                            success: function() {
+                                //ambil data file yang diupload
+                                var data_file = new FormData();
+                                var xhttp = new XMLHttpRequest();
+
+                                var fileSurat = document.getElementById("file_surat").files;
+                                data_file.append("file_surat", fileSurat[0]);
+
+                                var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                                data_file.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                                var id = document.getElementById("id").value;
+                                data_file.append("id", id);
+
+                                xhttp.open("POST", "_admin/exc/x_i_praktik_sFilePraktik.php", true);
+                                xhttp.send(data_file);
+
+                                //Cari Jenis Jurusan
+                                var jur = document.getElementById('jurusan').value;
+                                var xmlhttp_path = new XMLHttpRequest();
+                                xmlhttp_path.onload = function() {
+                                    var path = "?prk=ked";
+                                    Swal.fire({
+                                        allowOutsideClick: false,
+                                        // isDismissed: false,
+                                        icon: 'success',
+                                        title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
+                                        showConfirmButton: false,
+                                        html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
+                                    });
+                                };
+                                xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
+                                    true
+                                );
+                                xmlhttp_path.send();
+                            },
+                            error: function(response) {
+                                console.log(response.responseText);
+                                alert('eksekusi query gagal');
+                            }
+                        });
+                    }
+
                 }
             }
         }

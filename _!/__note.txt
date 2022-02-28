@@ -17,7 +17,7 @@
 
 git status
 git add . 
-git commit -a -m "alur kedokteran PPDS SELESAI"  
+git commit -a -m "Perbaikan alur penagjuan kedokteran PPDS (Tidak Bayar) SELESAI"  
 git pull
 git push
 

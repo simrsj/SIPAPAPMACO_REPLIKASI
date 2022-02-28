@@ -21,7 +21,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
 // ----------------------------------------------------------------SIMPAN DATA TARIF WAJIB
 $sql_tarif_jurusan = " SELECT * FROM tb_tarif ";
-$sql_tarif_jurusan .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jeni ";
+$sql_tarif_jurusan .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
 $sql_tarif_jurusan .= " JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan";
 $sql_tarif_jurusan .= " WHERE tb_tarif.id_jurusan_pdd = $id_jurusan_pdd AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5 AND tb_tarif.id_jenjang_pdd = 0";
 $sql_tarif_jurusan .= " ORDER BY nama_tarif_jenis ASC, nama_tarif ASC ";
@@ -140,6 +140,8 @@ while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
 $sql_update_status_praktik = " UPDATE tb_praktik
 SET status_cek_praktik = 'DTR_KED'
 WHERE id_praktik = $id_praktik";
+
+echo $sql_update_status_praktik;
 
 $conn->query($sql_update_status_praktik);
 echo json_encode(['success' => 'Data Tarif Berhasil Disimpan']);

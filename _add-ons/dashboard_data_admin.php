@@ -74,6 +74,7 @@ WHERE status_praktik='D'";
 $q_dpjp = $conn->query($sql_dpjp);
 
 $jumlah_praktik_proses = 0;
+$dashboard_dpjp = 0;
 while ($d_dpjp = $q_dpjp->fetch(PDO::FETCH_ASSOC)) {
     $dashboard_dpjp = $jumlah_praktik_proses + $d_dpjp['jumlah_praktik'];
 }
