@@ -17,7 +17,7 @@
 
 git status
 git add . 
-git commit -a -m "tamabah data tarif farmasi dan peksos"  
+git commit -a -m "perbaiki pilih tarif materi khusus keperawatan"  
 git pull
 git push
 
