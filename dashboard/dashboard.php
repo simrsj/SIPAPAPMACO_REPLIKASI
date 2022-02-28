@@ -35,11 +35,14 @@
               </div>
               <hr>
               <?php
-              $sql_praktik = "SELECT * FROM tb_praktik 
-                    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                    WHERE tb_praktik.status_cek_praktik  = 'AKTIF' AND tb_praktik.status_praktik = 'Y'
-                    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+              $sql_praktik = "SELECT * FROM tb_praktik ";
+              $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+              $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+              $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y'";
+              $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+
+              // echo $sql_praktik;
+
               $q_praktik = $conn->query($sql_praktik);
               $r_praktik = $q_praktik->rowCount();
 
@@ -109,7 +112,10 @@
               </div>
               <hr>
               <?php
-              $sql_mess = "SELECT * FROM tb_mess WHERE status_mess = 'AKTIF' AND nama_pemilik_mess = 'RS Jiwa Provinsi Jawa Barat' ORDER BY nama_mess ASC";
+              $sql_mess = "SELECT * FROM tb_mess ";
+              $sql_mess .= " WHERE nama_pemilik_mess = 'RS Jiwa Provinsi Jawa BaRat' ";
+              $sql_mess .= " ORDER BY tb_mess.nama_mess ASC";
+
               $q_mess = $conn->query($sql_mess);
               $r_mess = $q_mess->rowCount();
               ?>
@@ -128,15 +134,27 @@
                   <tbody>
                     <?php
                     $no = 1;
+                    $jumlah_terisi = 0;
                     while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+
+                      $sql_mess1 = "SELECT * FROM tb_praktik ";
+                      $sql_mess1 .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
+                      $sql_mess1 .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
+                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_mess.id_mess = " . $d_mess['id_mess'];
+                      $sql_mess1 .= " ORDER BY tb_mess.nama_mess ASC";
+                      $q_mess1 = $conn->query($sql_mess1);
+                      $jumlah_terisi = 0;
+                      while ($d_mess1 = $q_mess1->fetch(PDO::FETCH_ASSOC)) {
+                        $jumlah_terisi += $d_mess1['jumlah_praktik'];
+                      }
                     ?>
                       <tr>
                         <td><?php echo $no; ?></td>
                         <td><?php echo $d_mess['nama_mess']; ?></td>
                         <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
                         <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                        <td class="text-center"><?php echo $d_mess['kapasitas_terisi_mess']; ?></td>
-                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $d_mess['kapasitas_terisi_mess']; ?></td>
+                        <td class="text-center"><?php echo $jumlah_terisi; ?></td>
+                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
                         <?php
                         $no++;
                         ?>
@@ -147,7 +165,6 @@
                   </tbody>
                 </table>
               </div>
-
               <hr />
             </div>
           </div>
@@ -168,7 +185,10 @@
               </div>
               <hr>
               <?php
-              $sql_mess = "SELECT * FROM tb_mess WHERE status_mess = 'AKTIF' AND nama_pemilik_mess != 'RS Jiwa Provinsi Jawa Barat' ORDER BY nama_mess ASC";
+              $sql_mess = "SELECT * FROM tb_mess ";
+              $sql_mess .= " WHERE nama_pemilik_mess != 'RS Jiwa Provinsi Jawa Barat' AND status_mess = 'y'";
+              $sql_mess .= " ORDER BY tb_mess.nama_mess ASC";
+
               $q_mess = $conn->query($sql_mess);
               $r_mess = $q_mess->rowCount();
               ?>
@@ -177,7 +197,7 @@
                   <thead class="table-light">
                     <tr class="font-weight-bold text-center">
                       <th scope='col'>NO</th>
-                      <th>NAMA PEMONDOKAN</th>
+                      <th>NAMA MESS</th>
                       <th>NAMA PEMILIK</th>
                       <th>KAPASITAS TOTAL</th>
                       <th>KAPASITAS TERISI</th>
@@ -187,15 +207,27 @@
                   <tbody>
                     <?php
                     $no = 1;
+                    $jumlah_terisi = 0;
                     while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+
+                      $sql_mess1 = "SELECT * FROM tb_praktik ";
+                      $sql_mess1 .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
+                      $sql_mess1 .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
+                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_mess.id_mess = " . $d_mess['id_mess'];
+                      $sql_mess1 .= " ORDER BY tb_mess.nama_mess ASC";
+                      $q_mess1 = $conn->query($sql_mess1);
+                      $jumlah_terisi = 0;
+                      while ($d_mess1 = $q_mess1->fetch(PDO::FETCH_ASSOC)) {
+                        $jumlah_terisi += $d_mess1['jumlah_praktik'];
+                      }
                     ?>
                       <tr>
                         <td><?php echo $no; ?></td>
                         <td><?php echo $d_mess['nama_mess']; ?></td>
                         <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
                         <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                        <td class="text-center"><?php echo $d_mess['kapasitas_terisi_mess']; ?></td>
-                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $d_mess['kapasitas_terisi_mess']; ?></td>
+                        <td class="text-center"><?php echo $jumlah_terisi; ?></td>
+                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
                         <?php
                         $no++;
                         ?>
@@ -206,7 +238,6 @@
                   </tbody>
                 </table>
               </div>
-
               <hr />
             </div>
           </div>
