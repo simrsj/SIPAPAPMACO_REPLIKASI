@@ -741,8 +741,8 @@ if (isset($_POST['arsip_praktik'])) {
             })
         }
 
-        function valPembayaran_T(id) {
-            console.log("valPembayaran_T");
+        function valPembayaran_t(id) {
+            console.log("valPembayaran_t");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',

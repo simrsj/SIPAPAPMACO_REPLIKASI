@@ -53,8 +53,9 @@
                     Melakukan Proses Validasi <span class="font-weight-bold text-primary">PEMBAYARAN</span> oleh <b>ADMIN</b>
                     <br><br>
 
-                    <span class="badge badge-success text-md">PEMB. DITERIMA <i class="fas fa-check-circle"></i></span><br>
-                    Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br><br>
+                    <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span><br>
+                    Proses Pembayaran <span class="font-weight-bold text-success">DITERIMA</span> oleh <b>ADMIN</b> <br>
+                    Bila proses kegiatan praktik selesai <b>ADMIN</b> akan menyelesaikan praktik<br><br>
 
                     <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span><br>
                     Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, karena jumlah transfer kurang<br>
@@ -113,7 +114,7 @@
     ?>
         <span class="badge badge-primary text-md">Val. PEMBAYARAN</span>
     <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
+    } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y_KED") {
     ?>
         <span class="badge badge-success text-md">Val. PEMBAYARAN <i class="fas fa-check-circle"></i></span>
     <?php
@@ -239,9 +240,10 @@
             <button class="btn btn-outline-danger btn-sm" onclick="valPembayaran_T(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
         </div>
     <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
+    } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y_KED") {
     ?>
-        <button class="btn btn-outline-success btn-sm" onclick="aktivasiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">AKTIFKAN <i class="fas fa-question-circle"></i></button>
+        <b>PILIH :</b><br>
+        <button class="btn btn-outline-secondary btn-sm" onclick="selesaiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">SELESAIKAN<i class="fas fa-question-circle"></i></button>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "BYR_T_K") {
     ?>
