@@ -3,13 +3,13 @@
         <div class="col-lg-10">
             <h1 class="h3 mb-2 text-gray-800">Daftar Praktikan</h1>
         </div>
-        <div class="col-lg-2 text-right">
+        <!-- <div class="col-lg-2 text-right">
             <a href="?dpk&a" class="btn btn-outline-info btn-sm">
                 <i>
                     <i class="fas fa-archive"></i>
                 </i>Arsip
             </a>
-        </div>
+        </div> -->
     </div>
 
 
