@@ -15,17 +15,17 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 				</a>
 				<!-- Nav Item - Dashboard -->
-				<li class="nav-item active">
+				<li class="nav-item ">
 					<a class="nav-link" href="?test">
 						<i class="fas fa-fw fa-bug"></i>
 						<span>Testing</span></a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item ">
 					<a class="nav-link" href="?">
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item ">
 					<a class="nav-link" href="?mou">
 						<i class="fas fa-fw fa-handshake"></i>
 						<span>MoU-Kerjasama</span></a>
@@ -37,7 +37,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div class="sidebar-heading">
 					Kediklatan
 				</div>
-				<li class="nav-item active">
+				<li class="nav-item ">
 					<a class="nav-link" href="?info_diklat">
 						<i class="fas fa-fw fa-info-circle"></i>
 						<span>Informasi</span>
@@ -45,7 +45,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</li>
 				<li class="nav-item ">
 					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
-						<i class="fas fa-fw fa-users"></i>
+						<i class="far fa-fw fa-list-alt"></i>
 						<span>Pengajuan</span>
 					</a>
 					<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -69,32 +69,32 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						</div>
 					</div>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item ">
 					<a class="nav-link" href="?praktikan">
-						<i class="fas fa-fw fa-info-circle"></i>
+						<i class="far fa-fw fa-address-book"></i>
 						<span>Data Praktikan</span>
 					</a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item ">
 					<a class="nav-link" href="?pmbb">
-						<i class="fas fa-fw fa-info-circle"></i>
+						<i class="fas fa-fw fa-users"></i>
 						<span>Pembimbing</span>
 					</a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item ">
 					<a class="nav-link" href="?nil">
-						<i class="fas fa-fw fa-info-circle"></i>
+						<i class="fas fa-fw fa-clipboard-list"></i>
 						<span>Data Nilai</span>
 					</a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item ">
 					<a class="nav-link" href="?trs">
 						<i class="fas fa-fw fa-wallet"></i>
 						<span>Data Pembayaran</span>
 					</a>
 				</li>
 				<hr class="sidebar-divider">
-				<li class="nav-item active">
+				<li class="nav-item ">
 					<a class="nav-link" href="http://192.168.7.89/kuesioner/login.php" target="_blank">
 						<i class="fas fa-fw fa-list-ul"></i>
 						<span>Survey</span>

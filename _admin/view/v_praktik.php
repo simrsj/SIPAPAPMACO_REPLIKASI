@@ -163,6 +163,7 @@ if (isset($_POST['arsip_praktik'])) {
                         tb_praktik.status_praktik = 'D' 
                         OR tb_praktik.status_praktik = 'W'
                         OR tb_praktik.status_praktik = 'Y'
+                        OR tb_praktik.status_praktik = 'S'
                     )
                     $jenis_jurusan
                     ORDER BY tb_praktik.tgl_selesai_praktik ASC";
@@ -741,8 +742,8 @@ if (isset($_POST['arsip_praktik'])) {
             })
         }
 
-        function valPembayaran_t(id) {
-            console.log("valPembayaran_t");
+        function valPembayaran_T(id) {
+            console.log("valPembayaran_T");
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',

@@ -783,7 +783,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 });
 
                 //cek data materi upip
-                if (document.getElementById("jurusan") == 2) {
+                if (document.getElementById("jurusan").value == 2) {
 
                     var materi_upip = "";
                     if (document.getElementById("materi_upip").checked == true) {
@@ -795,10 +795,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                         name: 'materi_upip',
                         value: materi_upip
                     });
-                }
 
-                //cek data materi napza
-                if (document.getElementById("jurusan") == 2) {
                     var materi_napza = "";
                     if (document.getElementById("materi_napza").checked == true) {
                         materi_napza = document.getElementById("materi_napza").value;
@@ -809,6 +806,8 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                         name: 'materi_napza',
                         value: materi_napza
                     });
+
+                    console.log("MATERI UPIP");
                 }
 
                 //cek data makan_mess
@@ -865,7 +864,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 path = "?";
                             }
                             Swal.fire({
-                                allowOutsideClick: false,
+                                // allowOutsideClick: false,
                                 // isDismissed: false,
                                 icon: 'success',
                                 title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>TARIF</b><br>Berhasil Tersimpan',

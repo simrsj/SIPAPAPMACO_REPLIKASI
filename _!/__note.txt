@@ -17,7 +17,7 @@
 
 git status
 git add . 
-git commit -a -m "tambah database tb_kuota, perbaikan tb_praktikan, proses import file excel praktikan"  
+git commit -a -m "tambah database jurusan-jenjang, tambah database jurusan-profesi, perbaikan harga institusi fee dan manajemen fee selain kedokteran, penghilangan tarif rps, perbaiki kodingan tarif BST, bukti trasnfer dengan gambar, non nakes dan nakes lainnya tanpa pilih tempat, praktik yg selesai dimunculkan"  
 git pull
 git push
 
