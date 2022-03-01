@@ -1,28 +1,15 @@
 <?php
-$id_praktik = 1;
-$d1 = '2010-10-01';
-$d2 = '2010-10-05';
-$d2 = date('Y-m-d', strtotime($d2 . "+1 days"));
+$file = fopen($filename, "r");
+//$sql_data = "SELECT * FROM prod_list_1 ";
 
-$period = new DatePeriod(
-    new DateTime($d1),
-    new DateInterval('P1D'),
-    new DateTime($d2)
-);
+$count = 0;                                         // add this line
+while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
+    //print_r($emapData);
+    //exit();
+    $count++;                                      // add this line
 
-echo "<pre>";
-// print_r($period);
-echo "</pre>";
-
-$no = 1;
-foreach ($period as $key => $value) {
-    echo "INSERT INTO tb_praktik_tgl (
-        id_praktik, 
-        tgl_praktik
-    ) VALUES (
-        $id_praktik, 
-        '" . $value->format('Y-m-d') . "'
-    )";
-    echo "<br>";
-    $no++;
+    if ($count > 1) {                                  // add this line
+        $sql = "INSERT into prod_list_1(p_bench,p_name,p_price,p_reason) values ('$emapData[0]','$emapData[1]','$emapData[2]','$emapData[3]')";
+        $conn->query($sql);
+    }                                              // add this line
 }
