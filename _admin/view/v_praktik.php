@@ -152,21 +152,16 @@ if (isset($_POST['arsip_praktik'])) {
                 } else {
                     $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 0 ";
                 }
-                $sql_praktik = "SELECT * FROM tb_praktik 
-                    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd
-                    JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-                    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                    JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis
-                    JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    WHERE (
-                        tb_praktik.status_praktik = 'D' 
-                        OR tb_praktik.status_praktik = 'W'
-                        OR tb_praktik.status_praktik = 'Y'
-                        OR tb_praktik.status_praktik = 'S'
-                    )
-                    $jenis_jurusan
-                    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+                $sql_praktik = "SELECT * FROM tb_praktik ";
+                $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
+                $sql_praktik .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
+                $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
+                $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
+                $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
+                $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
+                $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'D' OR tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
+                $sql_praktik .= " $jenis_jurusan ";
+                $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
                 // echo $sql_praktik;
 
@@ -436,48 +431,50 @@ if (isset($_POST['arsip_praktik'])) {
                                             $r_tarif_pilih = $q_tarif_pilih->rowCount();
                                             if ($r_tarif_pilih > 0) {
                                             ?>
-                                                <table class="table table-striped" id="myTable">
-                                                    <thead class="thead-dark">
-                                                        <tr>
-                                                            <th scope="col">No</th>
-                                                            <th scope="col">Nama Jenis</th>
-                                                            <th scope="col">Nama </th>
-                                                            <th scope="col" width="80px">Tarif</th>
-                                                            <th scope="col" width="25px">Satuan</th>
-                                                            <th scope="col" width="25px">Frekuensi</th>
-                                                            <th scope="col">Kuantitas</th>
-                                                            <th scope="col" width="125px">Total Tarif</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $total_jumlah_tarif = 0;
-                                                        $no = 1;
-                                                        while ($d_tarif_pilih = $q_tarif_pilih->fetch(PDO::FETCH_ASSOC)) {
-                                                        ?>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped" id="myTable">
+                                                        <thead class="thead-dark">
                                                             <tr>
-                                                                <th scope="row"><?php echo $no; ?></th>
-                                                                <td><?php echo $d_tarif_pilih['nama_jenis_tarif_pilih']; ?></td>
-                                                                <td><?php echo $d_tarif_pilih['nama_tarif_pilih']; ?></td>
-                                                                <td><?php echo "Rp " . number_format($d_tarif_pilih['nominal_tarif_pilih'], 0, ",", "."); ?></td>
-                                                                <td><?php echo $d_tarif_pilih['nama_satuan_tarif_pilih']; ?></td>
-                                                                <td><?php echo $d_tarif_pilih['frekuensi_tarif_pilih']; ?></td>
-                                                                <td><?php echo $d_tarif_pilih['kuantitas_tarif_pilih']; ?></td>
-                                                                <td><?php echo "Rp " . number_format($d_tarif_pilih['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                <th scope="col">No</th>
+                                                                <th scope="col">Nama Jenis</th>
+                                                                <th scope="col">Nama </th>
+                                                                <th scope="col" width="80px">Tarif</th>
+                                                                <th scope="col" width="25px">Satuan</th>
+                                                                <th scope="col" width="25px">Frekuensi</th>
+                                                                <th scope="col">Kuantitas</th>
+                                                                <th scope="col" width="125px">Total Tarif</th>
                                                             </tr>
-                                                        <?php
-                                                            $total_jumlah_tarif += $d_tarif_pilih['jumlah_tarif_pilih'];
-                                                            $no++;
-                                                        }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
-                                                <br>
-                                                <center>
-                                                    <div class="text-lg badge badge-primary">
-                                                        JUMLAH TOTAL : <?php echo "Rp " . number_format($total_jumlah_tarif, 0, ",", "."); ?>
-                                                    </div>
-                                                </center>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $total_jumlah_tarif = 0;
+                                                            $no = 1;
+                                                            while ($d_tarif_pilih = $q_tarif_pilih->fetch(PDO::FETCH_ASSOC)) {
+                                                            ?>
+                                                                <tr>
+                                                                    <th scope="row"><?php echo $no; ?></th>
+                                                                    <td><?php echo $d_tarif_pilih['nama_jenis_tarif_pilih']; ?></td>
+                                                                    <td><?php echo $d_tarif_pilih['nama_tarif_pilih']; ?></td>
+                                                                    <td><?php echo "Rp " . number_format($d_tarif_pilih['nominal_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                    <td><?php echo $d_tarif_pilih['nama_satuan_tarif_pilih']; ?></td>
+                                                                    <td><?php echo $d_tarif_pilih['frekuensi_tarif_pilih']; ?></td>
+                                                                    <td><?php echo $d_tarif_pilih['kuantitas_tarif_pilih']; ?></td>
+                                                                    <td><?php echo "Rp " . number_format($d_tarif_pilih['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                </tr>
+                                                            <?php
+                                                                $total_jumlah_tarif += $d_tarif_pilih['jumlah_tarif_pilih'];
+                                                                $no++;
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                    <br>
+                                                    <center>
+                                                        <div class="text-lg badge badge-primary">
+                                                            JUMLAH TOTAL : <?php echo "Rp " . number_format($total_jumlah_tarif, 0, ",", "."); ?>
+                                                        </div>
+                                                    </center>
+                                                </div>
                                             <?php
                                             } else {
                                             ?>

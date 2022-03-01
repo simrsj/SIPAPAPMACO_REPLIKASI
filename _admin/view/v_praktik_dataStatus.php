@@ -189,7 +189,7 @@
         </div>
         <?php
     } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
-        if ($_GET['prk'] == ('nnk' || 'nkl')) {
+        if ($_GET['prk'] == 'nnk' || $_GET['prk'] == 'nkl') {
         ?>
             <b>PILIH : </b><br>
             <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
