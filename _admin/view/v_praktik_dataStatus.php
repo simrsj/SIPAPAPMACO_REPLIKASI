@@ -120,6 +120,47 @@
         } elseif ($d_praktik['status_cek_praktik'] == "BYR_T_K") {
         ?>
             <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span>
+            <hr>
+            <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" title="KETERANGAN">
+                KETERANGAN
+            </a>
+
+            <!-- modal pembayaran ulang -->
+            <div class="modal fade" id="ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+                <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header h5">
+                            <b>KETERANGAN KEKURANGAN TRANSFER</b>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="jumbotron">
+                                <div class="jumbotron-fluid h6 text-gray-800">
+                                    ANDA MEMLIKI KEKURANGAN TRANSFER SENILAI : <br>
+                                    <?php
+                                    $sql_bayar_ulang = "SELECT * FROM tb_bayar ";
+                                    $sql_bayar_ulang .= " JOIN tb_praktik ON tb_bayar.id_praktik = tb_praktik.id_praktik";
+                                    $sql_bayar_ulang .= " WHERE tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+
+                                    $q_bayar_ulang = $conn->query($sql_bayar_ulang);
+
+                                    $d_bayar_ulang = $q_bayar_ulang->fetch(PDO::FETCH_ASSOC);
+                                    ?>
+                                    <span class="h5 font-weight-bold">
+                                        <?php
+                                        echo "Rp " . number_format($d_bayar_ulang['kurang_tf_praktik'], 0, ",", ".");
+                                        ?>
+                                    </span>
+                                    <br><br>
+                                    <span class="text-danger font-weight-bold">LAKUKAN SEGERAN PEMBAYARAN ULANG..!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php
         } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
         ?>
@@ -146,14 +187,21 @@
             <button class="btn btn-outline-success btn-sm" onclick="valDataPraktikTarif_Y(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
             <button class="btn btn-outline-danger btn-sm" onclick="valDataPraktikTarif_T(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
         </div>
-    <?php
+        <?php
     } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
-    ?>
-        <b>PILIH : </b><br>
-        <a href="?prk=<?php echo $_GET['prk']; ?>&t=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">TEMPAT</a>
-    <?php
+        if ($_GET['prk'] == ('nnk' || 'nkl')) {
+        ?>
+            <b>PILIH : </b><br>
+            <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
+        <?php
+        } else {
+        ?>
+            <b>PILIH : </b><br>
+            <a href="?prk=<?php echo $_GET['prk']; ?>&t=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">TEMPAT</a>
+        <?php
+        }
     } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
-    ?>
+        ?>
         <b>CEK KETERANGAN : </b><br>
 
         <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPraktikHarga<?php echo $d_praktik['id_praktik']; ?>" title="Keterangan Status">
@@ -269,7 +317,7 @@
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
     ?>
-        <span class="badge badge-secondary text-md"> PRAKTIKAN SUDAH SELESAI</span>
+        <span class="badge badge-secondary text-md"> PRAKTIK <br> SELESAI</span>
     <?php
     }
     ?>

@@ -17,7 +17,13 @@ if ($d['id_jurusan_pdd_jenis'] == 1) {
         $sql = "UPDATE tb_praktik SET status_cek_praktik = 'VPT_T', ket_tolakPraktikTarif_praktik = '" . $_POST['valDPT_T'] . "' WHERE id_praktik = " . $_POST['id'];
     }
 } //jika praktik selain kedokteran
-else {
+elseif ($d['id_jurusan_pdd_jenis'] == (3 || 4)) {
+    if ($_POST['ket'] == 'y') {
+        $sql = "UPDATE tb_praktik SET status_cek_praktik = 'VPT_Y' WHERE id_praktik = " . $_POST['id'];
+    } elseif ($_POST['ket'] == 't') {
+        $sql = "UPDATE tb_praktik SET status_cek_praktik = 'VPT_T', ket_tolakPraktikTarif_praktik = '" . $_POST['valDPT_T'] . "' WHERE id_praktik = " . $_POST['id'];
+    }
+} else {
     if ($_POST['ket'] == 'y') {
         $sql = "UPDATE tb_praktik SET status_cek_praktik = 'VPT_Y' WHERE id_praktik = " . $_POST['id'];
     } elseif ($_POST['ket'] == 't') {

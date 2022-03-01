@@ -17,7 +17,7 @@
 
 git status
 git add . 
-git commit -a -m "tambah database tb_kuota, perbaikan tb_praktikan, proses import file excel praktikan"  
+git commit -a -m "generate interval tanggal praktik"
 git pull
 git push
 
