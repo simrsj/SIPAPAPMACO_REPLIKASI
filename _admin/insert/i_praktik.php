@@ -824,6 +824,18 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                     value: makan_mess
                 });
 
+
+                //Simpan Interval Tgl Praktik
+                $.ajax({
+                    type: 'POST',
+                    url: "_admin/exc/x_i_praktik_sPraktikTgl.php?",
+                    data: data_praktik,
+                    error: function(response) {
+                        console.log(response.responseText);
+                        alert('eksekusi query gagal');
+                    }
+                });
+
                 //Simpan Data Praktik dan Tarif
                 $.ajax({
                     type: 'POST',

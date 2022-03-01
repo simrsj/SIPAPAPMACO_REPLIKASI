@@ -1,12 +1,28 @@
 <?php
-function tanggal_between_weekasd($tgl_awal, $tgl_akhir)
-{
-    $mulai = DateTime::createFromFormat('Y-m-d', $tgl_awal);
-    $selesai = DateTime::createFromFormat('Y-m-d', $tgl_akhir);
-    if ($tgl_awal > $tgl_akhir) {
-        return tanggal_between_weekasd($tgl_akhir, $tgl_awal);
-    }
-    return ceil($mulai->diff($selesai)->days / 7);
-}
+$id_praktik = 1;
+$d1 = '2010-10-01';
+$d2 = '2010-10-05';
+$d2 = date('Y-m-d', strtotime($d2 . "+1 days"));
 
-echo "asd " . tanggal_between_weekasd("2022-03-01", "2022-03-10");
+$period = new DatePeriod(
+    new DateTime($d1),
+    new DateInterval('P1D'),
+    new DateTime($d2)
+);
+
+echo "<pre>";
+// print_r($period);
+echo "</pre>";
+
+$no = 1;
+foreach ($period as $key => $value) {
+    echo "INSERT INTO tb_praktik_tgl (
+        id_praktik, 
+        tgl_praktik
+    ) VALUES (
+        $id_praktik, 
+        '" . $value->format('Y-m-d') . "'
+    )";
+    echo "<br>";
+    $no++;
+}

@@ -317,7 +317,7 @@
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
     ?>
-        <span class="badge badge-secondary text-md"> PRAKTIKAN SUDAH SELESAI</span>
+        <span class="badge badge-secondary text-md"> PRAKTIK <br> SELESAI</span>
     <?php
     }
     ?>
