@@ -28,10 +28,10 @@
                                 Kepemilikan : <span style="color:red">*</span><br>
                                 <input type="radio" name="kepemilikan" value="dalam" required> Dalam (RSJ)<br>
                                 <input type="radio" name="kepemilikan" value="luar"> Luar<br><br>
-                                Harga Tanpa Makan : (Rp)<span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="harga_tanpa_makan_mess" required><br>
-                                Harga Dengan Makan : (Rp)<span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="harga_dengan_makan_mess" required><br>
+                                Tarif Tanpa Makan : (Rp)<span style="color:red">*</span><br>
+                                <input type="number" class="form-control" name="tarif_tanpa_makan_mess" required><br>
+                                Tarif Dengan Makan : (Rp)<span style="color:red">*</span><br>
+                                <input type="number" class="form-control" name="tarif_dengan_makan_mess" required><br>
                                 Alamat Mess : <span style="color:red">*</span><br>
                                 <textarea class="form-control" name="alamat_mess" required></textarea><br>
                                 Keterangan Mess : <br>
@@ -71,10 +71,10 @@
                                 <th>Nama Mess</th>
                                 <th>Nama Pemilik</th>
                                 <th>Kontak Pemilik</th>
-                                <th>Kepemilikan</th>
                                 <th>Kapasitas Total</th>
-                                <th>Harga Tanpa Makan</th>
-                                <th>Harga Dengan Makan</th>
+                                <th>Tarif Tanpa Makan</th>
+                                <th>Tarif Dengan Makan</th>
+                                <th>Kepemilikan</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
@@ -89,6 +89,9 @@
                                     <td><?php echo $d_mess['nama_mess']; ?></td>
                                     <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
                                     <td><?php echo $d_mess['no_pemilik_mess']; ?></td>
+                                    <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
+                                    <td><?php echo "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?></td>
+                                    <td><?php echo "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?></td>
                                     <td class="text-center">
                                         <?php
                                         if ($d_mess['kepemilikan_mess'] == 'dalam') {
@@ -98,18 +101,15 @@
                                         }
                                         ?>
                                     </td>
-                                    <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_mess['harga_tanpa_makan_mess'], 0, ",", "."); ?></td>
-                                    <td><?php echo "Rp " . number_format($d_mess['harga_dengan_makan_mess'], 0, ",", "."); ?></td>
                                     <td>
                                         <form method="post" action="">
                                             <?php
                                             switch ($d_mess['status_mess']) {
-                                                case "Aktif":
+                                                case "y":
                                                     $btn_status_mess = "success";
                                                     $icon_status_mess = "Aktif";
                                                     break;
-                                                case "Tidak Aktif":
+                                                case "t":
                                                     $btn_status_mess = "danger";
                                                     $icon_status_mess = "Non Aktif";
                                                     break;
@@ -159,10 +159,10 @@
                                                             Kepemilikan : <span style="color:red">*</span><br>
                                                             <input type="radio" name="kepemilikan" value="dalam" required <?php echo $km1; ?>> Dalam (RSJ)<br>
                                                             <input type="radio" name="kepemilikan" value="luar" <?php echo $km1; ?>> Luar<br><br>
-                                                            Harga Tanpa Makan : (Rp)<span style="color:red">*</span><br>
-                                                            <input type="number" class="form-control" name="harga_tanpa_makan_mess" value="<?php echo $d_mess['harga_tanpa_makan_mess']; ?>" required><br>
-                                                            Harga Dengan Makan : (Rp)<span style="color:red">*</span><br>
-                                                            <input type="number" class="form-control" name="harga_dengan_makan_mess" value="<?php echo $d_mess['harga_dengan_makan_mess']; ?>" required><br>
+                                                            Tarif Tanpa Makan : (Rp)<span style="color:red">*</span><br>
+                                                            <input type="number" class="form-control" name="tarif_tanpa_makan_mess" value="<?php echo $d_mess['tarif_tanpa_makan_mess']; ?>" required><br>
+                                                            Tarif Dengan Makan : (Rp)<span style="color:red">*</span><br>
+                                                            <input type="number" class="form-control" name="tarif_dengan_makan_mess" value="<?php echo $d_mess['tarif_dengan_makan_mess']; ?>" required><br>
                                                             Alamat Mess : <span style="color:red">*</span><br>
                                                             <textarea class="form-control" name="alamat_mess" required><?php echo $d_mess['alamat_mess']; ?></textarea><br>
                                                             Keterangan Mess : <br>
@@ -246,8 +246,8 @@ if (isset($_POST['tambah'])) {
         no_pemilik_mess, 
         email_pemilik_mess, 
         kepemilikan_mess, 
-        harga_tanpa_makan_mess, 
-        harga_dengan_makan_mess,
+        tarif_tanpa_makan_mess, 
+        tarif_dengan_makan_mess,
         ket_mess
     ) VALUES (
         '" . $_POST['nama_mess'] . "', 
@@ -259,8 +259,8 @@ if (isset($_POST['tambah'])) {
         '" . $_POST['no_pemilik_mess'] . "', 
         '" . $_POST['email_pemilik_mess'] . "', 
         '" . $_POST['kepemilikan'] . "', 
-        '" . $_POST['harga_tanpa_makan_mess'] . "', 
-        '" . $_POST['harga_dengan_makan_mess'] . "', 
+        '" . $_POST['tarif_tanpa_makan_mess'] . "', 
+        '" . $_POST['tarif_dengan_makan_mess'] . "', 
         '" . $_POST['ket_mess'] . "'
     )";
     echo $sql_tambah;
@@ -281,8 +281,8 @@ if (isset($_POST['tambah'])) {
     `no_pemilik_mess` = '" . $_POST['no_pemilik_mess'] . "' ,
     `email_pemilik_mess` = '" . $_POST['email_pemilik_mess'] . "' ,
     `kepemilikan_mess` = '" . $_POST['kepemilikan'] . "' ,
-    `harga_tanpa_makan_mess` = '" . $_POST['harga_tanpa_makan_mess'] . "' ,
-    `harga_dengan_makan_mess` = '" . $_POST['harga_dengan_makan_mess'] . "' ,
+    `tarif_tanpa_makan_mess` = '" . $_POST['tarif_tanpa_makan_mess'] . "' ,
+    `tarif_dengan_makan_mess` = '" . $_POST['tarif_dengan_makan_mess'] . "' ,
     `kapasitas_terisi_mess` = '" . $_POST['kapasitas_terisi_mess'] . "' ,
     `ket_mess` = '" . $_POST['ket_mess'] . "'
     WHERE `tb_mess`.`id_mess` = " . $_POST['id_mess'];
@@ -302,11 +302,11 @@ if (isset($_POST['tambah'])) {
 <?php
 } elseif (isset($_POST['ubah_status_mess'])) {
     switch ($_POST['status_mess']) {
-        case "Aktif":
-            $ubah_status_mess = "Tidak Aktif";
+        case "y":
+            $ubah_status_mess = "t";
             break;
-        case "Tidak Aktif":
-            $ubah_status_mess = "Aktif";
+        case "t":
+            $ubah_status_mess = "y";
             break;
     }
     $sql_status_mess =

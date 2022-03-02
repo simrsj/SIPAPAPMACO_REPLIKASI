@@ -158,7 +158,7 @@ function tanggal_between_week($tgl_awal, $tgl_akhir)
 	$selesai = DateTime::createFromFormat('Y-m-d', $tgl_akhir);
 	if ($tgl_awal > $tgl_akhir)
 		return tanggal_between_week($tgl_akhir, $tgl_awal);
-	return floor($mulai->diff($selesai)->days / 7);
+	return ceil($mulai->diff($selesai)->days / 7);
 }
 
 function tanggal_sisa($tgl_awal, $tgl_akhir)

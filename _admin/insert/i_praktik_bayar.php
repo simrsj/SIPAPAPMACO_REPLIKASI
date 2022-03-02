@@ -149,8 +149,8 @@ $id = $_GET['ib'];
                                         <b>Tanggal Transfer : </b><span style="color:red">*</span><br>
                                         <input class="form-control" type="date" name="tgl_bayar" required><br>
                                         <b>Unggah File : </b><span style="color:red">*</span><br>
-                                        <input type="file" name="file_bayar" accept="application/pdf" required><br>
-                                        <i style='font-size:12px;'>Data unggah harus .pdf, Maksimal 1 MB</i>
+                                        <input type="file" name="file_bayar" accept="application/pdf, image/jpg, image/png, image/jpeg" required><br>
+                                        <i style='font-size:12px;'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 1 MB</i>
                                         <input name="id_praktik" value="<?php echo $id; ?>" hidden><br>
                                         <hr>
                                         <nav id="navbar-tarif" class="navbar justify-content-center">
@@ -183,22 +183,31 @@ if (isset($_POST['simpan_bayar'])) {
         $no++;
     }
 
+    echo "<pre>";
+    print_r($_FILES);
+    echo "</pre>";
+
     //alamat file surat masuk
     $alamat_unggah = "./_file/bayar";
 
-    //ubah Nama File
-    $_FILES['file_bayar']['name'] = "bayar_" . $no . "_" . $_POST['id_praktik'] . "_" . date('Y-m-d') . ".pdf";
+    //cari file extensi
+    $path = $_FILES['file_bayar']['name'];
+    $ext = pathinfo($path, PATHINFO_EXTENSION);
 
-    // echo "<pre>";
-    // print_r($_FILES);
-    // echo "</pre>";
+    //ubah Nama File
+    $_FILES['file_bayar']['name'] = "bayar_" . $no . "_" . $_POST['id_praktik'] . "_" . date('Y-m-d') . "." . $ext;
+
+
+    echo "<pre>";
+    print_r($_FILES);
+    echo "</pre>";
 
     //pembuatan alamat bila tidak ada
     if (!is_dir($alamat_unggah)) {
         mkdir($alamat_unggah, 0777, $rekursif = true);
     }
 
-    //unggah surat dan data praktik
+    //unggah bukti bayar
     if (!is_null($_FILES['file_bayar'])) {
         $file_bayar = (object) @$_FILES['file_bayar'];
 
@@ -210,10 +219,10 @@ if (isset($_POST['simpan_bayar'])) {
                 </script>
                 ";
             $link_file_bayar = "";
-        } elseif ($file_bayar->type !== 'application/pdf') {
+        } elseif ($file_bayar->type != ('application/pdf' || 'image/jpg' || 'image/png' || 'image/jpeg')) {
             echo "
                 <script>
-                    alert('File Surat Harus .pdf');
+                    alert('File Surat Harus pdf/jpg/png/jpeg');
                 </script>
             ";
             $link_file_bayar = "";

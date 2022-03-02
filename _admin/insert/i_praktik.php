@@ -8,7 +8,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
         $jenis_jurusan = 4;
     }
 ?>
-    <div class="container-fluid">
+    <div class="container-fluid embed-responsive">
         <div class="row">
             <div class="col-lg-8">
                 <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik</h1>
@@ -263,9 +263,68 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                             </div>
                             <div class="col-lg-3">
                                 Unggah Data Praktikan : <span style="color:red">*</span>
-                                <i style='font-size:12px;'><a href="./_file/__format_data_praktikan.xlsx">Download Format</a></i><br>
+                                <a class='btn btn-outline-primary btn-sm text-uppercase' href='#' data-toggle='modal' data-target='#modal_data_praktikan'>
+                                    Info Format File
+                                </a>
+                                <br>
+
+                                <!-- modal info dan unduh data praktikan -->
+                                <div class="modal fade text-left " id="modal_data_praktikan" data-backdrop="static">
+                                    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_sbayar">
+                                                <div class="modal-header">
+                                                    <b>INFORMASI UNGGAH DATA PRAKTIKAN</b>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="text-uppercase navbar justify-content-center text-lg">
+                                                        <span class="badge badge-success">
+                                                            Isian File yg Benar &nbsp;<i class="fas fa-check-circle"></i>
+                                                        </span>
+                                                    </div>
+                                                    <img src="./_img/data_praktikan1.jpg" class="img-fluid" alt="Responsive image">
+                                                    <div class="navbar justify-content-center">
+                                                        <a href="./_img/data_praktikan1.jpg" class="btn btn-success btn-sm" target="_blank">
+                                                            <i class="fas fa-search"></i> Perbesar
+                                                        </a>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="text-uppercase navbar justify-content-center text-lg">
+                                                        <span class="badge badge-danger">
+                                                            Isian File yg SALAH &nbsp;<i class="fas fa-times-circle"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="row text-center">
+                                                        <div class="col ">
+                                                            <img src="./_img/data_praktikan2.jpg" class="img-fluid" alt="Responsive image">
+                                                        </div>
+                                                        <div class="col">
+                                                            <img src="./_img/data_praktikan3.jpg" class="img-fluid" alt="Responsive image">
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    Data Sesuaikan dengan <span class="text-danger">No</span>, karena <span class="text-danger">No</span> akan menentukan jumlah baris praktikannya<br>
+                                                    - Bila jumlah nomer kelebihan dalam formatnya <span class="text-danger">HAPUS</span> kolom tersebut<br>
+                                                    - Bila jumlah nomer kekurangan dalam formatnya <span class="text-danger">TAMBAH</span> kolom tersebut dengan mengisi <span class="text-danger">NO</span>
+                                                    <hr>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="navbar justify-content-center">
+                                                        <a href="./_file/__format_data_praktikan.xlsx" class="btn btn-success btn-sm">
+                                                            <i class="fas fa-file-download"></i>
+                                                            Download Format Data Praktikan
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx">
-                                <br><i style='font-size:12px;'>Data unggah harus .xlsx dan maksimal ukuran file 1 Mb</i>
+                                <br><i style='font-size:12px;'>File harus sesuai format dan maksimal ukuran file 1 Mb</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_data_praktikan"></span>
                             </div>
                         </div>
@@ -875,7 +934,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 });
 
                 //cek data materi upip
-                if (document.getElementById("jurusan") == 2) {
+                if (document.getElementById("jurusan").value == 2) {
 
                     var materi_upip = "";
                     if (document.getElementById("materi_upip").checked == true) {
@@ -890,7 +949,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 }
 
                 //cek data materi napza
-                if (document.getElementById("jurusan") == 2) {
+                if (document.getElementById("jurusan").value == 2) {
                     var materi_napza = "";
                     if (document.getElementById("materi_napza").checked == true) {
                         materi_napza = document.getElementById("materi_napza").value;
@@ -923,7 +982,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                     url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
                     data: data_praktik,
                     success: function() {
-                        //ambil data file yang diupload
+                        //simpan file upload
                         var data_file = new FormData();
                         var xhttp = new XMLHttpRequest();
 
@@ -936,8 +995,21 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                         var id = document.getElementById("id").value;
                         data_file.append("id", id);
 
-                        xhttp.open("POST", "_admin/exc/x_i_praktik_sFilePraktik.php", true);
+                        xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
                         xhttp.send(data_file);
+
+                        //import file excel ke database
+                        var data_file_praktikan = new FormData();
+                        var xhttp_data_praktikan = new XMLHttpRequest();
+
+                        var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                        data_file_praktikan.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                        var id = document.getElementById("id").value;
+                        data_file_praktikan.append("id", id);
+
+                        xhttp_data_praktikan.open("POST", "_admin/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
+                        xhttp_data_praktikan.send(data_file_praktikan);
 
                         //Cari Jenis Jurusan
                         var jur = document.getElementById('jurusan').value;
