@@ -13,7 +13,6 @@
 - penamaan judul tabel Invoice
 - membuat 5 akun sesuai dengan privilagenya
 - membuat format mout untuk diisi kang adi 
-- 
 
 git status
 git add . 
