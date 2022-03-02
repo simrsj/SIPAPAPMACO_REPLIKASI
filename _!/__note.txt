@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "database perbaikan pembimbing dan data mess, proses data pembimbing"
+git commit -a -m "perbaikan input praktk jenjang dan profesi"
 git pull
 git push
 
