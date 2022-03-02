@@ -332,12 +332,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/hide/dh_praktik.php";
 						} elseif (isset($_GET['i'])) {
 							if ($_GET['prk'] == 'ked') {
-								include "_admin/insert/i_praktik_kedokteran.php";
+								include "_admin/insert/i_praktikKed.php";
 							} else {
 								include "_admin/insert/i_praktik.php";
 							}
 						} elseif (isset($_GET['it_ked'])) {
-							include "_admin/insert/i_tarif_kedokteran.php";
+							include "_admin/insert/i_tarifKed.php";
 						} elseif (isset($_GET['m'])) {
 							include "_admin/insert/i_praktik_mess.php";
 						} elseif (isset($_GET['p_i'])) {

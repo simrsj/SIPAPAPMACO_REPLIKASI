@@ -102,52 +102,72 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                         <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
                         <div class="row">
                             <div class="col-lg-2">
-                                Pilih Jurusan : <span style="color:red">*</span><br>
                                 <?php
-
-                                $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd_jenis = $jenis_jurusan ORDER BY nama_jurusan_pdd ASC";
-                                // echo $sql_jurusan_pdd;
-                                $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
-                                $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
-
-                                if ($r_jurusan_pdd > 0) {
-                                    
-                                    // var_dump($d_jurusan_pdd);
+                                if ($_GET['prk'] == 'kep') {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" required>
-                                        <option value="">-- <i>Pilih</i>--</option>
-                                        <?php
-                                        while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                            <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
-                                                <?php
-                                                if ($d_jurusan_pdd['akronim_jurusan_pdd'] != "") {
-                                                    $nama_jurusan =  $d_jurusan_pdd['nama_jurusan_pdd'] . " (" . $d_jurusan_pdd['akronim_jurusan_pdd'] . ")";
-                                                } else {
-                                                    $nama_jurusan =  $d_jurusan_pdd['nama_jurusan_pdd'];
-                                                }
-                                                echo $nama_jurusan;
-                                                ?>
-                                            </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_jurusan"></span>
+                                    Jurusan : <span style="color:red">*</span><br>
+                                    <b>Keperawatan</b>
+                                    <input type="hidden" name='id_jurusan_pdd' id="jurusan" value="2">
                                 <?php
                                 } else {
                                 ?>
-                                    <b><i>Data Jurusan Tidak Ada</i></b>
+                                    Pilih Jurusan : <span style="color:red">*</span><br>
+                                    <?php
+
+                                    $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd_jenis = $jenis_jurusan ORDER BY nama_jurusan_pdd ASC";
+                                    // echo $sql_jurusan_pdd;
+                                    $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
+                                    $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
+
+                                    if ($r_jurusan_pdd > 0) {
+
+                                        // var_dump($d_jurusan_pdd);
+                                    ?>
+                                        <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" required>
+                                            <option value="">-- <i>Pilih</i>--</option>
+                                            <?php
+                                            while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                                <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
+                                                    <?php
+                                                    if ($d_jurusan_pdd['akronim_jurusan_pdd'] != "") {
+                                                        $nama_jurusan =  $d_jurusan_pdd['nama_jurusan_pdd'] . " (" . $d_jurusan_pdd['akronim_jurusan_pdd'] . ")";
+                                                    } else {
+                                                        $nama_jurusan =  $d_jurusan_pdd['nama_jurusan_pdd'];
+                                                    }
+                                                    echo $nama_jurusan;
+                                                    ?>
+                                                </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select><br>
+                                        <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_jurusan"></span>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <b><i>Data Jurusan Tidak Ada</i></b>
                                 <?php
+                                    }
                                 }
                                 ?>
                             </div>
                             <div class="col-lg-2">
                                 Pilih Jenjang : <span style="color:red">*</span><br>
                                 <?php
-                                $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd 
-                                        WHERE (id_jenjang_pdd != 0 && id_jenjang_pdd != 11)
-                                        ORDER BY id_jenjang_pdd ASC";
+                                if ($_GET['prk'] == 'kep') {
+                                    $sql_jenjang_pdd = " SELECT * FROM tb_jurusan_pdd_jenjang";
+                                    $sql_jenjang_pdd .= " JOIN tb_jurusan_pdd ON tb_jurusan_pdd_jenjang.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                                    $sql_jenjang_pdd .= " JOIN tb_jenjang_pdd ON tb_jurusan_pdd_jenjang.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+                                    $sql_jenjang_pdd .= " WHERE tb_jurusan_pdd.id_jurusan_pdd = 2";
+                                    $sql_jenjang_pdd .= " ORDER BY tb_jenjang_pdd.nama_jenjang_pdd ASC";
+                                } else {
+                                    $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd ";
+                                    $sql_jenjang_pdd .= " WHERE id_jenjang_pdd != 0 AND id_jenjang_pdd != 11";
+                                    $sql_jenjang_pdd .= " ORDER BY id_jenjang_pdd ASC";
+                                }
+
+                                // echo $sql_jenjang_pdd;
 
                                 $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
                                 $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
@@ -175,7 +195,22 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                             <div class="col-lg-5">
                                 Pilih Profesi : <span style="color:red">*</span><br>
                                 <?php
-                                $sql_profesi_pdd = "SELECT * FROM tb_profesi_pdd order by nama_profesi_pdd ASC";
+
+                                if ($_GET['prk'] == 'kep') {
+                                    $sql = " WHERE tb_jurusan_pdd.id_jurusan_pdd = 2";
+                                } elseif ($_GET['prk'] == 'nkl') {
+                                    $sql = " WHERE tb_jurusan_pdd.id_jurusan_pdd != 1 AND  tb_jurusan_pdd.id_jurusan_pdd != 2";
+                                } else {
+                                    $sql = " WHERE tb_jurusan_pdd.id_jurusan_pdd = 0";
+                                }
+
+                                $sql_profesi_pdd = " SELECT * FROM tb_jurusan_pdd_profesi";
+                                $sql_profesi_pdd .= " JOIN tb_jurusan_pdd ON tb_jurusan_pdd_profesi.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                                $sql_profesi_pdd .= " JOIN tb_profesi_pdd ON tb_jurusan_pdd_profesi.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+                                $sql_profesi_pdd .= $sql;
+                                $sql_profesi_pdd .= " ORDER BY tb_profesi_pdd.nama_profesi_pdd ASC";
+
+                                // echo $sql_profesi_pdd;
 
                                 $q_profesi_pdd = $conn->query($sql_profesi_pdd);
                                 $r_profesi_pdd = $q_profesi_pdd->rowCount();
@@ -392,33 +427,35 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
         //     );
         //     xmlhttp_data_jenjang.send();
         // }
-        function bukaJenjang(){
+        function bukaJenjang() {
             var id_jurusan_pdd = $('#id_jurusan_pdd').val();
             console.log("jenjang");
-            $.ajax ({
-                    type: 'POST',
-                    url: "_admin/exc/x_i_praktik_dataJenjangProfesi.php",
-                    //  dataType: 'json',
-                    data : {id_jurusan_pdd:id_jurusan_pdd},
-                    
-                    success: function(response){
-                        console.log(response);
-                        console.log("beres");
-                        // $('#id_kegiatan').empty();
+            $.ajax({
+                type: 'POST',
+                url: "_admin/exc/x_i_praktik_dataJenjangProfesi.php",
+                //  dataType: 'json',
+                data: {
+                    id_jurusan_pdd: id_jurusan_pdd
+                },
 
-                        // $('#id_kegiatan').append('<option value="0">- Pilih Nama Kegiatan -</option>');
-                        
-                        // $.each(response.data, function(key,value){
-                        //         $('#id_kegiatan').append(
-                        //             $('<option></option>').val(value['id_kegiatan']).html(value['kodering_kegiatan'] +"-"+ value['nama_kegiatan'])
-                        //         );
-                        // });        
-                    },
-                         error: function(response) {
-                            console.log(response);
-                            // alert('eksekusi query gagal');
-                        }   
-                    });
+                success: function(response) {
+                    console.log(response);
+                    console.log("beres");
+                    // $('#id_kegiatan').empty();
+
+                    // $('#id_kegiatan').append('<option value="0">- Pilih Nama Kegiatan -</option>');
+
+                    // $.each(response.data, function(key,value){
+                    //         $('#id_kegiatan').append(
+                    //             $('<option></option>').val(value['id_kegiatan']).html(value['kodering_kegiatan'] +"-"+ value['nama_kegiatan'])
+                    //         );
+                    // });        
+                },
+                error: function(response) {
+                    console.log(response);
+                    // alert('eksekusi query gagal');
+                }
+            });
             // //Simpan Data Praktik dan Tarif
             // $.ajax({
             //         // type: 'POST',
@@ -478,9 +515,10 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             //         }
             //     });
         }
-        function bukaProfesi(){
+
+        function bukaProfesi() {
             var id_jurusan = $('#id_jurusan_pdd').val();
-            
+
         }
 
         function simpan_praktik() {

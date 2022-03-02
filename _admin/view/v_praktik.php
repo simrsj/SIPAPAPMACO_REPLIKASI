@@ -193,9 +193,9 @@ if (isset($_POST['arsip_praktik'])) {
                                         </div>
                                         <?php
                                         if ($_GET['prk'] == "ked") {
-                                            include "_admin/view/v_praktik_dataStatusKed.php";
+                                            include "_admin/view/v_praktikDataStatusKed.php";
                                         } else {
-                                            include "_admin/view/v_praktik_dataStatus.php";
+                                            include "_admin/view/v_praktikDataStatus.php";
                                         }
                                         ?>
                                         <!-- tombol aksi/info proses  -->
