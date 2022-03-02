@@ -111,8 +111,10 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
 
                                 if ($r_jurusan_pdd > 0) {
+                                    
+                                    // var_dump($d_jurusan_pdd);
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" required>
+                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="id_jurusan_pdd" onChange="bukaJenjang();" required>
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -331,6 +333,96 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
         //     );
         //     xmlhttp_data_jenjang.send();
         // }
+        function bukaJenjang(){
+            var id_jurusan_pdd = $('#id_jurusan_pdd').val();
+            console.log("jenjang");
+            $.ajax ({
+                    type: 'POST',
+                    url: "_admin/exc/x_i_praktik_dataJenjangProfesi.php",
+                    //  dataType: 'json',
+                    data : {id_jurusan_pdd:id_jurusan_pdd},
+                    
+                    success: function(response){
+                        console.log(response);
+                        console.log("beres");
+                        // $('#id_kegiatan').empty();
+
+                        // $('#id_kegiatan').append('<option value="0">- Pilih Nama Kegiatan -</option>');
+                        
+                        // $.each(response.data, function(key,value){
+                        //         $('#id_kegiatan').append(
+                        //             $('<option></option>').val(value['id_kegiatan']).html(value['kodering_kegiatan'] +"-"+ value['nama_kegiatan'])
+                        //         );
+                        // });        
+                    },
+                         error: function(response) {
+                            console.log(response);
+                            // alert('eksekusi query gagal');
+                        }   
+                    });
+            // //Simpan Data Praktik dan Tarif
+            // $.ajax({
+            //         // type: 'POST',
+            //         url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
+            //         data: jurusan:id_jurusan,
+            //         success: function() {
+            //             //ambil data file yang diupload
+            //             var data_file = new FormData();
+            //             var xhttp = new XMLHttpRequest();
+
+            //             var fileSurat = document.getElementById("file_surat").files;
+            //             data_file.append("file_surat", fileSurat[0]);
+
+            //             var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+            //             data_file.append("file_data_praktikan", fileDataPraktikan[0]);
+
+            //             var id = document.getElementById("id").value;
+            //             data_file.append("id", id);
+
+            //             xhttp.open("POST", "_admin/exc/x_i_praktik_sFilePraktik.php", true);
+            //             xhttp.send(data_file);
+
+            //             //Cari Jenis Jurusan
+            //             var jur = document.getElementById('jurusan').value;
+            //             var xmlhttp_path = new XMLHttpRequest();
+            //             xmlhttp_path.onload = function() {
+            //                 var path = "";
+            //                 var pathResponse = JSON.parse(this.responseText);
+            //                 if (pathResponse.jenis_jurusan == 1) {
+            //                     path = "?prk=ked";
+            //                 } else if (pathResponse.jenis_jurusan == 2) {
+            //                     path = "?prk=kep";
+            //                 } else if (pathResponse.jenis_jurusan == 3) {
+            //                     path = "?prk=nkl";
+            //                 } else if (pathResponse.jenis_jurusan == 4) {
+            //                     path = "?prk=nnk";
+            //                 } else {
+            //                     path = "?";
+            //                 }
+            //                 Swal.fire({
+            //                     allowOutsideClick: false,
+            //                     // isDismissed: false,
+            //                     icon: 'success',
+            //                     title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>TARIF</b><br>Berhasil Tersimpan',
+            //                     showConfirmButton: false,
+            //                     html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
+            //                 });
+            //             };
+            //             xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
+            //                 true
+            //             );
+            //             xmlhttp_path.send();
+            //         },
+            //         error: function(response) {
+            //             console.log(response.responseText);
+            //             alert('eksekusi query gagal');
+            //         }
+            //     });
+        }
+        function bukaProfesi(){
+            var id_jurusan = $('#id_jurusan_pdd').val();
+            
+        }
 
         function simpan_praktik() {
 
