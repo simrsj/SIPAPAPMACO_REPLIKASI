@@ -320,7 +320,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['nil'])) {
 						include "_admin/view/v_nilai.php";
 					} elseif (isset($_GET['praktikan'])) {
-						include "_admin/view/v_praktikan.php";
+						if (isset($_GET['u'])) {
+							include "_admin/update/u_praktikan.php";
+						} else {
+							include "_admin/view/v_praktikan.php";
+						}
 					} elseif (isset($_GET['pmbb'])) {
 						include "_admin/view/v_pembimbing.php";
 					} elseif (isset($_GET['prk'])) {

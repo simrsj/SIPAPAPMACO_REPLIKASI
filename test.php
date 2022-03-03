@@ -1,7 +1,6 @@
-<form method="post" enctype="multipart/form-data" action="test1.php">
-    <div class="form-group">
-        <label for="exampleInputFile">File Upload</label>
-        <input type="file" name="berkas_excel" class="form-control" id="exampleInputFile">
+<form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-primary">Import</button>
+    <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
 </form>

@@ -54,19 +54,23 @@
                                         <b class="text-gray-800">TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
                                         <b class="text-gray-800">TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-1">
                                         <b class="text-gray-800">JURUSAN : </b><br><?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
                                         <b class="text-gray-800">JENJANG : </b><br><?php echo $d_praktik['nama_jenjang_pdd']; ?>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-1">
                                         <b class="text-gray-800">PROFESI : </b><br><?php echo $d_praktik['nama_profesi_pdd']; ?>
                                     </div>
                                     <!-- tombol aksi/info proses  -->
-                                    <div class="col-sm-2 my-auto text-center">
+                                    <div class="col-sm-3 my-auto text-center">
                                         <!-- tombol rincian -->
-                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
-                                            <i class="fas fa-info-circle"></i> Rincian
+                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                            <i class="fas fa-info-circle"></i> Rincian Data
                                         </button>
+                                        &nbsp;
+                                        <a class="btn btn-primary btn-sm collapsed" href="?praktikan&u=<?php echo $d_praktik['id_praktik']; ?>" title="Ubah">
+                                            <i class="far fa-edit"></i> Ubah Data
+                                        </a>
                                     </div>
                                 </div>
                             </div>

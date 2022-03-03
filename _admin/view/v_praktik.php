@@ -159,7 +159,7 @@ if (isset($_POST['arsip_praktik'])) {
                 $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
                 $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
                 $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
-                $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'D' OR tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
+                $sql_praktik .= " WHERE tb_praktik.status_praktik = 'D' OR tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ";
                 $sql_praktik .= " $jenis_jurusan ";
                 $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
