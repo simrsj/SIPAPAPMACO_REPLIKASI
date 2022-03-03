@@ -1,10 +1,10 @@
 <?php
 // error_reporting(0);
 session_start();
+
+// include '_add-ons/csrf_auth.php';
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
-
-include '_add-ons/csrf_auth.php';
 
 ?>
 <!DOCTYPE html>
@@ -14,6 +14,8 @@ include '_add-ons/csrf_auth.php';
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?>"> -->
 
 
     <title>SIPAPAP MACO</title>
@@ -84,17 +86,6 @@ include '_add-ons/csrf_auth.php';
     <script src="vendor/!custom/jsCustom.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <!-- <script src="https://kit.fontawesome.com/26550bb205.js" crossorigin="anonymous"></script> -->
-
-    <script>
-        $(document).ready(function() {
-            //Mengirimkan Token Keamanan
-            $.ajaxSetup({
-                headers: {
-                    'Csrf-Token': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

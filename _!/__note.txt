@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "perbaikan input praktik profesi +database"
+git commit -a -m "coba CSRF GAGAL"
 git pull
 git push
 
