@@ -61,7 +61,7 @@ if (empty($_SESSION['username_user'])) {
 				while ($row_pass = $exc_pass->fetch(PDO::FETCH_ASSOC)) {
 					$x_pass++;
 				}
-				while ($row = $exc_name_pass->fetch(PDO::FETCH_ASSOC)) {;
+				while ($row = $exc_name_pass->fetch(PDO::FETCH_ASSOC)) {
 					$_SESSION['username_user'] = $row['username_user'];
 					$_SESSION['nama_user'] = $row['nama_user'];
 					$_SESSION['id_user'] = $row['id_user'];
