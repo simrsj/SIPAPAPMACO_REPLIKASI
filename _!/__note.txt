@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "coba CSRF GAGAL"
+git commit -a -m "proses pilih pembimbing"
 git pull
 git push
 
