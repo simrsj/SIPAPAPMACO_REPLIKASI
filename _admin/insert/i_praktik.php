@@ -615,10 +615,12 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 }
 
                 //notif jurusan 
-                if (jurusan == "") {
-                    document.getElementById("err_jurusan").innerHTML = "Jurusan Harus Diisi";
-                } else {
-                    document.getElementById("err_jurusan").innerHTML = "";
+                if (jurusan != 2) {
+                    if (jurusan == "") {
+                        document.getElementById("err_jurusan").innerHTML = "Jurusan Harus Diisi";
+                    } else {
+                        document.getElementById("err_jurusan").innerHTML = "";
+                    }
                 }
 
                 //notif jenjang 
@@ -853,7 +855,11 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             ) {
                 document.getElementById("err_institusi").innerHTML = "";
                 document.getElementById("err_praktik").innerHTML = "";
-                document.getElementById("err_jurusan").innerHTML = "";
+
+                if (jurusan != 2) {
+                    document.getElementById("err_jurusan").innerHTML = "";
+                }
+
                 document.getElementById("err_jenjang").innerHTML = "";
                 document.getElementById("err_profesi").innerHTML = "";
                 document.getElementById("err_akreditasi").innerHTML = "";

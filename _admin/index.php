@@ -326,7 +326,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/view/v_praktikan.php";
 						}
 					} elseif (isset($_GET['pmbb'])) {
-						include "_admin/view/v_pembimbing.php";
+						if (isset($_GET['i'])) {
+							include "_admin/insert/i_pembimbing.php";
+						} else {
+							include "_admin/view/v_pembimbing.php";
+						}
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_admin/view/v_praktik_arsip.php";

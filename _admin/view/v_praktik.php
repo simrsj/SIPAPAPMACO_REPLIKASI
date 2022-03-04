@@ -179,15 +179,15 @@ if (isset($_POST['arsip_praktik'])) {
                                     <div class="row" style="font-size: small;">
                                         <br><br>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2 my-auto text-center">
                                             <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                         </div>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2  my-auto text-center">
                                             <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                         </div>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2  text-center">
                                             <b class="text-gray-800">TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
                                             <b class="text-gray-800">TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                         </div>

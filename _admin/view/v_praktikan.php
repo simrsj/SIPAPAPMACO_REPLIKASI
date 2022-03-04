@@ -16,19 +16,19 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <?php
-            $sql_praktik = "SELECT * FROM tb_praktik ";
-            $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
-            $sql_praktik .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
-            $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
-            $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
-            $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-            $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
-            $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
-            $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+            $sql_praktikan = "SELECT * FROM tb_praktik ";
+            $sql_praktikan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
+            $sql_praktikan .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
+            $sql_praktikan .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
+            $sql_praktikan .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
+            $sql_praktikan .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
+            $sql_praktikan .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
+            $sql_praktikan .= " WHERE (tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
+            $sql_praktikan .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
-            // echo $sql_praktik;
+            // echo $sql_praktikan;
 
-            $q_praktik = $conn->query($sql_praktik);
+            $q_praktik = $conn->query($sql_praktikan);
             $r_praktik = $q_praktik->rowCount();
 
             if ($r_praktik > 0) {
@@ -42,27 +42,25 @@
                                 <div class="row" style="font-size: small;">
                                     <br><br>
 
-                                    <div class="col-sm-2">
-                                        <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
-                                    </div>
-
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-3 text-center">
+                                        <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?><br>
                                         <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                     </div>
 
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-2 text-center">
                                         <b class="text-gray-800">TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
                                         <b class="text-gray-800">TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-2 text-center">
                                         <b class="text-gray-800">JURUSAN : </b><br><?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
                                         <b class="text-gray-800">JENJANG : </b><br><?php echo $d_praktik['nama_jenjang_pdd']; ?>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <b class="text-gray-800">PROFESI : </b><br><?php echo $d_praktik['nama_profesi_pdd']; ?>
+                                    <div class="col-sm-2 text-center">
+                                        <b class="text-gray-800">PROFESI : </b><br><?php echo $d_praktik['nama_profesi_pdd']; ?><br>
+                                        <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?php echo $d_praktik['jumlah_praktik']; ?>
                                     </div>
                                     <!-- tombol aksi/info proses  -->
-                                    <div class="col-sm-3 my-auto text-center">
+                                    <div class="col-sm-3 my-auto  text-center">
                                         <!-- tombol rincian -->
                                         <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data

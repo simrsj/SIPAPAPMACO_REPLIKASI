@@ -39,34 +39,34 @@
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header align-items-center bg-gray-200">
-                                <div class="row" style="font-size: small;">
+                                <div class="row" style="font-size: small;" class="justify-content-center">
                                     <br><br>
-
-                                    <div class="col-sm-2">
-                                        <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
-                                    </div>
-
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-3 text-center">
+                                        <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?><br>
                                         <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                     </div>
 
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-2 text-center">
                                         <b class="text-gray-800">TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
                                         <b class="text-gray-800">TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-2 text-center">
                                         <b class="text-gray-800">JURUSAN : </b><br><?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
                                         <b class="text-gray-800">JENJANG : </b><br><?php echo $d_praktik['nama_jenjang_pdd']; ?>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <b class="text-gray-800">PROFESI : </b><br><?php echo $d_praktik['nama_profesi_pdd']; ?>
+                                    <div class="col-sm-2 text-center">
+                                        <b class="text-gray-800">PROFESI : </b><br><?php echo $d_praktik['nama_profesi_pdd']; ?><br>
+                                        <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?php echo $d_praktik['jumlah_praktik']; ?>
                                     </div>
                                     <!-- tombol aksi/info proses  -->
-                                    <div class="col-sm-2 my-auto text-center">
+                                    <div class="col-sm-3 my-auto text-center">
                                         <!-- tombol rincian -->
-                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
-                                            <i class="fas fa-info-circle"></i> Rincian
-                                        </button>
+                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                            <i class="fas fa-info-circle"></i> Rincian Data</button>
+                                        &nbsp;
+                                        <a class="btn btn-warning btn-sm collapsed" href="?pmbb&i=<?php echo $d_praktik['id_praktik']; ?>" title="Ubah">
+                                            Pilih Pembimbing
+                                        </a>
                                     </div>
                                 </div>
                             </div>
