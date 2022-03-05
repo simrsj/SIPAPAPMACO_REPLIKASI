@@ -9,8 +9,8 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) 
  */
 
-select.pm{
-  width:150px;   
+select.pm {
+  width: 150px;
 }
 
 fieldset.fieldset {
@@ -9609,7 +9609,7 @@ a:focus {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 1rem;
+    /* padding: 1rem; */
     width: 14rem;
   }
   .sidebar .nav-item .nav-link i {

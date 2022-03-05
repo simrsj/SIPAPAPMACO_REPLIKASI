@@ -145,8 +145,6 @@ if (isset($_POST['ubah'])) {
 <?php
 }
 ?>
-<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable();

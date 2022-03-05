@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "proses pilih pembimbing"
+git commit -a -m "Perbaikan ubah dan hapus praktikan"
 git pull
 git push
 
