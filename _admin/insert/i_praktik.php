@@ -18,7 +18,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             <!-- Data Pengajuan Praktik  -->
             <div id="data_praktik_input">
                 <div class="card shadow mb-4">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <!-- Data Praktikan -->
                         <div class="row">
                             <div class="col-lg-12">
@@ -156,9 +156,9 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 Pilih Jenjang : <span style="color:red">*</span><br>
                                 <?php
                                 if ($_GET['prk'] == 'kep') {
-                                    $sql_jenjang_pdd = " SELECT * FROM tb_jurusan_pdd_jenjang";
-                                    $sql_jenjang_pdd .= " JOIN tb_jurusan_pdd ON tb_jurusan_pdd_jenjang.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-                                    $sql_jenjang_pdd .= " JOIN tb_jenjang_pdd ON tb_jurusan_pdd_jenjang.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+                                    $sql_jenjang_pdd = " SELECT * FROM tb_jurusan_pdd_jenjang_profesi";
+                                    $sql_jenjang_pdd .= " JOIN tb_jurusan_pdd ON tb_jurusan_pdd_jenjang_profesi.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                                    $sql_jenjang_pdd .= " JOIN tb_jenjang_pdd ON tb_jurusan_pdd_jenjang_profesi.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
                                     $sql_jenjang_pdd .= " WHERE tb_jurusan_pdd.id_jurusan_pdd = 2";
                                     $sql_jenjang_pdd .= " ORDER BY tb_jenjang_pdd.nama_jenjang_pdd ASC";
                                 } else {
@@ -204,10 +204,11 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                     $sql = " WHERE tb_jurusan_pdd.id_jurusan_pdd = 0";
                                 }
 
-                                $sql_profesi_pdd = " SELECT * FROM tb_jurusan_pdd_profesi";
-                                $sql_profesi_pdd .= " JOIN tb_jurusan_pdd ON tb_jurusan_pdd_profesi.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-                                $sql_profesi_pdd .= " JOIN tb_profesi_pdd ON tb_jurusan_pdd_profesi.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+                                $sql_profesi_pdd = " SELECT * FROM tb_jurusan_pdd_jenjang_profesi";
+                                $sql_profesi_pdd .= " JOIN tb_jurusan_pdd ON tb_jurusan_pdd_jenjang_profesi.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                                $sql_profesi_pdd .= " JOIN tb_profesi_pdd ON tb_jurusan_pdd_jenjang_profesi.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
                                 $sql_profesi_pdd .= $sql;
+                                $sql_profesi_pdd .= " GROUP BY tb_profesi_pdd.nama_profesi_pdd";
                                 $sql_profesi_pdd .= " ORDER BY tb_profesi_pdd.nama_profesi_pdd ASC";
 
                                 // echo $sql_profesi_pdd;

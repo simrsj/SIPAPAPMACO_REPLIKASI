@@ -11,7 +11,7 @@ if ($_GET['prk'] == 'ked') {
             <!-- Data Pengajuan Praktik  -->
             <div id="data_praktik_input">
                 <div class="card shadow mb-4">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <!-- Data Praktikan -->
                         <div class="row">
                             <div class="col-lg-12">
@@ -107,12 +107,13 @@ if ($_GET['prk'] == 'ked') {
                             <div class="col-lg-5">
                                 Pilih Profesi : <span style="color:red">*</span><br>
                                 <?php
-                                $sql_spek = "SELECT * FROM tb_jurusan_pdd_profesi 
-                                JOIN tb_profesi_pdd ON tb_jurusan_pdd_profesi.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd
-                                WHERE tb_jurusan_pdd_profesi.id_jurusan_pdd = 1
-                                ORDER BY tb_profesi_pdd.nama_profesi_pdd ASC";
+                                $sql_prof = "SELECT * FROM tb_jurusan_pdd_jenjang_profesi";
+                                $sql_prof .= " JOIN tb_profesi_pdd ON tb_jurusan_pdd_jenjang_profesi.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+                                $sql_prof .= " WHERE tb_jurusan_pdd_jenjang_profesi.id_jurusan_pdd = 1";
+                                $sql_prof .= " GROUP BY tb_profesi_pdd.nama_profesi_pdd";
+                                $sql_prof .= " ORDER BY tb_profesi_pdd.nama_profesi_pdd ASC";
 
-                                $q_spek = $conn->query($sql_spek);
+                                $q_spek = $conn->query($sql_prof);
                                 $r_spek = $q_spek->rowCount();
 
                                 if ($r_spek > 0) {
