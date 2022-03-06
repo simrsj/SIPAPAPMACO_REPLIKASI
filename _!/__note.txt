@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "Ubah database pilih jenjang-profesi dan tarif, perbaikan pengajuan input praktik"
+git commit -a -m "pemilihan pembimbinga dan unit #1"
 git pull
 git push
 
