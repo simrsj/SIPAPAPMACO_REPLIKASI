@@ -114,58 +114,55 @@ if (isset($_POST['ubah_nilai'])) {
         <div class="card shadow mb-4">
             <div class="card-body">
                 <?php
-                $sql_praktik = "SELECT * FROM tb_praktikan
-                    JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik
-                    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd
-                    JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-                    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                    JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    JOIN tb_pembimbing ON tb_praktik.id_pembimbing = tb_pembimbing.id_pembimbing 
-                    WHERE tb_praktik.status_praktik = 'Y'
-                    AND tb_praktik.status_cek_praktik = 'AKTIF' 
-                    AND tb_praktikan.status_pemb_temp_praktikan ='PEMB. TEMP. ADA'
-                    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+                $sql_praktik = "SELECT * FROM tb_praktikan";
+                $sql_praktik .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
+                $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+                $sql_praktik .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+                $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+                $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi ";
+                // $sql_praktik .= " JOIN tb_pembimbing ON tb_praktik.id_pembimbing = tb_pembimbing.id_pembimbing  ";
+                $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.status_praktik = 'S' ";
+                $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+                // echo $sql_praktik;
 
                 $q_praktik = $conn->query($sql_praktik);
                 $r_praktik = $q_praktik->rowCount();
 
                 if ($r_praktik > 0) {
-                ?>
-                    <?php
                     while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
+                ?>
                         <div id="accordion">
                             <div class="card">
                                 <div class="card-header align-items-center bg-gray-200">
-                                    <div class="row" style="font-size: small;">
+                                    <div class="row" style="font-size: small;" class="justify-content-center">
                                         <br><br>
-                                        <div class="col-sm-3 my-auto">
-                                            <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
+                                        <div class="col-sm-3 text-center">
+                                            <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?><br>
+                                            <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                         </div>
 
-                                        <div class="col-sm-2 my-auto">
-                                            <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
+                                        <div class="col-sm-2 text-center">
+                                            <b class="text-gray-800">TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
+                                            <b class="text-gray-800">TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                         </div>
-
-                                        <div class="col-sm-3 my-auto">
-                                            <b>TANGGAL SELESAI : </b>
-                                            <?php echo tanggal_minimal($d_praktik['tgl_selesai_praktik']); ?><br>
-                                            <b>TANGGAL MULAI : </b>
-                                            <?php echo tanggal_minimal($d_praktik['tgl_mulai_praktik']); ?>
+                                        <div class="col-sm-2 text-center">
+                                            <b class="text-gray-800">JURUSAN : </b><br><?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
+                                            <b class="text-gray-800">JENJANG : </b><br><?php echo $d_praktik['nama_jenjang_pdd']; ?>
                                         </div>
-
-                                        <div class="col-sm-2 text-center my-auto">
-                                            <b>Nama Pembimbing : </b><br>
-                                            <?php echo $d_praktik['nama_pembimbing']; ?>
+                                        <div class="col-sm-2 text-center">
+                                            <b class="text-gray-800">PROFESI : </b><br><?php echo $d_praktik['nama_profesi_pdd']; ?><br>
+                                            <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?php echo $d_praktik['jumlah_praktik']; ?>
                                         </div>
-
-                                        <div class="col-sm-2 text-center my-auto">
+                                        <!-- tombol aksi/info proses  -->
+                                        <div class="col-sm-3 my-auto text-center">
                                             <!-- tombol rincian -->
-                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
-                                                <i class="fas fa-info-circle"> </i>
-                                                Rincian
-                                            </button>
+                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                                <i class="fas fa-info-circle"></i> Rincian Data</button>
+                                            &nbsp;
+                                            <a class="btn btn-warning btn-sm collapsed" href="?pmbb&i=<?php echo $d_praktik['id_praktik']; ?>" title="Ubah">
+                                                Pilih Pembimbing
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -575,7 +572,7 @@ if (isset($_POST['ubah_nilai'])) {
                     }
                 } else {
                     ?>
-                    <h3 class='text-center'> Data Pembimbing dan Tempat/Unit Diinputkan</h3>
+                    <h3 class='text-center'> Data Pembimbing dan Tempat/Unit Belum Diinputkan</h3>
                 <?php
                 }
                 ?>
