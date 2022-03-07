@@ -81,11 +81,12 @@ if ($r_data_praktikan > 0) {
         document.getElementById("err_asal").innerHTML = "";
         document.getElementById("form_ubah_praktikan").reset();
         $("#data_ubah_praktikan").fadeIn('slow');
+        $("#data_tambah_praktikan").fadeOut('fast');
 
         var id = $(this).attr('id');
         $.ajax({
             type: 'POST',
-            url: "_admin/update/U_praktikanGetData.php",
+            url: "_admin/update/u_praktikanGetData.php",
             data: {
                 id: id
             },

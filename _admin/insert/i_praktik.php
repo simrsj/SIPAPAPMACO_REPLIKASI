@@ -343,8 +343,8 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                                     </div>
                                                     <hr>
                                                     Data Sesuaikan dengan <span class="text-danger">No</span>, karena <span class="text-danger">No</span> akan menentukan jumlah baris praktikannya<br>
-                                                    - Bila jumlah nomer kelebihan dalam formatnya <span class="text-danger">HAPUS</span> kolom tersebut<br>
-                                                    - Bila jumlah nomer kekurangan dalam formatnya <span class="text-danger">TAMBAH</span> kolom tersebut dengan mengisi <span class="text-danger">NO</span>
+                                                    - Bila jumlah nomer kelebihan dalam formatnya <span class="text-danger">HAPUS BARIS</span> kolom tersebut<br>
+                                                    - Bila jumlah nomer kekurangan dalam formatnya <span class="text-danger">TAMBAH BARIS</span> kolom tersebut dengan mengisi <span class="text-danger">NO</span>
                                                     <hr>
                                                 </div>
                                                 <div class="modal-footer">
