@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "progres penilian"
+git commit -a -m "perbaikan penamaan teks"
 git pull
 git push
 

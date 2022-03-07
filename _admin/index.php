@@ -394,7 +394,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<footer class="sticky-footer bg-white">
 					<div class="container my-auto">
 						<div class="copyright text-center my-auto">
-							<span>RS Jiwa Provinsi Jawa Barat 2021</span>
+							<span>RS Jiwa Provinsi Jawa Barat <?php echo date('Y'); ?></span>
 						</div>
 					</div>
 				</footer>

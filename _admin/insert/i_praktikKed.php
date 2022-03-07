@@ -243,7 +243,7 @@ if ($_GET['prk'] == 'ked') {
                                                     <hr>
                                                     Data Sesuaikan dengan <span class="text-danger">No</span>, karena <span class="text-danger">No</span> akan menentukan jumlah baris praktikannya<br>
                                                     - Bila jumlah nomer kelebihan dalam formatnya <span class="text-danger">HAPUS BARIS</span> tersebut<br>
-                                                    - Bila jumlah nomer kekurangan dalam formatnya <span class="text-danger">TAMBAH BARIS</span> tersebut dengan mengisi <span class="text-danger">NO</span>
+                                                    - Bila jumlah nomer kekurangan dalam formatnya <span class="text-danger">TAMBAH BARIS</span> tersebut dengan mengisi <span class="text-danger">NOMOR</span>
                                                     <hr>
                                                 </div>
                                                 <div class="modal-footer">

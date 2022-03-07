@@ -47,7 +47,7 @@
                     <span class="font-weight-bold text-warning">DATA TARIF </span> sudah diinputkan oleh <b>ADMIN</b> dan segera lakukan <span class="font-weight-bold text-danger">PEMBAYARAN</span><br><br>
 
                     <span class="badge badge-danger text-md">PEMBAYARAN</span><br>
-                    Silahkan melakukan Pembayara dengan menekan Tombol <span class="font-weight-bold text-danger">ISI PEMBAYARAN</span><br><br>
+                    Silahkan melakukan Pembayaran dengan menekan Tombol <span class="font-weight-bold text-danger">ISI PEMBAYARAN</span><br><br>
 
                     <span class="badge badge-primary text-md">Val. PEMBAYARAN</span><br>
                     Melakukan Proses Validasi <span class="font-weight-bold text-primary">PEMBAYARAN</span> oleh <b>ADMIN</b>
