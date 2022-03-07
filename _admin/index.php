@@ -318,7 +318,15 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['mtr'])) {
 						include "_admin/view/v_mentor.php";
 					} elseif (isset($_GET['nil'])) {
-						include "_admin/view/v_nilai.php";
+						if (isset($_GET['i']) && isset($_GET['p'])) {
+							include "_admin/insert/i_nilaiKep.php";
+						} elseif (isset($_GET['i']) && isset($_GET['pa'])) {
+							include "_admin/insert/i_nilaiDataKep.php";
+						} elseif (isset($_GET['i'])) {
+							include "_admin/insert/i_nilai_upload.php";
+						} else {
+							include "_admin/view/v_nilai.php";
+						}
 					} elseif (isset($_GET['praktikan'])) {
 						if (isset($_GET['u'])) {
 							include "_admin/update/u_praktikan.php";
