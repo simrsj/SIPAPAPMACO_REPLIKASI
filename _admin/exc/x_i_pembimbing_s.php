@@ -2,22 +2,23 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 echo "<pre>";
-var_dump($_POST);
+// var_dump($_POST);
+print_r($_POST);
 echo "</pre>";
-$sql = "INSERT INTO tb_praktikan ";
-$sql .= " (id_praktik)) ";
-$sql .= " no_id_praktikan='" . $_POST['no_id_praktikan'] . "', ";
-$sql .= " telp_praktikan='" . $_POST['telp_praktikan'] . "', ";
-$sql .= " wa_praktikan='" . $_POST['wa_praktikan'] . "', ";
-$sql .= " email_praktikan='" . $_POST['email_praktikan'] . "', ";
-$sql .= " kota_kab_praktikan='" . $_POST['kota_kab_praktikan'] . "', ";
-$sql .= " tgl_ubah_praktikan='" . date('Y-m-d') . "'";
-$sql .= " WHERE id_praktikan=" . $_POST['id_praktikan'];
 
-echo "$sql <br>";
-$q = $conn->query($sql);
+for ($no = 1; $no <= $_POST['jp']; $no++) {
+    $sql = "INSERT INTO tb_pembimbing_pilih ";
+    $sql .= " (id_praktik, id_pembimbing, id_unit, id_praktikan) ";
+    $sql .= " VALUES ";
+    $sql .= " ('" . $_POST['id_praktik'] . "', '" . $_POST['id_pembimbing' . $no] . "', '" . $_POST['id_unit' . $no] . "', '" . $_POST['id_praktikan' . $no] . "')";
 
-$sql_update_pmbb = "UPDATE tb_pembimbing SET";
-$sql_update_pmbb .= " kali_pembimbing='" . $_POST['nama_praktikan'] . "' ";
-$sql_update_pmbb .= " WHERE id_pembimbing=" . $_POST['id_pembimbing'];
+    // $sql_update_pmbb = "UPDATE tb_pembimbing SET";
+    // $sql_update_pmbb .= " kali_pembimbing = 1 ";
+    // $sql_update_pmbb .= " WHERE id_pembimbing=" . $_POST['id_pembimbing' . $no];
+
+    echo "$sql <br>";
+    // echo "$sql_update_pmbb <br>";
+    $conn->query($sql);
+    // $conn->query($sql_update_pmbb);
+}
 json_encode(['success' => 'Sukses']);

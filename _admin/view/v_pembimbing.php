@@ -23,7 +23,7 @@
             $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
             $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
-            $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
+            $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
             $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
             // echo $sql_praktik;
@@ -35,6 +35,17 @@
             ?>
                 <?php
                 while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+
+                    $sql_data_praktikan = "SELECT * FROM tb_pembimbing_pilih ";
+                    $sql_data_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing ";
+                    $sql_data_praktikan .= " JOIN tb_praktikan ON tb_pembimbing_pilih.id_praktikan = tb_praktikan.id_praktikan ";
+                    $sql_data_praktikan .= " JOIN tb_unit ON tb_pembimbing_pilih.id_unit = tb_unit.id_unit ";
+                    $sql_data_praktikan .= " JOIN tb_praktik ON tb_pembimbing_pilih.id_praktik = tb_praktik.id_praktik ";
+                    $sql_data_praktikan .= " WHERE (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+                    $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
+
+                    $q_data_praktikan = $conn->query($sql_data_praktikan);
+                    $r_data_praktikan = $q_data_praktikan->rowCount();
                 ?>
                     <div id="accordion">
                         <div class="card">
@@ -64,9 +75,21 @@
                                         <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data</button>
                                         &nbsp;
-                                        <a class="btn btn-warning btn-sm collapsed" href="?pmbb&i=<?php echo $d_praktik['id_praktik']; ?>" title="Ubah">
-                                            Pilih Pembimbing
-                                        </a>
+                                        <?php
+                                        if ($r_data_praktikan <= 0) {
+                                        ?>
+                                            <hr>
+                                            <a class="btn btn-warning btn-sm collapsed" href="?pmbb&i=<?php echo $d_praktik['id_praktik']; ?>" title="Ubah">
+                                                Pilih Pembimbing
+                                            </a>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <hr>
+                                            <span class="badge badge-success text-md">Pembimbing dan Ruangan <br>Sudah Dipilih</span>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -76,17 +99,9 @@
                                 <div class="card-body " style="font-size: medium;">
                                     <!-- data praktikan -->
                                     <div class="text-gray-700">
-                                        <h4 class="font-weight-bold">DATA PRAKTIKAN</h4><br>
+                                        <h4 class="font-weight-bold">DATA PEMBIMBING DAN RUANGAN</h4><br>
                                     </div>
                                     <?php
-                                    $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
-                                    $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
-                                    $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
-                                    $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
-
-                                    $q_data_praktikan = $conn->query($sql_data_praktikan);
-                                    $r_data_praktikan = $q_data_praktikan->rowCount();
-
                                     if ($r_data_praktikan > 0) {
                                     ?>
                                         <div class="table-responsive">
@@ -94,12 +109,10 @@
                                                 <thead class="thead-dark">
                                                     <tr>
                                                         <th scope="col">No</th>
-                                                        <th scope="col">Nama</th>
-                                                        <th scope="col">NIM / NPM / NIS </th>
-                                                        <th scope="col">No. HP</th>
-                                                        <th scope="col">No. WA</th>
-                                                        <th scope="col">EMAIL</th>
-                                                        <th scope="col">ASAL KOTA / KABUPATEN</th>
+                                                        <th scope="col">Nama Pembimbing</th>
+                                                        <th scope="col">Ruangan </th>
+                                                        <th scope="col">Nama Praktikan </th>
+                                                        <th scope="col">NIM / NPM / NIS</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -110,12 +123,10 @@
                                                     ?>
                                                         <tr>
                                                             <th scope="row"><?php echo $no; ?></th>
+                                                            <td><?php echo $d_data_praktikan['nama_pembimbing']; ?></td>
+                                                            <td><?php echo $d_data_praktikan['nama_unit']; ?></td>
                                                             <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
                                                             <td><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
-                                                            <td><?php echo $d_data_praktikan['telp_praktikan']; ?></td>
-                                                            <td><?php echo $d_data_praktikan['wa_praktikan']; ?></td>
-                                                            <td><?php echo $d_data_praktikan['email_praktikan']; ?></td>
-                                                            <td><?php echo $d_data_praktikan['kota_kab_praktikan']; ?></td>
                                                         </tr>
                                                     <?php
                                                         $no++;
@@ -130,7 +141,7 @@
                                         <div class="jumbotron">
                                             <div class="jumbotron-fluid">
                                                 <div class="text-gray-700">
-                                                    <h5 class="text-center">Data Praktikan Tidak Ada</h5>
+                                                    <h5 class="text-center">Data Pembimbing dan Ruangan Tidak Ada</h5>
                                                 </div>
                                             </div>
                                         </div>

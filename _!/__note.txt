@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "modul tambah praktikan, progres simpan pembimbing dan tempat"
+git commit -a -m "progres penilian"
 git pull
 git push
 
