@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "pemilihan pembimbinga dan unit #1"
+git commit -a -m "proses rumus pembimbinga dan unit #1"
 git pull
 git push
 
