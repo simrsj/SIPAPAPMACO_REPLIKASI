@@ -236,9 +236,12 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 } else {
                                 ?>
                                     <b><i>Data Profesi Tidak Ada</i></b>
+                                    <input type="hidden" name='id_profesi_pdd' id="profesi" value="0">
+                                    <input type="hidden" name='nonnakes' id="nonnakes" value="1">
                                 <?php
                                 }
                                 ?>
+                                <input type="hidden" name='nonnakes' id="nonnakes" value="0">
                             </div>
                             <div class="col-lg-3">
                                 Akreditasi Institusi : <span style="color:red">*</span><br>
@@ -531,6 +534,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             var jurusan = document.getElementById("jurusan").value;
             var jenjang = document.getElementById("jenjang").value;
             var profesi = document.getElementById("profesi").value;
+            var nonnakes = document.getElementById("nonnakes").value;
             var akreditasi = document.getElementById("akreditasi").value;
             var jumlah = document.getElementById("jumlah").value;
             var tgl_mulai = document.getElementById("tgl_mulai").value;
@@ -632,10 +636,12 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 }
 
                 //notif profesi 
-                if (profesi == "") {
-                    document.getElementById("err_profesi").innerHTML = "Profesi Harus Diisi";
-                } else {
-                    document.getElementById("err_profesi").innerHTML = "";
+                if (nonnakes == 0) {
+                    if (profesi == "") {
+                        document.getElementById("err_profesi").innerHTML = "Profesi Harus Diisi";
+                    } else {
+                        document.getElementById("err_profesi").innerHTML = "";
+                    }
                 }
 
                 //notif akreditasi 
@@ -862,7 +868,9 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 }
 
                 document.getElementById("err_jenjang").innerHTML = "";
-                document.getElementById("err_profesi").innerHTML = "";
+                if (nonnakes == 0) {
+                    document.getElementById("err_profesi").innerHTML = "";
+                }
                 document.getElementById("err_akreditasi").innerHTML = "";
                 document.getElementById("err_jumlah").innerHTML = "";
                 document.getElementById("err_tgl_mulai").innerHTML = "";

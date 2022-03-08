@@ -117,31 +117,63 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php
-                                                        $total_jumlah_tarif = 0;
-                                                        $no = 1;
-                                                        while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
-                                                        ?>
-                                                            <tr>
-                                                                <th scope="row"><?php echo $no; ?></th>
-                                                                <td><?php echo $d_data_praktikan['nama_pembimbing']; ?></td>
-                                                                <td><?php echo $d_data_praktikan['no_id_pembimbing']; ?></td>
-                                                                <td><?php echo $d_data_praktikan['nama_unit']; ?></td>
-                                                                <td>
-                                                                    <a href="<?php echo "?nil&i=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-success btn-sm">
-                                                                        Inputkan Nilai
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="<?php echo "?nil&i=" . $d_praktik['id_praktik'] . "&pa=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-primary btn-sm">
-                                                                        Data Nilai
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        <?php
-                                                            $no++;
-                                                        }
-                                                        ?>
+                                                        <div id="accordion_nilai">
+                                                            <div class="card">
+                                                                <?php
+                                                                $total_jumlah_tarif = 0;
+                                                                $no = 1;
+                                                                while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
+                                                                ?>
+                                                                    <tr>
+                                                                        <th scope="row"><?php echo $no; ?></th>
+                                                                        <td><?php echo $d_data_praktikan['nama_pembimbing']; ?></td>
+                                                                        <td><?php echo $d_data_praktikan['no_id_pembimbing']; ?></td>
+                                                                        <td><?php echo $d_data_praktikan['nama_unit']; ?></td>
+                                                                        <td class="text-center">
+                                                                            <?php
+
+                                                                            $sql_data_nilai = "SELECT * FROM tb_nilai_kep ";
+                                                                            $sql_data_nilai .= " WHERE id_praktik = " . $d_data_praktikan['id_praktik'] . " AND id_pembimbing = " . $d_data_praktikan['id_pembimbing'];
+                                                                            echo "$sql_data_nilai<br>";
+
+                                                                            $q_data_nilai = $conn->query($sql_data_nilai);
+                                                                            $r_data_nilai = $q_data_nilai->rowCount();
+                                                                            if ($r_data_nilai > 0) {
+                                                                            ?>
+                                                                                <a href="<?php echo "?nil&iu=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-primary btn-sm">
+                                                                                    Ubah Nilai
+                                                                                </a>
+                                                                            <?php
+                                                                            } else {
+                                                                            ?>
+                                                                                <a href="<?php echo "?nil&i=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-success btn-sm">
+                                                                                    Inputkan Nilai
+                                                                                </a>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#nilai<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                                                                <i class="fas fa-info-circle"></i> Rincian Nilai
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="6">
+                                                                            <div id="nilai<?php echo $no; ?>" class="collapse text-center" aria-labelledby="nilai<?php echo $no; ?>" data-parent="#accordion_nilai">
+                                                                                <div class="card-body " style="font-size: medium;">
+                                                                                    DATA NILAI
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php
+                                                                    $no++;
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                        </div>
                                                     </tbody>
 
                                                 <?php

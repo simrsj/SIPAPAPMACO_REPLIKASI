@@ -23,17 +23,19 @@ if (is_numeric($i) && is_numeric($p)) {
                 // echo $sql_data_praktikan;
 
                 $q_data_praktikan = $conn->query($sql_data_praktikan);
+                $q1_data_praktikan = $conn->query($sql_data_praktikan);
                 $r_data_praktikan = $q_data_praktikan->rowCount();
                 $j_ptkn = $r_data_praktikan;
-                // $d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC);
+                $d1_data_praktikan = $q1_data_praktikan->fetch(PDO::FETCH_ASSOC);
                 if ($r_data_praktikan > 0) {
                 ?>
-                    <form method="POST" id="form_pembb_ruangan">
+                    <form method="POST" id="form_nilai_kep">
                         <!-- data praktikan  -->
-                        Nama Pembimbing : <?php  ?><br>
-                        Ruangan : <?php ?>
+
+                        Nama Pembimbing : <?php echo $d1_data_praktikan['nama_pembimbing']; ?><br>
+                        Ruangan : <?php echo $d1_data_praktikan['nama_unit']; ?>
                         <hr>
-                        <div class="table-responsive">
+                        <span class="table-responsive">
                             <table class="table table-striped">
                                 <thead class="thead-dark">
                                     <tr class="text-center">
@@ -58,45 +60,68 @@ if (is_numeric($i) && is_numeric($p)) {
                                     $no = 1;
                                     while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <input type="hidden" name="id_praktik" id="id_praktik" value="<?php echo $_GET['i']; ?>">
+                                        <input type="hidden" name="id_praktik" id="id_praktik" value="<?php echo $d_data_praktikan['id_praktikan']; ?>">
+                                        <input type="hidden" name="id_pembimbing" id="id_pembimbing" value="<?php echo $d_data_praktikan['id_pembimbing']; ?>">
                                         <input type="hidden" name="id_praktikan<?php echo $no; ?>" id="id_praktikan<?php echo $no; ?>" value="<?php echo $d_data_praktikan['id_praktikan']; ?>">
                                         <tr>
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
                                             <td class="text-center"><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="LP" id="LP"></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="PREPOST" id="PREPOST"></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="SPTK" id="SPTK"></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="PENKES" id="PENKES"></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="DOKEP" id="DOKEP"></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="KOMTER" id="KOMTER"></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="TAK" id="TAK"></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="KASUS" id="KASUS"></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="UJIAN" id="UJIAN"></td>
-                                            <td scope="col" width="100px"><input type="number" class="form-control" min="0" max="100" name="SIKAP" id="SIKAP"></td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="lp<?php echo $no; ?>" required>
+                                            </td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="prepost<?php echo $no; ?>" required>
+                                            </td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="sptk<?php echo $no; ?>" required>
+                                            </td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="penkes<?php echo $no; ?>" required>
+                                            </td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="dokep<?php echo $no; ?>" required>
+                                            </td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="komter<?php echo $no; ?>" required>
+                                            </td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="tak<?php echo $no; ?>" required>
+                                            </td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="kasus<?php echo $no; ?>" required>
+                                            </td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="ujian<?php echo $no; ?>" required>
+                                            </td>
+                                            <td scope="col" width="100px">
+                                                <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="sikap<?php echo $no; ?>" required>
+                                            </td>
                                             <td scope="col">
-                                                <textarea class="form-control" name="KETERANGAN" id="KETERANGAN"></textarea>
+                                                <textarea class="form-control" name="ket<?php echo $no; ?>" id="ket<?php echo $no; ?>" required></textarea>
                                             </td>
                                         </tr>
                                     <?php
                                         $no++;
                                     }
                                     ?>
+                                    <tr>
+                                        <td colspan="14" class="font-weight-bold font-italic text-center">
+                                            "Bila ada jenis nilai yang tidak diperlukan, isikan nilai <span class="text-danger">0</span>"
+                                        </td>
+                                    </tr>
+                                    <input type="hidden" name="jp" id="jp" value="<?php echo $no; ?>">
                                 </tbody>
                             </table>
-                        </div>
-                        <hr>
-
+                        </span>
                         <!-- tombol simpan pilih Pembimbing dan Ruangan  -->
-                        <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
-                            <button type="button" name="simpan_pmbb_tmp" id="simpan_pmbb_tmp" class="btn btn-outline-success">
-                                <!-- <a class=" nav-link" href="#tarif"> -->
+                        <span class="nav btn justify-content-center text-md">
+                            <button type="submit" name="simpan_nilai_kep" class="btn btn-outline-success">
                                 <i class="fas fa-check-circle"></i>
                                 Simpan Pembimbing dan Ruangan Praktik
                                 <i class="fas fa-check-circle"></i>
-                                <!-- </a> -->
                             </button>
-                        </div>
+                        </span>
                     </form>
                 <?php
                 } else {
@@ -114,102 +139,49 @@ if (is_numeric($i) && is_numeric($p)) {
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable();
-        });
+    <?php
+    if (isset($_POST['simpan_nilai_kep'])) {
+        $jp = $_POST['jp'];
 
-        $("#simpan_pmbb_tmp").click(function() {
-            var data_pembimbing = $('#form_pembb_ruangan').serializeArray();
-            var jp = document.getElementById('jp').value;
+        $no = 1;
+        while ($jp > $no) {
+            $sql = "INSERT INTO tb_nilai_kep";
+            $sql .= " (id_praktikan, id_pembimbing, id_praktik, lp, prepost, sptk, penkes, dokep, komter, tak, kasus, ujian, sikap, ket_nilai)";
+            $sql .= " VALUES ";
+            $sql .= " ('" . $_POST['id_praktikan' . $no] . "','" . $_POST['id_pembimbing'] . "','" . $_POST['id_praktik'] . "','" . $_POST['lp' . $no] . "','" . $_POST['prepost' . $no] . "', ";
+            $sql .= " '" . $_POST['sptk' . $no] . "','" . $_POST['penkes' . $no] . "','" . $_POST['dokep' . $no] . "',";
+            $sql .= " '" . $_POST['komter' . $no] . "','" . $_POST['tak' . $no] . "', '" . $_POST['kasus' . $no] . "',";
+            $sql .= " '" . $_POST['ujian' . $no] . "', '" . $_POST['sikap' . $no] . "','" . $_POST['ket' . $no] . "')";
 
-            //Notif jika tida diisi Pembimbing 
-            var no = 1;
-            var pmbb = 0;
-            while (no <= jp) {
-                console.log("no: " + no + "jp: " + jp);
-                if (document.getElementById('id_pembimbing' + no).value == "") {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-
-                    Toast.fire({
-                        icon: 'warning',
-                        title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                    });
-                    document.getElementById("err_pmbb" + no).innerHTML = "<br>Pembimbing Harus Dipilih";
-                    pmbb++;
-                } else {
-                    document.getElementById("err_pmbb" + no).innerHTML = "";
-                }
-                no++;
-
-            }
-
-            //Notif jika tida diisi Unit
-            var no = 1;
-            var unit = 0;
-            while (no <= jp) {
-                console.log("no: " + no + "jp: " + jp);
-                if (document.getElementById('id_unit' + no).value == "") {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-
-                    Toast.fire({
-                        icon: 'warning',
-                        title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                    });
-                    document.getElementById("err_unit" + no).innerHTML = "<br> Ruangan Harus Dipilih";
-                    unit++;
-                } else {
-                    document.getElementById("err_unit" + no).innerHTML = "";
-                }
-                no++;
-            }
-
-            //jika data sudah diisi semua
-            if (pmbb == 0 && unit == 0) {
-                console.log("SIMPAN");
-                $.ajax({
-                    type: 'POST',
-                    url: "_admin/exc/x_i_pembimbing_s.php?",
-                    data: data_pembimbing,
-                    success: function() {
-                        Swal.fire({
-                            allowOutsideClick: false,
-                            // isDismissed: false,
-                            icon: 'success',
-                            title: '<span class"text-xs"><b>DATA Pembimbing</b> dan <b>Ruangan</b><br>Berhasil Tersimpan',
-                            showConfirmButton: false,
-                            html: '<a href="?pmbb" class="btn btn-outline-primary">OK</a>',
-                        });
-                    },
-                    error: function(response) {
-                        console.log(response.responseText);
-                        alert('eksekusi query gagal');
+            // echo "$sql<br>";
+            $conn->query($sql);
+            $no++;
+        }
+    ?>
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    allowOutsideClick: false,
+                    // isDismissed: false,
+                    icon: 'success',
+                    title: '<span class"text-xs"><b>DATA <br>Pembimbing</b> dan <b>Ruangan</b><br>Berhasil Tersimpan',
+                    showConfirmButton: false,
+                    html: '<a href="?nil" class="btn btn-outline-primary">OK</a>',
+                    timer: 4000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
-                });
-            }
-        });
-    </script>
+                }).then(
+                    function() {
+                        document.location.href = "?nil";
+                    }
+                );
+            });
+        </script>
 <?php
+    }
 } else {
     include "_error/index.php";
 }
