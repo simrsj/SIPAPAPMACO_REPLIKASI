@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "fix kalender jadwal praktik"
+git commit -a -m "sukses data nilai keperawatan"
 git pull
 git push
 

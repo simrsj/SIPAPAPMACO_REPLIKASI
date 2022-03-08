@@ -112,7 +112,7 @@
                                                             <th scope="col">Nama Pembimbing </th>
                                                             <th scope="col">NIP / NIPK</th>
                                                             <th scope="col">Nama Ruangan</th>
-                                                            <th scope="col">Input Nilai</th>
+                                                            <th scope="col">Isi / Ubah <br>Nilai</th>
                                                             <th scope="col">Data Nilai</th>
                                                         </tr>
                                                     </thead>
@@ -134,20 +134,20 @@
 
                                                                             $sql_data_nilai = "SELECT * FROM tb_nilai_kep ";
                                                                             $sql_data_nilai .= " WHERE id_praktik = " . $d_data_praktikan['id_praktik'] . " AND id_pembimbing = " . $d_data_praktikan['id_pembimbing'];
-                                                                            echo "$sql_data_nilai<br>";
+                                                                            // echo "$sql_data_nilai<br>";
 
                                                                             $q_data_nilai = $conn->query($sql_data_nilai);
                                                                             $r_data_nilai = $q_data_nilai->rowCount();
                                                                             if ($r_data_nilai > 0) {
                                                                             ?>
-                                                                                <a href="<?php echo "?nil&iu=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-primary btn-sm">
+                                                                                <a href="<?php echo "?nil&u=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-primary btn-sm">
                                                                                     Ubah Nilai
                                                                                 </a>
                                                                             <?php
                                                                             } else {
                                                                             ?>
                                                                                 <a href="<?php echo "?nil&i=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-success btn-sm">
-                                                                                    Inputkan Nilai
+                                                                                    Isi Nilai
                                                                                 </a>
                                                                             <?php
                                                                             }
@@ -163,7 +163,82 @@
                                                                         <td colspan="6">
                                                                             <div id="nilai<?php echo $no; ?>" class="collapse text-center" aria-labelledby="nilai<?php echo $no; ?>" data-parent="#accordion_nilai">
                                                                                 <div class="card-body " style="font-size: medium;">
-                                                                                    DATA NILAI
+
+                                                                                    <?php
+                                                                                    $sql_nilai = "SELECT * FROM tb_nilai_kep ";
+                                                                                    $sql_nilai .= " JOIN tb_praktikan ON tb_nilai_kep.id_praktikan = tb_praktikan.id_praktikan";
+                                                                                    $sql_nilai .= " JOIN tb_pembimbing ON tb_nilai_kep.id_pembimbing = tb_pembimbing.id_pembimbing";
+                                                                                    $sql_nilai .= " JOIN tb_unit ON tb_nilai_kep.id_unit = tb_unit.id_unit";
+                                                                                    $sql_nilai .= " WHERE tb_nilai_kep.id_praktik = " . $d_data_praktikan['id_praktik'] . " AND tb_nilai_kep.id_pembimbing = " . $d_data_praktikan['id_pembimbing'];
+                                                                                    $sql_nilai .= " ORDER BY tb_praktikan.nama_praktikan ASC";
+
+                                                                                    // echo $sql_data_praktikan;
+
+                                                                                    $q_nilai = $conn->query($sql_nilai);
+                                                                                    $r_nilai = $q_nilai->rowCount();
+                                                                                    if ($r_nilai > 0) {
+                                                                                    ?>
+                                                                                        <span class="table-responsive">
+                                                                                            <table class="table table-striped">
+                                                                                                <thead class="thead-dark">
+                                                                                                    <tr class="text-center">
+                                                                                                        <th scope="col">No</th>
+                                                                                                        <th scope="col">Nama</th>
+                                                                                                        <th scope="col">NIM / NPM / NIS</th>
+                                                                                                        <th scope="col">LP</th>
+                                                                                                        <th scope="col">Pre-Post</th>
+                                                                                                        <th scope="col">SPTK</th>
+                                                                                                        <th scope="col">PENKES</th>
+                                                                                                        <th scope="col">DOKEP</th>
+                                                                                                        <th scope="col">KOMTER</th>
+                                                                                                        <th scope="col">TAK</th>
+                                                                                                        <th scope="col">KASUS</th>
+                                                                                                        <th scope="col">UJIAN</th>
+                                                                                                        <th scope="col">SIKAP</th>
+                                                                                                        <th scope="col">KETERANGAN</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <?php
+                                                                                                    $no1 = 1;
+                                                                                                    while ($d_nilai = $q_nilai->fetch(PDO::FETCH_ASSOC)) {
+                                                                                                    ?>
+                                                                                                        <tr>
+                                                                                                            <td><?php echo $no1; ?></td>
+                                                                                                            <td><?php echo $d_nilai['nama_praktikan']; ?></td>
+                                                                                                            <td class="text-center"><?php echo $d_nilai['no_id_praktikan']; ?></td>
+                                                                                                            <td><?php echo $d_nilai['lp'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['prepost'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['sptk'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['penkes'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['dokep'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['komter'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['tak'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['kasus'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['ujian'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['sikap'] ?></td>
+                                                                                                            <td><?php echo $d_nilai['ket_nilai'] ?></td>
+                                                                                                        </tr>
+                                                                                                    <?php
+                                                                                                        $no1++;
+                                                                                                    }
+                                                                                                    ?>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </span>
+                                                                                    <?php
+                                                                                    } else {
+                                                                                    ?>
+                                                                                        <div class="jumbotron">
+                                                                                            <div class="jumbotron-fluid">
+                                                                                                <div class="text-gray-700">
+                                                                                                    <h5 class="text-center">Data Nilai Tidak Ada</h5>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    <?php
+                                                                                    }
+                                                                                    ?>
                                                                                 </div>
                                                                             </div>
                                                                         </td>

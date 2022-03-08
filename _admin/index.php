@@ -324,6 +324,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/insert/i_nilaiDataKep.php";
 						} elseif (isset($_GET['i'])) {
 							include "_admin/insert/i_nilai_upload.php";
+						} elseif (isset($_GET['u']) && isset($_GET['p'])) {
+							include "_admin/update/u_nilaiKep.php";
 						} else {
 							include "_admin/view/v_nilai.php";
 						}
