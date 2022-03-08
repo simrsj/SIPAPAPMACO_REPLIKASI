@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "perbaikan input pembimbing dan tempat jika data dan jumlah praktik tidak sesuai"
+git commit -a -m "fix kalender jadwal praktik"
 git pull
 git push
 
