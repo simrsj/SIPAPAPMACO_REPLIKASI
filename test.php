@@ -1,126 +1,112 @@
-<!-- CEK LIBRARY (KONEKSI, TABLE, DLL) SEBELUM MENGGUNAKAN -->
+<?php
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-10">
-            <h1 class="h3 mb-2 text-gray-800">Daftar Test</h1>
-        </div>
-        <div class="col-lg-2 text-right">
-            <button class='btn btn-outline-success btn-sm' id="tambah_init">
-                <i class="fas fa-plus"></i> Tambah
-            </button>
-        </div>
-    </div>
+define('NUMBER_OF_COLUMNS', 7);
 
-    <div class="card shadow mb-4 card-body" id="data_tambah_test" style="display: none;">
-        <form method="post" class="form-data" id="form_tambah_test">
-            <h5 class="mb-2 text-gray-800">Tambah Test</h5>
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <input class="form-control" name="t_nama_test" id="t_nama_test">
-                        <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_test"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <button type="button" name="tambah" id="tambah" class="btn btn-success">
-                    Tambah
-                </button>
-                <button type="button" id="tambah_tutup" class="btn btn-outline-danger">
-                    Tutup
-                </button>
-            </div>
-        </form>
-    </div>
-    <div class="card shadow mb-4 card-body" id="data_ubah_test" style="display: none;">
-        <form method="post" class="form-data" id="form_ubah_test">
-            <h5 class="mb-2 text-gray-800">Ubah Test</h5>
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="u_nama_test" id="u_nama_test">
-                        <input type="hidden" class="form-control" name="u_id_test" id="u_id_test">
-                        <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_test"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <button type="button" name="ubah" class="btn btn-primary ubah">
-                    Ubah
-                </button>
-                <button type="button" class="btn btn-outline-danger ubah_tutup">
-                    Tutup
-                </button>
-            </div>
-        </form>
-    </div>
+function renderCalenderMonth($date)
+{
+    $day = date('d', $date);
+    $month = date('m', $date);
+    $year = date('Y', $date);
 
-    <div class="card shadow mb-4 card-body" id="data_test">
-    </div>
-</div>
-<script>
-    $(document).ready(function() {
+    $firstDay = mktime(0, 0, 0, $month, 1, $year);
+    $title = strftime('%B', $firstDay);
+    $dayOfWeek = date('D', $firstDay);
+    $daysInMonth = cal_days_in_month(0, $month, $year);
+    /* Get the name of the week days */
+    $timestamp = strtotime('next Sunday');
+    $weekDays = array();
 
-        $('#data_test').load('test1.php');
+    for ($i = 0; $i < NUMBER_OF_COLUMNS; $i++) {
+        $weekDays[] = strftime('%a', $timestamp);
+        $timestamp = strtotime('+1 day', $timestamp);
+    }
+    $blank = date('w', strtotime("{$year}-{$month}-01"));
+?>
 
-    });
-    $("#tambah_init").click(function() {
-        document.getElementById("t_nama_test").value = "";
-        document.getElementById("err_nama_test").innerHTML = "";
-        document.getElementById("form_tambah_test").reset();
-        $("#data_tambah_test").fadeIn('slow');
-        $("#data_ubah_test").fadeOut('slow');
-    });
-    $("#tambah_tutup").click(function() {
-        document.getElementById("t_nama_test").value = "";
-        document.getElementById("err_nama_test").innerHTML = "";
-        document.getElementById("form_tambah_test").reset();
-        $("#data_tambah_test").fadeOut('slow');
-    });
-
-    $("#tambah").click(function() {
-        var data = $('#form_tambah_test').serialize();
-        var nama_test = document.getElementById("t_nama_test").value;
-
-        if (nama_test == "") {
-            document.getElementById("err_nama_test").innerHTML = "Nama Test Harus Diisi";
-        } else {
-            document.getElementById("err_nama_test").innerHTML = "";
-        }
-
-        if (nama_test != "") {
-            $.ajax({
-                type: 'POST',
-                url: "test2.php",
-                data: data,
-                success: function() {
-                    $('#data_test').load('test1.php');
-
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 5000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+    <div class="table-responsive">
+        <table class='table table-striped'>
+            <thead class="thead-dark">
+                <tr>
+                    <th colspan="<?php echo NUMBER_OF_COLUMNS ?>" class="text-center">
+                        <?php echo $title . " " . $year; ?>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center">
+                    <?php
+                    foreach ($weekDays as $key => $weekDay) {
+                    ?>
+                        <td class="text-center"><?php echo $weekDay ?></td>
+                    <?php
+                    }
+                    ?>
+                </tr>
+                <tr class="text-center">
+                    <?php
+                    for ($i = 0; $i < $blank; $i++) {
+                    ?>
+                        <td></td>
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    for ($i = 1; $i <= $daysInMonth; $i++) {
+                        if ($day == $i) {
+                    ?>
+                            <td>
+                                <strong><?php echo $i; ?></strong>
+                            </td>
+                        <?php
+                        } else {
+                        ?>
+                            <td><?php echo $i;  ?></td>
+                        <?php
                         }
-                    });
+                        if (($i + $blank) % NUMBER_OF_COLUMNS == 0) {
+                        ?>
+                </tr>
+                <tr class="text-center">
+            <?php
+                        }
+                    }
+            ?>
+            <br>
+            <?php
+            for ($i = 0; ($i + $blank + $daysInMonth) % NUMBER_OF_COLUMNS != 0; $i++) {
+            ?>
+                <td></td>
+            <?php
+            }
+            ?>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<?php
+}
 
-                    Toast.fire({
-                        icon: 'success',
-                        title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Disimpan</b></div>'
-                    });
-                    document.getElementById("t_nama_test").value = "";
-                    document.getElementById("form_tambah_test").reset();
-                },
-                error: function(response) {
-                    console.log(response.responseText);
-                }
-            });
+// ===========================
+
+/* Set the default timezone */
+date_default_timezone_set("Asia/Hong_Kong");
+$tahun_sekarang = date('Y');
+$bulan_sekarang = date('m') - 1;
+// $tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
+for ($iterateYear = $tahun_sekarang; $iterateYear <= $tahun_sekarang + 1; $iterateYear++) {
+    for ($iterateMonth = 1; $iterateMonth <= 12; $iterateMonth++) {
+        // TAHUN BERJALAN 
+        if ($iterateYear == $tahun_sekarang) {
+            if ($bulan_sekarang < $iterateMonth) {
+                /* Set the date */
+                $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
+                renderCalenderMonth($date);
+            }
+        } else {
+
+            /* Set the date */
+            $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
+            renderCalenderMonth($date);
         }
-
-    });
-</script>
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-define('NUMBER_OF_COLUMNS', 37);
+define('NUMBER_OF_COLUMNS', 7);
 
 function renderCalenderMonth($date)
 {
@@ -24,36 +24,61 @@ function renderCalenderMonth($date)
 ?>
 
     <div class="table-responsive">
-        <table class='table table-striped' id='myTable'>
+        <table class='table table-striped'>
             <thead class="thead-dark">
                 <tr>
-                    <th colspan="<?php echo NUMBER_OF_COLUMNS ?>" class="text-center"> <?php echo $title ?> <?php echo $year ?> </th>
+                    <th colspan="<?php echo NUMBER_OF_COLUMNS ?>" class="text-center">
+                        <?php echo $title . " " . $year; ?>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <?php foreach ($weekDays as $key => $weekDay) : ?>
+                <tr class="text-center">
+                    <?php
+                    foreach ($weekDays as $key => $weekDay) {
+                    ?>
                         <td class="text-center"><?php echo $weekDay ?></td>
-                    <?php endforeach ?>
+                    <?php
+                    }
+                    ?>
                 </tr>
-                <tr>
-                    <?php for ($i = 0; $i < $blank; $i++) : ?>
+                <tr class="text-center">
+                    <?php
+                    for ($i = 0; $i < $blank; $i++) {
+                    ?>
                         <td></td>
-                    <?php endfor; ?>
-                    <?php for ($i = 1; $i <= $daysInMonth; $i++) : ?>
-                        <?php if ($day == $i) : ?>
-                            <td><strong><?php echo $i ?></strong></td>
-                        <?php else : ?>
-                            <td><?php echo $i ?></td>
-                        <?php endif; ?>
-                        <?php if (($i + $blank) % NUMBER_OF_COLUMNS == 0) : ?>
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    for ($i = 1; $i <= $daysInMonth; $i++) {
+                        if ($day == $i) {
+                    ?>
+                            <td>
+                                <strong><?php echo $i; ?></strong>
+                            </td>
+                        <?php
+                        } else {
+                        ?>
+                            <td><?php echo $i;  ?></td>
+                        <?php
+                        }
+                        if (($i + $blank) % NUMBER_OF_COLUMNS == 0) {
+                        ?>
                 </tr>
-                <tr>
-                <?php endif; ?>
-            <?php endfor; ?>
-            <?php for ($i = 0; ($i + $blank + $daysInMonth) % NUMBER_OF_COLUMNS != 0; $i++) : ?>
+                <tr class="text-center">
+            <?php
+                        }
+                    }
+            ?>
+            <br>
+            <?php
+            for ($i = 0; ($i + $blank + $daysInMonth) % NUMBER_OF_COLUMNS != 0; $i++) {
+            ?>
                 <td></td>
-            <?php endfor; ?>
+            <?php
+            }
+            ?>
                 </tr>
             </tbody>
         </table>
@@ -66,12 +91,22 @@ function renderCalenderMonth($date)
 /* Set the default timezone */
 date_default_timezone_set("Asia/Hong_Kong");
 $tahun_sekarang = date('Y');
-$tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
-for ($iterateYear = $tahun_sekarang; $iterateYear <= 2023; $iterateYear++) {
+$bulan_sekarang = date('m') - 1;
+// $tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
+for ($iterateYear = $tahun_sekarang; $iterateYear <= $tahun_sekarang + 1; $iterateYear++) {
     for ($iterateMonth = 1; $iterateMonth <= 12; $iterateMonth++) {
+        // TAHUN BERJALAN 
+        if ($iterateYear == $tahun_sekarang) {
+            if ($bulan_sekarang < $iterateMonth) {
+                /* Set the date */
+                $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
+                renderCalenderMonth($date);
+            }
+        } else {
 
-        /* Set the date */
-        $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
-        renderCalenderMonth($date);
+            /* Set the date */
+            $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
+            renderCalenderMonth($date);
+        }
     }
 }
