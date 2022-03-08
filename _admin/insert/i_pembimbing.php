@@ -118,6 +118,7 @@ if (is_numeric($data)) {
                                         $no++;
                                     }
                                     ?>
+                                    <input type="hidden" name="dp" id="dp" value="<?php echo $no;  ?>">
                                 </tbody>
                             </table>
                         </div>
@@ -158,70 +159,88 @@ if (is_numeric($data)) {
         $("#simpan_pmbb_tmp").click(function() {
             var data_pembimbing = $('#form_pembb_ruangan').serializeArray();
             var jp = document.getElementById('jp').value;
+            var dp = document.getElementById('dp').value;
 
-            //Notif jika tida diisi Pembimbing 
-            var no = 1;
-            var pmbb = 0;
-            while (no <= jp) {
-                console.log("no: " + no + "jp: " + jp);
-                if (document.getElementById('id_pembimbing' + no).value == "") {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
+            //Jika Jumlah Praktik tidak sesuai dengan data praktikan
+            if (jp != dp) {
+                Swal.fire({
+                    allowOutsideClick: false,
+                    // isDismissed: false,
+                    icon: 'error',
+                    title: '<span class"text-xs"><b>DATA PRAKTIKAN</b> <br> TIDAK SESUAI DENGAN <br><b>JUMLAH PRAKTIK</b>',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+            } else {
+                //Notif jika tida diisi Pembimbing 
+                var no = 1;
+                var pmbb = 0;
+                while (no <= jp) {
+                    console.log("no: " + no + "jp: " + jp);
+                    if (document.getElementById('id_pembimbing' + no).value == "") {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 10000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
 
-                    Toast.fire({
-                        icon: 'warning',
-                        title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                    });
-                    document.getElementById("err_pmbb" + no).innerHTML = "<br>Pembimbing Harus Dipilih";
-                    pmbb++;
-                } else {
-                    document.getElementById("err_pmbb" + no).innerHTML = "";
+                        Toast.fire({
+                            icon: 'warning',
+                            title: '<center>DATA ADA YANG BELUM TERISI</center>'
+                        });
+                        document.getElementById("err_pmbb" + no).innerHTML = "<br>Pembimbing Harus Dipilih";
+                        pmbb++;
+                    } else {
+                        document.getElementById("err_pmbb" + no).innerHTML = "";
+                    }
+                    no++;
+
                 }
-                no++;
 
-            }
+                //Notif jika tida diisi Unit
+                var no = 1;
+                var unit = 0;
+                while (no <= jp) {
+                    console.log("no: " + no + "jp: " + jp);
+                    if (document.getElementById('id_unit' + no).value == "") {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 10000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
 
-            //Notif jika tida diisi Unit
-            var no = 1;
-            var unit = 0;
-            while (no <= jp) {
-                console.log("no: " + no + "jp: " + jp);
-                if (document.getElementById('id_unit' + no).value == "") {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-
-                    Toast.fire({
-                        icon: 'warning',
-                        title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                    });
-                    document.getElementById("err_unit" + no).innerHTML = "<br> Ruangan Harus Dipilih";
-                    unit++;
-                } else {
-                    document.getElementById("err_unit" + no).innerHTML = "";
+                        Toast.fire({
+                            icon: 'warning',
+                            title: '<center>DATA ADA YANG BELUM TERISI</center>'
+                        });
+                        document.getElementById("err_unit" + no).innerHTML = "<br> Ruangan Harus Dipilih";
+                        unit++;
+                    } else {
+                        document.getElementById("err_unit" + no).innerHTML = "";
+                    }
+                    no++;
                 }
-                no++;
             }
 
             //jika data sudah diisi semua
-            if (pmbb == 0 && unit == 0) {
+            if (pmbb == 0 && unit == 0 && jp == dp) {
                 console.log("SIMPAN");
                 $.ajax({
                     type: 'POST',
@@ -235,7 +254,17 @@ if (is_numeric($data)) {
                             title: '<span class"text-xs"><b>DATA Pembimbing</b> dan <b>Ruangan</b><br>Berhasil Tersimpan',
                             showConfirmButton: false,
                             html: '<a href="?pmbb" class="btn btn-outline-primary">OK</a>',
-                        });
+                            timer: 4000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        }).then(
+                            function() {
+                                document.location.href = "?pmbb";
+                            }
+                        );
                     },
                     error: function(response) {
                         console.log(response.responseText);

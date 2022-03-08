@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "perbaikan tarif bst profesi (ners),  nakes lainnya insitutsi fee, tidak bisa lanjut non nakes"
+git commit -a -m "perbaikan input pembimbing dan tempat jika data dan jumlah praktik tidak sesuai"
 git pull
 git push
 
@@ -34,5 +34,6 @@ TRUNCATE tb_mess_pilih;
 TRUNCATE tb_tempat_pilih;
 TRUNCATE tb_bayar;
 TRUNCATE tb_nilai_kep;
+TRUNCATE tb_nilai_upload;
 
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
