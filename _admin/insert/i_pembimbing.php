@@ -167,7 +167,7 @@ if (is_numeric($data)) {
                     allowOutsideClick: false,
                     // isDismissed: false,
                     icon: 'error',
-                    title: '<span class"text-xs"><b>DATA PRAKTIKAN</b> <br> TIDAK SESUAI DENGAN <br><b>JUMLAH PRAKTIK</b>',
+                    title: '<span class"text-xs"><b>DATA PRAKTIKAN</b> <br> TIDAK SESUAI DENGAN <br><b>JUMLAH PRAKTIK</b></span>',
                     showConfirmButton: false,
                     timer: 5000,
                     timerProgressBar: true,
