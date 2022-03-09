@@ -93,6 +93,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<span>Data Pembayaran</span>
 					</a>
 				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="?ars">
+						<i class="fas fa-fw fa-wallet"></i>
+						<span>Arsip Praktik</span>
+					</a>
+				</li>
 				<hr class="sidebar-divider">
 				<li class="nav-item ">
 					<a class="nav-link" href="http://192.168.7.89/kuesioner/login.php" target="_blank">
@@ -320,7 +326,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['nil'])) {
 						if (isset($_GET['i']) && isset($_GET['p'])) {
 							include "_admin/insert/i_nilaiKep.php";
-						} elseif (isset($_GET['iup']) && isset($_GET['p'])) {
+						} elseif (isset($_GET['i']) && isset($_GET['pu'])) {
 							include "_admin/insert/i_nilai_upload.php";
 						} elseif (isset($_GET['u']) && isset($_GET['p'])) {
 							include "_admin/update/u_nilaiKep.php";
