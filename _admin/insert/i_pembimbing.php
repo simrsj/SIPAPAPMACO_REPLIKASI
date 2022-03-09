@@ -118,7 +118,7 @@ if (is_numeric($data)) {
                                         $no++;
                                     }
                                     ?>
-                                    <input type="hidden" name="dp" id="dp" value="<?php echo $no;  ?>">
+                                    <input type="hidden" name="dp" id="dp" value="<?php echo $no - 1;  ?>">
                                 </tbody>
                             </table>
                         </div>
@@ -160,7 +160,8 @@ if (is_numeric($data)) {
             var data_pembimbing = $('#form_pembb_ruangan').serializeArray();
             var jp = document.getElementById('jp').value;
             var dp = document.getElementById('dp').value;
-
+            console.log("jp :" + jp);
+            console.log("dp :" + dp);
             //Jika Jumlah Praktik tidak sesuai dengan data praktikan
             if (jp != dp) {
                 Swal.fire({

@@ -34,7 +34,7 @@
             if ($r_praktik > 0) {
             ?>
                 <?php
-                while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+                while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
 
                     $sql_data_praktikan = "SELECT * FROM tb_pembimbing_pilih ";
                     $sql_data_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing ";
@@ -47,6 +47,7 @@
 
                     $q_data_praktikan = $conn->query($sql_data_praktikan);
                     $r_data_praktikan = $q_data_praktikan->rowCount();
+                    $d1_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC);
                 ?>
                     <div id="accordion">
                         <div class="card">
@@ -81,7 +82,7 @@
                                         <?php
                                         if ($d_praktik['id_jurusan_pdd'] != 2) {
                                         ?>
-                                            <a href="?nil&i=<?php echo $d_praktik['id_praktik'] ?>" class="btn btn-success btn-sm">
+                                            <a href="<?php echo "?nil&iup=" . $d_praktik['id_praktik'] . "&p=" . $d1_data_praktikan['id_pembimbing']; ?>" class="btn btn-success btn-sm">
                                                 <i class="fas fa-file-upload"></i> Unggah File Nilai
                                             </a>
                                         <?php

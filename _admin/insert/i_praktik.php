@@ -178,11 +178,15 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
+                                            if ($d_jenjang_pdd['id_jenjang_pdd'] == 9) {
+                                                continue;
+                                            } else {
                                         ?>
-                                            <option value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
-                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd'] ?>
-                                            </option>
+                                                <option value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
+                                                    <?php echo $d_jenjang_pdd['nama_jenjang_pdd'] ?>
+                                                </option>
                                         <?php
+                                            }
                                         }
                                         ?>
                                     </select><br>

@@ -320,9 +320,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['nil'])) {
 						if (isset($_GET['i']) && isset($_GET['p'])) {
 							include "_admin/insert/i_nilaiKep.php";
-						} elseif (isset($_GET['i']) && isset($_GET['pa'])) {
-							include "_admin/insert/i_nilaiDataKep.php";
-						} elseif (isset($_GET['i'])) {
+						} elseif (isset($_GET['iup']) && isset($_GET['p'])) {
 							include "_admin/insert/i_nilai_upload.php";
 						} elseif (isset($_GET['u']) && isset($_GET['p'])) {
 							include "_admin/update/u_nilaiKep.php";

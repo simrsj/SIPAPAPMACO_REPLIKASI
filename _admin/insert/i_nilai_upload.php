@@ -1,27 +1,30 @@
 <?php
-$i = $_GET['i'];
-if (is_numeric($i)) {
+$iup = $_GET['iup'];
+$p = $_GET['p'];
+if (is_numeric($iup) && is_numeric($p)) {
 ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Pilih Pembimbing dan Ruangan</h1>
+                <h1 class="h3 mb-2 text-gray-800">Unggah Nilai</h1>
             </div>
         </div>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <?php
-                $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
-                $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
-                $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . $_GET['i'];
-                $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
-                // echo $sql_data_praktikan;
+                $sql_nilai_praktikan = "SELECT * FROM tb_pembimbing_pilih ";
+                $sql_nilai_praktikan .= " JOIN tb_praktikan ON tb_pembimbing_pilih.id_praktikan = tb_praktikan.id_praktikan";
+                $sql_nilai_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing";
+                $sql_nilai_praktikan .= " JOIN tb_unit ON tb_pembimbing_pilih.id_unit = tb_unit.id_unit";
+                $sql_nilai_praktikan .= " WHERE tb_pembimbing_pilih.id_praktik = " . $iup . " AND tb_pembimbing_pilih.id_pembimbing = " . $p;
+                $sql_nilai_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
+                // echo $sql_nilai_praktikan;
 
-                $q_data_praktikan = $conn->query($sql_data_praktikan);
-                $r_data_praktikan = $q_data_praktikan->rowCount();
-                $j_ptkn = $r_data_praktikan;
+                $q_nilai_praktikan = $conn->query($sql_nilai_praktikan);
+                $r_nilai_praktikan = $q_nilai_praktikan->rowCount();
+                $j_ptkn = $r_nilai_praktikan;
 
-                if ($r_data_praktikan > 0) {
+                if ($r_nilai_praktikan > 0) {
                 ?>
                     <form method="POST" id="form_pembb_ruangan">
                         <!-- data praktikan  -->
@@ -30,27 +33,27 @@ if (is_numeric($i)) {
                                 <thead class="thead-dark">
                                     <tr class="text-center">
                                         <th scope="col ">No</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">NIM / NPM / NIS </th>
-                                        <th scope="col">Pilih<br>Pembimbing</th>
-                                        <th scope="col">Pilih<br>Ruangan</th>
+                                        <th scope="col">Nama Pembimbing</th>
+                                        <th scope="col">NIP / NIPK </th>
+                                        <th scope="col">Ruangan</th>
+                                        <th scope="col">Unggah File</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
+                                    while ($d_nilai_praktikan = $q_nilai_praktikan->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <input type="hidden" name="jp" id="jp" value="<?php echo $d_data_praktikan['jumlah_praktik']; ?>">
+                                        <input type="hidden" name="jp" id="jp" value="<?php echo $d_nilai_praktikan['jumlah_praktik']; ?>">
                                         <input type="hidden" name="id_praktik" id="id_praktik" value="<?php echo $_GET['i']; ?>">
-                                        <input type="hidden" name="id_praktikan<?php echo $no; ?>" id="id_praktikan<?php echo $no; ?>" value="<?php echo $d_data_praktikan['id_praktikan']; ?>">
+                                        <input type="hidden" name="id_praktikan<?php echo $no; ?>" id="id_praktikan<?php echo $no; ?>" value="<?php echo $d_nilai_praktikan['id_praktikan']; ?>">
                                         <tr>
                                             <td><?php echo $no; ?></td>
-                                            <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
-                                            <td class="text-center"><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
+                                            <td><?php echo $d_nilai_praktikan['nama_praktikan']; ?></td>
+                                            <td class="text-center"><?php echo $d_nilai_praktikan['no_id_praktikan']; ?></td>
                                             <td class="text-center">
                                                 <?php
-                                                $id_jurusan_pdd = $d_data_praktikan['id_jurusan_pdd'];
+                                                $id_jurusan_pdd = $d_nilai_praktikan['id_jurusan_pdd'];
                                                 if ($id_jurusan_pdd == 1) {
                                                     if ($id_profesi_pdd == 1) {
                                                         $jenis_pmbb = "PPDS";

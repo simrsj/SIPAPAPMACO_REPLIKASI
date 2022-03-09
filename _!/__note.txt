@@ -16,7 +16,7 @@
 
 git status
 git add . 
-git commit -a -m "sukses data nilai keperawatan"
+git commit -a -m "proses data nilai upload"
 git pull
 git push
 
