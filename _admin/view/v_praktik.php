@@ -99,7 +99,7 @@ if (isset($_POST['arsip_praktik'])) {
     <?php
         }
     }
-} else {
+} elseif ($_GET['prk'] == ('ked' || 'kep' || 'nkl' || 'nnk')) {
 
     if ($_GET['prk'] == 'ked') {
         $tambah = "ked";
@@ -158,7 +158,7 @@ if (isset($_POST['arsip_praktik'])) {
                 $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
                 $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'D' OR tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S') ";
                 $sql_praktik .= " $jenis_jurusan ";
-                $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+                $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
 
                 // echo $sql_praktik;
 
@@ -173,7 +173,6 @@ if (isset($_POST['arsip_praktik'])) {
                                 <div class="card-header align-items-center bg-gray-200">
                                     <div class="row" style="font-size: small;">
                                         <br><br>
-
                                         <div class="col-sm-2 my-auto text-center">
                                             <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
                                         </div>
@@ -199,14 +198,6 @@ if (isset($_POST['arsip_praktik'])) {
                                             <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                                 <i class="fas fa-info-circle"></i> Rincian
                                             </button>
-                                            <!-- tombol ubah -->
-                                            <?php
-                                            if (($d_praktik['status_cek_praktik'] == "AKV") || ($d_praktik['status_cek_praktik'] == "SLS")) {
-                                                $link_ubah = "href='#' data-toggle='modal' data-target='#prk_u_" . $d_praktik['id_praktik'] . "'";
-                                            } else {
-                                                $link_ubah = "href='?prk&u=" . $d_praktik['id_praktik'] . "'";
-                                            }
-                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -637,7 +628,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -681,7 +682,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -723,7 +734,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -767,7 +788,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -805,7 +836,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH AKTIF</div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -842,7 +883,64 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH SELESAI</div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
+                        },
+                        error: function(response) {
+                            console.log(response.responseText);
+                            alert('eksekusi query gagal');
+                        }
+                    });
+                }
+            })
+        }
+
+        function arsipPraktik(id) {
+            console.log("arsipPraktik");
+            Swal.fire({
+                position: 'top',
+                title: 'Yakin ?',
+                html: "<span class='text-secondary text-uppercase font-weight-bold'>ARSIPKAN</span> Praktik",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1cc88a',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Ya',
+                allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "_admin/exc/x_v_praktik_arsipPraktik.php?id=" + id,
+                        success: function() {
+                            Swal.fire({
+                                allowOutsideClick: false,
+                                // isDismissed: false,
+                                icon: 'success',
+                                title: '<div class="text-md text-center">PRAKTIK SUDAH DIARSIPKAN<br><br>CEK MENU <b>ARSIP PRAKTIK</b> UNTUK MELIHAT DATA</div>',
+                                showConfirmButton: false,
+                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -854,4 +952,7 @@ if (isset($_POST['arsip_praktik'])) {
         }
     </script>
 <?php
+} else {
+    include "_error/index.php";
 }
+?>

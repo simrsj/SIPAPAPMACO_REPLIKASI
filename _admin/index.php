@@ -78,7 +78,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<li class="nav-item ">
 					<a class="nav-link" href="?pmbb">
 						<i class="fas fa-fw fa-users"></i>
-						<span>Pembimbing</span>
+						<span>Pembimbing-Ruangan</span>
 					</a>
 				</li>
 				<li class="nav-item ">
@@ -91,6 +91,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					<a class="nav-link" href="?trs">
 						<i class="fas fa-fw fa-wallet"></i>
 						<span>Data Pembayaran</span>
+					</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="?ars">
+						<i class="fas fa-fw fa-archive"></i>
+						<span>Arsip Praktik</span>
 					</a>
 				</li>
 				<hr class="sidebar-divider">
@@ -279,6 +285,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 
 					if (isset($_GET['aku'])) {
 						include "_admin/view/v_akun.php";
+					} elseif (isset($_GET['ars'])) {
+						include "_admin/view/v_praktik_arsip.php";
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
 					} elseif (isset($_GET['info_diklat'])) {
@@ -320,10 +328,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['nil'])) {
 						if (isset($_GET['i']) && isset($_GET['p'])) {
 							include "_admin/insert/i_nilaiKep.php";
-						} elseif (isset($_GET['i']) && isset($_GET['pa'])) {
-							include "_admin/insert/i_nilaiDataKep.php";
-						} elseif (isset($_GET['i'])) {
+						} elseif (isset($_GET['i']) && isset($_GET['pu'])) {
 							include "_admin/insert/i_nilai_upload.php";
+						} elseif (isset($_GET['u']) && isset($_GET['p'])) {
+							include "_admin/update/u_nilaiKep.php";
 						} else {
 							include "_admin/view/v_nilai.php";
 						}

@@ -313,11 +313,12 @@
     } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
     ?>
         <b>PILIH :</b><br>
-        <button class="btn btn-outline-secondary btn-sm" onclick="selesaiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">SELESAIKAN<i class="fas fa-question-circle"></i></button>
+        <button class="btn btn-outline-secondary btn-sm" onclick="selesaiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">SELESAIKAN <i class="fas fa-question-circle"></i></button>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
     ?>
-        <span class="badge badge-secondary text-md"> PRAKTIK <br> SELESAI</span>
+        <b>PILIH :</b><br>
+        <button class="btn btn-outline-secondary btn-sm" onclick="arsipPraktik(<?php echo $d_praktik['id_praktik']; ?>)">ARSIPKAN <i class="fas fa-question-circle"></i></button>
     <?php
     }
     ?>

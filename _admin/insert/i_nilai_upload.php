@@ -1,39 +1,64 @@
 <?php
 $i = $_GET['i'];
-if (is_numeric($i)) {
+$pu = $_GET['pu'];
+
+if (is_numeric($i) && is_numeric($pu)) {
 ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Pilih Pembimbing dan Ruangan</h1>
+                <h1 class="h3 mb-2 text-gray-800">Input Nilai</h1>
             </div>
         </div>
         <div class="card shadow mb-4">
             <div class="card-body">
                 <?php
-                $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
-                $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
-                $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . $_GET['i'];
+                $sql_data_praktikan = "SELECT * FROM tb_pembimbing_pilih ";
+                $sql_data_praktikan .= " JOIN tb_praktikan ON tb_pembimbing_pilih.id_praktikan = tb_praktikan.id_praktikan";
+                $sql_data_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing";
+                $sql_data_praktikan .= " JOIN tb_unit ON tb_pembimbing_pilih.id_unit = tb_unit.id_unit";
+                $sql_data_praktikan .= " WHERE tb_pembimbing_pilih.id_praktik = " . $i . " AND tb_pembimbing_pilih.id_pembimbing = " . $pu;
                 $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
+
                 // echo $sql_data_praktikan;
 
                 $q_data_praktikan = $conn->query($sql_data_praktikan);
+                $q1_data_praktikan = $conn->query($sql_data_praktikan);
                 $r_data_praktikan = $q_data_praktikan->rowCount();
                 $j_ptkn = $r_data_praktikan;
-
+                $d1_data_praktikan = $q1_data_praktikan->fetch(PDO::FETCH_ASSOC);
                 if ($r_data_praktikan > 0) {
                 ?>
-                    <form method="POST" id="form_pembb_ruangan">
+                    <form method="POST" id="form_nilai_upload">
                         <!-- data praktikan  -->
-                        <div class="table-responsive">
+                        <div class="row justify-content-between">
+                            <div class="col-md-4">
+                                Nama Pembimbing : <?php echo $d1_data_praktikan['nama_pembimbing']; ?><br>
+                                Ruangan : <?php echo $d1_data_praktikan['nama_unit']; ?>
+                            </div>
+                            <div class="col-md-auto">
+                            </div>
+                            <div class="col-md-3">
+                                Unggah File :
+                                <input type="file" name="nilai_upload" id="nilai_upload" class="form-control-file" accept="application/pdf">
+                                <div class="text-xs font-italic">
+                                    File Data Nilai Harus .pdf dan ukuran file kurang dari 1Mb
+                                </div>
+                                <span id="err_nilai_upload" class="text-xs font-italic text-danger blink"></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <span class="table-responsive">
                             <table class="table table-striped">
                                 <thead class="thead-dark">
                                     <tr class="text-center">
-                                        <th scope="col ">No</th>
+                                        <th scope="col">No</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col">NIM / NPM / NIS </th>
-                                        <th scope="col">Pilih<br>Pembimbing</th>
-                                        <th scope="col">Pilih<br>Ruangan</th>
+                                        <th scope="col">NIM / NPM / NIS</th>
+                                        <th scope="col">No. HP </th>
+                                        <th scope="col">No. WA </th>
+                                        <th scope="col">EMAIL</th>
+                                        <th scope="col">ASAL KOTA / KABUPATEN</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,77 +66,17 @@ if (is_numeric($i)) {
                                     $no = 1;
                                     while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <input type="hidden" name="jp" id="jp" value="<?php echo $d_data_praktikan['jumlah_praktik']; ?>">
-                                        <input type="hidden" name="id_praktik" id="id_praktik" value="<?php echo $_GET['i']; ?>">
-                                        <input type="hidden" name="id_praktikan<?php echo $no; ?>" id="id_praktikan<?php echo $no; ?>" value="<?php echo $d_data_praktikan['id_praktikan']; ?>">
+                                        <input type="hidden" name="id_unit" id="id_unit" value="<?php echo $d_data_praktikan['id_unit']; ?>">
+                                        <input type="hidden" name="id_praktik" id="id_praktik" value="<?php echo $d_data_praktikan['id_praktik']; ?>">
+                                        <input type="hidden" name="id_pembimbing" id="id_pembimbing" value="<?php echo $d_data_praktikan['id_pembimbing']; ?>">
                                         <tr>
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
-                                            <td class="text-center"><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
-                                            <td class="text-center">
-                                                <?php
-                                                $id_jurusan_pdd = $d_data_praktikan['id_jurusan_pdd'];
-                                                if ($id_jurusan_pdd == 1) {
-                                                    if ($id_profesi_pdd == 1) {
-                                                        $jenis_pmbb = "PPDS";
-                                                    } elseif ($id_profesi_pdd == 2) {
-                                                        $jenis_pmbb = "PSPD";
-                                                    }
-                                                } elseif ($id_jurusan_pdd == 2) {
-                                                    $jenis_pmbb = "CI KEP";
-                                                } elseif ($id_jurusan_pdd == 3) {
-                                                    $jenis_pmbb = "CI PSI";
-                                                } elseif ($id_jurusan_pdd == 4) {
-                                                    $jenis_pmbb = "CI IT";
-                                                } elseif ($id_jurusan_pdd == 5) {
-                                                    $jenis_pmbb = "CI FAR";
-                                                } elseif ($id_jurusan_pdd == 6) {
-                                                    $jenis_pmbb = "CI PEKSOS";
-                                                } elseif ($id_jurusan_pdd == 7) {
-                                                    $jenis_pmbb = "CI KESLING";
-                                                }
-                                                $sql_pmbb = "SELECT * FROM tb_pembimbing";
-                                                $sql_pmbb .= " WHERE jenis_pembimbing = '" . $jenis_pmbb . "' AND status_pembimbing = 'y'";
-                                                $sql_pmbb .= " ORDER BY kali_pembimbing ASC, nama_pembimbing ASC";
-
-                                                $q_pmbb = $conn->query($sql_pmbb);
-                                                ?>
-
-                                                <select class='form-inline js-example-placeholder-single' aria-label='Default select example' name="id_pembimbing<?php echo $no; ?>" id="id_pembimbing<?php echo $no; ?>" required>
-                                                    <option value="">-- Pilih --</option>
-                                                    <?php
-                                                    while ($d_pmbb = $q_pmbb->fetch(PDO::FETCH_ASSOC)) {
-                                                    ?>
-                                                        <option value="<?php echo $d_pmbb['id_pembimbing']; ?>">
-                                                            <?php echo "(" . $d_pmbb['kali_pembimbing'] . ") " . $d_pmbb['nama_pembimbing']; ?>
-                                                        </option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                                <span id="err_pmbb<?php echo $no; ?>" class="text-danger text-xs font-italic blink"></span>
-                                            </td>
-                                            <td class="text-center">
-                                                <?php
-                                                $sql_unit = "SELECT * FROM tb_unit";
-                                                $sql_unit .= " ORDER BY nama_unit ASC";
-
-                                                $q_unit = $conn->query($sql_unit);
-                                                ?>
-                                                <select class='form-inline js-example-placeholder-single' aria-label='Default select example' name='id_unit<?php echo $no; ?>' id="id_unit<?php echo $no; ?>" required>
-                                                    <option value="">-- Pilih --</option>
-                                                    <?php
-                                                    while ($d_unit = $q_unit->fetch(PDO::FETCH_ASSOC)) {
-                                                    ?>
-                                                        <option value="<?php echo $d_unit['id_unit']; ?>">
-                                                            <?php echo $d_unit['nama_unit']; ?>
-                                                        </option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                                <span id="err_unit<?php echo $no; ?>" class="text-danger text-xs font-italic blink"></span>
-                                            </td>
+                                            <td><?php echo $d_data_praktikan['telp_praktikan']; ?></td>
+                                            <td><?php echo $d_data_praktikan['wa_praktikan']; ?></td>
+                                            <td><?php echo $d_data_praktikan['wa_praktikan']; ?></td>
+                                            <td><?php echo $d_data_praktikan['email_praktikan']; ?></td>
+                                            <td><?php echo $d_data_praktikan['kota_kab_praktikan']; ?></td>
                                         </tr>
                                     <?php
                                         $no++;
@@ -119,19 +84,15 @@ if (is_numeric($i)) {
                                     ?>
                                 </tbody>
                             </table>
-                        </div>
-                        <hr>
-
+                        </span>
                         <!-- tombol simpan pilih Pembimbing dan Ruangan  -->
-                        <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
-                            <button type="button" name="simpan_pmbb_tmp" id="simpan_pmbb_tmp" class="btn btn-outline-success">
-                                <!-- <a class=" nav-link" href="#tarif"> -->
+                        <center>
+                            <button type="button" name="simpan_nilai_upload" id="simpan_nilai_upload" class="btn btn-outline-success">
                                 <i class="fas fa-check-circle"></i>
                                 Simpan Pembimbing dan Ruangan Praktik
                                 <i class="fas fa-check-circle"></i>
-                                <!-- </a> -->
                             </button>
-                        </div>
+                        </center>
                     </form>
                 <?php
                 } else {
@@ -149,26 +110,18 @@ if (is_numeric($i)) {
             </div>
         </div>
     </div>
+
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable();
-        });
+            $("#simpan_nilai_upload").click(function() {
+                var nilai_upload = $('#nilai_upload').val();
+                if (nilai_upload == "") {
 
-        $("#simpan_pmbb_tmp").click(function() {
-            var data_pembimbing = $('#form_pembb_ruangan').serializeArray();
-            var jp = document.getElementById('jp').value;
-
-            //Notif jika tida diisi Pembimbing 
-            var no = 1;
-            var pmbb = 0;
-            while (no <= jp) {
-                console.log("no: " + no + "jp: " + jp);
-                if (document.getElementById('id_pembimbing' + no).value == "") {
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
                         showConfirmButton: false,
-                        timer: 10000,
+                        timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -178,70 +131,110 @@ if (is_numeric($i)) {
 
                     Toast.fire({
                         icon: 'warning',
-                        title: '<center>DATA ADA YANG BELUM TERISI</center>'
+                        title: '<div class="text-center font-weight-bold text-uppercase">Data NILAI Belum dipilih</b></div>'
                     });
-                    document.getElementById("err_pmbb" + no).innerHTML = "<br>Pembimbing Harus Dipilih";
-                    pmbb++;
-                } else {
-                    document.getElementById("err_pmbb" + no).innerHTML = "";
+
+                    document.getElementById("err_nilai_upload").innerHTML = "Data Nilai Belum Dipilih";
+                    // console.log("Belum Upload");
+
                 }
-                no++;
 
-            }
+                //eksekusi bila file surat terisi
+                if (nilai_upload != "") {
 
-            //Notif jika tida diisi Unit
-            var no = 1;
-            var unit = 0;
-            while (no <= jp) {
-                console.log("no: " + no + "jp: " + jp);
-                if (document.getElementById('id_unit' + no).value == "") {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
+                    //Cari ekstensi file surat yg diupload
+                    var typeSurat = document.querySelector('#nilai_upload').value;
+                    var getTypeSurat = typeSurat.split('.').pop();
 
-                    Toast.fire({
-                        icon: 'warning',
-                        title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                    });
-                    document.getElementById("err_unit" + no).innerHTML = "<br> Ruangan Harus Dipilih";
-                    unit++;
-                } else {
-                    document.getElementById("err_unit" + no).innerHTML = "";
-                }
-                no++;
-            }
+                    //cari ukuran file surat yg diupload
+                    var fileSurat = document.getElementById("nilai_upload").files;
+                    var getSizeSurat = document.getElementById("nilai_upload").files[0].size / 1024;
 
-            //jika data sudah diisi semua
-            if (pmbb == 0 && unit == 0) {
-                console.log("SIMPAN");
-                $.ajax({
-                    type: 'POST',
-                    url: "_admin/exc/x_i_pembimbing_s.php?",
-                    data: data_pembimbing,
-                    success: function() {
+                    // console.log("Size Surat : " + getSizeSurat);
+                    // console.log("Size Surat : " + fileSurat);
+
+                    //Toast bila upload file surat selain pdf
+                    if (getTypeSurat != 'pdf') {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 10000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+
+                        Toast.fire({
+                            icon: 'warning',
+                            title: '<div class="text-md text-center">File Nilai Harus <b>.pdf</b></div>'
+                        });
+                        document.getElementById("err_nilai_upload").innerHTML = "File Nilai Harus pdf";
+                    } //Toast bila upload file surat diatas 1 Mb 
+                    else if (getSizeSurat > 1024) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 10000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+
+                        Toast.fire({
+                            icon: 'warning',
+                            title: '<div class="text-md text-center">File Nilai Harus <br><b>Kurang dari 1 Mb</b></div>'
+                        });
+                        document.getElementById("err_nilai_upload").innerHTML = "File Nilai Harus Kurang dari 1 Mb";
+                    } else {
+                        //simpan file upload
+                        var data_file = new FormData();
+                        var xhttp = new XMLHttpRequest();
+
+                        var fileSurat = document.getElementById("nilai_upload").files;
+                        data_file.append("nilai_upload", fileSurat[0]);
+
+                        var id_pembimbing = document.getElementById("id_pembimbing").value;
+                        data_file.append("id_pembimbing", id_pembimbing);
+
+                        var id_unit = document.getElementById("id_unit").value;
+                        data_file.append("id_unit", id_unit);
+
+                        var id_praktik = document.getElementById("id_praktik").value;
+                        data_file.append("id_praktik", id_praktik);
+
+                        xhttp.open("POST", "_admin/exc/x_i_nilai_upload_sFileNilai.php", true);
+                        xhttp.send(data_file);
+
                         Swal.fire({
                             allowOutsideClick: false,
                             // isDismissed: false,
                             icon: 'success',
-                            title: '<span class"text-xs"><b>DATA Pembimbing</b> dan <b>Ruangan</b><br>Berhasil Tersimpan',
+                            title: '<span class"text-xs"><b>Data Nilai Berhasil disimpan',
                             showConfirmButton: false,
-                            html: '<a href="?pmbb" class="btn btn-outline-primary">OK</a>',
-                        });
-                    },
-                    error: function(response) {
-                        console.log(response.responseText);
-                        alert('eksekusi query gagal');
+                            html: '<a href="?nil" class="btn btn-outline-primary">OK</a>',
+                            timer: 5000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        }).then(
+                            function() {
+                                document.location.href = "?nil";
+                            }
+                        );
                     }
-                });
-            }
+                }
+
+            });
+
+
         });
     </script>
 <?php

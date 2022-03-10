@@ -1,8 +1,8 @@
 <?php
 
-define('NUMBER_OF_COLUMNS', 7);
+define('JUMLAH_KOLOM2', 7);
 
-function renderCalenderMonth($date)
+function generateKalenderNklNnk($date)
 {
     $day = date('d', $date);
     $month = date('m', $date);
@@ -16,7 +16,7 @@ function renderCalenderMonth($date)
     $timestamp = strtotime('next Sunday');
     $weekDays = array();
 
-    for ($i = 0; $i < NUMBER_OF_COLUMNS; $i++) {
+    for ($i = 0; $i < JUMLAH_KOLOM2; $i++) {
         $weekDays[] = strftime('%a', $timestamp);
         $timestamp = strtotime('+1 day', $timestamp);
     }
@@ -27,7 +27,7 @@ function renderCalenderMonth($date)
         <table class='table table-striped'>
             <thead class="thead-dark">
                 <tr>
-                    <th colspan="<?php echo NUMBER_OF_COLUMNS ?>" class="text-center">
+                    <th colspan="<?php echo JUMLAH_KOLOM2 ?>" class="text-center">
                         <?php echo $title . " " . $year; ?>
                     </th>
                 </tr>
@@ -63,7 +63,7 @@ function renderCalenderMonth($date)
                             <td><?php echo $i;  ?></td>
                         <?php
                         }
-                        if (($i + $blank) % NUMBER_OF_COLUMNS == 0) {
+                        if (($i + $blank) % JUMLAH_KOLOM2 == 0) {
                         ?>
                 </tr>
                 <tr class="text-center">
@@ -73,7 +73,7 @@ function renderCalenderMonth($date)
             ?>
             <br>
             <?php
-            for ($i = 0; ($i + $blank + $daysInMonth) % NUMBER_OF_COLUMNS != 0; $i++) {
+            for ($i = 0; ($i + $blank + $daysInMonth) % JUMLAH_KOLOM2 != 0; $i++) {
             ?>
                 <td></td>
             <?php
@@ -100,13 +100,13 @@ for ($iterateYear = $tahun_sekarang; $iterateYear <= $tahun_sekarang + 1; $itera
             if ($bulan_sekarang < $iterateMonth) {
                 /* Set the date */
                 $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
-                renderCalenderMonth($date);
+                generateKalenderNklNnk($date);
             }
         } else {
 
             /* Set the date */
             $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
-            renderCalenderMonth($date);
+            generateKalenderNklNnk($date);
         }
     }
 }

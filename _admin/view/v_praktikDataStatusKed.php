@@ -59,7 +59,7 @@
 
                     <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span><br>
                     Proses Pembayaran <span class="font-weight-bold text-danger">DITOLAK</span>, karena jumlah transfer kurang<br>
-                    Lakukan kembali pembayaran, seusai dengan jumlah kekurangan cek <span class="font-weight-bold text-danger">KETERANGAN</span>
+                    Lakukan kembali pembayaran, seusai dengan jumlah kekurangan cek <span class="font-weight-bold text-danger">KETERANGAN</span><br><br>
 
                     <span class="badge badge-dark text-md">SELESAI</span><br>
                     Praktikan Sudah <span class="text-dark font-weight-bold">SELESAI</span><br><br>

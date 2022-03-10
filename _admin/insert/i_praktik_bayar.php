@@ -183,9 +183,9 @@ if (isset($_POST['simpan_bayar'])) {
         $no++;
     }
 
-    echo "<pre>";
-    print_r($_FILES);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
 
     //alamat file surat masuk
     $alamat_unggah = "./_file/bayar";
@@ -198,9 +198,9 @@ if (isset($_POST['simpan_bayar'])) {
     $_FILES['file_bayar']['name'] = "bayar_" . $no . "_" . $_POST['id_praktik'] . "_" . date('Y-m-d') . "." . $ext;
 
 
-    echo "<pre>";
-    print_r($_FILES);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
 
     //pembuatan alamat bila tidak ada
     if (!is_dir($alamat_unggah)) {

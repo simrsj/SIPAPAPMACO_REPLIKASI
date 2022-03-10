@@ -178,11 +178,15 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
+                                            if (($_GET['prk'] == 'nnk' && $d_jenjang_pdd['id_jenjang_pdd'] == 9) || $d_jenjang_pdd['id_jenjang_pdd'] < 6 || $d_jenjang_pdd['id_jenjang_pdd'] > 9) {
+                                                continue;
+                                            } else {
                                         ?>
-                                            <option value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
-                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd'] ?>
-                                            </option>
+                                                <option value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
+                                                    <?php echo $d_jenjang_pdd['nama_jenjang_pdd'] ?>
+                                                </option>
                                         <?php
+                                            }
                                         }
                                         ?>
                                     </select><br>
@@ -522,7 +526,6 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
 
         function bukaProfesi() {
             var id_jurusan = $('#id_jurusan_pdd').val();
-
         }
 
         function simpan_praktik() {
@@ -919,7 +922,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
 
                 Toast.fire({
                     icon: 'info',
-                    title: '<div class="text-md text-center">LANJUTKAN KE <b>DATA TARIF</b></div>'
+                    title: '<div class="text-md text-center">LANJUTKAN KE <b>MENU TARIF</b></div>'
                 });
             }
         }
@@ -1088,7 +1091,17 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>TARIF</b><br>Berhasil Tersimpan',
                                 showConfirmButton: false,
                                 html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = path;
+                                }
+                            );
                         };
                         xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
                             true
