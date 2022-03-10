@@ -28,7 +28,7 @@ Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini :
 
 git status
 git add . 
-git commit -a -m "Selesai (Auto Fill Pengajuan Koordinator, Tarif Keselamatan Pasien dan Log Book, Sortir Daftar Pengajuan Praktik), note informasi Update WAG"
+git commit -a -m "Database Update"
 git pull
 git push
 
