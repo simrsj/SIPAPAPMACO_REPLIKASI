@@ -44,6 +44,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 				</li>
 				<li class="nav-item ">
+					<a class="nav-link" href="?kta">
+						<i class="fas fa-fw fa-info-circle"></i>
+						<span>Kuota</span>
+					</a>
+				</li>
+				<li class="nav-item ">
 					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
 						<i class="far fa-fw fa-list-alt"></i>
 						<span>Pengajuan</span>
@@ -305,6 +311,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_jurusan.php";
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
+					} elseif (isset($_GET['kta'])) {
+						include "_admin/view/v_kuota.php";
 					} elseif (isset($_GET['lapor'])) {
 						if (isset($_GET['dtl'])) {
 							include "_admin/view/v_lapor_detail.php";

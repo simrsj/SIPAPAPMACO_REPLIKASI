@@ -89,13 +89,25 @@
             </div>
         </div>
 
+        <?php
+        $sql_kuota = "SELECT * FROM tb_kuota";
+        $q_kuota = $conn->query($sql_kuota);
+
+
+        ?>
         <!-- INFORMASI JADWAL PRAKTIKAN-->
         <div class="row">
             <!-- KEDOKTERAN DAN KEPERAWATAN-->
             <div class="col-xl-6 col-md-6 mb-4 align-items-stretch">
                 <div class="card shadow h-100">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Kedokteran dan Keperawatan (Kuota Harian : )</h6>
+                        <?php
+                        $sql_kuotaKedKep = "SELECT * FROM tb_kuota";
+                        $sql_kuotaKedKep .= " WHERE nama_kuota = 'kedKep'";
+                        $q_kuotaKedKep = $conn->query($sql_kuotaKedKep);
+                        $d_kuotaKedKep = $q_kuotaKedKep->fetch(PDO::FETCH_ASSOC);
+                        ?>
+                        <h6 class="m-0 font-weight-bold text-primary">Kedokteran dan Keperawatan (<span class="text-danger">Kuota Harian : <?php echo $d_kuotaKedKep['jumlah_kuota']; ?>)</h6>
                         <a class="btn btn-outline-primary btn-sm" href="#">Input Kuota</a>
                     </div>
                     <div class="card">
@@ -111,27 +123,78 @@
             <div class="col-xl-6 col-md-6 mb-4 align-items-stretch">
                 <div class="card shadow h-100">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Nakes Lainnya dan Non-Nakes (Kuota Harian : )</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Nakes Lainnya dan Non-Nakes &nbsp;
+                            (
+                            <a href="#" class="text-danger" data-toggle="modal" data-target="#info_status" title="Keterangan Status">
+                                <i class="fas fa-info-circle"></i> Cek Kuota Harian
+                            </a>
+                            )
+                            <div class="modal fade text-gray-800" id="info_status" data-backdrop="static" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4>Info Kuota Harian Nakes Lainnya dan Non Nakes</h4>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row text-center text-lg">
+                                                <?php
+                                                $sql_kuotaFar = "SELECT * FROM tb_kuota";
+                                                $sql_kuotaFar .= " WHERE nama_kuota = 'far'";
+                                                $q_kuotaFar = $conn->query($sql_kuotaFar);
+                                                $d_kuotaFar = $q_kuotaFar->fetch(PDO::FETCH_ASSOC);
+
+                                                $sql_kuotaKesling = "SELECT * FROM tb_kuota";
+                                                $sql_kuotaKesling .= " WHERE nama_kuota = 'kesling'";
+                                                $q_kuotaKesling = $conn->query($sql_kuotaKesling);
+                                                $d_kuotaKesling = $q_kuotaKesling->fetch(PDO::FETCH_ASSOC);
+
+                                                $sql_kuotaPsi = "SELECT * FROM tb_kuota";
+                                                $sql_kuotaPsi .= " WHERE nama_kuota = 'psi'";
+                                                $q_kuotaPsi = $conn->query($sql_kuotaPsi);
+                                                $d_kuotaPsi = $q_kuotaPsi->fetch(PDO::FETCH_ASSOC);
+
+                                                $sql_kuotaRm = "SELECT * FROM tb_kuota";
+                                                $sql_kuotaRm .= " WHERE nama_kuota = 'rm'";
+                                                $q_kuotaRm = $conn->query($sql_kuotaRm);
+                                                $d_kuotaRm = $q_kuotaRm->fetch(PDO::FETCH_ASSOC);
+
+                                                $sql_kuotaIt = "SELECT * FROM tb_kuota";
+                                                $sql_kuotaIt .= " WHERE nama_kuota = 'it'";
+                                                $q_kuotaIt = $conn->query($sql_kuotaIt);
+                                                $d_kuotaIt = $q_kuotaIt->fetch(PDO::FETCH_ASSOC);
+
+                                                $sql_kuotaPeksos = "SELECT * FROM tb_kuota";
+                                                $sql_kuotaPeksos .= " WHERE nama_kuota = 'kesling'";
+                                                $q_kuotaPeksos = $conn->query($sql_kuotaPeksos);
+                                                $d_kuotaPeksos = $q_kuotaPeksos->fetch(PDO::FETCH_ASSOC);
+                                                ?>
+                                                <div class="col-md-4">
+                                                    Farmasi : <br><span class="badge badge-primary text-lg"><?php echo $d_kuotaFar['jumlah_kuota']; ?></span><br><br>
+                                                    Kesehatan Lingkungan (KESLING) : <br><span class="badge badge-primary text-lg"><?php echo $d_kuotaKesling['jumlah_kuota']; ?>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    Psikologi : <br><span class="badge badge-primary text-lg"><?php echo $d_kuotaPsi['jumlah_kuota']; ?></span><br><br>
+                                                    Rekam Medis (RM) : <br><span class="badge badge-primary text-lg"><?php echo $d_kuotaRm['jumlah_kuota']; ?></span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    Informasi Teknologi (IT) : <br><span class="badge badge-primary text-lg"><?php echo $d_kuotaIt['jumlah_kuota']; ?></span><br><br>
+                                                    Pekerja Sosial (PEKSOS) : <br><span class="badge badge-primary text-lg"><?php echo $d_kuotaPeksos['jumlah_kuota']; ?></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h6>
                         <a class="btn btn-outline-primary btn-sm" href="#">Input Kuota</a>
                     </div>
                     <div class="card">
                         <div class="overflow-auto">
                             <div class="no-gutters align-items-center text-center pt-0">
-                                <br>
-                                <div class="row text-center">
-                                    <div class="col-md-4">
-                                        Farmasi : 10<br><br>
-                                        Kesling : 10
-                                    </div>
-                                    <div class="col-md-4">
-                                        Farmasi : 10<br><br>
-                                        Kesling : 10
-                                    </div>
-                                    <div class="col-md-4">
-                                        Farmasi : 10<br><br>
-                                        Kesling : 10
-                                    </div>
-                                </div>
                                 <?php include "./_admin/view/v_info_diklat_dataNklNnk.php"; ?>
                             </div>
                         </div>

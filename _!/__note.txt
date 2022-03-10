@@ -3,6 +3,7 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 
 _*MAYOR*_
 - 🔃 Perbaikan Akun Institusi
+- ✅ Data Nilai Keperawatan dan Upload File (Selain Keperawatan)
 
 _*MINOR*_
 - 🔃 Pembuatan Informasi Jadwal Praktik
@@ -17,18 +18,17 @@ _*MINOR*_
 - Saat Pilih Mess oleh Admin, tidak usah lagi memilih Dengan atau Tanpa Makan
 
 KET : 
-_*MAYOR*_ = Modul yang _*BUG/ERROR*_nya pempengaruhi Alur Utama (Dipioritaskan)
-_*MINOR*_ = Modul yang _*BUG/ERROR*_nya bisa di kondisikan
+_*MAYOR*_ = Modul yang _*BUG/ERROR*_ nya pempengaruhi Alur Utama (Dipioritaskan)
+_*MINOR*_ = Modul yang _*BUG/ERROR*_ nya bisa di kondisikan
 ✅ = Selesai, 🔃 = Progress
 
 NOTE : 
-Modul yang sudah selesai akan dihilangkan diudate selanjutnya 
-
-Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : 
+Modul yang sudah selesai akan dihilangkan diudate selanjutnya, 
+Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/TLDevSM
 
 git status
 git add . 
-git commit -a -m "Progres Info Jadwal Praktik"
+git commit -a -m "Perbaikan Hilangkan Tarif (Keselamatan Pasin dan Log Book)"
 git pull
 git push
 

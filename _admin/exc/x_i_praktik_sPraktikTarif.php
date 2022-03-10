@@ -107,12 +107,13 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
 
 
     //SQL menentukan tarif berdasarkan jenis jurusan
-    $sql_tarif_jurusan = " SELECT * FROM tb_tarif 
-            JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
-            JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan  
-            WHERE tb_tarif.id_jurusan_pdd = $id_jurusan_pdd AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5 AND tb_tarif.id_jenjang_pdd = 0
-            ORDER BY nama_tarif_jenis ASC, nama_tarif ASC 
-            ";
+
+    $sql_tarif_jurusan = " SELECT * FROM tb_tarif";
+    $sql_tarif_jurusan .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
+    $sql_tarif_jurusan .= " JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan  ";
+    $sql_tarif_jurusan .= " WHERE tb_tarif.id_jurusan_pdd = $id_jurusan_pdd AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5 ";
+    $sql_tarif_jurusan .= " AND tb_tarif.id_jenjang_pdd = 0 AND tb_tarif.status_tarif = 'y'";
+    $sql_tarif_jurusan .= " ORDER BY nama_tarif_jenis ASC, nama_tarif ASC ";
 
     echo "<br><br>";
     echo $sql_tarif_jurusan;
@@ -195,13 +196,14 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
 
     //SQL BST Eksekusi bila jurusan selain dari kedokteran
     if ($id_jurusan_pdd != 1) {
-        $sql_tarif_jenjang = " SELECT * FROM tb_tarif 
-            JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
-            JOIN tb_jenjang_pdd ON tb_tarif.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-            JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 
-            WHERE tb_tarif.id_jurusan_pdd = " . $id_jurusan_pdd . " AND tb_tarif.id_jenjang_pdd = " . $id_jenjang_pdd . " AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 6
-            ORDER BY nama_jenjang_pdd ASC
-            ";
+        $sql_tarif_jenjang = " SELECT * FROM tb_tarif ";
+        $sql_tarif_jenjang .= "  JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
+        $sql_tarif_jenjang .= " JOIN tb_jenjang_pdd ON tb_tarif.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
+        $sql_tarif_jenjang .= "  JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan ";
+        $sql_tarif_jenjang .= "  WHERE tb_tarif.id_jurusan_pdd = " . $id_jurusan_pdd;
+        $sql_tarif_jenjang .= "  AND tb_tarif.id_jenjang_pdd = " . $id_jenjang_pdd . " AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 6 ";
+        $sql_tarif_jenjang .= "  AND tb_tarif.status_tarif = 'y'";
+        $sql_tarif_jenjang .= "  ORDER BY nama_jenjang_pdd ASC";
 
         $q_tarif_jenjang = $conn->query($sql_tarif_jenjang);
 
@@ -264,12 +266,12 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
 
     echo $cek_pilih_ujian . "<br>";
     if ($cek_pilih_ujian == 'y') {
-        $sql_tarif_ujian = " SELECT * FROM tb_tarif 
-            JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
-            JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan 
-            WHERE tb_tarif.id_tarif_jenis = 6 AND tb_tarif.id_jurusan_pdd = " . $id_jurusan_pdd . "
-            ORDER BY nama_tarif_jenis ASC
-        ";
+        $sql_tarif_ujian = " SELECT * FROM tb_tarif ";
+        $sql_tarif_ujian .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
+        $sql_tarif_ujian .= " JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan ";
+        $sql_tarif_ujian .= "  WHERE tb_tarif.id_tarif_jenis = 6 AND tb_tarif.id_jurusan_pdd = " . $id_jurusan_pdd;
+        $sql_tarif_ujian .= "  AND tb_tarif.status_tarif = 'y'";
+        $sql_tarif_ujian .= "  ORDER BY nama_tarif_jenis ASC";
 
         echo $sql_tarif_ujian;
 
