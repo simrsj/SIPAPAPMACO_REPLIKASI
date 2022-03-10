@@ -137,7 +137,7 @@ if (isset($_POST['hapus_mou'])) {
                     JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi
                     JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-                    JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
+                    JOIN tb_profesi_pdd ON tb_mou.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd
                     JOIN tb_akreditasi ON tb_mou.id_akreditasi = tb_akreditasi.id_akreditasi
                     WHERE tb_institusi.id_institusi = " . $_SESSION['id_institusi'] . "
                     ORDER BY tb_institusi.nama_institusi ASC";
@@ -292,8 +292,8 @@ if (isset($_POST['hapus_mou'])) {
                                                             <?php echo $d_mou['nama_jurusan_pdd']; ?><br><br>
                                                             <b>Jenjang : </b>
                                                             <?php echo $d_mou['nama_jenjang_pdd']; ?><br><br>
-                                                            <b>Spesifikasi : </b>
-                                                            <?php echo $d_mou['nama_spesifikasi_pdd']; ?><br><br>
+                                                            <b>Profesi : </b>
+                                                            <?php echo $d_mou['nama_profesi_pdd']; ?><br><br>
                                                             <b>Akreditasi Institusi : </b>
                                                             <?php echo $d_mou['nama_akreditasi']; ?><br><br>
                                                             <b>Tangga Mulai MoU : </b>
@@ -359,8 +359,8 @@ if (isset($_POST['hapus_mou'])) {
                                                             <?php echo $d_mou['nama_jurusan_pdd']; ?><br><br>
                                                             <b>Jenjang : </b>
                                                             <?php echo $d_mou['nama_jenjang_pdd']; ?><br><br>
-                                                            <b>Spesifikasi : </b>
-                                                            <?php echo $d_mou['nama_spesifikasi_pdd']; ?><br><br>
+                                                            <b>Profesi : </b>
+                                                            <?php echo $d_mou['nama_profesi_pdd']; ?><br><br>
                                                             <b>Akreditasi Institusi : </b>
                                                             <?php echo $d_mou['nama_akreditasi']; ?><br><br>
                                                             <b>Tangga Mulai MoU : </b>

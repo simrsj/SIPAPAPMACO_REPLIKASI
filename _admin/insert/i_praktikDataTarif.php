@@ -30,14 +30,12 @@ $jumlah_praktik = $_GET['jum'];
             </div>
             <hr>
             <?php
-            $sql_tarif_jurusan = " SELECT * FROM tb_tarif 
-                JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis 
-                JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan  
-                WHERE tb_tarif.id_jurusan_pdd = $id_jurusan_pdd AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5 AND tb_tarif.id_jenjang_pdd = 0
-                ORDER BY nama_tarif_jenis ASC, nama_tarif ASC 
-                ";
-
-
+            $sql_tarif_jurusan = " SELECT * FROM tb_tarif";
+            $sql_tarif_jurusan .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
+            $sql_tarif_jurusan .= " JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan  ";
+            $sql_tarif_jurusan .= " WHERE tb_tarif.id_jurusan_pdd = $id_jurusan_pdd AND tb_tarif.id_tarif_jenis BETWEEN 1 AND 5 ";
+            $sql_tarif_jurusan .= " AND tb_tarif.id_jenjang_pdd = 0 AND tb_tarif.status_tarif = 'y'";
+            $sql_tarif_jurusan .= " ORDER BY nama_tarif_jenis ASC, nama_tarif ASC ";
 
             // echo $sql_tarif_jurusan . "<br>";
             $q_tarif_jurusan = $conn->query($sql_tarif_jurusan);

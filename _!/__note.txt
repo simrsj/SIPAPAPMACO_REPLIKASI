@@ -1,10 +1,34 @@
 
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
 
+_*MAYOR*_
+- 🔃 Perbaikan Akun Institusi
+
+_*MINOR*_
+- 🔃 Pembuatan Informasi Jadwal Praktik
+- 🔃 Filter Pemilihan Jadwal Praktik saat pengajuan
+- Cetak Invoice Pembayaran 
+- Cetak Data Nilai Keperawatan
+- ✅ Auto Fill Pengajuan Koordinator
+- ✅ Tarif (Selain Kedokteran) Keselamatan Pasien dan Log Book sementara dihilangkan
+- Saat Pengajuan Keperawatan saat pilih jenjang profesi, menu profesi tidak usah (pilih) lagi
+- ✅ Pengurutan Daftar Pengajuan Disesuakan dengan pengajuan terbaru
+- Pembuatan Fungsi Notifikasi (alert) Setiap Proses Alur
+- Saat Pilih Mess oleh Admin, tidak usah lagi memilih Dengan atau Tanpa Makan
+
+KET : 
+_*MAYOR*_ = Modul yang _*BUG/ERROR*_nya pempengaruhi Alur Utama (Dipioritaskan)
+_*MINOR*_ = Modul yang _*BUG/ERROR*_nya bisa di kondisikan
+✅ = Selesai, 🔃 = Progress
+
+NOTE : 
+Modul yang sudah selesai akan dihilangkan diudate selanjutnya 
+
+Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : 
 
 git status
 git add . 
-git commit -a -m "Progres info jadwal praktik"
+git commit -a -m "Selesai (Auto Fill Pengajuan Koordinator, Tarif Keselamatan Pasien dan Log Book, Sortir Daftar Pengajuan Praktik), note informasi Update WAG"
 git pull
 git push
 

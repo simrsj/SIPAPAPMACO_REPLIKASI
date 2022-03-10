@@ -1,448 +1,159 @@
-<?php
-if (isset($_POST['arsip_praktik']) || isset($_POST['selesai_praktik'])) {
-    $conn->query("UPDATE `tb_praktik` SET status_praktik = 'T' WHERE id_praktik = " . $_POST['id_praktik']);
-    echo "
-        <script type='text/javascript'>
-            document.location.href = '?ptk';
-        </script>
-    ";
-} elseif (isset($_POST['tambah_praktikan'])) {
-    $id_praktik = $_POST['id_praktik'];
-    $q_praktikan = $conn->query("SELECT * FROM tb_praktikan WHERE id_praktik= '" . $id_praktik . "'");
-    $r_praktikan = $q_praktikan->rowCount();
-    if ($r_praktikan > 0) {
-        echo "
-        <script type='text/javascript'>
-           alert('DATA PRAKTIKAN SUDAH ADA');
-        </script>
-    ";
-    } else {
-        $sql_insert_praktikan = "INSERT INTO tb_praktikan (id_praktik, status_praktikan)  VALUES ($id_praktik, 'INPUT NILAI')";
-
-        // echo $sql_insert_praktikan;
-        $conn->query($sql_insert_praktikan);
-    }
-    echo "
-        <script type='text/javascript'>
-            //document.location.href = '?ptk';
-        </script>
-    ";
-} elseif (isset($_POST['hapus_praktikan'])) {
-    $sql_delete_praktikan_detail_all = "DELETE FROM `tb_praktikan_detail` WHERE id_praktikan = '" . $_POST['id_praktikan'] . "'";
-
-    // echo $sql_delete_praktikan_detail_all . "<br>";
-    $conn->query($sql_delete_praktikan_detail_all);
-
-    $sql_ubah_status_praktikan = "UPDATE tb_praktikan
-            SET status_praktikan = 'INPUT PRAKTIKAN'
-            WHERE id_praktikan = '" . $_POST['id_praktikan'] . "'";
-
-    // echo $sql_ubah_status_praktikan . "<br>";
-    $conn->query($sql_ubah_status_praktikan);
-    echo "
-        <script type='text/javascript'>
-            document.location.href = '?ptk';
-        </script>
-    ";
-} elseif (isset($_POST['tambah_data_praktikan'])) {
-    $sql_insert_data_praktikan = "INSERT INTO tb_praktikan_detail (
-        id_praktikan, 
-        no_id_praktikan_detail, 
-        nama_praktikan_detail, 
-        tgl_lahir_praktikan_detail, 
-        telp_praktikan_detail, 
-        email_praktikan_detail,
-        tgl_input_praktikan_detail
-        )  VALUES (
-            '" . $_POST['id_praktikan'] . "',
-            '" . $_POST['no_id_praktikan_detail'] . "',
-            '" . $_POST['nama_praktikan_detail'] . "',
-            '" . $_POST['tgl_lahir_praktikan_detail'] . "',
-            '" . $_POST['telp_praktikan_detail'] . "',
-            '" . $_POST['email_praktikan_detail'] . "',
-            '" . date('Y-m-d') . "'
-        )";
-
-    $sql_ubah_status_praktikan = "UPDATE tb_praktikan SET
-    status_praktikan = 'PRAKTIKAN ADA'
-    WHERE id_praktikan = '" . $_POST['id_praktikan'] . "'";
-
-    // echo $sql_insert_data_praktikan . "<br>";
-    // echo $sql_ubah_status_praktikan . "<br>";
-    $conn->query($sql_insert_data_praktikan);
-    $conn->query($sql_ubah_status_praktikan);
-
-    $q_praktikan = $conn->query("SELECT * FROM tb_praktikan_detail 
-                                JOIN tb_praktikan on tb_praktikan.id_praktikan = tb_praktikan_detail.id_praktikan
-                                JOIN tb_praktik on tb_praktik.id_praktik = tb_praktikan.id_praktik 
-    ORDER BY id_praktikan_detail DESC LIMIT 1");
-    $data = $q_praktikan->fetch(PDO::FETCH_ASSOC);
-    if ($data['id_jurusan_pdd_jenis'] == 1) {
-        echo "ini dokter";
-        // $sql_insert_nilai = "INSERT INTO tb_nilai (id_praktikan_detail)  VALUES (".$data['id_praktikan_detail'].")";
-    } else {
-        $sql_insert_nilai = "INSERT INTO tb_nilai (id_praktikan_detail)  VALUES (" . $data['id_praktikan_detail'] . ")";
-    }
-
-    // echo $sql_insert_nilai;die;
-    $conn->query($sql_insert_nilai);
-    echo "
-        <script type='text/javascript'>
-            document.location.href = '?ptk';
-        </script>
-    ";
-} elseif (isset($_POST['ubah_data_praktikan'])) {
-    $sql_ubah_data_praktikan = "UPDATE tb_praktikan_detail SET
-        no_id_praktikan_detail = '" . $_POST['no_id_praktikan_detail'] . "',
-        nama_praktikan_detail = '" . $_POST['nama_praktikan_detail'] . "',
-        tgl_lahir_praktikan_detail = '" . $_POST['tgl_lahir_praktikan_detail'] . "',
-        telp_praktikan_detail = '" . $_POST['telp_praktikan_detail'] . "',
-        email_praktikan_detail = '" . $_POST['email_praktikan_detail'] . "',
-        tgl_ubah_praktikan_detail = '" . date('Y-m-d') . "'
-        WHERE id_praktikan_detail = '" . $_POST['id_praktikan_detail'] . "'
-    ";
-    // echo $sql_ubah_data_praktikan . "<br>";
-    $conn->query($sql_ubah_data_praktikan);
-    echo "
-        <script type='text/javascript'>
-            document.location.href = '?ptk';
-        </script>
-    ";
-} elseif (isset($_POST['hapus_data_praktikan'])) {
-    $sql_delete_praktikan_detail = "DELETE FROM `tb_praktikan_detail` WHERE id_praktikan_detail = " . $_POST['id_praktikan_detail'];
-
-    echo $sql_delete_praktikan_detail . "<br>";
-    $conn->query($sql_delete_praktikan_detail);
-
-    //jika semuanya dihapus dalam data praktikan ubah status praktikan
-    $sql_praktikan_detail = "SELECT * FROM tb_praktikan_detail WHERE id_praktikan = '" . $_POST['id_praktikan'] . "'";
-    $q_praktikan_detail = $conn->query($sql_praktikan_detail);
-    $r_praktikan_detail = $q_praktikan_detail->rowCount();
-
-    if ($r_praktikan_detail == 0) {
-        $sql_ubah_status_praktikan = "UPDATE tb_praktikan
-            SET status_praktikan = 'INPUT PRAKTIKAN'
-            WHERE id_praktikan = '" . $_POST['id_praktikan'] . "'";
-
-        echo $sql_ubah_status_praktikan . "<br>";
-        $conn->query($sql_ubah_status_praktikan);
-    }
-    echo "
-        <script type='text/javascript'>
-            document.location.href = '?ptk';
-        </script>
-    ";
-} else {
-?>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Daftar Praktikan</h1>
-            </div>
-            <!-- <div class="col-lg-2 text-right">
-                <a href="?dpk&a" class="btn btn-outline-info btn-sm">
-                    <i>
-                        <i class="fas fa-archive"></i>
-                    </i>Arsip
-                </a> -->
-            <!-- </div> -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10">
+            <h1 class="h3 mb-2 text-gray-800">Daftar Praktikan</h1>
         </div>
+        <!-- <div class="col-lg-2 text-right">
+            <a href="?dpk&a" class="btn btn-outline-info btn-sm">
+                <i>
+                    <i class="fas fa-archive"></i>
+                </i>Arsip
+            </a>
+        </div> -->
+    </div>
 
-        <div class="card shadow mb-4">
-            <div class="card-body">
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <?php
+            $sql_praktikan = "SELECT * FROM tb_praktik ";
+            $sql_praktikan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
+            $sql_praktikan .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
+            $sql_praktikan .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
+            $sql_praktikan .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
+            $sql_praktikan .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
+            $sql_praktikan .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
+            $sql_praktikan .= " WHERE tb_praktik.status_praktik != 'A' ";
+            $sql_praktikan .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+
+            // echo $sql_praktikan;
+
+            $q_praktik = $conn->query($sql_praktikan);
+            $r_praktik = $q_praktik->rowCount();
+
+            if ($r_praktik > 0) {
+            ?>
                 <?php
-                $sql_praktik = "SELECT * FROM tb_praktikan
-                    JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik
-                    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
-                    JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-                    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                    JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-                    WHERE 
-                    tb_praktik.status_praktik = 'Y' AND tb_praktik.status_cek_praktik ='AKTIF' AND tb_institusi.id_institusi = '" . $_SESSION['id_institusi'] . "'
-                    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
-
-                $q_praktik = $conn->query($sql_praktik);
-                $r_praktik = $q_praktik->rowCount();
-
-                if ($r_praktik > 0) {
+                while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
                 ?>
-                    <?php
-                    while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <div id="accordion">
-                            <div class="card">
-                                <div class="card-header align-items-center bg-gray-200">
-                                    <div class="row" style="font-size: small;">
-                                        <br><br>
-                                        <div class="col-sm-3 my-auto">
-                                            <b>INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
-                                        </div>
-                                        <div class="col-sm-2 my-auto">
-                                            <b>GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
-                                        </div>
-                                        <div class="col-sm-3 my-auto">
-                                            <b>TANGGAL SELESAI : </b><?php echo tanggal_minimal($d_praktik['tgl_selesai_praktik']); ?>
-                                            <br>
-                                            <b>TANGGAL MULAI : </b><?php echo tanggal_minimal($d_praktik['tgl_mulai_praktik']); ?>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header align-items-center bg-gray-200">
+                                <div class="row" style="font-size: small;">
+                                    <br><br>
 
-                                        </div>
-                                        <div class="col-sm-2 text-center my-auto">
-                                            <b>STATUS : </b>
-                                            <a href="#" data-toggle="modal" data-target="#info_status">
-                                                <i class="fas fa-info-circle" style="font-size: 14px;"></i>
-                                            </a>
-
-                                            <!-- modal info_status -->
-                                            <div class="modal fade text-left" id="info_status">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4>INFO STATUS</h4>
-                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">×</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body text-center">
-                                                            <span class="badge badge-warning text-md">INPUT PRAKTIKAN</span><br>
-                                                            Lakukan proses Tambah untuk memasukan data praktikan<br><br>
-                                                            <span class="badge badge-primary text-md">PRAKTIKAN ADA</span><br>
-                                                            data praktikan sudah diinputkan<br><br>
-                                                            <span class="badge badge-danger text-md">ERROR</span><br> Terjadi kesalahan sistem, <br><a href="?lapor" class="text-danger text-uppercase font-weight-bold">Laporkan !</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <br>
-                                            <?php
-                                            if ($d_praktik['status_praktikan'] == "INPUT PRAKTIKAN") {
-                                            ?>
-                                                <span class="badge badge-warning text-md"><?php echo $d_praktik['status_praktikan']; ?></span>
-                                            <?php
-                                            } elseif ($d_praktik['status_praktikan'] == "PRAKTIKAN ADA") {
-                                            ?>
-                                                <span class="badge badge-primary text-md"><?php echo $d_praktik['status_praktikan']; ?></span>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <span class="badge badge-danger text-md">ERROR</span>
-                                            <?php
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="col-sm-2 text-center my-auto">
-                                            <!-- tombol rincian -->
-                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
-                                                <i class="fas fa-info-circle"> </i>
-                                                Rincian
-                                            </button>
-                                        </div>
+                                    <div class="col-sm-3 text-center">
+                                        <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?><br>
+                                        <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                     </div>
-                                </div>
 
-                                <!-- collapse data praktikan -->
-                                <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
-                                    <div class="card-body " style="font-size: small;">
-
-                                        <!-- data menu harga wajib, ujian dan sewa tempat yang dipilih -->
-                                        <div class="text-gray-700">
-                                            <div class="row">
-                                                <div class="col-lg-11">
-                                                    <h4 class="font-weight-bold">
-                                                        DATA PRAKTIKAN
-                                                    </h4>
-                                                </div>
-                                                <div class="col-lg-1">
-                                                    <a title="Tambah Data Praktikan" class="btn btn-success btn-sm" data-toggle='modal' data-target='#t_p_m<?php echo $d_praktik['id_praktikan']; ?>'>
-                                                        <i class="fas fa-plus"></i>
-                                                    </a>
-                                                    <!-- modal tambah data praktikan -->
-                                                    <div class="modal fade text-left" id="t_p_m<?php echo $d_praktik['id_praktikan']; ?>">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <form class="form-group" method="post">
-                                                                    <div class="modal-header">
-                                                                        <h4>TAMBAH DATA PRAKTIKAN ?</h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        ID Praktikan : <span style="color:red">*</span><br>
-                                                                        <input class="form-control" type="text" name="no_id_praktikan_detail" required><br>
-                                                                        Nama Praktikan : <span style="color:red">*</span><br>
-                                                                        <input class="form-control" type="text" name="nama_praktikan_detail" required><br>
-                                                                        Tanggal Lahir : <span style="color:red">*</span><br>
-                                                                        <input class="form-control" type="date" name="tgl_lahir_praktikan_detail" required><br>
-                                                                        No. Telp. : <span style="color:red">*</span><br>
-                                                                        <input class="form-control" type="number" min="1" name="telp_praktikan_detail" required><br>
-                                                                        E-Mail: <br>
-                                                                        <input class="form-control" type="email" name="email_praktikan_detail">
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <input name="id_praktikan" value="<?php echo $d_praktik['id_praktikan']; ?>" hidden>
-                                                                        <button class="btn btn-success btn-sm" type="submit" name="tambah_data_praktikan">TAMBAH</button>
-                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a title="Hapus Data Praktikan" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_p_m<?php echo $d_praktik['id_praktikan']; ?>'>
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </a>
-                                                    <!-- modal hapus data praktikan -->
-                                                    <div class="modal fade text-left" id="h_p_m<?php echo $d_praktik['id_praktikan']; ?>">
-                                                        <div class="modal-dialog" role="document">
-                                                            <form class="form-group" method="post">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4>HAPUS SEMUA DATA PRAKTIKAN ?</h4>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <input name="id_praktikan" value="<?php echo $d_praktik['id_praktikan']; ?>" hidden>
-                                                                        <button class="btn btn-danger btn-sm" type="submit" name="hapus_praktikan">HAPUS</button>
-                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div>
-                                            <?php
-                                            $sql_praktikan_detail = "SELECT * FROM tb_praktikan
-                                                    JOIN tb_praktikan_detail ON tb_praktikan.id_praktikan = tb_praktikan_detail.id_praktikan
-                                                    WHERE tb_praktikan_detail.id_praktikan = " . $d_praktik['id_praktikan'] . "
-                                                    ORDER BY nama_praktikan_detail ASC";
-                                            // echo $sql_praktikan_detail . "<br>";
-                                            $q_praktikan_detail = $conn->query($sql_praktikan_detail);
-                                            $r_praktikan_detail = $q_praktikan_detail->rowCount();
-                                            if ($r_praktikan_detail > 0) {
-                                            ?>
-                                                <table class="table table-striped" id="myTable">
-                                                    <thead class="thead-dark">
-                                                        <tr>
-                                                            <th scope="col">No</th>
-                                                            <th scope="col">NO ID</th>
-                                                            <th scope="col">Nama Praktikan</th>
-                                                            <th scope="col">Tanggal Lahir</th>
-                                                            <th scope="col">No. Telpon</th>
-                                                            <th scope="col">E-Mail</th>
-                                                            <th scope="col"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-
-                                                        $no = 1;
-                                                        while ($d_praktikan_detail = $q_praktikan_detail->fetch(PDO::FETCH_ASSOC)) {
-                                                        ?>
-                                                            <tr>
-                                                                <th scope="row"><?php echo $no; ?></th>
-                                                                <td><?php echo $d_praktikan_detail['no_id_praktikan_detail']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['nama_praktikan_detail']; ?></td>
-                                                                <td><?php echo tanggal($d_praktikan_detail['tgl_lahir_praktikan_detail']); ?></td>
-                                                                <td><?php echo $d_praktikan_detail['telp_praktikan_detail']; ?></td>
-                                                                <td><?php echo $d_praktikan_detail['email_praktikan_detail']; ?></td>
-                                                                <td>
-
-                                                                    <a title="Ubah Data Praktikan" class="btn btn-primary btn-sm" href='#' data-toggle='modal' data-target='#u_dp_m<?php echo $d_praktikan_detail['id_praktikan_detail']; ?>'>
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </a>
-                                                                    <!-- modal ubah data praktikan -->
-                                                                    <div class="modal fade text-left" id="u_dp_m<?php echo $d_praktikan_detail['id_praktikan_detail']; ?>">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <div class="modal-content">
-                                                                                <form class="form-group" method="post">
-                                                                                    <div class="modal-header">
-                                                                                        <h4>UBAH DATA PRAKTIKAN ?</h4>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        <?php
-                                                                                        $sql_data_praktikan = "SELECT * FROM tb_praktikan_detail WHERE id_praktikan_detail = '" . $d_praktikan_detail['id_praktikan_detail'] . "'";
-                                                                                        $q_data_praktikan = $conn->query($sql_data_praktikan);
-                                                                                        $d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC);
-                                                                                        ?>
-                                                                                        ID Praktikan : <span style="color:red">*</span><br>
-                                                                                        <input class="form-control" type="text" name="no_id_praktikan_detail" value="<?php echo $d_data_praktikan['no_id_praktikan_detail']; ?>" required><br>
-                                                                                        Nama Praktikan : <span style="color:red">*</span><br>
-                                                                                        <input class="form-control" type="text" name="nama_praktikan_detail" value="<?php echo $d_data_praktikan['nama_praktikan_detail']; ?>" required><br>
-                                                                                        Tanggal Lahir : <span style="color:red">*</span><br>
-                                                                                        <input class="form-control" type="date" name="tgl_lahir_praktikan_detail" value="<?php echo $d_data_praktikan['tgl_lahir_praktikan_detail']; ?>" required><br>
-                                                                                        No. Telp. : <span style="color:red">*</span><br>
-                                                                                        <input class="form-control" type="number" min="1" name="telp_praktikan_detail" value="<?php echo $d_data_praktikan['telp_praktikan_detail']; ?>" required><br>
-                                                                                        E-Mail: <br>
-                                                                                        <input class="form-control" type="email" name="email_praktikan_detail" value="<?php echo $d_data_praktikan['email_praktikan_detail']; ?>">
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <input name="id_praktikan_detail" value="<?php echo $d_data_praktikan['id_praktikan_detail']; ?>" hidden>
-                                                                                        <button class="btn btn-primary btn-sm" type="submit" name="ubah_data_praktikan">UBAH</button>
-                                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <a title="Hapus Data Praktikan" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_dp_m<?php echo $d_data_praktikan['id_praktikan_detail']; ?>'>
-                                                                        <i class="fas fa-trash-alt"></i>
-                                                                    </a>
-                                                                    <!-- modal hapus harga -->
-                                                                    <div class="modal fade text-left" id="h_dp_m<?php echo $d_data_praktikan['id_praktikan_detail']; ?>">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <form method="post" action="">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h4>HAPUS DATA PRAKTIKAN ?</h4>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <input name="id_praktikan_detail" value="<?php echo $d_data_praktikan['id_praktikan_detail']; ?>" hidden>
-                                                                                        <input name="id_praktikan" value="<?php echo $d_data_praktikan['id_praktikan']; ?>" hidden>
-                                                                                        <button class="btn btn-danger btn-sm" type="submit" name="hapus_data_praktikan">HAPUS</button>
-                                                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        <?php
-                                                            $no++;
-                                                        }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <div class="jumbotron">
-                                                    <div class="jumbotron-fluid">
-                                                        <div class="text-gray-700" style="padding-bottom: 2px; padding-top: 5px;">
-                                                            <h5 class="text-center">DATA PRAKTIKAN TIDA ADA</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php
-                                            }
-                                            ?>
-                                        </div>
+                                    <div class="col-sm-2 text-center">
+                                        <b class="text-gray-800">TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
+                                        <b class="text-gray-800">TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
+                                    </div>
+                                    <div class="col-sm-2 text-center">
+                                        <b class="text-gray-800">JURUSAN : </b><br><?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
+                                        <b class="text-gray-800">JENJANG : </b><br><?php echo $d_praktik['nama_jenjang_pdd']; ?>
+                                    </div>
+                                    <div class="col-sm-2 text-center">
+                                        <b class="text-gray-800">PROFESI : </b><br><?php echo $d_praktik['nama_profesi_pdd']; ?><br>
+                                        <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?php echo $d_praktik['jumlah_praktik']; ?>
+                                    </div>
+                                    <!-- tombol aksi/info proses  -->
+                                    <div class="col-sm-3 my-auto  text-center">
+                                        <!-- tombol rincian -->
+                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                            <i class="fas fa-info-circle"></i> Rincian Data
+                                        </button>
+                                        &nbsp;
+                                        <a class="btn btn-primary btn-sm collapsed" href="?praktikan&u=<?php echo $d_praktik['id_praktik']; ?>" title="Ubah">
+                                            <i class="far fa-edit"></i> Ubah Data
+                                        </a>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- collapse data praktikan -->
+                            <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
+                                <div class="card-body " style="font-size: medium;">
+                                    <!-- data praktikan -->
+                                    <div class="text-gray-700">
+                                        <h4 class="font-weight-bold">DATA PRAKTIKAN</h4><br>
+                                    </div>
+                                    <?php
+                                    $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
+                                    $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
+                                    $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+                                    $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
+
+                                    $q_data_praktikan = $conn->query($sql_data_praktikan);
+                                    $r_data_praktikan = $q_data_praktikan->rowCount();
+
+                                    if ($r_data_praktikan > 0) {
+                                    ?>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped" id="myTable">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Nama</th>
+                                                        <th scope="col">NIM / NPM / NIS </th>
+                                                        <th scope="col">No. HP</th>
+                                                        <th scope="col">No. WA</th>
+                                                        <th scope="col">EMAIL</th>
+                                                        <th scope="col">ASAL KOTA / KABUPATEN</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $total_jumlah_tarif = 0;
+                                                    $no = 1;
+                                                    while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
+                                                    ?>
+                                                        <tr>
+                                                            <th scope="row"><?php echo $no; ?></th>
+                                                            <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
+                                                            <td><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
+                                                            <td><?php echo $d_data_praktikan['telp_praktikan']; ?></td>
+                                                            <td><?php echo $d_data_praktikan['wa_praktikan']; ?></td>
+                                                            <td><?php echo $d_data_praktikan['email_praktikan']; ?></td>
+                                                            <td><?php echo $d_data_praktikan['kota_kab_praktikan']; ?></td>
+                                                        </tr>
+                                                    <?php
+                                                        $no++;
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <div class="jumbotron">
+                                            <div class="jumbotron-fluid">
+                                                <div class="text-gray-700">
+                                                    <h5 class="text-center">Data Praktikan Tidak Ada</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                    <hr>
+                                </div>
+                            </div>
                         </div>
-                        <hr>
-                    <?php
-                    }
-                } else {
-                    ?>
-                    <h3 class='text-center'> Data Praktikan Anda Tidak Ada</h3>
+                    </div>
+                    <hr class="bg-gray-800">
                 <?php
                 }
+            } else {
                 ?>
-            </div>
+                <h3 class='text-center'> Data Pendaftaran Praktikan Anda Tidak Ada</h3>
+            <?php
+            }
+            ?>
+
         </div>
     </div>
-<?php
-}
+</div>
