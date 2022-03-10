@@ -28,7 +28,7 @@ Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini :
 
 git status
 git add . 
-git commit -a -m "Database Update"
+git commit -a -m "Progres Info Jadwal Praktik"
 git pull
 git push
 

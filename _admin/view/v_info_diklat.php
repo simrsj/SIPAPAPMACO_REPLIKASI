@@ -117,6 +117,21 @@
                     <div class="card">
                         <div class="overflow-auto">
                             <div class="no-gutters align-items-center text-center pt-0">
+                                <br>
+                                <div class="row text-center">
+                                    <div class="col-md-4">
+                                        Farmasi : 10<br><br>
+                                        Kesling : 10
+                                    </div>
+                                    <div class="col-md-4">
+                                        Farmasi : 10<br><br>
+                                        Kesling : 10
+                                    </div>
+                                    <div class="col-md-4">
+                                        Farmasi : 10<br><br>
+                                        Kesling : 10
+                                    </div>
+                                </div>
                                 <?php include "./_admin/view/v_info_diklat_dataNklNnk.php"; ?>
                             </div>
                         </div>
