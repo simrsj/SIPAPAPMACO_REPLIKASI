@@ -78,7 +78,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<li class="nav-item ">
 					<a class="nav-link" href="?pmbb">
 						<i class="fas fa-fw fa-users"></i>
-						<span>Pembimbing</span>
+						<span>Pembimbing-Ruangan</span>
 					</a>
 				</li>
 				<li class="nav-item ">
@@ -95,7 +95,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</li>
 				<li class="nav-item ">
 					<a class="nav-link" href="?ars">
-						<i class="fas fa-fw fa-wallet"></i>
+						<i class="fas fa-fw fa-archive"></i>
 						<span>Arsip Praktik</span>
 					</a>
 				</li>
@@ -285,6 +285,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 
 					if (isset($_GET['aku'])) {
 						include "_admin/view/v_akun.php";
+					} elseif (isset($_GET['ars'])) {
+						include "_admin/view/v_praktik_arsip.php";
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
 					} elseif (isset($_GET['info_diklat'])) {

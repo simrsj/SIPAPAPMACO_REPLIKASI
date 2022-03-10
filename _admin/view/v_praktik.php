@@ -99,7 +99,7 @@ if (isset($_POST['arsip_praktik'])) {
     <?php
         }
     }
-} else {
+} elseif ($_GET['prk'] == ('ked' || 'kep' || 'nkl' || 'nnk')) {
 
     if ($_GET['prk'] == 'ked') {
         $tambah = "ked";
@@ -158,7 +158,7 @@ if (isset($_POST['arsip_praktik'])) {
                 $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
                 $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'D' OR tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S') ";
                 $sql_praktik .= " $jenis_jurusan ";
-                $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+                $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
 
                 // echo $sql_praktik;
 
@@ -628,7 +628,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -672,7 +682,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -714,7 +734,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -758,7 +788,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -796,7 +836,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH AKTIF</div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -833,7 +883,17 @@ if (isset($_POST['arsip_praktik'])) {
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH SELESAI</div>',
                                 showConfirmButton: false,
                                 html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                            });
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                }
+                            );
                         },
                         error: function(response) {
                             console.log(response.responseText);
@@ -892,4 +952,7 @@ if (isset($_POST['arsip_praktik'])) {
         }
     </script>
 <?php
+} else {
+    include "_error/index.php";
 }
+?>

@@ -4,7 +4,7 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 
 git status
 git add . 
-git commit -a -m "proses data nilai upload"
+git commit -a -m "Progres info jadwal praktik"
 git pull
 git push
 
