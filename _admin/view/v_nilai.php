@@ -175,7 +175,7 @@
                                                                     ?>
                                                                         <td class="text-center">
                                                                             <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#nilai<?php echo $no; ?>" title="Rincian">
-                                                                                <i class="fas fa-info-circle"></i> Rincian Nilai
+                                                                                <i class="fas fa-info-circle"></i>
                                                                             </button>
                                                                         </td>
                                                                     <?php
