@@ -21,7 +21,7 @@ $jumlah_praktik = $_GET['jum'];
     <!-- Data Tarif Praktik  -->
     <div class='card shadow mb-4' id="tarif_praktik">
         <div class='card-body'>
-            <div class="text-lg font-weight-bold text-center">DATA TARIF</div>
+            <div class="text-lg font-weight-bold text-center">MENU TARIF</div>
             <input type="hidden" name="path" id="path" value="<?php echo $_GET['i']; ?>">
 
             <!-- Menu Tarif wajib disesuaikan dengan jenis jurusan -->
@@ -364,7 +364,7 @@ $jumlah_praktik = $_GET['jum'];
                 <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success" onclick="simpan_tarif()">
                     <!-- <a class="nav-link" href="#tarif"> -->
                     <i class="fas fa-check-circle"></i>
-                    Simpan Data Praktik dan Data Tarif
+                    Simpan Praktik dan Tarif
                     <i class="fas fa-check-circle"></i>
                     <!-- </a> -->
                 </button>

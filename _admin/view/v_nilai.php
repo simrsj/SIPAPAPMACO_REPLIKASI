@@ -78,17 +78,6 @@
                                         <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data
                                         </button>
-                                        &nbsp;
-                                        &nbsp;
-                                        <?php
-                                        if ($d_praktik['id_jurusan_pdd'] != 2) {
-                                        ?>
-                                            <a href="<?php echo "?nil&iup=" . $d_praktik['id_praktik'] . "&p=" . $d1_data_praktikan['id_pembimbing']; ?>" class="btn btn-success btn-sm">
-                                                <i class="fas fa-file-upload"></i> Unggah File Nilai
-                                            </a>
-                                        <?php
-                                        }
-                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -152,13 +141,34 @@
                                                                             <a href="<?php echo "?nil&u=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-primary btn-sm">
                                                                                 Ubah Nilai
                                                                             </a>
-                                                                        <?php
+                                                                            <?php
                                                                         } else {
-                                                                        ?>
-                                                                            <a href="<?php echo "?nil&i=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-success btn-sm">
-                                                                                Isi Nilai
-                                                                            </a>
+                                                                            if ($d_praktik['id_jurusan_pdd'] == 2) {
+                                                                            ?>
+                                                                                <a href="<?php echo "?nil&i=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-success btn-sm">
+                                                                                    Isi Nilai
+                                                                                </a>
+                                                                                <?php
+                                                                            } else {
+                                                                                $sql_data_nilai_u = "SELECT * FROM tb_nilai_upload ";
+                                                                                $sql_data_nilai_u .= " WHERE id_praktik = " . $d_data_praktikan['id_praktik'] . " AND id_pembimbing = " . $d_data_praktikan['id_pembimbing'];
+                                                                                // echo "$sql_data_nilai<br>";
+
+                                                                                $q_data_nilai_u = $conn->query($sql_data_nilai_u);
+                                                                                $r_data_nilai_u = $q_data_nilai_u->rowCount();
+                                                                                $d_data_nilai_u = $q_data_nilai_u->fetch(PDO::FETCH_ASSOC);
+                                                                                if ($r_data_nilai_u > 0) {
+                                                                                ?>
+                                                                                    <a href="<?php echo $d_data_nilai_u['file_nilai_upload']; ?>" target="_blank" class="btn btn-outline-success btn-sm">
+                                                                                        Unduh Nilai
+                                                                                    </a>
+                                                                                <?php
+                                                                                } else {
+                                                                                ?>
+                                                                                    <span class="badge badge-danger text-lg"> Data Nilai Belum Diupload </span>
                                                                         <?php
+                                                                                }
+                                                                            }
                                                                         }
                                                                         ?>
                                                                     </td>
@@ -174,9 +184,9 @@
                                                                     } else {
                                                                     ?>
                                                                         <td class="text-center">
-                                                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#nilai<?php echo $no; ?>" title="Rincian">
-                                                                                <i class="fas fa-info-circle"></i>
-                                                                            </button>
+                                                                            <a href="<?php echo "?nil&i=" . $d_praktik['id_praktik'] . "&pu=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-primary btn-sm">
+                                                                                Unggah File Nilai
+                                                                            </a>
                                                                         </td>
                                                                     <?php
                                                                     }

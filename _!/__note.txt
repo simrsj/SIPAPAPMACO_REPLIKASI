@@ -1,22 +1,10 @@
-- enkripsi link 
-- perbaiki harga, mess dan pembayaran kedokteran (alurnya beda)
-- perbaiki isian akun institusi
-- perbaiki dastboard institusi
-- perbaiki dastboard admin
-- perbaiki Invoice pembayaran PDF
-- Perbaiki modul mou perpanjang dan baru
-- dashboard user tampil mounya dengan judul perpanjang / baru MoU
-- tanggal Selesai Pendaftaran tidak bisa input tanggal ≤ tanggal mulai
-- pelajari CSRF
 
-- membuat inputan uniq di pembayaran
-- penamaan judul tabel Invoice
-- membuat 5 akun sesuai dengan privilagenya
-- membuat format mout untuk diisi kang adi 
+RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
+
 
 git status
 git add . 
-git commit -a -m "proses data nilai upload"
+git commit -a -m "Progres info jadwal praktik"
 git pull
 git push
 
@@ -35,5 +23,3 @@ TRUNCATE tb_tempat_pilih;
 TRUNCATE tb_bayar;
 TRUNCATE tb_nilai_kep;
 TRUNCATE tb_nilai_upload;
-
-RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
