@@ -28,7 +28,7 @@ Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit
 
 git status
 git add . 
-git commit -a -m "Perbaikan Hilangkan Tarif (Keselamatan Pasin dan Log Book)"
+git commit -a -m "Progres Jadwal praktik"
 git pull
 git push
 
