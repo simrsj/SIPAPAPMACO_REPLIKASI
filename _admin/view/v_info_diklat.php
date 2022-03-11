@@ -89,12 +89,6 @@
             </div>
         </div>
 
-        <?php
-        $sql_kuota = "SELECT * FROM tb_kuota";
-        $q_kuota = $conn->query($sql_kuota);
-
-
-        ?>
         <!-- INFORMASI JADWAL PRAKTIKAN-->
         <div class="row">
             <!-- KEDOKTERAN DAN KEPERAWATAN-->
@@ -108,7 +102,23 @@
                         $d_kuotaKedKep = $q_kuotaKedKep->fetch(PDO::FETCH_ASSOC);
                         ?>
                         <h6 class="m-0 font-weight-bold text-primary">Kedokteran dan Keperawatan (<span class="text-danger">Kuota Harian : <?php echo $d_kuotaKedKep['jumlah_kuota']; ?>)</h6>
-                        <a class="btn btn-outline-primary btn-sm" href="#">Input Kuota</a>
+                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#info_status" title="Keterangan Status">
+                            <i class="fas fa-info-circle"></i> Keterangan
+                        </a>
+                        <div class="modal fade text-gray-800" id="info_status" data-backdrop="static" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4>Keterangan</h4>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card">
                         <div class="overflow-auto">
@@ -190,9 +200,25 @@
                                 </div>
                             </div>
                         </h6>
-                        <a class="btn btn-outline-primary btn-sm" href="#">Input Kuota</a>
+                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#info_status2" title="Keterangan Status">
+                            <i class="fas fa-info-circle"></i> Keterangan
+                        </a>
+                        <div class="modal fade text-gray-800" id="info_status2" data-backdrop="static" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4>Keterangan</h4>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card">
+                    <div class="card all-0 d-flex flex-column w-100 h-100 overflow-auto">
                         <div class="overflow-auto">
                             <div class="no-gutters align-items-center text-center pt-0">
                                 <?php include "./_admin/view/v_info_diklat_dataNklNnk.php"; ?>
@@ -203,59 +229,3 @@
             </div>
         </div>
     </div>
-    <script>
-        function kuotaKedKep() {
-            console.log("kuotaKedKep");
-            Swal.fire({
-                position: 'top',
-                title: 'Yakin ?',
-                html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Pembayaran Kurang Transfer" +
-                    '<input id="valP_T" class="swal2-input" type="number" min="10000" placeHolder="Isi Kekurangan Transfer">',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#1cc88a',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Kembali',
-                confirmButtonText: 'Ya',
-                allowOutsideClick: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var valP_T = document.getElementById('valP_T').value;
-                    $.ajax({
-                        type: 'POST',
-                        url: "_admin/exc/x_v_praktik_valPembayaran.php",
-                        data: {
-                            'id': id,
-                            'ket': 't',
-                            'valP_T': valP_T
-                        },
-                        success: function() {
-                            Swal.fire({
-                                allowOutsideClick: false,
-                                // isDismissed: false,
-                                icon: 'error',
-                                title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
-                                showConfirmButton: false,
-                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
-                                timer: 5000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            }).then(
-                                function() {
-                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
-                                }
-                            );
-                        },
-                        error: function(response) {
-                            console.log(response.responseText);
-                            alert('eksekusi query gagal');
-                        }
-                    });
-
-                }
-            });
-        }
-    </script>
