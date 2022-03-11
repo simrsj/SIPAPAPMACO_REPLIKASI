@@ -94,17 +94,17 @@ if ($_GET['prk'] == 'ked') {
 
                         <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
                         <div class="row">
-                            <div class="col-lg-2">
+                            <div class="col-lg-4">
                                 Jurusan : <br>
                                 <b>Kedokteran</b>
                                 <input type="hidden" name='id_jurusan_pdd' id="jurusan" value="1">
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-4">
                                 Jenjang : <br>
                                 <b>Profesi</b>
                                 <input type="hidden" name='id_jenjang_pdd' id="jenjang" value="10">
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-lg-4">
                                 Pilih Profesi : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_prof = "SELECT * FROM tb_jurusan_pdd_jenjang_profesi";
@@ -139,7 +139,7 @@ if ($_GET['prk'] == 'ked') {
                                 }
                                 ?>
                             </div>
-                            <div class="col-lg-3">
+                            <!-- <div class="col-lg-3">
                                 Akreditasi Institusi : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_akreditasi = "SELECT * FROM tb_akreditasi";
@@ -169,7 +169,7 @@ if ($_GET['prk'] == 'ked') {
                                 <?php
                                 }
                                 ?>
-                            </div>
+                            </div> -->
                         </div>
                         <br><br>
 
@@ -279,15 +279,15 @@ if ($_GET['prk'] == 'ked') {
                             ?>
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
+                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?php echo $d_user['nama_user']; ?>" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
-                                <input type="text" class="form-control" name="email_koordinator_praktik" id="email_koordinator" placeholder="Isi Email Koordinator">
+                                <input type="text" class="form-control" name="email_koordinator_praktik" id="email_koordinator" placeholder="Isi Email Koordinator" value="<?php echo $d_user['email_user']; ?>">
                             </div>
                             <div class="col-lg-4">
                                 Telpon : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" required>
+                                <input type="number" class="form-control" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_telp_koordinator"></span>
                             </div>
@@ -315,6 +315,7 @@ if ($_GET['prk'] == 'ked') {
                                 <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
                                 <div class="boxed-check-label">Tanpa Makan</div>
                             </label>
+                            <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_makan_mess"></span>
                         </div>
                         <hr>
                         <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
@@ -351,7 +352,7 @@ if ($_GET['prk'] == 'ked') {
             var jurusan = document.getElementById("jurusan").value;
             var jenjang = document.getElementById("jenjang").value;
             var profesi = document.getElementById("profesi").value;
-            var akreditasi = document.getElementById("akreditasi").value;
+            // var akreditasi = document.getElementById("akreditasi").value;
             var jumlah = document.getElementById("jumlah").value;
             var tgl_mulai = document.getElementById("tgl_mulai").value;
             var tgl_selesai = document.getElementById("tgl_selesai").value;
@@ -361,6 +362,7 @@ if ($_GET['prk'] == 'ked') {
             var nama_koordinator = document.getElementById("nama_koordinator").value;
             var email_koordinator = document.getElementById("email_koordinator").value;
             var telp_koordinator = document.getElementById("telp_koordinator").value;
+            var makan = document.getElementById("telp_koordinator").value;
 
             //Notif Bila tidak diisi
             if (
@@ -369,7 +371,7 @@ if ($_GET['prk'] == 'ked') {
                 jurusan == "" ||
                 jenjang == "" ||
                 profesi == "" ||
-                akreditasi == "" ||
+                // akreditasi == "" ||
                 jumlah == "" ||
                 tgl_mulai == "" ||
                 tgl_selesai == "" ||
@@ -457,11 +459,11 @@ if ($_GET['prk'] == 'ked') {
                 }
 
                 //notif akreditasi 
-                if (akreditasi == "") {
-                    document.getElementById("err_akreditasi").innerHTML = "Akreditasi Harus Diisi";
-                } else {
-                    document.getElementById("err_akreditasi").innerHTML = "";
-                }
+                // if (akreditasi == "") {
+                //     document.getElementById("err_akreditasi").innerHTML = "Akreditasi Harus Diisi";
+                // } else {
+                //     document.getElementById("err_akreditasi").innerHTML = "";
+                // }
 
                 //notif jumlah 
                 if (jumlah == "") {
@@ -658,7 +660,7 @@ if ($_GET['prk'] == 'ked') {
                 praktik != "" &&
                 jurusan != "" &&
                 profesi != "" &&
-                akreditasi != "" &&
+                // akreditasi != "" &&
                 jumlah != "" &&
                 tgl_mulai != "" &&
                 tgl_selesai != "" &&
@@ -678,7 +680,7 @@ if ($_GET['prk'] == 'ked') {
                 // document.getElementById("err_jurusan").innerHTML = "";
                 // document.getElementById("err_jenjang").innerHTML = "";
                 document.getElementById("err_profesi").innerHTML = "";
-                document.getElementById("err_akreditasi").innerHTML = "";
+                // document.getElementById("err_akreditasi").innerHTML = "";
                 document.getElementById("err_jumlah").innerHTML = "";
                 document.getElementById("err_tgl_mulai").innerHTML = "";
                 document.getElementById("err_tgl_selesai").innerHTML = "";

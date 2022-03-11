@@ -3,17 +3,13 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 
 _*MAYOR*_
 - 🔃 Perbaikan Akun Institusi
-- ✅ Data Nilai Keperawatan dan Upload File (Selain Keperawatan)
 
 _*MINOR*_
 - 🔃 Pembuatan Informasi Jadwal Praktik
 - 🔃 Filter Pemilihan Jadwal Praktik saat pengajuan
 - Cetak Invoice Pembayaran 
 - Cetak Data Nilai Keperawatan
-- ✅ Auto Fill Pengajuan Koordinator
-- ✅ Tarif (Selain Kedokteran) Keselamatan Pasien dan Log Book sementara dihilangkan
 - Saat Pengajuan Keperawatan saat pilih jenjang profesi, menu profesi tidak usah (pilih) lagi
-- ✅ Pengurutan Daftar Pengajuan Disesuakan dengan pengajuan terbaru
 - Pembuatan Fungsi Notifikasi (alert) Setiap Proses Alur
 - Saat Pilih Mess oleh Admin, tidak usah lagi memilih Dengan atau Tanpa Makan
 

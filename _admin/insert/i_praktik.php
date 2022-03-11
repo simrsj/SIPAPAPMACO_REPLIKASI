@@ -101,7 +101,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
 
                         <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
                         <div class="row">
-                            <div class="col-lg-2">
+                            <div class="col-lg-4">
                                 <?php
                                 if ($_GET['prk'] == 'kep') {
                                 ?>
@@ -152,7 +152,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 }
                                 ?>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-4">
                                 Pilih Jenjang : <span style="color:red">*</span><br>
                                 <?php
                                 if ($_GET['prk'] == 'kep') {
@@ -196,7 +196,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 }
                                 ?>
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-lg-4">
                                 Pilih Profesi : <span style="color:red">*</span><br>
                                 <?php
 
@@ -247,7 +247,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 ?>
                                 <input type="hidden" name='nonnakes' id="nonnakes" value="0">
                             </div>
-                            <div class="col-lg-3">
+                            <!-- <div class="col-lg-3">
                                 Akreditasi Institusi : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_akreditasi = "SELECT * FROM tb_akreditasi";
@@ -277,7 +277,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 <?php
                                 }
                                 ?>
-                            </div>
+                            </div> -->
                         </div>
                         <br><br>
 
@@ -538,7 +538,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             var jenjang = document.getElementById("jenjang").value;
             var profesi = document.getElementById("profesi").value;
             var nonnakes = document.getElementById("nonnakes").value;
-            var akreditasi = document.getElementById("akreditasi").value;
+            // var akreditasi = document.getElementById("akreditasi").value;
             var jumlah = document.getElementById("jumlah").value;
             var tgl_mulai = document.getElementById("tgl_mulai").value;
             var tgl_selesai = document.getElementById("tgl_selesai").value;
@@ -556,7 +556,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 jurusan == "" ||
                 jenjang == "" ||
                 profesi == "" ||
-                akreditasi == "" ||
+                // akreditasi == "" ||
                 jumlah == "" ||
                 tgl_mulai == "" ||
                 tgl_selesai == "" ||
@@ -648,11 +648,11 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 }
 
                 //notif akreditasi 
-                if (akreditasi == "") {
-                    document.getElementById("err_akreditasi").innerHTML = "Akreditasi Harus Diisi";
-                } else {
-                    document.getElementById("err_akreditasi").innerHTML = "";
-                }
+                // if (akreditasi == "") {
+                //     document.getElementById("err_akreditasi").innerHTML = "Akreditasi Harus Diisi";
+                // } else {
+                //     document.getElementById("err_akreditasi").innerHTML = "";
+                // }
 
                 //notif jumlah 
                 if (jumlah == "") {
@@ -848,7 +848,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 institusi != "" &&
                 praktik != "" &&
                 jurusan != "" &&
-                akreditasi != "" &&
+                // akreditasi != "" &&
                 jumlah != "" &&
                 tgl_mulai != "" &&
                 tgl_selesai != "" &&
@@ -874,7 +874,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 if (nonnakes == 0) {
                     document.getElementById("err_profesi").innerHTML = "";
                 }
-                document.getElementById("err_akreditasi").innerHTML = "";
+                // document.getElementById("err_akreditasi").innerHTML = "";
                 document.getElementById("err_jumlah").innerHTML = "";
                 document.getElementById("err_tgl_mulai").innerHTML = "";
                 document.getElementById("err_tgl_selesai").innerHTML = "";
