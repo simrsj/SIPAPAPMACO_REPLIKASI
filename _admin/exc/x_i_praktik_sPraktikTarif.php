@@ -12,6 +12,7 @@ WHERE id_jurusan_pdd = " . $_POST['id_jurusan_pdd'];
 $q_jenis_jurusan = $conn->query($sql_jenis_jurusan);
 $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
 
+//eksekusi jika kedokteran
 if ($_POST['id_jurusan_pdd'] == 1) {
     if ($_POST['id_profesi_pdd'] == 1) {
         $status_cek_praktik = "DPT_KED_PPDS";
@@ -21,19 +22,28 @@ if ($_POST['id_jurusan_pdd'] == 1) {
 } else {
     $status_cek_praktik = "DPT";
 }
+//elsekusi jika selain kedokteran
+if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
 
-//cek materi_upip
-if ($_POST['materi_upip'] == 'y') {
-    $materi_upip = 'y';
-} else {
-    $materi_upip = 't';
-}
+    $makan_mess = $_POST['makan_mess'];
 
-//cek materi_napza
-if ($_POST['materi_napza'] == 'y') {
-    $materi_napza = 'y';
+    //cek materi_upip
+    if ($_POST['materi_upip'] == 'y') {
+        $materi_upip = 'y';
+    } else {
+        $materi_upip = 't';
+    }
+
+    //cek materi_napza
+    if ($_POST['materi_napza'] == 'y') {
+        $materi_napza = 'y';
+    } else {
+        $materi_napza = 't';
+    }
 } else {
-    $materi_napza = 't';
+    $makan_mess = NULL;
+    $materi_upip = NULL;
+    $materi_napza = NULL;
 }
 
 $sql_insert = "INSERT INTO tb_praktik (
@@ -77,7 +87,7 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['telp_koordinator_praktik'] . "', 
         '" . $status_cek_praktik . "', 
         'D',
-        '" . $_POST['makan_mess'] . "',
+        '" . $makan_mess . "',
         '" . $materi_upip . "',
         '" . $materi_napza . "'
         )";

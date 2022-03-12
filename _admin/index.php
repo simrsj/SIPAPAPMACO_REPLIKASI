@@ -45,7 +45,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</li>
 				<li class="nav-item ">
 					<a class="nav-link" href="?kta">
-						<i class="fas fa-fw fa-info-circle"></i>
+						<i class="far fa-fw fa-circle"></i>
 						<span>Kuota</span>
 					</a>
 				</li>
@@ -292,7 +292,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					if (isset($_GET['aku'])) {
 						include "_admin/view/v_akun.php";
 					} elseif (isset($_GET['ars'])) {
-						include "_admin/view/v_praktik_arsip.php";
+						if (isset($_GET['dp'])) {
+							include "_admin/view/v_praktik_arsip_dataPraktik.php";
+						} else {
+							include "_admin/view/v_praktik_arsip.php";
+						}
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
 					} elseif (isset($_GET['info_diklat'])) {
@@ -356,9 +360,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/view/v_pembimbing.php";
 						}
 					} elseif (isset($_GET['prk'])) {
-						if (isset($_GET['a'])) {
-							include "_admin/view/v_praktik_arsip.php";
-						} elseif (isset($_GET['ib'])) {
+						if (isset($_GET['ib'])) {
 							include "_admin/insert/i_praktik_bayar.php";
 						} elseif (isset($_GET['dh'])) {
 							include "_admin/hide/dh_praktik.php";

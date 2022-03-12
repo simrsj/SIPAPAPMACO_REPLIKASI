@@ -22,9 +22,9 @@
             $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-            $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
+            // $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
             $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
-            $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+            $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
 
             // echo $sql_praktik;
 
@@ -55,7 +55,7 @@
                             <div class="card-header align-items-center bg-gray-200">
                                 <div class="row" style="font-size: small;" class="justify-content-center">
                                     <br><br>
-                                    <div class="col-sm-2 text-center">
+                                    <div class="col-sm-3 text-center">
                                         <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?><br>
                                         <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                     </div>
@@ -73,7 +73,7 @@
                                         <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?php echo $d_praktik['jumlah_praktik']; ?>
                                     </div>
                                     <!-- tombol aksi/info proses  -->
-                                    <div class="col-sm-4 my-auto text-center">
+                                    <div class="col-sm-3 my-auto text-center">
                                         <!-- tombol rincian -->
                                         <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data

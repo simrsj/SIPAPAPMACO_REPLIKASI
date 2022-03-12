@@ -69,8 +69,8 @@ if ($r_data_kuota > 0) {
     });
 
     $(".ubah_init").click(function() {
-        document.getElementById("err_nama").innerHTML = "";
-        document.getElementById("err_jumlah").innerHTML = "";
+        document.getElementById("err_u_nama").innerHTML = "";
+        document.getElementById("err_u_jumlah").innerHTML = "";
         document.getElementById("form_ubah_kuota").reset();
         $("#data_ubah_kuota").fadeIn('slow');
         $("#data_tambah_kuota").fadeOut('fast');
@@ -78,7 +78,7 @@ if ($r_data_kuota > 0) {
         var id = $(this).attr('id');
         $.ajax({
             type: 'POST',
-            url: "_admin/update/u_kuotaGetData.php",
+            url: "_admin/view/v_kuotaGetData.php",
             data: {
                 id: id
             },
@@ -87,13 +87,10 @@ if ($r_data_kuota > 0) {
 
                 document.getElementById("form_ubah_kuota").reset();
 
-                document.getElementById("id_kuota").value = response.id_kuota;
-                document.getElementById("nama_kuota").value = response.nama_kuota;
-                document.getElementById("no_id_kuota").value = response.no_id_kuota;
-                document.getElementById("telp_kuota").value = response.telp_kuota;
-                document.getElementById("wa_kuota").value = response.wa_kuota;
-                document.getElementById("email_kuota").value = response.email_kuota;
-                document.getElementById("kota_kab_kuota").value = response.kota_kab_kuota;
+                document.getElementById("u_id_kuota").value = response.id_kuota;
+                document.getElementById("u_nama_kuota").value = response.nama_kuota;
+                document.getElementById("u_jumlah_kuota").value = response.jumlah_kuota;
+                document.getElementById("u_ket_kuota").value = response.ket_kuota;
             },
             error: function(response) {
                 alert(response.responseText);
@@ -105,77 +102,42 @@ if ($r_data_kuota > 0) {
     });
 
     $(".ubah_tutup").click(function() {
-        document.getElementById("err_nama").innerHTML = "";
-        document.getElementById("err_no_id").innerHTML = "";
-        document.getElementById("err_no_hp").innerHTML = "";
-        document.getElementById("err_no_wa").innerHTML = "";
-        document.getElementById("err_email").innerHTML = "";
-        document.getElementById("err_asal").innerHTML = "";
+        document.getElementById("err_u_nama").innerHTML = "";
+        document.getElementById("err_u_jumlah").innerHTML = "";
         document.getElementById("form_ubah_kuota").reset();
         $("#data_ubah_kuota").fadeOut('slow');
     });
 
     $(document).on('click', '.ubah', function() {
         var data = $('#form_ubah_kuota').serialize();
-        var nama_kuota = document.getElementById("nama_kuota").value;
-        var no_id_kuota = document.getElementById("no_id_kuota").value;
-        var telp_kuota = document.getElementById("telp_kuota").value;
-        var wa_kuota = document.getElementById("wa_kuota").value;
-        var email_kuota = document.getElementById("email_kuota").value;
-        var kota_kab_kuota = document.getElementById("kota_kab_kuota").value;
+        var nama_kuota = document.getElementById("u_nama_kuota").value;
+        var jumlah_kuota = document.getElementById("u_jumlah_kuota").value;
+        var ket_kuota = document.getElementById("u_ket_kuota").value;
 
         //cek data from ubah bila tidak diiisi
         if (
             nama_kuota == "" ||
-            no_id_kuota == "" ||
-            telp_kuota == "" ||
-            wa_kuota == "" ||
-            email_kuota == "" ||
-            kota_kab_kuota == ""
+            jumlah_kuota == ""
         ) {
             if (nama_kuota == "") {
-                document.getElementById("err_nama").innerHTML = "Nama Harus Diisi";
+                document.getElementById("err_u_nama").innerHTML = "Nama Harus Diisi";
             } else {
-                document.getElementById("err_nama").innerHTML = "";
+                document.getElementById("err_u_nama").innerHTML = "";
             }
 
-            if (no_id_kuota == "") {
-                document.getElementById("err_no_id").innerHTML = "NIM / NPM / NIS Harus Diisi";
+            if (jumlah_kuota == "") {
+                document.getElementById("err_u_jumlah").innerHTML = "Kuota Harus Diisi";
             } else {
-                document.getElementById("err_no_id").innerHTML = "";
-            }
-
-            if (telp_kuota == "") {
-                document.getElementById("err_no_hp").innerHTML = "No. Telp Harus Diisi";
-            } else {
-                document.getElementById("err_no_hp").innerHTML = "";
-            }
-
-            if (wa_kuota == "") {
-                document.getElementById("err_no_wa").innerHTML = "No. WA Harus Diisi";
-            } else {
-                document.getElementById("err_no_wa").innerHTML = "";
-            }
-
-            if (email_kuota == "") {
-                document.getElementById("err_email").innerHTML = "Email Harus Diisi";
-            } else {
-                document.getElementById("err_email").innerHTML = "";
-            }
-
-            if (kota_kab_kuota == "") {
-                document.getElementById("err_asal").innerHTML = "Kota/Kabupaten Harus Diisi";
-            } else {
-                document.getElementById("err_asal").innerHTML = "";
+                document.getElementById("err_u_jumlah").innerHTML = "";
             }
 
         } else {
             $.ajax({
                 type: 'POST',
-                url: "_admin/exc/x_u_kuota_u.php",
+                url: "_admin/exc/x_v_kuota_u.php",
                 data: data,
                 success: function() {
-                    $('#data_kuota').load('_admin/update/u_kuotaData.php?u=<?php echo $_GET['u']; ?>');
+                    $('#data_kuota').load('_admin/view/v_kuotaData.php?');
 
                     const Toast = Swal.mixin({
                         toast: true,
@@ -217,12 +179,12 @@ if ($r_data_kuota > 0) {
             if (result.isConfirmed) {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_u_kuota_h.php",
+                    url: "_admin/exc/x_v_kuota_h.php",
                     data: {
                         "id_kuota": $(this).attr('id')
                     },
                     success: function() {
-                        $('#data_kuota').load('_admin/update/u_kuotaData.php?u=<?php echo $_GET['u']; ?>');
+                        $('#data_kuota').load('_admin/view/v_kuotaData.php?');
 
                         const Toast = Swal.mixin({
                             toast: true,

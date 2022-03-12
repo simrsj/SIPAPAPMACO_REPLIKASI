@@ -22,9 +22,9 @@
             $sql_praktikan .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
             $sql_praktikan .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
             $sql_praktikan .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-            $sql_praktikan .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
+            // $sql_praktikan .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
             $sql_praktikan .= " WHERE tb_praktik.status_praktik != 'A' ";
-            $sql_praktikan .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+            $sql_praktikan .= " ORDER BY tb_praktik.id_praktik DESC";
 
             // echo $sql_praktikan;
 

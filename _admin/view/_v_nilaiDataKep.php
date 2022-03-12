@@ -34,7 +34,7 @@
             if ($r_praktik > 0) {
             ?>
                 <?php
-                while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+                while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
 
                     $sql_data_praktikan = "SELECT * FROM tb_pembimbing_pilih ";
                     $sql_data_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing ";

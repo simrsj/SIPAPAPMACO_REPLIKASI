@@ -174,7 +174,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
 
                                 if ($r_jenjang_pdd > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jenjang_pdd' id="jenjang" required>
+                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' onchange="tutupProfesiKep()" name='id_jenjang_pdd' id="jenjang" required>
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -197,7 +197,6 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 ?>
                             </div>
                             <div class="col-lg-4">
-                                Pilih Profesi : <span style="color:red">*</span><br>
                                 <?php
 
                                 if ($_GET['prk'] == 'kep') {
@@ -222,19 +221,24 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
 
                                 if ($r_profesi_pdd > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_profesi_pdd' id="profesi">
-                                        <option value="">-- <i>Pilih</i>--</option>
-                                        <?php
-                                        while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                            <option value='<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>'>
-                                                <?php echo $d_profesi_pdd['nama_profesi_pdd'] ?>
-                                            </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select><br>
-                                    <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span><br>
+                                    Pilih Profesi : <span style="color:red">*</span><br>
+                                    <span id="profesi">
+                                        <b><i>"Pilih Jenjang"</i></b>
+                                        <!-- <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_profesi_pdd' id="profesi">
+                                            <option value="">-- <i>Pilih</i>--</option>
+                                            <?php
+                                            while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                                <option value='<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>'>
+                                                    <?php echo $d_profesi_pdd['nama_profesi_pdd'] ?>
+                                                </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select><br>
+                                        <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span> -->
+                                    </span>
+                                    <span id="NERS"></span>
                                     <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_profesi"></span>
                                 <?php
                                 } else {
@@ -306,7 +310,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                             </div>
                             <div class="col-lg-3">
                                 Unggah Data Praktikan : <span style="color:red">*</span>
-                                <a class='btn btn-outline-primary btn-sm text-uppercase' href='#' data-toggle='modal' data-target='#modal_data_praktikan'>
+                                <a class='text-xs text-uppercase badge badge-danger' href='#' data-toggle='modal' data-target='#modal_data_praktikan'>
                                     Info Format File
                                 </a>
                                 <br>
@@ -528,6 +532,21 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             var id_jurusan = $('#id_jurusan_pdd').val();
         }
 
+        function tutupProfesiKep() {
+            // console.log("tutupProfesiKep");
+            var jenjang = $("#jenjang").val();
+            if (jenjang == 9) {
+                $("#jenjang_profesi").fadeOut(1);
+                document.getElementById("NERS").innerHTML = "<b>NERS</b>";
+                document.getElementById("profesi").innerHTML = "";
+            } else {
+                $("#jenjang_profesi").fadeIn(1);
+                document.getElementById("NERS").innerHTML = "";
+                document.getElementById("profesi").innerHTML = "-";
+            }
+
+        }
+
         function simpan_praktik() {
 
             var id = document.getElementById("id").value;
@@ -536,7 +555,13 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             var praktik = document.getElementById("praktik").value;
             var jurusan = document.getElementById("jurusan").value;
             var jenjang = document.getElementById("jenjang").value;
-            var profesi = document.getElementById("profesi").value;
+            var profesi;
+            if (jenjang == 9) {
+                profesi = 5;
+            } else {
+                profesi = document.getElementById("profesi").value;
+            }
+            // var profesi_add = document.getElementById("profesi_add").value;
             var nonnakes = document.getElementById("nonnakes").value;
             // var akreditasi = document.getElementById("akreditasi").value;
             var jumlah = document.getElementById("jumlah").value;
@@ -548,6 +573,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             var nama_koordinator = document.getElementById("nama_koordinator").value;
             var email_koordinator = document.getElementById("email_koordinator").value;
             var telp_koordinator = document.getElementById("telp_koordinator").value;
+
 
             //Notif Bila tidak diisi
             if (

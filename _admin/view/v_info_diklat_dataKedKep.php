@@ -56,7 +56,7 @@ function generateKalenderKedKep($date)
                     ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tlg<?php echo $year . $month . $i; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-success btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $year . $month . $i; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
 
                                 <!-- modal   -->
                                 <div class="modal fade text-gray-800" id="tlg<?php echo $year . $month . $i; ?>" aria-hidden="true" style="display: none;">
@@ -79,7 +79,7 @@ function generateKalenderKedKep($date)
                         ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tlg<?php echo $year . $month . $i; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-success btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $year . $month . $i; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
 
                                 <!-- modal   -->
                                 <div class="modal fade text-gray-800" id="tlg<?php echo $year . $month . $i; ?>" aria-hidden="true" style="display: none;">

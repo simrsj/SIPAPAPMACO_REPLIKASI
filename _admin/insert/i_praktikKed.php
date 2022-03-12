@@ -118,7 +118,7 @@ if ($_GET['prk'] == 'ked') {
 
                                 if ($r_spek > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_profesi_pdd' id="profesi">
+                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' onchange="makanMess();" name='id_profesi_pdd' id="profesi">
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_spek = $q_spek->fetch(PDO::FETCH_ASSOC)) {
@@ -198,7 +198,7 @@ if ($_GET['prk'] == 'ked') {
                             </div>
                             <div class="col-lg-3">
                                 Unggah Data Praktikan : <span style="color:red">*</span>
-                                <a class='btn btn-outline-primary btn-sm text-uppercase' href='#' data-toggle='modal' data-target='#modal_data_praktikan'>
+                                <a class='text-xs text-uppercase badge badge-danger' href='#' data-toggle='modal' data-target='#modal_data_praktikan'>
                                     Info Format File
                                 </a>
                                 <br>
@@ -242,8 +242,8 @@ if ($_GET['prk'] == 'ked') {
                                                     </div>
                                                     <hr>
                                                     Data Sesuaikan dengan <span class="text-danger">No</span>, karena <span class="text-danger">No</span> akan menentukan jumlah baris praktikannya<br>
-                                                    - Bila jumlah nomer kelebihan dalam formatnya <span class="text-danger">HAPUS BARIS</span> tersebut<br>
-                                                    - Bila jumlah nomer kekurangan dalam formatnya <span class="text-danger">TAMBAH BARIS</span> tersebut dengan mengisi <span class="text-danger">NOMOR</span>
+                                                    - Bila jumlah nomer kelebihan dalam formatnya, <span class="text-danger">HAPUS BARIS</span> tersebut<br>
+                                                    - Bila jumlah nomer kekurangan dalam formatnya, <span class="text-danger">TAMBAH BARIS</span> tersebut dengan mengisi <span class="text-danger">NOMOR</span>
                                                     <hr>
                                                 </div>
                                                 <div class="modal-footer">
@@ -259,7 +259,7 @@ if ($_GET['prk'] == 'ked') {
                                     </div>
                                 </div>
                                 <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx">
-                                <br><i style='font-size:12px;'>Data unggah harus .xlsx dan maksimal ukuran file 1 Mb</i>
+                                <br><i style='font-size:12px;'>File harus sesuai format dan maksimal ukuran file 1 Mb</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_data_praktikan"></span>
                             </div>
                         </div>
@@ -294,30 +294,32 @@ if ($_GET['prk'] == 'ked') {
                         </div>
 
                         <hr>
-                        <div class="text-gray-700">
-                            <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                                Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
-                                <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)<br>
-                                    (Wajib dipilih jika <b>Profesi</b> memilih <b>PSPD/Co-Ass</b>)</span>
+                        <div id="data_makan_mess" style="display: none;">
+                            <div class="text-gray-700">
+                                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                                    Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span><br>
+                                    <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)<br>
+                                        (Wajib dipilih jika <b>Profesi</b> memilih <b>PSPD/Co-Ass</b>)</span>
+                                </div>
+                                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                                    <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
+                                </div>
                             </div>
-                            <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                                <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
+                            <div class="row boxed-check-group boxed-check-primary justify-content-center">
+                                <label class="boxed-check">
+                                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="y">
+                                    <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
+                                </label>
+                                &nbsp;
+                                &nbsp;
+                                <label class="boxed-check">
+                                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
+                                    <div class="boxed-check-label">Tanpa Makan</div>
+                                </label>
+                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_makan_mess"></span>
                             </div>
+                            <hr>
                         </div>
-                        <div class="row boxed-check-group boxed-check-primary justify-content-center">
-                            <label class="boxed-check">
-                                <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="y">
-                                <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
-                            </label>
-                            &nbsp;
-                            &nbsp;
-                            <label class="boxed-check">
-                                <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
-                                <div class="boxed-check-label">Tanpa Makan</div>
-                            </label>
-                            <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_makan_mess"></span>
-                        </div>
-                        <hr>
                         <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
 
                         <!-- Tombol Lanjut ke Daftar Tarif-->
@@ -343,6 +345,17 @@ if ($_GET['prk'] == 'ked') {
     <!-- <pre id="whereToPrint"> ce :</pre> -->
 
     <script type="text/javascript">
+        function makanMess() {
+            // console.log("makanMess");
+            // console.log($("#profesi").val());
+            var profesi = $("#profesi").val();
+            if (profesi == 1) {
+                $("#data_makan_mess").fadeOut('slow');
+            } else {
+                $("#data_makan_mess").fadeIn('slow');
+            }
+        }
+
         function simpan_ked() {
 
             var id = document.getElementById("id").value;
@@ -716,7 +729,7 @@ if ($_GET['prk'] == 'ked') {
                             var id = document.getElementById("id").value;
                             data_file.append("id", id);
 
-                            xhttp.open("POST", "_admin/exc/x_i_praktik_sFilePraktik.php", true);
+                            xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
                             xhttp.send(data_file);
 
                             //Cari Jenis Jurusan
@@ -800,7 +813,7 @@ if ($_GET['prk'] == 'ked') {
                                 var id = document.getElementById("id").value;
                                 data_file.append("id", id);
 
-                                xhttp.open("POST", "_admin/exc/x_i_praktik_sFilePraktik.php", true);
+                                xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
                                 xhttp.send(data_file);
 
                                 //Cari Jenis Jurusan

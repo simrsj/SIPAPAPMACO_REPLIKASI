@@ -1,30 +1,47 @@
 
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
+--------------------------------------------------------------------------------------------------------------------
+FORMAT UPDATE WAG
 
 _*MAYOR*_
 - 🔃 Perbaikan Akun Institusi
+- Pembuatan Modul Kuota Praktik
+- ✅ Pembuatan Informasi Jadwal Praktik
+- 🔃 Filter Pemilihan Jadwal Praktik saat pengajuan
+- ✅Pembuatan modul kuota praktikan
 
 _*MINOR*_
-- 🔃 Pembuatan Informasi Jadwal Praktik
-- 🔃 Filter Pemilihan Jadwal Praktik saat pengajuan
-- Cetak Invoice Pembayaran 
+- Cetak Invoice Pembayaran
 - Cetak Data Nilai Keperawatan
-- Saat Pengajuan Keperawatan saat pilih jenjang profesi, menu profesi tidak usah (pilih) lagi
+- ✅Saat Pengajuan Keperawatan saat pilih jenjang profesi, menu profesi tidak usah (pilih) lagi
 - Pembuatan Fungsi Notifikasi (alert) Setiap Proses Alur
-- Saat Pilih Mess oleh Admin, tidak usah lagi memilih Dengan atau Tanpa Makan
+- ✅Saat Pilih Mess oleh Admin, tidak usah lagi memilih Dengan atau Tanpa Makan
+- ✅Menghilankan pilihan dengan atau tanpa makan dipengajuan praktik kedokteran profesi ppds
+- ✅Penambahan data praktikan dimenu ARSIP
+- Penonaktifkan data praktikan dimenu DATA PRAKTIKAN 
+- Pembuatan input profil insitusi di Akun Institusi
+- Validasi inputan profil insitusi dari akun Institusi
+- Pmebuatan Modul Validasi Profil Institusi
 
 KET : 
-_*MAYOR*_ = Modul yang _*BUG/ERROR*_ nya pempengaruhi Alur Utama (Dipioritaskan)
-_*MINOR*_ = Modul yang _*BUG/ERROR*_ nya bisa di kondisikan
+_*MAYOR*_ = Modul yang _*FITUR/ERROR*_ nya pempengaruhi Alur Utama (PRIORITAS)
+_*MINOR*_ = Modul yang _*FITUR/ERROR*_ nya bisa dikondisikan
 ✅ = Selesai, 🔃 = Progress
 
 NOTE : 
 Modul yang sudah selesai akan dihilangkan diudate selanjutnya, 
 Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/TLDevSM
 
+--------------------------------------------------------------------------------------------------------------------
+PERTANYAAN
+
+- Gambar default bila tidak ada gambar logo Institusi
+- 
+--------------------------------------------------------------------------------------------------------------------
+
 git status
 git add . 
-git commit -a -m "Progres Jadwal praktik"
+git commit -a -m "Selesai modul kuota, informasi jadwal praktik"
 git pull
 git push
 

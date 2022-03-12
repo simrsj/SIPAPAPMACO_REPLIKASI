@@ -55,12 +55,48 @@ function generateKalenderNklNnk($date)
                         if ($day == $i) {
                     ?>
                             <td>
-                                <strong><?php echo $i; ?></strong>
+                                <!-- tombol modal -->
+                                <button type="button" class="btn btn-outline-primary btn-sm form-control" data-toggle="modal" data-target="#tlg2<?php echo $year . $month . $i; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+
+                                <!-- modal   -->
+                                <div class="modal fade text-gray-800" id="tlg2<?php echo $year . $month . $i; ?>" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="text-center text-lg">INFO PRAKTIK NAKES LAINNYA DAN NON-NAKES TANGGAL <b><?php echo tanggal($year . "-" . $month . "-" . $i); ?></b></div>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         <?php
                         } else {
                         ?>
-                            <td><?php echo $i;  ?></td>
+                            <td>
+                                <!-- tombol modal -->
+                                <button type="button" class="btn btn-outline-primary btn-sm form-control" data-toggle="modal" data-target="#tlg2<?php echo $year . $month . $i; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+
+                                <!-- modal   -->
+                                <div class="modal fade text-gray-800" id="tlg2<?php echo $year . $month . $i; ?>" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="text-center text-lg">INFO PRAKTIK NAKES LAINNYA DAN NON-NAKES TANGGAL <b><?php echo tanggal($year . "-" . $month . "-" . $i); ?></b></div>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         <?php
                         }
                         if (($i + $blank) % JUMLAH_KOLOM2 == 0) {
