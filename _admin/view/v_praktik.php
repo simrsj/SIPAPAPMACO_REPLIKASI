@@ -1,12 +1,5 @@
 <?php
-if (isset($_POST['arsip_praktik'])) {
-    $conn->query("UPDATE `tb_praktik` SET status_praktik = 'A' WHERE id_praktik = " . $_POST['id_praktik']);
-    echo "
-        <script type='text/javascript'>
-            document.location.href = '?prk';
-        </script>
-    ";
-} elseif (isset($_POST['simpan_bayar'])) {
+if (isset($_POST['simpan_bayar'])) {
 
     $no = 1;
     $sql = "SELECT id_bayar FROM tb_bayar ORDER BY id_bayar ASC";
@@ -93,8 +86,26 @@ if (isset($_POST['arsip_praktik'])) {
 
 ?>
             <script>
-                alert('Data Pembayaran Sudah Disimpan');
-                document.location.href = '?prk=<?php echo $_GET['prk']; ?>';
+                $(document).ready(function() {
+                    Swal.fire({
+                        allowOutsideClick: false,
+                        // isDismissed: false,
+                        icon: 'success',
+                        title: '<span class"text-xs"><b>DATA PERMBAYARAN</b><br>Berhasil Tersimpan',
+                        showConfirmButton: false,
+                        html: '<a href="?prk=<?php echo $_GET['prk']; ?>" class="btn btn-outline-primary">OK</a>',
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    }).then(
+                        function() {
+                            document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
+                        }
+                    );
+                });
             </script>
     <?php
         }

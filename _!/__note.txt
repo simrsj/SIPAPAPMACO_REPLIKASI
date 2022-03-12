@@ -5,23 +5,16 @@ FORMAT UPDATE WAG
 
 _*MAYOR*_
 - 🔃 Perbaikan Akun Institusi
-- Pembuatan Modul Kuota Praktik
 - ✅ Pembuatan Informasi Jadwal Praktik
 - 🔃 Filter Pemilihan Jadwal Praktik saat pengajuan
-- ✅Pembuatan modul kuota praktikan
 
 _*MINOR*_
 - Cetak Invoice Pembayaran
 - Cetak Data Nilai Keperawatan
-- ✅Saat Pengajuan Keperawatan saat pilih jenjang profesi, menu profesi tidak usah (pilih) lagi
-- Pembuatan Fungsi Notifikasi (alert) Setiap Proses Alur
-- ✅Saat Pilih Mess oleh Admin, tidak usah lagi memilih Dengan atau Tanpa Makan
-- ✅Menghilankan pilihan dengan atau tanpa makan dipengajuan praktik kedokteran profesi ppds
-- ✅Penambahan data praktikan dimenu ARSIP
 - Penonaktifkan data praktikan dimenu DATA PRAKTIKAN 
-- Pembuatan input profil insitusi di Akun Institusi
-- Validasi inputan profil insitusi dari akun Institusi
-- Pmebuatan Modul Validasi Profil Institusi
+- 🔃Pembuatan input profil insitusi di Akun Institusi
+- 🔃Validasi inputan profil insitusi dari akun Institusi
+- 🔃Pembuatan Modul Validasi Profil Institusi
 
 KET : 
 _*MAYOR*_ = Modul yang _*FITUR/ERROR*_ nya pempengaruhi Alur Utama (PRIORITAS)
@@ -41,7 +34,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Selesai modul kuota, informasi jadwal praktik"
+git commit -a -m "perbaikan input praktik keperawatan profesi"
 git pull
 git push
 

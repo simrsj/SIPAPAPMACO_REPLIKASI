@@ -555,12 +555,14 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
             var praktik = document.getElementById("praktik").value;
             var jurusan = document.getElementById("jurusan").value;
             var jenjang = document.getElementById("jenjang").value;
-            var profesi;
+            var profesi = 0;
+            console.log('jenjang' + jenjang);
             if (jenjang == 9) {
                 profesi = 5;
             } else {
                 profesi = document.getElementById("profesi").value;
             }
+            console.log('profesi' + profesi);
             // var profesi_add = document.getElementById("profesi_add").value;
             var nonnakes = document.getElementById("nonnakes").value;
             // var akreditasi = document.getElementById("akreditasi").value;
@@ -770,8 +772,8 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 var fileSurat = document.getElementById("file_surat").files;
                 var getSizeSurat = document.getElementById("file_surat").files[0].size / 1024;
 
-                console.log("Size Surat : " + getSizeSurat);
-                console.log("Size Surat : " + fileSurat);
+                // console.log("Size Surat : " + getSizeSurat);
+                // console.log("Size Surat : " + fileSurat);
 
                 //Toast bila upload file surat selain pdf
                 if (getTypeSurat != 'pdf') {
@@ -825,8 +827,8 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
                 var getSizeDataPraktikan = document.getElementById("file_data_praktikan").files[0].size / 1024;
 
-                console.log("Size Data Surat : " + getSizeDataPraktikan);
-                console.log("Size data Surat : " + fileDataPraktikan);
+                // console.log("Size Data Surat : " + getSizeDataPraktikan);
+                // console.log("Size data Surat : " + fileDataPraktikan);
 
                 //Toast bila upload file data praktikan selain xlsx
                 if (getTypeDataPraktikan != 'xlsx') {
@@ -1009,6 +1011,22 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                     cek_pilih_ujian = document.getElementById("cek_pilih_ujian2").value;
                 }
 
+                //push data profesi
+                var jenjang = document.getElementById("jenjang").value;
+                var profesi = 0;
+                console.log('jenjang' + jenjang);
+                if (jenjang == 9) {
+                    profesi = 5;
+                } else {
+                    profesi = document.getElementById("profesi").value;
+                }
+                console.log('profesi' + profesi);
+
+                data_praktik.push({
+                    name: 'id_profesi_pdd',
+                    value: profesi
+                });
+
                 //push data ujian    
                 data_praktik.push({
                     name: 'cek_pilih_ujian',
@@ -1117,7 +1135,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>TARIF</b><br>Berhasil Tersimpan',
                                 showConfirmButton: false,
                                 html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
-                                timer: 5000,
+                                timer: 5000000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
                                     toast.addEventListener('mouseenter', Swal.stopTimer)

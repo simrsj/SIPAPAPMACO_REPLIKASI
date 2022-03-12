@@ -59,7 +59,7 @@
                             <div class="no-gutters align-items-center">
                                 Jurusan : Farmasi, Kesehatan Lingkungan (KESLING), Psikologi, Rekam Medis
                                 <hr>
-                                Jenjang : D3, S1, Profesi (Farmasi, Psikologi).
+                                Jenjang : D3, D4, S1, Profesi (Farmasi, Psikologi).
                                 <hr>
                                 Profesi : Apotekes (Farmasi), Psikologi Klinik (Psikologi)
                             </div>
@@ -79,7 +79,7 @@
                             <div class="no-gutters align-items-center ">
                                 Jurusan : Informasi Teknologi (IT), Pekerja Sosial (Peksos)
                                 <hr>
-                                Jenjang : D3, S1.
+                                Jenjang : D3, D4, S1.
                                 <hr>
                                 Profesi : -
                             </div>
