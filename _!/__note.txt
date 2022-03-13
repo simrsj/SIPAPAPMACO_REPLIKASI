@@ -15,6 +15,8 @@ _*MINOR*_
 - 🔃Pembuatan input profil insitusi di Akun Institusi
 - 🔃Validasi inputan profil insitusi dari akun Institusi
 - 🔃Pembuatan Modul Validasi Profil Institusi
+- Modul Pengajuan MoU Baru
+- Modul Pengajuan MoU Perpanjang
 
 KET : 
 _*MAYOR*_ = Modul yang _*FITUR/ERROR*_ nya pempengaruhi Alur Utama (PRIORITAS)
@@ -34,7 +36,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "perbaikan input praktik keperawatan profesi"
+git commit -a -m "progres informasi dan filter jadwal praktik"
 git pull
 git push
 

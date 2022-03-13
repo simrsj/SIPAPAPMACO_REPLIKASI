@@ -87,7 +87,7 @@
                                 <div class="card-body " style="font-size: medium;">
                                     <!-- data praktikan -->
                                     <div class="text-gray-700">
-                                        <h4 class="font-weight-bold">DATA KELOMPOK</h4><br>
+                                        <h4 class="font-weight-bold">DATA NILAI</h4><br>
                                     </div>
                                     <?php
                                     if ($r_data_praktikan > 0) {

@@ -77,13 +77,14 @@ function tanggal_minimal($tanggal)
 function tanggal_hari($tanggal)
 {
 	$hari = array(
-		1 =>   'Senin',
+
+		0 => 'Minggu',
+		'Senin',
 		'Selasa',
 		'Rabu',
 		'Kamis',
 		"Jum'at",
-		'Sabtu',
-		'Minggu'
+		'Sabtu'
 	);
 
 	return $hari[$tanggal];

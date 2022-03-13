@@ -101,7 +101,10 @@
                         $q_kuotaKedKep = $conn->query($sql_kuotaKedKep);
                         $d_kuotaKedKep = $q_kuotaKedKep->fetch(PDO::FETCH_ASSOC);
                         ?>
-                        <h6 class="m-0 font-weight-bold text-primary">Kedokteran dan Keperawatan (<span class="text-danger">Kuota Harian : <?php echo $d_kuotaKedKep['jumlah_kuota']; ?></span>)</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Kedokteran dan Keperawatan <br>
+                            <span class="text-danger">(Kuota Harian Praktikan: <?php echo $d_kuotaKedKep['jumlah_kuota']; ?>)</span>
+                        </h6>
                         <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#info_status_kedKep" title="Keterangan Status">
                             <i class="fas fa-info-circle"></i> Keterangan
                         </a>
@@ -129,7 +132,9 @@
                     <div class="card">
                         <div class="overflow-auto">
                             <div class="no-gutters align-items-center text-center pt-0">
-                                <?php include "./_admin/view/v_info_diklat_dataKedKep.php"; ?>
+                                <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-height: 500px;">
+                                    <?php include "./_admin/view/v_info_diklat_dataKedKep.php"; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,17 +145,15 @@
                 <div class="card shadow h-100">
                     <div class="card-header d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">
-                            Nakes Lainnya dan Non-Nakes &nbsp;
-                            (
+                            Nakes Lainnya dan Non-Nakes <br>
                             <a href="#" class="text-danger" data-toggle="modal" data-target="#info_status" title="Keterangan Status">
-                                <i class="fas fa-info-circle"></i> Cek Kuota Harian
+                                (<i class="fas fa-info-circle"></i> Cek Kuota Harian Praktikan)
                             </a>
-                            )
                             <div class="modal fade text-gray-800" id="info_status" data-backdrop="static" style="display: none;">
                                 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4>Info Kuota Harian Nakes Lainnya dan Non Nakes</h4>
+                                            <h4>Info Kuota Harian Praktikan Nakes Lainnya dan Non Nakes</h4>
                                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
@@ -206,7 +209,7 @@
                                 </div>
                             </div>
                         </h6>
-                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#info_status2" title="Keterangan Status">
+                        <!-- <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#info_status2" title="Keterangan Status">
                             <i class="fas fa-info-circle"></i> Keterangan
                         </a>
                         <div class="modal fade text-gray-800" id="info_status2" data-backdrop="static" style="display: none;">
@@ -222,11 +225,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card all-0 d-flex flex-column w-100 h-100 overflow-auto">
                         <div class="overflow-auto">
-                            <div class="no-gutters align-items-center text-center pt-0">
+                            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-height: 500px;">
                                 <?php include "./_admin/view/v_info_diklat_dataNklNnk.php"; ?>
                             </div>
                         </div>

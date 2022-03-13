@@ -27,7 +27,7 @@ if (is_numeric($i) && is_numeric($p)) {
                     allowOutsideClick: false,
                     // isDismissed: false,
                     icon: 'success',
-                    title: '<span class"text-xs"><b>DATA <br>Pembimbing</b> dan <b>Ruangan</b><br>Berhasil disimpan',
+                    title: '<span class"text-xs"><b>DATA NILAI</b><br>Berhasil disimpan',
                     showConfirmButton: false,
                     html: '<a href="?nil" class="btn btn-outline-primary">OK</a>',
                     timer: 4000,

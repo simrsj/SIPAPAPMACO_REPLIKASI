@@ -94,6 +94,36 @@ $sql_insert = "INSERT INTO tb_praktik (
 
 // echo $sql_insert . "<br>";
 $conn->query($sql_insert);
+// --------------------------------------SIMPAN GENERATE TANGGAL--------------------------------------------
+
+$d1 = $_POST['tgl_mulai_praktik'];
+$d2 = $_POST['tgl_selesai_praktik'];
+$d2 = date('Y-m-d', strtotime($d2 . "+1 days"));
+
+$period = new DatePeriod(
+    new DateTime($d1),
+    new DateInterval('P1D'),
+    new DateTime($d2)
+);
+
+// echo "<pre>";
+// // print_r($period);
+// echo "</pre>";
+
+$no = 1;
+foreach ($period as $key => $value) {
+    $sql = "INSERT INTO tb_praktik_tgl (
+        id_praktik, 
+        praktik_tgl
+    ) VALUES (
+        '" . $_POST['id'] . "', 
+        '" . $value->format('Y-m-d') . "'
+    )";
+    // echo " $sql<br>";
+    $conn->query($sql);
+    $no++;
+}
+
 // --------------------------------------SIMPAN DATA TARIF--------------------------------------------
 
 //Eksekusi jika jenis jurusan selain dari kedokteran
@@ -123,9 +153,9 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
     $sql_tarif_jurusan .= " AND tb_tarif.id_jenjang_pdd = 0 AND tb_tarif.status_tarif = 'y'";
     $sql_tarif_jurusan .= " ORDER BY nama_tarif_jenis ASC, nama_tarif ASC ";
 
-    echo "<br><br>";
-    echo $sql_tarif_jurusan;
-    echo "<br><br>";
+    // echo "<br><br>";
+    // echo $sql_tarif_jurusan;
+    // echo "<br><br>";
 
     $q_tarif_jurusan = $conn->query($sql_tarif_jurusan);
     while ($d_tarif_jurusan = $q_tarif_jurusan->fetch(PDO::FETCH_ASSOC)) {
@@ -238,7 +268,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
             } else {
                 $kuantitas = $jumlah_praktik;
             }
-            echo $kuantitas;
+            // echo $kuantitas;
 
             $sql_insert_tarif_jenjang = " INSERT INTO tb_tarif_pilih (
                 id_praktik, 
@@ -262,8 +292,8 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
                 '" . $frekuensi * $kuantitas * $d_tarif_jenjang['jumlah_tarif'] . "'
             )";
 
-            echo $sql_insert_tarif_jenjang;
-            echo "<br>";
+            // echo $sql_insert_tarif_jenjang;
+            // echo "<br>";
             $conn->query($sql_insert_tarif_jenjang);
         }
     }
@@ -272,7 +302,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
     //SQL Tarif Ujian 
     $cek_pilih_ujian = $_POST['cek_pilih_ujian'];
 
-    echo $cek_pilih_ujian . "<br>";
+    // echo $cek_pilih_ujian . "<br>";
     if ($cek_pilih_ujian == 'y') {
         $sql_tarif_ujian = " SELECT * FROM tb_tarif ";
         $sql_tarif_ujian .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
@@ -281,7 +311,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
         $sql_tarif_ujian .= "  AND tb_tarif.status_tarif = 'y'";
         $sql_tarif_ujian .= "  ORDER BY nama_tarif_jenis ASC";
 
-        echo $sql_tarif_ujian;
+        // echo $sql_tarif_ujian;
 
         $q_tarif_ujian = $conn->query($sql_tarif_ujian);
 
@@ -309,7 +339,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
             } else {
                 $kuantitas = $jumlah_praktik;
             }
-            echo $kuantitas;
+            // echo $kuantitas;
 
             $sql_insert_tarif_ujian = " INSERT INTO tb_tarif_pilih (
                 id_praktik, 
@@ -333,17 +363,17 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
                 '" . $frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif'] . "'
             )";
 
-            echo $sql_insert_tarif_ujian;
-            echo "<br>";
+            // echo $sql_insert_tarif_ujian;
+            // echo "<br>";
             $conn->query($sql_insert_tarif_ujian);
         }
     }
     echo "<br><br>";
 
-    $sql_update_status_praktik = " UPDATE tb_praktik
-SET status_cek_praktik = 'DPT'
-WHERE id_praktik = $id_praktik";
+    $sql_update_status_praktik = " UPDATE tb_praktik";
+    $sql_update_status_praktik .= " SET status_cek_praktik = 'DPT'";
+    $sql_update_status_praktik .= " WHERE id_praktik = $id_praktik";
 
     $conn->query($sql_update_status_praktik);
-    echo json_encode(['success' => 'Data Tarif Berhasil Disimpan']);
+    json_encode(['success' => 'Data Tarif Berhasil Disimpan']);
 }
