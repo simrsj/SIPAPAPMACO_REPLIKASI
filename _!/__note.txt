@@ -44,7 +44,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "progres validasi jadwal praktik"
+git commit -a -m "delete"
 git pull
 git push
 
