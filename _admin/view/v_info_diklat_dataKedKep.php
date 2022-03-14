@@ -62,14 +62,17 @@ function generateKalenderKedKep($date)
                         } else {
                             $t = $i;
                         }
-
                         $tgl = $year . "-" . $month . "-" . $t;
                         $sql_kedKep = "SELECT * FROM tb_praktik";
                         $sql_kedKep .= " JOIN tb_praktik_tgl  ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
                         $sql_kedKep .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl'";
                         $sql_kedKep .= " AND (tb_praktik.id_jurusan_pdd = 1 OR tb_praktik.id_jurusan_pdd = 2)";
-                        $sql_kedKep .= " AND ((tb_praktik.status_cek_praktik = 'BYR') OR (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y')) ";
-                        $sql_kedKep .= " ";
+                        $sql_kedKep .= " AND (";
+                        $sql_kedKep .= "       (tb_praktik.status_cek_praktik = 'BYR') ";
+                        $sql_kedKep .= "       OR (tb_praktik.status_cek_praktik = 'VPT_Y') ";
+                        $sql_kedKep .= "       OR (tb_praktik.status_cek_praktik = 'VPT_Y_PPDS') ";
+                        $sql_kedKep .= "       OR (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y')";
+                        $sql_kedKep .= "     )";
                         // echo "$sql_kedKep<br>";
                         $q_kedKep = $conn->query($sql_kedKep);
 
@@ -82,18 +85,19 @@ function generateKalenderKedKep($date)
                         $kuota_kep = 0;
                         while ($d_kedKep = $q_kedKep->fetch(PDO::FETCH_ASSOC)) {
                             if ($d_kedKep['id_praktik'] != $id) {
-                                $jp_jt = $jp_j + $d_kedKep['jumlah_praktik'];
 
                                 //Kuota masing-masing dari kedokteran dan keperawatan
                                 if ($d_kedKep['id_jurusan_pdd'] == 1) {
-                                    $kuota_ked = $jp_j_ked + $d_kedKep['jumlah_praktik'];
+                                    $kuota_ked += $jp_j + $d_kedKep['jumlah_praktik'];
                                 } elseif ($d_kedKep['id_jurusan_pdd'] == 2) {
-                                    $kuota_kep = $jp_j_kep + $d_kedKep['jumlah_praktik'];
+                                    $kuota_kep += $jp_j + $d_kedKep['jumlah_praktik'];
                                 }
+
+                                $jp_jt = ($kuota_ked + $jp_j_ked) + ($kuota_kep + $jp_j_kep);
                             } else {
                                 $jp_j = $d_kedKep['jumlah_praktik'];
-                                $jp_j_ked = $d_kedKep['jumlah_praktik'];
-                                $jp_j_kep = $d_kedKep['jumlah_praktik'];
+                                $jp_j_ked = $kuota_ked;
+                                $jp_j_kep = $kuota_kep;
                                 $id = $d_kedKep['id_praktik'];
                             }
                         }

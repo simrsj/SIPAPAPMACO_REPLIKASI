@@ -18,7 +18,7 @@ _*MINOR*_
 - 🔃 Pembuatan Modul Validasi Profil Institusi
 - Modul Pengajuan MoU Baru
 - Modul Pengajuan MoU Perpanjang
-- 🔃 Penyesuaian Informasi Data Praktikan
+- ✅ Penyesuaian Informasi Data Praktikan
 - Modul Pengajuan Magang
 - Modul Pengajuan Ujian Akhir Periode (UAP)
 
@@ -52,6 +52,7 @@ git remote add origin https://github.com/fajarrachmath/SM.git
 git push -u origin main
 
 TRUNCATE tb_praktik;
+TRUNCATE tb_praktik_tgl;
 TRUNCATE tb_praktikan;
 TRUNCATE tb_tarif_pilih;
 TRUNCATE tb_mess_pilih;

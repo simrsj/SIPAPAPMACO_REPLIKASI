@@ -667,6 +667,23 @@ if ($_GET['prk'] == 'ked') {
                 }
             }
 
+            var data_praktik = $('#form_praktik').serializeArray();
+            $.ajax({
+                type: 'POST',
+                url: "_admin/insert/i_praktik_valTgl.php?",
+                data: data_praktik,
+                dataType: 'json',
+                success: function() {
+                    console.log("SUCCESS CEK VAL TGL");
+                    var response = JSON.parse(this.responseText);
+                    alert(response.ket1 + response.ket2 + response.ket3);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                    alert('eksekusi query gagal');
+                }
+            });
+
             //simpan data praktik dan data tarif
             if (
                 institusi != "" &&
