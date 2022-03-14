@@ -4,6 +4,8 @@ define('JUMLAH_KOLOM1', 7);
 
 function generateKalenderKedKep($date)
 {
+    include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+
     $day = date('d', $date);
     $month = date('m', $date);
     $year = date('Y', $date);
@@ -52,15 +54,124 @@ function generateKalenderKedKep($date)
                     ?>
                     <?php
                     for ($i = 1; $i <= $daysInMonth; $i++) {
+                        // echo strlen((string)$i) . "-" . $i;
+
+                        //tambah 0 jika tanggal 1 digit
+                        if (strlen((string)$i) == 1) {
+                            $t = "0" . $i;
+                        } else {
+                            $t = $i;
+                        }
+                        $tgl = $year . "-" . $month . "-" . $t;
+                        $sql_kedKep = "SELECT * FROM tb_praktik";
+                        $sql_kedKep .= " JOIN tb_praktik_tgl  ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
+                        $sql_kedKep .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl'";
+                        $sql_kedKep .= " AND (tb_praktik.id_jurusan_pdd = 1 OR tb_praktik.id_jurusan_pdd = 2)";
+                        $sql_kedKep .= " AND (";
+                        $sql_kedKep .= "       (tb_praktik.status_cek_praktik = 'BYR') ";
+                        $sql_kedKep .= "       OR (tb_praktik.status_cek_praktik = 'VPT_Y') ";
+                        $sql_kedKep .= "       OR (tb_praktik.status_cek_praktik = 'VPT_Y_PPDS') ";
+                        $sql_kedKep .= "       OR (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y')";
+                        $sql_kedKep .= "     )";
+                        // echo "$sql_kedKep<br>";
+                        $q_kedKep = $conn->query($sql_kedKep);
+
+                        $jp_jt = 0;
+                        $jp_j = 0;
+                        $id = 0;
+                        $jp_j_ked = 0;
+                        $jp_j_kep = 0;
+                        $kuota_ked = 0;
+                        $kuota_kep = 0;
+                        while ($d_kedKep = $q_kedKep->fetch(PDO::FETCH_ASSOC)) {
+                            if ($d_kedKep['id_praktik'] != $id) {
+
+                                //Kuota masing-masing dari kedokteran dan keperawatan
+                                if ($d_kedKep['id_jurusan_pdd'] == 1) {
+                                    $kuota_ked += $jp_j + $d_kedKep['jumlah_praktik'];
+                                } elseif ($d_kedKep['id_jurusan_pdd'] == 2) {
+                                    $kuota_kep += $jp_j + $d_kedKep['jumlah_praktik'];
+                                }
+
+                                $jp_jt = ($kuota_ked + $jp_j_ked) + ($kuota_kep + $jp_j_kep);
+                            } else {
+                                $jp_j = $d_kedKep['jumlah_praktik'];
+                                $jp_j_ked = $kuota_ked;
+                                $jp_j_kep = $kuota_kep;
+                                $id = $d_kedKep['id_praktik'];
+                            }
+                        }
+
+                        $sql_kuotaKedKep = "SELECT * FROM tb_kuota";
+                        $sql_kuotaKedKep .= " WHERE id_kuota= 1";
+
+                        $q_kuotaKedKep = $conn->query($sql_kuotaKedKep);
+                        $d_kuotaKedKep = $q_kuotaKedKep->fetch(PDO::FETCH_ASSOC);
+                        $kuota_keKep = $d_kuotaKedKep['jumlah_kuota'];
+
+                        //penentuan jenis tombol
+                        if ($jp_jt == 0) {
+                            $btn_kedKep = "success";
+                        } elseif (($jp_jt > 0) && ($jp_jt < $kuota_keKep)) {
+                            $btn_kedKep = "warning";
+                        } elseif ($jp_jt >= $kuota_keKep) {
+                            $btn_kedKep = "danger";
+                        } else {
+                            $btn_kedKep = "secondary";
+                        }
+                        // echo $jp_jt . "-" . $kuota_ked . "-" . $kuota_kep . "<br>";
+
                         if ($day == $i) {
                     ?>
                             <td>
-                                <strong><?php echo $i; ?></strong>
+                                <!-- tombol modal -->
+                                <button type="button" class="btn btn-outline-<?php echo $btn_kedKep; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+
+                                <!-- modal   -->
+                                <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="text-center text-lg">INFO PRAKTIK KEDOKTERAN DAN KEPERAWATAN TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
+                                                KEDOKTERAN : <?php echo $kuota_ked; ?><br>
+                                                KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         <?php
                         } else {
                         ?>
-                            <td><?php echo $i;  ?></td>
+                            <td>
+                                <!-- tombol modal -->
+                                <button type="button" class="btn btn-outline-<?php echo $btn_kedKep; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+
+                                <!-- modal   -->
+                                <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="text-center text-lg">INFO PRAKTIK KEDOKTERAN DAN KEPERAWATAN TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
+                                                KEDOKTERAN : <?php echo $kuota_ked; ?><br>
+                                                KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         <?php
                         }
                         if (($i + $blank) % JUMLAH_KOLOM1 == 0) {
@@ -89,11 +200,11 @@ function generateKalenderKedKep($date)
 // ===========================
 
 /* Set the default timezone */
-date_default_timezone_set("Asia/Hong_Kong");
+date_default_timezone_set("Asia/Jakarta");
 $tahun_sekarang = date('Y');
 $bulan_sekarang = date('m') - 1;
 // $tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
-for ($iterateYear = $tahun_sekarang; $iterateYear <= $tahun_sekarang + 1; $iterateYear++) {
+for ($iterateYear = $tahun_sekarang; $iterateYear <= ($tahun_sekarang + 1); $iterateYear++) {
     for ($iterateMonth = 1; $iterateMonth <= 12; $iterateMonth++) {
         // TAHUN BERJALAN 
         if ($iterateYear == $tahun_sekarang) {

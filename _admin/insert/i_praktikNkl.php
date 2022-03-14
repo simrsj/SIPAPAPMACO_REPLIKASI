@@ -228,7 +228,6 @@ if ($_GET['prk'] == 'nkl') {
                                     <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span>
                                 </span>
                                 <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_profesi"></span>
-                                <input type="hidden" name='nonnakes' id="nonnakes" value="0">
                             </div>
                         </div>
                         <br><br>
@@ -503,16 +502,7 @@ if ($_GET['prk'] == 'nkl') {
             var praktik = document.getElementById("praktik").value;
             var jurusan = document.getElementById("jurusan").value;
             var jenjang = document.getElementById("jenjang").value;
-            var profesi = 0;
-            console.log('jenjang' + jenjang);
-            if (jenjang == 9) {
-                profesi = 5;
-            } else {
-                profesi = document.getElementById("profesi").value;
-            }
-            console.log('profesi' + profesi);
-            // var profesi_add = document.getElementById("profesi_add").value;
-            var nonnakes = document.getElementById("nonnakes").value;
+            var profesi = document.getElementById("profesi").value;
             // var akreditasi = document.getElementById("akreditasi").value;
             var jumlah = document.getElementById("jumlah").value;
             var tgl_mulai = document.getElementById("tgl_mulai").value;
@@ -615,12 +605,10 @@ if ($_GET['prk'] == 'nkl') {
                 }
 
                 //notif profesi 
-                if (nonnakes == 0) {
-                    if (profesi == "") {
-                        document.getElementById("err_profesi").innerHTML = "Profesi Harus Diisi";
-                    } else {
-                        document.getElementById("err_profesi").innerHTML = "";
-                    }
+                if (profesi == "") {
+                    document.getElementById("err_profesi").innerHTML = "Profesi Harus Diisi";
+                } else {
+                    document.getElementById("err_profesi").innerHTML = "";
                 }
 
                 //notif akreditasi 
@@ -819,88 +807,122 @@ if ($_GET['prk'] == 'nkl') {
                 }
             }
 
-            //Simpan Data Praktik dan munculkan Data Tarif
-            if (
-                institusi != "" &&
-                praktik != "" &&
-                jurusan != "" &&
-                // akreditasi != "" &&
-                jumlah != "" &&
-                tgl_mulai != "" &&
-                tgl_selesai != "" &&
-                nama_koordinator != "" &&
-                telp_koordinator != "" &&
-                tgl_selesai > tgl_mulai &&
-                no_surat != "" &&
-                file_surat != "" &&
-                getTypeSurat == 'pdf' &&
-                getSizeSurat <= 1024 &&
-                file_data_praktikan != "" &&
-                getTypeDataPraktikan == 'xlsx' &&
-                getSizeDataPraktikan <= 1024
-            ) {
-                document.getElementById("err_institusi").innerHTML = "";
-                document.getElementById("err_praktik").innerHTML = "";
+            var data_praktik = $('#form_praktik').serializeArray();
+            $.ajax({
+                type: 'POST',
+                url: "_admin/insert/i_praktik_valTgl.php?",
+                data: data_praktik,
+                dataType: 'json',
+                success: function(response) {
+                    // console.log("SUCCESS CEK VAL TGL");
+                    if (response.ket == 'y') {
+                        Swal.fire({
+                            allowOutsideClick: false,
+                            // isDismissed: false,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            html: '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b><br>Silahkan Cek Kembali Informasi Jadwal Praktik<br><br>' +
+                                '<a href="?info_diklat" class="btn btn-outline-primary">Informasi Jadwal Praktik</a>',
+                            timer: 15000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        }).then(
+                            function() {
+                                // document.location.href = "?prk=ked";
+                            }
+                        );
+                    } else {
 
-                if (jurusan != 2) {
-                    document.getElementById("err_jurusan").innerHTML = "";
-                }
+                        //Simpan Data Praktik dan munculkan Data Tarif
+                        if (
+                            institusi != "" &&
+                            praktik != "" &&
+                            jurusan != "" &&
+                            // akreditasi != "" &&
+                            jumlah != "" &&
+                            tgl_mulai != "" &&
+                            tgl_selesai != "" &&
+                            nama_koordinator != "" &&
+                            telp_koordinator != "" &&
+                            tgl_selesai > tgl_mulai &&
+                            no_surat != "" &&
+                            file_surat != "" &&
+                            getTypeSurat == 'pdf' &&
+                            getSizeSurat <= 1024 &&
+                            file_data_praktikan != "" &&
+                            getTypeDataPraktikan == 'xlsx' &&
+                            getSizeDataPraktikan <= 1024
+                        ) {
+                            document.getElementById("err_institusi").innerHTML = "";
+                            document.getElementById("err_praktik").innerHTML = "";
 
-                document.getElementById("err_jenjang").innerHTML = "";
-                if (nonnakes == 0) {
-                    document.getElementById("err_profesi").innerHTML = "";
-                }
-                // document.getElementById("err_akreditasi").innerHTML = "";
-                document.getElementById("err_jumlah").innerHTML = "";
-                document.getElementById("err_tgl_mulai").innerHTML = "";
-                document.getElementById("err_tgl_selesai").innerHTML = "";
-                document.getElementById("err_no_surat").innerHTML = "";
-                document.getElementById("err_file_surat").innerHTML = "";
-                document.getElementById("err_file_data_praktikan").innerHTML = "";
-                // document.getElementById("err_akun_koordinator").innerHTML = "";
-                document.getElementById("err_nama_koordinator").innerHTML = "";
-                document.getElementById("err_telp_koordinator").innerHTML = "";
+                            if (jurusan != 2) {
+                                document.getElementById("err_jurusan").innerHTML = "";
+                            }
 
-                //data dari form_praktik
-                var data_praktik = $('#form_praktik').serializeArray();
-                // // document.getElementById("whereToPrint").innerHTML = JSON.stringify(data_praktik, null, 4);
+                            document.getElementById("err_jenjang").innerHTML = "";
+                            document.getElementById("err_profesi").innerHTML = "";
+                            // document.getElementById("err_akreditasi").innerHTML = "";
+                            document.getElementById("err_jumlah").innerHTML = "";
+                            document.getElementById("err_tgl_mulai").innerHTML = "";
+                            document.getElementById("err_tgl_selesai").innerHTML = "";
+                            document.getElementById("err_no_surat").innerHTML = "";
+                            document.getElementById("err_file_surat").innerHTML = "";
+                            document.getElementById("err_file_data_praktikan").innerHTML = "";
+                            // document.getElementById("err_akun_koordinator").innerHTML = "";
+                            document.getElementById("err_nama_koordinator").innerHTML = "";
+                            document.getElementById("err_telp_koordinator").innerHTML = "";
 
-                $("#data_praktik_input").fadeOut('fast');
-                $("#data_tarif_input").fadeIn('slow');
+                            //data dari form_praktik
+                            var data_praktik = $('#form_praktik').serializeArray();
+                            // // document.getElementById("whereToPrint").innerHTML = JSON.stringify(data_praktik, null, 4);
 
-                // Kirim Parameter ke Data Tarif untuk ditampilkan
-                var xmlhttp_data_tarif = new XMLHttpRequest();
-                xmlhttp_data_tarif.onreadystatechange = function() {
-                    document.getElementById("data_tarif_input").innerHTML = this.responseText;
-                };
-                xmlhttp_data_tarif.open("GET", "_admin/insert/i_praktikDataTarif.php?id=" + id +
-                    "&jur=" + jurusan +
-                    "&jen=" + jenjang +
-                    "&tmp=" + tgl_mulai +
-                    "&tsp=" + tgl_selesai +
-                    "&jum=" + jumlah,
-                    true
-                );
-                xmlhttp_data_tarif.send();
+                            $("#data_praktik_input").fadeOut('fast');
+                            $("#data_tarif_input").fadeIn('slow');
 
-                //Toast Lanjut Ke Data Tarif
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            // Kirim Parameter ke Data Tarif untuk ditampilkan
+                            var xmlhttp_data_tarif = new XMLHttpRequest();
+                            xmlhttp_data_tarif.onreadystatechange = function() {
+                                document.getElementById("data_tarif_input").innerHTML = this.responseText;
+                            };
+                            xmlhttp_data_tarif.open("GET", "_admin/insert/i_praktikDataTarif.php?id=" + id +
+                                "&jur=" + jurusan +
+                                "&jen=" + jenjang +
+                                "&tmp=" + tgl_mulai +
+                                "&tsp=" + tgl_selesai +
+                                "&jum=" + jumlah,
+                                true
+                            );
+                            xmlhttp_data_tarif.send();
+
+                            //Toast Lanjut Ke Data Tarif
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 10000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            });
+
+                            Toast.fire({
+                                icon: 'info',
+                                title: '<div class="text-md text-center">LANJUTKAN KE <b>MENU TARIF</b></div>'
+                            });
+                        }
                     }
-                });
-
-                Toast.fire({
-                    icon: 'info',
-                    title: '<div class="text-md text-center">LANJUTKAN KE <b>MENU TARIF</b></div>'
-                });
-            }
+                },
+                error: function() {
+                    console.log(response.responseText);
+                    alert('eksekusi query Val.Jadwal Praktik gagal');
+                }
+            });
         }
 
         function simpan_tarif() {

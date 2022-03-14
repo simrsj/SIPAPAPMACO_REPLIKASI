@@ -3,32 +3,33 @@
         <div class="col-lg-10">
             <h1 class="h3 mb-2 text-gray-800">Daftar Arsip Praktikan</h1>
         </div>
-        <div class="col-lg-2">
+        <!-- <div class="col-lg-2">
             <a href="?prk" class="btn btn-outline-dark btn-sm">
                 <i class="fas fa-arrow-circle-left"></i> Kembali
             </a>
-        </div>
+        </div> -->
     </div>
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="table-responsive">
-                <?php
-                $sql_praktik_a = "SELECT * FROM tb_praktik  ";
-                $sql_praktik_a .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-                $sql_praktik_a .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
-                $sql_praktik_a .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
-                $sql_praktik_a .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-                $sql_praktik_a .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi ";
-                $sql_praktik_a .= " WHERE tb_praktik.status_praktik = 'A'";
-                $sql_praktik_a .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+            <?php
+            $sql_praktik_a = "SELECT * FROM tb_praktik  ";
+            $sql_praktik_a .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+            $sql_praktik_a .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+            $sql_praktik_a .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+            $sql_praktik_a .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+            // $sql_praktik_a .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi ";
+            $sql_praktik_a .= " WHERE tb_praktik.status_praktik = 'A'";
+            $sql_praktik_a .= " AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
+            $sql_praktik_a .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
-                $q_praktik_a = $conn->query($sql_praktik_a);
-                $r_praktik_a = $q_praktik_a->rowCount();
+            $q_praktik_a = $conn->query($sql_praktik_a);
+            $r_praktik_a = $q_praktik_a->rowCount();
 
-                if ($r_praktik_a > 0) {
-                ?>
-                    <table class="table table-striped text-xs" style="vertical-align: middle;" id="myTable">
+            if ($r_praktik_a > 0) {
+            ?>
+                <div class="table-responsive">
+                    <table class="table table-striped " style="vertical-align: middle;" id="myTable">
                         <thead class="thead-dark text-center ">
                             <tr>
                                 <th scope='col'>No</th>
@@ -37,7 +38,7 @@
                                 <th>Jurusan</th>
                                 <th>Jenjang</th>
                                 <th>Profesi</th>
-                                <th>Tanggal Mulai <br>- <br>Tanggal Selesai</th>
+                                <th>Tanggal <br>Mulai dan Selesai</th>
                                 <th>
                                 </th>
                             </tr>
@@ -54,8 +55,15 @@
                                     <td><?php echo $d_praktik_a['nama_jurusan_pdd']; ?></td>
                                     <td><?php echo $d_praktik_a['nama_jenjang_pdd']; ?></td>
                                     <td><?php echo $d_praktik_a['nama_profesi_pdd']; ?></td>
-                                    <td><?php echo tanggal_minimal($d_praktik_a['tgl_mulai_praktik']); ?> - <?php echo tanggal_minimal($d_praktik_a['tgl_selesai_praktik']); ?></td>
-                                    <td><button type="button" id="<?php echo $d_praktik_a['id_praktik']; ?>" class="btn btn-outline-success btn-sm aktif">Aktifkan ? </button></td>
+                                    <td><?php echo tanggal_minimal($d_praktik_a['tgl_mulai_praktik']); ?> <br><?php echo tanggal_minimal($d_praktik_a['tgl_selesai_praktik']); ?></td>
+                                    <td>
+                                        <button type="button" id="<?php echo $d_praktik_a['id_praktik']; ?>" class="btn btn-outline-success btn-sm aktif">
+                                            Aktifkan
+                                        </button> &nbsp;
+                                        <a href="?ars&dp=<?php echo $d_praktik_a['id_praktik'] ?>" class="btn btn-outline-primary btn-sm" title="Drata Praktikan">
+                                            <i class="fas fa-fw fa-users"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php
                                 $no++;
@@ -63,14 +71,14 @@
                             ?>
                         </tbody>
                     </table>
-                <?php
-                } else {
-                ?>
-                    <h3 class='text-center'> Data Arsip Praktik Anda Tidak Ada</h3>
-                <?php
-                }
-                ?>
-            </div>
+                </div>
+            <?php
+            } else {
+            ?>
+                <h3 class='text-center'> Data Arsip Praktik Anda Tidak Ada</h3>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>

@@ -242,17 +242,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 							include "_ip/view/v_nilai.php";
 						}
 					} elseif (isset($_GET['praktikan'])) {
-						if (isset($_GET['u'])) {
-							include "_ip/update/u_praktikan.php";
-						} else {
-							include "_ip/view/v_praktikan.php";
-						}
+						include "_ip/view/v_praktikan.php";
 					} elseif (isset($_GET['pmbb'])) {
-						if (isset($_GET['i'])) {
-							include "_ip/insert/i_pembimbing.php";
-						} else {
-							include "_ip/view/v_pembimbing.php";
-						}
+						include "_ip/view/v_pembimbing.php";
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_ip/view/v_praktik_arsip.php";
@@ -263,8 +255,14 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						} elseif (isset($_GET['i'])) {
 							if ($_GET['prk'] == 'ked') {
 								include "_ip/insert/i_praktikKed.php";
+							} elseif ($_GET['prk'] == 'kep') {
+								include "_ip/insert/i_praktikKep.php";
+							} elseif ($_GET['prk'] == 'nkl') {
+								include "_ip/insert/i_praktikNkl.php";
+							} elseif ($_GET['prk'] == 'nnk') {
+								include "_ip/insert/i_praktikNnk.php";
 							} else {
-								include "_ip/insert/i_praktik.php";
+								include "_error/index.php";
 							}
 						} elseif (isset($_GET['it_ked'])) {
 							include "_ip/insert/i_tarifKed.php";

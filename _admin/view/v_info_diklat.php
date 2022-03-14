@@ -61,7 +61,7 @@
                                 <hr>
                                 Jenjang : D3, D4, S1, Profesi (Farmasi, Psikologi).
                                 <hr>
-                                Profesi : Apotekes (Farmasi), Psikologi Klinik (Psikologi)
+                                Profesi : Apoteker (Farmasi), Psikologi Klinik (Psikologi)
                             </div>
                         </div>
                     </div>
@@ -117,13 +117,13 @@
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body text-center">
                                         Kuota Praktikan untuk Jurusan Kedokteran dan Keparawatan Digabung <span class="text-danger">Kuota Harian : <?php echo $d_kuotaKedKep['jumlah_kuota']; ?></span>
                                         <br><br>
 
-                                        <button class="btn btn-outline-success btn-sm">"Tanggal"</button> = Info Kuota Praktikan Belum terisi <br>
-                                        <button class="btn btn-outline-warning btn-sm">"Tanggal"</button> = Info Kuota Praktikan Sudah terisi <br>
-                                        <button class="btn btn-outline-danger btn-sm">"Tanggal"</button> = Info Kuota Praktikan Sudah Penuh / Melebih Kapasitas <br>
+                                        <button class="btn btn-outline-success btn-sm">"Tanggal"</button> = Info Kuota Praktikan Belum terisi <br><br>
+                                        <button class="btn btn-outline-warning btn-sm">"Tanggal"</button> = Info Kuota Praktikan Sudah terisi <br><br>
+                                        <button class="btn btn-outline-danger btn-sm">"Tanggal"</button> = Info Kuota Praktikan Sudah Penuh
                                     </div>
                                 </div>
                             </div>

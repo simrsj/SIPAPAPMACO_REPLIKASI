@@ -1,12 +1,5 @@
 <?php
-if (isset($_POST['arsip_praktik'])) {
-    $conn->query("UPDATE `tb_praktik` SET status_praktik = 'A' WHERE id_praktik = " . $_POST['id_praktik']);
-    echo "
-        <script type='text/javascript'>
-            document.location.href = '?prk';
-        </script>
-    ";
-} elseif (isset($_POST['simpan_bayar'])) {
+if (isset($_POST['simpan_bayar'])) {
 
     $no = 1;
     $sql = "SELECT id_bayar FROM tb_bayar ORDER BY id_bayar ASC";
@@ -93,8 +86,26 @@ if (isset($_POST['arsip_praktik'])) {
 
 ?>
             <script>
-                alert('Data Pembayaran Sudah Disimpan');
-                document.location.href = '?prk=<?php echo $_GET['prk']; ?>';
+                $(document).ready(function() {
+                    Swal.fire({
+                        allowOutsideClick: false,
+                        // isDismissed: false,
+                        icon: 'success',
+                        title: '<span class"text-xs"><b>DATA PERMBAYARAN</b><br>Berhasil Tersimpan',
+                        showConfirmButton: false,
+                        html: '<a href="?prk=<?php echo $_GET['prk']; ?>" class="btn btn-outline-primary">OK</a>',
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    }).then(
+                        function() {
+                            document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
+                        }
+                    );
+                });
             </script>
     <?php
         }
@@ -155,9 +166,10 @@ if (isset($_POST['arsip_praktik'])) {
                 $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
                 $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
                 $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-                $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
-                $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'D' OR tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S') ";
+                // $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
+                $sql_praktik .= " WHERE tb_praktik.status_praktik != 'A' ";
                 $sql_praktik .= " $jenis_jurusan ";
+                $sql_praktik .= " AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
                 $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
 
                 // echo $sql_praktik;

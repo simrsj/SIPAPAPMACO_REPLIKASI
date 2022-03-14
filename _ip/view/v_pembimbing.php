@@ -22,9 +22,11 @@
             $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-            $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
+            // $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
             $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
-            $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+            $sql_praktik .= " AND tb_praktik.id_profesi_pdd != 1";
+            $sql_praktik .= " AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
+            $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
 
             // echo $sql_praktik;
 
@@ -41,7 +43,8 @@
                     $sql_data_praktikan .= " JOIN tb_praktikan ON tb_pembimbing_pilih.id_praktikan = tb_praktikan.id_praktikan ";
                     $sql_data_praktikan .= " JOIN tb_unit ON tb_pembimbing_pilih.id_unit = tb_unit.id_unit ";
                     $sql_data_praktikan .= " JOIN tb_praktik ON tb_pembimbing_pilih.id_praktik = tb_praktik.id_praktik ";
-                    $sql_data_praktikan .= " WHERE (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+                    $sql_data_praktikan .= " WHERE (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
+                    $sql_data_praktikan .= " AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
                     $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
 
                     $q_data_praktikan = $conn->query($sql_data_praktikan);
@@ -79,9 +82,7 @@
                                         if ($r_data_praktikan <= 0) {
                                         ?>
                                             <hr>
-                                            <a class="btn btn-warning btn-sm collapsed" href="?pmbb&i=<?php echo $d_praktik['id_praktik']; ?>" title="Ubah">
-                                                Pilih Pembimbing
-                                            </a>
+                                            <span class="badge badge-primary text-md">Proses Pemilihan <br>Pembimbing dan Ruangan</span>
                                         <?php
                                         } else {
                                         ?>

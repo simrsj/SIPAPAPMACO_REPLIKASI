@@ -10,6 +10,7 @@
             $sql_transaksi = "SELECT * FROM tb_praktik";
             $sql_transaksi .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
             $sql_transaksi .= " WHERE tb_praktik.status_praktik = 'S' OR tb_praktik.status_praktik = 'A'";
+            $sql_transaksi .= " AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
             $sql_transaksi .= " ORDER BY tb_institusi.nama_institusi ASC";
 
             $q_transaksi = $conn->query($sql_transaksi);

@@ -182,22 +182,16 @@
     <?php
     if ($d_praktik['status_cek_praktik'] == "DPT" || $d_praktik['status_cek_praktik'] == "DPT_KED") {
     ?>
-        <b>VALIDASI : </b><br>
-        <div class="btn-group">
-            <button class="btn btn-outline-success btn-sm" onclick="valDataPraktikTarif_Y(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
-            <button class="btn btn-outline-danger btn-sm" onclick="valDataPraktikTarif_T(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
-        </div>
+        <span class="badge badge-primary text-md">Proses Validasi Praktik</span>
         <?php
     } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
         if ($_GET['prk'] == 'nnk' || $_GET['prk'] == 'nkl') {
         ?>
-            <b>PILIH : </b><br>
-            <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
+            <span class="badge badge-primary text-md">Proses Pemilihan Mess</span>
         <?php
         } else {
         ?>
-            <b>PILIH : </b><br>
-            <a href="?prk=<?php echo $_GET['prk']; ?>&t=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">TEMPAT</a>
+            <span class="badge badge-primary text-md">Proses Pemilihan Tempat</span>
         <?php
         }
     } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
@@ -227,8 +221,7 @@
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "TMP" || $d_praktik['status_cek_praktik'] == "TMP_KED") {
     ?>
-        <b>PILIH : </b><br>
-        <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
+        <span class="badge badge-primary text-md">Proses Pemilihan Tempat</span>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
     ?>
@@ -237,15 +230,11 @@
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
     ?>
-        <b>VALIDASI : </b><br>
-        <div class="btn-group">
-            <button class="btn btn-outline-success btn-sm" onclick="valPembayaran_Y(<?php echo $d_praktik['id_praktik']; ?>)">Diterima</button>
-            <button class="btn btn-outline-danger btn-sm" onclick="valPembayaran_T(<?php echo $d_praktik['id_praktik']; ?>)">Ditolak</button>
-        </div>
+        <span class="badge badge-primary text-md">Proses Validasi Pembayaran</span>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "BYR_Y") {
     ?>
-        <button class="btn btn-outline-success btn-sm" onclick="aktivasiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">AKTIFKAN <i class="fas fa-question-circle"></i></button>
+        <span class="badge badge-primary text-md">Menuggu Aktivasi sesuai Tanggal Praktik </span>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "BYR_T_K") {
     ?>
@@ -312,13 +301,11 @@
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
     ?>
-        <b>PILIH :</b><br>
-        <button class="btn btn-outline-secondary btn-sm" onclick="selesaiPraktik(<?php echo $d_praktik['id_praktik']; ?>)">SELESAIKAN <i class="fas fa-question-circle"></i></button>
+        <span class="badge badge-primary text-md">Sedang Belangsung Proses Praktik </span>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "SLS") {
     ?>
-        <b>PILIH :</b><br>
-        <button class="btn btn-outline-secondary btn-sm" onclick="arsipPraktik(<?php echo $d_praktik['id_praktik']; ?>)">ARSIPKAN <i class="fas fa-question-circle"></i></button>
+        <span class="badge badge-primary text-md">Praktik Selesai</span>
     <?php
     }
     ?>

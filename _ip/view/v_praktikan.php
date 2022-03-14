@@ -22,9 +22,10 @@
             $sql_praktikan .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
             $sql_praktikan .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
             $sql_praktikan .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-            $sql_praktikan .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
+            // $sql_praktikan .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
             $sql_praktikan .= " WHERE tb_praktik.status_praktik != 'A' ";
-            $sql_praktikan .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+            $sql_praktikan .= " AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
+            $sql_praktikan .= " ORDER BY tb_praktik.id_praktik DESC";
 
             // echo $sql_praktikan;
 
@@ -65,10 +66,6 @@
                                         <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data
                                         </button>
-                                        &nbsp;
-                                        <a class="btn btn-primary btn-sm collapsed" href="?praktikan&u=<?php echo $d_praktik['id_praktik']; ?>" title="Ubah">
-                                            <i class="far fa-edit"></i> Ubah Data
-                                        </a>
                                     </div>
                                 </div>
                             </div>

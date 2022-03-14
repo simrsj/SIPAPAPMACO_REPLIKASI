@@ -11,10 +11,10 @@ if (isset($_POST['hapus_mou'])) {
 ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-11">
+            <div class="col-md-10">
                 <h1 class="h4 text-gray-800">MoU Kerjasama</h1>
             </div>
-            <div class="col-lg-1 text-right my-auto">
+            <div class="col-md-2 text-right my-auto">
                 <a href="?mou&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
@@ -78,7 +78,7 @@ if (isset($_POST['hapus_mou'])) {
                 // $sql_mou .= " JOIN tb_akreditasi ON tb_mou.id_akreditasi = tb_akreditasi.id_akreditasi";
                 $sql_mou .= "  ORDER BY tb_institusi.nama_institusi ASC";
 
-                echo "$sql_mou<br>";
+                // echo "$sql_mou<br>";
 
                 $q_mou = $conn->query($sql_mou);
                 $r_mou = $q_mou->rowCount();

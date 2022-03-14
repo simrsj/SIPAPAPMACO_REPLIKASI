@@ -22,9 +22,10 @@
             $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-            $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
+            // $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
             $sql_praktik .= " WHERE (tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'S' ) ";
-            $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+            $sql_praktik .= " AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
+            $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
 
             // echo $sql_praktik;
 
@@ -55,7 +56,7 @@
                             <div class="card-header align-items-center bg-gray-200">
                                 <div class="row" style="font-size: small;" class="justify-content-center">
                                     <br><br>
-                                    <div class="col-sm-2 text-center">
+                                    <div class="col-sm-3 text-center">
                                         <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?><br>
                                         <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                     </div>
@@ -73,7 +74,7 @@
                                         <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?php echo $d_praktik['jumlah_praktik']; ?>
                                     </div>
                                     <!-- tombol aksi/info proses  -->
-                                    <div class="col-sm-4 my-auto text-center">
+                                    <div class="col-sm-3 my-auto text-center">
                                         <!-- tombol rincian -->
                                         <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data
@@ -87,7 +88,7 @@
                                 <div class="card-body " style="font-size: medium;">
                                     <!-- data praktikan -->
                                     <div class="text-gray-700">
-                                        <h4 class="font-weight-bold">DATA KELOMPOK</h4><br>
+                                        <h4 class="font-weight-bold">DATA NILAI</h4><br>
                                     </div>
                                     <?php
                                     if ($r_data_praktikan > 0) {
@@ -100,19 +101,7 @@
                                                         <th scope="col">Nama Pembimbing </th>
                                                         <th scope="col">NIP / NIPK</th>
                                                         <th scope="col">Nama Ruangan</th>
-                                                        <?php
-                                                        if ($d_praktik['id_jurusan_pdd'] == 2) {
-                                                        ?>
-                                                            <th scope="col">Isi / Ubah <br>Nilai</th>
-                                                            <th scope="col">Data Nilai</th>
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <th scope="col">File Nilai</th>
-                                                            <th scope="col">Unggah File Nilai</th>
-                                                        <?php
-                                                        }
-                                                        ?>
+                                                        <th scope="col">Data Nilai</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -127,51 +116,6 @@
                                                                     <td><?php echo $d_data_praktikan['nama_pembimbing']; ?></td>
                                                                     <td><?php echo $d_data_praktikan['no_id_pembimbing']; ?></td>
                                                                     <td><?php echo $d_data_praktikan['nama_unit']; ?></td>
-                                                                    <td class="text-center">
-                                                                        <?php
-
-                                                                        $sql_data_nilai = "SELECT * FROM tb_nilai_kep ";
-                                                                        $sql_data_nilai .= " WHERE id_praktik = " . $d_data_praktikan['id_praktik'] . " AND id_pembimbing = " . $d_data_praktikan['id_pembimbing'];
-                                                                        // echo "$sql_data_nilai<br>";
-
-                                                                        $q_data_nilai = $conn->query($sql_data_nilai);
-                                                                        $r_data_nilai = $q_data_nilai->rowCount();
-                                                                        if ($r_data_nilai > 0) {
-                                                                        ?>
-                                                                            <a href="<?php echo "?nil&u=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-primary btn-sm">
-                                                                                Ubah Nilai
-                                                                            </a>
-                                                                            <?php
-                                                                        } else {
-                                                                            if ($d_praktik['id_jurusan_pdd'] == 2) {
-                                                                            ?>
-                                                                                <a href="<?php echo "?nil&i=" . $d_praktik['id_praktik'] . "&p=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-outline-success btn-sm">
-                                                                                    Isi Nilai
-                                                                                </a>
-                                                                                <?php
-                                                                            } else {
-                                                                                $sql_data_nilai_u = "SELECT * FROM tb_nilai_upload ";
-                                                                                $sql_data_nilai_u .= " WHERE id_praktik = " . $d_data_praktikan['id_praktik'] . " AND id_pembimbing = " . $d_data_praktikan['id_pembimbing'];
-                                                                                // echo "$sql_data_nilai<br>";
-
-                                                                                $q_data_nilai_u = $conn->query($sql_data_nilai_u);
-                                                                                $r_data_nilai_u = $q_data_nilai_u->rowCount();
-                                                                                $d_data_nilai_u = $q_data_nilai_u->fetch(PDO::FETCH_ASSOC);
-                                                                                if ($r_data_nilai_u > 0) {
-                                                                                ?>
-                                                                                    <a href="<?php echo $d_data_nilai_u['file_nilai_upload']; ?>" target="_blank" class="btn btn-outline-success btn-sm">
-                                                                                        Unduh Nilai
-                                                                                    </a>
-                                                                                <?php
-                                                                                } else {
-                                                                                ?>
-                                                                                    <span class="badge badge-danger text-lg"> Data Nilai Belum Diupload </span>
-                                                                        <?php
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                        ?>
-                                                                    </td>
                                                                     <?php
                                                                     if ($d_praktik['id_jurusan_pdd'] == 2) {
                                                                     ?>
@@ -180,15 +124,26 @@
                                                                                 <i class="fas fa-info-circle"></i> Rincian Nilai
                                                                             </button>
                                                                         </td>
-                                                                    <?php
+                                                                        <?php
                                                                     } else {
-                                                                    ?>
-                                                                        <td class="text-center">
-                                                                            <a href="<?php echo "?nil&i=" . $d_praktik['id_praktik'] . "&pu=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-primary btn-sm">
-                                                                                Unggah File Nilai
+                                                                        $sql_data_nilai_u = "SELECT * FROM tb_nilai_upload ";
+                                                                        $sql_data_nilai_u .= " WHERE id_praktik = " . $d_data_praktikan['id_praktik'] . " AND id_pembimbing = " . $d_data_praktikan['id_pembimbing'];
+                                                                        // echo "$sql_data_nilai<br>";
+
+                                                                        $q_data_nilai_u = $conn->query($sql_data_nilai_u);
+                                                                        $r_data_nilai_u = $q_data_nilai_u->rowCount();
+                                                                        $d_data_nilai_u = $q_data_nilai_u->fetch(PDO::FETCH_ASSOC);
+                                                                        if ($r_data_nilai_u > 0) {
+                                                                        ?>
+                                                                            <a href="<?php echo $d_data_nilai_u['file_nilai_upload']; ?>" target="_blank" class="btn btn-outline-success btn-sm">
+                                                                                Unduh Nilai
                                                                             </a>
-                                                                        </td>
+                                                                        <?php
+                                                                        } else {
+                                                                        ?>
+                                                                            <span class="badge badge-danger text-lg"> Data Nilai Belum Diupload </span>
                                                                     <?php
+                                                                        }
                                                                     }
                                                                     ?>
                                                                 </tr>

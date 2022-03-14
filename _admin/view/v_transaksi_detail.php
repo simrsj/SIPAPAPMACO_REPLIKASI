@@ -4,6 +4,7 @@ $sql_data_praktik .= " JOIN tb_institusi ON tb_institusi.id_institusi = tb_prakt
 $sql_data_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
 $sql_data_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
 $sql_data_praktik .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+$sql_data_praktik .= " AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
 $sql_data_praktik .= " WHERE tb_praktik.id_praktik ='" . $_GET['dtl'] . "'";
 
 $q_data_praktik = $conn->query($sql_data_praktik);

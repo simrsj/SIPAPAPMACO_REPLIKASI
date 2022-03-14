@@ -4,10 +4,8 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 FORMAT UPDATE WAG
 
 _*MAYOR*_
-- 🔃 Perbaikan Akun Institusi
-- 🔃 Filter Pemilihan Jadwal Praktik saat pengajuan (Jumlah dan Tanggal Praktik)
-- ✅ Pemilihan Profesi Nakes Lainnya 
-- ✅ Unggah Data Praktikan (.xlsx) Tidak muncul (Versi PHP >=7.3)
+- ✅ Perbaikan Akun Institusi
+- ✅ Filter Pemilihan Jadwal Praktik saat pengajuan (Jumlah dan Tanggal Praktik)
 
 _*MINOR*_
 - Cetak Invoice Pembayaran
@@ -18,7 +16,6 @@ _*MINOR*_
 - 🔃 Pembuatan Modul Validasi Profil Institusi
 - Modul Pengajuan MoU Baru
 - Modul Pengajuan MoU Perpanjang
-- ✅ Penyesuaian Informasi Data Praktikan
 - Modul Pengajuan Magang
 - Modul Pengajuan Ujian Akhir Periode (UAP)
 
@@ -44,7 +41,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "delete"
+git commit -a -m "Filter Jadwal praktik dipengajuan, proses perbaikan akun institusi"
 git pull
 git push
 
