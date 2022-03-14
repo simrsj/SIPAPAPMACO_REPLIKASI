@@ -40,7 +40,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "pemisahan file input praktik"
+git commit -a -m "delete"
 git pull
 git push
 
