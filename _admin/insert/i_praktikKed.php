@@ -732,6 +732,20 @@ if ($_GET['prk'] == 'ked') {
                             xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
                             xhttp.send(data_file);
 
+
+                            //import file excel ke database
+                            var data_file_praktikan = new FormData();
+                            var xhttp_data_praktikan = new XMLHttpRequest();
+
+                            var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                            data_file_praktikan.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                            var id = document.getElementById("id").value;
+                            data_file_praktikan.append("id", id);
+
+                            xhttp_data_praktikan.open("POST", "_admin/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
+                            xhttp_data_praktikan.send(data_file_praktikan);
+
                             //Cari Jenis Jurusan
                             var jur = document.getElementById('jurusan').value;
                             var xmlhttp_path = new XMLHttpRequest();
@@ -815,6 +829,19 @@ if ($_GET['prk'] == 'ked') {
 
                                 xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
                                 xhttp.send(data_file);
+
+                                //import file excel ke database
+                                var data_file_praktikan = new FormData();
+                                var xhttp_data_praktikan = new XMLHttpRequest();
+
+                                var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                                data_file_praktikan.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                                var id = document.getElementById("id").value;
+                                data_file_praktikan.append("id", id);
+
+                                xhttp_data_praktikan.open("POST", "_admin/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
+                                xhttp_data_praktikan.send(data_file_praktikan);
 
                                 //Cari Jenis Jurusan
                                 var jur = document.getElementById('jurusan').value;

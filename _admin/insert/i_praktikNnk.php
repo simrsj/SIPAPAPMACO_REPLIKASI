@@ -537,7 +537,6 @@ if ($_GET['prk'] == 'nnk') {
                 document.getElementById("NERS").innerHTML = "";
                 document.getElementById("profesi").innerHTML = "-";
             }
-
         }
 
         function simpan_praktik() {
