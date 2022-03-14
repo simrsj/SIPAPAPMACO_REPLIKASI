@@ -28,6 +28,10 @@ _*MINOR*_ = Modul yang _*FITUR/ERROR*_ nya bisa dikondisikan
 ✅ = Selesai, 🔃 = Progress
 
 NOTE : 
+
+Link Dalam (Local) : http://10.132.0.75/SM/ 
+Link Luar (Public) : http://103.147.222.122:88/SM/
+
 Modul yang sudah selesai akan dihilangkan diudate selanjutnya, 
 Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/TLDevSM
 
