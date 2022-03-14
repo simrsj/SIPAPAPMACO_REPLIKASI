@@ -667,6 +667,23 @@ if ($_GET['prk'] == 'ked') {
                 }
             }
 
+            var data_praktik = $('#form_praktik').serializeArray();
+            $.ajax({
+                type: 'POST',
+                url: "_admin/insert/i_praktik_valTgl.php?",
+                data: data_praktik,
+                dataType: 'json',
+                success: function() {
+                    console.log("SUCCESS CEK VAL TGL");
+                    var response = JSON.parse(this.responseText);
+                    alert(response.ket1 + response.ket2 + response.ket3);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                    alert('eksekusi query gagal');
+                }
+            });
+
             //simpan data praktik dan data tarif
             if (
                 institusi != "" &&
@@ -731,6 +748,20 @@ if ($_GET['prk'] == 'ked') {
 
                             xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
                             xhttp.send(data_file);
+
+
+                            //import file excel ke database
+                            var data_file_praktikan = new FormData();
+                            var xhttp_data_praktikan = new XMLHttpRequest();
+
+                            var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                            data_file_praktikan.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                            var id = document.getElementById("id").value;
+                            data_file_praktikan.append("id", id);
+
+                            xhttp_data_praktikan.open("POST", "_admin/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
+                            xhttp_data_praktikan.send(data_file_praktikan);
 
                             //Cari Jenis Jurusan
                             var jur = document.getElementById('jurusan').value;
@@ -815,6 +846,19 @@ if ($_GET['prk'] == 'ked') {
 
                                 xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
                                 xhttp.send(data_file);
+
+                                //import file excel ke database
+                                var data_file_praktikan = new FormData();
+                                var xhttp_data_praktikan = new XMLHttpRequest();
+
+                                var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                                data_file_praktikan.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                                var id = document.getElementById("id").value;
+                                data_file_praktikan.append("id", id);
+
+                                xhttp_data_praktikan.open("POST", "_admin/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
+                                xhttp_data_praktikan.send(data_file_praktikan);
 
                                 //Cari Jenis Jurusan
                                 var jur = document.getElementById('jurusan').value;

@@ -1,12 +1,6 @@
 <?php
-if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
-    if ($_GET['prk'] == 'kep') {
-        $jenis_jurusan = 2;
-    } elseif ($_GET['prk'] == 'nkl') {
-        $jenis_jurusan = 3;
-    } elseif ($_GET['prk'] == 'nnk') {
-        $jenis_jurusan = 4;
-    }
+if ($_GET['prk'] == 'kep') {
+    $jenis_jurusan = 2;
 ?>
     <div class="container-fluid embed-responsive">
         <div class="row">
@@ -871,7 +865,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                 }
             }
 
-            //Simpan Data Praktik dan munculkan Data Tarif
+            //Lanjut Data Praktik Data Tarif
             if (
                 institusi != "" &&
                 praktik != "" &&

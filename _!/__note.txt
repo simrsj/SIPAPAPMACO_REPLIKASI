@@ -6,19 +6,19 @@ FORMAT UPDATE WAG
 _*MAYOR*_
 - 🔃 Perbaikan Akun Institusi
 - 🔃 Filter Pemilihan Jadwal Praktik saat pengajuan (Jumlah dan Tanggal Praktik)
-- Pemilihan Profesi Nakes Lainnya 
-- Unggah Data Praktikan (.xlsx) Tidak muncul
+- ✅ Pemilihan Profesi Nakes Lainnya 
+- ✅ Unggah Data Praktikan (.xlsx) Tidak muncul (Versi PHP >=7.3)
 
 _*MINOR*_
 - Cetak Invoice Pembayaran
 - Cetak Data Nilai Keperawatan
 - Penonaktifkan data praktikan dimenu DATA PRAKTIKAN 
-- 🔃Pembuatan input profil insitusi di Akun Institusi
-- 🔃Validasi inputan profil insitusi dari akun Institusi
-- 🔃Pembuatan Modul Validasi Profil Institusi
+- 🔃 Pembuatan input profil insitusi di Akun Institusi
+- 🔃 Validasi inputan profil insitusi dari akun Institusi
+- 🔃 Pembuatan Modul Validasi Profil Institusi
 - Modul Pengajuan MoU Baru
 - Modul Pengajuan MoU Perpanjang
-- Penyesuaian Informasi Data Praktikan
+- ✅ Penyesuaian Informasi Data Praktikan
 - Modul Pengajuan Magang
 - Modul Pengajuan Ujian Akhir Periode (UAP)
 
@@ -52,6 +52,7 @@ git remote add origin https://github.com/fajarrachmath/SM.git
 git push -u origin main
 
 TRUNCATE tb_praktik;
+TRUNCATE tb_praktik_tgl;
 TRUNCATE tb_praktikan;
 TRUNCATE tb_tarif_pilih;
 TRUNCATE tb_mess_pilih;
