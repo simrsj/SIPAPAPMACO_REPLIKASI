@@ -1,12 +1,6 @@
 <?php
-if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
-    if ($_GET['prk'] == 'kep') {
-        $jenis_jurusan = 2;
-    } elseif ($_GET['prk'] == 'nkl') {
-        $jenis_jurusan = 3;
-    } elseif ($_GET['prk'] == 'nnk') {
-        $jenis_jurusan = 4;
-    }
+if ($_GET['prk'] == 'nkl') {
+    $jenis_jurusan = 3;
 ?>
     <div class="container-fluid embed-responsive">
         <div class="row">
@@ -174,7 +168,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
 
                                 if ($r_jenjang_pdd > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' onchange="tutupProfesiKep()" name='id_jenjang_pdd' id="jenjang" required>
+                                    <select class='form-control js-example-placeholder-single' name='id_jenjang_pdd' id="jenjang" required>
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -213,75 +207,29 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 $sql_profesi_pdd .= $sql;
                                 $sql_profesi_pdd .= " GROUP BY tb_profesi_pdd.nama_profesi_pdd";
                                 $sql_profesi_pdd .= " ORDER BY tb_profesi_pdd.nama_profesi_pdd ASC";
-
                                 // echo $sql_profesi_pdd;
-
                                 $q_profesi_pdd = $conn->query($sql_profesi_pdd);
-                                $r_profesi_pdd = $q_profesi_pdd->rowCount();
-
-                                if ($r_profesi_pdd > 0) {
                                 ?>
-                                    Pilih Profesi : <span style="color:red">*</span><br>
-                                    <span id="profesi">
-                                        <b><i>"Pilih Jenjang"</i></b>
-                                        <!-- <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_profesi_pdd' id="profesi">
-                                            <option value="">-- <i>Pilih</i>--</option>
-                                            <?php
-                                            while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                            ?>
-                                                <option value='<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>'>
-                                                    <?php echo $d_profesi_pdd['nama_profesi_pdd'] ?>
-                                                </option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select><br>
-                                        <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span> -->
-                                    </span>
-                                    <span id="NERS"></span>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_profesi"></span>
-                                <?php
-                                } else {
-                                ?>
-                                    <b><i>Data Profesi Tidak Ada</i></b>
-                                    <input type="hidden" name='id_profesi_pdd' id="profesi" value="0">
-                                    <input type="hidden" name='nonnakes' id="nonnakes" value="1">
-                                <?php
-                                }
-                                ?>
-                                <input type="hidden" name='nonnakes' id="nonnakes" value="0">
-                            </div>
-                            <!-- <div class="col-lg-3">
-                                Akreditasi Institusi : <span style="color:red">*</span><br>
-                                <?php
-                                $sql_akreditasi = "SELECT * FROM tb_akreditasi";
-
-                                $q_akreditasi = $conn->query($sql_akreditasi);
-                                $r_akreditasi = $q_akreditasi->rowCount();
-
-                                if ($r_akreditasi > 0) {
-                                ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_akreditasi' id="akreditasi" required>
+                                Pilih Profesi : <span style="color:red">*</span><br>
+                                <span id="profesi">
+                                    <!-- <b><i>"Pilih Jenjang"</i></b> -->
+                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_profesi_pdd' id="profesi">
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
-                                        while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
+                                        while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
-                                            <option class='text-wrap' value='<?php echo $d_akreditasi['id_akreditasi']; ?>'>
-                                                <?php echo $d_akreditasi['nama_akreditasi']; ?>
+                                            <option value='<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>'>
+                                                <?php echo $d_profesi_pdd['nama_profesi_pdd'] ?>
                                             </option>
                                         <?php
                                         }
                                         ?>
                                     </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_akreditasi"></span>
-                                <?php
-                                } else {
-                                ?>
-                                    <b><i>Data Akreditasi Tidak Ada</i></b>
-                                <?php
-                                }
-                                ?>
-                            </div> -->
+                                    <span class="text-xs font-italic">Bila tidak ada yang sesuai, pilih <b>"-- Lainnya --"</b></span>
+                                </span>
+                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_profesi"></span>
+                                <input type="hidden" name='nonnakes' id="nonnakes" value="0">
+                            </div>
                         </div>
                         <br><br>
 
@@ -1135,7 +1083,7 @@ if ($_GET['prk'] == 'kep' || $_GET['prk'] == 'nkl' || $_GET['prk'] == 'nnk') {
                                 title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>TARIF</b><br>Berhasil Tersimpan',
                                 showConfirmButton: false,
                                 html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
-                                timer: 5000,
+                                timer: 500000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
                                     toast.addEventListener('mouseenter', Swal.stopTimer)

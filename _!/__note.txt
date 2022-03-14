@@ -5,8 +5,9 @@ FORMAT UPDATE WAG
 
 _*MAYOR*_
 - 🔃 Perbaikan Akun Institusi
-- ✅ Pembuatan Informasi Jadwal Praktik
-- 🔃 Filter Pemilihan Jadwal Praktik saat pengajuan
+- 🔃 Filter Pemilihan Jadwal Praktik saat pengajuan (Jumlah dan Tanggal Praktik)
+- Pemilihan Profesi Nakes Lainnya 
+- Unggah Data Praktikan (.xlsx) Tidak muncul
 
 _*MINOR*_
 - Cetak Invoice Pembayaran
@@ -17,6 +18,9 @@ _*MINOR*_
 - 🔃Pembuatan Modul Validasi Profil Institusi
 - Modul Pengajuan MoU Baru
 - Modul Pengajuan MoU Perpanjang
+- Penyesuaian Informasi Data Praktikan
+- Modul Pengajuan Magang
+- Modul Pengajuan Ujian Akhir Periode (UAP)
 
 KET : 
 _*MAYOR*_ = Modul yang _*FITUR/ERROR*_ nya pempengaruhi Alur Utama (PRIORITAS)
@@ -36,7 +40,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "progres informasi dan filter jadwal praktik"
+git commit -a -m "pemisahan file input praktik"
 git pull
 git push
 

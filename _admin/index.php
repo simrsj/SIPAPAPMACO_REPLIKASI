@@ -413,8 +413,14 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						} elseif (isset($_GET['i'])) {
 							if ($_GET['prk'] == 'ked') {
 								include "_admin/insert/i_praktikKed.php";
+							} elseif ($_GET['prk'] == 'kep') {
+								include "_admin/insert/i_praktikKep.php";
+							} elseif ($_GET['prk'] == 'nkl') {
+								include "_admin/insert/i_praktikNkl.php";
+							} elseif ($_GET['prk'] == 'nnk') {
+								include "_admin/insert/i_praktikNnk.php";
 							} else {
-								include "_admin/insert/i_praktik.php";
+								include "_error/index.php";
 							}
 						} elseif (isset($_GET['it_ked'])) {
 							include "_admin/insert/i_tarifKed.php";
