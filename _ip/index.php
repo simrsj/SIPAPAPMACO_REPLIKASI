@@ -108,6 +108,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				</li>
 				<hr class="sidebar-divider">
 				<li class="nav-item">
+					<a class="nav-link" href="?ins">
+						<i class="fas fa-fw fa-user-cog"></i>
+						<span>Data Institusi</span>
+					</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="?aku">
 						<i class="fas fa-fw fa-user-cog"></i>
 						<span>Pengaturan Akun</span>
@@ -198,9 +204,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					} elseif (isset($_GET['info_diklat'])) {
 						include "_ip/view/v_info_diklat.php";
 					} elseif (isset($_GET['ins'])) {
-						if (isset($_GET['i'])) {
-							include "_ip/insert/i_institusi.php";
-						} elseif (isset($_GET['u'])) {
+						if (isset($_GET['u'])) {
 							include "_ip/update/u_institusi.php";
 						} elseif (isset($_GET['d'])) {
 							include "_ip/delete/d_institusi.php";
