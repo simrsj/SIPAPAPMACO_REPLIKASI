@@ -41,7 +41,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m ", proses perbaikan akun institusi"
+git commit -a -m "perbaikan akun institusi ada tombol validasi setiap alur"
 git pull
 git push
 

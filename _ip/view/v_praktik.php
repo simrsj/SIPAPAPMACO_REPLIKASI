@@ -199,9 +199,9 @@ if (isset($_POST['simpan_bayar'])) {
                                         </div>
                                         <?php
                                         if ($_GET['prk'] == "ked") {
-                                            include "_admin/view/v_praktikDataStatusKed.php";
+                                            include "_ip/view/v_praktikDataStatusKed.php";
                                         } else {
-                                            include "_admin/view/v_praktikDataStatus.php";
+                                            include "_ip/view/v_praktikDataStatus.php";
                                         }
                                         ?>
                                         <!-- tombol aksi/info proses  -->
