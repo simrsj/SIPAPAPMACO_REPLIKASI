@@ -41,7 +41,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Filter Jadwal praktik dipengajuan, proses perbaikan akun institusi"
+git commit -a -m ", proses perbaikan akun institusi"
 git pull
 git push
 
