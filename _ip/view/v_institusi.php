@@ -9,10 +9,8 @@
     </div>
 
     <div class="row">
-
-        <div class="col-xl-3 col-md-3 mb-4  align-items-stretch justify-content-center">
-
-            <div class="card shadow mb-4">
+        <div class="col-xl-6 col-md-6 mb-4 align-items-stretch">
+            <div class="card shadow mb-4 h-100 py-2">
                 <div class="card-header flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary text-center">Data Profil Institusi</h6>
                 </div>
@@ -122,38 +120,16 @@
                         <?php
                         }
                         ?>
-                    </b><br><br>
-                </div>
-            </div>
-        </div>
-
-        <!-- DATA KEPERAWATAN -->
-        <div class="col-xl-3 col-md-3 mb-4  align-items-stretch justify-content-center">
-            <div class="card  shadow h-100">
-                <div class="card-header   flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Keperawatan</h6>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <div class="no-gutters align-items-center">
-                            Jurusan : Keperawatan
-                            <hr>
-                            Jenjang : D3, S1, Profesi.
-                            <hr>
-                            Profesi : NERS
-                        </div>
-                    </div>
+                    </b>
                 </div>
             </div>
         </div>
         <div class="col-xl-6 col-md-6 mb-4 align-items-stretch">
-        </div>
-        <div class="col-xl-6 col-md-6 mb-4 align-items-stretch">
-            <div class="card shadow mb-4">
+            <div class="card shadow mb-4 h-100 py-2">
                 <div class="card-header flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary text-center">Data Pengajuan Profil Institusi</h6>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body text-center align-items-center d-flex justify-content-center">
                     <?php
                     $sql = "SELECT * FROM tb_institusi_temp ";
                     $sql .= " WHERE id_institusi = " . $_SESSION['id_institusi'];
@@ -266,9 +242,7 @@
                     ?>
                         <div class="jumbotron">
                             <div class="jumbotron-fluid">
-                                <div class="text-gray-700" style="padding-bottom: 2px; padding-top: 5px;">
-                                    <h5 class="text-center">DATA PENGAJUAN PROFIL INSTITUSI TIDAK ADA</h5>
-                                </div>
+                                <h5 class="font-weight-bold"> DATA PENGAJUAN TIDAK ADA</h5>
                             </div>
                         </div>
                     <?php

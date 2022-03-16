@@ -4,22 +4,23 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 FORMAT UPDATE WAG
 
 _*MAYOR*_
-- ✅ Perbaikan Akun Institusi/User
+- ✅ Perbaikan Alur Akun Institusi/User
 - ✅ Filter Pemilihan Jadwal Praktik saat pengajuan (Jumlah dan Tanggal Praktik)
-- Pilih pembimbing kedokteran
-- Penghilangan pilih tempat saat pilih pembimbing kedokteran
+- ✅ Pilih pembimbing kedokteran
+- ✅ Penghilangan pilih tempat saat pilih pembimbing kedokteran
+- ✅ Perbaikan Nilai Keperawatan) di Akun Institusi/User 
+- ✅ Perbaikan Upload Nilai (Selain Keperawatan) di Akun Institusi/User 
 
 _*MINOR*_
 - 🔃 Cetak Invoice Tarif Pembayaran
 - 🔃 Cetak Invoice Tarif Mess
-- 🔃 Cetak Invoice Khusus Maranatha tambah tembusan (Bagian Keuangan RS Jiwa Provinsi Jawa Barat)
-- Cetak Data Nilai Keperawatan
-- Penonaktifkan data praktikan dimenu DATA PRAKTIKAN 
+- 🔃 Cetak Invoice Khusus Universitas Kristen Maranatha (UKM) tambah tembusan (Bagian Keuangan RS Jiwa Provinsi Jawa Barat)
+- 🔃 Cetak Data Nilai Keperawatan
+- ✅ Penonaktifkan data praktikan dimenu DATA PRAKTIKAN 
 - 🔃 Pembuatan input profil insitusi di Akun Institusi
 - 🔃 Validasi inputan profil insitusi dari akun Institusi
 - 🔃 Pembuatan Modul Validasi Profil Institusi
-- ✅ Typo Penamaan Hover tombol data praktik di Menu ARSIP
-
+- ✅ Typo Penamaan Hover tombol data praktik di Menu ARSIP PRAKTIK
 - Modul Pengajuan MoU Baru
 - Modul Pengajuan MoU Perpanjang
 - Modul Pengajuan Magang
@@ -42,12 +43,12 @@ Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit
 PERTANYAAN
 
 - Gambar default bila tidak ada gambar logo Institusi
-- 
+- Preloader untuk proses generate Kalender (Seraching)
 --------------------------------------------------------------------------------------------------------------------
 
 git status
 git add . 
-git commit -a -m "Typo Penamaan Hover tombol data praktik di Menu ARSIP"
+git commit -a -m "Progres modul profil insitusi"
 git pull
 git push
 
@@ -67,3 +68,4 @@ TRUNCATE tb_tempat_pilih;
 TRUNCATE tb_bayar;
 TRUNCATE tb_nilai_kep;
 TRUNCATE tb_nilai_upload;
+TRUNCATE tb_pembimbing_pilih;

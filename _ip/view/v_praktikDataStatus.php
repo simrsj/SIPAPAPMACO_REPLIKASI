@@ -221,7 +221,7 @@
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "TMP" || $d_praktik['status_cek_praktik'] == "TMP_KED") {
     ?>
-        <span class="badge badge-primary text-md">Proses Pemilihan Tempat</span>
+        <span class="badge badge-primary text-md">Proses Pemilihan MESS</span>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
     ?>

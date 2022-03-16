@@ -81,6 +81,7 @@
                                     $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
                                     $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
                                     $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+                                    $sql_data_praktikan .= " AND tb_praktikan.status_praktikan = 'y'";
                                     $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
 
                                     $q_data_praktikan = $conn->query($sql_data_praktikan);

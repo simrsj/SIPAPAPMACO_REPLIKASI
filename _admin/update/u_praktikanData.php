@@ -12,7 +12,7 @@ $r_data_praktikan = $q_data_praktikan->rowCount();
 
 if ($r_data_praktikan > 0) {
 ?>
-    <div class="table-responsive">
+    <div class="table-responsive text-xs">
         <table class="table table-striped" id="myTable">
             <thead class="thead-dark">
                 <tr>
@@ -23,6 +23,7 @@ if ($r_data_praktikan > 0) {
                     <th scope="col">No. WA</th>
                     <th scope="col">EMAIL</th>
                     <th scope="col">ASAL KOTA / KABUPATEN</th>
+                    <th scope="col">Status</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -40,6 +41,24 @@ if ($r_data_praktikan > 0) {
                         <td><?php echo $d_data_praktikan['wa_praktikan']; ?></td>
                         <td><?php echo $d_data_praktikan['email_praktikan']; ?></td>
                         <td><?php echo $d_data_praktikan['kota_kab_praktikan']; ?></td>
+                        <td>
+                            <?php
+                            if ($d_data_praktikan['status_praktikan'] == 'y') {
+                            ?>
+                                <span class="badge badge-success">Aktif</span>
+                            <?php
+                            } elseif ($d_data_praktikan['status_praktikan'] == 't') {
+                            ?>
+                                <span class="badge badge-danger">Non-Aktif</span>
+                            <?php
+
+                            } else {
+                            ?>
+                                <span class="badge badge-danger blink">ERROR!</span>
+                            <?php
+                            }
+                            ?>
+                        </td>
                         <td>
                             <button id="<?php echo $d_data_praktikan['id_praktikan']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH"> <i class="fa fa-edit"></i> </button>
                             <button id="<?php echo $d_data_praktikan['id_praktikan']; ?>" class="btn btn-danger btn-sm hapus" title="HAPUS"> <i class="fa fa-trash"></i> </button>
@@ -213,7 +232,7 @@ if ($r_data_praktikan > 0) {
         console.log("hapus");
         Swal.fire({
             position: 'top',
-            title: 'Hapus Data Praktikan?',
+            title: 'Non-Aktifkan Data Praktikan?',
             icon: 'error',
             showCancelButton: true,
             confirmButtonColor: '#1cc88a',
@@ -245,8 +264,8 @@ if ($r_data_praktikan > 0) {
                         });
 
                         Toast.fire({
-                            icon: 'success',
-                            title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil DIHAPUS</b></div>'
+                            icon: 'warning',
+                            title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Dinonaktifkan</b></div>'
                         });
                     },
                     error: function(response) {

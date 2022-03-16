@@ -102,7 +102,7 @@ if ($_GET['prk'] == 'ked') {
                             <div class="col-lg-4">
                                 Jenjang : <br>
                                 <b>Profesi</b>
-                                <input type="hidden" name='id_jenjang_pdd' id="jenjang" value="10">
+                                <input type="hidden" name='id_jenjang_pdd' id="jenjang" value="9">
                             </div>
                             <div class="col-lg-4">
                                 Pilih Profesi : <span style="color:red">*</span><br>

@@ -5,7 +5,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // var_dump($_POST);
 // echo "</pre>";
 
-$sql = "DELETE FROM tb_praktikan";
+$sql = "UPDATE tb_praktikan SET";
+$sql .= " status_praktikan= 't'";
 $sql .= " WHERE id_praktikan=" . $_POST['id_praktikan'];
 
 echo "$sql<br>";

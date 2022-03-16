@@ -129,6 +129,7 @@ if (isset($_POST['hapus_mou'])) {
                                                 <?php
                                             } else {
                                                 echo tanggal_min_alt($d_mou['tgl_selesai_mou']) . "<br>";
+
                                                 $date_end = strtotime($d_mou['tgl_selesai_mou']);
                                                 $date_now = strtotime(date('Y-m-d'));
                                                 $date_diff = ($date_now - $date_end) / 24 / 60 / 60;

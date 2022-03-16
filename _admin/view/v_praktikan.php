@@ -26,7 +26,7 @@
             $sql_praktikan .= " WHERE tb_praktik.status_praktik != 'A' ";
             $sql_praktikan .= " ORDER BY tb_praktik.id_praktik DESC";
 
-            // echo $sql_praktikan;
+            // echo "$sql_praktikan<br>";
 
             $q_praktik = $conn->query($sql_praktikan);
             $r_praktik = $q_praktik->rowCount();
@@ -84,8 +84,10 @@
                                     $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
                                     $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
                                     $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+                                    $sql_data_praktikan .= " AND tb_praktikan.status_praktikan = 'y'";
                                     $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
 
+                                    // echo "$sql_data_praktikan<br>";
                                     $q_data_praktikan = $conn->query($sql_data_praktikan);
                                     $r_data_praktikan = $q_data_praktikan->rowCount();
 
