@@ -15,17 +15,21 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 				</a>
 				<!-- Nav Item - Dashboard -->
-				<li class="nav-item active">
-					<a class="nav-link" href="?ds">
+				<li class="nav-item ">
+					<a class="nav-link" href="?test">
+						<i class="fas fa-fw fa-bug"></i>
+						<span>Testing</span></a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="?">
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
 				</li>
-				<!-- Nav Item - Dashboard -->
-				<li class="nav-item active">
+				<!-- <li class="nav-item ">
 					<a class="nav-link" href="?mou">
 						<i class="fas fa-fw fa-handshake"></i>
 						<span>MoU-Kerjasama</span></a>
-				</li>
+				</li> -->
 
 				<!-- Divider -->
 				<hr class="sidebar-divider">
@@ -33,42 +37,82 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<div class="sidebar-heading">
 					Kediklatan
 				</div>
-				<!-- Nav Item - Pages Collapse Menu -->
-				<li class="nav-item">
-					<a class="nav-link" href="?prk">
-						<i class="fas fa-fw fa-chart-area"></i>
-						<span>Praktikan</span>
+				<li class="nav-item ">
+					<a class="nav-link" href="?info_diklat">
+						<i class="fas fa-fw fa-info-circle"></i>
+						<span>Informasi</span>
 					</a>
 				</li>
-
-				<li class="nav-item">
+				<li class="nav-item ">
+					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
+						<i class="far fa-fw fa-list-alt"></i>
+						<span>Pengajuan</span>
+					</a>
+					<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="?prk=ked">
+								<i class="far fa-circle"></i>
+								<span>Kedokteran</span>
+							</a>
+							<a class="collapse-item" href="?prk=kep">
+								<i class="far fa-circle"></i>
+								<span>Keperawatan</span>
+							</a>
+							<a class="collapse-item" href="?prk=nkl">
+								<i class="far fa-circle"></i>
+								<span>Nakes Lainnya</span>
+							</a>
+							<a class="collapse-item" href="?prk=nnk">
+								<i class="far fa-circle"></i>
+								<span>Non Nakes</span>
+							</a>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="?praktikan">
+						<i class="far fa-fw fa-address-book"></i>
+						<span>Data Praktikan</span>
+					</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="?pmbb">
+						<i class="fas fa-fw fa-users"></i>
+						<span>Pembimbing-Ruangan</span>
+					</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="?nil">
+						<i class="fas fa-fw fa-clipboard-list"></i>
+						<span>Data Nilai</span>
+					</a>
+				</li>
+				<li class="nav-item ">
 					<a class="nav-link" href="?trs">
 						<i class="fas fa-fw fa-wallet"></i>
 						<span>Data Pembayaran</span>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="?ptk">
-						<i class="fas fa-fw fa-user-graduate"></i>
-						<span>Nama Praktikan</span>
+				<li class="nav-item ">
+					<a class="nav-link" href="?ars">
+						<i class="fas fa-fw fa-archive"></i>
+						<span>Arsip Praktik</span>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="?ppt">
-						<i class="fas fa-fw fa-house-user"></i>
-						<span>Pembimbing dan Tempat</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="?nil">
-						<i class="far fa-fw fa-star"></i>
-						<span>Data Nilai</span>
-					</a>
-				</li>
-				<!-- Divider -->
 				<hr class="sidebar-divider">
-				<!-- Heading -->
-
+				<li class="nav-item ">
+					<a class="nav-link" href="http://192.168.7.89/kuesioner/login.php" target="_blank">
+						<i class="fas fa-fw fa-list-ul"></i>
+						<span>Survey</span>
+					</a>
+				</li>
+				<hr class="sidebar-divider">
+				<li class="nav-item">
+					<a class="nav-link" href="?ins">
+						<i class="fas fa-fw fa-user-cog"></i>
+						<span>Data Institusi</span>
+					</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="?aku">
 						<i class="fas fa-fw fa-user-cog"></i>
@@ -83,11 +127,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<div class="text-center d-none d-md-inline">
 					<button class="rounded-circle border-0" id="sidebarToggle"></button>
 				</div>
-				<div class="sidebar-card">
+				<!-- <div class="sidebar-card">
 					<i class="fas fa-3x fa-exclamation-circle"></i>
 					<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
 					<a class="btn btn-success btn-sm" href="?lapor">Lapor !</a>
-				</div>
+				</div> -->
 			</ul>
 			<!-- End of Sidebar -->
 
@@ -96,50 +140,173 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 
 				<!-- Main Content -->
 				<div id="content">
+					<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+						<!-- Sidebar Toggle (Topbar) -->
+						<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+							<i class="fa fa-bars"></i>
+						</button>
+
+						<!-- Topbar Navbar -->
+						<ul class="navbar-nav ml-auto">
+
+							<!-- Nav Item - User Information -->
+							<li class="nav-item dropdown no-arrow">
+								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nama_user']; ?></span>
+									<i class="far fa-user"></i>
+								</a>
+								<!-- Dropdown - User Information -->
+								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+									<a class="dropdown-item" href="?aku">
+										<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+										Pengaturan
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#log-out">
+										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+										Logout
+									</a>
+
+
+								</div>
+							</li>
+						</ul>
+					</nav>
+
+					<!-- Logout Modal-->
+					<div class="modal fade" id="log-out" tabindex="-1" role="dialog" aria-labelledby="log-out" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+									<a class="btn btn-danger" href="?lo">Ya</a>
+								</div>
+							</div>
+						</div>
+					</div>
 					<?php
-					include "_ip/_nav.php";
+
+					include "./_add-ons/dashboard_data_ip.php";
+
 					if (isset($_GET['aku'])) {
 						include "_ip/view/v_akun.php";
+					} elseif (isset($_GET['ars'])) {
+						include "_ip/view/v_praktik_arsip.php";
+					} elseif (isset($_GET['akr'])) {
+						include "_ip/view/v_akreditasi.php";
+					} elseif (isset($_GET['info_diklat'])) {
+						include "_ip/view/v_info_diklat.php";
+					} elseif (isset($_GET['ins'])) {
+						if (isset($_GET['u'])) {
+							include "_ip/update/u_institusi.php";
+						} elseif (isset($_GET['d'])) {
+							include "_ip/delete/d_institusi.php";
+						} else {
+							include "_ip/view/v_institusi.php";
+						}
+					} elseif (isset($_GET['jrs'])) {
+						include "_ip/view/v_jurusan.php";
+					} elseif (isset($_GET['jjg'])) {
+						include "_ip/view/v_jenjang.php";
 					} elseif (isset($_GET['lapor'])) {
-						include "_ip/view/v_lapor.php";
+						if (isset($_GET['dtl'])) {
+							include "_ip/view/v_lapor_detail.php";
+						} else {
+							include "_ip/view/v_lapor.php";
+						}
+					} elseif (isset($_GET['mes'])) {
+						include "_ip/view/v_mess.php";
 					} elseif (isset($_GET['mou'])) {
-						if (isset($_GET['ipb'])) {
-							include "_ip/insert/i_mou_baru.php";
-						} elseif (isset($_GET['ipp'])) {
-							include "_ip/insert/i_mou_perpanjang.php";
+						if (isset($_GET['i'])) {
+							include "_ip/insert/i_mou.php";
+						} elseif (isset($_GET['u'])) {
+							include "_ip/update/u_mou.php";
+						} elseif (isset($_GET['d'])) {
+							include "_ip/delete/d_mou.php";
 						} else {
 							include "_ip/view/v_mou.php";
 						}
+					} elseif (isset($_GET['mtr'])) {
+						include "_ip/view/v_mentor.php";
 					} elseif (isset($_GET['nil'])) {
-						include "_ip/view/v_nilai.php";
-					} elseif (isset($_GET['ppt'])) {
-						include "_ip/view/v_praktikan_pemb_temp.php";
+						if (isset($_GET['i']) && isset($_GET['p'])) {
+							include "_ip/insert/i_nilaiKep.php";
+						} elseif (isset($_GET['i']) && isset($_GET['pu'])) {
+							include "_ip/insert/i_nilai_upload.php";
+						} elseif (isset($_GET['u']) && isset($_GET['p'])) {
+							include "_ip/update/u_nilaiKep.php";
+						} else {
+							include "_ip/view/v_nilai.php";
+						}
+					} elseif (isset($_GET['praktikan'])) {
+						include "_ip/view/v_praktikan.php";
+					} elseif (isset($_GET['pmbb'])) {
+						include "_ip/view/v_pembimbing.php";
 					} elseif (isset($_GET['prk'])) {
 						if (isset($_GET['a'])) {
 							include "_ip/view/v_praktik_arsip.php";
-						} elseif (isset($_GET['i'])) {
-							include "_ip/insert/i_praktik.php";
 						} elseif (isset($_GET['ib'])) {
 							include "_ip/insert/i_praktik_bayar.php";
-						} elseif (isset($_GET['ih'])) {
-							include "_ip/insert/i_praktik_harga.php";
+						} elseif (isset($_GET['dh'])) {
+							include "_ip/hide/dh_praktik.php";
+						} elseif (isset($_GET['i'])) {
+							if ($_GET['prk'] == 'ked') {
+								include "_ip/insert/i_praktikKed.php";
+							} elseif ($_GET['prk'] == 'kep') {
+								include "_ip/insert/i_praktikKep.php";
+							} elseif ($_GET['prk'] == 'nkl') {
+								include "_ip/insert/i_praktikNkl.php";
+							} elseif ($_GET['prk'] == 'nnk') {
+								include "_ip/insert/i_praktikNnk.php";
+							} else {
+								include "_error/index.php";
+							}
+						} elseif (isset($_GET['it_ked'])) {
+							include "_ip/insert/i_tarifKed.php";
 						} elseif (isset($_GET['m'])) {
 							include "_ip/insert/i_praktik_mess.php";
+						} elseif (isset($_GET['p_i'])) {
+							include "_print/p_praktik_invoice.php";
+						} elseif (isset($_GET['u'])) {
+							include "_ip/update/u_praktik.php";
+						} elseif (isset($_GET['ub'])) {
+							include "_ip/update/u_praktik_bayar.php";
+						} elseif (isset($_GET['uh'])) {
+							include "_ip/update/u_praktik_tarif.php";
+						} elseif (isset($_GET['um'])) {
+							include "_ip/update/u_praktik_mess.php";
+						} elseif (isset($_GET['t'])) {
+							include "_ip/insert/i_praktik_tempat.php";
 						} else {
 							include "_ip/view/v_praktik.php";
 						}
 					} elseif (isset($_GET['ptk'])) {
 						include "_ip/view/v_praktikan.php";
+					} elseif (isset($_GET['pfs'])) {
+						include "_ip/view/v_profesi.php";
+					} elseif (isset($_GET['uni'])) {
+						include "_ip/view/v_unit.php";
+					} elseif (isset($_GET['tmp'])) {
+						include "_ip/view/v_tempat.php";
+					} elseif (isset($_GET['test'])) {
+						include "test.php";
+					} elseif (isset($_GET['test1'])) {
+						include "test1.php";
+					} elseif (isset($_GET['trf'])) {
+						include "_ip/view/v_tarif.php";
 					} elseif (isset($_GET['trs'])) {
 						if (isset($_GET['dtl'])) {
 							include "_ip/view/v_transaksi_detail.php";
 						} else {
 							include "_ip/view/v_transaksi.php";
 						}
-					} elseif (isset($_GET['test'])) {
-						include "test.php";
-					} elseif (isset($_GET['test1'])) {
-						include "test1.php";
 					} else {
 						include "_ip/dashboard.php";
 					}
@@ -151,7 +318,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				<footer class="sticky-footer bg-white">
 					<div class="container my-auto">
 						<div class="copyright text-center my-auto">
-							<span>RS Jiwa Provinsi Jawa Barat 2021</span>
+							<span>RS Jiwa Provinsi Jawa Barat <?php echo date('Y'); ?></span>
 						</div>
 					</div>
 				</footer>

@@ -183,9 +183,9 @@ if (isset($_POST['simpan_bayar'])) {
         $no++;
     }
 
-    echo "<pre>";
-    print_r($_FILES);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
 
     //alamat file surat masuk
     $alamat_unggah = "./_file/bayar";
@@ -198,9 +198,9 @@ if (isset($_POST['simpan_bayar'])) {
     $_FILES['file_bayar']['name'] = "bayar_" . $no . "_" . $_POST['id_praktik'] . "_" . date('Y-m-d') . "." . $ext;
 
 
-    echo "<pre>";
-    print_r($_FILES);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
 
     //pembuatan alamat bila tidak ada
     if (!is_dir($alamat_unggah)) {
@@ -266,8 +266,26 @@ if (isset($_POST['simpan_bayar'])) {
 
 ?>
             <script>
-                alert('Data Pembayaran Sudah Disimpan');
-                document.location.href = '?prk=<?php echo $_GET['prk']; ?>';
+                $(document).ready(function() {
+                    Swal.fire({
+                        allowOutsideClick: false,
+                        // isDismissed: false,
+                        icon: 'success',
+                        title: '<span class"text-xs"><b>DATA PERMBAYARAN</b><br>Berhasil Tersimpan',
+                        showConfirmButton: false,
+                        html: '<a href="?prk=<?php echo $_GET['prk']; ?>" class="btn btn-outline-primary">OK</a>',
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    }).then(
+                        function() {
+                            document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
+                        }
+                    );
+                });
             </script>
 <?php
         }

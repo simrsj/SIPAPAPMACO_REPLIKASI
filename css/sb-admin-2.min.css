@@ -9,8 +9,8 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) 
  */
 
-select.pm{
-  width:150px;   
+select.pm {
+  width: 150px;
 }
 
 fieldset.fieldset {
@@ -1472,7 +1472,7 @@ pre code {
   border-top: 1px solid #e3e6f0;
 }
 .table thead th {
-  vertical-align: bottom;
+  vertical-align: middle;
   border-bottom: 2px solid #e3e6f0;
 }
 .table tbody + tbody {
@@ -9609,7 +9609,7 @@ a:focus {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 1rem;
+    /* padding: 1rem; */
     width: 14rem;
   }
   .sidebar .nav-item .nav-link i {

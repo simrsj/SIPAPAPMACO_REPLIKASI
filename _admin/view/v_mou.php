@@ -11,10 +11,10 @@ if (isset($_POST['hapus_mou'])) {
 ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-11">
+            <div class="col-md-10">
                 <h1 class="h4 text-gray-800">MoU Kerjasama</h1>
             </div>
-            <div class="col-lg-1 text-right my-auto">
+            <div class="col-md-2 text-right my-auto">
                 <a href="?mou&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
@@ -70,13 +70,15 @@ if (isset($_POST['hapus_mou'])) {
         <div class="card shadow mb-4">
             <div class="card-body">
                 <?php
-                $sql_mou = "SELECT * FROM tb_mou 
-                    JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                    JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-                    JOIN tb_profesi_pdd ON tb_mou.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd
-                    JOIN tb_akreditasi ON tb_mou.id_akreditasi = tb_akreditasi.id_akreditasi
-                    ORDER BY tb_institusi.nama_institusi ASC";
+                $sql_mou = "SELECT * FROM tb_mou ";
+                $sql_mou .= " JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi";
+                // $sql_mou .= " JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                // $sql_mou .= "  JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+                // $sql_mou .= "  JOIN tb_profesi_pdd ON tb_mou.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+                // $sql_mou .= " JOIN tb_akreditasi ON tb_mou.id_akreditasi = tb_akreditasi.id_akreditasi";
+                $sql_mou .= "  ORDER BY tb_institusi.nama_institusi ASC";
+
+                // echo "$sql_mou<br>";
 
                 $q_mou = $conn->query($sql_mou);
                 $r_mou = $q_mou->rowCount();

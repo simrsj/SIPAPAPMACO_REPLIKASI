@@ -44,6 +44,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 				</li>
 				<li class="nav-item ">
+					<a class="nav-link" href="?kta">
+						<i class="far fa-fw fa-circle"></i>
+						<span>Kuota</span>
+					</a>
+				</li>
+				<li class="nav-item ">
 					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
 						<i class="far fa-fw fa-list-alt"></i>
 						<span>Pengajuan</span>
@@ -78,7 +84,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<li class="nav-item ">
 					<a class="nav-link" href="?pmbb">
 						<i class="fas fa-fw fa-users"></i>
-						<span>Pembimbing</span>
+						<span>Pembimbing-Ruangan</span>
 					</a>
 				</li>
 				<li class="nav-item ">
@@ -91,6 +97,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					<a class="nav-link" href="?trs">
 						<i class="fas fa-fw fa-wallet"></i>
 						<span>Data Pembayaran</span>
+					</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="?ars">
+						<i class="fas fa-fw fa-archive"></i>
+						<span>Arsip Praktik</span>
 					</a>
 				</li>
 				<hr class="sidebar-divider">
@@ -231,7 +243,53 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 
 						<!-- Topbar Navbar -->
 						<ul class="navbar-nav ml-auto">
-
+							<li class="nav-item dropdown no-arrow mx-1">
+								<a class="nav-link dropdown-toggle" href="#" id="notifikasi" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fas fa-bell fa-fw"></i>
+									<!-- Counter - Alerts -->
+									<span class="badge badge-danger badge-counter">3+</span>
+								</a>
+								<!-- Dropdown - Alerts -->
+								<div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-xl shadow animated--grow-in" aria-labelledby="notifikasi">
+									<h6 class="dropdown-header">
+										Notifikasi </h6>
+									<a class="dropdown-item d-flex align-items-center" href="#">
+										<div class="mr-3">
+											<div class="icon-circle bg-primary">
+												<i class="fas fa-file-alt text-white"></i>
+											</div>
+										</div>
+										<div>
+											<div class="small text-gray-500">December 12, 2019</div>
+											<span class="font-weight-bold">A new monthly report is ready to download!</span>
+										</div>
+									</a>
+									<a class="dropdown-item d-flex align-items-center" href="#">
+										<div class="mr-3">
+											<div class="icon-circle bg-success">
+												<i class="fas fa-donate text-white"></i>
+											</div>
+										</div>
+										<div>
+											<div class="small text-gray-500">December 7, 2019</div>
+											$290.29 has been deposited into your account!
+										</div>
+									</a>
+									<a class="dropdown-item d-flex align-items-center" href="#">
+										<div class="mr-3">
+											<div class="icon-circle bg-warning">
+												<i class="fas fa-exclamation-triangle text-white"></i>
+											</div>
+										</div>
+										<div>
+											<div class="small text-gray-500">December 2, 2019</div>
+											Spending Alert: We've noticed unusually high spending for your account.
+										</div>
+									</a>
+									<a class="dropdown-item text-center small text-gray-800 font-weight-bold" href="#">Lihat Semua Notifikasi</a>
+								</div>
+							</li>
+							<div class="topbar-divider d-none d-sm-block"></div>
 							<!-- Nav Item - User Information -->
 							<li class="nav-item dropdown no-arrow">
 								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -279,6 +337,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 
 					if (isset($_GET['aku'])) {
 						include "_admin/view/v_akun.php";
+					} elseif (isset($_GET['ars'])) {
+						if (isset($_GET['dp'])) {
+							include "_admin/view/v_praktik_arsip_dataPraktik.php";
+						} else {
+							include "_admin/view/v_praktik_arsip.php";
+						}
 					} elseif (isset($_GET['akr'])) {
 						include "_admin/view/v_akreditasi.php";
 					} elseif (isset($_GET['info_diklat'])) {
@@ -297,6 +361,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/view/v_jurusan.php";
 					} elseif (isset($_GET['jjg'])) {
 						include "_admin/view/v_jenjang.php";
+					} elseif (isset($_GET['kta'])) {
+						include "_admin/view/v_kuota.php";
 					} elseif (isset($_GET['lapor'])) {
 						if (isset($_GET['dtl'])) {
 							include "_admin/view/v_lapor_detail.php";
@@ -318,26 +384,46 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} elseif (isset($_GET['mtr'])) {
 						include "_admin/view/v_mentor.php";
 					} elseif (isset($_GET['nil'])) {
-						include "_admin/view/v_nilai.php";
+						if (isset($_GET['i']) && isset($_GET['p'])) {
+							include "_admin/insert/i_nilaiKep.php";
+						} elseif (isset($_GET['i']) && isset($_GET['pu'])) {
+							include "_admin/insert/i_nilai_upload.php";
+						} elseif (isset($_GET['u']) && isset($_GET['p'])) {
+							include "_admin/update/u_nilaiKep.php";
+						} else {
+							include "_admin/view/v_nilai.php";
+						}
 					} elseif (isset($_GET['praktikan'])) {
-						include "_admin/view/v_praktikan.php";
+						if (isset($_GET['u'])) {
+							include "_admin/update/u_praktikan.php";
+						} else {
+							include "_admin/view/v_praktikan.php";
+						}
 					} elseif (isset($_GET['pmbb'])) {
-						include "_admin/view/v_pembimbing.php";
+						if (isset($_GET['i'])) {
+							include "_admin/insert/i_pembimbing.php";
+						} else {
+							include "_admin/view/v_pembimbing.php";
+						}
 					} elseif (isset($_GET['prk'])) {
-						if (isset($_GET['a'])) {
-							include "_admin/view/v_praktik_arsip.php";
-						} elseif (isset($_GET['ib'])) {
+						if (isset($_GET['ib'])) {
 							include "_admin/insert/i_praktik_bayar.php";
 						} elseif (isset($_GET['dh'])) {
 							include "_admin/hide/dh_praktik.php";
 						} elseif (isset($_GET['i'])) {
 							if ($_GET['prk'] == 'ked') {
-								include "_admin/insert/i_praktik_kedokteran.php";
+								include "_admin/insert/i_praktikKed.php";
+							} elseif ($_GET['prk'] == 'kep') {
+								include "_admin/insert/i_praktikKep.php";
+							} elseif ($_GET['prk'] == 'nkl') {
+								include "_admin/insert/i_praktikNkl.php";
+							} elseif ($_GET['prk'] == 'nnk') {
+								include "_admin/insert/i_praktikNnk.php";
 							} else {
-								include "_admin/insert/i_praktik.php";
+								include "_error/index.php";
 							}
 						} elseif (isset($_GET['it_ked'])) {
-							include "_admin/insert/i_tarif_kedokteran.php";
+							include "_admin/insert/i_tarifKed.php";
 						} elseif (isset($_GET['m'])) {
 							include "_admin/insert/i_praktik_mess.php";
 						} elseif (isset($_GET['p_i'])) {
@@ -386,7 +472,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<footer class="sticky-footer bg-white">
 					<div class="container my-auto">
 						<div class="copyright text-center my-auto">
-							<span>RS Jiwa Provinsi Jawa Barat 2021</span>
+							<span>RS Jiwa Provinsi Jawa Barat <?php echo date('Y'); ?></span>
 						</div>
 					</div>
 				</footer>

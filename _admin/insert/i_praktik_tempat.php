@@ -20,11 +20,10 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         <div class="card-body">
             <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_tTempat">
                 <?php
-                $sql_tempat = "SELECT * FROM tb_tempat 
-                    JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
-                    WHERE tb_tempat.id_jurusan_pdd_jenis = 0 AND status_tempat = 'y'
-                    ORDER BY nama_tempat ASC
-                ";
+                $sql_tempat = "SELECT * FROM tb_tempat ";
+                $sql_tempat .= " JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan";
+                $sql_tempat .= " WHERE tb_tempat.id_jurusan_pdd_jenis = 0 AND status_tempat = 'y'";
+                $sql_tempat .= " ORDER BY nama_tempat ASC";
 
                 // echo $sql_tempat;
 
@@ -42,7 +41,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <th scope="col">Kapasitas</th>
                                 <th scope="col">Keterangan</th>
                                 <th scope="col">Pilih<br>
-                                    <div id="err_pilih" class="text-xs font-italic badge badge-danger"></div>
+                                    <div id="err_pilih" class="text-xs font-italic badge badge-danger blink"></div>
                                 </th>
                             </tr>
                         </thead>
@@ -141,7 +140,17 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             title: '<span class"text-xs"><b>DATA TEMPAT</b><br>Berhasil Tersimpan',
                             showConfirmButton: false,
                             html: '<a href="?prk=' + path + '" class="btn btn-outline-primary">OK</a>',
-                        });
+                            timer: 5000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        }).then(
+                            function() {
+                                document.location.href = "?prk=" + path;
+                            }
+                        );
                     },
                     error: function(response) {
                         console.log(response.responseText);

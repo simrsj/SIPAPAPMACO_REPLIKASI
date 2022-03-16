@@ -14,7 +14,7 @@ if (isset($_POST['ubah_user'])) {
             password_user = '" . md5($_POST['password_user']) . "',
             nama_user = '" . $_POST['nama_user'] . "',
             email_user = '" . $_POST['email_user'] . "',
-            level_user = '" . $_POST['level_user'] . "',
+            level_user = 2,
             no_telp_user = '" . $_POST['no_telp_user'] . "',
             tgl_ubah_user = '" . date('Y-m-d') . "'
 

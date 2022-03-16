@@ -35,7 +35,7 @@ if (isset($_FILES['file_data_praktikan']['name']) && in_array($_FILES['file_data
         $sql .= " (id_praktik, nama_praktikan,no_id_praktikan,telp_praktikan, wa_praktikan, email_praktikan, kota_kab_praktikan, tgl_input_praktikan ) ";
         $sql .= " VALUES ";
         $sql .= " (" . $_POST['id'] . ",'$nama','$id_p','$hp','$wa','$email','$kota_kab', '" . date('Y-m-d') . "')";
-        echo "$sql<br>";
+        // echo "$sql<br>";
         $conn->query($sql);
     }
 }

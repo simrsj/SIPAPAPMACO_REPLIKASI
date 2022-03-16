@@ -1,23 +1,47 @@
-- enkripsi link 
-- perbaiki harga, mess dan pembayaran kedokteran (alurnya beda)
-- perbaiki isian akun institusi
-- perbaiki dastboard institusi
-- perbaiki dastboard admin
-- perbaiki Invoice pembayaran PDF
-- Perbaiki modul mou perpanjang dan baru
-- dashboard user tampil mounya dengan judul perpanjang / baru MoU
-- tanggal Selesai Pendaftaran tidak bisa input tanggal ≤ tanggal mulai
-- pelajari CSRF
 
-- membuat inputan uniq di pembayaran
-- penamaan judul tabel Invoice
-- membuat 5 akun sesuai dengan privilagenya
-- membuat format mout untuk diisi kang adi 
+RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
+--------------------------------------------------------------------------------------------------------------------
+FORMAT UPDATE WAG
+
+_*MAYOR*_
+- ✅ Perbaikan Akun Institusi
+- ✅ Filter Pemilihan Jadwal Praktik saat pengajuan (Jumlah dan Tanggal Praktik)
+
+_*MINOR*_
+- Cetak Invoice Pembayaran
+- Cetak Data Nilai Keperawatan
+- Penonaktifkan data praktikan dimenu DATA PRAKTIKAN 
+- 🔃 Pembuatan input profil insitusi di Akun Institusi
+- 🔃 Validasi inputan profil insitusi dari akun Institusi
+- 🔃 Pembuatan Modul Validasi Profil Institusi
+- Modul Pengajuan MoU Baru
+- Modul Pengajuan MoU Perpanjang
+- Modul Pengajuan Magang
+- Modul Pengajuan Ujian Akhir Periode (UAP)
+
+KET : 
+_*MAYOR*_ = Modul yang _*FITUR/ERROR*_ nya pempengaruhi Alur Utama (PRIORITAS)
+_*MINOR*_ = Modul yang _*FITUR/ERROR*_ nya bisa dikondisikan
+✅ = Selesai, 🔃 = Progress
+
+NOTE : 
+
+Link Dalam (Local) : http://10.132.0.75/SM/ 
+Link Luar (Public) : http://103.147.222.122:88/SM/
+
+Modul yang sudah selesai akan dihilangkan diudate selanjutnya, 
+Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/TLDevSM
+
+--------------------------------------------------------------------------------------------------------------------
+PERTANYAAN
+
+- Gambar default bila tidak ada gambar logo Institusi
 - 
+--------------------------------------------------------------------------------------------------------------------
 
 git status
 git add . 
-git commit -a -m "database perbaikan pembimbing dan data mess, proses data pembimbing"
+git commit -a -m "perbaikan data institusi"
 git pull
 git push
 
@@ -29,10 +53,11 @@ git remote add origin https://github.com/fajarrachmath/SM.git
 git push -u origin main
 
 TRUNCATE tb_praktik;
+TRUNCATE tb_praktik_tgl;
 TRUNCATE tb_praktikan;
 TRUNCATE tb_tarif_pilih;
 TRUNCATE tb_mess_pilih;
 TRUNCATE tb_tempat_pilih;
 TRUNCATE tb_bayar;
-
-RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
+TRUNCATE tb_nilai_kep;
+TRUNCATE tb_nilai_upload;

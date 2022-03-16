@@ -68,10 +68,10 @@
     <script>
         function Bukains() {
             if ($('#instansi').val() == '0') {
-                console.log("Pilih Institusi Lainnya");
+                // console.log("Pilih Institusi Lainnya");
                 $('#institusi_lainnya').append("<input type='text' class='form-control form-control' placeHolder='Isikan Nama Institusi' name='nama_institusi'>").focus();
             } else {
-                console.log("Tidak Pilih Institusi Lainnya");
+                // console.log("Tidak Pilih Institusi Lainnya");
                 $('#institusi_lainnya').empty();
             }
         }

@@ -76,7 +76,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             <div class="modal-header">
                                 <b>PILIH MESS/PEMONDOKAN</b>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body text-center">
                                 <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
                                 <div id="err_mess" class="text-danger text-xs font-italic blink"></div>
                                 <select class="form-control" name="id_mess" id="id_mess" required>
@@ -91,7 +91,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     ?>
                                 </select>
                                 <hr>
-                                <span class="text-lg font-weight-bold">Makan Mess <span style="color:red">*</span></span>
                                 <?php
 
                                 //cari data makan mess
@@ -105,7 +104,9 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     $makan_mess = "Tanpa Makan";
                                 }
                                 ?>
-                                <span class="text-xs font-intalic">(Praktik memilih <b><?php echo $makan_mess; ?></b>)</span>
+
+                                <span class="text-lg">Institusi Memilih Mess <b><?php echo $makan_mess; ?></b></span>
+                                <!-- <span class="text-xs font-intalic">(Praktik memilih <b><?php echo $makan_mess; ?></b>)</span>
                                 <div id="err_makan" class="text-danger text-xs font-italic blink"></div>
                                 <div class="boxed-check-group boxed-check-primary boxed-check-sm text-center">
                                     <label class="boxed-check">
@@ -118,7 +119,9 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                         <input class="boxed-check-input" type="radio" name="makan_mess_pilih" id="makan_mess_pilih2" value="t" required>
                                         <span class="boxed-check-label">Tanpa Makan</span>
                                     </label>
-                                </div>
+                                </div> -->
+
+                                <input type="hidden" name="makan_mess_pilih" id="makan_mess_pilih" value="<?php echo $d_makan_mess['makan_mess_praktik']; ?>">
                                 <input type="hidden" name="path" id="path" value="<?php echo $_GET['prk'] ?>">
                                 <input type="hidden" name="id" id="id" value="<?php echo $_GET['m'] ?>">
                             </div>
@@ -142,9 +145,10 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             // console.log("masuk tambah");
             var path = document.getElementById('path').value;
             var mess = document.getElementById('id_mess').value;
+            // var makan = $('input[name="makan_mess_pilih"]:checked').val();
+            var makan = document.getElementById('makan_mess_pilih').value;
             // var makan1 = document.getElementById('makan_mess_pilih1').value;
             // var makan2 = document.getElementById('makan_mess_pilih2').value;
-            var makan = $('input[name="makan_mess_pilih"]:checked').val();
 
             // alert("path:" + path + " mess:" + mess + " makan1:" + makan1 + " makan2:" + makan2 + " makan:" + makan);
 
@@ -156,7 +160,9 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             // }
 
             //Notif Bila tidak dipilih
-            if (makan == undefined || mess == "") {
+            if (
+                // makan == undefined || 
+                mess == "") {
 
                 //warning Toast bila ada data wajib yg berlum terisi
                 const Toast = Swal.mixin({
@@ -184,11 +190,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 }
 
                 //notif makan tidak diisi
-                if (makan == undefined) {
-                    document.getElementById("err_makan").innerHTML = "Pilih Mess";
-                } else {
-                    document.getElementById("err_makan").innerHTML = "";
-                }
+                // if (makan == undefined) {
+                //     document.getElementById("err_makan").innerHTML = "Pilih Mess";
+                // } else {
+                //     document.getElementById("err_makan").innerHTML = "";
+                // }
             }
 
             //tambah tempat
@@ -208,7 +214,17 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             title: '<span class"text-xs"><b>DATA MESS</b><br>Berhasil Tersimpan',
                             showConfirmButton: false,
                             html: '<a href="?prk=' + path + '" class="btn btn-outline-primary">OK</a>',
-                        });
+                            timer: 5000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        }).then(
+                            function() {
+                                document.location.href = "?prk=" + path;
+                            }
+                        );
                     },
                     error: function(response) {
                         console.log(response.responseText);

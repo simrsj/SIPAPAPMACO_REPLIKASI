@@ -7,18 +7,19 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <?php
-            $sql_praktik = "SELECT * FROM tb_praktik
-                                    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-                                    WHERE tb_praktik.status_cek_praktik = 'AKTIF' OR tb_praktik.status_cek_praktik = 'SELESAI'
-                                    ORDER BY tb_institusi.nama_institusi ASC";
+            $sql_transaksi = "SELECT * FROM tb_praktik";
+            $sql_transaksi .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+            $sql_transaksi .= " WHERE tb_praktik.status_praktik = 'S' OR tb_praktik.status_praktik = 'A'";
+            $sql_transaksi .= " AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
+            $sql_transaksi .= " ORDER BY tb_institusi.nama_institusi ASC";
 
-            $q_praktik = $conn->query($sql_praktik);
-            $r_praktik = $q_praktik->rowCount();
+            $q_transaksi = $conn->query($sql_transaksi);
+            $r_transaksi = $q_transaksi->rowCount();
 
-            if ($r_praktik > 0) {
+            if ($r_transaksi > 0) {
             ?>
                 <table class='table table-striped' id="myTable">
-                    <thead class="thead-dark">
+                    <thead class="thead-dark text-center">
                         <tr>
                             <th scope='col'>No</th>
                             <th>Nama Institusi</th>
@@ -26,7 +27,7 @@
                             <th>Tanggal Mulai Praktik</th>
                             <th>Tanggal Selesa Praktik</th>
                             <th>Jumlah Praktik</th>
-                            <th>Total Harga Praktik</th>
+                            <th>Total Tarif Praktik</th>
                             <th>Status Praktik</th>
                             <th></th>
                         </tr>
@@ -34,60 +35,55 @@
                     <tbody>
                         <?php
                         $no = 1;
-                        while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+                        while ($d_transaksi = $q_transaksi->fetch(PDO::FETCH_ASSOC)) {
 
-                            $total_harga = 0;
+                            $total_tarif = 0;
 
-                            //data harga tb_harga_pilih
-                            $sql_data_harga = "SELECT * FROM tb_praktik
-                                JOIN tb_harga_pilih ON tb_praktik.id_praktik = tb_harga_pilih.id_praktik
-                                WHERE tb_praktik.id_praktik = '" . $d_praktik['id_praktik'] . "' AND
-                                (tb_praktik.status_cek_praktik = 'AKTIF' OR tb_praktik.status_cek_praktik = 'SELESAI')";
+                            //data tarif tb_tarif_pilih
+                            $sql_data_tarif = "SELECT * FROM tb_praktik";
+                            $sql_data_tarif .= " JOIN tb_tarif_pilih ON tb_praktik.id_praktik = tb_tarif_pilih.id_praktik";
+                            $sql_data_tarif .= " WHERE tb_praktik.id_praktik = '" . $d_transaksi['id_praktik'] . "' ";
+                            $sql_data_tarif .= " AND (tb_praktik.status_praktik = 'Y' OR tb_praktik.status_praktik = 'A')";
 
-                            $q_data_harga = $conn->query($sql_data_harga);
+                            $q_data_tarif = $conn->query($sql_data_tarif);
 
-                            while ($d_data_harga = $q_data_harga->fetch(PDO::FETCH_ASSOC)) {
-                                $total_harga = $total_harga + $d_data_harga['jumlah_harga_pilih'];
-                            }
-
-                            //data mess tb_mess_pilih
-                            $sql_data_mess = "SELECT * FROM tb_praktik
-                                JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik
-                                WHERE tb_praktik.id_praktik = '" . $d_praktik['id_praktik'] . "' AND
-                                (tb_praktik.status_cek_praktik = 'AKTIF' OR tb_praktik.status_cek_praktik = 'SELESAI')";
-
-                            $q_data_mess = $conn->query($sql_data_mess);
-
-                            while ($d_data_mess = $q_data_mess->fetch(PDO::FETCH_ASSOC)) {
-                                $total_harga = $total_harga + $d_data_mess['total_harga_mess_pilih'];
+                            while ($d_data_tarif = $q_data_tarif->fetch(PDO::FETCH_ASSOC)) {
+                                $total_tarif = $total_tarif + $d_data_tarif['jumlah_tarif_pilih'];
                             }
 
                         ?>
-                            <tr>
+                            <tr class="text-center">
                                 <td><?php echo $no; ?></td>
-                                <td><?php echo $d_praktik['nama_institusi']; ?></td>
-                                <td><?php echo $d_praktik['nama_praktik']; ?></td>
-                                <td><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?></td>
-                                <td><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?></td>
-                                <td><?php echo $d_praktik['jumlah_praktik']; ?></td>
-                                <td><?php echo "Rp " . number_format($total_harga, 0, '.', ','); ?></td>
-                                <td>
+                                <td><?php echo $d_transaksi['nama_institusi']; ?></td>
+                                <td><?php echo $d_transaksi['nama_praktik']; ?></td>
+                                <td><?php echo tanggal($d_transaksi['tgl_mulai_praktik']); ?></td>
+                                <td><?php echo tanggal($d_transaksi['tgl_selesai_praktik']); ?></td>
+                                <td><?php echo $d_transaksi['jumlah_praktik']; ?></td>
+                                <td><?php echo "Rp " . number_format($total_tarif, 0, '.', ','); ?></td>
+                                <td class="text-lg">
                                     <?php
-                                    if ($d_praktik['status_cek_praktik'] == 'AKTIF') {
-                                        $badge = "badge badge-success text-md";
+                                    if ($d_transaksi['status_praktik'] == 'Y') {
+                                    ?>
+                                        <span class="badge badge-primary">SELESAI</span>
+                                    <?php
+                                    } elseif ($d_transaksi['status_praktik'] == 'A') {
+                                    ?>
+                                        <span class="badge badge-primary">ARSIP</span>
+                                    <?php
                                     } else {
-                                        $badge = "badge badge-secondary text-md";
+                                    ?>
+                                        <span class="badge badge-danger">ERROR</span>
+                                    <?php
                                     }
                                     ?>
-                                    <span class="<?php echo $badge; ?>"><?php echo $d_praktik['status_cek_praktik']; ?></span>
                                 </td>
                                 <td>
-                                    <a title="Cetak Invoice" target="_blank" class="btn btn-warning btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>">
+                                    <!-- <a title="Cetak Invoice" target="_blank" class="btn btn-warning btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>">
                                         <i class="fas fa-print"></i>
-                                    </a>
+                                    </a> -->
 
-                                    <a title="Detail Harga" class='btn btn-info btn-sm' href='<?php echo "?trs&dtl=" . $d_praktik['id_praktik']; ?>'>
-                                        <i class="fas fa-info-circle"></i>
+                                    <a title="Detail Tarif" class='btn btn-info btn-sm' href='<?php echo "?trs&dtl=" . $d_transaksi['id_praktik']; ?>'>
+                                        <i class="fas fa-info-circle"></i> Rincian
                                     </a>
                                 </td>
                             </tr>

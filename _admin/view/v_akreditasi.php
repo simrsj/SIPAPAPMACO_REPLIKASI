@@ -60,50 +60,52 @@
                                         <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_d_m" . $d_akreditasi['id_akreditasi']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
-                                    </td>
-                                    <?php $no++; ?>
-                                    <!-- modal ubah Akreditasi  -->
-                                    <div class="modal fade" id="<?php echo "akr_u_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <form method="post" action="">
-                                                    <div class="modal-header">
-                                                        Ubah Akreditasi :
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
-                                                        <input class="form-control" name="nama_akreditasi" value="<?php echo $d_akreditasi['nama_akreditasi']; ?>">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary btn-sm" name="ubah">Ubah</button>
-                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="modal fade" id="<?php echo "akr_d_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <form method="post" action="">
-                                                    <div class="modal-header">
-                                                        Hapus Data
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <h6><b><?php echo $d_akreditasi['nama_akreditasi']; ?></b></h6>
-                                                        <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>
-                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Tidak</button>
-                                                    </div>
-                                                </form>
+
+                                        <!-- modal ubah Akreditasi  -->
+                                        <div class="modal fade" id="<?php echo "akr_u_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <form method="post" action="">
+                                                        <div class="modal-header">
+                                                            Ubah Akreditasi :
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
+                                                            <input class="form-control" name="nama_akreditasi" value="<?php echo $d_akreditasi['nama_akreditasi']; ?>">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary btn-sm" name="ubah">Ubah</button>
+                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <div class="modal fade" id="<?php echo "akr_d_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <form method="post" action="">
+                                                        <div class="modal-header">
+                                                            Hapus Data
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h6><b><?php echo $d_akreditasi['nama_akreditasi']; ?></b></h6>
+                                                            <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>
+                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Tidak</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             <?php
+                                $no++;
                             }
                             ?>
                         </tbody>
@@ -143,8 +145,6 @@ if (isset($_POST['ubah'])) {
 <?php
 }
 ?>
-<script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable();
