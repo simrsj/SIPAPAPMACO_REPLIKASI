@@ -656,7 +656,7 @@ if ($_GET['prk'] == 'ked') {
             var data_praktik = $('#form_praktik').serializeArray();
             $.ajax({
                 type: 'POST',
-                url: "_admin/insert/i_praktik_valTgl.php?",
+                url: "_ip/insert/i_praktik_valTgl.php?",
                 data: data_praktik,
                 dataType: 'json',
                 success: function(response) {
@@ -728,7 +728,7 @@ if ($_GET['prk'] == 'ked') {
                                 //Simpan Data Praktik dan Tarif
                                 $.ajax({
                                     type: 'POST',
-                                    url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
+                                    url: "_ip/exc/x_i_praktik_sPraktikTarif.php?",
                                     data: data_praktik,
                                     success: function() {
                                         //ambil data file yang diupload
@@ -744,7 +744,7 @@ if ($_GET['prk'] == 'ked') {
                                         var id = document.getElementById("id").value;
                                         data_file.append("id", id);
 
-                                        xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
+                                        xhttp.open("POST", "_ip/exc/x_i_praktik_sPraktikFile.php", true);
                                         xhttp.send(data_file);
 
 
@@ -758,7 +758,7 @@ if ($_GET['prk'] == 'ked') {
                                         var id = document.getElementById("id").value;
                                         data_file_praktikan.append("id", id);
 
-                                        xhttp_data_praktikan.open("POST", "_admin/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
+                                        xhttp_data_praktikan.open("POST", "_ip/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
                                         xhttp_data_praktikan.send(data_file_praktikan);
 
                                         //Cari Jenis Jurusan
@@ -775,7 +775,7 @@ if ($_GET['prk'] == 'ked') {
                                                 html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
                                             });
                                         };
-                                        xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
+                                        xmlhttp_path.open("GET", "_ip/insert/i_praktikPath.php?jur=" + jur,
                                             true
                                         );
                                         xmlhttp_path.send();
@@ -826,7 +826,7 @@ if ($_GET['prk'] == 'ked') {
                                     //Simpan Data Praktik dan Tarif
                                     $.ajax({
                                         type: 'POST',
-                                        url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
+                                        url: "_ip/exc/x_i_praktik_sPraktikTarif.php?",
                                         data: data_praktik,
                                         success: function() {
                                             //ambil data file yang diupload
@@ -842,7 +842,7 @@ if ($_GET['prk'] == 'ked') {
                                             var id = document.getElementById("id").value;
                                             data_file.append("id", id);
 
-                                            xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
+                                            xhttp.open("POST", "_ip/exc/x_i_praktik_sPraktikFile.php", true);
                                             xhttp.send(data_file);
 
                                             //import file excel ke database
@@ -855,7 +855,7 @@ if ($_GET['prk'] == 'ked') {
                                             var id = document.getElementById("id").value;
                                             data_file_praktikan.append("id", id);
 
-                                            xhttp_data_praktikan.open("POST", "_admin/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
+                                            xhttp_data_praktikan.open("POST", "_ip/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
                                             xhttp_data_praktikan.send(data_file_praktikan);
 
                                             //Cari Jenis Jurusan
@@ -882,7 +882,7 @@ if ($_GET['prk'] == 'ked') {
                                                     }
                                                 );
                                             };
-                                            xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
+                                            xmlhttp_path.open("GET", "_ip/insert/i_praktikPath.php?jur=" + jur,
                                                 true
                                             );
                                             xmlhttp_path.send();

@@ -16,15 +16,19 @@ if (is_numeric($data)) {
                 $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
                 $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . $_GET['i'];
                 $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
+
                 // echo $sql_data_praktikan;
 
                 $q_data_praktikan = $conn->query($sql_data_praktikan);
+                $q_data_praktikan1 = $conn->query($sql_data_praktikan);
+                $d_data_praktikan1 = $q_data_praktikan1->fetch(PDO::FETCH_ASSOC);
                 $r_data_praktikan = $q_data_praktikan->rowCount();
                 $j_ptkn = $r_data_praktikan;
 
                 if ($r_data_praktikan > 0) {
                 ?>
                     <form method="POST" id="form_pembb_ruangan">
+                        <input type="hidden" name="jurusan_ked" id="jurusan_ked" value="<?php echo $d_data_praktikan1['id_jurusan_pdd']; ?>">
                         <!-- data praktikan  -->
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -34,7 +38,13 @@ if (is_numeric($data)) {
                                         <th scope="col">Nama</th>
                                         <th scope="col">NIM / NPM / NIS </th>
                                         <th scope="col">Pilih<br>Pembimbing</th>
-                                        <th scope="col">Pilih<br>Ruangan</th>
+                                        <?php
+                                        if ($d_data_praktikan1['id_jurusan_pdd'] != 1) {
+                                        ?>
+                                            <th scope="col">Pilih<br>Ruangan</th>
+                                        <?php
+                                        }
+                                        ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,6 +62,7 @@ if (is_numeric($data)) {
                                             <td class="text-center">
                                                 <?php
                                                 $id_jurusan_pdd = $d_data_praktikan['id_jurusan_pdd'];
+                                                $id_profesi_pdd = $d_data_praktikan['id_profesi_pdd'];
                                                 if ($id_jurusan_pdd == 1) {
                                                     if ($id_profesi_pdd == 1) {
                                                         $jenis_pmbb = "PPDS";
@@ -92,27 +103,33 @@ if (is_numeric($data)) {
                                                 </select>
                                                 <span id="err_pmbb<?php echo $no; ?>" class="text-danger text-xs font-italic blink"></span>
                                             </td>
-                                            <td class="text-center">
-                                                <?php
-                                                $sql_unit = "SELECT * FROM tb_unit";
-                                                $sql_unit .= " ORDER BY nama_unit ASC";
+                                            <?php
+                                            if ($id_jurusan_pdd != 1) {
+                                            ?>
+                                                <td class="text-center">
+                                                    <?php
+                                                    $sql_unit = "SELECT * FROM tb_unit";
+                                                    $sql_unit .= " ORDER BY nama_unit ASC";
 
-                                                $q_unit = $conn->query($sql_unit);
-                                                ?>
-                                                <select class='form-inline js-example-placeholder-single' aria-label='Default select example' name='id_unit<?php echo $no; ?>' id="id_unit<?php echo $no; ?>" required>
-                                                    <option value="">-- Pilih --</option>
-                                                    <?php
-                                                    while ($d_unit = $q_unit->fetch(PDO::FETCH_ASSOC)) {
+                                                    $q_unit = $conn->query($sql_unit);
                                                     ?>
-                                                        <option value="<?php echo $d_unit['id_unit']; ?>">
-                                                            <?php echo $d_unit['nama_unit']; ?>
-                                                        </option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                                <span id="err_unit<?php echo $no; ?>" class="text-danger text-xs font-italic blink"></span>
-                                            </td>
+                                                    <select class='form-inline js-example-placeholder-single' aria-label='Default select example' name='id_unit<?php echo $no; ?>' id="id_unit<?php echo $no; ?>" required>
+                                                        <option value="">-- Pilih --</option>
+                                                        <?php
+                                                        while ($d_unit = $q_unit->fetch(PDO::FETCH_ASSOC)) {
+                                                        ?>
+                                                            <option value="<?php echo $d_unit['id_unit']; ?>">
+                                                                <?php echo $d_unit['nama_unit']; ?>
+                                                            </option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                    <span id="err_unit<?php echo $no; ?>" class="text-danger text-xs font-italic blink"></span>
+                                                </td>
+                                            <?php
+                                            }
+                                            ?>
                                         </tr>
                                     <?php
                                         $no++;
@@ -160,8 +177,9 @@ if (is_numeric($data)) {
             var data_pembimbing = $('#form_pembb_ruangan').serializeArray();
             var jp = document.getElementById('jp').value;
             var dp = document.getElementById('dp').value;
-            console.log("jp :" + jp);
-            console.log("dp :" + dp);
+            var jurusan_ked = document.getElementById('jurusan_ked').value;
+            // console.log("jp :" + jp);
+            // console.log("dp :" + dp);
             //Jika Jumlah Praktik tidak sesuai dengan data praktikan
             if (jp != dp) {
                 Swal.fire({
@@ -212,36 +230,43 @@ if (is_numeric($data)) {
                 //Notif jika tida diisi Unit
                 var no = 1;
                 var unit = 0;
-                while (no <= jp) {
-                    console.log("no: " + no + "jp: " + jp);
-                    if (document.getElementById('id_unit' + no).value == "") {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 10000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        });
+                if (jurusan_ked != 1) {
+                    while (no <= jp) {
+                        console.log("no: " + no + "jp: " + jp);
+                        if (document.getElementById('id_unit' + no).value == "") {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 10000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            });
 
-                        Toast.fire({
-                            icon: 'warning',
-                            title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                        });
-                        document.getElementById("err_unit" + no).innerHTML = "<br> Ruangan Harus Dipilih";
-                        unit++;
-                    } else {
-                        document.getElementById("err_unit" + no).innerHTML = "";
+                            Toast.fire({
+                                icon: 'warning',
+                                title: '<center>DATA ADA YANG BELUM TERISI</center>'
+                            });
+                            document.getElementById("err_unit" + no).innerHTML = "<br> Ruangan Harus Dipilih";
+                            unit++;
+                        } else {
+                            document.getElementById("err_unit" + no).innerHTML = "";
+                        }
+                        no++;
                     }
-                    no++;
                 }
             }
 
             //jika data sudah diisi semua
             if (pmbb == 0 && unit == 0 && jp == dp) {
+                if (jurusan_ked == 1) {
+                    $title = '<span class"text-xs"><b>DATA Pembimbing</b><br>Berhasil Tersimpan';
+                } else {
+                    $title = '<span class"text-xs"><b>DATA Pembimbing</b> dan <b>Ruangan</b><br>Berhasil Tersimpan';
+                }
                 console.log("SIMPAN");
                 $.ajax({
                     type: 'POST',
@@ -252,10 +277,11 @@ if (is_numeric($data)) {
                             allowOutsideClick: false,
                             // isDismissed: false,
                             icon: 'success',
-                            title: '<span class"text-xs"><b>DATA Pembimbing</b> dan <b>Ruangan</b><br>Berhasil Tersimpan',
+
+                            title: $title,
                             showConfirmButton: false,
                             html: '<a href="?pmbb" class="btn btn-outline-primary">OK</a>',
-                            timer: 4000,
+                            timer: 5000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)

@@ -60,7 +60,7 @@
                                         <button type="button" id="<?php echo $d_praktik_a['id_praktik']; ?>" class="btn btn-outline-success btn-sm aktif">
                                             Aktifkan
                                         </button> &nbsp;
-                                        <a href="?ars&dp=<?php echo $d_praktik_a['id_praktik'] ?>" class="btn btn-outline-primary btn-sm" title="Drata Praktikan">
+                                        <a href="?ars&dp=<?php echo $d_praktik_a['id_praktik'] ?>" class="btn btn-outline-primary btn-sm" title="Data Praktikan">
                                             <i class="fas fa-fw fa-users"></i>
                                         </a>
                                     </td>
