@@ -4,16 +4,22 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 FORMAT UPDATE WAG
 
 _*MAYOR*_
-- ✅ Perbaikan Akun Institusi
+- ✅ Perbaikan Akun Institusi/User
 - ✅ Filter Pemilihan Jadwal Praktik saat pengajuan (Jumlah dan Tanggal Praktik)
+- Pilih pembimbing kedokteran
+- Penghilangan pilih tempat saat pilih pembimbing kedokteran
 
 _*MINOR*_
-- Cetak Invoice Pembayaran
+- 🔃 Cetak Invoice Tarif Pembayaran
+- 🔃 Cetak Invoice Tarif Mess
+- 🔃 Cetak Invoice Khusus Maranatha tambah tembusan (Bagian Keuangan RS Jiwa Provinsi Jawa Barat)
 - Cetak Data Nilai Keperawatan
 - Penonaktifkan data praktikan dimenu DATA PRAKTIKAN 
 - 🔃 Pembuatan input profil insitusi di Akun Institusi
 - 🔃 Validasi inputan profil insitusi dari akun Institusi
 - 🔃 Pembuatan Modul Validasi Profil Institusi
+- ✅ Typo Penamaan Hover tombol data praktik di Menu ARSIP
+
 - Modul Pengajuan MoU Baru
 - Modul Pengajuan MoU Perpanjang
 - Modul Pengajuan Magang
@@ -41,7 +47,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "perbaikan data institusi"
+git commit -a -m "Typo Penamaan Hover tombol data praktik di Menu ARSIP"
 git pull
 git push
 
