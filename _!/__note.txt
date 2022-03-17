@@ -48,7 +48,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "koneksi"
+git commit -a -m "database"
 git pull
 git push
 
