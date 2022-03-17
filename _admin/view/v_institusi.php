@@ -227,11 +227,12 @@ if (isset($_POST['ubah'])) {
         $d_logo = $conn->query($sql_institusi)->fetch(PDO::FETCH_ASSOC);
         $link_logo_institusi = $d_logo['logo_institusi'];
     }
-    $sql_ubah = "UPDATE `tb_institusi` SET 
-    `nama_institusi` = '" . $_POST['nama_institusi'] . "',
-    `akronim_institusi` = '" . $_POST['akronim_institusi'] . "',
-    `logo_institusi` = '" . $link_logo_institusi . "'
-     WHERE `tb_institusi`.`id_institusi` = " . $_POST['id_institusi'];
+
+    $sql_ubah = "UPDATE `tb_institusi` SET ";
+    $sql_ubah .= " `nama_institusi` = '" . $_POST['nama_institusi'] . "',";
+    $sql_ubah .= " `akronim_institusi` = '" . $_POST['akronim_institusi'] . "',";
+    $sql_ubah .= " `logo_institusi` = '" . $link_logo_institusi . "'";
+    $sql_ubah .= "  WHERE `tb_institusi`.`id_institusi` = " . $_POST['id_institusi'];
 
     // echo $sql_ubah . "<br>";
     $conn->query($sql_ubah);

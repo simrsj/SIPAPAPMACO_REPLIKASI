@@ -3,8 +3,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 $id = $_POST['id'];
 
-//alamat file surat masuk
-$alamat_unggah = "./../../_file/praktik";
+//alamat file logo masuk
+$alamat_unggah = "./../../_img/akred";
 
 // echo $alamat_unggah . "<br>";
 

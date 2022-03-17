@@ -131,12 +131,20 @@
                 </div>
                 <div class="card-body text-center align-items-center d-flex justify-content-center">
                     <?php
-                    $sql = "SELECT * FROM tb_institusi_temp ";
+                    $sql = "SELECT * FROM tb_institusi ";
                     $sql .= " WHERE id_institusi = " . $_SESSION['id_institusi'];
                     $q = $conn->query($sql);
+                    $q1 = $conn->query($sql);
 
-                    $d = $q->fetch(PDO::FETCH_ASSOC);
-                    if ($q->rowCount() > 0) {
+                    $d1 = $q1->fetch(PDO::FETCH_ASSOC);
+                    if (
+                        $d1['tempAkronim_institusi'] != "" ||
+                        $d1['tempLogo_institusi'] != "" ||
+                        $d1['tempAlamat_institusi'] != "" ||
+                        $d1['tempAkred_institusi'] != "" ||
+                        $d1['tempTglBerlakuAkred_institusi'] != "" ||
+                        $d1['tempFileAkred_institusi'] != ""
+                    ) {
                     ?>
                         Institusi : <br>
                         <b><?php echo $d['nama_institusi']; ?></b><br><br>
