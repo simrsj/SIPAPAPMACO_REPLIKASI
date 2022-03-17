@@ -48,7 +48,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Progres modul profil insitusi"
+git commit -a -m "snippet #1"
 git pull
 git push
 
