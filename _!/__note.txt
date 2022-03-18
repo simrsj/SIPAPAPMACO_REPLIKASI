@@ -48,7 +48,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "database"
+git commit -a -m "progress val profil institusi"
 git pull
 git push
 
