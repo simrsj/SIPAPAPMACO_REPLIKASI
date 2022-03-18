@@ -18,6 +18,7 @@ $img =  $_SERVER['DOCUMENT_ROOT'].'/SM/_img/logopemprov.png';
 // $dompdf->set('isRemoteEnabled', true);
 
 $jenis_kegiatan = mysqli_query($koneksi,"select nama_jenis_tarif_pilih from tb_tarif_pilih where id_praktik = 3 GROUP BY nama_jenis_tarif_pilih ");
+// $query = mysqli_query($koneksi,"select nama_jenis_tarif_pilih from tb_tarif_pilih where id_praktik = 3 GROUP BY nama_jenis_tarif_pilih ");
 
 $html = '<center>
             <table width="100%">
@@ -98,7 +99,7 @@ $html .= '<table width="100%" border=1>
             <th>Jumlah (Rp)</th>
         </tr>';
 $no = 1;
-
+$total = 0;
 while($rows = mysqli_fetch_array($jenis_kegiatan))
 {
     $html .= "<tr>
@@ -113,13 +114,21 @@ while($rows = mysqli_fetch_array($jenis_kegiatan))
                         <td>".$row['nama_tarif_pilih']."</td>
                         <td>".$row['frekuensi_tarif_pilih']."</td>
                         <td>".$row['kuantitas_tarif_pilih']."</td>
-                        <td>".$row['nominal_tarif_pilih']."</td>
-                        <td>".$row['nama_satuan_tarif_pilih']."</td>
-                        <td>".$row['jumlah_tarif_pilih']."</td>
+                        <td style='text-align:right;'>".number_format($row['nominal_tarif_pilih'],'2',',','.')."</td>
+                        <td style='text-align:right;'>".$row['nama_satuan_tarif_pilih']."</td>
+                        <td style='text-align:right;'>".number_format($row['jumlah_tarif_pilih'],'2',',','.')."</td>
+                        
                     </tr>";            
-            }
-    $no++;
+                    $total = $total + $row['jumlah_tarif_pilih'];
+                }
+        $no++;
 }
+$html .= "<tr>
+    <th colspan = '6'>TOTAL</th>
+    <th>".number_format($total,'2',',','.')."</td>
+
+    </tr>";
+
 $html.='</table>
 
 <p style="text-align:justify;">
