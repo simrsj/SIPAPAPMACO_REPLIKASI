@@ -111,3 +111,112 @@
         </div>
     </div>
 </div>
+<script>
+    $(".terima").click(function() {
+
+        var id = $(this).attr('id');
+        // console.log("terima profil");
+        Swal.fire({
+            position: 'top',
+            title: 'Yakin ?',
+            html: "<span class='text-success text-uppercase font-weight-bold'>Penerimaan</span> Data Pengajuan Profil Institusi",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1cc88a',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Kembali',
+            confirmButtonText: 'Ya',
+            allowOutsideClick: false,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: "_admin/exc/x_v_institusi_val.php?",
+                    data: {
+                        'id': id,
+                        'status': 'terima'
+                    },
+                    success: function() {
+                        Swal.fire({
+                            allowOutsideClick: false,
+                            // isDismissed: false,
+                            icon: 'success',
+                            title: '<div class="text-md text-center">DATA PENGAJUAN PROFIL INSTITUSI <br> <b>DITERIMA</b></div>',
+                            showConfirmButton: false,
+                            timer: 500000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        }).then(
+                            function() {
+                                document.location.href = "?ins&val";
+                            }
+                        );
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                        alert('eksekusi query gagal');
+                    }
+                });
+            }
+        });
+    });
+
+    $(".tolak").click(function() {
+
+        var id = $(this).attr('id');
+        // console.log("tolak profil");
+        Swal.fire({
+            position: 'top',
+            title: 'Yakin ?',
+            html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Pengajuan Profil Institusi" +
+                '<textarea id="ketValTolakProfilIns" class="swal2-input" placeHolder="Isi Ket. Penolakan "></textarea>',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1cc88a',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Kembali',
+            confirmButtonText: 'Ya',
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var ketValTolakProfilIns = document.getElementById('ketValTolakProfilIns').value;
+                $.ajax({
+                    type: 'POST',
+                    url: "_admin/exc/x_v_institusi_val.php?",
+                    data: {
+                        'id': id,
+                        'status': 'tolak',
+                        'ket': ketValTolakProfilIns
+                    },
+                    success: function() {
+                        Swal.fire({
+                            allowOutsideClick: false,
+                            // isDismissed: false,
+                            icon: 'error',
+                            title: '<div class="text-md text-center">DATA PENGAJUAN PROFIL INSTITUSI <br> <b>DITOLAK</b></div>',
+                            showConfirmButton: false,
+                            timer: 500000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        }).then(
+                            function() {
+                                document.location.href = "?ins&val";
+                            }
+                        );
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                        alert('eksekusi query gagal');
+                    }
+                });
+
+            }
+        });
+    });
+</script>

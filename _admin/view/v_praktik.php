@@ -657,7 +657,7 @@ if (isset($_POST['simpan_bayar'])) {
                         }
                     });
                 }
-            })
+            });
         }
 
         function valDataPraktikTarif_T(id) {
@@ -666,7 +666,7 @@ if (isset($_POST['simpan_bayar'])) {
                 position: 'top',
                 title: 'Yakin ?',
                 html: "<span class='text-danger text-uppercase font-weight-bold'>Penolakan</span> Data Praktikan dan Data Tarif" +
-                    '<input id="valDPT_T" class="swal2-input" placeHolder="Isi Ket. Penolakan ">',
+                    '<textarea id="valDPT_T" class="swal2-input" placeHolder="Isi Ket. Penolakan "></textarea>',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',
