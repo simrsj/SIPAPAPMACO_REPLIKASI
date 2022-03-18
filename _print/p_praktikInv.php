@@ -1,6 +1,6 @@
 <?php
 // include('koneksi.php');
-$koneksi = mysqli_connect("localhost", "root", "", "db_sm");
+$koneksi = mysqli_connect("localhost", "root", "simrs12345", "db_sm");
 
 require_once("../vendor/dompdf/autoload.inc.php");
 // def("DOMPDF_ENABLE_REMOTE", false);
@@ -14,16 +14,14 @@ $options->set('isRemoteEnabled', true);
 $dompdf = new Dompdf($options);
 // $dompdf = new Dompdf();
 // $dompdf = $dompdf->set_option('isRemoteEnabled', TRUE);
-$img =  $_SERVER['DOCUMENT_ROOT'].'/SM/_img/logopemprov.png';
+$img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
 // $dompdf->set('isRemoteEnabled', true);
 
-$jenis_kegiatan = mysqli_query($koneksi,"select nama_jenis_tarif_pilih from tb_tarif_pilih where id_praktik = 3 GROUP BY nama_jenis_tarif_pilih ");
-// $query = mysqli_query($koneksi,"select nama_jenis_tarif_pilih from tb_tarif_pilih where id_praktik = 3 GROUP BY nama_jenis_tarif_pilih ");
-
+$jenis_kegiatan = mysqli_query($koneksi, "select nama_jenis_tarif_pilih from tb_tarif_pilih where id_praktik = 2 GROUP BY nama_jenis_tarif_pilih ");
 $html = '<center>
             <table width="100%">
             <tr>
-                <th rowspan = 6><img src='.$img.' style="width:100px !important;"></th>
+                <th rowspan = 6><img src="' . $img . '" style="width: 100px !important, heigth:150px !important;"></th>
                 <th>PEMERINTAH DAERAH PROVINSI JAWA BARAT</th>
             </tr>
             <tr>
@@ -99,37 +97,27 @@ $html .= '<table width="100%" border=1>
             <th>Jumlah (Rp)</th>
         </tr>';
 $no = 1;
-$total = 0;
-while($rows = mysqli_fetch_array($jenis_kegiatan))
-{
+
+while ($rows = mysqli_fetch_array($jenis_kegiatan)) {
     $html .= "<tr>
-                <td>".$no."</td>
-                <td colspan = '6'>".$rows['nama_jenis_tarif_pilih']."</td>
+                <td>" . $no . "</td>
+                <td colspan = '6'>" . $rows['nama_jenis_tarif_pilih'] . "</td>
                 </tr>";
-                $query = mysqli_query($koneksi,"select * from tb_tarif_pilih where id_praktik = 3 and nama_jenis_tarif_pilih='". $rows['nama_jenis_tarif_pilih']. "'");
-                while($row = mysqli_fetch_array($query))
-                {
-                    $html .= "<tr>
+    $query = mysqli_query($koneksi, "select * from tb_tarif_pilih where id_praktik = 2 and nama_jenis_tarif_pilih='" . $rows['nama_jenis_tarif_pilih'] . "'");
+    while ($row = mysqli_fetch_array($query)) {
+        $html .= "<tr>
                         <td>  </td>
-                        <td>".$row['nama_tarif_pilih']."</td>
-                        <td>".$row['frekuensi_tarif_pilih']."</td>
-                        <td>".$row['kuantitas_tarif_pilih']."</td>
-                        <td style='text-align:right;'>".number_format($row['nominal_tarif_pilih'],'2',',','.')."</td>
-                        <td style='text-align:right;'>".$row['nama_satuan_tarif_pilih']."</td>
-                        <td style='text-align:right;'>".number_format($row['jumlah_tarif_pilih'],'2',',','.')."</td>
-                        
-                    </tr>";            
-                    $total = $total + $row['jumlah_tarif_pilih'];
-                }
-        $no++;
+                        <td>" . $row['nama_tarif_pilih'] . "</td>
+                        <td>" . $row['frekuensi_tarif_pilih'] . "</td>
+                        <td>" . $row['kuantitas_tarif_pilih'] . "</td>
+                        <td>" . $row['nominal_tarif_pilih'] . "</td>
+                        <td>" . $row['nama_satuan_tarif_pilih'] . "</td>
+                        <td>" . $row['jumlah_tarif_pilih'] . "</td>
+                    </tr>";
+    }
+    $no++;
 }
-$html .= "<tr>
-    <th colspan = '6'>TOTAL</th>
-    <th>".number_format($total,'2',',','.')."</td>
-
-    </tr>";
-
-$html.='</table>
+$html .= '</table>
 
 <p style="text-align:justify;">
 Perlu kami informasikan pembayaran ditransfer pada Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD) dengan Nomor: <b>BJB-0063028738002</b>. Bukti transfer dapat dikirim melaui email  <u>diklit.rsj.jabarprov@gmail.com</u> dan nomor WA Bendahara Penerimaan RSJ <b>(081321412643)</b><br/>
@@ -166,9 +154,8 @@ $html .= "<table border = 1 width='100%'>
 $html .= "</html>";
 $dompdf->loadHtml($html);
 // Setting ukuran dan orientasi kertas
-$dompdf->setPaper('A4', 'potrait');
+$dompdf->setPaper('F4', 'potrait');
 // Rendering dari HTML Ke PDF
 $dompdf->render();
 // Melakukan output file Pdf
 $dompdf->stream('Invoice_Praktikan.pdf');
-?>
