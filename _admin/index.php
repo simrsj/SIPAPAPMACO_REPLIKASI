@@ -354,6 +354,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							include "_admin/update/u_institusi.php";
 						} elseif (isset($_GET['d'])) {
 							include "_admin/delete/d_institusi.php";
+						} elseif (isset($_GET['val'])) {
+							include "_admin/view/v_institusi_val.php";
 						} else {
 							include "_admin/view/v_institusi.php";
 						}

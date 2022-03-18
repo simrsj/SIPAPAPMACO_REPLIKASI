@@ -15,7 +15,8 @@
                 <div class="card-body">
                     <div class="text-md font-weight-bold text-center text-primary mb-1">
                         <div class="h5 mb-0 font-weight-bold">
-                            <b><?php echo $dAr_ins['nama_institusi']; ?></b>
+
+                            <b> DATA PROFIL <br><?php echo $dAr_ins['nama_institusi']; ?></b>
                         </div>
                     </div>
                     <hr class="bg-primary" style="height: 2px;">
@@ -170,7 +171,10 @@
                 <div class="card-body">
                     <div class="text-md font-weight-bold text-center text-danger mb-1">
                         <div class="h5 mb-0 font-weight-bold">
-                            <b><i>MoU</i> / KERJA SAMA</b>
+                            <b>
+                                <i>DATA MoU</i> / KERJA SAMA<br>
+                                dengan RS Jiwa Provinsi Jawa Barat
+                                </br>
                         </div>
                     </div>
                     <hr class="bg-danger" style="height: 2px;">

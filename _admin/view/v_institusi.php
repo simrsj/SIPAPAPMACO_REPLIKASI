@@ -3,9 +3,12 @@
         <div class="col-lg-10">
             <h1 class="h3 mb-2 text-gray-800">Daftar Institusi</h1>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-2 text-right">
             <a class='btn btn-outline-success btn-sm' href='#' data-toggle='modal' data-target='#akr_i_m'>
                 <i class="fas fa-plus"></i> Tambah
+            </a>
+            <a class='btn btn-outline-primary btn-sm' href='?ins&val'>
+                Validasi
             </a>
             <!-- modal tambah Institusi  -->
             <div class="modal fade" id="akr_i_m">
@@ -44,12 +47,15 @@
                 if ($r_institusi > 0) {
                 ?>
                     <table class='table table-striped' id="myTable">
-                        <thead class="thead-dark">
+                        <thead class="thead-dark text-center align-content-center">
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>Nama Institusi</th>
-                                <th>Akronim Institusi</th>
-                                <th>Logo Institusi</th>
+                                <th>Akronim </th>
+                                <th>Logo </th>
+                                <th>Akreditasi </th>
+                                <th>Tanggal <br>Berlaku Akreditasi</th>
+                                <th>File Akreditasi</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -65,7 +71,7 @@
                                         <?php
                                         if ($d_institusi['akronim_institusi'] == '') {
                                         ?>
-                                            <span class="badge badge-danger text-lg">Tidak Ada</span>
+                                            <span class="badge badge-danger">Tidak Ada</span>
                                         <?php
                                         } else {
                                             echo $d_institusi['akronim_institusi'];
@@ -76,7 +82,7 @@
                                         <?php
                                         if ($d_institusi['logo_institusi'] == '') {
                                         ?>
-                                            <span class="badge badge-danger text-lg">Tidak Ada</span>
+                                            <span class="badge badge-danger">Tidak Ada</span>
                                         <?php
                                         } else {
                                         ?>
@@ -98,7 +104,44 @@
                                         }
                                         ?>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
+                                        <?php
+                                        if ($d_institusi['akred_institusi'] == '') {
+                                        ?>
+                                            <span class="badge badge-danger">Tidak Ada</span>
+                                        <?php
+                                        } else {
+                                            echo $d_institusi['akred_institusi'];
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php
+                                        if ($d_institusi['tglAkhirAkred_institusi'] == '') {
+                                        ?>
+                                            <span class="badge badge-danger">Tidak Ada</span>
+                                        <?php
+                                        } else {
+                                            echo $d_institusi['tglAkhirAkred_institusi'];
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <?php
+                                        if ($d_institusi['tglAkhirAkred_institusi'] == '') {
+                                        ?>
+                                            <span class="badge badge-danger">Tidak Ada</span>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <a href="<?php echo $d_institusi['fileAkred_institusi']; ?>" class="btn btn-success btn-sm">
+                                                <i class="fas fa-file-download"></i> Download
+                                            </a>
+                                        <?php
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="text-center">
                                         <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_institusi['id_institusi']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
@@ -227,11 +270,12 @@ if (isset($_POST['ubah'])) {
         $d_logo = $conn->query($sql_institusi)->fetch(PDO::FETCH_ASSOC);
         $link_logo_institusi = $d_logo['logo_institusi'];
     }
-    $sql_ubah = "UPDATE `tb_institusi` SET 
-    `nama_institusi` = '" . $_POST['nama_institusi'] . "',
-    `akronim_institusi` = '" . $_POST['akronim_institusi'] . "',
-    `logo_institusi` = '" . $link_logo_institusi . "'
-     WHERE `tb_institusi`.`id_institusi` = " . $_POST['id_institusi'];
+
+    $sql_ubah = "UPDATE `tb_institusi` SET ";
+    $sql_ubah .= " `nama_institusi` = '" . $_POST['nama_institusi'] . "',";
+    $sql_ubah .= " `akronim_institusi` = '" . $_POST['akronim_institusi'] . "',";
+    $sql_ubah .= " `logo_institusi` = '" . $link_logo_institusi . "'";
+    $sql_ubah .= "  WHERE `tb_institusi`.`id_institusi` = " . $_POST['id_institusi'];
 
     // echo $sql_ubah . "<br>";
     $conn->query($sql_ubah);

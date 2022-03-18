@@ -1,6 +1,5 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-// include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
 $id = $_POST['id'];
 

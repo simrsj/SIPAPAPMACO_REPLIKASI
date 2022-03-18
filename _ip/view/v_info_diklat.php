@@ -11,7 +11,7 @@
             <!-- DATA KEDOKTERAN -->
             <div class="col-xl-3 col-md-3 mb-4  align-items-stretch justify-content-center">
                 <div class="card shadow h-100">
-                    <div class="card-header   flex-row align-items-center justify-content-between">
+                    <div class="card-header flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">Kedokteran</h6>
                     </div>
                     <div class="card-body">
@@ -29,9 +29,9 @@
             </div>
 
             <!-- DATA KEPERAWATAN -->
-            <div class="col-xl-3 col-md-3 mb-4  align-items-stretch justify-content-center">
-                <div class="card  shadow h-100">
-                    <div class="card-header   flex-row align-items-center justify-content-between">
+            <div class="col-xl-3 col-md-3 mb-4 align-items-stretch justify-content-center">
+                <div class="card shadow h-100">
+                    <div class="card-header flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">Keperawatan</h6>
                     </div>
                     <div class="card-body">
@@ -130,11 +130,9 @@
                         </div>
                     </div>
                     <div class="card">
-                        <div class="overflow-auto">
-                            <div class="no-gutters align-items-center text-center pt-0">
-                                <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-height: 500px;">
-                                    <?php include "./_admin/view/v_info_diklat_dataKedKep.php"; ?>
-                                </div>
+                        <div class="no-gutters align-items-center text-center pt-0">
+                            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-height: 500px;">
+                                <?php include "./_admin/view/v_info_diklat_dataKedKep.php"; ?>
                             </div>
                         </div>
                     </div>
@@ -228,10 +226,8 @@
                         </div> -->
                     </div>
                     <div class="card all-0 d-flex flex-column w-100 h-100 overflow-auto">
-                        <div class="overflow-auto">
-                            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-height: 500px;">
-                                <?php include "./_admin/view/v_info_diklat_dataNklNnk.php"; ?>
-                            </div>
+                        <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-height: 500px;">
+                            <?php include "./_admin/view/v_info_diklat_dataNklNnk.php"; ?>
                         </div>
                     </div>
                 </div>
