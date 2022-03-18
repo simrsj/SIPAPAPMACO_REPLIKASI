@@ -1,7 +1,14 @@
+<?php
+$sql = "SELECT * FROM tb_institusi ";
+$sql .= " WHERE id_institusi = " . $_SESSION['id_institusi'];
+$q = $conn->query($sql);
+
+$d = $q->fetch(PDO::FETCH_ASSOC);
+?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10">
-            <h1 class="h3 mb-2 text-gray-800">Data Institusi</h1>
+            <h1 class="h4 mb-2 text-gray-800">Data Institusi <b><?php echo $d['nama_institusi']; ?></b></h1>
         </div>
         <div class="col-lg-2 text-right">
             <a class="btn btn-outline-primary btn-sm" href="?ins&u"><i class="fas fa-edit"></i> Ubah</a>
@@ -10,20 +17,11 @@
 
     <div class="row">
         <div class="col-xl-6 col-md-6 mb-4 align-items-stretch">
-            <div class="card shadow mb-4 h-100 py-2">
-                <div class="card-header flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary text-center">Data Profil Institusi</h6>
+            <div class="card shadow mb-4 h-100 ">
+                <div class="card-header bg-primary flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-light text-center">Data Profil Institusi</h6>
                 </div>
                 <div class="card-body text-center">
-                    <?php
-                    $sql = "SELECT * FROM tb_institusi ";
-                    $sql .= " WHERE id_institusi = " . $_SESSION['id_institusi'];
-                    $q = $conn->query($sql);
-
-                    $d = $q->fetch(PDO::FETCH_ASSOC);
-                    ?>
-                    Institusi : <br>
-                    <b><?php echo $d['nama_institusi']; ?></b><br><br>
                     Akronim :<br>
                     <b>
                         <?php
@@ -125,45 +123,57 @@
             </div>
         </div>
         <div class="col-xl-6 col-md-6 mb-4 align-items-stretch">
-            <div class="card shadow mb-4 h-100 py-2">
-                <div class="card-header flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary text-center">Data Pengajuan Profil Institusi</h6>
+            <div class="card shadow mb-4 h-100">
+                <div class="card-header bg-primary flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-light text-center">Data Pengajuan Profil Institusi, Status :
+                        <?php
+                        if ($d['tempStatus_institusi'] == 'pengajuan') {
+                        ?>
+                            <span class="badge badge-light text-primary">Diajukan</span>
+                        <?php
+                        } elseif ($d['tempStatus_institusi'] == 'ditolak') {
+                        ?>
+                            <span class="badge badge-danger">Ditolak</span>
+                        <?php
+                        } elseif ($d['tempStatus_institusi'] == 'diterima') {
+                        ?>
+                            <span class="badge badge-success">Diterima</span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="badge badge-danger blink">EROOR!</span>
+                        <?php
+                        }
+                        ?>
+                    </h6>
                 </div>
-                <div class="card-body text-center align-items-center d-flex justify-content-center">
+                <div class="card-body text-center">
                     <?php
-                    $sql = "SELECT * FROM tb_institusi ";
-                    $sql .= " WHERE id_institusi = " . $_SESSION['id_institusi'];
-                    $q = $conn->query($sql);
-                    $q1 = $conn->query($sql);
-
-                    $d1 = $q1->fetch(PDO::FETCH_ASSOC);
                     if (
-                        $d1['tempAkronim_institusi'] != "" ||
-                        $d1['tempLogo_institusi'] != "" ||
-                        $d1['tempAlamat_institusi'] != "" ||
-                        $d1['tempAkred_institusi'] != "" ||
-                        $d1['tempTglBerlakuAkred_institusi'] != "" ||
-                        $d1['tempFileAkred_institusi'] != ""
+                        $d['tempAkronim_institusi'] != "" ||
+                        $d['tempLogo_institusi'] != "" ||
+                        $d['tempAlamat_institusi'] != "" ||
+                        $d['tempAkred_institusi'] != "" ||
+                        $d['tempTglBerlakuAkred_institusi'] != "" ||
+                        $d['tempFileAkred_institusi'] != ""
                     ) {
                     ?>
-                        Institusi : <br>
-                        <b><?php echo $d['nama_institusi']; ?></b><br><br>
                         Akronim :<br>
                         <b>
                             <?php
-                            if ($d['akronim_institusi'] == "") {
+                            if ($d['tempAkronim_institusi'] == "") {
                             ?>
                                 <span class="badge badge-danger">Data Tidak Ada</span>
                             <?php
                             } else {
-                                echo $d['akronim_institusi'];
+                                echo $d['tempAkronim_institusi'];
                             }
                             ?>
                         </b><br><br>
                         Logo :<br>
                         <b>
                             <?php
-                            if ($d['logo_institusi'] == "") {
+                            if ($d['tempLogo_institusi'] == "") {
                             ?>
                                 <span class="badge badge-danger">Data Tidak Ada</span>
                             <?php
@@ -178,7 +188,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                                                <img src="<?php echo $d['logo_institusi']; ?>" width="250px" height="250px">
+                                                <img src="<?php echo $d['tempLogo_institusi']; ?>" width="250px" height="250px">
                                             </div>
                                         </div>
                                     </div>
@@ -191,60 +201,60 @@
                         Alamat :<br>
                         <b>
                             <?php
-                            if ($d['alamat_institusi'] == "") {
+                            if ($d['tempAlamat_institusi'] == "") {
                             ?>
                                 <span class="badge badge-danger">Data Tidak Ada</span>
                             <?php
                             } else {
-                                echo $d['alamat_institusi'];
+                                echo $d['tempAlamat_institusi'];
                             }
                             ?>
                         </b><br><br>
                         Akreditasi :<br>
                         <b>
                             <?php
-                            if ($d['akred_institusi'] == "") {
+                            if ($d['tempAkred_institusi'] == "") {
                             ?>
                                 <span class="badge badge-danger">Data Tidak Ada</span>
                             <?php
                             } else {
-                                echo $d['alamat_institusi'];
+                                echo $d['tempAkred_institusi'];
                             }
                             ?>
                         </b><br><br>
                         Tanggal Akreditasi Berlaku:<br>
                         <b>
                             <?php
-                            if ($d['tglAkhirAkred_institusi'] == "") {
+                            if ($d['tempTglAkhirAkred_institusi'] == "") {
                             ?>
                                 <span class="badge badge-danger">Data Tidak Ada</span>
                                 <?php
                             } else {
-                                if ($d['tglAkhirAkred_institusi'] >= date('Y-m-d')) {
+                                if ($d['tempTglAkhirAkred_institusi'] >= date('Y-m-d')) {
                                 ?>
                                     <span class="badge badge-danger">Sudah Tidak Berlaku</span><br>
                             <?php
                                 }
-                                echo tanggal($d['tglAkhirAkred_institusi']);
+                                echo tanggal($d['tempTglAkhirAkred_institusi']);
                             }
                             ?>
                         </b><br><br>
                         File Akreditasi :<br>
                         <b>
                             <?php
-                            if ($d['fileAkred_institusi'] == "") {
+                            if ($d['tempFileAkred_institusi'] == "") {
                             ?>
                                 <span class="badge badge-danger">Data Tidak Ada</span>
                             <?php
                             } else {
                             ?>
-                                <a href='<?php echo $d['fileAkred_institusi']; ?>' target=" _blank" class="btn btn-success btn-sm">
+                                <a href='<?php echo $d['tempFileAkred_institusi']; ?>' target=" _blank" class="btn btn-success btn-sm">
                                     <i class="fas fa-file-download"></i> Download
                                 </a>
                             <?php
                             }
                             ?>
-                        </b><br><br>
+                        </b>
                     <?php
                     } else {
                     ?>
