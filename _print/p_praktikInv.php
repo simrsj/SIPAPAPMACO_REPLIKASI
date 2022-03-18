@@ -18,11 +18,11 @@ $img =  $_SERVER['DOCUMENT_ROOT'].'/SM/_img/logopemprov.png';
 // $dompdf->set('isRemoteEnabled', true);
 
 $jenis_kegiatan = mysqli_query($koneksi,"select nama_jenis_tarif_pilih from tb_tarif_pilih where id_praktik = 3 GROUP BY nama_jenis_tarif_pilih ");
-$html = $img;
-$html .= '<center>
+
+$html = '<center>
             <table width="100%">
             <tr>
-                <th rowspan = 6><img src="logo.png"></th>
+                <th rowspan = 6><img src='.$img.' style="width:100px !important;"></th>
                 <th>PEMERINTAH DAERAH PROVINSI JAWA BARAT</th>
             </tr>
             <tr>
@@ -157,7 +157,7 @@ $html .= "<table border = 1 width='100%'>
 $html .= "</html>";
 $dompdf->loadHtml($html);
 // Setting ukuran dan orientasi kertas
-$dompdf->setPaper('F4', 'potrait');
+$dompdf->setPaper('A4', 'potrait');
 // Rendering dari HTML Ke PDF
 $dompdf->render();
 // Melakukan output file Pdf
