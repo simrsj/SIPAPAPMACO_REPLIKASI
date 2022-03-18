@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 if ($_POST['status'] == 'terima') {
     $sql = "UPDATE tb_institusi SET ";
     $sql .= " tempStatus_institusi = '" . $_POST['status'] . "'";
-    $sql .= " WHERE id_praktik = " . $_POST['id'];
+    $sql .= " WHERE id_institusi = " . $_POST['id'];
 
     $sql_ins = "SELECT * FROM tb_institusi";
     $sql_ins .= " WHERE id_institusi = " . $_POST['id'];

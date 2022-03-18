@@ -131,11 +131,11 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                         ?>
                             <span class="badge badge-light text-primary">Diajukan</span>
                         <?php
-                        } elseif ($d['tempStatus_institusi'] == 'ditolak') {
+                        } elseif ($d['tempStatus_institusi'] == 'tolak') {
                         ?>
                             <span class="badge badge-danger">Ditolak</span>
                         <?php
-                        } elseif ($d['tempStatus_institusi'] == 'diterima') {
+                        } elseif ($d['tempStatus_institusi'] == 'terima') {
                         ?>
                             <span class="badge badge-success">Diterima</span>
                         <?php
