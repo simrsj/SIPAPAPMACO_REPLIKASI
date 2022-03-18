@@ -3,17 +3,26 @@
 $koneksi = mysqli_connect("localhost", "root", "", "db_sm");
 
 require_once("../vendor/dompdf/autoload.inc.php");
+// def("DOMPDF_ENABLE_REMOTE", false);
 use Dompdf\Dompdf;
+use Dompdf\Options;
 // def("DOMPDF_ENABLE_REMOTE", false);
 // instantiate and use the dompdf class
-$dompdf = new Dompdf();
-$dompdf = new Dompdf(array('enable_remote' => true));
+// $dompdf = new Dompdf();
+$options = new Options();
+$options->set('isRemoteEnabled', true);
+$dompdf = new Dompdf($options);
+// $dompdf = new Dompdf();
+// $dompdf = $dompdf->set_option('isRemoteEnabled', TRUE);
+$img =  $_SERVER['DOCUMENT_ROOT'].'/SM/_img/logopemprov.png';
+// $dompdf->set('isRemoteEnabled', true);
 
 $jenis_kegiatan = mysqli_query($koneksi,"select nama_jenis_tarif_pilih from tb_tarif_pilih where id_praktik = 3 GROUP BY nama_jenis_tarif_pilih ");
-$html = '<center>
+$html = $img;
+$html .= '<center>
             <table width="100%">
             <tr>
-                <th rowspan = 6><img src= height=100px></th>
+                <th rowspan = 6><img src="logo.png"></th>
                 <th>PEMERINTAH DAERAH PROVINSI JAWA BARAT</th>
             </tr>
             <tr>
@@ -113,11 +122,38 @@ while($rows = mysqli_fetch_array($jenis_kegiatan))
 }
 $html.='</table>
 
-<p>
-Perlu kami informasikan pembayaran ditransfer pada Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD) dengan Nomor: <b>BJB-0063028738002</b>. Bukti transfer dapat dikirim melaui email  diklit.rsj.jabarprov@gmail.com dan nomor WA Bendahara Penerimaan RSJ <b>(081321412643)</b><br/>
+<p style="text-align:justify;">
+Perlu kami informasikan pembayaran ditransfer pada Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD) dengan Nomor: <b>BJB-0063028738002</b>. Bukti transfer dapat dikirim melaui email  <u>diklit.rsj.jabarprov@gmail.com</u> dan nomor WA Bendahara Penerimaan RSJ <b>(081321412643)</b><br/>
 Demikian agar menjadi maklum. Atas perhatian dan kerja sama Saudara kami ucapkan terima kasih.
 
 </p>';
+$html .= "<table border = 1 width='100%'>
+            <tr>
+                <td></td>
+                <td>DIREKTUR</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>RS JIWA PROVINSI JAWA BARAT</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><br/><br/><br/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>ELLY MARLIYANI, dr., Sp.KJ., M.K.M.</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Pembina Utama Madya</td>
+            </tr>
+            <tr>
+                <td>tembusan</td>
+                <td>NIP. 196608141991022004</td>
+            </tr>
+            </table>";
+
 $html .= "</html>";
 $dompdf->loadHtml($html);
 // Setting ukuran dan orientasi kertas
