@@ -197,8 +197,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 // }
             }
 
-            //tambah tempat
-            if (makan != undefined && mess != "") {
+            //tambah mess
+            if (
+                makan != undefined &&
+                mess != ""
+            ) {
                 var data_tMess = $('#form_sMess').serializeArray();
 
                 //Simpan Data Praktik dan tarif

@@ -11,9 +11,9 @@ _*MINOR*_
 - 🔃 Cetak Invoice Tarif Mess
 - 🔃 Cetak Invoice Khusus Universitas Kristen Maranatha (UKM) tambah tembusan (Bagian Keuangan RS Jiwa Provinsi Jawa Barat)
 - 🔃 Cetak Data Nilai Keperawatan
-- ✅ Pembuatan input profil insitusi di Akun Institusi
-- ✅ Validasi inputan profil insitusi dari akun Institusi
-- ✅ Pembuatan Modul Validasi Profil Institusi
+- ✅ Perbaikan Modul Tambah dan Ubah MoU Akun ADMIN
+- ✅ Perbaikan Menu Cetak Invoice Kedokteran Profesi PSPD
+- ✅ Perbaikan Menu Cetak Invoice Keperawatan, Nakes Lainnya dan Non-Nakes
 - Modul Pengajuan MoU Baru
 - Modul Pengajuan MoU Perpanjang
 - Modul Pengajuan Magang
@@ -41,7 +41,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Progres cetak invoice Tarif"
+git commit -a -m "Perbaikan Tombol Cetak Invoice, Perbaikan Modul Tambah dan Ubah MoU ADMIN"
 git pull
 git push
 

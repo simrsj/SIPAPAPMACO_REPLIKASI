@@ -3,6 +3,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
 // --------------------------------------SIMPAN DATA PRAKTIK--------------------------------------------
 
 //mencari jenis jurusan
@@ -18,10 +22,13 @@ if ($_POST['id_jurusan_pdd'] == 1) {
         $status_cek_praktik = "DPT_KED_PPDS";
     } else {
         $status_cek_praktik = "DPT_KED";
+        $makan_mess = $_POST['makan_mess'];
     }
 } else {
     $status_cek_praktik = "DPT";
 }
+
+
 //elsekusi jika selain kedokteran
 if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
 
@@ -41,7 +48,6 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
         $materi_napza = 't';
     }
 } else {
-    $makan_mess = NULL;
     $materi_upip = NULL;
     $materi_napza = NULL;
 }
@@ -92,7 +98,7 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $materi_napza . "'
         )";
 
-// echo $sql_insert . "<br>";
+echo $sql_insert . "<br>";
 $conn->query($sql_insert);
 // --------------------------------------SIMPAN GENERATE TANGGAL--------------------------------------------
 

@@ -61,9 +61,8 @@ if (isset($_POST['ubah_mou'])) {
     no_rsj_mou = '" . $_POST['no_rsj_mou'] . "', 
     no_institusi_mou = '" . $_POST['no_institusi_mou'] . "', 
     id_jurusan_pdd = '" . $_POST['id_jurusan_pdd'] . "', 
-    id_spesifikasi_pdd = '" . $_POST['id_spesifikasi_pdd'] . "',
+    id_profesi_pdd = '" . $_POST['id_profesi_pdd'] . "',
     id_jenjang_pdd = '" . $_POST['id_jenjang_pdd'] . "', 
-    id_akreditasi = '" . $_POST['id_akreditasi'] . "',
     " . $file_mou . "
     ket_mou = '" . $_POST['ket_mou'] . "'
     WHERE id_mou = " . $_POST['id_mou'];
@@ -123,9 +122,6 @@ if (isset($_POST['ubah_mou'])) {
                                 ?>
                             </select>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="row">
                         <div class="col-sm-4">
                             No. MoU RSJ<span style="color:red">*</span><br>
                             <input class="form-control" type="text" name="no_rsj_mou" value="<?php echo $d_mou['no_rsj_mou'] ?>" required>
@@ -137,10 +133,10 @@ if (isset($_POST['ubah_mou'])) {
                     </div>
                     <hr>
 
-                    <!-- Jurusan, Spesifikasi, Jenjang, dan Akreditasi -->
+                    <!-- Jurusan, profesi, Jenjang, dan Akreditasi -->
                     <div class="row">
-                        <div class="col-sm-3">
-                            Jurusan Pendidikan <span style="color:red">*</span><br>
+                        <div class="col-sm-4">
+                            Jurusan <span style="color:red">*</span><br>
                             <select class="js-example-placeholder-single js-states form-control" name="id_jurusan_pdd" required>
                                 <?php
                                 $q_jurusan = $conn->query("SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC");
@@ -159,28 +155,8 @@ if (isset($_POST['ubah_mou'])) {
                                 ?>
                             </select>
                         </div>
-                        <div class="col-sm-3">
-                            Spesifikasi Pendidikan <span style="color:red">*</span><br>
-                            <select class="js-example-placeholder-single js-states form-control" name="id_spesifikasi_pdd" required>
-                                <?php
-                                $q_spek = $conn->query("SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC");
-                                while ($d_spek = $q_spek->fetch(PDO::FETCH_ASSOC)) {
-                                    if ($d_spek['id_spesifikasi_pdd'] == $d_mou['id_spesifikasi_pdd']) {
-                                        $selected = 'selected';
-                                    } else {
-                                        $selected = '';
-                                    }
-                                ?>
-                                    <option <?php echo $selected; ?> value="<?php echo $d_spek['id_spesifikasi_pdd']; ?> ">
-                                        <?php echo $d_spek['nama_spesifikasi_pdd']; ?>
-                                    </option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            Jenjang Pendidikan <span style="color:red">*</span><br>
+                        <div class="col-sm-4">
+                            Jenjang <span style="color:red">*</span><br>
                             <select class="js-example-placeholder-single js-states form-control" name="id_jenjang_pdd" required>
                                 <option value="">-- Pilih --</option>
                                 <?php
@@ -198,21 +174,20 @@ if (isset($_POST['ubah_mou'])) {
                                 ?>
                             </select>
                         </div>
-                        <div class="col-sm-3">
-                            Akreditasi Institusi : <span style="color:red">*</span><br>
-                            <select class="js-example-placeholder-single js-states form-control" name="id_akreditasi" required>
-                                <option value="">-- Pilih --</option>
+                        <div class="col-sm-4">
+                            Profesi <span style="color:red">*</span><br>
+                            <select class="js-example-placeholder-single js-states form-control" name="id_profesi_pdd" required>
                                 <?php
-                                $q_akreditasi = $conn->query("SELECT * FROM tb_akreditasi");
-                                while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
-                                    if ($d_akreditasi['id_akreditasi'] == $d_mou['id_akreditasi']) {
+                                $q_spek = $conn->query("SELECT * FROM tb_profesi_pdd order by nama_profesi_pdd ASC");
+                                while ($d_spek = $q_spek->fetch(PDO::FETCH_ASSOC)) {
+                                    if ($d_spek['id_profesi_pdd'] == $d_mou['id_profesi_pdd']) {
                                         $selected = 'selected';
                                     } else {
                                         $selected = '';
                                     }
                                 ?>
-                                    <option <?php echo $selected; ?> value="<?php echo $d_akreditasi['id_akreditasi']; ?> ">
-                                        <?php echo $d_akreditasi['nama_akreditasi']; ?>
+                                    <option <?php echo $selected; ?> value="<?php echo $d_spek['id_profesi_pdd']; ?> ">
+                                        <?php echo $d_spek['nama_profesi_pdd']; ?>
                                     </option>
                                 <?php
                                 }
@@ -233,16 +208,22 @@ if (isset($_POST['ubah_mou'])) {
                             <input class="form-control" type="date" name="tgl_selesai_mou" value="<?php echo $d_mou['tgl_selesai_mou'] ?>" required>
                         </div>
                         <div class="col-sm-4">
-                            Keterangan<br>
-                            <textarea name="ket_mou" class="form-control"><?php echo $d_mou['ket_mou'] ?></textarea>
-                        </div>
-                        <div class="col-sm-4">
                             File MoU <br>
-                            <i style='font-size:12px;'>File MoU Sebelumnya
-                                <a href="<?php echo $d_mou['file_mou']; ?>">Download</a>
-                            </i><br>
+                            <?php
+                            if ($d_mou['file_mou'] != "") {
+                            ?>
+                                <i style='font-size:12px;'>File MoU Sebelumnya
+                                    <a href="<?php echo $d_mou['file_mou']; ?>">Download</a>
+                                </i><br>
+                            <?php
+                            }
+                            ?>
                             <input type="file" accept="application/pdf" name="file_mou"><br>
                             <span class="text-xs font-italic">File MoU harus .pdf dan ukurannya kurang dari 1 Mb</span>
+                        </div>
+                        <div class="col-sm-4">
+                            Keterangan<br>
+                            <textarea name="ket_mou" class="form-control"><?php echo $d_mou['ket_mou'] ?></textarea>
                         </div>
                     </div>
                     <hr>

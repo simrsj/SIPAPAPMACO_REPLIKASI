@@ -31,7 +31,7 @@
                     Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh <b>ADMIN</b><br><br>
 
                     <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
-                    MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses <span class="font-weight-bold text-danger">PEMBAYARAN</span>
+                    MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses <span class="font-weight-bold text-success">UNGGAH INVOICE</span>
                     <br><br>
 
                     <span class="badge badge-danger text-md">PEMBAYARAN</span><br>
@@ -102,6 +102,10 @@
             </span>
         <?php
         } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+        ?>
+            <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "INV") {
         ?>
             <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
             <hr>
@@ -231,6 +235,48 @@
         <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+    ?>
+        <b>PILIH : </b><br>
+
+        <a class="btn btn-outline-success btn-sm" href="#" data-toggle="modal" data-target="#inv<?php echo $d_praktik['id_praktik']; ?>" title="Unggah Invoice">
+            UNGGAH FILE INVOICE
+        </a>
+
+        <!-- modal keterangan penolakan -->
+        <div class="modal fade" id="inv<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Unggah Invoice</h4>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-lg">
+
+                        <form enctype="multipart/form-data" class="form-group" method="post" action="">
+                            <a href="./_print/p_praktikInv.php?id=<?php echo $d_praktik['id_praktik'] ?>" class="btn btn-outline-success" target="_blank" title="Cetak Invoice untuk ditandatangai (TTD Basah)">
+                                <i class="fas fa-file-download"></i> Unduh Data Invoice
+                            </a><br><br>
+
+
+                            <h5>Unggah Invoice yg sudah ditandatangani: </h5><br>
+                            <input type="file" name="file_invoice" id="file_invoice" accept="application/pdf" required>
+                            <input type="hidden" name="id_praktik" id="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>">
+                            <hr>
+                            <nav id="navbar-tarif" class="navbar justify-content-center">
+                                <button type="submit" name="simpan_invoice" class="nav-link btn btn-success btn-sm">
+                                    <i class="fas fa-paper-plane"></i> Kirim Data Invoice
+                                </button>
+                            </nav>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php
+    } elseif ($d_praktik['status_cek_praktik'] == "INV") {
     ?>
         <b>PLIH : </b><br>
         <a class="btn btn-outline-danger btn-sm" href="?prk=<?php echo $_GET['prk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>

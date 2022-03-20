@@ -107,6 +107,103 @@ if (isset($_POST['simpan_bayar'])) {
                     );
                 });
             </script>
+        <?php
+        }
+    }
+} elseif (isset($_POST['simpan_invoice'])) {
+
+    //alamat file surat masuk
+    $alamat_unggah = "./_file/inv";
+
+    //ubah Nama File
+    $_FILES['file_invoice']['name'] = "inv_" .  $_POST['id_praktik'] . "_" . date('Y-m-d') . ".pdf";
+
+    // echo "<pre>";
+    // print_r($_FILES);
+    // echo "</pre>";
+
+    //pembuatan alamat bila tidak ada
+    if (!is_dir($alamat_unggah)) {
+        mkdir($alamat_unggah, 0777, $rekursif = true);
+    }
+
+    //unggah surat dan data praktik
+    if (!is_null($_FILES['file_invoice'])) {
+        $file_invoice = (object) @$_FILES['file_invoice'];
+
+        //mulai unggah file surat praktik
+        if ($file_invoice->size > 1000 * 1000) {
+        ?>
+            <script>
+                alert('File Harus dibawah 1 Mb');
+                document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
+            </script>
+        <?PHP
+            $link_file_invoice = "";
+        } elseif ($file_invoice->type !== 'application/pdf') {
+        ?>
+            <script>
+                alert('File Surat Harus .pdf');
+                document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
+            </script>
+        <?PHP
+            $link_file_invoice = "";
+        } else {
+            $unggah_file_bayar = move_uploaded_file(
+                $file_invoice->tmp_name,
+                "{$alamat_unggah}/{$file_invoice->name}"
+            );
+            $link_file_invoice = "{$alamat_unggah}/{$file_invoice->name}";
+
+            $sql_insert_inv = " UPDATE tb_praktik SET ";
+            $sql_insert_inv .= " fileInv_praktik = '" . $link_file_invoice . "'";
+            $sql_insert_inv .= " WHERE id_praktik = " . $_POST['id_praktik'];
+
+            // echo $sql_insert_inv . "<br>";
+            $conn->query($sql_insert_inv);
+
+            $sql_jurPrak = "SELECT * FROM tb_praktik ";
+            $sql_jurPrak .= " WHERE id_praktik = " . $_POST['id_praktik'];
+            $q_jurPrak = $conn->query($sql_jurPrak);
+            $d_jurPrak = $q_jurPrak->fetch(PDO::FETCH_ASSOC);
+
+            if ($d_jurPrak['id_jurusan_pdd'] != 1) {
+                $status_praktik = "INV";
+            } else {
+                $status_praktik = "DTR_KED";
+            }
+
+            //SQL ubah status praktik
+            $sql_ubah_status_praktik = "UPDATE tb_praktik
+            SET status_cek_praktik = '$status_praktik'
+            WHERE id_praktik = " . $_POST['id_praktik'];
+
+            // echo $sql_ubah_status_praktik . "<br>";
+            $conn->query($sql_ubah_status_praktik);
+
+        ?>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        allowOutsideClick: false,
+                        // isDismissed: false,
+                        icon: 'success',
+                        title: '<span class"text-xs"><b>DATA INVOICE</b><br>Berhasil Tersimpan',
+                        showConfirmButton: false,
+                        html: '<a href="?prk=<?php echo $_GET['prk']; ?>" class="btn btn-outline-primary">OK</a>',
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    }).then(
+                        function() {
+                            document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
+                        }
+                    );
+                });
+            </script>
     <?php
         }
     }

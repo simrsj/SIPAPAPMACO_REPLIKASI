@@ -3,11 +3,15 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
 //cari data mess
-$sql_mess = "SELECT * FROM tb_mess
-JOIN tb_tarif_satuan ON tb_mess.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan
-JOIN tb_tarif_jenis ON tb_mess.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis
-WHERE id_mess = " . $_POST['id_mess'];
+$sql_mess = "SELECT * FROM tb_mess";
+$sql_mess .= " JOIN tb_tarif_satuan ON tb_mess.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan ";
+$sql_mess .= " JOIN tb_tarif_jenis ON tb_mess.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
+$sql_mess .= " WHERE id_mess = " . $_POST['id_mess'];
 $d_mess = $conn->query($sql_mess)->fetch(PDO::FETCH_ASSOC);
 
 //cari data praktik

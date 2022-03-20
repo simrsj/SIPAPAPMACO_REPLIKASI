@@ -41,7 +41,7 @@
                     akan di <span class="text-success font-weight-bold">AKTIF</span>-kan oleh <b>ADMIN</b> sesuai dengan tanggal mulai praktiknya<br><br>
 
                     <span class="badge badge-success text-md">AKTIF</span><br>
-                    Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span>, <span class="text-warning font-weight-bold">Data Tarif</span> akan di inputakan oleh <b>ADMIN</b><br><br>
+                    Parktikan sedang <span class="text-success font-weight-bold">AKTIF</span>, <span class="text-warning font-weight-bold">Data Tarif</span> akan di inputkan oleh <b>ADMIN</b><br><br>
 
                     <span class="badge badge-warning text-md">DATA TARIF</span><br>
                     <span class="font-weight-bold text-warning">DATA TARIF </span> sudah diinputkan oleh <b>ADMIN</b> dan segera lakukan <span class="font-weight-bold text-danger">PEMBAYARAN</span><br><br>
@@ -169,7 +169,7 @@
                 </div>
             </div>
         <?php
-        } elseif ($d_praktik['status_cek_praktik'] == "AKV" || $d_praktik['status_cek_praktik'] == "AKV_PPDS") {
+        } elseif ($d_praktik['status_cek_praktik'] == "AKV" || $d_praktik['status_cek_praktik'] == "AKV_PPDS" || $d_praktik['status_cek_praktik'] == "DTR_KED_INV") {
         ?>
             <span class="badge badge-success text-md">AKTIF</span>
         <?php
@@ -307,11 +307,10 @@
             </div>
         </div>
     <?php
-    } elseif ($d_praktik['status_cek_praktik'] == "AKV") {
+    } elseif ($d_praktik['status_cek_praktik'] == "AKV" || $d_praktik['status_cek_praktik'] == "DTR_KED_INV") {
     ?>
-        <span class="badge badge-primary text-xs">
-            Proses Praktik sedang belangsung
-            <hr> Proses Pengisian Tarif
+        <span class="badge badge-primary text-md">
+            Proses <br> Praktik dan <span class="badge badge-warning text-md">Isi Tarif</span>
         </span>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "SLS") {

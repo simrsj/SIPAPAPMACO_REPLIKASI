@@ -138,7 +138,7 @@ while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
 
 
 $sql_update_status_praktik = " UPDATE tb_praktik
-SET status_cek_praktik = 'DTR_KED'
+SET status_cek_praktik = 'DTR_KED_INV'
 WHERE id_praktik = $id_praktik";
 
 echo $sql_update_status_praktik;

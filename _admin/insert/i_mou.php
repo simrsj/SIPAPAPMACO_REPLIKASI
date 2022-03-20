@@ -3,15 +3,10 @@ if (isset($_POST['simpan_mou'])) {
 
     //mencari data id_mou yg belum ada
     $no = 1;
-    $sql = "SELECT id_mou FROM tb_mou ORDER BY id_mou ASC";
+    $sql = "SELECT id_mou FROM tb_mou ORDER BY id_mou DESC";
     $q = $conn->query($sql);
-    while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
-        if ($no != $d['id_mou']) {
-            $no = $d['id_mou'] + 1;
-            break;
-        }
-        $no++;
-    }
+    $d = $q->fetch(PDO::FETCH_ASSOC);
+    $no = $d['id_mou'] + 1;
 
     if ($_FILES['file_mou']['size'] > 0) {
         //ubah Nama File PDF
@@ -52,6 +47,7 @@ if (isset($_POST['simpan_mou'])) {
         }
     }
 
+    $tgl_selesai = date('Y-m-d', strtotime($_POST['tgl_mulai_mou'] . ' + 3 years'));
     $sql_insert_mou = " INSERT INTO tb_mou (
             id_mou, 
             id_institusi,
@@ -60,24 +56,20 @@ if (isset($_POST['simpan_mou'])) {
             no_rsj_mou, 
             no_institusi_mou,
             id_jurusan_pdd,
-            id_spesifikasi_pdd,
+            id_profesi_pdd,
             id_jenjang_pdd,
-            id_akreditasi,
-            file_mou,
-            ket_mou
+            file_mou
         ) VALUE (
             '" . $no . "',
             '" . $_POST['id_institusi'] . "',
             '" . $_POST['tgl_mulai_mou'] . "',
-            '" . $_POST['tgl_selesai_mou'] . "',        
+            '" . $tgl_selesai . "',        
             '" . $_POST['no_rsj_mou'] . "',
             '" . $_POST['no_institusi_mou'] . "',
             '" . $_POST['id_jurusan_pdd'] . "',
-            '" . $_POST['id_spesifikasi_pdd'] . "',
+            '" . $_POST['id_profesi_pdd'] . "',
             '" . $_POST['id_jenjang_pdd'] . "',
-            '" . $_POST['id_akreditasi'] . "',
-            '" . $link_file_mou . "',
-            '" . $_POST['ket_mou'] . "'
+            '" . $link_file_mou . "'
         )";
 
 
@@ -124,26 +116,22 @@ if (isset($_POST['simpan_mou'])) {
                                 ?>
                             </select>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             No. MoU RSJ<span style="color:red">*</span><br>
                             <input class="form-control" type="text" name="no_rsj_mou" required>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             No. MoU Institusi <span style="color:red">*</span><br>
                             <input class="form-control" type="text" name="no_institusi_mou" required>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             Tanggal Mulai MoU<span style=" color:red">*</span><br>
                             <input class="form-control" type="date" name="tgl_mulai_mou" required>
-                        </div>
-                        <div class="col-sm-3">
-                            File MoU <br>
-                            <input type="file" accept="application/pdf" name="file_mou">
                         </div>
                     </div>
                     <hr>
 
-                    <!-- Jurusan, Spesifikasi, Jenjang, dan Akreditasi -->
+                    <!-- Jurusan, profesi, Jenjang, dan Akreditasi -->
                     <div class="row">
                         <div class="col-sm-3">
                             Jurusan Pendidikan <span style="color:red">*</span><br>
@@ -160,14 +148,14 @@ if (isset($_POST['simpan_mou'])) {
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            Spesifikasi Pendidikan <span style="color:red">*</span><br>
-                            <select class="form-control js-example-placeholder-single" name="id_spesifikasi_pdd" required>
+                            Profesi Pendidikan <span style="color:red">*</span><br>
+                            <select class="form-control js-example-placeholder-single" name="id_profesi_pdd" required>
                                 <option value="">-- Pilih --</option>
                                 <?php
-                                $x_spek = $conn->query("SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC");
+                                $x_spek = $conn->query("SELECT * FROM tb_profesi_pdd order by nama_profesi_pdd ASC");
                                 while ($d_spek = $x_spek->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
-                                    <option value="<?php echo $d_spek['id_spesifikasi_pdd']; ?> "><?php echo $d_spek['nama_spesifikasi_pdd']; ?></option>
+                                    <option value="<?php echo $d_spek['id_profesi_pdd']; ?> "><?php echo $d_spek['nama_profesi_pdd']; ?></option>
                                 <?php
                                 }
                                 ?>
@@ -189,18 +177,8 @@ if (isset($_POST['simpan_mou'])) {
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            Akreditasi<span style="color:red">*</span><br>
-                            <select class="form-control js-example-placeholder-single" name="id_akreditasi" required>
-                                <option value="">-- Pilih --</option>
-                                <?php
-                                $x_akreditasi = $conn->query("SELECT * FROM tb_akreditasi");
-                                while ($d_akreditasi = $x_akreditasi->fetch(PDO::FETCH_ASSOC)) {
-                                ?>
-                                    <option value="<?php echo $d_akreditasi['id_akreditasi']; ?> "><?php echo $d_akreditasi['nama_akreditasi']; ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
+                            File MoU <br>
+                            <input type="file" accept="application/pdf" name="file_mou">
                         </div>
                     </div>
                     <hr>

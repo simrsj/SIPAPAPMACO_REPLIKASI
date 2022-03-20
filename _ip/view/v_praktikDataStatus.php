@@ -31,7 +31,8 @@
                     Tempat Sudah Dipilih, dilanjutkan Pilih <span class="font-weight-bold text-warning">MESS/PEMONDOKAN</span> oleh <b>ADMIN</b><br><br>
 
                     <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span><br>
-                    MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, dilanjutkan Melakukan Proses <span class="font-weight-bold text-danger">PEMBAYARAN</span>
+                    MESS/PEMONDOKAN Sudah didaftarkan oleh Admin, <br>Tunggu <span class="font-weight-bold text-primary">Proses Cek Tarif</span> oleh <b>ADMIN</b>. <br>
+                    dilanjutkan Melakukan Proses <span class="font-weight-bold text-danger">PEMBAYARAN</span>
                     <br><br>
 
                     <span class="badge badge-danger text-md">PEMBAYARAN</span><br>
@@ -102,6 +103,10 @@
             </span>
         <?php
         } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+        ?>
+            <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
+        <?php
+        } elseif ($d_praktik['status_cek_praktik'] == "INV") {
         ?>
             <span class="badge badge-warning text-md">MESS/PEMONDOKAN</span>
             <hr>
@@ -224,6 +229,10 @@
         <span class="badge badge-primary text-md">Proses Pemilihan MESS</span>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
+    ?>
+        <span class="badge badge-primary text-md">Proses Cek Tarif</span>
+    <?php
+    } elseif ($d_praktik['status_cek_praktik'] == "INV") {
     ?>
         <b>PLIH : </b><br>
         <a class="btn btn-outline-danger btn-sm" href="?prk=<?php echo $_GET['prk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>

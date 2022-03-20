@@ -361,7 +361,7 @@ if ($_GET['prk'] == 'ked') {
             var nama_koordinator = document.getElementById("nama_koordinator").value;
             var email_koordinator = document.getElementById("email_koordinator").value;
             var telp_koordinator = document.getElementById("telp_koordinator").value;
-            var makan = document.getElementById("telp_koordinator").value;
+            // var makan = document.getElementById("makan_mess").value;
 
             //Notif Bila tidak diisi
             if (
@@ -773,7 +773,17 @@ if ($_GET['prk'] == 'ked') {
                                                 title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                                 showConfirmButton: false,
                                                 html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
-                                            });
+                                                timer: 5000,
+                                                timerProgressBar: true,
+                                                didOpen: (toast) => {
+                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                }
+                                            }).then(
+                                                function() {
+                                                    document.location.href = path;
+                                                }
+                                            );
                                         };
                                         xmlhttp_path.open("GET", "_ip/insert/i_praktikPath.php?jur=" + jur,
                                             true

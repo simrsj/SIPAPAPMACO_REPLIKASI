@@ -10,7 +10,21 @@ $id = $_GET['ib'];
         </div>
     </div>
     <div class="row">
+        <?php
 
+        $id_praktik = $_GET['ib'];
+        // echo $id_praktik . "<br>";
+
+        #data tarif pilih
+        $sql_praktik = "SELECT * FROM tb_tarif_pilih ";
+        $sql_praktik .= " JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik";
+        $sql_praktik .= " WHERE tb_praktik.id_praktik = '" . $id_praktik . "'";
+        $sql_praktik .= " ORDER BY nama_jenis_tarif_pilih ASC";
+
+        $q_praktik = $conn->query($sql_praktik);
+        $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
+        // echo $sql_praktik;
+        ?>
         <!-- Data Rincian Pembayaran Chart -->
         <div class="col-md-12">
             <div class="card shadow mb-4">
@@ -19,21 +33,13 @@ $id = $_GET['ib'];
                         Rincian Pembayaran (INVOICE)
                     </div>
 
-                    <a class="btn btn-outline-success btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $_GET['ib']; ?>" title="Invoice" target="_blank"><i class="fas fa-file-download"></i> DOWNLOAD INVOICE</a>
+                    <a class="btn btn-outline-success btn-sm" href="<?php echo $d_praktik['fileInv_praktik']; ?>" title="Invoice" target="_blank">
+                        <i class="fas fa-file-download"></i> DOWNLOAD INVOICE
+                    </a>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <?php
-                    $id_praktik = $_GET['ib'];
-                    // echo $id_praktik . "<br>";
-
-                    #data tarif pilih
-                    $sql_praktik = "SELECT * FROM tb_tarif_pilih
-                        JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
-                        WHERE tb_praktik.id_praktik = '" . $id_praktik . "'
-                        ORDER BY nama_jenis_tarif_pilih ASC";
-
-                    // echo $sql_praktik;
 
                     $q_praktik = $conn->query($sql_praktik);
 
