@@ -1,1 +1,1 @@
-<a href="./_print/p_praktikInv.php" class="btn btn-primary btn-xs" target="_blank">invoice</a>
+<a href="./_print/p_praktikNilaiKep.php" class="btn btn-primary btn-xs" target="_blank">invoice</a>

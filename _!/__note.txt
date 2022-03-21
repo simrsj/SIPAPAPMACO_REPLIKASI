@@ -41,7 +41,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Perbaikan Tombol Cetak Invoice, Perbaikan Modul Tambah dan Ubah MoU ADMIN"
+git commit -a -m "Progres Tombol Cetak Invoice"
 git pull
 git push
 
