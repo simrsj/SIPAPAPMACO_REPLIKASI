@@ -189,12 +189,16 @@ $html .= '
         style="text-align: justify;
         text-justify: inter-word;
         ">
-            Menindaklanjuti surat dari ' . ucwords(strtolower($d_praktik['nama_institusi'])) . ', Nomor: ' . $d_praktik['no_surat_praktik'] . ' pada tanggal ' . tanggal($d_praktik['tgl_input_praktik']) . '
-            perihal Permohonan <span style="color: red">Izin Praktik Orientasi Klinik Program Studi Sarjana Keperawatan</span>.
-            Pada dasarnya kami dapat menerima Permohonan Praktik Lapangan tersebut
-            untuk <b>' . $d_praktik['jumlah_praktik'] . '</b> orang <span style="color: red">praktikan </span> pada tanggal <b>' . tanggal($d_praktik['tgl_mulai_praktik']) . ' sampai dengan ' . tanggal($d_praktik['tgl_selesai_praktik']) . '.</b> <br>
-            Sesuai Peraturan Gubernur Jawa Barat Nomor 15 Tahun 2020 tentang Tarif Layanan Unit Pelaksanaan Teknis Daerah Rumah Sakit Jiwa,
-            maka Rincian Anggaran Biaya yang harus Saudara penuhi adalah sebagai berikut :
+            <div style="
+            text-indent: 0.3in;
+            ">
+                Menindaklanjuti surat dari ' . ucwords(strtolower($d_praktik['nama_institusi'])) . ', Nomor: ' . $d_praktik['no_surat_praktik'] . ' pada tanggal ' . tanggal($d_praktik['tgl_input_praktik']) . 'perihal Permohonan <span style="color: red">Izin Praktik Orientasi Klinik Program Studi Sarjana Keperawatan</span>. Pada dasarnya kami dapat menerima Permohonan Praktik Lapangan tersebut untuk <b>' . $d_praktik['jumlah_praktik'] . '</b> orang <span style="color: red">praktikan </span> pada tanggal <b>' . tanggal($d_praktik['tgl_mulai_praktik']) . ' sampai dengan ' . tanggal($d_praktik['tgl_selesai_praktik']) . '.</b> <br>
+            </div>
+            <div style="
+            text-indent: 0.3in;
+            ">
+                Sesuai Peraturan Gubernur Jawa Barat Nomor 15 Tahun 2020 tentang Tarif Layanan Unit Pelaksanaan Teknis Daerah Rumah Sakit Jiwa, maka Rincian Anggaran Biaya yang harus Saudara penuhi adalah sebagai berikut :
+            </div>
         </td>
     </tr>
 </table>
@@ -255,6 +259,7 @@ $html .= '
         <td 
         style="text-align: justify;
         text-justify: inter-word;
+        text-indent: 0.5in;
         ">
             Perlu kami informasikan pembayaran ditransfer pada Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD) 
             dengan Nomor: <b>BJB-0063028738002</b>. Bukti transfer dapat dikirim melaui email  <u>diklit.rsj.jabarprov@gmail.com</u> 
