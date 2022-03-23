@@ -1,11 +1,9 @@
 <?php
-// include('koneksi.php');
-$koneksi = mysqli_connect("localhost", "root", "simrs12345", "db_sm");
 
+# --------------------------------------------------------------------------- CONNECTION
 $servername = "localhost";
 $database = "db_sm";
 $username = "root";
-// $password = "";
 $password = "simrs12345";
 
 try {
@@ -21,7 +19,71 @@ try {
     echo "Connection failed: " . $e->getMessage();
 }
 
+# --------------------------------------------------------------------------- EXC. DATABASE
+$sql_praktik = "SELECT * FROM tb_praktik";
+$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+$sql_praktik .= " WHERE id_praktik = 2";
+$q_praktik = $conn->query($sql_praktik);
+$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 
+$sql_getJenisKegiatan = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
+$sql_getJenisKegiatan .= " WHERE id_praktik = 2 AND nama_jenis_tarif_pilih != 'Ujian'";
+$sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
+$q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
+
+# --------------------------------------------------------------------------- GET VARIABLE
+
+//logo Gambar
+$img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
+
+//perihal
+if ($d_praktik['id_jurusan_pdd'] == 1) {
+    $perihal = "Praktik Kedokteran Jiwa";
+} elseif ($d_praktik['id_jurusan_pdd'] == 2) {
+    if ($d_praktik['id_profesi_pdd'] != 0) {
+        $perihal = "Kerja Profesi Apoteker (PKPA)";
+    } else {
+        $perihal = "Praktik Keperawatan Jiwa";
+    }
+} elseif ($d_praktik['id_jurusan_pdd'] == 3) {
+    if ($d_praktik['id_profesi_pdd'] != 0) {
+        $perihal = "Praktik Program Studi Profesi Psikologi (PSPP)";
+    } else {
+        $perihal = "Praktik Psikologi";
+    }
+} elseif ($d_praktik['id_jurusan_pdd'] == 4) {
+    $perihal = "Praktik Informasi Teknologi";
+} elseif ($d_praktik['id_jurusan_pdd'] == 5) {
+    if ($d_praktik['id_profesi_pdd'] != 0) {
+        $perihal = "Praktik Kerja Profesi Apoteker (PKPA)";
+    } else {
+        $perihal = "Praktik Farmasi";
+    }
+} elseif ($d_praktik['id_jurusan_pdd'] == 6) {
+    $perihal = "Pekerja Sosial";
+} elseif ($d_praktik['id_jurusan_pdd'] == 7) {
+    $perihal = "Kesehatan Lingkungan";
+} elseif ($d_praktik['id_jurusan_pdd'] == 8) {
+    $perihal = "Rekam Medis";
+}
+
+//tembusan
+if ($d_praktik['id_institusi'] == 19) {
+    $tembusan = '
+        Tembusan :
+        <div style="text-indent: 0.3in;">1. Direktur Utama RS Immanuel</div>
+        <div style="text-indent: 0.3in;">2. Bagian Keuangan RS Jiwa</div>
+    ';
+} else {
+    $tembusan = '
+    Tembusan :
+    <div style="text-indent: 0.3in;">1. Bagian Keuangan RS Jiwa</div>
+    ';
+}
+
+# --------------------------------------------------------------------------- FUNCTION
+
+//tanggal Contoh : 23 Maret 2022
 function tanggal($tanggal)
 {
     $bulan = array(
@@ -40,80 +102,68 @@ function tanggal($tanggal)
     );
     $pecahkan = explode('-', $tanggal);
 
-    // variabel pecahkan 0 = tanggal
-    // variabel pecahkan 1 = bulan
-    // variabel pecahkan 2 = tahun
-
     return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
 
+# --------------------------------------------------------------------------- LIB. DOMPDF
 require_once("../vendor/dompdf/autoload.inc.php");
-// def("DOMPDF_ENABLE_REMOTE", false);
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
-// def("DOMPDF_ENABLE_REMOTE", false);
-// instantiate and use the dompdf class
-// $dompdf = new Dompdf();
+
 $options = new Options();
-$options->set('isRemoteEnabled', true);
+$options->set('defaultFont', 'Courier');
 $dompdf = new Dompdf($options);
-// $dompdf = new Dompdf();
-// $dompdf = $dompdf->set_option('isRemoteEnabled', TRUE);
-
-$img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
-
-$css_sbAdmin2 =  $_SERVER['DOCUMENT_ROOT'] . '/SM/css/sb-admin-2.min.css';
-$css_dataTables =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/datatables/dataTables.bootstrap4.min.css';
-$css_custom =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/!custom/cssCustom.css';
-
-$js_bootstrap =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/bootstrap/js/bootstrap.bundle.min.js';
-$js_jquery =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/jquery-easing/jquery.easing.min.js';
-$js_sbAdmin2 =  $_SERVER['DOCUMENT_ROOT'] . '/SM/js/sb-admin-2.min.js';
-$js_dataTables =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/datatables/jquery.dataTables.min.js';
-$js_dataTables_bs =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/datatables/dataTables.bootstrap4.min.js';
-$js_custom =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/!custom/jsCustom.js';
-
-$sql_praktik = "SELECT * FROM tb_praktik";
-$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-$sql_praktik .= " WHERE id_praktik = 2";
-$q_praktik = $conn->query($sql_praktik);
-$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
-
-// $dompdf->set('isRemoteEnabled', true);
-$jenis_kegiatan = mysqli_query($koneksi, "select nama_jenis_tarif_pilih from tb_tarif_pilih where id_praktik = 2 AND nama_jenis_tarif_pilih != 'Ujian' GROUP BY nama_jenis_tarif_pilih ");
-
+# --------------------------------------------------------------------------- HTML
 
 //tag awal html
 $html = '
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    ';
 
-$html .= '    
-<style>
-  @page { 
-    size: 21.5cm 33cm potrait; 
-    margin: 0.5cm 1cm 0.5cm 2cm ; 
-    }
-</style>
-';
+    <style>
+    @page { 
+        size: 21.5cm 33cm potrait; 
+        margin: 1cm 1cm 0cm 2cm ; 
+        }
+        @font-face {
+            font-family: "source_sans_proregular";           
+            src: local("Source Sans Pro"), url("fonts/sourcesans/sourcesanspro-regular-webfont.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
 
+        }        
+        body{
+            font-family: "source_sans_proregular", Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;            
+        }
+        header {
+            position: fixed;
+        }
+        main {
+            margin-top: 3.3cm;
+        }
+        footer {
+            position: fixed; 
+            bottom: 0cm; 
+            left: 0cm; 
+            right: 0cm;
+            height : 2cm;
+            vertical-align: bottom;
+            font-size: 14.667px;
+            line-height: 15px;
+            // border-style:solid;
+        }
+        .s {
+            padding: 3px 3px 3px 3px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 
-$html .= '
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="' . $css_sbAdmin2 . '" rel="stylesheet">
-    <link href="' . $css_dataTables . '" rel="stylesheet">
-    <link href="' . $css_custom . '" rel="stylesheet">
-
-    <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-';
-
-$html .= '
 </head>
 ';
 
@@ -124,6 +174,7 @@ $html .= '
 
 //tag kop surat
 $html .= '
+<header>
 <table width="100%" border=0 >
     <tr>
         <th class="text-center">
@@ -135,7 +186,7 @@ $html .= '
                 <span style="font-size: 21.333px;"> DINAS KESEHATAN</span><br>
                 <span style="font-weight: bold; font-size: 24px;"> RUMAH SAKIT JIWA</span><br>
             </span>
-            <span style="line-height: 15px">
+            <span style="line-height: 13px">
                 <span style="font-size: 13.333px;">
                 Jalan Kolonel Masturi KM. 7 – Cisarua Telepon: (022) 2700260<br>
                 Fax: (022) 2700304 Website: www.rsj.jabarprov.go.id email: rsj@jabarprov.go.id<br>
@@ -146,11 +197,13 @@ $html .= '
     </tr>
 </table>
 <hr>
+</header>
 ';
 
 //Tag judul Surat
 $html .= '
-<table border="0" style="font-size: 14.667px; line-height: 20px">
+<main>
+<table border="0" style="font-size: 14.667px; line-height: 18px">
     <tr>
         <td colspan="2"></td>
         <td colspan="2">Kab Bandung Barat, ' . tanggal(date("Y-m-d")) . '</td>
@@ -163,16 +216,17 @@ $html .= '
             Perihal<br>
         </td>
         <td width="350px" style="vertical-align: text-top;">
-            : 420/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Diklat-RSJ/' . date("Y") . '<br>
+            : 420/<span style="color:red">NOMOR</span>/Diklat-RSJ/' . date("Y") . '<br>
             : Biasa<br>
             : -<br>
-            : Praktik <span style="color: red">{Keperawatan Jiwa}</span><br>
+            : ' . $perihal . '<br>
         </td>
         <td style="vertical-align: text-top; width : 15px;">
             Yth.
         </td>
-        <td style="vertical-align: text-top;">
-        <span style="color: red">{Dekan Fakultas Ilmu Keperawatan Universitas Adhirajarasa Reswara Sanjaya} </span><br>
+        <td style="vertical-align: text-top; width : 210px;">
+        <span style="color: red">{Dekan Fakultas Ilmu Keperawatan}</span><br>
+        ' . ucwords(strtolower($d_praktik['nama_institusi'])) . '<br>
             di <br>
             &nbsp;&nbsp;&nbsp;Tempat
         </td>
@@ -180,8 +234,9 @@ $html .= '
 </table>
 ';
 
+//isi
 $html .= '
-<table border="0" style="font-size: 14.667px; line-height: 20px">
+<table border="0" style="font-size: 14.667px; line-height: 18px">
     <tr>
         <td width="67px">
         </td>
@@ -192,7 +247,7 @@ $html .= '
             <div style="
             text-indent: 0.3in;
             ">
-                Menindaklanjuti surat dari ' . ucwords(strtolower($d_praktik['nama_institusi'])) . ', Nomor: ' . $d_praktik['no_surat_praktik'] . ' pada tanggal ' . tanggal($d_praktik['tgl_input_praktik']) . ' perihal Permohonan <span style="color: red">Izin Praktik Orientasi Klinik Program Studi Sarjana Keperawatan</span>. Pada dasarnya kami dapat menerima Permohonan Praktik Lapangan tersebut untuk <b>' . $d_praktik['jumlah_praktik'] . '</b> orang praktikan pada tanggal <b>' . tanggal($d_praktik['tgl_mulai_praktik']) . ' sampai dengan ' . tanggal($d_praktik['tgl_selesai_praktik']) . '.</b> <br>
+                Menindaklanjuti surat dari ' . ucwords(strtolower($d_praktik['nama_institusi'])) . ', Nomor: ' . $d_praktik['no_surat_praktik'] . ' pada tanggal ' . tanggal($d_praktik['tgl_input_praktik']) . ' perihal Permohonan Izin ' . $perihal . '. Pada dasarnya kami dapat menerima Permohonan Praktik Lapangan tersebut untuk <b>' . $d_praktik['jumlah_praktik'] . '</b> orang praktikan pada tanggal <b>' . tanggal($d_praktik['tgl_mulai_praktik']) . ' sampai dengan ' . tanggal($d_praktik['tgl_selesai_praktik']) . '.</b> <br>
             </div>
             <div style="
             text-indent: 0.3in;
@@ -206,40 +261,48 @@ $html .= '
 
 //tag buka tabel invoice
 $html .= '
-<table>
+<table >
 <tr>
 <td width="67px">
 </td>
 <td>
-<table border=1 width="100%" style="font-size: 14.667px;">
-        <tr>
-            <th>NO</th>
-            <th>JENIS KEGIATAN</th>
-            <th>FREK </th>
-            <th>MHS</th>
-            <th>TARIF (Rp)</th>
-            <th>SATUAN</th>
-            <th>JUMLAH (Rp)</th>
-        </tr>';
+<table width="100%" style="font-size: 14.667px;" class="s">
+    <tr class="s" style="font-size: 14.667px; background-color: #cfcfcf;">
+        <th class="s">NO</th>
+        <th class="s">JENIS KEGIATAN</th>
+        <th class="s">FREK </th>
+        <th class="s">MHS</th>
+        <th class="s">TARIF (Rp)</th>
+        <th class="s">SATUAN</th>
+        <th class="s">JUMLAH (Rp)</th>
+    </tr>';
 $no = 1;
 $jt = 0;
-while ($rows = mysqli_fetch_array($jenis_kegiatan)) {
-    $html .= "<tr>
-                <td>" . $no . "</td>
-                <td colspan = '6'>" . $rows['nama_jenis_tarif_pilih'] . "</td>
-                </tr>";
-    $query = mysqli_query($koneksi, "select * from tb_tarif_pilih where id_praktik = 2 and nama_jenis_tarif_pilih='" . $rows['nama_jenis_tarif_pilih'] . "' AND nama_jenis_tarif_pilih != 'Ujian'");
-    while ($row = mysqli_fetch_array($query)) {
-        $html .= "<tr>
-                        <td>  </td>
-                        <td>" . $row['nama_tarif_pilih'] . "</td>
-                        <td style='text-align: center;'>" . $row['frekuensi_tarif_pilih'] . "</td>
-                        <td style='text-align: center;'>" . $row['kuantitas_tarif_pilih'] . "</td>
-                        <td style='text-align: right;'>" . number_format($row['nominal_tarif_pilih'], 0, ",", ".") . "</td>
-                        <td>" . $row['nama_satuan_tarif_pilih'] . "</td>
-                        <td style='text-align: right;'>" . number_format($row['jumlah_tarif_pilih'], 0, ",", ".") . "</td>
-                    </tr>";
-        $jt += $row['jumlah_tarif_pilih'];
+while ($d_getJenisKegiatan = $q_getJenisKegiatan->fetch(PDO::FETCH_ASSOC)) {
+    $html .= '
+    <tr class="s">
+        <td class="s"style="text-align: center;"><b>' . $no . '</b></td>
+        <td class="s" colspan =6 style="text-transform: uppercase;"><b>' . $d_getJenisKegiatan["nama_jenis_tarif_pilih"] . '</b></td>
+    </tr>
+    ';
+
+
+    $sql_getTarif = "SELECT * FROM tb_tarif_pilih ";
+    $sql_getTarif .= " WHERE id_praktik = 2 and nama_jenis_tarif_pilih='" . $d_getJenisKegiatan['nama_jenis_tarif_pilih'] . "'";
+    $q_getTarif = $conn->query($sql_getTarif);
+    while ($d_getTarif = $q_getTarif->fetch(PDO::FETCH_ASSOC)) {
+        $html .= '
+        <tr  class="s">
+            <td class="s">  </td>
+            <td class="s">' . $d_getTarif["nama_tarif_pilih"] . '</td>
+            <td class="s" style="text-align: center;">' . $d_getTarif["frekuensi_tarif_pilih"] . '</td>
+            <td class="s" style="text-align: center;">' . $d_getTarif["kuantitas_tarif_pilih"] . '</td>
+            <td class="s" style="text-align: right;">' . number_format($d_getTarif["nominal_tarif_pilih"], 0, ",", ".") . '</td>
+            <td class="s">' . $d_getTarif["nama_satuan_tarif_pilih"] . '</td>
+            <td class="s" style="text-align: right;">' . number_format($d_getTarif["jumlah_tarif_pilih"], 0, ",", ".") . '</td>
+        </tr>
+        ';
+        $jt += $d_getTarif["jumlah_tarif_pilih"];
     }
     $no++;
 }
@@ -247,9 +310,9 @@ while ($rows = mysqli_fetch_array($jenis_kegiatan)) {
 //baris jumlah total tarif
 $html .= '
 <tr>
-<td colspan=6 style="text-align: right;"> <b>JUMLAH TOTAL : </b>
+<td class="s" colspan=6 style="text-align: right;"> <b>JUMLAH TOTAL</b>
 </td>
-<td style="text-align: right;"><b>' . number_format($jt, 0, ",", ".") . '</b></td>
+<td class="s" style="text-align: right;"><b>' . number_format($jt, 0, ",", ".") . '</b></td>
 </tr>
 ';
 
@@ -261,10 +324,9 @@ $html .= '
 </table>
 ';
 
-
 //tag akhir surat
 $html .= '
-<table border="0" style="font-size: 14.667px; line-height: 20px">
+<table border="0" style="font-size: 14.667px; line-height: 18px">
     <tr>
         <td width="67px">
         </td>
@@ -289,7 +351,7 @@ $html .= '
 
 //tag ttd surat
 $html .= '
-<table border="0" style="font-size: 14.667px; line-height: 20px">
+<table border="0" style="font-size: 14.667px; line-height: 18px">
     <tr>
         <td width="67px">
         </td>
@@ -304,17 +366,14 @@ $html .= '
         </td>
     </tr>
 </table>
+</main>
 ';
 
-//javascript
+//footer
 $html .= '
-<!-- JS -->
-<script src="' . $js_bootstrap . '"></script>
-<script src="' . $js_jquery . '"></script>
-<script src="' . $js_sbAdmin2 . '"></script>
-<script src="' . $js_dataTables . '"></script>
-<script src="' . $js_dataTables_bs . '"></script>
-<script src="' . $js_custom . '"></script>
+<footer>
+    <div>' . $tembusan . '</div>
+</footer>
 ';
 
 //tag tutup body

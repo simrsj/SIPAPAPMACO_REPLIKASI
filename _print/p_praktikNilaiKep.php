@@ -1,11 +1,9 @@
 <?php
-// include('koneksi.php');
-$koneksi = mysqli_connect("localhost", "root", "simrs12345", "db_sm");
 
+# --------------------------------------------------------------------------- CONNECTION
 $servername = "localhost";
 $database = "db_sm";
 $username = "root";
-// $password = "";
 $password = "simrs12345";
 
 try {
@@ -21,7 +19,55 @@ try {
     echo "Connection failed: " . $e->getMessage();
 }
 
+# --------------------------------------------------------------------------- EXC. DATABASE
+$sql_praktik = "SELECT * FROM tb_praktik";
+$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+$sql_praktik .= " WHERE id_praktik = 2";
+$q_praktik = $conn->query($sql_praktik);
+$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 
+$sql_getJenisKegiatan = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
+$sql_getJenisKegiatan .= " WHERE id_praktik = 2 ";
+$sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
+$q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
+
+# --------------------------------------------------------------------------- GET VARIABLE
+
+//logo Gambar
+$img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
+
+//perihal
+if ($d_praktik['id_jurusan_pdd'] == 1) {
+    $perihal = "Praktik Kedokteran Jiwa";
+} elseif ($d_praktik['id_jurusan_pdd'] == 2) {
+    if ($d_praktik['id_profesi_pdd'] != 0) {
+        $perihal = "Kerja Profesi Apoteker (PKPA)";
+    } else {
+        $perihal = "Praktik Keperawatan Jiwa";
+    }
+} elseif ($d_praktik['id_jurusan_pdd'] == 3) {
+    if ($d_praktik['id_profesi_pdd'] != 0) {
+        $perihal = "Praktik Program Studi Profesi Psikologi (PSPP)";
+    } else {
+        $perihal = "Praktik Psikologi";
+    }
+} elseif ($d_praktik['id_jurusan_pdd'] == 4) {
+    $perihal = "Praktik Informasi Teknologi";
+} elseif ($d_praktik['id_jurusan_pdd'] == 5) {
+    if ($d_praktik['id_profesi_pdd'] != 0) {
+        $perihal = "Praktik Kerja Profesi Apoteker (PKPA)";
+    } else {
+        $perihal = "Praktik Farmasi";
+    }
+} elseif ($d_praktik['id_jurusan_pdd'] == 6) {
+    $perihal = "Pekerja Sosial";
+} elseif ($d_praktik['id_jurusan_pdd'] == 7) {
+    $perihal = "Kesehatan Lingkungan";
+} elseif ($d_praktik['id_jurusan_pdd'] == 8) {
+    $perihal = "Rekam Medis";
+}
+
+# --------------------------------------------------------------------------- FUNCTION
 function tanggal($tanggal)
 {
     $bulan = array(
@@ -40,80 +86,38 @@ function tanggal($tanggal)
     );
     $pecahkan = explode('-', $tanggal);
 
-    // variabel pecahkan 0 = tanggal
-    // variabel pecahkan 1 = bulan
-    // variabel pecahkan 2 = tahun
-
     return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
 }
 
+# --------------------------------------------------------------------------- LIB. DOMPDF
 require_once("../vendor/dompdf/autoload.inc.php");
-// def("DOMPDF_ENABLE_REMOTE", false);
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
-// def("DOMPDF_ENABLE_REMOTE", false);
-// instantiate and use the dompdf class
-// $dompdf = new Dompdf();
+
 $options = new Options();
 $options->set('isRemoteEnabled', true);
 $dompdf = new Dompdf($options);
-// $dompdf = new Dompdf();
-// $dompdf = $dompdf->set_option('isRemoteEnabled', TRUE);
 
-$img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
 
-$css_sbAdmin2 =  $_SERVER['DOCUMENT_ROOT'] . '/SM/css/sb-admin-2.min.css';
-$css_dataTables =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/datatables/dataTables.bootstrap4.min.css';
-$css_custom =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/!custom/cssCustom.css';
-
-$js_bootstrap =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/bootstrap/js/bootstrap.bundle.min.js';
-$js_jquery =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/jquery-easing/jquery.easing.min.js';
-$js_sbAdmin2 =  $_SERVER['DOCUMENT_ROOT'] . '/SM/js/sb-admin-2.min.js';
-$js_dataTables =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/datatables/jquery.dataTables.min.js';
-$js_dataTables_bs =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/datatables/dataTables.bootstrap4.min.js';
-$js_custom =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/!custom/jsCustom.js';
-
-$sql_praktik = "SELECT * FROM tb_praktik";
-$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-$sql_praktik .= " WHERE id_praktik = 2";
-$q_praktik = $conn->query($sql_praktik);
-$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
-
-// $dompdf->set('isRemoteEnabled', true);
-$jenis_kegiatan = mysqli_query($koneksi, "select nama_jenis_tarif_pilih from tb_tarif_pilih where id_praktik = 2 GROUP BY nama_jenis_tarif_pilih ");
-
+# --------------------------------------------------------------------------- HTML
 
 //tag awal html
 $html = '
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    ';
 
-$html .= '    
-<style>
-  @page { 
-    size: 21.5cm 33cm potrait; 
-    margin: 0.5cm 1cm 0.5cm 2cm ; 
-    }
-</style>
-';
-
-
-$html .= '
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="' . $css_sbAdmin2 . '" rel="stylesheet">
-    <link href="' . $css_dataTables . '" rel="stylesheet">
-    <link href="' . $css_custom . '" rel="stylesheet">
-
-    <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-';
-
-$html .= '
+    <style>
+    @page {
+        size: 21.5cm 33cm potrait; 
+        margin: 0.5cm 1cm 0.5cm 2cm ; 
+        }
+    </style>
+    
 </head>
 ';
 
@@ -166,7 +170,7 @@ $html .= '
             : 420/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/Diklat-RSJ/2022<br>
             : Biasa<br>
             : -<br>
-            : Praktik <span style="color: red">{Keperawatan Jiwa}</span><br>
+            : Praktik <span style="color: red">' . $perihal . '</span><br>
         </td>
         <td style="vertical-align: text-top;">
             Yth.
@@ -220,25 +224,29 @@ $html .= '
         </tr>';
 $no = 1;
 
-while ($rows = mysqli_fetch_array($jenis_kegiatan)) {
+while ($d_getJenisKegiatan = $q_getJenisKegiatan->fetch(PDO::FETCH_ASSOC)) {
     $html .= "<tr>
                 <td width='67px'>
                 </td>
                 <td>" . $no . "</td>
-                <td colspan = '6'>" . $rows['nama_jenis_tarif_pilih'] . "</td>
+                <td colspan = '6'>" . $d_getJenisKegiatan['nama_jenis_tarif_pilih'] . "</td>
                 </tr>";
-    $query = mysqli_query($koneksi, "select * from tb_tarif_pilih where id_praktik = 2 and nama_jenis_tarif_pilih='" . $rows['nama_jenis_tarif_pilih'] . "'");
-    while ($row = mysqli_fetch_array($query)) {
+
+
+    $sql_getTarif = "SELECT * FROM tb_tarif_pilih ";
+    $sql_getTarif .= " WHERE id_praktik = 2 and nama_jenis_tarif_pilih='" . $d_getJenisKegiatan['nama_jenis_tarif_pilih'] . "'";
+    $q_getTarif = $conn->query($sql_getTarif);
+    while ($d_getTarif = $q_getTarif->fetch(PDO::FETCH_ASSOC)) {
         $html .= "<tr>
                         <td width='67px'>
                         </td>
                         <td>  </td>
-                        <td>" . $row['nama_tarif_pilih'] . "</td>
-                        <td>" . $row['frekuensi_tarif_pilih'] . "</td>
-                        <td>" . $row['kuantitas_tarif_pilih'] . "</td>
-                        <td>" . $row['nominal_tarif_pilih'] . "</td>
-                        <td>" . $row['nama_satuan_tarif_pilih'] . "</td>
-                        <td>" . $row['jumlah_tarif_pilih'] . "</td>
+                        <td>" . $d_getTarif['nama_tarif_pilih'] . "</td>
+                        <td>" . $d_getTarif['frekuensi_tarif_pilih'] . "</td>
+                        <td>" . $d_getTarif['kuantitas_tarif_pilih'] . "</td>
+                        <td>" . $d_getTarif['nominal_tarif_pilih'] . "</td>
+                        <td>" . $d_getTarif['nama_satuan_tarif_pilih'] . "</td>
+                        <td>" . $d_getTarif['jumlah_tarif_pilih'] . "</td>
                     </tr>";
     }
     $no++;
@@ -301,22 +309,13 @@ $html .= '
 </table>
 ';
 
-//javascript
-$html .= '
-<!-- JS -->
-<script src="' . $js_bootstrap . '"></script>
-<script src="' . $js_jquery . '"></script>
-<script src="' . $js_sbAdmin2 . '"></script>
-<script src="' . $js_dataTables . '"></script>
-<script src="' . $js_dataTables_bs . '"></script>
-<script src="' . $js_custom . '"></script>
-';
-
 //tag tutup body
 $html .= "</body>";
 
 //tag tutup html
 $html .= "</html>";
+
+# --------------------------------------------------------------------------- RENDER DOMPDF
 
 $dompdf->loadHtml($html);
 

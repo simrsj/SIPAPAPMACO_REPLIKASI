@@ -1,6 +1,0 @@
-{
-    "name": "rebuy/ezpdf",
-    "autoload": {
-        "classmap": ["src/"]
-    }
-}
