@@ -19,19 +19,7 @@ try {
     echo "Connection failed: " . $e->getMessage();
 }
 
-# --------------------------------------------------------------------------- EXC. DATABASE
-$sql_praktik = "SELECT * FROM tb_praktik";
-$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-$sql_praktik .= " WHERE id_praktik = 2";
-$q_praktik = $conn->query($sql_praktik);
-$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
-
-$sql_getJenisKegiatan = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
-$sql_getJenisKegiatan .= " WHERE id_praktik = 2 AND nama_jenis_tarif_pilih != 'Ujian'";
-$sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
-$q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
-
-# --------------------------------------------------------------------------- GET VARIABLE
+# --------------------------------------------------------------------------- EXC. DATABASE & GET VARIABLE
 
 //logo Gambar
 $img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
@@ -81,9 +69,20 @@ if ($d_praktik['id_institusi'] == 19) {
     ';
 }
 
+$sql_praktik = "SELECT * FROM tb_praktik";
+$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+$sql_praktik .= " WHERE id_praktik = " . $_POST['id'];
+$q_praktik = $conn->query($sql_praktik);
+$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
+
+$sql_getJenisKegiatan = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
+$sql_getJenisKegiatan .= " WHERE id_praktik = " . $_POST['id'] . " AND nama_jenis_tarif_pilih != 'Ujian' AND nama_jenis_tarif_pilih != 'Ujian'";
+$sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
+$q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
+
 # --------------------------------------------------------------------------- FUNCTION
 
-//tanggal Contoh : 23 Maret 2022
+//format tanggal Contoh : 23 Maret 2022
 function tanggal($tanggal)
 {
     $bulan = array(
@@ -114,6 +113,7 @@ use Dompdf\Options;
 $options = new Options();
 $options->set('defaultFont', 'Courier');
 $dompdf = new Dompdf($options);
+
 # --------------------------------------------------------------------------- HTML
 
 //tag awal html

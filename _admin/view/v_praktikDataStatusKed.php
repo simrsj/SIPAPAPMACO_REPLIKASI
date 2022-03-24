@@ -219,22 +219,30 @@
                         </button>
                     </div>
                     <div class="modal-body text-lg">
+                        Nomor Surat : <span class="text-danger">*</span><br>
+                        <input class="form-control" name="no_surat" id="no_surat" type="number" min="1" maxlength="4">
+                        <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_no_surat"></div>
+                        Kepada : <span class="text-danger">*</span><br>
+                        <input class="form-control" name="kepada" id="kepada">
+                        <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_kepada"></div>
+                        <br>
+                        <center>
+                            <button onclick="unggahInv(<?php echo $d_praktik['id_praktik']; ?>)" name="unduh_invoice" id="unduh_invoice" class="btn btn-outline-success btn-sm">
+                                <i class="fas fa-file-download"></i> Unduh Data Invoice
+                            </button>
+                        </center>
+                        <hr>
 
                         <form enctype="multipart/form-data" class="form-group" method="post" action="">
-                            <a href="./_print/p_praktikInv.php?id=<?php echo $d_praktik['id_praktik'] ?>" class="btn btn-outline-success" target="_blank" title="Cetak Invoice untuk ditandatangai (TTD Basah)">
-                                <i class="fas fa-file-download"></i> Unduh Data Invoice
-                            </a><br><br>
-
-
                             <h5>Unggah Invoice yg sudah ditandatangani: </h5><br>
                             <input type="file" name="file_invoice" id="file_invoice" accept="application/pdf" required>
                             <input type="hidden" name="id_praktik" id="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>">
                             <hr>
-                            <nav id="navbar-tarif" class="navbar justify-content-center">
-                                <button type="submit" name="simpan_invoice" class="nav-link btn btn-success btn-sm">
+                            <center>
+                                <button type="submit" name="simpan_invoiceasd" class="btn btn-outline-success btn-sm">
                                     <i class="fas fa-paper-plane"></i> Kirim Data Invoice
                                 </button>
-                            </nav>
+                            </center>
                         </form>
                     </div>
                 </div>

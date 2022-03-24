@@ -704,7 +704,6 @@ if (isset($_POST['simpan_bayar'])) {
             </div>
         </div>
     </div>
-
     <script>
         function valDataPraktikTarif_Y(id) {
             console.log("valDataPraktikTarif_Y");
@@ -1057,6 +1056,70 @@ if (isset($_POST['simpan_bayar'])) {
                     });
                 }
             })
+        }
+
+
+        function unggahInv(id) {
+            var noSurat = document.getElementById("no_surat").value;
+            var kepada = document.getElementById("kepada").value;
+
+            console.log("noSurat " + noSurat);
+            console.log("kepada " + kepada);
+            console.log("id " + id);
+
+            if (
+                noSurat == "" ||
+                kepada == ""
+            ) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: '<div class="text-center font-weight-bold text-uppercase">DATA WAJIB BELUM TERISI</div>'
+                });
+
+                //notif noSurat
+                if (noSurat == "") {
+                    document.getElementById("err_no_surat").innerHTML = "No Surat Harus diisi";
+                } else {
+                    document.getElementById("err_no_surat").innerHTML = "";
+                }
+
+                //notif kepada
+                if (kepada == "") {
+                    document.getElementById("err_kepada").innerHTML = "Kepada Harus diisi";
+                } else {
+                    document.getElementById("err_kepada").innerHTML = "";
+                }
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: "./_print/p_praktikInv.php?",
+                    data: {
+                        id: id,
+                        noSurat: noSurat,
+                        kepada: kepada
+                    },
+                    success: function(response) {
+                        document.getElementById("err_no_surat").value = "";
+                        document.getElementById("err_kepada").value = "";
+                    },
+                    error: function(response) {
+                        alert(response.responseText);
+                        console.log(response.responseText);
+                    }
+                });
+            }
         }
     </script>
 <?php

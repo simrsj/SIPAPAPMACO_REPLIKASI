@@ -675,13 +675,16 @@ if ($_GET['prk'] == 'ked') {
                 dataType: 'json',
                 success: function(response) {
                     // console.log("SUCCESS CEK VAL TGL");
+
+                    //notif jika jadwal dan-atau jumlah praktik melebihi kuota
                     if (response.ket == 'y') {
                         Swal.fire({
                             allowOutsideClick: false,
                             // isDismissed: false,
                             icon: 'error',
                             showConfirmButton: false,
-                            html: '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b><br>Silahkan Cek Kembali Informasi Jadwal Praktik<br><br>' +
+                            html: '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b>' +
+                                '<br>Silahkan Cek Kembali Informasi Jadwal Praktik<br><br>' +
                                 '<a href="?info_diklat" class="btn btn-outline-primary">Informasi Jadwal Praktik</a>',
                             timer: 15000,
                             timerProgressBar: true,
@@ -818,7 +821,7 @@ if ($_GET['prk'] == 'ked') {
                                         title: '<center>Pilih <b>MAKAN MESS</b></center>'
                                     });
                                     document.getElementById("err_makan_mess").innerHTML = "Pilih Makan Mess <br>";
-                                } //eksekusi simpadn data praktik dan pilih makan mess
+                                } //eksekusi simpan data praktik dan pilih makan mess
                                 else {
                                     var path = "";
                                     var data_praktik = $('#form_praktik').serializeArray();
@@ -884,7 +887,7 @@ if ($_GET['prk'] == 'ked') {
                                                     title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                                     showConfirmButton: false,
                                                     html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
-                                                    timer: 5000,
+                                                    timer: 100000,
                                                     timerProgressBar: true,
                                                     didOpen: (toast) => {
                                                         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -907,7 +910,6 @@ if ($_GET['prk'] == 'ked') {
                                         }
                                     });
                                 }
-
                             }
                         }
                     }

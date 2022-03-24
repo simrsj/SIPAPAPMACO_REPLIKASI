@@ -3,6 +3,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
+
 // --------------------------------------SIMPAN DATA PRAKTIK--------------------------------------------
 
 //mencari jenis jurusan
@@ -22,11 +27,9 @@ if ($_POST['id_jurusan_pdd'] == 1) {
 } else {
     $status_cek_praktik = "DPT";
 }
+
 //elsekusi jika selain kedokteran
 if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
-
-    $makan_mess = $_POST['makan_mess'];
-
     //cek materi_upip
     if ($_POST['materi_upip'] == 'y') {
         $materi_upip = 'y';
@@ -41,9 +44,15 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
         $materi_napza = 't';
     }
 } else {
-    $makan_mess = NULL;
     $materi_upip = NULL;
     $materi_napza = NULL;
+}
+
+//dengan dan tanpa makan mess
+if ($_POST['id_profesi_pdd'] != 1) {
+    $makan_mess = $_POST['makan_mess'];
+} else {
+    $makan_mess = NULL;
 }
 
 $sql_insert = "INSERT INTO tb_praktik (
@@ -143,7 +152,6 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
     $tgl_selesai_praktik = $_POST['tgl_selesai_praktik'];
     $jumlah_praktik = $_POST['jumlah_praktik'];
 
-
     //SQL menentukan tarif berdasarkan jenis jurusan
 
     $sql_tarif_jurusan = " SELECT * FROM tb_tarif";
@@ -183,7 +191,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
         }
         echo $kuantitas;
 
-        //eksekiso jiga salah satu materi dipilih (upip dan-atau napza)
+        //eksekusi jika salah satu materi dipilih (upip dan-atau napza)
         if ($d_tarif_jurusan['nama_tarif'] == 'Materi') {
             $ket_tarif = $d_tarif_jurusan['ket_tarif'];
 
