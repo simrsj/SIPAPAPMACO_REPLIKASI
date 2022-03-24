@@ -41,7 +41,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Progres Tombol Cetak Invoice"
+git commit -a -m "Progres Tombol Cetak Invoicea"
 git pull
 git push
 
