@@ -1,5 +1,12 @@
 <?php
 
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
+// echo "<pre>";
+// print_r($_GET);
+// echo "</pre>";
+
 # --------------------------------------------------------------------------- CONNECTION
 $servername = "localhost";
 $database = "db_sm";
@@ -21,8 +28,25 @@ try {
 
 # --------------------------------------------------------------------------- EXC. DATABASE & GET VARIABLE
 
+$sql_praktik = "SELECT * FROM tb_praktik";
+$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+$sql_praktik .= " WHERE id_praktik = " . $_GET['id'];
+$q_praktik = $conn->query($sql_praktik);
+$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
+
+$sql_getJenisKegiatan = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
+$sql_getJenisKegiatan .= " WHERE id_praktik = " . $_GET['id'] . " AND nama_jenis_tarif_pilih != 'Ujian' AND nama_jenis_tarif_pilih != 'Ujian'";
+$sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
+$q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
+
 //logo Gambar
 $img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
+
+//no surat
+$noSurat =  $_GET['ns'];
+
+//kepada
+$kepada =  $_GET['k'];
 
 //perihal
 if ($d_praktik['id_jurusan_pdd'] == 1) {
@@ -68,17 +92,6 @@ if ($d_praktik['id_institusi'] == 19) {
     <div style="text-indent: 0.3in;">1. Bagian Keuangan RS Jiwa</div>
     ';
 }
-
-$sql_praktik = "SELECT * FROM tb_praktik";
-$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-$sql_praktik .= " WHERE id_praktik = " . $_POST['id'];
-$q_praktik = $conn->query($sql_praktik);
-$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
-
-$sql_getJenisKegiatan = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
-$sql_getJenisKegiatan .= " WHERE id_praktik = " . $_POST['id'] . " AND nama_jenis_tarif_pilih != 'Ujian' AND nama_jenis_tarif_pilih != 'Ujian'";
-$sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
-$q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
 
 # --------------------------------------------------------------------------- FUNCTION
 
@@ -145,6 +158,7 @@ $html = '
         }
         main {
             margin-top: 3.3cm;
+            margin-top: 0cm;
         }
         footer {
             position: fixed; 
@@ -174,7 +188,7 @@ $html .= '
 
 //tag kop surat
 $html .= '
-<header>
+<!--header -->
 <table width="100%" border=0 >
     <tr>
         <th class="text-center">
@@ -197,7 +211,7 @@ $html .= '
     </tr>
 </table>
 <hr>
-</header>
+<!--/header-->
 ';
 
 //Tag judul Surat
@@ -216,7 +230,7 @@ $html .= '
             Perihal<br>
         </td>
         <td width="350px" style="vertical-align: text-top;">
-            : 420/<span style="color:red">NOMOR</span>/Diklat-RSJ/' . date("Y") . '<br>
+            : 420/' . $noSurat . '/Diklat-RSJ/' . date("Y") . '<br>
             : Biasa<br>
             : -<br>
             : ' . $perihal . '<br>
@@ -225,8 +239,7 @@ $html .= '
             Yth.
         </td>
         <td style="vertical-align: text-top; width : 210px;">
-        <span style="color: red">{Dekan Fakultas Ilmu Keperawatan}</span><br>
-        ' . ucwords(strtolower($d_praktik['nama_institusi'])) . '<br>
+        ' . $kepada . " " . ucwords(strtolower($d_praktik['nama_institusi'])) . '<br>
             di <br>
             &nbsp;&nbsp;&nbsp;Tempat
         </td>
@@ -288,7 +301,7 @@ while ($d_getJenisKegiatan = $q_getJenisKegiatan->fetch(PDO::FETCH_ASSOC)) {
 
 
     $sql_getTarif = "SELECT * FROM tb_tarif_pilih ";
-    $sql_getTarif .= " WHERE id_praktik = 2 and nama_jenis_tarif_pilih='" . $d_getJenisKegiatan['nama_jenis_tarif_pilih'] . "'";
+    $sql_getTarif .= " WHERE id_praktik = " . $_GET['id'] . " AND nama_jenis_tarif_pilih='" . $d_getJenisKegiatan['nama_jenis_tarif_pilih'] . "'";
     $q_getTarif = $conn->query($sql_getTarif);
     while ($d_getTarif = $q_getTarif->fetch(PDO::FETCH_ASSOC)) {
         $html .= '

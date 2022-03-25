@@ -1058,69 +1058,70 @@ if (isset($_POST['simpan_bayar'])) {
             })
         }
 
+        $(document).ready(function() {
+            $('.unduh_invoice').on('click', function() {
+                var $this = $(this);
+                var id = $(this).attr('id');
+                var noSurat = document.getElementById("no_surat").value;
+                var kepada = document.getElementById("kepada").value;
 
-        function unggahInv(id) {
-            var noSurat = document.getElementById("no_surat").value;
-            var kepada = document.getElementById("kepada").value;
+                // console.log("noSurat " + noSurat);
+                // console.log("kepada " + kepada);
+                // console.log("id " + id);
 
-            console.log("noSurat " + noSurat);
-            console.log("kepada " + kepada);
-            console.log("id " + id);
+                if (
+                    noSurat == "" ||
+                    kepada == ""
+                ) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
 
-            if (
-                noSurat == "" ||
-                kepada == ""
-            ) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    Toast.fire({
+                        icon: 'warning',
+                        title: '<div class="text-center font-weight-bold text-uppercase">DATA WAJIB BELUM TERISI</div>'
+                    });
+
+                    //notif noSurat
+                    if (noSurat == "") {
+                        document.getElementById("err_no_surat").innerHTML = "No Surat Harus diisi";
+                    } else {
+                        document.getElementById("err_no_surat").innerHTML = "";
                     }
-                });
 
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-center font-weight-bold text-uppercase">DATA WAJIB BELUM TERISI</div>'
-                });
-
-                //notif noSurat
-                if (noSurat == "") {
-                    document.getElementById("err_no_surat").innerHTML = "No Surat Harus diisi";
+                    //notif kepada
+                    if (kepada == "") {
+                        document.getElementById("err_kepada").innerHTML = "Kepada Harus diisi";
+                    } else {
+                        document.getElementById("err_kepada").innerHTML = "";
+                    }
                 } else {
-                    document.getElementById("err_no_surat").innerHTML = "";
+                    $.ajax({
+                        success: function(url) {
+                            window.open('./_print/p_praktikInv.php?id=' + id + '&ns=' + noSurat + '&k=' + kepada, '_blank');
+                            document.getElementById("no_surat").value = "";
+                            document.getElementById("kepada").value = "";
+                            document.getElementById("err_no_surat").innerHTML = "";
+                            document.getElementById("err_kepada").innerHTML = "";
+                            console.log("SUCCESS");
+                        },
+                        error: function(response) {
+                            alert(response.responseText);
+                            console.log(response.responseText);
+                        }
+                    });
                 }
 
-                //notif kepada
-                if (kepada == "") {
-                    document.getElementById("err_kepada").innerHTML = "Kepada Harus diisi";
-                } else {
-                    document.getElementById("err_kepada").innerHTML = "";
-                }
-            } else {
-                $.ajax({
-                    type: 'POST',
-                    url: "./_print/p_praktikInv.php?",
-                    data: {
-                        id: id,
-                        noSurat: noSurat,
-                        kepada: kepada
-                    },
-                    success: function(response) {
-                        document.getElementById("err_no_surat").value = "";
-                        document.getElementById("err_kepada").value = "";
-                    },
-                    error: function(response) {
-                        alert(response.responseText);
-                        console.log(response.responseText);
-                    }
-                });
-            }
-        }
+            });
+        });
     </script>
 <?php
 } else {

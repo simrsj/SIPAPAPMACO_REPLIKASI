@@ -358,7 +358,8 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
                 nama_satuan_tarif_pilih,
                 frekuensi_tarif_pilih,
                 kuantitas_tarif_pilih,
-                jumlah_tarif_pilih
+                jumlah_tarif_pilih,
+                ujian_tarif_pilih
             ) VALUES (
                 '" . $id_praktik . "', 
                 '" . date('Y-m-d') . "', 
@@ -368,7 +369,8 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
                 '" . $d_tarif_ujian['nama_tarif_satuan'] . "',  
                 '" . $frekuensi . "', 
                 '" . $kuantitas . "', 
-                '" . $frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif'] . "'
+                '" . $frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif'] . "',
+                'y' 
             )";
 
             // echo $sql_insert_tarif_ujian;

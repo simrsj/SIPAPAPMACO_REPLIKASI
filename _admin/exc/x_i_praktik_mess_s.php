@@ -49,7 +49,8 @@ $sql_insert_tarif_mess = "INSERT INTO tb_tarif_pilih (
     nama_satuan_tarif_pilih,
     frekuensi_tarif_pilih,
     kuantitas_tarif_pilih,
-    jumlah_tarif_pilih
+    jumlah_tarif_pilih,
+    mess_tarif_pilih
 ) VALUES (
         '" . $_POST['id'] . "', 
             '" . date('Y-m-d') . "',
@@ -59,7 +60,8 @@ $sql_insert_tarif_mess = "INSERT INTO tb_tarif_pilih (
             '" . $d_mess['nama_tarif_satuan'] . "',
         '" . $jumlah_hari_praktik . "', 
         '" . $d_praktik['jumlah_praktik'] . "', 
-        '" . $total_tarif_mess_pilih . "'
+        '" . $total_tarif_mess_pilih . "', 
+        'y'
 )";
 
 //tambah ke tb_mess_pilih
