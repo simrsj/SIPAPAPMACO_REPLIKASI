@@ -78,6 +78,21 @@
                                         <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data
                                         </button>
+                                        <?php
+                                        //cek data nilai keperawatan
+                                        $sql_getNilKep = " SELECT * FROM tb_nilai_kep ";
+                                        $sql_getNilKep .= " WHERE id_praktik = " . $d_praktik['id_praktik'];
+                                        $q_getNilKpep = $conn->query($sql_getNilKep);
+                                        $r_getNilKpep = $q_getNilKpep->rowCount();
+                                        if ($r_getNilKpep > 0) {
+                                        ?>
+                                            <hr>
+                                            <a class="btn btn-success btn-sm" title="Unduh Nilai " target="_blank" href="./_print/p_praktikNilaiKep.php?ip=<?php echo $d_praktik['id_praktik'] ?>">
+                                                <i class="fas fa-file-download"></i> Unduh Nilai
+                                            </a>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -179,10 +194,6 @@
                                                                             <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#nilai<?php echo $no; ?>" title="Rincian">
                                                                                 <i class="fas fa-info-circle"></i> Rincian Nilai
                                                                             </button>
-
-                                                                            <a class="btn btn-success btn-sm" title="Unduh Nilai " href="./_print/v_nilai_kep?ip=<?php echo $d_data_praktikan['id_praktik'] ?>">
-                                                                                <i class="fas fa-file-download"></i> Unduh
-                                                                            </a>
                                                                         </td>
                                                                     <?php
                                                                     } else {

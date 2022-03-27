@@ -77,7 +77,7 @@ if (is_numeric($i) && is_numeric($p)) {
                             Nama Pembimbing : <?php echo $d1_data_praktikan['nama_pembimbing']; ?><br>
                             Ruangan : <?php echo $d1_data_praktikan['nama_unit']; ?>
                             <hr>
-                            <span class="table-responsive">
+                            <span class="table-responsive text-xs">
                                 <table class="table table-striped">
                                     <thead class="thead-dark">
                                         <tr class="text-center">
@@ -111,52 +111,51 @@ if (is_numeric($i) && is_numeric($p)) {
                                                 <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
                                                 <td class="text-center"><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="lp<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="lp<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="prepost<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="prepost<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="sptk<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="sptk<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="penkes<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="penkes<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="dokep<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="dokep<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="komter<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="komter<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="tak<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="tak<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="kasus<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="kasus<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="ujian<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="ujian<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col" width="100px">
-                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" min="0" max="100" name="sikap<?php echo $no; ?>" required>
+                                                    <input type="number" maxlength="3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" min="0" max="100" name="sikap<?php echo $no; ?>" required>
                                                 </td>
                                                 <td scope="col">
-                                                    <textarea class="form-control" name="ket<?php echo $no; ?>" id="ket<?php echo $no; ?>" required></textarea>
+                                                    <textarea name="ket<?php echo $no; ?>" id="ket<?php echo $no; ?>" rows="2" required></textarea>
                                                 </td>
                                             </tr>
                                         <?php
                                             $no++;
                                         }
                                         ?>
-                                        <tr>
-                                            <td colspan="14" class="font-weight-bold font-italic text-center">
-                                                "Bila ada jenis nilai yang tidak diperlukan, isikan nilai <span class="text-danger">0</span>"
-                                            </td>
-                                        </tr>
                                         <input type="hidden" name="jp" id="jp" value="<?php echo $no; ?>">
                                     </tbody>
                                 </table>
                             </span>
+                            <div colspan="14" class="font-weight-bold font-italic text-center">
+                                "Bila ada jenis nilai yang tidak diperlukan, isikan nilai <span class="text-danger">0</span>"
+                            </div>
+                            <hr>
                             <!-- tombol simpan pilih Pembimbing dan Ruangan  -->
                             <span class="nav btn justify-content-center text-md">
                                 <button type="submit" name="simpan_nilai_kep" class="btn btn-outline-success">

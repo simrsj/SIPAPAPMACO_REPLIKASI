@@ -4,33 +4,40 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 FORMAT UPDATE WAG
 
 _*MAYOR*_
+---------------------------------------
 -
 
 _*MINOR*_
-- 🔃 Cetak Invoice Tarif Pembayaran
-- 🔃 Cetak Invoice Tarif Mess
-- 🔃 Cetak Invoice Khusus Universitas Kristen Maranatha (UKM) tambah tembusan (Bagian Keuangan RS Jiwa Provinsi Jawa Barat)
-- 🔃 Cetak Data Nilai Keperawatan
-- ✅ Perbaikan Modul Tambah dan Ubah MoU Akun ADMIN
-- ✅ Perbaikan Menu Cetak Invoice Kedokteran Profesi PSPD
-- ✅ Perbaikan Menu Cetak Invoice Keperawatan, Nakes Lainnya dan Non-Nakes
+---------------------------------------
+- ✅ Cetak Invoice Tarif (RAB) 
+- ✅ Cetak Invoice Tarif (RAB) Khusus Universitas Kristen Maranatha (UKM) tambah tembusan (Direktur Utama RS Immanuel)
+- ✅ Cetak Invoice Tarif (RAB) Mess
+- ✅ Cetak Invoice Tarif (RAB) Ujian
+- ✅ Cetak Data Nilai Keperawatan 
 - Modul Pengajuan MoU Baru
 - Modul Pengajuan MoU Perpanjang
 - Modul Pengajuan Magang
 - Modul Pengajuan Ujian Akhir Periode (UAP)
 
 KET : 
+---------------------------------------
 _*MAYOR*_ = Modul yang _*FITUR/ERROR*_ nya pempengaruhi Alur Utama (PRIORITAS)
 _*MINOR*_ = Modul yang _*FITUR/ERROR*_ nya bisa dikondisikan
 ✅ = Selesai, 🔃 = Progress
 
-NOTE : 
-
+NOTE :
+--------------------------------------- 
 Link Dalam (Local) : http://10.132.0.75/SM/ 
 Link Luar (Public) : http://103.147.222.122:88/SM/
 
 Modul yang sudah selesai akan dihilangkan diudate selanjutnya, 
 Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/TLDevSM
+
+
+- 🔃 Cetak Data SP Pembimbing / CI
+- Unduh Invoice Format .doc/docx 
+- Unduh Nilai Format .xls/xlsx 
+- loading screen
 
 --------------------------------------------------------------------------------------------------------------------
 PERTANYAAN
@@ -41,7 +48,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Progres Tombol Cetak Invoice"
+git commit -a -m "Cetak Invoice Tarif, Cetak Invoice Tarif (Khsusu UKM), Cetak Invoice Tarif Mess, Cetak Invoice Tarif Ujian, Cetak Data Nilai Keperawatan"
 git pull
 git push
 

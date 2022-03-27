@@ -238,12 +238,44 @@
     ?>
         <b>PILIH : </b><br>
 
-        <a class="btn btn-outline-success btn-sm" href="#" data-toggle="modal" data-target="#inv<?php echo $d_praktik['id_praktik']; ?>" title="Unggah Invoice">
-            UNGGAH FILE INVOICE
+        <a class="btn btn-outline-success btn-sm" href="#" data-toggle="modal" data-target="#undInv<?php echo $d_praktik['id_praktik']; ?>" title="Unduh Invoice">
+            UNDUH INVOICE
+        </a>
+        <hr>
+        <a class="btn btn-outline-primary btn-sm" href="#" data-toggle="modal" data-target="#ungInv<?php echo $d_praktik['id_praktik']; ?>" title="Unggah Invoice">
+            UNGGAH INVOICE
         </a>
 
         <!-- modal keterangan penolakan -->
-        <div class="modal fade" id="inv<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+        <div class="modal fade" id="undInv<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Unduh Invoice</h4>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-lg">
+                        Nomor Surat : <span class="text-danger">*</span><br>
+                        <input class="form-control" name="no_surat" id="no_surat" type="number" min="1" maxlength="4" required>
+                        <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_no_surat"></div>
+                        Kepada : <span class="text-danger">*</span><br>
+                        <input class="form-control" name="kepada" id="kepada" required>
+                        <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_kepada"></div>
+                        <br>
+                        <center>
+                            <a target="_blank" id="<?php echo $d_praktik['id_praktik']; ?>" name="unduh_invoice" class="btn btn-outline-success btn-sm unduh_invoice">
+                                <i class="fas fa-file-download"></i> Unduh Data Invoice
+                            </a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal keterangan penolakan -->
+        <div class="modal fade" id="ungInv<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -253,27 +285,22 @@
                         </button>
                     </div>
                     <div class="modal-body text-lg">
-
                         <form enctype="multipart/form-data" class="form-group" method="post" action="">
-                            <a href="./_print/p_praktikInv.php?id=<?php echo $d_praktik['id_praktik'] ?>" class="btn btn-outline-success" target="_blank" title="Cetak Invoice untuk ditandatangai (TTD Basah)">
-                                <i class="fas fa-file-download"></i> Unduh Data Invoice
-                            </a><br><br>
-
-
                             <h5>Unggah Invoice yg sudah ditandatangani: </h5><br>
                             <input type="file" name="file_invoice" id="file_invoice" accept="application/pdf" required>
                             <input type="hidden" name="id_praktik" id="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>">
                             <hr>
-                            <nav id="navbar-tarif" class="navbar justify-content-center">
-                                <button type="submit" name="simpan_invoice" class="nav-link btn btn-success btn-sm">
+                            <center>
+                                <button type="submit" name="simpan_invoice" class="btn btn-outline-success btn-sm">
                                     <i class="fas fa-paper-plane"></i> Kirim Data Invoice
                                 </button>
-                            </nav>
+                            </center>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
 
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "INV") {
