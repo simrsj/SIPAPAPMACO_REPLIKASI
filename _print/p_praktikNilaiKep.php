@@ -45,9 +45,9 @@ $img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
 $sql_nilai = " SELECT * FROM `tb_pembimbing_pilih`";
 $sql_nilai .= " JOIN tb_nilai_kep ON tb_pembimbing_pilih.id_pembimbing = tb_nilai_kep.id_pembimbing";
 $sql_nilai .= " JOIN tb_unit ON tb_pembimbing_pilih.id_unit = tb_unit.id_unit";
-$sql_nilai .= " JOIN tb_praktikan ON tb_pembimbing_pilih.id_praktikan = tb_praktikan.id_praktikan";
+$sql_nilai .= " JOIN tb_praktikan ON tb_nilai_kep.id_praktikan = tb_praktikan.id_praktikan ";
 $sql_nilai .= " WHERE tb_nilai_kep.id_praktik = " . $_GET['ip'];
-$sql_nilai .= " GROUP BY tb_pembimbing_pilih.id_praktikan";
+$sql_nilai .= " GROUP BY tb_praktikan.id_praktikan";
 $q_nilai = $conn->query($sql_nilai);
 
 # ------------------------------------------------------------------------------------------------------------------------------------- FUNCTION

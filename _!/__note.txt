@@ -48,7 +48,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Cetak Invoice Tarif, Cetak Invoice Tarif (Khsusu UKM), Cetak Invoice Tarif Mess, Cetak Invoice Tarif Ujian, Cetak Data Nilai Keperawatan"
+git commit -a -m "perbaikan Cetak Data Nilai Keperawatan"
 git pull
 git push
 
