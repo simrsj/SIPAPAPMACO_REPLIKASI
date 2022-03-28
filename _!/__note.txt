@@ -43,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Cleaning Index Utama LINK CSS dan JS"
+git commit -a -m "Perbaikan Data Nilai Keperawatan"
 git pull
 git push
 
