@@ -21,3 +21,8 @@ $dAr_ins['ket_institusi'] = $d_ins['ket_institusi'];
 $dAr_ins['tgl_selesai_mou'] = $d_ins['tgl_selesai_mou'];
 
 //////////////////// DATA INSTITUSi ////////////////////
+
+function manipulasiTanggal($tgl,$jumlah=1,$format='days'){
+	$currentDate = $tgl;
+	return date('Y-m-d', strtotime($jumlah.' '.$format, strtotime($currentDate)));
+}
