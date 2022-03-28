@@ -41,7 +41,7 @@ include "_add-ons/tanggal_waktu.php";
     <?php
 
     if (isset($_GET['dashboard'])) {
-        include "dashboard/dashboard.php";
+        include "_dashboard/dashboard.php";
     } elseif (isset($_SESSION['status_user'])) {
         if ($_SESSION['status_user'] == 'Y') {
             if (isset($_GET['lo'])) {

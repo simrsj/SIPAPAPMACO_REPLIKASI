@@ -43,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Informasi Modal Kedokteran dan Keperawatan"
+git commit -a -m "Ubah Tampilan Navigasi Dashboard, Login, dan Registrasi"
 git pull
 git push
 

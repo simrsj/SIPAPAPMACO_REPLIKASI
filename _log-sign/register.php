@@ -1,4 +1,28 @@
 <body class="bg-gradient-primary">
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse h5 font-weight-bold row">
+            <ul class="navbar-nav col">
+                <li class="nav-item active">
+                    <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
+                    <img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="2%">
+                    <img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="3%">
+                    REGISTRASI AKUN INSTITUSI - RS JIWA PROVINSI JAWA BARAT
+                    <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
+                </li>
+            </ul>
+            <ul class="navbar-nav col-auto">
+                <a class="btn btn-success btn-sm" href="http://192.168.7.89/kuesioner/survey.php" target="_blank"><i class="fas fa-clipboard-check"></i> SURVEY</a>&nbsp;
+                <a class="btn btn-info btn-sm" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>&nbsp;
+                <a class="btn btn-primary btn-sm" href="?lo"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -75,5 +99,17 @@
                 $('#institusi_lainnya').empty();
             }
         }
+
+        var span = document.getElementById("jam");
+        time();
+
+        function time() {
+            var d = new Date();
+            var s = formattedNumber = ("0" + d.getSeconds()).slice(-2);
+            var m = formattedNumber = ("0" + d.getMinutes()).slice(-2);
+            var h = formattedNumber = ("0" + d.getHours()).slice(-2);
+            span.textContent = h + ":" + m + ":" + s;
+        }
+        setInterval(time, 1000);
     </script>
 </body>

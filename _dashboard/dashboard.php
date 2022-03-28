@@ -17,8 +17,8 @@
       </ul>
       <ul class="navbar-nav col-auto">
         <a class="btn btn-success btn-sm" href="http://192.168.7.89/kuesioner/survey.php" target="_blank"><i class="fas fa-clipboard-check"></i> SURVEY</a>&nbsp;
-        <a class="btn btn-info btn-sm" href="?reg" target="_blank"><i class="fas fa-user-plus"></i> DAFTAR</a>&nbsp;
-        <a class="btn btn-primary btn-sm" href="?lo" target="_blank"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+        <a class="btn btn-info btn-sm" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>&nbsp;
+        <a class="btn btn-primary btn-sm" href="?lo"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
       </ul>
     </div>
   </nav>
