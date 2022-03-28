@@ -15,9 +15,6 @@ include "_add-ons/tanggal_waktu.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?>"> -->
-
-
     <title>SIPAPAP MACO</title>
 
     <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?>">
@@ -28,7 +25,6 @@ include "_add-ons/tanggal_waktu.php";
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet">
     <link href="vendor/sw2/dist/sweetalert2.min.css" rel="stylesheet">
-    <!-- <link href="vendor/datatables-all/datatables.min.css" rel="stylesheet"> -->
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
     <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
 
@@ -73,19 +69,16 @@ include "_add-ons/tanggal_waktu.php";
     ?>
 
     <!-- JS -->
-    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="js/sb-admin-2.min.js"></script>
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <!-- <script type="text/javascript" src="vendor/datatables-all/datatables.min.js"></script> -->
     <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
     <script src="vendor/select2/dist/js/select2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/!custom/jsCustom.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    <!-- <script src="https://kit.fontawesome.com/26550bb205.js" crossorigin="anonymous"></script> -->
 </body>
 
 </html>

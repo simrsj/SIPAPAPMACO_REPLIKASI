@@ -43,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Ubah Tampilan Navigasi Dashboard, Login, dan Registrasi"
+git commit -a -m "Cleaning Index Utama LINK CSS dan JS"
 git pull
 git push
 
