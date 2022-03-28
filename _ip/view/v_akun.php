@@ -67,8 +67,6 @@ if (isset($_POST['ubah_user'])) {
                             <input class="form-control" type="number" name="no_telp_user" value="<?php echo $d_akun['no_telp_user']; ?>"><br>
                             <b>E-Mail : </b><br>
                             <input class="form-control" type="email" name="email_user" value="<?php echo $d_akun['email_user']; ?>"><br>
-
-                            <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Kembali</button>
                             <button type="submit" class="btn btn-primary btn-sm" name="ubah_user">Ubah</button>
 
                         </form>

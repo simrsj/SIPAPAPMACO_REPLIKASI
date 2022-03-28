@@ -23,8 +23,8 @@
             $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
             // $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
-            $sql_praktik .= " WHERE tb_praktik.status_praktik IN ('W','Y', 'S') ";
-            $sql_praktik .= " OR tb_praktik.status_cek_praktik IN ('VPT_Y_PPDS') ";
+            $sql_praktik .= " WHERE (tb_praktik.status_praktik IN ('W','Y','S') ";
+            $sql_praktik .= " OR tb_praktik.status_cek_praktik IN ('VPT_Y_PPDS')) ";
             // $sql_praktik .= " AND tb_praktik.id_profesi_pdd != 1";
             $sql_praktik .= " AND tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
             $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
