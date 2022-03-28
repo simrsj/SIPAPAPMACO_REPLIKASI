@@ -241,10 +241,6 @@
         <a class="btn btn-outline-success btn-sm" href="#" data-toggle="modal" data-target="#undInv<?php echo $d_praktik['id_praktik']; ?>" title="Unduh Invoice">
             UNDUH INVOICE
         </a>
-        <hr>
-        <a class="btn btn-outline-primary btn-sm" href="#" data-toggle="modal" data-target="#ungInv<?php echo $d_praktik['id_praktik']; ?>" title="Unggah Invoice">
-            UNGGAH INVOICE
-        </a>
 
         <!-- modal keterangan penolakan -->
         <div class="modal fade" id="undInv<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
@@ -273,6 +269,10 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <a class="btn btn-outline-primary btn-sm" href="#" data-toggle="modal" data-target="#ungInv<?php echo $d_praktik['id_praktik']; ?>" title="Unggah Invoice">
+            UNGGAH INVOICE
+        </a>
 
         <!-- modal keterangan penolakan -->
         <div class="modal fade" id="ungInv<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">

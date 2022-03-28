@@ -80,18 +80,19 @@
                                             <i class="fas fa-info-circle"></i> Rincian Data
                                         </button>
                                         <?php
-                                        //cek data nilai keperawatan
-                                        $sql_getNilKep = " SELECT * FROM tb_nilai_kep ";
-                                        $sql_getNilKep .= " WHERE id_praktik = " . $d_praktik['id_praktik'];
-                                        $q_getNilKpep = $conn->query($sql_getNilKep);
-                                        $r_getNilKpep = $q_getNilKpep->rowCount();
-                                        if ($r_getNilKpep > 0) {
+                                        if ($d_praktik['id_jurusan_pdd'] == 2) {
+                                            if ($d_praktik['fileNilKep_praktik'] != "") {
                                         ?>
-                                            <hr>
-                                            <a class="btn btn-success btn-sm" title="Unduh Nilai " target="_blank" href="./_print/p_praktikNilaiKep.php?ip=<?php echo $d_praktik['id_praktik'] ?>">
-                                                <i class="fas fa-file-download"></i> Unduh Nilai
-                                            </a>
+
+                                                <a class="btn btn-outline-danger btn-sm" title="Unduh Nilai " target="_blank" href="<?php echo $d_praktik['fileNilKep_praktik'] ?>">
+                                                    <i class="fas fa-file-download"></i> Data Nilai
+                                                </a>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <span class="badge badge-danger"> Data Nilai Belum diunggah</span>
                                         <?php
+                                            }
                                         }
                                         ?>
                                     </div>

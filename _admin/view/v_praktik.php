@@ -138,7 +138,7 @@ if (isset($_POST['simpan_bayar'])) {
                 alert('File Harus dibawah 1 Mb');
                 document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
             </script>
-        <?PHP
+        <?php
             $link_file_invoice = "";
         } elseif ($file_invoice->type !== 'application/pdf') {
         ?>
@@ -146,7 +146,7 @@ if (isset($_POST['simpan_bayar'])) {
                 alert('File Surat Harus .pdf');
                 document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
             </script>
-        <?PHP
+        <?php
             $link_file_invoice = "";
         } else {
             $unggah_file_bayar = move_uploaded_file(

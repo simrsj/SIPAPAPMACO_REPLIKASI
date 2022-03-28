@@ -110,7 +110,6 @@
               <div class="text-center">
                 <div class="h5 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA MESS</span></div>
               </div>
-              <hr>
               <?php
               $sql_mess = "SELECT * FROM tb_mess ";
               $sql_mess .= " WHERE nama_pemilik_mess = 'RS Jiwa Provinsi Jawa Barat' ";
@@ -120,8 +119,8 @@
               $r_mess = $q_mess->rowCount();
               ?>
               <div class="table-responsive">
-                <table class="table table-hover table-striped">
-                  <thead class="table-light">
+                <table class="table">
+                  <thead class="table-dark">
                     <tr class="font-weight-bold text-center">
                       <th scope='col'>NO</th>
                       <th>NAMA MESS</th>
@@ -129,6 +128,7 @@
                       <th>KAPASITAS TOTAL</th>
                       <th>KAPASITAS TERISI</th>
                       <th>KAPASITAS SISA</th>
+                      <th>Rincian</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -149,47 +149,75 @@
                       }
                     ?>
                       <tr>
-                        <div id="accordion">
-                          <div class="card">
-                            <div class="card-header" id="headingTwo">
-                              <h5 class="mb-0">
-                                <div class="row text-md text-center font-weight-bold">
-                                  <div class="col-md-2 my-auto">
-                                    <?php echo $d_mess['nama_mess']; ?>
-                                  </div>
-                                  <div class="col-md-3 my-auto">
-                                    <?php echo $d_mess['nama_pemilik_mess']; ?>
-                                  </div>
-                                  <div class="col-md-2 my-auto">
-                                    <?php echo $d_mess['kapasitas_t_mess']; ?>
-                                  </div>
-                                  <div class="col-md-2 my-auto">
-                                    <?php echo $jumlah_terisi; ?>
-                                  </div>
-                                  <div class="col-md-2 my-auto">
-                                    <?php echo $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?>
-                                  </div>
-                                  <div class="col-md-1 my-auto">
-                                    <button class="btn btn-outline-primary collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                      <i class="fas fa-info-circle"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                              </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                              <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                         <td><?php echo $no; ?></td>
                         <td><?php echo $d_mess['nama_mess']; ?></td>
                         <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
                         <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
                         <td class="text-center"><?php echo $jumlah_terisi; ?></td>
                         <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
+                        <td class="text-center">
+                          <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#c_<?php echo $d_mess['id_mess']; ?>">
+                            <i class="fas fa-info-circle"></i>
+                          </button>
+
+                          <!-- data detail mess  -->
+                      <tr>
+                        <td colspan="7" class="p-0">
+                          <div id="accordion">
+                            <div id="c_<?php echo $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion">
+                              <?php
+                              $sql_messPraktik = "SELECT * FROM tb_praktik";
+                              $sql_messPraktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+                              $sql_messPraktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                              $sql_messPraktik .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
+                              $sql_messPraktik .= " WHERE tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
+                              // echo $sql_messPraktik . "<br>";
+                              $q_messPraktik = $conn->query($sql_messPraktik);
+                              if ($q_messPraktik->rowCount() > 0) {
+                              ?>
+                                <table class="table table-hover text-center">
+                                  <thead class="table-light">
+                                    <tr class="font-weight-bold ">
+                                      <th>Nama Institusi</th>
+                                      <th>Jurusan</th>
+                                      <th>Jumlah Praktik</th>
+                                      <th>Tanggal Mulai</th>
+                                      <th>Tanggal Selesai</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <?php
+                                    while ($d_messPraktik = $q_messPraktik->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                      <tr>
+                                        <td><?php echo $d_messPraktik['nama_institusi']; ?></td>
+                                        <td><?php echo $d_messPraktik['nama_jurusan_pdd']; ?></td>
+                                        <td><?php echo $d_messPraktik['jumlah_praktik']; ?></td>
+                                        <td><?php echo tanggal($d_messPraktik['tgl_mulai_praktik']); ?></td>
+                                        <td><?php echo tanggal($d_messPraktik['tgl_selesai_praktik']); ?></td>
+                                      </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                  </tbody>
+                                </table>
+                              <?php
+                              } else {
+                              ?>
+                                <div class="jumbotron">
+                                  <div class="jumbotron-fluid font-weight-bold">
+                                    DATA PRAKTIK TIDAK ADA
+                                  </div>
+                                </div>
+                              <?php
+                              }
+                              ?>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      </td>
                       </tr>
                     <?php
                       $no++;
@@ -198,7 +226,6 @@
                   </tbody>
                 </table>
               </div>
-              <hr />
             </div>
           </div>
         </div>
