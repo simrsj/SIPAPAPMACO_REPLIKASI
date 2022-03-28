@@ -1,5 +1,5 @@
 <body class="bg-gradient-primary">
-  <meta http-equiv="refresh" content="10">
+  <meta http-equiv="refresh" content="101027831028973">
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -113,7 +113,7 @@
               <hr>
               <?php
               $sql_mess = "SELECT * FROM tb_mess ";
-              $sql_mess .= " WHERE nama_pemilik_mess = 'RS Jiwa Provinsi Jawa BaRat' ";
+              $sql_mess .= " WHERE nama_pemilik_mess = 'RS Jiwa Provinsi Jawa Barat' ";
               $sql_mess .= " ORDER BY tb_mess.nama_mess ASC";
 
               $q_mess = $conn->query($sql_mess);
@@ -149,17 +149,50 @@
                       }
                     ?>
                       <tr>
+                        <div id="accordion">
+                          <div class="card">
+                            <div class="card-header" id="headingTwo">
+                              <h5 class="mb-0">
+                                <div class="row text-md text-center font-weight-bold">
+                                  <div class="col-md-2 my-auto">
+                                    <?php echo $d_mess['nama_mess']; ?>
+                                  </div>
+                                  <div class="col-md-3 my-auto">
+                                    <?php echo $d_mess['nama_pemilik_mess']; ?>
+                                  </div>
+                                  <div class="col-md-2 my-auto">
+                                    <?php echo $d_mess['kapasitas_t_mess']; ?>
+                                  </div>
+                                  <div class="col-md-2 my-auto">
+                                    <?php echo $jumlah_terisi; ?>
+                                  </div>
+                                  <div class="col-md-2 my-auto">
+                                    <?php echo $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?>
+                                  </div>
+                                  <div class="col-md-1 my-auto">
+                                    <button class="btn btn-outline-primary collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                      <i class="fas fa-info-circle"></i>
+                                    </button>
+                                  </div>
+                                </div>
+                              </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                              <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <td><?php echo $no; ?></td>
                         <td><?php echo $d_mess['nama_mess']; ?></td>
                         <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
                         <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
                         <td class="text-center"><?php echo $jumlah_terisi; ?></td>
                         <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
-                        <?php
-                        $no++;
-                        ?>
                       </tr>
                     <?php
+                      $no++;
                     }
                     ?>
                   </tbody>

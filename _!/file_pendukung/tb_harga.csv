@@ -1,0 +1,79 @@
+3;Alat Tulis Kantor;1;NULL;5000;SEKALI;1;1;0;0;1;1;NULL
+69;Aula NAPZA;7;NULL;750000;SEKALI;0;0;0;0;7;2;NULL
+70;Aula Utama;7;NULL;1000000;SEKALI;0;0;0;0;7;2;NULL
+29;Bahan Habis Pakai Ujian;2;NULL;100000;SEKALI;2;2;0;0;6;1;NULL
+43;Bahan Habis Pakai Ujian;2;NULL;100000;SEKALI;3;3;0;0;6;1;NULL
+57;Bahan Habis Pakai Ujian;2;NULL;100000;SEKALI;4;0;0;0;6;1;NULL
+60;Bed side teaching (BST);2;NULL;50000;MINGGUAN;0;0;6;0;4;2;NULL
+61;Bed side teaching (BST);2;NULL;75000;MINGGUAN;0;0;7;0;4;2;NULL
+62;Bed side teaching (BST);2;NULL;75000;MINGGUAN;0;0;8;0;4;2;NULL
+63;Bed side teaching (BST);2;NULL;75000;MINGGUAN;0;0;10;0;4;2;NULL
+13;Bed side teaching (BST)- Visite Besar-Role Model - Pembimbingan Kedokteran Umum di IGD;2;NULL;37500;HARI-;1;1;0;0;4;1;NULL
+10;Case base Discusion (CBD);2;NULL;37500;INPUT;1;1;0;0;4;1;NULL
+9;Case report session (CRS);2;NULL;37500;INPUT;1;1;0;0;4;1;NULL
+8;Clinical science session (CSS);2;NULL;37500;INPUT;1;1;0;0;4;1;NULL
+1;Institusional Fee;1;NULL;50000;SEKALI;1;1;0;0;1;1;NULL
+18;Institusional Fee;1;NULL;50000;SEKALI;2;2;0;0;1;1;NULL
+32;Institusional Fee;1;NULL;20000;SEKALI;3;3;0;0;1;2;NULL
+46;Institusional Fee;1;NULL;50000;SEKALI;4;0;0;0;1;1;NULL
+30;Institusional Fee Ujian;6;NULL;150000;SEKALI;2;2;0;0;6;1;NULL
+44;Institusional Fee Ujian;6;NULL;150000;SEKALI;3;3;0;0;6;1;NULL
+58;Institusional Fee Ujian;6;NULL;150000;SEKALI;4;0;0;0;6;1;NULL
+22;Keselamatan Pasien;3;NULL;150000;SEKALI;2;2;0;0;3;1;NULL
+36;Keselamatan Pasien;3;NULL;150000;SEKALI;3;3;0;0;3;1;NULL
+50;Keselamatan Pasien;3;NULL;150000;SEKALI;4;0;0;0;3;1;NULL
+6;Log Book (dibayar 1 kali);1;NULL;20000;SEKALI;1;1;0;0;3;1;NULL
+23;Log Book (dibayar 1 kali);1;NULL;20000;SEKALI;2;2;0;0;3;1;NULL
+37;Log Book (dibayar 1 kali);1;NULL;20000;SEKALI;3;3;0;0;3;1;NULL
+51;Log Book (dibayar 1 kali);1;NULL;20000;SEKALI;4;0;0;0;3;1;NULL
+28;Makan dan Snack Penguji;5;NULL;20000;SEKALI;2;2;0;0;6;1;NULL
+42;Makan dan Snack Penguji;5;NULL;20000;SEKALI;3;3;0;0;6;1;NULL
+56;Makan dan Snack Penguji;5;NULL;20000;SEKALI;4;0;0;0;6;1;NULL
+16;Makan Pembimbing Ujian;2;NULL;20000;SEKALI;1;1;0;0;6;1;NULL
+2;Management Fee;1;NULL;75000;SEKALI;1;1;0;0;1;1;NULL
+19;Management Fee;1;NULL;75000;SEKALI;2;2;0;0;1;1;NULL
+33;Management Fee;1;NULL;20000;SEKALI;3;3;0;0;1;2;NULL
+47;Management Fee;1;NULL;75000;SEKALI;4;0;0;0;1;1;NULL
+31;Management Fee Ujian;6;NULL;20000;SEKALI;2;2;0;0;6;1;NULL
+45;Management Fee Ujian;6;NULL;20000;SEKALI;3;3;0;0;6;1;NULL
+59;Management Fee Ujian;6;NULL;20000;SEKALI;4;0;0;0;6;1;NULL
+26;Materi (TAK, Komunikasi Terapeutik, Dokumentasi Keperawatanan) ;3;NULL;150000;INPUT;2;2;0;0;4;1;NULL
+40;Materi (TAK, Komunikasi Terapeutik, Dokumentasi Keperawatanan) ;3;NULL;150000;INPUT;3;3;0;0;4;1;NULL
+54;Materi (TAK, Komunikasi Terapeutik, Dokumentasi Keperawatanan) ;3;NULL;150000;INPUT;4;0;0;0;4;1;NULL
+14;Mini Clinical Examination  Evaluation (Mini CeX);2;NULL;150000;SEKALI;0;1;0;0;6;1;NULL
+7;Name Tag (dibayar 1 kali);1;NULL;5000;SEKALI;1;1;0;0;3;1;NULL
+24;Name Tag (dibayar 1 kali);1;NULL;10000;SEKALI;2;2;0;0;3;1;NULL
+38;Name Tag (dibayar 1 kali);1;NULL;10000;SEKALI;3;3;0;0;3;1;NULL
+52;Name Tag (dibayar 1 kali);1;NULL;10000;SEKALI;4;0;0;0;3;1;NULL
+21;Orientasi ;3;NULL;75000;SEKALI;2;2;0;0;3;1;NULL
+35;Orientasi ;3;NULL;75000;SEKALI;3;3;0;0;3;1;NULL
+49;Orientasi ;3;NULL;75000;SEKALI;4;0;0;0;3;1;NULL
+5;Orientasi Keselamatan Pasien;1;NULL;10000;SEKALI;1;1;0;0;3;1;NULL
+11;Pengayaan - Observasi;2;NULL;37500;INPUT;1;1;0;0;4;1;NULL
+71;Praktik Kerja Lapangan (PKL);8;NULL;100000;SEKALI;0;0;1;0;9;1;NULL
+72;Praktik Kerja Lapangan (PKL);8;NULL;100000;SEKALI;0;0;2;0;9;1;NULL
+73;Praktik Kerja Lapangan (PKL);8;NULL;100000;SEKALI;0;0;3;0;9;1;NULL
+74;Praktik Kerja Lapangan (PKL);8;NULL;200000;SEKALI;0;0;4;0;9;1;NULL
+75;Praktik Kerja Lapangan (PKL);8;NULL;200000;SEKALI;0;0;5;0;9;1;NULL
+76;Praktik Kerja Lapangan (PKL);8;NULL;200000;SEKALI;0;0;6;0;9;1;NULL
+77;Praktik Kerja Lapangan (PKL);8;NULL;250000;SEKALI;0;0;7;0;9;1;NULL
+78;Praktik Kerja Lapangan (PKL);8;NULL;250000;SEKALI;0;0;8;0;9;1;NULL
+79;Praktik Kerja Lapangan (PKL);8;NULL;350000;SEKALI;0;0;9;0;9;1;NULL
+80;Praktik Kerja Lapangan (PKL);8;NULL;350000;SEKALI;0;0;10;0;9;1;NULL
+81;Praktik Kerja Lapangan (PKL);8;NULL;250000;SEKALI;0;0;11;0;9;1;NULL
+12;RPS (Resource Person Session);2;NULL;37500;SEKALI;1;1;0;0;4;1;NULL
+25;RPS (Resource Person Session);3;NULL;150000;SEKALI;2;2;0;0;4;1;NULL
+39;RPS (Resource Person Session);3;NULL;150000;SEKALI;3;3;0;0;4;1;NULL
+53;RPS (Resource Person Session);3;NULL;150000;SEKALI;4;0;0;0;4;1;NULL
+68;Ruang Kelas / Ruang Diskusi;4;NULL;30000;HARI-;1;1;0;0;7;1;NULL
+66;Ruang R. Komite Medik;7;NULL;750000;HARI-;1;1;0;0;7;2;NULL
+67;Ruang SPI;7;NULL;500000;SEKALI;0;0;0;0;7;2;NULL
+17;Standar Pasien;2;NULL;100000;SEKALI;1;1;0;0;6;1;NULL
+15;Ujian;2;NULL;150000;SEKALI;1;1;0;0;6;1;NULL
+27;Ujian;4;NULL;150000;SEKALI;2;2;0;0;6;1;NULL
+41;Ujian;4;NULL;150000;SEKALI;3;3;0;0;6;1;NULL
+55;Ujian;4;NULL;150000;SEKALI;4;0;0;0;6;1;NULL
+4;Untuk Keselamatan Kerja (Handrub, tisue, sabun);1;NULL;5000;SEKALI;1;1;0;0;2;1;NULL
+20;Untuk Keselamatan Kerja (Handrub, tisue, sabun);1;NULL;20000;SEKALI;2;2;0;0;2;1;NULL
+34;Untuk Keselamatan Kerja (Handrub, tisue, sabun);1;NULL;20000;SEKALI;3;3;0;0;2;1;NULL
+48;Untuk Keselamatan Kerja (Handrub, tisue, sabun);1;NULL;20000;SEKALI;4;0;0;0;2;1;NULL
