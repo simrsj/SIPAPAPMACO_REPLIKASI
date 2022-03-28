@@ -99,13 +99,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						<span>Arsip Praktik</span>
 					</a>
 				</li>
-				<hr class="sidebar-divider">
+				<!-- <hr class="sidebar-divider">
 				<li class="nav-item ">
 					<a class="nav-link" href="http://192.168.7.89/kuesioner/login.php" target="_blank">
 						<i class="fas fa-fw fa-list-ul"></i>
 						<span>Survey</span>
 					</a>
-				</li>
+				</li> -->
 				<hr class="sidebar-divider">
 				<li class="nav-item">
 					<a class="nav-link" href="?ins">

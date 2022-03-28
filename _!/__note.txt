@@ -5,15 +5,10 @@ FORMAT UPDATE WAG
 
 _*MAYOR*_
 ---------------------------------------
--
+- 
 
 _*MINOR*_
 ---------------------------------------
-- ✅ Cetak Invoice Tarif (RAB) 
-- ✅ Cetak Invoice Tarif (RAB) Khusus Universitas Kristen Maranatha (UKM) tambah tembusan (Direktur Utama RS Immanuel)
-- ✅ Cetak Invoice Tarif (RAB) Mess
-- ✅ Cetak Invoice Tarif (RAB) Ujian
-- ✅ Cetak Data Nilai Keperawatan 
 - Modul Pengajuan MoU Baru
 - Modul Pengajuan MoU Perpanjang
 - Modul Pengajuan Magang
@@ -31,7 +26,7 @@ Link Dalam (Local) : http://10.132.0.75/SM/
 Link Luar (Public) : http://103.147.222.122:88/SM/
 
 Modul yang sudah selesai akan dihilangkan diudate selanjutnya, 
-Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/TLDevSM
+Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/TimlineSM
 
 
 - 🔃 Cetak Data SP Pembimbing / CI
@@ -48,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "perbaikan Cetak Data Nilai Keperawatan"
+git commit -a -m "Perbaikan query data nilai dan pembimbing akun Institusi"
 git pull
 git push
 
