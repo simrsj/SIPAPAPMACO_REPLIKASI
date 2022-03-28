@@ -65,16 +65,14 @@ function generateKalenderKedKep($date)
                         $tgl = $year . "-" . $month . "-" . $t;
                         $sql_kedKep = "SELECT * FROM tb_praktik";
                         $sql_kedKep .= " JOIN tb_praktik_tgl  ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
+                        $sql_kedKep .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+                        $sql_kedKep .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
                         $sql_kedKep .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl'";
                         $sql_kedKep .= " AND (tb_praktik.id_jurusan_pdd = 1 OR tb_praktik.id_jurusan_pdd = 2)";
-                        $sql_kedKep .= " AND (";
-                        $sql_kedKep .= "       (tb_praktik.status_cek_praktik = 'BYR') ";
-                        $sql_kedKep .= "       OR (tb_praktik.status_cek_praktik = 'VPT_Y') ";
-                        $sql_kedKep .= "       OR (tb_praktik.status_cek_praktik = 'VPT_Y_PPDS') ";
-                        $sql_kedKep .= "       OR (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y')";
-                        $sql_kedKep .= "     )";
+                        $sql_kedKep .= " AND (tb_praktik.status_cek_praktik IN ('BYR','VPT_Y','VPT_Y_PPDS') OR (tb_praktik.status_praktik IN ('W','Y')))";
                         // echo "$sql_kedKep<br>";
                         $q_kedKep = $conn->query($sql_kedKep);
+                        $q1_kedKep = $conn->query($sql_kedKep);
 
                         $jp_jt = 0;
                         $jp_j = 0;
@@ -129,7 +127,7 @@ function generateKalenderKedKep($date)
 
                                 <!-- modal   -->
                                 <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <div class="text-center text-lg">INFO PRAKTIK KEDOKTERAN DAN KEPERAWATAN TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
@@ -141,6 +139,45 @@ function generateKalenderKedKep($date)
                                                 JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
                                                 KEDOKTERAN : <?php echo $kuota_ked; ?><br>
                                                 KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                                <hr>
+                                                <?php
+                                                if ($q1_kedKep->rowCount() > 0) {
+                                                    while ($d1_kedKep = $q1_kedKep->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                        <div class="table-responsive text-left">
+                                                            <table class='table table-striped' id="myTable">
+                                                                <thead class="thead-dark">
+                                                                    <tr>
+                                                                        <th>Nama Institusi</th>
+                                                                        <th>Tanggal Mulai</th>
+                                                                        <th>Tanggal Selesai</th>
+                                                                        <th>Jumlah Praktik</th>
+                                                                        <th>Jurusan</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><?php echo $d1_kedKep['nama_institusi']; ?></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                } else {
+                                                    ?>
+                                                    <div class="jumbotron">
+                                                        <div class="jumbotron-fluid font-weight-bold">
+                                                            DATA PRAKTIK TIDAK ADA
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +192,7 @@ function generateKalenderKedKep($date)
 
                                 <!-- modal   -->
                                 <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <div class="text-center text-lg">INFO PRAKTIK KEDOKTERAN DAN KEPERAWATAN TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
@@ -167,6 +204,49 @@ function generateKalenderKedKep($date)
                                                 JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
                                                 KEDOKTERAN : <?php echo $kuota_ked; ?><br>
                                                 KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                                <hr>
+                                                <?php
+                                                if ($q1_kedKep->rowCount() > 0) {
+                                                ?>
+                                                    <div class="table-responsive text-left">
+                                                        <table class='table table-striped'>
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th>Nama Institusi</th>
+                                                                    <th>Jurusan</th>
+                                                                    <th>Jumlah Praktik</th>
+                                                                    <th>Tanggal Mulai</th>
+                                                                    <th>Tanggal Selesai</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                while ($d1_kedKep = $q1_kedKep->fetch(PDO::FETCH_ASSOC)) {
+                                                                ?>
+                                                                    <tr>
+                                                                        <td><?php echo $d1_kedKep['nama_institusi']; ?></td>
+                                                                        <td><?php echo $d1_kedKep['nama_jurusan_pdd']; ?></td>
+                                                                        <td><?php echo $d1_kedKep['jumlah_praktik']; ?></td>
+                                                                        <td><?php echo tanggal($d1_kedKep['tgl_mulai_praktik']); ?></td>
+                                                                        <td><?php echo tanggal($d1_kedKep['tgl_selesai_praktik']); ?></td>
+                                                                    </tr>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <div class="jumbotron">
+                                                        <div class="jumbotron-fluid font-weight-bold">
+                                                            DATA PRAKTIK TIDAK ADA
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>

@@ -43,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Perbaikan query data nilai dan pembimbing akun Institusi"
+git commit -a -m "Informasi Modal Kedokteran dan Keperawatan"
 git pull
 git push
 
