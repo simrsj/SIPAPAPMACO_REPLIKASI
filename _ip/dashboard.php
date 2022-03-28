@@ -195,7 +195,8 @@
                            <div class="col-xl-12 col-md-12 col-12">
                                <h3>Hai <br><?php echo $dAr_ins['nama_institusi']; ?> </h3>
                            <br/> 
-                           <?php if($date_diff <= 0) { 
+                           <?php if(ISNULL($selesai)){
+                               if($date_diff <= 0) { 
                                     if($before_end <= 0){ ?>
                                         <div class="col-xl-12 col-md-12 col-12"> <h5><span class="badge badge-success col-12">MOU Kita masih <b>AKTIF</b>,<br> Terima Kasih Telah Ber-MOU dengan Kami</span></h5></div>
                                 <?php }else{ ?>          
@@ -203,6 +204,9 @@
                                <?php } ?>
                             <?php } elseif($date_diff > 0) { ?>
                                     <div class="col-xl-12 col-md-12 col-12"><h5><span class="badge badge-dark col-12">Mohon Maaf MOU Kita <b>SUDAH KADALUARSA</b>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut :  <b>081321417344 (Adhie)</b>  </span></h5></div>
+                            <?php }
+                                    }else{ ?>
+                                    <div class="col-xl-12 col-md-12 col-12"><h5><span class="badge badge-orange col-12">Mohon Maaf Kita <b>BELUM MOU</b>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut :  <b>081321417344 (Adhie)</b>  </span></h5></div>
                             <?php } ?>
                           
                            </div>
