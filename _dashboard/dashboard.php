@@ -175,7 +175,7 @@
                               $q_messPraktik = $conn->query($sql_messPraktik);
                               if ($q_messPraktik->rowCount() > 0) {
                               ?>
-                                <table class="table table-hover text-center">
+                                <table class="table table-hover table-striped text-center">
                                   <thead class="table-light">
                                     <tr class="font-weight-bold ">
                                       <th>Nama Institusi</th>
