@@ -43,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Perbaikan navbar Hal. Dashboard, Login dan Register"
+git commit -a -m "Perbaikan navbar Hal. Dashboard, Login, dan Register"
 git pull
 git push
 
