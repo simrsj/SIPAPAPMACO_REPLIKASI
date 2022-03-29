@@ -43,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Perbaikan Data Nilai Keperawatan"
+git commit -a -m "Proges Dashboard Mess"
 git pull
 git push
 
