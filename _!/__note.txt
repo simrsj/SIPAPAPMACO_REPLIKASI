@@ -43,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Progres Data Jadwal Mess"
+git commit -a -m "Perbaikan query data peondokan, accordioan data mess dan pemondokan"
 git pull
 git push
 

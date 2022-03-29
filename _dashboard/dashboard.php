@@ -1,5 +1,5 @@
 <body class="bg-gradient-primary">
-  <meta http-equiv="refresh" content="30">
+  <meta http-equiv="refresh" content="60">
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -171,14 +171,15 @@
                           <!-- data detail mess  -->
                       <tr>
                         <td colspan="7" class="p-0">
-                          <div id="accordion">
-                            <div id="c_<?php echo $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion">
+                          <div id="accordion<?php echo $d_mess['id_mess']; ?>">
+                            <div id="c_<?php echo $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion<?php echo $d_mess['id_mess']; ?>">
                               <?php
                               $sql_messPraktik = "SELECT * FROM tb_praktik";
                               $sql_messPraktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
                               $sql_messPraktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
                               $sql_messPraktik .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
-                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
+                              $sql_messPraktik .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
+                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "'  AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
                               // echo $sql_messPraktik . "<br>";
                               $q_messPraktik = $conn->query($sql_messPraktik);
                               if ($q_messPraktik->rowCount() > 0) {
@@ -306,14 +307,16 @@
                           <!-- data detail mess  -->
                       <tr>
                         <td colspan="7" class="p-0">
-                          <div id="accordion">
-                            <div id="c_<?php echo $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion">
+                          <div id="accordion<?php echo $d_mess['id_mess']; ?>">
+                            <div id="c_<?php echo $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion<?php echo $d_mess['id_mess']; ?>">
                               <?php
                               $sql_messPraktik = "SELECT * FROM tb_praktik";
                               $sql_messPraktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
                               $sql_messPraktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
                               $sql_messPraktik .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
-                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
+                              $sql_messPraktik .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
+                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "'  AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
+
                               // echo $sql_messPraktik . "<br>";
                               $q_messPraktik = $conn->query($sql_messPraktik);
                               if ($q_messPraktik->rowCount() > 0) {
