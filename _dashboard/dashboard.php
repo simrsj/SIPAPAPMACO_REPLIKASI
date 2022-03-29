@@ -35,11 +35,16 @@
               </div>
               <hr>
               <?php
-              $sql_praktik = "SELECT * FROM tb_praktik ";
+              $sql_praktik = "SELECT * FROM tb_praktik";
               $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
               $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-              $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y'";
-              $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
+              $sql_praktik .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
+              $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "'";
+              // $sql_praktik = "SELECT * FROM tb_praktik ";
+              // $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+              // $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+              // $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y'";
+              // $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
               // echo $sql_praktik;
 
@@ -136,12 +141,15 @@
                     $no = 1;
                     $jumlah_terisi = 0;
                     while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-
-                      $sql_mess1 = "SELECT * FROM tb_praktik ";
+                      $sql_mess1 = "SELECT tb_praktik.id_praktik, nama_mess, nama_institusi, nama_jurusan_pdd, jumlah_praktik, tgl_mulai_praktik, tgl_selesai_praktik, praktik_tgl  FROM tb_praktik";
+                      $sql_mess1 .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+                      $sql_mess1 .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                      $sql_mess1 .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
                       $sql_mess1 .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
                       $sql_mess1 .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
-                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_mess.id_mess = " . $d_mess['id_mess'];
+                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "' AND  tb_mess.id_mess = " . $d_mess['id_mess'];
                       $sql_mess1 .= " ORDER BY tb_mess.nama_mess ASC";
+                      // echo $sql_mess1 . "<br>";
                       $q_mess1 = $conn->query($sql_mess1);
                       $jumlah_terisi = 0;
                       while ($d_mess1 = $q_mess1->fetch(PDO::FETCH_ASSOC)) {
@@ -170,7 +178,7 @@
                               $sql_messPraktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
                               $sql_messPraktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
                               $sql_messPraktik .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
-                              $sql_messPraktik .= " WHERE tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
+                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
                               // echo $sql_messPraktik . "<br>";
                               $q_messPraktik = $conn->query($sql_messPraktik);
                               if ($q_messPraktik->rowCount() > 0) {
@@ -205,7 +213,7 @@
                               } else {
                               ?>
                                 <div class="jumbotron">
-                                  <div class="jumbotron-fluid font-weight-bold">
+                                  <div class="jumbotron-fluid font-weight-bold text-center">
                                     DATA PRAKTIK TIDAK ADA
                                   </div>
                                 </div>
@@ -216,7 +224,6 @@
                           </div>
                         </td>
                       </tr>
-
                       </td>
                       </tr>
                     <?php
@@ -243,7 +250,6 @@
               <div class="text-center">
                 <div class="h5 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA PEMONDOKAN</span></div>
               </div>
-              <hr>
               <?php
               $sql_mess = "SELECT * FROM tb_mess ";
               $sql_mess .= " WHERE nama_pemilik_mess != 'RS Jiwa Provinsi Jawa Barat' AND status_mess = 'y'";
@@ -253,8 +259,8 @@
               $r_mess = $q_mess->rowCount();
               ?>
               <div class="table-responsive">
-                <table class="table table-hover table-striped">
-                  <thead class="table-light">
+                <table class="table">
+                  <thead class="table-dark">
                     <tr class="font-weight-bold text-center">
                       <th scope='col'>NO</th>
                       <th>NAMA MESS</th>
@@ -262,6 +268,7 @@
                       <th>KAPASITAS TOTAL</th>
                       <th>KAPASITAS TERISI</th>
                       <th>KAPASITAS SISA</th>
+                      <th>Rincian</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -269,12 +276,15 @@
                     $no = 1;
                     $jumlah_terisi = 0;
                     while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-
-                      $sql_mess1 = "SELECT * FROM tb_praktik ";
+                      $sql_mess1 = "SELECT tb_praktik.id_praktik, nama_mess, nama_institusi, nama_jurusan_pdd, jumlah_praktik, tgl_mulai_praktik, tgl_selesai_praktik, praktik_tgl  FROM tb_praktik";
+                      $sql_mess1 .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+                      $sql_mess1 .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                      $sql_mess1 .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
                       $sql_mess1 .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
                       $sql_mess1 .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
-                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_mess.id_mess = " . $d_mess['id_mess'];
+                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "' AND  tb_mess.id_mess = " . $d_mess['id_mess'];
                       $sql_mess1 .= " ORDER BY tb_mess.nama_mess ASC";
+                      // echo $sql_mess1 . "<br>";
                       $q_mess1 = $conn->query($sql_mess1);
                       $jumlah_terisi = 0;
                       while ($d_mess1 = $q_mess1->fetch(PDO::FETCH_ASSOC)) {
@@ -288,17 +298,76 @@
                         <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
                         <td class="text-center"><?php echo $jumlah_terisi; ?></td>
                         <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
-                        <?php
-                        $no++;
-                        ?>
+                        <td class="text-center">
+                          <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#c_<?php echo $d_mess['id_mess']; ?>">
+                            <i class="fas fa-info-circle"></i>
+                          </button>
+
+                          <!-- data detail mess  -->
+                      <tr>
+                        <td colspan="7" class="p-0">
+                          <div id="accordion">
+                            <div id="c_<?php echo $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion">
+                              <?php
+                              $sql_messPraktik = "SELECT * FROM tb_praktik";
+                              $sql_messPraktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+                              $sql_messPraktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                              $sql_messPraktik .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
+                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
+                              // echo $sql_messPraktik . "<br>";
+                              $q_messPraktik = $conn->query($sql_messPraktik);
+                              if ($q_messPraktik->rowCount() > 0) {
+                              ?>
+                                <table class="table table-hover table-striped text-center">
+                                  <thead class="table-light">
+                                    <tr class="font-weight-bold ">
+                                      <th>Nama Institusi</th>
+                                      <th>Jurusan</th>
+                                      <th>Jumlah Praktik</th>
+                                      <th>Tanggal Mulai</th>
+                                      <th>Tanggal Selesai</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <?php
+                                    while ($d_messPraktik = $q_messPraktik->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                      <tr>
+                                        <td><?php echo $d_messPraktik['nama_institusi']; ?></td>
+                                        <td><?php echo $d_messPraktik['nama_jurusan_pdd']; ?></td>
+                                        <td><?php echo $d_messPraktik['jumlah_praktik']; ?></td>
+                                        <td><?php echo tanggal($d_messPraktik['tgl_mulai_praktik']); ?></td>
+                                        <td><?php echo tanggal($d_messPraktik['tgl_selesai_praktik']); ?></td>
+                                      </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                  </tbody>
+                                </table>
+                              <?php
+                              } else {
+                              ?>
+                                <div class="jumbotron">
+                                  <div class="jumbotron-fluid font-weight-bold text-center">
+                                    DATA PRAKTIK TIDAK ADA
+                                  </div>
+                                </div>
+                              <?php
+                              }
+                              ?>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      </td>
                       </tr>
                     <?php
+                      $no++;
                     }
                     ?>
                   </tbody>
                 </table>
               </div>
-              <hr />
             </div>
           </div>
         </div>
@@ -307,6 +376,7 @@
   </div>
 
 </body>
+
 <script type="text/javascript">
   var span = document.getElementById("jam");
   time();
