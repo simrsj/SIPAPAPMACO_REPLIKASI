@@ -1,11 +1,8 @@
 <body class="bg-gradient-primary">
   <meta http-equiv="refresh" content="60">
-  <nav class="navbar navbar-expand-sm navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
 
-    <div class="collapse navbar-collapse h5 font-weight-bold row">
+    <div class="h5 font-weight-bold row">
       <ul class="navbar-nav col">
         <li class="nav-item active">
           <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
@@ -16,15 +13,15 @@
         </li>
       </ul>
       <ul class="navbar-nav col-auto">
-        <a class="btn btn-success btn-sm" href="http://192.168.7.89/kuesioner/survey.php" target="_blank"><i class="fas fa-clipboard-check"></i> SURVEY</a>&nbsp;
-        <a class="btn btn-info btn-sm" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>&nbsp;
-        <a class="btn btn-primary btn-sm" href="?lo"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+        <a class="btn btn-success btn-sm  my-auto" href="http://192.168.7.89/kuesioner/survey.php" target="_blank"><i class="fas fa-clipboard-check"></i> SURVEY</a>&nbsp;
+        <a class="btn btn-info btn-sm  my-auto" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>&nbsp;
+        <a class="btn btn-primary btn-sm  my-auto" href="?lo"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
       </ul>
     </div>
   </nav>
 
   <!-- DATA PRAKTIKAN -->
-  <div class="container">
+  <div class="container pt-5">
     <div class="card o-hidden border-0 shadow-lg my-3">
       <div class="card-body p-0">
         <div class="row">

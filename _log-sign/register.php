@@ -1,6 +1,6 @@
 <body class="bg-gradient-primary">
 
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,7 +23,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container pt-5">
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
@@ -36,7 +36,7 @@
                             </div>
                             <form class="user" action="?reg_x" method="POST">
                                 <div class="form-group">
-                                    <select class="form-control" id="instansi" onChange='Bukains()' name="id_institusi" required>
+                                    <select class="js-example-placeholder-single form-control" id="instansi" onChange='Bukains()' name="id_institusi" id="" required>
                                         <option value="">--<i> Pilih Institusi </i>--</option>
 
                                         <?php
@@ -55,6 +55,7 @@
                                         ?>
                                         <option value='0'>-- <i>LAINNYA</i> --</option>
                                     </select>
+                                    <center><span class="text-xs font-italic text-center">Pilih <b>-- LAINNYA --</b> bila nama institusi tidak terdaftar dan isikan nama institusi yang disediakan</span></center>
                                 </div>
                                 <div class="form-group" id="institusi_lainnya">
                                 </div>
@@ -63,6 +64,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control" placeholder="Alamat Email untuk username" name="email_user">
+                                    <center><span class="text-xs font-italic text-center">Alamat e-mail akan dijadikan <b>username</b></span></center>
                                 </div>
                                 <div class="form-group">
                                     <input type="number" class="form-control" placeholder="No. Telp" name="no_telp_user">

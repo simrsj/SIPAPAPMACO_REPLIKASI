@@ -43,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Perbaikan query data peondokan, accordioan data mess dan pemondokan"
+git commit -a -m "Perbaikan navbar Hal. Dashboard, Login dan Register"
 git pull
 git push
 

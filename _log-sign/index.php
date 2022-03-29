@@ -4,7 +4,7 @@ if (empty($_SESSION['username_user'])) {
 
 	<body class="bg-gradient-primary">
 
-		<nav class="navbar navbar-expand-sm navbar-light bg-light">
+		<nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -27,7 +27,7 @@ if (empty($_SESSION['username_user'])) {
 			</div>
 		</nav>
 
-		<div class="container">
+		<div class="container pt-5">
 			<!-- Outer Row -->
 			<div class="row justify-content-center">
 				<div class="col-xl-10 col-lg-12 col-md-9">
