@@ -43,7 +43,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Perbaikan Dashboard Utama (Data Praktik, Mess, Pemondokan)"
+git commit -a -m "Progres Data Jadwal Mess"
 git pull
 git push
 

@@ -30,6 +30,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <th>Kapasitas Total</th>
                                 <th>Tarif Tanpa Makan</th>
                                 <th>Tarif Dengan Makan</th>
+                                <th>Cek Jadwal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,6 +46,36 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
                                     <td><?php echo "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?></td>
                                     <td><?php echo "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?></td>
+                                    <td class="text-center">
+
+                                        <!-- tambah harga -->
+                                        <a class='btn btn-outline-primary btn-sm ' href='#' data-toggle='modal' data-target='#mess<?php echo $d_mess['id_mess']; ?>'>
+                                            <i class="fas fa-info-circle"></i> Rincian
+                                        </a>
+
+                                        <!-- modal tambah Harga  -->
+                                        <div class="modal fade" id="mess<?php echo $d_mess['id_mess']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form class="form-group" method="POST">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">TAMBAH AKUN</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            CEK
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <input type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal" value="Kembali">
+                                                            <input type="submit" class="btn btn-primary btn-sm" name="tambah_user" value="Tambah">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             <?php
                                 $no++;
