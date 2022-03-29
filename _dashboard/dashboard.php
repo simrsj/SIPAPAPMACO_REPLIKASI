@@ -1,5 +1,5 @@
 <body class="bg-gradient-primary">
-  <meta http-equiv="refresh" content="101027831028973">
+  <meta http-equiv="refresh" content="30">
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
