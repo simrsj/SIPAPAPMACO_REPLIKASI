@@ -1,5 +1,6 @@
 <?php
-
+echo $_GET['id'] . "<br>";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 define('JUMLAH_KOLOM1', 7);
 
 function generateKalenderKedKep($date)
@@ -25,9 +26,9 @@ function generateKalenderKedKep($date)
     $blank = date('w', strtotime("{$year}-{$month}-01"));
 ?>
 
-    <div class="table-responsive pt-0">
+    <div class="table-responsive">
         <table class='table table-striped'>
-            <thead class="thead-dark">
+            <thead class=" thead-dark">
                 <tr>
                     <th colspan="<?php echo JUMLAH_KOLOM1 ?>" class="text-center">
                         <?php echo $title . " " . $year; ?>
@@ -63,85 +64,65 @@ function generateKalenderKedKep($date)
                             $t = $i;
                         }
                         $tgl = $year . "-" . $month . "-" . $t;
-                        $sql_kedKep = "SELECT * FROM tb_praktik";
-                        $sql_kedKep .= " JOIN tb_praktik_tgl  ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
-                        $sql_kedKep .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-                        $sql_kedKep .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-                        $sql_kedKep .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl'";
-                        $sql_kedKep .= " AND (tb_praktik.id_jurusan_pdd = 1 OR tb_praktik.id_jurusan_pdd = 2)";
-                        $sql_kedKep .= " AND (tb_praktik.status_cek_praktik IN ('BYR','VPT_Y','VPT_Y_PPDS') OR (tb_praktik.status_praktik IN ('W','Y')))";
-                        // echo "$sql_kedKep<br>";
-                        $q_kedKep = $conn->query($sql_kedKep);
-                        $q1_kedKep = $conn->query($sql_kedKep);
+                        $sql_messTgl = "SELECT * FROM tb_praktik";
+                        $sql_messTgl .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
+                        $sql_messTgl .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
+                        $sql_messTgl .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
+                        $sql_messTgl .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl' AND tb_mess.id_mess = " . $_GET['id'];
+                        // echo "$sql_messTgl<br>";
+                        $q_mess = $conn->query($sql_messTgl);
+                        $q1_mess = $conn->query($sql_messTgl);
 
                         $jp_jt = 0;
-                        $jp_j = 0;
-                        $id = 0;
-                        $jp_j_ked = 0;
-                        $jp_j_kep = 0;
-                        $kuota_ked = 0;
-                        $kuota_kep = 0;
-                        while ($d_kedKep = $q_kedKep->fetch(PDO::FETCH_ASSOC)) {
-                            if ($d_kedKep['id_praktik'] != $id) {
-
-                                //Kuota masing-masing dari kedokteran dan keperawatan
-                                if ($d_kedKep['id_jurusan_pdd'] == 1) {
-                                    $kuota_ked += $jp_j + $d_kedKep['jumlah_praktik'];
-                                } elseif ($d_kedKep['id_jurusan_pdd'] == 2) {
-                                    $kuota_kep += $jp_j + $d_kedKep['jumlah_praktik'];
-                                }
-
-                                $jp_jt = ($kuota_ked + $jp_j_ked) + ($kuota_kep + $jp_j_kep);
-                            } else {
-                                $jp_j = $d_kedKep['jumlah_praktik'];
-                                $jp_j_ked = $kuota_ked;
-                                $jp_j_kep = $kuota_kep;
-                                $id = $d_kedKep['id_praktik'];
-                            }
+                        while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+                            $nama_mess = $d_mess['nama_mess'];
+                            $jp_jt += $d_mess['jumlah_praktik'];
                         }
 
-                        $sql_kuotaKedKep = "SELECT * FROM tb_kuota";
-                        $sql_kuotaKedKep .= " WHERE id_kuota= 1";
+                        $sql_kuotaMess = "SELECT * FROM tb_mess";
+                        $sql_kuotaMess .= " WHERE id_mess= " .  $_GET['id'];
 
-                        $q_kuotaKedKep = $conn->query($sql_kuotaKedKep);
-                        $d_kuotaKedKep = $q_kuotaKedKep->fetch(PDO::FETCH_ASSOC);
-                        $kuota_keKep = $d_kuotaKedKep['jumlah_kuota'];
+                        $q_kuotaMess = $conn->query($sql_kuotaMess);
+                        $d_kuotaMess = $q_kuotaMess->fetch(PDO::FETCH_ASSOC);
+                        $kuota_messTotal = $d_kuotaMess['kapasitas_t_mess'];
 
                         //penentuan jenis tombol
                         if ($jp_jt == 0) {
-                            $btn_kedKep = "success";
-                        } elseif (($jp_jt > 0) && ($jp_jt < $kuota_keKep)) {
-                            $btn_kedKep = "warning";
-                        } elseif ($jp_jt >= $kuota_keKep) {
-                            $btn_kedKep = "danger";
+                            $btn_mess = "success";
+                        } elseif (($jp_jt > 0) && ($jp_jt < $kuota_messTotal)) {
+                            $btn_mess = "warning";
+                        } elseif ($jp_jt >= $kuota_messTotal) {
+                            $btn_mess = "danger";
                         } else {
-                            $btn_kedKep = "secondary";
+                            $btn_mess = "secondary";
                         }
                         // echo $jp_jt . "-" . $kuota_ked . "-" . $kuota_kep . "<br>";
 
+                        $sql_infoMess = " SELECT * FROM tb_mess ";
+                        $sql_infoMess .= " WHERE tb_mess.id_mess = " . $_GET['id'];
+                        // echo $sql_infoMess . "<br>";
+                        $q_infoMess = $conn->query($sql_infoMess);
+                        $d_infoMess = $q_infoMess->fetch(PDO::FETCH_ASSOC);
                         if ($day == $i) {
                     ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-outline-<?php echo $btn_kedKep; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
 
                                 <!-- modal   -->
-                                <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>">
+                                    <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="text-center text-lg">INFO PRAKTIK KEDOKTERAN DAN KEPERAWATAN TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
-                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
+                                                <div class="text-center text-lg">INFO MESS <?php echo $d_infoMess['nama_mess']; ?> TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
                                             </div>
                                             <div class="modal-body">
                                                 JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
-                                                KEDOKTERAN : <?php echo $kuota_ked; ?><br>
-                                                KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                                KUOTA MESS : <?php echo $kuota_messTotal; ?><br>
+                                                KUOTA SISA : <?php echo $kuota_sisa; ?>
                                                 <hr>
                                                 <?php
-                                                if ($q1_kedKep->rowCount() > 0) {
+                                                if ($q1_mess->rowCount() > 0) {
                                                 ?>
                                                     <div class="table-responsive text-left">
                                                         <table class='table table-striped'>
@@ -156,14 +137,14 @@ function generateKalenderKedKep($date)
                                                             </thead>
                                                             <tbody>
                                                                 <?php
-                                                                while ($d1_kedKep = $q1_kedKep->fetch(PDO::FETCH_ASSOC)) {
+                                                                while ($d1_mess = $q1_mess->fetch(PDO::FETCH_ASSOC)) {
                                                                 ?>
                                                                     <tr>
-                                                                        <td><?php echo $d1_kedKep['nama_institusi']; ?></td>
-                                                                        <td><?php echo $d1_kedKep['nama_jurusan_pdd']; ?></td>
-                                                                        <td><?php echo $d1_kedKep['jumlah_praktik']; ?></td>
-                                                                        <td><?php echo tanggal($d1_kedKep['tgl_mulai_praktik']); ?></td>
-                                                                        <td><?php echo tanggal($d1_kedKep['tgl_selesai_praktik']); ?></td>
+                                                                        <td><?php echo $d1_mess['nama_institusi']; ?></td>
+                                                                        <td><?php echo $d1_mess['nama_jurusan_pdd']; ?></td>
+                                                                        <td><?php echo $d1_mess['jumlah_praktik']; ?></td>
+                                                                        <td><?php echo tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
+                                                                        <td><?php echo tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
                                                                     </tr>
                                                                 <?php
                                                                 }
@@ -192,25 +173,22 @@ function generateKalenderKedKep($date)
                         ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-outline-<?php echo $btn_kedKep; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
 
                                 <!-- modal   -->
-                                <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>">
+                                    <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="text-center text-lg">INFO PRAKTIK KEDOKTERAN DAN KEPERAWATAN TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
-                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
+                                                <div class="text-center text-lg">INFO MESS <?php echo $d_infoMess['nama_mess']; ?> TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
                                             </div>
                                             <div class="modal-body">
                                                 JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
-                                                KEDOKTERAN : <?php echo $kuota_ked; ?><br>
-                                                KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                                KUOTA MESS : <?php echo $kuota_messTotal; ?><br>
+                                                KUOTA SISA : <?php echo $kuota_sisa; ?>
                                                 <hr>
                                                 <?php
-                                                if ($q1_kedKep->rowCount() > 0) {
+                                                if ($q1_mess->rowCount() > 0) {
                                                 ?>
                                                     <div class="table-responsive text-left">
                                                         <table class='table table-striped'>
@@ -225,14 +203,14 @@ function generateKalenderKedKep($date)
                                                             </thead>
                                                             <tbody>
                                                                 <?php
-                                                                while ($d1_kedKep = $q1_kedKep->fetch(PDO::FETCH_ASSOC)) {
+                                                                while ($d1_mess = $q1_mess->fetch(PDO::FETCH_ASSOC)) {
                                                                 ?>
                                                                     <tr>
-                                                                        <td><?php echo $d1_kedKep['nama_institusi']; ?></td>
-                                                                        <td><?php echo $d1_kedKep['nama_jurusan_pdd']; ?></td>
-                                                                        <td><?php echo $d1_kedKep['jumlah_praktik']; ?></td>
-                                                                        <td><?php echo tanggal($d1_kedKep['tgl_mulai_praktik']); ?></td>
-                                                                        <td><?php echo tanggal($d1_kedKep['tgl_selesai_praktik']); ?></td>
+                                                                        <td><?php echo $d1_mess['nama_institusi']; ?></td>
+                                                                        <td><?php echo $d1_mess['nama_jurusan_pdd']; ?></td>
+                                                                        <td><?php echo $d1_mess['jumlah_praktik']; ?></td>
+                                                                        <td><?php echo tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
+                                                                        <td><?php echo tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
                                                                     </tr>
                                                                 <?php
                                                                 }

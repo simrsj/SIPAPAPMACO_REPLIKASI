@@ -14,7 +14,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         </div>
         <div class="card-body">
             <?php
-            $sql_mess = "SELECT * FROM tb_mess WHERE status_mess = 'y' ORDER BY nama_mess ASC";
+            $sql_mess = "SELECT * FROM tb_mess ";
+            $sql_mess .= " WHERE status_mess = 'y'";
+            $sql_mess .= " ORDER BY nama_mess ASC";
+
+            echo $sql_mess . "<br>";
             $q_mess = $conn->query($sql_mess);
             $r_mess = $q_mess->rowCount();
             if ($r_mess > 0) {
@@ -49,29 +53,23 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     <td class="text-center">
 
                                         <!-- tambah harga -->
-                                        <a class='btn btn-outline-primary btn-sm ' href='#' data-toggle='modal' data-target='#mess<?php echo $d_mess['id_mess']; ?>'>
+                                        <a class='btn btn-outline-primary btn-sm cekJadwalMess' id='<?php echo $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?php echo $d_mess['id_mess']; ?>'>
                                             <i class="fas fa-info-circle"></i> Rincian
                                         </a>
 
                                         <!-- modal tambah Harga  -->
                                         <div class="modal fade" id="mess<?php echo $d_mess['id_mess']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog modal-dialog-scrollable modal-lg ">
                                                 <div class="modal-content">
-                                                    <form class="form-group" method="POST">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLabel">TAMBAH AKUN</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            CEK
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal" value="Kembali">
-                                                            <input type="submit" class="btn btn-primary btn-sm" name="tambah_user" value="Tambah">
-                                                        </div>
-                                                    </form>
+                                                    <div class="modal-header text-uppercase font-weight-bold">
+                                                        <b><?php echo $d_mess['nama_mess']; ?></b>
+                                                    </div>
+                                                    <div class="modal-body p-0" id="dataJadwalMess">
+                                                    </div>
+                                                    <div class="modal-footer pb-0">
+                                                        <input type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal" value="Kembali">
+                                                        <input type="submit" class="btn btn-primary btn-sm" name="tambah_user" value="Tambah">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,6 +168,17 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
 <script>
     $(document).ready(function() {
+
+        $(".cekJadwalMess").click(function() {
+            var id = $(this).attr('id');
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                document.getElementById("dataJadwalMess").innerHTML = xhttp.responseText;
+            };
+            xhttp.open("GET", "_admin/insert/i_praktik_mess_dataJadwal.php?id=" + id, true);
+            xhttp.send();
+        });
 
         $("#simpan_mess").click(function() {
 
