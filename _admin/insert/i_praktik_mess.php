@@ -1,24 +1,53 @@
 <?php
 $id_praktik = $_GET['m'];
-$q_praktik = $conn->query("SELECT * FROM tb_praktik WHERE id_praktik = $id_praktik");
+$sql_praktik = "SELECT * FROM tb_praktik ";
+$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+$sql_praktik .= " WHERE id_praktik = $id_praktik";
+$q_praktik = $conn->query($sql_praktik);
 $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 $jumlah_praktik = $d_praktik['jumlah_praktik'];
 ?>
 
 <div class="container-fluid">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex flex-row align-items-center">
-            <div class="h4 text-gray-800 font-weight-bold">
-                Pilih Mess/Pemondokan
+    <div class="row">
+        <div class="col-md-9 h4 text-gray-900 ">
+            Pilih Mess/Pemondokan
+        </div>
+    </div>
+    <div class="card shadow mb-4 mt-3">
+        <div class="card-body">
+            <div class="row text-center h6 text-gray-900 ">
+                <div class="col-6">
+                    Nama Institusi :
+                    <b><?php echo $d_praktik['nama_institusi']; ?></b>
+                    <hr>
+                    Jumlah Praktik :
+                    <b><?php echo $d_praktik['jumlah_praktik']; ?></b>
+                </div>
+                <div class="col-6">
+                    Tanggal Mulai :
+                    <b><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?></b>
+                    <hr>
+                    Tanggal Selesai :
+                    <b><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?></b>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="card shadow mb-4 mt-3">
         <div class="card-body">
             <?php
-            $sql_mess = "SELECT * FROM tb_mess WHERE status_mess = 'y' ORDER BY nama_mess ASC";
+            $sql_mess = "SELECT * FROM tb_mess ";
+            $sql_mess .= " WHERE status_mess = 'y'";
+            $sql_mess .= " ORDER BY nama_mess ASC";
+
+            // echo $sql_mess . "<br>";
             $q_mess = $conn->query($sql_mess);
             $r_mess = $q_mess->rowCount();
             if ($r_mess > 0) {
             ?>
+
+                <input type="hidden" name="jumlah_mess" id="jumlah_mess" value="<?php echo $r_mess; ?>">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-dark">
@@ -49,29 +78,23 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     <td class="text-center">
 
                                         <!-- tambah harga -->
-                                        <a class='btn btn-outline-primary btn-sm ' href='#' data-toggle='modal' data-target='#mess<?php echo $d_mess['id_mess']; ?>'>
+                                        <a class='btn btn-outline-primary btn-sm cekJadwalMess<?php echo $no; ?>' id='<?php echo $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?php echo $d_mess['id_mess']; ?>'>
                                             <i class="fas fa-info-circle"></i> Rincian
                                         </a>
 
                                         <!-- modal tambah Harga  -->
                                         <div class="modal fade" id="mess<?php echo $d_mess['id_mess']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog modal-dialog-scrollable modal-lg ">
                                                 <div class="modal-content">
-                                                    <form class="form-group" method="POST">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLabel">TAMBAH AKUN</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            CEK
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal" value="Kembali">
-                                                            <input type="submit" class="btn btn-primary btn-sm" name="tambah_user" value="Tambah">
-                                                        </div>
-                                                    </form>
+                                                    <div class="modal-header text-uppercase font-weight-bold">
+                                                        <b><?php echo $d_mess['nama_mess']; ?></b>
+                                                    </div>
+                                                    <div class="modal-body p-0" id="dataJadwalMess<?php echo $no; ?>">
+                                                    </div>
+                                                    <div class="modal-footer pb-0">
+                                                        <input type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal" value="Kembali">
+                                                        <input type="submit" class="btn btn-primary btn-sm" name="tambah_user" value="Tambah">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,6 +194,26 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 <script>
     $(document).ready(function() {
 
+        <?php
+        $no = 1;
+        while ($no < $r_mess) {
+        ?>
+            $(".cekJadwalMess<?php echo $no; ?>").click(function() {
+
+                var id = $(this).attr('id');
+                console.log("No " + 1);
+                console.log("MASUK");
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    document.getElementById("dataJadwalMess<?php echo $no; ?>").innerHTML = xhttp.responseText;
+                };
+                xhttp.open("GET", "_admin/insert/i_praktik_mess_dataJadwal.php?id=" + id, true);
+                xhttp.send();
+            });
+        <?php
+            $no++;
+        }
+        ?>
         $("#simpan_mess").click(function() {
 
             // console.log("masuk tambah");

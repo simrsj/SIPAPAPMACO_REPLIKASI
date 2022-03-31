@@ -142,34 +142,38 @@ function generateKalenderKedKep($date)
                                                 <hr>
                                                 <?php
                                                 if ($q1_kedKep->rowCount() > 0) {
-                                                    while ($d1_kedKep = $q1_kedKep->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
-                                                        <div class="table-responsive text-left">
-                                                            <table class='table table-striped' id="myTable">
-                                                                <thead class="thead-dark">
-                                                                    <tr>
-                                                                        <th>Nama Institusi</th>
-                                                                        <th>Tanggal Mulai</th>
-                                                                        <th>Tanggal Selesai</th>
-                                                                        <th>Jumlah Praktik</th>
-                                                                        <th>Jurusan</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
+                                                    <div class="table-responsive text-left">
+                                                        <table class='table table-striped'>
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th>Nama Institusi</th>
+                                                                    <th>Jurusan</th>
+                                                                    <th>Jumlah Praktik</th>
+                                                                    <th>Tanggal Mulai</th>
+                                                                    <th>Tanggal Selesai</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                while ($d1_kedKep = $q1_kedKep->fetch(PDO::FETCH_ASSOC)) {
+                                                                ?>
                                                                     <tr>
                                                                         <td><?php echo $d1_kedKep['nama_institusi']; ?></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
+                                                                        <td><?php echo $d1_kedKep['nama_jurusan_pdd']; ?></td>
+                                                                        <td><?php echo $d1_kedKep['jumlah_praktik']; ?></td>
+                                                                        <td><?php echo tanggal($d1_kedKep['tgl_mulai_praktik']); ?></td>
+                                                                        <td><?php echo tanggal($d1_kedKep['tgl_selesai_praktik']); ?></td>
                                                                     </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    <?php
-                                                    }
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                <?php
                                                 } else {
-                                                    ?>
+                                                ?>
                                                     <div class="jumbotron">
                                                         <div class="jumbotron-fluid font-weight-bold">
                                                             DATA PRAKTIK TIDAK ADA

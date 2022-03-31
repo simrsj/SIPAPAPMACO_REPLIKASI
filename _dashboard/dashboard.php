@@ -1,7 +1,6 @@
 <body class="bg-gradient-primary">
   <meta http-equiv="refresh" content="60">
-  <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
-
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="h5 font-weight-bold row">
       <ul class="navbar-nav col">
         <li class="nav-item active">
@@ -21,7 +20,7 @@
   </nav>
 
   <!-- DATA PRAKTIKAN -->
-  <div class="container pt-5">
+  <div class="container">
     <div class="card o-hidden border-0 shadow-lg my-3">
       <div class="card-body p-0">
         <div class="row">

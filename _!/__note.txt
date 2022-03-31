@@ -28,7 +28,6 @@ Link Luar (Public) : http://103.147.222.122:88/SM/
 Modul yang sudah selesai akan dihilangkan diudate selanjutnya, 
 Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/TLSMDev
 
-
 - 🔃 Cetak Data SP Pembimbing / CI
 - Unduh Invoice Format .doc/docx 
 - Unduh Nilai Format .xls/xlsx 
@@ -39,11 +38,13 @@ PERTANYAAN
 
 - Gambar default bila tidak ada gambar logo Institusi
 - Preloader untuk proses generate Kalender (Seraching)
+- Link Survey Hilangankan?
+- 
 --------------------------------------------------------------------------------------------------------------------
 
 git status
 git add . 
-git commit -a -m "Perbaikan navbar Hal. Dashboard, Login, dan Register"
+git commit -a -m "Progress Loading Screen"
 git pull
 git push
 
