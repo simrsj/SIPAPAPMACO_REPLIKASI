@@ -44,7 +44,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Perbaikan Cek Jadwal Mess"
+git commit -a -m "Perbaikan Judul Data Praktik"
 git pull
 git push
 

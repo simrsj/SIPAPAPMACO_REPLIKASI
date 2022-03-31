@@ -1,6 +1,9 @@
 <?php
 $id_praktik = $_GET['m'];
-$q_praktik = $conn->query("SELECT * FROM tb_praktik WHERE id_praktik = $id_praktik");
+$sql_praktik = "SELECT * FROM tb_praktik ";
+$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+$sql_praktik .= " WHERE id_praktik = $id_praktik";
+$q_praktik = $conn->query($sql_praktik);
 $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 $jumlah_praktik = $d_praktik['jumlah_praktik'];
 ?>
@@ -13,9 +16,20 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
     </div>
     <div class="card shadow mb-4 mt-3">
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-9 h4 text-gray-900 ">
-                    Pilih Mess/Pemondokan
+            <div class="row text-center h6 text-gray-900 ">
+                <div class="col-6">
+                    Nama Institusi :
+                    <b><?php echo $d_praktik['nama_institusi']; ?></b>
+                    <hr>
+                    Jumlah Praktik :
+                    <b><?php echo $d_praktik['jumlah_praktik']; ?></b>
+                </div>
+                <div class="col-6">
+                    Tanggal Mulai :
+                    <b><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?></b>
+                    <hr>
+                    Tanggal Selesai :
+                    <b><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?></b>
                 </div>
             </div>
         </div>
