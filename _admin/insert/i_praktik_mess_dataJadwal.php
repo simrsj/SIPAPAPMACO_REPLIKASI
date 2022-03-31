@@ -1,5 +1,5 @@
 <?php
-echo $_GET['id'] . "<br>";
+// echo $_GET['id'] . "<br>";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 define('JUMLAH_KOLOM1', 7);
 
@@ -67,6 +67,8 @@ function generateKalenderKedKep($date)
                         $sql_messTgl = "SELECT * FROM tb_praktik";
                         $sql_messTgl .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
                         $sql_messTgl .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
+                        $sql_messTgl .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+                        $sql_messTgl .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
                         $sql_messTgl .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
                         $sql_messTgl .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl' AND tb_mess.id_mess = " . $_GET['id'];
                         // echo "$sql_messTgl<br>";
@@ -103,18 +105,19 @@ function generateKalenderKedKep($date)
                         // echo $sql_infoMess . "<br>";
                         $q_infoMess = $conn->query($sql_infoMess);
                         $d_infoMess = $q_infoMess->fetch(PDO::FETCH_ASSOC);
+                        $kuota_sisa = $kuota_messTotal - $jp_jt;
                         if ($day == $i) {
                     ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $_GET['id'] . $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
 
                                 <!-- modal   -->
-                                <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>">
+                                <div class="modal fade text-gray-800" id="tlg<?php echo $_GET['id'] . $tgl; ?>">
                                     <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="text-center text-lg">INFO MESS <?php echo $d_infoMess['nama_mess']; ?> TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
+                                                <div class="text-center text-lg text-uppercase">INFO MESS <?php echo $d_infoMess['nama_mess']; ?>, TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
                                             </div>
                                             <div class="modal-body">
                                                 JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
@@ -173,14 +176,14 @@ function generateKalenderKedKep($date)
                         ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $_GET['id'] . $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
 
                                 <!-- modal   -->
-                                <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>">
+                                <div class="modal fade text-gray-800" id="tlg<?php echo $_GET['id'] . $tgl; ?>">
                                     <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="text-center text-lg">INFO MESS <?php echo $d_infoMess['nama_mess']; ?> TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
+                                                <div class="text-center text-lg text-uppercase">INFO MESS <?php echo $d_infoMess['nama_mess']; ?>, TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
                                             </div>
                                             <div class="modal-body">
                                                 JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>

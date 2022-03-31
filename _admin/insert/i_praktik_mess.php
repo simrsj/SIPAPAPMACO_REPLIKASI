@@ -6,23 +6,34 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 ?>
 
 <div class="container-fluid">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex flex-row align-items-center">
-            <div class="h4 text-gray-800 font-weight-bold">
-                Pilih Mess/Pemondokan
+    <div class="row">
+        <div class="col-md-9 h4 text-gray-900 ">
+            Pilih Mess/Pemondokan
+        </div>
+    </div>
+    <div class="card shadow mb-4 mt-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-9 h4 text-gray-900 ">
+                    Pilih Mess/Pemondokan
+                </div>
             </div>
         </div>
+    </div>
+    <div class="card shadow mb-4 mt-3">
         <div class="card-body">
             <?php
             $sql_mess = "SELECT * FROM tb_mess ";
             $sql_mess .= " WHERE status_mess = 'y'";
             $sql_mess .= " ORDER BY nama_mess ASC";
 
-            echo $sql_mess . "<br>";
+            // echo $sql_mess . "<br>";
             $q_mess = $conn->query($sql_mess);
             $r_mess = $q_mess->rowCount();
             if ($r_mess > 0) {
             ?>
+
+                <input type="hidden" name="jumlah_mess" id="jumlah_mess" value="<?php echo $r_mess; ?>">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-dark">
@@ -53,7 +64,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     <td class="text-center">
 
                                         <!-- tambah harga -->
-                                        <a class='btn btn-outline-primary btn-sm cekJadwalMess' id='<?php echo $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?php echo $d_mess['id_mess']; ?>'>
+                                        <a class='btn btn-outline-primary btn-sm cekJadwalMess<?php echo $no; ?>' id='<?php echo $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?php echo $d_mess['id_mess']; ?>'>
                                             <i class="fas fa-info-circle"></i> Rincian
                                         </a>
 
@@ -64,7 +75,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                                     <div class="modal-header text-uppercase font-weight-bold">
                                                         <b><?php echo $d_mess['nama_mess']; ?></b>
                                                     </div>
-                                                    <div class="modal-body p-0" id="dataJadwalMess">
+                                                    <div class="modal-body p-0" id="dataJadwalMess<?php echo $no; ?>">
                                                     </div>
                                                     <div class="modal-footer pb-0">
                                                         <input type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal" value="Kembali">
@@ -169,17 +180,26 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 <script>
     $(document).ready(function() {
 
-        $(".cekJadwalMess").click(function() {
-            var id = $(this).attr('id');
+        <?php
+        $no = 1;
+        while ($no < $r_mess) {
+        ?>
+            $(".cekJadwalMess<?php echo $no; ?>").click(function() {
 
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                document.getElementById("dataJadwalMess").innerHTML = xhttp.responseText;
-            };
-            xhttp.open("GET", "_admin/insert/i_praktik_mess_dataJadwal.php?id=" + id, true);
-            xhttp.send();
-        });
-
+                var id = $(this).attr('id');
+                console.log("No " + 1);
+                console.log("MASUK");
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    document.getElementById("dataJadwalMess<?php echo $no; ?>").innerHTML = xhttp.responseText;
+                };
+                xhttp.open("GET", "_admin/insert/i_praktik_mess_dataJadwal.php?id=" + id, true);
+                xhttp.send();
+            });
+        <?php
+            $no++;
+        }
+        ?>
         $("#simpan_mess").click(function() {
 
             // console.log("masuk tambah");
