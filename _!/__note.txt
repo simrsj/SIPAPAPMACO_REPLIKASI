@@ -39,11 +39,13 @@ PERTANYAAN
 
 - Gambar default bila tidak ada gambar logo Institusi
 - Preloader untuk proses generate Kalender (Seraching)
+- Link Survey Hilangankan?
+- 
 --------------------------------------------------------------------------------------------------------------------
 
 git status
 git add . 
-git commit -a -m "Progres Jadwal Mess "
+git commit -a -m "Perbaikan Judul Hal. Dashboard, Login, dan Register"
 git pull
 git push
 

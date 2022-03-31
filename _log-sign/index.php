@@ -4,12 +4,8 @@ if (empty($_SESSION['username_user'])) {
 
 	<body class="bg-gradient-primary">
 
-		<nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse h5 font-weight-bold row">
+		<nav class="navbar navbar-expand-sm navbar-light bg-light">
+			<div class="h5 font-weight-bold row">
 				<ul class="navbar-nav col">
 					<li class="nav-item active">
 						<img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
@@ -20,18 +16,38 @@ if (empty($_SESSION['username_user'])) {
 					</li>
 				</ul>
 				<ul class="navbar-nav col-auto">
-					<a class="btn btn-success btn-sm" href="http://192.168.7.89/kuesioner/survey.php" target="_blank"><i class="fas fa-clipboard-check"></i> SURVEY</a>&nbsp;
-					<a class="btn btn-info btn-sm" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>&nbsp;
-					<a class="btn btn-primary btn-sm" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>
+					<a class="btn btn-success btn-sm  my-auto" href="http://192.168.7.89/kuesioner/survey.php" target="_blank"><i class="fas fa-clipboard-check"></i> SURVEY</a>&nbsp;
+					<a class="btn btn-info btn-sm  my-auto" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>&nbsp;
+					<a class="btn btn-primary btn-sm  my-auto" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>
 				</ul>
 			</div>
 		</nav>
 
-		<div class="container pt-5">
+		<div class="container">
 			<!-- Outer Row -->
 			<div class="row justify-content-center">
 				<div class="col-xl-10 col-lg-12 col-md-9">
-					<div class="card o-hidden border-0 shadow-lg my-5">
+					<div class="card o-hidden border-0 shadow-lg my-3">
+						<div class="card-body text-center font-weight-bold text-gray-800">
+							<span class="badge badge-primary mb-2">
+								<h4>
+									SIPAPAP MACO
+								</h4>
+							</span>
+							<h5 class="text-gray-900">
+								(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)
+							</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<!-- Outer Row -->
+			<div class="row justify-content-center">
+				<div class="col-xl-10 col-lg-12 col-md-9">
+					<div class="card o-hidden border-0 shadow-lg my-2">
 						<div class="card-body p-0">
 							<!-- Nested Row within Card Body -->
 							<div class="row">
