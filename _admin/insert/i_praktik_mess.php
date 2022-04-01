@@ -197,14 +197,13 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 <script>
     $(document).ready(function() {
         <?php
-        $no = 1;
-        // print_r($r_mess);
-        while ($no < $r_mess) {
+        $no1 = 1;
+        while ($no1 <= $r_mess) {
         ?>
-            $(".cekJadwalMess<?php echo $no; ?>").click(function() {
+            $(".cekJadwalMess<?php echo $no1; ?>").click(function() {
                 var id = $(this).attr('id');
-                // console.log("No " + 1);
-                // console.log("MASUK");
+                console.log("No " + id);
+                console.log("MASUK");
 
                 var xhttp = new XMLHttpRequest();
 
@@ -212,7 +211,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 xhttp.send();
 
                 xhttp.onreadystatechange = function() {
-                    document.getElementById("dataJadwalMess<?php echo $no; ?>").innerHTML = xhttp.responseText;
+                    document.getElementById("dataJadwalMess<?php echo $no1; ?>").innerHTML = xhttp.responseText;
                 };
 
                 $(".preloader" + id).fadeOut();
@@ -220,7 +219,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 $(".isi" + id).fadeIn();
             });
         <?php
-            $no++;
+            $no1++;
         }
         ?>
 
