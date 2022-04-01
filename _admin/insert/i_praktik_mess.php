@@ -88,11 +88,14 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                                 <div class="modal-content">
                                                     <div class="modal-header text-uppercase font-weight-bold">
                                                         <b><?php echo $d_mess['nama_mess']; ?></b>
+
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
                                                     </div>
                                                     <div class="modal-body p-0" id="dataJadwalMess<?php echo $no; ?>">
                                                     </div>
-                                                    <div class="modal-footer pb-0">
-                                                        <input type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal" value="Kembali">
+                                                    <div class="modal-footer">
                                                         <input type="submit" class="btn btn-primary btn-sm" name="tambah_user" value="Tambah">
                                                     </div>
                                                 </div>
@@ -193,27 +196,35 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
 <script>
     $(document).ready(function() {
-
         <?php
         $no = 1;
+        // print_r($r_mess);
         while ($no < $r_mess) {
         ?>
             $(".cekJadwalMess<?php echo $no; ?>").click(function() {
-
                 var id = $(this).attr('id');
-                console.log("No " + 1);
-                console.log("MASUK");
+                // console.log("No " + 1);
+                // console.log("MASUK");
+
                 var xhttp = new XMLHttpRequest();
+
+                xhttp.open("GET", "_admin/insert/i_praktik_mess_dataJadwal.php?id=" + id, true);
+                xhttp.send();
+
                 xhttp.onreadystatechange = function() {
                     document.getElementById("dataJadwalMess<?php echo $no; ?>").innerHTML = xhttp.responseText;
                 };
-                xhttp.open("GET", "_admin/insert/i_praktik_mess_dataJadwal.php?id=" + id, true);
-                xhttp.send();
+
+                $(".preloader" + id).fadeOut();
+                $(".loading" + id).fadeOut();
+                $(".isi" + id).fadeIn();
             });
         <?php
             $no++;
         }
         ?>
+
+
         $("#simpan_mess").click(function() {
 
             // console.log("masuk tambah");

@@ -25,7 +25,6 @@ function generateKalenderKedKep($date)
     }
     $blank = date('w', strtotime("{$year}-{$month}-01"));
 ?>
-
     <div class="table-responsive">
         <table class='table table-striped'>
             <thead class=" thead-dark">
@@ -261,28 +260,42 @@ function generateKalenderKedKep($date)
     </div>
 <?php
 }
+?>
+<div class="preloader<?php echo $_GET['id']; ?>">
+    <div class="loading<?php echo $_GET['id']; ?>">
+        <center>
+            <br>
+            <img src="_img/logorsj.png" class="rotate" width="100" height="100" />
+            <br><br>
+            <p>Harap Tunggu</p>
+        </center>
+    </div>
+</div>
 
-// ===========================
+<div class="isi<?php echo $_GET['id']; ?>" style="display: none">
+    <?php
 
-/* Set the default timezone */
-date_default_timezone_set("Asia/Jakarta");
-$tahun_sekarang = date('Y');
-$bulan_sekarang = date('m') - 1;
-// $tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
-for ($iterateYear = $tahun_sekarang; $iterateYear <= ($tahun_sekarang + 1); $iterateYear++) {
-    for ($iterateMonth = 1; $iterateMonth <= 12; $iterateMonth++) {
-        // TAHUN BERJALAN 
-        if ($iterateYear == $tahun_sekarang) {
-            if ($bulan_sekarang < $iterateMonth) {
+    /* Set the default timezone */
+    date_default_timezone_set("Asia/Jakarta");
+    $tahun_sekarang = date('Y');
+    $bulan_sekarang = date('m') - 1;
+    // $tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
+    for ($iterateYear = $tahun_sekarang; $iterateYear <= ($tahun_sekarang + 1); $iterateYear++) {
+        for ($iterateMonth = 1; $iterateMonth <= 12; $iterateMonth++) {
+            // TAHUN BERJALAN 
+            if ($iterateYear == $tahun_sekarang) {
+                if ($bulan_sekarang < $iterateMonth) {
+                    /* Set the date */
+                    $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
+                    generateKalenderKedKep($date);
+                }
+            } else {
+
                 /* Set the date */
                 $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
                 generateKalenderKedKep($date);
             }
-        } else {
-
-            /* Set the date */
-            $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
-            generateKalenderKedKep($date);
         }
     }
-}
+    ?>
+</div>
