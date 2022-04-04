@@ -167,7 +167,7 @@ function generateKalenderNklNnk($date)
                             <td>
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item dropdown no-arrow mx-1">
-                                        <button type="button" class="btn btn-outline-primary btn-sm nav-link dropdown-toggle form-control" data-toggle="dropdown" id="tlg2<?php echo $tgl; ?>" title="<?php echo tanggal($tgl); ?>">
+                                        <button type="button" class="btn btn-outline-primary btn-sm form-control" data-toggle="dropdown" id="tlg2<?php echo $tgl; ?>" title="<?php echo tanggal($tgl); ?>">
                                             <?php echo $i; ?>
                                         </button>
 
@@ -287,7 +287,7 @@ function generateKalenderNklNnk($date)
                             <td>
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item dropdown no-arrow mx-1">
-                                        <button type="button" class="btn btn-outline-primary btn-sm nav-link dropdown-toggle form-control" data-toggle="dropdown" id="tlg2<?php echo $tgl; ?>" title="<?php echo tanggal($tgl); ?>">
+                                        <button type="button" class="btn btn-outline-primary btn-sm form-control" data-toggle="dropdown" id="tlg2<?php echo $tgl; ?>" title="<?php echo tanggal($tgl); ?>">
                                             <?php echo $i; ?>
                                         </button>
 

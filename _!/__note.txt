@@ -44,7 +44,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Perbaikan Dashboard Admin"
+git commit -a -m "Perbaikan Informasi Jadwal Nakes Lainnya dan Non-Nakes"
 git pull
 git push
 
