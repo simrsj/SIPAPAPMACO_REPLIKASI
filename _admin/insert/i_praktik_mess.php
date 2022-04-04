@@ -95,9 +95,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                                     </div>
                                                     <div class="modal-body p-0" id="dataJadwalMess<?php echo $no; ?>">
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <input type="submit" class="btn btn-primary btn-sm" name="tambah_user" value="Tambah">
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -317,7 +317,7 @@ function generateKalenderKedKep($date)
     </div>
 </div>
 
-<div class="isi<?php echo $_GET['id']; ?>" style="display: inline">
+<div class="isi<?php echo $_GET['id']; ?>" style="display: none">
     <?php
     /* Set the default timezone */
     date_default_timezone_set("Asia/Jakarta");
