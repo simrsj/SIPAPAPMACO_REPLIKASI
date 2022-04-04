@@ -10,7 +10,32 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
 <!-- Menu tarif Lainnya -->
 <div class="container-fluid">
-    <div class="card shadow mb-4">
+    <div class="row">
+        <div class="col-md-9 h4 text-gray-900 ">
+            Menu Tarif Ruangan dan Tempat : <i style='font-size:14px;'>(Jumlah Praktik <b><?php echo $d_praktik['jumlah_praktik']; ?></b>)</i>
+        </div>
+    </div>
+    <div class="card shadow mb-4 mt-3">
+        <div class="card-body">
+            <div class="row text-center h6 text-gray-900 ">
+                <div class="col-6">
+                    Nama Institusi :
+                    <b><?php echo $d_praktik['nama_institusi']; ?></b>
+                    <hr>
+                    Jumlah Praktik :
+                    <b><?php echo $d_praktik['jumlah_praktik']; ?></b>
+                </div>
+                <div class="col-6">
+                    Tanggal Mulai :
+                    <b><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?></b>
+                    <hr>
+                    Tanggal Selesai :
+                    <b><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?></b>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card shadow mb-4 mt-3">
 
         <div class="card-header py-3 d-flex flex-row align-items-center">
             <div class="h4 text-gray-800 font-weight-bold">

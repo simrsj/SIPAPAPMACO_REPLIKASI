@@ -260,86 +260,25 @@ function generateKalenderKedKep($date)
     </div>
 <?php
 }
-?>
-
-<head>
-    <title>Preloader</title>
-    <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
-    <style type="text/css">
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background-color: #fff;
-        }
-
-        .preloader .loading {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            font: 14px arial;
-        }
-
-        .rotate {
-            animation: rotation 2s infinite linear;
-        }
-
-        @keyframes rotation {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(359deg);
-            }
-        }
-    </style>
-
-    <script>
-        $(document).ready(function() {
-            $(".preloader<?php echo $_GET['id']; ?>").fadeOut();
-            $(".isi<?php echo $_GET['id']; ?>").fadeIn();
-        });
-    </script>
-</head>
-<div class="preloader<?php echo $_GET['id']; ?>">
-    <div class="loading<?php echo $_GET['id']; ?>">
-        <center>
-            <br>
-            <img src="_img/logorsj.png" class="rotate" width="100" height="100" />
-            <br><br>
-            <p>Harap Tunggu</p>
-        </center>
-    </div>
-</div>
-
-<div class="isi<?php echo $_GET['id']; ?>" style="display: none">
-    <?php
-    /* Set the default timezone */
-    date_default_timezone_set("Asia/Jakarta");
-    $tahun_sekarang = date('Y');
-    $bulan_sekarang = date('m') - 1;
-    // $tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
-    for ($iterateYear = $tahun_sekarang; $iterateYear <= ($tahun_sekarang + 1); $iterateYear++) {
-        for ($iterateMonth = 1; $iterateMonth <= 12; $iterateMonth++) {
-            // TAHUN BERJALAN 
-            if ($iterateYear == $tahun_sekarang) {
-                if ($bulan_sekarang < $iterateMonth) {
-                    /* Set the date */
-                    $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
-                    generateKalenderKedKep($date);
-                }
-            } else {
-
+/* Set the default timezone */
+date_default_timezone_set("Asia/Jakarta");
+$tahun_sekarang = date('Y');
+$bulan_sekarang = date('m') - 1;
+// $tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
+for ($iterateYear = $tahun_sekarang; $iterateYear <= ($tahun_sekarang + 1); $iterateYear++) {
+    for ($iterateMonth = 1; $iterateMonth <= 12; $iterateMonth++) {
+        // TAHUN BERJALAN 
+        if ($iterateYear == $tahun_sekarang) {
+            if ($bulan_sekarang < $iterateMonth) {
                 /* Set the date */
                 $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
                 generateKalenderKedKep($date);
             }
+        } else {
+
+            /* Set the date */
+            $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
+            generateKalenderKedKep($date);
         }
     }
-    ?>
-</div>
+}

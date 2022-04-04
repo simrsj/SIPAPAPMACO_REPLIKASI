@@ -93,7 +93,9 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                                             <span aria-hidden="true">×</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body p-0" id="dataJadwalMess<?php echo $no; ?>">
+                                                    <div class="modal-body p-0">
+                                                        <div id="loader<?php echo $no; ?>" class="loader center"></div>
+                                                        <div id="dataJadwalMess<?php echo $no; ?>" class="tag-loader"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,14 +195,15 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
 <script>
     $(document).ready(function() {
+
         <?php
         $no1 = 1;
         while ($no1 <= $r_mess) {
         ?>
             $(".cekJadwalMess<?php echo $no1; ?>").click(function() {
                 var id = $(this).attr('id');
-                console.log("No " + id);
-                console.log("MASUK");
+                // console.log("No " + id);
+                // console.log("MASUK");
 
                 var xhttp = new XMLHttpRequest();
 
@@ -210,11 +213,17 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 xhttp.onreadystatechange = function() {
                     document.getElementById("dataJadwalMess<?php echo $no1; ?>").innerHTML = xhttp.responseText;
                 };
-
-                $(".preloader" + id).fadeOut();
-                $(".loading" + id).fadeOut();
-                $(".isi" + id).fadeIn();
             });
+
+            document.onreadystatechange = function() {
+                if (document.readyState !== "complete") {
+                    document.querySelector("#dataJadwalMess<?php echo $no; ?>").style.visibility = "hidden";
+                    document.querySelector("#loader<?php echo $no; ?>").style.visibility = "visible";
+                } else {
+                    document.querySelector("#loader<?php echo $no; ?>").style.display = "none";
+                    document.querySelector("#dataJadwalMess<?php echo $no; ?>").style.visibility = "visible";
+                }
+            };
         <?php
             $no1++;
         }
