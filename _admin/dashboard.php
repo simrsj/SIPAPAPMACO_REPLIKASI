@@ -16,7 +16,7 @@
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
+                        <div class="col">
                             <div class="text-md font-weight-bold  text-primary mb-1">
                                 JUMLAH DIKLAT PROSES :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -36,9 +36,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-graduate fa-3x text-gray-400"></i>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -49,15 +46,12 @@
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
+                        <div class="col">
                             <div class="text-md font-weight-bold text-success text-uppercase mb-1">
                                 TOTAL PENDAPATAN : </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?php echo "Rp " . number_format($total_tarif, 0, '.', '.'); ?>
                             </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-3x fa-money-bill-wave text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -69,7 +63,7 @@
             <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
+                        <div class="col">
                             <div class="text-md font-weight-bold text-danger mb-1">
                                 <b>TOTAL MOU : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -85,9 +79,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-handshake fa-3x text-gray-400"></i>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -98,7 +89,7 @@
             <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
+                        <div class="col">
                             <!-- <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN : </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -119,9 +110,6 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 <?php echo $dashboard_dpjs; ?> Orang
                             </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-3x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
