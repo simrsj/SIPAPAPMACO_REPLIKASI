@@ -44,7 +44,7 @@ PERTANYAAN
 
 git status
 git add . 
-git commit -a -m "Perbaikan Pemilihan Tempat"
+git commit -a -m "Progres Loading Screen"
 git pull
 git push
 
