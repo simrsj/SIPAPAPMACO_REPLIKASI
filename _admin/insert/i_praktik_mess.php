@@ -229,7 +229,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         }
         ?>
 
-
         $("#simpan_mess").click(function() {
 
             // console.log("masuk tambah");
