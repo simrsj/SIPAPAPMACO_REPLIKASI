@@ -2,6 +2,7 @@
 
 $id_praktik = $_GET['t'];
 $q_praktik = $conn->query("SELECT * FROM tb_praktik 
+JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi 
 JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd 
 WHERE id_praktik = $id_praktik");
 $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
@@ -12,7 +13,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9 h4 text-gray-900 ">
-            Menu Tarif Ruangan dan Tempat : <i style='font-size:14px;'>(Jumlah Praktik <b><?php echo $d_praktik['jumlah_praktik']; ?></b>)</i>
+            Menu Tarif Ruangan dan Tempat
         </div>
     </div>
     <div class="card shadow mb-4 mt-3">

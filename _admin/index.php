@@ -3,6 +3,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 ?>
 
 	<body id="page-top">
+		<div class="preloader">
+			<div class="loading">
+				<img src="./_img/logorsj.png" class="rotate mb-3" width="100" height="100" />
+				<p>Harap Tunggu</p>
+			</div>
+		</div>
 		<!-- Page Wrapper -->
 		<div id="wrapper">
 			<!-- Sidebar -->

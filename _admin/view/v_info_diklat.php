@@ -3,9 +3,8 @@
             <div class="col-lg-11">
                 <h1 class="h4 text-gray-800">Informasi Kediklatan</h1>
             </div>
-        </div><br>
-
-
+        </div>
+        <br>
         <!-- INFORMASI JURUSAN, JENJANG, PROFESI -->
         <div class="row">
             <!-- DATA KEDOKTERAN -->

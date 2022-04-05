@@ -80,4 +80,10 @@ include "_add-ons/tanggal_waktu.php";
     <script src="js/demo/chart-pie-demo.js"></script>
 </body>
 
+<script>
+    $(document).ready(function() {
+        $(".preloader").fadeOut();
+    });
+</script>
+
 </html>
