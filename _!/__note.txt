@@ -47,7 +47,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Progres Loading Screen"
+git commit -a -m "Logo WBK"
 git pull
 git push
 

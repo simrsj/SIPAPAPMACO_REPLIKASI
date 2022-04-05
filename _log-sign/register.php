@@ -7,6 +7,7 @@
                     <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
                     <img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="2%">
                     <img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="3%">
+                    <img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="2%">
                     REGISTRASI AKUN INSTITUSI - RS JIWA PROVINSI JAWA BARAT
                     <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
                 </li>
