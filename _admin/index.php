@@ -9,9 +9,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 			<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 				<!-- Sidebar - Brand -->
 				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="?">
-					<div class="sidebar-brand-icon">
-						<i class="fas fa-book-reader"></i>
-					</div>
+					<img src="./_img/rsj.svg" width="28" />
 					<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 				</a>
 				<!-- Nav Item - Dashboard -->

@@ -47,7 +47,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Logo WBK"
+git commit -a -m "Logo RSJ Akun Admin dan IP"
 git pull
 git push
 
