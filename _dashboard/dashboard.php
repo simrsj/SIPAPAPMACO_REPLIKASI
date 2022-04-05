@@ -85,10 +85,9 @@
               } else {
               ?>
                 <div class="jumbotron text-center my-auto">
-                  <div class="display-4 my-auto text-lg text-uppercase font-weight-bold">Praktikan Tidak Ada </div>
-                  <hr class="my-2">
-                  <p class="lead">
-                    <a class="btn btn-outline-success btn-lg" href="?reg" target="_blank" role="button">Ayo Daftar !!! </a>
+                  <div class="display-4 my-auto text-lg text-uppercase font-weight-bold mb-2">Praktikan Tidak Ada </div>
+                  <p class="lead mt-2 mb-0">
+                    <a class="btn btn-outline-success" href="?reg" target="_blank" role="button">Ayo Daftar !!! </a>
                   </p>
                 </div>
               <?php
