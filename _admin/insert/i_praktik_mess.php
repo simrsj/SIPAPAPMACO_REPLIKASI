@@ -94,7 +94,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                                         </button>
                                                     </div>
                                                     <div class="modal-body p-0">
-                                                        <div id="loader<?php echo $no; ?>" class="loader center"></div>
+                                                        <!-- <div id="loader<?php echo $no; ?>" class="loader center"></div> -->
                                                         <div id="dataJadwalMess<?php echo $no; ?>" class="tag-loader"></div>
                                                     </div>
                                                 </div>
