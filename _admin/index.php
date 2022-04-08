@@ -19,11 +19,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 				</a>
 				<!-- Nav Item - Dashboard -->
-				<li class="nav-item ">
+				<!-- <li class="nav-item ">
 					<a class="nav-link" href="?test">
 						<i class="fas fa-fw fa-bug"></i>
 						<span>Testing</span></a>
-				</li>
+				</li> -->
 				<li class="nav-item ">
 					<a class="nav-link" href="?">
 						<i class="fas fa-fw fa-tachometer-alt"></i>

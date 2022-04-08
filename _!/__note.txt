@@ -47,7 +47,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Loading Screen Setiap Menu"
+git commit -a -m "Cleaning File"
 git pull
 git push
 
