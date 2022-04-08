@@ -29,12 +29,7 @@ Link Dalam (Local) : http://10.132.0.75/SM/
 Link Luar (Public) : http://103.147.222.122:88/SM/
 
 Modul yang sudah selesai akan dihilangkan diudate selanjutnya, 
-Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/TLSMDev
-
-- 🔃 Cetak Data SP Pembimbing / CI
-- Unduh Invoice Format .doc/docx 
-- Unduh Nilai Format .xls/xlsx 
-- loading screen
+Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/SMDevTL
 
 --------------------------------------------------------------------------------------------------------------------
 PERTANYAAN
