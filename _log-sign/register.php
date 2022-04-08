@@ -98,6 +98,10 @@
                                         </div>
                                         <input type="submit" class="btn btn-primary btn-user btn-block" value="Daftar">
                                     </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="?lo">Klik disini, jika sudah punya akun</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

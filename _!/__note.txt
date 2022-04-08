@@ -42,7 +42,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Cleaning File"
+git commit -a -m "Tambah link ke login"
 git pull
 git push
 
