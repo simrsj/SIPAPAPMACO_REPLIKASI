@@ -56,7 +56,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "pindah ke xampp7"
+git commit -a -m "perbaikan database"
 git pull
 git push
 

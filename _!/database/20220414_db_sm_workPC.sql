@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2022 at 11:33 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Generation Time: Apr 14, 2022 at 08:50 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -181,27 +181,6 @@ INSERT INTO `tb_institusi` (`id_institusi`, `nama_institusi`, `akronim_institusi
 (85, 'UNIVERSITAS KRISTEN SATYA WACANA SALATIGA', '', '', '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '', ''),
 (87, 'RS JIWA PROVINSI JAWA BARAT', 'RS JIWA*', './_img/logo_institusi/87.png', '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '', ''),
 (88, 'UNIVERSITAS KOMPUTER INDONESIA', 'UNIKOM', './_img/logo_institusi/88.png', '', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_jenis_mentor`
---
-
-CREATE TABLE `tb_jenis_mentor` (
-  `id_jenis_mentor` int(11) NOT NULL,
-  `nama_jenis_mentor` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_jenis_mentor`
---
-
-INSERT INTO `tb_jenis_mentor` (`id_jenis_mentor`, `nama_jenis_mentor`) VALUES
-(1, 'CI'),
-(2, 'CIL'),
-(3, 'PPDS'),
-(4, 'PSPD');
 
 -- --------------------------------------------------------
 
@@ -1328,15 +1307,20 @@ CREATE TABLE `tb_tarif_satuan` (
 --
 
 INSERT INTO `tb_tarif_satuan` (`id_tarif_satuan`, `nama_tarif_satuan`, `ket_tarif_satuan`) VALUES
-(1, 'persiswa/periode', NULL),
-(2, 'persiswa/kali', NULL),
-(3, 'perperiode/kali', NULL),
-(4, 'persiswa/hari', NULL),
-(5, 'perpenguji/kali', NULL),
-(6, 'persiswa/periode ujian', NULL),
-(7, 'perhari/keg', NULL),
-(8, 'perminggu/orang', 'Mingguan dikali jumlah praktik'),
-(13, 'persiswa/minggu', NULL);
+(1, 'per-siswa / periode', NULL),
+(2, 'per-siswa / kali', NULL),
+(3, 'per-periode / kali', NULL),
+(4, 'per-siswa / hari', NULL),
+(5, 'per-penguji / kali', NULL),
+(6, 'per-siswa / periode ujian', NULL),
+(7, 'per-hari / kegiatan', NULL),
+(8, 'per-minggu / orang', 'Mingguan dikali jumlah praktik'),
+(9, 'per-orang', NULL),
+(10, 'per-orang / penguji', NULL),
+(11, 'per-hari / orang', NULL),
+(12, 'per-hari', 'Maksimal 8 Jam'),
+(13, 'persiswa / minggu', NULL),
+(14, 'per-jam', NULL);
 
 -- --------------------------------------------------------
 
@@ -1354,7 +1338,7 @@ CREATE TABLE `tb_tempat` (
   `id_tarif_satuan` int(11) NOT NULL,
   `tgl_input_tempat` date NOT NULL,
   `ket_tempat` text DEFAULT NULL,
-  `status_tempat` enum('y','t') NOT NULL
+  `status_tempat` enum('Y','T') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1362,11 +1346,11 @@ CREATE TABLE `tb_tempat` (
 --
 
 INSERT INTO `tb_tempat` (`id_tempat`, `id_tarif_jenis`, `nama_tempat`, `kapasitas_tempat`, `id_jurusan_pdd_jenis`, `tarif_tempat`, `id_tarif_satuan`, `tgl_input_tempat`, `ket_tempat`, `status_tempat`) VALUES
-(3, 7, 'Aula Utama', 40, 0, 1000000, 3, '2022-02-13', '-', 'y'),
-(6, 7, 'Aula Napza', 40, 0, 750000, 3, '2022-02-13', '-', 'y'),
-(9, 7, 'Ruang SPI', 20, 0, 500000, 3, '2022-02-13', '-', 'y'),
-(10, 7, 'Ruang Kelas/Ruang Diskusi', 10, 1, 30000, 4, '2022-02-15', '-', 'y'),
-(16, 7, 'Ruang Komite Medik', 15, 0, 750000, 3, '2022-02-13', '-', 'y');
+(3, 7, 'Aula Utama', 40, 0, 1000000, 7, '2022-02-13', '-', 'Y'),
+(6, 7, 'Aula Napza', 40, 0, 750000, 7, '2022-02-13', '-', 'Y'),
+(9, 7, 'Ruang SPI', 20, 0, 500000, 7, '2022-02-13', '-', 'Y'),
+(10, 7, 'Ruang Kelas/Ruang Diskusi', 10, 1, 30000, 4, '2022-02-15', '-', 'Y'),
+(16, 7, 'Ruang Komite Medik', 15, 0, 750000, 7, '2022-02-13', '-', 'Y');
 
 -- --------------------------------------------------------
 
@@ -1439,7 +1423,7 @@ CREATE TABLE `tb_user` (
   `password_user` varchar(255) NOT NULL,
   `nama_user` varchar(20) NOT NULL,
   `email_user` text NOT NULL,
-  `level_user` enum('1','2') NOT NULL,
+  `level_user` enum('1','2','10') NOT NULL,
   `no_telp_user` text NOT NULL,
   `foto_user` text DEFAULT NULL,
   `terakhir_login_user` date DEFAULT NULL,
@@ -1453,11 +1437,12 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `id_mou`, `id_institusi`, `username_user`, `password_user`, `nama_user`, `email_user`, `level_user`, `no_telp_user`, `foto_user`, `terakhir_login_user`, `tgl_buat_user`, `tgl_ubah_user`, `status_user`) VALUES
-(1, 0, 0, 'admin', 'e1d5be1c7f2f456670de3d53c7b54f4a', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '1', '08123145645', NULL, '2022-03-29', '2021-03-29', '2022-02-22', 'Y'),
+(1, 0, 0, 'admin', 'e1d5be1c7f2f456670de3d53c7b54f4a', 'ADMIN DIKLAT RS JIWA', 'admin@admin', '1', '08123145645', NULL, '2022-04-12', '2021-03-29', '2022-02-22', 'Y'),
+(2, 0, 0, 'admin2', 'e1d5be1c7f2f456670de3d53c7b54f4a', 'ADMIN LITBANG RSJ', 'admin@admin', '10', '08123145645', NULL, '2022-04-12', '2022-04-13', '2022-04-13', 'Y'),
 (15, 1, 87, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'USER INSTITUSI', 'asd@asd', '2', '091273', NULL, '2022-01-10', '2021-12-31', '2022-01-10', 'Y'),
 (16, 0, 5, 'asalajah@gmail.com', 'e66ed49f9432f4ef78d0910ab7e31f57', 'Melly', 'asalajah@gmail.com', '2', '081123456789', NULL, '2022-01-05', '2022-01-05', NULL, 'Y'),
 (17, 0, 3, 'diklit.rsj.jabarprov@gmail.com', '39b1f688752f9edb7e1283a4649f05a4', 'Rani', 'diklit.rsj.jabarprov@gmail.com', '2', '081320510201', NULL, '2022-01-05', '2022-01-05', NULL, 'Y'),
-(18, 0, 19, 'ip', '81dc9bdb52d04dc20036dbd8313ed055', 'ip', 'ip@ip', '2', '012309', NULL, '2022-03-20', '2022-03-10', '2022-03-10', 'Y'),
+(18, 0, 19, 'ip', '81dc9bdb52d04dc20036dbd8313ed055', 'ip', 'ip@ip', '2', '012309', NULL, '2022-03-29', '2022-03-10', '2022-03-10', 'Y'),
 (19, 0, 71, 'rr@gmail.com', '0cc175b9c0f1b6a831c399e269772661', 'Rani', 'rr@gmail.com', '2', '12345', NULL, '2022-03-15', '2022-03-15', NULL, 'Y'),
 (20, 0, 68, 'r@gmail.com', '0cc175b9c0f1b6a831c399e269772661', 'Riffani', 'r@gmail.com', '2', '123', NULL, '2022-03-15', '2022-03-15', NULL, 'Y'),
 (21, 0, 25, 'adeihsanmr@gmail.com', '202cb962ac59075b964b07152d234b70', 'ade', 'adeihsanmr@gmail.com', '2', '0000', NULL, '2022-03-15', '2022-03-15', NULL, 'Y');
@@ -1503,12 +1488,6 @@ ALTER TABLE `tb_bayar`
 --
 ALTER TABLE `tb_institusi`
   ADD PRIMARY KEY (`id_institusi`);
-
---
--- Indexes for table `tb_jenis_mentor`
---
-ALTER TABLE `tb_jenis_mentor`
-  ADD PRIMARY KEY (`id_jenis_mentor`);
 
 --
 -- Indexes for table `tb_jenjang_pdd`
@@ -1806,7 +1785,7 @@ ALTER TABLE `tb_tarif_pilih`
 -- AUTO_INCREMENT for table `tb_tarif_satuan`
 --
 ALTER TABLE `tb_tarif_satuan`
-  MODIFY `id_tarif_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_tarif_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_tempat`
