@@ -48,7 +48,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Mengubah Informasi Format Data Praktikan + database"
+git commit -a -m "Mengubah Informasi Format Data Praktikan di admin dan ip"
 git pull
 git push
 
