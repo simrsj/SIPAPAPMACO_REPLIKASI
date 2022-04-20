@@ -43,12 +43,27 @@ PERTANYAAN
 - Validasi untuk pembayaran seperti apa? apakah keuangan perlu dibuatkan akun / konfirmasi pembayarannya secara manual antara diklat dengan keuangan ?
 - Saat Validasi Pembayaran Ditolak karena Kekurangan/Kelebihan,  Apakah ada Penambahan/Pengembalian?
 - Keterlibatan Umum dalam Aplikasi SIPAPAP MACHO untuk apa?
+- Ketika Sudah Kadaluarsa maka harus ada batas waktu yang ditentukan, atau paling lambat 1 minggu setelah kadaluarsa, nanti nomor PIC berubah menjadi Kang Dian 
+- Untuk manual yang dilakukan dan di isi di website harus sama ya 
+- Untuk memilih mess pemondokan di admin ditentukan oleh admin umum , prioritas mess rsj 
+- Keinginan Bu Dir untuk pemondokan dari luar tidak bisa memilih di luar RSJ, 
+- Harus ada Penanggung Jawab di Umum untuk Pemondokan 
+- Di MOU harus ada ketentuan mengenai ketersediaan MESS sudah ditentukan 
+- Kontak Pemilik MESS jangan diberikan nanti diberikan saja 1 nomor dari RSJ 
+- BerNotDin ke Diklat untuk diujicobakan 
+- Di MOU juga harus ada permintaan institusi yang tidak menginap
+- Diklat segera membuat notadinas untuk institusi 
+- Dimulai dengan bulan Mei atau Juni
+- Daftar Harga untuk mess dan pondokan seperti biaya admin, terutama dengan kodering harus ada
+- Perubahan Invoice menjadi Nota Tagihan
+- Pembuatan Fitur Kwitansi, no Kwitansi disesuaikan dengan aplikasi
+- Cek Untuk narasumber dari PT dan lainnya siapa yg berwenang
 
 --------------------------------------------------------------------------------------------------------------------
 
 git status
 git add .
-git commit -a -m "Mengubah Informasi Format Data Praktikan di admin dan ip"
+git commit -a -m "Hasil Analisa Rapat dengan Direksi"
 git pull
 git push
 
