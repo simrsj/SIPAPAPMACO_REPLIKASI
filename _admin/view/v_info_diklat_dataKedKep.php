@@ -127,7 +127,7 @@ function generateKalenderKedKep($date)
 
                                 <!-- modal   -->
                                 <div class="modal fade text-gray-800" id="tlg<?php echo $tgl; ?>" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <div class="text-center text-lg">INFO PRAKTIK KEDOKTERAN DAN KEPERAWATAN TANGGAL <b><?php echo tanggal($tgl); ?></b></div>

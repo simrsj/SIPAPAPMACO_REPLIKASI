@@ -141,7 +141,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                         <?php
                         } else {
                         ?>
-                            <span class="badge badge-danger blink">EROOR!</span>
+                            <span class="badge badge-danger">DATA TIDAK ADA</span>
                         <?php
                         }
                         ?>

@@ -217,7 +217,7 @@ if ($_GET['prk'] == 'ked') {
                                                 <div class="modal-body">
                                                     <div class="text-uppercase navbar justify-content-center text-lg">
                                                         <span class="badge badge-success">
-                                                            Isian File yg Benar &nbsp;<i class="fas fa-check-circle"></i>
+                                                            Isian File yg Benar dan LENGKAP &nbsp;<i class="fas fa-check-circle"></i>
                                                         </span>
                                                     </div>
                                                     <img src="./_img/data_praktikan1.jpg" class="img-fluid" alt="Responsive image">
@@ -227,16 +227,23 @@ if ($_GET['prk'] == 'ked') {
                                                         </a>
                                                     </div>
                                                     <hr>
-                                                    <div class="text-uppercase navbar justify-content-center text-lg">
-                                                        <span class="badge badge-danger">
-                                                            Isian File yg SALAH &nbsp;<i class="fas fa-times-circle"></i>
-                                                        </span>
-                                                    </div>
                                                     <div class="row text-center">
                                                         <div class="col ">
+                                                            <span class="badge badge-success text-uppercase">
+                                                                Isian File yg BENAR &nbsp;<i class="fas fa-check-circle"></i>
+                                                            </span>
+                                                            <img src="./_img/data_praktikan1_.jpg" class="img-fluid" alt="Responsive image">
+                                                        </div>
+                                                        <div class="col ">
+                                                            <span class="badge badge-danger text-uppercase">
+                                                                Isian File yg SALAH &nbsp;<i class="fas fa-times-circle"></i>
+                                                            </span>
                                                             <img src="./_img/data_praktikan2.jpg" class="img-fluid" alt="Responsive image">
                                                         </div>
                                                         <div class="col">
+                                                            <span class="badge badge-danger text-uppercase">
+                                                                Isian File yg SALAH &nbsp;<i class="fas fa-times-circle"></i>
+                                                            </span>
                                                             <img src="./_img/data_praktikan3.jpg" class="img-fluid" alt="Responsive image">
                                                         </div>
                                                     </div>
