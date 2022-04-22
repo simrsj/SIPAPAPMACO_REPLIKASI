@@ -12,12 +12,16 @@ _*MAYOR*_
 
 _*MINOR*_
 ---------------------------------------
-- Modul Pengajuan MoU Baru
-- Modul Pengajuan MoU Perpanjang
-- Modul Pengajuan Magang
-- Modul Pengajuan Ujian Akhir Periode (UAP)
+- Informasi Sisa di Modal Informasi Jadwal Praktikan
 - Simpan data MoU di Admin diklat
-- Ubah 
+- Di MOU juga harus ada permintaan institusi yang tidak menginap
+- Pembuatan Fitur Kwitansi, no Kwitansi disesuaikan dengan aplikasi
+- Daftar Harga untuk mess dan pondokan seperti biaya admin, terutama dengan kodering harus ada
+- Perubahan Invoice menjadi Nota Tagihan
+- Perubahan "Kontak Person" Mess dan Pemondokan
+- Perubahan Data MoU saat sudah Kadaluarsa (maksimal h-7) dengan nomor PIC Kang Dian Tim Kordik
+- Pembuatan Akun User Umum
+- Pembuatan Akun User Keuangan
 
 KET : 
 ---------------------------------------
@@ -38,32 +42,22 @@ PERTANYAAN
 
 - Gambar default bila tidak ada gambar logo Institusi
 - Link Survey Hilangankan?
-- Saat Pendaftaran Praktik oleh user bila dalam institusinya ada beberapa user, Data Praktik yang sudah dinputkan apakah cuma dapat dilihat oleh user yg menginputkan / semua user dalam institusi tersebut
-- Untuk Pemilihan Tempat apakah kedokteran diharuskan memilih Ruang Rapat Komite Medik
 - Validasi untuk pembayaran seperti apa? apakah keuangan perlu dibuatkan akun / konfirmasi pembayarannya secara manual antara diklat dengan keuangan ?
-- Saat Validasi Pembayaran Ditolak karena Kekurangan/Kelebihan,  Apakah ada Penambahan/Pengembalian?
 - Keterlibatan Umum dalam Aplikasi SIPAPAP MACHO untuk apa?
-- Ketika Sudah Kadaluarsa maka harus ada batas waktu yang ditentukan, atau paling lambat 1 minggu setelah kadaluarsa, nanti nomor PIC berubah menjadi Kang Dian 
 - Untuk manual yang dilakukan dan di isi di website harus sama ya 
-- Untuk memilih mess pemondokan di admin ditentukan oleh admin umum , prioritas mess rsj 
-- Keinginan Bu Dir untuk pemondokan dari luar tidak bisa memilih di luar RSJ, 
+- Untuk memilih mess pemondokan di admin ditentukan oleh admin umum, prioritas mess rsj
 - Harus ada Penanggung Jawab di Umum untuk Pemondokan 
 - Di MOU harus ada ketentuan mengenai ketersediaan MESS sudah ditentukan 
-- Kontak Pemilik MESS jangan diberikan nanti diberikan saja 1 nomor dari RSJ 
 - BerNotDin ke Diklat untuk diujicobakan 
-- Di MOU juga harus ada permintaan institusi yang tidak menginap
+- Cek Untuk narasumber dari PT dan lainnya siapa yg berwenang (Pak Narmin)
 - Diklat segera membuat notadinas untuk institusi 
 - Dimulai dengan bulan Mei atau Juni
-- Daftar Harga untuk mess dan pondokan seperti biaya admin, terutama dengan kodering harus ada
-- Perubahan Invoice menjadi Nota Tagihan
-- Pembuatan Fitur Kwitansi, no Kwitansi disesuaikan dengan aplikasi
-- Cek Untuk narasumber dari PT dan lainnya siapa yg berwenang
 
 --------------------------------------------------------------------------------------------------------------------
 
 git status
 git add .
-git commit -a -m "Hasil Analisa Rapat dengan Direksi"
+git commit -a -m "Perbaikan Informasi Sisa Jadwal Diklat"
 git pull
 git push
 

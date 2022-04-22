@@ -206,7 +206,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					} elseif (isset($_GET['akr'])) {
 						include "_ip/view/v_akreditasi.php";
 					} elseif (isset($_GET['info_diklat'])) {
-						include "_ip/view/v_info_diklat.php";
+						include "_admin/view/v_info_diklat.php";
 					} elseif (isset($_GET['ins'])) {
 						if (isset($_GET['u'])) {
 							include "_ip/update/u_institusi.php";

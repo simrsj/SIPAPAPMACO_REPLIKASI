@@ -105,14 +105,14 @@ function generateKalenderKedKep($date)
 
                         $q_kuotaKedKep = $conn->query($sql_kuotaKedKep);
                         $d_kuotaKedKep = $q_kuotaKedKep->fetch(PDO::FETCH_ASSOC);
-                        $kuota_keKep = $d_kuotaKedKep['jumlah_kuota'];
+                        $kuota_kedKep = $d_kuotaKedKep['jumlah_kuota'];
 
                         //penentuan jenis tombol
                         if ($jp_jt == 0) {
                             $btn_kedKep = "success";
-                        } elseif (($jp_jt > 0) && ($jp_jt < $kuota_keKep)) {
+                        } elseif (($jp_jt > 0) && ($jp_jt < $kuota_kedKep)) {
                             $btn_kedKep = "warning";
-                        } elseif ($jp_jt >= $kuota_keKep) {
+                        } elseif ($jp_jt >= $kuota_kedKep) {
                             $btn_kedKep = "danger";
                         } else {
                             $btn_kedKep = "secondary";
@@ -136,9 +136,17 @@ function generateKalenderKedKep($date)
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
-                                                KEDOKTERAN : <?php echo $kuota_ked; ?><br>
-                                                KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                                <div class="row text-center">
+                                                    <div class="col-md-6 my-auto">
+                                                        KEDOKTERAN : <?php echo $kuota_ked; ?><br>
+                                                        KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        KUOTA PRAKTIKAN : <?php echo $kuota_kedKep; ?><br>
+                                                        JUMLAH TOTAL PRAKTIKAN : <?php echo $jp_jt; ?><br>
+                                                        JUMLAH SISA PRAKTIKAN : <?php echo $kuota_kedKep - $jp_jt; ?><br>
+                                                    </div>
+                                                </div>
                                                 <hr>
                                                 <?php
                                                 if ($q1_kedKep->rowCount() > 0) {
@@ -205,9 +213,17 @@ function generateKalenderKedKep($date)
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
-                                                KEDOKTERAN : <?php echo $kuota_ked; ?><br>
-                                                KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                                <div class="row text-center">
+                                                    <div class="col-md-6 my-auto">
+                                                        KEDOKTERAN : <?php echo $kuota_ked; ?><br>
+                                                        KEPERAWATAN : <?php echo $kuota_kep; ?>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        KUOTA PRAKTIKAN : <?php echo $kuota_kedKep; ?><br>
+                                                        JUMLAH TOTAL PRAKTIKAN : <?php echo $jp_jt; ?><br>
+                                                        JUMLAH SISA PRAKTIKAN : <?php echo $kuota_kedKep - $jp_jt; ?><br>
+                                                    </div>
+                                                </div>
                                                 <hr>
                                                 <?php
                                                 if ($q1_kedKep->rowCount() > 0) {
@@ -298,7 +314,6 @@ for ($iterateYear = $tahun_sekarang; $iterateYear <= ($tahun_sekarang + 1); $ite
                 generateKalenderKedKep($date);
             }
         } else {
-
             /* Set the date */
             $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
             generateKalenderKedKep($date);
