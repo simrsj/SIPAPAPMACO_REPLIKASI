@@ -12,7 +12,7 @@
 
 
         <!-- Data Jumlah MoU -->
-        <div class="row">
+        <div class="row justify-content-center">
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-5 col-md-6 mb-4">
@@ -32,8 +32,8 @@
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-7 col-md-6 mb-4">
+            <!-- Card Data Mou Belum Perpanjang, Pengajuan Baru, Pengajuan Perbanjang -->
+            <!-- <div class="col-xl-7 col-md-6 mb-4">
                 <div class="card shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center text-center">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <!-- Data Tabel MoU -->
