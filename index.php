@@ -22,7 +22,8 @@ include "_add-ons/tanggal_waktu.php";
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet"> -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.css" rel="stylesheet" />
     <link href="vendor/sw2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
     <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
@@ -33,6 +34,12 @@ include "_add-ons/tanggal_waktu.php";
 </head>
 
 <body>
+    <div class="preloader">
+        <div class="loading">
+            <img src="./_img/logorsj.png" class="rotate mb-3" width="100" height="100" />
+            <p>Harap Tunggu</p>
+        </div>
+    </div>
     <?php
 
     if (isset($_GET['dashboard'])) {
@@ -74,16 +81,11 @@ include "_add-ons/tanggal_waktu.php";
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
-    <script src="vendor/select2/dist/js/select2.min.js"></script>
+    <!-- <script src="vendor/select2/dist/js/select2.min.js"></script> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/!custom/jsCustom.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 </body>
-
-<script>
-    $(document).ready(function() {
-        $(".preloader").fadeOut();
-    });
-</script>
 
 </html>

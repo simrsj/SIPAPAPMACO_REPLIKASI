@@ -1,14 +1,3 @@
-<?php
-if (isset($_POST['hapus_mou'])) {
-    $conn->query("DELETE FROM `tb_mou` WHERE `id_mou` = " . $_POST['id_mou']);
-
-    echo "
-    <script>
-        document.location.href = '?mou';
-    </script>
-    ";
-} else {
-?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10">
@@ -304,6 +293,3 @@ if (isset($_POST['hapus_mou'])) {
             </div>
         </div>
     </div>
-<?php
-}
-?>

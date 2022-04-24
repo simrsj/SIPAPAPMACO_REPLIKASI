@@ -1,15 +1,17 @@
 $(document).ready(function () {
+  $(".preloader").fadeOut();
+
   $("#myTable").dataTable();
 
   $("#myTable_2").dataTable();
 
-  $(".js-example-placeholder-single-long").select2({
-    placeholder: "-------------- Pilih --------------",
+  $(".select2").select2({
+    placeholder: "-- Pilih --",
     allowClear: true,
   });
 
-  $(".js-example-placeholder-single").select2({
-    placeholder: "-- Pilih --",
+  $(".select2-long").select2({
+    placeholder: "-------------- Pilih --------------",
     allowClear: true,
   });
 });

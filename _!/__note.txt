@@ -12,8 +12,8 @@ _*MAYOR*_
 
 _*MINOR*_
 ---------------------------------------
-- Informasi Sisa di Modal Informasi Jadwal Praktikan
-- Simpan data MoU di Admin diklat
+- ✅ Informasi Sisa di Modal Informasi Jadwal Praktikan
+- Perbaikan data MoU dan PKS di Admin diklat
 - Di MOU juga harus ada permintaan institusi yang tidak menginap
 - Pembuatan Fitur Kwitansi, no Kwitansi disesuaikan dengan aplikasi
 - Daftar Harga untuk mess dan pondokan seperti biaya admin, terutama dengan kodering harus ada
@@ -57,7 +57,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Perbaikan Informasi Sisa Jadwal Diklat"
+git commit -a -m "Perbaikan Tambah MoU"
 git pull
 git push
 
