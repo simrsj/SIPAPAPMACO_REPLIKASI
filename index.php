@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 session_start();
 
 // include '_add-ons/csrf_auth.php';
@@ -34,12 +34,12 @@ include "_add-ons/tanggal_waktu.php";
 </head>
 
 <body>
-    <div class="preloader">
+    <!-- <div class="preloader">
         <div class="loading">
             <img src="./_img/logorsj.png" class="rotate mb-3" width="100" height="100" />
             <p>Harap Tunggu</p>
         </div>
-    </div>
+    </div> -->
     <?php
 
     if (isset($_GET['dashboard'])) {

@@ -40,8 +40,7 @@ Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit
 --------------------------------------------------------------------------------------------------------------------
 PERTANYAAN
 
-- Gambar default bila tidak ada gambar logo Institusi
-- Link Survey Hilangankan?
+- tgl selesai mou apakah 3 tahun ?
 - Validasi untuk pembayaran seperti apa? apakah keuangan perlu dibuatkan akun / konfirmasi pembayarannya secara manual antara diklat dengan keuangan ?
 - Keterlibatan Umum dalam Aplikasi SIPAPAP MACHO untuk apa?
 - Untuk manual yang dilakukan dan di isi di website harus sama ya 
@@ -57,7 +56,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Perbaikan Tampilan Data MoU"
+git commit -a -m "Perbaikan Tambah Data MoU"
 git pull
 git push
 

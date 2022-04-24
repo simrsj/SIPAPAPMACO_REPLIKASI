@@ -390,7 +390,7 @@
                         title: '<span class"text-xs"><b>DATA MOU</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
                         html: '<a href="?mou" class="btn btn-outline-primary">OK</a>',
-                        timer: 100000000000,
+                        timer: 10000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
