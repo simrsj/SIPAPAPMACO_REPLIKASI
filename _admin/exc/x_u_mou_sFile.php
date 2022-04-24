@@ -60,14 +60,7 @@ $sql_u_mou .= " file_mou = '" . $link_file_mou . "',";
 $sql_u_mou .= " file_pks = '" . $link_file_pks . "'";
 $sql_u_mou .= " WHERE id_mou = " . $id;
 
-// $sql_u_mou_arsip = "UPDATE tb_mou_arsip SET ";
-// $sql_u_mou_arsip .= " file_mou_arsip = '" . $link_file_mou . "',";
-// $sql_u_mou_arsip .= " file_pks_arsip = '" . $link_file_pks . "'";
-// $sql_u_mou_arsip .= " WHERE id_mou_arsip = " . $id;
-
-// echo $sql_u_mou . "<br>";
-// echo $sql_u_mou_arsip . "<br>";
+// $conn->query($sql_u_mou);
 $conn->query($sql_u_mou);
-// $conn->query($sql_u_mou_arsip);
 
 echo json_encode(['success' => 'Data Praktik Berhasil Disimpan']);

@@ -23,7 +23,8 @@ $q_dmbp = $conn->query($sql_dmbp);
 $dashboard_dmbp = $q_dmbp->rowCount();
 
 //////////////////// DATA MOU PENGAJUAN BARU ////////////////////
-$sql_dmpb = "SELECT * FROM tb_mou ";
+$sql_dmpb = "SELECT * FROM tb_mou 
+-- WHERE ket_mou = 'proses pengajuan perpanjang'";
 $q_dmpb = $conn->query($sql_dmpb);
 $dashboard_dmpb = $q_dmpb->rowCount();
 

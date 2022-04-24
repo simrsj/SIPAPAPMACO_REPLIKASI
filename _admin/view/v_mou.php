@@ -1,30 +1,19 @@
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-10">
+        <div class="row justify-content-center mb-2 ">
+            <div class="col-md my-auto">
                 <h1 class="h4 text-gray-800">MoU Kerjasama</h1>
             </div>
-            <div class="col-md-2 text-right my-auto">
-                <a href="?mou&i" class="btn btn-outline-success btn-sm">
-                    <i class="fas fa-plus"></i> Tambah
-                </a>
-            </div>
-        </div><br>
-
-
-        <!-- Data Jumlah MoU -->
-        <div class="row justify-content-center">
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-5 col-md-6 mb-4">
-                <div class="card  shadow h-100 py-2">
-                    <div class="card-body">
+            <!-- Data Jumlah MoU -->
+            <div class="col-md-7">
+                <div class="card shadow p-0 my-auto">
+                    <div class="card-body p-2">
                         <div class="row no-gutters align-items-center text-center">
                             <div class="col">
                                 Berlaku (Aktif) : <br>
                                 <span class="badge badge-success text-lg"><?php echo $dashboard_dma; ?></span>
                             </div>
                             <div class="col">
-                                Tidak Berlaku (Non-Aktif) : <br>
+                                Tidak Berlaku (Kadaluarsa) : <br>
                                 <span class="badge badge-danger text-lg"><?php echo $dashboard_dmb; ?></span>
                             </div>
                         </div>
@@ -33,7 +22,7 @@
             </div>
 
             <!-- Card Data Mou Belum Perpanjang, Pengajuan Baru, Pengajuan Perbanjang -->
-            <!-- <div class="col-xl-7 col-md-6 mb-4">
+            <!-- <div class="col-md">
                 <div class="card shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center text-center">
@@ -53,6 +42,14 @@
                     </div>
                 </div>
             </div> -->
+            <div class="col-md text-right my-auto">
+                <a href="?mou&i" class="btn btn-outline-success btn-sm">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+                <a href="?mou&a" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-archive"></i> Arsip
+                </a>
+            </div>
         </div>
 
         <!-- Data Tabel MoU -->
@@ -64,7 +61,6 @@
                 $sql_mou .= " JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
                 $sql_mou .= " JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
                 $sql_mou .= " JOIN tb_profesi_pdd ON tb_mou.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
-                // $sql_mou .= " JOIN tb_akreditasi ON tb_mou.id_akreditasi = tb_akreditasi.id_akreditasi";
                 $sql_mou .= "  ORDER BY tb_institusi.nama_institusi ASC";
 
                 // echo "$sql_mou<br>";
@@ -131,17 +127,6 @@
                                                 } elseif ($date_diff > 0) {
                                                 ?>
                                                     <span class="badge badge-danger text-xs">Tidak Berlaku</span>
-                                                <?php
-                                                }
-                                                echo "<br>";
-
-                                                if ($date_diff > 0 && $d_mou['ket_mou'] == NULL) {
-                                                ?>
-                                                    <span class="badge badge-danger text-xs">Belum Pengajuan</span>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <span class="badge badge-danger text-xs"></span>
                                             <?php
                                                 }
                                             }
@@ -274,6 +259,11 @@
                                             <a title="Ubah" href='?mou&u=<?php echo $d_mou['id_mou']; ?>' class=" btn btn-primary btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
+
+                                            <!-- tombol ubah  -->
+                                            <button title="Arsip" id="<?php echo $d_mou['id_mou']; ?>" class="btn btn-secondary btn-sm arsip">
+                                                <i class="fas fa-archive"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 <?php
@@ -293,3 +283,6 @@
             </div>
         </div>
     </div>
+    <script>
+
+    </script>

@@ -16,7 +16,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
         <div class="card-body">
             <form method="post" class="form-data text-gray-900" enctype="multipart/form-data" id="form_mou">
                 <!-- Nama Institusi, MoU RSJ dan Institusi -->
-                <input type="hidden" name="id_mou" id="id_mou" value="<?php echo $id_mou; ?>">
+                <input type="hidden" name="id_mou" id="id_mou" value="<?php echo $d['id_mou']; ?>">
                 <div class="row text-center">
                     <div class="col-md-6">
                         Nama Institusi <span style="color:red">*</span><br>
@@ -436,7 +436,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                         title: '<span class"text-xs"><b>DATA MOU</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
                         html: '<a href="?mou" class="btn btn-outline-primary">OK</a>',
-                        timer: 10000000000,
+                        timer: 10000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
