@@ -375,8 +375,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/insert/i_mou.php";
 					} elseif (isset($_GET['u'])) {
 						include "_admin/update/u_mou.php";
-					} elseif (isset($_GET['d'])) {
-						include "_admin/delete/d_mou.php";
+					} elseif (isset($_GET['a'])) {
+						include "_admin/view/v_mou_arsip.php";
 					} else {
 						include "_admin/view/v_mou.php";
 					}

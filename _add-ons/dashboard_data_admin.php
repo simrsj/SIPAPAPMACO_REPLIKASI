@@ -4,17 +4,17 @@ $sql_dmt = "SELECT * FROM tb_mou ";
 $q_dmt = $conn->query($sql_dmt);
 $dashboard_dmt = $q_dmt->rowCount();
 
-//////////////////// DATA MOU BERAKHIR ////////////////////
-$sql_dmb = "SELECT * FROM tb_mou 
-WHERE tgl_selesai_mou < CURDATE()";
-$q_dmb = $conn->query($sql_dmb);
-$dashboard_dmb = $q_dmb->rowCount();
-
 //////////////////// DATA MOU AKTIF ////////////////////
-$sql_dma = "SELECT * FROM tb_mou 
-WHERE tgl_selesai_mou >= CURDATE()";
+$sql_dma = "SELECT * FROM tb_mou ";
+$sql_dma .= " WHERE tgl_selesai_mou >= CURDATE() AND arsip_mou IS NULL";
 $q_dma = $conn->query($sql_dma);
 $dashboard_dma = $q_dma->rowCount();
+
+//////////////////// DATA MOU BERAKHIR ////////////////////
+$sql_dmb = "SELECT * FROM tb_mou ";
+$sql_dmb .= " WHERE tgl_selesai_mou < CURDATE() AND arsip_mou IS NULL";
+$q_dmb = $conn->query($sql_dmb);
+$dashboard_dmb = $q_dmb->rowCount();
 
 //////////////////// DATA MOU BELUM PENGAJUAN ////////////////////
 $sql_dmbp = "SELECT * FROM tb_mou 
