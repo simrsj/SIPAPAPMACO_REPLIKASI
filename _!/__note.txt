@@ -56,7 +56,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Perbaikan Tampilan Data MoU"
+git commit -a -m "Perbaikan Pengajuan akun IP"
 git pull
 git push
 
