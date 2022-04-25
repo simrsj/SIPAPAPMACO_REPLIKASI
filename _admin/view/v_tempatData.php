@@ -25,7 +25,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
                             <th>Keterangan</th>
                             <th>
                                 Tombol
-                                <hr class="p-0 m-0" style="color: aliceblue;">
+                                <hr class="text-gray-900 p-0 m-0" style="background-color: aliceblue; height: 2px;">
                                 Status
                             </th>
                         </tr>
