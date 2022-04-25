@@ -14,7 +14,7 @@ _*MINOR*_
 ---------------------------------------
 - ✅ Informasi Sisa di Modal Informasi Jadwal Praktikan
 - ✅ Perbaikan data MoU dan PKS di Admin diklat
-- Di MOU juga harus ada permintaan institusi yang tidak menginap
+- Perubahan Daftar Mess-Pemondokan Saat Akan dipilih
 - Pembuatan Fitur Kwitansi, no Kwitansi disesuaikan dengan aplikasi
 - Perubahan "Kontak Person" Mess dan Pemondokan
 - Perubahan Data MoU saat sudah Kadaluarsa (maksimal h-7) dengan nomor PIC Kang Dian Tim Kordik
@@ -45,6 +45,7 @@ PERTANYAAN
 - Untuk memilih mess pemondokan di admin ditentukan oleh admin umum, prioritas mess rsj
 - Harus ada Penanggung Jawab di Umum untuk Pemondokan 
 - Daftar Harga untuk mess dan pondokan seperti biaya admin, terutama dengan kodering harus ada
+- Di MOU juga harus ada permintaan institusi yang tidak menginap
 - Di MOU harus ada ketentuan mengenai ketersediaan MESS sudah ditentukan 
 - BerNotDin ke Diklat untuk diujicobakan 
 - Cek Untuk narasumber dari PT dan lainnya siapa yg berwenang (Pak Narmin)

@@ -1,5 +1,4 @@
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -146,7 +145,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     <b>
                                         <?php
-                                        if ($dAr_ins['logo_institusi'] == "") {
+                                        if ($dAr_ins['fileAkred_institusi'] == "") {
                                         ?>
                                             <span class="badge badge-danger">Data Tidak Ada</span>
                                         <?php
@@ -171,45 +170,58 @@
                 <div class="card-body">
                     <div class="text-md font-weight-bold text-center text-danger mb-1">
                         <div class="h5 mb-0 font-weight-bold">
-                            <b>
-                                <i>STATUS MoU</i> / KERJA SAMA<br>
-                                dengan RS Jiwa Provinsi Jawa Barat
-                                </br>
+                            <i>STATUS MoU</i> / KERJA SAMA<br>
+                            dengan RS Jiwa Provinsi Jawa Barat
+                            </br>
                         </div>
-                        
                     </div>
-                    <?php 
-                        $now = date('Y-m-d');
-                        $selesai = $dAr_ins['tgl_selesai_mou'];
-                         $date_end = strtotime($dAr_ins['tgl_selesai_mou']);
-                        $date_now = strtotime(date('Y-m-d'));
-                        $date_before_end = strtotime(manipulasiTanggal($dAr_ins['tgl_selesai_mou'],'-1','months'));
-                        // var_dump(tanggal($date_before_end));
-                        $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
-                        $before_end = ($date_now - $date_before_end) / 24 / 60 / 60;
-                        $aktif = 2; 
-                    
+                    <?php
+                    $now = date('Y-m-d');
+                    $selesai = $dAr_ins['tgl_selesai_mou'];
+                    $date_end = strtotime($dAr_ins['tgl_selesai_mou']);
+                    $date_now = strtotime(date('Y-m-d'));
+                    $date_before_end = strtotime(manipulasiTanggal($dAr_ins['tgl_selesai_mou'], '-1', 'months'));
+                    // var_dump(tanggal($date_before_end));
+                    $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
+                    $before_end = ($date_now - $date_before_end) / 24 / 60 / 60;
+                    $aktif = 2;
                     ?>
                     <hr class="bg-danger" style="height: 2px;">
                     <div class="no-gutters align-items-center text-center">
-                           <div class="col-xl-12 col-md-12 col-12">
-                               <h3>Hai <br><?php echo $dAr_ins['nama_institusi']; ?> </h3>
-                           <br/> 
-                           <?php if($selesai != '' && $selesai != NULL){
-                               if($date_diff <= 0) { 
-                                    if($before_end <= 0){ ?>
-                                        <div class="col-xl-12 col-md-12 col-12"> <h5><span class="badge badge-success col-12">MOU Kita masih <b>AKTIF</b>,<br> Terima Kasih Telah Ber-MOU dengan Kami</span></h5></div>
-                                <?php }else{ ?>          
-                                        <div class="col-xl-12 col-md-12 col-12"><h5><span class="badge badge-danger col-12">MOU Kita sebentar lagi <b>KADALUARSA</b> <br/>tepatnya pada tanggal : <?php echo tanggal($dAr_ins['tgl_selesai_mou']); ?>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut : <b>081321417344 (Adhie)</b></span></h5></div>
-                               <?php } ?>
-                            <?php } elseif($date_diff > 0) { ?>
-                                    <div class="col-xl-12 col-md-12 col-12"><h5><span class="badge badge-dark col-12">Mohon Maaf MOU Kita <b>SUDAH KADALUARSA</b>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut :  <b>081321417344 (Adhie)</b>  </span></h5></div>
-                            <?php }
-                                    }else{ ?>
-                                    <div class="col-xl-12 col-md-12 col-12"><h5><span class="badge badge-orange col-12">Mohon Maaf Kita <b>BELUM MOU</b>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut :  <b>081321417344 (Adhie)</b>  </span></h5></div>
-                            <?php } ?>
-                          
-                           </div>
+                        <div class="col-xl-12 col-md-12 col-12">
+                            <h3>Hai <br><?php echo $dAr_ins['nama_institusi']; ?> </h3>
+                            <br />
+                            <?php if ($selesai != '' && $selesai != NULL) {
+                                if ($date_diff <= 0) {
+                                    if ($before_end <= 0) {
+                            ?>
+                                        <div class="col-xl-12 col-md-12 col-12">
+                                            <h5><span class="badge badge-success col-12">MOU Kita masih <b>AKTIF</b>,<br> Terima Kasih Telah Ber-MOU dengan Kami</span></h5>
+                                        </div>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <div class="col-xl-12 col-md-12 col-12">
+                                            <h5><span class="badge badge-danger col-12">MOU Kita sebentar lagi <b>KADALUARSA</b> <br />tepatnya pada tanggal : <?php echo tanggal($dAr_ins['tgl_selesai_mou']); ?>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut : <b>081321417344 (Adhie)</b></span></h5>
+                                        </div>
+                                    <?php
+                                    }
+                                } elseif ($date_diff > 0) {
+                                    ?>
+                                    <div class="col-xl-12 col-md-12 col-12">
+                                        <h5><span class="badge badge-dark col-12">Mohon Maaf MOU Kita <b>SUDAH KADALUARSA</b>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut : <b>081321417344 (Adhie)</b> </span></h5>
+                                    </div>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <div class="col-xl-12 col-md-12 col-12">
+                                    <h5><span class="badge badge-orange col-12">Mohon Maaf Kita <b>BELUM MOU</b>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut : <b>081321417344 (Adhie)</b> </span></h5>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>

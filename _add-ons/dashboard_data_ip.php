@@ -6,7 +6,7 @@ $id_ins = $_SESSION['id_institusi'];
 $sql_ins = " SELECT * FROM tb_institusi ";
 $sql_ins .= "JOIN tb_user on tb_institusi.id_institusi = tb_user.id_institusi ";
 $sql_ins .= "JOIN tb_mou on tb_institusi.id_institusi = tb_mou.id_institusi ";
-$sql_ins .= " WHERE tb_institusi.id_institusi = " . $id_ins;
+$sql_ins .= "WHERE arsip_mou IS NULL AND tb_institusi.id_institusi = " . $id_ins;
 $q_ins = $conn->query($sql_ins);
 
 $d_ins = $q_ins->fetch(PDO::FETCH_ASSOC);
@@ -22,7 +22,8 @@ $dAr_ins['tgl_selesai_mou'] = $d_ins['tgl_selesai_mou'];
 
 //////////////////// DATA INSTITUSi ////////////////////
 
-function manipulasiTanggal($tgl,$jumlah=1,$format='days'){
+function manipulasiTanggal($tgl, $jumlah = 1, $format = 'days')
+{
 	$currentDate = $tgl;
-	return date('Y-m-d', strtotime($jumlah.' '.$format, strtotime($currentDate)));
+	return date('Y-m-d', strtotime($jumlah . ' ' . $format, strtotime($currentDate)));
 }

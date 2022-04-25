@@ -4,7 +4,7 @@ if ($_GET['prk'] == 'ked') {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik</h1>
+                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik Kedokteran</h1>
             </div>
         </div>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
@@ -49,21 +49,10 @@ if ($_GET['prk'] == 'ked') {
 
                                 $q_institusi = $conn->query($sql_institusi);
                                 $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
-                                $r_institusi = $q_institusi->rowCount();
-                                if ($r_institusi > 0) {
-                                    $no = 1;
                                 ?>
-                                    <div class="text-lg font-weight-bold"><?php echo $d_institusi['nama_institusi']; ?></div>
-                                    <input type="hidden" name='id_institusi' id="institusi" value="<?php echo $_SESSION['id_institusi']; ?>">
-                                    <!-- <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del> -->
-                                    <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_institusi"></div>
-                                <?php
-                                } else {
-                                ?>
-                                    <b><i>Data MoU Tidak Ada</i></b>
-                                <?php
-                                }
-                                ?>
+                                <div class="text-lg font-weight-bold"><?php echo $d_institusi['nama_institusi'] . " (" . $d_institusi['akronim_institusi'] . ")"; ?></div>
+                                <input type="hidden" name='id_institusi' id="institusi" value="<?php echo $_SESSION['id_institusi']; ?>">
+                                <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_institusi"></div>
                             </div>
                             <div class="col-lg-5">
                                 Gelombang/Kelompok : <span style="color:red">*</span><br>
@@ -115,8 +104,8 @@ if ($_GET['prk'] == 'ked') {
                                         <?php
                                         }
                                         ?>
-                                    </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_profesi"></span>
+                                    </select>
+                                    <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_profesi"></div>
                                 <?php
                                 } else {
                                 ?>
@@ -125,37 +114,6 @@ if ($_GET['prk'] == 'ked') {
                                 }
                                 ?>
                             </div>
-                            <!-- <div class="col-lg-3">
-                                Akreditasi Institusi : <span style="color:red">*</span><br>
-                                <?php
-                                $sql_akreditasi = "SELECT * FROM tb_akreditasi";
-
-                                $q_akreditasi = $conn->query($sql_akreditasi);
-                                $r_akreditasi = $q_akreditasi->rowCount();
-
-                                if ($r_akreditasi > 0) {
-                                ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_akreditasi' id="akreditasi" required>
-                                        <option value="">-- <i>Pilih</i>--</option>
-                                        <?php
-                                        while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                            <option class='text-wrap' value='<?php echo $d_akreditasi['id_akreditasi']; ?>'>
-                                                <?php echo $d_akreditasi['nama_akreditasi']; ?>
-                                            </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select><br>
-                                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_akreditasi"></span>
-                                <?php
-                                } else {
-                                ?>
-                                    <b><i>Data Akreditasi Tidak Ada</i></b>
-                                <?php
-                                }
-                                ?>
-                            </div> -->
                         </div>
                         <br><br>
 
@@ -177,23 +135,25 @@ if ($_GET['prk'] == 'ked') {
                                 <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_no_surat"></span>
                             </div>
                             <div class="col-lg-3">
-                                Unggah Surat : <span style="color:red">*</span><br>
-                                <input type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
-                                <br><i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_surat"></span>
+                                <fieldset class="border p-2 ">
+                                    Unggah Surat : <span class="mb-2" style="color:red">*</span><br>
+                                    <input type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
+                                </fieldset>
+                                <i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</i>
+                                <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_surat"></div>
                             </div>
                             <div class="col-lg-3">
-                                Unggah Data Praktikan : <span style="color:red">*</span>
-                                <a class='text-xs text-uppercase badge badge-danger' href='#' data-toggle='modal' data-target='#modal_data_praktikan'>
-                                    Info Format File
-                                </a>
-                                <br>
-
-                                <!-- modal info dan unduh data praktikan -->
-                                <?php include "_admin/insert/i_praktik_formatDataPraktikan.php"; ?>
-                                <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx">
-                                <br><i style='font-size:12px;'>File harus sesuai format dan maksimal ukuran file 1 Mb</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_data_praktikan"></span>
+                                <fieldset class="border p-2">
+                                    Unggah Data Praktikan : <span style="color:red">*</span>
+                                    <a class='text-xs text-uppercase badge badge-danger' href='#' data-toggle='modal' data-target='#modal_data_praktikan'>
+                                        Info Format File
+                                    </a>
+                                    <!-- modal info dan unduh data praktikan -->
+                                    <?php include "_admin/insert/i_praktik_formatDataPraktikan.php"; ?>
+                                    <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx">
+                                </fieldset>
+                                <i style='font-size:12px;'>File harus sesuai format dan maksimal ukuran file 1 Mb</i>
+                                <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_data_praktikan"></div>
                             </div>
                         </div>
                         <hr>
@@ -399,7 +359,7 @@ if ($_GET['prk'] == 'ked') {
 
                 //notif profesi 
                 if (profesi == "") {
-                    document.getElementById("err_profesi").innerHTML = "Profesi Harus Diisi";
+                    document.getElementById("err_profesi").innerHTML = "Profesi Harus Dipilih";
                 } else {
                     document.getElementById("err_profesi").innerHTML = "";
                 }
