@@ -7,7 +7,6 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <form action="" method="post" class="form-data text-gray-900" enctype="multipart/form-data" id="form_mou">
-
                 <?php
                 $sql_id_mou = "SELECT * FROM tb_mou";
                 $sql_id_mou .= " ORDER BY id_mou ASC";

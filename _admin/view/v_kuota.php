@@ -13,6 +13,8 @@ if (isset($_GET['kta'])) {
                 </button>
             </div>
         </div>
+
+        <!-- form tambah kuota  -->
         <div class="card shadow mb-4 card-body" id="data_tambah_kuota" style="display: none;">
             <form class="form-inline" method="post" id="form_tambah_kuota">
                 <div class="form-group mx-sm-3 mb-2">
@@ -42,6 +44,8 @@ if (isset($_GET['kta'])) {
                 </button>
             </div>
         </div>
+
+        <!-- form ubah kuota  -->
         <div class="card shadow mb-4 card-body" id="data_ubah_kuota" style="display: none;">
             <form class="form-inline" method="post" id="form_ubah_kuota">
                 <input type="hidden" name="u_id_kuota" id="u_id_kuota">

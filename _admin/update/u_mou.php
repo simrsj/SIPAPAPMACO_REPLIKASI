@@ -148,7 +148,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                                 <?php
                                 if ($d['file_pks'] != "") {
                                 ?>
-                                    <div class="text-xs font-italic text-primary">File MoU Sebelumnya : <a href="<?php echo $d['file_mou']; ?>" class="font-weight-bold">UNDUH</a></div>
+                                    <div class="text-xs font-italic text-primary">File MoU Sebelumnya : <a href="<?php echo $d['file_mou']; ?>" class="font-weight-bold" target="_blank">UNDUH</a></div>
                                 <?php
                                 }
                                 ?>
@@ -165,7 +165,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                                 <?php
                                 if ($d['file_pks'] != "") {
                                 ?>
-                                    <div class="text-xs font-italic text-primary">File PKS Sebelumnya : <a href="<?php echo $d['file_pks']; ?>" class="font-weight-bold">UNDUH</a></div>
+                                    <div class="text-xs font-italic text-primary">File PKS Sebelumnya : <a href="<?php echo $d['file_pks']; ?>" class="font-weight-bold" target="_blank">UNDUH</a></div>
                                 <?php
                                 }
                                 ?>

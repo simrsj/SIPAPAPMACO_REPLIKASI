@@ -167,7 +167,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							<span>Tarif</span>
 						</a>
 						<a class="collapse-item" href="?tmp">
-							<i class="fas fa-house"></i>
+							<i class="fas fa-school"></i>
 							<span>Tempat</span>
 						</a>
 						<a class="collapse-item" href="?uni">

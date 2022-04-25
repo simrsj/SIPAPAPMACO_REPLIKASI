@@ -52,6 +52,14 @@ if (isset($_POST['ubah_user'])) {
                             ?>
                             <b>Username : </b><br>
                             <input class="form-control" type="text" name="username_user" value="<?php echo $d_akun['username_user']; ?>" required><br>
+                            <b>Nama Akun : </b><br>
+                            <input class="form-control" type="text" name="nama_user" value="<?php echo $d_akun['nama_user']; ?>" required><br>
+                            <b>No. Telp. : </b><br>
+                            <input class="form-control" type="number" name="no_telp_user" value="<?php echo $d_akun['no_telp_user']; ?>"><br>
+                            <b>E-Mail : </b><br>
+                            <input class="form-control" type="email" name="email_user" value="<?php echo $d_akun['email_user']; ?>"><br>
+                            <hr>
+                            <div class="font-weight-bold text-center mb-2 text-uppercase">Ubah Password</div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <b>Password : </b><br>
@@ -61,14 +69,11 @@ if (isset($_POST['ubah_user'])) {
                                     <b>Ulangi Password : </b><br>
                                     <input class="form-control" type="password" name="ulangi_password_user" required><br>
                                 </div>
-                            </div><b>Nama Akun : </b><br>
-                            <input class="form-control" type="text" name="nama_user" value="<?php echo $d_akun['nama_user']; ?>" required><br>
-                            <b>No. Telp. : </b><br>
-                            <input class="form-control" type="number" name="no_telp_user" value="<?php echo $d_akun['no_telp_user']; ?>"><br>
-                            <b>E-Mail : </b><br>
-                            <input class="form-control" type="email" name="email_user" value="<?php echo $d_akun['email_user']; ?>"><br>
-                            <button type="submit" class="btn btn-primary btn-sm" name="ubah_user">Ubah</button>
+                            </div>
 
+                            <div class="row col-md-auto justify-content-center">
+                                <button type="submit" class="btn btn-primary btn-sm" name="ubah_user">Ubah</button>
+                            </div>
                         </form>
                     </div>
                 </div>
