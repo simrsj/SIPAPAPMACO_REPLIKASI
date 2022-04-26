@@ -98,10 +98,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     ?>
                                 </td>
                                 <td class="text-center">
-                                    <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_institusi['id_institusi']; ?>'>
+                                    <a title="Ubah" class='btn btn-primary btn-sm ubah_init ' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_institusi['id_institusi']; ?>'>
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_d_m" . $d_institusi['id_institusi']; ?>'>
+                                    <a title="Hapus" class='btn btn-danger btn-sm hapus' href='#' data-toggle='modal' data-target='<?php echo "#akr_d_m" . $d_institusi['id_institusi']; ?>'>
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     <hr class="m-2">
@@ -132,55 +132,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     }
                                     ?>
                                 </td>
-                                <?php $no++; ?>
-                                <!-- modal ubah Institusi  -->
-                                <div class="modal fade" id="<?php echo "akr_u_m" . $d_institusi['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <form method="post" action="" enctype="multipart/form-data">
-                                                <div class="modal-header">
-                                                    Ubah Institusi :
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input name="id_institusi" value="<?php echo $d_institusi['id_institusi']; ?>" hidden>
-                                                    Nama Institusi :
-                                                    <input class="form-control" name="nama_institusi" value="<?php echo $d_institusi['nama_institusi']; ?>" required><br>
-                                                    Akronim Institusi :
-                                                    <i style='font-size:12px;'>Maximal 10 Karakter</i><span style="color:red">*</span>
-                                                    <input type='text' class="form-control" name="akronim_institusi" maxlength="10" value="<?php echo $d_institusi['akronim_institusi']; ?>"><br>
-                                                    Logo Institusi:<br>
-                                                    <input type="file" name="logo_institusi" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-success btn-sm" name="ubah">Ubah</button>
-                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="modal fade" id="<?php echo "akr_d_m" . $d_institusi['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <form method="post" action="">
-                                                <div class="modal-header">
-                                                    <h5>Hapus Data</h5>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h6><b><?php echo $d_institusi['nama_institusi']; ?></b></h6>
-                                                    <input name="id_institusi" value="<?php echo $d_institusi['id_institusi']; ?>" hidden>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>
-                                                    <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Tidak</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </tr>
                         <?php
+                            $no++;
                         }
                         ?>
                     </tbody>
@@ -209,9 +163,34 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
         document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
         document.getElementById("form_tambah_institusi").reset();
+
+        var id = $(this).attr('id');
+        $.ajax({
+            type: 'POST',
+            url: "_admin/view/v_kuotaGetData.php",
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(response) {
+
+                document.getElementById("form_ubah_kuota").reset();
+
+                document.getElementById("u_nama_institusi").value = response.id_kuota;
+                document.getElementById("u_nama_kuota").value = response.nama_kuota;
+                document.getElementById("u_jumlah_kuota").value = response.jumlah_kuota;
+                document.getElementById("u_ket_kuota").value = response.ket_kuota;
+            },
+            error: function(response) {
+                alert(response.responseText);
+                console.log(response.responseText);
+            }
+        });
+
         $("#data_ubah_institus").fadeIn(1);
         $("#data_tambah_institusi").fadeOut(1);
         $('#u_nama_institusi').focus();
+
     });
 
     $(".ubah_tutup").click(function() {

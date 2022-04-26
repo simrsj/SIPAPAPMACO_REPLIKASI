@@ -107,7 +107,7 @@
     <div class="card shadow mb-4 card-body" id="data_ubah_institusi" style="display: none;">
         <form class="form-data" method="post" id="form_ubah_institusi">
             <!-- Nama Institusi, MoU RSJ dan Institusi -->
-            <input type="hidden" name="id_institusi" id="id_institusi">
+            <input type="hidden" name="u_id_institusi" id="u_id_institusi">
             <div class="row mb-4">
                 <div class="col-md ">
                     Nama Institusi : <span class="text-danger">*</span>&nbsp;&nbsp;

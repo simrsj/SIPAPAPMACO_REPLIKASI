@@ -56,7 +56,7 @@ if ($_FILES['t_logo_institusi']['size'] > 0) {
             $logo->tmp_name,
             "{$alamat_unggah_logo}/{$logo->name}"
         );
-        $alamat_unggah_logo = "./_file/mou-pks";
+        $alamat_unggah_logo = "./_img/logo_institusi";
 
         // link alamat file 
         $link_logo = "{$alamat_unggah_logo}/{$logo->name}";
