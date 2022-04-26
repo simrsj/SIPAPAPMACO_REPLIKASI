@@ -7,9 +7,9 @@
             <button class='btn btn-outline-success btn-sm tambah_init'>
                 <i class="fas fa-plus"></i> Tambah
             </button>
-            <button class='btn btn-outline-primary btn-sm' href='?ins&val'>
+            <a class='btn btn-outline-primary btn-sm' href='?ins&val'>
                 Validasi
-            </button>
+            </a>
         </div>
     </div>
 
