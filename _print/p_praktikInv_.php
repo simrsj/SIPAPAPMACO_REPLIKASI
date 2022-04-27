@@ -38,14 +38,11 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 if ($d_praktik['id_jurusan_pdd'] == 1) {
     $ukuranFontIsi = "12px";
 } else {
-    $ukuranFontIsi = "12px";
+    $ukuranFontIsi = "14,67px";
 }
 
 //logo Gambar
 $img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
-
-//logo Gambar
-$tte_elly =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/tte/elly_marliani.jpeg';
 
 //no surat
 $noSurat =  $_GET['ns'];
@@ -93,28 +90,6 @@ if ($d_praktik['id_institusi'] == 19) {
     <div style="text-indent: 0.3in;">1. Bagian Keuangan RS Jiwa</div>
     ';
 }
-
-
-$ttdTembusan = '
-<table border="1" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px; width: 100% !important">
-<tr>
-    <td>
-    </td>
-    <td style="text-align:center;">
-        DIREKTUR<br>
-        RS JIWA PROVINSI JAWA BARAT<br>
-    </td>
-</tr>
-<tr>
-    <td style="text-valign: text-bottom;">
-    ' . $tembusan . '
-    </td>
-    <td style="text-align:center;">
-        <img src="' . $tte_elly . '" style="width: 200px !important, heigth: 100px !important;">
-    </td>
-</tr>
-</table>
-';
 
 //cari Jenis kegiatan 
 $sql_getJenisKegiatan = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
@@ -179,7 +154,7 @@ $options = new Options();
 // $options->set('defaultFont', 'Courier');
 $dompdf = new Dompdf($options);
 
-# ------------------------------------------------------------------------------------------------------------------------------------- HTML HEAD DAN FOOTER
+# ------------------------------------------------------------------------------------------------------------------------------------- HTML TARIF
 
 //tag awal html
 $html = '
@@ -254,7 +229,7 @@ $html .= '
                 <span style="font-weight: bold; font-size: 24px;"> RUMAH SAKIT JIWA</span><br>
             </span>
             <span style="line-height: 13px">
-                <span style="font-size: 12px;">
+                <span style="font-size: 13.333px;">
                 Jalan Kolonel Masturi KM. 7 – Cisarua Telepon: (022) 2700260<br>
                 Fax: (022) 2700304 Website: www.rsj.jabarprov.go.id email: rsj@jabarprov.go.id<br>
                 KABUPATEN BANDUNG BARAT – 40551
@@ -417,9 +392,31 @@ $html .= '
 </table>
 ';
 
-//tag ttd surat dan tembusan
-$html .= $ttdTembusan . '
+//tag ttd surat
+$html .= '
+<table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px">
+    <tr>
+        <td width="67px">
+        </td>
+        <td width="350px">
+        </td>
+        <td style="text-align:center;">
+        DIREKTUR<br>
+        RS JIWA PROVINSI JAWA BARAT<br><br><br><br>
+        ELLY MARLIYANI, dr., Sp.KJ., M.K.M.<br>
+        Pembina Utama Madya<br>
+        NIP. 196608141991022004
+        </td>
+    </tr>
+</table>
 </main>
+';
+
+//footer
+$html .= '
+<footer>
+    <div>' . $tembusan . '</div>
+</footer>
 ';
 
 # ------------------------------------------------------------------------------------------------------------------------------------- HTML TARIF MESS
@@ -456,6 +453,7 @@ $html .= '
 <hr>
 <!--/header-->
 ';
+
 
 //Tag judul Surat
 $html .= '
@@ -606,10 +604,33 @@ $html .= '
 </table>
 ';
 
-//tag ttd surat dan tembusan
-$html .= $ttdTembusan . '
+//tag ttd surat
+$html .= '
+<table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px">
+    <tr>
+        <td width="67px">
+        </td>
+        <td width="350px">
+        </td>
+        <td style="text-align:center;">
+        DIREKTUR<br>
+        RS JIWA PROVINSI JAWA BARAT<br><br><br><br>
+        ELLY MARLIYANI, dr., Sp.KJ., M.K.M.<br>
+        Pembina Utama Madya<br>
+        NIP. 196608141991022004
+        </td>
+    </tr>
+</table>
 </main>
 ';
+
+//footer
+$html .= '
+<footer>
+    <div>' . $tembusan . '</div>
+</footer>
+';
+
 # ------------------------------------------------------------------------------------------------------------------------------------- HTML TARIF UJIAN
 
 if ($r_getDataUjian > 0) {
@@ -797,12 +818,33 @@ if ($r_getDataUjian > 0) {
     </table>
     ';
 
-    //tag ttd surat dan tembusan
-    $html .= $ttdTembusan . '
+    //tag ttd surat
+    $html .= '
+    <table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px">
+        <tr>
+            <td width="67px">
+            </td>
+            <td width="350px">
+            </td>
+            <td style="text-align:center;">
+            DIREKTUR<br>
+            RS JIWA PROVINSI JAWA BARAT<br><br><br><br>
+            ELLY MARLIYANI, dr., Sp.KJ., M.K.M.<br>
+            Pembina Utama Madya<br>
+            NIP. 196608141991022004
+            </td>
+        </tr>
+    </table>
     </main>
     ';
-}
 
+    //footer
+    $html .= '
+    <footer>
+        <div>' . $tembusan . '</div>
+    </footer>
+    ';
+}
 //tag tutup body
 $html .= "</body>";
 

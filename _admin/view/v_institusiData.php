@@ -3,7 +3,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 ?>
 
-
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
@@ -98,10 +97,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     ?>
                                 </td>
                                 <td class="text-center">
-                                    <a title="Ubah" class='btn btn-primary btn-sm ubah_init ' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_institusi['id_institusi']; ?>'>
+                                    <a title="Ubah" class='btn btn-primary btn-sm ubah_init ' id='<?php echo $d_institusi['id_institusi']; ?>'>
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a title="Hapus" class='btn btn-danger btn-sm hapus' href='#' data-toggle='modal' data-target='<?php echo "#akr_d_m" . $d_institusi['id_institusi']; ?>'>
+                                    <a title="Hapus" class='btn btn-danger btn-sm hapus' id='<?php echo $d_institusi['id_institusi']; ?>'>
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     <hr class="m-2">
@@ -162,24 +161,35 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         document.getElementById("err_u_akred_institusi").innerHTML = "";
         document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
         document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
-        document.getElementById("form_tambah_institusi").reset();
+        document.getElementById("form_ubah_institusi").reset();
 
         var id = $(this).attr('id');
         $.ajax({
             type: 'POST',
-            url: "_admin/view/v_kuotaGetData.php",
+            url: "_admin/view/v_institusiGetData.php",
             data: {
                 id: id
             },
             dataType: 'json',
             success: function(response) {
 
-                document.getElementById("form_ubah_kuota").reset();
+                document.getElementById("form_ubah_institusi").reset();
 
-                document.getElementById("u_nama_institusi").value = response.id_kuota;
-                document.getElementById("u_nama_kuota").value = response.nama_kuota;
-                document.getElementById("u_jumlah_kuota").value = response.jumlah_kuota;
-                document.getElementById("u_ket_kuota").value = response.ket_kuota;
+                document.getElementById("u_id_institusi").value = response.id_institusi;
+                document.getElementById("u_nama_institusi").value = response.nama_institusi;
+                document.getElementById("u_akronim_institusi").value = response.akronim_institusi;
+                if (response.logo_institusi == '' || response.logo_institusi == null) {
+                    // document.getElementById("logo_institusi").value = response.logo_institusi;
+                    // $("#logo_institusi").attr('src', response.logo_institusi);
+                    $('#logo_institusi').append('<img src="' + response.logo_institusi + '" width="100%" height="100%">');
+                } else {
+                    $("#logo_institusi").append('LOGO TIDAK ADA');
+                }
+                document.getElementById("u_alamat_institusi").value = response.alamat_institusi;
+                document.getElementById("u_akred_institusi").value = response.akred_institusi;
+                document.getElementById("u_tglAkhirAkred_institusi").value = response.tglAkhirAkred_institusi;
+                // document.getElementById("fileAkred_institusi").value = response.fileAkred_institusi;
+                $("#fileAkred_institusi").attr('href', response.fileAkred_institusi);
             },
             error: function(response) {
                 alert(response.responseText);
@@ -187,7 +197,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
             }
         });
 
-        $("#data_ubah_institus").fadeIn(1);
+        $("#data_ubah_institusi").fadeIn(1);
         $("#data_tambah_institusi").fadeOut(1);
         $('#u_nama_institusi').focus();
 

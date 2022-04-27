@@ -120,6 +120,11 @@
                     <div class="font-italic text-xs">Maksimal 10 Karakter</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_akronim_institusi"></div>
                 </div>
+                <div class="col-md-2">
+                    <fieldset class="border p-2">
+                        <div id="logo_institusi"></div>
+                    </fieldset>
+                </div>
                 <div class="col-md">
                     <fieldset class="border p-2">
                         Logo : <span class="text-danger">*</span>&nbsp;&nbsp;
@@ -149,6 +154,7 @@
                 <div class="col-md">
                     <fieldset class="border p-2">
                         File Akreditasi : <span class="text-danger">*</span>&nbsp;&nbsp;
+                        <div class="font-italic text-primary text-xs">File Sebelumnya : <a href="" target="_blank" id="fileAkred_institusi"><u>UNDUH</u></a></div>
                         <input type="file" name="u_fileAkred_institusi" id="u_fileAkred_institusi" required>
                     </fieldset>
                     <div class="font-italic text-xs">File Akreditasi harus PDF dan ukuran kurang dari 1 Mb</div>
