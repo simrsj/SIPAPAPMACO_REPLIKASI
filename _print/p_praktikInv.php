@@ -94,7 +94,6 @@ if ($d_praktik['id_institusi'] == 19) {
     ';
 }
 
-
 $ttdTembusan = '
 <table border="1" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px; width: 100% !important">
 <tr>
