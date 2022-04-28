@@ -150,7 +150,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							<i class="fas fa-fw fa-university"></i>
 							<span>Institusi</span>
 						</a>
-						<a class="collapse-item" href="?mtr">
+						<a class="collapse-item" href="?d_pmbb">
 							<i class="fas fa-fw fa-portrait"></i>
 							<span>Mentor/Pembimbing</span>
 						</a>
@@ -380,8 +380,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} else {
 						include "_admin/view/v_mou.php";
 					}
-				} elseif (isset($_GET['mtr'])) {
-					include "_admin/view/v_mentor.php";
+				} elseif (isset($_GET['d_pmbb'])) {
+					include "_admin/view/v_daftarPembimbing.php";
 				} elseif (isset($_GET['nil'])) {
 					if (isset($_GET['i']) && isset($_GET['p'])) {
 						include "_admin/insert/i_nilaiKep.php";
