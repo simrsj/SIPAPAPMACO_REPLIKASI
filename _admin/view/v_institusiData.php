@@ -100,7 +100,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     <a title="Ubah" class='btn btn-primary btn-sm ubah_init ' id='<?php echo $d_institusi['id_institusi']; ?>'>
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a title="Hapus" class='btn btn-danger btn-sm hapus' id='<?php echo $d_institusi['id_institusi']; ?>'>
+                                    <a title="Hapus" class='btn btn-outline-danger btn-sm hapus' id='<?php echo $d_institusi['id_institusi']; ?>'>
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     <hr class="m-2">
@@ -464,7 +464,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         console.log("hapus");
         Swal.fire({
             position: 'top',
-            title: 'Hapus Data Tempat ?',
+            title: 'Hapus Data Institusi ?',
             icon: 'error',
             showCancelButton: true,
             confirmButtonColor: '#1cc88a',
@@ -476,12 +476,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
             if (result.isConfirmed) {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_v_tempat_h.php",
+                    url: "_admin/exc/x_v_institusi_h.php",
                     data: {
-                        "id_tempat": $(this).attr('id')
+                        "h_id_institusi": $(this).attr('id')
                     },
                     success: function() {
-                        $('#data_tempat').load('_admin/view/v_tempatData.php?');
+                        $('#data_institusi').load('_admin/view/v_institusiData.php?');
 
                         const Toast = Swal.mixin({
                             toast: true,

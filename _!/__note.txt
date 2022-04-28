@@ -56,7 +56,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Perbaikan Modul Ubah Institusi"
+git commit -a -m "Perbaikan Modul Hapus Institusi"
 git pull
 git push
 
