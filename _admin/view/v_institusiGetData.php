@@ -7,7 +7,7 @@ $sql .= " WHERE id_institusi= " . $_POST['id'];
 
 $q = $conn->query($sql);
 $d = $q->fetch(PDO::FETCH_ASSOC);
-$h['id_institusi '] = $d["id_institusi"];
+$h['id_institusi'] = $d["id_institusi"];
 $h['nama_institusi'] = $d["nama_institusi"];
 $h['akronim_institusi'] = $d["akronim_institusi"];
 $h['logo_institusi'] = $d["logo_institusi"];

@@ -22,11 +22,10 @@
 
             $q_id_institusi = $conn->query($sql_id_institusi);
             if ($q_id_institusi->rowCount() > 0) {
-
                 $no = 1;
                 while ($d_id_institusi = $q_id_institusi->fetch(PDO::FETCH_ASSOC)) {
                     if ($no != $d_id_institusi['id_institusi']) {
-                        $no = $d_id_institusi['id_institusi'] + 1;
+                        // $no = $d_id_institusi['id_institusi'] + 1;
                         break;
                     }
                     $no++;
@@ -37,19 +36,19 @@
             <!-- Nama Institusi, MoU RSJ dan Institusi -->
             <input type="hidden" name="id_institusi" id="id_institusi" value="<?php echo $id_institusi; ?>">
             <div class="row mb-4">
-                <div class="col-md ">
+                <div class="col-md-6">
                     Nama Institusi : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <input class="form-control" name="t_nama_institusi" id="t_nama_institusi" required>
+                    <input class="form-control form-control-sm" name="t_nama_institusi" id="t_nama_institusi" required>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_nama_institusi"></div>
                 </div>
                 <div class="col-md">
                     Akronim : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <input class="form-control" name="t_akronim_institusi" id="t_akronim_institusi" required>
+                    <input class="form-control form-control-sm" maxlength="10" name="t_akronim_institusi" id="t_akronim_institusi" required>
                     <div class="font-italic text-xs">Maksimal 10 Karakter</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_akronim_institusi"></div>
                 </div>
-                <div class="col-md">
-                    <fieldset class="border p-2">
+                <div class="col-md-4">
+                    <fieldset class="border p-2 ">
                         Logo : <span class="text-danger">*</span>&nbsp;&nbsp;
                         <input type="file" name="t_logo_institusi" id="t_logo_institusi" accept="image/png" required>
                         <div class="font-italic text-xs">Logo harus PNG dan ukuran kurang dari 200 Kb</div>
@@ -58,9 +57,9 @@
                 </div>
             </div>
             <div class="row mb-4">
-                <div class="col-md ">
+                <div class="col-md-2">
                     Akreditasi Institusi : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <select class="form-control" name="t_akred_institusi" id="t_akred_institusi" width="100%" required>
+                    <select class="select2" name="t_akred_institusi" id="t_akred_institusi" required>
                         <option value=""></option>
                         <option value="-- Lainnya --">-- Lainnya --</option>
                         <option value="A">A</option>
@@ -69,26 +68,24 @@
                     </select>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_akred_institusi"></div>
                 </div>
-                <div class="col-md">
-                    Tanggal Berlaku Akreditasi : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <input type="date" class="form-control" name="t_tglAkhirAkred_institusi" id="t_tglAkhirAkred_institusi" required>
+                <div class="col-md-2">
+                    Berlaku Akreditasi : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <input type="date" class="form-control form-control-sm" name="t_tglAkhirAkred_institusi" id="t_tglAkhirAkred_institusi" required>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_tglAkhirAkred_institusi"></div>
+                </div>
+                <div class="col-md">
+                    Alamat Institusi : <br>
+                    <textarea class="form-control form-control-sm" name="t_alamat_institusi" id="t_alamat_institusi"></textarea>
                 </div>
                 <div class="col-md">
                     <fieldset class="border p-2">
                         File Akreditasi : <span class="text-danger">*</span>&nbsp;&nbsp;
-                        <input type="file" name="t_fileAkred_institusi" id="t_fileAkred_institusi" required>
+                        <input type="file" name="t_fileAkred_institusi" id="t_fileAkred_institusi" accept="application/pdf" required>
                     </fieldset>
                     <div class="font-italic text-xs">File Akreditasi harus PDF dan ukuran kurang dari 1 Mb</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_fileAkred_institusi"></div>
                 </div>
-            </div>
-            <div class="row mb-4">
 
-                <div class="col-md">
-                    Alamat Institusi : <br>
-                    <textarea class="form-control" name="t_alamat_institusi" id="t_alamat_institusi"></textarea>
-                </div>
             </div>
             <hr>
             <div class="form-inline navbar nav-link justify-content-end">
@@ -109,23 +106,23 @@
             <!-- Nama Institusi, MoU RSJ dan Institusi -->
             <input type="hidden" name="u_id_institusi" id="u_id_institusi">
             <div class="row mb-4">
-                <div class="col-md ">
+                <div class="col-md-5">
                     Nama Institusi : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <input class="form-control" name="u_nama_institusi" id="u_nama_institusi" required>
+                    <input class="form-control form-control-sm" name="u_nama_institusi" id="u_nama_institusi" required>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_nama_institusi"></div>
                 </div>
-                <div class="col-md">
+                <div class="col-md-2">
                     Akronim : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <input class="form-control" name="u_akronim_institusi" id="u_akronim_institusi" required>
+                    <input class="form-control form-control-sm" maxlength="10" name="u_akronim_institusi" id="u_akronim_institusi" required>
                     <div class="font-italic text-xs">Maksimal 10 Karakter</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_akronim_institusi"></div>
                 </div>
-                <div class="col-md-2">
-                    <fieldset class="border p-2">
+                <div class="col-md text-center my-auto">
+                    <fieldset class="border border-1 p-1 m-0">
                         <div id="logo_institusi"></div>
                     </fieldset>
                 </div>
-                <div class="col-md">
+                <div class="col-md-3">
                     <fieldset class="border p-2">
                         Logo : <span class="text-danger">*</span>&nbsp;&nbsp;
                         <input type="file" name="u_logo_institusi" id="u_logo_institusi" accept="image/png" required>
@@ -135,9 +132,9 @@
                 </div>
             </div>
             <div class="row mb-4">
-                <div class="col-md ">
+                <div class="col-md-2">
                     Akreditasi Institusi : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <select class="form-control" name="u_akred_institusi" id="u_akred_institusi" width="100%" required>
+                    <select class="select2" name="u_akred_institusi" id="u_akred_institusi" required>
                         <option value=""></option>
                         <option value="-- Lainnya --">-- Lainnya --</option>
                         <option value="A">A</option>
@@ -146,26 +143,27 @@
                     </select>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_akred_institusi"></div>
                 </div>
-                <div class="col-md">
-                    Tanggal Berlaku Akreditasi : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <input type="date" class="form-control" name="u_tglAkhirAkred_institusi" id="u_tglAkhirAkred_institusi" required>
+                <div class="col-md-2">
+                    Berlaku Akreditasi : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <input type="date" class="form-control form-control-sm" name="u_tglAkhirAkred_institusi" id="u_tglAkhirAkred_institusi" required>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_tglAkhirAkred_institusi"></div>
                 </div>
                 <div class="col-md">
+                    Alamat Institusi : <br>
+                    <textarea class="form-control form-control-sm" name="u_alamat_institusi" id="u_alamat_institusi"></textarea>
+                </div>
+                <div class="col-md-3">
                     <fieldset class="border p-2">
                         File Akreditasi : <span class="text-danger">*</span>&nbsp;&nbsp;
-                        <div class="font-italic text-primary text-xs">File Sebelumnya : <a href="" target="_blank" id="fileAkred_institusi"><u>UNDUH</u></a></div>
-                        <input type="file" name="u_fileAkred_institusi" id="u_fileAkred_institusi" required>
+                        <div class="font-italic text-primary text-xs">File Sebelumnya : <span id="fileAkred_institusi"></span>
+                        </div>
+                        <input type="file" name="u_fileAkred_institusi" id="u_fileAkred_institusi" accept="application/pdf" required>
                     </fieldset>
                     <div class="font-italic text-xs">File Akreditasi harus PDF dan ukuran kurang dari 1 Mb</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_fileAkred_institusi"></div>
                 </div>
             </div>
             <div class="row mb-4">
-                <div class="col-md">
-                    Alamat Institusi : <br>
-                    <textarea class="form-control" name="u_alamat_institusi" id="u_alamat_institusi"></textarea>
-                </div>
             </div>
             <hr>
             <div class="form-inline navbar nav-link justify-content-end">
@@ -222,6 +220,9 @@
         var t_akred_institusi = $('#t_akred_institusi').val();
         var t_tglAkhirAkred_institusi = $('#t_tglAkhirAkred_institusi').val();
         var t_fileAkred_institusi = $('#t_fileAkred_institusi').val();
+        // console.log("NAMA : " + t_nama_institusi);
+        // console.log("AKRED : " + t_akred_institusi);
+        // console.log("ALAMAT : " + $('#t_alamat_institusi').val());
 
         //cek data from tambah bila tidak diiisi
         if (
@@ -299,7 +300,7 @@
                     icon: 'warning',
                     title: '<div class="text-md text-center">Logo Harus <b>.png</b></div>'
                 });
-                document.getElementById("err_file_mou").innerHTML = "Logo Harus png";
+                document.getElementById("err_t_logo_institusi").innerHTML = "Logo Harus PNG";
             } //Toast bila upload file MoU diatas 200 Kb 
             else if (getSizeLogo > 256) {
                 const Toast = Swal.mixin({
@@ -318,7 +319,7 @@
                     icon: 'warning',
                     title: '<div class="text-md text-center">Ukuran File MoU Harus <br><b>Kurang dari 200 Kb </b></div>'
                 });
-                document.getElementById("err_file_mou").innerHTML = "Ukuran Logo Harus Kurang dari 200 Kb ";
+                document.getElementById("err_t_logo_institusi").innerHTML = "Ukuran Logo Harus Kurang dari 200 Kb ";
             }
         }
 
@@ -350,7 +351,7 @@
                     icon: 'warning',
                     title: '<div class="text-md text-center">File Akrediatasi Harus <b>.pdf</b></div>'
                 });
-                document.getElementById("err_file_mou").innerHTML = "File Akrediatasi Harus pdf";
+                document.getElementById("err_t_fileAkred_institusi").innerHTML = "File Akrediatasi Harus pdf";
             } //Toast bila upload file MoU diatas 1 Mb 
             else if (getSizeAkred > 1024) {
                 const Toast = Swal.mixin({
@@ -369,7 +370,7 @@
                     icon: 'warning',
                     title: '<div class="text-md text-center">Ukuran File Akreditasi Harus <br><b>Kurang dari 1 Mb</b></div>'
                 });
-                document.getElementById("err_file_mou").innerHTML = "Ukuran File Akreditasi Harus Kurang dari 1 Mb";
+                document.getElementById("err_t_fileAkred_institusi").innerHTML = "Ukuran File Akreditasi Harus Kurang dari 1 Mb";
             }
         }
 
@@ -411,7 +412,7 @@
                         icon: 'success',
                         title: '<span class"text-xs"><b>Data Institusi</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
-                        timer: 523123000,
+                        timer: 5123123000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)

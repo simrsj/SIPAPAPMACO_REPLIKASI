@@ -176,20 +176,38 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                 document.getElementById("form_ubah_institusi").reset();
 
                 document.getElementById("u_id_institusi").value = response.id_institusi;
+                // console.log("u_id_institusi : " + response.id_institusi);
                 document.getElementById("u_nama_institusi").value = response.nama_institusi;
                 document.getElementById("u_akronim_institusi").value = response.akronim_institusi;
+
+                $("#logo_institusi").empty();
                 if (response.logo_institusi == '' || response.logo_institusi == null) {
+                    $("#logo_institusi").append('LOGO TIDAK ADA');
+                } else {
                     // document.getElementById("logo_institusi").value = response.logo_institusi;
                     // $("#logo_institusi").attr('src', response.logo_institusi);
-                    $('#logo_institusi').append('<img src="' + response.logo_institusi + '" width="100%" height="100%">');
-                } else {
-                    $("#logo_institusi").append('LOGO TIDAK ADA');
+                    $('#logo_institusi')
+                        .append(
+                            '<img src="' + response.logo_institusi + '" width="80px" height="80px">' +
+                            ' &nbsp;&nbsp;<a class="btn btn-outline-success btn-xs" href="' + response.logo_institusi + '" download><i class="far fa-image"></i> Unduh</a>'
+                        );
                 }
+
                 document.getElementById("u_alamat_institusi").value = response.alamat_institusi;
-                document.getElementById("u_akred_institusi").value = response.akred_institusi;
+
+                // document.getElementById("u_akred_institusi").value = response.akred_institusi;
+                $('#u_akred_institusi').val(response.akred_institusi).trigger('change');
+
                 document.getElementById("u_tglAkhirAkred_institusi").value = response.tglAkhirAkred_institusi;
-                // document.getElementById("fileAkred_institusi").value = response.fileAkred_institusi;
-                $("#fileAkred_institusi").attr('href', response.fileAkred_institusi);
+
+                $("#fileAkred_institusi").empty();
+                if (response.fileAkred_institusi == '' || response.fileAkred_institusi == null) {
+                    console.log('Data File Akreditasi Tidak Ada');
+                    $('#fileAkred_institusi').append('<span class="badge badge-danger">Tidak Ada</span>');
+                } else {
+                    // $("#fileAkred_institusi").attr('href', response.fileAkred_institusi);
+                    $('#fileAkred_institusi').append('<a href="' + response.fileAkred_institusi + '" target="_blank" download><u><b>UNDUH</b></u></a>');
+                }
             },
             error: function(response) {
                 alert(response.responseText);
@@ -223,6 +241,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         var u_akred_institusi = $('#u_akred_institusi').val();
         var u_tglAkhirAkred_institusi = $('#u_tglAkhirAkred_institusi').val();
         var u_fileAkred_institusi = $('#u_fileAkred_institusi').val();
+        // console.log("NAMA : " + u_nama_institusi);
+        // console.log("AKRED : " + u_akred_institusi);
+        // console.log("ALAMAT : " + $('#u_alamat_institusi').val());
 
         //cek data from tambah bila tidak diiisi
         if (
@@ -230,6 +251,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
             u_akronim_institusi == "" ||
             u_logo_institusi == "" ||
             u_akred_institusi == "" ||
+            u_akred_institusi == null ||
             u_tglAkhirAkred_institusi == "" ||
             u_fileAkred_institusi == ""
         ) {
@@ -251,7 +273,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                 document.getElementById("err_u_logo_institusi").innerHTML = "";
             }
 
-            if (u_akred_institusi == "") {
+            if (u_akred_institusi == "" || u_akred_institusi == null) {
                 document.getElementById("err_u_akred_institusi").innerHTML = "Akreditasi Harus Dipilih";
             } else {
                 document.getElementById("err_u_akred_institusi").innerHTML = "";
@@ -300,7 +322,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                     icon: 'warning',
                     title: '<div class="text-md text-center">Logo Harus <b>.png</b></div>'
                 });
-                document.getElementById("err_file_mou").innerHTML = "Logo Harus png";
+                document.getElementById("err_u_logo_institusi").innerHTML = "Logo Harus png";
             } //Toast bila upload file MoU diatas 200 Kb 
             else if (getSizeLogo > 256) {
                 const Toast = Swal.mixin({
@@ -319,7 +341,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                     icon: 'warning',
                     title: '<div class="text-md text-center">Ukuran File MoU Harus <br><b>Kurang dari 200 Kb </b></div>'
                 });
-                document.getElementById("err_file_mou").innerHTML = "Ukuran Logo Harus Kurang dari 200 Kb ";
+                document.getElementById("err_u_logo_institusi").innerHTML = "Ukuran Logo Harus Kurang dari 200 Kb ";
             }
         }
 
@@ -351,7 +373,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                     icon: 'warning',
                     title: '<div class="text-md text-center">File Akrediatasi Harus <b>.pdf</b></div>'
                 });
-                document.getElementById("err_file_mou").innerHTML = "File Akrediatasi Harus pdf";
+                document.getElementById("err_u_fileAkred_institusi").innerHTML = "File Akrediatasi Harus pdf";
             } //Toast bila upload file MoU diatas 1 Mb 
             else if (getSizeAkred > 1024) {
                 const Toast = Swal.mixin({
@@ -370,7 +392,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                     icon: 'warning',
                     title: '<div class="text-md text-center">Ukuran File Akreditasi Harus <br><b>Kurang dari 1 Mb</b></div>'
                 });
-                document.getElementById("err_file_mou").innerHTML = "Ukuran File Akreditasi Harus Kurang dari 1 Mb";
+                document.getElementById("err_u_fileAkred_institusi").innerHTML = "Ukuran File Akreditasi Harus Kurang dari 1 Mb";
             }
         }
 
@@ -401,8 +423,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                     var fileAkred = document.getElementById("u_fileAkred_institusi").files;
                     data_file.append("u_fileAkred_institusi", fileAkred[0]);
 
-                    var id_institusi = document.getElementById("id_institusi").value;
-                    data_file.append("id_institusi", id_institusi);
+                    var id_institusi = document.getElementById("u_id_institusi").value;
+                    data_file.append("u_id_institusi", id_institusi);
 
                     xhttp.open("POST", "_admin/exc/x_v_institusi_uFile.php", true);
                     xhttp.send(data_file);
@@ -484,6 +506,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                     }
                 });
             }
-        })
+        });
     });
 </script>

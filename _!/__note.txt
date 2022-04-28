@@ -56,7 +56,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Progres Cetak Nilai Keperawatan"
+git commit -a -m "Perbaikan Modul Ubah Institusi"
 git pull
 git push
 

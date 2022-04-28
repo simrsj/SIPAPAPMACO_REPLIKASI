@@ -1,16 +1,12 @@
-@charset "UTF-8"; /*!
- * Bootstrap v5.0.0-beta3 (https://getbootstrap.com/)
- * Copyright 2011-2021 The Bootstrap Authors
- * Copyright 2011-2021 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+@charset "UTF-8";
+ 
+/* -------------------------------------------------------------- Fieldset, Legend */
 fieldset {
   min-width: 0;
   padding: 0;
   margin: 0;
   border: 0;
 }
-
 legend {
   float: left;
   width: 100%;
@@ -20,15 +16,17 @@ legend {
   line-height: inherit;
 }
 
+/* -------------------------------------------------------------- Blink */
 .blink {
   animation: blinker 1s linear infinite;
 }
-
 @keyframes blinker {
   50% {
     opacity: 0;
   }
 }
+
+/* -------------------------------------------------------------- Loader */
 .preloader {
   position: fixed;
   top: 0;
@@ -45,11 +43,9 @@ legend {
   transform: translate(-50%, -50%);
   font: 14px arial;
 }
-
 .rotate {
   animation: rotation 2s infinite linear;
 }
-
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -60,7 +56,9 @@ legend {
 }
 
 /* -------------------------------------------------------------- SELECT2 */
-
+.select2 {
+  width: 100% !important;
+}
 .select2-selection--single {
   height: 100% !important;
 }
@@ -68,4 +66,22 @@ legend {
   word-wrap: break-word !important;
   text-overflow: inherit !important;
   white-space: normal !important;
+  width: 100% !important;
+}
+
+/* -------------------------------------------------------------- Border Thickness */
+.border-1 {
+  border-width:1px !important;
+}
+.border-2 {
+  border-width:2px !important;
+}
+.border-3 {
+  border-width:3px !important;
+}
+.border-4 {
+  border-width:4px !important;
+}
+.border-5 {
+  border-width:5px !important;
 }

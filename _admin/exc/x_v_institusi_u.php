@@ -10,6 +10,6 @@ $sql .= " akred_institusi = '" . $_POST['u_akred_institusi'] . "',";
 $sql .= " tglAkhirAkred_institusi = '" . $_POST['u_tglAkhirAkred_institusi'] . "'";
 $sql .= " WHERE id_institusi = " . $_POST['u_id_institusi'];
 
-echo $sql . "<br>";
-// $conn->query($sql);
+// echo $sql . "<br>";
+$conn->query($sql);
 echo json_encode(['success' => 'Data Institusi Berhasil Disimpan']);

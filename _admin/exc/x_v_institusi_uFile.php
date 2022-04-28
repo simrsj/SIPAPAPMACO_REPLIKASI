@@ -1,7 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
-$id = $_POST['id_institusi'];
+$id = $_POST['u_id_institusi'];
 
 
 //Cek Variable File
@@ -16,13 +16,13 @@ if (!is_dir($alamat_unggah_file_akred)) {
     mkdir($alamat_unggah_file_akred, 0777, $rekursif = true);
 }
 
-if ($_FILES['t_fileAkred_institusi']['size'] > 0) {
+if ($_FILES['u_fileAkred_institusi']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['t_fileAkred_institusi']['name'] = "akred_" . $id . "_" . date('Y-m-d') . ".pdf";
+    $_FILES['u_fileAkred_institusi']['name'] = "akred_" . $id . "_" . date('Y-m-d') . ".pdf";
 
     //unggah 
-    if (!is_null($_FILES['t_fileAkred_institusi'])) {
-        $file_akred = (object) @$_FILES['t_fileAkred_institusi'];
+    if (!is_null($_FILES['u_fileAkred_institusi'])) {
+        $file_akred = (object) @$_FILES['u_fileAkred_institusi'];
 
         //mulai unggah file 
         $unggah_file_akred = move_uploaded_file(
@@ -43,20 +43,20 @@ if (!is_dir($alamat_unggah_logo)) {
     mkdir($alamat_unggah_logo, 0777, $rekursif = true);
 }
 
-if ($_FILES['t_logo_institusi']['size'] > 0) {
+if ($_FILES['u_logo_institusi']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['t_logo_institusi']['name'] = $id . ".png";
+    $_FILES['u_logo_institusi']['name'] = $id . ".png";
 
     //unggah 
-    if (!is_null($_FILES['t_logo_institusi'])) {
-        $logo = (object) @$_FILES['t_logo_institusi'];
+    if (!is_null($_FILES['u_logo_institusi'])) {
+        $logo = (object) @$_FILES['u_logo_institusi'];
 
         //mulai unggah file 
         $unggah_logo = move_uploaded_file(
             $logo->tmp_name,
             "{$alamat_unggah_logo}/{$logo->name}"
         );
-        $alamat_unggah_logo = "./_file/mou-pks";
+        $alamat_unggah_logo = "./_img/logo_institusi";
 
         // link alamat file 
         $link_logo = "{$alamat_unggah_logo}/{$logo->name}";
