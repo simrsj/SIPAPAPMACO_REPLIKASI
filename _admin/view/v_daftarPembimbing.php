@@ -3,15 +3,13 @@
 
     <!-- Page Heading -->
     <div class="row">
-        <div class="col-lg-11">
+        <div class="col-md">
             <h1 class="h3 mb-2 text-gray-800">Daftar Pembimbing</h1>
         </div>
-        <div class="col-lg-1">
-            <p>
-                <a href="#" data-toggle='modal' data-target="#pmbb_t_m" class="btn btn-outline-success btn-sm">
-                    <i class="fas fa-plus"></i> Tambah
-                </a>
-            </p>
+        <div class="col-md-2 text-right my-auto">
+            <button class="btn btn-outline-success btn-sm tambah">
+                <i class="fas fa-plus"></i> Tambah
+            </button>
         </div>
     </div>
 
@@ -37,7 +35,7 @@
             <!-- Nama Institusi, MoU RSJ dan Institusi -->
             <input type="hidden" name="t_id_pembimbing" id="t_id_pembimbing" value="<?php echo $t_id_pembimbing; ?>">
             <div class="row mb-4">
-                <div class="col-md-6">
+                <div class="col-md-3">
                     Nama Pembimbing : <span class="text-danger">*</span>&nbsp;&nbsp;
                     <input class="form-control form-control-sm" name="t_nama_pembimbing" id="t_nama_pembimbing" required>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_nama_pembimbing"></div>
@@ -48,7 +46,7 @@
                     <div class="font-italic text-xs">Maksimal 10 Karakter</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_nipnipk_pembimbing"></div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     Jenis Pembimbing : <span class="text-danger">*</span>&nbsp;&nbsp;
                     <select class="select2" name="t_jenis_pembimbing" id="t_jenis_pembimbing" required>
                         <option value=""></option>
@@ -70,7 +68,7 @@
                     </select>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_jenis_pembimbing"></div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     Jenjang Pendidikan : <span class="text-danger">*</span>&nbsp;&nbsp;
                     <select class="select2" name="t_jenjang_pembimbing" id="t_jenjang_pembimbing" required>
                         <option value=""></option>
@@ -90,7 +88,11 @@
                         }
                         ?>
                     </select>
-                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_jenis_pembimbing"></div>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_jenjang_pembimbing"></div>
+                </div>
+                <div class="col-md">
+                    Kali Membimbing :
+                    <input class="form-control form-control-sm" type="number" maxlength="1" name="t_kali_pembimbing" id="t_kali_pembimbing">
                 </div>
             </div>
             <hr>
@@ -189,16 +191,14 @@
 
 <script>
     $(document).ready(function() {
-        $('#data_pembimbing').load("_admin/view/v_pembimbingData.php");
+        $('#data_pembimbing').load("_admin/view/v_daftarPembimbingData.php");
     });
 
     $(".tambah_init").click(function() {
         document.getElementById("err_t_nama_pembimbing").innerHTML = "";
-        document.getElementById("err_t_akronim_pembimbing").innerHTML = "";
-        document.getElementById("err_t_logo_pembimbing").innerHTML = "";
-        document.getElementById("err_t_akred_pembimbing").innerHTML = "";
-        document.getElementById("err_t_tglAkhirAkred_pembimbing").innerHTML = "";
-        document.getElementById("err_t_fileAkred_pembimbing").innerHTML = "";
+        document.getElementById("err_t_nipnipk_pembimbing").innerHTML = "";
+        document.getElementById("err_t_jenis_pembimbing").innerHTML = "";
+        document.getElementById("err_t_jenjang_pembimbing").innerHTML = "";
         document.getElementById("form_tambah_pembimbing").reset();
         $("#data_tambah_pembimbing").fadeIn(1);
         $("#data_ubah_pembimbing").fadeOut(1);
@@ -207,11 +207,9 @@
 
     $(".tambah_tutup").click(function() {
         document.getElementById("err_t_nama_pembimbing").innerHTML = "";
-        document.getElementById("err_t_akronim_pembimbing").innerHTML = "";
-        document.getElementById("err_t_logo_pembimbing").innerHTML = "";
-        document.getElementById("err_t_akred_pembimbing").innerHTML = "";
-        document.getElementById("err_t_tglAkhirAkred_pembimbing").innerHTML = "";
-        document.getElementById("err_t_fileAkred_pembimbing").innerHTML = "";
+        document.getElementById("err_t_nipnipk_pembimbing").innerHTML = "";
+        document.getElementById("err_t_jenis_pembimbing").innerHTML = "";
+        document.getElementById("err_t_jenjang_pembimbing").innerHTML = "";
         document.getElementById("form_tambah_pembimbing").reset();
         $("#data_tambah_pembimbing").fadeOut(1);
     });
@@ -220,197 +218,53 @@
         var data = $('#form_tambah_pembimbing').serialize();
 
         var t_nama_pembimbing = $('#t_nama_pembimbing').val();
-        var t_akronim_pembimbing = $('#t_akronim_pembimbing').val();
-        var t_logo_pembimbing = $('#t_logo_pembimbing').val();
-        var t_akred_pembimbing = $('#t_akred_pembimbing').val();
-        var t_tglAkhirAkred_pembimbing = $('#t_tglAkhirAkred_pembimbing').val();
-        var t_fileAkred_pembimbing = $('#t_fileAkred_pembimbing').val();
-        // console.log("NAMA : " + t_nama_pembimbing);
-        // console.log("AKRED : " + t_akred_pembimbing);
-        // console.log("ALAMAT : " + $('#t_alamat_pembimbing').val());
+        var t_nipnipk_pembimbing = $('#t_nipnipk_pembimbing').val();
+        var t_jenis_pembimbing = $('#t_jenis_pembimbing').val();
+        var t_jenjang_pembimbing = $('#t_jenjang_pembimbing').val();
 
         //cek data from tambah bila tidak diiisi
         if (
             t_nama_pembimbing == "" ||
-            t_akronim_pembimbing == "" ||
-            t_logo_pembimbing == "" ||
-            t_akred_pembimbing == "" ||
-            t_tglAkhirAkred_pembimbing == "" ||
-            t_fileAkred_pembimbing == ""
+            t_nipnipk_pembimbing == "" ||
+            t_jenis_pembimbing == "" ||
+            t_jenjang_pembimbing == ""
         ) {
             if (t_nama_pembimbing == "") {
-                document.getElementById("err_t_nama_pembimbing").innerHTML = "Nama Institusi Harus Diisi";
+                document.getElementById("err_t_nama_pembimbing").innerHTML = "Nama Pembimbing Harus Diisi";
             } else {
                 document.getElementById("err_t_nama_pembimbing").innerHTML = "";
             }
 
-            if (t_akronim_pembimbing == "") {
-                document.getElementById("err_t_akronim_pembimbing").innerHTML = "Akronim Harus Diisi";
+            if (t_nipnipk_pembimbing == "") {
+                document.getElementById("err_t_nipnipk_pembimbing").innerHTML = "NIP/NIPK Harus Diisi";
             } else {
-                document.getElementById("err_t_akronim_pembimbing").innerHTML = "";
+                document.getElementById("err_t_nipnipk_pembimbing").innerHTML = "";
             }
 
-            if (t_logo_pembimbing == "") {
-                document.getElementById("err_t_logo_pembimbing").innerHTML = "Logo Harus Diunggah";
+            if (t_jenis_pembimbing == "") {
+                document.getElementById("err_t_jenis_pembimbing").innerHTML = "Jenis Pembimbing Harus Dipilih";
             } else {
-                document.getElementById("err_t_logo_pembimbing").innerHTML = "";
+                document.getElementById("err_t_jenis_pembimbing").innerHTML = "";
             }
 
-            if (t_akred_pembimbing == "") {
-                document.getElementById("err_t_akred_pembimbing").innerHTML = "Akreditasi Harus Dipilih";
+            if (t_jenjang_pembimbing == "") {
+                document.getElementById("err_t_jenjang_pembimbing").innerHTML = "Jenjang Pembimbing Harus Dipilih";
             } else {
-                document.getElementById("err_t_akred_pembimbing").innerHTML = "";
-            }
-
-            if (t_tglAkhirAkred_pembimbing == "") {
-                document.getElementById("err_t_tglAkhirAkred_pembimbing").innerHTML = "Tanggal Berlaku Akreditasi Harus Dipilih";
-            } else {
-                document.getElementById("err_t_tglAkhirAkred_pembimbing").innerHTML = "";
-            }
-
-            if (t_fileAkred_pembimbing == "") {
-                document.getElementById("err_t_fileAkred_pembimbing").innerHTML = "File Akreditasi Harus Dipilih";
-            } else {
-                document.getElementById("err_t_fileAkred_pembimbing").innerHTML = "";
-            }
-
-        }
-
-        //eksekusi bila file MoU terisi
-        if (t_logo_pembimbing != "") {
-
-            //Cari ekstensi file MoU yg diupload
-            var typeLogo = document.querySelector('#t_logo_pembimbing').value;
-            var getTypeLogo = typeLogo.split('.').pop();
-
-            //cari ukuran file MoU yg diupload
-            var getSizeLogo = document.getElementById("t_logo_pembimbing").files[0].size / 1024;
-
-            console.log("Ukuran Logo : " + getSizeLogo);
-            //Toast bila upload Logo selain pdf
-            if (getTypeLogo != 'png') {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">Logo Harus <b>.png</b></div>'
-                });
-                document.getElementById("err_t_logo_pembimbing").innerHTML = "Logo Harus PNG";
-            } //Toast bila upload file MoU diatas 200 Kb 
-            else if (getSizeLogo > 256) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">Ukuran File MoU Harus <br><b>Kurang dari 200 Kb </b></div>'
-                });
-                document.getElementById("err_t_logo_pembimbing").innerHTML = "Ukuran Logo Harus Kurang dari 200 Kb ";
-            }
-        }
-
-        //eksekusi bila file MoU terisi
-        if (t_fileAkred_pembimbing != "") {
-
-            //Cari ekstensi file MoU yg diupload
-            var typeAkred = document.querySelector('#t_fileAkred_pembimbing').value;
-            var getTypeAkred = typeAkred.split('.').pop();
-
-            //cari ukuran file MoU yg diupload
-            var getSizeAkred = document.getElementById("t_fileAkred_pembimbing").files[0].size / 1024;
-
-            //Toast bila upload file MoU selain pdf
-            if (getTypeAkred != 'pdf') {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">File Akrediatasi Harus <b>.pdf</b></div>'
-                });
-                document.getElementById("err_t_fileAkred_pembimbing").innerHTML = "File Akrediatasi Harus pdf";
-            } //Toast bila upload file MoU diatas 1 Mb 
-            else if (getSizeAkred > 1024) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">Ukuran File Akreditasi Harus <br><b>Kurang dari 1 Mb</b></div>'
-                });
-                document.getElementById("err_t_fileAkred_pembimbing").innerHTML = "Ukuran File Akreditasi Harus Kurang dari 1 Mb";
+                document.getElementById("err_t_jenjang_pembimbing").innerHTML = "";
             }
         }
 
         if (
             t_nama_pembimbing != "" &&
-            t_akronim_pembimbing != "" &&
-            t_logo_pembimbing != "" &&
-            getTypeLogo == "png" &&
-            getSizeLogo < 256 &&
-            t_akred_pembimbing != "" &&
-            t_tglAkhirAkred_pembimbing != "" &&
-            t_fileAkred_pembimbing != "" &&
-            getTypeAkred == "pdf" &&
-            getSizeAkred < 1024
+            t_nipnipk_pembimbing != "" &&
+            t_jenis_pembimbing != "" &&
+            t_jenjang_pembimbing != ""
         ) {
             $.ajax({
                 type: 'POST',
-                url: "_admin/exc/x_v_pembimbing_s.php",
+                url: "_admin/exc/x_v_daftarPembimbing_s.php",
                 data: data,
                 success: function() {
-                    //ambil data file yang diupload
-                    var data_file = new FormData();
-                    var xhttp = new XMLHttpRequest();
-
-                    var logo = document.getElementById("t_logo_pembimbing").files;
-                    data_file.append("t_logo_pembimbing", logo[0]);
-
-                    var fileAkred = document.getElementById("t_fileAkred_pembimbing").files;
-                    data_file.append("t_fileAkred_pembimbing", fileAkred[0]);
-
-                    var id_pembimbing = document.getElementById("id_pembimbing").value;
-                    data_file.append("id_pembimbing", id_pembimbing);
-
-                    xhttp.open("POST", "_admin/exc/x_v_pembimbing_sFile.php", true);
-                    xhttp.send(data_file);
                     Swal.fire({
                         allowOutsideClick: false,
                         // isDismissed: false,
@@ -425,14 +279,12 @@
                         }
                     });;
 
-                    $('#data_pembimbing').load('_admin/view/v_pembimbingData.php');
+                    $('#data_pembimbing').load('_admin/view/v_daftarPembimbingData.php');
 
                     document.getElementById("err_t_nama_pembimbing").innerHTML = "";
-                    document.getElementById("err_t_akronim_pembimbing").innerHTML = "";
-                    document.getElementById("err_t_logo_pembimbing").innerHTML = "";
-                    document.getElementById("err_t_akred_pembimbing").innerHTML = "";
-                    document.getElementById("err_t_tglAkhirAkred_pembimbing").innerHTML = "";
-                    document.getElementById("err_t_fileAkred_pembimbing").innerHTML = "";
+                    document.getElementById("err_t_nipnipk_pembimbing").innerHTML = "";
+                    document.getElementById("err_t_jenis_pembimbing").innerHTML = "";
+                    document.getElementById("err_t_jenjang_pembimbing").innerHTML = "";
                     document.getElementById("form_tambah_pembimbing").reset();
                     $("#data_tambah_pembimbing").fadeOut(1);
                 },
