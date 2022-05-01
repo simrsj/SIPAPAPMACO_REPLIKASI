@@ -3,7 +3,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 $sql = "INSERT INTO tb_institusi (
     id_institusi,
-    tgl_input_institusi, 
+    tgl_tambah_institusi, 
     nama_institusi, 
     akronim_institusi,
     alamat_institusi,

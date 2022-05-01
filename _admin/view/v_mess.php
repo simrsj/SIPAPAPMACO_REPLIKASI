@@ -17,21 +17,6 @@
                                 <b>TAMBAH MESS/PEMONDOKAN</b>
                             </div>
                             <div class="modal-body">
-                                Nama Mess/Pemondokan : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_mess" required><br>
-                                Nama Pemilik : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_pemilik_mess" required><br>
-                                No Pemilik : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="no_pemilik_mess"><br>
-                                E-Mail Pemilik : <br>
-                                <input type="emial" class="form-control" name="email_pemilik_mess"><br>
-                                Kepemilikan : <span style="color:red">*</span><br>
-                                <input type="radio" name="kepemilikan" value="dalam" required> Dalam (RSJ)<br>
-                                <input type="radio" name="kepemilikan" value="luar"> Luar<br><br>
-                                Tarif Tanpa Makan : (Rp)<span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="tarif_tanpa_makan_mess" required><br>
-                                Tarif Dengan Makan : (Rp)<span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="tarif_dengan_makan_mess" required><br>
                                 Alamat Mess : <span style="color:red">*</span><br>
                                 <textarea class="form-control" name="alamat_mess" required></textarea><br>
                                 Keterangan Mess : <br>
@@ -55,268 +40,233 @@
             </div>
         </div>
     </div>
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <?php
-            $sql_mess = "SELECT * FROM tb_mess order by nama_mess ASC";
-            $q_mess = $conn->query($sql_mess);
-            $r_mess = $q_mess->rowCount();
-            if ($r_mess > 0) {
-            ?>
-                <div class="table-responsive">
-                    <table class="table table-hover" id="myTable">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope='col'>No</th>
-                                <th>Nama Mess</th>
-                                <th>Nama Pemilik</th>
-                                <th>Kontak Pemilik</th>
-                                <th>Kapasitas Total</th>
-                                <th>Tarif Tanpa Makan</th>
-                                <th>Tarif Dengan Makan</th>
-                                <th>Kepemilikan</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-                            ?>
-                                <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_mess['nama_mess']; ?></td>
-                                    <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
-                                    <td><?php echo $d_mess['no_pemilik_mess']; ?></td>
-                                    <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?></td>
-                                    <td><?php echo "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?></td>
-                                    <td class="text-center">
-                                        <?php
-                                        if ($d_mess['kepemilikan_mess'] == 'dalam') {
-                                            echo "<span class='badge badge-success text-uppercase'>" . $d_mess['kepemilikan_mess'] . "</span>";
-                                        } elseif ($d_mess['kepemilikan_mess'] == 'luar') {
-                                            echo "<span class='badge badge-primary text-uppercase'>" . $d_mess['kepemilikan_mess'] . "</span>";
-                                        }
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <form method="post" action="">
-                                            <?php
-                                            switch ($d_mess['status_mess']) {
-                                                case "y":
-                                                    $btn_status_mess = "success";
-                                                    $icon_status_mess = "Aktif";
-                                                    break;
-                                                case "t":
-                                                    $btn_status_mess = "danger";
-                                                    $icon_status_mess = "Non Aktif";
-                                                    break;
-                                            }
-                                            ?>
-                                            <input name='id_mess' value="<?php echo $d_mess['id_mess']; ?>" hidden>
-                                            <input name='status_mess' value='<?php echo $d_mess['status_mess']; ?>' hidden>
-                                            <button title="<?php echo $d_mess['status_mess']; ?>" type="submit" name="ubah_status_mess" class="<?php echo "btn btn-" . $btn_status_mess . " btn-sm"; ?>">
-                                                <?php echo $icon_status_mess; ?>
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#mes_u_m" . $d_mess['id_mess']; ?>'>
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#mes_d_m" . $d_mess['id_mess']; ?>'>
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
 
-                                        <!-- modal ubah Mess  -->
-                                        <div class="modal fade" id="<?php echo "mes_u_m" . $d_mess['id_mess']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <form method="post" action="">
-                                                        <div class="modal-header">
-                                                            <b>UBAH MESS</b>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Nama Mess : <span style="color:red">*</span><br>
-                                                            <input type="text" class="form-control" name="nama_mess" value="<?php echo $d_mess['nama_mess']; ?>" required><br>
-                                                            Nama Pemilik : <span style="color:red">*</span><br>
-                                                            <input type="text" class="form-control" name="nama_pemilik_mess" value="<?php echo $d_mess['nama_pemilik_mess']; ?>" required><br>
-                                                            No Pemilik : <span style="color:red">*</span><br>
-                                                            <input type="number" class="form-control" name="no_pemilik_mess" value="<?php echo $d_mess['no_pemilik_mess']; ?>" required><br>
-                                                            E-Mail Pemilik : <br>
-                                                            <input type="emial" class="form-control" name="email_pemilik_mess" value="<?php echo $d_mess['email_pemilik_mess']; ?>"><br>
-                                                            <?php
-                                                            $km1 = "";
-                                                            $km2 = "";
-                                                            if ($d_mess['kepemilikan_mess'] == 'dalam') {
-                                                                $km1 = 'checked';
-                                                            } elseif ($d_mess['kepemilikan_mess'] == 'luar') {
-                                                                $km2 = 'checked';
-                                                            }
-                                                            ?>
-                                                            Kepemilikan : <span style="color:red">*</span><br>
-                                                            <input type="radio" name="kepemilikan" value="dalam" required <?php echo $km1; ?>> Dalam (RSJ)<br>
-                                                            <input type="radio" name="kepemilikan" value="luar" <?php echo $km1; ?>> Luar<br><br>
-                                                            Tarif Tanpa Makan : (Rp)<span style="color:red">*</span><br>
-                                                            <input type="number" class="form-control" name="tarif_tanpa_makan_mess" value="<?php echo $d_mess['tarif_tanpa_makan_mess']; ?>" required><br>
-                                                            Tarif Dengan Makan : (Rp)<span style="color:red">*</span><br>
-                                                            <input type="number" class="form-control" name="tarif_dengan_makan_mess" value="<?php echo $d_mess['tarif_dengan_makan_mess']; ?>" required><br>
-                                                            Alamat Mess : <span style="color:red">*</span><br>
-                                                            <textarea class="form-control" name="alamat_mess" required><?php echo $d_mess['alamat_mess']; ?></textarea><br>
-                                                            Keterangan Mess : <br>
-                                                            <textarea class="form-control" name="ket_mess"><?php echo $d_mess['ket_mess']; ?></textarea>
-                                                            <hr>
-                                                            <b>KAPASITAS MESS</b><br>
-                                                            <!-- Laki-Laki :
-                                                            <input type="number" class="form-control" name="kapasitas_l_mess" value="<?php echo $d_mess['kapasitas_l_mess']; ?>">
-                                                            Perempuan :
-                                                            <input type="number" class="form-control" name="kapasitas_p_mess" value="<?php echo $d_mess['kapasitas_p_mess']; ?>"> -->
-                                                            Kapasitas Total : <span style="color:red">*</span><br>
-                                                            <input type="number" class="form-control" name="kapasitas_t_mess" value="<?php echo $d_mess['kapasitas_t_mess']; ?>" required>
-                                                            Kapasitas Terisi : <span style="color:red">*</span><br>
-                                                            <input type="number" class="form-control" name="kapasitas_terisi_mess" value="<?php echo $d_mess['kapasitas_terisi_mess']; ?>">
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
-                                                            <button type="submit" class="btn btn-success btn-sm" name="ubah">Ubah</button>
-                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">
-                                                                Kembali
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <!-- modal hapus Mess -->
-                                        <div class="modal fade" id="<?php echo "mes_d_m" . $d_mess['id_mess']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <form method="post" action="">
-                                                        <div class="modal-header">
-                                                            <h5>HAPUS MESS ?</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Nama Mess :
-                                                            <h6><b><?php echo $d_mess['nama_mess']; ?></b></h6>
-                                                            Nama Pemilik :
-                                                            <h6><b><?php echo $d_mess['nama_pemilik_mess']; ?></b></h6>
-                                                            <input name="id_mess" value="<?php echo $d_mess['id_mess']; ?>" hidden>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>
-                                                            <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Tidak</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <?php
-                                    $no++;
-                                    ?>
-                                </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+    <!-- form tambah mess  -->
+    <div class="card shadow mb-4 card-body" id="data_tambah_mess" style="display: none;">
+        <form class="form-data" method="post" id="form_tambah_mess">
+            <!-- Nama Institusi, MoU RSJ dan Institusi -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    Nama Mess/Pemondokan : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <input class="form-control form-control-sm" name="t_nama_mess" id="t_nama_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_nama_mess"></div>
                 </div>
-            <?php
-            } else {
-            ?>
-                <h3> Data Mess Tidak Ada</h3>
-            <?php
-            }
-            ?>
-        </div>
+                <div class="col-md">
+                    Nama Pemilik : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <input class="form-control form-control-sm" name="t_nama_pemilik_mess" id="t_nama_pemilik_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_nama_pemilik_mess"></div>
+                </div>
+                <div class="col-md">
+                    Telp. Pemilik : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <input class="form-control form-control-sm" name="t_telp_pemilik_mess" id="t_telp_pemilik_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_telp_pemilik_mess"></div>
+                </div>
+                <div class="col-md">
+                    E-Mail Pemilik : &nbsp;&nbsp;
+                    <input class="form-control form-control-sm" type="email" name="t_email_pemilik_mess" id="t_email_pemilik_mess">
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_email_pemilik_mess"></div>
+                </div>
+                <div class="col-md-3">
+                    Kepemilikan : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <select class="select2" name="t_kepemilikan_mess" id="t_kepemilikan_mess" required>
+                        <option value=""></option>
+                        <option value="dalam">Dalam (RSJ)</option>
+                        <option value="luar">Luar</option>
+                    </select>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_kepemilikan_mess"></div>
+                </div>
+                <div class="col-md-3">
+                    Tarif Tanpa Makan : (Rp)<span style="color:red">*</span><br>
+                    <input type="number" class="form-control" name="t_tarif_tanpa_makan_mess" id="t_tarif_tanpa_makan_mess" required><br>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_tarif_tanpa_makan_mess"></div>
+                </div>
+                <div class="col-md-3">
+                    Tarif Dengan Makan : (Rp)<span style="color:red">*</span><br>
+                    <input type="number" class="form-control" name="t_tarif_dengan_makan_mess" id="t_tarif_dengan_makan_mess" required><br>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_tarif_dengan_makan_mess"></div>
+                </div>
+                <div class="col-md-2">
+                    Kapasitas Total Mess/Pemondokan : <span style="color:red">*</span><br>
+                    <input type="number" class="form-control" name="t_kapsitas_total_mess" id="t_kapsitas_total_mess" required><br>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_kapsitas_total_mess"></div>
+                </div>
+                <div class="col-md-2">
+                    Alamat Mess/Pemondokan : <span style="color:red">*</span><br>
+                    <input type="number" class="form-control" name="t_alamat_mess" id="t_alamat_mess" required><br>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_alamat_mess"></div>
+                </div>
+                <div class="col-md-2">
+                    Jenjang Pendidikan : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <select class="select2" name="t_jenjang_mess" id="t_jenjang_mess" required>
+                        <option value=""></option>
+                        <?php
+                        $sql_jenjang_pmbb = "SELECT * FROM tb_jenjang_pdd";
+                        $sql_jenjang_pmbb .= " ORDER BY nama_jenjang_pdd ASC";
+
+                        $q_jenjang_pmbb = $conn->query($sql_jenjang_pmbb);
+                        while ($d_jenjang_pmbb = $q_jenjang_pmbb->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                            <option value="<?php echo $d_jenjang_pmbb['id_jenjang_pdd'] ?>">
+                                <?php
+                                echo $d_jenjang_pmbb['nama_jenjang_pdd'];
+                                ?>
+                            </option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_jenjang_mess"></div>
+                </div>
+                <div class="col-md-1">
+                    Kali : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <input class="form-control form-control-sm" type="number" maxlength="1" name="t_kali_mess" id="t_kali_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_kali_mess"></div>
+                </div>
+            </div>
+            <hr>
+            <div class="form-inline navbar nav-link justify-content-end">
+                <button type="button" name="tambah" class="btn btn-success btn-sm tambah">
+                    Tambah
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-outline-danger btn-sm tambah_tutup">
+                    Tutup
+                </button>
+            </div>
+        </form>
     </div>
+
+    <div id="data_mess"></div>
 </div>
-<?php
-if (isset($_POST['tambah'])) {
-    $sql_tambah = "INSERT INTO `tb_mess` (
-        nama_mess,
-        kapasitas_l_mess,  
-        kapasitas_p_mess, 
-        kapasitas_t_mess, 
-        alamat_mess, 
-        nama_pemilik_mess, 
-        no_pemilik_mess, 
-        email_pemilik_mess, 
-        kepemilikan_mess, 
-        tarif_tanpa_makan_mess, 
-        tarif_dengan_makan_mess,
-        ket_mess
-    ) VALUES (
-        '" . $_POST['nama_mess'] . "', 
-        '" . $_POST['kapasitas_l_mess'] . "', 
-        '" . $_POST['kapasitas_p_mess'] . "', 
-        '" . $_POST['kapasitas_t_mess'] . "', 
-        '" . $_POST['alamat_mess'] . "', 
-        '" . $_POST['nama_pemilik_mess'] . "', 
-        '" . $_POST['no_pemilik_mess'] . "', 
-        '" . $_POST['email_pemilik_mess'] . "', 
-        '" . $_POST['kepemilikan'] . "', 
-        '" . $_POST['tarif_tanpa_makan_mess'] . "', 
-        '" . $_POST['tarif_dengan_makan_mess'] . "', 
-        '" . $_POST['ket_mess'] . "'
-    )";
-    echo $sql_tambah;
-    $conn->query($sql_tambah);
-?>
-    <script>
-        document.location.href = "?mes";
-    </script>
-<?php
-} elseif (isset($_POST['ubah'])) {
-    $sql_ubah = "UPDATE `tb_mess` SET 
-    `nama_mess` = '" . $_POST['nama_mess'] . "', 
-    `kapasitas_l_mess` = '" . $_POST['kapasitas_l_mess'] . "' ,
-    `kapasitas_p_mess` = '" . $_POST['kapasitas_p_mess'] . "' ,
-    `kapasitas_t_mess` = '" . $_POST['kapasitas_t_mess'] . "' ,
-    `alamat_mess` = '" . $_POST['alamat_mess'] . "' ,
-    `nama_pemilik_mess` = '" . $_POST['nama_pemilik_mess'] . "' ,
-    `no_pemilik_mess` = '" . $_POST['no_pemilik_mess'] . "' ,
-    `email_pemilik_mess` = '" . $_POST['email_pemilik_mess'] . "' ,
-    `kepemilikan_mess` = '" . $_POST['kepemilikan'] . "' ,
-    `tarif_tanpa_makan_mess` = '" . $_POST['tarif_tanpa_makan_mess'] . "' ,
-    `tarif_dengan_makan_mess` = '" . $_POST['tarif_dengan_makan_mess'] . "' ,
-    `kapasitas_terisi_mess` = '" . $_POST['kapasitas_terisi_mess'] . "' ,
-    `ket_mess` = '" . $_POST['ket_mess'] . "'
-    WHERE `tb_mess`.`id_mess` = " . $_POST['id_mess'];
-    // echo $sql_ubah;
-    $conn->query($sql_ubah);
-?>
-    <script>
-        document.location.href = "?mes";
-    </script>
-<?php
-} elseif (isset($_POST['hapus'])) {
-    $conn->query("DELETE FROM `tb_mess` WHERE `id_mess` = " . $_POST['id_mess']);
-?>
-    <script>
-        document.location.href = "?mes";
-    </script>
-<?php
-} elseif (isset($_POST['ubah_status_mess'])) {
-    switch ($_POST['status_mess']) {
-        case "y":
-            $ubah_status_mess = "t";
-            break;
-        case "t":
-            $ubah_status_mess = "y";
-            break;
-    }
-    $sql_status_mess =
-        "UPDATE `tb_mess` SET `status_mess` = '$ubah_status_mess' WHERE `id_mess` = '" . $_POST['id_mess'] . "'";
-    // echo $sql_status_mess;
-    $conn->query($sql_status_mess);
-?>
-    <script>
-        document.location.href = "?mes";
-    </script>
-<?php
-}
-?>
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#data_mess').load("_admin/view/v_messData.php");
+    });
+
+    $(".tambah_init").click(function() {
+        // console.log("tambah_init")''
+        $('#err_t_nama_mess').empty();
+        $('#err_t_nipnipk_mess').empty();
+        $('#err_t_jenis_mess').empty();
+        $('#err_t_jenjang_mess').empty();
+        $('#err_t_kali_mess').empty();
+
+        $('#form_tambah_mess').trigger("reset");
+        $('#t_jenis_mess').val('').trigger("change");
+        $('#t_jenjang_mess').val('').trigger("change");
+
+        $("#data_tambah_mess").fadeIn(1);
+        $("#data_ubah_mess").fadeOut(1);
+
+        $('#t_nama_mess').focus();
+    });
+
+    $(".tambah_tutup").click(function() {
+        $('#err_t_nama_mess').empty();
+        $('#err_t_nipnipk_mess').empty();
+        $('#err_t_jenis_mess').empty();
+        $('#err_t_jenjang_mess').empty();
+        $('#err_t_kali_mess').empty();
+
+        $('#form_tambah_mess').trigger("reset");
+        $('#t_jenis_mess').val('').trigger("change");
+        $('#t_jenjang_mess').val('').trigger("change");
+
+        $("#data_tambah_mess").fadeOut(1);
+    });
+
+    $(document).on('click', '.tambah', function() {
+        var data = $('#form_tambah_mess').serialize();
+
+        var t_nama_mess = $('#t_nama_mess').val();
+        var t_nipnipk_mess = $('#t_nipnipk_mess').val();
+        var t_jenis_mess = $('#t_jenis_mess').val();
+        var t_jenjang_mess = $('#t_jenjang_mess').val();
+        var t_kali_mess = $('#t_kali_mess').val();
+
+        //cek data from tambah bila tidak diiisi
+        if (
+            t_nama_mess == "" ||
+            t_nipnipk_mess == "" ||
+            t_jenis_mess == "" ||
+            t_jenjang_mess == "" ||
+            t_kali_mess == ""
+        ) {
+            if (t_nama_mess == "") {
+                document.getElementById("err_t_nama_mess").innerHTML = "Nama Pembimbing Harus Diisi";
+            } else {
+                document.getElementById("err_t_nama_mess").innerHTML = "";
+            }
+
+            if (t_nipnipk_mess == "") {
+                document.getElementById("err_t_nipnipk_mess").innerHTML = "NIP/NIPK Harus Diisi";
+            } else {
+                document.getElementById("err_t_nipnipk_mess").innerHTML = "";
+            }
+
+            if (t_jenis_mess == "") {
+                document.getElementById("err_t_jenis_mess").innerHTML = "Jenis Pembimbing Harus Dipilih";
+            } else {
+                document.getElementById("err_t_jenis_mess").innerHTML = "";
+            }
+
+            if (t_jenjang_mess == "") {
+                document.getElementById("err_t_jenjang_mess").innerHTML = "Jenjang Pembimbing Harus Dipilih";
+            } else {
+                document.getElementById("err_t_jenjang_mess").innerHTML = "";
+            }
+
+            if (t_kali_mess == "") {
+                document.getElementById("err_t_kali_mess").innerHTML = "Kali Membimbing Harus Diisi";
+            } else {
+                document.getElementById("err_t_kali_mess").innerHTML = "";
+            }
+        }
+
+        if (
+            t_nama_mess != "" &&
+            t_nipnipk_mess != "" &&
+            t_jenis_mess != "" &&
+            t_jenjang_mess != "" &&
+            t_kali_mess != ""
+        ) {
+            $.ajax({
+                type: 'POST',
+                url: "_admin/exc/x_v_daftarPembimbing_s.php",
+                data: data,
+                success: function() {
+                    Swal.fire({
+                        allowOutsideClick: false,
+                        // isDismissed: false,
+                        icon: 'success',
+                        title: '<span class"text-xs"><b>Data Pembimbing</b><br>Berhasil Tersimpan',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });;
+
+                    $('#data_daftarPembimbing').load('_admin/view/v_daftarPembimbingData.php');
+
+                    document.getElementById("err_t_nama_mess").innerHTML = "";
+                    document.getElementById("err_t_nipnipk_mess").innerHTML = "";
+                    document.getElementById("err_t_jenis_mess").innerHTML = "";
+                    document.getElementById("err_t_jenjang_mess").innerHTML = "";
+                    document.getElementById("err_t_kali_mess").innerHTML = "";
+                    document.getElementById("form_tambah_mess").reset();
+                    $("#data_tambah_mess").fadeOut(1);
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+    });
+</script>

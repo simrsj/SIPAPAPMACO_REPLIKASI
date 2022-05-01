@@ -13,27 +13,9 @@
         </div>
     </div>
 
-    <!-- form tambah institusi  -->
+    <!-- form tambah pembimbing  -->
     <div class="card shadow mb-4 card-body" id="data_tambah_pembimbing" style="display: none;">
         <form class="form-data" method="post" id="form_tambah_pembimbing">
-            <?php
-            $sql_id_pembimbing = "SELECT * FROM tb_pembimbing";
-            $sql_id_pembimbing .= " ORDER BY id_pembimbing ASC";
-
-            $q_id_pembimbing = $conn->query($sql_id_pembimbing);
-            if ($q_id_pembimbing->rowCount() > 0) {
-                $no = 1;
-                while ($d_id_pembimbing = $q_id_pembimbing->fetch(PDO::FETCH_ASSOC)) {
-                    if ($no != $d_id_pembimbing['id_pembimbing']) {
-                        break;
-                    }
-                    $no++;
-                }
-            }
-            $t_id_pembimbing = $no;
-            ?>
-            <!-- Nama Institusi, MoU RSJ dan Institusi -->
-            <input type="hidden" name="t_id_pembimbing" id="t_id_pembimbing" value="<?php echo $t_id_pembimbing; ?>">
             <div class="row mb-4">
                 <div class="col-md-3">
                     Nama Pembimbing : <span class="text-danger">*</span>&nbsp;&nbsp;
@@ -108,7 +90,7 @@
         </form>
     </div>
 
-    <!-- form ubah institusi  -->
+    <!-- form ubah pembimbing  -->
     <div class="card shadow mb-4 card-body" id="data_ubah_pembimbing" style="display: none;">
         <form class="form-data" method="post" id="form_ubah_pembimbing">
             <!-- Nama Institusi, MoU RSJ dan Institusi -->
