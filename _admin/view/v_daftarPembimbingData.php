@@ -17,19 +17,24 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
             if ($r_pembimbing > 0) {
             ?>
-                <div class="table-responsive">
+                <div class="table-responsive text-xs">
                     <table class="table table-striped" id="myTable">
-                        <thead class="thead-dark">
+                        <thead class="thead-dark text-center">
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>NIP/NIPK</th>
                                 <th>Nama Pembimbing</th>
-                                <th>Unit</th>
-                                <th>Status</th>
-                                <th></th>
+                                <th>Jenis Pembimbing</th>
+                                <th>Jenjang <br>Pendidikan</th>
+                                <th>Kali <br>Membimbing</th>
+                                <th>
+                                    Action
+                                    <hr class="p-0 m-0 bg-gray-100">
+                                    Status
+                                </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="my-auto">
                             <?php
                             $no = 1;
                             while ($d_pembimbing = $q_pembimbing->fetch(PDO::FETCH_ASSOC)) {
@@ -38,188 +43,29 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $d_pembimbing['no_id_pembimbing']; ?></td>
                                     <td><?php echo $d_pembimbing['nama_pembimbing']; ?></td>
-                                    <td><?php echo $d_pembimbing['nama_unit']; ?></td>
-                                    <td>
-
-                                        <!-- Aktivasi status Pembimbing -->
-                                        <form method="post" action="">
-                                            <?php
-                                            switch ($d_pembimbing['status_pembimbing']) {
-                                                case "y":
-                                                    $btn_status_pembimbing = "success";
-                                                    $nama_status_pembimbing = "Aktif";
-                                                    break;
-                                                case "t":
-                                                    $btn_status_pembimbing = "danger";
-                                                    $nama_status_pembimbing = "Non-Aktif";
-                                                    break;
-                                            }
-                                            ?>
-                                            <input name='id_pembimbing' value="<?php echo $d_pembimbing['id_pembimbing']; ?>" hidden>
-                                            <input name='status_pembimbing' value='<?php echo $d_pembimbing['status_pembimbing']; ?>' hidden>
-                                            <button title="<?php echo $d_pembimbing['status_pembimbing']; ?>" type="submit" name="ubah_status_pembimbing" class="<?php echo "btn btn-" . $btn_status_pembimbing . " btn-sm"; ?>">
-                                                <?php echo $nama_status_pembimbing; ?>
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#pmbb_u_m" . $d_pembimbing['id_pembimbing']; ?>'>
+                                    <td><?php echo $d_pembimbing['nama_pembimbing_jenis'] . " (" . $d_pembimbing['akronim_pembimbing_jenis'] . ")"; ?></td>
+                                    <td><?php echo $d_pembimbing['nama_jenjang_pdd']; ?></td>
+                                    <td class="text-center"><?php echo $d_pembimbing['kali_pembimbing']; ?></td>
+                                    <td class="text-center text-md">
+                                        <a title="Ubah" class='btn btn-primary btn-xs ubah_init' id='<?php echo $d_pembimbing['id_pembimbing']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#pmbb_d_m" . $d_pembimbing['id_pembimbing']; ?>'>
+                                        <a title="Hapus" class='btn btn-outline-danger btn-xs hapus' id='<?php echo $d_pembimbing['id_pembimbing']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
+                                        <hr class="m-1 bg-gray-500">
+                                        <?php
+                                        if ($d_pembimbing['status_pembimbing'] == 'Y') {
+                                        ?>
+                                            <span class="badge badge-success">Aktif</span>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <span class="badge badge-danger">Non-aktif</span>
+                                        <?php
+                                        }
+                                        ?>
 
-                                        <!-- modah ubah -->
-                                        <div class="modal fade" id="<?php echo "pmbb_u_m" . $d_pembimbing['id_pembimbing']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <form method="post" action="">
-                                                        <div class="modal-header">
-                                                            UBAH DATA PEMBIMBING
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <input name="id_pembimbing" value="<?php echo $d_pembimbing['id_pembimbing']; ?>" hidden>
-                                                            NIP/NIPK : <br>
-                                                            <input class="form-control" name="no_id_pembimbing" value="<?php echo $d_pembimbing['no_id_pembimbing']; ?>"><br>
-
-                                                            Nama Pembimbing :<br>
-                                                            <input class="form-control" name="nama_pembimbing" value="<?php echo $d_pembimbing['nama_pembimbing']; ?>" size="35px"><br>
-
-                                                            Unit/Ruangan :<br>
-                                                            <?php
-                                                            $sql_unit = "SELECT * FROM tb_unit order by nama_unit ASC";
-
-                                                            $q_unit = $conn->query($sql_unit);
-                                                            $r_unit = $q_unit->rowCount();
-
-                                                            if ($r_unit > 0) {
-                                                            ?>
-                                                                <select class="form-control" name='id_unit'>
-                                                                    <?php
-                                                                    while ($d_unit = $q_unit->fetch(PDO::FETCH_ASSOC)) {
-                                                                        if (strtolower($d_unit['id_unit']) == strtolower($d_pembimbing['id_unit'])) {
-                                                                            $selected = "selected";
-                                                                        } else {
-                                                                            $selected = "";
-                                                                        }
-                                                                    ?>
-                                                                        <option <?php echo $selected; ?> value='<?php echo $d_unit['id_unit']; ?>'>
-                                                                            <?php echo $d_unit['nama_unit']; ?>
-                                                                        </option>
-                                                                    <?php
-                                                                    }
-                                                                    ?>
-                                                                </select>
-                                                                <br>
-                                                            <?php
-                                                            } else {
-                                                            ?>
-                                                                <i class='btn btn-danger btn-sm' style='font-size:10px'> Data Unit Tida Ada</i>
-                                                            <?php
-                                                            }
-                                                            ?>
-
-                                                            Jenis Pembimbing : <br>
-                                                            <?php
-                                                            $sql_pembimbing_jenis = "SELECT * FROM tb_pembimbing_jenis ORDER BY nama_pembimbing_jenis ASC";
-                                                            // echo $sql_pembimbing_jenis;
-                                                            $q_pembimbing_jenis = $conn->query($sql_pembimbing_jenis);
-                                                            $r_pembimbing_jenis = $q_pembimbing_jenis->rowCount();
-
-                                                            // echo $r_pembimbing_jenis;
-                                                            if ($r_pembimbing_jenis > 0) {
-                                                            ?>
-                                                                <select class="form-control" name='id_pembimbing_jenis'>
-                                                                    <?php
-                                                                    while ($d_pembimbing_jenis = $q_pembimbing_jenis->fetch(PDO::FETCH_ASSOC)) {
-                                                                        if (strtolower($d_pembimbing_jenis['id_pembimbing_jenis']) == strtolower($d_pembimbing['id_pembimbing_jenis'])) {
-                                                                            $selected = "selected";
-                                                                        } else {
-                                                                            $selected = "";
-                                                                        }
-                                                                    ?>
-                                                                        <option <?php echo $selected; ?> value='<?php echo $d_pembimbing_jenis['id_pembimbing_jenis']; ?>'>
-                                                                            <?php echo $d_pembimbing_jenis['nama_pembimbing_jenis'] ?>
-                                                                        </option>
-                                                                    <?php
-                                                                    }
-                                                                    ?>
-                                                                </select>
-                                                            <?php
-                                                            } else {
-                                                            ?>
-                                                                <i class='btn btn-danger btn-sm' style='font-size:10px'> Data Jenis Pembimbing Tidak Ada</i>
-                                                            <?php
-                                                            }
-                                                            ?>
-
-                                                            Pendidikan Pembimbing : <br>
-                                                            <?php
-                                                            $sql_pembimbing_jenis = "SELECT * FROM tb_jenjang_pdd ORDER BY nama_jenjang_pdd ASC";
-                                                            // echo $sql_pembimbing_jenis;
-                                                            $q_pembimbing_jenis = $conn->query($sql_pembimbing_jenis);
-                                                            $r_pembimbing_jenis = $q_pembimbing_jenis->rowCount();
-
-                                                            // echo $r_pembimbing_jenis;
-                                                            if ($r_pembimbing_jenis > 0) {
-                                                            ?>
-                                                                <select class="form-control" name='id_jenjang_pdd'>
-                                                                    <?php
-                                                                    while ($d_pembimbing_jenis = $q_pembimbing_jenis->fetch(PDO::FETCH_ASSOC)) {
-                                                                        if (strtolower($d_pembimbing_jenis['id_jenjang_pdd']) == strtolower($d_pembimbing['id_jenjang_pdd'])) {
-                                                                            $selected = "selected";
-                                                                        } else {
-                                                                            $selected = "";
-                                                                        }
-                                                                    ?>
-                                                                        <option <?php echo $selected; ?> value='<?php echo $d_pembimbing_jenis['id_jenjang_pdd']; ?>'>
-                                                                            <?php echo $d_pembimbing_jenis['nama_jenjang_pdd'] ?>
-                                                                        </option>
-                                                                    <?php
-                                                                    }
-                                                                    ?>
-                                                                </select>
-                                                            <?php
-                                                            } else {
-                                                            ?>
-                                                                <i class='btn btn-danger btn-sm' style='font-size:10px'> Data Jenis Pembimbing Tidak Ada</i>
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-success btn-sm" name="ubah_pembimbing">Ubah</button>
-                                                            <button class="btn btn-outline-dark" type="button" data-dismiss="modal">Tidak</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- modal hapus Mess -->
-                                        <div class="modal fade" id="<?php echo "pmbb_d_m" . $d_pembimbing['id_pembimbing']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <form method="post" action="">
-                                                        <div class="modal-header">
-                                                            <h5>HAPUS PEMBIMBING ?</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Nama Pembimbing :
-                                                            <h6><b><?php echo $d_pembimbing['no_id_pembimbing']; ?></b></h6>
-                                                            NIP/NIPK :
-                                                            <h6><b><?php echo $d_pembimbing['nama_pembimbing']; ?></b></h6>
-                                                            <input name="id_pembimbing" value="<?php echo $d_pembimbing['id_pembimbing']; ?>" hidden>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-danger" name="hapus">Ya</button>
-                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </td>
                                 </tr>
                             <?php
@@ -246,59 +92,35 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
     });
 
     $(".ubah_init").click(function() {
-        document.getElementById("err_u_nama_institusi").innerHTML = "";
-        document.getElementById("err_u_akronim_institusi").innerHTML = "";
-        document.getElementById("err_u_logo_institusi").innerHTML = "";
-        document.getElementById("err_u_akred_institusi").innerHTML = "";
-        document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
-        document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
-        document.getElementById("form_ubah_institusi").reset();
+        // console.log("ubah_init");
+        $('#err_u_nama_pembimbing').empty();
+        $('#err_u_nipnipk_pembimbing').empty();
+        $('#err_u_jenis_pembimbing').empty();
+        $('#err_u_jenjang_pembimbing').empty();
+        $('#err_u_kali_pembimbing').empty();
+        $('#err_u_status_pembimbing').empty();
 
+        $('#form_ubah_pembimbing').trigger("reset");
+        $('#u_jenis_pembimbing').val('').trigger("change");
+        $('#u_jenjang_pembimbing').val('').trigger("change");
+        $('#u_status_pembimbing').val('').trigger("change");
         var id = $(this).attr('id');
         $.ajax({
             type: 'POST',
-            url: "_admin/view/v_institusiGetData.php",
+            url: "_admin/view/v_daftarPembimbingGetData.php",
             data: {
                 id: id
             },
             dataType: 'json',
             success: function(response) {
-
-                document.getElementById("form_ubah_institusi").reset();
-
-                document.getElementById("u_id_institusi").value = response.id_institusi;
-                // console.log("u_id_institusi : " + response.id_institusi);
-                document.getElementById("u_nama_institusi").value = response.nama_institusi;
-                document.getElementById("u_akronim_institusi").value = response.akronim_institusi;
-
-                $("#logo_institusi").empty();
-                if (response.logo_institusi == '' || response.logo_institusi == null) {
-                    $("#logo_institusi").append('LOGO TIDAK ADA');
-                } else {
-                    // document.getElementById("logo_institusi").value = response.logo_institusi;
-                    // $("#logo_institusi").attr('src', response.logo_institusi);
-                    $('#logo_institusi')
-                        .append(
-                            '<img src="' + response.logo_institusi + '" width="80px" height="80px">' +
-                            ' &nbsp;&nbsp;<a class="btn btn-outline-success btn-xs" href="' + response.logo_institusi + '" download><i class="far fa-image"></i> Unduh</a>'
-                        );
-                }
-
-                document.getElementById("u_alamat_institusi").value = response.alamat_institusi;
-
-                // document.getElementById("u_akred_institusi").value = response.akred_institusi;
-                $('#u_akred_institusi').val(response.akred_institusi).trigger('change');
-
-                document.getElementById("u_tglAkhirAkred_institusi").value = response.tglAkhirAkred_institusi;
-
-                $("#fileAkred_institusi").empty();
-                if (response.fileAkred_institusi == '' || response.fileAkred_institusi == null) {
-                    console.log('Data File Akreditasi Tidak Ada');
-                    $('#fileAkred_institusi').append('<span class="badge badge-danger">Tidak Ada</span>');
-                } else {
-                    // $("#fileAkred_institusi").attr('href', response.fileAkred_institusi);
-                    $('#fileAkred_institusi').append('<a href="' + response.fileAkred_institusi + '" target="_blank" download><u><b>UNDUH</b></u></a>');
-                }
+                $('#u_id_pembimbing').val(response.id_pembimbing);
+                $('#u_nama_pembimbing').val(response.nama_pembimbing);
+                $('#u_nipnipk_pembimbing').val(response.no_id_pembimbing);
+                $('#u_jenis_pembimbing').val(response.id_pembimbing_jenis).trigger('change');
+                $('#u_jenjang_pembimbing').val(response.id_jenjang_pdd).trigger('change');
+                $('#u_kali_pembimbing').val(response.kali_pembimbing);
+                $('#u_status_pembimbing').val(response.status_pembimbing).trigger('change');
+                // console.log('' + response.u_id_pembimbing);
             },
             error: function(response) {
                 alert(response.responseText);
@@ -306,226 +128,106 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
             }
         });
 
-        $("#data_ubah_institusi").fadeIn(1);
-        $("#data_tambah_institusi").fadeOut(1);
-        $('#u_nama_institusi').focus();
-
+        $("#data_tambah_pembimbing").fadeOut(1);
+        $("#data_ubah_pembimbing").fadeIn(1);
+        $('#u_nama_pembimbing').focus();
     });
 
     $(".ubah_tutup").click(function() {
-        document.getElementById("err_u_nama_institusi").innerHTML = "";
-        document.getElementById("err_u_akronim_institusi").innerHTML = "";
-        document.getElementById("err_u_logo_institusi").innerHTML = "";
-        document.getElementById("err_u_akred_institusi").innerHTML = "";
-        document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
-        document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
-        document.getElementById("form_tambah_institusi").reset();
-        $("#data_ubah_institusi").fadeOut(1);
+        $('#err_u_nama_pembimbing').empty();
+        $('#err_u_nipnipk_pembimbing').empty();
+        $('#err_u_jenis_pembimbing').empty();
+        $('#err_u_jenjang_pembimbing').empty();
+        $('#err_u_kali_pembimbing').empty();
+        $('#err_u_status_pembimbing').empty();
+
+        $('#form_ubah_pembimbing').trigger("reset");
+        $('#u_jenis_pembimbing').val('').trigger("change");
+        $('#u_jenjang_pembimbing').val('').trigger("change");
+
+        $("#data_ubah_pembimbing").fadeOut(1);
     });
 
     $(document).on('click', '.ubah', function() {
-        var data = $('#form_ubah_institusi').serialize();
+        var data = $('#form_ubah_pembimbing').serialize();
 
-        var u_nama_institusi = $('#u_nama_institusi').val();
-        var u_akronim_institusi = $('#u_akronim_institusi').val();
-        var u_logo_institusi = $('#u_logo_institusi').val();
-        var u_akred_institusi = $('#u_akred_institusi').val();
-        var u_tglAkhirAkred_institusi = $('#u_tglAkhirAkred_institusi').val();
-        var u_fileAkred_institusi = $('#u_fileAkred_institusi').val();
-        // console.log("NAMA : " + u_nama_institusi);
-        // console.log("AKRED : " + u_akred_institusi);
-        // console.log("ALAMAT : " + $('#u_alamat_institusi').val());
+        var u_id_pembimbing = $('#u_id_pembimbing').val();
+        var u_nama_pembimbing = $('#u_nama_pembimbing').val();
+        var u_nipnipk_pembimbing = $('#u_nipnipk_pembimbing').val();
+        var u_jenis_pembimbing = $('#u_jenis_pembimbing').val();
+        var u_jenjang_pembimbing = $('#u_jenjang_pembimbing').val();
+        var u_kali_pembimbing = $('#u_kali_pembimbing').val();
+        var u_status_pembimbing = $('#u_status_pembimbing').val();
+        // console.log("id : " + u_id_pembimbing);
 
         //cek data from tambah bila tidak diiisi
         if (
-            u_nama_institusi == "" ||
-            u_akronim_institusi == "" ||
-            u_logo_institusi == "" ||
-            u_akred_institusi == "" ||
-            u_akred_institusi == null ||
-            u_tglAkhirAkred_institusi == "" ||
-            u_fileAkred_institusi == ""
+            u_id_pembimbing == "" ||
+            u_nama_pembimbing == "" ||
+            u_nipnipk_pembimbing == "" ||
+            u_jenis_pembimbing == "" ||
+            u_jenjang_pembimbing == "" ||
+            u_kali_pembimbing == "" ||
+            u_status_pembimbing == ""
         ) {
-            if (u_nama_institusi == "") {
-                document.getElementById("err_u_nama_institusi").innerHTML = "Nama Institusi Harus Diisi";
+            if (u_nama_pembimbing == "") {
+                document.getElementById("err_u_nama_pembimbing").innerHTML = "Nama Pembimbing Harus Diisi";
             } else {
-                document.getElementById("err_u_nama_institusi").innerHTML = "";
+                document.getElementById("err_u_nama_pembimbing").innerHTML = "";
             }
 
-            if (u_akronim_institusi == "") {
-                document.getElementById("err_u_akronim_institusi").innerHTML = "Akronim Harus Diisi";
+            if (u_nipnipk_pembimbing == "") {
+                document.getElementById("err_u_nipnipk_pembimbing").innerHTML = "NIP/NIPK Harus Diisi";
             } else {
-                document.getElementById("err_u_akronim_institusi").innerHTML = "";
+                document.getElementById("err_u_nipnipk_pembimbing").innerHTML = "";
             }
 
-            if (u_logo_institusi == "") {
-                document.getElementById("err_u_logo_institusi").innerHTML = "Logo Harus Diunggah";
+            if (u_jenis_pembimbing == "") {
+                document.getElementById("err_u_jenis_pembimbing").innerHTML = "Jenis Pembimbing Harus Dipilih";
             } else {
-                document.getElementById("err_u_logo_institusi").innerHTML = "";
+                document.getElementById("err_u_jenis_pembimbing").innerHTML = "";
             }
 
-            if (u_akred_institusi == "" || u_akred_institusi == null) {
-                document.getElementById("err_u_akred_institusi").innerHTML = "Akreditasi Harus Dipilih";
+            if (u_jenjang_pembimbing == "") {
+                document.getElementById("err_u_jenjang_pembimbing").innerHTML = "Jenjang Pembimbing Harus Dipilih";
             } else {
-                document.getElementById("err_u_akred_institusi").innerHTML = "";
+                document.getElementById("err_u_jenjang_pembimbing").innerHTML = "";
             }
 
-            if (u_tglAkhirAkred_institusi == "") {
-                document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "Tanggal Berlaku Akreditasi Harus Dipilih";
+            if (u_kali_pembimbing == "") {
+                document.getElementById("err_u_kali_pembimbing").innerHTML = "Kali Membimbing Harus Diisi";
             } else {
-                document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
+                document.getElementById("err_u_kali_pembimbing").innerHTML = "";
             }
 
-            if (u_fileAkred_institusi == "") {
-                document.getElementById("err_u_fileAkred_institusi").innerHTML = "File Akreditasi Harus Dipilih";
+            if (u_status_pembimbing == "") {
+                document.getElementById("err_u_status_pembimbing").innerHTML = "Status Harus Dipilih";
             } else {
-                document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
-            }
-
-        }
-
-        //eksekusi bila file MoU terisi
-        if (u_logo_institusi != "") {
-
-            //Cari ekstensi file MoU yg diupload
-            var typeLogo = document.querySelector('#u_logo_institusi').value;
-            var getTypeLogo = typeLogo.split('.').pop();
-
-            //cari ukuran file MoU yg diupload
-            var getSizeLogo = document.getElementById("u_logo_institusi").files[0].size / 1024;
-
-            console.log("Ukuran Logo : " + getSizeLogo);
-            //Toast bila upload Logo selain pdf
-            if (getTypeLogo != 'png') {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">Logo Harus <b>.png</b></div>'
-                });
-                document.getElementById("err_u_logo_institusi").innerHTML = "Logo Harus png";
-            } //Toast bila upload file MoU diatas 200 Kb 
-            else if (getSizeLogo > 256) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">Ukuran File MoU Harus <br><b>Kurang dari 200 Kb </b></div>'
-                });
-                document.getElementById("err_u_logo_institusi").innerHTML = "Ukuran Logo Harus Kurang dari 200 Kb ";
-            }
-        }
-
-        //eksekusi bila file MoU terisi
-        if (u_fileAkred_institusi != "") {
-
-            //Cari ekstensi file MoU yg diupload
-            var typeAkred = document.querySelector('#u_fileAkred_institusi').value;
-            var getTypeAkred = typeAkred.split('.').pop();
-
-            //cari ukuran file MoU yg diupload
-            var getSizeAkred = document.getElementById("u_fileAkred_institusi").files[0].size / 1024;
-
-            //Toast bila upload file MoU selain pdf
-            if (getTypeAkred != 'pdf') {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">File Akrediatasi Harus <b>.pdf</b></div>'
-                });
-                document.getElementById("err_u_fileAkred_institusi").innerHTML = "File Akrediatasi Harus pdf";
-            } //Toast bila upload file MoU diatas 1 Mb 
-            else if (getSizeAkred > 1024) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">Ukuran File Akreditasi Harus <br><b>Kurang dari 1 Mb</b></div>'
-                });
-                document.getElementById("err_u_fileAkred_institusi").innerHTML = "Ukuran File Akreditasi Harus Kurang dari 1 Mb";
+                document.getElementById("err_u_status_pembimbing").innerHTML = "";
             }
         }
 
         if (
-            u_nama_institusi != "" &&
-            u_akronim_institusi != "" &&
-            u_logo_institusi != "" &&
-            getTypeLogo == "png" &&
-            getSizeLogo < 256 &&
-            u_akred_institusi != "" &&
-            u_tglAkhirAkred_institusi != "" &&
-            u_fileAkred_institusi != "" &&
-            getTypeAkred == "pdf" &&
-            getSizeAkred < 1024
+            u_id_pembimbing != "" &&
+            u_nama_pembimbing != "" &&
+            u_nipnipk_pembimbing != "" &&
+            u_jenis_pembimbing != "" &&
+            u_jenjang_pembimbing != "" &&
+            u_kali_pembimbing != "" &&
+            u_status_pembimbing != ""
         ) {
             $.ajax({
                 type: 'POST',
-                url: "_admin/exc/x_v_institusi_u.php",
+                url: "_admin/exc/x_v_daftarPembimbing_u.php",
                 data: data,
-                success: function() {
-                    //ambil data file yang diupload
-                    var data_file = new FormData();
-                    var xhttp = new XMLHttpRequest();
-
-                    var logo = document.getElementById("u_logo_institusi").files;
-                    data_file.append("u_logo_institusi", logo[0]);
-
-                    var fileAkred = document.getElementById("u_fileAkred_institusi").files;
-                    data_file.append("u_fileAkred_institusi", fileAkred[0]);
-
-                    var id_institusi = document.getElementById("u_id_institusi").value;
-                    data_file.append("u_id_institusi", id_institusi);
-
-                    xhttp.open("POST", "_admin/exc/x_v_institusi_uFile.php", true);
-                    xhttp.send(data_file);
+                success: function(response) {
                     Swal.fire({
                         allowOutsideClick: false,
                         // isDismissed: false,
                         icon: 'success',
-                        title: '<span class"text-xs"><b>Data Institusi</b><br>Berhasil Tersimpan',
+                        title: '<span class"text-xs"><b>Data Pembimbing</b><br>Berhasil Dirubah',
                         showConfirmButton: false,
-                        timer: 523123000,
+                        timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -533,16 +235,20 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                         }
                     });
 
-                    $('#data_institusi').load('_admin/view/v_institusiData.php');
+                    $('#data_daftarPembimbing').load("_admin/view/v_daftarPembimbingData.php");
 
-                    document.getElementById("err_u_nama_institusi").innerHTML = "";
-                    document.getElementById("err_u_akronim_institusi").innerHTML = "";
-                    document.getElementById("err_u_logo_institusi").innerHTML = "";
-                    document.getElementById("err_u_akred_institusi").innerHTML = "";
-                    document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
-                    document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
-                    document.getElementById("form_tambah_institusi").reset();
-                    $("#data_tambah_institusi").fadeOut(1);
+                    $('#err_u_nama_pembimbing').empty();
+                    $('#err_u_nipnipk_pembimbing').empty();
+                    $('#err_u_jenis_pembimbing').empty();
+                    $('#err_u_jenjang_pembimbing').empty();
+                    $('#err_u_kali_pembimbing').empty();
+                    $('#err_u_status_pembimbing').empty();
+
+                    $('#form_ubah_pembimbing').trigger("reset");
+                    $('#u_jenis_pembimbing').val('').trigger("change");
+                    $('#u_jenjang_pembimbing').val('').trigger("change");
+
+                    $("#data_ubah_pembimbing").fadeOut(1);
                 },
                 error: function(response) {
                     console.log(response.responseText);
@@ -555,7 +261,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         console.log("hapus");
         Swal.fire({
             position: 'top',
-            title: 'Hapus Data Institusi ?',
+            title: 'Hapus Data Pembimbing ?',
             icon: 'error',
             showCancelButton: true,
             confirmButtonColor: '#1cc88a',
@@ -567,12 +273,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
             if (result.isConfirmed) {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_v_institusi_h.php",
+                    url: "_admin/exc/x_v_daftarPembimbing_h.php",
                     data: {
-                        "h_id_institusi": $(this).attr('id')
+                        "h_id_pembimbing": $(this).attr('id')
                     },
                     success: function() {
-                        $('#data_institusi').load('_admin/view/v_institusiData.php?');
+                        $('#data_daftarPembimbing').load("_admin/view/v_daftarPembimbingData.php");
 
                         const Toast = Swal.mixin({
                             toast: true,
@@ -588,7 +294,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
                         Toast.fire({
                             icon: 'success',
-                            title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil DIHAPUS</b></div>'
+                            title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Dihapus</b></div>'
                         });
                     },
                     error: function(response) {

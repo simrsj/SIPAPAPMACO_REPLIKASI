@@ -95,7 +95,7 @@ if ($d_praktik['id_institusi'] == 19) {
 }
 
 $ttdTembusan = '
-<table border="1" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px; width: 100% !important">
+<table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px; width: 100% !important">
 <tr>
     <td>
     </td>
@@ -178,7 +178,7 @@ $options = new Options();
 // $options->set('defaultFont', 'Courier');
 $dompdf = new Dompdf($options);
 
-# ------------------------------------------------------------------------------------------------------------------------------------- HTML HEAD DAN FOOTER
+# ------------------------------------------------------------------------------------------------------------------------------------- HTML TARIF 
 
 //tag awal html
 $html = '
@@ -516,7 +516,7 @@ $html .= '
 
 //tag buka tabel invoice
 $html .= '
-<table >
+<table width="100%">
 <tr>
 <td width="67px">
 </td>
@@ -707,7 +707,7 @@ if ($r_getDataUjian > 0) {
 
     //tag buka tabel invoice
     $html .= '
-    <table >
+    <table width="100%">
     <tr>
     <td width="67px">
     </td>
