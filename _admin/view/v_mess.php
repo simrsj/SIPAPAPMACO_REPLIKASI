@@ -85,6 +85,82 @@
         </form>
     </div>
 
+    <!-- form ubah mess  -->
+    <div class="card shadow mb-4 card-body text-xs" id="data_ubah_mess" style="display: none;">
+        <form class="form-data" method="post" id="form_ubah_mess">
+            <input type="hidden" name="u_id_mess" id="u_id_mess">
+            <!-- Nama Institusi, MoU RSJ dan Institusi -->
+            <div class="row mb-4">
+                <div class="col-md">
+                    Nama Mess/Pemondokan : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <input class="form-control form-control-sm" name="u_nama_mess" id="u_nama_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_nama_mess"></div>
+                </div>
+                <div class="col-md">
+                    Nama Pemilik : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <input class="form-control form-control-sm" name="u_nama_pemilik_mess" id="u_nama_pemilik_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_nama_pemilik_mess"></div>
+                </div>
+                <div class="col-md">
+                    Telp. Pemilik : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <input class="form-control form-control-sm" type="number" name="u_telp_pemilik_mess" id="u_telp_pemilik_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_telp_pemilik_mess"></div>
+                </div>
+                <div class="col-md">
+                    E-Mail Pemilik : &nbsp;&nbsp;
+                    <input class="form-control form-control-sm" type="email" name="u_email_pemilik_mess" id="u_email_pemilik_mess">
+                    <!-- <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_email_pemilik_mess"></div> -->
+                </div>
+                <div class="col-md-2">
+                    Kepemilikan : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <select class="select2" name="u_kepemilikan_mess" id="u_kepemilikan_mess" required>
+                        <option value=""></option>
+                        <option value="dalam">Dalam (RSJ)</option>
+                        <option value="luar">Luar</option>
+                    </select>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_kepemilikan_mess"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    Tarif Tanpa Makan : (Rp)<span style="color:red">*</span><br>
+                    <input type="number" class="form-control form-control-sm" name="u_tarif_tanpa_makan_mess" id="u_tarif_tanpa_makan_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_tarif_tanpa_makan_mess"></div>
+                </div>
+                <div class="col-md-2">
+                    Tarif Dengan Makan : (Rp)<span style="color:red">*</span><br>
+                    <input type="number" class="form-control form-control-sm" name="u_tarif_dengan_makan_mess" id="u_tarif_dengan_makan_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_tarif_dengan_makan_mess"></div>
+                </div>
+                <div class="col-md-2">
+                    Kapasitas Total : <span style="color:red">*</span><br>
+                    <input type="number" class="form-control form-control-sm" name="u_kapsitas_total_mess" id="u_kapsitas_total_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_kapsitas_total_mess"></div>
+                </div>
+                <div class="col-md">
+                    Alamat : <span style="color:red">*</span><br>
+                    <textarea class="form-control form-control-sm" name="u_alamau_mess" id="u_alamau_mess" required></textarea>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_alamau_mess"></div>
+                </div>
+                <div class="col-md">
+                    Fasilitas : <span style="color:red">*</span><br>
+                    <textarea class="form-control form-control-sm" name="u_fasilitas_mess" id="u_fasilitas_mess" required></textarea>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_fasilitas_mess"></div>
+                </div>
+            </div>
+            <hr>
+            <div class="form-inline navbar nav-link justify-content-end">
+                <button type="button" name="ubah" class="btn btn-success btn-sm ubah">
+                    Ubah
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-outline-danger btn-sm ubah_tutup">
+                    Tutup
+                </button>
+            </div>
+        </form>
+    </div>
+
     <div id="data_mess"></div>
 </div>
 
@@ -216,23 +292,29 @@
                 url: "_admin/exc/x_v_mess_s.php",
                 data: data,
                 success: function() {
-                    Swal.fire({
+                    const SwalButton = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false
+                    })
+                    SwalButton.fire({
                         allowOutsideClick: false,
                         // isDismissed: false,
                         icon: 'success',
                         title: '<span class"text-xs"><b>Data Mess</b><br>Berhasil Tersimpan',
-                        showConfirmButton: false,
-                        timer: 5000,
+                        showConfirmButton: true,
+                        timer: 5000123,
                         timerProgressBar: true,
                         didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            toast.addEventListener('mouseenter', SwalButton.stopTimer)
+                            toast.addEventListener('mouseleave', SwalButton.resumeTimer)
                         }
-                    });;
-
-                    $('#data_mess').load('_admin/view/v_messData.php');
-
-                    $("#data_tambah_mess").fadeOut(1);
+                    }).then((result) => {
+                        $('#data_mess').load('_admin/view/v_messData.php');
+                        $("#data_tambah_mess").fadeOut(1);
+                    });
                 },
                 error: function(response) {
                     console.log(response.responseText);
