@@ -370,3 +370,15 @@ $jumlah_praktik = $_GET['jum'];
         </div>
     </div>
 </form>
+
+
+<script type="text/javascript">
+    //untuk di File i_praktikDataTarif.php
+
+    $("#cek_pilih_ujian1").on('change', function() {
+        $("#tarif_ujian").slideDown();
+    });
+    $("#cek_pilih_ujian2").on('change', function() {
+        $("#tarif_ujian").slideUp();
+    });
+</script>

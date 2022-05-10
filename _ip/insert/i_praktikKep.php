@@ -322,14 +322,12 @@ if ($_GET['prk'] == 'kep') {
     </div>
 
     <script type="text/javascript">
-        //untuk di File i_praktikDataTarif.php
-
-        $("#cek_pilih_ujian12").on('change', function() {
-            $("#tarif_ujian").slideDown();
-        });
-        $("#cek_pilih_ujian22").on('change', function() {
-            $("#tarif_ujian").slideUp();
-        });
+        // $("#cek_pilih_ujian1").on('change', function() {
+        //     $("#tarif_ujian").slideDown();
+        // });
+        // $("#cek_pilih_ujian2").on('change', function() {
+        //     $("#tarif_ujian").slideUp();
+        // });
 
         function tutupProfesiKep() {
             // console.log("tutupProfesiKep");
