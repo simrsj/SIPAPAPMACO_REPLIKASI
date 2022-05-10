@@ -175,8 +175,6 @@
     <div id="data_mess"></div>
 </div>
 
-
-
 <script>
     $(document).ready(function() {
         $('#data_mess').load("_admin/view/v_messData.php");

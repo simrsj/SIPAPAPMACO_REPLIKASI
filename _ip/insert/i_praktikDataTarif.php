@@ -259,7 +259,7 @@ $jumlah_praktik = $_GET['jum'];
                 </label>
             </div>
             <br>
-            <div id="data_ujian" style="display: none;">
+            <div id="tarif_ujian" style="display:none;">
                 <?php
                 $sql_tarif_ujian = " SELECT * FROM tb_tarif ";
                 $sql_tarif_ujian .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
@@ -273,7 +273,7 @@ $jumlah_praktik = $_GET['jum'];
 
                 if ($r_tarif_ujian > 0) {
                 ?>
-                    <table class="table table-hover ">
+                    <table class="table table-hover border-1">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">No</th>
@@ -369,13 +369,3 @@ $jumlah_praktik = $_GET['jum'];
         </div>
     </div>
 </form>
-<script>
-    $(document).ready(function() {
-        $(".ujian_Y").click(function() {
-            $("#data_ujian").fadeIn('slow');
-        });
-        $(".ujian_T").click(function() {
-            $("#data_ujian").fadeOut('slow');
-        });
-    });
-</script>

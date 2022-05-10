@@ -322,9 +322,14 @@ if ($_GET['prk'] == 'kep') {
     </div>
 
     <script type="text/javascript">
-        function bukaProfesi() {
-            var id_jurusan = $('#id_jurusan_pdd').val();
-        }
+        //untuk di File i_praktikDataTarif.php
+
+        $("#cek_pilih_ujian12").on('change', function() {
+            $("#tarif_ujian").slideDown();
+        });
+        $("#cek_pilih_ujian22").on('change', function() {
+            $("#tarif_ujian").slideUp();
+        });
 
         function tutupProfesiKep() {
             // console.log("tutupProfesiKep");
@@ -350,13 +355,15 @@ if ($_GET['prk'] == 'kep') {
             var jurusan = document.getElementById("jurusan").value;
             var jenjang = document.getElementById("jenjang").value;
             var profesi = 0;
-            console.log('jenjang' + jenjang);
+            // console.log('jenjang' + jenjang);
+
             if (jenjang == 9) {
                 profesi = 5;
             } else {
                 profesi = document.getElementById("profesi").value;
             }
-            console.log('profesi' + profesi);
+            // console.log('profesi' + profesi);
+
             // var profesi_add = document.getElementById("profesi_add").value;
             var nonnakes = document.getElementById("nonnakes").value;
             // var akreditasi = document.getElementById("akreditasi").value;
@@ -369,7 +376,6 @@ if ($_GET['prk'] == 'kep') {
             var nama_koordinator = document.getElementById("nama_koordinator").value;
             var email_koordinator = document.getElementById("email_koordinator").value;
             var telp_koordinator = document.getElementById("telp_koordinator").value;
-
 
             //Notif Bila tidak diisi
             if (
@@ -687,11 +693,7 @@ if ($_GET['prk'] == 'kep') {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
                                 toast.addEventListener('mouseleave', Swal.resumeTimer)
                             }
-                        }).then(
-                            function() {
-                                // document.location.href = "?prk=ked";
-                            }
-                        );
+                        });
                     } else {
                         //Lanjut Data Praktik Data Tarif
                         if (
@@ -777,8 +779,8 @@ if ($_GET['prk'] == 'kep') {
                         }
                     }
                 },
-                error: function() {
-                    console.log(response.responseText);
+                error: function(response) {
+                    console.log(response);
                     alert('eksekusi query Val.Jadwal Praktik gagal');
                 }
             });
@@ -843,13 +845,14 @@ if ($_GET['prk'] == 'kep') {
                 //push data profesi
                 var jenjang = document.getElementById("jenjang").value;
                 var profesi = 0;
-                console.log('jenjang' + jenjang);
+                // console.log('jenjang ' + jenjang);
+
                 if (jenjang == 9) {
                     profesi = 5;
                 } else {
                     profesi = document.getElementById("profesi").value;
                 }
-                console.log('profesi' + profesi);
+                // console.log('profesi' + profesi);
 
                 data_praktik.push({
                     name: 'id_profesi_pdd',

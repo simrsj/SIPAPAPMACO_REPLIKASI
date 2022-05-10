@@ -56,7 +56,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Perbaikan Ubah dan Hapus Mess/Pemondokan"
+git commit -a -m "Progres tampilan tarif ujian praktik keperawatan"
 git pull
 git push
 
