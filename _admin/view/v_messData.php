@@ -11,17 +11,25 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         $r_mess = $q_mess->rowCount();
         if ($r_mess > 0) {
         ?>
-            <div class="table-responsive text-xs">
+            <div class="table-responsive text-sm">
                 <table class="table table-hover" id="myTable">
                     <thead class="table-dark text-center">
                         <tr>
                             <th scope='col'>No</th>
                             <th>Nama Mess</th>
-                            <th>Nama Pemilik</th>
-                            <th>Kontak Pemilik</th>
+                            <th>
+                                Nama Pemilik
+                                <hr class="p-0 m-0 bg-gray-100">
+                                Telepon
+                                <hr class="p-0 m-0 bg-gray-100">
+                                Email
+                            </th>
                             <th>Kapasitas Total</th>
-                            <th>Tarif Tanpa Makan</th>
-                            <th>Tarif Dengan Makan</th>
+                            <th>
+                                Tarif Tanpa Makan
+                                <hr class="p-0 m-0 bg-gray-100">
+                                Tarif Dengan Makan
+                            </th>
                             <th>Kepemilikan</th>
                             <th>
                                 Action
@@ -38,16 +46,19 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                             <tr>
                                 <td><?php echo $no; ?></td>
                                 <td><?php echo $d_mess['nama_mess']; ?></td>
-                                <td>
-                                    <?php
-                                    echo $d_mess['nama_pemilik_mess'];
-                                    ?>
-                                    <hr class="">
+                                <td class="text-center">
+                                    <?php echo $d_mess['nama_pemilik_mess']; ?>
+                                    <hr class="p-0 m-0 bg-gray-100">
+                                    <?php echo $d_mess['telp_pemilik_mess']; ?>
+                                    <hr class="p-0 m-0 bg-gray-100">
+                                    <?php echo $d_mess['email_pemilik_mess']; ?>
                                 </td>
-                                <td><?php echo $d_mess['telp_pemilik_mess']; ?></td>
                                 <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                                <td><?php echo "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?></td>
-                                <td><?php echo "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?></td>
+                                <td class="text-center">
+                                    <?php echo "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?>
+                                    <hr class="p-0 m-0 bg-gray-100">
+                                    <?php echo "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?>
+                                </td>
                                 <td class="text-center text-md">
                                     <?php
                                     if ($d_mess['kepemilikan_mess'] == 'dalam') {
@@ -113,9 +124,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         $('#err_u_kapsitas_total_mess').empty();
         $('#err_u_alamat_mess').empty();
         $('#err_u_fasilitas_mess').empty();
+        $('#err_u_status_mess').empty();
 
         $('#form_ubah_mess').trigger("reset");
         $('#u_kepemilikan_mess').val('').trigger("change");
+        $('#u_status_mess').val('').trigger("change");
         var id = $(this).attr('id');
         $.ajax({
             type: 'POST',
@@ -125,7 +138,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
             },
             dataType: 'json',
             success: function(response) {
-                $('#u_id_mess').val(response.u_id_mess);
+                $('#u_id_mess').val(response.id_mess);
                 $('#u_nama_mess').val(response.nama_mess);
                 $('#u_nama_pemilik_mess').val(response.nama_pemilik_mess);
                 $('#u_telp_pemilik_mess').val(response.telp_pemilik_mess);
@@ -133,10 +146,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                 $('#u_kepemilikan_mess').val(response.kepemilikan_mess).trigger('change');
                 $('#u_tarif_tanpa_makan_mess').val(response.tarif_tanpa_makan_mess);
                 $('#u_tarif_dengan_makan_mess').val(response.tarif_dengan_makan_mess);
-                $('#u_kapsitas_total_mess').val(response.kapsitas_total_mess);
+                $('#u_kapasitas_total_mess').val(response.kapasitas_t_mess);
                 $('#u_alamat_mess').val(response.alamat_mess);
                 $('#u_fasilitas_mess').val(response.fasilitas_mess);
-                // console.log('' + response.u_id_pembimbing);
+                $('#u_status_mess').val(response.status_mess).trigger('change');
+
+                // console.log('id mess ' + response.id_mess);
             },
             error: function(response) {
                 alert(response.responseText);
@@ -147,106 +162,145 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         $("#data_tambah_mess").fadeOut(1);
         $("#data_ubah_mess").fadeIn(1);
 
-        // $('#u_nama_mess').animate({
-        //     scrollTop: $('#u_nama_mess').offset().top
-        // }, 200, function() {
-        //     $('#u_nama_mess').focus();
-        // });
+        var ubahScrollAnimate = $("html, body, input");
+        ubahScrollAnimate.stop().animate({
+            scrollTop: 0
+        }, 500, 'swing', function() {
+            $('#u_nama_mess').focus();
+        });
     });
 
     $(".ubah_tutup").click(function() {
-        $('#err_u_nama_pembimbing').empty();
-        $('#err_u_nipnipk_pembimbing').empty();
-        $('#err_u_jenis_pembimbing').empty();
-        $('#err_u_jenjang_pembimbing').empty();
-        $('#err_u_kali_pembimbing').empty();
-        $('#err_u_status_pembimbing').empty();
+        $('#err_u_nama_mess').empty();
+        $('#err_u_nama_pemilik_mess').empty();
+        $('#err_u_telp_pemilik_mess').empty();
+        $('#err_u_kepemilikan_mess').empty();
+        $('#err_u_tarif_tanpa_makan_mess').empty();
+        $('#err_u_tarif_dengan_makan_mess').empty();
+        $('#err_u_kapsitas_total_mess').empty();
+        $('#err_u_alamat_mess').empty();
+        $('#err_u_fasilitas_mess').empty();
+        $('#err_u_status_mess').empty();
 
-        $('#form_ubah_pembimbing').trigger("reset");
-        $('#u_jenis_pembimbing').val('').trigger("change");
-        $('#u_jenjang_pembimbing').val('').trigger("change");
+        $('#form_ubah_mess').trigger("reset");
+        $('#u_kepemilikan_mess').val('').trigger("change");
+        $('#u_status_mess').val('').trigger("change");
 
-        $("#data_ubah_pembimbing").fadeOut(1);
+        $("#data_ubah_mess").fadeOut(1);
     });
 
     $(document).on('click', '.ubah', function() {
-        var data = $('#form_ubah_pembimbing').serialize();
+        var data = $('#form_ubah_mess').serialize();
 
-        var u_id_pembimbing = $('#u_id_pembimbing').val();
-        var u_nama_pembimbing = $('#u_nama_pembimbing').val();
-        var u_nipnipk_pembimbing = $('#u_nipnipk_pembimbing').val();
-        var u_jenis_pembimbing = $('#u_jenis_pembimbing').val();
-        var u_jenjang_pembimbing = $('#u_jenjang_pembimbing').val();
-        var u_kali_pembimbing = $('#u_kali_pembimbing').val();
-        var u_status_pembimbing = $('#u_status_pembimbing').val();
-        // console.log("id : " + u_id_pembimbing);
+        var u_id_mess = $('#u_id_mess').val();
+        var u_nama_mess = $('#u_nama_mess').val();
+        var u_nama_pemilik_mess = $('#u_nama_pemilik_mess').val();
+        var u_telp_pemilik_mess = $('#u_telp_pemilik_mess').val();
+        // var u_email_pemilik_mess = $('#u_email_pemilik_mess').val();
+        var u_kepemilikan_mess = $('#u_kepemilikan_mess').val();
+        var u_tarif_tanpa_makan_mess = $('#u_tarif_tanpa_makan_mess').val();
+        var u_tarif_dengan_makan_mess = $('#u_tarif_dengan_makan_mess').val();
+        var u_kapasitas_total_mess = $('#u_kapasitas_total_mess').val();
+        var u_alamat_mess = $('#u_alamat_mess').val();
+        var u_fasilitas_mess = $('#u_fasilitas_messs').val();
+        var u_status_mess = $('#u_status_mess').val();
 
         //cek data from tambah bila tidak diiisi
         if (
-            u_id_pembimbing == "" ||
-            u_nama_pembimbing == "" ||
-            u_nipnipk_pembimbing == "" ||
-            u_jenis_pembimbing == "" ||
-            u_jenjang_pembimbing == "" ||
-            u_kali_pembimbing == "" ||
-            u_status_pembimbing == ""
+            u_nama_mess == "" ||
+            u_nama_pemilik_mess == "" ||
+            u_telp_pemilik_mess == "" ||
+            u_kepemilikan_mess == "" ||
+            u_tarif_tanpa_makan_mess == "" ||
+            u_tarif_dengan_makan_mess == "" ||
+            u_kapasitas_total_mess == "" ||
+            u_alamat_mess == "" ||
+            u_fasilitas_mess == "" ||
+            u_status_mess == ""
         ) {
-            if (u_nama_pembimbing == "") {
-                document.getElementById("err_u_nama_pembimbing").innerHTML = "Nama Pembimbing Harus Diisi";
+            if (u_nama_mess == "") {
+                document.getElementById("err_u_nama_mess").innerHTML = "Nama Mess Harus Diisi";
             } else {
-                document.getElementById("err_u_nama_pembimbing").innerHTML = "";
+                document.getElementById("err_u_nama_mess").innerHTML = "";
             }
 
-            if (u_nipnipk_pembimbing == "") {
-                document.getElementById("err_u_nipnipk_pembimbing").innerHTML = "NIP/NIPK Harus Diisi";
+            if (u_nama_pemilik_mess == "") {
+                document.getElementById("err_u_nama_pemilik_mess").innerHTML = "Nama Pemilik Harus Diisi";
             } else {
-                document.getElementById("err_u_nipnipk_pembimbing").innerHTML = "";
+                document.getElementById("err_u_nama_pemilik_mess").innerHTML = "";
             }
 
-            if (u_jenis_pembimbing == "") {
-                document.getElementById("err_u_jenis_pembimbing").innerHTML = "Jenis Pembimbing Harus Dipilih";
+            if (u_telp_pemilik_mess == "") {
+                document.getElementById("err_u_telp_pemilik_mess").innerHTML = "Telpon Pemilik Harus Diisi";
             } else {
-                document.getElementById("err_u_jenis_pembimbing").innerHTML = "";
+                document.getElementById("err_u_telp_pemilik_mess").innerHTML = "";
             }
 
-            if (u_jenjang_pembimbing == "") {
-                document.getElementById("err_u_jenjang_pembimbing").innerHTML = "Jenjang Pembimbing Harus Dipilih";
+
+            if (u_kepemilikan_mess == "") {
+                document.getElementById("err_u_kepemilikan_mess").innerHTML = "Kepemilikan Harus Dipilih";
             } else {
-                document.getElementById("err_u_jenjang_pembimbing").innerHTML = "";
+                document.getElementById("err_u_kepemilikan_mess").innerHTML = "";
             }
 
-            if (u_kali_pembimbing == "") {
-                document.getElementById("err_u_kali_pembimbing").innerHTML = "Kali Membimbing Harus Diisi";
+            if (u_tarif_tanpa_makan_mess == "") {
+                document.getElementById("err_u_tarif_tanpa_makan_mess").innerHTML = "Tarif Tanpa Makan Mess Harus Diisi";
             } else {
-                document.getElementById("err_u_kali_pembimbing").innerHTML = "";
+                document.getElementById("err_u_tarif_tanpa_makan_mess").innerHTML = "";
             }
 
-            if (u_status_pembimbing == "") {
-                document.getElementById("err_u_status_pembimbing").innerHTML = "Status Harus Dipilih";
+            if (u_tarif_dengan_makan_mess == "") {
+                document.getElementById("err_u_tarif_dengan_makan_mess").innerHTML = "Tarif Dengan Makan Mess Harus Diisi";
             } else {
-                document.getElementById("err_u_status_pembimbing").innerHTML = "";
+                document.getElementById("err_u_tarif_dengan_makan_mess").innerHTML = "";
+            }
+
+            if (u_kapasitas_total_mess == "") {
+                document.getElementById("err_u_kapasitas_total_mess").innerHTML = "Kapasitas Total Mess Harus Diisi";
+            } else {
+                document.getElementById("err_u_kapasitas_total_mess").innerHTML = "";
+            }
+
+            if (u_alamat_mess == "") {
+                document.getElementById("err_u_alamat_mess").innerHTML = "Alamat Mess Harus Diisi";
+            } else {
+                document.getElementById("err_u_alamat_mess").innerHTML = "";
+            }
+
+            if (u_fasilitas_mess == "") {
+                document.getElementById("err_u_fasilitas_mess").innerHTML = "Fasilitas Mess Harus Diisi";
+            } else {
+                document.getElementById("err_u_fasilitas_mess").innerHTML = "";
+            }
+
+            if (u_status_mess == "") {
+                document.getElementById("err_u_status_mess").innerHTML = "Status Mess Harus Dipilih";
+            } else {
+                document.getElementById("err_u_status_mess").innerHTML = "";
             }
         }
 
         if (
-            u_id_pembimbing != "" &&
-            u_nama_pembimbing != "" &&
-            u_nipnipk_pembimbing != "" &&
-            u_jenis_pembimbing != "" &&
-            u_jenjang_pembimbing != "" &&
-            u_kali_pembimbing != "" &&
-            u_status_pembimbing != ""
+            u_nama_mess != "" &&
+            u_nama_pemilik_mess != "" &&
+            u_telp_pemilik_mess != "" &&
+            u_kepemilikan_mess != "" &&
+            u_tarif_tanpa_makan_mess != "" &&
+            u_tarif_dengan_makan_mess != "" &&
+            u_kapasitas_total_mess != "" &&
+            u_alamat_mess != "" &&
+            u_fasilitas_mess != ""
         ) {
             $.ajax({
                 type: 'POST',
-                url: "_admin/exc/x_v_daftarPembimbing_u.php",
+                url: "_admin/exc/x_v_mess_u.php",
                 data: data,
-                success: function(response) {
+                success: function() {
                     Swal.fire({
                         allowOutsideClick: false,
                         // isDismissed: false,
                         icon: 'success',
-                        title: '<span class"text-xs"><b>Data Pembimbing</b><br>Berhasil Dirubah',
+                        title: '<span class"text-xs"><b>Data Mess</b><br>Berhasil Dirubah',
                         showConfirmButton: false,
                         timer: 5000,
                         timerProgressBar: true,
@@ -256,20 +310,24 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                         }
                     });
 
-                    $('#data_daftarPembimbing').load("_admin/view/v_daftarPembimbingData.php");
+                    $('#data_mess').load("_admin/view/v_messData.php");
 
-                    $('#err_u_nama_pembimbing').empty();
-                    $('#err_u_nipnipk_pembimbing').empty();
-                    $('#err_u_jenis_pembimbing').empty();
-                    $('#err_u_jenjang_pembimbing').empty();
-                    $('#err_u_kali_pembimbing').empty();
-                    $('#err_u_status_pembimbing').empty();
+                    $('#err_u_nama_mess').empty();
+                    $('#err_u_nama_pemilik_mess').empty();
+                    $('#err_u_telp_pemilik_mess').empty();
+                    $('#err_u_kepemilikan_mess').empty();
+                    $('#err_u_tarif_tanpa_makan_mess').empty();
+                    $('#err_u_tarif_dengan_makan_mess').empty();
+                    $('#err_u_kapsitas_total_mess').empty();
+                    $('#err_u_alamat_mess').empty();
+                    $('#err_u_fasilitas_mess').empty();
+                    $('#err_u_status_mess').empty();
 
-                    $('#form_ubah_pembimbing').trigger("reset");
-                    $('#u_jenis_pembimbing').val('').trigger("change");
-                    $('#u_jenjang_pembimbing').val('').trigger("change");
+                    $('#form_ubah_mess').trigger("reset");
+                    $('#u_kepemilikan_mess').val('').trigger("change");
+                    $('#u_status_mess').val('').trigger("change");
 
-                    $("#data_ubah_pembimbing").fadeOut(1);
+                    $("#data_ubah_mess").fadeOut(1);
                 },
                 error: function(response) {
                     console.log(response.responseText);
@@ -282,7 +340,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         console.log("hapus");
         Swal.fire({
             position: 'top',
-            title: 'Hapus Data Pembimbing ?',
+            title: 'Hapus Data Mess ?',
             icon: 'error',
             showCancelButton: true,
             confirmButtonColor: '#1cc88a',
@@ -294,12 +352,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
             if (result.isConfirmed) {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_v_daftarPembimbing_h.php",
+                    url: "_admin/exc/x_v_mess_h.php",
                     data: {
-                        "h_id_pembimbing": $(this).attr('id')
+                        "h_id_mess": $(this).attr('id')
                     },
                     success: function() {
-                        $('#data_daftarPembimbing').load("_admin/view/v_daftarPembimbingData.php");
+                        $('#data_mess').load("_admin/view/v_messData.php");
 
                         const Toast = Swal.mixin({
                             toast: true,

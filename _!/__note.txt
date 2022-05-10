@@ -56,7 +56,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Progres Modul CRUD Mess/Pemondokan"
+git commit -a -m "Perbaikan Ubah dan Hapus Mess/Pemondokan"
 git pull
 git push
 

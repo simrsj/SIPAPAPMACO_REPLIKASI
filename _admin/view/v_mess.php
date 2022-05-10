@@ -111,14 +111,17 @@
                     <input class="form-control form-control-sm" type="email" name="u_email_pemilik_mess" id="u_email_pemilik_mess">
                     <!-- <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_email_pemilik_mess"></div> -->
                 </div>
-                <div class="col-md-2">
-                    Kepemilikan : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <select class="select2" name="u_kepemilikan_mess" id="u_kepemilikan_mess" required>
-                        <option value=""></option>
-                        <option value="dalam">Dalam (RSJ)</option>
-                        <option value="luar">Luar</option>
-                    </select>
-                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_kepemilikan_mess"></div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md">
+                    Fasilitas : <span style="color:red">*</span><br>
+                    <textarea class="form-control form-control-sm" name="u_fasilitas_mess" id="u_fasilitas_mess" required></textarea>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_fasilitas_mess"></div>
+                </div>
+                <div class="col-md">
+                    Alamat : <span style="color:red">*</span><br>
+                    <textarea class="form-control form-control-sm" name="u_alamat_mess" id="u_alamat_mess" required></textarea>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_alamat_mess"></div>
                 </div>
             </div>
             <div class="row">
@@ -134,23 +137,31 @@
                 </div>
                 <div class="col-md-2">
                     Kapasitas Total : <span style="color:red">*</span><br>
-                    <input type="number" class="form-control form-control-sm" name="u_kapsitas_total_mess" id="u_kapsitas_total_mess" required>
-                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_kapsitas_total_mess"></div>
+                    <input type="number" class="form-control form-control-sm" name="u_kapasitas_total_mess" id="u_kapasitas_total_mess" required>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_kapasitas_total_mess"></div>
                 </div>
                 <div class="col-md">
-                    Alamat : <span style="color:red">*</span><br>
-                    <textarea class="form-control form-control-sm" name="u_alamau_mess" id="u_alamau_mess" required></textarea>
-                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_alamau_mess"></div>
+                    Kepemilikan : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <select class="select2" name="u_kepemilikan_mess" id="u_kepemilikan_mess" required>
+                        <option value=""></option>
+                        <option value="dalam">Dalam (RSJ)</option>
+                        <option value="luar">Luar</option>
+                    </select>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_kepemilikan_mess"></div>
                 </div>
                 <div class="col-md">
-                    Fasilitas : <span style="color:red">*</span><br>
-                    <textarea class="form-control form-control-sm" name="u_fasilitas_mess" id="u_fasilitas_mess" required></textarea>
-                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_fasilitas_mess"></div>
+                    Status : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <select class="select2" name="u_status_mess" id="u_status_mess" required>
+                        <option value=""></option>
+                        <option value="Y">Aktif</option>
+                        <option value="T">Non-Aktif</option>
+                    </select>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_status_mess"></div>
                 </div>
             </div>
             <hr>
             <div class="form-inline navbar nav-link justify-content-end">
-                <button type="button" name="ubah" class="btn btn-success btn-sm ubah">
+                <button type="button" name="ubah" class="btn btn-primary btn-sm ubah">
                     Ubah
                 </button>
                 &nbsp;&nbsp;
