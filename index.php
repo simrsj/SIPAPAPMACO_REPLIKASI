@@ -16,6 +16,7 @@ include "_add-ons/tanggal_waktu.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>SIPAPAP MACO</title>
+    <link rel="icon" href="./_img/logorsj.ico">
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">

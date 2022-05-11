@@ -21,14 +21,15 @@ $jumlah_praktik = $_GET['jum'];
     <!-- Data Tarif Praktik  -->
     <div class='card shadow mb-4' id="tarif_praktik">
         <div class='card-body'>
-            <div class="text-lg font-weight-bold text-center">MENU TARIF</div>
+            <div class="row">
+                <div class="col-12 badge badge-primary text-lg font-weight-bold text-center ">MENU TARIF</div>
+            </div>
             <input type="hidden" name="path" id="path" value="<?php echo $_GET['i']; ?>">
 
             <!-- Menu Tarif wajib disesuaikan dengan jenis jurusan -->
-            <div class="text-gray-700">
+            <div class="text-gray-700 mb-3">
                 <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
             </div>
-            <hr>
             <?php
             $sql_tarif_jurusan = " SELECT * FROM tb_tarif";
             $sql_tarif_jurusan .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
@@ -212,30 +213,6 @@ $jumlah_praktik = $_GET['jum'];
             <?php
             }
             ?>
-            <!-- Menu Mess/Pemondokan dengan Makan -->
-            <div class="text-gray-700">
-                <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                    Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
-                    <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)</span>
-                </div>
-                <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                    <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
-                </div>
-            </div>
-            <div class="row boxed-check-group boxed-check-primary justify-content-center">
-                <label class="boxed-check">
-                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="y">
-                    <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
-                </label>
-                &nbsp;
-                &nbsp;
-                <label class="boxed-check">
-                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
-                    <div class="boxed-check-label">Tanpa Makan</div>
-                </label>
-            </div>
-            <hr>
-
 
             <!-- Menu Tarif Ujian disesuaikan dengan Jenis Jurusan -->
             <div class="text-gray-700">
@@ -246,20 +223,19 @@ $jumlah_praktik = $_GET['jum'];
                     <span class="text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></span>
                 </div>
             </div>
-            <div class="row boxed-check-group boxed-check-primary justify-content-center">
+            <div class="row boxed-check-group boxed-check-primary justify-content-center mb-3">
                 <label class="boxed-check">
-                    <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="y">
+                    <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="y" onclick="cekPilihUjian1()">
                     <div class="boxed-check-label">Ya</div>
                 </label>
                 &nbsp;
                 &nbsp;
                 <label class="boxed-check">
-                    <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="t">
+                    <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="t" onclick="cekPilihUjian2()">
                     <div class="boxed-check-label">Tidak</div>
                 </label>
             </div>
-            <br>
-
+            <!-- tabel tarif ujian -->
             <div id="tarif_ujian" style="display: none;">
                 <?php
                 $sql_tarif_ujian = " SELECT * FROM tb_tarif ";
@@ -358,27 +334,36 @@ $jumlah_praktik = $_GET['jum'];
                 ?>
             </div>
             <hr>
+            <!-- Menu Mess/Pemondokan -->
+            <div class="text-gray-700">
+                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                    Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
+                    <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)</span>
+                </div>
+                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                    <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
+                </div>
+            </div>
+            <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
+                <label class="boxed-check">
+                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="y">
+                    <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
+                </label>
+                &nbsp;
+                &nbsp;
+                <label class="boxed-check">
+                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
+                    <div class="boxed-check-label">Tanpa Makan</div>
+                </label>
+            </div>
+            <hr>
+
+            <!-- tombol simpan data praktik dan tarif  -->
             <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
                 <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success" onclick="simpan_tarif()">
-                    <!-- <a class="nav-link" href="#tarif"> -->
-                    <i class="fas fa-check-circle"></i>
-                    Simpan Praktik dan Tarif
-                    <i class="fas fa-check-circle"></i>
-                    <!-- </a> -->
+                    <i class="fas fa-check-circle"></i> Simpan Praktik dan Tarif <i class="fas fa-check-circle"></i>
                 </button>
             </div>
         </div>
     </div>
 </form>
-
-
-<script type="text/javascript">
-    //untuk di File i_praktikDataTarif.php
-
-    $("#cek_pilih_ujian1").on('change', function() {
-        $("#tarif_ujian").slideDown();
-    });
-    $("#cek_pilih_ujian2").on('change', function() {
-        $("#tarif_ujian").slideUp();
-    });
-</script>

@@ -15,9 +15,7 @@ if ($_GET['prk'] == 'kep') {
                     <div class="card-body text-center">
                         <!-- Data Praktikan -->
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="text-lg font-weight-bold text-center"> DATA PRAKTIKAN</div>
-                            </div>
+                            <div class="col-12 text-lg font-weight-bold text-center badge badge-primary"> DATA PRAKTIKAN</div>
                         </div>
                         <hr>
                         <!-- Nama Institusi dan Praktikan -->
@@ -274,10 +272,8 @@ if ($_GET['prk'] == 'kep') {
                         <hr>
 
                         <!-- Koordinator -->
-                        <div class=" row">
-                            <div class="col-lg-12 text-center">
-                                <b>KOORDINATOR</b>
-                            </div>
+                        <div class="row">
+                            <div class="col-12 text-center font-weight-bold badge badge-primary text-lg">KOORDINATOR</div>
                         </div>
                         <br>
                         <div class="row">
@@ -321,13 +317,14 @@ if ($_GET['prk'] == 'kep') {
         <div id="data_tarif_input"></div>
     </div>
 
-    <script type="text/javascript">
-        // $("#cek_pilih_ujian1").on('change', function() {
-        //     $("#tarif_ujian").slideDown();
-        // });
-        // $("#cek_pilih_ujian2").on('change', function() {
-        //     $("#tarif_ujian").slideUp();
-        // });
+    <script>
+        function cekPilihUjian1() {
+            $("#tarif_ujian").slideDown();
+        }
+
+        function cekPilihUjian2() {
+            $("#tarif_ujian").slideUp();
+        }
 
         function tutupProfesiKep() {
             // console.log("tutupProfesiKep");
@@ -397,10 +394,10 @@ if ($_GET['prk'] == 'kep') {
                 telp_koordinator == ""
             ) {
 
-                /* console.log(institusi + "--" +
+                console.log(institusi + "--" +
                     praktik + "--" +
                     jurusan + "--" +
-                    akreditasi + "--" +
+                    // akreditasi + "--" +
                     jumlah + "--" +
                     tgl_mulai + "--" +
                     tgl_selesai + "--" +
@@ -413,7 +410,7 @@ if ($_GET['prk'] == 'kep') {
                     nama_koordinator + "--" +
                     email_koordinator + "--" +
                     telp_koordinator
-                ); */
+                );
 
                 //warning Toast bila ada data wajib yg berlum terisi
                 const Toast = Swal.mixin({
@@ -778,7 +775,7 @@ if ($_GET['prk'] == 'kep') {
                     }
                 },
                 error: function(response) {
-                    console.log(response);
+                    console.log(response.ket);
                     alert('eksekusi query Val.Jadwal Praktik gagal');
                 }
             });

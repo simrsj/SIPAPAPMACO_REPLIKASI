@@ -74,3 +74,4 @@ foreach ($period as $key => $value) {
 }
 
 echo json_encode($json);
+// echo json_encode(['success' => 'Sukses']);
