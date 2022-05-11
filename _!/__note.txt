@@ -56,7 +56,7 @@ PERTANYAAN
 
 git status
 git add .
-git commit -a -m "Progres tampilan tarif ujian praktik keperawatan"
+git commit -a -m "Perbaikan favicon tab logorsj.ico"
 git pull
 git push
 
