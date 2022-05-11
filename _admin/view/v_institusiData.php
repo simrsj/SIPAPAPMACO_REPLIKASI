@@ -19,6 +19,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                             <th width="250px">Nama Institusi</th>
                             <th>Akronim</th>
                             <th>Alamat</th>
+                            <th>Pemilihan <br> Mess/Pemondokan</th>
                             <th>
                                 Akreditasi
                                 <hr class="p-0 m-0" style="background-color: white;">
@@ -39,22 +40,35 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                         while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
                         ?>
                             <tr>
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $d_institusi['nama_institusi']; ?></td>
+                                <td><?= $no; ?></td>
+                                <td><?= $d_institusi['nama_institusi']; ?></td>
                                 <td class="text-center">
                                     <?php
 
                                     // akronim 
                                     if ($d_institusi['akronim_institusi'] == '') {
                                     ?>
-                                        <span class="badge badge-danger">Tidak Ada</span>
+                                        <span class="badge badge-danger text-lg">Tidak Ada</span>
                                     <?php
                                     } else {
                                         echo $d_institusi['akronim_institusi'];
                                     }
                                     ?>
                                 </td>
-                                <td><?php echo $d_institusi['alamat_institusi'] ?></td>
+                                <td><?= $d_institusi['alamat_institusi']; ?></td>
+                                <td class="text-center">
+                                    <?php
+                                    if ($d_institusi['messOptional_institusi'] == 'Y') {
+                                    ?>
+                                        <span class="badge badge-success text-lg">Optional</span>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <span class="badge badge-danger text-lg">Wajib</span>
+                                    <?php
+                                    }
+                                    ?>
+                                </td>
                                 <td class="text-center">
                                     <?php
 
@@ -67,7 +81,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                         echo $d_institusi['akred_institusi'];
                                     }
                                     ?>
-                                    <br>
+                                    <hr class="p-0 m-0 bg-gray-500">
                                     <?php
 
                                     // Tanggal Berlaku Akreditasi
@@ -79,7 +93,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                         echo tanggal($d_institusi['tglAkhirAkred_institusi']);
                                     }
                                     ?>
-                                    <br>
+                                    <hr class="p-0 m-0 mb-2 bg-gray-500">
                                     <?php
 
                                     // File Akreditasi
@@ -103,7 +117,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     <a title="Hapus" class='btn btn-outline-danger btn-sm hapus' id='<?php echo $d_institusi['id_institusi']; ?>'>
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <hr class="m-2">
+                                    <hr class="p-0 m-2 bg-gray-500">
                                     <?php
 
                                     // logo 
@@ -162,6 +176,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
         document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
         document.getElementById("form_ubah_institusi").reset();
+
+        var ubahScrollAnimate = $("html, body, input");
+        ubahScrollAnimate.stop().animate({
+            scrollTop: 0
+        }, 500, 'swing', function() {
+            $('#u_nama_institusi').focus();
+        });
 
         var id = $(this).attr('id');
         $.ajax({
@@ -434,7 +455,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                         icon: 'success',
                         title: '<span class"text-xs"><b>Data Institusi</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
-                        timer: 523123000,
+                        timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -451,7 +472,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                     document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
                     document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
                     document.getElementById("form_tambah_institusi").reset();
-                    $("#data_tambah_institusi").fadeOut(1);
+                    $("#data_ubah_institusi").fadeOut(1);
                 },
                 error: function(response) {
                     console.log(response.responseText);

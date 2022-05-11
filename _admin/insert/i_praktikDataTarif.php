@@ -3,6 +3,11 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
+//Mencari Data institusi
+$sql_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = " . $_GET['id'];
+$q_institusi = $conn->query($sql_institusi);
+$d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
+
 //Mencari Data Jurusan
 $id_jurusan_pdd = $_GET['jur'];
 $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd WHERE id_jurusan_pdd = " . $id_jurusan_pdd;
@@ -334,27 +339,37 @@ $jumlah_praktik = $_GET['jum'];
                 ?>
             </div>
             <hr>
+
             <!-- Menu Mess/Pemondokan -->
-            <div class="text-gray-700">
-                <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                    Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
-                    <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)</span>
+            <?php
+            if ($d_institusi['messOptional_institusi'] == 'Y') {
+                $display_makan_mess = "display:none;";
+            } else {
+                $display_makan_mess = "display:block;";
+            }
+            ?>
+            <div style="<?= $display_makan_mess; ?>">
+                <div class="text-gray-700">
+                    <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                        Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
+                        <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)</span>
+                    </div>
+                    <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                        <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
+                    </div>
                 </div>
-                <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                    <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
+                <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
+                    <label class="boxed-check">
+                        <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="y">
+                        <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
+                    </label>
+                    &nbsp;
+                    &nbsp;
+                    <label class="boxed-check">
+                        <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
+                        <div class="boxed-check-label">Tanpa Makan</div>
+                    </label>
                 </div>
-            </div>
-            <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
-                <label class="boxed-check">
-                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="y">
-                    <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
-                </label>
-                &nbsp;
-                &nbsp;
-                <label class="boxed-check">
-                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
-                    <div class="boxed-check-label">Tanpa Makan</div>
-                </label>
             </div>
             <hr>
 

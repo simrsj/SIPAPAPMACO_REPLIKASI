@@ -36,10 +36,17 @@
             <!-- Nama Institusi, MoU RSJ dan Institusi -->
             <input type="hidden" name="id_institusi" id="id_institusi" value="<?php echo $id_institusi; ?>">
             <div class="row mb-4">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     Nama Institusi : <span class="text-danger">*</span>&nbsp;&nbsp;
                     <input class="form-control form-control-sm" name="t_nama_institusi" id="t_nama_institusi" required>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_nama_institusi"></div>
+                </div>
+                <div class="col-md">
+                    Pemilihan Mess/Pemondokan : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <select class="form-control form-control-sm" name="t_mess_pilih_institusi" id="t_mess_pilih_institusi" required>
+                        <option </select>
+                            <div class="font-italic text-xs">Maksimal 10 Karakter</div>
+                            <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_mess_pilih_institusi"></div>
                 </div>
                 <div class="col-md">
                     Akronim : <span class="text-danger">*</span>&nbsp;&nbsp;
@@ -85,7 +92,6 @@
                     <div class="font-italic text-xs">File Akreditasi harus PDF dan ukuran kurang dari 1 Mb</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_fileAkred_institusi"></div>
                 </div>
-
             </div>
             <hr>
             <div class="form-inline navbar nav-link justify-content-end">
@@ -412,7 +418,7 @@
                         icon: 'success',
                         title: '<span class"text-xs"><b>Data Institusi</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
-                        timer: 5123123000,
+                        timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
