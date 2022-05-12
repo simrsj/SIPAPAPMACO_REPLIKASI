@@ -58,7 +58,7 @@ git status
 
 
 git add .
-git commit -a -m "Perbaikan Dashboard Akun Institusi"
+git commit -a -m "Progres Pemilihan Mess Praktik Keperawatan"
 git pull
 git push
 

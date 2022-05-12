@@ -149,7 +149,6 @@
                         <option value="T">WAJIB</option>
                         <option value="Y">OPSIONAL</option>
                     </select>
-                    <div class="font-italic text-xs">Maksimal 10 Karakter</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_messOpsional_institusi"></div>
                 </div>
                 <div class="col-md-2">

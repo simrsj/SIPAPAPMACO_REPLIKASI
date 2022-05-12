@@ -4,7 +4,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
 //Mencari Data institusi
-$sql_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = " . $_GET['id'];
+$sql_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = " . $_GET['id_ins'];
 $q_institusi = $conn->query($sql_institusi);
 $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
 
@@ -224,11 +224,8 @@ $jumlah_praktik = $_GET['jum'];
                 <div class="h5 font-weight-bold text-center mt-3 mb-3">
                     Menu Tarif Ujian <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?> <span class="text-danger">*</span>
                 </div>
-                <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                    <span class="text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></span>
-                </div>
             </div>
-            <div class="row boxed-check-group boxed-check-primary justify-content-center mb-3">
+            <div class="row boxed-check-group boxed-check-primary justify-content-center mb-4">
                 <label class="boxed-check">
                     <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="y" onclick="cekPilihUjian1()">
                     <div class="boxed-check-label">Ya</div>
@@ -240,6 +237,7 @@ $jumlah_praktik = $_GET['jum'];
                     <div class="boxed-check-label">Tidak</div>
                 </label>
             </div>
+            <div class="text-center text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></div>
             <!-- tabel tarif ujian -->
             <div id="tarif_ujian" style="display: none;">
                 <?php
@@ -341,21 +339,45 @@ $jumlah_praktik = $_GET['jum'];
             <hr>
 
             <!-- Menu Mess/Pemondokan -->
+            <div class="row">
+                <div class="col-12 badge badge-primary text-lg font-weight-bold text-center mb-2">MENU MESS/PEMONDOKAN</div>
+            </div>
             <?php
-            if ($d_institusi['messOptional_institusi'] == 'Y') {
+            if ($d_institusi['messOpsional_institusi'] == 'Y') {
                 $display_makan_mess = "display:none;";
+                $display_pemilihan_mess = "display:block;";
             } else {
                 $display_makan_mess = "display:block;";
+                $display_pemilihan_mess = "display:none;";
             }
             ?>
-            <div style="<?= $display_makan_mess; ?>">
+
+            <!-- pemilihan mess/pemondokan  -->
+            <div style="<?= $display_pemilihan_mess; ?>">
+                <div class="text-gray-700">
+                    <div class="h5 font-weight-bold text-center mb-3">
+                        Pilih Mess/Pemondokan<span class="text-danger">*</span>
+                    </div>
+                </div>
+                <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
+                    <label class="boxed-check">
+                        <input class="boxed-check-input" type="radio" name="pilih_mess" id="pilih_mess1" value="Y" onclick="pilihMessY();">
+                        <div class="boxed-check-label">Ya</div>
+                    </label>
+                    &nbsp;
+                    &nbsp;
+                    <label class="boxed-check">
+                        <input class="boxed-check-input" type="radio" name="pilih_mess" id="pilih_mess2" value="T" onclick="pilihMessT();">
+                        <div class="boxed-check-label">Tidak</div>
+                    </label>
+                </div>
+            </div>
+            <!-- pemilihan makan mess/pemondokan  -->
+            <div id="pilih_makan_mess" style="<?= $display_makan_mess; ?>">
                 <div class="text-gray-700">
                     <div class="h5 font-weight-bold text-center mt-3 mb-3">
                         Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span>
                         <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)</span>
-                    </div>
-                    <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                        <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
                     </div>
                 </div>
                 <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
@@ -370,6 +392,7 @@ $jumlah_praktik = $_GET['jum'];
                         <div class="boxed-check-label">Tanpa Makan</div>
                     </label>
                 </div>
+                <div class="text-center text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></div>
             </div>
             <hr>
 

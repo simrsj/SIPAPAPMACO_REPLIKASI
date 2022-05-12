@@ -14,7 +14,6 @@
                 <div class="card-body">
                     <div class="text-md font-weight-bold text-center text-primary mb-1">
                         <div class="h5 mb-0 font-weight-bold">
-
                             <b> DATA PROFIL <br><?php echo $dAr_ins['nama_institusi']; ?></b>
                         </div>
                     </div>

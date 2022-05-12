@@ -326,6 +326,14 @@ if ($_GET['prk'] == 'kep') {
             $("#tarif_ujian").slideUp();
         }
 
+        function pilihMessY() {
+            $("#pilih_makan_mess").slideDown();
+        }
+
+        function pilihMessT() {
+            $("#pilih_makan_mess").slideUp();
+        }
+
         function tutupProfesiKep() {
             // console.log("tutupProfesiKep");
             var jenjang = $("#jenjang").val();
@@ -745,6 +753,7 @@ if ($_GET['prk'] == 'kep') {
                                 document.getElementById("data_tarif_input").innerHTML = this.responseText;
                             };
                             xmlhttp_data_tarif.open("GET", "_admin/insert/i_praktikDataTarif.php?id=" + id +
+                                "&id_ins=" + <?= $_SESSION['id_institusi']; ?> +
                                 "&jur=" + jurusan +
                                 "&jen=" + jenjang +
                                 "&tmp=" + tgl_mulai +
@@ -784,7 +793,39 @@ if ($_GET['prk'] == 'kep') {
         function simpan_tarif() {
 
             //Notif dan Toast Bila Ujian Tidak dipilih
-            if (document.getElementById("makan_mess1").checked == false && document.getElementById("makan_mess2").checked == false) {
+            if (
+                // document.getElementById("cek_pilih_ujian1").checked == false &&
+                // document.getElementById("cek_pilih_ujian2").checked == false 
+                $('input[name="pilih_mess"]:checked').val() != 'Y'
+            ) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: '<center>Pilih Ujian <b>Ya</b> atau <b>Tidak</b></center>'
+                });
+                document.getElementById("err_cek_pilih_ujian").innerHTML = "Pilih Ujian <br>";
+            }
+
+
+            //Notif dan Toast Bila Makan Mess Tidak dipilih
+            var pilih_mess = $('input[name="pilih_mess"]:checked').val();
+            console.log('pilih_mess : ' + pilih_mess);
+            if (
+                // document.getElementById("makan_mess1").checked == false &&
+                // document.getElementById("makan_mess2").checked == false
+                $('input[name="pilih_mess"]:checked').val() != 'y'
+            ) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -802,8 +843,16 @@ if ($_GET['prk'] == 'kep') {
                     title: '<center>Pilih <b>MAKAN MESS</b></center>'
                 });
                 document.getElementById("err_makan_mess").innerHTML = "Pilih Makan Mess <br>";
-            } //Notif dan Toast Bila Ujian Tidak dipilih
-            else if (document.getElementById("cek_pilih_ujian1").checked == false && document.getElementById("cek_pilih_ujian2").checked == false) {
+            }
+
+            //Notif dan Toast Bila Makan Mess Tidak dipilih
+            var makan_mess = $('input[name="makan_mess"]:checked').val();
+            console.log('makan mess : ' + makan_mess);
+            if (
+                // document.getElementById("makan_mess1").checked == false &&
+                // document.getElementById("makan_mess2").checked == false
+                $('input[name="makan_mess"]:checked').val() != 'y'
+            ) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -818,173 +867,176 @@ if ($_GET['prk'] == 'kep') {
 
                 Toast.fire({
                     icon: 'warning',
-                    title: '<center>Pilih Ujian <b>Ya</b> atau <b>Tidak</b></center>'
+                    title: '<center>Pilih <b>MAKAN MESS</b></center>'
                 });
-                document.getElementById("err_makan_mess").innerHTML = "";
-                document.getElementById("err_cek_pilih_ujian").innerHTML = "Pilih Ujian <br>";
+                document.getElementById("err_makan_mess").innerHTML = "Pilih Makan Mess <br>";
             }
-            //simpan data praktik dan data tarif
-            else {
 
-                //ambil data dari tag from form_praktik
-                var data_praktik = $('#form_praktik').serializeArray();
+            /* 
+                        //simpan data praktik dan data tarif
+                        if (
 
-                //cek data ujian
-                var cek_pilih_ujian = "";
-                if (document.getElementById("cek_pilih_ujian1").checked == true) {
-                    cek_pilih_ujian = document.getElementById("cek_pilih_ujian1").value;
-                } else if (document.getElementById("cek_pilih_ujian2").checked == true) {
-                    cek_pilih_ujian = document.getElementById("cek_pilih_ujian2").value;
-                }
+                        ) {
 
-                //push data profesi
-                var jenjang = document.getElementById("jenjang").value;
-                var profesi = 0;
-                // console.log('jenjang ' + jenjang);
+                            //ambil data dari tag from form_praktik
+                            var data_praktik = $('#form_praktik').serializeArray();
 
-                if (jenjang == 9) {
-                    profesi = 5;
-                } else {
-                    profesi = document.getElementById("profesi").value;
-                }
-                // console.log('profesi' + profesi);
-
-                data_praktik.push({
-                    name: 'id_profesi_pdd',
-                    value: profesi
-                });
-
-                //push data ujian    
-                data_praktik.push({
-                    name: 'cek_pilih_ujian',
-                    value: cek_pilih_ujian
-                });
-
-                //cek data materi upip
-                if (document.getElementById("jurusan").value == 2) {
-
-                    var materi_upip = "";
-                    if (document.getElementById("materi_upip").checked == true) {
-                        materi_upip = document.getElementById("materi_upip").value;
-                    }
-
-                    //data materi upip
-                    data_praktik.push({
-                        name: 'materi_upip',
-                        value: materi_upip
-                    });
-                }
-
-                //cek data materi napza
-                if (document.getElementById("jurusan").value == 2) {
-                    var materi_napza = "";
-                    if (document.getElementById("materi_napza").checked == true) {
-                        materi_napza = document.getElementById("materi_napza").value;
-                    }
-
-                    //data materi napza
-                    data_praktik.push({
-                        name: 'materi_napza',
-                        value: materi_napza
-                    });
-                }
-
-                //cek data makan_mess
-                var makan_mess = "";
-                if (document.getElementById("makan_mess1").checked == true) {
-                    makan_mess = document.getElementById("makan_mess1").value;
-                } else if (document.getElementById("makan_mess2").checked == true) {
-                    makan_mess = document.getElementById("makan_mess2").value;
-                }
-
-                //push data makan_mess    
-                data_praktik.push({
-                    name: 'makan_mess',
-                    value: makan_mess
-                });
-
-                //Simpan Data Praktik dan Tarif
-                $.ajax({
-                    type: 'POST',
-                    url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
-                    data: data_praktik,
-                    success: function() {
-                        //simpan file upload
-                        var data_file = new FormData();
-                        var xhttp = new XMLHttpRequest();
-
-                        var fileSurat = document.getElementById("file_surat").files;
-                        data_file.append("file_surat", fileSurat[0]);
-
-                        var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
-                        data_file.append("file_data_praktikan", fileDataPraktikan[0]);
-
-                        var id = document.getElementById("id").value;
-                        data_file.append("id", id);
-
-                        xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
-                        xhttp.send(data_file);
-
-                        //import file excel ke database
-                        var data_file_praktikan = new FormData();
-                        var xhttp_data_praktikan = new XMLHttpRequest();
-
-                        var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
-                        data_file_praktikan.append("file_data_praktikan", fileDataPraktikan[0]);
-
-                        var id = document.getElementById("id").value;
-                        data_file_praktikan.append("id", id);
-
-                        xhttp_data_praktikan.open("POST", "_admin/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
-                        xhttp_data_praktikan.send(data_file_praktikan);
-
-                        //Cari Jenis Jurusan
-                        var jur = document.getElementById('jurusan').value;
-                        var xmlhttp_path = new XMLHttpRequest();
-                        xmlhttp_path.onload = function() {
-                            var path = "";
-                            var pathResponse = JSON.parse(this.responseText);
-                            if (pathResponse.jenis_jurusan == 1) {
-                                path = "?prk=ked";
-                            } else if (pathResponse.jenis_jurusan == 2) {
-                                path = "?prk=kep";
-                            } else if (pathResponse.jenis_jurusan == 3) {
-                                path = "?prk=nkl";
-                            } else if (pathResponse.jenis_jurusan == 4) {
-                                path = "?prk=nnk";
-                            } else {
-                                path = "?";
+                            //cek data ujian
+                            var cek_pilih_ujian = "";
+                            if (document.getElementById("cek_pilih_ujian1").checked == true) {
+                                cek_pilih_ujian = document.getElementById("cek_pilih_ujian1").value;
+                            } else if (document.getElementById("cek_pilih_ujian2").checked == true) {
+                                cek_pilih_ujian = document.getElementById("cek_pilih_ujian2").value;
                             }
-                            Swal.fire({
-                                allowOutsideClick: false,
-                                // isDismissed: false,
-                                icon: 'success',
-                                title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>TARIF</b><br>Berhasil Tersimpan',
-                                showConfirmButton: false,
-                                html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
-                                timer: 5000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+
+                            //push data profesi
+                            var jenjang = document.getElementById("jenjang").value;
+                            var profesi = 0;
+                            // console.log('jenjang ' + jenjang);
+
+                            if (jenjang == 9) {
+                                profesi = 5;
+                            } else {
+                                profesi = document.getElementById("profesi").value;
+                            }
+                            // console.log('profesi' + profesi);
+
+                            data_praktik.push({
+                                name: 'id_profesi_pdd',
+                                value: profesi
+                            });
+
+                            //push data ujian    
+                            data_praktik.push({
+                                name: 'cek_pilih_ujian',
+                                value: cek_pilih_ujian
+                            });
+
+                            //cek data materi upip
+                            if (document.getElementById("jurusan").value == 2) {
+
+                                var materi_upip = "";
+                                if (document.getElementById("materi_upip").checked == true) {
+                                    materi_upip = document.getElementById("materi_upip").value;
                                 }
-                            }).then(
-                                function() {
-                                    document.location.href = path;
+
+                                //data materi upip
+                                data_praktik.push({
+                                    name: 'materi_upip',
+                                    value: materi_upip
+                                });
+                            }
+
+                            //cek data materi napza
+                            if (document.getElementById("jurusan").value == 2) {
+                                var materi_napza = "";
+                                if (document.getElementById("materi_napza").checked == true) {
+                                    materi_napza = document.getElementById("materi_napza").value;
                                 }
-                            );
-                        };
-                        xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
-                            true
-                        );
-                        xmlhttp_path.send();
-                    },
-                    error: function(response) {
-                        console.log(response.responseText);
-                        alert('eksekusi query gagal');
-                    }
-                });
-            }
+
+                                //data materi napza
+                                data_praktik.push({
+                                    name: 'materi_napza',
+                                    value: materi_napza
+                                });
+                            }
+
+                            //cek data makan_mess
+                            var makan_mess = "";
+                            if (document.getElementById("makan_mess1").checked == true) {
+                                makan_mess = document.getElementById("makan_mess1").value;
+                            } else if (document.getElementById("makan_mess2").checked == true) {
+                                makan_mess = document.getElementById("makan_mess2").value;
+                            }
+
+                            //push data makan_mess    
+                            data_praktik.push({
+                                name: 'makan_mess',
+                                value: makan_mess
+                            });
+
+                            //Simpan Data Praktik dan Tarif
+                            $.ajax({
+                                type: 'POST',
+                                url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
+                                data: data_praktik,
+                                success: function() {
+                                    //simpan file upload
+                                    var data_file = new FormData();
+                                    var xhttp = new XMLHttpRequest();
+
+                                    var fileSurat = document.getElementById("file_surat").files;
+                                    data_file.append("file_surat", fileSurat[0]);
+
+                                    var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                                    data_file.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                                    var id = document.getElementById("id").value;
+                                    data_file.append("id", id);
+
+                                    xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
+                                    xhttp.send(data_file);
+
+                                    //import file excel ke database
+                                    var data_file_praktikan = new FormData();
+                                    var xhttp_data_praktikan = new XMLHttpRequest();
+
+                                    var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                                    data_file_praktikan.append("file_data_praktikan", fileDataPraktikan[0]);
+
+                                    var id = document.getElementById("id").value;
+                                    data_file_praktikan.append("id", id);
+
+                                    xhttp_data_praktikan.open("POST", "_admin/exc/x_i_praktik_sPraktikDataPraktikan.php?", true);
+                                    xhttp_data_praktikan.send(data_file_praktikan);
+
+                                    //Cari Jenis Jurusan
+                                    var jur = document.getElementById('jurusan').value;
+                                    var xmlhttp_path = new XMLHttpRequest();
+                                    xmlhttp_path.onload = function() {
+                                        var path = "";
+                                        var pathResponse = JSON.parse(this.responseText);
+                                        if (pathResponse.jenis_jurusan == 1) {
+                                            path = "?prk=ked";
+                                        } else if (pathResponse.jenis_jurusan == 2) {
+                                            path = "?prk=kep";
+                                        } else if (pathResponse.jenis_jurusan == 3) {
+                                            path = "?prk=nkl";
+                                        } else if (pathResponse.jenis_jurusan == 4) {
+                                            path = "?prk=nnk";
+                                        } else {
+                                            path = "?";
+                                        }
+                                        Swal.fire({
+                                            allowOutsideClick: false,
+                                            // isDismissed: false,
+                                            icon: 'success',
+                                            title: '<span class"text-xs"><b>DATA PRAKTIK</b> dan <b>TARIF</b><br>Berhasil Tersimpan',
+                                            showConfirmButton: false,
+                                            html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
+                                            timer: 5000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        }).then(
+                                            function() {
+                                                document.location.href = path;
+                                            }
+                                        );
+                                    };
+                                    xmlhttp_path.open("GET", "_admin/insert/i_praktikPath.php?jur=" + jur,
+                                        true
+                                    );
+                                    xmlhttp_path.send();
+                                },
+                                error: function(response) {
+                                    console.log(response.responseText);
+                                    alert('eksekusi query gagal');
+                                }
+                            });
+                        } */
         }
     </script>
 
