@@ -326,7 +326,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 	<!-- End of Page Wrapper -->
 
 	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top">
+	<a class="scroll-to-top rounded" href="body">
 		<i class="fas fa-angle-up"></i>
 	</a>
 <?php

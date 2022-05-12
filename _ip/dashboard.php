@@ -9,7 +9,7 @@
     </div>
 
     <div class="row">
-        <div class="col-xl-6 col-md-12 col-12">
+        <div class="col-xl-6 col-md-12 col-12  mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="text-md font-weight-bold text-center text-primary mb-1">
@@ -106,8 +106,8 @@
                             </div>
                             <br>
                             <div class="text-md font-weight-bold text-primary mb-1">
-                                Tanggal Berlaku Akreditasi Sampai:
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                Tanggal Sisa Berlaku Akreditasi:
+                                <div class="mb-0 font-weight-bold text-gray-800">
                                     <b>
                                         <?php
                                         if ($dAr_ins['tglAkhirAkred_institusi'] == "") {
@@ -122,9 +122,8 @@
 
                                             if ($date_diff <= 0) {
                                             ?>
-                                                <br>
-                                                <span class="badge badge-success text-xs">
-                                                    <?php echo tanggal_sisa($dAr_ins['tglAkhirAkred_institusi'], date('Y-m-d')); ?>
+                                                <span class="badge badge-success text-md">
+                                                    <?= tanggal_sisa($dAr_ins['tglAkhirAkred_institusi'], date('Y-m-d')); ?>
                                                 </span>
                                             <?php
                                             } elseif ($date_diff > 0) {
@@ -151,7 +150,7 @@
                                         <?php
                                         } else {
                                         ?>
-                                            <a title="Data Akreditasi Institusi" class="btn btn-success btn-sm" href="<?php echo $dAr_ins['logo_institusi']; ?>" target="_blank">
+                                            <a title="Data Akreditasi Institusi" class="btn btn-success btn-sm" href="<?php echo $dAr_ins['fileAkred_institusi']; ?>" target="_blank">
                                                 <i class="fas fa-file-download"></i> Unggah File
                                             </a>
                                         <?php
@@ -165,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 col-md-12  col-12">
+        <div class="col-xl-6 col-md-12 col-12  mb-4">
             <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                     <div class="text-md font-weight-bold text-center text-danger mb-1">
