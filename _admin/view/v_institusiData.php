@@ -58,9 +58,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                 <td><?= $d_institusi['alamat_institusi']; ?></td>
                                 <td class="text-center">
                                     <?php
-                                    if ($d_institusi['messOptional_institusi'] == 'Y') {
+                                    if ($d_institusi['messOpsional_institusi'] == 'Y') {
                                     ?>
-                                        <span class="badge badge-success text-lg">Optional</span>
+                                        <span class="badge badge-success text-lg">Opsional</span>
                                     <?php
                                     } else {
                                     ?>
@@ -197,7 +197,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                 document.getElementById("form_ubah_institusi").reset();
 
                 document.getElementById("u_id_institusi").value = response.id_institusi;
-                // console.log("u_id_institusi : " + response.id_institusi);
                 document.getElementById("u_nama_institusi").value = response.nama_institusi;
                 document.getElementById("u_akronim_institusi").value = response.akronim_institusi;
 
@@ -205,18 +204,26 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                 if (response.logo_institusi == '' || response.logo_institusi == null) {
                     $("#logo_institusi").append('LOGO TIDAK ADA');
                 } else {
-                    // document.getElementById("logo_institusi").value = response.logo_institusi;
-                    // $("#logo_institusi").attr('src', response.logo_institusi);
                     $('#logo_institusi')
                         .append(
-                            '<img src="' + response.logo_institusi + '" width="80px" height="80px">' +
-                            ' &nbsp;&nbsp;<a class="btn btn-outline-success btn-xs" href="' + response.logo_institusi + '" download><i class="far fa-image"></i> Unduh</a>'
+                            '<img src="' + response.logo_institusi + '" width="80px" height="80px">'
+                        );
+                }
+
+                $("#fileLogo_institusi").empty();
+                if (response.logo_institusi != '' || response.logo_institusi == null) {
+                    // $("#logo_institusi").append('LOGO TIDAK ADA');
+                    $('#fileLogo_institusi')
+                        .append(
+                            'Logo Sebelumnya : <a href="' + response.logo_institusi + '" target="_blank" download>' +
+                            '<u><b>UNDUH</b></u>' +
+                            '</a>'
                         );
                 }
 
                 document.getElementById("u_alamat_institusi").value = response.alamat_institusi;
 
-                // document.getElementById("u_akred_institusi").value = response.akred_institusi;
+                $('#u_messOpsional_institusi').val(response.messOpsional_institusi).trigger('change');
                 $('#u_akred_institusi').val(response.akred_institusi).trigger('change');
 
                 document.getElementById("u_tglAkhirAkred_institusi").value = response.tglAkhirAkred_institusi;
@@ -224,10 +231,18 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                 $("#fileAkred_institusi").empty();
                 if (response.fileAkred_institusi == '' || response.fileAkred_institusi == null) {
                     console.log('Data File Akreditasi Tidak Ada');
-                    $('#fileAkred_institusi').append('<span class="badge badge-danger">Tidak Ada</span>');
+                    // $('#fileAkred_institusi')
+                    //     .append(
+                    //         '<span class="badge badge-danger">Tidak Ada</span>'
+                    //     );
                 } else {
                     // $("#fileAkred_institusi").attr('href', response.fileAkred_institusi);
-                    $('#fileAkred_institusi').append('<a href="' + response.fileAkred_institusi + '" target="_blank" download><u><b>UNDUH</b></u></a>');
+                    $('#fileAkred_institusi')
+                        .append(
+                            'File Sebelumnya : <a href="' + response.fileAkred_institusi + '" target="_blank" download>' +
+                            '<u><b>UNDUH</b></u>' +
+                            '</a>'
+                        );
                 }
             },
             error: function(response) {
@@ -243,13 +258,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
     });
 
     $(".ubah_tutup").click(function() {
-        document.getElementById("err_u_nama_institusi").innerHTML = "";
-        document.getElementById("err_u_akronim_institusi").innerHTML = "";
-        document.getElementById("err_u_logo_institusi").innerHTML = "";
-        document.getElementById("err_u_akred_institusi").innerHTML = "";
-        document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
-        document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
-        document.getElementById("form_tambah_institusi").reset();
         $("#data_ubah_institusi").fadeOut(1);
     });
 
@@ -465,13 +473,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
                     $('#data_institusi').load('_admin/view/v_institusiData.php');
 
-                    document.getElementById("err_u_nama_institusi").innerHTML = "";
-                    document.getElementById("err_u_akronim_institusi").innerHTML = "";
-                    document.getElementById("err_u_logo_institusi").innerHTML = "";
-                    document.getElementById("err_u_akred_institusi").innerHTML = "";
-                    document.getElementById("err_u_tglAkhirAkred_institusi").innerHTML = "";
-                    document.getElementById("err_u_fileAkred_institusi").innerHTML = "";
-                    document.getElementById("form_tambah_institusi").reset();
                     $("#data_ubah_institusi").fadeOut(1);
                 },
                 error: function(response) {

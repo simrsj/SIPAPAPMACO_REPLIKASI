@@ -8,7 +8,8 @@ $sql = "INSERT INTO tb_institusi (
     akronim_institusi,
     alamat_institusi,
     akred_institusi,
-    tglAkhirAkred_institusi
+    tglAkhirAkred_institusi,
+    messOpsional_institusi
     ) VALUES (
         '" . $_POST['id_institusi'] . "', 
         '" . date('Y-m-d') . "', 
@@ -16,7 +17,8 @@ $sql = "INSERT INTO tb_institusi (
         '" . $_POST['t_akronim_institusi'] . "', 
         '" . $_POST['t_alamat_institusi'] . "',
         '" . $_POST['t_akred_institusi'] . "',
-        '" . $_POST['t_tglAkhirAkred_institusi'] . "'
+        '" . $_POST['t_tglAkhirAkred_institusi'] . "',
+        '" . $_POST['t_messOpsional_institusi'] . "'
     )";
 
 // echo $sql . "<br>";

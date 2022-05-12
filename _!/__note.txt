@@ -58,7 +58,7 @@ git status
 
 
 git add .
-git commit -a -m "Progres Perbaikan Tambah Institusi"
+git commit -a -m "Perbaikan Tambah dan Ubah Institusi"
 git pull
 git push
 

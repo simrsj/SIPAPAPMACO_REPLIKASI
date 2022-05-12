@@ -41,12 +41,15 @@
                     <input class="form-control form-control-sm" name="t_nama_institusi" id="t_nama_institusi" required>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_nama_institusi"></div>
                 </div>
-                <div class="col-md">
+                <div class="col-md-3">
                     Pemilihan Mess/Pemondokan : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <select class="form-control form-control-sm" name="t_mess_pilih_institusi" id="t_mess_pilih_institusi" required>
-                        <option </select>
-                            <div class="font-italic text-xs">Maksimal 10 Karakter</div>
-                            <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_mess_pilih_institusi"></div>
+                    <select class="select2" name="t_messOpsional_institusi" id="t_messOpsional_institusi" required>
+                        <option value=""></option>
+                        <option value="T">WAJIB</option>
+                        <option value="Y">OPSIONAL</option>
+                    </select>
+                    <div class="font-italic text-xs">Maksimal 10 Karakter</div>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_messOpsional_institusi"></div>
                 </div>
                 <div class="col-md">
                     Akronim : <span class="text-danger">*</span>&nbsp;&nbsp;
@@ -54,7 +57,7 @@
                     <div class="font-italic text-xs">Maksimal 10 Karakter</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_akronim_institusi"></div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <fieldset class="border p-2 ">
                         Logo : <span class="text-danger">*</span>&nbsp;&nbsp;
                         <input type="file" name="t_logo_institusi" id="t_logo_institusi" accept="image/png" required>
@@ -88,8 +91,8 @@
                     <fieldset class="border p-2">
                         File Akreditasi : <span class="text-danger">*</span>&nbsp;&nbsp;
                         <input type="file" name="t_fileAkred_institusi" id="t_fileAkred_institusi" accept="application/pdf" required>
+                        <div class="font-italic text-xs">File Akreditasi harus PDF dan ukuran kurang dari 1 Mb</div>
                     </fieldset>
-                    <div class="font-italic text-xs">File Akreditasi harus PDF dan ukuran kurang dari 1 Mb</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_t_fileAkred_institusi"></div>
                 </div>
             </div>
@@ -131,6 +134,7 @@
                 <div class="col-md-3">
                     <fieldset class="border p-2">
                         Logo : <span class="text-danger">*</span>&nbsp;&nbsp;
+                        <div class="font-italic text-primary text-xs" id="fileLogo_institusi"></div>
                         <input type="file" name="u_logo_institusi" id="u_logo_institusi" accept="image/png" required>
                         <div class="font-italic text-xs">Logo harus PNG dan ukuran kurang dari 200 Kb</div>
                     </fieldset>
@@ -138,6 +142,16 @@
                 </div>
             </div>
             <div class="row mb-4">
+                <div class="col-md">
+                    Pemilihan Mess/Pemondokan : <span class="text-danger">*</span>&nbsp;&nbsp;
+                    <select class="select2" name="u_messOpsional_institusi" id="u_messOpsional_institusi" required>
+                        <option value=""></option>
+                        <option value="T">WAJIB</option>
+                        <option value="Y">OPSIONAL</option>
+                    </select>
+                    <div class="font-italic text-xs">Maksimal 10 Karakter</div>
+                    <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_messOpsional_institusi"></div>
+                </div>
                 <div class="col-md-2">
                     Akreditasi Institusi : <span class="text-danger">*</span>&nbsp;&nbsp;
                     <select class="select2" name="u_akred_institusi" id="u_akred_institusi" required>
@@ -161,11 +175,10 @@
                 <div class="col-md-3">
                     <fieldset class="border p-2">
                         File Akreditasi : <span class="text-danger">*</span>&nbsp;&nbsp;
-                        <div class="font-italic text-primary text-xs">File Sebelumnya : <span id="fileAkred_institusi"></span>
-                        </div>
+                        <div class="font-italic text-primary text-xs" id="fileAkred_institusi"></div>
                         <input type="file" name="u_fileAkred_institusi" id="u_fileAkred_institusi" accept="application/pdf" required>
+                        <div class="font-italic text-xs">File Akreditasi harus PDF dan ukuran kurang dari 1 Mb</div>
                     </fieldset>
-                    <div class="font-italic text-xs">File Akreditasi harus PDF dan ukuran kurang dari 1 Mb</div>
                     <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_fileAkred_institusi"></div>
                 </div>
             </div>
@@ -187,7 +200,6 @@
     <div id="data_institusi"></div>
 </div>
 
-
 <script>
     $(document).ready(function() {
         $('#data_institusi').load("_admin/view/v_institusiData.php");
@@ -197,23 +209,19 @@
         document.getElementById("err_t_nama_institusi").innerHTML = "";
         document.getElementById("err_t_akronim_institusi").innerHTML = "";
         document.getElementById("err_t_logo_institusi").innerHTML = "";
-        document.getElementById("err_t_akred_institusi").innerHTML = "";
         document.getElementById("err_t_tglAkhirAkred_institusi").innerHTML = "";
-        document.getElementById("err_t_fileAkred_institusi").innerHTML = "";
+        document.getElementById("err_t_messOpsional_institusi").innerHTML = "";
         document.getElementById("form_tambah_institusi").reset();
+
+        $('#t_messOpsional_institusi').val('').trigger("change");
+        $('#t_akred_institusi').val('').trigger("change");
+
         $("#data_tambah_institusi").fadeIn(1);
         $("#data_ubah_institusi").fadeOut(1);
         $('#t_nama_institusi').focus();
     });
 
     $(".tambah_tutup").click(function() {
-        document.getElementById("err_t_nama_institusi").innerHTML = "";
-        document.getElementById("err_t_akronim_institusi").innerHTML = "";
-        document.getElementById("err_t_logo_institusi").innerHTML = "";
-        document.getElementById("err_t_akred_institusi").innerHTML = "";
-        document.getElementById("err_t_tglAkhirAkred_institusi").innerHTML = "";
-        document.getElementById("err_t_fileAkred_institusi").innerHTML = "";
-        document.getElementById("form_tambah_institusi").reset();
         $("#data_tambah_institusi").fadeOut(1);
     });
 
@@ -226,6 +234,7 @@
         var t_akred_institusi = $('#t_akred_institusi').val();
         var t_tglAkhirAkred_institusi = $('#t_tglAkhirAkred_institusi').val();
         var t_fileAkred_institusi = $('#t_fileAkred_institusi').val();
+        var t_messOpsional_institusi = $('#t_messOpsional_institusi').val();
         // console.log("NAMA : " + t_nama_institusi);
         // console.log("AKRED : " + t_akred_institusi);
         // console.log("ALAMAT : " + $('#t_alamat_institusi').val());
@@ -237,7 +246,8 @@
             t_logo_institusi == "" ||
             t_akred_institusi == "" ||
             t_tglAkhirAkred_institusi == "" ||
-            t_fileAkred_institusi == ""
+            t_fileAkred_institusi == "" ||
+            t_messOpsional_institusi == ""
         ) {
             if (t_nama_institusi == "") {
                 document.getElementById("err_t_nama_institusi").innerHTML = "Nama Institusi Harus Diisi";
@@ -270,11 +280,16 @@
             }
 
             if (t_fileAkred_institusi == "") {
-                document.getElementById("err_t_fileAkred_institusi").innerHTML = "File Akreditasi Harus Dipilih";
+                document.getElementById("err_t_fileAkred_institusi").innerHTML = "File Akreditasi Harus Diunggah";
             } else {
                 document.getElementById("err_t_fileAkred_institusi").innerHTML = "";
             }
 
+            if (t_messOpsional_institusi == "") {
+                document.getElementById("err_t_messOpsional_institusi").innerHTML = "Pemilihan Mess/Pemondokan Harus Dipilih";
+            } else {
+                document.getElementById("err_t_messOpsional_institusi").innerHTML = "";
+            }
         }
 
         //eksekusi bila file MoU terisi
@@ -444,14 +459,6 @@
                     // });
 
                     $('#data_institusi').load('_admin/view/v_institusiData.php');
-
-                    document.getElementById("err_t_nama_institusi").innerHTML = "";
-                    document.getElementById("err_t_akronim_institusi").innerHTML = "";
-                    document.getElementById("err_t_logo_institusi").innerHTML = "";
-                    document.getElementById("err_t_akred_institusi").innerHTML = "";
-                    document.getElementById("err_t_tglAkhirAkred_institusi").innerHTML = "";
-                    document.getElementById("err_t_fileAkred_institusi").innerHTML = "";
-                    document.getElementById("form_tambah_institusi").reset();
                     $("#data_tambah_institusi").fadeOut(1);
                 },
                 error: function(response) {

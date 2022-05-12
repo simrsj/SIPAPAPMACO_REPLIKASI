@@ -15,6 +15,7 @@ $h['alamat_institusi'] = $d["alamat_institusi"];
 $h['akred_institusi'] = $d["akred_institusi"];
 $h['tglAkhirAkred_institusi'] = $d["tglAkhirAkred_institusi"];
 $h['fileAkred_institusi'] = $d["fileAkred_institusi"];
+$h['messOpsional_institusi'] = $d["messOpsional_institusi"];
 
 echo json_encode($h);
 
