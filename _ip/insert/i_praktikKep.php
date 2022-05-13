@@ -794,8 +794,6 @@ if ($_GET['prk'] == 'kep') {
 
             //Notif dan Toast Bila Ujian Tidak dipilih
             if (
-                // document.getElementById("cek_pilih_ujian1").checked == false &&
-                // document.getElementById("cek_pilih_ujian2").checked == false 
                 $('input[name="pilih_mess"]:checked').val() != 'Y'
             ) {
                 const Toast = Swal.mixin({
@@ -816,7 +814,6 @@ if ($_GET['prk'] == 'kep') {
                 });
                 document.getElementById("err_cek_pilih_ujian").innerHTML = "Pilih Ujian <br>";
             }
-
 
             //Notif dan Toast Bila Makan Mess Tidak dipilih
             var pilih_mess = $('input[name="pilih_mess"]:checked').val();
