@@ -29,11 +29,11 @@ $jumlah_praktik = $_GET['jum'];
             <div class="row">
                 <div class="col-12 badge badge-primary text-lg font-weight-bold text-center ">MENU TARIF</div>
             </div>
-            <input type="hidden" name="path" id="path" value="<?php echo $_GET['i']; ?>">
+            <input type="hidden" name="path" id="path" value="<?= $_GET['i']; ?>">
 
             <!-- Menu Tarif wajib disesuaikan dengan jenis jurusan -->
             <div class="text-gray-700 mb-3">
-                <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
+                <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
             </div>
             <?php
             $sql_tarif_jurusan = " SELECT * FROM tb_tarif";
@@ -69,11 +69,11 @@ $jumlah_praktik = $_GET['jum'];
                         while ($d_tarif_jurusan = $q_tarif_jurusan->fetch(PDO::FETCH_ASSOC)) {
                         ?>
                             <tr>
-                                <th scope="row"><?php echo $no; ?></th>
-                                <td><?php echo $d_tarif_jurusan['nama_tarif_jenis']; ?></td>
-                                <td><?php echo $d_tarif_jurusan['nama_tarif']; ?></td>
-                                <td><?php echo $d_tarif_jurusan['nama_tarif_satuan']; ?></td>
-                                <td><?php echo "Rp " . number_format($d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?></td>
+                                <th scope="row"><?= $no; ?></th>
+                                <td><?= $d_tarif_jurusan['nama_tarif_jenis']; ?></td>
+                                <td><?= $d_tarif_jurusan['nama_tarif']; ?></td>
+                                <td><?= $d_tarif_jurusan['nama_tarif_satuan']; ?></td>
+                                <td><?= "Rp " . number_format($d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?></td>
                                 <td>
                                     <?php
 
@@ -105,7 +105,7 @@ $jumlah_praktik = $_GET['jum'];
                                     ?>
                                 </td>
                                 <td>
-                                    <?php echo "Rp " . number_format($frekuensi * $kuantitas * $d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?>
+                                    <?= "Rp " . number_format($frekuensi * $kuantitas * $d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?>
                                 </td>
                                 <?php
                                 $jumlah_total_tarif = ($frekuensi * $kuantitas * $d_tarif_jurusan['jumlah_tarif']) + $jumlah_total_tarif;
@@ -131,11 +131,11 @@ $jumlah_praktik = $_GET['jum'];
                             while ($d_tarif_jenjang = $q_tarif_jenjang->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $no; ?></th>
-                                    <td><?php echo $d_tarif_jenjang['nama_tarif_jenis']; ?></td>
-                                    <td><?php echo $d_tarif_jenjang['nama_tarif']; ?></td>
-                                    <td><?php echo $d_tarif_jenjang['nama_tarif_satuan']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_tarif_jenjang['jumlah_tarif'], 0, ",", "."); ?></td>
+                                    <th scope="row"><?= $no; ?></th>
+                                    <td><?= $d_tarif_jenjang['nama_tarif_jenis']; ?></td>
+                                    <td><?= $d_tarif_jenjang['nama_tarif']; ?></td>
+                                    <td><?= $d_tarif_jenjang['nama_tarif_satuan']; ?></td>
+                                    <td><?= "Rp " . number_format($d_tarif_jenjang['jumlah_tarif'], 0, ",", "."); ?></td>
                                     <td>
                                         <?php
 
@@ -167,7 +167,7 @@ $jumlah_praktik = $_GET['jum'];
                                         echo $kuantitas;
                                         ?>
                                     </td>
-                                    <td><?php echo "Rp " . number_format($frekuensi * $kuantitas * $d_tarif_jenjang['jumlah_tarif'], 0, ",", "."); ?></td>
+                                    <td><?= "Rp " . number_format($frekuensi * $kuantitas * $d_tarif_jenjang['jumlah_tarif'], 0, ",", "."); ?></td>
                                 </tr>
                         <?php
                                 $jumlah_total_tarif = ($frekuensi * $kuantitas * $d_tarif_jenjang['jumlah_tarif']) + $jumlah_total_tarif;
@@ -177,7 +177,7 @@ $jumlah_praktik = $_GET['jum'];
                         ?>
                         <tr>
                             <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
-                            <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_tarif, 0, ",", "."); ?></td>
+                            <td class="font-weight-bold"><?= "Rp " . number_format($jumlah_total_tarif, 0, ",", "."); ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -198,7 +198,7 @@ $jumlah_praktik = $_GET['jum'];
             ?>
                 <div class="text-gray-700">
                     <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                        Tambahan Materi <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                        Tambahan Materi <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?>
                         <span class="font-italic font-weight-bold text-xs">(Optional)</span>
                     </div>
                 </div>
@@ -222,10 +222,10 @@ $jumlah_praktik = $_GET['jum'];
             <!-- Menu Tarif Ujian disesuaikan dengan Jenis Jurusan -->
             <div class="text-gray-700">
                 <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                    Menu Tarif Ujian <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?> <span class="text-danger">*</span>
+                    Menu Tarif Ujian <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?> <span class="text-danger">*</span>
                 </div>
             </div>
-            <div class="row boxed-check-group boxed-check-primary justify-content-center mb-4">
+            <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
                 <label class="boxed-check">
                     <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="y" onclick="cekPilihUjian1()">
                     <div class="boxed-check-label">Ya</div>
@@ -239,7 +239,7 @@ $jumlah_praktik = $_GET['jum'];
             </div>
             <div class="text-center text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></div>
             <!-- tabel tarif ujian -->
-            <div id="tarif_ujian" style="display: none;">
+            <div id="tarif_ujian" class="mt-4" style="display: none;">
                 <?php
                 $sql_tarif_ujian = " SELECT * FROM tb_tarif ";
                 $sql_tarif_ujian .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis = tb_tarif_jenis.id_tarif_jenis ";
@@ -273,11 +273,11 @@ $jumlah_praktik = $_GET['jum'];
                             while ($d_tarif_ujian = $q_tarif_ujian->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $no; ?></th>
-                                    <td><?php echo $d_tarif_ujian['nama_tarif_jenis']; ?></td>
-                                    <td><?php echo $d_tarif_ujian['nama_tarif']; ?></td>
-                                    <td><?php echo $d_tarif_ujian['nama_tarif_satuan']; ?></td>
-                                    <td> <?php echo "Rp " . number_format($d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
+                                    <th scope="row"><?= $no; ?></th>
+                                    <td><?= $d_tarif_ujian['nama_tarif_jenis']; ?></td>
+                                    <td><?= $d_tarif_ujian['nama_tarif']; ?></td>
+                                    <td><?= $d_tarif_ujian['nama_tarif_satuan']; ?></td>
+                                    <td> <?= "Rp " . number_format($d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
                                     <td>
                                         <?php
 
@@ -285,7 +285,7 @@ $jumlah_praktik = $_GET['jum'];
                                             $frekuensi = 1;
                                         } elseif ($d_tarif_ujian['tipe_tarif'] == 'INPUT') {
                                         ?>
-                                            <input class="form-control" name="<?php echo $d_praktik['id_praktik'] . "-" . $d_tarif_ujian['id_tarif'] ?>">
+                                            <input class="form-control" name="<?= $d_praktik['id_praktik'] . "-" . $d_tarif_ujian['id_tarif'] ?>">
                                         <?php
                                         } elseif ($d_tarif_ujian['tipe_tarif'] == 'TARIF-') {
                                             $frekuensi = tanggal_between_nonweekend($tgl_mulai_praktik, $tgl_selesai_praktik);
@@ -313,7 +313,7 @@ $jumlah_praktik = $_GET['jum'];
                                         echo $kuantitas;
                                         ?>
                                     </td>
-                                    <td><?php echo "Rp " . number_format($frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
+                                    <td><?= "Rp " . number_format($frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
                                 </tr>
                             <?php
                                 $jumlah_total_ujian = ($frekuensi * $kuantitas * $d_tarif_ujian['jumlah_tarif']) + $jumlah_total_ujian;
@@ -322,7 +322,7 @@ $jumlah_praktik = $_GET['jum'];
                             ?>
                             <tr>
                                 <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
-                                <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_ujian, 0, ",", "."); ?></td>
+                                <td class="font-weight-bold"><?= "Rp " . number_format($jumlah_total_ujian, 0, ",", "."); ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -342,6 +342,7 @@ $jumlah_praktik = $_GET['jum'];
             <div class="row">
                 <div class="col-12 badge badge-primary text-lg font-weight-bold text-center mb-2">MENU MESS/PEMONDOKAN</div>
             </div>
+            <input type="hidden" name="messOpsional_institusi" id="messOpsional_institusi" value="<?= $d_institusi['messOpsional_institusi']; ?>">
             <?php
             if ($d_institusi['messOpsional_institusi'] == 'Y') {
                 $display_makan_mess = "display:none;";
@@ -371,6 +372,7 @@ $jumlah_praktik = $_GET['jum'];
                         <div class="boxed-check-label">Tidak</div>
                     </label>
                 </div>
+                <div class="text-center text-danger font-weight-bold font-italic text-md blink" id="err_pilih_mess"></div>
             </div>
             <!-- pemilihan makan mess/pemondokan  -->
             <div id="pilih_makan_mess" style="<?= $display_makan_mess; ?>">

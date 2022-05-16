@@ -7,7 +7,6 @@ echo "<pre>";
 print_r($_POST);
 echo "</pre>";
 
-
 // --------------------------------------SIMPAN DATA PRAKTIK--------------------------------------------
 
 //mencari jenis jurusan
@@ -48,11 +47,11 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
     $materi_napza = NULL;
 }
 
-//dengan dan tanpa makan mess
-if ($_POST['id_profesi_pdd'] != 1) {
-    $makan_mess = $_POST['makan_mess'];
+//mess/pemondokan optional serta pemilihan dengan dan tanpa makan mess, jika selain profesi PPDS dan mess/pemondokan Tidak maka ELSE.
+if ($_POST['id_profesi_pdd'] == 1 || $_POST['pilih_mess'] == 'T') {
+    $makan_mess = null;
 } else {
-    $makan_mess = NULL;
+    $makan_mess = $_POST['makan_mess'];
 }
 
 $sql_insert = "INSERT INTO tb_praktik (
@@ -74,6 +73,7 @@ $sql_insert = "INSERT INTO tb_praktik (
     telp_koordinator_praktik,
     status_cek_praktik, 
     status_praktik,
+    pilih_mess_praktik,
     makan_mess_praktik,
     materi_upip_praktik,
     materi_napza_praktik
@@ -96,6 +96,7 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['telp_koordinator_praktik'] . "', 
         '" . $status_cek_praktik . "', 
         'D',
+        '" . $_POST['pilih_mess'] . "',
         '" . $makan_mess . "',
         '" . $materi_upip . "',
         '" . $materi_napza . "'
@@ -189,7 +190,6 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
         } else {
             $kuantitas = $jumlah_praktik;
         }
-        echo $kuantitas;
 
         //eksekusi jika salah satu materi dipilih (upip dan-atau napza)
         if ($d_tarif_jurusan['nama_tarif'] == 'Materi') {
