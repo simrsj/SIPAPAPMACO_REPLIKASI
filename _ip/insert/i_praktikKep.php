@@ -793,12 +793,11 @@ if ($_GET['prk'] == 'kep') {
         function simpan_tarif() {
 
             //Notif dan Toast Bila Data Wajib Tidak dipilih
-            messOpsional_institusi
             var ujian = $('input[name="cek_pilih_ujian"]:checked').val();
             var pilih_mess = $('input[name="pilih_mess"]:checked').val();
             var makan_mess = $('input[name="makan_mess"]:checked').val();
             var messOpsional = $('#messOpsional_institusi').val();
-            console.log('Ujin:' + ujian + ', pilih_mess:' + pilih_mess + ', makan_mess:' + makan_mess + ', messOpsional:' + messOpsional);
+            // console.log('Ujin:' + ujian + ', pilih_mess:' + pilih_mess + ', makan_mess:' + makan_mess + ', messOpsional:' + messOpsional);
             if (
                 ujian == undefined ||
                 (
