@@ -58,7 +58,7 @@ git status
 
 
 git add .
-git commit -a -m "Perbaikan Pemilihan dan Makan Mess/Pemondokan Opsional"
+git commit -a -m "Progres Pemilihan dan Makan Mess/Pemondokan Wajib"
 git pull
 git push
 
