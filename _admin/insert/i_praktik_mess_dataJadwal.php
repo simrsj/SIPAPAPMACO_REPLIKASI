@@ -76,7 +76,6 @@ function generateKalenderKedKep($date)
 
                         $jp_jt = 0;
                         while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-                            $nama_mess = $d_mess['nama_mess'];
                             $jp_jt += $d_mess['jumlah_praktik'];
                         }
 

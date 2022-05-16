@@ -49,7 +49,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
                 <input type="hidden" name="jumlah_mess" id="jumlah_mess" value="<?= $r_mess; ?>">
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table">
                         <thead class="table-dark">
                             <tr>
                                 <th scope='col'>No</th>
@@ -141,7 +141,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             <div class="modal-body text-center">
                                 <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
                                 <div id="err_mess" class="text-danger text-xs font-italic blink"></div>
-                                <select class="form-control" name="id_mess" id="id_mess" required>
+                                <select class="select2" name="id_mess" id="id_mess" required>
                                     <option value="">-- Pilih --</option>
                                     <?php
                                     $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE status_mess = 'y' ORDER BY nama_mess ASC");
