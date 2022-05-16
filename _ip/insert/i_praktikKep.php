@@ -904,6 +904,9 @@ if ($_GET['prk'] == 'kep') {
 
                 //cek data pilih_mess
                 var pilih_mess = $('input[name="pilih_mess"]:checked').val();
+                if (pilih_mess == undefined) {
+                    pilih_mess = 'T';
+                }
                 //cek data makan_mess
                 var makan_mess = $('input[name="makan_mess"]:checked').val();
 

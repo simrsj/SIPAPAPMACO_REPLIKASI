@@ -48,7 +48,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
 }
 
 //mess/pemondokan optional serta pemilihan dengan dan tanpa makan mess, jika selain profesi PPDS dan mess/pemondokan Tidak maka ELSE.
-if ($_POST['id_profesi_pdd'] == 1 || $_POST['pilih_mess'] == 'T') {
+if ($_POST['id_profesi_pdd'] == 1) {
     $makan_mess = null;
 } else {
     $makan_mess = $_POST['makan_mess'];

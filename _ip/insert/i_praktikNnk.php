@@ -15,9 +15,7 @@ if ($_GET['prk'] == 'nnk') {
                     <div class="card-body text-center">
                         <!-- Data Praktikan -->
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="text-lg font-weight-bold text-center"> DATA PRAKTIKAN</div>
-                            </div>
+                            <div class="col-lg-12 badge badge-primary text-lg font-weight-bold text-center mb-4">DATA PRAKTIK</div>
                         </div>
                         <hr>
                         <!-- Nama Institusi dan Praktikan -->
@@ -223,10 +221,8 @@ if ($_GET['prk'] == 'nnk') {
                         <hr>
 
                         <!-- Koordinator -->
-                        <div class=" row">
-                            <div class="col-lg-12 text-center">
-                                <b>KOORDINATOR</b>
-                            </div>
+                        <div class="row">
+                            <div class="col-lg-12 badge badge-primary text-lg font-weight-bold text-center mb-4">KOORDINATOR</div>
                         </div>
                         <br>
                         <div class="row">

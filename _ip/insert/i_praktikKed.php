@@ -192,7 +192,7 @@ if ($_GET['prk'] == 'ked') {
                         <input type="hidden" name="messOpsional_institusi" id="messOpsional_institusi" value="<?= $d_institusi['messOpsional_institusi']; ?>">
 
                         <!-- pemilihan mess/pemondokan  -->
-                        <div id="data_pilih_mess" class="mb-4" style="display: none;">
+                        <div id="pilih_pakai_mess" class="mb-4" style="display: none;">
                             <div class="text-gray-700">
                                 <div class="h5 font-weight-bold text-center mb-3">
                                     Pilih Mess/Pemondokan<span class="text-danger">*</span>
@@ -258,20 +258,33 @@ if ($_GET['prk'] == 'ked') {
     <!-- <pre id="whereToPrint"> ce :</pre> -->
 
     <script type="text/javascript">
-        function pilihMess() {
-            if ($("#profesi").val() == 1) {
-                $("#data_pilih_mess").slideUp('slow');
-            } else {
-                $("#data_pilih_mess").slideDown('slow');
+        if ($('#messOpsional_institusi').val() == 'Y') {
+            function pilihMess() {
+                if ($("#profesi").val() == 1) {
+                    $("#pilih_pakai_mess").slideUp('slow');
+                } else {
+                    $("#pilih_pakai_mess").slideDown('slow');
+                }
             }
-        }
 
-        function pilihMessY() {
+            function pilihMessY() {
+                $("#pilih_makan_mess").slideDown();
+            }
+
+            function pilihMessT() {
+                $("#pilih_makan_mess").slideUp();
+            }
+        } else {
+            $("#pilih_pakai_mess").slideUp('slow');
             $("#pilih_makan_mess").slideDown();
-        }
 
-        function pilihMessT() {
-            $("#pilih_makan_mess").slideUp();
+            function pilihMess() {
+                if ($("#profesi").val() == 1) {
+                    $("#pilih_makan_mess").slideUp('slow');
+                } else {
+                    $("#pilih_makan_mess").slideDown('slow');
+                }
+            }
         }
 
         function simpan_ked() {
@@ -294,7 +307,7 @@ if ($_GET['prk'] == 'ked') {
             var pilih_mess = $('input[name="pilih_mess"]:checked').val();
             var makan_mess = $('input[name="makan_mess"]:checked').val();
             var messOpsional = $('#messOpsional_institusi').val();
-            console.log('1pilih_mess:' + pilih_mess + ', makan_mess:' + makan_mess + ', messOpsional:' + messOpsional);
+            // console.log('1pilih_mess:' + pilih_mess + ', makan_mess:' + makan_mess + ', messOpsional:' + messOpsional);
 
             //Notif Bila Data Wajib tidak diisi
             if (
@@ -605,11 +618,16 @@ if ($_GET['prk'] == 'ked') {
                             getSizeDataPraktikan <= 1024 &&
                             makan_mess != undefined &&
                             (
-                                pilih_mess != undefined &&
-                                messOpsional == 'Y'
+                                (
+                                    pilih_mess != undefined &&
+                                    messOpsional == 'Y'
+                                ) ||
+                                (
+                                    pilih_mess == undefined &&
+                                    messOpsional == 'T'
+                                )
                             )
                         ) {
-                            console.log('pilih_mess:' + pilih_mess + ', makan_mess:' + makan_mess + ', messOpsional:' + messOpsional);
 
                             //eksekusi jika kedokteran PPDS
                             if (profesi == 1) {
@@ -714,6 +732,9 @@ if ($_GET['prk'] == 'ked') {
 
                                     //cek data pilih_mess
                                     var pilih_mess = $('input[name="pilih_mess"]:checked').val();
+                                    if (pilih_mess == undefined) {
+                                        pilih_mess = 'T';
+                                    }
                                     //cek data makan_mess
                                     var makan_mess = $('input[name="makan_mess"]:checked').val();
 
@@ -726,6 +747,7 @@ if ($_GET['prk'] == 'ked') {
                                         value: makan_mess
                                     });
 
+                                    console.log('pilih_mess:' + pilih_mess + ', makan_mess:' + makan_mess + ', messOpsional:' + messOpsional);
                                     //Simpan Data Praktik dan Tarif
                                     $.ajax({
                                         type: 'POST',
@@ -773,7 +795,7 @@ if ($_GET['prk'] == 'ked') {
                                                     title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                                     showConfirmButton: false,
                                                     html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
-                                                    timer: 5000,
+                                                    timer: 5000970,
                                                     timerProgressBar: true,
                                                     didOpen: (toast) => {
                                                         toast.addEventListener('mouseenter', Swal.stopTimer)

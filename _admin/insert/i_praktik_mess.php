@@ -19,17 +19,17 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             <div class="row text-center h6 text-gray-900 ">
                 <div class="col-6">
                     Nama Institusi :
-                    <b><?php echo $d_praktik['nama_institusi']; ?></b>
+                    <b><?= $d_praktik['nama_institusi']; ?></b>
                     <hr>
                     Jumlah Praktik :
-                    <b><?php echo $d_praktik['jumlah_praktik']; ?></b>
+                    <b><?= $d_praktik['jumlah_praktik']; ?></b>
                 </div>
                 <div class="col-6">
                     Tanggal Mulai :
-                    <b><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?></b>
+                    <b><?= tanggal($d_praktik['tgl_mulai_praktik']); ?></b>
                     <hr>
                     Tanggal Selesai :
-                    <b><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?></b>
+                    <b><?= tanggal($d_praktik['tgl_selesai_praktik']); ?></b>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             <?php
             $sql_mess = "SELECT * FROM tb_mess ";
             $sql_mess .= " WHERE status_mess = 'y'";
-            $sql_mess .= " ORDER BY nama_mess ASC";
+            $sql_mess .= " ORDER BY kepemilikan_mess ASC, nama_mess ASC";
 
             // echo $sql_mess . "<br>";
             $q_mess = $conn->query($sql_mess);
@@ -47,9 +47,9 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             if ($r_mess > 0) {
             ?>
 
-                <input type="hidden" name="jumlah_mess" id="jumlah_mess" value="<?php echo $r_mess; ?>">
+                <input type="hidden" name="jumlah_mess" id="jumlah_mess" value="<?= $r_mess; ?>">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-bordered">
                         <thead class="table-dark">
                             <tr>
                                 <th scope='col'>No</th>
@@ -66,36 +66,42 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             <?php
                             $no = 1;
                             while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+                                if ($d_mess['']) {
+                                    $tabelBaris = "bg-danger";
+                                    $tombolModal = "btn-outline-light";
+                                } else {
+                                    $tabelBaris = "";
+                                    $tombolModal = "btn-outline-danger";
+                                }
                             ?>
-                                <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_mess['nama_mess']; ?></td>
-                                    <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
-                                    <td><?php echo $d_mess['no_pemilik_mess']; ?></td>
-                                    <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?></td>
-                                    <td><?php echo "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?></td>
+                                <tr class="<?= $tabelBaris ?>">
+                                    <td><?= $no; ?></td>
+                                    <td><?= $d_mess['nama_mess']; ?></td>
+                                    <td><?= $d_mess['nama_pemilik_mess']; ?></td>
+                                    <td><?= $d_mess['telp_pemilik_mess']; ?></td>
+                                    <td><?= $d_mess['kapasitas_t_mess']; ?></td>
+                                    <td><?= "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?></td>
+                                    <td><?= "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?></td>
                                     <td class="text-center">
 
                                         <!-- tambah harga -->
-                                        <a class='btn btn-outline-primary btn-sm cekJadwalMess<?php echo $no; ?>' id='<?php echo $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?php echo $d_mess['id_mess']; ?>'>
+                                        <a class='btn <?= $tombolModal ?>" btn-sm cekJadwalMess<?= $no; ?>' id='<?= $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?= $d_mess['id_mess']; ?>'>
                                             <i class="fas fa-info-circle"></i> Rincian
                                         </a>
 
                                         <!-- modal tambah Harga  -->
-                                        <div class="modal fade" id="mess<?php echo $d_mess['id_mess']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal fade" id="mess<?= $d_mess['id_mess']; ?>">
                                             <div class="modal-dialog modal-dialog-scrollable modal-lg ">
                                                 <div class="modal-content">
                                                     <div class="modal-header text-uppercase font-weight-bold">
-                                                        <b><?php echo $d_mess['nama_mess']; ?></b>
-
+                                                        <b><?= $d_mess['nama_mess']; ?></b>
                                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">×</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body p-0">
-                                                        <!-- <div id="loader<?php echo $no; ?>" class="loader center"></div> -->
-                                                        <div id="dataJadwalMess<?php echo $no; ?>" class="tag-loader"></div>
+                                                        <!-- <div id="loader<?= $no; ?>" class="loader center"></div> -->
+                                                        <div id="dataJadwalMess<?= $no; ?>" class="tag-loader"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,7 +147,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE status_mess = 'y' ORDER BY nama_mess ASC");
                                     while ($d_jurusan = $q_jurusan->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <option value="<?php echo $d_jurusan['id_mess']; ?>"><?php echo $d_jurusan['nama_mess']; ?></option>
+                                        <option value="<?= $d_jurusan['id_mess']; ?>"><?= $d_jurusan['nama_mess']; ?></option>
                                     <?php
                                     }
                                     ?>
@@ -161,8 +167,8 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 }
                                 ?>
 
-                                <span class="text-lg">Institusi Memilih Mess <b><?php echo $makan_mess; ?></b></span>
-                                <!-- <span class="text-xs font-intalic">(Praktik memilih <b><?php echo $makan_mess; ?></b>)</span>
+                                <span class="text-lg">Institusi Memilih Mess <b><?= $makan_mess; ?></b></span>
+                                <!-- <span class="text-xs font-intalic">(Praktik memilih <b><?= $makan_mess; ?></b>)</span>
                                 <div id="err_makan" class="text-danger text-xs font-italic blink"></div>
                                 <div class="boxed-check-group boxed-check-primary boxed-check-sm text-center">
                                     <label class="boxed-check">
@@ -177,9 +183,9 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     </label>
                                 </div> -->
 
-                                <input type="hidden" name="makan_mess_pilih" id="makan_mess_pilih" value="<?php echo $d_makan_mess['makan_mess_praktik']; ?>">
-                                <input type="hidden" name="path" id="path" value="<?php echo $_GET['prk'] ?>">
-                                <input type="hidden" name="id" id="id" value="<?php echo $_GET['m'] ?>">
+                                <input type="hidden" name="makan_mess_pilih" id="makan_mess_pilih" value="<?= $d_makan_mess['makan_mess_praktik']; ?>">
+                                <input type="hidden" name="path" id="path" value="<?= $_GET['prk'] ?>">
+                                <input type="hidden" name="id" id="id" value="<?= $_GET['m'] ?>">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-success btn-sm" id="simpan_mess">SIMPAN</button>
@@ -200,7 +206,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         $no1 = 1;
         while ($no1 <= $r_mess) {
         ?>
-            $(".cekJadwalMess<?php echo $no1; ?>").click(function() {
+            $(".cekJadwalMess<?= $no1; ?>").click(function() {
                 var id = $(this).attr('id');
                 // console.log("No " + id);
                 // console.log("MASUK");
@@ -211,17 +217,17 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 xhttp.send();
 
                 xhttp.onreadystatechange = function() {
-                    document.getElementById("dataJadwalMess<?php echo $no1; ?>").innerHTML = xhttp.responseText;
+                    document.getElementById("dataJadwalMess<?= $no1; ?>").innerHTML = xhttp.responseText;
                 };
             });
 
             document.onreadystatechange = function() {
                 if (document.readyState !== "complete") {
-                    document.querySelector("#dataJadwalMess<?php echo $no; ?>").style.visibility = "hidden";
-                    document.querySelector("#loader<?php echo $no; ?>").style.visibility = "visible";
+                    document.querySelector("#dataJadwalMess<?= $no; ?>").style.visibility = "hidden";
+                    document.querySelector("#loader<?= $no; ?>").style.visibility = "visible";
                 } else {
-                    document.querySelector("#loader<?php echo $no; ?>").style.display = "none";
-                    document.querySelector("#dataJadwalMess<?php echo $no; ?>").style.visibility = "visible";
+                    document.querySelector("#loader<?= $no; ?>").style.display = "none";
+                    document.querySelector("#dataJadwalMess<?= $no; ?>").style.visibility = "visible";
                 }
             };
         <?php

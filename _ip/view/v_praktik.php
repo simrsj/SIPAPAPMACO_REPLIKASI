@@ -93,7 +93,7 @@ if (isset($_POST['simpan_bayar'])) {
                         icon: 'success',
                         title: '<span class"text-xs"><b>DATA PERMBAYARAN</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
-                        html: '<a href="?prk=<?php echo $_GET['prk']; ?>" class="btn btn-outline-primary">OK</a>',
+                        html: '<a href="?prk=<?= $_GET['prk']; ?>" class="btn btn-outline-primary">OK</a>',
                         timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
@@ -102,7 +102,7 @@ if (isset($_POST['simpan_bayar'])) {
                         }
                     }).then(
                         function() {
-                            document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
+                            document.location.href = "?prk=<?= $_GET['prk']; ?>";
                         }
                     );
                 });
@@ -132,10 +132,10 @@ if (isset($_POST['simpan_bayar'])) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Daftar Praktik <?php echo $judul; ?></h1>
+                <h1 class="h3 mb-2 text-gray-800">Daftar Praktik <?= $judul; ?></h1>
             </div>
             <div class="col-lg-2 text-right">
-                <a href="?prk=<?php echo $tambah; ?>&i" class="btn btn-outline-success btn-sm">
+                <a href="?prk=<?= $tambah; ?>&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
                 <!-- <a href="?prk&a" class="btn btn-outline-info btn-sm">
@@ -186,16 +186,16 @@ if (isset($_POST['simpan_bayar'])) {
                                     <div class="row" style="font-size: small;">
                                         <br><br>
                                         <div class="col-sm-2 my-auto text-center">
-                                            <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?>
+                                            <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?>
                                         </div>
 
                                         <div class="col-sm-2  my-auto text-center">
-                                            <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
+                                            <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?= $d_praktik['nama_praktik']; ?>
                                         </div>
 
                                         <div class="col-sm-2  text-center">
-                                            <b class="text-gray-800">TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
-                                            <b class="text-gray-800">TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
+                                            <b class="text-gray-800">TANGGAL MULAI : </b><br><?= tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
+                                            <b class="text-gray-800">TANGGAL SELESAI : </b><br><?= tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                         </div>
                                         <?php
                                         if ($_GET['prk'] == "ked") {
@@ -207,7 +207,7 @@ if (isset($_POST['simpan_bayar'])) {
                                         <!-- tombol aksi/info proses  -->
                                         <div class="col-sm-2 my-auto text-center">
                                             <!-- tombol rincian -->
-                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?= $d_praktik['id_praktik']; ?>" aria-expanded="false" aria-controls="collapse<?= $d_praktik['id_praktik']; ?>" title="Rincian">
                                                 <i class="fas fa-info-circle"></i> Rincian
                                             </button>
                                         </div>
@@ -215,7 +215,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 </div>
 
                                 <!-- collapse data praktikan -->
-                                <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
+                                <div id="collapse<?= $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?= $d_praktik['id_praktik']; ?>" data-parent="#accordion">
                                     <div class="card-body " style="font-size: medium;">
                                         <!-- data praktikan -->
                                         <div class="text-gray-700">
@@ -227,23 +227,23 @@ if (isset($_POST['simpan_bayar'])) {
                                                     <!-- Data Praktik  -->
                                                     <div class="col-sm-4">
                                                         <h5 class="text-gray-800 font-weight-bold">JURUSAN : </h5>
-                                                        <?php echo $d_praktik['nama_jurusan_pdd']; ?><br><br>
+                                                        <?= $d_praktik['nama_jurusan_pdd']; ?><br><br>
                                                         <h5 class="text-gray-800 font-weight-bold">JENJANG : </h5>
-                                                        <?php echo $d_praktik['nama_jenjang_pdd']; ?><br><br>
+                                                        <?= $d_praktik['nama_jenjang_pdd']; ?><br><br>
                                                         <h5 class="text-gray-800 font-weight-bold">PROFESI : </h5>
-                                                        <?php echo $d_praktik['nama_profesi_pdd']; ?><br><br>
+                                                        <?= $d_praktik['nama_profesi_pdd']; ?><br><br>
                                                         <h5 class="text-gray-800 font-weight-bold">JUMLAH PRAKTIKAN : </h5>
-                                                        <?php echo $d_praktik['jumlah_praktik']; ?><br><br>
+                                                        <?= $d_praktik['jumlah_praktik']; ?><br><br>
                                                     </div>
 
                                                     <!-- Data Koordinator  -->
                                                     <div class="col-sm-4">
                                                         <h5 class="text-gray-800 font-weight-bold">NAMA KOORDINATOR : </h5>
-                                                        <?php echo $d_praktik['nama_koordinator_praktik']; ?><br><br>
+                                                        <?= $d_praktik['nama_koordinator_praktik']; ?><br><br>
                                                         <h5 class="text-gray-800 font-weight-bold">NO. HP KOORDINATOR : </h5>
-                                                        <?php echo $d_praktik['telp_koordinator_praktik']; ?><br><br>
+                                                        <?= $d_praktik['telp_koordinator_praktik']; ?><br><br>
                                                         <h5 class="text-gray-800 font-weight-bold">EMAIL KOORDINATOR : </h5>
-                                                        <?php echo $d_praktik['email_koordinator_praktik']; ?><br><br>
+                                                        <?= $d_praktik['email_koordinator_praktik']; ?><br><br>
                                                     </div>
 
                                                     <!-- Data File -->
@@ -256,7 +256,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                         <?php
                                                         } else {
                                                         ?>
-                                                            <a href="<?php echo $d_praktik['surat_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                            <a href="<?= $d_praktik['surat_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
                                                                 <i class="fas fa-file-download"></i> Download
                                                             </a>
                                                         <?php
@@ -270,7 +270,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                         <?php
                                                         } else {
                                                         ?>
-                                                            <a href="<?php echo $d_praktik['data_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                            <a href="<?= $d_praktik['data_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
                                                                 <i class="fas fa-file-download"></i> Download
                                                             </a>
                                                         <?php
@@ -291,22 +291,22 @@ if (isset($_POST['simpan_bayar'])) {
                                                         <div class="col-lg-11">
                                                             <h4 class="font-weight-bold">
                                                                 DATA MESS
-                                                                <!-- <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?prk&um=<?php echo $d_praktik['id_praktik']; ?>'>
+                                                                <!-- <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?prk&um=<?= $d_praktik['id_praktik']; ?>'>
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-                                                                <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?= $d_praktik['id_praktik']; ?>">
                                                                     <i class=" fas fa-trash-alt"></i>
                                                                 </a> -->
 
                                                                 <!-- modal hapus bayar -->
-                                                                <!-- <div class="modal fade text-left" id="m_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                <!-- <div class="modal fade text-left" id="m_h_m<?= $d_praktik['id_praktik']; ?>">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h4>HAPUS DATA MESS ?</h4>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hm=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hm=<?= $d_praktik['id_praktik']; ?>'> HAPUS </a>
                                                                                 <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                             </div>
                                                                         </div>
@@ -334,17 +334,17 @@ if (isset($_POST['simpan_bayar'])) {
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <h5 class="text-gray-800 font-weight-bold">Nama Mess :</h5>
-                                                                        <?php echo $d_mess_pilih['nama_mess']; ?><br><br>
+                                                                        <?= $d_mess_pilih['nama_mess']; ?><br><br>
                                                                         <h5 class="text-gray-800 font-weight-bold"> Nama Pemilik :</h5>
-                                                                        <?php echo $d_mess_pilih['nama_pemilik_mess']; ?><br><br>
+                                                                        <?= $d_mess_pilih['nama_pemilik_mess']; ?><br><br>
                                                                         <h5 class="text-gray-800 font-weight-bold">No Pemilik :</h5>
-                                                                        <?php echo $d_mess_pilih['no_pemilik_mess']; ?><br><br>
+                                                                        <br><br>
                                                                         <h5 class="text-gray-800 font-weight-bold"> Alamat Mess : </h5>
-                                                                        <?php echo $d_mess_pilih['alamat_mess']; ?><br><br>
+                                                                        <?= $d_mess_pilih['alamat_mess']; ?><br><br>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <h5 class="text-gray-800 font-weight-bold"> Jumlah Hari :</h5>
-                                                                        <?php echo $d_mess_pilih['jumlah_hari_mess_pilih']; ?><br><br>
+                                                                        <?= $d_mess_pilih['jumlah_hari_mess_pilih']; ?><br><br>
                                                                         <h5 class="text-gray-800 font-weight-bold">
                                                                             Dengan Makan (3X Sehari) :
                                                                         </h5>
@@ -389,22 +389,22 @@ if (isset($_POST['simpan_bayar'])) {
                                                 <div class="col-md-12">
                                                     <h4 class="font-weight-bold">
                                                         DATA TARIF
-                                                        <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&uh=<?php echo $d_praktik['id_praktik']; ?>'>
+                                                        <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&uh=<?= $d_praktik['id_praktik']; ?>'>
                                                             <i class="fas fa-edit"></i>
                                                         </a>
-                                                        <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_h_m<?php echo $d_praktik['id_praktik']; ?>'>
+                                                        <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_h_m<?= $d_praktik['id_praktik']; ?>'>
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a> -->
 
                                                         <!-- modal hapus tarif -->
-                                                        <!-- <div class="modal fade text-left" id="h_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                        <!-- <div class="modal fade text-left" id="h_h_m<?= $d_praktik['id_praktik']; ?>">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h4>HAPUS DATA TARIF ?</h4>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <a title="Hapus Tarif" class="btn btn-danger btn-sm" href='?prk&hh=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                                                        <a title="Hapus Tarif" class="btn btn-danger btn-sm" href='?prk&hh=<?= $d_praktik['id_praktik']; ?>'> HAPUS </a>
                                                                         <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                     </div>
                                                                 </div>
@@ -434,13 +434,13 @@ if (isset($_POST['simpan_bayar'])) {
                                                         <thead class="thead-dark">
                                                             <tr>
                                                                 <th scope="col">No</th>
-                                                                <th scope="col">Nama Jenis</th>
-                                                                <th scope="col">Nama </th>
-                                                                <th scope="col" width="80px">Tarif</th>
-                                                                <th scope="col" width="25px">Satuan</th>
+                                                                <th scope="col" width="250px">Nama Jenis</th>
+                                                                <th scope="col" width="30%">Nama Tarif</th>
+                                                                <th scope="col" width="120px">Tarif</th>
+                                                                <th scope="col">Satuan</th>
                                                                 <th scope="col" width="25px">Frekuensi</th>
                                                                 <th scope="col">Kuantitas</th>
-                                                                <th scope="col" width="125px">Total Tarif</th>
+                                                                <th scope="col" width="150px">Total Tarif</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -450,14 +450,14 @@ if (isset($_POST['simpan_bayar'])) {
                                                             while ($d_tarif_pilih = $q_tarif_pilih->fetch(PDO::FETCH_ASSOC)) {
                                                             ?>
                                                                 <tr>
-                                                                    <th scope="row"><?php echo $no; ?></th>
-                                                                    <td><?php echo $d_tarif_pilih['nama_jenis_tarif_pilih']; ?></td>
-                                                                    <td><?php echo $d_tarif_pilih['nama_tarif_pilih']; ?></td>
-                                                                    <td><?php echo "Rp " . number_format($d_tarif_pilih['nominal_tarif_pilih'], 0, ",", "."); ?></td>
-                                                                    <td><?php echo $d_tarif_pilih['nama_satuan_tarif_pilih']; ?></td>
-                                                                    <td><?php echo $d_tarif_pilih['frekuensi_tarif_pilih']; ?></td>
-                                                                    <td><?php echo $d_tarif_pilih['kuantitas_tarif_pilih']; ?></td>
-                                                                    <td><?php echo "Rp " . number_format($d_tarif_pilih['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                    <th scope="row"><?= $no; ?></th>
+                                                                    <td><?= $d_tarif_pilih['nama_jenis_tarif_pilih']; ?></td>
+                                                                    <td><?= $d_tarif_pilih['nama_tarif_pilih']; ?></td>
+                                                                    <td><?= "Rp " . number_format($d_tarif_pilih['nominal_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                    <td><?= $d_tarif_pilih['nama_satuan_tarif_pilih']; ?></td>
+                                                                    <td><?= $d_tarif_pilih['frekuensi_tarif_pilih']; ?></td>
+                                                                    <td><?= $d_tarif_pilih['kuantitas_tarif_pilih']; ?></td>
+                                                                    <td><?= "Rp " . number_format($d_tarif_pilih['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
                                                                 </tr>
                                                             <?php
                                                                 $total_jumlah_tarif += $d_tarif_pilih['jumlah_tarif_pilih'];
@@ -466,12 +466,12 @@ if (isset($_POST['simpan_bayar'])) {
                                                             ?>
                                                         </tbody>
                                                     </table>
-                                                    <br>
-                                                    <center>
-                                                        <div class="text-lg badge badge-primary">
-                                                            JUMLAH TOTAL : <?php echo "Rp " . number_format($total_jumlah_tarif, 0, ",", "."); ?>
-                                                        </div>
-                                                    </center>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-12 text-lg badge badge-danger">
+                                                        JUMLAH TOTAL : <?= "Rp " . number_format($total_jumlah_tarif, 0, ",", "."); ?>
+                                                    </div>
                                                 </div>
                                             <?php
                                             } else {
@@ -498,22 +498,22 @@ if (isset($_POST['simpan_bayar'])) {
                                                         <div class="col-lg-11">
                                                             <h4 class="font-weight-bold">
                                                                 DATA PEMBAYARAN
-                                                                <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&ub=<?php echo $d_praktik['id_praktik']; ?>'>
+                                                                <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&ub=<?= $d_praktik['id_praktik']; ?>'>
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#b_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#b_h_m<?= $d_praktik['id_praktik']; ?>">
                                                                     <i class=" fas fa-trash-alt"></i>
                                                                 </a> -->
 
                                                                 <!-- modal hapus bayar -->
-                                                                <!-- <div class="modal fade text-left" id="b_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                                                                <!-- <div class="modal fade text-left" id="b_h_m<?= $d_praktik['id_praktik']; ?>">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h4>HAPUS PEMBAYARAN ?</h4>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hb=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS
+                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hb=<?= $d_praktik['id_praktik']; ?>'> HAPUS
                                                                                 </a>
                                                                                 <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                             </div>
@@ -551,13 +551,13 @@ if (isset($_POST['simpan_bayar'])) {
                                                                 while ($d_bayar = $q_bayar->fetch(PDO::FETCH_ASSOC)) {
                                                                 ?>
                                                                     <tr>
-                                                                        <th scope="row"><?php echo $no; ?></th>
-                                                                        <td><?php echo $d_bayar['atas_nama_bayar']; ?></td>
-                                                                        <td><?php echo $d_bayar['noRek_bayar']; ?></td>
-                                                                        <td><?php echo $d_bayar['melalui_bayar']; ?></td>
-                                                                        <td><?php echo tanggal($d_bayar['tgl_bayar']); ?></td>
+                                                                        <th scope="row"><?= $no; ?></th>
+                                                                        <td><?= $d_bayar['atas_nama_bayar']; ?></td>
+                                                                        <td><?= $d_bayar['noRek_bayar']; ?></td>
+                                                                        <td><?= $d_bayar['melalui_bayar']; ?></td>
+                                                                        <td><?= tanggal($d_bayar['tgl_bayar']); ?></td>
                                                                         <td>
-                                                                            <a href="<?php echo $d_bayar['file_bayar']; ?>" class="btn btn-success btn-sm" target="_blank">
+                                                                            <a href="<?= $d_bayar['file_bayar']; ?>" class="btn btn-success btn-sm" target="_blank">
                                                                                 <i class="fas fa-file-download"></i> Download
                                                                             </a>
                                                                         </td>
@@ -572,7 +572,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                         </table>
                                                         <center>
                                                             <div class="text-lg badge badge-danger">
-                                                                KODE BAYAR : <?php echo $kode_bayar; ?>
+                                                                KODE BAYAR : <?= $kode_bayar; ?>
                                                             </div>
                                                         </center>
                                                     <?php
@@ -639,7 +639,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -648,7 +648,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
                                 }
                             );
                         },
@@ -693,7 +693,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'error',
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -702,7 +702,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
                                 }
                             );
                         },
@@ -745,7 +745,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -754,7 +754,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
                                 }
                             );
                         },
@@ -799,7 +799,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'error',
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -808,7 +808,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
                                 }
                             );
                         },
@@ -847,7 +847,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH AKTIF</div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -856,7 +856,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
                                 }
                             );
                         },
@@ -894,7 +894,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH SELESAI</div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -903,7 +903,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
                                 }
                             );
                         },
@@ -941,7 +941,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH DIARSIPKAN<br><br>CEK MENU <b>ARSIP PRAKTIK</b> UNTUK MELIHAT DATA</div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?php echo "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -950,7 +950,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?php echo "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
                                 }
                             );
                         },
