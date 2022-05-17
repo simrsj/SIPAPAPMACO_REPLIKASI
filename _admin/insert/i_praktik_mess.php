@@ -10,7 +10,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-9 h4 text-gray-900 ">
+        <div class="col-md-9 h4 text-gray-900">
             Pilih Mess/Pemondokan
         </div>
     </div>
@@ -85,7 +85,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     <td class="text-center">
 
                                         <!-- tambah harga -->
-                                        <a class='btn <?= $tombolModal ?>" btn-sm cekJadwalMess<?= $no; ?>' id='<?= $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?= $d_mess['id_mess']; ?>'>
+                                        <a class='btn btn-outline-dark btn-sm cekJadwalMess<?= $no; ?>' id='<?= $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?= $d_mess['id_mess']; ?>'>
                                             <i class="fas fa-info-circle"></i> Rincian
                                         </a>
 
@@ -129,7 +129,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 </a>
             </nav>
 
-
             <!-- modal tambah Mess  -->
             <div class="modal fade text-left " id="pilih_mess" data-backdrop="static">
                 <div class="modal-dialog" role="document">
@@ -140,7 +139,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             </div>
                             <div class="modal-body text-center">
                                 <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
-                                <div id="err_mess" class="text-danger text-xs font-italic blink"></div>
                                 <select class="select2" name="id_mess" id="id_mess" required>
                                     <option value="">-- Pilih --</option>
                                     <?php
@@ -152,6 +150,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                     }
                                     ?>
                                 </select>
+                                <div id="err_mess" class="text-danger text-xs font-italic blink"></div>
                                 <hr>
                                 <?php
 
@@ -167,21 +166,20 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 }
                                 ?>
 
-                                <span class="text-lg">Institusi Memilih Mess <b><?= $makan_mess; ?></b></span>
-                                <!-- <span class="text-xs font-intalic">(Praktik memilih <b><?= $makan_mess; ?></b>)</span>
-                                <div id="err_makan" class="text-danger text-xs font-italic blink"></div>
-                                <div class="boxed-check-group boxed-check-primary boxed-check-sm text-center">
-                                    <label class="boxed-check">
-                                        <input class="boxed-check-input" type="radio" name="makan_mess_pilih" id="makan_mess_pilih1" value="y" required>
-                                        <span class="boxed-check-label">Dengan Makan(3x Sehari)</span>
-                                    </label>
+                                <div class="jumbotron">
+                                    <div class="jumbotron-fluid text-lg">
+                                        Institusi Memilih Mess <b><?= $makan_mess; ?></b>
+                                    </div>
                                 </div>
-                                <div class="boxed-check-group boxed-check-primary boxed-check-sm text-center">
-                                    <label class="boxed-check">
-                                        <input class="boxed-check-input" type="radio" name="makan_mess_pilih" id="makan_mess_pilih2" value="t" required>
-                                        <span class="boxed-check-label">Tanpa Makan</span>
-                                    </label>
-                                </div> -->
+                                <hr>
+                                <div class="jumbotron">
+                                    <div class="jumbotron-fluid">
+                                        "Pilihan yang dimunculkan <br>
+                                        <b>dipioritaskan Mess yang dari RSJ</b>, <br>
+                                        bila Mess RSJ <b>tidak bisa menampung praktikan</b> <br>
+                                        maka akan dialihkan ke <b>Mess/Pemondokan diluar</b>"
+                                    </div>
+                                </div>
 
                                 <input type="hidden" name="makan_mess_pilih" id="makan_mess_pilih" value="<?= $d_makan_mess['makan_mess_praktik']; ?>">
                                 <input type="hidden" name="path" id="path" value="<?= $_GET['prk'] ?>">
@@ -279,7 +277,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
                 //notif makan tidak diisi
                 if (mess == "") {
-                    document.getElementById("err_mess").innerHTML = "Pilih Makan";
+                    document.getElementById("err_mess").innerHTML = "Pilih Mess/Pemondokan";
                 } else {
                     document.getElementById("err_mess").innerHTML = "";
                 }
