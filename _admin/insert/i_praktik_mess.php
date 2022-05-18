@@ -49,16 +49,23 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
                 <input type="hidden" name="jumlah_mess" id="jumlah_mess" value="<?= $r_mess; ?>">
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead class="table-dark">
+                    <table class="table table-hover">
+                        <thead class="table-dark text-center">
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>Nama Mess</th>
-                                <th>Nama Pemilik</th>
-                                <th>Kontak Pemilik</th>
+                                <th class="text-left">
+                                    Nama Pemilik
+                                    <hr class="p-0 m-0 bg-gray-500">
+                                    Kontak Pemilik
+                                </th>
                                 <th>Kapasitas Total</th>
-                                <th>Tarif Tanpa Makan</th>
-                                <th>Tarif Dengan Makan</th>
+                                <th class="text-left">
+                                    Tarif Tanpa Makan
+                                    <hr class="p-0 m-0 bg-gray-500">
+                                    Tarif Dengan Makan
+                                </th>
+                                <th>Status<br>Kuota</th>
                                 <th>Cek Jadwal</th>
                             </tr>
                         </thead>
@@ -77,11 +84,21 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <tr class="<?= $tabelBaris ?>">
                                     <td><?= $no; ?></td>
                                     <td><?= $d_mess['nama_mess']; ?></td>
-                                    <td><?= $d_mess['nama_pemilik_mess']; ?></td>
-                                    <td><?= $d_mess['telp_pemilik_mess']; ?></td>
-                                    <td><?= $d_mess['kapasitas_t_mess']; ?></td>
-                                    <td><?= "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?></td>
-                                    <td><?= "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?></td>
+                                    <td>
+                                        <?= $d_mess['nama_pemilik_mess']; ?>
+                                        <hr class="p-0 m-0 bg-gray-500">
+                                        <?= $d_mess['telp_pemilik_mess']; ?>
+                                    </td>
+                                    <td class="text-center"><?= $d_mess['kapasitas_t_mess']; ?></td>
+                                    <td>
+                                        <?= "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?>
+                                        <hr class="p-0 m-0 bg-gray-500">
+                                        <?= "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="badge badge-success">Kosong</div>
+                                        <div class="badge badge-danger">Penuh</div>
+                                    </td>
                                     <td class="text-center">
 
                                         <!-- tambah harga -->

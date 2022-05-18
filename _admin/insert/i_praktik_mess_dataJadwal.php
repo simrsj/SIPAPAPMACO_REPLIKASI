@@ -29,8 +29,8 @@ function generateKalenderKedKep($date)
         <table class='table table-striped'>
             <thead class=" thead-dark">
                 <tr>
-                    <th colspan="<?php echo JUMLAH_KOLOM1 ?>" class="text-center">
-                        <?php echo $title . " " . $year; ?>
+                    <th colspan="<?= JUMLAH_KOLOM1 ?>" class="text-center">
+                        <?= $title . " " . $year; ?>
                     </th>
                 </tr>
             </thead>
@@ -39,7 +39,7 @@ function generateKalenderKedKep($date)
                     <?php
                     foreach ($weekDays as $key => $weekDay) {
                     ?>
-                        <td class="text-center"><?php echo $weekDay ?></td>
+                        <td class="text-center"><?= $weekDay ?></td>
                     <?php
                     }
                     ?>
@@ -108,19 +108,19 @@ function generateKalenderKedKep($date)
                     ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $_GET['id'] . $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-<?= $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?= $_GET['id'] . $tgl; ?>" title="<?= tanggal($year . "-" . $month . "-" . $i); ?>"><?= $i; ?></button>
 
                                 <!-- modal   -->
-                                <div class="modal fade text-gray-800" id="tlg<?php echo $_GET['id'] . $tgl; ?>">
+                                <div class="modal fade text-gray-800" id="tlg<?= $_GET['id'] . $tgl; ?>">
                                     <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="text-center text-lg text-uppercase">INFO MESS <?php echo $d_infoMess['nama_mess']; ?>, TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
+                                                <div class="text-center text-lg text-uppercase">INFO MESS <?= $d_infoMess['nama_mess']; ?>, TANGGAL <b><?= tanggal($tgl); ?></b></div>
                                             </div>
                                             <div class="modal-body">
-                                                JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
-                                                KUOTA MESS : <?php echo $kuota_messTotal; ?><br>
-                                                KUOTA SISA : <?php echo $kuota_sisa; ?>
+                                                JUMLAH PRAKTIK : <?= $jp_jt; ?><br>
+                                                KUOTA MESS : <?= $kuota_messTotal; ?><br>
+                                                KUOTA SISA : <?= $kuota_sisa; ?>
                                                 <hr>
                                                 <?php
                                                 if ($q1_mess->rowCount() > 0) {
@@ -141,11 +141,11 @@ function generateKalenderKedKep($date)
                                                                 while ($d1_mess = $q1_mess->fetch(PDO::FETCH_ASSOC)) {
                                                                 ?>
                                                                     <tr>
-                                                                        <td><?php echo $d1_mess['nama_institusi']; ?></td>
-                                                                        <td><?php echo $d1_mess['nama_jurusan_pdd']; ?></td>
-                                                                        <td><?php echo $d1_mess['jumlah_praktik']; ?></td>
-                                                                        <td><?php echo tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
-                                                                        <td><?php echo tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
+                                                                        <td><?= $d1_mess['nama_institusi']; ?></td>
+                                                                        <td><?= $d1_mess['nama_jurusan_pdd']; ?></td>
+                                                                        <td><?= $d1_mess['jumlah_praktik']; ?></td>
+                                                                        <td><?= tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
+                                                                        <td><?= tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
                                                                     </tr>
                                                                 <?php
                                                                 }
@@ -174,19 +174,19 @@ function generateKalenderKedKep($date)
                         ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $_GET['id'] . $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-<?= $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?= $_GET['id'] . $tgl; ?>" title="<?= tanggal($year . "-" . $month . "-" . $i); ?>"><?= $i; ?></button>
 
                                 <!-- modal   -->
-                                <div class="modal fade text-gray-800" id="tlg<?php echo $_GET['id'] . $tgl; ?>">
+                                <div class="modal fade text-gray-800" id="tlg<?= $_GET['id'] . $tgl; ?>">
                                     <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="text-center text-lg text-uppercase">INFO MESS <?php echo $d_infoMess['nama_mess']; ?>, TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
+                                                <div class="text-center text-lg text-uppercase">INFO MESS <?= $d_infoMess['nama_mess']; ?>, TANGGAL <b><?= tanggal($tgl); ?></b></div>
                                             </div>
                                             <div class="modal-body">
-                                                JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
-                                                KUOTA MESS : <?php echo $kuota_messTotal; ?><br>
-                                                KUOTA SISA : <?php echo $kuota_sisa; ?>
+                                                JUMLAH PRAKTIK : <?= $jp_jt; ?><br>
+                                                KUOTA MESS : <?= $kuota_messTotal; ?><br>
+                                                KUOTA SISA : <?= $kuota_sisa; ?>
                                                 <hr>
                                                 <?php
                                                 if ($q1_mess->rowCount() > 0) {
@@ -207,11 +207,11 @@ function generateKalenderKedKep($date)
                                                                 while ($d1_mess = $q1_mess->fetch(PDO::FETCH_ASSOC)) {
                                                                 ?>
                                                                     <tr>
-                                                                        <td><?php echo $d1_mess['nama_institusi']; ?></td>
-                                                                        <td><?php echo $d1_mess['nama_jurusan_pdd']; ?></td>
-                                                                        <td><?php echo $d1_mess['jumlah_praktik']; ?></td>
-                                                                        <td><?php echo tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
-                                                                        <td><?php echo tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
+                                                                        <td><?= $d1_mess['nama_institusi']; ?></td>
+                                                                        <td><?= $d1_mess['nama_jurusan_pdd']; ?></td>
+                                                                        <td><?= $d1_mess['jumlah_praktik']; ?></td>
+                                                                        <td><?= tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
+                                                                        <td><?= tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
                                                                     </tr>
                                                                 <?php
                                                                 }

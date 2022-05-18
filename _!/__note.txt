@@ -58,7 +58,7 @@ git status
 
 
 git add .
-git commit -a -m "Progres Pemilihan Mess/Pemondokan Prakrik"
+git commit -a -m "Perbaikan Tampilan Pilih Mess-Pemondokan Praktik "
 git pull
 git push
 
