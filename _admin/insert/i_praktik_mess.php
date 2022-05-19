@@ -39,7 +39,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             <?php
             $sql_mess = "SELECT * FROM tb_mess ";
             $sql_mess .= " WHERE status_mess = 'Y'";
-            $sql_mess .= " ORDER BY kepemilikan_mess ASC, nama_mess ASC";
+            $sql_mess .= " ORDER BY  nama_mess ASC";
 
             // echo $sql_mess . "<br>";
             $q_mess = $conn->query($sql_mess);
@@ -54,18 +54,21 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             <tr>
                                 <th scope='col'>No</th>
                                 <th>Nama Mess</th>
-                                <th class="text-left">
+                                <th>
                                     Nama Pemilik
                                     <hr class="p-0 m-0 bg-gray-500">
                                     Kontak Pemilik
                                 </th>
-                                <th>Kapasitas Total</th>
-                                <th class="text-left">
+                                <th>
                                     Tarif Tanpa Makan
                                     <hr class="p-0 m-0 bg-gray-500">
                                     Tarif Dengan Makan
                                 </th>
-                                <th>Status<br>Kuota</th>
+                                <th>
+                                    Kapasitas Total
+                                    <hr class="p-0 m-0 bg-gray-500">
+                                    Status Kuota
+                                </th>
                                 <th>Cek Jadwal</th>
                             </tr>
                         </thead>
@@ -73,28 +76,28 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             <?php
                             $no = 1;
                             while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+                                echo $no;
                             ?>
-                                <tr>
+                                <input type="hidden" name="mess<?= $no; ?>" id="mess<?= $no; ?>" value="<?= $d_mess['id_mess']; ?>">
+                                <tr class="text-center">
                                     <td><?= $no; ?></td>
-                                    <td><?= $d_mess['nama_mess']; ?></td>
+                                    <td class="text-left"><?= $d_mess['nama_mess']; ?></td>
                                     <td>
                                         <?= $d_mess['nama_pemilik_mess']; ?>
                                         <hr class="p-0 m-0 bg-gray-500">
                                         <?= $d_mess['telp_pemilik_mess']; ?>
                                     </td>
-                                    <td class="text-center"><?= $d_mess['kapasitas_t_mess']; ?></td>
                                     <td>
                                         <?= "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?>
                                         <hr class="p-0 m-0 bg-gray-500">
                                         <?= "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?>
                                     </td>
-                                    <td class="text-center">
-                                        <div class="badge badge-success">Kosong</div>
-                                        <div class="badge badge-danger">Penuh</div>
-                                        <div class="ketersediaan_mess<?= $no; ?>" value="<?= $d_mess['id_mess']; ?>"></div>
-                                        <input type="hidden" name="mess<?= $no; ?>" id="mess<?= $no; ?>" value="<?= $d_mess['id_mess']; ?>">?
+                                    <td>
+                                        <?= $d_mess['kapasitas_t_mess']; ?>
+                                        <hr class="p-0 m-0 bg-gray-500">
+                                        <div class="ketersediaan_mess<?= $no; ?>"></div>
                                     </td>
-                                    <td class="text-center">
+                                    <td>
 
                                         <!-- tambah harga -->
                                         <a class='btn btn-outline-dark btn-sm cekJadwalMess<?= $no; ?>' id='<?= $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?= $d_mess['id_mess']; ?>'>
@@ -210,16 +213,13 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
 <script>
     $(document).ready(function() {
-
+        console.log('MESS7: ' + $('#mess6').val());
         <?php
         $no1 = 1;
         while ($no1 <= $r_mess) {
         ?>
             $(".cekJadwalMess<?= $no1; ?>").click(function() {
                 var id = $(this).attr('id');
-                // console.log("No " + id);
-                // console.log("MASUK");
-
                 var xhttp = new XMLHttpRequest();
 
                 xhttp.open("GET", "_admin/insert/i_praktik_mess_dataJadwal.php?id=" + id, true);
@@ -231,6 +231,8 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             });
 
             var id_mess = $('#mess<?= $no1; ?>').val();
+            console.log('mess<?= $no1; ?>: ' +
+                id_mess);
             $.ajax({
                 type: 'POST',
                 url: "_admin/insert/i_praktik_mess_dataTgl.php?",
@@ -242,24 +244,23 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 },
                 dataType: 'json',
                 success: function(response) {
-                    if (response.ket == 'Y') {
-                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">Kosong</span>');
-                    } else if (response.ket == 'T') {
-                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>');
+                    if (response.ket == 'T') {
+                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">Kosong</span>' + response.messKuota);
+                    } else if (response.ket == 'Y') {
+                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>' + response.messKuota);
                     } else {
-                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');
+                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>' + response.messKuota);
                     }
                 },
                 error: function() {
                     console.log(response.ket);
-                    // alert('eksekusi query jadwal mess gagal');
+                    alert('eksekusi query jadwal mess gagal');
                 }
             });
         <?php
             $no1++;
         }
         ?>
-
 
         $("#simpan_mess").click(function() {
 
