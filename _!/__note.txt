@@ -58,7 +58,7 @@ git status
 
 
 git add .
-git commit -a -m "Perbaikan Tampilan Pilih Mess-Pemondokan Praktik "
+git commit -a -m "Perbaikan Tampilan Modal Jadwal dan Status Kuota Pilih Mess-Pemondokan Praktik "
 git pull
 git push
 

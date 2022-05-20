@@ -39,7 +39,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             <?php
             $sql_mess = "SELECT * FROM tb_mess ";
             $sql_mess .= " WHERE status_mess = 'Y'";
-            $sql_mess .= " ORDER BY  nama_mess ASC";
+            $sql_mess .= " ORDER BY kepemilikan_mess ASC, nama_mess ASC";
 
             // echo $sql_mess . "<br>";
             $q_mess = $conn->query($sql_mess);
@@ -76,7 +76,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             <?php
                             $no = 1;
                             while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-                                echo $no;
                             ?>
                                 <input type="hidden" name="mess<?= $no; ?>" id="mess<?= $no; ?>" value="<?= $d_mess['id_mess']; ?>">
                                 <tr class="text-center">
@@ -98,14 +97,13 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                         <div class="ketersediaan_mess<?= $no; ?>"></div>
                                     </td>
                                     <td>
-
                                         <!-- tambah harga -->
-                                        <a class='btn btn-outline-dark btn-sm cekJadwalMess<?= $no; ?>' id='<?= $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#mess<?= $d_mess['id_mess']; ?>'>
+                                        <a class='btn btn-outline-dark btn-sm cekJadwalMess<?= $no; ?>' id='<?= $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#modalMess<?= $d_mess['id_mess']; ?>'>
                                             <i class="fas fa-info-circle"></i> Rincian
                                         </a>
 
                                         <!-- modal tambah Harga  -->
-                                        <div class="modal fade" id="mess<?= $d_mess['id_mess']; ?>">
+                                        <div class="modal fade" id="modalMess<?= $d_mess['id_mess']; ?>">
                                             <div class="modal-dialog modal-dialog-scrollable modal-lg ">
                                                 <div class="modal-content">
                                                     <div class="modal-header text-uppercase font-weight-bold">
@@ -213,7 +211,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
 <script>
     $(document).ready(function() {
-        console.log('MESS7: ' + $('#mess6').val());
         <?php
         $no1 = 1;
         while ($no1 <= $r_mess) {
@@ -231,11 +228,10 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             });
 
             var id_mess = $('#mess<?= $no1; ?>').val();
-            console.log('mess<?= $no1; ?>: ' +
-                id_mess);
+            console.log('mess<?= $no1; ?>: ' + id_mess);
             $.ajax({
                 type: 'POST',
-                url: "_admin/insert/i_praktik_mess_dataTgl.php?",
+                url: "_admin/insert/i_praktik_mess_dataTgl.php?id_m=" + id_mess,
                 data: {
                     id_m: id_mess,
                     jp: "<?= $jumlah_praktik; ?>",
@@ -245,11 +241,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 dataType: 'json',
                 success: function(response) {
                     if (response.ket == 'T') {
-                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">Kosong</span>' + response.messKuota);
+                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">Kosong</span>');
                     } else if (response.ket == 'Y') {
-                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>' + response.messKuota);
+                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>');
                     } else {
-                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>' + response.messKuota);
+                        $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');
                     }
                 },
                 error: function() {

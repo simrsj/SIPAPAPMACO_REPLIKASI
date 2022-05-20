@@ -6,7 +6,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // print_r($_POST);
 // echo "</pre>";
 
-$id_mess = $_POST['id_m'];
+if ($_POST['id_m'] != '') {
+    $id_mess = $_POST['id_m'];
+} else {
+    $id_mess = $_GET['id_m'];
+}
 $jumlahPraktikan = $_POST['jp'];
 $tgl_mulai = $_POST['tgl_m'];
 $tgl_selesai = $_POST['tgl_s'];
