@@ -135,6 +135,10 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             }
             ?>
 
+            <!-- data mess dalam mess1 dan mess2 -->
+            <input type="hidden" name="mess1" id="mess1">
+            <input type="hidden" name="mess2" id="mess2">
+
             <nav id="navbar-tarif" class="navbar justify-content-center">
                 <a class='nav-link btn btn-outline-success' href='#' data-toggle='modal' data-target='#pilih_mess'>
                     PILIH MESS/PEMONDOKAN
@@ -154,10 +158,15 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <select class="select2" name="id_mess" id="id_mess" required>
                                     <option value="">-- Pilih --</option>
                                     <?php
-                                    $q_jurusan = $conn->query("SELECT * FROM tb_mess WHERE status_mess = 'y' ORDER BY nama_mess ASC");
-                                    while ($d_jurusan = $q_jurusan->fetch(PDO::FETCH_ASSOC)) {
+
+                                    $sql_messPilih = "SELECT * FROM tb_mess ";
+                                    $sql_messPilih .= " WHERE status_mess = 'y' AND kepemilikan ='" . $kepemilikan_mess . "'";
+                                    $sql_messPilih .= " ORDER BY nama_mess ASC";
+
+                                    $q_messPilih = $conn->query($sql_messPilih);
+                                    while ($d_messPilih = $q_messPilih->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <option value="<?= $d_jurusan['id_mess']; ?>"><?= $d_jurusan['nama_mess']; ?></option>
+                                        <option value="<?= $d_messPilih['id_mess']; ?>"><?= $d_messPilih['nama_mess']; ?></option>
                                     <?php
                                     }
                                     ?>
@@ -228,7 +237,6 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             });
 
             var id_mess = $('#mess<?= $no1; ?>').val();
-            console.log('mess<?= $no1; ?>: ' + id_mess);
             $.ajax({
                 type: 'POST',
                 url: "_admin/insert/i_praktik_mess_dataTgl.php?id_m=" + id_mess,

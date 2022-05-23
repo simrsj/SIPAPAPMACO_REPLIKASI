@@ -52,8 +52,12 @@ foreach ($period as $key => $value) {
     $messKuota = $d_messKuota['kapasitas_t_mess'];
 
     $jumlahPraktikanTotal = $jumlahPraktikan + $jumlahTotal;
-    if ($jumlahPraktikanTotal > $messKuota) {
+    if ($jumlahPraktikanTotal >= $messKuota) {
         $dataJSON['ket'] = 'Y';
+    }
+
+    if(){
+        $dataJSON['dataMess']['id_mess']=$
     }
     $no++;
 }
