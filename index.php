@@ -29,9 +29,8 @@ include "_add-ons/tanggal_waktu.php";
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
     <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
 
-
-    <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <!-- <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -88,8 +87,9 @@ include "_add-ons/tanggal_waktu.php";
     <script src="vendor/!custom/jsCustom.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script>
-        console.log('Javascript Aktif');
+        // console.log('Javascript Aktif');
     </script>
+
 </body>
 
 </html>
