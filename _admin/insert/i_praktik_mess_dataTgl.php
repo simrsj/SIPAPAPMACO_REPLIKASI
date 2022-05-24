@@ -41,19 +41,26 @@ foreach ($period as $key => $value) {
 
     $jumlahTotal = 0;
     while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
-        $jt += $d['jumlah_praktik'];
+        $jumlahTotal += $d['jumlah_praktik'];
     }
 
-    $sql_messKuota = "SELECT * FROM tb_mess";
-    $sql_messKuota .= " WHERE id_mess= " . $id_mess;
+    $sql_mess = "SELECT * FROM tb_mess";
+    $sql_mess .= " WHERE id_mess= " . $id_mess;
 
-    $q_messKuota = $conn->query($sql_messKuota);
-    $d_messKuota = $q_messKuota->fetch(PDO::FETCH_ASSOC);
-    $messKuota = $d_messKuota['kapasitas_t_mess'];
+    $q_mess = $conn->query($sql_mess);
+    $d_mess = $q_mess->fetch(PDO::FETCH_ASSOC);
+    $messKuota = $d_mess['kapasitas_t_mess'];
 
     $jumlahPraktikanTotal = $jumlahPraktikan + $jumlahTotal;
     if ($jumlahPraktikanTotal >= $messKuota) {
         $dataJSON['ket'] = 'Y';
+    }
+
+    if ($d_mess['kepemilikan_mess'] == "dalam") {
+        $dataJSON['mess' . $d_mess['id_mess']]['idMess'] = intval($d_mess['id_mess']);
+        $dataJSON['mess' . $d_mess['id_mess']]['kapasitasTotalMess'] = intval($d_mess['kapasitas_t_mess']);
+        $dataJSON['mess' . $d_mess['id_mess']]['kapasitasTerisiMess'] = $jumlahPraktikanTotal;
+        $dataJSON['mess' . $d_mess['id_mess']]['ketMess'] = $dataJSON['ket'];
     }
 
     $no++;

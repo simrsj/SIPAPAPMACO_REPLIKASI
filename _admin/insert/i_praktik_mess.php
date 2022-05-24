@@ -158,11 +158,15 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 <select class="select2" name="id_mess" id="id_mess" required>
                                     <option value="">-- Pilih --</option>
                                     <?php
-
+                                    if (1 <= 123) {
+                                        $kepemilikan_mess = "dalam";
+                                    } else {
+                                        $kepemilikan_mess = "luar";
+                                    }
                                     $sql_messPilih = "SELECT * FROM tb_mess ";
-                                    $sql_messPilih .= " WHERE status_mess = 'y' AND kepemilikan ='" . $kepemilikan_mess . "'";
+                                    $sql_messPilih .= " WHERE status_mess = 'y' AND kepemilikan_mess ='" . $kepemilikan_mess . "'";
                                     $sql_messPilih .= " ORDER BY nama_mess ASC";
-
+                                    echo $sql_messPilih;
                                     $q_messPilih = $conn->query($sql_messPilih);
                                     while ($d_messPilih = $q_messPilih->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
@@ -223,6 +227,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         <?php
         $no1 = 1;
         while ($no1 <= $r_mess) {
+            $ar_mess['mess' + $no1] = "";
         ?>
             $(".cekJadwalMess<?= $no1; ?>").click(function() {
                 var id = $(this).attr('id');
@@ -256,7 +261,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                         $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');
                     }
                 },
-                error: function() {
+                error: function(response) {
                     console.log(response.ket);
                     alert('eksekusi query jadwal mess gagal');
                 }
