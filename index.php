@@ -31,7 +31,7 @@ include "_add-ons/tanggal_waktu.php";
 
 
     <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- SCRIPT JS  -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 </head>
 
 <body>
@@ -87,6 +87,9 @@ include "_add-ons/tanggal_waktu.php";
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/!custom/jsCustom.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script>
+        console.log('Javascript Aktif');
+    </script>
 </body>
 
 </html>

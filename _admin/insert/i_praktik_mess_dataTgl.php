@@ -56,9 +56,6 @@ foreach ($period as $key => $value) {
         $dataJSON['ket'] = 'Y';
     }
 
-    if(){
-        $dataJSON['dataMess']['id_mess']=$
-    }
     $no++;
 }
 $dataJSON['success'] = 'Sukses';
