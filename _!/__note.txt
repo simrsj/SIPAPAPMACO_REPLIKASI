@@ -57,7 +57,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Perbaikan package-lock.json"
+git commit -a -m "Perbaikan Pilih Mess/Pemondokan"
 git pull
 git push
 
