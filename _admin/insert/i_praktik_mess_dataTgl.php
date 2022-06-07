@@ -6,6 +6,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // print_r($_POST);
 // echo "</pre>";
 
+// $dataJSON['POST'] = print_r($_POST);
+
 if ($_POST['id_m'] != '') {
     $id_mess = $_POST['id_m'];
 } else {
@@ -23,20 +25,22 @@ $period = new DatePeriod(
 );
 
 // echo "<pre>";
-// // print_r($period);
+// print_r($period);
 // echo "</pre>";
 
 $no = 1;
-$dataJSON['ket'] = 'T';
+$dataJSON['messKet'] = 'T';
 foreach ($period as $key => $value) {
+
 
     $sql = "SELECT * FROM tb_praktik ";
     $sql .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik ";
     $sql .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik ";
+    $sql .= " JOIN tb_mess ON tb_mess.id_mess = tb_mess_pilih.id_mess ";
     $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
     $sql .= " AND tb_mess_pilih.id_mess = " . $id_mess;
     $sql .= " AND (tb_praktik.status_cek_praktik IN ('BYR', 'VPT_Y_PPDS','VPT_Y') OR tb_praktik.status_cek_praktik IN ('W', 'Y'))";
-    // echo "$sql<br>";
+    // $dataJSON['sql'] = $sql;
     $q = $conn->query($sql);
 
     $jumlahTotal = 0;
@@ -53,18 +57,9 @@ foreach ($period as $key => $value) {
 
     $jumlahPraktikanTotal = $jumlahPraktikan + $jumlahTotal;
     if ($jumlahPraktikanTotal >= $messKuota) {
-        $dataJSON['ket'] = 'Y';
+        $dataJSON['messKet'] = 'Y';
     }
-
-    if ($d_mess['kepemilikan_mess'] == "dalam") {
-        $dataJSON['mess' . $d_mess['id_mess']]['idMess'] = intval($d_mess['id_mess']);
-        $dataJSON['mess' . $d_mess['id_mess']]['kapasitasTotalMess'] = intval($d_mess['kapasitas_t_mess']);
-        $dataJSON['mess' . $d_mess['id_mess']]['kapasitasTerisiMess'] = $jumlahPraktikanTotal;
-        $dataJSON['mess' . $d_mess['id_mess']]['ketMess'] = $dataJSON['ket'];
-    }
-
     $no++;
 }
-$dataJSON['success'] = 'Sukses';
 $dataJSON['messKuota'] = $messKuota;
 echo json_encode($dataJSON);

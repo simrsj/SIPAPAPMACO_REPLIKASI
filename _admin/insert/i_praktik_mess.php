@@ -155,25 +155,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             </div>
                             <div class="modal-body text-center">
                                 <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
-                                <select class="select2" name="id_mess" id="id_mess" required>
-                                    <option value="">-- Pilih --</option>
-                                    <?php
-                                    if (1 <= 123) {
-                                        $kepemilikan_mess = "dalam";
-                                    } else {
-                                        $kepemilikan_mess = "luar";
-                                    }
-                                    $sql_messPilih = "SELECT * FROM tb_mess ";
-                                    $sql_messPilih .= " WHERE status_mess = 'y' AND kepemilikan_mess ='" . $kepemilikan_mess . "'";
-                                    $sql_messPilih .= " ORDER BY nama_mess ASC";
-                                    echo $sql_messPilih;
-                                    $q_messPilih = $conn->query($sql_messPilih);
-                                    while ($d_messPilih = $q_messPilih->fetch(PDO::FETCH_ASSOC)) {
-                                    ?>
-                                        <option value="<?= $d_messPilih['id_mess']; ?>"><?= $d_messPilih['nama_mess']; ?></option>
-                                    <?php
-                                    }
-                                    ?>
+                                <select class="select2" name="id_mess" id="option_mess" required>
                                 </select>
                                 <div id="err_mess" class="text-danger text-xs font-italic blink"></div>
                                 <hr>
@@ -225,9 +207,10 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 <script>
     $(document).ready(function() {
         <?php
+
+        //Perulangan jumlah mess/pemondolam yang aktif
         $no1 = 1;
         while ($no1 <= $r_mess) {
-            $ar_mess['mess' + $no1] = "";
         ?>
             $(".cekJadwalMess<?= $no1; ?>").click(function() {
                 var id = $(this).attr('id');
@@ -253,16 +236,17 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 },
                 dataType: 'json',
                 success: function(response) {
-                    if (response.ket == 'T') {
+                    if (response.messKet == 'T') {
                         $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">Kosong</span>');
                     } else if (response.ket == 'Y') {
                         $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>');
                     } else {
                         $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');
                     }
+                    // $('#option_mess').append(response.messOption).trigger("change");
                 },
                 error: function(response) {
-                    console.log(response.ket);
+                    console.log(response.messKet);
                     alert('eksekusi query jadwal mess gagal');
                 }
             });
@@ -368,5 +352,26 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             }
 
         });
+
+        //select option pilih mess/pemondokan
+        $.ajax({
+            type: 'POST',
+            url: "_admin/insert/i_praktik_mess_selectOption.php?",
+            data: {
+                jp: "<?= $jumlah_praktik; ?>",
+                tgl_m: "<?= $d_praktik['tgl_mulai_praktik']; ?>",
+                tgl_s: "<?= $d_praktik['tgl_selesai_praktik']; ?>"
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('#option_mess').append(response.option).trigger("change");
+                // console.log(response.option);
+            },
+            error: function(response) {
+                console.log(response.ket);
+                alert('eksekusi query gagal');
+            }
+        });
+
     });
 </script>
