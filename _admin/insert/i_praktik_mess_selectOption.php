@@ -39,17 +39,14 @@ while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
             $jumlahTotal += $d['jumlah_praktik'];
         }
         $jumlahPraktikanTotal = $jumlahPraktikan + $jumlahTotal;
-        if ($jumlahPraktikanTotal > $d_mess['kapasitas_t_mess']) {
-            $option .= '<option value="' . $d_mess['id_mess'] . '">' . $d_mess['nama_mess'] . '</option>';
-        }
     }
 
     if ($jumlahPraktikanTotal < $d_mess['kapasitas_t_mess'] && $d_mess['kepemilikan_mess'] == 'dalam') {
         $option .= '<option value="' . $d_mess['id_mess'] . '">' . $d_mess['nama_mess'] . '</option>';
     } else {
+        $option .= '<option value="' . $d_mess['id_mess'] . '">' . $d_mess['nama_mess'] . '</option>';
     }
 }
-
 $dataJSON['option'] = $option;
 
 echo json_encode($dataJSON);

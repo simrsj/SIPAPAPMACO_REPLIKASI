@@ -155,7 +155,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             </div>
                             <div class="modal-body text-center">
                                 <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
-                                <select class="select2" name="id_mess" id="option_mess" required>
+                                <select class="select2" name="id_mess" id="id_mess" required>
                                 </select>
                                 <div id="err_mess" class="text-danger text-xs font-italic blink"></div>
                                 <hr>
@@ -364,7 +364,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             },
             dataType: 'json',
             success: function(response) {
-                $('#option_mess').append(response.option).trigger("change");
+                $('#id_mess').append(response.option).trigger("change");
                 // console.log(response.option);
             },
             error: function(response) {
