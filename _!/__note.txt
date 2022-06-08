@@ -64,7 +64,6 @@ git push
 git clone https://github.com/fajarrachmath/SM.git
 --------------------------------------------------------------------------------------------------------------------
 
-
 TRUNCATE tb_praktik;
 TRUNCATE tb_praktik_tgl;
 TRUNCATE tb_praktikan;
