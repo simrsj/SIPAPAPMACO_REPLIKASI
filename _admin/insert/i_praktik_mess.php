@@ -155,10 +155,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             </div>
                             <div class="modal-body text-center">
                                 <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
+
+                                <!-- data pilih mess kosong -->
                                 <select class="select2" name="id_mess" id="id_mess" required>
                                 </select>
-                                <div id="err_mess" class="text-danger text-xs font-italic blink"></div>
-                                <hr>
+                                <div id="err_mess" class="text-danger text-xs font-italic blink mb-3"></div>
                                 <?php
 
                                 //cari data makan mess
@@ -173,12 +174,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 }
                                 ?>
 
-                                <div class="jumbotron">
+                                <div class="jumbotron mb-3">
                                     <div class="jumbotron-fluid text-lg">
                                         Institusi Memilih Mess <b><?= $makan_mess; ?></b>
                                     </div>
                                 </div>
-                                <hr>
                                 <div class="jumbotron">
                                     <div class="jumbotron-fluid">
                                         "Pilihan yang dimunculkan <br>
