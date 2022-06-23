@@ -52,7 +52,7 @@ if ($_GET['prk'] == 'ked') {
                                 if ($r_institusi > 0) {
                                     $no = 1;
                                 ?>
-                                    <select class='js-example-placeholder-single form-control' name='id_institusi' id="institusi" required>
+                                    <select class='select2 form-control' name='id_institusi' id="institusi" required>
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
@@ -118,7 +118,7 @@ if ($_GET['prk'] == 'ked') {
 
                                 if ($r_spek > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' onchange="makanMess();" name='id_profesi_pdd' id="profesi">
+                                    <select class='select2' aria-label='Default select example' onchange="makanMess();" name='id_profesi_pdd' id="profesi" height="100%">
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_spek = $q_spek->fetch(PDO::FETCH_ASSOC)) {

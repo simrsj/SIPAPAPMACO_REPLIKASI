@@ -53,7 +53,7 @@ if ($_GET['prk'] == 'nkl') {
                                 if ($r_institusi > 0) {
                                     $no = 1;
                                 ?>
-                                    <select class='js-example-placeholder-single form-control' name='id_institusi' id="institusi" required>
+                                    <select class='select2 form-control' name='id_institusi' id="institusi" required>
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
@@ -115,7 +115,7 @@ if ($_GET['prk'] == 'nkl') {
 
                                     if ($r_jurusan_pdd > 0) {
                                     ?>
-                                        <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" required>
+                                        <select class='form-control select2' aria-label='Default select example' name='id_jurusan_pdd' id="jurusan" required>
                                             <option value="">-- <i>Pilih</i>--</option>
                                             <?php
                                             while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -166,7 +166,7 @@ if ($_GET['prk'] == 'nkl') {
 
                                 if ($r_jenjang_pdd > 0) {
                                 ?>
-                                    <select class='form-control js-example-placeholder-single' name='id_jenjang_pdd' id="jenjang" required>
+                                    <select class='form-control select2' name='id_jenjang_pdd' id="jenjang" required>
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
@@ -210,7 +210,7 @@ if ($_GET['prk'] == 'nkl') {
                                 Pilih Profesi : <span style="color:red">*</span><br>
                                 <div id="profesi">
                                     <!-- <b><i>"Pilih Jenjang"</i></b> -->
-                                    <select class='form-control js-example-placeholder-single' aria-label='Default select example' name='id_profesi_pdd' id="profesi">
+                                    <select class='form-control select2' aria-label='Default select example' name='id_profesi_pdd' id="profesi">
                                         <option value="">-- <i>Pilih</i>--</option>
                                         <?php
                                         while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) {

@@ -82,7 +82,7 @@ include "_add-ons/tanggal_waktu.php";
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
     <!-- <script src="vendor/select2/dist/js/select2.min.js"></script> -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/!custom/jsCustom.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
