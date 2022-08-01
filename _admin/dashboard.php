@@ -120,7 +120,7 @@
     <!-- Content Row -->
     <div class="row">
         <!-- Area Chart -->
-        <div class="col-xl-8 col-lg-7">
+        <div class="col-xl-7 col-lg-6">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -148,11 +148,11 @@
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead class="table-dark">
-                                <tr>
+                                <tr class="text-center">
                                     <th scope='col'>No</th>
                                     <th>Nama Mess</th>
                                     <th>Kapasitas Total</th>
-                                    <th>Kapasitas Terisi</th>
+                                    <!-- <th>Kapasitas Terisi</th> -->
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -162,43 +162,35 @@
                                 while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $no; ?></td>
+                                        <td class="text-center"><?php echo $no; ?></td>
                                         <td><?php echo $d_mess['nama_mess']; ?></td>
-                                        <td><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                                        <td><?php
-                                            // $sql_kapsTerisiMess = "SELECT * FROM tb_praktik 
-                                            // JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_mess_pilih
-                                            // WHERE tb_praktik.status_cek_praktik = 'BYR_Y' 
-                                            // AND tb_praktik.status_cek_praktik = 'AKV'
-                                            // AND tb_mess.id_mess = ".d_mess['id_mess'];                                      "; 
+                                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
+                                        <!-- <td><?php
+                                                    // $sql_kapsTerisiMess = "SELECT * FROM tb_praktik 
+                                                    // JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_mess_pilih
+                                                    // WHERE tb_praktik.status_cek_praktik = 'BYR_Y' 
+                                                    // AND tb_praktik.status_cek_praktik = 'AKV'
+                                                    // AND tb_mess.id_mess = ".d_mess['id_mess'];                                      "; 
 
-                                            // $q_kapsTerisiMess = $conn->query($sql_kapsTerisiMess);
-                                            // while ($d_kapsTerisiMess = $q_kapsTerisiMess->fetch(PDO::FETCH_ASSOC)){
-                                            //     $d_kapsTerisiMess['jumlah_praktik'];
-                                            // }
-                                            // echo $d_kapsTerisiMess['jumlah_praktik']; 
+                                                    // $q_kapsTerisiMess = $conn->query($sql_kapsTerisiMess);
+                                                    // while ($d_kapsTerisiMess = $q_kapsTerisiMess->fetch(PDO::FETCH_ASSOC)){
+                                                    //     $d_kapsTerisiMess['jumlah_praktik'];
+                                                    // }
+                                                    // echo $d_kapsTerisiMess['jumlah_praktik']; 
+                                                    ?>
+                                        </td> -->
+                                        <td class="text-center">
+                                            <?php
+                                            if ($d_mess['status_mess'] == 'Y') {
                                             ?>
-                                        </td>
-                                        <td>
-                                            <form method="post" action="">
-                                                <?php
-                                                switch ($d_mess['status_mess']) {
-                                                    case "y":
-                                                        $btn_status_mess = "success";
-                                                        $icon_status_mess = "Aktif";
-                                                        break;
-                                                    case "t":
-                                                        $btn_status_mess = "danger";
-                                                        $icon_status_mess = "Non Aktif";
-                                                        break;
-                                                }
-                                                ?>
-                                                <input name='id_mess' value="<?php echo $d_mess['id_mess']; ?>" hidden>
-                                                <input name='status_mess' value='<?php echo $d_mess['status_mess']; ?>' hidden>
-                                                <button title="<?php echo $d_mess['status_mess']; ?>" class="<?php echo "btn btn-" . $btn_status_mess . " btn-sm"; ?>">
-                                                    <?php echo $icon_status_mess; ?>
-                                                </button>
-                                            </form>
+                                                <div class="btn btn-sm btn-success">Aktif</div>
+                                            <?php
+                                            } elseif ($d_mess['status_mess'] == 'T') {
+                                            ?>
+                                                <div class="btn btn-sm btn-danger">Non-Aktif</div>
+                                            <?php
+                                            }
+                                            ?>
                                         </td>
                                         <?php
                                         $no++;
@@ -215,22 +207,10 @@
         </div>
 
         <!-- Data Praktik Tahunan -->
-        <div class="col-xl-4 col-lg-5">
+        <div class="col-xl-5 col-lg-6">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Persentase Jenis Diklat Tahun <?php echo date('Y'); ?></h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
