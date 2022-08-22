@@ -33,7 +33,7 @@ include "_add-ons/tanggal_waktu.php";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body>
+<body id="page-top">
     <!-- <div class="preloader">
         <div class="loading">
             <img src="./_img/logorsj.png" class="rotate mb-3" width="100" height="100" />

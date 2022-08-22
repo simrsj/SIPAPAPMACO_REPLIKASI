@@ -57,7 +57,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Perbaikan Select Pengajuan Praktikan"
+git commit -a -m "Perbaikan Icon Web"
 git pull
 git push
 
