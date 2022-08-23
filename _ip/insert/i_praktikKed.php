@@ -795,7 +795,7 @@ if ($_GET['prk'] == 'ked') {
                                                     title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                                     showConfirmButton: false,
                                                     html: '<a href="' + path + '" class="btn btn-outline-primary">OK</a>',
-                                                    timer: 5000970,
+                                                    timer: 10000,
                                                     timerProgressBar: true,
                                                     didOpen: (toast) => {
                                                         toast.addEventListener('mouseenter', Swal.stopTimer)
