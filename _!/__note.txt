@@ -57,11 +57,7 @@ PERTANYAAN
 git status
 
 git add .
-<<<<<<< HEAD
 git commit -a -m "Note delete file"
-=======
-git commit -a -m "timer selesai proses pengajuan kedokteran"
->>>>>>> 266693077ec78c3b4ed80561d1d6bb0ee399df5a
 git pull
 git push
 
