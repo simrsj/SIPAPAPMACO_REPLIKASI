@@ -57,7 +57,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Note delete file"
+git commit -a -m "dependabot manual "scss-tokenizer": ">=0.4.3" "
 git pull
 git push
 
