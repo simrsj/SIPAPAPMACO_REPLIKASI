@@ -8,16 +8,15 @@ if (empty($_SESSION['username_user'])) {
 			<div class="h5 font-weight-bold row">
 				<ul class="navbar-nav col">
 					<li class="nav-item active">
-						<img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="2%">
-						<img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="2%">
-						<img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="3%">
-						<img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="2%">
+						<img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="30px">
+						<img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="30px">
+						<img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="40px">
+						<img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="30px">
 						LOGIN - RS JIWA PROVINSI JAWA BARAT
 						<span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
 					</li>
 				</ul>
 				<ul class="navbar-nav col-auto">
-					<a class="btn btn-success btn-sm  my-auto" href="http://192.168.7.89/kuesioner/survey.php" target="_blank"><i class="fas fa-clipboard-check"></i> SURVEY</a>&nbsp;
 					<a class="btn btn-info btn-sm  my-auto" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>&nbsp;
 					<a class="btn btn-primary btn-sm  my-auto" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>
 				</ul>
