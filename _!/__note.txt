@@ -57,7 +57,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Perbaikan Icon Web"
+git commit -a -m "Note delete file"
 git pull
 git push
 
