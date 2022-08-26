@@ -74,3 +74,10 @@ TRUNCATE tb_bayar;
 TRUNCATE tb_nilai_kep;
 TRUNCATE tb_nilai_upload;
 TRUNCATE tb_pembimbing_pilih;
+
+DELETE FILE ---------------------------------------------------------------------------------------------------------
+
+- rm ./path/to/the/file/file_1.txt SM/_file/bayar 
+- SM/_file/inv 
+- SM/_file/nilai 
+- SM/_file/praktik
