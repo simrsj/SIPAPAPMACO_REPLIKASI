@@ -12,9 +12,9 @@
           <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
         </li>
       </ul>
-      <ul class="navbar-nav col-auto">
-        <a class="btn btn-info btn-sm  my-auto" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>&nbsp;
-        <a class="btn btn-primary btn-sm  my-auto" href="?lo"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+      <ul class="navbar-nav col-auto font-weight-bold">
+        <a class="btn btn-outline-success btn-sm  my-auto" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>&nbsp;
+        <a class="btn btn-outline-primary btn-sm  my-auto" href="?lo"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
       </ul>
     </div>
   </nav>

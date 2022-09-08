@@ -28,7 +28,7 @@ if (is_numeric($data)) {
                 if ($r_data_praktikan > 0) {
                 ?>
                     <form method="POST" id="form_pembb_ruangan">
-                        <input type="hidden" name="jurusan_ked" id="jurusan_ked" value="<?php echo $d_data_praktikan1['id_jurusan_pdd']; ?>">
+                        <input type="hidden" name="jurusan_ked" id="jurusan_ked" value="<?= $d_data_praktikan1['id_jurusan_pdd']; ?>">
                         <!-- data praktikan  -->
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -52,56 +52,58 @@ if (is_numeric($data)) {
                                     $no = 1;
                                     while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <input type="hidden" name="jp" id="jp" value="<?php echo $d_data_praktikan['jumlah_praktik']; ?>">
-                                        <input type="hidden" name="id_praktik" id="id_praktik" value="<?php echo $_GET['i']; ?>">
-                                        <input type="hidden" name="id_praktikan<?php echo $no; ?>" id="id_praktikan<?php echo $no; ?>" value="<?php echo $d_data_praktikan['id_praktikan']; ?>">
+                                        <input type="hidden" name="jp" id="jp" value="<?= $d_data_praktikan['jumlah_praktik']; ?>">
+                                        <input type="hidden" name="id_praktik" id="id_praktik" value="<?= $_GET['i']; ?>">
+                                        <input type="hidden" name="id_praktikan<?= $no; ?>" id="id_praktikan<?= $no; ?>" value="<?= $d_data_praktikan['id_praktikan']; ?>">
                                         <tr>
-                                            <td><?php echo $no; ?></td>
-                                            <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
-                                            <td class="text-center"><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
+                                            <td><?= $no; ?></td>
+                                            <td><?= $d_data_praktikan['nama_praktikan']; ?></td>
+                                            <td class="text-center"><?= $d_data_praktikan['no_id_praktikan']; ?></td>
                                             <td class="text-center">
                                                 <?php
                                                 $id_jurusan_pdd = $d_data_praktikan['id_jurusan_pdd'];
                                                 $id_profesi_pdd = $d_data_praktikan['id_profesi_pdd'];
                                                 if ($id_jurusan_pdd == 1) {
                                                     if ($id_profesi_pdd == 1) {
-                                                        $jenis_pmbb = "PPDS";
+                                                        $jenis_pmbb = 8;
                                                     } elseif ($id_profesi_pdd == 2) {
-                                                        $jenis_pmbb = "PSPD";
+                                                        $jenis_pmbb = 9;
                                                     }
                                                 } elseif ($id_jurusan_pdd == 2) {
-                                                    $jenis_pmbb = "CI KEP";
+                                                    $jenis_pmbb = 4;
                                                 } elseif ($id_jurusan_pdd == 3) {
-                                                    $jenis_pmbb = "CI PSI";
+                                                    $jenis_pmbb = 6;
                                                 } elseif ($id_jurusan_pdd == 4) {
-                                                    $jenis_pmbb = "CI IT";
+                                                    $jenis_pmbb = 2;
                                                 } elseif ($id_jurusan_pdd == 5) {
-                                                    $jenis_pmbb = "CI FAR";
+                                                    $jenis_pmbb = 1;
                                                 } elseif ($id_jurusan_pdd == 6) {
-                                                    $jenis_pmbb = "CI PEKSOS";
+                                                    $jenis_pmbb = 5;
                                                 } elseif ($id_jurusan_pdd == 7) {
-                                                    $jenis_pmbb = "CI KESLING";
+                                                    $jenis_pmbb = 3;
+                                                } elseif ($id_jurusan_pdd == 8) {
+                                                    $jenis_pmbb = 7;
                                                 }
                                                 $sql_pmbb = "SELECT * FROM tb_pembimbing";
-                                                $sql_pmbb .= " WHERE jenis_pembimbing = '" . $jenis_pmbb . "' AND status_pembimbing = 'y'";
+                                                $sql_pmbb .= " WHERE id_pembimbing_jenis = '" . $jenis_pmbb . "' AND status_pembimbing = 'y'";
                                                 $sql_pmbb .= " ORDER BY kali_pembimbing ASC, nama_pembimbing ASC";
-
+                                                // echo $sql_pmbb;
                                                 $q_pmbb = $conn->query($sql_pmbb);
                                                 ?>
 
-                                                <select class='form-inline js-example-placeholder-single' aria-label='Default select example' name="id_pembimbing<?php echo $no; ?>" id="id_pembimbing<?php echo $no; ?>" required>
+                                                <select class='select2' aria-label='Default select example' name="id_pembimbing<?= $no; ?>" id="id_pembimbing<?= $no; ?>" required>
                                                     <option value="">-- Pilih --</option>
                                                     <?php
                                                     while ($d_pmbb = $q_pmbb->fetch(PDO::FETCH_ASSOC)) {
                                                     ?>
-                                                        <option value="<?php echo $d_pmbb['id_pembimbing']; ?>">
-                                                            <?php echo "(" . $d_pmbb['kali_pembimbing'] . ") " . $d_pmbb['nama_pembimbing']; ?>
+                                                        <option value="<?= $d_pmbb['id_pembimbing']; ?>">
+                                                            <?= "(" . $d_pmbb['kali_pembimbing'] . ") " . $d_pmbb['nama_pembimbing']; ?>
                                                         </option>
                                                     <?php
                                                     }
                                                     ?>
                                                 </select>
-                                                <span id="err_pmbb<?php echo $no; ?>" class="text-danger text-xs font-italic blink"></span>
+                                                <span id="err_pmbb<?= $no; ?>" class="text-danger text-xs font-italic blink"></span>
                                             </td>
                                             <?php
                                             if ($id_jurusan_pdd != 1) {
@@ -113,19 +115,19 @@ if (is_numeric($data)) {
 
                                                     $q_unit = $conn->query($sql_unit);
                                                     ?>
-                                                    <select class='form-inline js-example-placeholder-single' aria-label='Default select example' name='id_unit<?php echo $no; ?>' id="id_unit<?php echo $no; ?>" required>
+                                                    <select class='form-inline js-example-placeholder-single' aria-label='Default select example' name='id_unit<?= $no; ?>' id="id_unit<?= $no; ?>" required>
                                                         <option value="">-- Pilih --</option>
                                                         <?php
                                                         while ($d_unit = $q_unit->fetch(PDO::FETCH_ASSOC)) {
                                                         ?>
-                                                            <option value="<?php echo $d_unit['id_unit']; ?>">
-                                                                <?php echo $d_unit['nama_unit']; ?>
+                                                            <option value="<?= $d_unit['id_unit']; ?>">
+                                                                <?= $d_unit['nama_unit']; ?>
                                                             </option>
                                                         <?php
                                                         }
                                                         ?>
                                                     </select>
-                                                    <span id="err_unit<?php echo $no; ?>" class="text-danger text-xs font-italic blink"></span>
+                                                    <span id="err_unit<?= $no; ?>" class="text-danger text-xs font-italic blink"></span>
                                                 </td>
                                             <?php
                                             }
@@ -135,7 +137,7 @@ if (is_numeric($data)) {
                                         $no++;
                                     }
                                     ?>
-                                    <input type="hidden" name="dp" id="dp" value="<?php echo $no - 1;  ?>">
+                                    <input type="hidden" name="dp" id="dp" value="<?= $no - 1;  ?>">
                                 </tbody>
                             </table>
                         </div>

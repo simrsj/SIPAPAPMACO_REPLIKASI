@@ -12,9 +12,9 @@
                     <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
                 </li>
             </ul>
-            <ul class="navbar-nav col">
-                <a class="btn btn-info btn-sm  my-auto" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>&nbsp;
-                <a class="btn btn-primary btn-sm  my-auto" href="?lo"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+            <ul class="navbar-nav col-auto font-weight-bold">
+                <a class="btn btn-outline-warning btn-sm  my-auto" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>&nbsp;
+                <a class="btn btn-outline-primary btn-sm  my-auto" href="?lo"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
             </ul>
         </div>
     </nav>
@@ -54,12 +54,13 @@
                                     </div>
                                     <form class="user" action="?reg_x" method="POST">
                                         <div class="form-group">
-                                            <select class="js-example-placeholder-single form-control" id="instansi" onChange='Bukains()' name="id_institusi" id="" required>
+
+                                            <select class="select2" id="instansi" onChange='Bukains()' name="id_institusi" id="" style="width:100%" required>
                                                 <option value="">--<i> Pilih Institusi </i>--</option>
 
                                                 <?php
-                                                $sql_mou = "SELECT * FROM tb_institusi
-                                        ORDER BY tb_institusi.nama_institusi ASC";
+                                                $sql_mou = "SELECT * FROM tb_institusi";
+                                                $sql_mou .= " ORDER BY tb_institusi.nama_institusi ASC";
 
                                                 $q_mou = $conn->query($sql_mou);
                                                 $r_mou = $q_mou->rowCount();
