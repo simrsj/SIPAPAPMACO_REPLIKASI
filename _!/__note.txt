@@ -57,7 +57,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "perbaikan icon dan penghapusan survey - dashboard, register, login"
+git commit -a -m "-"
 git pull
 git push
 
