@@ -3,36 +3,40 @@ if (empty($_SESSION['username_user'])) {
 ?>
 
 	<body class="bg-gradient-primary">
-
-		<nav class="navbar navbar-expand-sm navbar-light bg-light">
-			<div class="h5 font-weight-bold row">
-				<ul class="navbar-nav col">
-					<li class="nav-item active">
-						<img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="30px">
-						<img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="30px">
-						<img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="40px">
-						<img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="30px">
-						LOGIN - RS JIWA PROVINSI JAWA BARAT
-						<span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
-					</li>
-				</ul>
-				<ul class="navbar-nav col-auto font-weight-bold">
-					<a class="btn btn-outline-warning btn-sm  my-auto" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>&nbsp;
+		<nav class="navbar navbar-light bg-light row">
+			<ul class="navbar-nav col-4">
+				<li class="nav-item">
+					<?php include "?logo"; ?>
+					<img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="30px">
+					<img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="30px">
+					<img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="40px">
+					<img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="30px">
+				</li>
+			</ul>
+			<ul class="h5 font-weight-bold navbar-nav col-4 text-center">
+				<li class="nav-item">
+					LOGIN
+					<span class="badge badge-primary text-md">
+						<?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>,
+						<span id="jam"></span>
+					</span>
+				</li>
+			</ul>
+			<ul class="navbar-nav col-4 font-weight-bold text-right">
+				<li class="nav-item">
+					<a class="btn btn-outline-warning btn-sm  my-auto" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>
 					<a class="btn btn-outline-success btn-sm  my-auto" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>
-				</ul>
-			</div>
+				<li class="nav-item">
+			</ul>
 		</nav>
 
 		<div class="container">
-			<!-- Outer Row -->
 			<div class="row justify-content-center">
 				<div class="col-xl-10 col-lg-12 col-md-9">
 					<div class="card o-hidden border-0 shadow-lg my-3">
 						<div class="card-body text-center font-weight-bold text-gray-800">
 							<span class="badge badge-primary mb-2">
-								<h4>
-									SIPAPAP MACO
-								</h4>
+								<h4>SIPAPAP MACO</h4>
 							</span>
 							<h5 class="text-gray-900">
 								(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)
