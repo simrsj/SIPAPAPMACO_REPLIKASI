@@ -12,11 +12,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 			</a>
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item ">
+			<!-- <li class="nav-item ">
 				<a class="nav-link" href="?test">
 					<i class="fas fa-fw fa-bug"></i>
 					<span>Testing</span></a>
-			</li>
+			</li> -->
 			<li class="nav-item ">
 				<a class="nav-link" href="?">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
@@ -241,11 +241,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown no-arrow mx-1">
-							<a class="nav-link dropdown-toggle" href="#" id="notifikasi" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<!-- <a class="nav-link dropdown-toggle" href="#" id="notifikasi" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-bell fa-fw"></i>
-								<!-- Counter - Alerts -->
 								<span class="badge badge-danger badge-counter">3+</span>
-							</a>
+							</a> -->
 							<!-- Dropdown - Alerts -->
 							<div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-xl shadow animated--grow-in" aria-labelledby="notifikasi">
 								<h6 class="dropdown-header">

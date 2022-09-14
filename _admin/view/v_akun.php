@@ -156,7 +156,7 @@ if (isset($_POST['tambah_user'])) {
 
                                     <b>Institusi : </b><br>
                                     <i style="font-size:12px;">Pilih "-- ADMIN --", bila memilih level user ADMIN</i>
-                                    <select class='form-control js-example-placeholder-single' name='id_institusi' required>
+                                    <select class='select2' name='id_institusi' style="width: 100%;" required>
                                         <option value="">-- pilih --</option>
                                         <option value="0">-- ADMIN --</option>
                                         <?php
@@ -310,7 +310,7 @@ if (isset($_POST['tambah_user'])) {
                                                                 if ($d_akun['level_user'] != 1) {
                                                                 ?>
                                                                     <b>Institusi : </b><br>
-                                                                    <select class='form-control js-example-placeholder-single-long' aria-label='Default select example' name='id_institusi' required>
+                                                                    <select class='select2' name='id_institusi' style="width: 100%;" required>
                                                                         <option value="">-- Pilih --</option>
                                                                         <?php
                                                                         while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
