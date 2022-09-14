@@ -14,6 +14,7 @@ _*MINOR*_
 ---------------------------------------
 - ✅ Informasi Sisa di Modal Informasi Jadwal Praktikan
 - ✅ Perbaikan data MoU dan PKS di Admin diklat
+- 🔃 Pembuatan Aplikasi Jadwal praktikan sederhana diinputkan di zoom
 - Perubahan Daftar Mess-Pemondokan Saat Akan dipilih
 - Pembuatan Fitur Kwitansi, no Kwitansi disesuaikan dengan aplikasi
 - Perubahan "Kontak Person" Mess dan Pemondokan
@@ -57,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "-"
+git commit -a -m "Perbaikan Menu Login-Registrasi-Dashboard"
 git pull
 git push
 
