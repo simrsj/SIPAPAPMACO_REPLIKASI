@@ -682,6 +682,7 @@ if ($_GET['prk'] == 'kep') {
                 }
             }
 
+            //Cek jadwal praktikan
             var data_praktik = $('#form_praktik').serializeArray();
             $.ajax({
                 type: 'POST',
@@ -769,7 +770,8 @@ if ($_GET['prk'] == 'kep') {
                                 "&jen=" + jenjang +
                                 "&tmp=" + tgl_mulai +
                                 "&tsp=" + tgl_selesai +
-                                "&jum=" + jumlah,
+                                "&jum=" + jumlah +
+                                "&id_ins=" + institusi,
                                 true
                             );
                             xmlhttp_data_tarif.send();

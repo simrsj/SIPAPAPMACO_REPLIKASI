@@ -24,8 +24,8 @@ if (empty($_SESSION['username_user'])) {
 			</ul>
 			<ul class="navbar-nav col-4 font-weight-bold text-right">
 				<li class="nav-item">
-					<a class="btn btn-outline-warning btn-sm  my-auto" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>
-					<a class="btn btn-outline-success btn-sm  my-auto" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>
+					<a class="btn btn-outline-warning btn-sm my-auto" href="?dashboard"><i class="fas fa-fw fa-tachometer-alt"></i> DASHBOARD</a>
+					<a class="btn btn-outline-success btn-sm my-auto" href="?reg"><i class="fas fa-user-plus"></i> REGISTRASI</a>
 				<li class="nav-item">
 			</ul>
 		</nav>
@@ -171,6 +171,12 @@ if (empty($_SESSION['username_user'])) {
 				}
 			}
 			?>
+		</div>
+
+		<div class="container">
+			<div class="row justify-content-center">
+				<a href="./_file/panduan_aplikasi_sm.pdf" class="btn btn-danger" target="_blank">PANDUAN APLIKASI</a>
+			</div>
 		</div>
 	</body>
 	<script>
