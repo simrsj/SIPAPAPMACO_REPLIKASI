@@ -3,7 +3,7 @@ if (empty($_SESSION['username_user'])) {
 ?>
 
 	<body class="bg-gradient-primary">
-		<nav class="navbar navbar-light bg-light row">
+		<nav class="navbar navbar-light bg-light row mr-0 ml-0">
 			<ul class="navbar-nav col-4">
 				<li class="nav-item">
 					<?php include "?logo"; ?>

@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Perbaikan Menu Login-Registrasi-Dashboard untuk IID Kemendagri"
+git commit -a -m "Perbaikan Menu Login"
 git pull
 git push
 
