@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Perbaikan Menu Login"
+git commit -a -m "Input data praktikan farmasi profesi apoteker"
 git pull
 git push
 
