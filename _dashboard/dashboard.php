@@ -8,7 +8,7 @@
           <img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="30px">
           <img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="40px">
           <img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="30px">
-          DASHBOARD PRAKTIKAN DAN MESS/PEMONDOKAN - RS JIWA PROVINSI JAWA BARAT
+          DASHBOARD PRAKTIKAN DAN MESS/PEMONDOKAN
           <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
         </li>
       </ul>

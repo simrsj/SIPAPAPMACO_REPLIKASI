@@ -4,6 +4,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
 //Mencari Data institusi
+if (empty($_GET['id_ins'])) {
+}
 $sql_institusi = "SELECT * FROM tb_institusi WHERE id_institusi = " . $_GET['id_ins'];
 $q_institusi = $conn->query($sql_institusi);
 $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);

@@ -8,8 +8,8 @@
                     <img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="30px">
                     <img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="40px">
                     <img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="30px">
-                    REGISTRASI AKUN INSTITUSI - RS JIWA PROVINSI JAWA BARAT
-                    <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
+                    REGISTRASI
+                    <span class="badge badge-primary text-md"><?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
                 </li>
             </ul>
             <ul class="navbar-nav col-auto font-weight-bold">
@@ -59,15 +59,19 @@
                                                 <option value="">--<i> Pilih Institusi </i>--</option>
 
                                                 <?php
-                                                $sql_mou = "SELECT * FROM tb_institusi";
-                                                $sql_mou .= " ORDER BY tb_institusi.nama_institusi ASC";
+                                                $sql_ip = "SELECT * FROM tb_institusi";
+                                                $sql_ip .= " ORDER BY tb_institusi.nama_institusi ASC";
 
-                                                $q_mou = $conn->query($sql_mou);
-                                                $r_mou = $q_mou->rowCount();
+                                                $q_ip = $conn->query($sql_ip);
+                                                $r_ip = $q_ip->rowCount();
 
-                                                while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
+                                                while ($d_ip = $q_ip->fetch(PDO::FETCH_ASSOC)) {
+                                                    $akronim_institusi = "";
+                                                    if (!empty($d_ip['akronim_institusi'])) {
+                                                        $akronim_institusi = " (" . $d_ip['akronim_institusi'] . ")";
+                                                    }
                                                 ?>
-                                                    <option class='text-wrap' value='<?php echo $d_mou['id_institusi']; ?> '> <?php echo $d_mou['nama_institusi']; ?> </option>
+                                                    <option class='text-wrap' value='<?= $d_ip['id_institusi']; ?> '> <?= $d_ip['nama_institusi'] . $akronim_institusi; ?> </option>
                                                 <?php
                                                     $no++;
                                                 }
