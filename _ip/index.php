@@ -253,13 +253,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						include "_ip/hide/dh_praktik.php";
 					} elseif (isset($_GET['i'])) {
 						if ($_GET['prk'] == 'ked') {
-							include "_ip/insert/i_praktikKed.php";
+							include "_admin/insert/i_praktikKed.php";
 						} elseif ($_GET['prk'] == 'kep') {
-							include "_ip/insert/i_praktikKep.php";
+							include "_admin/insert/i_praktikKep.php";
 						} elseif ($_GET['prk'] == 'nkl') {
-							include "_ip/insert/i_praktikNkl.php";
+							include "_admin/insert/i_praktikNkl.php";
 						} elseif ($_GET['prk'] == 'nnk') {
-							include "_ip/insert/i_praktikNnk.php";
+							include "_admin/insert/i_praktikNnk.php";
 						} else {
 							include "_error/index.php";
 						}
