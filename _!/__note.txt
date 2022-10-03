@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Perubahan Keterangan MoU Dashboard Institusi"
+git commit -a -m "Database Kosong"
 git pull
 git push
 
