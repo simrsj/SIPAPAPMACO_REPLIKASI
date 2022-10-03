@@ -185,40 +185,56 @@
                     $aktif = 2;
                     ?>
                     <hr class="bg-danger" style="height: 2px;">
-                    <div class="no-gutters align-items-center text-center">
-                        <div class="col-xl-12 col-md-12 col-12">
-                            <h3>Hai <br><?php echo $dAr_ins['nama_institusi']; ?> </h3>
-                            <br />
-                            <?php if ($selesai != '' && $selesai != NULL) {
-                                if ($date_diff <= 0) {
-                                    if ($before_end <= 0) {
-                            ?>
-                                        <div class="col-xl-12 col-md-12 col-12">
-                                            <h5><span class="badge badge-success col-12">MOU Kita masih <b>AKTIF</b>,<br> Terima Kasih Telah Ber-MOU dengan Kami</span></h5>
-                                        </div>
-                                    <?php
-                                    } else {
+                    <div class="align-items-center text-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5>
+                                    <h3>Hai <br><?php echo $dAr_ins['nama_institusi']; ?> </h3>
+                                    <br />
+                                    <?php if ($selesai != '' && $selesai != NULL) {
+                                        if ($date_diff <= 0) {
+                                            if ($before_end <= 0) {
                                     ?>
-                                        <div class="col-xl-12 col-md-12 col-12">
-                                            <h5><span class="badge badge-danger col-12">MOU Kita sebentar lagi <b>KADALUARSA</b> <br />tepatnya pada tanggal : <?php echo tanggal($dAr_ins['tgl_selesai_mou']); ?>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut : <b>081321417344 (Adhie)</b></span></h5>
-                                        </div>
+                                                <span class="badge badge-success col-12">
+                                                    MOU Kita masih <b>AKTIF</b>,
+                                                    <br> Terima Kasih Telah Ber-MOU dengan Kami
+                                                </span>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <span class="badge badge-danger col-12">
+                                                    MOU Kita sebentar lagi <b>KADALUARSA</b>
+                                                    <br />tepatnya pada tanggal :
+                                                    <?php echo tanggal($dAr_ins['tgl_selesai_mou']); ?>,
+                                                    <br> Silahkan Hubungi Pihak Kami melalui nomor berikut :
+                                                    <b>081321417344 (Adhie)</b>
+                                                </span>
+                                            <?php
+                                            }
+                                        } elseif ($date_diff > 0) {
+                                            ?>
+                                            <span class="badge badge-dark ">
+                                                Mohon Maaf MOU Kita
+                                                <b>SUDAH KADALUARSA</b>,
+                                                <br>
+                                                Silahkan Hubungi Pihak Kami melalui nomor berikut :
+                                                <b>081321417344 (Adhie)</b>
+                                            </span>
+                                        <?php
+                                        }
+                                    } else {
+                                        ?>
+                                        <span class="badge badge-orange col-12">
+                                            Mohon Maaf Kita
+                                            <b>BELUM MOU</b>,
+                                            <br> Silahkan Hubungi Pihak Kami melalui nomor berikut :
+                                            <b>081321417344 (Adhie)</b>
+                                        </span>
                                     <?php
                                     }
-                                } elseif ($date_diff > 0) {
                                     ?>
-                                    <div class="col-xl-12 col-md-12 col-12">
-                                        <h5><span class="badge badge-dark col-12">Mohon Maaf MOU Kita <b>SUDAH KADALUARSA</b>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut : <b>081321417344 (Adhie)</b> </span></h5>
-                                    </div>
-                                <?php
-                                }
-                            } else {
-                                ?>
-                                <div class="col-xl-12 col-md-12 col-12">
-                                    <h5><span class="badge badge-orange col-12">Mohon Maaf Kita <b>BELUM MOU</b>,<br> Silahkan Hubungi Pihak Kami melalui nomor berikut : <b>081321417344 (Adhie)</b> </span></h5>
-                                </div>
-                            <?php
-                            }
-                            ?>
+                                </h5>
+                            </div>
                         </div>
                     </div>
                 </div>

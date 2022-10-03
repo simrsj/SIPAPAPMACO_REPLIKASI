@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Input data praktikan farmasi profesi apoteker"
+git commit -a -m "Perubahan Keterangan MoU Dashboard Institusi"
 git pull
 git push
 
