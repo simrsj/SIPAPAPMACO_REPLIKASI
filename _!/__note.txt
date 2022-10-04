@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Selesai Pengajuan Keperawtan User Institusi"
+git commit -a -m "Database Trial"
 git pull
 git push
 
