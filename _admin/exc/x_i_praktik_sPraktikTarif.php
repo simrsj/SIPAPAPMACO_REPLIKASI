@@ -79,7 +79,7 @@ $sql_insert = "INSERT INTO tb_praktik (
     materi_napza_praktik
     ) VALUES (
         '" . $_POST['id'] . "', 
-        '" . $_POST['id_institusi'] . "', 
+        '" . $_POST['institusi'] . "', 
         '" . $_POST['nama_praktik'] . "',
         '" . date('Y-m-d') . "', 
         '" . $_POST['tgl_mulai_praktik'] . "', 

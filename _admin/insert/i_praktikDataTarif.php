@@ -231,13 +231,13 @@ $jumlah_praktik = $_GET['jum'];
             </div>
             <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
                 <label class="boxed-check">
-                    <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="y" onclick="cekPilihUjian1()">
+                    <input class="boxed-check-input " type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="y" onclick="cekPilihUjianY()">
                     <div class="boxed-check-label">Ya</div>
                 </label>
                 &nbsp;
                 &nbsp;
                 <label class="boxed-check">
-                    <input class="boxed-check-input" type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="t" onclick="cekPilihUjian2()">
+                    <input class="boxed-check-input " type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="t" onclick="cekPilihUjianT()">
                     <div class="boxed-check-label">Tidak</div>
                 </label>
             </div>

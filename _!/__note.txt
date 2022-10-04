@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Nama Institusi Pengajuan Keperawatan Disesuaikan dengan User"
+git commit -a -m "Selesai Pengajuan Keperawtan User Institusi"
 git pull
 git push
 

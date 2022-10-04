@@ -176,24 +176,24 @@
     });
 
     $(".tambah_init").click(function() {
-        document.getElementById("err_t_nama_tempat").innerHTML = "";
-        document.getElementById("err_t_kapasitas_tempat").innerHTML = "";
-        document.getElementById("err_t_tarif_tempat").innerHTML = "";
-        document.getElementById("err_t_tarif_satuan").innerHTML = "";
-        document.getElementById("err_t_jenis_jurusan").innerHTML = "";
-        document.getElementById("form_tambah_tempat").reset();
+        $("#err_t_nama_tempat").html("");
+        $("#err_t_kapasitas_tempat").html("");
+        $("#err_t_tarif_tempat").html("");
+        $("#err_t_tarif_satuan").html("");
+        $("#err_t_jenis_jurusan").html("");
+        $("#form_tambah_tempat").reset();
         $("#data_tambah_tempat").fadeIn(1);
         $("#data_ubah_tempat").fadeOut(1);
         $('#t_nama_tempat').focus();
     });
 
     $(".tambah_tutup").click(function() {
-        document.getElementById("err_t_nama_tempat").innerHTML = "";
-        document.getElementById("err_t_kapasitas_tempat").innerHTML = "";
-        document.getElementById("err_t_tarif_tempat").innerHTML = "";
-        document.getElementById("err_t_tarif_satuan").innerHTML = "";
-        document.getElementById("err_t_jenis_jurusan").innerHTML = "";
-        document.getElementById("form_tambah_tempat").reset();
+        $("#err_t_nama_tempat").html("");
+        $("#err_t_kapasitas_tempat").html("");
+        $("#err_t_tarif_tempat").html("");
+        $("#err_t_tarif_satuan").html("");
+        $("#err_t_jenis_jurusan").html("");
+        $("#form_tambah_tempat").reset();
         $("#data_tambah_tempat").fadeOut(1);
     });
 
@@ -216,33 +216,33 @@
             t_jenis_jurusan == ""
         ) {
             if (t_nama_tempat == "") {
-                document.getElementById("err_t_nama_tempat").innerHTML = "Nama Harus Diisi";
+                $("#err_t_nama_tempat").html("Nama Harus Diisi");
             } else {
-                document.getElementById("err_t_nama_tempat").innerHTML = "";
+                $("#err_t_nama_tempat").html("");
             }
 
             if (t_kapasitas_tempat == "") {
-                document.getElementById("err_t_kapasitas_tempat").innerHTML = "Kapasitas Harus Diisi";
+                $("#err_t_kapasitas_tempat").html("Kapasitas Harus Diisi");
             } else {
-                document.getElementById("err_t_kapasitas_tempat").innerHTML = "";
+                $("#err_t_kapasitas_tempat").html("");
             }
 
             if (t_tarif_tempat == "") {
-                document.getElementById("err_t_tarif_tempat").innerHTML = "Tarif Harus Diisi";
+                $("#err_t_tarif_tempat").html("Tarif Harus Diisi");
             } else {
-                document.getElementById("err_t_tarif_tempat").innerHTML = "";
+                $("#err_t_tarif_tempat").html("");
             }
 
             if (t_tarif_satuan == "") {
-                document.getElementById("err_t_tarif_satuan").innerHTML = "Satuan Harus Dipilih";
+                $("#err_t_tarif_satuan").html("Satuan Harus Dipilih");
             } else {
-                document.getElementById("err_t_tarif_satuan").innerHTML = "";
+                $("#err_t_tarif_satuan").html("");
             }
 
             if (t_jenis_jurusan == "") {
-                document.getElementById("err_t_jenis_jurusan").innerHTML = "Jenis jurusan Harus Dipilih";
+                $("#err_t_jenis_jurusan").html("Jenis jurusan Harus Dipilih");
             } else {
-                document.getElementById("err_t_jenis_jurusan").innerHTML = "";
+                $("#err_t_jenis_jurusan").html("");
             }
 
         } else {
@@ -270,12 +270,12 @@
                         icon: 'success',
                         title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Ditambah</b></div>'
                     });
-                    document.getElementById("err_t_nama_tempat").innerHTML = "";
-                    document.getElementById("err_t_kapasitas_tempat").innerHTML = "";
-                    document.getElementById("err_t_tarif_tempat").innerHTML = "";
-                    document.getElementById("err_t_tarif_satuan").innerHTML = "";
-                    document.getElementById("err_t_jenis_jurusan").innerHTML = "";
-                    document.getElementById("form_tambah_tempat").reset();
+                    $("#err_t_nama_tempat").html("");
+                    $("#err_t_kapasitas_tempat").html("");
+                    $("#err_t_tarif_tempat").html("");
+                    $("#err_t_tarif_satuan").html("");
+                    $("#err_t_jenis_jurusan").html("");
+                    $("#form_tambah_tempat").reset();
                 },
                 error: function(response) {
                     console.log(response.responseText);

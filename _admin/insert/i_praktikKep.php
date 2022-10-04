@@ -92,6 +92,7 @@ if ($_GET['prk'] == 'kep') {
                                     $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)
                                     ?>
                                     <b><?= $d_institusi['nama_institusi']; ?></b>
+                                    <input name="institusi" value="<?php echo $_SESSION['id_institusi']; ?>" id="institusi" hidden>
                                 <?php
                                 }
 
@@ -342,7 +343,6 @@ if ($_GET['prk'] == 'kep') {
             var email_koordinator = $("#email_koordinator").val();
             var telp_koordinator = $("#telp_koordinator").val();
 
-
             //Notif Bila tidak diisi
             if (
                 institusi == "" ||
@@ -359,24 +359,6 @@ if ($_GET['prk'] == 'kep') {
                 nama_koordinator == "" ||
                 telp_koordinator == ""
             ) {
-
-                /* console.log(institusi + "--" +
-                    praktik + "--" +
-                    jurusan + "--" +
-                    akreditasi + "--" +
-                    jumlah + "--" +
-                    tgl_mulai + "--" +
-                    tgl_selesai + "--" +
-                    file_surat + "--" +
-                    // type_surat + "--" +
-                    // size_surat + "--" +
-                    file_data_praktikan + "--" +
-                    // type_data_praktikan + "--" +
-                    // size_data_praktikan + "--" +
-                    nama_koordinator + "--" +
-                    email_koordinator + "--" +
-                    telp_koordinator
-                ); */
 
                 //warning Toast bila ada data wajib yg berlum terisi
                 const Toast = Swal.mixin({
@@ -395,13 +377,19 @@ if ($_GET['prk'] == 'kep') {
                     icon: 'warning',
                     title: '<center>DATA WAJIB ADA YANG BELUM TERISI</center>'
                 });
+                <?php
 
-                //notif institusi 
-                if (institusi == "") {
-                    $("#err_institusi").html("Institusi Harus Dipilih");
-                } else {
-                    $("#err_institusi").html("");
+                if ($_SESSION['level_user'] == "2") {
+                ?>
+                    //notif institusi 
+                    if (institusi == "") {
+                        $("#err_institusi").html("Institusi Harus Dipilih");
+                    } else {
+                        $("#err_institusi").html("");
+                    }
+                <?php
                 }
+                ?>
 
                 //notif praktik 
                 if (praktik == "") {
@@ -519,15 +507,15 @@ if ($_GET['prk'] == 'kep') {
             if (file_surat != "") {
 
                 //Cari ekstensi file surat yg diupload
-                var typeSurat = document.querySelector('#file_surat').val();
+                var typeSurat = document.querySelector('#file_surat').value;
                 var getTypeSurat = typeSurat.split('.').pop();
 
                 //cari ukuran file surat yg diupload
-                var fileSurat = $("#file_surat").files;
-                var getSizeSurat = $("#file_surat").files[0].size / 1024;
+                var fileSurat = document.getElementById("file_surat").files;
+                var getSizeSurat = document.getElementById("file_surat").files[0].size / 1024;
 
-                // console.log("Size Surat : " + getSizeSurat);
-                // console.log("Size Surat : " + fileSurat);
+                console.log(getTypeSurat);
+                console.log(getSizeSurat);
 
                 //Toast bila upload file surat selain pdf
                 if (getTypeSurat != 'pdf') {
@@ -574,15 +562,14 @@ if ($_GET['prk'] == 'kep') {
             if (file_data_praktikan != "") {
 
                 //Cari ekstensi file data praktikan yg diupload
-                var typeDataPraktikan = document.querySelector('#file_data_praktikan').val();
+                var typeDataPraktikan = document.querySelector('#file_data_praktikan').value;
                 var getTypeDataPraktikan = typeDataPraktikan.split('.').pop();
 
                 //cari ukuran file data praktikan yg diupload
-                var fileDataPraktikan = $("#file_data_praktikan").files;
-                var getSizeDataPraktikan = $("#file_data_praktikan").files[0].size / 1024;
+                var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
+                var getSizeDataPraktikan = document.getElementById("file_data_praktikan").files[0].size / 1024;
 
-                // console.log("Size Data Surat : " + getSizeDataPraktikan);
-                // console.log("Size data Surat : " + fileDataPraktikan);
+                // console.log(getTypeDataPraktikan);
 
                 //Toast bila upload file data praktikan selain xlsx
                 if (getTypeDataPraktikan != 'xlsx') {
@@ -746,6 +733,15 @@ if ($_GET['prk'] == 'kep') {
             });
         }
 
+        function cekPilihUjianY() {
+            $('#tarif_ujian').focus();
+            $("#tarif_ujian").fadeIn(1000);
+        }
+
+        function cekPilihUjianT() {
+            $("#tarif_ujian").fadeOut(1000);
+        }
+
         function simpan_tarif() {
 
             //Notif dan Toast Bila Ujian Tidak dipilih
@@ -805,13 +801,11 @@ if ($_GET['prk'] == 'kep') {
                 //push data profesi
                 var jenjang = $("#jenjang").val();
                 var profesi = 0;
-                console.log('jenjang' + jenjang);
                 if (jenjang == 9) {
                     profesi = 5;
                 } else {
                     profesi = $("#profesi").val();
                 }
-                console.log('profesi' + profesi);
 
                 data_praktik.push({
                     name: 'id_profesi_pdd',
@@ -877,10 +871,10 @@ if ($_GET['prk'] == 'kep') {
                         var data_file = new FormData();
                         var xhttp = new XMLHttpRequest();
 
-                        var fileSurat = $("#file_surat").files;
+                        var fileSurat = document.getElementById("file_surat").files;
                         data_file.append("file_surat", fileSurat[0]);
 
-                        var fileDataPraktikan = $("#file_data_praktikan").files;
+                        var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
                         data_file.append("file_data_praktikan", fileDataPraktikan[0]);
 
                         var id = $("#id").val();
@@ -893,7 +887,7 @@ if ($_GET['prk'] == 'kep') {
                         var data_file_praktikan = new FormData();
                         var xhttp_data_praktikan = new XMLHttpRequest();
 
-                        var fileDataPraktikan = $("#file_data_praktikan").files;
+                        var fileDataPraktikan = document.getElementById("file_data_praktikan").files;
                         data_file_praktikan.append("file_data_praktikan", fileDataPraktikan[0]);
 
                         var id = $("#id").val();
@@ -903,7 +897,7 @@ if ($_GET['prk'] == 'kep') {
                         xhttp_data_praktikan.send(data_file_praktikan);
 
                         //Cari Jenis Jurusan
-                        var jur = document.getElementById('jurusan').val();
+                        var jur = $('#jurusan').val();
                         var xmlhttp_path = new XMLHttpRequest();
                         xmlhttp_path.onload = function() {
                             var path = "";
