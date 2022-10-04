@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Database Kosong"
+git commit -a -m "Nama Institusi Pengajuan Keperawatan Disesuaikan dengan User"
 git pull
 git push
 

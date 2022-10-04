@@ -50,34 +50,51 @@ if ($_GET['prk'] == 'kep') {
 
                                 $q_institusi = $conn->query($sql_institusi);
                                 $r_institusi = $q_institusi->rowCount();
-                                if ($r_institusi > 0) {
-                                    $no = 1;
+                                if ($_SESSION['level_user'] == 1) {
+                                    $sql_institusi = "SELECT * FROM tb_institusi";
+                                    $sql_institusi .= " ORDER BY tb_institusi.nama_institusi ASC";
+
+                                    $q_institusi = $conn->query($sql_institusi);
+                                    $r_institusi = $q_institusi->rowCount();
+                                    if ($r_institusi > 0) {
+                                        $no = 1;
                                 ?>
-                                    <select class='select2 form-control' name='id_institusi' id="institusi" required>
-                                        <option value="">-- <i>Pilih</i>--</option>
-                                        <?php
-                                        while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                            <option value='<?php echo $d_institusi['id_institusi']; ?>'>
-                                                <?php echo $d_institusi['nama_institusi'];
-                                                if ($d_institusi['akronim_institusi'] != '') {
-                                                    echo " (" . $d_institusi['akronim_institusi'] . ")";
-                                                }
-                                                ?>
-                                            </option>
-                                        <?php
-                                            $no++;
-                                        }
-                                        ?>
-                                    </select>
-                                    <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
-                                    <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_institusi"></div>
-                                <?php
-                                } else {
-                                ?>
-                                    <b><i>Data MoU Tidak Ada</i></b>
+                                        <select class='select2 form-control' name='id_institusi' id="institusi" required>
+                                            <option value="">-- <i>Pilih</i>--</option>
+                                            <?php
+                                            while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                                <option value='<?php echo $d_institusi['id_institusi']; ?>'>
+                                                    <?php echo $d_institusi['nama_institusi'];
+                                                    if ($d_institusi['akronim_institusi'] != '') {
+                                                        echo " (" . $d_institusi['akronim_institusi'] . ")";
+                                                    }
+                                                    ?>
+                                                </option>
+                                            <?php
+                                                $no++;
+                                            }
+                                            ?>
+                                        </select>
+                                        <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
+                                        <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_institusi"></div>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <b><i>Data MoU Tidak Ada</i></b>
+                                    <?php
+                                    }
+                                } elseif ($_SESSION['level_user'] == 2) {
+                                    $sql_institusi = "SELECT * FROM tb_institusi";
+                                    $sql_institusi .= " WHERE id_institusi = " . $_SESSION['id_institusi'];
+
+                                    $q_institusi = $conn->query($sql_institusi);
+                                    $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)
+                                    ?>
+                                    <b><?= $d_institusi['nama_institusi']; ?></b>
                                 <?php
                                 }
+
                                 ?>
                             </div>
                             <div class="col-lg-5">
