@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Arsip Hasil Rapat Tanggal 07 Oktober 2022"
+git commit -a -m "Branch dev dibuat"
 git pull
 git push
 
