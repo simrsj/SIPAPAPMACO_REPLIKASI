@@ -20,7 +20,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
         <?php if ($d_prvl['c_akun'] == "Y") { ?>
             <div class="card shadow mb-4 card-body" id="data_tambah" style="display: none;">
                 <form method="post" id="form_tambah">
-                    <div class="form-group row mb-4 " width="100%">
+                    <div class="form-group row mb-4 my-auto" width="100%">
                         <?php
                         $sql_user = "SELECT * FROM tb_user";
                         $sql_user .= " ORDER BY id_user ASC";
@@ -38,22 +38,22 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                         $id_user = $no;
                         ?>
                         <input name="id_user" id="id_user" value="<?= $id_user; ?>" hidden>
-                        <div class="col-3">
+                        <div class="col-3 my-auto">
                             Nama : <span class="text-danger">*</span><br>
                             <input class="form-control" name="c_nama" id="c_nama" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_c_nama"></div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 my-auto">
                             Telepon : <span class="text-danger mb-2">*</span><br>
                             <input class="form-control" type="number" min="0" pattern="[0-9]{2}[4-14]{9}" name="c_telp" id="c_telp" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_c_telp"></div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 my-auto">
                             Email : <span class="text-danger">*</span><br>
                             <input class="form-control" type="email" name="c_email" id="c_email" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_c_email"></div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 my-auto">
                             <fieldset class="border p-2">
                                 Foto : <span class="text-danger">*</span><br>
                                 <input type="file" name="c_foto" id="c_foto" accept=".png, .jpg, .jpeg">
@@ -63,22 +63,22 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col">
+                        <div class="col my-auto">
                             <i>Username</i> : <span class="text-danger">*</span><br>
                             <input class="form-control" name="c_username" id="c_username" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_c_username"></div>
                         </div>
-                        <div class="col">
+                        <div class="col my-auto">
                             <i>Password</i> : <span class="text-danger">*</span><br>
                             <input class="form-control" type="password" name="c_password" id="c_password" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_c_password"></div>
                         </div>
-                        <div class="col">
+                        <div class="col my-auto">
                             Ulangi <i>Password</i> : <span class="text-danger">*</span><br>
                             <input class="form-control" type="password" name="c_passwordx" id="c_passwordx" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_c_passwordx"></div>
                         </div>
-                        <div class="col">
+                        <div class="col my-auto">
                             <i>Level Akun</i> : <span class="text-danger">*</span><br>
                             <select class="select2" name="c_level" id="c_level" required>
                                 <option value=""></option>
@@ -93,11 +93,11 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                 </form>
                 <hr>
                 <div class="form-inline navbar nav-link justify-content-end">
-                    <button type="button" name="tambah" class="btn btn-success mb-2 tambah">
+                    <button type="button" name="tambah" class="btn btn-success btn-xs tambah">
                         Tambah
                     </button>
                     &nbsp;&nbsp;
-                    <button type="button" class="btn btn-outline-danger mb-2 tambah_tutup">
+                    <button type="button" class="btn btn-outline-danger btn-xs tambah_tutup">
                         Tutup
                     </button>
                 </div>
@@ -107,27 +107,32 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
         <!-- form ubah akun  -->
         <?php if ($d_prvl['u_akun'] == "Y") { ?>
             <div class="card shadow mb-4 card-body" id="data_ubah" style="display: none;">
-                <form method="post" id="form_ubahs">
+                <form method="post" id="form_ubah">
                     <div class="form-group row mb-4 " width="100%">
-                        <div class="col-3">
+                        <div class="col my-auto">
                             Nama : <span class="text-danger">*</span><br>
                             <input class="form-control" name="u_nama" id="u_nama" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_u_nama"></div>
                         </div>
-                        <div class="col-3">
+                        <div class="col my-auto">
                             Telepon : <span class="text-danger mb-2">*</span><br>
                             <input class="form-control" type="number" min="0" name="u_telp" id="u_telp" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_u_telp"></div>
                         </div>
-                        <div class="col-3">
+                        <div class="col my-auto">
                             Email : <span class="text-danger">*</span><br>
                             <input class="form-control" type="email" name="u_email" id="u_email" required>
-                            <br>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_u_email"></div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-1 text-center my-auto">
+                            <fieldset class="border border-1 p-1 m-0">
+                                <div id="foto_akun"></div>
+                            </fieldset>
+                        </div>
+                        <div class="col-3 my-auto">
                             <fieldset class="border p-2">
                                 Foto :
+                                <div id="file_foto" class="text-xs font-italic"></div>
                                 <input type="file" name="u_foto" id="u_foto" accept=".png, .jpg, .jpeg">
                                 <div class="font-italic text-xs">Foto harus PNG/JPG/JPEG dan ukuran kurang dari 200 Kb</div>
                             </fieldset>
@@ -135,22 +140,22 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col">
+                        <div class="col my-auto">
                             <i>Username</i> : <span class="text-danger">*</span><br>
                             <input class="form-control" name="u_username" id="u_username" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_u_username"></div>
                         </div>
-                        <div class="col">
+                        <div class="col my-auto">
                             <i>Password</i> : <span class="text-danger">*</span><br>
                             <input class="form-control" type="password" name="u_password" id="u_password" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_u_password"></div>
                         </div>
-                        <div class="col">
+                        <div class="col my-auto">
                             Ulangi <i>Password</i> : <span class="text-danger">*</span><br>
                             <input class="form-control" type="password" name="u_passwordx" id="u_passwordx" required>
                             <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_u_passwordx"></div>
                         </div>
-                        <div class="col">
+                        <div class="col my-auto">
                             <i>Level Akun</i> : <span class="text-danger">*</span><br>
                             <select class="select2" name="u_level" id="u_level" required>
                                 <option value=""></option>
@@ -161,15 +166,24 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                             </select>
                             <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_level"></div>
                         </div>
+                        <div class="col my-auto">
+                            <i>Status Akun</i> : <span class="text-danger">*</span><br>
+                            <select class="select2" name="u_status" id="u_status" required>
+                                <option value=""></option>
+                                <option value="Y">Aktif</option>
+                                <option value="N">Tidak Aktif</option>
+                            </select>
+                            <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_status"></div>
+                        </div>
                     </div>
                 </form>
                 <hr>
                 <div class="form-inline navbar nav-link justify-content-end">
-                    <button type="button" name="tambah" class="btn btn-success mb-2 tambah">
-                        Tambah
+                    <button type="button" name="tambah" class="btn btn-primary btn-xs ubah">
+                        Ubah
                     </button>
                     &nbsp;&nbsp;
-                    <button type="button" class="btn btn-outline-danger mb-2 tambah_tutup">
+                    <button type="button" class="btn btn-outline-danger btn-xs ubah_tutup">
                         Tutup
                     </button>
                 </div>
@@ -192,6 +206,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                 document.getElementById("err_c_password").innerHTML = "";
                 document.getElementById("err_c_passwordx").innerHTML = "";
                 document.getElementById("err_c_level").innerHTML = "";
+                document.getElementById("err_c_foto").innerHTML = "";
                 document.getElementById("form_tambah").reset();
                 $('#c_level').val("").trigger("change");
                 $("#data_tambah").fadeIn(0);
@@ -205,6 +220,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                 document.getElementById("err_c_password").innerHTML = "";
                 document.getElementById("err_c_passwordx").innerHTML = "";
                 document.getElementById("err_c_level").innerHTML = "";
+                document.getElementById("err_c_foto").innerHTML = "";
                 document.getElementById("form_tambah").reset();
                 $('#c_level').val("").trigger("change");
                 $("#data_tambah").fadeOut(0);
@@ -222,7 +238,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 
                 // console.log(foto)
 
-                //cek data from ubah bila tidak diiisi
+                //cek data from tambah bila tidak diiisi
                 if (
                     nama == "" ||
                     telp == "" ||
@@ -305,7 +321,6 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                     // }
 
                 }
-
 
                 //eksekusi bila data wajib terisi dan sesuai
                 if (
@@ -411,6 +426,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                                     document.getElementById("err_c_password").innerHTML = "";
                                     document.getElementById("err_c_passwordx").innerHTML = "";
                                     document.getElementById("err_c_level").innerHTML = "";
+                                    document.getElementById("err_c_foto").innerHTML = "";
                                     document.getElementById("form_tambah").reset();
                                     $("#c_level").val("").trigger("change");
                                     $("#data_tambah").fadeOut(0);
@@ -450,6 +466,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                                 document.getElementById("err_c_password").innerHTML = "";
                                 document.getElementById("err_c_passwordx").innerHTML = "";
                                 document.getElementById("err_c_level").innerHTML = "";
+                                document.getElementById("err_c_foto").innerHTML = "";
                                 document.getElementById("form_tambah").reset();
                                 $("#c_level").val("").trigger("change");
                                 $("#data_tambah").fadeOut(0);

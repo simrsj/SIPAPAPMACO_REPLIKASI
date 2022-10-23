@@ -9,8 +9,12 @@ $q = $conn->query($sql);
 $d = $q->fetch(PDO::FETCH_ASSOC);
 $h['id_user'] = $d["id_user"];
 $h['nama_user'] = $d["nama_user"];
-$h['jumlah_kuota'] = $d["jumlah_kuota"];
-$h['ket_kuota'] = $d["ket_kuota"];
+$h['email_user'] = $d["email_user"];
+$h['no_telp_user'] = $d["no_telp_user"];
+$h['level_user'] = $d["level_user"];
+$h['username_user'] = $d["username_user"];
+$h['foto_user'] = $d["foto_user"];
+$h['status_user'] = $d["status_user"];
 
 echo json_encode($h);
 
