@@ -21,6 +21,23 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
             <div class="card shadow mb-4 card-body" id="data_tambah" style="display: none;">
                 <form method="post" id="form_tambah">
                     <div class="form-group row mb-4 " width="100%">
+                        <?php
+                        $sql_user = "SELECT * FROM tb_user";
+                        $sql_user .= " ORDER BY id_user ASC";
+
+                        $q_user = $conn->query($sql_user);
+                        if ($q_user->rowCount() > 0) {
+                            $no = 1;
+                            while ($d_user = $q_user->fetch(PDO::FETCH_ASSOC)) {
+                                if ($no != $d_user['id_user']) {
+                                    break;
+                                }
+                                $no++;
+                            }
+                        }
+                        $id_user = $no;
+                        ?>
+                        <input name="id_user" id="id_user" value="<?= $id_user; ?>" hidden>
                         <div class="col-3">
                             Nama : <span class="text-danger">*</span><br>
                             <input class="form-control" name="c_nama" id="c_nama" required>
@@ -38,7 +55,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                         </div>
                         <div class="col-3">
                             <fieldset class="border p-2">
-                                Foto :
+                                Foto : <span class="text-danger">*</span><br>
                                 <input type="file" name="c_foto" id="c_foto" accept=".png, .jpg, .jpeg">
                                 <div class="font-italic text-xs">Foto harus PNG/JPG/JPEG dan ukuran kurang dari 200 Kb</div>
                             </fieldset>
@@ -197,11 +214,13 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                 var nama = $("#c_nama").val();
                 var telp = $("#c_telp").val();
                 var email = $("#c_email").val();
-                var foto = $("#foto").val();
+                var foto = $("#c_foto").val();
                 var username = $("#c_username").val();
                 var password = $("#c_password").val();
                 var passwordx = $("#c_passwordx").val();
                 var level = $("#c_level").val();
+
+                // console.log(foto)
 
                 //cek data from ubah bila tidak diiisi
                 if (
@@ -213,7 +232,25 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                     passwordx == "" ||
                     password != passwordx ||
                     level == ""
+                    // foto == ""
                 ) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+
+                    Toast.fire({
+                        icon: 'warning',
+                        title: '<div class="text-md text-center">Data Wajib ada yang belum diisi</div>'
+                    });
+
                     if (nama == "") {
                         document.getElementById("err_c_nama").innerHTML = "Nama Harus Diisi";
                     } else {
@@ -261,21 +298,27 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                         document.getElementById("err_c_level").innerHTML = "";
                     }
 
+                    // if (foto == "") {
+                    //     document.getElementById("err_c_foto").innerHTML = "Foto Harus Diunggah";
+                    // } else {
+                    //     document.getElementById("err_c_foto").innerHTML = "";
+                    // }
+
                 }
 
                 //eksekusi bila file Foto terisi
-                if (foto != undefined) {
+                if (foto != "") {
 
-                    //Cari ekstensi file MoU yg diupload
+                    //Cari ekstensi file Foto yg diupload
                     var typeFoto = document.querySelector('#c_foto').value;
                     var getTypeFoto = typeFoto.split('.').pop();
 
-                    //cari ukuran file MoU yg diupload
+                    //cari ukuran file Foto yg diupload
                     var getSizeFoto = document.getElementById("c_foto").files[0].size / 1024;
 
                     console.log(getSizeFoto);
 
-                    //Toast bila upload Foto selain pdf
+                    //Toast bila upload Foto selain png/jpg/jpeg
                     if (getTypeFoto != 'png' && getTypeFoto != 'jpg' && getTypeFoto != 'jpeg') {
                         const Toast = Swal.mixin({
                             toast: true,
@@ -313,9 +356,23 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                             title: '<div class="text-md text-center">Ukuran File Foto Harus <br><b>Kurang dari 200 Kb </b></div>'
                         });
                         document.getElementById("err_c_foto").innerHTML = "Ukuran Foto Harus Kurang dari 200 Kb ";
+                    } else {
+
+                        var data_file = new FormData();
+                        var xhttp = new XMLHttpRequest();
+
+                        var foto = document.getElementById("c_foto").files;
+                        data_file.append("c_foto", foto[0]);
+
+                        var id_user = document.getElementById("id_user").value;
+                        data_file.append("id_user", id_user);
+
+                        xhttp.open("POST", "_admin/exc/x_v_akun_sFile.php", true);
+                        xhttp.send(data_file);
                     }
                 }
 
+                //eksekusi bila data wajib terisi dan sesuai
                 if (
                     nama != "" &&
                     telp != "" &&
@@ -325,6 +382,9 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                     passwordx != "" &&
                     password == passwordx &&
                     level != ""
+                    // foto != "" &&
+                    // (getTypeLogo == "png" || getTypeLogo == "jpg" || getTypeLogo == "jpeg") &&
+                    // getSizeLogo < 256
                 ) {
                     $.ajax({
                         type: 'POST',
@@ -332,7 +392,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                         data: data,
                         success: function() {
 
-                            $('#data_akun').load('_admin/view/v_akunData.php');
+                            $('#data_akun').load('_admin/view/v_akunData.php?id=' + <?= $_SESSION['id_user'] ?>);
 
                             Swal.fire({
                                 allowOutsideClick: false,
@@ -346,8 +406,16 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                                 }
                             });
+                            document.getElementById("err_c_nama").innerHTML = "";
+                            document.getElementById("err_c_telp").innerHTML = "";
+                            document.getElementById("err_c_email").innerHTML = "";
+                            document.getElementById("err_c_username").innerHTML = "";
+                            document.getElementById("err_c_password").innerHTML = "";
+                            document.getElementById("err_c_passwordx").innerHTML = "";
+                            document.getElementById("err_c_level").innerHTML = "";
                             document.getElementById("form_tambah").reset();
                             $("#c_level").val("").trigger("change");
+                            $("#data_tambah").fadeOut(0);
                         },
                         error: function(response) {
                             console.log(response.responseText);
