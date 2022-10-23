@@ -12,7 +12,7 @@ $sql = "INSERT INTO tb_institusi (
     messOpsional_institusi
     ) VALUES (
         '" . $_POST['id_institusi'] . "', 
-        '" . date('Y-m-d') . "', 
+        '" . date('Y-m-d G:i:s') . "', 
         '" . $_POST['t_nama_institusi'] . "', 
         '" . $_POST['t_akronim_institusi'] . "', 
         '" . $_POST['t_alamat_institusi'] . "',

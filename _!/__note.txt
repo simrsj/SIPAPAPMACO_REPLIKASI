@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Progres Ubah Akun"
+git commit -a -m "Perbaikan Ubah Akun foto"
 git pull
 git push
 

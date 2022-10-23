@@ -108,6 +108,8 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
         <?php if ($d_prvl['u_akun'] == "Y") { ?>
             <div class="card shadow mb-4 card-body" id="data_ubah" style="display: none;">
                 <form method="post" id="form_ubah">
+                    <input type="hidden" name="u_id_user" id="u_id_user">
+                    <input type="hidden" name="foto_asal" id="foto_asal" value="ubah">
                     <div class="form-group row mb-4 " width="100%">
                         <div class="col my-auto">
                             Nama : <span class="text-danger">*</span><br>
@@ -171,7 +173,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                             <select class="select2" name="u_status" id="u_status" required>
                                 <option value=""></option>
                                 <option value="Y">Aktif</option>
-                                <option value="N">Tidak Aktif</option>
+                                <option value="T">Tidak Aktif</option>
                             </select>
                             <div class="text-danger font-weight-bold font-italic text-xs blink" id="err_u_status"></div>
                         </div>

@@ -4,9 +4,9 @@ use PhpOffice\PhpSpreadsheet\Reader\Xls\MD5;
 
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 
 $sql = "INSERT INTO tb_user (";
 $sql .= " id_user,";
