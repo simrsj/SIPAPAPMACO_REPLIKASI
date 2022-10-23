@@ -306,71 +306,6 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 
                 }
 
-                //eksekusi bila file Foto terisi
-                if (foto != "") {
-
-                    //Cari ekstensi file Foto yg diupload
-                    var typeFoto = document.querySelector('#c_foto').value;
-                    var getTypeFoto = typeFoto.split('.').pop();
-
-                    //cari ukuran file Foto yg diupload
-                    var getSizeFoto = document.getElementById("c_foto").files[0].size / 1024;
-
-                    console.log(getSizeFoto);
-
-                    //Toast bila upload Foto selain png/jpg/jpeg
-                    if (getTypeFoto != 'png' && getTypeFoto != 'jpg' && getTypeFoto != 'jpeg') {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 10000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        });
-
-                        Toast.fire({
-                            icon: 'warning',
-                            title: '<div class="text-md text-center">Foto Harus <b>.png</b>/<b>.jpg</b>/<b>.jpeg</b></div>'
-                        });
-                        document.getElementById("err_c_foto").innerHTML = "Foto Harus PNG/JPG/JPEG";
-                    } //Toast bila upload file Foto diatas 200 Kb 
-                    else if (getSizeFoto > 256) {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 10000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        });
-
-                        Toast.fire({
-                            icon: 'warning',
-                            title: '<div class="text-md text-center">Ukuran File Foto Harus <br><b>Kurang dari 200 Kb </b></div>'
-                        });
-                        document.getElementById("err_c_foto").innerHTML = "Ukuran Foto Harus Kurang dari 200 Kb ";
-                    } else {
-
-                        var data_file = new FormData();
-                        var xhttp = new XMLHttpRequest();
-
-                        var foto = document.getElementById("c_foto").files;
-                        data_file.append("c_foto", foto[0]);
-
-                        var id_user = document.getElementById("id_user").value;
-                        data_file.append("id_user", id_user);
-
-                        xhttp.open("POST", "_admin/exc/x_v_akun_sFile.php", true);
-                        xhttp.send(data_file);
-                    }
-                }
 
                 //eksekusi bila data wajib terisi dan sesuai
                 if (
@@ -382,45 +317,148 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                     passwordx != "" &&
                     password == passwordx &&
                     level != ""
-                    // foto != "" &&
+                    // foto == "" &&
                     // (getTypeLogo == "png" || getTypeLogo == "jpg" || getTypeLogo == "jpeg") &&
                     // getSizeLogo < 256
                 ) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "_admin/exc/x_v_akun_s.php",
-                        data: data,
-                        success: function() {
 
-                            $('#data_akun').load('_admin/view/v_akunData.php?id=' + <?= $_SESSION['id_user'] ?>);
+                    //eksekusi bila file Foto terisi
+                    if (foto != "") {
 
-                            Swal.fire({
-                                allowOutsideClick: false,
-                                icon: 'success',
-                                title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Ditambah</b></div>',
+                        //Cari ekstensi file Foto yg diupload
+                        var typeFoto = document.querySelector('#c_foto').value;
+                        var getTypeFoto = typeFoto.split('.').pop();
+
+                        //cari ukuran file Foto yg diupload
+                        var getSizeFoto = document.getElementById("c_foto").files[0].size / 1024;
+
+                        //Toast bila upload Foto selain png/jpg/jpeg
+                        if (getTypeFoto != 'png' && getTypeFoto != 'jpg' && getTypeFoto != 'jpeg') {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
                                 showConfirmButton: false,
-                                timer: 3000,
+                                timer: 10000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
                                     toast.addEventListener('mouseenter', Swal.stopTimer)
                                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                                 }
                             });
-                            document.getElementById("err_c_nama").innerHTML = "";
-                            document.getElementById("err_c_telp").innerHTML = "";
-                            document.getElementById("err_c_email").innerHTML = "";
-                            document.getElementById("err_c_username").innerHTML = "";
-                            document.getElementById("err_c_password").innerHTML = "";
-                            document.getElementById("err_c_passwordx").innerHTML = "";
-                            document.getElementById("err_c_level").innerHTML = "";
-                            document.getElementById("form_tambah").reset();
-                            $("#c_level").val("").trigger("change");
-                            $("#data_tambah").fadeOut(0);
-                        },
-                        error: function(response) {
-                            console.log(response.responseText);
+
+                            Toast.fire({
+                                icon: 'warning',
+                                title: '<div class="text-md text-center">Foto Harus <b>.png</b>/<b>.jpg</b>/<b>.jpeg</b></div>'
+                            });
+                            document.getElementById("err_c_foto").innerHTML = "Foto Harus PNG/JPG/JPEG";
+                        } //Toast bila upload file Foto diatas 200 Kb 
+                        else if (getSizeFoto > 256) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 10000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            });
+
+                            Toast.fire({
+                                icon: 'warning',
+                                title: '<div class="text-md text-center">Ukuran File Foto Harus <br><b>Kurang dari 200 Kb </b></div>'
+                            });
+                            document.getElementById("err_c_foto").innerHTML = "Ukuran Foto Harus Kurang dari 200 Kb ";
+                        } //eksekusi  jika foto sesuai 
+                        else {
+                            $.ajax({
+                                type: 'POST',
+                                url: "_admin/exc/x_v_akun_s.php",
+                                data: data,
+                                success: function() {
+
+                                    $('#data_akun').load('_admin/view/v_akunData.php?id=' + <?= $_SESSION['id_user'] ?>);
+
+                                    var data_file = new FormData();
+                                    var xhttp = new XMLHttpRequest();
+
+                                    var foto = document.getElementById("c_foto").files;
+                                    data_file.append("c_foto", foto[0]);
+
+                                    var id_user = document.getElementById("id_user").value;
+                                    data_file.append("id_user", id_user);
+
+                                    xhttp.open("POST", "_admin/exc/x_v_akun_sFile.php", true);
+                                    xhttp.send(data_file);
+
+                                    Swal.fire({
+                                        allowOutsideClick: false,
+                                        icon: 'success',
+                                        title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Ditambah</b></div>',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                        }
+                                    });
+                                    document.getElementById("err_c_nama").innerHTML = "";
+                                    document.getElementById("err_c_telp").innerHTML = "";
+                                    document.getElementById("err_c_email").innerHTML = "";
+                                    document.getElementById("err_c_username").innerHTML = "";
+                                    document.getElementById("err_c_password").innerHTML = "";
+                                    document.getElementById("err_c_passwordx").innerHTML = "";
+                                    document.getElementById("err_c_level").innerHTML = "";
+                                    document.getElementById("form_tambah").reset();
+                                    $("#c_level").val("").trigger("change");
+                                    $("#data_tambah").fadeOut(0);
+                                },
+                                error: function(response) {
+                                    console.log(response.responseText);
+                                }
+                            });
                         }
-                    });
+                    } //eksekusi jika foto tidak ada 
+                    else {
+                        $.ajax({
+                            type: 'POST',
+                            url: "_admin/exc/x_v_akun_s.php",
+                            data: data,
+                            success: function() {
+
+                                $('#data_akun').load('_admin/view/v_akunData.php?id=' + <?= $_SESSION['id_user'] ?>);
+
+                                Swal.fire({
+                                    allowOutsideClick: false,
+                                    icon: 'success',
+                                    title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Ditambah</b></div>',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+
+                                document.getElementById("err_c_nama").innerHTML = "";
+                                document.getElementById("err_c_telp").innerHTML = "";
+                                document.getElementById("err_c_email").innerHTML = "";
+                                document.getElementById("err_c_username").innerHTML = "";
+                                document.getElementById("err_c_password").innerHTML = "";
+                                document.getElementById("err_c_passwordx").innerHTML = "";
+                                document.getElementById("err_c_level").innerHTML = "";
+                                document.getElementById("form_tambah").reset();
+                                $("#c_level").val("").trigger("change");
+                                $("#data_tambah").fadeOut(0);
+                            },
+                            error: function(response) {
+                                console.log(response.responseText);
+                            }
+                        });
+                    }
                 }
             });
         <?php } ?>

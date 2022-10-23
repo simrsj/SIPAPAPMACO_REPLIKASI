@@ -45,6 +45,6 @@ $sql_u_user = "UPDATE tb_user SET ";
 $sql_u_user .= " foto_user = '" . $link_foto . "'";
 $sql_u_user .= " WHERE id_user = " . $id;
 
-echo $sql_u_user . "<br>";
+// echo $sql_u_user . "<br>";
 $conn->query($sql_u_user);
 echo json_encode(['success' => 'Data Institusi Berhasil Disimpan']);
