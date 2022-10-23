@@ -291,14 +291,14 @@
             }
         }
 
-        //eksekusi bila file MoU terisi
+        //eksekusi bila file logo terisi
         if (t_logo_institusi != "") {
 
-            //Cari ekstensi file MoU yg diupload
+            //Cari ekstensi file Foto yg diupload
             var typeLogo = document.querySelector('#t_logo_institusi').value;
             var getTypeLogo = typeLogo.split('.').pop();
 
-            //cari ukuran file MoU yg diupload
+            //cari ukuran file Foto yg diupload
             var getSizeLogo = document.getElementById("t_logo_institusi").files[0].size / 1024;
 
             console.log("Ukuran Logo : " + getSizeLogo);
@@ -321,7 +321,7 @@
                     title: '<div class="text-md text-center">Logo Harus <b>.png</b></div>'
                 });
                 document.getElementById("err_t_logo_institusi").innerHTML = "Logo Harus PNG";
-            } //Toast bila upload file MoU diatas 200 Kb 
+            } //Toast bila upload file Foto diatas 200 Kb 
             else if (getSizeLogo > 256) {
                 const Toast = Swal.mixin({
                     toast: true,
@@ -337,7 +337,7 @@
 
                 Toast.fire({
                     icon: 'warning',
-                    title: '<div class="text-md text-center">Ukuran File MoU Harus <br><b>Kurang dari 200 Kb </b></div>'
+                    title: '<div class="text-md text-center">Ukuran File Foto Harus <br><b>Kurang dari 200 Kb </b></div>'
                 });
                 document.getElementById("err_t_logo_institusi").innerHTML = "Ukuran Logo Harus Kurang dari 200 Kb ";
             }
@@ -438,7 +438,7 @@
                             toast.addEventListener('mouseenter', Swal.stopTimer)
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
-                    });;
+                    });
 
                     // const Toast = Swal.mixin({
                     //     toast: true,

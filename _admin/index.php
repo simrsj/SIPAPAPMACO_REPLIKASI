@@ -1,5 +1,10 @@
 <?php
 if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
+
+	//data privileges 
+	$sql_prvl = "SELECT * FROM tb_user WHERE id_user = " . $_SESSION['id_user'];
+	$q_prvl = $conn->query($sql_prvl);
+	$d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 ?>
 
 	<!-- Page Wrapper -->
@@ -28,24 +33,28 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					<span>MoU-Kerjasama</span></a>
 			</li>
 
-			<!-- Divider -->
 			<hr class="sidebar-divider">
-			<!-- Heading -->
 			<div class="sidebar-heading">
 				Kediklatan
 			</div>
+
+			<!-- Informasi -->
 			<li class="nav-item ">
 				<a class="nav-link" href="?info_diklat">
 					<i class="fas fa-fw fa-info-circle"></i>
 					<span>Informasi</span>
 				</a>
 			</li>
-			<li class="nav-item ">
-				<a class="nav-link" href="?kta">
-					<i class="far fa-fw fa-circle"></i>
-					<span>Kuota</span>
-				</a>
-			</li>
+
+			<!-- Kuota -->
+			<?php if ($d_prvl['r_kuota'] == "Y") { ?>
+				<li class="nav-item ">
+					<a class="nav-link" href="?kta">
+						<i class="far fa-fw fa-circle"></i>
+						<span>Kuota</span>
+					</a>
+				</li>
+			<?php } ?>
 			<li class="nav-item ">
 				<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
 					<i class="far fa-fw fa-list-alt"></i>
@@ -204,12 +213,16 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</div>
 				</div>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="?aku">
-					<i class="fas fa-fw fa-user-cog"></i>
-					<span>Pengaturan Akun</span>
-				</a>
-			</li>
+
+			<!-- Pengaturan Akun -->
+			<?php if ($d_prvl['r_akun'] == "Y") { ?>
+				<li class="nav-item">
+					<a class="nav-link" href="?aku">
+						<i class="fas fa-fw fa-user-cog"></i>
+						<span>Pengaturan Akun</span>
+					</a>
+				</li>
+			<?php } ?>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
@@ -331,8 +344,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 
 				include "./_add-ons/dashboard_data_admin.php";
 
-				if (isset($_GET['aku'])) {
-					include "_admin/view/v_akun.php";
+				if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
+					if (isset($_GET['ha'])) {
+						include "_admin/view/v_akun_hak_akses.php";
+					} else {
+						include "_admin/view/v_akun.php";
+					}
 				} elseif (isset($_GET['ars'])) {
 					if (isset($_GET['dp'])) {
 						include "_admin/view/v_praktik_arsip_dataPraktik.php";
@@ -359,7 +376,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					include "_admin/view/v_jurusan.php";
 				} elseif (isset($_GET['jjg'])) {
 					include "_admin/view/v_jenjang.php";
-				} elseif (isset($_GET['kta'])) {
+				} elseif (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') {
 					include "_admin/view/v_kuota.php";
 				} elseif (isset($_GET['lapor'])) {
 					if (isset($_GET['dtl'])) {

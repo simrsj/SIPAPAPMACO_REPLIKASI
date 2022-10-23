@@ -59,7 +59,7 @@ legend {
 .select2 {
   width: 100% !important;
 }
-.select2-selection--single {
+.select2-selection-single {
   height: 100% !important;
 }
 .select2-selection__rendered{
@@ -84,4 +84,12 @@ legend {
 }
 .border-5 {
   border-width:5px !important;
+}
+
+/* -------------------------------------------------------------- myTable*/
+#myTable {
+  width:100% !important;
+}
+#myTable_2 {
+  width:100% !important;
 }

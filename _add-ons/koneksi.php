@@ -1,4 +1,6 @@
 <?php
+
+//----------------------------------------------------------------------------------DATABASE SM
 $servername = "localhost";
 $database = "db_sm";
 $username = "root";

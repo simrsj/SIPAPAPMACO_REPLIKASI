@@ -6,7 +6,6 @@ if (empty($_SESSION['username_user'])) {
 		<nav class="navbar navbar-light bg-light row mr-0 ml-0">
 			<ul class="navbar-nav col-4">
 				<li class="nav-item">
-					<?php include "?logo"; ?>
 					<img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="30px">
 					<img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="30px">
 					<img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="40px">
@@ -87,10 +86,7 @@ if (empty($_SESSION['username_user'])) {
 				$password_user = MD5($_POST['password_user']);
 				$sql_name = "SELECT * from `tb_user` WHERE `username_user`='$username_user'";
 				$sql_pass = "SELECT * from `tb_user` WHERE `password_user`='$password_user'";
-				$sql_name_pass = "SELECT * from `tb_user` 
-				WHERE `username_user`='$username_user' 
-					AND `password_user`='$password_user' 
-					AND status_user = 'Y' ";
+				$sql_name_pass = "SELECT * from `tb_user` WHERE `username_user`='$username_user' AND `password_user`='$password_user' AND status_user = 'Y' ";
 
 				$exc_name = $conn->query($sql_name);
 				$exc_pass = $conn->query($sql_pass);
@@ -152,22 +148,13 @@ if (empty($_SESSION['username_user'])) {
 			<?php
 					}
 				} else {
-					$sql_update_login = "UPDATE tb_user
-					SET terakhir_login_user = '" . date('Y-m-d') . "'
-					WHERE id_user ='" . $_SESSION['id_user'] . "'";
-
-					// echo $sql_update_login . "<br>";
-
+					$sql_update_login = "UPDATE tb_user";
+					$sql_update_login .= " SET terakhir_login_user = '" . date("Y-m-d G:i:s") . "'";
+					$sql_update_login .= " WHERE id_user ='" . $_SESSION['id_user'] . "'";
 					$conn->query($sql_update_login);
 
-					echo "
-					<script>			
-						document.location.href='?';
-					</script>
-					";
-
-					// header("Refresh:0"); 
-					// Warning: Cannot modify header information - headers already sent by (output started at C:\xampp7\htdocs\SM\_log-sign\index.php:4) in C:\xampp7\htdocs\SM\_log-sign\index.php on line 108
+					//reload ke index
+					echo "<script>document.location.href='?';</script>";
 				}
 			}
 			?>

@@ -103,7 +103,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     <?php
                                     } else {
                                     ?>
-                                        <a href="<?php echo $d_institusi['fileAkred_institusi']; ?>" class="btn btn-success btn-sm" target="_blank">
+                                        <a href="<?= $d_institusi['fileAkred_institusi']; ?>" class="btn btn-success btn-sm" target="_blank">
                                             <i class="fas fa-file-download"></i> Unduh
                                         </a>
                                     <?php
@@ -111,10 +111,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     ?>
                                 </td>
                                 <td class="text-center">
-                                    <a title="Ubah" class='btn btn-primary btn-sm ubah_init ' id='<?php echo $d_institusi['id_institusi']; ?>'>
+                                    <a title="Ubah" class='btn btn-primary btn-sm ubah_init ' id='<?= $d_institusi['id_institusi']; ?>'>
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a title="Hapus" class='btn btn-outline-danger btn-sm hapus' id='<?php echo $d_institusi['id_institusi']; ?>'>
+                                    <a title="Hapus" class='btn btn-outline-danger btn-sm hapus' id='<?= $d_institusi['id_institusi']; ?>'>
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     <hr class="p-0 m-2 bg-gray-500">
@@ -127,16 +127,16 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     <?php
                                     } else {
                                     ?>
-                                        <a title="Lihat Logo" class='btn btn-info btn-xs' href='#' data-toggle='modal' data-target='<?php echo "#see_" . $d_institusi['id_institusi']; ?>'>
+                                        <a title="Lihat Logo" class='btn btn-info btn-xs' href='#' data-toggle='modal' data-target='<?= "#see_" . $d_institusi['id_institusi']; ?>'>
                                             <i class="fas fa-eye"></i> Lihat
                                         </a>
 
                                         <!-- Lihat Logo  -->
-                                        <div class="modal fade" id="<?php echo "see_" . $d_institusi['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="<?= "see_" . $d_institusi['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
-                                                        <img src="<?php echo $d_institusi['logo_institusi']; ?>" width="250px" height="250px">
+                                                        <img src="<?= $d_institusi['logo_institusi']; ?>" width="250px" height="250px">
                                                     </div>
                                                 </div>
                                             </div>

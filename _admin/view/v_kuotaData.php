@@ -1,8 +1,11 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+$sql_prvl = "SELECT * FROM tb_user WHERE id_user = " . $_GET['id'];
+// echo $sql_prvl;
+$q_prvl = $conn->query($sql_prvl);
+$d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
-$sql_kuota = "SELECT * FROM tb_kuota ";
-$sql_kuota .= " ORDER BY tb_kuota.nama_kuota ASC";
+$sql_kuota = "SELECT * FROM tb_kuota ORDER BY tb_kuota.nama_kuota ASC";
 // echo $sql_kuota;
 
 $q_data_kuota = $conn->query($sql_kuota);
@@ -32,13 +35,17 @@ if ($r_data_kuota > 0) {
                         <td><?php echo $d_data_kuota['nama_kuota']; ?></td>
                         <td><?php echo $d_data_kuota['jumlah_kuota']; ?></td>
                         <td><?php echo $d_data_kuota['ket_kuota']; ?></td>
-                        <td>
-                            <button id="<?php echo $d_data_kuota['id_kuota']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH">
-                                <i class="fa fa-edit"></i> Ubah
-                            </button>
-                            <button id="<?php echo $d_data_kuota['id_kuota']; ?>" class="btn btn-danger btn-sm hapus" title="HAPUS">
-                                <i class="fa fa-trash"></i> Hapus
-                            </button>
+                        <td class="text-center">
+                            <?php if ($d_prvl['u_kuota'] == "Y") { ?>
+                                <button id="<?php echo $d_data_kuota['id_kuota']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH">
+                                    <i class="fa fa-edit"></i> Ubah
+                                </button>
+                            <?php } ?>
+                            <?php if ($d_prvl['d_kuota'] == "Y") { ?>
+                                <button id="<?php echo $d_data_kuota['id_kuota']; ?>" class="btn btn-danger btn-sm hapus" title="HAPUS">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </button>
+                            <?php } ?>
                         </td>
                     </tr>
                 <?php
@@ -68,121 +75,75 @@ if ($r_data_kuota > 0) {
         $('#myTable').DataTable();
     });
 
-    $(".ubah_init").click(function() {
-        document.getElementById("err_u_nama").innerHTML = "";
-        document.getElementById("err_u_jumlah").innerHTML = "";
-        document.getElementById("form_ubah_kuota").reset();
-        $("#data_ubah_kuota").fadeIn('slow');
-        $("#data_tambah_kuota").fadeOut('fast');
+    <?php if ($d_prvl['u_kuota'] == "Y") { ?>
+        $(".ubah_init").click(function() {
+            document.getElementById("err_u_nama").innerHTML = "";
+            document.getElementById("err_u_jumlah").innerHTML = "";
+            document.getElementById("form_ubah_kuota").reset();
+            $("#data_ubah_kuota").fadeIn('slow');
+            $("#data_tambah_kuota").fadeOut('fast');
 
-        var id = $(this).attr('id');
-        $.ajax({
-            type: 'POST',
-            url: "_admin/view/v_kuotaGetData.php",
-            data: {
-                id: id
-            },
-            dataType: 'json',
-            success: function(response) {
-
-                document.getElementById("form_ubah_kuota").reset();
-
-                document.getElementById("u_id_kuota").value = response.id_kuota;
-                document.getElementById("u_nama_kuota").value = response.nama_kuota;
-                document.getElementById("u_jumlah_kuota").value = response.jumlah_kuota;
-                document.getElementById("u_ket_kuota").value = response.ket_kuota;
-            },
-            error: function(response) {
-                alert(response.responseText);
-                console.log(response.responseText);
-            }
-        });
-
-        $("#data_tambah_test").fadeOut('slow');
-    });
-
-    $(".ubah_tutup").click(function() {
-        document.getElementById("err_u_nama").innerHTML = "";
-        document.getElementById("err_u_jumlah").innerHTML = "";
-        document.getElementById("form_ubah_kuota").reset();
-        $("#data_ubah_kuota").fadeOut('slow');
-    });
-
-    $(document).on('click', '.ubah', function() {
-        var data = $('#form_ubah_kuota').serialize();
-        var nama_kuota = document.getElementById("u_nama_kuota").value;
-        var jumlah_kuota = document.getElementById("u_jumlah_kuota").value;
-        var ket_kuota = document.getElementById("u_ket_kuota").value;
-
-        //cek data from ubah bila tidak diiisi
-        if (
-            nama_kuota == "" ||
-            jumlah_kuota == ""
-        ) {
-            if (nama_kuota == "") {
-                document.getElementById("err_u_nama").innerHTML = "Nama Harus Diisi";
-            } else {
-                document.getElementById("err_u_nama").innerHTML = "";
-            }
-
-            if (jumlah_kuota == "") {
-                document.getElementById("err_u_jumlah").innerHTML = "Kuota Harus Diisi";
-            } else {
-                document.getElementById("err_u_jumlah").innerHTML = "";
-            }
-
-        } else {
+            var id = $(this).attr('id');
             $.ajax({
                 type: 'POST',
-                url: "_admin/exc/x_v_kuota_u.php",
-                data: data,
-                success: function() {
-                    $('#data_kuota').load('_admin/view/v_kuotaData.php?');
+                url: "_admin/view/v_kuotaGetData.php",
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function(response) {
 
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 5000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
+                    document.getElementById("form_ubah_kuota").reset();
 
-                    Toast.fire({
-                        icon: 'success',
-                        title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Diubah</b></div>'
-                    });
+                    document.getElementById("u_id_kuota").value = response.id_kuota;
+                    document.getElementById("u_nama_kuota").value = response.nama_kuota;
+                    document.getElementById("u_jumlah_kuota").value = response.jumlah_kuota;
+                    document.getElementById("u_ket_kuota").value = response.ket_kuota;
                 },
                 error: function(response) {
+                    alert(response.responseText);
                     console.log(response.responseText);
                 }
             });
-        }
-    });
 
-    $(document).on('click', '.hapus', function() {
-        console.log("hapus");
-        Swal.fire({
-            position: 'top',
-            title: 'Hapus Data Praktikan?',
-            icon: 'error',
-            showCancelButton: true,
-            confirmButtonColor: '#1cc88a',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'Kembali',
-            confirmButtonText: 'Ya',
-            allowOutsideClick: false,
-        }).then((result) => {
-            if (result.isConfirmed) {
+            $("#data_tambah_test").fadeOut('slow');
+        });
+
+        $(".ubah_tutup").click(function() {
+            document.getElementById("err_u_nama").innerHTML = "";
+            document.getElementById("err_u_jumlah").innerHTML = "";
+            document.getElementById("form_ubah_kuota").reset();
+            $("#data_ubah_kuota").fadeOut('slow');
+        });
+
+        $(document).on('click', '.ubah', function() {
+            var data = $('#form_ubah_kuota').serialize();
+            var nama_kuota = document.getElementById("u_nama_kuota").value;
+            var jumlah_kuota = document.getElementById("u_jumlah_kuota").value;
+            var ket_kuota = document.getElementById("u_ket_kuota").value;
+
+            //cek data from ubah bila tidak diiisi
+            if (
+                nama_kuota == "" ||
+                jumlah_kuota == ""
+            ) {
+                if (nama_kuota == "") {
+                    document.getElementById("err_u_nama").innerHTML = "Nama Harus Diisi";
+                } else {
+                    document.getElementById("err_u_nama").innerHTML = "";
+                }
+
+                if (jumlah_kuota == "") {
+                    document.getElementById("err_u_jumlah").innerHTML = "Kuota Harus Diisi";
+                } else {
+                    document.getElementById("err_u_jumlah").innerHTML = "";
+                }
+
+            } else {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_v_kuota_h.php",
-                    data: {
-                        "id_kuota": $(this).attr('id')
-                    },
+                    url: "_admin/exc/x_v_kuota_u.php",
+                    data: data,
                     success: function() {
                         $('#data_kuota').load('_admin/view/v_kuotaData.php?');
 
@@ -200,15 +161,65 @@ if ($r_data_kuota > 0) {
 
                         Toast.fire({
                             icon: 'success',
-                            title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil DIHAPUS</b></div>'
+                            title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Diubah</b></div>'
                         });
                     },
                     error: function(response) {
                         console.log(response.responseText);
-                        alert('eksekusi query gagal');
                     }
                 });
             }
-        })
-    });
+        });
+    <?php } ?>
+
+    <?php if ($d_prvl['d_kuota'] == "Y") { ?>
+        $(document).on('click', '.hapus', function() {
+            console.log("hapus");
+            Swal.fire({
+                position: 'top',
+                title: 'Hapus Data Praktikan?',
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#1cc88a',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Ya',
+                allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "_admin/exc/x_v_kuota_h.php",
+                        data: {
+                            "id_kuota": $(this).attr('id')
+                        },
+                        success: function() {
+                            $('#data_kuota').load('_admin/view/v_kuotaData.php?');
+
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 5000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            });
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil DIHAPUS</b></div>'
+                            });
+                        },
+                        error: function(response) {
+                            console.log(response.responseText);
+                            alert('eksekusi query gagal');
+                        }
+                    });
+                }
+            })
+        });
+    <?php } ?>
 </script>
