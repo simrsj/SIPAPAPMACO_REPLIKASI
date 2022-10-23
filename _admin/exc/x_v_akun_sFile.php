@@ -5,10 +5,10 @@ $id = $_POST['id_user'];
 $foto_asal = $_POST['foto_asal'];
 
 //Cek Variable File
-echo "<pre>";
-print_r($_FILES);
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_FILES);
+// print_r($_POST);
+// echo "</pre>";
 
 $alamat_unggah_foto = "./../../_img/akun";
 
@@ -72,6 +72,6 @@ $sql_u_foto = "UPDATE tb_user SET ";
 $sql_u_foto .= " foto_user = '" . $link_foto . "'";
 $sql_u_foto .= " WHERE id_user = " . $id;
 
-echo $sql_u_foto . "<br>";
+// echo $sql_u_foto . "<br>";
 $conn->query($sql_u_foto);
 echo json_encode(['success' => 'Data Berhasil Disimpan']);
