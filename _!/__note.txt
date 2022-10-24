@@ -58,7 +58,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Perbaikan Ubah Akun foto"
+git commit -a -m "Merge Branch origin/dev"
 git pull
 git push
 
