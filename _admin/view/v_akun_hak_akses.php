@@ -1,9 +1,12 @@
 <?php
 
-if (isset($_GET['aku']) && isset($_GET['ha']) && $d_prvl['r_akun'] == 'Y') {
-
-    $sql_user = "SELECT * FROM tb_user WHERE id_user=" . $_GET['ha'];
-    $q_user = $conn->query($sql_user);
+if (isset($_GET['aku']) && isset($_GET['ha']) && $d_prvl['u_akun'] == 'Y') {
+    $sql_user_prvl = "SELECT * FROM tb_user ";
+    $sql_user_prvl .= " JOIN tb_user_privileges ON tb_user.id_user = tb_user_privileges.id_user ";
+    $sql_user_prvl .= " WHERE id_user=" . $_GET['ha'];
+    echo $sql_user_prvl;
+    $q_user_prvl = $conn->query($sql_user_prvl);
+    $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC)
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -14,22 +17,77 @@ if (isset($_GET['aku']) && isset($_GET['ha']) && $d_prvl['r_akun'] == 'Y') {
         <div class="card shadow mb-4 card-body">
             <form method="post" id="form_prvl">
                 <div class="table-responsive">
-                    <table class="table table-striped text-xs" id="myTable">
+                    <table class="table table-striped" id="myTable">
                         <thead class="thead-dark">
                             <tr class="text-center">
                                 <th scope="col">Nama Hak Akses</th>
-                                <th scope="col">Institusi</th>
-                                <th scope="col">E-Mail</th>
-                                <th scope="col">No. Telp.</th>
-                                <th scope="col">Tanggal Buat</th>
-                                <th scope="col">Terakhir Login</th>
-                                <th scope="col">Level</th>
-                                <th scope="col" width="80px"></th>
+                                <th scope="col">Create/Tambah</th>
+                                <th scope="col">Read/Melihat/Melihat</th>
+                                <th scope="col">Update/Mengubah</th>
+                                <th scope="col">Delete/Menghapus</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="text-center">
-                                <td></td>
+                                <td>Kuota</td>
+                                <td>
+                                    <label class="boxed-check">
+                                        <input class="boxed-check-input" type="radio" name="c_kuota" id="c_kuotaY" value="Y">
+                                        <div class="boxed-check-label">Ya</div>
+                                    </label>
+                                    &nbsp;
+                                    &nbsp;
+                                    <label class="boxed-check">
+                                        <input class="boxed-check-input " type="radio" name="c_kuota" id="c_kuotaT" value="N">
+                                        <div class="boxed-check-label">Tidak</div>
+                                    </label>
+                                    <div class="text-center text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></div>
+                                </td>
+                                <td>
+                                    <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
+                                        <label class="boxed-check">
+                                            <input class="boxed-check-input " type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="Y" onclick="cekPilihUjianY()">
+                                            <div class="boxed-check-label">Ya</div>
+                                        </label>
+                                        &nbsp;
+                                        &nbsp;
+                                        <label class="boxed-check">
+                                            <input class="boxed-check-input " type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="N" onclick="cekPilihUjianT()">
+                                            <div class="boxed-check-label">Tidak</div>
+                                        </label>
+                                    </div>
+                                    <div class="text-center text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></div>
+                                </td>
+                                <td>
+                                    <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
+                                        <label class="boxed-check">
+                                            <input class="boxed-check-input " type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="Y" onclick="cekPilihUjianY()">
+                                            <div class="boxed-check-label">Ya</div>
+                                        </label>
+                                        &nbsp;
+                                        &nbsp;
+                                        <label class="boxed-check">
+                                            <input class="boxed-check-input " type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="N" onclick="cekPilihUjianT()">
+                                            <div class="boxed-check-label">Tidak</div>
+                                        </label>
+                                    </div>
+                                    <div class="text-center text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></div>
+                                </td>
+                                <td>
+                                    <div class="row boxed-check-group boxed-check-primary justify-content-center mb-0">
+                                        <label class="boxed-check">
+                                            <input class="boxed-check-input " type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian1" value="Y" onclick="cekPilihUjianY()">
+                                            <div class="boxed-check-label">Ya</div>
+                                        </label>
+                                        &nbsp;
+                                        &nbsp;
+                                        <label class="boxed-check">
+                                            <input class="boxed-check-input " type="radio" name="cek_pilih_ujian" id="cek_pilih_ujian2" value="N" onclick="cekPilihUjianT()">
+                                            <div class="boxed-check-label">Tidak</div>
+                                        </label>
+                                    </div>
+                                    <div class="text-center text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
