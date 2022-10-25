@@ -69,7 +69,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "progres pembuatan hak akses akun"
+git commit -a -m "perbaikan pembuatan hak akses akun"
 git pull
 git push
 
