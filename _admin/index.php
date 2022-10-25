@@ -1,6 +1,11 @@
 <?php
 if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 
+	//data user 
+	$sql_user = "SELECT * FROM tb_user WHERE id_user=" . $_SESSION['id_user'];
+	$q_user = $conn->query($sql_user);
+	$d_user = $q_user->fetch(PDO::FETCH_ASSOC);
+
 	//data privileges 
 	$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . $_SESSION['id_user'];
 	$q_prvl = $conn->query($sql_prvl);

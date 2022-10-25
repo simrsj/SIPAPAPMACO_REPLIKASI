@@ -25,53 +25,53 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
             <tbody class="text-center">
                 <!-- Kuota  -->
                 <tr>
-                    <td>Kuota</td>
+                    <td><em>Kuota</em></td>
                     <td>
                         <?php
                         $c_kuotaY = "";
-                        $c_kuotaN = "";
+                        $c_kuotaT = "";
                         if ($d_user_prvl['c_kuota'] == 'Y') $c_kuotaY = "checked";
-                        else if ($d_user_prvl['c_kuota'] == 'N')  $c_kuotaN = "checked";
+                        else if ($d_user_prvl['c_kuota'] == 'T')  $c_kuotaT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="c_kuota" id="c_kuotaY" value="Y" <?= $c_kuotaY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="c_kuota" id="c_kuotaT" value="N" <?= $c_kuotaN; ?>>Tidak
+                        <input type="radio" name="c_kuota" id="c_kuotaY" value="Y" <?= $c_kuotaY; ?>><label for="c_kuotaY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="c_kuota" id="c_kuotaT" value="T" <?= $c_kuotaT; ?>><label for="c_kuotaT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_kuota"></div>
                     </td>
                     <td>
                         <?php
                         $r_kuotaY = "";
-                        $r_kuotaN = "";
+                        $r_kuotaT = "";
                         if ($d_user_prvl['r_kuota'] == 'Y') $r_kuotaY = "checked";
-                        else if ($d_user_prvl['r_kuota'] == 'N')  $r_kuotaN = "checked";
+                        else if ($d_user_prvl['r_kuota'] == 'T')  $r_kuotaT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="r_kuota" id="r_kuotaY" value="Y" <?= $r_kuotaY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="r_kuota" id="r_kuotaT" value="N" <?= $r_kuotaN; ?>>Tidak
+                        <input type="radio" name="r_kuota" id="r_kuotaY" value="Y" <?= $r_kuotaY; ?>><label for="r_kuotaY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="r_kuota" id="r_kuotaT" value="T" <?= $r_kuotaT; ?>><label for="r_kuotaT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_kuota"></div>
                     </td>
                     <td>
                         <?php
                         $u_kuotaY = "";
-                        $u_kuotaN = "";
+                        $u_kuotaT = "";
                         if ($d_user_prvl['u_kuota'] == 'Y') $u_kuotaY = "checked";
-                        else if ($d_user_prvl['u_kuota'] == 'N')  $u_kuotaN = "checked";
+                        else if ($d_user_prvl['u_kuota'] == 'T')  $u_kuotaT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="u_kuota" id="u_kuotaY" value="Y" <?= $u_kuotaY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="u_kuota" id="u_kuotaT" value="N" <?= $u_kuotaN; ?>>Tidak
+                        <input type="radio" name="u_kuota" id="u_kuotaY" value="Y" <?= $u_kuotaY; ?>><label for="u_kuotaY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="u_kuota" id="u_kuotaT" value="T" <?= $u_kuotaT; ?>><label for="u_kuotaT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_kuota"></div>
                     </td>
                     <td>
                         <?php
                         $d_kuotaY = "";
-                        $d_kuotaN = "";
+                        $d_kuotaT = "";
                         if ($d_user_prvl['d_kuota'] == 'Y') $d_kuotaY = "checked";
-                        else if ($d_user_prvl['d_kuota'] == 'N')  $d_kuotaN = "checked";
+                        else if ($d_user_prvl['d_kuota'] == 'T')  $d_kuotaT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="d_kuota" id="d_kuotaY" value="Y" <?= $d_kuotaY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="d_kuota" id="d_kuotaT" value="N" <?= $d_kuotaN; ?>>Tidak
+                        <input type="radio" name="d_kuota" id="d_kuotaY" value="Y" <?= $d_kuotaY; ?>><label for="d_kuotaY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="d_kuota" id="d_kuotaT" value="T" <?= $d_kuotaT; ?>><label for="d_kuotaT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_kuota"></div>
                     </td>
                 </tr>
@@ -81,49 +81,49 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
                     <td>
                         <?php
                         $c_akunY = "";
-                        $c_akunN = "";
+                        $c_akunT = "";
                         if ($d_user_prvl['c_akun'] == 'Y') $c_akunY = "checked";
-                        else if ($d_user_prvl['c_akun'] == 'N')  $c_akunN = "checked";
+                        else if ($d_user_prvl['c_akun'] == 'T')  $c_akunT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="c_akun" id="c_akunY" value="Y" <?= $c_akunY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="c_akun" id="c_akunT" value="N" <?= $c_akunN; ?>>Tidak
+                        <input type="radio" name="c_akun" id="c_akunY" value="Y" <?= $c_akunY; ?>><label for="c_akunY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="c_akun" id="c_akunT" value="T" <?= $c_akunT; ?>><label for="c_akunT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_akun"></div>
                     </td>
                     <td>
                         <?php
                         $r_akunY = "";
-                        $r_akunN = "";
+                        $r_akunT = "";
                         if ($d_user_prvl['r_akun'] == 'Y') $r_akunY = "checked";
-                        else if ($d_user_prvl['r_akun'] == 'N')  $r_akunN = "checked";
+                        else if ($d_user_prvl['r_akun'] == 'T')  $r_akunT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="r_akun" id="r_akunY" value="Y" <?= $r_akunY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="r_akun" id="r_akunT" value="N" <?= $r_akunN; ?>>Tidak
+                        <input type="radio" name="r_akun" id="r_akunY" value="Y" <?= $r_akunY; ?>><label for="r_akunY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="r_akun" id="r_akunT" value="T" <?= $r_akunT; ?>><label for="r_akunT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_akun"></div>
                     </td>
                     <td>
                         <?php
                         $u_akunY = "";
-                        $u_akunN = "";
+                        $u_akunT = "";
                         if ($d_user_prvl['u_akun'] == 'Y') $u_akunY = "checked";
-                        else if ($d_user_prvl['u_akun'] == 'N')  $u_akunN = "checked";
+                        else if ($d_user_prvl['u_akun'] == 'T')  $u_akunT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="u_akun" id="u_akunY" value="Y" <?= $u_akunY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="u_akun" id="u_akunT" value="N" <?= $u_akunN; ?>>Tidak
+                        <input type="radio" name="u_akun" id="u_akunY" value="Y" <?= $u_akunY; ?>><label for="u_akunY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="u_akun" id="u_akunT" value="T" <?= $u_akunT; ?>><label for="u_akunT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_akun"></div>
                     </td>
                     <td>
                         <?php
                         $d_akunY = "";
-                        $d_akunN = "";
+                        $d_akunT = "";
                         if ($d_user_prvl['d_akun'] == 'Y') $d_akunY = "checked";
-                        else if ($d_user_prvl['d_akun'] == 'N')  $d_akunN = "checked";
+                        else if ($d_user_prvl['d_akun'] == 'T')  $d_akunT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="d_akun" id="d_akunY" value="Y" <?= $d_akunY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="d_akun" id="d_akunT" value="N" <?= $d_akunN; ?>>Tidak
+                        <input type="radio" name="d_akun" id="d_akunY" value="Y" <?= $d_akunY; ?>><label for="d_akunY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="d_akun" id="d_akunT" value="T" <?= $d_akunT; ?>><label for="d_akunT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_akun"></div>
                     </td>
                 </tr>
@@ -133,49 +133,49 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
                     <td>
                         <?php
                         $c_praktikY = "";
-                        $c_praktikN = "";
+                        $c_praktikT = "";
                         if ($d_user_prvl['c_praktik'] == 'Y') $c_praktikY = "checked";
-                        else if ($d_user_prvl['c_praktik'] == 'N')  $c_praktikN = "checked";
+                        else if ($d_user_prvl['c_praktik'] == 'T')  $c_praktikT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="c_praktik" id="c_praktikY" value="Y" <?= $c_praktikY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="c_praktik" id="c_praktikT" value="N" <?= $c_praktikN; ?>>Tidak
+                        <input type="radio" name="c_praktik" id="c_praktikY" value="Y" <?= $c_praktikY; ?>><label for="c_praktikY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="c_praktik" id="c_praktikT" value="T" <?= $c_praktikT; ?>><label for="c_praktikT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_praktik"></div>
                     </td>
                     <td>
                         <?php
                         $r_praktikY = "";
-                        $r_praktikN = "";
+                        $r_praktikT = "";
                         if ($d_user_prvl['r_praktik'] == 'Y') $r_praktikY = "checked";
-                        else if ($d_user_prvl['r_praktik'] == 'N')  $r_praktikN = "checked";
+                        else if ($d_user_prvl['r_praktik'] == 'T')  $r_praktikT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="r_praktik" id="r_praktikY" value="Y" <?= $r_praktikY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="r_praktik" id="r_praktikT" value="N" <?= $r_praktikN; ?>>Tidak
+                        <input type="radio" name="r_praktik" id="r_praktikY" value="Y" <?= $r_praktikY; ?>><label for="r_praktikY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="r_praktik" id="r_praktikT" value="T" <?= $r_praktikT; ?>><label for="r_praktikT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_praktik"></div>
                     </td>
                     <td>
                         <?php
                         $u_praktikY = "";
-                        $u_praktikN = "";
+                        $u_praktikT = "";
                         if ($d_user_prvl['u_praktik'] == 'Y') $u_praktikY = "checked";
-                        else if ($d_user_prvl['u_praktik'] == 'N')  $u_praktikN = "checked";
+                        else if ($d_user_prvl['u_praktik'] == 'T')  $u_praktikT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="u_praktik" id="u_praktikY" value="Y" <?= $u_praktikY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="u_praktik" id="u_praktikT" value="N" <?= $u_praktikN; ?>>Tidak
+                        <input type="radio" name="u_praktik" id="u_praktikY" value="Y" <?= $u_praktikY; ?>><label for="u_praktikY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="u_praktik" id="u_praktikT" value="T" <?= $u_praktikT; ?>><label for="u_praktikT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_praktik"></div>
                     </td>
                     <td>
                         <?php
                         $d_praktikY = "";
-                        $d_praktikN = "";
+                        $d_praktikT = "";
                         if ($d_user_prvl['d_praktik'] == 'Y') $d_praktikY = "checked";
-                        else if ($d_user_prvl['d_praktik'] == 'N')  $d_praktikN = "checked";
+                        else if ($d_user_prvl['d_praktik'] == 'T')  $d_praktikT = "checked";
                         else echo "ERROR!";
                         ?>
-                        <input type="radio" name="d_praktik" id="d_praktikY" value="Y" <?= $d_praktikY; ?>>Ya&nbsp;&nbsp;
-                        <input type="radio" name="d_praktik" id="d_praktikT" value="N" <?= $d_praktikN; ?>>Tidak
+                        <input type="radio" name="d_praktik" id="d_praktikY" value="Y" <?= $d_praktikY; ?>><label for="d_praktikY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="d_praktik" id="d_praktikT" value="T" <?= $d_praktikT; ?>><label for="d_praktikT">Tidak</label>
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_praktik"></div>
                     </td>
                 </tr>

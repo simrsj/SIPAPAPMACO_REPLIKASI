@@ -39,8 +39,8 @@ if ($d_prvl['c_praktik'] == "Y") {
                             <input name="id" value="<?= $id_praktik; ?>" id="id" hidden>
                             <input name="user" value="<?= $_SESSION['id_user']; ?>" id="user" hidden>
 
-                            <div class="col-lg-5 ">
-                                <?php if ($_SESSION['level_user'] == 2) {
+                            <div class="col">
+                                <?php if ($d_user['level_user'] == 2) {
                                     $sql_institusi = "SELECT * FROM tb_user";
                                     $sql_institusi .= " JOIN tb_institusi ON tb_user.id_institusi = tb_institusi.id_institusi ASC";
                                     $sql_institusi .= " WHERE tb_user.id_user ASC";
@@ -66,7 +66,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                     if ($r_institusi > 0) {
                                         $no = 1;
                                     ?>
-                                        <select class='select2 form-control' name='id_institusi' id="institusi" required>
+                                        <select class='select2 form-control' name='institusi' id="institusi" required>
                                             <option value="">-- <i>Pilih</i>--</option>
                                             <?php
                                             while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
@@ -89,15 +89,10 @@ if ($d_prvl['c_praktik'] == "Y") {
                                     }
                                 } ?>
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col">
                                 Gelombang/Kelompok : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control form-control-xs" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" id="praktik" required>
+                                <input type="text" class="form-control form-control-xs" name="kelompok" placeholder="Isi Gelombang/Kelompok" id="kelompok" required>
                                 <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_praktik"></div>
-                            </div>
-                            <div class="col-lg-2">
-                                Jumlah Praktikan : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="jumlah_praktik" min="1" placeholder="Isi Jumlah Praktik" id="jumlah" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_jumlah"></span>
                             </div>
                         </div>
                         <br>
@@ -106,48 +101,45 @@ if ($d_prvl['c_praktik'] == "Y") {
                         <div class="row">
                             <div class="col-lg-4">
                                 Jurusan : <br>
-                                <b>Kedokteran</b>
-                                <input type="hidden" name='id_jurusan_pdd' id="jurusan" value="1">
+                                <?php
+                                $sql_jurusan_pdd = "SELECT * FROM  tb_jurusan_pdd ORDER BY nama_jurusan_pdd ASC";
+                                $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
+                                ?>
+
+                                <select class='select2' name='jurusan' id="jurusan" required>
+                                    <option value="">-- <i>Pilih</i>--</option>
+                                    <?php while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) { ?>
+                                        <option value='<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>'><?= $d_jurusan_pdd['nama_jurusan_pdd']; ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                             <div class="col-lg-4">
                                 Jenjang : <br>
-                                <b>Profesi</b>
-                                <input type="hidden" name='id_jenjang_pdd' id="jenjang" value="9">
+                                <?php
+                                $sql_jenjang_pdd = "SELECT * FROM  tb_jenjang_pdd ORDER BY nama_jenjang_pdd ASC";
+                                $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
+                                ?>
+
+                                <select class='select2' name='jenjang' id="jenjang" required>
+                                    <option value="">-- <i>Pilih</i>--</option>
+                                    <?php while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) { ?>
+                                        <option value='<?= $d_jenjang_pdd['id_jenjang_pdd']; ?>'><?= $d_jenjang_pdd['nama_jenjang_pdd']; ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                             <div class="col-lg-4">
-                                Pilih Profesi : <span style="color:red">*</span><br>
+                                Profesi : <br>
                                 <?php
-                                $sql_prof = "SELECT * FROM tb_jurusan_pdd_jenjang_profesi";
-                                $sql_prof .= " JOIN tb_profesi_pdd ON tb_jurusan_pdd_jenjang_profesi.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
-                                $sql_prof .= " WHERE tb_jurusan_pdd_jenjang_profesi.id_jurusan_pdd = 1";
-                                $sql_prof .= " GROUP BY tb_profesi_pdd.nama_profesi_pdd";
-                                $sql_prof .= " ORDER BY tb_profesi_pdd.nama_profesi_pdd ASC";
+                                $sql_profesi_pdd = "SELECT * FROM  tb_profesi_pdd ORDER BY nama_profesi_pdd ASC";
+                                $q_profesi_pdd = $conn->query($sql_profesi_pdd);
+                                ?>
 
-                                $q_spek = $conn->query($sql_prof);
-                                $r_spek = $q_spek->rowCount();
-
-                                if ($r_spek > 0) {
-                                ?>
-                                    <select class='select2' aria-label='Default select example' onchange="makanMess();" name='id_profesi_pdd' id="profesi" height="100%">
-                                        <option value="">-- <i>Pilih</i>--</option>
-                                        <?php
-                                        while ($d_spek = $q_spek->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                            <option value='<?= $d_spek['id_profesi_pdd']; ?>'>
-                                                <?= $d_spek['nama_profesi_pdd']; ?>
-                                            </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                    <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_profesi"></div>
-                                <?php
-                                } else {
-                                ?>
-                                    <b><i>Data Profesi Tidak Ada</i></b>
-                                <?php
-                                }
-                                ?>
+                                <select class='select2' name='profesi' id="profesi" required>
+                                    <option value="">-- <i>Pilih</i>--</option>
+                                    <?php while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) { ?>
+                                        <option value='<?= $d_profesi_pdd['id_profesi_pdd']; ?>'><?= $d_profesi_pdd['nama_profesi_pdd']; ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
                         <br><br>
@@ -156,41 +148,26 @@ if ($d_prvl['c_praktik'] == "Y") {
                         <div class="row">
                             <div class="col-lg-2">
                                 Tanggal Mulai : <span style="color:red">*</span><br>
-                                <input type="date" class="form-control" name="tgl_mulai_praktik" id="tgl_mulai" required>
+                                <input type="date" class="form-control form-control-xs" name="tgl_mulai_praktik" id="tgl_mulai" required>
                                 <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_tgl_mulai"></span>
                             </div>
                             <div class="col-lg-2">
                                 Tanggal Selesai : <span style="color:red">*</span><br>
-                                <input type="date" class="form-control" name="tgl_selesai_praktik" id="tgl_selesai" required>
+                                <input type="date" class="form-control form-control-xs" name="tgl_selesai_praktik" id="tgl_selesai" required>
                                 <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_tgl_selesai"></span>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 No. Surat Institusi : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="no_surat" placeholder="Isi no Surat Institusi" id="no_surat" required>
+                                <input type="text" class="form-control form-control-xs" name="no_surat" placeholder="Isi no Surat Institusi" id="no_surat" required>
                                 <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_no_surat"></span>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-5">
                                 <fieldset class="border p-2">
-                                    Surat : <span style="color:red">*</span><br />
-                                    <input type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
+                                    Unggah Surat Institusi: <span style="color:red">*</span><br />
+                                    <input class="form-control-file" type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
                                 </fieldset>
                                 <i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</i>
                                 <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_surat"></div>
-                            </div>
-                            <div class="col-lg-3">
-                                <fieldset class="border p-2">
-                                    Unggah Data Praktikan : <span style="color:red">*</span>
-                                    <a class='text-xs text-uppercase badge badge-danger mb-2' href='#' data-toggle='modal' data-target='#modal_data_praktikan'>
-                                        Info Format File
-                                    </a>
-                                    <br>
-
-                                    <!-- modal info dan unduh data praktikan -->
-                                    <?php include "_admin/insert/i_praktik_formatDataPraktikan.php"; ?>
-                                    <input type="file" name="data_praktik" id="file_data_praktikan" accept=".xlsx">
-                                </fieldset>
-                                <i style='font-size:12px;'>File harus sesuai format dan maksimal ukuran file 1 Mb</i>
-                                <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_data_praktikan"></div>
                             </div>
                         </div>
                         <hr>
@@ -203,10 +180,6 @@ if ($d_prvl['c_praktik'] == "Y") {
                         </div>
                         <br>
                         <div class="row">
-                            <?php
-                            $q_user = $conn->query("SELECT * FROM tb_user WHERE id_user=" . $_SESSION['id_user']);
-                            $d_user = $q_user->fetch(PDO::FETCH_ASSOC);
-                            ?>
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
