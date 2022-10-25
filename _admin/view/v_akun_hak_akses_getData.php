@@ -127,6 +127,58 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_akun"></div>
                     </td>
                 </tr>
+                <!-- Praktik  -->
+                <tr>
+                    <td>Praktik</td>
+                    <td>
+                        <?php
+                        $c_praktikY = "";
+                        $c_praktikN = "";
+                        if ($d_user_prvl['c_praktik'] == 'Y') $c_praktikY = "checked";
+                        else if ($d_user_prvl['c_praktik'] == 'N')  $c_praktikN = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="c_praktik" id="c_praktikY" value="Y" <?= $c_praktikY; ?>>Ya&nbsp;&nbsp;
+                        <input type="radio" name="c_praktik" id="c_praktikT" value="N" <?= $c_praktikN; ?>>Tidak
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_praktik"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $r_praktikY = "";
+                        $r_praktikN = "";
+                        if ($d_user_prvl['r_praktik'] == 'Y') $r_praktikY = "checked";
+                        else if ($d_user_prvl['r_praktik'] == 'N')  $r_praktikN = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="r_praktik" id="r_praktikY" value="Y" <?= $r_praktikY; ?>>Ya&nbsp;&nbsp;
+                        <input type="radio" name="r_praktik" id="r_praktikT" value="N" <?= $r_praktikN; ?>>Tidak
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_praktik"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $u_praktikY = "";
+                        $u_praktikN = "";
+                        if ($d_user_prvl['u_praktik'] == 'Y') $u_praktikY = "checked";
+                        else if ($d_user_prvl['u_praktik'] == 'N')  $u_praktikN = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="u_praktik" id="u_praktikY" value="Y" <?= $u_praktikY; ?>>Ya&nbsp;&nbsp;
+                        <input type="radio" name="u_praktik" id="u_praktikT" value="N" <?= $u_praktikN; ?>>Tidak
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_praktik"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $d_praktikY = "";
+                        $d_praktikN = "";
+                        if ($d_user_prvl['d_praktik'] == 'Y') $d_praktikY = "checked";
+                        else if ($d_user_prvl['d_praktik'] == 'N')  $d_praktikN = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="d_praktik" id="d_praktikY" value="Y" <?= $d_praktikY; ?>>Ya&nbsp;&nbsp;
+                        <input type="radio" name="d_praktik" id="d_praktikT" value="N" <?= $d_praktikN; ?>>Tidak
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_praktik"></div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -152,6 +204,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
         var r_akun = $("input[name='r_akun']:checked").val();
         var u_akun = $("input[name='u_akun']:checked").val();
         var d_akun = $("input[name='d_akun']:checked").val();
+        var c_praktik = $("input[name='c_praktik']:checked").val();
+        var r_praktik = $("input[name='r_praktik']:checked").val();
+        var u_praktik = $("input[name='u_praktik']:checked").val();
+        var d_praktik = $("input[name='d_praktik']:checked").val();
 
         // console.log(c_kuota + r_kuota + u_kuota + d_kuota);
 
@@ -164,7 +220,11 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
             c_akun != "" &&
             r_akun != "" &&
             u_akun != "" &&
-            d_akun != ""
+            d_akun != "" &&
+            c_praktik != "" &&
+            r_praktik != "" &&
+            u_praktik != "" &&
+            d_praktik != ""
         ) {
             $.ajax({
                 type: 'POST',

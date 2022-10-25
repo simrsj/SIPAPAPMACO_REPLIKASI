@@ -62,14 +62,12 @@ PERTANYAAN
 - Cek Untuk narasumber dari PT dan lainnya siapa yg berwenang (Pak Narmin)
 - Diklat segera membuat notadinas untuk institusi 
 - Dimulai dengan bulan Mei atau Juni
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 git status
 
 git add .
-git commit -a -m "perbaikan pembuatan hak akses akun"
+git commit -a -m "progres pengajuan praktik"
 git pull
 git push
 

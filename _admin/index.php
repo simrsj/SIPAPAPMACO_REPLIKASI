@@ -61,24 +61,22 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					<span>Pengajuan</span>
 				</a>
 				<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="?prk=ked">
-							<i class="far fa-circle"></i>
-							<span>Kedokteran</span>
-						</a>
-						<a class="collapse-item" href="?prk=kep">
-							<i class="far fa-circle"></i>
-							<span>Keperawatan</span>
-						</a>
-						<a class="collapse-item" href="?prk=nkl">
-							<i class="far fa-circle"></i>
-							<span>Nakes Lainnya</span>
-						</a>
-						<a class="collapse-item" href="?prk=nnk">
-							<i class="far fa-circle"></i>
-							<span>Non Nakes</span>
-						</a>
-					</div>
+					<?php if ($d_prvl['r_praktik'] == "Y" || $d_prvl['d_narsum'] == "Y") { ?>
+						<div class="bg-white py-2 collapse-inner rounded">
+							<?php if ($d_prvl['r_praktik'] == "Y") { ?>
+								<a class="collapse-item" href="?prk">
+									<i class="far fa-circle"></i>
+									<span>Praktik</span>
+								</a>
+							<?php } ?>
+							<?php if ($d_prvl['r_narsum'] == "Y") { ?>
+								<a class="collapse-item" href="?narsum">
+									<i class="far fa-circle"></i>
+									<span>Narasumber/Sponsorship</span>
+								</a>
+							<?php } ?>
+						</div>
+					<?php } ?>
 				</div>
 			</li>
 			<li class="nav-item ">
@@ -420,26 +418,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} else {
 						include "_admin/view/v_pembimbing.php";
 					}
-				} elseif (isset($_GET['prk'])) {
-					if (isset($_GET['ib'])) {
-						include "_admin/insert/i_praktik_bayar.php";
-					} elseif (isset($_GET['dh'])) {
+				} elseif (isset($_GET['prk']) && $d_prvl['c_praktik'] == 'Y') {
+					if (isset($_GET['ib'])) include "_admin/insert/i_praktik_bayar.php";
+					elseif (isset($_GET['dh'])) {
 						include "_admin/hide/dh_praktik.php";
-					} elseif (isset($_GET['i'])) {
-						if ($_GET['prk'] == 'ked') {
-							include "_admin/insert/i_praktikKed.php";
-						} elseif ($_GET['prk'] == 'kep') {
-							include "_admin/insert/i_praktikKep.php";
-						} elseif ($_GET['prk'] == 'nkl') {
-							include "_admin/insert/i_praktikNkl.php";
-						} elseif ($_GET['prk'] == 'nnk') {
-							include "_admin/insert/i_praktikNnk.php";
-						} else {
-							include "_error/index.php";
-						}
-					} elseif (isset($_GET['it_ked'])) {
-						include "_admin/insert/i_tarifKed.php";
-					} elseif (isset($_GET['m'])) {
+					} elseif (isset($_GET['i'])) include "_admin/insert/i_praktik.php";
+					elseif (isset($_GET['it_ked'])) include "_admin/insert/i_tarifKed.php";
+					elseif (isset($_GET['m'])) {
 						include "_admin/insert/i_praktik_mess.php";
 					} elseif (isset($_GET['p_i'])) {
 						include "_print/p_praktik_invoice.php";
