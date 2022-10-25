@@ -55,13 +55,14 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 				</li>
 			<?php } ?>
-			<li class="nav-item ">
-				<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
-					<i class="far fa-fw fa-list-alt"></i>
-					<span>Pengajuan</span>
-				</a>
-				<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-					<?php if ($d_prvl['r_praktik'] == "Y" || $d_prvl['d_narsum'] == "Y") { ?>
+			<!-- Pengajuan -->
+			<?php if ($d_prvl['r_praktik'] == "Y" || $d_prvl['r_narsum'] == "Y") { ?>
+				<li class="nav-item" style=" word-wrap: break-word;">
+					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
+						<i class="far fa-fw fa-list-alt"></i>
+						<span>Pengajuan</span>
+					</a>
+					<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<?php if ($d_prvl['r_praktik'] == "Y") { ?>
 								<a class="collapse-item" href="?prk">
@@ -72,13 +73,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 							<?php if ($d_prvl['r_narsum'] == "Y") { ?>
 								<a class="collapse-item" href="?narsum">
 									<i class="far fa-circle"></i>
-									<span>Narasumber/Sponsorship</span>
+									<span>Narsum/Sponsorship</span>
 								</a>
 							<?php } ?>
 						</div>
-					<?php } ?>
-				</div>
-			</li>
+					</div>
+				</li>
+			<?php } ?>
 			<li class="nav-item ">
 				<a class="nav-link" href="?praktikan">
 					<i class="far fa-fw fa-address-book"></i>

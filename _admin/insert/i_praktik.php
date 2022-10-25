@@ -1,10 +1,10 @@
 <?php
-if ($d_prvl['i_praktik'] == "Y") {
+if ($d_prvl['c_praktik'] == "Y") {
 ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik Kedokteran</h1>
+                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik</h1>
             </div>
         </div>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
@@ -14,9 +14,7 @@ if ($d_prvl['i_praktik'] == "Y") {
                     <div class="card-body text-center">
                         <!-- Data Praktikan -->
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="text-lg font-weight-bold text-center"> DATA PRAKTIK</div>
-                            </div>
+                            <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">DATA PRAKTIK</div>
                         </div>
                         <hr>
                         <!-- Nama Institusi dan Praktikan -->
@@ -38,50 +36,62 @@ if ($d_prvl['i_praktik'] == "Y") {
                             }
                             $id_praktik = $no;
                             ?>
-                            <input name="id" value="<?php echo $id_praktik; ?>" id="id" hidden>
-                            <input name="user" value="<?php echo $_SESSION['id_user']; ?>" id="user" hidden>
+                            <input name="id" value="<?= $id_praktik; ?>" id="id" hidden>
+                            <input name="user" value="<?= $_SESSION['id_user']; ?>" id="user" hidden>
 
                             <div class="col-lg-5 ">
-                                Nama Institusi : <span style="color:red">*</span><br>
-                                <?php
-                                $sql_institusi = "SELECT * FROM tb_institusi
-                                    ORDER BY tb_institusi.nama_institusi ASC";
-
-                                $q_institusi = $conn->query($sql_institusi);
-                                $r_institusi = $q_institusi->rowCount();
-                                if ($r_institusi > 0) {
-                                    $no = 1;
+                                <?php if ($_SESSION['level_user'] == 2) {
+                                    $sql_institusi = "SELECT * FROM tb_user";
+                                    $sql_institusi .= " JOIN tb_institusi ON tb_user.id_institusi = tb_institusi.id_institusi ASC";
+                                    $sql_institusi .= " WHERE tb_user.id_user ASC";
+                                    $q_institusi = $conn->query($sql_institusi);
+                                    $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
                                 ?>
-                                    <select class='select2 form-control' name='id_institusi' id="institusi" required>
-                                        <option value="">-- <i>Pilih</i>--</option>
+                                    <div class="b text-uppercase">
                                         <?php
-                                        while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
+                                        $d_institusi['nama_institusi'];
+                                        if ($d_institusi['akronim_institusi'] != "") echo " (" . $d_institusi['akronim_institusi'] . ")";
                                         ?>
-                                            <option value='<?php echo $d_institusi['id_institusi']; ?>'>
-                                                <?php echo $d_institusi['nama_institusi'];
-                                                if ($d_institusi['akronim_institusi'] != '') {
-                                                    echo " (" . $d_institusi['akronim_institusi'] . ")";
-                                                }
-                                                ?>
-                                            </option>
-                                        <?php
-                                            $no++;
-                                        }
-                                        ?>
-                                    </select>
-                                    <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
-                                    <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_institusi"></div>
+                                    </div>
                                 <?php
                                 } else {
                                 ?>
-                                    <b><i>Data MoU Tidak Ada</i></b>
+                                    Nama Institusi : <span style="color:red">*</span><br>
+                                    <?php
+                                    $sql_institusi = "SELECT * FROM tb_institusi";
+                                    $sql_institusi .= " ORDER BY tb_institusi.nama_institusi ASC";
+
+                                    $q_institusi = $conn->query($sql_institusi);
+                                    $r_institusi = $q_institusi->rowCount();
+                                    if ($r_institusi > 0) {
+                                        $no = 1;
+                                    ?>
+                                        <select class='select2 form-control' name='id_institusi' id="institusi" required>
+                                            <option value="">-- <i>Pilih</i>--</option>
+                                            <?php
+                                            while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                                <option value='<?= $d_institusi['id_institusi']; ?>'>
+                                                    <?= $d_institusi['nama_institusi'];
+                                                    if ($d_institusi['akronim_institusi'] != '') {
+                                                        echo " (" . $d_institusi['akronim_institusi'] . ")";
+                                                    }
+                                                    ?>
+                                                </option>
+                                            <?php
+                                                $no++;
+                                            }
+                                            ?>
+                                        </select>
+                                        <!-- <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del> -->
+                                        <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_institusi"></div>
                                 <?php
-                                }
-                                ?>
+                                    }
+                                } ?>
                             </div>
                             <div class="col-lg-5">
                                 Gelombang/Kelompok : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" id="praktik" required>
+                                <input type="text" class="form-control form-control-xs" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" id="praktik" required>
                                 <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_praktik"></div>
                             </div>
                             <div class="col-lg-2">
@@ -123,8 +133,8 @@ if ($d_prvl['i_praktik'] == "Y") {
                                         <?php
                                         while ($d_spek = $q_spek->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
-                                            <option value='<?php echo $d_spek['id_profesi_pdd']; ?>'>
-                                                <?php echo $d_spek['nama_profesi_pdd']; ?>
+                                            <option value='<?= $d_spek['id_profesi_pdd']; ?>'>
+                                                <?= $d_spek['nama_profesi_pdd']; ?>
                                             </option>
                                         <?php
                                         }
@@ -199,15 +209,15 @@ if ($d_prvl['i_praktik'] == "Y") {
                             ?>
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?php echo $d_user['nama_user']; ?>" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
+                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
-                                <input type="text" class="form-control" name="email_koordinator_praktik" id="email_koordinator" placeholder="Isi Email Koordinator" value="<?php echo $d_user['email_user']; ?>">
+                                <input type="text" class="form-control" name="email_koordinator_praktik" id="email_koordinator" placeholder="Isi Email Koordinator" value="<?= $d_user['email_user']; ?>">
                             </div>
                             <div class="col-lg-4">
                                 Telpon : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" value="<?php echo $d_user['no_telp_user']; ?>" required>
+                                <input type="number" class="form-control" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" value="<?= $d_user['no_telp_user']; ?>" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_telp_koordinator"></span>
                             </div>
@@ -258,7 +268,7 @@ if ($d_prvl['i_praktik'] == "Y") {
                 </div>
             </div>
         </form>
-        <input type="hidden" name="path" value="<?php echo $_GET['prk']; ?>" id="path">
+        <input type="hidden" name="path" value="<?= $_GET['prk']; ?>" id="path">
         <div id="data_tarif_input"></div>
     </div>
 
