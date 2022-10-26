@@ -16,7 +16,6 @@ if ($d_prvl['c_praktik'] == "Y") {
                         <div class="row">
                             <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">DATA PRAKTIK</div>
                         </div>
-                        <hr>
                         <!-- Nama Institusi dan Praktikan -->
                         <div class="row">
                             <?php
@@ -170,34 +169,35 @@ if ($d_prvl['c_praktik'] == "Y") {
                                 <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_surat"></div>
                             </div>
                         </div>
-                        <hr>
 
                         <!-- Koordinator -->
                         <div class=" row">
-                            <div class="col-lg-12 text-center">
-                                <b>KOORDINATOR</b>
-                            </div>
+                            <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">KORDINATOR</div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
+                                <input type="text" class="form-control form-control-xs" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
-                                <input type="text" class="form-control" name="email_koordinator_praktik" id="email_koordinator" placeholder="Isi Email Koordinator" value="<?= $d_user['email_user']; ?>">
+                                <input type="text" class="form-control form-control-xs" name="email_koordinator_praktik" id="email_koordinator" placeholder="Isi Email Koordinator" value="<?= $d_user['email_user']; ?>">
                             </div>
                             <div class="col-lg-4">
                                 Telpon : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" value="<?= $d_user['no_telp_user']; ?>" required>
+                                <input type="number" class="form-control form-control-xs" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" value="<?= $d_user['no_telp_user']; ?>" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
                                 <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_telp_koordinator"></span>
                             </div>
                         </div>
 
-                        <hr>
-                        <div id="data_makan_mess" style="display: none;">
+                        <!-- Mess -->
+                        <div class=" row">
+                            <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
+                        </div>
+                        <br>
+                        <div id="data_makan_mess">
                             <div class="text-gray-700">
                                 <div class="h5 font-weight-bold text-center mt-3 mb-3">
                                     Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span><br>

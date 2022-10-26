@@ -67,7 +67,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "hapus beberapa file css, js, dan vendor"
+git commit -a -m "progres isert pengajuan praktik"
 git pull
 git push
 
