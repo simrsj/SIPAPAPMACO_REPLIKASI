@@ -83,7 +83,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                             ?>
                                         </select>
                                         <!-- <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del> -->
-                                        <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_institusi"></div>
+                                        <div class="text-danger b  font-italic text-xs blink" id="err_institusi"></div>
                                 <?php
                                     }
                                 } ?>
@@ -91,7 +91,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                             <div class="col">
                                 Gelombang/Kelompok : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="kelompok" placeholder="Isi Gelombang/Kelompok" id="kelompok" required>
-                                <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_praktik"></div>
+                                <div class="text-danger b  font-italic text-xs blink" id="err_praktik"></div>
                             </div>
                         </div>
                         <br>
@@ -99,7 +99,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                         <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
                         <div class="row">
                             <div class="col-lg-4">
-                                Jurusan : <br>
+                                Jurusan : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_jurusan_pdd = "SELECT * FROM  tb_jurusan_pdd ORDER BY nama_jurusan_pdd ASC";
                                 $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
@@ -113,7 +113,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                 </select>
                             </div>
                             <div class="col-lg-4">
-                                Jenjang : <br>
+                                Jenjang : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_jenjang_pdd = "SELECT * FROM  tb_jenjang_pdd ORDER BY nama_jenjang_pdd ASC";
                                 $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
@@ -127,7 +127,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                 </select>
                             </div>
                             <div class="col-lg-4">
-                                Profesi : <br>
+                                Profesi : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_profesi_pdd = "SELECT * FROM  tb_profesi_pdd ORDER BY nama_profesi_pdd ASC";
                                 $q_profesi_pdd = $conn->query($sql_profesi_pdd);
@@ -148,17 +148,17 @@ if ($d_prvl['c_praktik'] == "Y") {
                             <div class="col-lg-2">
                                 Tanggal Mulai : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control form-control-xs" name="tgl_mulai_praktik" id="tgl_mulai" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_tgl_mulai"></span>
+                                <span class="text-danger b  font-italic text-xs blink" id="err_tgl_mulai"></span>
                             </div>
                             <div class="col-lg-2">
                                 Tanggal Selesai : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control form-control-xs" name="tgl_selesai_praktik" id="tgl_selesai" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_tgl_selesai"></span>
+                                <span class="text-danger b  font-italic text-xs blink" id="err_tgl_selesai"></span>
                             </div>
                             <div class="col-lg-3">
                                 No. Surat Institusi : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="no_surat" placeholder="Isi no Surat Institusi" id="no_surat" required>
-                                <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_no_surat"></span>
+                                <span class="text-danger b  font-italic text-xs blink" id="err_no_surat"></span>
                             </div>
                             <div class="col-lg-5">
                                 <fieldset class="border p-2">
@@ -166,7 +166,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                     <input class="form-control-file" type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
                                 </fieldset>
                                 <i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</i>
-                                <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_file_surat"></div>
+                                <div class="text-danger b  font-italic text-xs blink" id="err_file_surat"></div>
                             </div>
                         </div>
 
@@ -178,7 +178,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                         <div class="row">
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control form-control-xs" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama_koordinator"></span>
+                                <input type="text" class="form-control form-control-xs" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required><span class="text-danger b  font-italic text-xs blink" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
@@ -188,7 +188,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                 Telpon : <span style="color:red">*</span><br>
                                 <input type="number" class="form-control form-control-xs" name="telp_koordinator_praktik" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" value="<?= $d_user['no_telp_user']; ?>" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_telp_koordinator"></span>
+                                <br><span class="text-danger b  font-italic text-xs blink" id="err_telp_koordinator"></span>
                             </div>
                         </div>
 
@@ -196,19 +196,16 @@ if ($d_prvl['c_praktik'] == "Y") {
                         <div class=" row">
                             <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
                         </div>
-                        <br>
                         <div id="data_makan_mess">
                             <div class="text-gray-700">
-                                <div class="h5 font-weight-bold text-center mt-3 mb-3">
+                                <div class="h5 b text-center mt-3 mb-3">
                                     Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span><br>
-                                    <span class="font-italic font-weight-bold text-xs">(Tempat Akan dipilih oleh Admin)<br>
-                                        (Wajib dipilih jika <b>Profesi</b> memilih <b>PSPD/Co-Ass</b>)</span>
                                 </div>
-                                <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                                    <span class="text-danger font-weight-bold font-italic text-md blink" id="err_makan_mess"></span>
+                                <div class="h5 b text-center mt-3 mb-3">
+                                    <span class="text-danger b font-italic text-md blink" id="err_makan_mess"></span>
                                 </div>
                             </div>
-                            <div class="row boxed-check-group boxed-check-primary justify-content-center">
+                            <div class="row boxed-check-group boxed-check-xs boxed-check-primary justify-content-center">
                                 <label class="boxed-check">
                                     <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="y">
                                     <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
@@ -219,21 +216,17 @@ if ($d_prvl['c_praktik'] == "Y") {
                                     <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="t">
                                     <div class="boxed-check-label">Tanpa Makan</div>
                                 </label>
-                                <br><span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_makan_mess"></span>
+                                <br><span class="text-danger b  font-italic text-xs blink" id="err_makan_mess"></span>
                             </div>
                             <hr>
                         </div>
-                        <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
 
-                        <!-- Tombol Lanjut ke Daftar Tarif-->
-
-                        <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
-                            <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success" onclick="simpan_ked()">
-                                <!-- <a class="nav-link" href="#tarif"> -->
+                        <!-- Tombol Simpan Praktik-->
+                        <div id="simpan_praktik_tarif" class="nav btn justify-content-center">
+                            <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success btn-xs" onclick="simpan_ked()">
                                 <i class="fas fa-check-circle"></i>
                                 Simpan Data Praktik
                                 <i class="fas fa-check-circle"></i>
-                                <!-- </a> -->
                             </button>
                         </div>
 
