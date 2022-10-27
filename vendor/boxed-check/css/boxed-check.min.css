@@ -61,6 +61,9 @@
   border-radius: 0.25rem;
   cursor: pointer;
 }
+.boxed-check-group.boxed-check-xs .boxed-check .boxed-check-label {
+  padding: 0.1rem 1.3rem;
+}
 .boxed-check-group.boxed-check-sm .boxed-check .boxed-check-label {
   padding: 0.2rem 1.3rem;
 }

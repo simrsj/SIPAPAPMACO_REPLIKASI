@@ -1,11 +1,11 @@
 <?php
 
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
-$jp = $_POST['jumlah_praktik'];
-$id_jur = $_POST['id_jurusan_pdd'];
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+$jp = $_POST['jumlah'];
+$id_jur = $_POST['jurusan'];
 $d1 = $_POST['tgl_mulai_praktik'];
 $d2 = $_POST['tgl_selesai_praktik'];
 $d2 = date('Y-m-d', strtotime($d2 . "+1 days"));
@@ -17,7 +17,7 @@ $period = new DatePeriod(
 );
 
 // echo "<pre>";
-// // print_r($period);
+// print_r($period);
 // echo "</pre>";
 
 if ($id_jur == 1 || $id_jur == 2) {
@@ -43,14 +43,14 @@ if ($id_jur == 1 || $id_jur == 2) {
     $id_kuota = 5;
 }
 $no = 1;
-$json['ket'] = 't';
+$json['ket'] = 'T';
 foreach ($period as $key => $value) {
 
     $sql = "SELECT * FROM tb_praktik ";
     $sql .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik ";
     $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
     $sql .= " $sql_jur";
-    $sql .= " AND (tb_praktik.status_cek_praktik IN ('BYR', 'VPT_Y_PPDS','VPT_Y') OR tb_praktik.status_cek_praktik IN ('W', 'Y'))";
+    $sql .= " AND tb_praktik.status_praktik IN ('N', 'Y')";
     // echo "$sql<br>";
     $q = $conn->query($sql);
 
@@ -68,7 +68,7 @@ foreach ($period as $key => $value) {
 
     $jp_jt = $jp + $jt;
     if ($jp_jt > $kuota) {
-        $json['ket'] = 'y';
+        $json['ket'] = 'Y';
     }
     $no++;
 }
