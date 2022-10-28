@@ -1,9 +1,9 @@
 <?php
 
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 $jp = $_POST['jumlah'];
 $id_jur = $_POST['jurusan'];
 $d1 = $_POST['tgl_mulai_praktik'];
@@ -43,7 +43,7 @@ if ($id_jur == 1 || $id_jur == 2) {
     $id_kuota = 5;
 }
 $no = 1;
-$json['ket'] = 'T';
+$json['ket'] = 'Y';
 foreach ($period as $key => $value) {
 
     $sql = "SELECT * FROM tb_praktik ";
@@ -68,7 +68,7 @@ foreach ($period as $key => $value) {
 
     $jp_jt = $jp + $jt;
     if ($jp_jt > $kuota) {
-        $json['ket'] = 'Y';
+        $json['ket'] = 'T';
     }
     $no++;
 }

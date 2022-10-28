@@ -185,11 +185,8 @@ if ($d_prvl['c_praktik'] == "Y") {
                         <div class="row">
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <<<<<<< HEAD <input type="text" class="form-control form-control-xs" name="nama_koordinator_praktik" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required><span class="text-danger b  font-italic text-xs blink" id="err_nama_koordinator"></span>
-                                    =======
-                                    <input type="text" class="form-control form-control-xs" name="nama_koordinator" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required>
-                                    <span class="text-danger b  font-italic text-xs blink" id="err_nama_koordinator"></span>
-                                    >>>>>>> d3c725af97023e10d4329072a478f825ee5955e3
+                                <input type="text" class="form-control form-control-xs" name="nama_koordinator" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required>
+                                <span class="text-danger b  font-italic text-xs blink" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
@@ -207,60 +204,39 @@ if ($d_prvl['c_praktik'] == "Y") {
                         <div class=" row">
                             <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
                         </div>
-                        <<<<<<< HEAD <div id="data_makan_mess">
-                            <div class="text-gray-700">
-                                <div class="h5 b text-center mt-3 mb-3">
-                                    Pemilihan Mess/Pemondokan dengan Makan <span class="text-danger">*</span><br>
-                                </div>
-                                <div class="h5 b text-center mt-3 mb-3">
-                                    <span class="text-danger b font-italic text-md blink" id="err_makan_mess"></span>
-                                </div>
-                                =======
-                                <br>
-                                <div id="data_makan">
-                                    <div class="text-center mb-3">
-                                        Pemilihan Mess/Pemondokan dengan Makan : <span class="text-danger">*</span><br>
-                                        >>>>>>> d3c725af97023e10d4329072a478f825ee5955e3
-                                    </div>
-                                    <div class="row boxed-check-group boxed-check-xs boxed-check-primary justify-content-center">
-                                        <label class="boxed-check">
-                                            <input class="boxed-check-input" type="radio" name="makan" id="makan1" value="Y">
-                                            <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
-                                        </label>
-                                        &nbsp;
-                                        &nbsp;
-                                        <label class="boxed-check">
-                                            <input class="boxed-check-input" type="radio" name="makan" id="makan1" value="T">
-                                            <div class="boxed-check-label">Tanpa Makan</div>
-                                        </label>
-                                        <<<<<<< HEAD <br><span class="text-danger b  font-italic text-xs blink" id="err_makan_mess"></span>
-                                            =======
-                                            >>>>>>> d3c725af97023e10d4329072a478f825ee5955e3
-                                    </div>
-                                    <div class="text-danger b  font-italic text-xs blink" id="err_makan"></div>
-                                    <hr>
-                                </div>
-
-                                <<<<<<< HEAD <!-- Tombol Simpan Praktik-->
-                                    <div id="simpan_praktik_tarif" class="nav btn justify-content-center">
-                                        <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success btn-xs" onclick="simpan_ked()">
-                                            =======
-                                            <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
-                                                <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success">
-                                                    <!-- <a class="nav-link" href="#tarif"> -->
-                                                    >>>>>>> d3c725af97023e10d4329072a478f825ee5955e3
-                                                    <i class="fas fa-check-circle"></i>
-                                                    Simpan Data Praktik
-                                                    <i class="fas fa-check-circle"></i>
-                                                </button>
-                                            </div>
-
-                                    </div>
+                        <div id="data_makan_mess">
+                            <div class="text-center mb-3">
+                                Pemilihan Mess/Pemondokan dengan Makan : <span class="text-danger">*</span><br>
                             </div>
+                            <div class="row boxed-check-group boxed-check-xs boxed-check-primary justify-content-center">
+                                <label class="boxed-check">
+                                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="Y">
+                                    <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
+                                </label>
+                                &nbsp;
+                                &nbsp;
+                                <label class="boxed-check">
+                                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="T">
+                                    <div class="boxed-check-label">Tanpa Makan</div>
+                                </label>
+                            </div>
+                            <div class="text-danger b font-italic text-xs blink" id="err_makan_mess"></div>
+                            <hr>
+                        </div>
+
+                        <!-- Tombol Simpan Praktik-->
+                        <div id="simpan_praktik_tarif" class="nav btn justify-content-center">
+                            <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
+                                <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success">
+                                    <i class="fas fa-check-circle"></i>
+                                    Simpan Data Praktik
+                                    <i class="fas fa-check-circle"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
+                </div>
         </form>
-        <input type="hidden" name="path" value="<?= $_GET['prk']; ?>" id="path">
-        <div id="data_tarif_input"></div>
     </div>
 
     <script type="text/javascript">
@@ -282,7 +258,7 @@ if ($d_prvl['c_praktik'] == "Y") {
             var nama_koordinator = $("#nama_koordinator").val();
             var email_koordinator = $("#email_koordinator").val();
             var telp_koordinator = $("#telp_koordinator").val();
-            var makan = $('input[name="makan"]:checked').val();
+            var makan_mess = $('input[name="makan_mess"]:checked').val();
 
             //Notif Bila tidak diisi
             if (
@@ -299,7 +275,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                 file_surat == undefined ||
                 nama_koordinator == "" ||
                 telp_koordinator == "" ||
-                makan == ""
+                makan_mess == undefined
             ) {
                 //warning Toast bila ada data wajib yg berlum terisi
                 const Toast = Swal.mixin({
@@ -404,10 +380,10 @@ if ($d_prvl['c_praktik'] == "Y") {
                 }
 
                 //notif telp_koordinator
-                if (makan == "" || makan == undefined) {
-                    $("#err_makan").html("Makan Harus Dipilih");
+                if (makan_mess == undefined) {
+                    $("#err_makan_mess").html("Makan Harus Dipilih");
                 } else {
-                    $("#err_makan").html("");
+                    $("#err_makan_mess").html("");
                 }
             }
 
@@ -495,12 +471,14 @@ if ($d_prvl['c_praktik'] == "Y") {
                 //Cek Data Ketersediaan Jadwal Praktik
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/insert/i_praktik_valTgl.php?",
+                    url: "_admin/insert/i_praktik_valTgl.php",
                     data: data_praktik,
                     dataType: 'json',
                     success: function(response) {
+                        console.log('success');
                         //notif jika jadwal dan-atau jumlah praktik melebihi kuota
                         if (response.ket == 'Y') {
+                            console.log('Praktik Tidak Bisa');
                             Swal.fire({
                                 allowOutsideClick: false,
                                 icon: 'error',
@@ -508,7 +486,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                 html: '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b>' +
                                     '<br>Silahkan Cek Kembali Informasi Jadwal Praktik<br><br>' +
                                     '<a href="?info_diklat" class="btn btn-outline-primary">Cek Informasi Jadwal Praktik</a>',
-                                timer: 15000,
+                                timer: 10000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
                                     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -522,125 +500,76 @@ if ($d_prvl['c_praktik'] == "Y") {
                         }
                         //eksekusi bila jadwal tersedia
                         else if (response.ket == 'T') {
-                            //bila mess belum dipilih
-                            if (document.getElementById("makan1").checked == false && document.getElementById("makan2").checked == false) {
-                                const Toast = Swal.mixin({
-                                    toast: true,
-                                    position: 'top-end',
-                                    showConfirmButton: false,
-                                    timer: 10000,
-                                    timerProgressBar: true,
-                                    didOpen: (toast) => {
-                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            console.log('Praktik Bisa');
+                            //simpan data praktik dan data tarif
+                            if (
+                                institusi != "" &&
+                                kelompok != "" &&
+                                jumlah != "" &&
+                                jurusan != "" &&
+                                jenjang != "" &&
+                                profesi != "" &&
+                                tgl_mulai != "" &&
+                                tgl_selesai != "" &&
+                                no_surat != "" &&
+                                file_surat != undefined &&
+                                getTypeSurat == 'pdf' &&
+                                getSizeSurat <= 1024 &&
+                                nama_koordinator != "" &&
+                                telp_koordinator != "" &&
+                                makan_mess != undefined
+                            ) {
+                                //push data makan_mess    
+                                data_praktik.push({
+                                    name: 'makan_mess',
+                                    value: makan_mess
+                                });
+
+                                //Simpan Data Praktik dan Tarif
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
+                                    data: data_praktik,
+                                    success: function() {
+                                        //ambil data file yang diupload
+                                        var data_file = new FormData();
+                                        var xhttp = new XMLHttpRequest();
+
+                                        var fileSurat = document.getElementById("file_surat").files;
+                                        data_file.append("file_surat", fileSurat[0]);
+
+                                        var id = document.getElementById("id").value;
+                                        data_file.append("id", id);
+
+                                        xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
+                                        xhttp.send(data_file);
+
+                                        Swal.fire({
+                                            allowOutsideClick: false,
+                                            // isDismissed: false,
+                                            icon: 'success',
+                                            title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
+                                            showConfirmButton: false,
+                                            timer: 5000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        }).then(
+                                            function() {
+                                                document.location.href = "?prk";
+                                            }
+                                        );
+                                    },
+                                    error: function(response) {
+                                        console.log(response.responseText);
+                                        alert('eksekusi query gagal');
                                     }
                                 });
 
-                                Toast.fire({
-                                    icon: 'warning',
-                                    title: '<center>Pilih <b>MAKAN MESS</b></center>'
-                                });
-                                document.getElementById("err_makan_mess").innerHTML = "Pilih Makan Mess <br>";
-                            } //eksekusi simpan data praktik dan pilih makan mess
-                            else {
-                                //simpan data praktik dan data tarif
-                                if (
-                                    institusi != "" &&
-                                    kelompok != "" &&
-                                    jumlah != "" &&
-                                    jurusan != "" &&
-                                    jenjang != "" &&
-                                    profesi != "" &&
-                                    tgl_mulai != "" &&
-                                    tgl_selesai != "" &&
-                                    no_surat != "" &&
-                                    file_surat != undefined &&
-                                    getTypeSurat == 'pdf' &&
-                                    getSizeSurat <= 1024 &&
-                                    nama_koordinator != "" &&
-                                    telp_koordinator != "" &&
-                                    makan == undefined
-                                ) {
-                                    $("#err_institusi").html("");
-                                    $("#err_kelompok").html("");
-                                    $("#err_jumlah").html("");
-                                    $("#err_jurusan").html("");
-                                    $("#err_jenjang").html("");
-                                    $("#err_profesi").html("");
-                                    $("#err_jumlah").html("");
-                                    $("#err_tgl_mulai").html("");
-                                    $("#err_tgl_selesai").html("");
-                                    $("#err_no_surat").html("");
-                                    $("#err_file_surat").html("");
-                                    $("#err_akun_koordinator").html("");
-                                    $("#err_nama_koordinator").html("");
-                                    $("#err_telp_koordinator").html("");
-
-                                    var path = "";
-                                    var data_praktik = $('#form_praktik').serializeArray();
-
-                                    //cek data makan_mess
-                                    var makan_mess = "";
-                                    if (document.getElementById("makan1").checked == true) {
-                                        makan_mess = document.getElementById("makan1").value;
-                                    } else if (document.getElementById("makan2").checked == true) {
-                                        makan_mess = document.getElementById("makan2").value;
-                                    }
-
-                                    //push data makan_mess    
-                                    data_praktik.push({
-                                        name: 'makan_mess',
-                                        value: makan_mess
-                                    });
-
-                                    //Simpan Data Praktik dan Tarif
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
-                                        data: data_praktik,
-                                        success: function() {
-                                            //ambil data file yang diupload
-                                            var data_file = new FormData();
-                                            var xhttp = new XMLHttpRequest();
-
-                                            var fileSurat = document.getElementById("file_surat").files;
-                                            data_file.append("file_surat", fileSurat[0]);
-
-                                            var id = document.getElementById("id").value;
-                                            data_file.append("id", id);
-
-                                            xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
-                                            xhttp.send(data_file);
-
-                                            Swal.fire({
-                                                allowOutsideClick: false,
-                                                // isDismissed: false,
-                                                icon: 'success',
-                                                title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
-                                                showConfirmButton: false,
-                                                timer: 5000,
-                                                timerProgressBar: true,
-                                                didOpen: (toast) => {
-                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                }
-                                            }).then(
-                                                function() {
-                                                    document.location.href = "prk";
-                                                }
-                                            );
-                                        },
-                                        error: function(response) {
-                                            console.log(response.responseText);
-                                            alert('eksekusi query gagal');
-                                        }
-                                    });
-
-                                }
-                            }
-                        } else {
-                            alert("ERROR CEK TANGGAL PRAKTIK");
-                        }
+                            } else alert("ERROR DATA WAJIB PRAKTIK");
+                        } else alert("ERROR CEK TANGGAL PRAKTIK");
                     }
                     // ,
                     // error: function() {
