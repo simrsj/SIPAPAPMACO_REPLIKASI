@@ -1,9 +1,9 @@
 <?php
 
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
 $jp = $_POST['jumlah'];
 $id_jur = $_POST['jurusan'];
 $d1 = $_POST['tgl_mulai_praktik'];
@@ -49,9 +49,10 @@ foreach ($period as $key => $value) {
     $sql = "SELECT * FROM tb_praktik ";
     $sql .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik ";
     $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
-    $sql .= " $sql_jur";
-    $sql .= " AND tb_praktik.status_praktik IN ('N', 'Y')";
-    // echo "$sql<br>";
+    $sql .= $sql_jur;
+    $sql .= " AND tb_praktik.status_praktik IN ('ARSIP', 'Y')";
+    // $sql .= " AND tb_praktik.bayar_praktik = 'T'";
+    echo "$sql<br>";
     $q = $conn->query($sql);
 
     $jt = 0;

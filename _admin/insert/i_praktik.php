@@ -240,6 +240,25 @@ if ($d_prvl['c_praktik'] == "Y") {
     </div>
 
     <script type="text/javascript">
+        $('#jurusan').on('select2:select', function(e) {
+            // var data = e.params.data;
+            console.log("asd");
+        });
+        var data = {
+            "id": 1,
+            "text": "Tyto alba",
+            "genus": "Tyto",
+            "species": "alba"
+        };
+
+        $('#jenjang').trigger({
+            type: 'select2:select',
+            params: {
+                data: data
+            }
+        });
+
+
         $("#simpan_praktik").click(function() {
 
             var data_praktik = $('#form_praktik').serializeArray();
@@ -475,9 +494,8 @@ if ($d_prvl['c_praktik'] == "Y") {
                     data: data_praktik,
                     dataType: 'json',
                     success: function(response) {
-                        console.log('success');
-                        //notif jika jadwal dan-atau jumlah praktik melebihi kuota
-                        if (response.ket == 'Y') {
+                        //notif jika jadwal dan/ jumlah praktik melebihi kuota
+                        if (response.ket == 'T') {
                             console.log('Praktik Tidak Bisa');
                             Swal.fire({
                                 allowOutsideClick: false,
@@ -499,7 +517,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                             );
                         }
                         //eksekusi bila jadwal tersedia
-                        else if (response.ket == 'T') {
+                        else if (response.ket == 'Y') {
                             console.log('Praktik Bisa');
                             //simpan data praktik dan data tarif
                             if (
@@ -528,7 +546,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                 //Simpan Data Praktik dan Tarif
                                 $.ajax({
                                     type: 'POST',
-                                    url: "_admin/exc/x_i_praktik_sPraktikTarif.php?",
+                                    url: "_admin/exc/x_i_praktik_sPraktik.php?",
                                     data: data_praktik,
                                     success: function() {
                                         //ambil data file yang diupload
@@ -550,7 +568,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                             icon: 'success',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                             showConfirmButton: false,
-                                            timer: 5000,
+                                            timer: 115000,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -567,8 +585,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                         alert('eksekusi query gagal');
                                     }
                                 });
-
-                            } else alert("ERROR DATA WAJIB PRAKTIK");
+                            } else console.log("Data Wajib Praktik Belum Diisi dan/ tidak sesuai");
                         } else alert("ERROR CEK TANGGAL PRAKTIK");
                     }
                     // ,

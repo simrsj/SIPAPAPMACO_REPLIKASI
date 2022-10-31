@@ -24,6 +24,7 @@ if ($_POST['id_profesi_pdd'] == 1) {
 }
 
 $sql_insert = "INSERT INTO tb_praktik (
+    id_user,
     id_praktik, 
     id_institusi, 
     nama_praktik,
@@ -36,7 +37,6 @@ $sql_insert = "INSERT INTO tb_praktik (
     id_jurusan_pdd,
     id_jenjang_pdd,
     id_profesi_pdd,
-    id_user,
     nama_koordinator_praktik,
     email_koordinator_praktik,
     telp_koordinator_praktik,
@@ -45,6 +45,7 @@ $sql_insert = "INSERT INTO tb_praktik (
     pilih_mess_praktik,
     makan_mess_praktik
     ) VALUES (
+        '" . $_POST['user'] . "',
         '" . $_POST['id'] . "', 
         '" . $_POST['institusi'] . "', 
         '" . $_POST['nama_praktik'] . "',
@@ -54,10 +55,9 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['no_surat'] . "',
         '" . $_POST['jumlah_praktik'] . "', 
         '" . $d_jenis_jurusan['id_jurusan_pdd_jenis'] . "', 
-        '" . $_POST['id_jurusan_pdd'] . "',
-        '" . $_POST['id_jenjang_pdd'] . "',
-        '" . $_POST['id_profesi_pdd'] . "', 
-        '" . $_POST['user'] . "',
+        '" . $_POST['jurusan'] . "',
+        '" . $_POST['jenjang'] . "',
+        '" . $_POST['profesi'] . "', 
         '" . $_POST['nama_koordinator_praktik'] . "', 
         '" . $_POST['email_koordinator_praktik'] . "',
         '" . $_POST['telp_koordinator_praktik'] . "', 
