@@ -119,32 +119,14 @@ if ($d_prvl['c_praktik'] == "Y") {
                             </div>
                             <div class="col-lg-4">
                                 Jenjang : <span style="color:red">*</span><br>
-                                <?php
-                                $sql_jenjang_pdd = "SELECT * FROM  tb_jenjang_pdd ORDER BY nama_jenjang_pdd ASC";
-                                $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
-                                ?>
-
-                                <select class='select2' name='jenjang' id="jenjang" required>
-                                    <option value="">-- <i>Pilih</i>--</option>
-                                    <?php while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) { ?>
-                                        <option value='<?= $d_jenjang_pdd['id_jenjang_pdd']; ?>'><?= $d_jenjang_pdd['nama_jenjang_pdd']; ?></option>
-                                    <?php } ?>
-                                </select>
+                                <span id="jenjangData" style="display: none;"></span>
+                                <span id="jenjangKet" class="b i">Pilih Jurusan Terlebih Dahulu</span>
                                 <div class="text-danger b  font-italic text-xs blink" id="err_jenjang"></div>
                             </div>
                             <div class="col-lg-4">
                                 Profesi : <span style="color:red">*</span><br>
-                                <?php
-                                $sql_profesi_pdd = "SELECT * FROM  tb_profesi_pdd ORDER BY nama_profesi_pdd ASC";
-                                $q_profesi_pdd = $conn->query($sql_profesi_pdd);
-                                ?>
-
-                                <select class='select2' name='profesi' id="profesi" required>
-                                    <option value="">-- <i>Pilih</i>--</option>
-                                    <?php while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) { ?>
-                                        <option value='<?= $d_profesi_pdd['id_profesi_pdd']; ?>'><?= $d_profesi_pdd['nama_profesi_pdd']; ?></option>
-                                    <?php } ?>
-                                </select>
+                                <span id="profesiData" style="display: none;"></span>
+                                <span id="profesiKet" class="b i">Pilih Jenjang Terlebih Dahulu</span>
                                 <div class="text-danger b  font-italic text-xs blink" id="err_profesi"></div>
                             </div>
                         </div>
@@ -240,24 +222,11 @@ if ($d_prvl['c_praktik'] == "Y") {
     </div>
 
     <script type="text/javascript">
-        $('#jurusan').on('select2:select', function(e) {
-            // var data = e.params.data;
-            console.log("asd");
+        $('#jurusan').on('select2:select', function() {
+            $('#jenjangData').load('_admin/insert/i_praktikDataJenjang.php?jur=' + $("#jurusan").val());
+            $('#jenjangData').fadeIn(0);
+            $('#jenjangKet').fadeOut(0);
         });
-        var data = {
-            "id": 1,
-            "text": "Tyto alba",
-            "genus": "Tyto",
-            "species": "alba"
-        };
-
-        $('#jenjang').trigger({
-            type: 'select2:select',
-            params: {
-                data: data
-            }
-        });
-
 
         $("#simpan_praktik").click(function() {
 

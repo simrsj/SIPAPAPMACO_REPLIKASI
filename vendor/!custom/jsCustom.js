@@ -17,5 +17,6 @@ $(document).ready(function () {
   $(".select2-long").select2({
     placeholder: "-------------- Pilih --------------",
     allowClear: true,
+    width: "100%",
   });
 });
