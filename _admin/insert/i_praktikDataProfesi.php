@@ -1,8 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-// echo "<pre>";
-// print_r($_GET);
-// echo "</pre>";
+echo "<pre>";
+print_r($_GET);
+echo "</pre>";
 
 //Mencari jenjang
 $id_jurusan_pdd = $_GET['jur'];
@@ -11,24 +11,28 @@ $sql_profesi .= " JOIN tb_jurusan_pdd ON tb_jurusan_pdd_jenjang_profesi.id_jurus
 $sql_profesi .= " JOIN tb_profesi_pdd ON tb_jurusan_pdd_jenjang_profesi.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
 $sql_profesi .= " WHERE tb_jurusan_pdd.id_jurusan_pdd = " . $id_jurusan_pdd;
 $sql_profesi .= " GROUP BY tb_profesi_pdd.nama_profesi_pdd";
-echo $sql_profesi;
+// echo $sql_profesi;
 $q_profesi = $conn->query($sql_profesi);
 ?>
 
 <select class='select2' name='profesi' id="profesi" required>
     <option value="">-- Pilih --</option>
     <?php
-    while ($d_profesi = $q_profesi->fetch(PDO::FETCH_ASSOC)) {
-    ?>
-        <option value="<?= $d_profesi['id_profesi_pdd']; ?>">
-            <?= $d_profesi['nama_profesi_pdd']; ?>
-        </option>
-    <?php
-    }
-    if ($q_jurusan_pdd->rowCount() < 1) {
+    if (
+        ($q_jurusan_pdd->rowCount() < 1) &&
+        ($_GET['jen'] != 9)
+    ) {
     ?>
         <option value="0">-- Lainnya --</option>
+        <?php
+    } else {
+        while ($d_profesi = $q_profesi->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+            <option value="<?= $d_profesi['id_profesi_pdd']; ?>">
+                <?= $d_profesi['nama_profesi_pdd']; ?>
+            </option>
     <?php
+        }
     }
     ?>
 </select>

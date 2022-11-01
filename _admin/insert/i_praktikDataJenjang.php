@@ -11,7 +11,7 @@ $sql_jenjang .= " JOIN tb_jurusan_pdd ON tb_jurusan_pdd_jenjang_profesi.id_jurus
 $sql_jenjang .= " JOIN tb_jenjang_pdd ON tb_jurusan_pdd_jenjang_profesi.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
 $sql_jenjang .= " WHERE tb_jurusan_pdd.id_jurusan_pdd = " . $id_jurusan_pdd;
 $sql_jenjang .= " GROUP BY tb_jenjang_pdd.nama_jenjang_pdd";
-echo $sql_jenjang;
+// echo $sql_jenjang;
 $q_jenjang = $conn->query($sql_jenjang);
 ?>
 
@@ -34,7 +34,7 @@ $q_jenjang = $conn->query($sql_jenjang);
         width: "100%",
     });
     $('#jenjang').on('select2:select', function() {
-        $('#profesiData').load('_admin/insert/i_praktikDataProfesi.php?jur=' + $("#jenjang").val());
+        $('#profesiData').load('_admin/insert/i_praktikDataProfesi.php?jur=' + $("#jurusan").val() + '&jen=' + $("#jenjang").val());
         $('#profesiData').fadeIn(1);
         $('#profesiKet').fadeOut(0);
     });
