@@ -1,8 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-echo "<pre>";
-print_r($_GET);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_GET);
+// echo "</pre>";
 
 //Mencari jenjang
 $id_jurusan_pdd = $_GET['jur'];
