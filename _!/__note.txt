@@ -67,7 +67,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "progres select jurusan jenjang profesi"
+git commit -a -m "perbaikan select jurusan jenjang profesi"
 git pull
 git push
 

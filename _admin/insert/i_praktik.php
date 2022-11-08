@@ -7,6 +7,39 @@ if ($d_prvl['c_praktik'] == "Y") {
                 <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik</h1>
             </div>
         </div>
+        <style>
+            .loader {
+                border: 8px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 8px solid #3498db;
+                width: 15px;
+                height: 15px;
+                -webkit-animation: spin 2s linear infinite;
+                /* Safari */
+                animation: spin 2s linear infinite;
+            }
+
+            /* Safari */
+            @-webkit-keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
             <!-- Data Pengajuan Praktik  -->
             <div id="data_praktik_input">
@@ -82,7 +115,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                             ?>
                                         </select>
                                         <!-- <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del> -->
-                                        <div class="text-danger b  font-italic text-xs blink" id="err_institusi"></div>
+                                        <div class="text-danger b  i text-xs blink" id="err_institusi"></div>
                                 <?php
                                     }
                                 } ?>
@@ -90,12 +123,12 @@ if ($d_prvl['c_praktik'] == "Y") {
                             <div class="col">
                                 Nama Gelombang/Kelompok : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="kelompok" id="kelompok" placeholder="Isi Gelombang/Kelompok" required>
-                                <div class="text-danger b  font-italic text-xs blink" id="err_kelompok"></div>
+                                <div class="text-danger b  i text-xs blink" id="err_kelompok"></div>
                             </div>
                             <div class="col-2">
                                 Jumlah Praktik: <span style="color:red">*</span><br>
                                 <input type="number" min="1" class="form-control form-control-xs" name="jumlah" id="jumlah" placeholder="Isi Jumlah Praktik" required>
-                                <div class="text-danger b  font-italic text-xs blink" id="err_jumlah"></div>
+                                <div class="text-danger b  i text-xs blink" id="err_jumlah"></div>
                             </div>
                         </div>
                         <br>
@@ -115,19 +148,20 @@ if ($d_prvl['c_praktik'] == "Y") {
                                         <option value='<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>'><?= $d_jurusan_pdd['nama_jurusan_pdd']; ?></option>
                                     <?php } ?>
                                 </select>
-                                <div class="text-danger b  font-italic text-xs blink" id="err_jurusan"></div>
+                                <div class="text-danger b i text-xs blink" id="err_jurusan"></div>
                             </div>
                             <div class="col-lg-4">
                                 Jenjang : <span style="color:red">*</span><br>
-                                <span id="jenjangData" style="display: none;"></span>
+                                <div class="loader-small" id="jenjangLoader" style="display: none;"></div>
+                                <div id="jenjangData" style="display: none;"></div>
                                 <span id="jenjangKet" class="b i">Pilih Jurusan Terlebih Dahulu</span>
-                                <div class="text-danger b  font-italic text-xs blink" id="err_jenjang"></div>
+                                <div class="text-danger b i text-xs blink" id="err_jenjang"></div>
                             </div>
                             <div class="col-lg-4">
                                 Profesi : <span style="color:red">*</span><br>
                                 <span id="profesiData" style="display: none;"></span>
                                 <span id="profesiKet" class="b i">Pilih Jenjang Terlebih Dahulu</span>
-                                <div class="text-danger b  font-italic text-xs blink" id="err_profesi"></div>
+                                <div class="text-danger b  i text-xs blink" id="err_profesi"></div>
                             </div>
                         </div>
                         <br>
@@ -137,17 +171,17 @@ if ($d_prvl['c_praktik'] == "Y") {
                             <div class="col-lg-2">
                                 Tanggal Mulai : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control form-control-xs" name="tgl_mulai_praktik" id="tgl_mulai" required>
-                                <span class="text-danger b  font-italic text-xs blink" id="err_tgl_mulai"></span>
+                                <span class="text-danger b  i text-xs blink" id="err_tgl_mulai"></span>
                             </div>
                             <div class="col-lg-2">
                                 Tanggal Selesai : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control form-control-xs" name="tgl_selesai_praktik" id="tgl_selesai" required>
-                                <span class="text-danger b  font-italic text-xs blink" id="err_tgl_selesai"></span>
+                                <span class="text-danger b  i text-xs blink" id="err_tgl_selesai"></span>
                             </div>
                             <div class="col-lg-3">
                                 No. Surat Institusi : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="no_surat" placeholder="Isi no Surat Institusi" id="no_surat" required>
-                                <span class="text-danger b  font-italic text-xs blink" id="err_no_surat"></span>
+                                <span class="text-danger b  i text-xs blink" id="err_no_surat"></span>
                             </div>
                             <div class="col-lg-5">
                                 <fieldset class="border p-2">
@@ -155,7 +189,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                     <input class="form-control-file" type="file" name="surat_praktik" id="file_surat" accept="application/pdf" required>
                                 </fieldset>
                                 <i style='font-size:12px;'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</i>
-                                <div class="text-danger b  font-italic text-xs blink" id="err_file_surat"></div>
+                                <div class="text-danger b  i text-xs blink" id="err_file_surat"></div>
                             </div>
                         </div>
 
@@ -168,7 +202,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                             <div class="col-lg-4">
                                 Nama : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="nama_koordinator" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required>
-                                <span class="text-danger b  font-italic text-xs blink" id="err_nama_koordinator"></span>
+                                <span class="text-danger b  i text-xs blink" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-lg-4">
                                 Email :<br>
@@ -178,7 +212,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                 Telpon : <span style="color:red">*</span><br>
                                 <input type="number" class="form-control form-control-xs" name="telp_koordinator" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" value="<?= $d_user['no_telp_user']; ?>" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
-                                <br><span class="text-danger b  font-italic text-xs blink" id="err_telp_koordinator"></span>
+                                <br><span class="text-danger b  i text-xs blink" id="err_telp_koordinator"></span>
                             </div>
                         </div>
 
@@ -202,7 +236,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                     <div class="boxed-check-label">Tanpa Makan</div>
                                 </label>
                             </div>
-                            <div class="text-danger b font-italic text-xs blink" id="err_makan_mess"></div>
+                            <div class="text-danger b i text-xs blink" id="err_makan_mess"></div>
                             <hr>
                         </div>
 
@@ -222,76 +256,14 @@ if ($d_prvl['c_praktik'] == "Y") {
     </div>
 
     <script type="text/javascript">
-        $(".jurusan").select2({
-            ajax: {
-                url: "https://api.github.com/search/repositories",
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        q: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function(data, params) {
-                    // parse the results into the format expected by Select2
-                    // since we are using custom formatting functions we do not need to
-                    // alter the remote JSON data, except to indicate that infinite
-                    // scrolling can be used
-                    params.page = params.page || 1;
-
-                    return {
-                        results: data.items,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            placeholder: 'Search for a repository',
-            minimumInputLength: 1,
-            templateResult: formatRepo,
-            templateSelection: formatRepoSelection
-        });
-
-        function formatRepo(repo) {
-            if (repo.loading) {
-                return repo.text;
-            }
-
-            var $container = $(
-                "<div class='select2-result-repository clearfix'>" +
-                "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
-                "<div class='select2-result-repository__meta'>" +
-                "<div class='select2-result-repository__title'></div>" +
-                "<div class='select2-result-repository__description'></div>" +
-                "<div class='select2-result-repository__statistics'>" +
-                "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> </div>" +
-                "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> </div>" +
-                "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> </div>" +
-                "</div>" +
-                "</div>" +
-                "</div>"
-            );
-
-            $container.find(".select2-result-repository__title").text(repo.full_name);
-            $container.find(".select2-result-repository__description").text(repo.description);
-            $container.find(".select2-result-repository__forks").append(repo.forks_count + " Forks");
-            $container.find(".select2-result-repository__stargazers").append(repo.stargazers_count + " Stars");
-            $container.find(".select2-result-repository__watchers").append(repo.watchers_count + " Watchers");
-
-            return $container;
-        }
-
-        function formatRepoSelection(repo) {
-            return repo.full_name || repo.text;
-        }
         $('#jurusan').on('select2:select', function() {
             $('#jenjangData').load('_admin/insert/i_praktikDataJenjang.php?jur=' + $("#jurusan").val());
-            $('#jenjangData').fadeIn(0);
             $('#jenjangKet').fadeOut(0);
+            $('#jenjangData').fadeIn(0);
+            $('#profesiData').fadeOut(0);
+            $('#profesiKet').fadeIn(0);
         });
+
         $("#simpan_praktik").click(function() {
 
             var data_praktik = $('#form_praktik').serializeArray();
