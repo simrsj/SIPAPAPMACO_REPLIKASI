@@ -217,7 +217,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                         </div>
 
                         <!-- Mess -->
-                        <div class=" row">
+                        <!-- <div class=" row">
                             <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
                         </div>
                         <div id="data_makan_mess">
@@ -238,7 +238,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                             </div>
                             <div class="text-danger b i text-xs blink" id="err_makan_mess"></div>
                             <hr>
-                        </div>
+                        </div> -->
 
                         <!-- Tombol Simpan Praktik-->
                         <div id="simpan_praktik_tarif" class="nav btn justify-content-center">
@@ -282,7 +282,7 @@ if ($d_prvl['c_praktik'] == "Y") {
             var nama_koordinator = $("#nama_koordinator").val();
             var email_koordinator = $("#email_koordinator").val();
             var telp_koordinator = $("#telp_koordinator").val();
-            var makan_mess = $('input[name="makan_mess"]:checked').val();
+            // var makan_mess = $('input[name="makan_mess"]:checked').val();
 
             //Notif Bila tidak diisi
             if (
@@ -298,8 +298,8 @@ if ($d_prvl['c_praktik'] == "Y") {
                 file_surat == "" ||
                 file_surat == undefined ||
                 nama_koordinator == "" ||
-                telp_koordinator == "" ||
-                makan_mess == undefined
+                telp_koordinator == ""
+                // makan_mess == undefined
             ) {
                 //warning Toast bila ada data wajib yg berlum terisi
                 const Toast = Swal.mixin({
@@ -404,11 +404,11 @@ if ($d_prvl['c_praktik'] == "Y") {
                 }
 
                 //notif telp_koordinator
-                if (makan_mess == undefined) {
-                    $("#err_makan_mess").html("Makan Harus Dipilih");
-                } else {
-                    $("#err_makan_mess").html("");
-                }
+                // if (makan_mess == undefined) {
+                //     $("#err_makan_mess").html("Makan Harus Dipilih");
+                // } else {
+                //     $("#err_makan_mess").html("");
+                // }
             }
 
             //eksekusi bila file surat terisi
@@ -539,14 +539,14 @@ if ($d_prvl['c_praktik'] == "Y") {
                                 getTypeSurat == 'pdf' &&
                                 getSizeSurat <= 1024 &&
                                 nama_koordinator != "" &&
-                                telp_koordinator != "" &&
-                                makan_mess != undefined
+                                telp_koordinator != ""
+                                // makan_mess != undefined
                             ) {
-                                //push data makan_mess    
-                                data_praktik.push({
-                                    name: 'makan_mess',
-                                    value: makan_mess
-                                });
+                                //push data makan_mess
+                                // data_praktik.push({
+                                //     name: 'makan_mess',
+                                //     value: makan_mess
+                                // });
 
                                 //Simpan Data Praktik dan Tarif
                                 $.ajax({

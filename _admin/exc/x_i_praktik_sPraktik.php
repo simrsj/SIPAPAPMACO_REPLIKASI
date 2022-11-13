@@ -16,13 +16,6 @@ WHERE id_jurusan_pdd = " . $_POST['id_jurusan_pdd'];
 $q_jenis_jurusan = $conn->query($sql_jenis_jurusan);
 $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
 
-//mess/pemondokan optional serta pemilihan dengan dan tanpa makan mess, jika selain profesi PPDS dan mess/pemondokan Tidak maka ELSE.
-if ($_POST['id_profesi_pdd'] == 1) {
-    $makan_mess = null;
-} else {
-    $makan_mess = $_POST['makan_mess'];
-}
-
 $sql_insert = "INSERT INTO tb_praktik (
     id_user,
     id_praktik, 
@@ -41,9 +34,7 @@ $sql_insert = "INSERT INTO tb_praktik (
     email_koordinator_praktik,
     telp_koordinator_praktik,
     status_cek_praktik, 
-    status_praktik,
-    pilih_mess_praktik,
-    makan_mess_praktik
+    status_praktik
     ) VALUES (
         '" . $_POST['user'] . "',
         '" . $_POST['id'] . "', 
@@ -62,9 +53,7 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['email_koordinator_praktik'] . "',
         '" . $_POST['telp_koordinator_praktik'] . "', 
         '" . $status_cek_praktik . "', 
-        'Y',
-        '" . $_POST['pilih_mess'] . "',
-        '" . $makan_mess . "'
+        'Y'
         )";
 
 // echo $sql_insert . "<br>";

@@ -67,7 +67,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "perbaikan select jurusan jenjang profesi"
+git commit -a -m "Tidak ada pemilihan makan mess"
 git pull
 git push
 
