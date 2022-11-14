@@ -501,7 +501,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                     success: function(response) {
                         //notif jika jadwal dan/ jumlah praktik melebihi kuota
                         if (response.ket == 'T') {
-                            console.log('Praktik Tidak Bisa');
+                            console.log('Jadwal Praktik Tidak Bisa');
                             Swal.fire({
                                 allowOutsideClick: false,
                                 icon: 'error',
@@ -523,7 +523,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                         }
                         //eksekusi bila jadwal tersedia
                         else if (response.ket == 'Y') {
-                            console.log('Praktik Bisa');
+                            console.log('Jadwal Praktik Bisa');
                             //simpan data praktik dan data tarif
                             if (
                                 institusi != "" &&
@@ -564,7 +564,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                         var id = document.getElementById("id").value;
                                         data_file.append("id", id);
 
-                                        xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
+                                        xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFileSurat.php", true);
                                         xhttp.send(data_file);
 
                                         Swal.fire({

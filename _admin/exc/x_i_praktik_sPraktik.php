@@ -11,7 +11,7 @@ echo "</pre>";
 
 //mencari jenis jurusan
 $sql_jenis_jurusan = "SELECT * FROM tb_jurusan_pdd 
-WHERE id_jurusan_pdd = " . $_POST['id_jurusan_pdd'];
+WHERE id_jurusan_pdd = " . $_POST['jurusan'];
 
 $q_jenis_jurusan = $conn->query($sql_jenis_jurusan);
 $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
@@ -33,26 +33,24 @@ $sql_insert = "INSERT INTO tb_praktik (
     nama_koordinator_praktik,
     email_koordinator_praktik,
     telp_koordinator_praktik,
-    status_cek_praktik, 
     status_praktik
     ) VALUES (
         '" . $_POST['user'] . "',
         '" . $_POST['id'] . "', 
         '" . $_POST['institusi'] . "', 
-        '" . $_POST['nama_praktik'] . "',
+        '" . $_POST['kelompok'] . "',
         '" . date('Y-m-d') . "', 
         '" . $_POST['tgl_mulai_praktik'] . "', 
         '" . $_POST['tgl_selesai_praktik'] . "',
         '" . $_POST['no_surat'] . "',
-        '" . $_POST['jumlah_praktik'] . "', 
+        '" . $_POST['jumlah'] . "', 
         '" . $d_jenis_jurusan['id_jurusan_pdd_jenis'] . "', 
         '" . $_POST['jurusan'] . "',
         '" . $_POST['jenjang'] . "',
         '" . $_POST['profesi'] . "', 
-        '" . $_POST['nama_koordinator_praktik'] . "', 
-        '" . $_POST['email_koordinator_praktik'] . "',
-        '" . $_POST['telp_koordinator_praktik'] . "', 
-        '" . $status_cek_praktik . "', 
+        '" . $_POST['nama_koordinator'] . "', 
+        '" . $_POST['email_koordinator'] . "',
+        '" . $_POST['telp_koordinator'] . "', 
         'Y'
         )";
 
