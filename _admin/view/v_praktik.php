@@ -98,13 +98,14 @@
                                         <td>
                                             <?php if ($d_praktik['status_mess_praktik'] != 'Y') { ?>
                                                 <span class="badge badge-danger">Tidak Ada</span>
-                                                <a title="Lihat" class='btn btn-outline-danger btn-xs text-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
                                             <?php } else { ?>
                                                 <span class="badge badge-success">Ada</span>
-                                                <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
-                                                    <i class="fas fa-edit"></i>
+                                            <?php } ?>
+                                            <hr class="p-0 m-2 bg-gray-500">
+
+                                            <?php if ($d_prvl[$c_praktik_mess] == 'Y') { ?>
+                                                <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
+                                                    Cek
                                                 </a>
                                             <?php } ?>
                                         </td>
