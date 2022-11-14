@@ -573,7 +573,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                             icon: 'success',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                             showConfirmButton: false,
-                                            timer: 115000,
+                                            timer: 5000,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)
