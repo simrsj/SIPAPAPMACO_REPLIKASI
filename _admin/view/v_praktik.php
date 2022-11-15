@@ -103,7 +103,7 @@
                                             <?php } ?>
                                             <hr class="p-0 m-2 bg-gray-500">
 
-                                            <?php if ($d_prvl[$c_praktik_mess] == 'Y') { ?>
+                                            <?php if ($d_prvl['c_praktik_mess'] == 'Y') { ?>
                                                 <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     Cek
                                                 </a>
@@ -137,7 +137,7 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <a title="Ubah" class='btn btn-primary btn-xs' href='#'>
+                                            <a title="Ubah" class='btn btn-primary btn-xs m-1' href='#'>
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <a title="Hapus" class='btn btn-danger btn-xs' href='#'>
