@@ -67,7 +67,7 @@ PERTANYAAN
 git status
 
 git add .
-git commit -a -m "Progres Pengajuan Praktik mess"
+git commit -a -m "link file praktik berubah"
 git pull
 git push
 
