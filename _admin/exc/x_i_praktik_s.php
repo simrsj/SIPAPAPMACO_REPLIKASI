@@ -33,6 +33,7 @@ $sql_insert = "INSERT INTO tb_praktik (
     nama_koordinator_praktik,
     email_koordinator_praktik,
     telp_koordinator_praktik,
+    status_mess_praktik,
     status_praktik
     ) VALUES (
         '" . $_POST['user'] . "',
@@ -51,6 +52,7 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['nama_koordinator'] . "', 
         '" . $_POST['email_koordinator'] . "',
         '" . $_POST['telp_koordinator'] . "', 
+        '" . $_POST['pilih_mess'] . "', 
         'Y'
         )";
 

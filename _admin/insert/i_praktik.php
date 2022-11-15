@@ -491,8 +491,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                 $("#err_tgl_selesai").html("<b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b>");
             }
             //bila tanggal mulai dan selesai sesuai
-            else {
-                //Cek Data Ketersediaan Jadwal Praktik
+            else { //Cek Data Ketersediaan Jadwal Praktik
                 $.ajax({
                     type: 'POST',
                     url: "_admin/insert/i_praktik_valTgl.php",

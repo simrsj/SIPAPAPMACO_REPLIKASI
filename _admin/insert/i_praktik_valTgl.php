@@ -23,6 +23,7 @@ $no = 1;
 $json['ket'] = 'Y';
 foreach ($period as $key => $value) {
 
+    //mencari jumlah praktikan sesuai dengan tanggal praktik
     $sql = "SELECT * FROM tb_praktik ";
     $sql .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik ";
     $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
@@ -36,6 +37,7 @@ foreach ($period as $key => $value) {
         $jumlah_total += $d['jumlah_praktik'];
     }
 
+    //mencari kuota sesuai dengan jurusannya
     $sql_k = "SELECT * FROM tb_kuota";
     $sql_k .= " WHERE id_jurusan_pdd = " . $id_jurusan;
 
