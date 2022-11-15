@@ -216,29 +216,29 @@ if ($d_prvl['c_praktik'] == "Y") {
                             </div>
                         </div>
 
-                        <!-- Mess -->
-                        <!-- <div class=" row">
+                        <!-- Pakai Mess -->
+                        <div class=" row">
                             <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
                         </div>
-                        <div id="data_makan_mess">
+                        <div id="data_pilih_mess">
                             <div class="text-center mb-3">
-                                Pemilihan Mess/Pemondokan dengan Makan : <span class="text-danger">*</span><br>
+                                Pemakaian Mess/Pemondokan : <span class="text-danger">*</span><br>
                             </div>
                             <div class="row boxed-check-group boxed-check-xs boxed-check-primary justify-content-center">
                                 <label class="boxed-check">
-                                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess1" value="Y">
-                                    <div class="boxed-check-label">Dengan Makan (3x Sehari)</div>
+                                    <input class="boxed-check-input" type="radio" name="pilih_mess" id="pilih_mess1" value="Y">
+                                    <div class="boxed-check-label">Ya</div>
                                 </label>
                                 &nbsp;
                                 &nbsp;
                                 <label class="boxed-check">
-                                    <input class="boxed-check-input" type="radio" name="makan_mess" id="makan_mess2" value="T">
-                                    <div class="boxed-check-label">Tanpa Makan</div>
+                                    <input class="boxed-check-input" type="radio" name="pilih_mess" id="pilih_mess2" value="T">
+                                    <div class="boxed-check-label">Tidak</div>
                                 </label>
                             </div>
-                            <div class="text-danger b i text-xs blink" id="err_makan_mess"></div>
+                            <div class="text-danger b i text-xs blink" id="err_pilih_mess"></div>
                             <hr>
-                        </div> -->
+                        </div>
 
                         <!-- Tombol Simpan Praktik-->
                         <div id="simpan_praktik_tarif" class="nav btn justify-content-center">
@@ -282,7 +282,7 @@ if ($d_prvl['c_praktik'] == "Y") {
             var nama_koordinator = $("#nama_koordinator").val();
             var email_koordinator = $("#email_koordinator").val();
             var telp_koordinator = $("#telp_koordinator").val();
-            // var makan_mess = $('input[name="makan_mess"]:checked').val();
+            var pilih_mess = $('input[name="pilih_mess"]:checked').val();
 
             //Notif Bila tidak diisi
             if (
@@ -298,8 +298,8 @@ if ($d_prvl['c_praktik'] == "Y") {
                 file_surat == "" ||
                 file_surat == undefined ||
                 nama_koordinator == "" ||
-                telp_koordinator == ""
-                // makan_mess == undefined
+                telp_koordinator == "" ||
+                pilih_mess == undefined
             ) {
                 //warning Toast bila ada data wajib yg berlum terisi
                 const Toast = Swal.mixin({
@@ -404,11 +404,11 @@ if ($d_prvl['c_praktik'] == "Y") {
                 }
 
                 //notif telp_koordinator
-                // if (makan_mess == undefined) {
-                //     $("#err_makan_mess").html("Makan Harus Dipilih");
-                // } else {
-                //     $("#err_makan_mess").html("");
-                // }
+                if (pilih_mess == undefined) {
+                    $("#err_pilih_mess").html("Pemakai Harus Dipilih");
+                } else {
+                    $("#err_pilih_mess").html("");
+                }
             }
 
             //eksekusi bila file surat terisi
@@ -491,8 +491,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                 $("#err_tgl_selesai").html("<b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b>");
             }
             //bila tanggal mulai dan selesai sesuai
-            else {
-                //Cek Data Ketersediaan Jadwal Praktik
+            else { //Cek Data Ketersediaan Jadwal Praktik
                 $.ajax({
                     type: 'POST',
                     url: "_admin/insert/i_praktik_valTgl.php",
@@ -501,7 +500,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                     success: function(response) {
                         //notif jika jadwal dan/ jumlah praktik melebihi kuota
                         if (response.ket == 'T') {
-                            console.log('Praktik Tidak Bisa');
+                            console.log('Jadwal Praktik Tidak Bisa');
                             Swal.fire({
                                 allowOutsideClick: false,
                                 icon: 'error',
@@ -523,7 +522,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                         }
                         //eksekusi bila jadwal tersedia
                         else if (response.ket == 'Y') {
-                            console.log('Praktik Bisa');
+                            console.log('Jadwal Praktik Bisa');
                             //simpan data praktik dan data tarif
                             if (
                                 institusi != "" &&
@@ -539,19 +538,19 @@ if ($d_prvl['c_praktik'] == "Y") {
                                 getTypeSurat == 'pdf' &&
                                 getSizeSurat <= 1024 &&
                                 nama_koordinator != "" &&
-                                telp_koordinator != ""
-                                // makan_mess != undefined
+                                telp_koordinator != "" &&
+                                pilih_mess != undefined
                             ) {
-                                //push data makan_mess
-                                // data_praktik.push({
-                                //     name: 'makan_mess',
-                                //     value: makan_mess
-                                // });
+                                //push data pilih_mess
+                                data_praktik.push({
+                                    name: 'pilih_mess',
+                                    value: pilih_mess
+                                });
 
                                 //Simpan Data Praktik dan Tarif
                                 $.ajax({
                                     type: 'POST',
-                                    url: "_admin/exc/x_i_praktik_sPraktik.php?",
+                                    url: "_admin/exc/x_i_praktik_s.php?",
                                     data: data_praktik,
                                     success: function() {
                                         //ambil data file yang diupload
@@ -564,7 +563,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                         var id = document.getElementById("id").value;
                                         data_file.append("id", id);
 
-                                        xhttp.open("POST", "_admin/exc/x_i_praktik_sPraktikFile.php", true);
+                                        xhttp.open("POST", "_admin/exc/x_i_praktik_fileSurat_s.php", true);
                                         xhttp.send(data_file);
 
                                         Swal.fire({
@@ -573,7 +572,7 @@ if ($d_prvl['c_praktik'] == "Y") {
                                             icon: 'success',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                             showConfirmButton: false,
-                                            timer: 115000,
+                                            timer: 5000,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)

@@ -41,7 +41,7 @@
   .boxed-check
   .boxed-check-input:checked
   + .boxed-check-label::before {
-  content: " ";
+  /* content: " "; */
   position: absolute;
   width: 10px;
   height: 6px;

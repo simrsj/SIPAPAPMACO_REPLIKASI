@@ -47,15 +47,13 @@ $dashboard_dpp = $q_dpp->rowCount();
 
 //////////////////// DATA PRAKTIKAN AKTIF ////////////////////
 $sql_dpa = "SELECT * FROM tb_praktik
-WHERE status_cek_praktik = 'AKV'";
+WHERE status_praktik = 'Y'";
 $q_dpa = $conn->query($sql_dpa);
 $dashboard_dpa = $q_dpa->rowCount();
 
 //////////////////// DATA PRAKTIKAN SELESAI ////////////////////
 $sql_dpn = "SELECT * FROM tb_praktik
-WHERE 
-status_cek_praktik = 'SLS'
-AND status_praktik='Y'";
+WHERE status_praktik='ARSIP'";
 $q_dpn = $conn->query($sql_dpn);
 $dashboard_dpn = $q_dpn->rowCount();
 
@@ -70,7 +68,7 @@ while ($d_dpj = $q_dpj->fetch(PDO::FETCH_ASSOC)) {
 
 //////////////////// DATA PRAKTIKAN JUMLAH PROSES ////////////////////
 $sql_dpjp = "SELECT * FROM tb_praktik
-WHERE status_praktik='D'";
+WHERE status_praktik='Y'";
 $q_dpjp = $conn->query($sql_dpjp);
 
 $jumlah_praktik_proses = 0;
@@ -81,8 +79,7 @@ while ($d_dpjp = $q_dpjp->fetch(PDO::FETCH_ASSOC)) {
 
 //////////////////// DATA PRAKTIKAN JUMLAH AKTIF ////////////////////
 $sql_dpja = "SELECT * FROM tb_praktik
-WHERE status_cek_praktik = 'AKV' 
-AND status_praktik='Y'";
+WHERE status_praktik='Y'";
 $q_dpja = $conn->query($sql_dpja);
 
 $jumlah_praktik_aktif = 0;
@@ -94,7 +91,7 @@ while ($d_dpja = $q_dpja->fetch(PDO::FETCH_ASSOC)) {
 
 //////////////////// DATA PRAKTIKAN JUMLAH SELESAI ////////////////////
 $sql_dpjs = "SELECT * FROM tb_praktik
-WHERE status_cek_praktik = 'SLS'";
+WHERE status_praktik='Y'";
 $q_dpjs = $conn->query($sql_dpjs);
 
 $jumlah_praktik_selesai = 0;
@@ -104,32 +101,17 @@ while ($d_dpjs = $q_dpjs->fetch(PDO::FETCH_ASSOC)) {
     $dashboard_dpjs = $jumlah_praktik_selesai + $d_dpjs['jumlah_praktik'];
 }
 
-//////////////////// PENDAPATAN SEMUA ////////////////////
+//////////////////// PENDAPATAN////////////////////
 
-$total_tarif_pilih = 0;
-$total_mess = 0;
-#data tarif pilih
-$sql_praktik = "SELECT * FROM tb_tarif_pilih
-            JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_cek_praktik = 'AKV' OR status_cek_praktik =  'SLS'";
-$q_praktik = $conn->query($sql_praktik);
-$total_tarif = 0;
-while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-    $total_tarif = $total_tarif + $d_praktik['jumlah_tarif_pilih'];
-    $total_tarif_pilih = $total_tarif_pilih + $d_praktik['jumlah_tarif_pilih'];
-}
-
-//////////////////// PENDAPATAN BULANAN ////////////////////
 $total_tarif = 0;
 $total_tarif_pilih = 0;
 $total_mess = 0;
-#data tarif pilih
 $sql_praktik = "SELECT * FROM tb_tarif_pilih
             JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_cek_praktik = 'AKV' OR status_cek_praktik =  'SLS'";
+            WHERE status_bayar_praktik =  'Y'";
 $q_praktik = $conn->query($sql_praktik);
 
-$total_tarif = 0;
+#semua
 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
     $total_tarif = $total_tarif + $d_praktik['jumlah_tarif_pilih'];
     $total_tarif_pilih = $total_tarif_pilih + $d_praktik['jumlah_tarif_pilih'];
