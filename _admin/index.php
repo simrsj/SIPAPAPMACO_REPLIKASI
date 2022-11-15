@@ -430,7 +430,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/hide/dh_praktik.php";
 					} elseif (isset($_GET['i'])) include "_admin/insert/i_praktik.php";
 					elseif (isset($_GET['it_ked'])) include "_admin/insert/i_tarifKed.php";
-					elseif (isset($_GET['m']) && $d_prvl['c_praktik_mess'] == 'T') {
+					elseif (isset($_GET['m']) && $d_prvl['c_praktik_mess'] == 'Y') {
 						include "_admin/insert/i_praktik_mess.php";
 					} elseif (isset($_GET['p_i'])) {
 						include "_print/p_praktik_invoice.php";
@@ -455,10 +455,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					include "_admin/view/v_unit.php";
 				} elseif (isset($_GET['tmp'])) {
 					include "_admin/view/v_tempat.php";
-				} elseif (isset($_GET['test'])) {
-					include "test.php";
-				} elseif (isset($_GET['test1'])) {
-					include "test1.php";
 				} elseif (isset($_GET['trf'])) {
 					include "_admin/view/v_tarif.php";
 				} elseif (isset($_GET['trs'])) {
@@ -467,6 +463,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} else {
 						include "_admin/view/v_transaksi.php";
 					}
+				} elseif (isset($_GET['test'])) {
+					include "test.php";
+				} elseif (isset($_GET['error401'])) {
+					include "_error/error401.php";
+				} elseif (isset($_GET['error404'])) {
+					include "_error/error404.php";
 				} else {
 					include "_admin/dashboard.php";
 				}

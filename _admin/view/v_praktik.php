@@ -110,7 +110,7 @@
                                                 if ($d_prvl['c_praktik_mess'] == 'Y') {
                                                 ?>
                                                     <hr class="p-0 m-1 bg-gray-500">
-                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m'>
                                                         Cek
                                                     </a>
                                                 <?php } ?>
@@ -174,5 +174,5 @@
         </div>
     </div>
 <?php } else {
-    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?';</script>";
+    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?error401';</script>";
 }
