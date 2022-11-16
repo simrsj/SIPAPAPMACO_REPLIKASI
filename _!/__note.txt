@@ -66,9 +66,9 @@ PERTANYAAN
 
 git status
 
-git add .
-git commit -a -m "progres pemilihan mess di pengajuan praktik"
 git pull
+git add .
+git commit -a -m "Tidak ada pemilihan makan mess"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git

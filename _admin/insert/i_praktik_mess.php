@@ -71,9 +71,9 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                                     <th scope='col'>No</th>
                                     <th>Nama Mess</th>
                                     <th>Nama Pemilik</th>
-                                    <th> Kontak Pemilik</th>
-                                    <th> Kapasitas Total</th>
-                                    <th> Status Kuota</th>
+                                    <th>Kontak Pemilik</th>
+                                    <th>Kapasitas Total</th>
+                                    <th>Status Kuota</th>
                                     <th>Cek Jadwal</th>
                                 </tr>
                             </thead>

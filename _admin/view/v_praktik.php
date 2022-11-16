@@ -104,7 +104,7 @@
                                                 if ($r_cek_mess > 0) {
                                                     echo '<span class="badge badge-success">Sudah Dipilih</span>';
                                                 } else {
-                                                    echo '<span class="badge badge-warning">Belum Dipilih</span>';
+                                                    echo '<span class="badge badge-warning blink">Belum Dipilih</span>';
                                                 }
 
                                                 if ($d_prvl['c_praktik_mess'] == 'Y') {
