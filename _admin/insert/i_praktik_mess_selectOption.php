@@ -7,8 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 $jumlahPraktikan = $_POST['jp'];
 $tgl_mulai = $_POST['tgl_m'];
-$tgl_selesai = $_POST['tgl_s'];
-$tgl_selesai = date('Y-m-d', strtotime($tgl_selesai . "+1 days"));
+$tgl_selesai = date('Y-m-d', strtotime($_POST['tgl_s'] . "+1 days"));
 
 $period = new DatePeriod(
     new DateTime($tgl_mulai),
@@ -21,7 +20,12 @@ $period = new DatePeriod(
 // echo "</pre>";
 
 $sql_mess = "SELECT * FROM tb_mess";
-$q_mess = $conn->query($sql_mess);
+// $sql_mess .= " WHERE kepemilikan_mess = 'dalam'";
+try {
+    $q_mess = $conn->query($sql_mess);
+} catch (Exception $ex) {
+    echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+}
 
 $option = '<option value=""></option>';
 while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
@@ -33,8 +37,13 @@ while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
         $sql .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik ";
         $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
         $sql .= " AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
-        $sql .= " AND (tb_praktik.status_cek_praktik IN ('BYR', 'VPT_Y_PPDS','VPT_Y') OR tb_praktik.status_cek_praktik IN ('W', 'Y'))";
-        $q = $conn->query($sql);
+        $sql .= " AND tb_praktik.status_praktik = 'Y'";
+        try {
+            $q = $conn->query($sql);
+        } catch (Exception $ex) {
+            echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+        }
+
         while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
             $jumlahTotal += $d['jumlah_praktik'];
         }

@@ -39,9 +39,13 @@ foreach ($period as $key => $value) {
     $sql .= " JOIN tb_mess ON tb_mess.id_mess = tb_mess_pilih.id_mess ";
     $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
     $sql .= " AND tb_mess_pilih.id_mess = " . $id_mess;
-    $sql .= " AND (tb_praktik.status_cek_praktik IN ('BYR', 'VPT_Y_PPDS','VPT_Y') OR tb_praktik.status_cek_praktik IN ('W', 'Y'))";
-    // $dataJSON['sql'] = $sql;
-    $q = $conn->query($sql);
+    $sql .= " AND tb_praktik.status_praktik = 'Y'";
+    try {
+        $q = $conn->query($sql);
+    } catch (Exception $ex) {
+
+        echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+    }
 
     $jumlahTotal = 0;
     while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
@@ -50,8 +54,13 @@ foreach ($period as $key => $value) {
 
     $sql_mess = "SELECT * FROM tb_mess";
     $sql_mess .= " WHERE id_mess= " . $id_mess;
+    try {
+        $q_mess = $conn->query($sql_mess);
+    } catch (Exception $ex) {
 
-    $q_mess = $conn->query($sql_mess);
+        echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+    }
+
     $d_mess = $q_mess->fetch(PDO::FETCH_ASSOC);
     $messKuota = $d_mess['kapasitas_t_mess'];
 

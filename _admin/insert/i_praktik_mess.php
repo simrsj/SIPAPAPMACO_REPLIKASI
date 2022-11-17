@@ -5,18 +5,12 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     $sql_praktik = "SELECT * FROM tb_praktik ";
     $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
     $sql_praktik .= " WHERE id_praktik = $id_praktik";
-    // echo $sql_praktik;
-    // $q_praktik = $conn->query($sql_praktik);
-
     try {
         $q_praktik = $conn->query($sql_praktik);
-        echo "<script>console.log('Query Praktik Berhasil!')</script>";
     } catch (Exception $ex) {
-        // echo $ex->getMessage();
+
         echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
     }
-
-    // echo $q_praktik->rowCount();
 
     $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
     $jumlah_praktik = $d_praktik['jumlah_praktik'];
@@ -55,12 +49,18 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 <?php
                 $sql_mess = "SELECT * FROM tb_mess ";
                 $sql_mess .= " WHERE status_mess = 'Y'";
-                $sql_mess .= " ORDER BY kepemilikan_mess ASC, nama_mess ASC";
-
+                // $sql_mess .= " AND kepemilikan_mess = 'dalam'";
+                // $sql_mess .= " ORDER BY kepemilikan_mess ASC, nama_mess ASC";
                 // echo $sql_mess . "<br>";
-                $q_mess = $conn->query($sql_mess);
+                try {
+                    $q_mess = $conn->query($sql_mess);
+                } catch (Exception $ex) {
+
+                    echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+                }
+
                 $r_mess = $q_mess->rowCount();
-                if ($r_mess > 0) {
+                if ($q_mess->rowCount() > 0) {
                 ?>
 
                     <input type="hidden" name="jumlah_mess" id="jumlah_mess" value="<?= $r_mess; ?>">
@@ -72,6 +72,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                                     <th>Nama Mess</th>
                                     <th>Nama Pemilik</th>
                                     <th>Kontak Pemilik</th>
+                                    <th>Kepemilikan Mess</th>
                                     <th>Kapasitas Total</th>
                                     <th>Status Kuota</th>
                                     <th>Cek Jadwal</th>
@@ -88,32 +89,55 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                                         <td class="text-left"><?= $d_mess['nama_mess']; ?></td>
                                         <td><?= $d_mess['nama_pemilik_mess']; ?></td>
                                         <td><?= $d_mess['telp_pemilik_mess']; ?></td>
-                                        <td><?= $d_mess['kapasitas_t_mess']; ?></td>
                                         <td>
-                                            <div class="ketersediaan_mess<?= $no; ?>"></div>
+                                            <?php if ($d_mess['kepemilikan_mess'] == 'dalam') { ?>
+                                                <span class="badge badge-primary">Dalam</span>
+                                            <?php } else if ($d_mess['kepemilikan_mess'] == 'luar') { ?>
+                                                <span class="badge badge-success">Luar</span>
+                                            <?php } else { ?>
+                                                <span class="badge badge-danger">ERROR</span>
+                                            <?php } ?>
                                         </td>
                                         <td>
-                                            <!-- tambah harga -->
-                                            <a class='btn btn-outline-dark btn-sm cekJadwalMess<?= $no; ?>' id='<?= $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#modalMess<?= $d_mess['id_mess']; ?>'>
-                                                <i class="fas fa-info-circle"></i> Rincian
-                                            </a>
+                                            <?php if ($d_mess['kepemilikan_mess'] == 'dalam') { ?>
+                                                <?= $d_mess['kapasitas_t_mess']; ?>
+                                            <?php } else { ?>
+                                                -
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($d_mess['kepemilikan_mess'] == 'dalam') { ?>
+                                                <div class="ketersediaan_mess<?= $no; ?>"></div>
+                                            <?php } else { ?>
+                                                -
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($d_mess['kepemilikan_mess'] == 'dalam') { ?>
+                                                <!-- tombol cek jadwal mess -->
+                                                <a class='btn btn-outline-dark btn-sm cekJadwalMess<?= $no; ?>' id='<?= $d_mess['id_mess']; ?>' href='#' data-toggle='modal' data-target='#modalMess<?= $d_mess['id_mess']; ?>'>
+                                                    <i class="fas fa-info-circle"></i> Rincian
+                                                </a>
 
-                                            <!-- modal tambah Harga  -->
-                                            <div class="modal fade" id="modalMess<?= $d_mess['id_mess']; ?>">
-                                                <div class="modal-dialog modal-dialog-scrollable modal-lg ">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header text-uppercase font-weight-bold">
-                                                            <b><?= $d_mess['nama_mess']; ?></b>
-                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">×</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body p-0">
-                                                            <div id="dataJadwalMess<?= $no; ?>"></div>
+                                                <!-- modal cek jadwal mess  -->
+                                                <div class="modal fade" id="modalMess<?= $d_mess['id_mess']; ?>">
+                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg ">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header text-uppercase font-weight-bold">
+                                                                <b><?= $d_mess['nama_mess']; ?></b>
+                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body p-0">
+                                                                <div id="dataJadwalMess<?= $no; ?>"></div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            <?php } else { ?>
+                                                -
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                 <?php
@@ -156,37 +180,17 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                                     <select class="select2" name="id_mess" id="id_mess" required>
                                     </select>
                                     <div id="err_mess" class="text-danger text-xs font-italic blink mb-3"></div>
-                                    <?php
-
-                                    //cari data makan mess
-                                    $sql_makan_mass = "SELECT * FROM tb_praktik WHERE id_praktik = " . $_GET['m'];
-                                    $q_makan_mess = $conn->query($sql_makan_mass);
-                                    $d_makan_mess = $q_makan_mess->fetch(PDO::FETCH_ASSOC);
-
-                                    if ($d_makan_mess['makan_mess_praktik'] == 'y') {
-                                        $makan_mess = "Dengan Makan";
-                                    } else {
-                                        $makan_mess = "Tanpa Makan";
-                                    }
-                                    ?>
-
-                                    <div class="jumbotron mb-3">
-                                        <div class="jumbotron-fluid text-lg">
-                                            Institusi Memilih Mess <b><?= $makan_mess; ?></b>
-                                        </div>
-                                    </div>
                                     <div class="jumbotron">
                                         <div class="jumbotron-fluid">
                                             "Pilihan yang dimunculkan <br>
-                                            <b>dipioritaskan Mess yang dari RSJ</b>, <br>
+                                            <b>dipioritaskan Mess yang dari RSJ (Dalam)</b>, <br>
                                             bila Mess RSJ <b>tidak bisa menampung praktikan</b> <br>
-                                            maka akan dialihkan ke <b>Mess/Pemondokan diluar</b>"
+                                            maka <b>pilihan otomatis</b> akan dialihkan ke <b>Mess/Pemondokan diluar</b>"
                                         </div>
                                     </div>
 
                                     <input type="hidden" name="makan_mess_pilih" id="makan_mess_pilih" value="<?= $d_makan_mess['makan_mess_praktik']; ?>">
-                                    <input type="hidden" name="path" id="path" value="<?= $_GET['prk'] ?>">
-                                    <input type="hidden" name="id" id="id" value="<?= $_GET['m'] ?>">
+                                    <input type="hidden" name="id" id="id" value="<?= $id_praktik ?>">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-success btn-sm" id="simpan_mess">SIMPAN</button>
@@ -223,13 +227,11 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 var id_mess = $('#mess<?= $no1; ?>').val();
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/insert/i_praktik_mess_dataTgl.php?id_m=" + id_mess,
-                    data: {
-                        id_m: id_mess,
-                        jp: "<?= $jumlah_praktik; ?>",
-                        tgl_m: "<?= $d_praktik['tgl_mulai_praktik']; ?>",
-                        tgl_s: "<?= $d_praktik['tgl_selesai_praktik']; ?>"
-                    },
+                    url: "_admin/insert/i_praktik_mess_dataTgl.php?id_m=" +
+                        id_mess + "&jp=" +
+                        <?= $jumlah_praktik ?> + "&tgl_m=" +
+                        <?= $d_praktik['tgl_mulai_praktik'] ?> + "&tgl_s=" +
+                        <?= $d_praktik['tgl_selesai_praktik'] ?>,
                     dataType: 'json',
                     success: function(response) {
                         if (response.messKet == 'T') {
@@ -240,16 +242,32 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');
                         }
                         // $('#option_mess').append(response.messOption).trigger("change");
-                    },
-                    error: function(response) {
-                        console.log(response.messKet);
-                        alert('eksekusi query jadwal mess gagal');
                     }
                 });
             <?php
                 $no1++;
             }
             ?>
+
+            //select option pilih mess/pemondokan
+            $.ajax({
+                type: 'POST',
+                url: "_admin/insert/i_praktik_mess_selectOption.php?",
+                data: {
+                    jp: "<?= $jumlah_praktik; ?>",
+                    tgl_m: "<?= $d_praktik['tgl_mulai_praktik']; ?>",
+                    tgl_s: "<?= $d_praktik['tgl_selesai_praktik']; ?>"
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('#id_mess').append(response.option).trigger("change");
+                    // console.log(response.option);
+                },
+                error: function(response) {
+                    console.log(response.ket);
+                    alert('eksekusi query gagal');
+                }
+            });
 
             $("#simpan_mess").click(function() {
 
@@ -347,26 +365,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                     });
                 }
 
-            });
-
-            //select option pilih mess/pemondokan
-            $.ajax({
-                type: 'POST',
-                url: "_admin/insert/i_praktik_mess_selectOption.php?",
-                data: {
-                    jp: "<?= $jumlah_praktik; ?>",
-                    tgl_m: "<?= $d_praktik['tgl_mulai_praktik']; ?>",
-                    tgl_s: "<?= $d_praktik['tgl_selesai_praktik']; ?>"
-                },
-                dataType: 'json',
-                success: function(response) {
-                    $('#id_mess').append(response.option).trigger("change");
-                    // console.log(response.option);
-                },
-                error: function(response) {
-                    console.log(response.ket);
-                    alert('eksekusi query gagal');
-                }
             });
 
         });

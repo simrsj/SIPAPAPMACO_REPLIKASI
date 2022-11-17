@@ -71,8 +71,13 @@ function generateKalenderKedKep($date)
                         $sql_messTgl .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
                         $sql_messTgl .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl' AND tb_mess.id_mess = " . $_GET['id'];
                         // echo "$sql_messTgl<br>";
-                        $q_mess = $conn->query($sql_messTgl);
-                        $q1_mess = $conn->query($sql_messTgl);
+                        try {
+                            $q_mess = $conn->query($sql_messTgl);
+                            $q1_mess = $conn->query($sql_messTgl);
+                        } catch (Exception $ex) {
+
+                            echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+                        }
 
                         $jp_jt = 0;
                         while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
@@ -81,8 +86,13 @@ function generateKalenderKedKep($date)
 
                         $sql_kuotaMess = "SELECT * FROM tb_mess";
                         $sql_kuotaMess .= " WHERE id_mess= " .  $_GET['id'];
+                        try {
+                            $q_kuotaMess = $conn->query($sql_kuotaMess);
+                        } catch (Exception $ex) {
 
-                        $q_kuotaMess = $conn->query($sql_kuotaMess);
+                            echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+                        }
+
                         $d_kuotaMess = $q_kuotaMess->fetch(PDO::FETCH_ASSOC);
                         $kuota_messTotal = $d_kuotaMess['kapasitas_t_mess'];
 
@@ -96,12 +106,17 @@ function generateKalenderKedKep($date)
                         } else {
                             $btn_mess = "secondary";
                         }
-                        // echo $jp_jt . "-" . $kuota_ked . "-" . $kuota_kep . "<br>";
 
                         $sql_infoMess = " SELECT * FROM tb_mess ";
                         $sql_infoMess .= " WHERE tb_mess.id_mess = " . $_GET['id'];
                         // echo $sql_infoMess . "<br>";
-                        $q_infoMess = $conn->query($sql_infoMess);
+                        try {
+                            $q_infoMess = $conn->query($sql_infoMess);
+                        } catch (Exception $ex) {
+
+                            echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+                        }
+
                         $d_infoMess = $q_infoMess->fetch(PDO::FETCH_ASSOC);
                         $kuota_sisa = $kuota_messTotal - $jp_jt;
                         if ($day == $i) {
