@@ -8,11 +8,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 // $dataJSON['POST'] = print_r($_POST);
 
-if ($_POST['id_m'] != '') {
-    $id_mess = $_POST['id_m'];
-} else {
-    $id_mess = $_GET['id_m'];
-}
+$id_mess = $_POST['id_m'];
 $jumlahPraktikan = $_POST['jp'];
 $tgl_mulai = $_POST['tgl_m'];
 $tgl_selesai = $_POST['tgl_s'];
@@ -40,11 +36,11 @@ foreach ($period as $key => $value) {
     $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
     $sql .= " AND tb_mess_pilih.id_mess = " . $id_mess;
     $sql .= " AND tb_praktik.status_praktik = 'Y'";
+    // echo $sql . "<br>";
     try {
         $q = $conn->query($sql);
     } catch (Exception $ex) {
-
-        echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+        echo "<script>alert('Maaf Data Tidak Ada -DATA MESS PILIH-');document.location.href='?error404';</script>";
     }
 
     $jumlahTotal = 0;
@@ -57,8 +53,7 @@ foreach ($period as $key => $value) {
     try {
         $q_mess = $conn->query($sql_mess);
     } catch (Exception $ex) {
-
-        echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+        echo "<script>alert('Maaf Data Tidak Ada -DATA KUOTA MESS-');document.location.href='?error404';</script>";
     }
 
     $d_mess = $q_mess->fetch(PDO::FETCH_ASSOC);

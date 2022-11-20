@@ -91,9 +91,9 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                                         <td><?= $d_mess['telp_pemilik_mess']; ?></td>
                                         <td>
                                             <?php if ($d_mess['kepemilikan_mess'] == 'dalam') { ?>
-                                                <span class="badge badge-primary">Dalam</span>
+                                                <span class="badge badge-primary">DALAM</span>
                                             <?php } else if ($d_mess['kepemilikan_mess'] == 'luar') { ?>
-                                                <span class="badge badge-success">Luar</span>
+                                                <span class="badge badge-success">LUAR</span>
                                             <?php } else { ?>
                                                 <span class="badge badge-danger">ERROR</span>
                                             <?php } ?>
@@ -159,13 +159,14 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 <input type="hidden" name="mess1" id="mess1">
                 <input type="hidden" name="mess2" id="mess2">
 
+                <!-- tombol pilih Mess  -->
                 <nav id="navbar-tarif" class="navbar justify-content-center">
                     <a class='nav-link btn btn-outline-success' href='#' data-toggle='modal' data-target='#pilih_mess'>
                         PILIH MESS/PEMONDOKAN
                     </a>
                 </nav>
 
-                <!-- modal tambah Mess  -->
+                <!-- modal pilih Mess  -->
                 <div class="modal fade text-left " id="pilih_mess" data-backdrop="static">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -174,7 +175,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                                     <b>PILIH MESS/PEMONDOKAN</b>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
+                                    <span class="text-lg font-weight-bold">Pilih Mess <span style="color:red">*</span></span>
 
                                     <!-- data pilih mess kosong -->
                                     <select class="select2" name="id_mess" id="id_mess" required>
@@ -206,9 +207,9 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
 
     <script>
         $(document).ready(function() {
-            <?php
 
             //Perulangan jumlah mess/pemodalan yang aktif
+            <?php
             $no1 = 1;
             while ($no1 <= $r_mess) {
             ?>
@@ -224,23 +225,25 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                     };
                 });
 
-                var id_mess = $('#mess<?= $no1; ?>').val();
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/insert/i_praktik_mess_dataTgl.php?id_m=" +
-                        id_mess + "&jp=" +
-                        <?= $jumlah_praktik ?> + "&tgl_m=" +
-                        <?= $d_praktik['tgl_mulai_praktik'] ?> + "&tgl_s=" +
-                        <?= $d_praktik['tgl_selesai_praktik'] ?>,
+                    url: "_admin/insert/i_praktik_mess_dataTgl.php",
+                    data: {
+                        id_m: $('#mess<?= $no1; ?>').val(),
+                        jp: <?= $jumlah_praktik ?>,
+                        tgl_m: "<?= $d_praktik['tgl_mulai_praktik'] ?>",
+                        tgl_s: "<?= $d_praktik['tgl_selesai_praktik'] ?>",
+                    },
                     dataType: 'json',
                     success: function(response) {
                         if (response.messKet == 'T') {
-                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">Kosong</span>');
+                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">KOSONG</span>');
                         } else if (response.ket == 'Y') {
-                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>');
+                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">KOSONG</span>');
                         } else {
-                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');
+                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge basdge-danger">ERROR!!!</span>');
                         }
+                        console.log("Keterangan Ketersediaan Mess" + response.messKet);
                         // $('#option_mess').append(response.messOption).trigger("change");
                     }
                 });
@@ -261,7 +264,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 dataType: 'json',
                 success: function(response) {
                     $('#id_mess').append(response.option).trigger("change");
-                    // console.log(response.option);
                 },
                 error: function(response) {
                     console.log(response.ket);
