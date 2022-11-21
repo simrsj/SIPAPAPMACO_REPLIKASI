@@ -49,8 +49,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 <?php
                 $sql_mess = "SELECT * FROM tb_mess ";
                 $sql_mess .= " WHERE status_mess = 'Y'";
-                // $sql_mess .= " AND kepemilikan_mess = 'dalam'";
-                // $sql_mess .= " ORDER BY kepemilikan_mess ASC, nama_mess ASC";
                 // echo $sql_mess . "<br>";
                 try {
                     $q_mess = $conn->query($sql_mess);
@@ -60,7 +58,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 }
 
                 $r_mess = $q_mess->rowCount();
-                if ($q_mess->rowCount() > 0) {
+                if ($r_mess > 0) {
                 ?>
 
                     <input type="hidden" name="jumlah_mess" id="jumlah_mess" value="<?= $r_mess; ?>">
@@ -207,7 +205,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     <script>
         $(document).ready(function() {
             <?php
-
             //Perulangan jumlah mess/pemodalan yang aktif
             $no1 = 1;
             while ($no1 <= $r_mess) {
