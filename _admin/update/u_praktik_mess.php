@@ -14,14 +14,16 @@ try {
 
 //query data mess yg sudah dipilih
 $sql_mess_pilih = "SELECT * FROM tb_mess_pilih ";
+$sql_mess_pilih .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess ";
 $sql_mess_pilih .= " WHERE id_praktik = $id_praktik";
 try {
     $q_mess_pilih = $conn->query($sql_mess_pilih);
+    $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
 } catch (Exception $ex) {
     echo "<script>alert('$ex -DATA MESS PILIH-');document.location.href='?error404';</script>";
 }
 
-if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
+if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
     $jumlah_praktik = $d_praktik['jumlah_praktik'];
 ?>
 
@@ -35,19 +37,26 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
         <div class="card shadow mb-4 mt-3">
             <div class="card-body">
                 <div class="row text-center h6 text-gray-900 ">
-                    <div class="col-6">
+                    <div class="col my-auto">
                         Nama Institusi :
                         <b><?= $d_praktik['nama_institusi']; ?></b>
                         <hr>
                         Jumlah Praktik :
                         <b><?= $d_praktik['jumlah_praktik']; ?></b>
                     </div>
-                    <div class="col-6">
+                    <div class="col my-auto">
                         Tanggal Mulai :
                         <b><?= tanggal($d_praktik['tgl_mulai_praktik']); ?></b>
                         <hr>
                         Tanggal Selesai :
                         <b><?= tanggal($d_praktik['tgl_selesai_praktik']); ?></b>
+                    </div>
+                    <div class="col my-auto">
+                        Mess yang Dipilih :
+                        <b><?= $d_mess_pilih['nama_mess']; ?></b>
+                        <hr>
+                        Nama Pemilik :
+                        <b><?= $d_mess_pilih['nama_pemilik_mess']; ?></b>
                     </div>
                 </div>
             </div>
@@ -162,10 +171,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                 }
                 ?>
 
-                <!-- data mess dalam mess1 dan mess2 -->
-                <input type="hidden" name="mess1" id="mess1">
-                <input type="hidden" name="mess2" id="mess2">
-
                 <!-- tombol pemilihan mess/pemondokan -->
                 <nav id="navbar-tarif" class="navbar justify-content-center">
                     <a class='nav-link btn btn-outline-success' href='#' data-toggle='modal' data-target='#pilih_mess'>
@@ -243,7 +248,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                     success: function(response) {
                         if (response.messKet == 'T') {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">Kosong</span>');
-                        } else if (response.ket == 'Y') {
+                        } else if (response.messKet == 'Y') {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>');
                         } else {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');

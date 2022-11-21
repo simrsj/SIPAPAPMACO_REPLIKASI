@@ -162,10 +162,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                 }
                 ?>
 
-                <!-- data mess dalam mess1 dan mess2 -->
-                <input type="hidden" name="mess1" id="mess1">
-                <input type="hidden" name="mess2" id="mess2">
-
                 <!-- tombol pemilihan mess/pemondokan -->
                 <nav id="navbar-tarif" class="navbar justify-content-center">
                     <a class='nav-link btn btn-outline-success' href='#' data-toggle='modal' data-target='#pilih_mess'>
@@ -243,7 +239,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                     success: function(response) {
                         if (response.messKet == 'T') {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">Kosong</span>');
-                        } else if (response.ket == 'Y') {
+                        } else if (response.messKet == 'Y') {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>');
                         } else {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');

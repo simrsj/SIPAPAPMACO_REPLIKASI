@@ -39,7 +39,11 @@
                                     <?php if ($_SESSION['level_user'] == 1) { ?>
                                         <th rowspan="2"> Nama Institusi</th>
                                     <?php } ?>
-                                    <th rowspan="2">Nama Kelompok</th>
+                                    <th rowspan="2">
+                                        Nama Kelompok
+                                        <hr class="p-0 m-0 bg-gray-500">
+                                        Jumlah Praktikan
+                                    </th>
                                     <th rowspan="2">Tgl Mulai</th>
                                     <th rowspan="2">Tgl Selesai</th>
                                     <th rowspan="2">
@@ -78,7 +82,11 @@
                                         <?php if ($_SESSION['level_user'] == 1) { ?>
                                             <td><?= $d_praktik['nama_institusi'] ?></td>
                                         <?php } ?>
-                                        <td><?= $d_praktik['nama_praktik'] ?></td>
+                                        <td>
+                                            <?= $d_praktik['nama_praktik'] ?>
+                                            <hr class="p-0 m-0 bg-gray-500">
+                                            <?= $d_praktik['jumlah_praktik'] ?>
+                                        </td>
                                         <td><?= tanggal_min_alt($d_praktik['tgl_mulai_praktik']) ?></td>
                                         <td><?= tanggal_min_alt($d_praktik['tgl_selesai_praktik']) ?></td>
                                         <td>
@@ -112,7 +120,7 @@
                                                 ?>
                                                     <span class="badge badge-warning">Belum Dipilih</span>
                                                     <hr class="p-0 m-1 bg-gray-500">
-                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m=i'>
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
                                                         Pilih
                                                     </a>
                                                 <?php
@@ -120,7 +128,7 @@
                                                 ?>
                                                     <span class="badge badge-success">Sudah Dipilih</span>
                                                     <hr class="p-0 m-1 bg-gray-500">
-                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m=u'>
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
                                                         Ubah
                                                     </a>
                                                 <?php

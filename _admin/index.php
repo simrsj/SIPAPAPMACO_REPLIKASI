@@ -430,9 +430,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/hide/dh_praktik.php";
 					} elseif (isset($_GET['i'])) include "_admin/insert/i_praktik.php";
 					elseif (isset($_GET['it_ked'])) include "_admin/insert/i_tarifKed.php";
-					elseif (isset($_GET['m']) && $d_prvl['c_praktik_mess'] == 'Y') {
-						include "_admin/insert/i_praktik_mess.php";
-					} elseif (isset($_GET['p_i'])) {
+					elseif (isset($_GET['m_i']) && $d_prvl['c_praktik_mess'] == 'Y') include "_admin/insert/i_praktik_mess.php";
+					elseif (isset($_GET['m_u']) && $d_prvl['u_praktik_mess'] == 'Y') include "_admin/update/u_praktik_mess.php";
+					elseif (isset($_GET['p_i'])) {
 						include "_print/p_praktik_invoice.php";
 					} elseif (isset($_GET['u'])) {
 						include "_admin/update/u_praktik.php";
