@@ -97,30 +97,43 @@
                                         </td>
                                         <td>
                                             <?php if ($d_praktik['status_mess_praktik'] == 'Y') { ?>
-                                                <span class="badge badge-success">Ya</span>
                                                 <?php
-                                                $q_cek_mess = $conn->query("SELECT * FROM tb_mess_pilih WHERE id_praktik=" . $d_praktik['id_praktik']);
-                                                $r_cek_mess = $q_cek_mess->rowCount();
-                                                if ($r_cek_mess > 0) {
-                                                    echo '<span class="badge badge-success">Sudah Dipilih</span>';
-                                                } else {
-                                                    echo '<span class="badge badge-warning blink">Belum Dipilih</span>';
+                                                $sql_mess_pilih = "SELECT * FROM tb_mess_pilih WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                                try {
+                                                    $q_mess_pilih = $conn->query($sql_mess_pilih);
+                                                } catch (Exception $ex) {
+                                                    echo "<script>alert('Unauthorized');";
+                                                    echo "document.location.href='?error404';</script>";
                                                 }
+                                                $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
+                                                $r_mess_pilih = $q_mess_pilih->rowCount();
 
-                                                if ($d_prvl['c_praktik_mess'] == 'Y') {
+                                                if ($d_prvl['c_praktik_mess'] == 'Y' && $r_mess_pilih < 1) {
                                                 ?>
+                                                    <span class="badge badge-warning">Belum Dipilih</span>
                                                     <hr class="p-0 m-1 bg-gray-500">
-                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m'>
-                                                        Cek
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m=i'>
+                                                        Pilih
                                                     </a>
-                                                <?php } ?>
+                                                <?php
+                                                } else if ($d_prvl['u_praktik_mess'] == 'Y' && $r_mess_pilih > 0) {
+                                                ?>
+                                                    <span class="badge badge-success">Sudah Dipilih</span>
+                                                    <hr class="p-0 m-1 bg-gray-500">
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m=u'>
+                                                        Ubah
+                                                    </a>
+                                                <?php
+
+                                                }
+                                                ?>
                                             <?php } else { ?>
                                                 <span class="badge badge-danger">Tidak</span>
                                             <?php } ?>
                                         </td>
                                         <td>
                                             <?php if ($d_praktik['status_pembimbing_praktik'] != 'Y') { ?>
-                                                <span class="badge badge-danger">Tidak Ada</span>
+                                                <span class="badge badge-warning">Belum Dipilih</span>
                                             <?php } else { ?>
                                                 <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     <i class="fas fa-edit"></i>
@@ -129,7 +142,7 @@
                                         </td>
                                         <td>
                                             <?php if ($d_praktik['status_tarif_praktik'] != 'Y') { ?>
-                                                <span class="badge badge-danger">Tidak Ada</span>
+                                                <span class="badge badge-warning">Belum Dipilih</span>
                                             <?php } else { ?>
                                                 <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     <i class="fas fa-edit"></i>
@@ -138,7 +151,7 @@
                                         </td>
                                         <td>
                                             <?php if ($d_praktik['status_bayar_praktik'] != 'Y') { ?>
-                                                <span class="badge badge-danger">Tidak Ada</span>
+                                                <span class="badge badge-warning">Belum Dipilih</span>
                                             <?php } else { ?>
                                                 <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     <i class="fas fa-edit"></i>
