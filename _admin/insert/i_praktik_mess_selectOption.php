@@ -7,7 +7,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 $jumlahPraktikan = $_POST['jp'];
 $tgl_mulai = $_POST['tgl_m'];
-$tgl_selesai = date('Y-m-d', strtotime($_POST['tgl_s'] . "+1 days"));
+$tgl_selesai = $_POST['tgl_s'];
+$tgl_selesai = date('Y-m-d', strtotime($tgl_selesai . "+1 days"));
 
 $period = new DatePeriod(
     new DateTime($tgl_mulai),
@@ -20,15 +21,19 @@ $period = new DatePeriod(
 // echo "</pre>";
 
 $sql_mess = "SELECT * FROM tb_mess";
-// $sql_mess .= " WHERE kepemilikan_mess = 'dalam'";
+$sql_mess .= " ORDER BY kepemilikan_mess ASC";
 try {
     $q_mess = $conn->query($sql_mess);
 } catch (Exception $ex) {
-    echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+    echo "<script>alert('$ex');document.location.href='?error404';</script>";
 }
 
 $option = '<option value=""></option>';
 while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+    $messKuota = $d_mess['kapasitas_t_mess'];
+
+    $option_tambah = '<option value="' . $d_mess['id_mess'] . '">' . $d_mess['nama_mess'] . '</option>';
+
     foreach ($period as $key => $value) {
 
         $jumlahTotal = 0;
@@ -41,20 +46,19 @@ while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
         try {
             $q = $conn->query($sql);
         } catch (Exception $ex) {
-            echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+            echo "<script>alert('Maaf Data Tidak Ada -DATA MESS PILIH-');document.location.href='?error404';</script>";
         }
 
+        $jumlahTotal = 0;
         while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
             $jumlahTotal += $d['jumlah_praktik'];
         }
         $jumlahPraktikanTotal = $jumlahPraktikan + $jumlahTotal;
+        if ($jumlahPraktikanTotal >= $messKuota) {
+            $option_tambah = "";
+        }
     }
-
-    if ($jumlahPraktikanTotal < $d_mess['kapasitas_t_mess'] && $d_mess['kepemilikan_mess'] == 'dalam') {
-        $option .= '<option value="' . $d_mess['id_mess'] . '">' . $d_mess['nama_mess'] . '</option>';
-    } else {
-        $option .= '<option value="' . $d_mess['id_mess'] . '">' . $d_mess['nama_mess'] . '</option>';
-    }
+    $option .= $option_tambah;
 }
 $dataJSON['option'] = $option;
 

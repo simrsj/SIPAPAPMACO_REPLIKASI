@@ -267,7 +267,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 },
                 error: function(response) {
                     console.log(response.ket);
-                    alert('eksekusi query gagal');
+                    alert('eksekusi query select option pilih mess/pemondokan gagal');
                 }
             });
 
