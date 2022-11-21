@@ -227,11 +227,13 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 var id_mess = $('#mess<?= $no1; ?>').val();
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/insert/i_praktik_mess_dataTgl.php?id_m=" +
-                        id_mess + "&jp=" +
-                        <?= $jumlah_praktik ?> + "&tgl_m=" +
-                        <?= $d_praktik['tgl_mulai_praktik'] ?> + "&tgl_s=" +
-                        <?= $d_praktik['tgl_selesai_praktik'] ?>,
+                    url: "_admin/insert/i_praktik_mess_dataTgl.php?",
+                    data: {
+                        id_m: $('#mess<?= $no1; ?>').val(),
+                        jp: <?= $jumlah_praktik ?>,
+                        tgl_m: "<?= $d_praktik['tgl_mulai_praktik'] ?>",
+                        tgl_s: "<?= $d_praktik['tgl_selesai_praktik'] ?>",
+                    },
                     dataType: 'json',
                     success: function(response) {
                         if (response.messKet == 'T') {
@@ -242,6 +244,9 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');
                         }
                         // $('#option_mess').append(response.messOption).trigger("change");
+                    },
+                    error: function(response) {
+                        console.log(response);
                     }
                 });
             <?php

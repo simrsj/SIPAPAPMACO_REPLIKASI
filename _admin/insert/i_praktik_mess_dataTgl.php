@@ -6,17 +6,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // print_r($_POST);
 // echo "</pre>";
 
-// $dataJSON['POST'] = print_r($_POST);
-
-if ($_POST['id_m'] != '') {
-    $id_mess = $_POST['id_m'];
-} else {
-    $id_mess = $_GET['id_m'];
-}
+$id_mess = $_POST['id_m'];
 $jumlahPraktikan = $_POST['jp'];
 $tgl_mulai = $_POST['tgl_m'];
-$tgl_selesai = $_POST['tgl_s'];
-$tgl_selesai = date('Y-m-d', strtotime($tgl_selesai . "+1 days"));
+$tgl_selesai = date('Y-m-d', strtotime($_POST['tgl_s'] . "+1 days"));
 
 $period = new DatePeriod(
     new DateTime($tgl_mulai),
@@ -32,7 +25,6 @@ $no = 1;
 $dataJSON['messKet'] = 'T';
 foreach ($period as $key => $value) {
 
-
     $sql = "SELECT * FROM tb_praktik ";
     $sql .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik ";
     $sql .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik ";
@@ -43,8 +35,7 @@ foreach ($period as $key => $value) {
     try {
         $q = $conn->query($sql);
     } catch (Exception $ex) {
-
-        echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+        echo "<script>alert('Maaf Data Tidak Ada -DATA JADWAL HARIAN MESS-');document.location.href='?error404';</script>";
     }
 
     $jumlahTotal = 0;
@@ -54,11 +45,11 @@ foreach ($period as $key => $value) {
 
     $sql_mess = "SELECT * FROM tb_mess";
     $sql_mess .= " WHERE id_mess= " . $id_mess;
+    // echo $sql_mess;
     try {
         $q_mess = $conn->query($sql_mess);
     } catch (Exception $ex) {
-
-        echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+        echo "<script>alert('Maaf Data Tidak Ada -DATA MESS-');document.location.href='?error404';</script>";
     }
 
     $d_mess = $q_mess->fetch(PDO::FETCH_ASSOC);
