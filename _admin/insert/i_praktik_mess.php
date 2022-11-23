@@ -1,18 +1,27 @@
 <?php
-if ($d_prvl['c_praktik_mess'] == 'Y') {
+$id_praktik = base64_decode(urldecode($_GET['prk']));
 
-    $id_praktik = base64_decode(urldecode($_GET['prk']));
-    $sql_praktik = "SELECT * FROM tb_praktik ";
-    $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-    $sql_praktik .= " WHERE id_praktik = $id_praktik";
-    try {
-        $q_praktik = $conn->query($sql_praktik);
-    } catch (Exception $ex) {
-
-        echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
-    }
-
+//query data praktik
+$sql_praktik = "SELECT * FROM tb_praktik ";
+$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+$sql_praktik .= " WHERE id_praktik = $id_praktik";
+try {
+    $q_praktik = $conn->query($sql_praktik);
     $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
+} catch (Exception $ex) {
+    echo "<script>alert('$ex -DATA PRAKTIK-');document.location.href='?error404';</script>";
+}
+
+//query data mess yg sudah dipilih
+$sql_mess_pilih = "SELECT * FROM tb_mess_pilih ";
+$sql_mess_pilih .= " WHERE id_praktik = $id_praktik";
+try {
+    $q_mess_pilih = $conn->query($sql_mess_pilih);
+} catch (Exception $ex) {
+    echo "<script>alert('$ex -DATA MESS PILIH-');document.location.href='?error404';</script>";
+}
+
+if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
     $jumlah_praktik = $d_praktik['jumlah_praktik'];
 ?>
 
@@ -49,8 +58,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 <?php
                 $sql_mess = "SELECT * FROM tb_mess ";
                 $sql_mess .= " WHERE status_mess = 'Y'";
-                // $sql_mess .= " AND kepemilikan_mess = 'dalam'";
-                // $sql_mess .= " ORDER BY kepemilikan_mess ASC, nama_mess ASC";
                 // echo $sql_mess . "<br>";
                 try {
                     $q_mess = $conn->query($sql_mess);
@@ -60,7 +67,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 }
 
                 $r_mess = $q_mess->rowCount();
-                if ($q_mess->rowCount() > 0) {
+                if ($r_mess > 0) {
                 ?>
 
                     <input type="hidden" name="jumlah_mess" id="jumlah_mess" value="<?= $r_mess; ?>">
@@ -155,18 +162,14 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 }
                 ?>
 
-                <!-- data mess dalam mess1 dan mess2 -->
-                <input type="hidden" name="mess1" id="mess1">
-                <input type="hidden" name="mess2" id="mess2">
-
-                <!-- tombol pilih Mess  -->
+                <!-- tombol pemilihan mess/pemondokan -->
                 <nav id="navbar-tarif" class="navbar justify-content-center">
                     <a class='nav-link btn btn-outline-success' href='#' data-toggle='modal' data-target='#pilih_mess'>
                         PILIH MESS/PEMONDOKAN
                     </a>
                 </nav>
 
-                <!-- modal pilih Mess  -->
+                <!-- modal pemilihan mess/pemondokan -->
                 <div class="modal fade text-left " id="pilih_mess" data-backdrop="static">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -189,8 +192,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                                             maka <b>pilihan otomatis</b> akan dialihkan ke <b>Mess/Pemondokan diluar</b>"
                                         </div>
                                     </div>
-
-                                    <input type="hidden" name="makan_mess_pilih" id="makan_mess_pilih" value="<?= $d_makan_mess['makan_mess_praktik']; ?>">
                                     <input type="hidden" name="id" id="id" value="<?= $id_praktik ?>">
                                 </div>
                                 <div class="modal-footer">
@@ -207,7 +208,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
 
     <script>
         $(document).ready(function() {
-
+            <?php
             //Perulangan jumlah mess/pemodalan yang aktif
             <?php
             $no1 = 1;
@@ -227,7 +228,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
 
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/insert/i_praktik_mess_dataTgl.php",
+                    url: "_admin/insert/i_praktik_mess_dataTgl.php?",
                     data: {
                         id_m: $('#mess<?= $no1; ?>').val(),
                         jp: <?= $jumlah_praktik ?>,
@@ -237,14 +238,17 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                     dataType: 'json',
                     success: function(response) {
                         if (response.messKet == 'T') {
-                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">KOSONG</span>');
-                        } else if (response.ket == 'Y') {
-                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">KOSONG</span>');
+                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-success">Kosong</span>');
+                        } else if (response.messKet == 'Y') {
+                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>');
                         } else {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge basdge-danger">ERROR!!!</span>');
                         }
                         console.log("Keterangan Ketersediaan Mess" + response.messKet);
                         // $('#option_mess').append(response.messOption).trigger("change");
+                    },
+                    error: function(response) {
+                        console.log(response);
                     }
                 });
             <?php
@@ -271,29 +275,13 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                 }
             });
 
+            //eksekusi pengecekan simpan pilihan mess/pemondokan
             $("#simpan_mess").click(function() {
 
-                // console.log("masuk tambah");
-                var path = document.getElementById('path').value;
-                var mess = document.getElementById('id_mess').value;
-                // var makan = $('input[name="makan_mess_pilih"]:checked').val();
-                var makan = document.getElementById('makan_mess_pilih').value;
-                // var makan1 = document.getElementById('makan_mess_pilih1').value;
-                // var makan2 = document.getElementById('makan_mess_pilih2').value;
+                var mess = $('#id_mess').val();
 
-                // alert("path:" + path + " mess:" + mess + " makan1:" + makan1 + " makan2:" + makan2 + " makan:" + makan);
-
-                // if (makan == undefined) {
-                //     alert("makan:" + makan);
-                // }
-                // if (makan != undefined) {
-                //     alert("makan not:" + makan);
-                // }
-
-                //Notif Bila tidak dipilih
-                if (
-                    // makan == undefined || 
-                    mess == "") {
+                //Notif Bila tidak dipilih mess/pemondokan
+                if (mess == "") {
 
                     //warning Toast bila ada data wajib yg berlum terisi
                     const Toast = Swal.mixin({
@@ -319,27 +307,17 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                     } else {
                         document.getElementById("err_mess").innerHTML = "";
                     }
-
-                    //notif makan tidak diisi
-                    // if (makan == undefined) {
-                    //     document.getElementById("err_makan").innerHTML = "Pilih Mess";
-                    // } else {
-                    //     document.getElementById("err_makan").innerHTML = "";
-                    // }
                 }
 
-                //tambah mess
-                if (
-                    makan != undefined &&
-                    mess != ""
-                ) {
-                    var data_tMess = $('#form_sMess').serializeArray();
+                //simpan pilihan mess/pemodokan bila sudah sesuais
+                if (mess != "") {
+                    var data_pilih_mess = $('#form_sMess').serializeArray();
 
-                    //Simpan Data Praktik dan tarif
+                    //Simpan pilihan mess/pemondokan
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_i_praktik_mess_s.php?",
-                        data: data_tMess,
+                        url: "_admin/exc/x_i_praktik_mess_s.php?id=<?= urlencode(base64_encode($_SESSION['id_user'])) ?>",
+                        data: data_pilih_mess,
                         success: function() {
                             Swal.fire({
                                 allowOutsideClick: false,
@@ -347,8 +325,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                                 icon: 'success',
                                 title: '<span class"text-xs"><b>DATA MESS</b><br>Berhasil Tersimpan',
                                 showConfirmButton: false,
-                                html: '<a href="?prk=' + path + '" class="btn btn-outline-primary">OK</a>',
-                                timer: 5000,
+                                timer: 115000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
                                     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -356,13 +333,12 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "?prk=" + path;
+                                    document.location.href = "?prk";
                                 }
                             );
                         },
-                        error: function(response) {
-                            console.log(response.responseText);
-                            alert('eksekusi query gagal');
+                        error: function() {
+                            console.log('eksekusi simpan pilihan mess/pemondokan gagal');
                         }
                     });
                 }
@@ -372,5 +348,5 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
         });
     </script>
 <?php } else {
-    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?error401';</script>";
+    echo "<script>alert('Unauthorized');document.location.href='?error401';</script>";
 }

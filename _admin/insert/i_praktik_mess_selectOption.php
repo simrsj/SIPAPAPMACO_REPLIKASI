@@ -20,20 +20,20 @@ $period = new DatePeriod(
 // // print_r($period);
 // echo "</pre>";
 
-$sql_mess = "SELECT * FROM tb_mess";
-$sql_mess .= " ORDER BY kepemilikan_mess ASC";
+$sql_mess_dalam = "SELECT * FROM tb_mess";
+$sql_mess_dalam .= " WHERE kepemilikan_mess = 'dalam'";
 try {
-    $q_mess = $conn->query($sql_mess);
+    $q_mess_dalam = $conn->query($sql_mess_dalam);
 } catch (Exception $ex) {
-    echo "<script>alert('$ex');document.location.href='?error404';</script>";
+    echo "<script>alert('Maaf Data Tidak Ada -DATA MESS DALAM-');";
+    echo "document.location.href='?error404';</script>";
 }
 
 $option = '<option value=""></option>';
-while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-    $messKuota = $d_mess['kapasitas_t_mess'];
-
-    $option_tambah = '<option value="' . $d_mess['id_mess'] . '">' . $d_mess['nama_mess'] . '</option>';
-
+//cek data ketersediaan mess dalam
+while ($d_mess_dalam = $q_mess_dalam->fetch(PDO::FETCH_ASSOC)) {
+    $option_tambah = '<option value="' . $d_mess_dalam['id_mess'] . '">' . $d_mess_dalam['nama_mess'] . '</option>';
+    $status_mess_dalam = 'tersedia';
     foreach ($period as $key => $value) {
 
         $jumlahTotal = 0;
@@ -41,12 +41,13 @@ while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
         $sql .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik ";
         $sql .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik ";
         $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
-        $sql .= " AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
+        $sql .= " AND tb_mess_pilih.id_mess = " . $d_mess_dalam['id_mess'];
         $sql .= " AND tb_praktik.status_praktik = 'Y'";
         try {
             $q = $conn->query($sql);
         } catch (Exception $ex) {
-            echo "<script>alert('Maaf Data Tidak Ada -DATA MESS PILIH-');document.location.href='?error404';</script>";
+            echo "<script>alert('Maaf Data Tidak Ada -DATA JADWAL HARIAN MESS');";
+            echo "document.location.href='?error404';</script>";
         }
 
         $jumlahTotal = 0;
@@ -54,11 +55,27 @@ while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
             $jumlahTotal += $d['jumlah_praktik'];
         }
         $jumlahPraktikanTotal = $jumlahPraktikan + $jumlahTotal;
-        if ($jumlahPraktikanTotal >= $messKuota) {
+        if ($jumlahPraktikanTotal >= $d_mess_dalam['kapasitas_t_mess']) {
             $option_tambah = "";
+            $status_mess_dalam = 'penuh';
+            break;
         }
     }
     $option .= $option_tambah;
+}
+//eksekusi bila ketersediaan mess dalam penuh
+if ($status_mess_dalam == 'penuh') {
+    $sql_mess_luar = "SELECT * FROM tb_mess";
+    $sql_mess_luar .= " WHERE kepemilikan_mess = 'luar'";
+    try {
+        $q_mess_luar = $conn->query($sql_mess_luar);
+    } catch (Exception $ex) {
+        echo "<script>alert('Maaf Data Tidak Ada -DATA MESS LUAR-');";
+        echo "document.location.href='?error404';</script>";
+    }
+    while ($d_mess_luar = $q_mess_luar->fetch(PDO::FETCH_ASSOC)) {
+        $option .= '<option value="' . $d_mess_luar['id_mess'] . '">' . $d_mess_luar['nama_mess'] . '</option>';
+    }
 }
 $dataJSON['option'] = $option;
 
