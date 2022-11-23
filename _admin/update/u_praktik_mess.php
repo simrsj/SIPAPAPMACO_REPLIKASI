@@ -16,6 +16,7 @@ try {
 $sql_mess_pilih = "SELECT * FROM tb_mess_pilih ";
 $sql_mess_pilih .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess ";
 $sql_mess_pilih .= " WHERE id_praktik = $id_praktik";
+echo $sql_mess_pilih . "<br>";
 try {
     $q_mess_pilih = $conn->query($sql_mess_pilih);
     $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
@@ -71,7 +72,6 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                 try {
                     $q_mess = $conn->query($sql_mess);
                 } catch (Exception $ex) {
-
                     echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
                 }
 
@@ -204,7 +204,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                                     <input type="hidden" name="id" id="id" value="<?= $id_praktik ?>">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-success btn-sm" id="simpan_mess">SIMPAN</button>
+                                    <button type="button" class="btn btn-primary btn-sm" id="ubah_mess">UBAH</button>
                                     <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                 </div>
                             </form>
@@ -283,8 +283,8 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                 }
             });
 
-            //eksekusi pengecekan simpan pilihan mess/pemondokan
-            $("#simpan_mess").click(function() {
+            //eksekusi pengecekan ubah pilihan mess/pemondokan
+            $("#ubah_mess").click(function() {
 
                 var mess = $('#id_mess').val();
 
@@ -317,21 +317,21 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                     }
                 }
 
-                //simpan pilihan mess/pemodokan bila sudah sesuais
+                //ubah pilihan mess/pemodokan bila sudah sesuais
                 if (mess != "") {
                     var data_pilih_mess = $('#form_sMess').serializeArray();
 
-                    //Simpan pilihan mess/pemondokan
+                    //ubah pilihan mess/pemondokan
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_i_praktik_mess_s.php?id=<?= urlencode(base64_encode($_SESSION['id_user'])) ?>",
+                        url: "_admin/exc/x_u_praktik_mess_u.php?id=<?= urlencode(base64_encode($_SESSION['id_user'])) ?>&idtp=<?= urlencode(base64_encode(1)) ?>",
                         data: data_pilih_mess,
                         success: function() {
                             Swal.fire({
                                 allowOutsideClick: false,
                                 // isDismissed: false,
                                 icon: 'success',
-                                title: '<span class"text-xs"><b>DATA MESS</b><br>Berhasil Tersimpan',
+                                title: '<span class"text-xs"><b>DATA MESS</b><br>Berhasil Diubah',
                                 showConfirmButton: false,
                                 timer: 115000,
                                 timerProgressBar: true,
@@ -346,7 +346,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                             );
                         },
                         error: function() {
-                            console.log('eksekusi simpan pilihan mess/pemondokan gagal');
+                            console.log('eksekusi ubah pilihan mess/pemondokan gagal');
                         }
                     });
                 }
