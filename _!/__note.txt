@@ -68,7 +68,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres ubah Pengajuan Praktik mess"
+git commit -a -m "Perbaikan pengajuan pilih mess.php"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git

@@ -32,6 +32,7 @@ foreach ($period as $key => $value) {
     $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
     $sql .= " AND tb_mess_pilih.id_mess = " . $id_mess;
     $sql .= " AND tb_praktik.status_praktik = 'Y'";
+    // echo $sql . "<br>";
     try {
         $q = $conn->query($sql);
     } catch (Exception $ex) {

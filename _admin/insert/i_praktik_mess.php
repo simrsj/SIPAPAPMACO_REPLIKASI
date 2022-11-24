@@ -98,9 +98,9 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                                         <td><?= $d_mess['telp_pemilik_mess']; ?></td>
                                         <td>
                                             <?php if ($d_mess['kepemilikan_mess'] == 'dalam') { ?>
-                                                <span class="badge badge-primary">Dalam</span>
+                                                <span class="badge badge-primary">DALAM</span>
                                             <?php } else if ($d_mess['kepemilikan_mess'] == 'luar') { ?>
-                                                <span class="badge badge-success">Luar</span>
+                                                <span class="badge badge-success">LUAR</span>
                                             <?php } else { ?>
                                                 <span class="badge badge-danger">ERROR</span>
                                             <?php } ?>
@@ -178,7 +178,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                                     <b>PILIH MESS/PEMONDOKAN</b>
                                 </div>
                                 <div class="modal-body text-center">
-                                    <span class="text-lg font-weight-bold">Nama Mess <span style="color:red">*</span></span>
+                                    <span class="text-lg font-weight-bold">Pilih Mess <span style="color:red">*</span></span>
 
                                     <!-- data pilih mess kosong -->
                                     <select class="select2" name="id_mess" id="id_mess" required>
@@ -210,6 +210,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
         $(document).ready(function() {
             <?php
             //Perulangan jumlah mess/pemodalan yang aktif
+            <?php
             $no1 = 1;
             while ($no1 <= $r_mess) {
             ?>
@@ -225,7 +226,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                     };
                 });
 
-                var id_mess = $('#mess<?= $no1; ?>').val();
                 $.ajax({
                     type: 'POST',
                     url: "_admin/insert/i_praktik_mess_dataTgl.php?",
@@ -242,8 +242,9 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                         } else if (response.messKet == 'Y') {
                             $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">Penuh</span>');
                         } else {
-                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge badge-danger">ERROR!!!</span>');
+                            $('.ketersediaan_mess<?= $no1; ?>').html('<span class="badge basdge-danger">ERROR!!!</span>');
                         }
+                        console.log("Keterangan Ketersediaan Mess" + response.messKet);
                         // $('#option_mess').append(response.messOption).trigger("change");
                     },
                     error: function(response) {
@@ -270,7 +271,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                 },
                 error: function(response) {
                     console.log(response.ket);
-                    alert('eksekusi query gagal');
+                    alert('eksekusi query select option pilih mess/pemondokan gagal');
                 }
             });
 

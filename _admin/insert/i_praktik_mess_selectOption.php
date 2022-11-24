@@ -7,7 +7,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 $jumlahPraktikan = $_POST['jp'];
 $tgl_mulai = $_POST['tgl_m'];
-$tgl_selesai = date('Y-m-d', strtotime($_POST['tgl_s'] . "+1 days"));
+$tgl_selesai = $_POST['tgl_s'];
+$tgl_selesai = date('Y-m-d', strtotime($tgl_selesai . "+1 days"));
 
 $period = new DatePeriod(
     new DateTime($tgl_mulai),
@@ -49,6 +50,7 @@ while ($d_mess_dalam = $q_mess_dalam->fetch(PDO::FETCH_ASSOC)) {
             echo "document.location.href='?error404';</script>";
         }
 
+        $jumlahTotal = 0;
         while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
             $jumlahTotal += $d['jumlah_praktik'];
         }
