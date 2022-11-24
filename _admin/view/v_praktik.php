@@ -36,10 +36,11 @@
                             <thead class="table-dark text-center">
                                 <tr>
                                     <th rowspan="2">No</th>
-                                    <?php if ($_SESSION['level_user'] == 1) { ?>
-                                        <th rowspan="2"> Nama Institusi</th>
-                                    <?php } ?>
                                     <th rowspan="2">
+                                        <?php if ($_SESSION['level_user'] == 1) { ?>
+                                            Nama Institusi
+                                            <hr class="p-0 m-0 bg-gray-500">
+                                        <?php } ?>
                                         Nama Kelompok
                                         <hr class="p-0 m-0 bg-gray-500">
                                         Jumlah Praktikan
@@ -62,7 +63,7 @@
                                         Email Koordinator
                                         <hr class="p-0 m-0 bg-gray-500">
                                     </th>
-                                    <th colspan="4">Status</th>
+                                    <th colspan="5">Status</th>
                                     <th rowspan="2">Aksi</th>
                                 </tr>
                                 <tr>
@@ -70,6 +71,7 @@
                                     <th>Pembimbing</th>
                                     <th>Tarif</th>
                                     <th>Bayar</th>
+                                    <th>Nilai</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,10 +81,11 @@
                                 ?>
                                     <tr class="text-center">
                                         <td><?= $no; ?></td>
-                                        <?php if ($_SESSION['level_user'] == 1) { ?>
-                                            <td><?= $d_praktik['nama_institusi'] ?></td>
-                                        <?php } ?>
                                         <td>
+                                            <?php if ($_SESSION['level_user'] == 1) { ?>
+                                                <?= $d_praktik['nama_institusi'] ?>
+                                                <hr class="p-0 m-0 bg-gray-500">
+                                            <?php } ?>
                                             <?= $d_praktik['nama_praktik'] ?>
                                             <hr class="p-0 m-0 bg-gray-500">
                                             <?= $d_praktik['jumlah_praktik'] ?>
@@ -103,6 +106,7 @@
                                             <hr class="p-0 m-0 bg-gray-500">
                                             <?= $d_praktik['email_koordinator_praktik'] ?>
                                         </td>
+                                        <!-- status mess praktik  -->
                                         <td>
                                             <?php if ($d_praktik['status_mess_praktik'] == 'Y') { ?>
                                                 <?php
@@ -110,42 +114,102 @@
                                                 try {
                                                     $q_mess_pilih = $conn->query($sql_mess_pilih);
                                                 } catch (Exception $ex) {
-                                                    echo "<script>alert('Unauthorized');";
+                                                    echo "<script>alert('$ex -MESS PRAKTIK-');";
                                                     echo "document.location.href='?error404';</script>";
                                                 }
                                                 $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
                                                 $r_mess_pilih = $q_mess_pilih->rowCount();
 
-                                                if ($d_prvl['c_praktik_mess'] == 'Y' && $r_mess_pilih < 1) {
+                                                //teks status praktik mess
+                                                if ($r_mess_pilih < 1) {
                                                 ?>
                                                     <span class="badge badge-warning">Belum Dipilih</span>
+                                                <?php
+                                                } else if ($r_mess_pilih > 0) {
+                                                ?>
+                                                    <span class="badge badge-success">Sudah Dipilih</span>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <span class="badge badge-danger">ERROR!!!</span>
+                                                <?php
+                                                }
+
+                                                //privileges praktik mess
+                                                if ($d_prvl['c_praktik_mess'] == 'Y') {
+                                                ?>
                                                     <hr class="p-0 m-1 bg-gray-500">
                                                     <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
                                                         Pilih
                                                     </a>
                                                 <?php
-                                                } else if ($d_prvl['u_praktik_mess'] == 'Y' && $r_mess_pilih > 0) {
+                                                } else if ($d_prvl['u_praktik_mess'] == 'Y') {
                                                 ?>
-                                                    <span class="badge badge-success">Sudah Dipilih</span>
                                                     <hr class="p-0 m-1 bg-gray-500">
                                                     <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
                                                         Ubah
                                                     </a>
                                                 <?php
-
-                                                }
+                                                } else {
                                                 ?>
-                                            <?php } else { ?>
+                                                    <span class="badge badge-danger">ERROR!!!</span>
+                                                <?php
+                                                }
+                                            } else { ?>
                                                 <span class="badge badge-danger">Tidak</span>
                                             <?php } ?>
                                         </td>
+                                        <!-- status pembimbing praktik  -->
                                         <td>
-                                            <?php if ($d_praktik['status_pembimbing_praktik'] != 'Y') { ?>
-                                                <span class="badge badge-warning">Belum Dipilih</span>
-                                            <?php } else { ?>
-                                                <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
+                                            <?php if ($d_praktik['status_pembimbing_praktik'] == 'Y') { ?>
+                                                <?php
+                                                $sql_pembimbing_pilih = "SELECT * FROM tb_pembimbing_pilih WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                                try {
+                                                    $q_pembimbing_pilih = $conn->query($sql_pembimbing_pilih);
+                                                } catch (Exception $ex) {
+                                                    echo "<script>alert('$ex -PEMBIMBING PRAKTIK-');";
+                                                    echo "document.location.href='?error404';</script>";
+                                                }
+                                                $d_pembimbing_pilih = $q_pembimbing_pilih->fetch(PDO::FETCH_ASSOC);
+                                                $r_pembimbing_pilih = $q_pembimbing_pilih->rowCount();
+
+                                                //teks status praktik pembimbing
+                                                if ($r_pembimbing_pilih < 1) {
+                                                ?>
+                                                    <span class="badge badge-warning">Belum Dipilih</span>
+                                                <?php
+                                                } else if ($r_pembimbing_pilih > 0) {
+                                                ?>
+                                                    <span class="badge badge-success">Sudah Dipilih</span>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <span class="badge badge-danger">ERROR!!!</span>
+                                                <?php
+                                                }
+
+                                                //privileges praktik pembimbing
+                                                if ($d_prvl['c_praktik_pembimbing'] == 'Y') {
+                                                ?>
+                                                    <hr class="p-0 m-1 bg-gray-500">
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
+                                                        Pilih
+                                                    </a>
+                                                <?php
+                                                } else if ($d_prvl['u_praktik_pembimbing'] == 'Y') {
+                                                ?>
+                                                    <hr class="p-0 m-1 bg-gray-500">
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
+                                                        Ubah
+                                                    </a>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <span class="badge badge-danger">ERROR!!!</span>
+                                                <?php
+                                                }
+                                            } else { ?>
+                                                <span class="badge badge-danger">Tidak</span>
                                             <?php } ?>
                                         </td>
                                         <td>
@@ -159,6 +223,15 @@
                                         </td>
                                         <td>
                                             <?php if ($d_praktik['status_bayar_praktik'] != 'Y') { ?>
+                                                <span class="badge badge-warning">Belum Dipilih</span>
+                                            <?php } else { ?>
+                                                <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($d_praktik['status_nilai_praktik'] != 'Y') { ?>
                                                 <span class="badge badge-warning">Belum Dipilih</span>
                                             <?php } else { ?>
                                                 <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>

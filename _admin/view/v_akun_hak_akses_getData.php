@@ -231,6 +231,58 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_praktik_mess"></div>
                     </td>
                 </tr>
+                <!-- Praktik Pembimbing -->
+                <tr>
+                    <td>Praktik Pembimbing</td>
+                    <td>
+                        <?php
+                        $c_praktik_pembimbingY = "";
+                        $c_praktik_pembimbingT = "";
+                        if ($d_user_prvl['c_praktik_pembimbing'] == 'Y') $c_praktik_pembimbingY = "checked";
+                        else if ($d_user_prvl['c_praktik_pembimbing'] == 'T')  $c_praktik_pembimbingT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="c_praktik_pembimbing" id="c_praktik_pembimbingY" value="Y" <?= $c_praktik_pembimbingY; ?>><label for="c_praktik_pembimbingY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="c_praktik_pembimbing" id="c_praktik_pembimbingT" value="T" <?= $c_praktik_pembimbingT; ?>><label for="c_praktik_pembimbingT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_praktik_pembimbing"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $r_praktik_pembimbingY = "";
+                        $r_praktik_pembimbingT = "";
+                        if ($d_user_prvl['r_praktik_pembimbing'] == 'Y') $r_praktik_pembimbingY = "checked";
+                        else if ($d_user_prvl['r_praktik_pembimbing'] == 'T')  $r_praktik_pembimbingT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="r_praktik_pembimbing" id="r_praktik_pembimbingY" value="Y" <?= $r_praktik_pembimbingY; ?>><label for="r_praktik_pembimbingY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="r_praktik_pembimbing" id="r_praktik_pembimbingT" value="T" <?= $r_praktik_pembimbingT; ?>><label for="r_praktik_pembimbingT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_praktik_pembimbing"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $u_praktik_pembimbingY = "";
+                        $u_praktik_pembimbingT = "";
+                        if ($d_user_prvl['u_praktik_pembimbing'] == 'Y') $u_praktik_pembimbingY = "checked";
+                        else if ($d_user_prvl['u_praktik_pembimbing'] == 'T')  $u_praktik_pembimbingT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="u_praktik_pembimbing" id="u_praktik_pembimbingY" value="Y" <?= $u_praktik_pembimbingY; ?>><label for="u_praktik_pembimbingY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="u_praktik_pembimbing" id="u_praktik_pembimbingT" value="T" <?= $u_praktik_pembimbingT; ?>><label for="u_praktik_pembimbingT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_praktik_pembimbing"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $d_praktik_pembimbingY = "";
+                        $d_praktik_pembimbingT = "";
+                        if ($d_user_prvl['d_praktik_pembimbing'] == 'Y') $d_praktik_pembimbingY = "checked";
+                        else if ($d_user_prvl['d_praktik_pembimbing'] == 'T')  $d_praktik_pembimbingT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="d_praktik_pembimbing" id="d_praktik_pembimbingY" value="Y" <?= $d_praktik_pembimbingY; ?>><label for="d_praktik_pembimbingY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="d_praktik_pembimbing" id="d_praktik_pembimbingT" value="T" <?= $d_praktik_pembimbingT; ?>><label for="d_praktik_pembimbingT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_praktik_pembimbing"></div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -264,6 +316,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
         var r_praktik_mess = $("input[name='r_praktik_mess']:checked").val();
         var u_praktik_mess = $("input[name='u_praktik_mess']:checked").val();
         var d_praktik_mess = $("input[name='d_praktik_mess']:checked").val();
+        var c_praktik_pembimbing = $("input[name='c_praktik_pembimbing']:checked").val();
+        var r_praktik_pembimbing = $("input[name='r_praktik_pembimbing']:checked").val();
+        var u_praktik_pembimbing = $("input[name='u_praktik_pembimbing']:checked").val();
+        var d_praktik_pembimbing = $("input[name='d_praktik_pembimbing']:checked").val();
 
         // console.log(c_kuota + r_kuota + u_kuota + d_kuota);
 
@@ -284,7 +340,11 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
             c_praktik_mess != "" &&
             r_praktik_mess != "" &&
             u_praktik_mess != "" &&
-            d_praktik_mess != ""
+            d_praktik_mess != "" &&
+            c_praktik_pembimbing != "" &&
+            r_praktik_pembimbing != "" &&
+            u_praktik_pembimbing != "" &&
+            d_praktik_pembimbing != ""
         ) {
             $.ajax({
                 type: 'POST',
