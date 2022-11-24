@@ -36,7 +36,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
         echo "document.location.href='?error404';</script>";
     }
     $jumlah_hari_praktik = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
-    $total_tarif_mess_pilih = $jumlah_hari_praktik * $d_mess['tarif_tanpa_makan_mess'];
+    $total_tarif_mess_pilih = $jumlah_hari_praktik * $d_praktik['jumlah_praktik'] * $d_mess['tarif_tanpa_makan_mess'];
     // echo $jumlah_hari_praktik . "<br>";
 
     //mencari id_tarif_pilih yang belum ada
@@ -67,7 +67,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     $sql_insert_tarif_mess .= " nama_satuan_tarif_pilih,";
     $sql_insert_tarif_mess .= " frekuensi_tarif_pilih,";
     $sql_insert_tarif_mess .= " kuantitas_tarif_pilih,";
-    $sql_insert_tarif_mess .= " jumlah_tarif_pilih,";
+    $sql_insert_tarif_mess .= " jumlah_tarif_pilih";
     $sql_insert_tarif_mess .= " ) VALUES (";
     $sql_insert_tarif_mess .= " '" . $id_tarif_pilih . "',";
     $sql_insert_tarif_mess .= " '" . $_POST['id'] . "',";
@@ -98,8 +98,8 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     $sql_insert_pilih_mess .= " )";
 
     //Eksekusi Query
-    // echo $sql_insert_tarif_mess . "<br>";
-    // echo $sql_insert_pilih_mess . "<br>";
+    echo $sql_insert_tarif_mess . "<br>";
+    echo $sql_insert_pilih_mess . "<br>";
 
     try {
         $conn->query($sql_insert_tarif_mess);

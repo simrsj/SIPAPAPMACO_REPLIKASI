@@ -200,7 +200,9 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                                             maka <b>pilihan otomatis</b> akan dialihkan ke <b>Mess/Pemondokan diluar</b>"
                                         </div>
                                     </div>
-                                    <input type="hidden" name="id" id="id" value="<?= $id_praktik ?>">
+                                    <input type="hidden" name="idp" id="idp" value="<?= urlencode(base64_encode($id_praktik)); ?>">
+                                    <input type="hidden" name="idu" id="idu" value="<?= urlencode(base64_encode($_SESSION['id_user'])); ?>">
+                                    <input type="hidden" name="idtp" id="idtp" value="<?= urlencode(base64_encode($d_mess_pilih['id_tarif_pilih'])); ?>">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary btn-sm" id="ubah_mess">UBAH</button>
@@ -323,7 +325,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                     //ubah pilihan mess/pemondokan
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_u_praktik_mess_u.php?id=<?= urlencode(base64_encode($_SESSION['id_user'])) ?>&idtp=<?= urlencode(base64_encode(1)) ?>",
+                        url: "_admin/exc/x_u_praktik_mess_u.php",
                         data: data_pilih_mess,
                         success: function() {
                             Swal.fire({
