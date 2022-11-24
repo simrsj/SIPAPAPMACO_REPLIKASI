@@ -58,6 +58,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
 
     //tambah ke tb_tarif_pilih
     $sql_insert_tarif_mess = "INSERT INTO tb_tarif_pilih (";
+    $sql_insert_tarif_mess .= " id_tarif_pilih,";
     $sql_insert_tarif_mess .= " id_praktik,";
     $sql_insert_tarif_mess .= " tgl_input_tarif_pilih,";
     $sql_insert_tarif_mess .= " nama_jenis_tarif_pilih,";
