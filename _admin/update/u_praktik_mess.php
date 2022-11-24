@@ -16,7 +16,7 @@ try {
 $sql_mess_pilih = "SELECT * FROM tb_mess_pilih ";
 $sql_mess_pilih .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess ";
 $sql_mess_pilih .= " WHERE id_praktik = $id_praktik";
-echo $sql_mess_pilih . "<br>";
+// echo $sql_mess_pilih . "<br>";
 try {
     $q_mess_pilih = $conn->query($sql_mess_pilih);
     $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
@@ -27,7 +27,6 @@ try {
 if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
     $jumlah_praktik = $d_praktik['jumlah_praktik'];
 ?>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9 h4 text-gray-900">

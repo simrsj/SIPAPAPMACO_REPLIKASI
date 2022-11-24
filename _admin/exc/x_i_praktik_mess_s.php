@@ -68,7 +68,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     $sql_insert_tarif_mess .= " frekuensi_tarif_pilih,";
     $sql_insert_tarif_mess .= " kuantitas_tarif_pilih,";
     $sql_insert_tarif_mess .= " jumlah_tarif_pilih,";
-    $sql_insert_tarif_mess .= " mess_tarif_pilih";
     $sql_insert_tarif_mess .= " ) VALUES (";
     $sql_insert_tarif_mess .= " '" . $id_tarif_pilih . "',";
     $sql_insert_tarif_mess .= " '" . $_POST['id'] . "',";
@@ -79,8 +78,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     $sql_insert_tarif_mess .= " '" . $d_mess['nama_tarif_satuan'] . "',";
     $sql_insert_tarif_mess .= " '" . $jumlah_hari_praktik . "',";
     $sql_insert_tarif_mess .= " '" . $d_praktik['jumlah_praktik'] . "',";
-    $sql_insert_tarif_mess .= " '" . $total_tarif_mess_pilih . "',";
-    $sql_insert_tarif_mess .= " 'Y')";
+    $sql_insert_tarif_mess .= " '" . $total_tarif_mess_pilih . "')";
 
     //tambah ke tb_mess_pilih
     $sql_insert_pilih_mess = "INSERT INTO tb_mess_pilih (";

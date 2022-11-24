@@ -10,7 +10,7 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 
-if ($d_prvl['c_praktik_mess'] == 'Y') {
+if ($d_prvl['u_praktik_mess'] == 'Y') {
     // echo "<pre>";
     // print_r($_POST);
     // echo "</pre>";
@@ -37,50 +37,26 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     }
     $jumlah_hari_praktik = tanggal_between($d_praktik['tgl_mulai_praktik'], $d_praktik['tgl_selesai_praktik']);
     $total_tarif_mess_pilih = $jumlah_hari_praktik * $d_mess['tarif_tanpa_makan_mess'];
-    echo $jumlah_hari_praktik . "<br>";
+    // echo $jumlah_hari_praktik . "<br>";
 
     //tambah ke tb_tarif_pilih
     $sql_ubah_tarif_mess = "UPDATE tb_tarif_pilih SET";
     $sql_ubah_tarif_mess .= " tgl_ubah_tarif_pilih = " . date('Y-m-d');
-    $sql_ubah_tarif_mess .= " 
-    id_praktik, 
-    tgl_input_tarif_pilih,
-    nama_jenis_tarif_pilih,
-    nama_tarif_pilih,
-    nominal_tarif_pilih,
-    nama_satuan_tarif_pilih,
-    frekuensi_tarif_pilih,
-    kuantitas_tarif_pilih,
-    jumlah_tarif_pilih,
-    mess_tarif_pilih
-    ) VALUES (
-            '" . $_POST['id'] . "', 
-                '" . date('Y-m-d') . "',
-                '" . $d_mess['nama_tarif_jenis'] . "', 
-                '" . $d_mess['nama_mess'] . "', 
-                '" . $d_mess['tarif_tanpa_makan_mess'] . "',  
-                '" . $d_mess['nama_tarif_satuan'] . "',
-            '" . $jumlah_hari_praktik . "', 
-            '" . $d_praktik['jumlah_praktik'] . "', 
-            '" . $total_tarif_mess_pilih . "', 
-            'Y'
-    );";
+    $sql_ubah_tarif_mess .= " nama_tarif_pilih = ";
+    $sql_ubah_tarif_mess .= " nominal_tarif_pilih,";
+    $sql_ubah_tarif_mess .= " frekuensi_tarif_pilih,";
+    $sql_ubah_tarif_mess .= " kuantitas_tarif_pilih,";
+    $sql_ubah_tarif_mess .= " jumlah_tarif_pilih = '" . $total_tarif_mess_pilih . "'";
     $sql_ubah_tarif_mess .= " WHERE id_tarif_pilih = " . $_POST['idtp'];
 
     //tambah ke tb_mess_pilih
-    $sql_insert_pilih_mess = "INSERT INTO tb_mess_pilih (
-    id_praktik, 
-    id_mess,
-    tgl_input_mess_pilih,
-    jumlah_hari_mess_pilih,
-    total_tarif_mess_pilih
-) VALUES (
-        '" . $_POST['id'] . "', 
-        '" . $_POST['id_mess'] . "', 
-        '" . date('Y-m-d') . "', 
-        '" . $jumlah_hari_praktik . "',
-        '" . $total_tarif_mess_pilih . "'
-)";
+    $sql_ubah_pilih_mess = "UPDATE tb_tarif_pilih SET";
+    $sql_ubah_pilih_mess .= "id_praktik, ";
+    $sql_ubah_pilih_mess .= "id_mess,";
+    $sql_ubah_pilih_mess .= "tgl_input_mess_pilih,";
+    $sql_ubah_pilih_mess .= "jumlah_hari_mess_pilih,";
+    $sql_ubah_pilih_mess .= "total_tarif_mess_pilih";
+    $sql_ubah_pilih_mess .= " WHERE id_tarif_pilih = " . $_POST['idtp'];
 
     //SQL ubah status praktik
     $sql_ubah_status_praktik = "UPDATE tb_praktik";
