@@ -412,12 +412,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} else {
 						include "_admin/view/v_nilai.php";
 					}
-				} elseif (isset($_GET['praktikan'])) {
-					if (isset($_GET['u'])) {
-						include "_admin/update/u_praktikan.php";
-					} else {
-						include "_admin/view/v_praktikan.php";
-					}
 				} elseif (isset($_GET['pmbb'])) {
 					if (isset($_GET['i'])) {
 						include "_admin/insert/i_pembimbing.php";

@@ -22,34 +22,39 @@
             $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
             $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-            // $sql_praktik .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi  ";
-            $sql_praktik .= " WHERE tb_praktik.status_praktik IN ('W','Y', 'S') ";
-            $sql_praktik .= " OR tb_praktik.status_cek_praktik IN ('VPT_Y_PPDS') ";
-            // $sql_praktik .= " AND tb_praktik.id_profesi_pdd != 1";
+            $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' ";
             $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
 
             // echo "$sql_praktik<br>";
-
-            $q_praktik = $conn->query($sql_praktik);
+            try {
+                $q_praktik = $conn->query($sql_praktik);
+            } catch (Exception $ex) {
+                echo "<script>alert('$ex -DATA PRAKTIK');";
+                echo "document.location.href='?error404';</script>";
+            }
             $r_praktik = $q_praktik->rowCount();
 
             if ($r_praktik > 0) {
             ?>
                 <?php
-                while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+                while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
 
                     $sql_data_praktikan = "SELECT * FROM tb_pembimbing_pilih ";
                     $sql_data_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing ";
                     $sql_data_praktikan .= " JOIN tb_praktikan ON tb_pembimbing_pilih.id_praktikan = tb_praktikan.id_praktikan ";
                     $sql_data_praktikan .= " JOIN tb_unit ON tb_pembimbing_pilih.id_unit = tb_unit.id_unit ";
                     $sql_data_praktikan .= " JOIN tb_praktik ON tb_pembimbing_pilih.id_praktik = tb_praktik.id_praktik ";
-                    $sql_data_praktikan .= " WHERE (tb_praktik.status_praktik IN ('W', 'Y', 'S') OR tb_praktik.status_cek_praktik IN ('VPT_Y_PPDS') )";
-                    $sql_data_praktikan .= " AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+                    $sql_data_praktikan .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
                     $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
 
                     // echo "$sql_data_praktikan<br>";
 
-                    $q_data_praktikan = $conn->query($sql_data_praktikan);
+                    try {
+                        $q_data_praktikan = $conn->query($sql_data_praktikan);
+                    } catch (Exception $ex) {
+                        echo "<script>alert('$ex -DATA PRAKTIK');";
+                        echo "document.location.href='?error404';</script>";
+                    }
                     $r_data_praktikan = $q_data_praktikan->rowCount();
                 ?>
                     <div id="accordion">

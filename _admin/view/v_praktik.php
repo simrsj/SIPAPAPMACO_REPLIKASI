@@ -240,6 +240,28 @@
                                             <?php } ?>
                                         </td>
                                         <td>
+                                            <!-- tombol modal detail praktik  -->
+                                            <a title="Detail" class='btn btn-info btn-xs m-1' href='#' data-toggle="modal" data-target="#<?= md5($d_praktik['id_praktik']); ?>">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+
+                                            <!-- modal detail praktik  -->
+                                            <div class="modal fade" id="<?= md5($d_praktik['id_praktik']); ?>">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+                                                            <a class="btn btn-danger" href="?lo">Ya</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <a title="Ubah" class='btn btn-primary btn-xs m-1' href='#'>
                                                 <i class="fas fa-edit"></i>
                                             </a>
