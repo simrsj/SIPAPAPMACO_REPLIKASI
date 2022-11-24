@@ -58,18 +58,24 @@ if ($d_prvl['u_praktik_mess'] == 'Y') {
     $sql_ubah_pilih_mess .= "total_tarif_mess_pilih";
     $sql_ubah_pilih_mess .= " WHERE id_tarif_pilih = " . $_POST['idtp'];
 
-    //SQL ubah status praktik
-    $sql_ubah_status_praktik = "UPDATE tb_praktik";
-    $sql_ubah_status_praktik .= " SET status_mess_praktik = 'Y'";
-    $sql_ubah_status_praktik .= " WHERE id_praktik = " . $_POST['id'];
-
     //Eksekusi Query
-    echo $sql_insert_tarif_mess . "<br>";
+    echo $sql_ubah_pilih_mess . "<br>";
     echo $sql_insert_pilih_mess . "<br>";
-    echo $sql_ubah_status_praktik . "<br>";
-    // $conn->query($sql_insert_tarif_mess);
-    // $conn->query($sql_insert_pilih_mess);
-    // $conn->query($sql_ubah_status_praktik);
+    // $conn->query($sql_ubah_pilih_mess);
+    // $conn->query($sql_ubah_pilih_mess);
+
+    try {
+        $conn->query($sql_insert_tarif_mess);
+    } catch (Exception $ex) {
+        echo "<script>alert('$ex -DATA TARIF PILIH-');";
+        echo "document.location.href='?error404';</script>";
+    }
+    try {
+        $conn->query($sql_insert_pilih_mess);
+    } catch (Exception $ex) {
+        echo "<script>alert('$ex -DATA TARIF PILIH-');";
+        echo "document.location.href='?error404';</script>";
+    }
 } else {
     echo "<script>alert('Unauthorized');document.location.href='?error401';</script>";
 }

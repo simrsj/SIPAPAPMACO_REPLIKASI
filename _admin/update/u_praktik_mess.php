@@ -30,7 +30,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9 h4 text-gray-900">
-                Pilih Mess/Pemondokan
+                Ubah Mess/Pemondokan
             </div>
         </div>
         <!-- Data Praktik -->
@@ -332,7 +332,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                                 icon: 'success',
                                 title: '<span class"text-xs"><b>DATA MESS</b><br>Berhasil Diubah',
                                 showConfirmButton: false,
-                                timer: 115000,
+                                timer: 1115000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
                                     toast.addEventListener('mouseenter', Swal.stopTimer)

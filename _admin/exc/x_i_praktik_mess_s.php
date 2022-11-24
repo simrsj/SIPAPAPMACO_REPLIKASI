@@ -44,7 +44,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     try {
         $q_tarif_pilih = $conn->query($sql_tarif_pilih);
     } catch (Exception $ex) {
-        echo "<script>alert('$ex -DATA TARIF PILIHs-');";
+        echo "<script>alert('$ex -DATA TARIF PILIH-');";
         echo "document.location.href='?error404';</script>";
     }
     $no = 1;
@@ -100,8 +100,19 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     //Eksekusi Query
     // echo $sql_insert_tarif_mess . "<br>";
     // echo $sql_insert_pilih_mess . "<br>";
-    $conn->query($sql_insert_tarif_mess);
-    $conn->query($sql_insert_pilih_mess);
+
+    try {
+        $conn->query($sql_insert_tarif_mess);
+    } catch (Exception $ex) {
+        echo "<script>alert('$ex -INSERT TARIF MESS-');";
+        echo "document.location.href='?error404';</script>";
+    }
+    try {
+        $conn->query($sql_insert_pilih_mess);
+    } catch (Exception $ex) {
+        echo "<script>alert('$ex -INSERT PILIH MESS-');";
+        echo "document.location.href='?error404';</script>";
+    }
 } else {
     echo "<script>alert('Unauthorized');document.location.href='?error401';</script>";
 }
