@@ -89,25 +89,25 @@
                                                                 <div class="modal-body text-md">
                                                                     <form class="form-data" method="post" id="form_i<?= md5($d_praktik['id_praktik']); ?>">
                                                                         No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
-                                                                        <input type="text" id="no_id" name="no_id" class="form-control" required>
+                                                                        <input type="text" id="i_no_id<?= md5($d_praktik['id_praktik']); ?>" name="i_no_id<?= md5($d_praktik['id_praktik']); ?>" class="form-control" required>
                                                                         <div class="text-danger b i text-xs blink" id="err_i_no_id"></div><br>
                                                                         Nama Siswa/Mahasiswa : <span style="color:red">*</span><br>
-                                                                        <input type="text" id="nama" name="nama" class="form-control" required>
+                                                                        <input type="text" id="i_nama" name="i_nama" class="form-control" required>
                                                                         <div class="text-danger b i text-xs blink" id="err_i_nama"></div><br>
                                                                         Tanggal Lahir : <span style="color:red">*</span><br>
-                                                                        <input type="date" id="tgl" name="tgl" class="form-control" required>
+                                                                        <input type="date" id="i_tgl" name="i_tgl" class="form-control" required>
                                                                         <div class="text-danger b i text-xs blink" id="err_i_tgl"></div><br>
                                                                         Alamat : <span style="color:red">*</span><br>
-                                                                        <textarea id="alamat" name="alamat" id="" class="form-control" rows="2"></textarea>
+                                                                        <textarea id="i_alamat" name="i_alamat" class="form-control" rows="2"></textarea>
                                                                         <div class="text-danger b i text-xs blink" id="err_i_alamat"></div><br>
                                                                         No Telepon : <span style="color:red">*</span><br>
-                                                                        <input type="number" id="telpon" name="telpon" class="form-control" min="1" required>
+                                                                        <input type="number" id="i_telpon" name="i_telpon" class="form-control" min="1" required>
                                                                         <div class="text-danger b i text-xs blink" id="err_i_telpon"></div><br>
                                                                         No WhatsApp :<br>
-                                                                        <input type="number" id="wa" name="wa" class="form-control" min="1">
+                                                                        <input type="number" id="i_wa" name="i_wa" class="form-control" min="1">
                                                                         <div class="text-danger b i text-xs blink" id="err_i_wa"></div><br>
                                                                         E-Mail : <br>
-                                                                        <input type="email" id="email" name="email" class="form-control">
+                                                                        <input type="email" id="i_email" name="i_email" class="form-control">
                                                                         <div class="text-danger b i text-xs blink" id="err_i_email"></div>
                                                                     </form>
                                                                 </div>
@@ -116,7 +116,7 @@
                                                                         Kembali
                                                                     </a>
                                                                     &nbsp;
-                                                                    <a class="tambah btn btn-success btn-sm" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
+                                                                    <a class="tambah btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
                                                                         Tambah
                                                                     </a>
                                                                 </div>
@@ -141,20 +141,15 @@
                                                 $('#err_i_telpon').empty();
                                                 $('#err_i_wa').empty();
                                                 $('#err_i_email').empty();
-                                                $('#err_t_alamat_mess').empty();
-                                                $('#err_t_fasilitas_mess').empty();
 
-                                                $("#data_tambah_mess").fadeIn(1);
-                                                $("#data_ubah_mess").fadeOut(1);
-
-                                                $('#mi<?= md5($d_praktik['id_praktik']); ?>').focus();
+                                                $('#i_no_id<?= md5($d_praktik['id_praktik']); ?>').focus();
                                             });
 
                                             $(".tambah_tutup<?= md5($d_praktik['id_praktik']); ?>").click(function() {
                                                 $("#form_i<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
                                             });
 
-                                            $(document).on('click', '.tambah', function() {
+                                            $(document).on('click', '.tambah<?= md5($d_praktik['id_praktik']); ?>', function() {
                                                 var data = $('#form_tambah_mess').serialize();
 
                                                 var t_nama_mess = $('#t_nama_mess').val();
