@@ -75,7 +75,7 @@
                                                 <div class="col-2 text-right">
 
                                                     <!-- tombol modal tambah praktikan  -->
-                                                    <a title="tambah praktikan" class='btn btn-success btn-sm tambah_init' href='#' data-toggle="modal" data-target="#mi<?= md5($d_praktik['id_praktik']); ?>">
+                                                    <a title="tambah praktikan" class='btn btn-success btn-sm tambah_init<?= md5($d_praktik['id_praktik']); ?>' href='#' data-toggle="modal" data-target="#mi<?= md5($d_praktik['id_praktik']); ?>">
                                                         <i class="fas fa-plus"></i> Tambah Data
                                                     </a>
 
@@ -87,7 +87,7 @@
                                                                     Tambah Praktikan
                                                                 </div>
                                                                 <div class="modal-body text-md">
-                                                                    <from id="form_i<?= md5($d_praktik['id_praktik']); ?>">
+                                                                    <form class="form-data" method="post" id="form_i<?= md5($d_praktik['id_praktik']); ?>">
                                                                         No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
                                                                         <input type="text" id="no_id" name="no_id" class="form-control" required>
                                                                         <div class="text-danger b i text-xs blink" id="err_i_no_id"></div><br>
@@ -109,10 +109,10 @@
                                                                         E-Mail : <br>
                                                                         <input type="email" id="email" name="email" class="form-control">
                                                                         <div class="text-danger b i text-xs blink" id="err_i_email"></div>
-                                                                    </from>
+                                                                    </form>
                                                                 </div>
                                                                 <div class="modal-footer text-md">
-                                                                    <a class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close">
+                                                                    <a class="btn btn-danger btn-sm tambah_tutup<?= md5($d_praktik['id_praktik']); ?>" data-dismiss="modal">
                                                                         Kembali
                                                                     </a>
                                                                     &nbsp;
@@ -133,7 +133,7 @@
                                                 $('#<?= md5("data" . $d_praktik['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>");
                                             });
 
-                                            $(".tambah_init").click(function() {
+                                            $(".tambah_init<?= md5($d_praktik['id_praktik']); ?>").click(function() {
                                                 $('#err_i_no_id').empty();
                                                 $('#err_i_nama').empty();
                                                 $('#err_i_tgl').empty();
@@ -150,8 +150,8 @@
                                                 $('#mi<?= md5($d_praktik['id_praktik']); ?>').focus();
                                             });
 
-                                            $(".tambah_tutup").click(function() {
-                                                $("#data_tambah_mess").fadeOut(1);
+                                            $(".tambah_tutup<?= md5($d_praktik['id_praktik']); ?>").click(function() {
+                                                $("#form_i<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
                                             });
 
                                             $(document).on('click', '.tambah', function() {
