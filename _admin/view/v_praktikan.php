@@ -9,15 +9,15 @@
         <div class="card shadow mb-4">
             <div class="card-body">
                 <?php
-                $sql_praktikan = "SELECT * FROM tb_praktik ";
-                $sql_praktikan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
-                $sql_praktikan .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
-                $sql_praktikan .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
-                $sql_praktikan .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
-                $sql_praktikan .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-                $sql_praktikan .= " WHERE tb_praktik.status_praktik = 'Y' ";
-                $sql_praktikan .= " ORDER BY tb_praktik.id_praktik DESC";
-                // echo $sql_praktikan . "<br>";
+                $sql_praktik = "SELECT * FROM tb_praktik ";
+                $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
+                $sql_praktik .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
+                $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
+                $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
+                $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
+                $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' ";
+                $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
+                // echo $sql_praktik . "<br>";
                 try {
                     $q_praktik = $conn->query($sql_praktik);
                 } catch (Exception $ex) {
@@ -27,10 +27,8 @@
                 $r_praktik = $q_praktik->rowCount();
 
                 if ($r_praktik > 0) {
+                    while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
                 ?>
-                    <?php
-                    while ($d_praktik = $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
                         <div id="accordion">
                             <div class="card">
                                 <div class="card-header align-items-center bg-gray-200">
@@ -57,19 +55,19 @@
                                         <!-- tombol aksi/info proses  -->
                                         <div class="col-sm-3 my-auto  text-center">
                                             <!-- tombol rincian -->
-                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?= $d_praktik['id_praktik']; ?>" title="Rincian">
+                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#<?= md5($d_praktik['id_praktik']); ?>" title="Rincian">
                                                 <i class="fas fa-info-circle"></i> Rincian Data
                                             </button>
                                             &nbsp;
-                                            <a class="btn btn-primary btn-sm collapsed" href="?praktikan&u=<?= $d_praktik['id_praktik']; ?>" title="Ubah">
-                                                <i class="far fa-edit"></i> Ubah Data
+                                            <a class="btn btn-primary btn-sm collapsed" href="?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>&iu" title="Tambah/Ubah">
+                                                <i class="far fa-edit"></i> Tambah/Ubah Data
                                             </a>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- collapse data praktikan -->
-                                <div id="collapse<?= $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?= $d_praktik['id_praktik']; ?>" data-parent="#accordion">
+                                <div id="<?= md5($d_praktik['id_praktik']); ?>" class="collapse" data-parent="#accordion">
                                     <div class="card-body " style="font-size: medium;">
                                         <!-- data praktikan -->
                                         <div class="text-gray-700">

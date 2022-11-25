@@ -423,9 +423,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					}
 				} elseif (isset($_GET['prk']) && $d_prvl['c_praktik'] == 'Y') {
 					if (isset($_GET['ib'])) include "_admin/insert/i_praktik_bayar.php";
-					elseif (isset($_GET['dh'])) {
-						include "_admin/hide/dh_praktik.php";
-					} elseif (isset($_GET['i'])) include "_admin/insert/i_praktik.php";
+					elseif (isset($_GET['dh'])) include "_admin/hide/dh_praktik.php";
+					elseif (isset($_GET['i'])) include "_admin/insert/i_praktik.php";
 					elseif (isset($_GET['it_ked'])) include "_admin/insert/i_tarifKed.php";
 					elseif (isset($_GET['m_i']) && $d_prvl['c_praktik_mess'] == 'Y') include "_admin/insert/i_praktik_mess.php";
 					elseif (isset($_GET['m_u']) && $d_prvl['u_praktik_mess'] == 'Y') include "_admin/update/u_praktik_mess.php";
@@ -441,11 +440,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						include "_admin/update/u_praktik_mess.php";
 					} elseif (isset($_GET['t'])) {
 						include "_admin/insert/i_praktik_tempat.php";
-					} else {
-						include "_admin/view/v_praktik.php";
-					}
-				} elseif (isset($_GET['ptk']) && $d_prvl['c_praktikan'] == 'Y') {
-					include "_admin/view/v_praktikan.php";
+					} else include "_admin/view/v_praktik.php";
+				} elseif (isset($_GET['ptk']) && $d_prvl['r_praktikan'] == 'Y') {
+					if (isset($_GET['i']) && $d_prvl['c_praktikan'] == 'Y') include "_admin/insert/i_praktikan.php";
+					else if (isset($_GET['u']) && $d_prvl['u_praktikan'] == 'Y') include "_admin/view/u_praktikan.php";
+					else include "_admin/view/v_praktikan.php";
 				} elseif (isset($_GET['pfs'])) {
 					include "_admin/view/v_profesi.php";
 				} elseif (isset($_GET['uni'])) {
