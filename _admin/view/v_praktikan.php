@@ -1,4 +1,4 @@
-<?php if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['r_praktikan'] == "Y") { ?>
+<?php if (isset($_GET['ptk']) && $d_prvl['r_praktikan'] == "Y") { ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
@@ -35,8 +35,10 @@
                                     <div class="row" style="font-size: small;">
                                         <br><br>
 
-                                        <div class="col-sm-4 text-center">
-                                            <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?><br>
+                                        <div class="col-sm-4 text-center m-auto">
+                                            <?php if ($_SESSION['level_user'] == 1) { ?>
+                                                <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?><br>
+                                            <?php } ?>
                                             <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?= $d_praktik['nama_praktik']; ?>
                                         </div>
 
@@ -71,9 +73,39 @@
                                                 <h4 class="font-weight-bold">DATA PRAKTIKAN</h4><br>
                                             </div>
                                             <div class="col-2 text-right">
-                                                <a class="btn btn-primary btn-sm collapsed" href="?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>&i" title="Tambah">
-                                                    <i class="far fa-edit"></i> Tambah Data
+
+                                                <!-- tombol modal tambah praktikan  -->
+                                                <a title="tambah praktikan" class='btn btn-success btn-sm' href='#' data-toggle="modal" data-target="#i<?= md5($d_praktik['id_praktik']); ?>">
+                                                    <i class="fas fa-plus"></i> Tambah Data
                                                 </a>
+
+                                                <!-- modal tambah praktikan  -->
+                                                <div class="modal fade text-center" id="i<?= md5($d_praktik['id_praktik']); ?>">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header h5">
+                                                                Detail Data Praktik
+                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-md">
+                                                                No. ID PRAKTIKAN (NIM/NPM/NIP) : <span style="color:red">*</span><br>
+                                                                <input type="text" id="no_id" name="no_id" class="form-control" required>
+                                                                <div class="text-danger b i text-xs blink" id="err_no_id"></div><br>
+                                                                NAMA SISWA/MAHASISWA : <span style="color:red">*</span><br>
+                                                                <input type="text" id="nama" name="nama" class="form-control" required>
+                                                                <div class="text-danger b i text-xs blink" id="err_nama"></div><br>
+                                                                TANGGAL LAHIR : <span style="color:red">*</span><br>
+                                                                <input type="date" id="tgl" name="tgl" class="form-control" required>
+                                                                <div class="text-danger b i text-xs blink" id="err_tgl"></div><br>
+                                                                ALAMAT : <span style="color:red">*</span><br>
+                                                                <textarea id="alamat" name="alamat" id="" class="form-control" rows="2"></textarea>
+                                                                <div class="text-danger b i text-xs blink" id="err_alamat"></div><br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <?php

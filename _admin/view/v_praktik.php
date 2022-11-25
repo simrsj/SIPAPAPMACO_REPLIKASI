@@ -1,4 +1,4 @@
-<?php if (isset($_GET['prk']) && isset($_GET['i']) && $d_prvl['r_praktik'] == "Y") { ?>
+<?php if (isset($_GET['prk']) && $d_prvl['r_praktik'] == "Y") { ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
@@ -34,7 +34,7 @@
                 if ($r_praktik > 0) {
                 ?>
                     <div class="table-responsive text-xs">
-                        <table class="table table-striped table-bordered" width="100%" id="myTable">
+                        <table class="table table-hover table-bordered m-auto" width="100%" id="myTable">
                             <thead class="table-dark text-center">
                                 <tr>
                                     <th rowspan="2">No</th>
@@ -72,23 +72,22 @@
                                 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr class="text-center">
-                                        <td><?= $no; ?></td>
+                                        <td class="align-middle"><?= $no; ?></td>
                                         <?php if ($_SESSION['level_user'] == 1) { ?>
-                                            <td>
+                                            <td class="align-middle">
                                                 <?= $d_praktik['nama_institusi'] ?>
                                             </td>
                                         <?php } ?>
-                                        <td>
+                                        <td class="align-middle">
                                             <?= $d_praktik['nama_praktik'] ?>
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <?= $d_praktik['jumlah_praktik'] ?>
                                         </td>
-                                        </td>
-                                        <td><?= $d_praktik['tgl_mulai_praktik'] ?></td>
-                                        <td><?= $d_praktik['tgl_selesai_praktik'] ?></td>
+                                        <td class="align-middle"><?= $d_praktik['tgl_mulai_praktik'] ?></td>
+                                        <td class="align-middle"><?= $d_praktik['tgl_selesai_praktik'] ?></td>
                                         <!-- status mess praktik  -->
-                                        <td>
+                                        <td class="align-middle">
                                             <?php if ($d_praktik['status_mess_praktik'] == 'Y') { ?>
                                                 <?php
                                                 $sql_mess_pilih = "SELECT * FROM tb_mess_pilih ";
@@ -134,7 +133,7 @@
                                             <?php } ?>
                                         </td>
                                         <!-- status pembimbing praktik  -->
-                                        <td class="my-auto">
+                                        <td class="align-middle">
                                             <?php if ($d_praktik['status_pembimbing_praktik'] == 'Y') { ?>
                                                 <?php
                                                 $sql_pembimbing_pilih = "SELECT * FROM tb_pembimbing_pilih WHERE id_praktik=" . $d_praktik['id_praktik'];
@@ -173,7 +172,7 @@
                                                 <span class="badge badge-danger">Tidak</span>
                                             <?php } ?>
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <?php if ($d_praktik['status_tarif_praktik'] != 'Y') { ?>
                                                 <span class="badge badge-warning">Belum Dipilih</span>
                                             <?php } else { ?>
@@ -182,7 +181,7 @@
                                                 </a>
                                             <?php } ?>
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <?php if ($d_praktik['status_bayar_praktik'] != 'Y') { ?>
                                                 <span class="badge badge-warning">Belum Dipilih</span>
                                             <?php } else { ?>
@@ -191,7 +190,7 @@
                                                 </a>
                                             <?php } ?>
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <?php if ($d_praktik['status_nilai_praktik'] != 'Y') { ?>
                                                 <span class="badge badge-warning">Belum Dipilih</span>
                                             <?php } else { ?>
@@ -200,12 +199,20 @@
                                                 </a>
                                             <?php } ?>
                                         </td>
-                                        <td>
-                                            <!-- tombol modal detail praktik  -->
-                                            <a title="Detail" class='btn btn-info btn-xs m-1' href='#' data-toggle="modal" data-target="#<?= md5($d_praktik['id_praktik']); ?>">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
+                                        <td class="align-middle">
+                                            <div class="btn-group" role="group">
+                                                <!-- tombol modal detail praktik  -->
+                                                <a title="Detail" class='btn btn-info btn-xs' href='#' data-toggle="modal" data-target="#<?= md5($d_praktik['id_praktik']); ?>">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
 
+                                                <a title="Ubah" class='btn btn-primary btn-xs' href='#'>
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a title="Hapus" class='btn btn-danger btn-xs' href='#'>
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </div>
                                             <!-- modal detail praktik  -->
                                             <div class="modal fade" id="<?= md5($d_praktik['id_praktik']); ?>">
                                                 <div class="modal-dialog">
@@ -237,23 +244,19 @@
                                                             Profesi : <br>
                                                             <b><?= $d_praktik['nama_profesi_pdd'] ?></b>
                                                             <hr class="p-0 m-0 bg-gray-500 b">
-                                                            Profesi : <br>
-                                                            <?= $d_praktik['nama_koordinator_praktik'] ?>
+                                                            Koordinator : <br>
+                                                            <b><?= $d_praktik['nama_koordinator_praktik'] ?></b>
                                                             <hr class="p-0 m-0 bg-gray-500">
-                                                            <?= $d_praktik['telp_koordinator_praktik'] ?>
+                                                            Telpon Koordinator : <br>
+                                                            <b><?= $d_praktik['telp_koordinator_praktik'] ?></b>
                                                             <hr class="p-0 m-0 bg-gray-500">
-                                                            <?= $d_praktik['email_koordinator_praktik'] ?>
+                                                            E-Mail Koordinator : <br>
+                                                            <b><?= $d_praktik['email_koordinator_praktik'] ?></b>
 
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a title="Ubah" class='btn btn-primary btn-xs m-1' href='#'>
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a title="Hapus" class='btn btn-danger btn-xs' href='#'>
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
                                         </td>
                                     </tr>
                                     <?php
