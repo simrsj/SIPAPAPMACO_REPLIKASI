@@ -1,4 +1,4 @@
-<?php if ($d_prvl['r_praktikan'] == "Y") { ?>
+<?php if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['r_praktikan'] == "Y") { ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
@@ -35,7 +35,7 @@
                                     <div class="row" style="font-size: small;">
                                         <br><br>
 
-                                        <div class="col-sm-3 text-center">
+                                        <div class="col-sm-4 text-center">
                                             <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?><br>
                                             <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?= $d_praktik['nama_praktik']; ?>
                                         </div>
@@ -53,14 +53,10 @@
                                             <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?= $d_praktik['jumlah_praktik']; ?>
                                         </div>
                                         <!-- tombol aksi/info proses  -->
-                                        <div class="col-sm-3 my-auto  text-center">
+                                        <div class="col-sm-2 my-auto text-right">
                                             <!-- tombol rincian -->
-                                            <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#<?= md5($d_praktik['id_praktik']); ?>" title="Rincian">
+                                            <a class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#<?= md5($d_praktik['id_praktik']); ?>" title="Rincian">
                                                 <i class="fas fa-info-circle"></i> Rincian Data
-                                            </button>
-                                            &nbsp;
-                                            <a class="btn btn-primary btn-sm collapsed" href="?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>&iu" title="Tambah/Ubah">
-                                                <i class="far fa-edit"></i> Tambah/Ubah Data
                                             </a>
                                         </div>
                                     </div>
@@ -70,8 +66,15 @@
                                 <div id="<?= md5($d_praktik['id_praktik']); ?>" class="collapse" data-parent="#accordion">
                                     <div class="card-body " style="font-size: medium;">
                                         <!-- data praktikan -->
-                                        <div class="text-gray-700">
-                                            <h4 class="font-weight-bold">DATA PRAKTIKAN</h4><br>
+                                        <div class="text-gray-700 row">
+                                            <div class="col">
+                                                <h4 class="font-weight-bold">DATA PRAKTIKAN</h4><br>
+                                            </div>
+                                            <div class="col-2 text-right">
+                                                <a class="btn btn-primary btn-sm collapsed" href="?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>&i" title="Tambah">
+                                                    <i class="far fa-edit"></i> Tambah Data
+                                                </a>
+                                            </div>
                                         </div>
                                         <?php
                                         $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
@@ -101,6 +104,7 @@
                                                             <th scope="col">No. WA</th>
                                                             <th scope="col">EMAIL</th>
                                                             <th scope="col">ASAL KOTA / KABUPATEN</th>
+                                                            <th scope="col">AKSI</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -117,6 +121,15 @@
                                                                 <td><?= $d_data_praktikan['wa_praktikan']; ?></td>
                                                                 <td><?= $d_data_praktikan['email_praktikan']; ?></td>
                                                                 <td><?= $d_data_praktikan['kota_kab_praktikan']; ?></td>
+                                                                <td>
+                                                                    <a class="btn btn-primary btn-sm collapsed" href="?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>&i" title="Tambah">
+                                                                        <i class="far fa-edit"></i> Tambah Data
+                                                                    </a>
+                                                                    &nbsp;
+                                                                    <a class="btn btn-primary btn-sm collapsed" href="?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>&i" title="Tambah">
+                                                                        <i class="far fa-edit"></i> Tambah Data
+                                                                    </a>
+                                                                </td>
                                                             </tr>
                                                         <?php
                                                             $no++;

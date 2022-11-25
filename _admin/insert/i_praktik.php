@@ -1,5 +1,5 @@
 <?php
-if ($d_prvl['c_praktik'] == "Y") {
+if (isset($_GET['prk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -601,13 +601,6 @@ if ($d_prvl['c_praktik'] == "Y") {
             }
         });
     </script>
-
-<?php
-} else {
-?>
-    <script type="text/javascript">
-        document.location.href = "?";
-    </script>
-<?php
+<?php } else {
+    echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
 }
-?>
