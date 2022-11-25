@@ -100,11 +100,6 @@
                                             <?= $d_praktik['nama_profesi_pdd'] ?>
                                         </td>
                                         <td>
-                                            <?= $d_praktik['nama_koordinator_praktik'] ?>
-                                            <hr class="p-0 m-0 bg-gray-500">
-                                            <?= $d_praktik['telp_koordinator_praktik'] ?>
-                                            <hr class="p-0 m-0 bg-gray-500">
-                                            <?= $d_praktik['email_koordinator_praktik'] ?>
                                         </td>
                                         <!-- status mess praktik  -->
                                         <td>
@@ -247,17 +242,42 @@
 
                                             <!-- modal detail praktik  -->
                                             <div class="modal fade" id="<?= md5($d_praktik['id_praktik']); ?>">
-                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-dialog">
                                                     <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
+                                                        <div class="modal-header h5">
+                                                            Detail Data Praktik
                                                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">×</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-                                                            <a class="btn btn-danger" href="?lo">Ya</a>
+                                                        <div class="modal-body text-md">
+                                                            <?php if ($_SESSION['level_user'] == 1) { ?>
+                                                                Nama Institusi : <br>
+                                                                <b><?= $d_praktik['nama_institusi'] ?></b>
+                                                                <hr class="p-0 m-0 bg-gray-500 b">
+                                                            <?php } ?>
+                                                            Nama Kelompok : <br>
+                                                            <b><?= $d_praktik['nama_praktik'] ?></b>
+                                                            <hr class="p-0 m-0 bg-gray-500 b">
+                                                            Jumlah Praktikan Kelompok : <br>
+                                                            <b><?= $d_praktik['nama_praktik'] ?></b>
+                                                            <hr class="p-0 m-0 bg-gray-500 b">
+                                                            Jurusan : <br>
+                                                            <b><?= $d_praktik['nama_jurusan_pdd'] ?></b>
+                                                            <hr class="p-0 m-0 bg-gray-500 b">
+                                                            Jenjang : <br>
+                                                            <b><?= $d_praktik['nama_jenjang_pdd'] ?></b>
+                                                            <hr class="p-0 m-0 bg-gray-500 b">
+                                                            Profesi : <br>
+                                                            <b><?= $d_praktik['nama_profesi_pdd'] ?></b>
+                                                            <hr class="p-0 m-0 bg-gray-500 b">
+                                                            Profesi : <br>
+                                                            <?= $d_praktik['nama_koordinator_praktik'] ?>
+                                                            <hr class="p-0 m-0 bg-gray-500">
+                                                            <?= $d_praktik['telp_koordinator_praktik'] ?>
+                                                            <hr class="p-0 m-0 bg-gray-500">
+                                                            <?= $d_praktik['email_koordinator_praktik'] ?>
+
                                                         </div>
                                                     </div>
                                                 </div>

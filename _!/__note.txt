@@ -68,7 +68,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "sql progres detail praktikan dan pemilihan pembimbing"
+git commit -a -m "progres modal detail pengajuan praktik"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git
