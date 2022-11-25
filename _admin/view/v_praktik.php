@@ -105,7 +105,7 @@
                                                 //teks status dan privileges praktik mess
                                                 if ($d_prvl['c_praktik_mess'] == 'Y' && $r_mess_pilih < 1) {
                                                 ?>
-                                                    <span class="badge badge-warning">Belum Dipilih</span>
+                                                    <span class="badge badge-secondary">Belum Dipilih</span>
                                                     <br>
                                                     <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
                                                         Pilih
@@ -149,7 +149,7 @@
                                                 //teks status dan privileges praktik pembimbing
                                                 if ($d_prvl['c_praktik_pembimbing'] == 'Y' && $r_pembimbing_pilih < 1) {
                                                 ?>
-                                                    <span class="badge badge-warning">Belum Dipilih</span>
+                                                    <span class="badge badge-secondary">Belum Dipilih</span>
                                                     <hr class="p-0 m-1 bg-gray-500">
                                                     <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
                                                         Pilih
@@ -174,7 +174,7 @@
                                         </td>
                                         <td class="align-middle">
                                             <?php if ($d_praktik['status_tarif_praktik'] != 'Y') { ?>
-                                                <span class="badge badge-warning">Belum Dipilih</span>
+                                                <span class="badge badge-secondary">Belum Dipilih</span>
                                             <?php } else { ?>
                                                 <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     <i class="fas fa-edit"></i>
@@ -183,7 +183,7 @@
                                         </td>
                                         <td class="align-middle">
                                             <?php if ($d_praktik['status_bayar_praktik'] != 'Y') { ?>
-                                                <span class="badge badge-warning">Belum Dipilih</span>
+                                                <span class="badge badge-secondary">Belum Dipilih</span>
                                             <?php } else { ?>
                                                 <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     <i class="fas fa-edit"></i>
@@ -192,7 +192,7 @@
                                         </td>
                                         <td class="align-middle">
                                             <?php if ($d_praktik['status_nilai_praktik'] != 'Y') { ?>
-                                                <span class="badge badge-warning">Belum Dipilih</span>
+                                                <span class="badge badge-secondary">Belum Dipilih</span>
                                             <?php } else { ?>
                                                 <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     <i class="fas fa-edit"></i>
