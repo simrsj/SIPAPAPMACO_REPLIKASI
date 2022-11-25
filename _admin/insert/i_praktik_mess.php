@@ -210,7 +210,6 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
         $(document).ready(function() {
             <?php
             //Perulangan jumlah mess/pemodalan yang aktif
-            <?php
             $no1 = 1;
             while ($no1 <= $r_mess) {
             ?>
