@@ -25,7 +25,11 @@ $sql .= " d_praktik_mess = '" . $_POST['d_praktik_mess'] . "', ";
 $sql .= " c_praktik_pembimbing = '" . $_POST['c_praktik_pembimbing'] . "',";
 $sql .= " r_praktik_pembimbing = '" . $_POST['r_praktik_pembimbing'] . "',";
 $sql .= " u_praktik_pembimbing = '" . $_POST['u_praktik_pembimbing'] . "', ";
-$sql .= " d_praktik_pembimbing = '" . $_POST['d_praktik_pembimbing'] . "'";
+$sql .= " d_praktik_pembimbing = '" . $_POST['d_praktik_pembimbing'] . "', ";
+$sql .= " c_praktikan = '" . $_POST['c_praktikan'] . "',";
+$sql .= " r_praktikan = '" . $_POST['r_praktikan'] . "',";
+$sql .= " u_praktikan = '" . $_POST['u_praktikan'] . "', ";
+$sql .= " d_praktikan = '" . $_POST['d_praktikan'] . "'";
 $sql .= " WHERE id_user = " . $_POST['id_user'];
 
 // echo $sql . "<br>";

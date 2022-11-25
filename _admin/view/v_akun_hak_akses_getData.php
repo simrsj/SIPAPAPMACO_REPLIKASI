@@ -283,6 +283,58 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_praktik_pembimbing"></div>
                     </td>
                 </tr>
+                <!-- Praktikan -->
+                <tr>
+                    <td>Praktikan</td>
+                    <td>
+                        <?php
+                        $c_praktikanY = "";
+                        $c_praktikanT = "";
+                        if ($d_user_prvl['c_praktikan'] == 'Y') $c_praktikanY = "checked";
+                        else if ($d_user_prvl['c_praktikan'] == 'T')  $c_praktikanT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="c_praktikan" id="c_praktikanY" value="Y" <?= $c_praktikanY; ?>><label for="c_praktikanY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="c_praktikan" id="c_praktikanT" value="T" <?= $c_praktikanT; ?>><label for="c_praktikanT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_praktikan"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $r_praktikanY = "";
+                        $r_praktikanT = "";
+                        if ($d_user_prvl['r_praktikan'] == 'Y') $r_praktikanY = "checked";
+                        else if ($d_user_prvl['r_praktikan'] == 'T')  $r_praktikanT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="r_praktikan" id="r_praktikanY" value="Y" <?= $r_praktikanY; ?>><label for="r_praktikanY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="r_praktikan" id="r_praktikanT" value="T" <?= $r_praktikanT; ?>><label for="r_praktikanT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_praktikan"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $u_praktikanY = "";
+                        $u_praktikanT = "";
+                        if ($d_user_prvl['u_praktikan'] == 'Y') $u_praktikanY = "checked";
+                        else if ($d_user_prvl['u_praktikan'] == 'T')  $u_praktikanT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="u_praktikan" id="u_praktikanY" value="Y" <?= $u_praktikanY; ?>><label for="u_praktikanY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="u_praktikan" id="u_praktikanT" value="T" <?= $u_praktikanT; ?>><label for="u_praktikanT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_praktikan"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $d_praktikanY = "";
+                        $d_praktikanT = "";
+                        if ($d_user_prvl['d_praktikan'] == 'Y') $d_praktikanY = "checked";
+                        else if ($d_user_prvl['d_praktikan'] == 'T')  $d_praktikanT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="d_praktikan" id="d_praktikanY" value="Y" <?= $d_praktikanY; ?>><label for="d_praktikanY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="d_praktikan" id="d_praktikanT" value="T" <?= $d_praktikanT; ?>><label for="d_praktikanT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_praktikan"></div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -320,6 +372,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
         var r_praktik_pembimbing = $("input[name='r_praktik_pembimbing']:checked").val();
         var u_praktik_pembimbing = $("input[name='u_praktik_pembimbing']:checked").val();
         var d_praktik_pembimbing = $("input[name='d_praktik_pembimbing']:checked").val();
+        var c_praktikan = $("input[name='c_praktikan']:checked").val();
+        var r_praktikan = $("input[name='r_praktikan']:checked").val();
+        var u_praktikan = $("input[name='u_praktikan']:checked").val();
+        var d_praktikan = $("input[name='d_praktikan']:checked").val();
 
         // console.log(c_kuota + r_kuota + u_kuota + d_kuota);
 
@@ -344,7 +400,11 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
             c_praktik_pembimbing != "" &&
             r_praktik_pembimbing != "" &&
             u_praktik_pembimbing != "" &&
-            d_praktik_pembimbing != ""
+            d_praktik_pembimbing != "" &&
+            c_praktikan != "" &&
+            r_praktikan != "" &&
+            u_praktikan != "" &&
+            d_praktikan != ""
         ) {
             $.ajax({
                 type: 'POST',

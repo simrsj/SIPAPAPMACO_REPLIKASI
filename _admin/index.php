@@ -85,12 +85,15 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</div>
 				</li>
 			<?php } ?>
-			<li class="nav-item ">
-				<a class="nav-link" href="?praktikan">
-					<i class="far fa-fw fa-address-book"></i>
-					<span>Data Praktikan</span>
-				</a>
-			</li>
+			<!-- Praktikan -->
+			<?php if ($d_prvl['r_praktikan'] == "Y") { ?>
+				<li class="nav-item ">
+					<a class="nav-link" href="?ptk">
+						<i class="far fa-fw fa-address-book"></i>
+						<span>Data Praktikan</span>
+					</a>
+				</li>
+			<?php } ?>
 			<li class="nav-item ">
 				<a class="nav-link" href="?pmbb">
 					<i class="fas fa-fw fa-users"></i>
@@ -441,7 +444,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} else {
 						include "_admin/view/v_praktik.php";
 					}
-				} elseif (isset($_GET['ptk'])) {
+				} elseif (isset($_GET['ptk']) && $d_prvl['c_praktikan'] == 'Y') {
 					include "_admin/view/v_praktikan.php";
 				} elseif (isset($_GET['pfs'])) {
 					include "_admin/view/v_profesi.php";

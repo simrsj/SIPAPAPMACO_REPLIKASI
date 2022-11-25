@@ -22,12 +22,14 @@
                 $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
                 $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
                 $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-                // $sql_praktik .= " WHERE tb_praktik.status_praktik != 'A' ";
                 $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
-
                 // echo $sql_praktik;
-
-                $q_praktik = $conn->query($sql_praktik);
+                try {
+                    $q_praktik = $conn->query($sql_praktik);
+                } catch (Exception $ex) {
+                    echo "<script>alert('$ex -DATA PRAKTIK-');";
+                    echo "document.location.href='?error404';</script>";
+                }
                 $r_praktik = $q_praktik->rowCount();
                 if ($r_praktik > 0) {
                 ?>
@@ -274,5 +276,5 @@
         </div>
     </div>
 <?php } else {
-    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?error401';</script>";
+    echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
 }
