@@ -42,9 +42,6 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                         <th scope="col">No. WA</th>
                         <th scope="col">EMAIL</th>
                         <th scope="col">ALAMAT</th>
-                        <?php if ($d_prvl['level_user'] == 1) { ?>
-                            <th scope="col">STATUS</th>
-                        <?php } ?>
                         <th scope="col">AKSI</th>
                     </tr>
                 </thead>
@@ -63,15 +60,6 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                             <td><?= $d_data_praktikan['wa_praktikan']; ?></td>
                             <td><?= $d_data_praktikan['email_praktikan']; ?></td>
                             <td><?= $d_data_praktikan['alamat_praktikan']; ?></td>
-                            <?php if ($d_prvl['level_user'] == 1) { ?>
-                                <td>
-                                    <?php
-                                    if ($d_data_praktikan['status_praktikan'] == "Y") echo "<span class='badge badge-success'>AKTIF</span>";
-                                    elseif ($d_data_praktikan['status_praktikan'] == "T") echo "<span class='badge badge-danger'>NON-AKTIF</span>";
-                                    else echo "<span class='badge badge-danger'>ERROR!!!</span>";
-                                    ?>
-                                </td>
-                            <?php } ?>
                             <td class="text-center">
                                 <div class="btn-group" role="group">
                                     <!-- tombol modal ubah praktikan  -->
@@ -276,6 +264,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                         $(document).on('click', '.hapus<?= md5($d_data_praktikan['id_praktikan']) ?>', function() {
                                             console.log("hapus data praktikan");
                                             Swal.fire({
+                                                position: 'center',
                                                 title: 'Hapus Data Praktikan ?',
                                                 icon: 'error',
                                                 showCancelButton: true,
