@@ -63,8 +63,8 @@ PERTANYAAN
 - Diklat segera membuat notadinas untuk institusi 
 - Dimulai dengan bulan Mei atau Juni
 --------------------------------------------------------------------------------------------------------------------
-<?= urlencode(base64_encode(5)); ?> encrypt
-<?= base64_decode(urldecode('NQ%3D%3D')); ?> decrypt
+<?= urlencode(base64_encode(5)); ?>
+<?= base64_decode(urldecode('NQ%3D%3D')); ?>
 
 git status
 

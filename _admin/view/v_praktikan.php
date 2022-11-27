@@ -73,7 +73,6 @@
                                             </div>
                                             <?php if ($d_prvl['c_praktikan'] == 'Y') { ?>
                                                 <div class="col-2 text-right">
-
                                                     <!-- tombol modal tambah praktikan  -->
                                                     <a title="tambah praktikan" class='btn btn-success btn-sm tambah_init<?= md5($d_praktik['id_praktik']); ?>' href='#' data-toggle="modal" data-target="#mi<?= md5($d_praktik['id_praktik']); ?>">
                                                         <i class="fas fa-plus"></i> Tambah Data
@@ -130,7 +129,7 @@
                                         <div id="<?= md5("data" . $d_praktik['id_praktik']); ?>"></div>
                                         <script>
                                             $(document).ready(function() {
-                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>");
+                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>");
                                             });
 
                                             // inisiasi klik modal tambah
@@ -240,7 +239,7 @@
 
                                                             Toast.fire({
                                                                 icon: 'success',
-                                                                title: '<span class"text-center"><b>Data Praktikan</b><br>Berhasil Tersimpan',
+                                                                title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Tersimpan',
                                                             }).then(
                                                                 function() {}
                                                             );

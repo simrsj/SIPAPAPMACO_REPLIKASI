@@ -34,7 +34,7 @@
                 if ($r_praktik > 0) {
                 ?>
                     <div class="table-responsive text-xs">
-                        <table class="table table-hover table-bordered m-auto" width="100%" id="myTable">
+                        <table class="table table-striped table-hover table-bordered m-auto" width="100%" id="myTable">
                             <thead class="table-dark text-center">
                                 <tr>
                                     <th rowspan="2">No</th>

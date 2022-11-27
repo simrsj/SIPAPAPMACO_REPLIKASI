@@ -1,24 +1,24 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
-$sql = "SELECT * FROM tb_mess";
-$sql .= " WHERE id_mess= " . $_POST['id'];
+$sql = "SELECT * FROM tb_praktikan";
+$sql .= " WHERE id_praktikan= " . base64_decode(urldecode($_POST['idprkn']));
 // echo "$sql <br>";
-
-$q = $conn->query($sql);
+try {
+    $q = $conn->query($sql);
+} catch (Exception $ex) {
+    echo "<script>alert('$ex -DATA PRAKTIKAN-');";
+    echo "document.location.href='?error404';</script>";
+}
 $d = $q->fetch(PDO::FETCH_ASSOC);
-$h['id_mess'] = $d["id_mess"];
-$h['nama_mess'] = $d["nama_mess"];
-$h['kapasitas_t_mess'] = $d["kapasitas_t_mess"];
-$h['alamat_mess'] = $d["alamat_mess"];
-$h['nama_pemilik_mess'] = $d["nama_pemilik_mess"];
-$h['telp_pemilik_mess'] = $d["telp_pemilik_mess"];
-$h['email_pemilik_mess'] = $d["email_pemilik_mess"];
-$h['tarif_tanpa_makan_mess'] = $d["tarif_tanpa_makan_mess"];
-$h['tarif_dengan_makan_mess'] = $d["tarif_dengan_makan_mess"];
-$h['kepemilikan_mess'] = $d["kepemilikan_mess"];
-$h['fasilitas_mess'] = $d["fasilitas_mess"];
-$h['status_mess'] = $d["status_mess"];
+$h['idprkn'] = $d["id_praktikan"];
+$h['u_no_id'] = $d["no_id_praktikan"];
+$h['u_nama'] = $d["nama_praktikan"];
+$h['u_tgl'] = $d["tgl_lahir_praktikan"];
+$h['u_telp'] = $d["telp_praktikan"];
+$h['u_wa'] = $d["wa_praktikan"];
+$h['u_email'] = $d["email_praktikan"];
+$h['u_alamat'] = $d["alamat_praktikan"];
 
 echo json_encode($h);
 
