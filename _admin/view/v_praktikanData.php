@@ -293,9 +293,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                                             "idprkn": $(this).attr('id')
                                                         },
                                                         success: function() {
-                                                            $('#mu<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
-                                                                $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>");
-                                                            })
+
                                                             const Toast = Swal.mixin({
                                                                 toast: true,
                                                                 position: 'top-end',
@@ -312,6 +310,8 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                                                 icon: 'success',
                                                                 title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Dihapus</b></div>'
                                                             });
+                                                            $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>");
+
                                                         },
                                                         error: function(response) {
                                                             console.log(response);
