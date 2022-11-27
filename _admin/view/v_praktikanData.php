@@ -1,7 +1,9 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
-$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($_GET['idu']));
+$sql_prvl = "SELECT * FROM tb_user_privileges ";
+$sql_prvl .= " JOIN tb_user ON tb_user_privileges.id_user = tb_user.id_user";
+$sql_prvl .= " WHERE tb_user.id_user = " . base64_decode(urldecode($_GET['idu']));
 try {
     $q_prvl = $conn->query($sql_prvl);
 } catch (Exception $ex) {
@@ -9,14 +11,13 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
-
 ?>
 <div class="card-body">
     <?php
     $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
     $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
     $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . base64_decode(urldecode($_GET['idp']));
-    $sql_data_praktikan .= " AND tb_praktikan.status_praktikan = 'Y'";
+    // $sql_data_praktikan .= " AND tb_praktikan.status_praktikan = 'Y'";
     $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
     // echo "$sql_data_praktikan<br>";
     try {
@@ -41,6 +42,9 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                         <th scope="col">No. WA</th>
                         <th scope="col">EMAIL</th>
                         <th scope="col">ALAMAT</th>
+                        <?php if ($d_prvl['level_user'] == 1) { ?>
+                            <th scope="col">STATUS</th>
+                        <?php } ?>
                         <th scope="col">AKSI</th>
                     </tr>
                 </thead>
@@ -59,6 +63,15 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                             <td><?= $d_data_praktikan['wa_praktikan']; ?></td>
                             <td><?= $d_data_praktikan['email_praktikan']; ?></td>
                             <td><?= $d_data_praktikan['alamat_praktikan']; ?></td>
+                            <?php if ($d_prvl['level_user'] == 1) { ?>
+                                <td>
+                                    <?php
+                                    if ($d_data_praktikan['status_praktikan'] == "Y") echo "<span class='badge badge-success'>AKTIF</span>";
+                                    elseif ($d_data_praktikan['status_praktikan'] == "T") echo "<span class='badge badge-danger'>NON-AKTIF</span>";
+                                    else echo "<span class='badge badge-danger'>ERROR!!!</span>";
+                                    ?>
+                                </td>
+                            <?php } ?>
                             <td class="text-center">
                                 <div class="btn-group" role="group">
                                     <!-- tombol modal ubah praktikan  -->
