@@ -32,10 +32,11 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
         <div class="table-responsive">
             <table class="table table-striped" id="myTable">
                 <thead class="thead-dark">
-                    <tr>
+                    <tr class="text-center">
                         <th scope="col">No</th>
+                        <th scope="col">NO ID</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">NIM / NPM / NIS </th>
+                        <th scope="col">Tgl Lahir</th>
                         <th scope="col">No. HP</th>
                         <th scope="col">No. WA</th>
                         <th scope="col">EMAIL</th>
@@ -51,72 +52,73 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                     ?>
                         <tr>
                             <th scope="row"><?= $no; ?></th>
-                            <td><?= $d_data_praktikan['nama_praktikan']; ?></td>
                             <td><?= $d_data_praktikan['no_id_praktikan']; ?></td>
+                            <td><?= $d_data_praktikan['nama_praktikan']; ?></td>
+                            <td><?= tanggal_minimal($d_data_praktikan['tgl_lahir_praktikan']); ?></td>
                             <td><?= $d_data_praktikan['telp_praktikan']; ?></td>
                             <td><?= $d_data_praktikan['wa_praktikan']; ?></td>
                             <td><?= $d_data_praktikan['email_praktikan']; ?></td>
                             <td><?= $d_data_praktikan['alamat_praktikan']; ?></td>
                             <td class="text-center">
-                                <!-- tombol modal ubah praktikan  -->
-                                <?php if ($d_prvl['u_praktikan'] == 'Y') { ?>
-                                    <a title="ubah praktikan" class='btn btn-primary btn-sm ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>' id="<?= urlencode(base64_encode($d_data_praktikan['id_praktikan'])); ?>" href='#' data-toggle="modal" data-target="#mu<?= md5($d_data_praktikan['id_praktikan']); ?>">
-                                        <i class="far fa-edit"></i>
-                                    </a>
+                                <div class="btn-group" role="group">
+                                    <!-- tombol modal ubah praktikan  -->
+                                    <?php if ($d_prvl['u_praktikan'] == 'Y') { ?>
+                                        <a title="Ubah" class='btn btn-primary ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>' id="<?= urlencode(base64_encode($d_data_praktikan['id_praktikan'])); ?>" href='#' data-toggle="modal" data-target="#mu<?= md5($d_data_praktikan['id_praktikan']); ?>">
+                                            <i class="far fa-edit"></i>
+                                        </a>
 
-                                    <!-- modal ubah praktikan  -->
-                                    <div class="modal fade text-center" id="mu<?= md5($d_data_praktikan['id_praktikan']); ?>" data-backdrop="static">
-                                        <div class="modal-dialog modal-dialog-scrollable  modal-md">
-                                            <div class="modal-content">
-                                                <div class="modal-header h5">
-                                                    Ubah Praktikan
-                                                </div>
-                                                <div class="modal-body text-md">
-                                                    <form class="form-data b" method="post" id="form_u<?= md5($d_praktik['id_praktik']); ?>">
-                                                        <input type="hidden" name="idprkn<?= md5($d_data_praktikan['id_praktikan']); ?>" id="idprkn<?= md5($d_data_praktikan['id_praktikan']); ?>" value="" required>
-                                                        No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
-                                                        <input type="text" id="u_no_id<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_no_id" class="form-control" placeholder="Isikan No ID" required>
-                                                        <div class="text-danger b i text-xs blink" id="err_u_no_id"></div><br>
-                                                        Nama Siswa/Mahasiswa : <span style="color:red">*</span><br>
-                                                        <input type="text" id="u_nama<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_nama" class="form-control" placeholder="Inputkan Nama Siswa/Mahasiswa" required>
-                                                        <div class="text-danger b i text-xs blink" id="err_u_nama"></div><br>
-                                                        Tanggal Lahir : <span style="color:red">*</span><br>
-                                                        <input type="date" id="u_tgl<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_tgl" class="form-control" required>
-                                                        <div class="text-danger b i text-xs blink" id="err_u_tgl"></div><br>
-                                                        Alamat : <span style="color:red">*</span><br>
-                                                        <textarea id="u_alamat<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_alamat" class="form-control" rows="2" placeholder="Inputkan Alamat"></textarea>
-                                                        <div class="text-danger b i text-xs blink" id="err_u_alamat"></div><br>
-                                                        No Telepon : <span style="color:red">*</span><br>
-                                                        <input type="number" id="u_telp<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_telp" class="form-control" min="1" placeholder="Inputkan No Telpon" required>
-                                                        <div class="text-danger b i text-xs blink" id="err_u_telpon"></div><br>
-                                                        No WhatsApp :<br>
-                                                        <input type="number" id="u_wa<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
-                                                        <div class="text-danger b i text-xs blink" id="err_u_wa"></div><br>
-                                                        E-Mail : <br>
-                                                        <input type="email" id="u_email<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_email" class="form-control" placeholder="Inputkan E-Mail">
-                                                        <div class="text-danger b i text-xs blink" id="err_u_email"></div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer text-md">
-                                                    <a class="btn btn-danger btn-sm tambah_tutup<?= md5($d_praktik['id_praktik']); ?>" data-dismiss="modal">
-                                                        Kembali
-                                                    </a>
-                                                    &nbsp;
-                                                    <a class="tambah btn btn-primary btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
-                                                        Ubah
-                                                    </a>
+                                        <!-- modal ubah praktikan  -->
+                                        <div class="modal fade text-center" id="mu<?= md5($d_data_praktikan['id_praktikan']); ?>" data-backdrop="static">
+                                            <div class="modal-dialog modal-dialog-scrollable  modal-md">
+                                                <div class="modal-content">
+                                                    <div class="modal-header h5">
+                                                        Ubah Praktikan
+                                                    </div>
+                                                    <div class="modal-body text-md">
+                                                        <form class="form-data b" method="post" id="form_u<?= md5($d_data_praktikan['id_praktikan']); ?>">
+                                                            <input type="hidden" name="idprkn<?= md5($d_data_praktikan['id_praktikan']); ?>" id="idprkn<?= md5($d_data_praktikan['id_praktikan']); ?>" value="" required>
+                                                            No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
+                                                            <input type="text" id="u_no_id<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_no_id" class="form-control" placeholder="Isikan No ID" required>
+                                                            <div class="text-danger b i text-xs blink" id="err_u_no_id"></div><br>
+                                                            Nama Siswa/Mahasiswa : <span style="color:red">*</span><br>
+                                                            <input type="text" id="u_nama<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_nama" class="form-control" placeholder="Inputkan Nama Siswa/Mahasiswa" required>
+                                                            <div class="text-danger b i text-xs blink" id="err_u_nama"></div><br>
+                                                            Tanggal Lahir : <span style="color:red">*</span><br>
+                                                            <input type="date" id="u_tgl<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_tgl" class="form-control" required>
+                                                            <div class="text-danger b i text-xs blink" id="err_u_tgl"></div><br>
+                                                            Alamat : <span style="color:red">*</span><br>
+                                                            <textarea id="u_alamat<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_alamat" class="form-control" rows="2" placeholder="Inputkan Alamat"></textarea>
+                                                            <div class="text-danger b i text-xs blink" id="err_u_alamat"></div><br>
+                                                            No Telepon : <span style="color:red">*</span><br>
+                                                            <input type="number" id="u_telp<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_telp" class="form-control" min="1" placeholder="Inputkan No Telpon" required>
+                                                            <div class="text-danger b i text-xs blink" id="err_u_telpon"></div><br>
+                                                            No WhatsApp :<br>
+                                                            <input type="number" id="u_wa<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
+                                                            <div class="text-danger b i text-xs blink" id="err_u_wa"></div><br>
+                                                            E-Mail : <br>
+                                                            <input type="email" id="u_email<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_email" class="form-control" placeholder="Inputkan E-Mail">
+                                                            <div class="text-danger b i text-xs blink" id="err_u_email"></div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer text-md">
+                                                        <a class="btn btn-danger btn-sm ubah_tutup<?= md5($d_data_praktikan['id_praktikan']); ?>" data-dismiss="modal">
+                                                            Kembali
+                                                        </a>
+                                                        &nbsp;
+                                                        <a class="btn btn-primary btn-sm ubah<?= md5($d_data_praktikan['id_praktikan']); ?>" id="<?= urlencode(base64_encode($d_data_praktikan['id_praktikan'])); ?>" data-dismiss="modal">
+                                                            Ubah
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                <?php } ?>
-                                &nbsp;
-                                <?php if ($d_prvl['d_praktikan'] == 'T') { ?>
-                                    <a class="btn btn-danger btn-sm collapsed" href="" title="Hapus">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
-                                <?php } ?>
-
+                                    <?php } ?>
+                                    <?php if ($d_prvl['d_praktikan'] == 'Y') { ?>
+                                        <a class="btn btn-danger hapus" href="#" title="Hapus">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    <?php } ?>
+                                </div>
 
                                 <script>
                                     $(document).ready(function() {
@@ -159,38 +161,79 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                         $(".ubah_tutup<?= md5($d_data_praktikan['id_praktikan']); ?>").click(function() {
                                             // console.log("tambah_tutup<?= md5($d_data_praktikan['id_praktikan']); ?>");
                                             $("#form_u<?= md5($d_data_praktikan['id_praktikan']); ?>").trigger("reset");
+                                            $('#mu<?= md5($d_data_praktikan['id_praktikan']); ?>').modal('hide');
                                         });
 
-                                        $(document).on('click', '.ubah', function() {
-                                            var data = $('#form_ubah_mess').serialize();
+                                        $(document).on('click', '.ubah<?= md5($d_data_praktikan['id_praktikan']); ?>', function() {
+                                            var data_u = $('#form_u<?= md5($d_data_praktikan['id_praktikan']); ?>').serializeArray();
+                                            data_u.push({
+                                                name: "idprkn",
+                                                value: $(this).attr('id')
+                                            });
 
-                                            var u_id_mess = $('#u_id_mess').val();
-
-                                            //cek data from tambah bila tidak diiisi
+                                            var u_no_id = $('#u_no_id<?= md5($d_data_praktikan['id_praktikan']); ?>').val();
+                                            var u_nama = $('#u_nama<?= md5($d_data_praktikan['id_praktikan']); ?>').val();
+                                            var u_tgl = $('#u_tgl<?= md5($d_data_praktikan['id_praktikan']); ?>').val();
+                                            var u_alamat = $('#u_alamat<?= md5($d_data_praktikan['id_praktikan']); ?>').val();
+                                            var u_telpon = $('#u_telpon<?= md5($d_data_praktikan['id_praktikan']); ?>').val();
+                                            //cek data from ubah bila tidak diiisi
                                             if (
-                                                u_nama_mess == ""
+                                                u_no_id == "" ||
+                                                u_nama == "" ||
+                                                u_tgl == "" ||
+                                                u_alamat == "" ||
+                                                u_telpon == ""
                                             ) {
-                                                if (u_nama_mess == "") {
-                                                    document.getElementById("err_u_nama_mess").innerHTML = "Nama Mess Harus Diisi";
+                                                if (u_no_id == "") {
+                                                    document.getElementById("err_u_no_id").innerHTML = "No ID Harus Diisi";
                                                 } else {
-                                                    document.getElementById("err_u_nama_mess").innerHTML = "";
+                                                    document.getElementById("err_u_no_id").innerHTML = "";
+                                                }
+
+                                                if (u_nama == "") {
+                                                    document.getElementById("err_u_nama").innerHTML = "Nama Harus Diisi";
+                                                } else {
+                                                    document.getElementById("err_u_nama").innerHTML = "";
+                                                }
+
+                                                if (u_tgl == "") {
+                                                    document.getElementById("err_u_tgl").innerHTML = "Tanggal Lahir Harus Dipilih";
+                                                } else {
+                                                    document.getElementById("err_u_tgl").innerHTML = "";
+                                                }
+
+                                                if (u_alamat == "") {
+                                                    document.getElementById("err_u_alamat").innerHTML = "Alamat Harus Diisi";
+                                                } else {
+                                                    document.getElementById("err_u_alamat").innerHTML = "";
+                                                }
+
+                                                if (u_telpon == "") {
+                                                    document.getElementById("err_u_telpon").innerHTML = "Telpon Harus Diisi";
+                                                } else {
+                                                    document.getElementById("err_u_telpon").innerHTML = "";
                                                 }
                                             }
 
+                                            //simpan data ubah bila sudah sesuai
                                             if (
-                                                u_nama_mess != "" &&
-                                                u_nama_pemilik_mess != ""
+                                                u_no_id != "" &&
+                                                u_nama != "" &&
+                                                u_tgl != "" &&
+                                                u_alamat != "" &&
+                                                u_telpon != ""
                                             ) {
                                                 $.ajax({
                                                     type: 'POST',
                                                     url: "_admin/exc/x_v_praktikan_u.php",
-                                                    data: data,
+                                                    data: data_u,
                                                     success: function() {
-                                                        Swal.fire({
-                                                            allowOutsideClick: false,
-                                                            // isDismissed: false,
-                                                            icon: 'success',
-                                                            title: '<span class"text-xs"><b>Data Praktikan</b><br>Berhasil Dirubah',
+                                                        $('#mu<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
+                                                            $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>");
+                                                        })
+                                                        const Toast = Swal.mixin({
+                                                            toast: true,
+                                                            position: 'top-end',
                                                             showConfirmButton: false,
                                                             timer: 5000,
                                                             timerProgressBar: true,
@@ -200,14 +243,15 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                                             }
                                                         });
 
-                                                        $('#data_mess').load("_admin/view/v_messData.php");
-
-                                                        $('#err_u_nama_mess').empty();
-
-                                                        $("#data_ubah_mess").fadeOut(1);
+                                                        Toast.fire({
+                                                            icon: 'success',
+                                                            title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Tersimpan',
+                                                        }).then(
+                                                            function() {}
+                                                        );
                                                     },
                                                     error: function(response) {
-                                                        console.log(response.responseText);
+                                                        console.log(response);
                                                     }
                                                 });
                                             }
