@@ -50,11 +50,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                             <td><?= $d_data_praktikan['alamat_praktikan']; ?></td>
                             <td>
                                 <a class="btn btn-primary btn-sm collapsed" href="" title="Ubah">
-                                    <i class="far fa-edit"></i> Ubah
+                                    <i class="far fa-edit"></i>
                                 </a>
                                 &nbsp;
-                                <a class="btn btn-primary btn-sm collapsed" href="" title="Hapus">
-                                    <i class="far fa-trash-alt"></i> Hapus
+                                <a class="btn btn-danger btn-sm collapsed" href="" title="Hapus">
+                                    <i class="far fa-trash-alt"></i>
                                 </a>
                             </td>
                         </tr>

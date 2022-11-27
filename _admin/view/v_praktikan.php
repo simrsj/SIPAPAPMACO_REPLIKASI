@@ -80,35 +80,35 @@
                                                     </a>
 
                                                     <!-- modal tambah praktikan  -->
-                                                    <div class="modal fade text-center" id="mi<?= md5($d_praktik['id_praktik']); ?>">
-                                                        <div class="modal-dialog modal-dialog-scrollable  modal-sm">
+                                                    <div class="modal fade text-center" id="mi<?= md5($d_praktik['id_praktik']); ?>" data-backdrop="static">
+                                                        <div class="modal-dialog modal-dialog-scrollable  modal-md">
                                                             <div class="modal-content">
                                                                 <div class="modal-header h5">
                                                                     Tambah Praktikan
                                                                 </div>
                                                                 <div class="modal-body text-md">
-                                                                    <form class="form-data" method="post" id="form_i<?= md5($d_praktik['id_praktik']); ?>">
+                                                                    <form class="form-data b" method="post" id="form_t<?= md5($d_praktik['id_praktik']); ?>">
                                                                         No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
-                                                                        <input type="text" id="i_no_id<?= md5($d_praktik['id_praktik']); ?>" name="i_no_id<?= md5($d_praktik['id_praktik']); ?>" class="form-control" required>
-                                                                        <div class="text-danger b i text-xs blink" id="err_i_no_id"></div><br>
+                                                                        <input type="text" id="t_no_id" name="t_no_id" class="form-control" placeholder="Isikan No ID" required>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_no_id"></div><br>
                                                                         Nama Siswa/Mahasiswa : <span style="color:red">*</span><br>
-                                                                        <input type="text" id="i_nama" name="i_nama" class="form-control" required>
-                                                                        <div class="text-danger b i text-xs blink" id="err_i_nama"></div><br>
+                                                                        <input type="text" id="t_nama" name="t_nama" class="form-control" placeholder="Inputkan Nama Siswa/Mahasiswa" required>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_nama"></div><br>
                                                                         Tanggal Lahir : <span style="color:red">*</span><br>
-                                                                        <input type="date" id="i_tgl" name="i_tgl" class="form-control" required>
-                                                                        <div class="text-danger b i text-xs blink" id="err_i_tgl"></div><br>
+                                                                        <input type="date" id="t_tgl" name="t_tgl" class="form-control" required>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_tgl"></div><br>
                                                                         Alamat : <span style="color:red">*</span><br>
-                                                                        <textarea id="i_alamat" name="i_alamat" class="form-control" rows="2"></textarea>
-                                                                        <div class="text-danger b i text-xs blink" id="err_i_alamat"></div><br>
+                                                                        <textarea id="t_alamat" name="t_alamat" class="form-control" rows="2" placeholder="Inputkan Alamat"></textarea>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_alamat"></div><br>
                                                                         No Telepon : <span style="color:red">*</span><br>
-                                                                        <input type="number" id="i_telpon" name="i_telpon" class="form-control" min="1" required>
-                                                                        <div class="text-danger b i text-xs blink" id="err_i_telpon"></div><br>
+                                                                        <input type="number" id="t_telpon" name="t_telpon" class="form-control" min="1" placeholder="Inputkan No Telpon" required>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_telpon"></div><br>
                                                                         No WhatsApp :<br>
-                                                                        <input type="number" id="i_wa" name="i_wa" class="form-control" min="1">
-                                                                        <div class="text-danger b i text-xs blink" id="err_i_wa"></div><br>
+                                                                        <input type="number" id="t_wa" name="t_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_wa"></div><br>
                                                                         E-Mail : <br>
-                                                                        <input type="email" id="i_email" name="i_email" class="form-control">
-                                                                        <div class="text-danger b i text-xs blink" id="err_i_email"></div>
+                                                                        <input type="email" id="t_email" name="t_email" class="form-control" placeholder="Inputkan E-Mail">
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_email"></div>
                                                                     </form>
                                                                 </div>
                                                                 <div class="modal-footer text-md">
@@ -117,7 +117,7 @@
                                                                     </a>
                                                                     &nbsp;
                                                                     <a class="tambah btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
-                                                                        Tambah
+                                                                        Simpan
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -133,144 +133,120 @@
                                                 $('#<?= md5("data" . $d_praktik['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>");
                                             });
 
+                                            // inisiasi klik modal tambah
                                             $(".tambah_init<?= md5($d_praktik['id_praktik']); ?>").click(function() {
-                                                $('#err_i_no_id').empty();
-                                                $('#err_i_nama').empty();
-                                                $('#err_i_tgl').empty();
-                                                $('#err_i_alamat').empty();
-                                                $('#err_i_telpon').empty();
-                                                $('#err_i_wa').empty();
-                                                $('#err_i_email').empty();
-
-                                                $('#i_no_id<?= md5($d_praktik['id_praktik']); ?>').focus();
+                                                // console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
+                                                $('#err_t_no_id').empty();
+                                                $('#err_t_nama').empty();
+                                                $('#err_t_tgl').empty();
+                                                $('#err_t_alamat').empty();
+                                                $('#err_t_telpon').empty();
                                             });
 
+                                            // inisiasi klik modal tambah  tutup
                                             $(".tambah_tutup<?= md5($d_praktik['id_praktik']); ?>").click(function() {
-                                                $("#form_i<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
+                                                // console.log("tambah_tutup<?= md5($d_praktik['id_praktik']); ?>");
+                                                $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
                                             });
 
+                                            // inisiasi klik modal tambah simpan
                                             $(document).on('click', '.tambah<?= md5($d_praktik['id_praktik']); ?>', function() {
-                                                var data = $('#form_tambah_mess').serialize();
+                                                // console.log("tambah<?= md5($d_praktik['id_praktik']); ?>");
+                                                var data_t = $("#form_t<?= md5($d_praktik['id_praktik']); ?>").serializeArray();
+                                                data_t.push({
+                                                    name: "idp",
+                                                    value: $(this).attr('id')
+                                                });
 
-                                                var t_nama_mess = $('#t_nama_mess').val();
-                                                var t_nama_pemilik_mess = $('#t_nama_pemilik_mess').val();
-                                                var t_telp_pemilik_mess = $('#t_telp_pemilik_mess').val();
-                                                var t_kepemilikan_mess = $('#t_kepemilikan_mess').val();
-                                                var t_tarif_tanpa_makan_mess = $('#t_tarif_tanpa_makan_mess').val();
-                                                var t_tarif_dengan_makan_mess = $('#t_tarif_dengan_makan_mess').val();
-                                                var t_kapsitas_total_mess = $('#t_kapsitas_total_mess').val();
-                                                var t_alamat_mess = $('#t_alamat_mess').val();
-                                                var t_fasilitas_mess = $('#t_fasilitas_mess').val();
+                                                var t_no_id = $('#t_no_id').val();
+                                                var t_nama = $('#t_nama').val();
+                                                var t_tgl = $('#t_tgl').val();
+                                                var t_alamat = $('#t_alamat').val();
+                                                var t_telpon = $('#t_telpon').val();
 
-                                                //cek data from tambah bila tidak diiisi
+                                                //cek data from modal tambah bila tidak diiisi
                                                 if (
-                                                    t_nama_mess == "" ||
-                                                    t_nama_pemilik_mess == "" ||
-                                                    t_telp_pemilik_mess == "" ||
-                                                    t_kepemilikan_mess == "" ||
-                                                    t_tarif_tanpa_makan_mess == "" ||
-                                                    t_tarif_dengan_makan_mess == "" ||
-                                                    t_kapsitas_total_mess == "" ||
-                                                    t_alamat_mess == "" ||
-                                                    t_fasilitas_mess == ""
+                                                    t_no_id == "" ||
+                                                    t_nama == "" ||
+                                                    t_tgl == "" ||
+                                                    t_alamat == "" ||
+                                                    t_telpon == ""
                                                 ) {
-                                                    if (t_nama_mess == "") {
-                                                        document.getElementById("err_t_nama_mess").innerHTML = "Nama Mess Harus Diisi";
+                                                    if (t_no_id == "") {
+                                                        document.getElementById("err_t_no_id").innerHTML = "No ID Harus Diisi";
                                                     } else {
-                                                        document.getElementById("err_t_nama_mess").innerHTML = "";
+                                                        document.getElementById("err_t_no_id").innerHTML = "";
                                                     }
 
-                                                    if (t_nama_pemilik_mess == "") {
-                                                        document.getElementById("err_t_nama_pemilik_mess").innerHTML = "Nama Pemilik Harus Diisi";
+                                                    if (t_nama == "") {
+                                                        document.getElementById("err_t_nama").innerHTML = "Nama Harus Diisi";
                                                     } else {
-                                                        document.getElementById("err_t_nama_pemilik_mess").innerHTML = "";
+                                                        document.getElementById("err_t_nama").innerHTML = "";
                                                     }
 
-                                                    if (t_telp_pemilik_mess == "") {
-                                                        document.getElementById("err_t_telp_pemilik_mess").innerHTML = "No. Telp Harus Diisi";
+                                                    if (t_tgl == "") {
+                                                        document.getElementById("err_t_tgl").innerHTML = "Tanggal Lahir Harus Dipilih";
                                                     } else {
-                                                        document.getElementById("err_t_telp_pemilik_mess").innerHTML = "";
+                                                        document.getElementById("err_t_tgl").innerHTML = "";
                                                     }
 
-                                                    if (t_kepemilikan_mess == "") {
-                                                        document.getElementById("err_t_kepemilikan_mess").innerHTML = "Kepemilikan Harus Dipilih";
+                                                    if (t_alamat == "") {
+                                                        document.getElementById("err_t_alamat").innerHTML = "Alamat Harus Diisi";
                                                     } else {
-                                                        document.getElementById("err_t_kepemilikan_mess").innerHTML = "";
+                                                        document.getElementById("err_t_alamat").innerHTML = "";
                                                     }
 
-                                                    if (t_tarif_tanpa_makan_mess == "") {
-                                                        document.getElementById("err_t_tarif_tanpa_makan_mess").innerHTML = "Tarif Tanpa Makan harus Diisi";
+                                                    if (t_telpon == "") {
+                                                        document.getElementById("err_t_telpon").innerHTML = "Telpon Harus Diisi";
                                                     } else {
-                                                        document.getElementById("err_t_tarif_tanpa_makan_mess").innerHTML = "";
-                                                    }
-
-                                                    if (t_tarif_dengan_makan_mess == "") {
-                                                        document.getElementById("err_t_tarif_dengan_makan_mess").innerHTML = "Tarif Dengan Makan Harus Diisi";
-                                                    } else {
-                                                        document.getElementById("err_t_tarif_dengan_makan_mess").innerHTML = "";
-                                                    }
-
-                                                    if (t_kapsitas_total_mess == "") {
-                                                        document.getElementById("err_t_kapsitas_total_mess").innerHTML = "Kapasitas Total Harus Diisi";
-                                                    } else {
-                                                        document.getElementById("err_t_kapsitas_total_mess").innerHTML = "";
-                                                    }
-
-                                                    if (t_alamat_mess == "") {
-                                                        document.getElementById("err_t_alamat_mess").innerHTML = "Alamat Harus Diisi";
-                                                    } else {
-                                                        document.getElementById("err_t_alamat_mess").innerHTML = "";
-                                                    }
-
-                                                    if (t_fasilitas_mess == "") {
-                                                        document.getElementById("err_t_fasilitas_mess").innerHTML = "Fasiltias Harus Diisi";
-                                                    } else {
-                                                        document.getElementById("err_t_fasilitas_mess").innerHTML = "";
+                                                        document.getElementById("err_t_telpon").innerHTML = "";
                                                     }
                                                 }
 
+                                                //simpan data tambah bila sudah sesuai
                                                 if (
-                                                    t_nama_mess != "" &&
-                                                    t_nama_pemilik_mess != "" &&
-                                                    t_telp_pemilik_mess != "" &&
-                                                    t_kepemilikan_mess != "" &&
-                                                    t_tarif_tanpa_makan_mess != "" &&
-                                                    t_tarif_dengan_makan_mess != "" &&
-                                                    t_kapsitas_total_mess != "" &&
-                                                    t_alamat_mess != "" &&
-                                                    t_fasilitas_mess != ""
+                                                    t_no_id != "" &&
+                                                    t_nama != "" &&
+                                                    t_tgl != "" &&
+                                                    t_alamat != "" &&
+                                                    t_telpon != ""
                                                 ) {
                                                     $.ajax({
                                                         type: 'POST',
-                                                        url: "_admin/exc/x_v_mess_s.php",
-                                                        data: data,
+                                                        url: "_admin/exc/x_v_praktikan_s.php",
+                                                        data: data_t,
                                                         success: function() {
-                                                            const SwalButton = Swal.mixin({
-                                                                customClass: {
-                                                                    confirmButton: 'btn btn-success',
-                                                                    cancelButton: 'btn btn-danger'
-                                                                },
-                                                                buttonsStyling: false
-                                                            })
-                                                            SwalButton.fire({
-                                                                allowOutsideClick: false,
-                                                                // isDismissed: false,
-                                                                icon: 'success',
-                                                                title: '<span class"text-xs"><b>Data Mess</b><br>Berhasil Tersimpan',
-                                                                showConfirmButton: true,
-                                                                timer: 5000123,
+                                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>");
+
+                                                            $('#err_t_no_id').empty();
+                                                            $('#err_t_nama').empty();
+                                                            $('#err_t_tgl').empty();
+                                                            $('#err_t_alamat').empty();
+                                                            $('#err_t_telpon').empty();
+                                                            $('#err_t_wa').empty();
+                                                            $('#err_t_email').empty();
+                                                            $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
+                                                            const Toast = Swal.mixin({
+                                                                toast: true,
+                                                                position: 'top-end',
+                                                                showConfirmButton: false,
+                                                                timer: 5000,
                                                                 timerProgressBar: true,
                                                                 didOpen: (toast) => {
-                                                                    toast.addEventListener('mouseenter', SwalButton.stopTimer)
-                                                                    toast.addEventListener('mouseleave', SwalButton.resumeTimer)
+                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                                 }
-                                                            }).then((result) => {
-                                                                $('#data_mess').load('_admin/view/v_messData.php');
-                                                                $("#data_tambah_mess").fadeOut(1);
                                                             });
+
+                                                            Toast.fire({
+                                                                icon: 'success',
+                                                                title: '<span class"text-center"><b>Data Praktikan</b><br>Berhasil Tersimpan',
+                                                            }).then(
+                                                                function() {}
+                                                            );
                                                         },
                                                         error: function(response) {
-                                                            console.log(response.responseText);
+                                                            console.log(response);
                                                         }
                                                     });
                                                 }
