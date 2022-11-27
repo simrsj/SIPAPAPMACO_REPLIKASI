@@ -245,7 +245,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
                                                         Toast.fire({
                                                             icon: 'success',
-                                                            title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Diubah',
+                                                            title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Tersimpan',
                                                         }).then(
                                                             function() {}
                                                         );
