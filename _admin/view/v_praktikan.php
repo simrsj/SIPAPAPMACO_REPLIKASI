@@ -88,25 +88,25 @@
                                                                 <div class="modal-body text-md">
                                                                     <form class="form-data b" method="post" id="form_t<?= md5($d_praktik['id_praktik']); ?>">
                                                                         No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
-                                                                        <input type="text" id="t_no_id" name="t_no_id" class="form-control" placeholder="Isikan No ID" required>
+                                                                        <input type="text" id="t_no_id<?= md5($d_praktik['id_praktik']); ?>" name="t_no_id" class="form-control" placeholder="Isikan No ID" required>
                                                                         <div class="text-danger b i text-xs blink" id="err_t_no_id"></div><br>
                                                                         Nama Siswa/Mahasiswa : <span style="color:red">*</span><br>
-                                                                        <input type="text" id="t_nama" name="t_nama" class="form-control" placeholder="Inputkan Nama Siswa/Mahasiswa" required>
+                                                                        <input type="text" id="t_nama<?= md5($d_praktik['id_praktik']); ?>" name="t_nama" class="form-control" placeholder="Inputkan Nama Siswa/Mahasiswa" required>
                                                                         <div class="text-danger b i text-xs blink" id="err_t_nama"></div><br>
                                                                         Tanggal Lahir : <span style="color:red">*</span><br>
-                                                                        <input type="date" id="t_tgl" name="t_tgl" class="form-control" required>
+                                                                        <input type="date" id="t_tgl<?= md5($d_praktik['id_praktik']); ?>" name="t_tgl" class="form-control" required>
                                                                         <div class="text-danger b i text-xs blink" id="err_t_tgl"></div><br>
                                                                         Alamat : <span style="color:red">*</span><br>
-                                                                        <textarea id="t_alamat" name="t_alamat" class="form-control" rows="2" placeholder="Inputkan Alamat"></textarea>
+                                                                        <textarea id="t_alamat<?= md5($d_praktik['id_praktik']); ?>" name="t_alamat" class="form-control" rows="2" placeholder="Inputkan Alamat"></textarea>
                                                                         <div class="text-danger b i text-xs blink" id="err_t_alamat"></div><br>
                                                                         No Telepon : <span style="color:red">*</span><br>
-                                                                        <input type="number" id="t_telpon" name="t_telpon" class="form-control" min="1" placeholder="Inputkan No Telpon" required>
+                                                                        <input type="number" id="t_telpon<?= md5($d_praktik['id_praktik']); ?>" name="t_telpon" class="form-control" min="1" placeholder="Inputkan No Telpon" required>
                                                                         <div class="text-danger b i text-xs blink" id="err_t_telpon"></div><br>
                                                                         No WhatsApp :<br>
-                                                                        <input type="number" id="t_wa" name="t_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
+                                                                        <input type="number" id="t_wa<?= md5($d_praktik['id_praktik']); ?>" name="t_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
                                                                         <div class="text-danger b i text-xs blink" id="err_t_wa"></div><br>
                                                                         E-Mail : <br>
-                                                                        <input type="email" id="t_email" name="t_email" class="form-control" placeholder="Inputkan E-Mail">
+                                                                        <input type="email" id="t_email<?= md5($d_praktik['id_praktik']); ?>" name="t_email" class="form-control" placeholder="Inputkan E-Mail">
                                                                         <div class="text-danger b i text-xs blink" id="err_t_email"></div>
                                                                     </form>
                                                                 </div>
@@ -134,7 +134,7 @@
 
                                             // inisiasi klik modal tambah
                                             $(".tambah_init<?= md5($d_praktik['id_praktik']); ?>").click(function() {
-                                                // console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
+                                                console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
                                                 $('#err_t_no_id').empty();
                                                 $('#err_t_nama').empty();
                                                 $('#err_t_tgl').empty();
@@ -144,24 +144,24 @@
 
                                             // inisiasi klik modal tambah  tutup
                                             $(".tambah_tutup<?= md5($d_praktik['id_praktik']); ?>").click(function() {
-                                                // console.log("tambah_tutup<?= md5($d_praktik['id_praktik']); ?>");
+                                                console.log("tambah_tutup<?= md5($d_praktik['id_praktik']); ?>");
                                                 $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
                                             });
 
                                             // inisiasi klik modal tambah simpan
                                             $(document).on('click', '.tambah<?= md5($d_praktik['id_praktik']); ?>', function() {
-                                                // console.log("tambah<?= md5($d_praktik['id_praktik']); ?>");
+                                                console.log("tambah<?= md5($d_praktik['id_praktik']); ?>");
                                                 var data_t = $("#form_t<?= md5($d_praktik['id_praktik']); ?>").serializeArray();
                                                 data_t.push({
                                                     name: "idp",
                                                     value: $(this).attr('id')
                                                 });
 
-                                                var t_no_id = $('#t_no_id').val();
-                                                var t_nama = $('#t_nama').val();
-                                                var t_tgl = $('#t_tgl').val();
-                                                var t_alamat = $('#t_alamat').val();
-                                                var t_telpon = $('#t_telpon').val();
+                                                var t_no_id = $('#t_no_id<?= md5($d_praktik['id_praktik']); ?>').val();
+                                                var t_nama = $('#t_nama<?= md5($d_praktik['id_praktik']); ?>').val();
+                                                var t_tgl = $('#t_tgl<?= md5($d_praktik['id_praktik']); ?>').val();
+                                                var t_alamat = $('#t_alamat<?= md5($d_praktik['id_praktik']); ?>').val();
+                                                var t_telpon = $('#t_telpon<?= md5($d_praktik['id_praktik']); ?>').val();
 
                                                 //cek data from modal tambah bila tidak diiisi
                                                 if (
@@ -215,7 +215,7 @@
                                                         url: "_admin/exc/x_v_praktikan_s.php",
                                                         data: data_t,
                                                         success: function() {
-                                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>");
+                                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>");
 
                                                             $('#err_t_no_id').empty();
                                                             $('#err_t_nama').empty();
