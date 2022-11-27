@@ -114,7 +114,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                         </div>
                                     <?php } ?>
                                     <?php if ($d_prvl['d_praktikan'] == 'Y') { ?>
-                                        <a class="btn btn-danger hapus" href="#" title="Hapus">
+                                        <a class="btn btn-danger hapus<?= md5($d_data_praktikan['id_praktikan']) ?>" id="<?= urlencode(base64_encode($d_data_praktikan['id_praktikan'])); ?>" href="#" title="Hapus">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
                                     <?php } ?>
@@ -245,7 +245,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
                                                         Toast.fire({
                                                             icon: 'success',
-                                                            title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Tersimpan',
+                                                            title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Diubah',
                                                         }).then(
                                                             function() {}
                                                         );
@@ -260,29 +260,26 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                     <?php } ?>
 
                                     <?php if ($d_prvl['d_praktikan'] == 'Y') { ?>
-                                        $(document).on('click', '.hapus', function() {
-                                            console.log("hapus");
+                                        $(document).on('click', '.hapus<?= md5($d_data_praktikan['id_praktikan']) ?>', function() {
+                                            console.log("hapus data praktikan");
                                             Swal.fire({
-                                                position: 'top',
-                                                title: 'Hapus Data Mess ?',
+                                                title: 'Hapus Data Praktikan ?',
                                                 icon: 'error',
                                                 showCancelButton: true,
                                                 confirmButtonColor: '#1cc88a',
                                                 cancelButtonColor: '#d33',
                                                 cancelButtonText: 'Kembali',
                                                 confirmButtonText: 'Ya',
-                                                allowOutsideClick: false,
+                                                allowOutsideClick: true,
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
                                                     $.ajax({
                                                         type: 'POST',
                                                         url: "_admin/exc/x_v_praktikan_h.php",
                                                         data: {
-                                                            "h_id_mess": $(this).attr('id')
+                                                            "idprkn": $(this).attr('id')
                                                         },
                                                         success: function() {
-                                                            $('#data_mess').load("_admin/view/v_messData.php");
-
                                                             const Toast = Swal.mixin({
                                                                 toast: true,
                                                                 position: 'top-end',
@@ -301,7 +298,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                                             });
                                                         },
                                                         error: function(response) {
-                                                            console.log(response.responseText);
+                                                            console.log(response);
                                                             alert('eksekusi query gagal');
                                                         }
                                                     });
