@@ -248,7 +248,8 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                                     data: data_u,
                                                     success: function() {
                                                         $('#mu<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
-                                                            $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>");
+                                                            $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>')
+                                                                .load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
                                                         })
                                                         const Toast = Swal.mixin({
                                                             toast: true,
@@ -264,7 +265,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
                                                         Toast.fire({
                                                             icon: 'success',
-                                                            title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Tersimpan',
+                                                            title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Dirubah',
                                                         }).then(
                                                             function() {}
                                                         );
