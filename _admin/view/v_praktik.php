@@ -52,7 +52,7 @@
                                 <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="11">Status Nilai</a>
                             </div>
                         </div>
-                        <table class="table table-striped table-bordered m-auto" width="100%" id="myTable">
+                        <table class="table table-striped table-bordered m-auto display" width="100%" id="table-search-each">
                             <thead class="table-dark text-center">
                                 <tr>
                                     <th rowspan="2">No</th>
@@ -309,6 +309,23 @@
                                 }
                                 ?>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 <?php
