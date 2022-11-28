@@ -128,9 +128,9 @@
                                         <!-- inisiasi tabel data praktikan -->
                                         <div id="<?= md5("data" . $d_praktik['id_praktik']); ?>"></div>
                                         <script>
-                                            $(document).ready(function() {
-                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>");
-                                            });
+                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                .load(
+                                                    "_admin/view/v_praktikanData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&tb=<?= md5($d_praktik['id_praktik']); ?>");
 
                                             // inisiasi klik modal tambah
                                             $(".tambah_init<?= md5($d_praktik['id_praktik']); ?>").click(function() {

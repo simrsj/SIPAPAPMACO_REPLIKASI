@@ -34,7 +34,7 @@
                 if ($r_praktik > 0) {
                 ?>
                     <div class="table-responsive text-xs">
-                        <table class="table table-striped table-hover table-bordered m-auto" width="100%" id="myTable">
+                        <table class="table table-striped table-bordered m-auto" width="100%" id="myTable">
                             <thead class="table-dark text-center">
                                 <tr>
                                     <th rowspan="2">No</th>
@@ -60,7 +60,10 @@
                                 </tr>
                                 <tr>
                                     <th>Mess</th>
-                                    <th>Pembimbing</th>
+                                    <th>
+                                        Data Praktikan
+                                        <hr class="m-1 p-0 border-1">Pembimbing
+                                    </th>
                                     <th>Tarif</th>
                                     <th>Bayar</th>
                                     <th>Nilai</th>
@@ -132,7 +135,7 @@
                                                 <span class="badge badge-danger">Tidak</span>
                                             <?php } ?>
                                         </td>
-                                        <!-- status pembimbing praktik  -->
+                                        <!-- status data praktikan dan pembimbing praktik  -->
                                         <td class="align-middle">
                                             <?php if ($d_praktik['status_pembimbing_praktik'] == 'Y') { ?>
                                                 <?php
@@ -252,7 +255,6 @@
                                                             <hr class="p-0 m-0 bg-gray-500">
                                                             E-Mail Koordinator : <br>
                                                             <b><?= $d_praktik['email_koordinator_praktik'] ?></b>
-
                                                         </div>
                                                     </div>
                                                 </div>

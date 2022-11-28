@@ -31,7 +31,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
     if ($r_data_praktikan > 0) {
     ?>
         <div class="table-responsive">
-            <table class="table table-striped" id="myTable">
+            <table class="table table-striped" id="myTable<?= $_GET['tb']; ?>">
                 <thead class="thead-dark">
                     <tr class="text-center">
                         <th scope="col">No</th>
@@ -61,10 +61,10 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                             <td><?= $d_data_praktikan['email_praktikan']; ?></td>
                             <td><?= $d_data_praktikan['alamat_praktikan']; ?></td>
                             <td class="text-center">
-                                <div class="btn-group" role="group">
-                                    <!-- tombol modal ubah praktikan  -->
+                                <div class="btn-group" role="group" role="group" aria-label="Basic example">
                                     <?php if ($d_prvl['u_praktikan'] == 'Y') { ?>
-                                        <a title="Ubah" class='btn btn-primary ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>' id="<?= urlencode(base64_encode($d_data_praktikan['id_praktikan'])); ?>" href='#' data-toggle="modal" data-target="#mu<?= md5($d_data_praktikan['id_praktikan']); ?>">
+                                        <!-- tombol modal ubah praktikan  -->
+                                        <a title="Ubah" class='btn btn-outline-primary ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>' id="<?= urlencode(base64_encode($d_data_praktikan['id_praktikan'])); ?>" href='#' data-toggle="modal" data-target="#mu<?= md5($d_data_praktikan['id_praktikan']); ?>">
                                             <i class="far fa-edit"></i>
                                         </a>
 
@@ -115,17 +115,35 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                         </div>
                                     <?php } ?>
                                     <?php if ($d_prvl['d_praktikan'] == 'Y') { ?>
-                                        <a class="btn btn-danger hapus<?= md5($d_data_praktikan['id_praktikan']) ?>" id="<?= urlencode(base64_encode($d_data_praktikan['id_praktikan'])); ?>" href="#" title="Hapus">
+                                        <!-- tombol modal hapus praktikan  -->
+                                        <a title="Hapus" class='btn btn-outline-danger' href='#' data-toggle="modal" data-target="#md<?= md5($d_data_praktikan['id_praktikan']); ?>">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
+
+                                        <!-- modal hapus praktikan  -->
+                                        <div class="modal fade text-center" id="md<?= md5($d_data_praktikan['id_praktikan']); ?>">
+                                            <div class="modal-dialog modal-dialog-scrollable  modal-md">
+                                                <div class="modal-content">
+                                                    <div class="modal-header h5">
+                                                        Hapus Praktikan
+                                                    </div>
+                                                    <div class="modal-footer text-md">
+                                                        <a class="btn btn-outline-secondary btn-sm" data-dismiss="modal">
+                                                            Kembali
+                                                        </a>
+                                                        &nbsp;
+                                                        <a class="btn btn-outline-danger btn-sm hapus<?= md5($d_data_praktikan['id_praktikan']); ?>" id="<?= urlencode(base64_encode($d_data_praktikan['id_praktikan'])); ?>" data-dismiss="modal">
+                                                            Hapus
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <?php } ?>
                                 </div>
 
                                 <script>
-                                    $(document).ready(function() {
-                                        $('#myTable').DataTable();
-                                    });
-
+                                    $('#myTable<?= $_GET['tb'] ?>').DataTable();
                                     <?php if ($d_prvl['u_praktikan'] == 'Y') { ?>
                                         $(".ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>").click(function() {
                                             // console.log("ubah_init");
@@ -263,50 +281,37 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                     <?php if ($d_prvl['d_praktikan'] == 'Y') { ?>
                                         $(document).on('click', '.hapus<?= md5($d_data_praktikan['id_praktikan']) ?>', function() {
                                             console.log("hapus data praktikan");
-                                            Swal.fire({
-                                                position: 'center',
-                                                title: 'Hapus Data Praktikan ?',
-                                                icon: 'error',
-                                                showCancelButton: true,
-                                                confirmButtonColor: '#1cc88a',
-                                                cancelButtonColor: '#d33',
-                                                cancelButtonText: 'Kembali',
-                                                confirmButtonText: 'Ya',
-                                                allowOutsideClick: true,
-                                            }).then((result) => {
-                                                if (result.isConfirmed) {
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: "_admin/exc/x_v_praktikan_h.php",
-                                                        data: {
-                                                            "idprkn": $(this).attr('id')
-                                                        },
-                                                        success: function() {
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: "_admin/exc/x_v_praktikan_h.php",
+                                                data: {
+                                                    "idprkn": $(this).attr('id')
+                                                },
+                                                success: function() {
 
-                                                            const Toast = Swal.mixin({
-                                                                toast: true,
-                                                                position: 'top-end',
-                                                                showConfirmButton: false,
-                                                                timer: 5000,
-                                                                timerProgressBar: true,
-                                                                didOpen: (toast) => {
-                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                }
-                                                            });
-
-                                                            Toast.fire({
-                                                                icon: 'success',
-                                                                title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Dihapus</b></div>'
-                                                            });
-                                                            $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>");
-
-                                                        },
-                                                        error: function(response) {
-                                                            console.log(response);
-                                                            alert('eksekusi query gagal');
+                                                    $('#md<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
+                                                        $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>");
+                                                    })
+                                                    const Toast = Swal.mixin({
+                                                        toast: true,
+                                                        position: 'top-end',
+                                                        showConfirmButton: false,
+                                                        timer: 5000,
+                                                        timerProgressBar: true,
+                                                        didOpen: (toast) => {
+                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                         }
                                                     });
+
+                                                    Toast.fire({
+                                                        icon: 'success',
+                                                        title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Dihapus</b></div>'
+                                                    });
+                                                },
+                                                error: function(response) {
+                                                    console.log(response);
+                                                    alert('eksekusi query gagal');
                                                 }
                                             });
                                         });

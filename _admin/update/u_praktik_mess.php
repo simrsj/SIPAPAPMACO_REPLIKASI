@@ -297,7 +297,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                         toast: true,
                         position: 'top-end',
                         showConfirmButton: false,
-                        timer: 10000,
+                        timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -334,7 +334,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                                 icon: 'success',
                                 title: '<span class"text-xs"><b>DATA MESS</b><br>Berhasil Diubah',
                                 showConfirmButton: false,
-                                timer: 1115000,
+                                timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
                                     toast.addEventListener('mouseenter', Swal.stopTimer)
