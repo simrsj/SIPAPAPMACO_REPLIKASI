@@ -194,7 +194,7 @@
     } elseif ($d_praktik['status_cek_praktik'] == "DTR_KED") {
     ?>
         <b>PLIH : </b><br>
-        <a class="btn btn-outline-danger btn-sm" href="?prk=<?php echo $_GET['prk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>
+        <a class="btn btn-outline-danger btn-sm" href="?ptk=<?php echo $_GET['ptk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
     ?>

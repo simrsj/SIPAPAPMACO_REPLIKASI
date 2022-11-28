@@ -93,7 +93,7 @@ if (isset($_POST['simpan_bayar'])) {
                         icon: 'success',
                         title: '<span class"text-xs"><b>DATA PERMBAYARAN</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
-                        html: '<a href="?prk=<?= $_GET['prk']; ?>" class="btn btn-outline-primary">OK</a>',
+                        html: '<a href="?ptk=<?= $_GET['ptk']; ?>" class="btn btn-outline-primary">OK</a>',
                         timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
@@ -102,7 +102,7 @@ if (isset($_POST['simpan_bayar'])) {
                         }
                     }).then(
                         function() {
-                            document.location.href = "?prk=<?= $_GET['prk']; ?>";
+                            document.location.href = "?ptk=<?= $_GET['ptk']; ?>";
                         }
                     );
                 });
@@ -110,18 +110,18 @@ if (isset($_POST['simpan_bayar'])) {
     <?php
         }
     }
-} elseif ($_GET['prk'] == ('ked' || 'kep' || 'nkl' || 'nnk')) {
+} elseif ($_GET['ptk'] == ('ked' || 'kep' || 'nkl' || 'nnk')) {
 
-    if ($_GET['prk'] == 'ked') {
+    if ($_GET['ptk'] == 'ked') {
         $tambah = "ked";
         $judul = "Kedokteran";
-    } elseif ($_GET['prk'] == 'kep') {
+    } elseif ($_GET['ptk'] == 'kep') {
         $tambah = "kep";
         $judul = "Keperawatan";
-    } elseif ($_GET['prk'] == 'nkl') {
+    } elseif ($_GET['ptk'] == 'nkl') {
         $tambah = "nkl";
         $judul = "Nakes Lainnya";
-    } elseif ($_GET['prk'] == 'nnk') {
+    } elseif ($_GET['ptk'] == 'nnk') {
         $tambah = "nnk";
         $judul = "Non-Nakes";
     } else {
@@ -135,10 +135,10 @@ if (isset($_POST['simpan_bayar'])) {
                 <h1 class="h3 mb-2 text-gray-800">Daftar Praktik <?= $judul; ?></h1>
             </div>
             <div class="col-lg-2 text-right">
-                <a href="?prk=<?= $tambah; ?>&i" class="btn btn-outline-success btn-sm">
+                <a href="?ptk=<?= $tambah; ?>&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
-                <!-- <a href="?prk&a" class="btn btn-outline-info btn-sm">
+                <!-- <a href="?ptk&a" class="btn btn-outline-info btn-sm">
                     <i>
                         <i class="fas fa-archive"></i>
                     </i>Arsip
@@ -149,13 +149,13 @@ if (isset($_POST['simpan_bayar'])) {
         <div class="card shadow mb-4">
             <div class="card-body">
                 <?php
-                if ($_GET['prk'] == 'ked') {
+                if ($_GET['ptk'] == 'ked') {
                     $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 1 ";
-                } elseif ($_GET['prk'] == 'kep') {
+                } elseif ($_GET['ptk'] == 'kep') {
                     $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 2 ";
-                } elseif ($_GET['prk'] == 'nkl') {
+                } elseif ($_GET['ptk'] == 'nkl') {
                     $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 3 ";
-                } elseif ($_GET['prk'] == 'nnk') {
+                } elseif ($_GET['ptk'] == 'nnk') {
                     $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 4 ";
                 } else {
                     $jenis_jurusan = " AND tb_jurusan_pdd.id_jurusan_pdd_jenis = 0 ";
@@ -198,7 +198,7 @@ if (isset($_POST['simpan_bayar'])) {
                                             <b class="text-gray-800">TANGGAL SELESAI : </b><br><?= tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                         </div>
                                         <?php
-                                        if ($_GET['prk'] == "ked") {
+                                        if ($_GET['ptk'] == "ked") {
                                             include "_ip/view/v_praktikDataStatusKed.php";
                                         } else {
                                             include "_ip/view/v_praktikDataStatus.php";
@@ -291,7 +291,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                         <div class="col-lg-11">
                                                             <h4 class="font-weight-bold">
                                                                 DATA MESS
-                                                                <!-- <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?prk&um=<?= $d_praktik['id_praktik']; ?>'>
+                                                                <!-- <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?ptk&um=<?= $d_praktik['id_praktik']; ?>'>
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                                 <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?= $d_praktik['id_praktik']; ?>">
@@ -306,7 +306,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                                                 <h4>HAPUS DATA MESS ?</h4>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hm=<?= $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?ptk&hm=<?= $d_praktik['id_praktik']; ?>'> HAPUS </a>
                                                                                 <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                             </div>
                                                                         </div>
@@ -389,7 +389,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                 <div class="col-md-12">
                                                     <h4 class="font-weight-bold">
                                                         DATA TARIF
-                                                        <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&uh=<?= $d_praktik['id_praktik']; ?>'>
+                                                        <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?ptk&uh=<?= $d_praktik['id_praktik']; ?>'>
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                         <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#h_h_m<?= $d_praktik['id_praktik']; ?>'>
@@ -404,7 +404,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                                         <h4>HAPUS DATA TARIF ?</h4>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <a title="Hapus Tarif" class="btn btn-danger btn-sm" href='?prk&hh=<?= $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                                                        <a title="Hapus Tarif" class="btn btn-danger btn-sm" href='?ptk&hh=<?= $d_praktik['id_praktik']; ?>'> HAPUS </a>
                                                                         <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                     </div>
                                                                 </div>
@@ -498,7 +498,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                         <div class="col-lg-11">
                                                             <h4 class="font-weight-bold">
                                                                 DATA PEMBAYARAN
-                                                                <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?prk&ub=<?= $d_praktik['id_praktik']; ?>'>
+                                                                <!-- <a title="Ubah Pembayaran" class="btn btn-primary btn-sm" href='?ptk&ub=<?= $d_praktik['id_praktik']; ?>'>
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                                 <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#b_h_m<?= $d_praktik['id_praktik']; ?>">
@@ -513,7 +513,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                                                 <h4>HAPUS PEMBAYARAN ?</h4>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hb=<?= $d_praktik['id_praktik']; ?>'> HAPUS
+                                                                                <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?ptk&hb=<?= $d_praktik['id_praktik']; ?>'> HAPUS
                                                                                 </a>
                                                                                 <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                                                             </div>
@@ -639,7 +639,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?ptk=" . $_GET['ptk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -648,7 +648,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?ptk=" . $_GET['ptk']; ?>";
                                 }
                             );
                         },
@@ -693,7 +693,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'error',
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?ptk=" . $_GET['ptk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -702,7 +702,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?ptk=" . $_GET['ptk']; ?>";
                                 }
                             );
                         },
@@ -745,7 +745,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITERIMA</b></div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?ptk=" . $_GET['ptk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -754,7 +754,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?ptk=" . $_GET['ptk']; ?>";
                                 }
                             );
                         },
@@ -799,7 +799,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'error',
                                 title: '<div class="text-md text-center">DATA PRAKTIKAN DAN TARIF <br> <b>DITOLAK</b></div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?ptk=" . $_GET['ptk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -808,7 +808,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?ptk=" . $_GET['ptk']; ?>";
                                 }
                             );
                         },
@@ -847,7 +847,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH AKTIF</div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?ptk=" . $_GET['ptk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -856,7 +856,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?ptk=" . $_GET['ptk']; ?>";
                                 }
                             );
                         },
@@ -894,7 +894,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH SELESAI</div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?ptk=" . $_GET['ptk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -903,7 +903,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?ptk=" . $_GET['ptk']; ?>";
                                 }
                             );
                         },
@@ -941,7 +941,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 icon: 'success',
                                 title: '<div class="text-md text-center">PRAKTIK SUDAH DIARSIPKAN<br><br>CEK MENU <b>ARSIP PRAKTIK</b> UNTUK MELIHAT DATA</div>',
                                 showConfirmButton: false,
-                                html: '<a href="<?= "?prk=" . $_GET['prk']; ?>" class="btn btn-primary">OK</a>',
+                                html: '<a href="<?= "?ptk=" . $_GET['ptk']; ?>" class="btn btn-primary">OK</a>',
                                 timer: 5000,
                                 timerProgressBar: true,
                                 didOpen: (toast) => {
@@ -950,7 +950,7 @@ if (isset($_POST['simpan_bayar'])) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "<?= "?prk=" . $_GET['prk']; ?>";
+                                    document.location.href = "<?= "?ptk=" . $_GET['ptk']; ?>";
                                 }
                             );
                         },

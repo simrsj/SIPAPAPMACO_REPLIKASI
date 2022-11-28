@@ -193,15 +193,15 @@
         </div>
         <?php
     } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
-        if ($_GET['prk'] == 'nnk' || $_GET['prk'] == 'nkl') {
+        if ($_GET['ptk'] == 'nnk' || $_GET['ptk'] == 'nkl') {
         ?>
             <b>PILIH : </b><br>
-            <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
+            <a href="?ptk=<?php echo $_GET['ptk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
         <?php
         } else {
         ?>
             <b>PILIH : </b><br>
-            <a href="?prk=<?php echo $_GET['prk']; ?>&t=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">TEMPAT</a>
+            <a href="?ptk=<?php echo $_GET['ptk']; ?>&t=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">TEMPAT</a>
         <?php
         }
     } elseif ($d_praktik['status_cek_praktik'] == "VPT_T") {
@@ -232,7 +232,7 @@
     } elseif ($d_praktik['status_cek_praktik'] == "TMP" || $d_praktik['status_cek_praktik'] == "TMP_KED") {
     ?>
         <b>PILIH : </b><br>
-        <a href="?prk=<?php echo $_GET['prk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
+        <a href="?ptk=<?php echo $_GET['ptk']; ?>&m=<?php echo $d_praktik['id_praktik']; ?>" class="btn btn-outline-warning btn-sm font-weight-bold">MESS</a>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "MESS") {
     ?>
@@ -306,7 +306,7 @@
     } elseif ($d_praktik['status_cek_praktik'] == "INV") {
     ?>
         <b>PLIH : </b><br>
-        <a class="btn btn-outline-danger btn-sm" href="?prk=<?php echo $_GET['prk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>
+        <a class="btn btn-outline-danger btn-sm" href="?ptk=<?php echo $_GET['ptk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
     ?>

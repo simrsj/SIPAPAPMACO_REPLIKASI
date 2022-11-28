@@ -1,6 +1,6 @@
 <?php
 
-$path = $_GET['prk'];
+$path = $_GET['ptk'];
 $id = $_GET['ib'];
 ?>
 <div class="container-fluid">
@@ -278,7 +278,7 @@ if (isset($_POST['simpan_bayar'])) {
                         icon: 'success',
                         title: '<span class"text-xs"><b>DATA PERMBAYARAN</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
-                        html: '<a href="?prk=<?php echo $_GET['prk']; ?>" class="btn btn-outline-primary">OK</a>',
+                        html: '<a href="?ptk=<?php echo $_GET['ptk']; ?>" class="btn btn-outline-primary">OK</a>',
                         timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
@@ -287,7 +287,7 @@ if (isset($_POST['simpan_bayar'])) {
                         }
                     }).then(
                         function() {
-                            document.location.href = "?prk=<?php echo $_GET['prk']; ?>";
+                            document.location.href = "?ptk=<?php echo $_GET['ptk']; ?>";
                         }
                     );
                 });

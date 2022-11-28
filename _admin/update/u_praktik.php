@@ -127,7 +127,7 @@ if (isset($_POST['ubah_praktik'])) {
     $conn->query($sql_update);
 ?>
     <script type="text/javascript">
-        document.location.href = "?prk";
+        document.location.href = "?ptk";
     </script>
 <?php
 } else {

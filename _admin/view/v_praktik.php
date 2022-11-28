@@ -1,4 +1,4 @@
-<?php if (isset($_GET['prk']) && $d_prvl['r_praktik'] == "Y") { ?>
+<?php if (isset($_GET['ptk']) && $d_prvl['r_praktik'] == "Y") { ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
@@ -6,7 +6,7 @@
             </div>
             <?php if ($d_prvl['c_praktik'] == "Y") { ?>
                 <div class="col-lg-2 text-right">
-                    <a href="?prk&i" class="btn btn-outline-success btn-sm">
+                    <a href="?ptk&i" class="btn btn-outline-success btn-sm">
                         <i class="fas fa-plus"></i> Tambah
                     </a>
                 </div>
@@ -126,7 +126,7 @@
                                                 ?>
                                                     <span class="badge badge-secondary">Belum Dipilih</span>
                                                     <br>
-                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
                                                         Pilih
                                                     </a>
                                                 <?php
@@ -138,7 +138,7 @@
                                                         <br>
                                                         <?= $d_mess_pilih['telp_pemilik_mess']; ?>
                                                     </fieldset>
-                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
                                                         Ubah
                                                     </a>
                                                 <?php
@@ -195,7 +195,7 @@
                                                 ?>
                                                     <span class="badge badge-secondary">Belum Dipilih</span>
                                                     <hr class="p-0 m-1 bg-gray-500">
-                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
                                                         Pilih
                                                     </a>
                                                 <?php
@@ -203,7 +203,7 @@
                                                 ?>
                                                     <span class="badge badge-success">Sudah Dipilih</span>
                                                     <hr class="p-0 m-1 bg-gray-500">
-                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?prk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
+                                                    <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
                                                         Ubah
                                                     </a>
                                                 <?php
@@ -220,7 +220,7 @@
                                             <?php if ($d_praktik['status_tarif_praktik'] != 'Y') { ?>
                                                 <span class="badge badge-secondary">Belum Dipilih</span>
                                             <?php } else { ?>
-                                                <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
+                                                <a title="Ubah" class='btn btn-primary btn-xs' href='?ptk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                             <?php } ?>
@@ -229,7 +229,7 @@
                                             <?php if ($d_praktik['status_bayar_praktik'] != 'Y') { ?>
                                                 <span class="badge badge-secondary">Belum Dipilih</span>
                                             <?php } else { ?>
-                                                <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
+                                                <a title="Ubah" class='btn btn-primary btn-xs' href='?ptk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                             <?php } ?>
@@ -238,7 +238,7 @@
                                             <?php if ($d_praktik['status_nilai_praktik'] != 'Y') { ?>
                                                 <span class="badge badge-secondary">Belum Dipilih</span>
                                             <?php } else { ?>
-                                                <a title="Ubah" class='btn btn-primary btn-xs' href='?prk=<?= $d_praktik['id_praktik'] ?>&m'>
+                                                <a title="Ubah" class='btn btn-primary btn-xs' href='?ptk=<?= $d_praktik['id_praktik'] ?>&m'>
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                             <?php } ?>

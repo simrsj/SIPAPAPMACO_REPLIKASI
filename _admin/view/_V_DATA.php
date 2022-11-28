@@ -9,7 +9,7 @@
                 <div class="col-lg-11">
                     <h4 class="font-weight-bold">
                         DATA MESS
-                        <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?prk&um=<?php echo $d_praktik['id_praktik']; ?>'>
+                        <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?ptk&um=<?php echo $d_praktik['id_praktik']; ?>'>
                             <i class="fas fa-edit"></i>
                         </a>
                         <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?php echo $d_praktik['id_praktik']; ?>">
@@ -24,7 +24,7 @@
                                         <h4>HAPUS DATA MESS ?</h4>
                                     </div>
                                     <div class="modal-footer">
-                                        <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?prk&hm=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                        <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?ptk&hm=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
                                         <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                     </div>
                                 </div>

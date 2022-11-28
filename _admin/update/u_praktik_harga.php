@@ -84,7 +84,7 @@ if (isset($_POST['ubah_harga'])) {
     }
 ?>
     <script type="text/javascript">
-        document.location.href = "?prk";
+        document.location.href = "?ptk";
     </script>
 <?php
 }

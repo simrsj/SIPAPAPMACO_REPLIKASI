@@ -27,7 +27,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         <div class='card shadow mb-4' id="tarif_praktik">
             <div class='card-body'>
                 <div class="text-lg font-weight-bold text-center">DATA TARIF</div>
-                <input type="hidden" name="path" id="path" value="<?php echo $_GET['prk']; ?>">
+                <input type="hidden" name="path" id="path" value="<?php echo $_GET['ptk']; ?>">
                 <input type="hidden" name="id" id="id" value="<?php echo $_GET['it_ked']; ?>">
                 <!-- Menu Tarif wajib disesuaikan dengan jenis jurusan -->
                 <div class="text-gray-700">
@@ -345,7 +345,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                     icon: 'success',
                     title: '<span class"text-xs"><b>DATA TARIF</b><br>Berhasil Tersimpan',
                     showConfirmButton: false,
-                    html: '<a href="?prk=' + document.getElementById("path").value + '" class="btn btn-outline-primary">OK</a>',
+                    html: '<a href="?ptk=' + document.getElementById("path").value + '" class="btn btn-outline-primary">OK</a>',
                 });
             },
             error: function(response) {

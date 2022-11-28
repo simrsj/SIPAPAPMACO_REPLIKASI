@@ -190,7 +190,7 @@
         <span class="badge badge-primary text-md">Proses Validasi Praktik</span>
         <?php
     } elseif ($d_praktik['status_cek_praktik'] == "VPT_Y") {
-        if ($_GET['prk'] == 'nnk' || $_GET['prk'] == 'nkl') {
+        if ($_GET['ptk'] == 'nnk' || $_GET['ptk'] == 'nkl') {
         ?>
             <span class="badge badge-primary text-md">Proses Pemilihan Mess</span>
         <?php
@@ -235,7 +235,7 @@
     } elseif ($d_praktik['status_cek_praktik'] == "INV") {
     ?>
         <b>PLIH : </b><br>
-        <a class="btn btn-outline-danger btn-sm" href="?prk=<?php echo $_GET['prk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>
+        <a class="btn btn-outline-danger btn-sm" href="?ptk=<?php echo $_GET['ptk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
     ?>

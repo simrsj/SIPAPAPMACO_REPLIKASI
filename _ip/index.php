@@ -46,19 +46,19 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				</a>
 				<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="?prk=ked">
+						<a class="collapse-item" href="?ptk=ked">
 							<i class="far fa-circle"></i>
 							<span>Kedokteran</span>
 						</a>
-						<a class="collapse-item" href="?prk=kep">
+						<a class="collapse-item" href="?ptk=kep">
 							<i class="far fa-circle"></i>
 							<span>Keperawatan</span>
 						</a>
-						<a class="collapse-item" href="?prk=nkl">
+						<a class="collapse-item" href="?ptk=nkl">
 							<i class="far fa-circle"></i>
 							<span>Nakes Lainnya</span>
 						</a>
-						<a class="collapse-item" href="?prk=nnk">
+						<a class="collapse-item" href="?ptk=nnk">
 							<i class="far fa-circle"></i>
 							<span>Non Nakes</span>
 						</a>
@@ -244,7 +244,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					include "_ip/view/v_praktikan.php";
 				} elseif (isset($_GET['pmbb'])) {
 					include "_ip/view/v_pembimbing.php";
-				} elseif (isset($_GET['prk'])) {
+				} elseif (isset($_GET['ptk'])) {
 					if (isset($_GET['a'])) {
 						include "_ip/view/v_praktik_arsip.php";
 					} elseif (isset($_GET['ib'])) {
@@ -252,13 +252,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					} elseif (isset($_GET['dh'])) {
 						include "_ip/hide/dh_praktik.php";
 					} elseif (isset($_GET['i'])) {
-						if ($_GET['prk'] == 'ked') {
+						if ($_GET['ptk'] == 'ked') {
 							include "_admin/insert/i_praktikKed.php";
-						} elseif ($_GET['prk'] == 'kep') {
+						} elseif ($_GET['ptk'] == 'kep') {
 							include "_admin/insert/i_praktikKep.php";
-						} elseif ($_GET['prk'] == 'nkl') {
+						} elseif ($_GET['ptk'] == 'nkl') {
 							include "_admin/insert/i_praktikNkl.php";
-						} elseif ($_GET['prk'] == 'nnk') {
+						} elseif ($_GET['ptk'] == 'nnk') {
 							include "_admin/insert/i_praktikNnk.php";
 						} else {
 							include "_error/index.php";
@@ -282,7 +282,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					} else {
 						include "_ip/view/v_praktik.php";
 					}
-				} elseif (isset($_GET['ptk'])) {
+				} elseif (isset($_GET['ptkn'])) {
 					include "_ip/view/v_praktikan.php";
 				} elseif (isset($_GET['pfs'])) {
 					include "_ip/view/v_profesi.php";

@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktikan'] == "Y") {
+if (isset($_GET['ptkn']) && isset($_GET['i']) && $d_prvl['c_praktikan'] == "Y") {
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -313,7 +313,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktikan'] == "Y") {
                                 }
                             }).then(
                                 function() {
-                                    // document.location.href = "?prk";
+                                    // document.location.href = "?ptk";
                                 }
                             );
                         }
@@ -377,7 +377,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktikan'] == "Y") {
                                             }
                                         }).then(
                                             function() {
-                                                document.location.href = "?prk";
+                                                document.location.href = "?ptk";
                                             }
                                         );
                                     },

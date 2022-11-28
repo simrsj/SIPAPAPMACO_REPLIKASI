@@ -1,5 +1,5 @@
 <?php
-$id_praktik = base64_decode(urldecode($_GET['prk']));
+$id_praktik = base64_decode(urldecode($_GET['ptk']));
 
 //query data praktik
 $sql_praktik = "SELECT * FROM tb_praktik ";
@@ -342,7 +342,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() > 0) {
                                 }
                             }).then(
                                 function() {
-                                    document.location.href = "?prk";
+                                    document.location.href = "?ptk";
                                 }
                             );
                         },

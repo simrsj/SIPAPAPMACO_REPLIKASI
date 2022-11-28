@@ -108,7 +108,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 }
                 ?>
 
-                <input type="hidden" name="path" id="path" value="<?php echo $_GET['prk'] ?>">
+                <input type="hidden" name="path" id="path" value="<?php echo $_GET['ptk'] ?>">
                 <input type="hidden" name="id" id="id" value="<?php echo $_GET['t'] ?>">
                 <nav id="navbar-tarif" class="navbar justify-content-center">
                     <button type="button" id="simpan_tempat" class="nav-link btn btn-outline-success">
@@ -165,7 +165,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             icon: 'success',
                             title: '<span class"text-xs"><b>DATA TEMPAT</b><br>Berhasil Tersimpan',
                             showConfirmButton: false,
-                            html: '<a href="?prk=' + path + '" class="btn btn-outline-primary">OK</a>',
+                            html: '<a href="?ptk=' + path + '" class="btn btn-outline-primary">OK</a>',
                             timer: 5000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
@@ -174,7 +174,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             }
                         }).then(
                             function() {
-                                document.location.href = "?prk=" + path;
+                                document.location.href = "?ptk=" + path;
                             }
                         );
                     },

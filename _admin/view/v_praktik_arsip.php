@@ -4,7 +4,7 @@
             <h1 class="h3 mb-2 text-gray-800">Daftar Arsip Praktikan</h1>
         </div>
         <!-- <div class="col-lg-2">
-            <a href="?prk" class="btn btn-outline-dark btn-sm">
+            <a href="?ptk" class="btn btn-outline-dark btn-sm">
                 <i class="fas fa-arrow-circle-left"></i> Kembali
             </a>
         </div> -->

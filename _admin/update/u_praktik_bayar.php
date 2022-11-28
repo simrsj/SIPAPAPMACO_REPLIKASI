@@ -4,7 +4,7 @@ if ($r_bayar == 0) {
 ?>
     <script type="text/javascript">
         alert('Data Tidak Ada');
-        document.location.href = "?prk";
+        document.location.href = "?ptk";
     </script>
 <?php
 }
@@ -41,7 +41,7 @@ if ($r_bayar == 0) {
                             <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
                             <input name="id_bayar" value="<?php echo $d_bayar['id_bayar'] ?>" hidden>
                             <input type="submit" name="ubah_bayar" value="Ubah" class="btn btn-primary btn-sm">
-                            <a href="?prk" class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</a>
+                            <a href="?ptk" class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</a>
                         </div>
                     </form>
                 </div>
@@ -134,7 +134,7 @@ if (isset($_POST['ubah_bayar'])) {
     $conn->query($sql_ubah_status_praktik);
 ?>
     <script type="text/javascript">
-        document.location.href = "?prk";
+        document.location.href = "?ptk";
     </script>
 <?php
 }
