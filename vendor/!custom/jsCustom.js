@@ -17,7 +17,7 @@ $(document).ready(function () {
     column.visible(!column.visible());
   });
 
-  $("#table-search-each tfoot th").each(function () {
+  $("#table-search-each tfoot tr th").each(function () {
     var title = $(this).text();
     $(this).html(
       '<input class="form-control" type="text" placeholder="Cari ' +
@@ -43,7 +43,7 @@ $(document).ready(function () {
         });
     },
   });
-
+  $("#table-search-each tfoot tr").appendTo("#table-search-each thead");
   $("#myTable_2").dataTable();
   /* -------------------------------------------------------------- select2 */
   $(".select2").select2({
