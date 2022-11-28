@@ -46,9 +46,7 @@
                     $sql_data_praktikan .= " JOIN tb_praktik ON tb_pembimbing_pilih.id_praktik = tb_praktik.id_praktik ";
                     $sql_data_praktikan .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
                     $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
-
                     // echo "$sql_data_praktikan<br>";
-
                     try {
                         $q_data_praktikan = $conn->query($sql_data_praktikan);
                     } catch (Exception $ex) {
@@ -62,7 +60,7 @@
                             <div class="card-header align-items-center bg-gray-200">
                                 <div class="row" style="font-size: small;" class="justify-content-center">
                                     <br><br>
-                                    <div class="col-sm-3 text-center">
+                                    <div class="col-sm-4 text-center">
                                         <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?><br>
                                         <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
                                     </div>
@@ -80,7 +78,7 @@
                                         <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?php echo $d_praktik['jumlah_praktik']; ?>
                                     </div>
                                     <!-- tombol aksi/info proses  -->
-                                    <div class="col-sm-3 my-auto text-center">
+                                    <div class="col-sm-2 my-auto text-center">
                                         <!-- tombol rincian -->
                                         <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data</button>

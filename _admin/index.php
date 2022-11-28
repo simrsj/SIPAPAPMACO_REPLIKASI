@@ -104,7 +104,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 				</li>
 			<?php } ?>
-			<?php if ($d_prvl['r_pembimbing'] == "Y") { ?>
+			<?php if ($d_prvl['r_praktik_pembimbing'] == "Y") { ?>
 				<li class="nav-item ">
 					<a class="nav-link" href="?pmbb">
 						<i class="fas fa-fw fa-users"></i>
@@ -431,7 +431,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					}
 				}
 				//pemibimbing
-				else if (isset($_GET['ppmbb']) && $d_prvl['r_praktik_pembimbing'] == 'Y') {
+				else if (isset($_GET['pmbb']) && $d_prvl['r_praktik_pembimbing'] == 'Y') {
 					if (isset($_GET['i'])) {
 						include "_admin/insert/i_pembimbing.php";
 					} else {
