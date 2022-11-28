@@ -143,7 +143,9 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                 </div>
 
                                 <script>
-                                    $('#myTable<?= $_GET['tb'] ?>').DataTable();
+                                    $(document).ready(function() {
+                                        $('#myTable<?= $_GET['tb'] ?>').DataTable();
+                                    });
                                     <?php if ($d_prvl['u_praktikan'] == 'Y') { ?>
                                         $(".ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>").click(function() {
                                             // console.log("ubah_init");
@@ -276,11 +278,10 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                                 });
                                             }
                                         });
-
                                     <?php } ?>
 
                                     <?php if ($d_prvl['d_praktikan'] == 'Y') { ?>
-                                        $(document).on('click', '.hapus<?= md5($d_data_praktikan['id_praktikan']) ?>', function() {
+                                        $(document).on('click', '.hapus<?= md5($d_data_praktikan['id_praktikan']); ?>', function() {
                                             console.log("hapus data praktikan");
                                             $.ajax({
                                                 type: 'POST',
@@ -290,8 +291,9 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
                                                 },
                                                 success: function() {
 
-                                                    $('#md<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
-                                                        $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>");
+                                                    $('#md<?= md5($d_data_praktikan['id_praktikan']); ?>').on('hidden.bs.modal', function(e) {
+                                                        $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>')
+                                                            .load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
                                                     })
                                                     const Toast = Swal.mixin({
                                                         toast: true,

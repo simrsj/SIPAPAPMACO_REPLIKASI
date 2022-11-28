@@ -215,7 +215,8 @@
                                                         url: "_admin/exc/x_v_praktikan_s.php",
                                                         data: data_t,
                                                         success: function() {
-                                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>').load("_admin/view/v_praktikanData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>");
+                                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                                .load("_admin/view/v_praktikanData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&tb=<?= md5($d_praktik['id_praktik']); ?>");
 
                                                             $('#err_t_no_id').empty();
                                                             $('#err_t_nama').empty();
