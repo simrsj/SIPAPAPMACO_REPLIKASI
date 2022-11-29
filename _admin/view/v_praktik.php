@@ -281,6 +281,13 @@
                                                             <hr class="p-0 m-0 bg-gray-500">
                                                             E-Mail Koordinator : <br>
                                                             <b><?= $d_praktik['email_koordinator_praktik'] ?></b>
+                                                            <hr class="p-0 m-0 bg-gray-500">
+                                                            Surat Pengajuan: <br>
+                                                            <b>
+                                                                <a href="<?= $d_praktik['surat_praktik'] ?>" download="Surat Pengajuan" class="btn btn-outline-success btn-sm">
+                                                                    <i class="fas fa-file"></i> Unduh Surat
+                                                                </a>
+                                                            </b>
                                                         </div>
                                                     </div>
                                                 </div>

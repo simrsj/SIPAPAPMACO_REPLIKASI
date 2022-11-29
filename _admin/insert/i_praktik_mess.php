@@ -31,7 +31,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y' && $q_mess_pilih->rowCount() == 0) {
                 Pilih Mess/Pemondokan
             </div>
         </div>
-        <!-- Data Praktik -->
+        <!-- Data Mess -->
         <div class="card shadow mb-4 mt-3">
             <div class="card-body">
                 <div class="row text-center h6 text-gray-900 ">
