@@ -105,6 +105,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</li>
 			<?php } ?>
 			<?php if ($d_prvl['r_praktik_pembimbing'] == "Y") { ?>
+				<!-- Praktik Pembimbing -->
 				<li class="nav-item ">
 					<a class="nav-link" href="?pmbb">
 						<i class="fas fa-fw fa-users"></i>
@@ -253,10 +254,10 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<button class="rounded-circle border-0" id="sidebarToggle"></button>
 			</div>
 			<!-- <div class="sidebar-card">
-					<i class="fas fa-3x fa-exclamation-circle"></i>
-					<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
-					<a class="btn btn-success btn-sm" href="?lapor">Lapor !</a>
-				</div> -->
+				<i class="fas fa-3x fa-exclamation-circle"></i>
+				<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
+				<a class="btn btn-success btn-sm" href="?lapor">Lapor !</a>
+			</div> -->
 		</ul>
 		<!-- End of Sidebar -->
 
