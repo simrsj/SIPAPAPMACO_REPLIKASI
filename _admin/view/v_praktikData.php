@@ -134,7 +134,6 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <?php
                                     } else if ($d_prvl['u_praktik_mess'] == 'Y' && $r_mess_pilih > 0) {
                                     ?>
-                                        <span class="badge badge-success">Sudah Dipilih</span>
                                         <fieldset class="border-1 m-1 p-1">
                                             <?= $d_mess_pilih['nama_mess']; ?>
                                             <br>
