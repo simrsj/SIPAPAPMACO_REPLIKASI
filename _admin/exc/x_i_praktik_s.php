@@ -1,85 +1,109 @@
 <?php
+
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
+//data privileges 
+$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($_POST['idu']));
+try {
+    $q_prvl = $conn->query($sql_prvl);
+} catch (Exception $ex) {
+    echo "<script>alert('$ex -DATA PRIVILEGES-');";
+    echo "document.location.href='?error404';</script>";
+}
+$d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
-// --------------------------------------SIMPAN DATA PRAKTIK--------------------------------------------
+if ($d_prvl['c_praktik'] == "Y") {
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
 
-//mencari jenis jurusan
-$sql_jenis_jurusan = "SELECT * FROM tb_jurusan_pdd 
-WHERE id_jurusan_pdd = " . $_POST['jurusan'];
+    // --------------------------------------SIMPAN DATA PRAKTIK--------------------------------------------
 
-$q_jenis_jurusan = $conn->query($sql_jenis_jurusan);
-$d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
+    //mencari jenis jurusan
+    $sql_jenis_jurusan = "SELECT * FROM tb_jurusan_pdd ";
+    $sql_jenis_jurusan .= "WHERE id_jurusan_pdd = " . $_POST['jurusan'];
 
-$sql_insert = "INSERT INTO tb_praktik (
-    id_user,
-    id_praktik, 
-    id_institusi, 
-    nama_praktik,
-    tgl_input_praktik,
-    tgl_mulai_praktik,
-    tgl_selesai_praktik,
-    no_surat_praktik,
-    jumlah_praktik,
-    id_jurusan_pdd_jenis,
-    id_jurusan_pdd,
-    id_jenjang_pdd,
-    id_profesi_pdd,
-    nama_koordinator_praktik,
-    email_koordinator_praktik,
-    telp_koordinator_praktik,
-    status_mess_praktik,
-    status_praktik
-    ) VALUES (
-        '" . $_POST['user'] . "',
-        '" . $_POST['id'] . "', 
-        '" . $_POST['institusi'] . "', 
-        '" . $_POST['kelompok'] . "',
-        '" . date('Y-m-d') . "', 
-        '" . $_POST['tgl_mulai_praktik'] . "', 
-        '" . $_POST['tgl_selesai_praktik'] . "',
-        '" . $_POST['no_surat'] . "',
-        '" . $_POST['jumlah'] . "', 
-        '" . $d_jenis_jurusan['id_jurusan_pdd_jenis'] . "', 
-        '" . $_POST['jurusan'] . "',
-        '" . $_POST['jenjang'] . "',
-        '" . $_POST['profesi'] . "', 
-        '" . $_POST['nama_koordinator'] . "', 
-        '" . $_POST['email_koordinator'] . "',
-        '" . $_POST['telp_koordinator'] . "', 
-        '" . $_POST['pilih_mess'] . "', 
-        'Y'
-        )";
+    try {
+        $q_jenis_jurusan = $conn->query($sql_jenis_jurusan);
+    } catch (Exception $ex) {
+        echo "<script>alert('$ex -DATA JENIS JURUSAN-');";
+        echo "document.location.href='?error404';</script>";
+    }
+    $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
 
-// echo $sql_insert . "<br>";
-$conn->query($sql_insert);
-// --------------------------------------SIMPAN GENERATE TANGGAL--------------------------------------------
+    //bila profesi tidak dipilih
+    if ($_POST['profesi'] != "") $profesi = $_POST['profesi'];
+    else $profesi = "";
 
-$d1 = $_POST['tgl_mulai_praktik'];
-$d2 = $_POST['tgl_selesai_praktik'];
-$d2 = date('Y-m-d', strtotime($d2 . "+1 days"));
+    $sql_insert = "INSERT INTO tb_praktik ( ";
+    $sql_insert .= " id_user,";
+    $sql_insert .= " id_praktik, ";
+    $sql_insert .= " id_institusi, ";
+    $sql_insert .= " nama_praktik,";
+    $sql_insert .= " tgl_input_praktik,";
+    $sql_insert .= " tgl_mulai_praktik,";
+    $sql_insert .= " tgl_selesai_praktik,";
+    $sql_insert .= " no_surat_praktik,";
+    $sql_insert .= " jumlah_praktik,";
+    $sql_insert .= " id_jurusan_pdd_jenis,";
+    $sql_insert .= " id_jurusan_pdd,";
+    $sql_insert .= " id_jenjang_pdd,";
+    $sql_insert .= " id_profesi_pdd,";
+    $sql_insert .= " nama_koordinator_praktik,";
+    $sql_insert .= " email_koordinator_praktik,";
+    $sql_insert .= " telp_koordinator_praktik,";
+    $sql_insert .= " status_mess_praktik,";
+    $sql_insert .= " status_praktik";
+    $sql_insert .= " ) VALUES (";
+    $sql_insert .= " '" . $_POST['user'] . "',";
+    $sql_insert .= " '" . $_POST['id'] . "', ";
+    $sql_insert .= " '" . $_POST['institusi'] . "', ";
+    $sql_insert .= " '" . $_POST['kelompok'] . "',";
+    $sql_insert .= " '" . date('Y-m-d') . "', ";
+    $sql_insert .= " '" . $_POST['tgl_mulai_praktik'] . "', ";
+    $sql_insert .= " '" . $_POST['tgl_selesai_praktik'] . "',";
+    $sql_insert .= " '" . $_POST['no_surat'] . "',";
+    $sql_insert .= " '" . $_POST['jumlah'] . "', ";
+    $sql_insert .= " '" . $d_jenis_jurusan['id_jurusan_pdd_jenis'] . "', ";
+    $sql_insert .= " '" . $_POST['jurusan'] . "',";
+    $sql_insert .= " '" . $_POST['jenjang'] . "',";
+    $sql_insert .= " '" . $profesi . "', ";
+    $sql_insert .= " '" . $_POST['nama_koordinator'] . "', ";
+    $sql_insert .= " '" . $_POST['email_koordinator'] . "',";
+    $sql_insert .= " '" . $_POST['telp_koordinator'] . "', ";
+    $sql_insert .= " '" . $_POST['pilih_mess'] . "', ";
+    $sql_insert .= " 'Y'";
+    $sql_insert .= " )";
 
-$period = new DatePeriod(
-    new DateTime($d1),
-    new DateInterval('P1D'),
-    new DateTime($d2)
-);
+    // echo $sql_insert . "<br>";
+    $conn->query($sql_insert);
+    // --------------------------------------SIMPAN GENERATE TANGGAL--------------------------------------------
 
-$no = 1;
-foreach ($period as $key => $value) {
-    $sql = "INSERT INTO tb_praktik_tgl (
-        id_praktik, 
-        praktik_tgl
-    ) VALUES (
-        '" . $_POST['id'] . "', 
-        '" . $value->format('Y-m-d') . "'
-    )";
-    // echo " $sql<br>";
-    $conn->query($sql);
-    $no++;
+    $d1 = $_POST['tgl_mulai_praktik'];
+    $d2 = $_POST['tgl_selesai_praktik'];
+    $d2 = date('Y-m-d', strtotime($d2 . "+1 days"));
+
+    $period = new DatePeriod(
+        new DateTime($d1),
+        new DateInterval('P1D'),
+        new DateTime($d2)
+    );
+
+    $no = 1;
+    foreach ($period as $key => $value) {
+        $sql = "INSERT INTO tb_praktik_tgl ( ";
+        $sql .= " id_praktik, ";
+        $sql .= " praktik_tgl";
+        $sql .= " ) VALUES (";
+        $sql .= " '" . $_POST['id'] . "', ";
+        $sql .= " '" . $value->format('Y-m-d') . "'";
+        $sql .= " )";
+        // echo " $sql<br>";
+        $conn->query($sql);
+        $no++;
+    }
+} else {
+    echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
 }

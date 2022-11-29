@@ -257,6 +257,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
     <script type="text/javascript">
         $('#jurusan').on('select2:select', function() {
+            console.log("pilih jurusan");
             $('#jenjangData').load('_admin/insert/i_praktikDataJenjang.php?jur=' + $("#jurusan").val());
             $('#jenjangKet').fadeOut(0);
             $('#jenjangData').fadeIn(0);
@@ -545,6 +546,9 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 data_praktik.push({
                                     name: 'pilih_mess',
                                     value: pilih_mess
+                                }, {
+                                    name: 'idu',
+                                    value: '<?= urlencode(base64_encode($_SESSION['id_user'])); ?>'
                                 });
 
                                 //Simpan Data Praktik dan Tarif
@@ -572,7 +576,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                             icon: 'success',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                             showConfirmButton: false,
-                                            timer: 5000,
+                                            timer: 11115000,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)
