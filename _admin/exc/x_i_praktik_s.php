@@ -5,7 +5,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
 //data privileges 
-$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($_POST['idu']));
+$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($_POST['user']));
 try {
     $q_prvl = $conn->query($sql_prvl);
 } catch (Exception $ex) {
@@ -18,6 +18,10 @@ if ($d_prvl['c_praktik'] == "Y") {
     echo "<pre>";
     print_r($_POST);
     echo "</pre>";
+
+    //bila profesi tidak dipilih
+    if ($_POST['profesi'] != "") $profesi = $_POST['profesi'];
+    else $profesi = "";
 
     // --------------------------------------SIMPAN DATA PRAKTIK--------------------------------------------
 
@@ -32,10 +36,6 @@ if ($d_prvl['c_praktik'] == "Y") {
         echo "document.location.href='?error404';</script>";
     }
     $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
-
-    //bila profesi tidak dipilih
-    if ($_POST['profesi'] != "") $profesi = $_POST['profesi'];
-    else $profesi = "";
 
     $sql_insert = "INSERT INTO tb_praktik ( ";
     $sql_insert .= " id_user,";
@@ -57,8 +57,8 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " status_mess_praktik,";
     $sql_insert .= " status_praktik";
     $sql_insert .= " ) VALUES (";
-    $sql_insert .= " '" . $_POST['user'] . "',";
-    $sql_insert .= " '" . $_POST['id'] . "', ";
+    $sql_insert .= " '" . base64_decode(urldecode($_POST['user'])) . "',";
+    $sql_insert .= " '" . base64_decode(urldecode($_POST['id'])) . "', ";
     $sql_insert .= " '" . $_POST['institusi'] . "', ";
     $sql_insert .= " '" . $_POST['kelompok'] . "',";
     $sql_insert .= " '" . date('Y-m-d') . "', ";
@@ -77,7 +77,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " 'Y'";
     $sql_insert .= " )";
 
-    // echo $sql_insert . "<br>";
+    echo $sql_insert . "<br>";
     $conn->query($sql_insert);
     // --------------------------------------SIMPAN GENERATE TANGGAL--------------------------------------------
 

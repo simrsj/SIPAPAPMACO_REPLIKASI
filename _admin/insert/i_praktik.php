@@ -58,17 +58,18 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                             $q = $conn->query($sql);
                             if ($q->rowCount() > 0) {
                                 while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
+                                    echo $no . "-" . $d['id_praktik'] . "<br>";
                                     if ($no != $d['id_praktik']) {
-                                        $no = $d['id_praktik'] + 1;
                                         break;
                                     }
                                     $no++;
                                 }
                             }
+                            echo $no . "<br>";
                             $id_praktik = $no;
                             ?>
-                            <input name="id" id="id" value="<?= $id_praktik; ?>" hidden>
-                            <input name="user" id="user" value="<?= $_SESSION['id_user']; ?>" hidden>
+                            <input name="id" id="id" value="<?= urlencode(base64_encode($id_praktik)); ?>" hidden>
+                            <input name="user" id="user" value="<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" hidden>
                             <div class="col">
                                 <?php if ($d_user['level_user'] == 2) {
                                     $sql_institusi = "SELECT * FROM tb_user";
@@ -82,7 +83,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                         $d_institusi['nama_institusi'];
                                         if ($d_institusi['akronim_institusi'] != "") echo " (" . $d_institusi['akronim_institusi'] . ")";
                                         ?>
-                                        <input name="institusi" id="institusi" value="<?= $_SESSION['id_user']; ?>" hidden>
+                                        <input name="institusi" id="institusi" value="<?= $d_institusi['id_institusi']; ?>" hidden>
                                     </div>
                                 <?php
                                 } else {
@@ -159,8 +160,12 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                             </div>
                             <div class="col-lg-4">
                                 Profesi : <span style="color:red">*</span><br>
-                                <span id="profesiData" style="display: none;"></span>
-                                <span id="profesiKet" class="b i">Pilih Jenjang Terlebih Dahulu</span>
+                                <span id="profesiData" style="display: none;">
+                                    <input type="hidden" id="profesi" name="profesi" value="0">
+                                </span>
+                                <span id="profesiKet" class="b i">
+                                    Pilih Jenjang Terlebih Dahulu
+                                </span>
                                 <div class="text-danger b  i text-xs blink" id="err_profesi"></div>
                             </div>
                         </div>
@@ -406,7 +411,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
                 //notif telp_koordinator
                 if (pilih_mess == undefined) {
-                    $("#err_pilih_mess").html("Pemakai Harus Dipilih");
+                    $("#err_pilih_mess").html("Pemakaian Mess Harus Dipilih");
                 } else {
                     $("#err_pilih_mess").html("");
                 }
@@ -546,9 +551,6 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 data_praktik.push({
                                     name: 'pilih_mess',
                                     value: pilih_mess
-                                }, {
-                                    name: 'idu',
-                                    value: '<?= urlencode(base64_encode($_SESSION['id_user'])); ?>'
                                 });
 
                                 //Simpan Data Praktik dan Tarif
