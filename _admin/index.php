@@ -433,7 +433,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				//praktik pemibimbing
 				else if (isset($_GET['pmbb']) && $d_prvl['r_praktik_pembimbing'] == 'Y') {
 					if (isset($_GET['i'])) include "_admin/insert/i_praktik_pembimbing.php";
-					else include "_admin/view/v_pembimbing.php";
+					else include "_admin/view/v_praktik_pembimbing.php";
 				}
 				//praktik
 				else if (isset($_GET['ptk']) && $d_prvl['r_praktik'] == 'Y') {

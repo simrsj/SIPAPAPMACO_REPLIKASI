@@ -4,7 +4,7 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
     $sql_praktik = "SELECT * FROM tb_praktik";
     $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
     $sql_praktik .= " WHERE tb_praktik.id_praktik = " . base64_decode(urldecode($_GET['pmbb']));
-    // echo $sql_praktik;
+    // echo $sql_praktik."<br>";
     try {
         $q_praktik = $conn->query($sql_praktik);
     } catch (Exception $ex) {
@@ -47,7 +47,6 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
             </div>
         </div>
         <div class="card shadow mb-4">
-
             <div class="card-body">
                 <?php
                 //data praktikan
@@ -62,13 +61,11 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                     echo "<script>alert('$ex -DATA PRAKTIK');";
                     echo "document.location.href='?error404';</script>";
                 }
-                $d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC);
                 $r_data_praktikan = $q_data_praktikan->rowCount();
-
+                // echo $r_data_praktikan;
                 if ($r_data_praktikan > 0) {
                 ?>
                     <form method="POST" id="form_pembb_ruangan">
-                        <input type="hidden" name="jurusan" id="jurusan" value="<?= urlencode(base64_encode($d_data_praktikan['id_jurusan_pdd'])); ?>">
                         <!-- data praktikan  -->
                         <div class="">
                             <table class="table table-striped" style="width:100%">
@@ -78,12 +75,9 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                                         <th scope="col">No ID</th>
                                         <th scope="col">Nama</th>
                                         <th scope="col">Pilih<br>Pembimbing</th>
-                                        <?php if ($d_data_praktikan['id_jurusan_pdd'] != 1) {
-                                        ?>
+                                        <?php if ($d_praktik['id_jurusan_pdd'] != 1) { ?>
                                             <th scope="col">Pilih<br>Ruangan</th>
-                                        <?php
-                                        }
-                                        ?>
+                                        <?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -91,7 +85,8 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                                     $no = 1;
                                     while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <input type="hidden" name="jp" id="jp" value="<?= $d_data_praktikan['jumlah_praktik']; ?>">
+                                        <input type="hidden" name="jurusan" id="jurusan" value="<?= $d_data_praktikan['id_jurusan_pdd']; ?>">
+                                        <input type="hidden" name="jumlah_praktik" id="jumlah_praktik" value="<?= $d_data_praktikan['jumlah_praktik']; ?>">
                                         <input type="hidden" name="id_praktik" id="id_praktik" value="<?= $_GET['pmbb']; ?>">
                                         <input type="hidden" name="id_praktikan<?= $no; ?>" id="id_praktikan<?= $no; ?>" value="<?= $d_data_praktikan['id_praktikan']; ?>">
                                         <tr>
@@ -100,43 +95,45 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                                             <td class="text-center"><?= $d_data_praktikan['no_id_praktikan']; ?></td>
                                             <td class="text-center">
                                                 <?php
+
                                                 $id_jurusan_pdd = $d_data_praktikan['id_jurusan_pdd'];
+                                                $id_jenjang_pdd = $d_data_praktikan['id_jenjang_pdd'];
                                                 $id_profesi_pdd = $d_data_praktikan['id_profesi_pdd'];
-                                                if ($id_jurusan_pdd == 1) {
-                                                    if ($id_profesi_pdd == 1) {
-                                                        $jenis_pmbb = 8;
-                                                    } elseif ($id_profesi_pdd == 2) {
-                                                        $jenis_pmbb = 9;
-                                                    }
-                                                } elseif ($id_jurusan_pdd == 2) {
-                                                    $jenis_pmbb = 4;
-                                                } elseif ($id_jurusan_pdd == 3) {
-                                                    $jenis_pmbb = 6;
-                                                } elseif ($id_jurusan_pdd == 4) {
-                                                    $jenis_pmbb = 2;
-                                                } elseif ($id_jurusan_pdd == 5) {
-                                                    $jenis_pmbb = 1;
-                                                } elseif ($id_jurusan_pdd == 6) {
-                                                    $jenis_pmbb = 5;
-                                                } elseif ($id_jurusan_pdd == 7) {
-                                                    $jenis_pmbb = 3;
-                                                } elseif ($id_jurusan_pdd == 8) {
-                                                    $jenis_pmbb = 7;
-                                                }
-                                                $sql_pmbb = "SELECT * FROM tb_pembimbing";
-                                                $sql_pmbb .= " WHERE id_pembimbing_jenis = '" . $jenis_pmbb . "' AND status_pembimbing = 'Y'";
+
+                                                //jika profesi kosong
+                                                if ($id_profesi_pdd == "") $id_profesi_pdd = 0;
+
+                                                $sql_pmbb = "SELECT * FROM tb_pembimbing ";
+                                                $sql_pmbb .= " WHERE id_jurusan_pdd = " . $id_jurusan_pdd;
+                                                $sql_pmbb .= " AND id_jenjang_pdd >= " . $id_jenjang_pdd;
+                                                $sql_pmbb .= " AND id_profesi_pdd >= " . $id_profesi_pdd;
+                                                $sql_pmbb .= " AND status_pembimbing = 'Y'";
                                                 $sql_pmbb .= " ORDER BY kali_pembimbing ASC, nama_pembimbing ASC";
                                                 // echo $sql_pmbb . "<br>";
-                                                $q_pmbb = $conn->query($sql_pmbb);
+                                                try {
+                                                    $q_pmbb = $conn->query($sql_pmbb);
+                                                } catch (Exception $ex) {
+                                                    echo "<script>alert('$ex -DATA PEMBIMBING');";
+                                                    echo "document.location.href='?error404';</script>";
+                                                }
                                                 ?>
-
                                                 <select class='select2' aria-label='Default select example' name="id_pembimbing<?= $no; ?>" id="id_pembimbing<?= $no; ?>" required>
                                                     <option value="">-- Pilih --</option>
                                                     <?php
                                                     while ($d_pmbb = $q_pmbb->fetch(PDO::FETCH_ASSOC)) {
+                                                        $sql_pmbb_kali = "SELECT * FROM tb_pembimbing_pilih ";
+                                                        $sql_pmbb_kali .= " WHERE id_pembimbing =" . $d_pmbb['id_pembimbing'];
+                                                        $sql_pmbb_kali .= " GROUP BY id_praktik";
+                                                        // echo $sql_pmbb . "<br>";
+                                                        try {
+                                                            $q_pmbb_kali = $conn->query($sql_pmbb_kali);
+                                                        } catch (Exception $ex) {
+                                                            echo "<script>alert('$ex -DATA PEMBIMBING KALI');";
+                                                            echo "document.location.href='?error404';</script>";
+                                                        }
                                                     ?>
                                                         <option value="<?= $d_pmbb['id_pembimbing']; ?>">
-                                                            <?= "(" . $d_pmbb['kali_pembimbing'] . ") " . $d_pmbb['nama_pembimbing']; ?>
+                                                            <?= "(" . $q_pmbb_kali->rowCount() . ") " . $d_pmbb['nama_pembimbing']; ?>
                                                         </option>
                                                     <?php
                                                     }
@@ -151,10 +148,14 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                                                     <?php
                                                     $sql_unit = "SELECT * FROM tb_unit";
                                                     $sql_unit .= " ORDER BY nama_unit ASC";
-
-                                                    $q_unit = $conn->query($sql_unit);
+                                                    try {
+                                                        $q_unit = $conn->query($sql_unit);
+                                                    } catch (Exception $ex) {
+                                                        echo "<script>alert('$ex -DATA UNIT');";
+                                                        echo "document.location.href='?error404';</script>";
+                                                    }
                                                     ?>
-                                                    <select class='form-inline js-example-placeholder-single' aria-label='Default select example' name='id_unit<?= $no; ?>' id="id_unit<?= $no; ?>" required>
+                                                    <select class='select2' aria-label='Default select example' name='id_unit<?= $no; ?>' id="id_unit<?= $no; ?>" required>
                                                         <option value="">-- Pilih --</option>
                                                         <?php
                                                         while ($d_unit = $q_unit->fetch(PDO::FETCH_ASSOC)) {
@@ -176,20 +177,17 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                                         $no++;
                                     }
                                     ?>
-                                    <input type="hidden" name="dp" id="dp" value="<?= $no - 1;  ?>">
+                                    <input type="hidden" name="jumlah_praktik_input" id="jumlah_praktik_input" value="<?= $no - 1;  ?>">
                                 </tbody>
                             </table>
                         </div>
                         <hr>
 
-                        <!-- tombol simpan pilih Pembimbing dan Ruangan  -->
-                        <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
+                        <!-- tombol simpan pilih Pembimbing dan atau Ruangan  -->
+                        <div class="nav btn justify-content-center text-md">
                             <button type="button" name="simpan_pmbb_tmp" id="simpan_pmbb_tmp" class="btn btn-outline-success">
-                                <!-- <a class=" nav-link" href="#tarif"> -->
                                 <i class="fas fa-check-circle"></i>
-                                Simpan Pembimbing dan Ruangan Praktik
-                                <i class="fas fa-check-circle"></i>
-                                <!-- </a> -->
+                                Simpan
                             </button>
                         </div>
                     </form>
@@ -212,18 +210,23 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
     <script>
         $("#simpan_pmbb_tmp").click(function() {
             var data_pembimbing = $('#form_pembb_ruangan').serializeArray();
-            var jp = document.getElementById('jp').value;
-            var dp = document.getElementById('dp').value;
-            var jurusan_ked = document.getElementById('jurusan_ked').value;
-            // console.log("jp :" + jp);
-            // console.log("dp :" + dp);
+            var jumlah_praktik = $('#jumlah_praktik').val();
+            var jumlah_praktik_input = $('#jumlah_praktik_input').val();
+            var jurusan = $('#jurusan').val();
+            console.log(jumlah_praktik);
+            console.log(jumlah_praktik_input);
             //Jika Jumlah Praktik tidak sesuai dengan data praktikan
-            if (jp != dp) {
+            if (jumlah_praktik != jumlah_praktik_input) {
                 Swal.fire({
                     allowOutsideClick: false,
                     // isDismissed: false,
                     icon: 'error',
-                    title: '<span class"text-xs"><b>DATA PRAKTIKAN</b> <br> TIDAK SESUAI DENGAN <br><b>JUMLAH PRAKTIK</b></span>',
+                    title: '<span class"text-xs">' +
+                        '<b>DATA PRAKTIKAN</b> <br> ' +
+                        'TIDAK SESUAI DENGAN<br>' +
+                        '<b>JUMLAH PRAKTIK</b><br>' +
+                        'Sesuaikan kembali di menu <b>DATA PRAKTIKAN praktikan</b><br>' +
+                        '</span>',
                     showConfirmButton: false,
                     timer: 5000,
                     timerProgressBar: true,
@@ -236,9 +239,9 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                 //Notif jika tida diisi Pembimbing 
                 var no = 1;
                 var pmbb = 0;
-                while (no <= jp) {
-                    console.log("no: " + no + "jp: " + jp);
-                    if (document.getElementById('id_pembimbing' + no).value == "") {
+                while (no <= jumlah_praktik) {
+                    console.log("no: " + no + "jumlah_praktik: " + jumlah_praktik);
+                    if ($('#id_pembimbing' + no).val() == "") {
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -255,21 +258,21 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                             icon: 'warning',
                             title: '<center>DATA ADA YANG BELUM TERISI</center>'
                         });
-                        document.getElementById("err_pmbb" + no).innerHTML = "<br>Pembimbing Harus Dipilih";
+                        $("#err_pmbb" + no).html("<br>Pembimbing Harus Dipilih");
                         pmbb++;
                     } else {
-                        document.getElementById("err_pmbb" + no).innerHTML = "";
+                        $("#err_pmbb" + no).html("");
                     }
                     no++;
 
                 }
 
-                //Notif jika tida diisi Unit
+                //Notif jika tidak diisi Unit
                 var no = 1;
                 var unit = 0;
-                if (jurusan_ked != 1) {
-                    while (no <= jp) {
-                        console.log("no: " + no + "jp: " + jp);
+                if (jurusan != 1) {
+                    while (no <= jumlah_praktik) {
+                        console.log("no: " + no + "jumlah_praktik: " + jumlah_praktik);
                         if (document.getElementById('id_unit' + no).value == "") {
                             const Toast = Swal.mixin({
                                 toast: true,
@@ -298,16 +301,16 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
             }
 
             //jika data sudah diisi semua
-            if (pmbb == 0 && unit == 0 && jp == dp) {
-                if (jurusan_ked == 1) {
+            if (pmbb == 0 && unit == 0 && jumlah_praktik == jumlah_praktik_input) {
+                if (jurusan == 1) {
                     $title = '<span class"text-xs"><b>DATA Pembimbing</b><br>Berhasil Tersimpan';
                 } else {
                     $title = '<span class"text-xs"><b>DATA Pembimbing</b> dan <b>Ruangan</b><br>Berhasil Tersimpan';
                 }
-                console.log("SIMPAN");
+                console.log("Simpan PMBB");
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_i_pembimbing_s.php?",
+                    url: "_admin/exc/x_i_praktik_pembimbing_s.php?",
                     data: data_pembimbing,
                     success: function() {
                         Swal.fire({
@@ -318,7 +321,7 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                             title: $title,
                             showConfirmButton: false,
                             html: '<a href="?pmbb" class="btn btn-outline-primary">OK</a>',
-                            timer: 5000,
+                            timer: 11115000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
