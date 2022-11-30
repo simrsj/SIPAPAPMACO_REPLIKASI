@@ -113,16 +113,25 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 				</li>
 			<?php } ?>
+			<?php if ($d_prvl['r_praktik_tarif'] == "Y") { ?>
+				<!-- Praktik tarif -->
+				<li class="nav-item ">
+					<a class="nav-link" href="?ptrf">
+						<i class="fas fa-fw fa-wallet"></i>
+						<span>Tarif Praktik</span>
+					</a>
+				</li>
+			<?php } ?>
+			<li class="nav-item ">
+				<a class="nav-link" href="?byr">
+					<i class="fas fa-fw fa-wallet"></i>
+					<span>Data Pembayaran</span>
+				</a>
+			</li>
 			<li class="nav-item ">
 				<a class="nav-link" href="?nil">
 					<i class="fas fa-fw fa-clipboard-list"></i>
 					<span>Data Nilai</span>
-				</a>
-			</li>
-			<li class="nav-item ">
-				<a class="nav-link" href="?trs">
-					<i class="fas fa-fw fa-wallet"></i>
-					<span>Data Pembayaran</span>
 				</a>
 			</li>
 			<li class="nav-item ">
