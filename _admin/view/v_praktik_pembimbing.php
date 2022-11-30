@@ -40,21 +40,21 @@
                     <?php
                     while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
 
-                        $sql_data_praktikan = "SELECT * FROM tb_pembimbing_pilih ";
-                        $sql_data_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing ";
-                        $sql_data_praktikan .= " JOIN tb_praktikan ON tb_pembimbing_pilih.id_praktikan = tb_praktikan.id_praktikan ";
-                        $sql_data_praktikan .= " JOIN tb_unit ON tb_pembimbing_pilih.id_unit = tb_unit.id_unit ";
-                        $sql_data_praktikan .= " JOIN tb_praktik ON tb_pembimbing_pilih.id_praktik = tb_praktik.id_praktik ";
-                        $sql_data_praktikan .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
-                        $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
-                        // echo "$sql_data_praktikan<br>";
+                        $sql_praktik_pembimbing = "SELECT * FROM tb_pembimbing_pilih ";
+                        $sql_praktik_pembimbing .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing ";
+                        $sql_praktik_pembimbing .= " JOIN tb_praktikan ON tb_pembimbing_pilih.id_praktikan = tb_praktikan.id_praktikan ";
+                        $sql_praktik_pembimbing .= " JOIN tb_unit ON tb_pembimbing_pilih.id_unit = tb_unit.id_unit ";
+                        $sql_praktik_pembimbing .= " JOIN tb_praktik ON tb_pembimbing_pilih.id_praktik = tb_praktik.id_praktik ";
+                        $sql_praktik_pembimbing .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+                        $sql_praktik_pembimbing .= " ORDER BY tb_praktikan.nama_praktikan ASC";
+                        // echo "$sql_praktik_pembimbing<br>";
                         try {
-                            $q_data_praktikan = $conn->query($sql_data_praktikan);
+                            $q_praktik_pembimbing = $conn->query($sql_praktik_pembimbing);
                         } catch (Exception $ex) {
                             echo "<script>alert('$ex -DATA PRAKTIK');";
                             echo "document.location.href='?error404';</script>";
                         }
-                        $r_data_praktikan = $q_data_praktikan->rowCount();
+                        $r_praktik_pembimbing = $q_praktik_pembimbing->rowCount();
                     ?>
                         <div id="accordion">
                             <div class="card">
@@ -108,7 +108,7 @@
                                             <?php } ?>
                                         </div>
                                         <?php
-                                        if ($r_data_praktikan > 0) {
+                                        if ($r_praktik_pembimbing > 0) {
                                         ?>
                                             <div class="table-responsive">
                                                 <table class="table table-striped" id="myTable">
@@ -125,14 +125,14 @@
                                                         <?php
                                                         $total_jumlah_tarif = 0;
                                                         $no = 1;
-                                                        while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
+                                                        while ($d_praktik_pembimbing = $q_praktik_pembimbing->fetch(PDO::FETCH_ASSOC)) {
                                                         ?>
                                                             <tr>
                                                                 <th scope="row"><?= $no; ?></th>
-                                                                <td><?= $d_data_praktikan['nama_pembimbing']; ?></td>
-                                                                <td><?= $d_data_praktikan['nama_unit']; ?></td>
-                                                                <td><?= $d_data_praktikan['nama_praktikan']; ?></td>
-                                                                <td><?= $d_data_praktikan['no_id_praktikan']; ?></td>
+                                                                <td><?= $d_praktik_pembimbing['nama_pembimbing']; ?></td>
+                                                                <td><?= $d_praktik_pembimbing['nama_unit']; ?></td>
+                                                                <td><?= $d_praktik_pembimbing['nama_praktikan']; ?></td>
+                                                                <td><?= $d_praktik_pembimbing['no_id_praktikan']; ?></td>
                                                             </tr>
                                                         <?php
                                                             $no++;

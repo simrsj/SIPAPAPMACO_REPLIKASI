@@ -117,7 +117,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<!-- Praktik tarif -->
 				<li class="nav-item ">
 					<a class="nav-link" href="?ptrf">
-						<i class="fas fa-fw fa-wallet"></i>
+						<i class="fas fa-fw fa-receipt"></i>
 						<span>Tarif Praktik</span>
 					</a>
 				</li>
@@ -456,6 +456,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					if (isset($_GET['i']) && $d_prvl['c_praktikan'] == 'Y') include "_admin/insert/i_praktikan.php";
 					else if (isset($_GET['u']) && $d_prvl['u_praktikan'] == 'Y') include "_admin/view/u_praktikan.php";
 					else include "_admin/view/v_praktikan.php";
+				}
+				//praktik tarif
+				elseif (isset($_GET['ptrf'])) {
+					if (isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == 'Y') include "_admin/insert/i_praktik_tarif.php";
+					else if (isset($_GET['u']) && $d_prvl['u_praktik_tarif'] == 'Y') include "_admin/view/u_praktik_tarif.php";
+					else include "_admin/view/v_praktik_tarif.php";
 				} elseif (isset($_GET['pfs'])) {
 					include "_admin/view/v_profesi.php";
 				} elseif (isset($_GET['uni'])) {
