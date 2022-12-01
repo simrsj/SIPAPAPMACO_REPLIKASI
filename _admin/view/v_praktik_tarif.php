@@ -93,13 +93,13 @@
                                         <!-- data praktikan -->
                                         <div class="row text-gray-700">
                                             <div class="col">
-                                                <h4 class="font-weight-bold">DATA Tarif</h4><br>
+                                                <h4 class="font-weight-bold">Data Tarif</h4><br>
                                             </div>
                                             <?php if ($d_prvl['c_praktik_tarif'] == 'Y') { ?>
                                                 <div class="col text-right">
                                                     <!-- tombol modal tambah permbimbing  -->
-                                                    <a title="tambah/ubah permbimbing" class='btn btn-outline-info btn-sm' href='?pmbb=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&i'>
-                                                        Tambah/Ubah Pembimbing
+                                                    <a title="tambah praktikan" class="btn btn-success btn-sm " href="?ptrf=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&i">
+                                                        <i class="fas fa-plus"></i> Tambah Tarif
                                                     </a>
                                                 </div>
                                             <?php } ?>
@@ -108,14 +108,19 @@
                                         if ($r_praktik_tarif > 0) {
                                         ?>
                                             <div class="table-responsive">
-                                                <table class="table table-striped" id="myTable">
+                                                <table class="table table-striped table-bordered" id="<?= md5('table' . $d_praktik['id_praktik']) ?>">
                                                     <thead class="thead-dark">
                                                         <tr>
                                                             <th scope="col">No</th>
-                                                            <th scope="col">Nama Pembimbing</th>
-                                                            <th scope="col">Ruangan </th>
-                                                            <th scope="col">Nama Praktikan </th>
-                                                            <th scope="col">NIM / NPM / NIS</th>
+                                                            <th scope="col">Nama Jenis tarif</th>
+                                                            <th scope="col">Nama Tarif </th>
+                                                            <th scope="col">Tarif </th>
+                                                            <th scope="col">Satuan </th>
+                                                            <th scope="col">Frekuensi </th>
+                                                            <th scope="col">Kuantitas </th>
+                                                            <th scope="col">Total Tarif </th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -124,12 +129,27 @@
                                                         $no = 1;
                                                         while ($d_praktik_tarif = $q_praktik_tarif->fetch(PDO::FETCH_ASSOC)) {
                                                         ?>
-                                                            <tr>
-                                                                <th scope="row"><?= $no; ?></th>
-                                                                <td><?= $d_praktik_tarif['nama_tarif']; ?></td>
-                                                                <td><?= $d_praktik_tarif['nama_unit']; ?></td>
-                                                                <td><?= $d_praktik_tarif['nama_praktikan']; ?></td>
-                                                                <td><?= $d_praktik_tarif['no_id_praktikan']; ?></td>
+                                                            <tr class="text-center align-middle my-auto">
+                                                                <td class="align-middle "><?= $no; ?></td>
+                                                                <td class="align-middle "><?= $d_praktik_tarif['nama_jenis_tarif_pilih']; ?></td>
+                                                                <td class="align-middle "><?= $d_praktik_tarif['nama_tarif_pilih']; ?></td>
+                                                                <td class="align-middle "><?= "Rp " . number_format($d_praktik_tarif['nominal_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                <td class="align-middle "><?= $d_praktik_tarif['nama_satuan_tarif_pilih']; ?></td>
+                                                                <td class="align-middle "><?= $d_praktik_tarif['frekuensi_tarif_pilih']; ?></td>
+                                                                <td class="align-middle "><?= $d_praktik_tarif['kuantitas_tarif_pilih']; ?></td>
+                                                                <td class="align-middle "> <?= "Rp " . number_format($d_praktik_tarif['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                <td class="align-middle ">
+                                                                    <?php if ($d_praktik_tarif['status_tarif_pilih'] == 'Y') { ?>
+                                                                        <span class="badge badge-success">Aktif</span>
+                                                                    <?php } else if ($d_praktik_tarif['status_tarif_pilih'] == 'T') { ?>
+                                                                        <span class="badge badge-danger">Tidak Aktif</span>
+                                                                    <?php } else { ?>
+                                                                        <span class="badge badge-danger">ERROR!!!</span>
+                                                                    <?php } ?>
+                                                                </td>
+                                                                <td class="align-middle ">
+                                                                    <?= $d_praktik_tarif['status_tarif_pilih']; ?>
+                                                                </td>
                                                             </tr>
                                                         <?php
                                                             $no++;
@@ -156,6 +176,11 @@
                             </div>
                         </div>
                         <hr class="bg-gray-800">
+                        <script>
+                            $(document).ready(function() {
+                                $("#<?= md5('table' . $d_praktik['id_praktik']) ?>").dataTable();
+                            });
+                        </script>
                     <?php
                     }
                 } else {

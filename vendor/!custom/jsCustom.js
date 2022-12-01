@@ -7,6 +7,9 @@ $(document).ready(function () {
     // scrollY: "500px",
     // paging: false,
   });
+  $("#myTable_2").dataTable();
+
+  //hilangkan colom table
   $("a.toggle-vis").on("click", function (e) {
     e.preventDefault();
 
@@ -17,6 +20,7 @@ $(document).ready(function () {
     column.visible(!column.visible());
   });
 
+  //inisiasi baris tag tfoot td th
   $("#table-search-each tfoot tr th").each(function () {
     var title = $(this).text();
     $(this).html(
@@ -26,7 +30,7 @@ $(document).ready(function () {
     );
   });
 
-  // DataTable
+  //inisiasi baris search
   var table = $("#table-search-each").DataTable({
     initComplete: function () {
       // Apply the search
@@ -43,8 +47,10 @@ $(document).ready(function () {
         });
     },
   });
+
+  //pindah baris tfoot k header
   $("#table-search-each tfoot tr").appendTo("#table-search-each thead");
-  $("#myTable_2").dataTable();
+
   /* -------------------------------------------------------------- select2 */
   $(".select2").select2({
     placeholder: "-- Pilih --",
