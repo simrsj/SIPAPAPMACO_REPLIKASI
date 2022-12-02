@@ -95,23 +95,45 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                         <td><?= $d_data_tarif['nama_tarif']; ?></td>
                                         <td><?= $d_data_tarif['nama_tarif_satuan']; ?></td>
                                         <td class="text-left"><?= "Rp " . number_format($d_data_tarif['jumlah_tarif'], 0, ",", "."); ?></td>
-                                        <td><input class="form-control" type="number" max="1" name="ferkuensi" id="ferkuensi" required></td>
-                                        <td><input class="form-control" type="number" max="1" name="kuantitas" id="kuantitas" required></td>
-                                        <td class="text-left">
-                                            <div class="jumlah_tarif">Rp 0</div>
-                                        </td>
+                                        <td><input class="form-control ferkuensi<?= $no; ?>" type="number" max="1" name="ferkuensi<?= $no; ?>" id="ferkuensi<?= $no; ?>" required></td>
+                                        <td><input class="form-control kuantitas<?= $no; ?>" type="number" max="1" name="kuantitas<?= $no ?>" id="kuantitas<?= $no; ?>" required></td>
+                                        <td><input class="form-control jumlahTarif<?= $no; ?>" type="number" max="1" name="jumlahTarif<?= $no ?>" id="jumlahTarif<?= $no ?>" readonly></td>
                                     </tr>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('input.frekuensi<?= $no; ?>,input.kuantitas<?= $no; ?>').on('change keyup', function() {
+                                                var $tr = $(this).closest('tr'),
+                                                    $frekuensi = $tr.find('input.frekuensi<?= $no; ?>'),
+                                                    $kuantitas = $tr.find('input.kuantitas<?= $no; ?>'),
+                                                    $total = $tr.find('input.jumlahTarif<?= $no; ?>'),
+                                                    $jumlahTotalTarif = $('#jumlahTotalTarif');
+
+                                                $total.val($frekuensi.val() * $kuantitas.val());
+
+                                                var jumlahTotalTarif = 0;
+                                                $('table').find('input#jumlahTotalTarif').each(function() {
+                                                    if (!isNaN($(this).val())) {
+                                                        jumlahTotalTarif += parseInt($(this).val());
+                                                    }
+                                                });
+                                                if (isNaN(jumlahTotalTarif)) jumlahTotalTarif = 0;
+                                                $jumlahTotalTarif.val(jumlahTotalTarif)
+                                            });
+                                        });
+                                    </script>
                                 <?php
                                     $no++;
                                 }
                                 ?>
+                                <!-- jumlah total tarif  -->
                                 <tr>
                                     <td colspan="7" class="text-right b h5">Jumlah Total :</td>
                                     <td class="text-left b h5">
-                                        <div class="jumlah_tarif">Rp 0</div>
+                                        <div class="jumlahTotalTarif">Rp 0</div>
                                     </td>
                                 </tr>
                                 </tr>
+                                <!-- jumlah data praktikan  -->
                                 <input type="hidden" name="jumlah_praktik_input" id="jumlah_praktik_input" value="<?= $no - 1;  ?>">
                             </tbody>
                         </table>
