@@ -191,39 +191,43 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
             var data_ptrf = $('#form_ptrf').serializeArray();
             var x_ptrf = "Y";
 
+            //Notif Bila tidak diisi
+            function alertDataTidakTerisi() {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: '<center>DATA ADA YANG BELUM TERISI</center>'
+                });
+            }
             <?php
             $no = 1;
             while ($r_data_tarif >= $no) {
             ?>
                 var frekuensi<?= $no; ?> = $('#frekuensi<?= $no; ?>').val();
                 var kuantitas<?= $no; ?> = $('#kuantitas<?= $no; ?>').val();
-                //Notif Bila tidak diisi
+
                 //warning Toast bila ada data wajib yg berlum terisi
-                // const Toast = Swal.mixin({
-                //     toast: true,
-                //     position: 'top-end',
-                //     showConfirmButton: false,
-                //     timer: 10000,
-                //     timerProgressBar: true,
-                //     didOpen: (toast) => {
-                //         toast.addEventListener('mouseenter', Swal.stopTimer)
-                //         toast.addEventListener('mouseleave', Swal.resumeTimer)
-                //     }
-                // });
-
-                // Toast.fire({
-                //     icon: 'warning',
-                //     title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                // });
-
                 if (frekuensi<?= $no; ?> == "") {
                     $("#err_frekuensi<?= $no; ?>").html("Mohon Diisi");
+                    alertDataTidakTerisi();
                     x_ptrf = "T";
                 } else {
                     $("#err_frekuensi<?= $no; ?>").html("");
                 }
                 if (kuantitas<?= $no; ?> == "") {
                     $("#err_kuantitas<?= $no; ?>").html("Mohon Diisi");
+                    alertDataTidakTerisi();
                     x_ptrf = "T";
                 } else {
                     $("#err_kuantitas<?= $no; ?>").html("");
@@ -233,7 +237,7 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
             }
             ?>
             if (x_ptrf == 'Y') {
-                console.log("Tambah Tarif Praktik");
+                console.log("Tambah Tarif Praktik ");
             }
         });
     </script>
