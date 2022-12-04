@@ -1,0 +1,117 @@
+SIPAPAP MACO (Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)
+RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
+===================================================================================================================
+
+# LAPORAN UPDATE UPDATE WAG
+
+## _*MAYOR*_
+
+-
+
+## _*MINOR*_
+
+- ✅ Informasi Sisa di Modal Informasi Jadwal Praktikan
+- ✅ Perbaikan data MoU dan PKS di Admin diklat
+- 🔃 Pembuatan Aplikasi Jadwal praktikan sederhana diinputkan di zoom
+- Perubahan Daftar Mess-Pemondokan Saat Akan dipilih
+- Pembuatan Fitur Kwitansi, no Kwitansi disesuaikan dengan aplikasi
+- Perubahan "Kontak Person" Mess dan Pemondokan
+- Perubahan Data MoU saat sudah Kadaluarsa (maksimal h-7) dengan nomor PIC Kang Dian Tim Kordik
+- Pembuatan Akun User Umum
+- Pembuatan Akun User Keuangan
+
+====================================================================================================================
+
+# KET :
+
+_*MAYOR*_ = Modul yang _*FITUR/ERROR*_ nya pempengaruhi Alur Utama (PRIORITAS)
+_*MINOR*_ = Modul yang _*FITUR/ERROR*_ nya bisa dikondisikan
+✅ = Selesai, 🔃 = Progress
+
+====================================================================================================================
+
+# NOTE :
+
+Link Dalam (Local) : http://10.132.0.75/SM/
+Link Luar (Public) : http://103.147.222.122:88/SM/
+
+Modul yang sudah selesai akan dihilangkan diudate selanjutnya,
+Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit.ly/SMDevTL
+
+====================================================================================================================
+
+# PERTANYAAN
+
+- Perorangan disesuaikan Mess
+- Keuangan Bridging dengan SIMRS
+- Pembayaran semuanya di akhir
+- membuat kwitansi pembayaran
+- Virutal Account Surat Pembayaran
+- Buat Pembayaran denga cara Cash atau Transfer
+- Membuat menu Pengajuan dan pendapatan naasumber/sponsorship
+- Notifikasi dan validasi Jumlah praktikan H-3 pelaksanaan
+- bagaimana proses magang Individu
+- mess wajib semua
+- buat notifikasi realtime (Websocket)
+- tgl selesai mou apakah 3 tahun ?
+- Validasi untuk pembayaran seperti apa? apakah keuangan perlu dibuatkan akun / konfirmasi pembayarannya secara manual antara diklat dengan keuangan ?
+- Keterlibatan Umum dalam Aplikasi SIPAPAP MACHO untuk apa?
+- Untuk manual yang dilakukan dan di isi di website harus sama ya
+- Untuk memilih mess pemondokan di admin ditentukan oleh admin umum, prioritas mess rsj
+- Harus ada Penanggung Jawab di Umum untuk Pemondokan
+- Daftar Harga untuk mess dan pondokan seperti biaya admin, terutama dengan kodering harus ada
+- Di MOU juga harus ada permintaan institusi yang tidak menginap
+- Di MOU harus ada ketentuan mengenai ketersediaan MESS sudah ditentukan
+- BerNotDin ke Diklat untuk diujicobakan
+- Cek Untuk narasumber dari PT dan lainnya siapa yg berwenang (Pak Narmin)
+- Diklat segera membuat notadinas untuk institusi
+- Dimulai dengan bulan Mei atau Juni
+
+===================================================================================================================
+
+# GIT CODE
+
+git status
+
+git pull
+git add .
+git commit -a -m "Progres Tarif Praktik + Database"
+git push
+
+git clone https://github.com/fajarrachmath/SM.git
+
+git commit --amend
+<UBAH commit sebelumnya, bila sudah CTRL + X lalu CTRL + C lalau ketik :wq untuk ubah keterangan Commit atau :qa untuk keluar>
+
+====================================================================================================================
+
+# PHP CODE
+
+base64_decode(urldecode())
+urlencode(base64_encode())
+
+====================================================================================================================
+
+# TRUNCATE DATABASE (EMPTY)
+
+TRUNCATE tb_praktik;
+TRUNCATE tb_praktik_tgl;
+TRUNCATE tb_praktikan;
+TRUNCATE tb_tarif_pilih;
+TRUNCATE tb_mess_pilih;
+TRUNCATE tb_tempat_pilih;
+TRUNCATE tb_bayar;
+TRUNCATE tb_nilai_kep;
+TRUNCATE tb_nilai_upload;
+TRUNCATE tb_pembimbing_pilih;
+
+====================================================================================================================
+
+# DELETE FILE
+
+rm ./path/to/the/file/file_1.txt SM/file/bayar
+SM/file/inv
+SM/file/nilai
+SM/file/praktik
+
+====================================================================================================================

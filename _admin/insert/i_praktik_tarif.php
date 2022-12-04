@@ -61,6 +61,7 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                 echo "<script>alert('$ex -DATA PRAKTIK');";
                 echo "document.location.href='?error404';</script>";
             }
+            print_r($q_data_tarif);
             $r_data_tarif = $q_data_tarif->rowCount();
             if ($r_data_tarif > 0) {
             ?>
@@ -79,8 +80,8 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                     <th scope="col">Nama Tarif</th>
                                     <th scope="col" width="300px">Satuan</th>
                                     <th scope="col" width="150px">Tarif</th>
-                                    <th scope="col" width="1%">Frekuensi</th>
-                                    <th scope="col" width="1%">Kuantitas</th>
+                                    <th scope="col" width="1px">Frekuensi</th>
+                                    <th scope="col" width="1px">Kuantitas</th>
                                     <th scope="col" width="200px">Jumlah Tarif</th>
                                 </tr>
                             </thead>
@@ -100,17 +101,18 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                         </td>
                                         <td>
                                             <input class="form-control" type="number" max="1" name="frekuensi<?= $no; ?>" id="frekuensi<?= $no; ?>" required>
-                                            <div class="text-xs font-italic  badge badge-danger  b blink" id="err_frekuensi<?= $no; ?>"></div>
+                                            <div class="text-xs font-italic text-danger b blink" id="err_frekuensi<?= $no; ?>"></div>
                                         </td>
                                         <td>
                                             <input class="form-control" type="number" max="1" name="kuantitas<?= $no ?>" id="kuantitas<?= $no; ?>" required>
-                                            <div class="text-xs font-italic  badge badge-danger  b blink" id="err_kuantitas<?= $no; ?>"></div>
+                                            <div class="text-xs font-italic text-danger b blink" id="err_kuantitas<?= $no; ?>"></div>
                                         </td>
                                         <td class="text-left">
                                             <div id="jumlahTarif<?= $no; ?>">Rp 0</div>
                                         </td>
                                     </tr>
                                 <?php
+                                    $baris_tarif = $no;
                                     $no++;
                                 }
                                 ?>
@@ -132,7 +134,7 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                             // var jumlahTotal = 0;
                                             var jumlahFr<?= $no ?> = 0;
                                             var jumlahKu<?= $no ?> = 0;
-                                            $('#kuantitas<?= $no; ?>').keyup(function() {
+                                            $('#kuantitas<?= $no; ?>').change(function() {
                                                 // jumlahTotal = jumlahTotal - jumlahFr<?= $no ?>;
                                                 var frekuensi = $("#frekuensi<?= $no; ?>").val();
                                                 var kuantitas = $("#kuantitas<?= $no; ?>").val();
@@ -143,7 +145,7 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                                 // jumlahTotal = jumlahTotal + jumlahFr<?= $no ?>;
                                                 // $("#jumlahTotalTarif<?= $no; ?>").html('Rp ' + jumlahTotal.toLocaleString());
                                             });
-                                            $('#frekuensi<?= $no; ?>').keyup(function() {
+                                            $('#frekuensi<?= $no; ?>').change(function() {
                                                 // jumlahTotal = jumlahTotal - jumlahKu<?= $no ?>;
                                                 var frekuensi = $("#frekuensi<?= $no; ?>").val();
                                                 var kuantitas = $("#kuantitas<?= $no; ?>").val();
@@ -189,6 +191,17 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
     <script>
         $("#simpan_ptrf").click(function() {
             var data_ptrf = $('#form_ptrf').serializeArray();
+            //push data pilih_mess
+            data_ptrf.push({
+                name: 'idu',
+                value: '<?= urlencode(base64_encode($_SESSION['id_user'])) ?>'
+            }, {
+                name: 'idp',
+                value: '<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>'
+            }, {
+                name: 'bt',
+                value: '<?= $baris_tarif; ?>'
+            });
             var x_ptrf = "Y";
 
             //Notif Bila tidak diisi
@@ -236,8 +249,40 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                 $no++;
             }
             ?>
+
+
+            //eksekusi bila sesuai
             if (x_ptrf == 'Y') {
                 console.log("Tambah Tarif Praktik ");
+
+                //Simpan praktik tarif
+                $.ajax({
+                    type: 'POST',
+                    url: "_admin/exc/x_i_praktik_tarif_s.php",
+                    data: data_ptrf,
+                    success: function() {
+                        Swal.fire({
+                            allowOutsideClick: false,
+                            // isDismissed: false,
+                            icon: 'success',
+                            title: '<span class"text-xs"><b>DATA TARIF</b><br>Berhasil Tersimpan',
+                            showConfirmButton: false,
+                            timer: 5000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        }).then(
+                            function() {
+                                // document.location.href = "?ptk";
+                            }
+                        );
+                    },
+                    error: function() {
+                        console.log('eksekusi simpan pilihan mess/pemondokan gagal');
+                    }
+                });
             }
         });
     </script>

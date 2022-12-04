@@ -98,8 +98,8 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     $sql_insert_pilih_mess .= " )";
 
     //Eksekusi Query
-    echo $sql_insert_tarif_mess . "<br>";
-    echo $sql_insert_pilih_mess . "<br>";
+    // echo $sql_insert_tarif_mess . "<br>";
+    // echo $sql_insert_pilih_mess . "<br>";
 
     try {
         $conn->query($sql_insert_tarif_mess);
