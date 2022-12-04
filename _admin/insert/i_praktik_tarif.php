@@ -47,24 +47,24 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
             </div>
         </div>
         <div class="card shadow mb-4">
-            <div class="card-body">
-                <?php
-                //data tarif
-                $sql_data_tarif = "SELECT * FROM tb_tarif ";
-                $sql_data_tarif .= " JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan= tb_tarif_satuan.id_tarif_satuan";
-                $sql_data_tarif .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis= tb_tarif_jenis.id_tarif_jenis";
-                $sql_data_tarif .= " WHERE tb_tarif.id_jurusan_pdd = " . $d_praktik['id_jurusan_pdd'];
-                $sql_data_tarif .= " ORDER BY tb_tarif_jenis.nama_tarif_jenis ASC";
-                // echo "$sql_data_tarif<br>";
-                try {
-                    $q_data_tarif = $conn->query($sql_data_tarif);
-                } catch (Exception $ex) {
-                    echo "<script>alert('$ex -DATA PRAKTIK');";
-                    echo "document.location.href='?error404';</script>";
-                }
-                $r_data_tarif = $q_data_tarif->rowCount();
-                if ($r_data_tarif > 0) {
-                ?>
+            <?php
+            //data tarif
+            $sql_data_tarif = "SELECT * FROM tb_tarif ";
+            $sql_data_tarif .= " JOIN tb_tarif_satuan ON tb_tarif.id_tarif_satuan= tb_tarif_satuan.id_tarif_satuan";
+            $sql_data_tarif .= " JOIN tb_tarif_jenis ON tb_tarif.id_tarif_jenis= tb_tarif_jenis.id_tarif_jenis";
+            $sql_data_tarif .= " WHERE tb_tarif.id_jurusan_pdd = " . $d_praktik['id_jurusan_pdd'];
+            $sql_data_tarif .= " ORDER BY tb_tarif_jenis.nama_tarif_jenis ASC";
+            // echo "$sql_data_tarif<br>";
+            try {
+                $q_data_tarif = $conn->query($sql_data_tarif);
+            } catch (Exception $ex) {
+                echo "<script>alert('$ex -DATA PRAKTIK');";
+                echo "document.location.href='?error404';</script>";
+            }
+            $r_data_tarif = $q_data_tarif->rowCount();
+            if ($r_data_tarif > 0) {
+            ?>
+                <div class="card-body">
                     <form method="POST" id="form_ptrf">
                         <div class="text-center h5">
                             Bila ada tarif yang tidak digunakan <br>
@@ -100,11 +100,11 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                         </td>
                                         <td>
                                             <input class="form-control" type="number" max="1" name="frekuensi<?= $no; ?>" id="frekuensi<?= $no; ?>" required>
-                                            <div class="text-xs font-italic text-danger blink" id="err_frekuensi<?= $no; ?>"></div>
+                                            <div class="text-xs font-italic  badge badge-danger  b blink" id="err_frekuensi<?= $no; ?>"></div>
                                         </td>
                                         <td>
                                             <input class="form-control" type="number" max="1" name="kuantitas<?= $no ?>" id="kuantitas<?= $no; ?>" required>
-                                            <div class="text-xs font-italic text-danger blink" id="err_kuantitas<?= $no; ?>"></div>
+                                            <div class="text-xs font-italic  badge badge-danger  b blink" id="err_kuantitas<?= $no; ?>"></div>
                                         </td>
                                         <td class="text-left">
                                             <div id="jumlahTarif<?= $no; ?>">Rp 0</div>
@@ -164,82 +164,77 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                 <input type="hidden" name="jumlah_praktik_input" id="jumlah_praktik_input" value="<?= $no - 1;  ?>">
                             </tbody>
                         </table>
-                        <hr>
-
-                        <!-- tombol simpan pilih Pembimbing dan atau Ruangan  -->
-                        <div class="nav btn justify-content-center text-md">
-                            <button type="button" name="simpan_ptrf" id="simpan_ptrf" class="btn btn-outline-success">
-                                <i class="fas fa-check-circle"></i>
-                                Simpan
-                            </button>
-                        </div>
                     </form>
-                <?php
-                } else {
-                ?>
-                    <div class="jumbotron">
-                        <div class="jumbotron-fluid">
-                            <div class="text-gray-700">
-                                <h5 class="text-center">Data Praktikan Tidak Ada</h5>
-                            </div>
+
+                    <!-- tombol simpan pilih Pembimbing dan atau Ruangan  -->
+                    <a name="simpan_ptrf" id="simpan_ptrf" class="btn btn-outline-success text-center col">
+                        <i class="fas fa-check-circle"></i> Simpan
+                    </a>
+                </div>
+            <?php
+            } else {
+            ?>
+                <div class="jumbotron">
+                    <div class="jumbotron-fluid">
+                        <div class="text-gray-700">
+                            <h5 class="text-center">Data Praktikan Tidak Ada</h5>
                         </div>
                     </div>
-                <?php
-                }
-                ?>
-            </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
     <script>
         $("#simpan_ptrf").click(function() {
             var data_ptrf = $('#form_ptrf').serializeArray();
+            var x_ptrf = "Y";
 
             <?php
-            $no = 0;
+            $no = 1;
             while ($r_data_tarif >= $no) {
             ?>
                 var frekuensi<?= $no; ?> = $('#frekuensi<?= $no; ?>').val();
                 var kuantitas<?= $no; ?> = $('#kuantitas<?= $no; ?>').val();
-
                 //Notif Bila tidak diisi
-                if (
-                    frekuensi<?= $no; ?> == "" ||
-                    kuantitas<?= $no; ?> == ""
-                ) {
+                //warning Toast bila ada data wajib yg berlum terisi
+                // const Toast = Swal.mixin({
+                //     toast: true,
+                //     position: 'top-end',
+                //     showConfirmButton: false,
+                //     timer: 10000,
+                //     timerProgressBar: true,
+                //     didOpen: (toast) => {
+                //         toast.addEventListener('mouseenter', Swal.stopTimer)
+                //         toast.addEventListener('mouseleave', Swal.resumeTimer)
+                //     }
+                // });
 
-                    //warning Toast bila ada data wajib yg berlum terisi
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
+                // Toast.fire({
+                //     icon: 'warning',
+                //     title: '<center>DATA ADA YANG BELUM TERISI</center>'
+                // });
 
-                    Toast.fire({
-                        icon: 'warning',
-                        title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                    });
-
-                    if (frekuensi<?= $no; ?> == "") {
-                        $("#err_frekuensi<?= $no; ?>").html("Mohon Diisi");
-                    } else {
-                        $("#err_frekuensi<?= $no; ?>").html("");
-                    }
-                    if (kuantitas<?= $no; ?> == "") {
-                        $("#err_kuantitas<?= $no; ?>").html("Mohon Diisi");
-                    } else {
-                        $("#err_kuantitas<?= $no; ?>").html("");
-                    }
+                if (frekuensi<?= $no; ?> == "") {
+                    $("#err_frekuensi<?= $no; ?>").html("Mohon Diisi");
+                    x_ptrf = "T";
+                } else {
+                    $("#err_frekuensi<?= $no; ?>").html("");
+                }
+                if (kuantitas<?= $no; ?> == "") {
+                    $("#err_kuantitas<?= $no; ?>").html("Mohon Diisi");
+                    x_ptrf = "T";
+                } else {
+                    $("#err_kuantitas<?= $no; ?>").html("");
                 }
             <?php
                 $no++;
             }
             ?>
+            if (x_ptrf == 'Y') {
+                console.log("Tambah Tarif Praktik");
+            }
         });
     </script>
 <?php } else {
