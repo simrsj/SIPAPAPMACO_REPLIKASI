@@ -79,8 +79,8 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                     <th scope="col">Nama Tarif</th>
                                     <th scope="col" width="300px">Satuan</th>
                                     <th scope="col" width="150px">Tarif</th>
-                                    <th scope="col" width="50px">Frekuensi</th>
-                                    <th scope="col" width="50px">Kuantitas</th>
+                                    <th scope="col" width="1%">Frekuensi</th>
+                                    <th scope="col" width="1%">Kuantitas</th>
                                     <th scope="col" width="200px">Jumlah Tarif</th>
                                 </tr>
                             </thead>
@@ -226,12 +226,12 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                     });
 
                     if (frekuensi<?= $no; ?> == "") {
-                        $("#err_frekuensi<?= $no; ?>").html("Isi");
+                        $("#err_frekuensi<?= $no; ?>").html("Mohon Diisi");
                     } else {
                         $("#err_frekuensi<?= $no; ?>").html("");
                     }
                     if (kuantitas<?= $no; ?> == "") {
-                        $("#err_kuantitas<?= $no; ?>").html("Isi");
+                        $("#err_kuantitas<?= $no; ?>").html("Mohon Diisi");
                     } else {
                         $("#err_kuantitas<?= $no; ?>").html("");
                     }
