@@ -37,7 +37,7 @@
             if ($r_akreditasi > 0) {
             ?>
                 <div class="table-responsive">
-                    <table class="table table-striped" id="myTable">
+                    <table class="table table-striped" id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
@@ -147,6 +147,6 @@ if (isset($_POST['ubah'])) {
 ?>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 </script>

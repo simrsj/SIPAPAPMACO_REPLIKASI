@@ -12,7 +12,7 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
 <form method="post" id="form_ubah">
     <input type="hidden" name="id_user" id="id_user" value="<?= $d_user_prvl['id_user']; ?>">
     <div class="table-responsive">
-        <table class="table table-striped" id="myTable">
+        <table class="table table-striped" id="dataTable">
             <thead class="thead-dark">
                 <tr class="text-center">
                     <th scope="col">Nama Hak Akses</th>
@@ -398,7 +398,7 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
 </form>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 
     $(document).on('click', '.ubah', function() {

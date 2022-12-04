@@ -95,7 +95,7 @@ $id = $_GET['ib'];
                     </div>
                     <br>
                     <div class="table-responsive">
-                        <table class="table table-hover" id="myTable">
+                        <table class="table table-hover" id="dataTable">
                             <thead class="table-dark">
                                 <tr>
                                     <th>No</th>

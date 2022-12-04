@@ -13,7 +13,7 @@ $r_data_praktikan = $q_data_praktikan->rowCount();
 if ($r_data_praktikan > 0) {
 ?>
     <div class="table-responsive text-xs">
-        <table class="table table-striped" id="myTable">
+        <table class="table table-striped" id="dataTable">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">No</th>
@@ -88,7 +88,7 @@ if ($r_data_praktikan > 0) {
 </div>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 
     $(".ubah_init").click(function() {

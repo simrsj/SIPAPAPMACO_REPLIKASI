@@ -15,7 +15,7 @@ $r_user = $q_user->rowCount();
 if ($r_user > 0) {
 ?>
     <div class="table-responsive">
-        <table class="table table-striped text-xs" id="myTable">
+        <table class="table table-striped text-xs" id="dataTable">
             <thead class="thead-dark">
                 <tr class="text-center">
                     <th scope="col">No</th>
@@ -146,7 +146,7 @@ if ($r_user > 0) {
 ?>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 
     <?php if ($d_prvl['u_akun'] == "Y") { ?>

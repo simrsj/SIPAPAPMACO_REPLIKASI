@@ -104,7 +104,7 @@ while ($d_data_tarif = $q_data_tarif->fetch(PDO::FETCH_ASSOC)) {
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped" id="myTable">
+                <table class="table table-striped" id="dataTable">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">No</th>

@@ -16,7 +16,7 @@
                 $r_institusi = $q_institusi->rowCount();
                 if ($r_institusi > 0) {
                 ?>
-                    <table class='table table-striped' id="myTable">
+                    <table class='table table-striped' id="dataTable">
                         <thead class="thead-dark text-center align-content-center">
                             <tr>
                                 <th scope='col'>No</th>

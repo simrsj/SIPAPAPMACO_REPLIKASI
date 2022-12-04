@@ -142,6 +142,6 @@ if (isset($_POST['ubah'])) {
 ?>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 </script>

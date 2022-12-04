@@ -14,7 +14,7 @@ $r_data_kuota = $q_data_kuota->rowCount();
 if ($r_data_kuota > 0) {
 ?>
     <div class="table-responsive">
-        <table class="table table-striped" id="myTable">
+        <table class="table table-striped" id="dataTable">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">No</th>
@@ -72,7 +72,7 @@ if ($r_data_kuota > 0) {
 </div>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 
     <?php if ($d_prvl['u_kuota'] == "Y") { ?>

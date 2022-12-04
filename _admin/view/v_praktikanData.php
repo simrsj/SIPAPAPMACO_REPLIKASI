@@ -29,7 +29,7 @@ $r_data_praktikan = $q_data_praktikan->rowCount();
 if ($r_data_praktikan > 0) {
 ?>
     <div class="table-responsive">
-        <table class="table table-striped" id="myTable<?= $_GET['tb']; ?>">
+        <table class="table table-striped" id="dataTable<?= $_GET['tb']; ?>">
             <thead class="thead-dark">
                 <tr class="text-center">
                     <th scope="col">No</th>
@@ -142,7 +142,7 @@ if ($r_data_praktikan > 0) {
 
                             <script>
                                 $(document).ready(function() {
-                                    $('#myTable<?= $_GET['tb'] ?>').DataTable();
+                                    $('#dataTable<?= $_GET['tb'] ?>').DataTable();
                                 });
                                 <?php if ($d_prvl['u_praktikan'] == 'Y') { ?>
                                     $(".ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>").click(function() {

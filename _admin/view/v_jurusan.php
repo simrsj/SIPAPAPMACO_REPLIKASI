@@ -58,7 +58,7 @@
                 $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
                 if ($r_jurusan_pdd > 0) {
                 ?>
-                    <table class='table table-striped' id="myTable">
+                    <table class='table table-striped' id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>

@@ -26,7 +26,7 @@
                 if ($r_mou > 0) {
                 ?>
                     <div class='table-responsive'>
-                        <table class='table table-striped table-hover text-md' id="myTable">
+                        <table class='table table-striped table-hover text-md' id="dataTable">
                             <thead class="thead-dark text-center">
                                 <tr>
                                     <th scope='col'>No</th>

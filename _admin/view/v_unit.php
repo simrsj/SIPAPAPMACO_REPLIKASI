@@ -38,7 +38,7 @@
                 $r_unit = $q_unit->rowCount();
                 if ($r_unit > 0) {
                 ?>
-                    <table class='table table-striped' id="myTable">
+                    <table class='table table-striped' id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
@@ -148,6 +148,6 @@ if (isset($_POST['ubah'])) {
 <script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 </script>

@@ -430,7 +430,7 @@ if (isset($_POST['simpan_bayar'])) {
                                             if ($r_tarif_pilih > 0) {
                                             ?>
                                                 <div class="table-responsive">
-                                                    <table class="table table-striped" id="myTable">
+                                                    <table class="table table-striped" id="dataTable">
                                                         <thead class="thead-dark">
                                                             <tr>
                                                                 <th scope="col">No</th>
@@ -534,7 +534,7 @@ if (isset($_POST['simpan_bayar'])) {
                                                     $r_bayar = $q_bayar->rowCount();
                                                     if ($r_bayar > 0) {
                                                     ?>
-                                                        <table class="table table-striped" id="myTable_2">
+                                                        <table class="table table-striped" id="dataTable_2">
                                                             <thead class="thead-dark">
                                                                 <tr>
                                                                     <th scope="col">No</th>

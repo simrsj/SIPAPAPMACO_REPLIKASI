@@ -38,7 +38,7 @@
                 $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
                 if ($r_jenjang_pdd > 0) {
                 ?>
-                    <table class='table table-striped' id="myTable">
+                    <table class='table table-striped' id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>

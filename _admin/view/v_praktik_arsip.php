@@ -28,7 +28,7 @@
             if ($r_praktik_a > 0) {
             ?>
                 <div class="table-responsive">
-                    <table class="table table-striped " style="vertical-align: middle;" id="myTable">
+                    <table class="table table-striped " style="vertical-align: middle;" id="dataTable">
                         <thead class="thead-dark text-center ">
                             <tr>
                                 <th scope='col'>No</th>

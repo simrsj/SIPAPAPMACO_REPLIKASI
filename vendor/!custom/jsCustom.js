@@ -3,11 +3,11 @@ $(document).ready(function () {
   $(".preloader").fadeOut();
 
   /* -------------------------------------------------------------- dataTable */
-  var table = $("#myTable").DataTable({
+  var table = $("#dataTable").DataTable({
     // scrollY: "500px",
     // paging: false,
   });
-  $("#myTable_2").dataTable();
+  $("#dataTable_2").dataTable();
 
   //hilangkan colom table
   $("a.toggle-vis").on("click", function (e) {

@@ -18,7 +18,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
             if ($r_pembimbing > 0) {
             ?>
                 <div class="table-responsive text-xs">
-                    <table class="table table-striped" id="myTable">
+                    <table class="table table-striped" id="dataTable">
                         <thead class="thead-dark text-center">
                             <tr>
                                 <th scope='col'>No</th>
@@ -88,7 +88,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 
     $(".ubah_init").click(function() {

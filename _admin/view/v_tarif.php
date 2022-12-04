@@ -263,7 +263,7 @@
                 // data satuan Tarif
                 if (isset($_GET['dts'])) {
                 ?>
-                    <table class="table table-striped" id="myTable">
+                    <table class="table table-striped" id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">No</th>
@@ -358,7 +358,7 @@
                 //data tarif
                 else {
                 ?>
-                    <table class="table table-striped" id="myTable">
+                    <table class="table table-striped" id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">No</th>

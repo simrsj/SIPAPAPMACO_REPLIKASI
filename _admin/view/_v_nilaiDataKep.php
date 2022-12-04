@@ -102,7 +102,7 @@
                                     if ($r_data_praktikan > 0) {
                                     ?>
                                         <div class="table-responsive">
-                                            <table class="table table-striped" id="myTable">
+                                            <table class="table table-striped" id="dataTable">
                                                 <?php
                                                 if ($d_praktik['id_jurusan_pdd'] == 2) {
                                                 ?>

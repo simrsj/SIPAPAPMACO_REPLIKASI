@@ -12,7 +12,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
         if ($r_mess > 0) {
         ?>
             <div class="table-responsive text-sm">
-                <table class="table table-hover" id="myTable">
+                <table class="table table-hover" id="dataTable">
                     <thead class="table-dark text-center">
                         <tr>
                             <th scope='col'>No</th>
@@ -110,7 +110,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 
     $(".ubah_init").click(function() {

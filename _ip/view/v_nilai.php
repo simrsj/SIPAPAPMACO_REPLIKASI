@@ -110,7 +110,7 @@
                                     if ($r_data_praktikan > 0) {
                                     ?>
                                         <div class="table-responsive">
-                                            <table class="table table-striped" id="myTable">
+                                            <table class="table table-striped" id="dataTable">
                                                 <thead class="thead-dark text-center">
                                                     <tr>
                                                         <th scope="col">No</th>

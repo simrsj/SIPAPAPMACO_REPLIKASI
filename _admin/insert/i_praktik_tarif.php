@@ -65,7 +65,7 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                 $r_data_tarif = $q_data_tarif->rowCount();
                 if ($r_data_tarif > 0) {
                 ?>
-                    <form method="POST" id="form_pembb_ruangan">
+                    <form method="POST" id="form_ptrf">
                         <div class="text-center h5">
                             Bila ada tarif yang tidak digunakan <br>
                             isikan <span class="b text-danger">Frekuensi</span> dan <span class="b text-danger">Kuantitas</span> dengan <span class="b text-danger">Angka 0 (Nol)</span>
@@ -98,9 +98,15 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                             <input class="form-control" type="hidden" max="1" name="tarif<?= $no; ?>" id="tarif<?= $no; ?>" value="<?= $d_data_tarif['jumlah_tarif'] ?>">
                                             <?= "Rp " . number_format($d_data_tarif['jumlah_tarif'], 0, ",", "."); ?>
                                         </td>
-                                        <td><input class="form-control" type="number" max="1" name="frekuensi<?= $no; ?>" id="frekuensi<?= $no; ?>" required></td>
-                                        <td><input class="form-control" type="number" max="1" name="kuantitas<?= $no ?>" id="kuantitas<?= $no; ?>" required></td>
                                         <td>
+                                            <input class="form-control" type="number" max="1" name="frekuensi<?= $no; ?>" id="frekuensi<?= $no; ?>" required>
+                                            <div class="text-xs font-italic text-danger blink" id="err_frekuensi<?= $no; ?>"></div>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="number" max="1" name="kuantitas<?= $no ?>" id="kuantitas<?= $no; ?>" required>
+                                            <div class="text-xs font-italic text-danger blink" id="err_kuantitas<?= $no; ?>"></div>
+                                        </td>
+                                        <td class="text-left">
                                             <div id="jumlahTarif<?= $no; ?>">Rp 0</div>
                                         </td>
                                     </tr>
@@ -108,29 +114,45 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                     $no++;
                                 }
                                 ?>
+                                <!-- jumlah total tarif  -->
+                                <!-- <tr>
+                                    <td colspan="7" class="text-right b h5">Jumlah Total :</td>
+                                    <td class="text-left b h5">
+                                        <div id="jumlahTotalTarif">Rp 0</div>
+                                        <script>
+                                        </script>
+                                    </td>
+                                </tr> -->
                                 <script>
                                     $(document).ready(function() {
                                         <?php
                                         $no = 1;
                                         while ($r_data_tarif >= $no) {
                                         ?>
-                                            var jumlahTotal = 0;
-                                            var jumlah = 0;
+                                            // var jumlahTotal = 0;
+                                            var jumlahFr<?= $no ?> = 0;
+                                            var jumlahKu<?= $no ?> = 0;
                                             $('#kuantitas<?= $no; ?>').keyup(function() {
+                                                // jumlahTotal = jumlahTotal - jumlahFr<?= $no ?>;
                                                 var frekuensi = $("#frekuensi<?= $no; ?>").val();
                                                 var kuantitas = $("#kuantitas<?= $no; ?>").val();
                                                 var tarif = $("#tarif<?= $no; ?>").val();
 
-                                                jumlah = frekuensi * kuantitas * tarif;
-                                                $("#jumlahTarif<?= $no; ?>").html('Rp ' + jumlah.toLocaleString());
+                                                jumlahFr<?= $no ?> = frekuensi * kuantitas * tarif;
+                                                $("#jumlahTarif<?= $no; ?>").html('Rp ' + jumlahFr<?= $no ?>.toLocaleString());
+                                                // jumlahTotal = jumlahTotal + jumlahFr<?= $no ?>;
+                                                // $("#jumlahTotalTarif<?= $no; ?>").html('Rp ' + jumlahTotal.toLocaleString());
                                             });
                                             $('#frekuensi<?= $no; ?>').keyup(function() {
+                                                // jumlahTotal = jumlahTotal - jumlahKu<?= $no ?>;
                                                 var frekuensi = $("#frekuensi<?= $no; ?>").val();
                                                 var kuantitas = $("#kuantitas<?= $no; ?>").val();
                                                 var tarif = $("#tarif<?= $no; ?>").val();
 
-                                                jumlah = frekuensi * kuantitas * tarif;
-                                                $("#jumlahTarif<?= $no; ?>").html('Rp ' + jumlah.toLocaleString());
+                                                jumlahKu<?= $no ?> = frekuensi * kuantitas * tarif;
+                                                $("#jumlahTarif<?= $no; ?>").html('Rp ' + jumlahKu<?= $no ?>.toLocaleString());
+                                                // jumlahTotal = jumlahTotal + jumlahKu<?= $no ?>;
+                                                // $("#jumlahTotalTarif<?= $no; ?>").html('Rp ' + jumlahTotal.toLocaleString());
                                             });
                                         <?php
                                             $no++;
@@ -146,7 +168,7 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
 
                         <!-- tombol simpan pilih Pembimbing dan atau Ruangan  -->
                         <div class="nav btn justify-content-center text-md">
-                            <button type="button" name="simpan_ptrf_tmp" id="simpan_ptrf_tmp" class="btn btn-outline-success">
+                            <button type="button" name="simpan_ptrf" id="simpan_ptrf" class="btn btn-outline-success">
                                 <i class="fas fa-check-circle"></i>
                                 Simpan
                             </button>
@@ -169,137 +191,55 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
         </div>
     </div>
     <script>
-        $("#simpan_ptrf_tmp").click(function() {
-            var data_pembimbing = $('#form_pembb_ruangan').serializeArray();
-            var jumlah_praktik = $('#jumlah_praktik').val();
-            var jumlah_praktik_input = $('#jumlah_praktik_input').val();
-            var jurusan = $('#jurusan').val();
-            console.log(jumlah_praktik);
-            console.log(jumlah_praktik_input);
-            //Jika Jumlah Praktik tidak sesuai dengan data praktikan
-            if (jumlah_praktik != jumlah_praktik_input) {
-                Swal.fire({
-                    allowOutsideClick: false,
-                    // isDismissed: false,
-                    icon: 'error',
-                    title: '<span class"text-xs">' +
-                        '<b>DATA PRAKTIKAN</b> <br> ' +
-                        'TIDAK SESUAI DENGAN<br>' +
-                        '<b>JUMLAH PRAKTIK</b><br>' +
-                        'Sesuaikan kembali di menu <b>DATA PRAKTIKAN praktikan</b><br>' +
-                        '</span>',
-                    showConfirmButton: false,
-                    timer: 5000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-            } else {
-                //Notif jika tida diisi Pembimbing 
-                var no = 1;
-                var ptrf = 0;
-                while (no <= jumlah_praktik) {
-                    console.log("no: " + no + "jumlah_praktik: " + jumlah_praktik);
-                    if ($('#id_pembimbing' + no).val() == "") {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 10000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        });
+        $("#simpan_ptrf").click(function() {
+            var data_ptrf = $('#form_ptrf').serializeArray();
 
-                        Toast.fire({
-                            icon: 'warning',
-                            title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                        });
-                        $("#err_ptrf" + no).html("<br>Pembimbing Harus Dipilih");
-                        ptrf++;
-                    } else {
-                        $("#err_ptrf" + no).html("");
-                    }
-                    no++;
+            <?php
+            $no = 0;
+            while ($r_data_tarif >= $no) {
+            ?>
+                var frekuensi<?= $no; ?> = $('#frekuensi<?= $no; ?>').val();
+                var kuantitas<?= $no; ?> = $('#kuantitas<?= $no; ?>').val();
 
-                }
+                //Notif Bila tidak diisi
+                if (
+                    frekuensi<?= $no; ?> == "" ||
+                    kuantitas<?= $no; ?> == ""
+                ) {
 
-                //Notif jika tidak diisi Unit
-                var no = 1;
-                var unit = 0;
-                if (jurusan != 1) {
-                    while (no <= jumlah_praktik) {
-                        console.log("no: " + no + "jumlah_praktik: " + jumlah_praktik);
-                        if (document.getElementById('id_unit' + no).value == "") {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 10000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            });
-
-                            Toast.fire({
-                                icon: 'warning',
-                                title: '<center>DATA ADA YANG BELUM TERISI</center>'
-                            });
-                            document.getElementById("err_unit" + no).innerHTML = "<br> Ruangan Harus Dipilih";
-                            unit++;
-                        } else {
-                            document.getElementById("err_unit" + no).innerHTML = "";
+                    //warning Toast bila ada data wajib yg berlum terisi
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
-                        no++;
+                    });
+
+                    Toast.fire({
+                        icon: 'warning',
+                        title: '<center>DATA ADA YANG BELUM TERISI</center>'
+                    });
+
+                    if (frekuensi<?= $no; ?> == "") {
+                        $("#err_frekuensi<?= $no; ?>").html("Isi");
+                    } else {
+                        $("#err_frekuensi<?= $no; ?>").html("");
+                    }
+                    if (kuantitas<?= $no; ?> == "") {
+                        $("#err_kuantitas<?= $no; ?>").html("Isi");
+                    } else {
+                        $("#err_kuantitas<?= $no; ?>").html("");
                     }
                 }
+            <?php
+                $no++;
             }
-
-            //jika data sudah diisi semua
-            if (ptrf == 0 && unit == 0 && jumlah_praktik == jumlah_praktik_input) {
-                if (jurusan == 1) {
-                    $title = '<span class"text-xs"><b>DATA Pembimbing</b><br>Berhasil Tersimpan';
-                } else {
-                    $title = '<span class"text-xs"><b>DATA Pembimbing</b> dan <b>Ruangan</b><br>Berhasil Tersimpan';
-                }
-                console.log("Simpan ptrf");
-                $.ajax({
-                    type: 'POST',
-                    url: "_admin/exc/x_i_praktik_pembimbing_s.php?",
-                    data: data_pembimbing,
-                    success: function() {
-                        Swal.fire({
-                            allowOutsideClick: false,
-                            // isDismissed: false,
-                            icon: 'success',
-
-                            title: $title,
-                            showConfirmButton: false,
-                            html: '<a href="?ptrf" class="btn btn-outline-primary">OK</a>',
-                            timer: 11115000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        }).then(
-                            function() {
-                                document.location.href = "?ptrf";
-                            }
-                        );
-                    },
-                    error: function(response) {
-                        console.log(response.responseText);
-                        alert('eksekusi query gagal');
-                    }
-                });
-            }
+            ?>
         });
     </script>
 <?php } else {

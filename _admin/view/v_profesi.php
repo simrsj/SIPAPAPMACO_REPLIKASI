@@ -39,7 +39,7 @@
                 $r_profesi_pdd = $q_profesi_pdd->rowCount();
                 if ($r_profesi_pdd > 0) {
                 ?>
-                    <table class='table table-striped' id="myTable">
+                    <table class='table table-striped' id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
