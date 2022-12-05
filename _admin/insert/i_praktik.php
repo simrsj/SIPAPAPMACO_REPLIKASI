@@ -58,19 +58,17 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                             $q = $conn->query($sql);
                             if ($q->rowCount() > 0) {
                                 while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
-                                    echo $no . "-" . $d['id_praktik'] . "<br>";
                                     if ($no != $d['id_praktik']) {
                                         break;
                                     }
                                     $no++;
                                 }
                             }
-                            echo $no . "<br>";
                             $id_praktik = $no;
                             ?>
                             <input name="id" id="id" value="<?= urlencode(base64_encode($id_praktik)); ?>" hidden>
                             <input name="user" id="user" value="<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" hidden>
-                            <div class="col">
+                            <div class="col-lg">
                                 <?php if ($d_user['level_user'] == 2) {
                                     $sql_institusi = "SELECT * FROM tb_user";
                                     $sql_institusi .= " JOIN tb_institusi ON tb_user.id_institusi = tb_institusi.id_institusi ASC";
@@ -121,12 +119,12 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                     }
                                 } ?>
                             </div>
-                            <div class="col">
+                            <div class="col-lg">
                                 Nama Gelombang/Kelompok : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="kelompok" id="kelompok" placeholder="Isi Gelombang/Kelompok" required>
                                 <div class="text-danger b  i text-xs blink" id="err_kelompok"></div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-lg-2">
                                 Jumlah Praktik: <span style="color:red">*</span><br>
                                 <input type="number" min="1" class="form-control form-control-xs" name="jumlah" id="jumlah" placeholder="Isi Jumlah Praktik" required>
                                 <div class="text-danger b  i text-xs blink" id="err_jumlah"></div>

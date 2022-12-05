@@ -61,7 +61,7 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                 echo "<script>alert('$ex -DATA PRAKTIK');";
                 echo "document.location.href='?error404';</script>";
             }
-            print_r($q_data_tarif);
+            // print_r($q_data_tarif);
             $r_data_tarif = $q_data_tarif->rowCount();
             if ($r_data_tarif > 0) {
             ?>
@@ -92,19 +92,28 @@ if (isset($_GET['ptrf']) && isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == "
                                 ?>
                                     <tr class="text-center">
                                         <td><?= $no; ?></td>
-                                        <td><?= $d_data_tarif['nama_tarif_jenis']; ?></td>
-                                        <td><?= $d_data_tarif['nama_tarif']; ?></td>
-                                        <td><?= $d_data_tarif['nama_tarif_satuan']; ?></td>
-                                        <td class="text-left">
-                                            <input class="form-control" type="hidden" max="1" name="tarif<?= $no; ?>" id="tarif<?= $no; ?>" value="<?= $d_data_tarif['jumlah_tarif'] ?>">
-                                            <?= "Rp " . number_format($d_data_tarif['jumlah_tarif'], 0, ",", "."); ?>
+                                        <td>
+                                            <?= $d_data_tarif['nama_tarif_jenis']; ?>
+                                            <input type="hidden" name="nama_tarif_jenis<?= $no; ?>" id="nama_tarif_jenis<?= $no; ?>" value="<?= $d_data_tarif['nama_tarif_jenis'] ?>">
                                         </td>
                                         <td>
-                                            <input class="form-control" type="number" max="1" name="frekuensi<?= $no; ?>" id="frekuensi<?= $no; ?>" required>
+                                            <?= $d_data_tarif['nama_tarif']; ?>
+                                            <input type="hidden" name="nama_tarif<?= $no; ?>" id="nama_tarif<?= $no; ?>" value="<?= $d_data_tarif['nama_tarif'] ?>">
+                                        </td>
+                                        <td>
+                                            <?= $d_data_tarif['nama_tarif_satuan']; ?>
+                                            <input type="hidden" name="nama_tarif_satuan<?= $no; ?>" id="nama_tarif_satuan<?= $no; ?>" value="<?= $d_data_tarif['nama_tarif_satuan'] ?>">
+                                        </td>
+                                        <td class="text-left">
+                                            <?= "Rp " . number_format($d_data_tarif['jumlah_tarif'], 0, ",", "."); ?>
+                                            <input type="hidden" name="tarif<?= $no; ?>" id="tarif<?= $no; ?>" value="<?= $d_data_tarif['jumlah_tarif'] ?>">
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="number" max="1" name="frekuensi<?= $no; ?>" id="frekuensi<?= $no; ?>" value="0" required>
                                             <div class="text-xs font-italic text-danger b blink" id="err_frekuensi<?= $no; ?>"></div>
                                         </td>
                                         <td>
-                                            <input class="form-control" type="number" max="1" name="kuantitas<?= $no ?>" id="kuantitas<?= $no; ?>" required>
+                                            <input class="form-control" type="number" max="1" name="kuantitas<?= $no ?>" id="kuantitas<?= $no; ?>" value="0" required>
                                             <div class="text-xs font-italic text-danger b blink" id="err_kuantitas<?= $no; ?>"></div>
                                         </td>
                                         <td class="text-left">

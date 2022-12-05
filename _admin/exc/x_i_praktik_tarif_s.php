@@ -1,8 +1,8 @@
 <?php
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
@@ -23,18 +23,29 @@ if ($d_prvl['c_praktik_tarif'] == 'Y') {
         // $sql_insert_tarif .= " id_tarif_pilih,";
         $sql_insert_tarif .= " id_praktik,";
         $sql_insert_tarif .= " tgl_input_tarif_pilih,";
-        // $sql_insert_tarif .= " jumlah_tarif_pilih";
+        $sql_insert_tarif .= " nama_jenis_tarif_pilih,";
+        $sql_insert_tarif .= " nama_tarif_pilih,";
+        $sql_insert_tarif .= " nominal_tarif_pilih,";
+        $sql_insert_tarif .= " nama_satuan_tarif_pilih,";
+        $sql_insert_tarif .= " frekuensi_tarif_pilih,";
+        $sql_insert_tarif .= " kuantitas_tarif_pilih,";
+        $sql_insert_tarif .= " jumlah_tarif_pilih";
         $sql_insert_tarif .= " ) VALUES (";
         $sql_insert_tarif .= " '" . base64_decode(urldecode($_POST['idp'])) . "',";
         $sql_insert_tarif .= " '" . date('Y-m-d') . "',";
-        $sql_insert_tarif .= " '" . $_POST['id'] . "',";
-        // $sql_insert_tarif .= " '" . $total_tarif_mess_pilih . "')";
+        $sql_insert_tarif .= " '" . $_POST['nama_tarif_jenis' . $no] . "',";
+        $sql_insert_tarif .= " '" . $_POST['nama_tarif' . $no] . "',";
+        $sql_insert_tarif .= " '" . $_POST['tarif' . $no] . "',";
+        $sql_insert_tarif .= " '" . $_POST['nama_tarif_satuan' . $no] . "',";
+        $sql_insert_tarif .= " '" . $_POST['frekuensi' . $no] . "',";
+        $sql_insert_tarif .= " '" . $_POST['kuantitas' . $no] . "',";
+        $sql_insert_tarif .= " '" . $_POST['tarif' . $no] * $_POST['frekuensi' . $no] * $_POST['kuantitas' . $no] . "'";
         $sql_insert_tarif .= " )";
         echo $sql_insert_tarif . "<br>";
 
         //Eksekusi Query
         try {
-            // $conn->query($sql_insert_tarif_mess);
+            $conn->query($sql_insert_tarif);
         } catch (Exception $ex) {
             echo "<script>alert('$ex -INSERT TARIF MESS-');";
             echo "document.location.href='?error404';</script>";

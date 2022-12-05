@@ -107,57 +107,13 @@
                                         <?php
                                         if ($r_praktik_tarif > 0) {
                                         ?>
-                                            <div class="table-responsive">
-                                                <table class="table table-striped table-bordered" id="<?= md5('table' . $d_praktik['id_praktik']) ?>">
-                                                    <thead class="thead-dark">
-                                                        <tr>
-                                                            <th scope="col">No</th>
-                                                            <th scope="col">Nama Jenis tarif</th>
-                                                            <th scope="col">Nama Tarif </th>
-                                                            <th scope="col">Tarif </th>
-                                                            <th scope="col">Satuan </th>
-                                                            <th scope="col">Frekuensi </th>
-                                                            <th scope="col">Kuantitas </th>
-                                                            <th scope="col">Total Tarif </th>
-                                                            <th scope="col">Status</th>
-                                                            <th scope="col">Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $total_jumlah_tarif = 0;
-                                                        $no = 1;
-                                                        while ($d_praktik_tarif = $q_praktik_tarif->fetch(PDO::FETCH_ASSOC)) {
-                                                        ?>
-                                                            <tr class="text-center align-middle my-auto">
-                                                                <td class="align-middle "><?= $no; ?></td>
-                                                                <td class="align-middle "><?= $d_praktik_tarif['nama_jenis_tarif_pilih']; ?></td>
-                                                                <td class="align-middle "><?= $d_praktik_tarif['nama_tarif_pilih']; ?></td>
-                                                                <td class="align-middle "><?= "Rp " . number_format($d_praktik_tarif['nominal_tarif_pilih'], 0, ",", "."); ?></td>
-                                                                <td class="align-middle "><?= $d_praktik_tarif['nama_satuan_tarif_pilih']; ?></td>
-                                                                <td class="align-middle "><?= $d_praktik_tarif['frekuensi_tarif_pilih']; ?></td>
-                                                                <td class="align-middle "><?= $d_praktik_tarif['kuantitas_tarif_pilih']; ?></td>
-                                                                <td class="align-middle "> <?= "Rp " . number_format($d_praktik_tarif['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
-                                                                <td class="align-middle ">
-                                                                    <?php if ($d_praktik_tarif['status_tarif_pilih'] == 'Y') { ?>
-                                                                        <span class="badge badge-success">Aktif</span>
-                                                                    <?php } else if ($d_praktik_tarif['status_tarif_pilih'] == 'T') { ?>
-                                                                        <span class="badge badge-danger">Tidak Aktif</span>
-                                                                    <?php } else { ?>
-                                                                        <span class="badge badge-danger">ERROR!!!</span>
-                                                                    <?php } ?>
-                                                                </td>
-                                                                <td class="align-middle ">
-                                                                    <?= $d_praktik_tarif['status_tarif_pilih']; ?>
-                                                                </td>
-                                                            </tr>
-                                                        <?php
-                                                            $no++;
-                                                        }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                            <!-- inisiasi tabel data praktikan -->
+                                            <div id="<?= md5("data" . $d_praktik['id_praktik']); ?>"></div>
+                                            <script>
+                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                    .load(
+                                                        "_admin/view/v_praktik_tarifData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&tb=<?= md5($d_praktik['id_praktik']); ?>");
+                                            </script>
                                         <?php
                                         } else {
                                         ?>
@@ -176,11 +132,6 @@
                             </div>
                         </div>
                         <hr class="bg-gray-800">
-                        <script>
-                            $(document).ready(function() {
-                                $("#<?= md5('table' . $d_praktik['id_praktik']) ?>").dataTable();
-                            });
-                        </script>
                     <?php
                     }
                 } else {
