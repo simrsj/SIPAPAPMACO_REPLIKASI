@@ -75,7 +75,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres Tarif Praktik + Database"
+git commit -a -m "Tambah Vendor Font Awesome v6 + Database"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git

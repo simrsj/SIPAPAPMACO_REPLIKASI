@@ -70,56 +70,61 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 				</li>
 			<?php } ?>
-			<?php if ($d_prvl['r_praktik'] == "Y" || $d_prvl['r_narsum'] == "Y") { ?>
-				<!-- Pengajuan -->
+			<?php if ($d_prvl['r_praktik'] == "Y") { ?>
+				<!-- Praktik -->
 				<li class="nav-item" style=" word-wrap: break-word;">
-					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapseTwo">
-						<i class="far fa-fw fa-list-alt"></i>
-						<span>Pengajuan</span>
+					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapse_prk">
+						<i class="fa-solid fa-fw fa-user-graduate"></i>
+						<span>Praktik</span>
 					</a>
 					<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<?php if ($d_prvl['r_praktik'] == "Y") { ?>
 								<a class="collapse-item" href="?ptk">
-									<i class="far fa-circle"></i>
-									<span>Praktik</span>
+									<i class="fas fa-envelope"></i>
+									<span>Daftar Pengajuan</span>
 								</a>
 							<?php } ?>
-							<?php if ($d_prvl['r_narsum'] == "Y") { ?>
-								<a class="collapse-item" href="?narsum">
-									<i class="far fa-circle"></i>
-									<span>Narsum/Sponsorship</span>
+							<?php if ($d_prvl['r_praktikan'] == "Y") { ?>
+								<!-- Praktikan -->
+								<a class="collapse-item" href="?ptkn">
+									<i class="far fa-fw fa-address-book"></i>
+									<span>Data Praktikan</span>
+								</a>
+							<?php } ?>
+							<?php if ($d_prvl['r_praktik_pembimbing'] == "Y") { ?>
+								<a class="collapse-item" href="?pmbb">
+									<i class="fas fa-fw fa-users"></i>
+									<span>Pembimbing-Ruangan</span>
+								</a>
+							<?php } ?>
+							<?php if ($d_prvl['r_praktik_tarif'] == "Y") { ?>
+								<a class="collapse-item" href="?ptrf">
+									<i class="fas fa-fw fa-receipt"></i>
+									<span>Tarif Praktik</span>
 								</a>
 							<?php } ?>
 						</div>
 					</div>
 				</li>
 			<?php } ?>
-			<?php if ($d_prvl['r_praktikan'] == "Y") { ?>
-				<!-- Praktikan -->
-				<li class="nav-item ">
-					<a class="nav-link" href="?ptkn">
-						<i class="far fa-fw fa-address-book"></i>
-						<span>Data Praktikan</span>
+			<?php if ($d_prvl['r_narsum'] == "Y") { ?>
+				<!-- Narasumber -->
+				<li class="nav-item" style=" word-wrap: break-word;">
+					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_narsum" aria-expanded="true" aria-controls="collapse_narsum">
+						<i class="fas fa-fw fa-person-chalkboard"></i>
+						<span>Narasumber</span>
 					</a>
-				</li>
-			<?php } ?>
-			<?php if ($d_prvl['r_praktik_pembimbing'] == "Y") { ?>
-				<!-- Praktik Pembimbing -->
-				<li class="nav-item ">
-					<a class="nav-link" href="?pmbb">
-						<i class="fas fa-fw fa-users"></i>
-						<span>Pembimbing-Ruangan</span>
-					</a>
-				</li>
-			<?php } ?>
-			<?php if ($d_prvl['r_praktik_tarif'] == "Y") { ?>
-				<!-- Praktik tarif -->
-				<li class="nav-item ">
-					<a class="nav-link" href="?ptrf">
-						<i class="fas fa-fw fa-receipt"></i>
-						<span>Tarif Praktik</span>
-					</a>
+					<div id="collapse_narsum" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<?php if ($d_prvl['r_narsum'] == "Y") { ?>
+								<a class="collapse-item" href="?narsum">
+									<i class="fas fa-envelope"></i>
+									<span>Pengajuan</span>
+								</a>
+							<?php } ?>
+						</div>
+					</div>
 				</li>
 			<?php } ?>
 			<li class="nav-item ">

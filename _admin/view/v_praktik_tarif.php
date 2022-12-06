@@ -95,12 +95,60 @@
                                             <div class="col">
                                                 <h4 class="font-weight-bold">Data Tarif</h4><br>
                                             </div>
-                                            <?php if ($d_prvl['c_praktik_tarif'] == 'Y') { ?>
-                                                <div class="col text-right">
-                                                    <!-- tombol modal tambah permbimbing  -->
-                                                    <a title="tambah praktikan" class="btn btn-success btn-sm " href="?ptrf=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&i">
-                                                        <i class="fas fa-plus"></i> Tambah Tarif
+                                            <?php if ($d_prvl['c_praktikan'] == 'Y') { ?>
+                                                <div class="col-2 text-right">
+                                                    <!-- tombol modal tambah praktikan  -->
+                                                    <a title="tambah praktikan" class='btn btn-success btn-sm tambah_init<?= md5($d_praktik['id_praktik']); ?>' href='#' data-toggle="modal" data-target="#mi<?= md5($d_praktik['id_praktik']); ?>">
+                                                        <i class="fas fa-plus"></i> Tambah Data
                                                     </a>
+
+                                                    <!-- modal tambah praktikan  -->
+                                                    <div class="modal fade text-center" id="mi<?= md5($d_praktik['id_praktik']); ?>" data-backdrop="static">
+                                                        <div class="modal-dialog modal-dialog-scrollable  modal-md">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header h5">
+                                                                    Tambah Praktikan
+                                                                </div>
+                                                                <div class="modal-body text-md">
+                                                                    <form class="form-data b" method="post" id="form_t<?= md5($d_praktik['id_praktik']); ?>">
+                                                                        Jenis Tarif : <span style="color:red">*</span><br>
+                                                                        <select class="select2" id="t_jenis_tarif">
+                                                                            <?php
+                                                                            $sql_jenis_tarif = "SELECT * FROM tb_tarif_jenis";
+                                                                            $sql_jenis_tarif .= " ORDER BY nama_jenis_tarif ASC";
+                                                                            try {
+                                                                                $q_jenis_tarif = $conn->query($sql_jenis_tarif);
+                                                                            } catch (Exception $ex) {
+                                                                                echo "<script>alert('$ex -DATA JENIS TARIF');";
+                                                                                echo "document.location.href='?error404';</script>";
+                                                                            }
+                                                                            while ($d_jenis_tarif = $q_jenis_tarif->fetch(PDO::FETCH_ASSOC)) {
+                                                                            ?>
+                                                                                <option value="<?= $d_jenis_tarif['id_tarif_jenis'] ?>">
+                                                                                    <?= $d_jenis_tarif['nama_tarif_jenis'] ?>
+                                                                                </option>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+                                                                        </select>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_jenis_tarif"></div><br>
+                                                                        Nama Siswa/Mahasiswa : <span style="color:red">*</span><br>
+                                                                        <input type="text" id="t_nama<?= md5($d_praktik['id_praktik']); ?>" name="t_nama" class="form-control" placeholder="Inputkan Nama Siswa/Mahasiswa" required>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_nama"></div><br>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer text-md">
+                                                                    <a class="btn btn-danger btn-sm tambah_tutup<?= md5($d_praktik['id_praktik']); ?>" data-dismiss="modal">
+                                                                        Kembali
+                                                                    </a>
+                                                                    &nbsp;
+                                                                    <a class="tambah btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
+                                                                        Simpan
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             <?php } ?>
                                         </div>

@@ -356,9 +356,9 @@ if ($d_prvl['r_praktik'] == "Y") {
                                         </div>
                                     </div>
 
-                                    <a title="Ubah" class='btn btn-primary btn-xs' href='#'>
+                                    <!-- <a title="Ubah" class='btn btn-primary btn-xs' href='#'>
                                         <i class="fas fa-edit"></i>
-                                    </a>
+                                    </a> -->
                                     <?php if ($d_prvl['d_praktik'] == "Y") { ?>
                                         <a title="Hapus" class='btn btn-danger btn-xs hapus<?= md5($d_praktik['id_praktik']); ?>' id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" href='#'>
                                             <i class="fas fa-trash-alt"></i>
