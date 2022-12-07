@@ -104,6 +104,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 									<span>Tarif Praktik</span>
 								</a>
 							<?php } ?>
+							<?php if ($d_prvl['r_praktik_bayar'] == "Y") { ?>
+								<a class="collapse-item" href="?pbyr">
+									<i class="fas fa-fw fa-wallet"></i>
+									<span>Data Pembayaran</span>
+								</a>
+							<?php } ?>
 						</div>
 					</div>
 				</li>
@@ -127,12 +133,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</div>
 				</li>
 			<?php } ?>
-			<li class="nav-item ">
-				<a class="nav-link" href="?byr">
-					<i class="fas fa-fw fa-wallet"></i>
-					<span>Data Pembayaran</span>
-				</a>
-			</li>
 			<li class="nav-item ">
 				<a class="nav-link" href="?nil">
 					<i class="fas fa-fw fa-clipboard-list"></i>
@@ -465,8 +465,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				//praktik tarif
 				elseif (isset($_GET['ptrf'])) {
 					if (isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == 'Y') include "_admin/insert/i_praktik_tarif.php";
-					else if (isset($_GET['u']) && $d_prvl['u_praktik_tarif'] == 'Y') include "_admin/view/u_praktik_tarif.php";
 					else include "_admin/view/v_praktik_tarif.php";
+				}
+				//praktik bayar
+				elseif (isset($_GET['pbyr'])) {
+					if ($d_prvl['r_praktik_bayar'] == 'Y') include "_admin/view/v_praktik_bayar.php";
 				} elseif (isset($_GET['pfs'])) {
 					include "_admin/view/v_profesi.php";
 				} elseif (isset($_GET['uni'])) {

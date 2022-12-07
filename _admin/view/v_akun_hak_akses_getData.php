@@ -387,6 +387,59 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_praktik_tarif"></div>
                     </td>
                 </tr>
+                <!-- Praktik Bayar -->
+                <tr>
+                    <td>Praktik Bayar</td>
+                    <td>
+                        <?php
+                        $c_praktik_bayarY = "";
+                        $c_praktik_bayarT = "";
+                        if ($d_user_prvl['c_praktik_bayar'] == 'Y') $c_praktik_bayarY = "checked";
+                        else if ($d_user_prvl['c_praktik_bayar'] == 'T')  $c_praktik_bayarT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="c_praktik_bayar" id="c_praktik_bayarY" value="Y" <?= $c_praktik_bayarY; ?>><label for="c_praktik_bayarY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="c_praktik_bayar" id="c_praktik_bayarT" value="T" <?= $c_praktik_bayarT; ?>><label for="c_praktik_bayarT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_praktik_bayar"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $r_praktik_bayarY = "";
+                        $r_praktik_bayarT = "";
+                        if ($d_user_prvl['r_praktik_bayar'] == 'Y') $r_praktik_bayarY = "checked";
+                        else if ($d_user_prvl['r_praktik_bayar'] == 'T')  $r_praktik_bayarT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="r_praktik_bayar" id="r_praktik_bayarY" value="Y" <?= $r_praktik_bayarY; ?>><label for="r_praktik_bayarY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="r_praktik_bayar" id="r_praktik_bayarT" value="T" <?= $r_praktik_bayarT; ?>><label for="r_praktik_bayarT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_praktik_bayar"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $u_praktik_bayarY = "";
+                        $u_praktik_bayarT = "";
+                        if ($d_user_prvl['u_praktik_bayar'] == 'Y') $u_praktik_bayarY = "checked";
+                        else if ($d_user_prvl['u_praktik_bayar'] == 'T')  $u_praktik_bayarT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="u_praktik_bayar" id="u_praktik_bayarY" value="Y" <?= $u_praktik_bayarY; ?>><label for="u_praktik_bayarY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="u_praktik_bayar" id="u_praktik_bayarT" value="T" <?= $u_praktik_bayarT; ?>><label for="u_praktik_bayarT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_praktik_bayar"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $d_praktik_bayarY = "";
+                        $d_praktik_bayarT = "";
+                        if ($d_user_prvl['d_praktik_bayar'] == 'Y') $d_praktik_bayarY = "checked";
+                        else if ($d_user_prvl['d_praktik_bayar'] == 'T')  $d_praktik_bayarT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="d_praktik_bayar" id="d_praktik_bayarY" value="Y" <?= $d_praktik_bayarY; ?>><label for="d_praktik_bayarY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="d_praktik_bayar" id="d_praktik_bayarT" value="T" <?= $d_praktik_bayarT; ?>><label for="d_praktik_bayarT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_praktik_bayar"></div>
+                    </td>
+                </tr>
+            </tbody>
             </tbody>
         </table>
     </div>
@@ -428,6 +481,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
         var r_praktik_tarif = $("input[name='r_praktik_tarif']:checked").val();
         var u_praktik_tarif = $("input[name='u_praktik_tarif']:checked").val();
         var d_praktik_tarif = $("input[name='d_praktik_tarif']:checked").val();
+        var c_praktik_bayar = $("input[name='c_praktik_bayar']:checked").val();
+        var r_praktik_bayar = $("input[name='r_praktik_bayar']:checked").val();
+        var u_praktik_bayar = $("input[name='u_praktik_bayar']:checked").val();
+        var d_praktik_bayar = $("input[name='d_praktik_bayar']:checked").val();
         var c_praktikan = $("input[name='c_praktikan']:checked").val();
         var r_praktikan = $("input[name='r_praktikan']:checked").val();
         var u_praktikan = $("input[name='u_praktikan']:checked").val();
@@ -461,6 +518,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
             r_praktik_tarif != "" &&
             u_praktik_tarif != "" &&
             d_praktik_tarif != "" &&
+            c_praktik_bayar != "" &&
+            r_praktik_bayar != "" &&
+            u_praktik_bayar != "" &&
+            d_praktik_bayar != "" &&
             c_praktikan != "" &&
             r_praktikan != "" &&
             u_praktikan != "" &&
