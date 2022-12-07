@@ -53,6 +53,30 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                     <?php
                     $no = 1;
                     while ($d_praktik_bayar = $q_praktik_bayar->fetch(PDO::FETCH_ASSOC)) {
+                        //sql tarif pilih
+                        $sql_tarif_pilih = "SELECT * FROM tb_tarif_pilih";
+                        $sql_tarif_pilih .= " WHERE id_praktik = " . $d_praktik_bayar['id_praktik'];
+                        $sql_tarif_pilih .= " AND status_tarif_pilih = 'Y'";
+                        // echo $sql_tarif_pilih . "<br>";
+                        try {
+                            $q_tarif_pilih = $conn->query($sql_tarif_pilih);
+                        } catch (Exception $ex) {
+                            echo "<script> alert('$ex -DATA TARIF PILIH-'); ";
+                            echo "document.location.href='?error404'; </script>";
+                        }
+                        $r_tarif_pilih = $q_tarif_pilih->rowCount();
+
+                        //sql bayar
+                        $sql_bayar = "SELECT * FROM tb_bayar";
+                        $sql_bayar .= " WHERE id_praktik = " . $d_praktik_bayar['id_praktik'];
+                        // echo $sql_tarif_pilih . "<br>";
+                        try {
+                            $q_bayar = $conn->query($sql_bayar);
+                        } catch (Exception $ex) {
+                            echo "<script> alert('$ex -DATA BAYAR-'); ";
+                            echo "document.location.href='?error404'; </script>";
+                        }
+                        $r_bayar = $q_bayar->rowCount();
                     ?>
                         <tr class="text-center">
                             <td class="align-middle"><?= $no; ?></td>
@@ -65,50 +89,52 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                             <td class="align-middle"> <?= $d_praktik_bayar['tgl_selesai_praktik'] ?> </td>
                             <td class="align-middle">
                                 <?php
-                                $sql_bayar = "SELECT * FROM tb_bayar";
-                                $sql_bayar .= " WHERE id_praktik = " . $d_praktik_bayar['id_praktik'];
-                                // echo $sql_tarif_pilih . "<br>";
-                                try {
-                                    $q_bayar = $conn->query($sql_bayar);
-                                } catch (Exception $ex) {
-                                    echo "<script> alert('$ex -DATA PRAKTIK-'); ";
-                                    echo "document.location.href='?error404'; </script>";
-                                }
-                                $r_bayar = $q_bayar->rowCount();
-                                if ($r_bayar > 0) {
+
+                                // jika tarif belum ada 
+                                if ($r_tarif_pilih < 1) {
                                 ?>
-                                    <a class="btn btn-outline-success text-xs" href="?pbyr=&i">
-                                        <i class="fa-solid fa-money-bill"></i>
-                                        Lakukan Pembayaran
-                                    </a>
+                                    <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
                                 <?php
-                                } else if ($r_bayar < 1) {
+                                }
+                                // jika tarif sudah ada dan belum dibayar 
+                                else if ($r_tarif_pilih > 0 && $r_bayar < 1) {
+                                ?>
+                                    <span class="badge badge-danger">Belum Dibayar</span>
+                                <?php
+                                }
+                                // jika tarif sudah ada dan sudah dibayar, menuggu verifikasi admin
+                                else if ($r_tarif_pilih > 0 && $r_bayar > 0) {
+                                ?>
+                                    <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
+                                <?php
+                                }
+                                // jika tarif sudah ada dan sudah dibayar, verifikasi gagal oleh admin
+                                else if ($r_tarif_pilih > 0 && $r_bayar > 0) {
+                                ?>
+                                    <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
+                                <?php
+                                }
+                                // jika tarif sudah ada dan sudah dibayar, sudah verifikasi gagal oleh admin
+                                else if ($r_tarif_pilih > 0 && $r_bayar > 0) {
                                 ?>
                                     <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
                                 <?php
                                 } else {
                                 ?>
                                     <span class="badge badge-danger">ERROR</span>
+                                    <a class="btn btn-outline-success text-xs" href="?pbyr=<?= urlencode(base64_encode($d_praktik_bayar['id_praktik'])) ?>&i">
+                                        <i class="fa-solid fa-money-bill"></i>
+                                        Lakukan Pembayaran
+                                    </a>
                                 <?php
                                 }
                                 ?>
                             </td>
                             <td class="align-middle">
                                 <?php
-                                $sql_tarif_pilih = "SELECT * FROM tb_tarif_pilih";
-                                $sql_tarif_pilih .= " WHERE id_praktik = " . $d_praktik_bayar['id_praktik'];
-                                $sql_tarif_pilih .= " AND status_tarif_pilih = 'Y'";
-                                // echo $sql_tarif_pilih . "<br>";
-                                try {
-                                    $q_tarif_pilih = $conn->query($sql_tarif_pilih);
-                                } catch (Exception $ex) {
-                                    echo "<script> alert('$ex -DATA PRAKTIK-'); ";
-                                    echo "document.location.href='?error404'; </script>";
-                                }
-                                $r_tarif_pilih = $q_tarif_pilih->rowCount();
                                 if ($r_tarif_pilih > 0) {
                                 ?>
-                                    <a class="btn btn-outline-success text-xs" href="?pbyr=&i">
+                                    <a class="btn btn-outline-success text-xs" href="?pbyr=<?= urlencode(base64_encode($d_praktik_bayar['id_praktik'])) ?>&i">
                                         <i class="fa-solid fa-money-bill"></i>
                                         Lakukan Pembayaran
                                     </a>
