@@ -12,13 +12,13 @@ try {
 }
 $d = $q->fetch(PDO::FETCH_ASSOC);
 $h['id_tarif_pilih'] = $d["id_tarif_pilih"];
-$h['u_nama_jenis_tarif'] = $d["nama_jenis_tarif_pilih"];
-$h['u_nama'] = $d["nama_praktikan"];
-$h['u_tgl'] = $d["tgl_lahir_praktikan"];
-$h['u_telp'] = $d["telp_praktikan"];
-$h['u_wa'] = $d["wa_praktikan"];
-$h['u_email'] = $d["email_praktikan"];
-$h['u_alamat'] = $d["alamat_praktikan"];
+$h['id_praktik'] = $d["id_praktik"];
+$h['u_nama_jenis'] = $d["nama_jenis_tarif_pilih"];
+$h['u_nama'] = $d["nama_tarif_pilih"];
+$h['u_tarif'] = $d["nominal_tarif_pilih"];
+$h['u_satuan'] = $d["nama_satuan_tarif_pilih"];
+$h['u_frekuensi'] = $d["frekuensi_tarif_pilih"];
+$h['u_kuantitas'] = $d["kuantitas_tarif_pilih"];
 
 echo json_encode($h);
 

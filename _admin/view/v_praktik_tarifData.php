@@ -15,7 +15,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
 $sql_praktik_tarif .= " JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik ";
 $sql_praktik_tarif .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.id_praktik = " . base64_decode(urldecode($_GET['idp']));
-$sql_praktik_tarif .= " ORDER BY tb_tarif_pilih.nama_tarif_pilih ASC";
+$sql_praktik_tarif .= " ORDER BY tb_tarif_pilih.nama_jenis_tarif_pilih ASC";
 // echo "$sql_praktik_tarif<br>";
 try {
     $q_praktik_tarif = $conn->query($sql_praktik_tarif);
@@ -28,7 +28,7 @@ $r_praktik_tarif = $q_praktik_tarif->rowCount();
 if ($r_praktik_tarif > 0) {
 ?>
     <div class="table-responsive">
-        <table class="table table-striped table-bordered" id="<?= md5('table' . $d_praktik['id_praktik']) ?>">
+        <table class="table table-striped table-bordered" id="<?= $_GET['tb'] ?>">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">No</th>
@@ -70,79 +70,33 @@ if ($r_praktik_tarif > 0) {
                         <td class="align-middle">
                             <div class="btn-group" role="group" role="group" aria-label="Basic example">
                                 <div class="btn-group" role="group" role="group" aria-label="Basic example">
-                                    <?php if ($d_prvl['u_praktikan'] == 'Y') { ?>
-                                        <!-- tombol modal ubah praktikan  -->
-                                        <a title="Ubah" class='btn btn-outline-primary ubah_init<?= md5($d_praktik_tarif['id_praktikan']); ?>' id="<?= urlencode(base64_encode($d_praktik_tarif['id_praktikan'])); ?>" href='#' data-toggle="modal" data-target="#mu<?= md5($d_praktik_tarif['id_praktikan']); ?>">
-                                            <i class="far fa-edit"></i>
-                                        </a>
-
-                                        <!-- modal ubah praktikan  -->
-                                        <div class="modal fade text-center" id="mu<?= md5($d_praktik_tarif['id_praktikan']); ?>" data-backdrop="static">
-                                            <div class="modal-dialog modal-dialog-scrollable  modal-md">
-                                                <div class="modal-content">
-                                                    <div class="modal-header h5">
-                                                        Ubah Praktikan
-                                                    </div>
-                                                    <div class="modal-body text-md">
-                                                        <form class="form-data b" method="post" id="form_u<?= md5($d_praktik_tarif['id_praktikan']); ?>">
-                                                            <input type="hidden" name="idprkn<?= md5($d_praktik_tarif['id_praktikan']); ?>" id="idprkn<?= md5($d_praktik_tarif['id_praktikan']); ?>" value="" required>
-                                                            No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
-                                                            <input type="text" id="u_no_id<?= md5($d_praktik_tarif['id_praktikan']); ?>" name="u_no_id" class="form-control" placeholder="Isikan No ID" required>
-                                                            <div class="text-danger b i text-xs blink" id="err_u_no_id"></div><br>
-                                                            Nama Siswa/Mahasiswa : <span style="color:red">*</span><br>
-                                                            <input type="text" id="u_nama<?= md5($d_praktik_tarif['id_praktikan']); ?>" name="u_nama" class="form-control" placeholder="Inputkan Nama Siswa/Mahasiswa" required>
-                                                            <div class="text-danger b i text-xs blink" id="err_u_nama"></div><br>
-                                                            Tanggal Lahir : <span style="color:red">*</span><br>
-                                                            <input type="date" id="u_tgl<?= md5($d_praktik_tarif['id_praktikan']); ?>" name="u_tgl" class="form-control" required>
-                                                            <div class="text-danger b i text-xs blink" id="err_u_tgl"></div><br>
-                                                            Alamat : <span style="color:red">*</span><br>
-                                                            <textarea id="u_alamat<?= md5($d_praktik_tarif['id_praktikan']); ?>" name="u_alamat" class="form-control" rows="2" placeholder="Inputkan Alamat"></textarea>
-                                                            <div class="text-danger b i text-xs blink" id="err_u_alamat"></div><br>
-                                                            No Telepon : <span style="color:red">*</span><br>
-                                                            <input type="number" id="u_telp<?= md5($d_praktik_tarif['id_praktikan']); ?>" name="u_telp" class="form-control" min="1" placeholder="Inputkan No Telpon" required>
-                                                            <div class="text-danger b i text-xs blink" id="err_u_telpon"></div><br>
-                                                            No WhatsApp :<br>
-                                                            <input type="number" id="u_wa<?= md5($d_praktik_tarif['id_praktikan']); ?>" name="u_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
-                                                            <div class="text-danger b i text-xs blink" id="err_u_wa"></div><br>
-                                                            E-Mail : <br>
-                                                            <input type="email" id="u_email<?= md5($d_praktik_tarif['id_praktikan']); ?>" name="u_email" class="form-control" placeholder="Inputkan E-Mail">
-                                                            <div class="text-danger b i text-xs blink" id="err_u_email"></div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer text-md">
-                                                        <a class="btn btn-danger btn-sm ubah_tutup<?= md5($d_praktik_tarif['id_praktikan']); ?>" data-dismiss="modal">
-                                                            Kembali
-                                                        </a>
-                                                        &nbsp;
-                                                        <a class="btn btn-primary btn-sm ubah<?= md5($d_praktik_tarif['id_praktikan']); ?>" id="<?= urlencode(base64_encode($d_praktik_tarif['id_praktikan'])); ?>" data-dismiss="modal">
-                                                            Ubah
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <?php if ($d_prvl['u_praktik_tarif'] == 'T') { ?>
                                     <?php } ?>
-                                    <?php if ($d_prvl['d_praktikan'] == 'Y') { ?>
-                                        <!-- tombol modal hapus praktikan  -->
-                                        <a title="Hapus" class='btn btn-outline-danger' href='#' data-toggle="modal" data-target="#md<?= md5($d_praktik_tarif['id_praktikan']); ?>">
+                                    <?php if ($d_prvl['d_praktik_tarif'] == 'Y') { ?>
+                                        <!-- tombol modal hapus pilih tarif  -->
+                                        <a title="Hapus" class='btn btn-outline-danger' href='#' data-toggle="modal" data-target="#<?= md5('md' . $d_praktik_tarif['id_tarif_pilih']); ?>">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
 
-                                        <!-- modal hapus praktikan  -->
-                                        <div class="modal fade text-center" id="md<?= md5($d_praktik_tarif['id_praktikan']); ?>">
+                                        <!-- modal hapus pilih tarif  -->
+                                        <div class="modal fade text-center" id="<?= md5('md' . $d_praktik_tarif['id_tarif_pilih']); ?>">
                                             <div class="modal-dialog modal-dialog-scrollable  modal-md">
                                                 <div class="modal-content">
-                                                    <div class="modal-header h5">
-                                                        Hapus Praktikan
-                                                    </div>
-                                                    <div class="modal-footer text-md">
-                                                        <a class="btn btn-outline-secondary btn-sm" data-dismiss="modal">
-                                                            Kembali
-                                                        </a>
-                                                        &nbsp;
-                                                        <a class="btn btn-outline-danger btn-sm hapus<?= md5($d_praktik_tarif['id_praktikan']); ?>" id="<?= urlencode(base64_encode($d_praktik_tarif['id_praktikan'])); ?>" data-dismiss="modal">
-                                                            Hapus
-                                                        </a>
+                                                    <div class="modal-body h5">
+                                                        <div class="row">
+                                                            <div class="col-lg text-left">
+                                                                Hapus Tarif Praktik ?
+                                                            </div>
+                                                            <div class="col-lg text-right">
+                                                                <a class="btn btn-outline-secondary btn-sm" data-dismiss="modal">
+                                                                    Kembali
+                                                                </a>
+                                                                &nbsp;
+                                                                <a class="btn btn-outline-danger btn-sm <?= md5('hapus' . $d_praktik_tarif['id_tarif_pilih']); ?>" id="<?= urlencode(base64_encode($d_praktik_tarif['id_tarif_pilih'])); ?>" data-dismiss="modal">
+                                                                    Hapus
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,156 +106,23 @@ if ($r_praktik_tarif > 0) {
 
                                 <script>
                                     $(document).ready(function() {
-                                        $('#dataTable<?= $_GET['tb'] ?>').DataTable();
+                                        $('#<?= $_GET['dt'] ?>').DataTable();
                                     });
-                                    <?php if ($d_prvl['u_praktikan'] == 'Y') { ?>
-                                        $(".ubah_init<?= md5($d_praktik_tarif['id_praktikan']); ?>").click(function() {
-                                            // console.log("ubah_init");
-                                            $('#err_u_no_id').empty();
-                                            $('#err_u_nama').empty();
-                                            $('#err_u_tgl').empty();
-                                            $('#err_u_alamat').empty();
-                                            $('#err_u_telpon').empty();
+
+                                    <?php if ($d_prvl['d_praktik_tarif'] == 'Y') { ?>
+                                        $(document).on('click', '.<?= md5('hapus' . $d_praktik_tarif['id_tarif_pilih']); ?>', function() {
+                                            console.log("hapus data tarif Pilih");
                                             $.ajax({
                                                 type: 'POST',
-                                                url: "_admin/view/v_praktikanGetData.php",
+                                                url: "_admin/exc/x_v_praktik_tarif_h.php",
                                                 data: {
-                                                    idprkn: $(this).attr('id')
-                                                },
-                                                dataType: 'json',
-                                                success: function(response) {
-                                                    $('#idprkn<?= md5($d_praktik_tarif['id_praktikan']); ?>').val(response.idprkn);
-                                                    $('#u_no_id<?= md5($d_praktik_tarif['id_praktikan']); ?>').val(response.u_no_id);
-                                                    $('#u_nama<?= md5($d_praktik_tarif['id_praktikan']); ?>').val(response.u_nama);
-                                                    $('#u_tgl<?= md5($d_praktik_tarif['id_praktikan']); ?>').val(response.u_tgl);
-                                                    $('#u_telp<?= md5($d_praktik_tarif['id_praktikan']); ?>').val(response.u_telp);
-                                                    $('#u_wa<?= md5($d_praktik_tarif['id_praktikan']); ?>').val(response.u_wa);
-                                                    $('#u_email<?= md5($d_praktik_tarif['id_praktikan']); ?>').val(response.u_email);
-                                                    $('#u_alamat<?= md5($d_praktik_tarif['id_praktikan']); ?>').val(response.u_alamat);
-                                                },
-                                                error: function(response) {
-                                                    alert(response.responseText);
-                                                    console.log(response.responseText);
-                                                }
-                                            });
-                                        });
-
-                                        // inisiasi klik modal ubah  tutup
-                                        $(".ubah_tutup<?= md5($d_praktik_tarif['id_praktikan']); ?>").click(function() {
-                                            // console.log("tambah_tutup<?= md5($d_praktik_tarif['id_praktikan']); ?>");
-                                            $("#form_u<?= md5($d_praktik_tarif['id_praktikan']); ?>").trigger("reset");
-                                            $('#mu<?= md5($d_praktik_tarif['id_praktikan']); ?>').modal('hide');
-                                        });
-
-                                        $(document).on('click', '.ubah<?= md5($d_praktik_tarif['id_praktikan']); ?>', function() {
-                                            var data_u = $('#form_u<?= md5($d_praktik_tarif['id_praktikan']); ?>').serializeArray();
-                                            data_u.push({
-                                                name: "idprkn",
-                                                value: $(this).attr('id')
-                                            });
-
-                                            var u_no_id = $('#u_no_id<?= md5($d_praktik_tarif['id_praktikan']); ?>').val();
-                                            var u_nama = $('#u_nama<?= md5($d_praktik_tarif['id_praktikan']); ?>').val();
-                                            var u_tgl = $('#u_tgl<?= md5($d_praktik_tarif['id_praktikan']); ?>').val();
-                                            var u_alamat = $('#u_alamat<?= md5($d_praktik_tarif['id_praktikan']); ?>').val();
-                                            var u_telpon = $('#u_telpon<?= md5($d_praktik_tarif['id_praktikan']); ?>').val();
-                                            //cek data from ubah bila tidak diiisi
-                                            if (
-                                                u_no_id == "" ||
-                                                u_nama == "" ||
-                                                u_tgl == "" ||
-                                                u_alamat == "" ||
-                                                u_telpon == ""
-                                            ) {
-                                                if (u_no_id == "") {
-                                                    document.getElementById("err_u_no_id").innerHTML = "No ID Harus Diisi";
-                                                } else {
-                                                    document.getElementById("err_u_no_id").innerHTML = "";
-                                                }
-
-                                                if (u_nama == "") {
-                                                    document.getElementById("err_u_nama").innerHTML = "Nama Harus Diisi";
-                                                } else {
-                                                    document.getElementById("err_u_nama").innerHTML = "";
-                                                }
-
-                                                if (u_tgl == "") {
-                                                    document.getElementById("err_u_tgl").innerHTML = "Tanggal Lahir Harus Dipilih";
-                                                } else {
-                                                    document.getElementById("err_u_tgl").innerHTML = "";
-                                                }
-
-                                                if (u_alamat == "") {
-                                                    document.getElementById("err_u_alamat").innerHTML = "Alamat Harus Diisi";
-                                                } else {
-                                                    document.getElementById("err_u_alamat").innerHTML = "";
-                                                }
-
-                                                if (u_telpon == "") {
-                                                    document.getElementById("err_u_telpon").innerHTML = "Telpon Harus Diisi";
-                                                } else {
-                                                    document.getElementById("err_u_telpon").innerHTML = "";
-                                                }
-                                            }
-
-                                            //simpan data ubah bila sudah sesuai
-                                            if (
-                                                u_no_id != "" &&
-                                                u_nama != "" &&
-                                                u_tgl != "" &&
-                                                u_alamat != "" &&
-                                                u_telpon != ""
-                                            ) {
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: "_admin/exc/x_v_praktikan_u.php",
-                                                    data: data_u,
-                                                    success: function() {
-                                                        $('#mu<?= md5($d_praktik_tarif['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
-                                                            $('#<?= md5("data" . $d_praktik_tarif['id_praktik']); ?>')
-                                                                .load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_praktik_tarif['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
-                                                        })
-                                                        const Toast = Swal.mixin({
-                                                            toast: true,
-                                                            position: 'top-end',
-                                                            showConfirmButton: false,
-                                                            timer: 5000,
-                                                            timerProgressBar: true,
-                                                            didOpen: (toast) => {
-                                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                            }
-                                                        });
-
-                                                        Toast.fire({
-                                                            icon: 'success',
-                                                            title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Dirubah',
-                                                        }).then(
-                                                            function() {}
-                                                        );
-                                                    },
-                                                    error: function(response) {
-                                                        console.log(response);
-                                                    }
-                                                });
-                                            }
-                                        });
-                                    <?php } ?>
-
-                                    <?php if ($d_prvl['d_praktikan'] == 'Y') { ?>
-                                        $(document).on('click', '.hapus<?= md5($d_praktik_tarif['id_praktikan']); ?>', function() {
-                                            console.log("hapus data praktikan");
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: "_admin/exc/x_v_praktikan_h.php",
-                                                data: {
-                                                    "idprkn": $(this).attr('id')
+                                                    "idptrf": $(this).attr('id')
                                                 },
                                                 success: function() {
 
-                                                    $('#md<?= md5($d_praktik_tarif['id_praktikan']); ?>').on('hidden.bs.modal', function(e) {
+                                                    $('#<?= md5('md' . $d_praktik_tarif['id_tarif_pilih']); ?>').on('hidden.bs.modal', function(e) {
                                                         $('#<?= md5("data" . $d_praktik_tarif['id_praktik']); ?>')
-                                                            .load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_praktik_tarif['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
+                                                            .load("_admin/view/v_praktik_tarifData.php?idu=<?= $_GET['idu']; ?>&idp=<?= $_GET['idp']; ?>&dt=<?= $_GET['dt'] ?>");
                                                     })
                                                     const Toast = Swal.mixin({
                                                         toast: true,
@@ -351,9 +172,3 @@ if ($r_praktik_tarif > 0) {
 <?php
 }
 ?>
-
-<script>
-    $(document).ready(function() {
-        $("#<?= md5('table' . $d_praktik['id_praktik']) ?>").dataTable();
-    });
-</script>
