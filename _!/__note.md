@@ -75,7 +75,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres Pembayara Praktik + Database"
+git commit -a -m "Progres Status dan Tombol Pembayaran Praktik + Database"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git
@@ -87,8 +87,8 @@ git commit --amend
 
 # PHP CODE
 
-base64_decode(urldecode())
 urlencode(base64_encode())
+base64_decode(urldecode())
 
 ====================================================================================================================
 
