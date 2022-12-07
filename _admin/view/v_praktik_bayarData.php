@@ -48,9 +48,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="6">Status Mess</a>
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="7">Status Data Praktikan</a>
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="8">Status Pembimbing</a>
-                    <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
-                        <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="9">Status Tarif</a>
-                    <?php } ?>
+                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="9">Status Tarif</a>
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="10">Status Pembayaran</a>
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="11">Status Nilai</a>
                 </div>
@@ -84,9 +82,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                         <th>Mess</th>
                         <th>Data Praktikan</th>
                         <th>Pembimbing </th>
-                        <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
-                            <th>Tarif</th>
-                        <?php } ?>
+                        <th>Tarif</th>
                         <th>Bayar</th>
                         <th>Nilai</th>
                     </tr>
@@ -210,36 +206,34 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 }
                                 ?>
                             </td>
-                            <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
-                                <!-- status Tarif praktik  -->
-                                <td class="align-middle">
-                                    <?php
-                                    $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
-                                    $sql_praktik_tarif .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                    $sql_praktik_tarif .= " AND status_tarif_pilih = 'Y'";
-                                    try {
-                                        $q_praktik_tarif = $conn->query($sql_praktik_tarif);
-                                    } catch (Exception $ex) {
-                                        echo "<script>alert('$ex -PRAKTIK TARIF-');";
-                                        echo "document.location.href='?error404';</script>";
-                                    }
-                                    $r_praktik_tarif = $q_praktik_tarif->rowCount();
+                            <!-- status Tarif praktik  -->
+                            <td class="align-middle">
+                                <?php
+                                $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
+                                $sql_praktik_tarif .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                $sql_praktik_tarif .= " AND status_tarif_pilih = 'Y'";
+                                try {
+                                    $q_praktik_tarif = $conn->query($sql_praktik_tarif);
+                                } catch (Exception $ex) {
+                                    echo "<script>alert('$ex -PRAKTIK TARIF-');";
+                                    echo "document.location.href='?error404';</script>";
+                                }
+                                $r_praktik_tarif = $q_praktik_tarif->rowCount();
 
-                                    if ($r_praktik_tarif > 0) {
-                                    ?>
-                                        <a href="?ptrf" class="btn btn-outline-info btn-xs">
-                                            <i class="fas fa-eye"></i> Lihat
-                                        </a>
-                                    <?php
+                                if ($r_praktik_tarif > 0) {
+                                ?>
+                                    <a href="?trf" class="btn btn-outline-info btn-xs">
+                                        <i class="fas fa-eye"></i> Lihat
+                                    </a>
+                                <?php
 
-                                    } else {
-                                    ?>
-                                        <span class="badge badge-secondary">Belum Dipilih</span>
-                                    <?php
-                                    }
-                                    ?>
-                                </td>
-                            <?php } ?>
+                                } else {
+                                ?>
+                                    <span class="badge badge-secondary">Belum Dipilih</span>
+                                <?php
+                                }
+                                ?>
+                            </td>
                             <!-- status bayar praktik  -->
                             <td class="align-middle">
                                 <?php
@@ -259,10 +253,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 <?php
                                 } else if ($r_praktik_tarif > 0 && $r_praktik_bayar < 1) {
                                 ?>
-                                    <span class="badge badge-danger">Belum Dibayar</span><br>
-                                    <a href="?pbyr" class="btn btn-outline-info btn-xs">
-                                        <i class="fa-solid fa-money-bill"></i> Bayar
-                                    </a>
+                                    <span class="badge badge-danger blink">Belum Dibayar</span>
                                 <?php
                                 } else if ($r_praktik_tarif < 1) {
                                 ?>

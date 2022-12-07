@@ -71,7 +71,7 @@ if ($r_praktik_tarif > 0) {
                             <div class="btn-group" role="group">
                                 <?php if ($d_prvl['u_praktik_tarif'] == 'Y') { ?>
                                     <!-- tombol modal ubah tarif  -->
-                                    <a title="Ubah" class='btn btn-outline-primary ubah_init<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>' href='#' data-toggle="modal" data-target="#mu<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>">
+                                    <a title="Ubah" class='btn btn-outline-primary btn-xs ubah_init<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>' href='#' data-toggle="modal" data-target="#mu<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <!-- modal ubah tarif  -->
@@ -180,7 +180,7 @@ if ($r_praktik_tarif > 0) {
                                 <?php } ?>
                                 <?php if ($d_prvl['d_praktik_tarif'] == 'Y') { ?>
                                     <!-- tombol modal hapus pilih tarif  -->
-                                    <a title="Hapus" class='btn btn-outline-danger' href='#' data-toggle="modal" data-target="#md<?= $no; ?>">
+                                    <a title="Hapus" class='btn btn-outline-danger btn-xs' href='#' data-toggle="modal" data-target="#md<?= $no; ?>">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
 
