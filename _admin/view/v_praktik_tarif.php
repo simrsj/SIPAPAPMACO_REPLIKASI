@@ -200,14 +200,15 @@
                                             <?php } ?>
                                         </div>
                                         <!-- inisiasi tabel data praktikan -->
-                                        <div id="<?= md5("datatables" . $d_praktik['id_praktik']); ?>"></div>
+                                        <div id="<?= md5("data" . $d_praktik['id_praktik']); ?>"></div>
                                         <script>
-                                            $('#<?= md5("datatables" . $d_praktik['id_praktik']); ?>')
+                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
                                                 .load(
                                                     "_admin/view/v_praktik_tarifData.php?" +
                                                     "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
                                                     "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
                                                     "&tb=<?= md5($d_praktik['id_praktik']); ?>");
+
                                             // inisiasi klik modal tambah
                                             $(".tambah_init<?= $v_no; ?>").click(function() {
                                                 console.log("tambah_init");
@@ -301,11 +302,12 @@
                                                         url: "_admin/exc/x_v_praktik_tarif_t.php",
                                                         data: data_t,
                                                         success: function() {
-                                                            $('#<?= md5("datatables" . $d_praktik['id_praktik']); ?>')
-                                                                .load("_admin/view/v_praktik_tarifData.php?" +
+                                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                                .load(
+                                                                    "_admin/view/v_praktik_tarifData.php?" +
                                                                     "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
                                                                     "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
-                                                                    "&dt=<?= md5('datatables' . $d_praktik['id_praktik']); ?>");
+                                                                    "&tb=<?= md5($d_praktik['id_praktik']); ?>");
 
                                                             $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").empty();
                                                             $('#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>').empty();

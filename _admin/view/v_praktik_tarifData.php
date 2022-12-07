@@ -28,7 +28,7 @@ $r_praktik_tarif = $q_praktik_tarif->rowCount();
 if ($r_praktik_tarif > 0) {
 ?>
     <div class="table-responsive">
-        <table class="table table-striped table-bordered" id="datatables<?= $_GET['tb'] ?>">
+        <table class="table table-striped table-bordered" id="<?= $_GET['tb'] ?>">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">No</th>
@@ -106,7 +106,7 @@ if ($r_praktik_tarif > 0) {
 
                                 <script>
                                     $(document).ready(function() {
-                                        $('#datatables<?= $_GET['tb'] ?>').DataTable();
+                                        $('#<?= $_GET['tb'] ?>').DataTable();
                                     });
 
                                     <?php if ($d_prvl['d_praktik_tarif'] == 'Y') { ?>
@@ -121,12 +121,12 @@ if ($r_praktik_tarif > 0) {
                                                 success: function() {
 
                                                     $('#md<?= $no; ?>').on('hidden.bs.modal', function(e) {
-                                                        $('#<?= md5("datatables" . $d_praktik_tarif['id_praktik']); ?>')
+                                                        $('#<?= $_GET['tb'] ?>  ')
                                                             .load("_admin/view/v_praktik_tarifData.php?" +
                                                                 "idu=<?= $_GET['idu']; ?>" +
                                                                 "&idp=<?= $_GET['idp']; ?>" +
                                                                 "&tb=<?= $_GET['tb'] ?>");
-                                                    })
+                                                    });
                                                     const Toast = Swal.mixin({
                                                         toast: true,
                                                         position: 'top-end',
@@ -143,6 +143,7 @@ if ($r_praktik_tarif > 0) {
                                                         icon: 'success',
                                                         title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Dihapus</b></div>'
                                                     });
+
                                                 },
                                                 error: function(response) {
                                                     console.log(response);
