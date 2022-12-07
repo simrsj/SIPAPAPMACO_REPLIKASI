@@ -119,10 +119,10 @@ input[type=number] {
 
 /* -------------------------------------------------------------- Select2 */
 .select2 {
-  width: 100% !important;
+  /* width: 100% !important; */
 }
 .select2-selection-single {
-  height: 100% !important;
+  /* height: 100% !important; */
 }
 .select2-selection__rendered{
   max-width: 100%;

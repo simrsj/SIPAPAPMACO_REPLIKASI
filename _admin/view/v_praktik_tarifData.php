@@ -28,7 +28,7 @@ $r_praktik_tarif = $q_praktik_tarif->rowCount();
 if ($r_praktik_tarif > 0) {
 ?>
     <div class="table-responsive">
-        <table class="table table-striped table-bordered" id="<?= $_GET['tb'] ?>">
+        <table class="table table-striped table-bordered" id="datatables<?= $_GET['tb'] ?>">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">No</th>
@@ -74,12 +74,12 @@ if ($r_praktik_tarif > 0) {
                                     <?php } ?>
                                     <?php if ($d_prvl['d_praktik_tarif'] == 'Y') { ?>
                                         <!-- tombol modal hapus pilih tarif  -->
-                                        <a title="Hapus" class='btn btn-outline-danger' href='#' data-toggle="modal" data-target="#<?= md5('md' . $d_praktik_tarif['id_tarif_pilih']); ?>">
+                                        <a title="Hapus" class='btn btn-outline-danger' href='#' data-toggle="modal" data-target="#md<?= $no; ?>">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
 
                                         <!-- modal hapus pilih tarif  -->
-                                        <div class="modal fade text-center" id="<?= md5('md' . $d_praktik_tarif['id_tarif_pilih']); ?>">
+                                        <div class="modal fade text-center" id="md<?= $no; ?>">
                                             <div class="modal-dialog modal-dialog-scrollable  modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-body h5">
@@ -92,7 +92,7 @@ if ($r_praktik_tarif > 0) {
                                                                     Kembali
                                                                 </a>
                                                                 &nbsp;
-                                                                <a class="btn btn-outline-danger btn-sm <?= md5('hapus' . $d_praktik_tarif['id_tarif_pilih']); ?>" id="<?= urlencode(base64_encode($d_praktik_tarif['id_tarif_pilih'])); ?>" data-dismiss="modal">
+                                                                <a class="btn btn-outline-danger btn-sm hapus<?= $no; ?>" id="<?= urlencode(base64_encode($d_praktik_tarif['id_tarif_pilih'])); ?>" data-dismiss="modal">
                                                                     Hapus
                                                                 </a>
                                                             </div>
@@ -106,11 +106,11 @@ if ($r_praktik_tarif > 0) {
 
                                 <script>
                                     $(document).ready(function() {
-                                        $('#<?= $_GET['dt'] ?>').DataTable();
+                                        $('#datatables<?= $_GET['tb'] ?>').DataTable();
                                     });
 
                                     <?php if ($d_prvl['d_praktik_tarif'] == 'Y') { ?>
-                                        $(document).on('click', '.<?= md5('hapus' . $d_praktik_tarif['id_tarif_pilih']); ?>', function() {
+                                        $(document).on('click', '.hapus<?= $no; ?>', function() {
                                             console.log("hapus data tarif Pilih");
                                             $.ajax({
                                                 type: 'POST',
@@ -120,9 +120,12 @@ if ($r_praktik_tarif > 0) {
                                                 },
                                                 success: function() {
 
-                                                    $('#<?= md5('md' . $d_praktik_tarif['id_tarif_pilih']); ?>').on('hidden.bs.modal', function(e) {
-                                                        $('#<?= md5("data" . $d_praktik_tarif['id_praktik']); ?>')
-                                                            .load("_admin/view/v_praktik_tarifData.php?idu=<?= $_GET['idu']; ?>&idp=<?= $_GET['idp']; ?>&dt=<?= $_GET['dt'] ?>");
+                                                    $('#md<?= $no; ?>').on('hidden.bs.modal', function(e) {
+                                                        $('#<?= md5("datatables" . $d_praktik_tarif['id_praktik']); ?>')
+                                                            .load("_admin/view/v_praktik_tarifData.php?" +
+                                                                "idu=<?= $_GET['idu']; ?>" +
+                                                                "&idp=<?= $_GET['idp']; ?>" +
+                                                                "&tb=<?= $_GET['tb'] ?>");
                                                     })
                                                     const Toast = Swal.mixin({
                                                         toast: true,
