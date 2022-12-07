@@ -16,7 +16,8 @@ $sql .= " nominal_tarif_pilih = '" . $_POST[md5('u_tarif' . $id_tarif_pilih)] . 
 $sql .= " nama_satuan_tarif_pilih = '" . $_POST[md5('u_satuan' . $id_tarif_pilih)] . "',";
 $sql .= " frekuensi_tarif_pilih = '" . $_POST[md5('u_frekuensi' . $id_tarif_pilih)] . "',";
 $sql .= " kuantitas_tarif_pilih = '" . $_POST[md5('u_kuantitas' . $id_tarif_pilih)] . "',";
-$sql .= " jumlah_tarif_pilih = '" . $_POST[md5('u_tarif' . $id_tarif_pilih)] * $_POST[md5('u_frekuensi' . $id_tarif_pilih)] * $_POST[md5('u_kuantitas' . $id_tarif_pilih)] . "'";
+$sql .= " jumlah_tarif_pilih = '" . $_POST[md5('u_tarif' . $id_tarif_pilih)] * $_POST[md5('u_frekuensi' . $id_tarif_pilih)] * $_POST[md5('u_kuantitas' . $id_tarif_pilih)] . "',";
+$sql .= " status_tarif_pilih = '" . $_POST[md5('u_status' . $id_tarif_pilih)] . "'";
 $sql .= " WHERE id_tarif_pilih  = " . $id_tarif_pilih;
 
 // echo $sql . "<br>";

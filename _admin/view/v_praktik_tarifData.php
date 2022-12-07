@@ -153,6 +153,15 @@ if ($r_praktik_tarif > 0) {
                                                                 <input type="number" id="<?= md5('u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>" name="<?= md5('u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>" class="form-control form-control-xs" min="1" placeholder="Isikan Kuantitas" required>
                                                                 <div class="text-danger b i text-xs blink" id="<?= md5('err_u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>"></div><br>
                                                             </div>
+                                                            <div class="col-md">
+                                                                Status : <span style="color:red">*</span>
+                                                                <select class="select2 form-control" id="<?= md5('u_status' . $d_praktik_tarif['id_tarif_pilih']); ?>" name="<?= md5('u_status' . $d_praktik_tarif['id_tarif_pilih']); ?>" required>
+                                                                    <option value="">-- Pilih Status Tarif --</option>
+                                                                    <option value="Y">Aktif</option>
+                                                                    <option value="T">Tidak Aktif</option>
+                                                                </select>
+                                                                <div class="text-danger b i text-xs blink" id="<?= md5('err_u_satuan' . $d_praktik_tarif['id_tarif_pilih']); ?>"></div><br>
+                                                            </div>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -221,6 +230,7 @@ if ($r_praktik_tarif > 0) {
                                         $("#<?= md5('err_u_satuan' . $d_praktik_tarif['id_tarif_pilih']); ?>").empty();
                                         $('#<?= md5('err_u_frekuensi' . $d_praktik_tarif['id_tarif_pilih']); ?>').empty();
                                         $('#<?= md5('err_u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>').empty();
+                                        $('#<?= md5('err_u_status' . $d_praktik_tarif['id_tarif_pilih']); ?>').empty();
                                         $.ajax({
                                             type: 'POST',
                                             url: "_admin/view/v_praktik_tarifGetData.php",
@@ -236,6 +246,7 @@ if ($r_praktik_tarif > 0) {
                                                 $('#<?= md5('u_satuan' . $d_praktik_tarif['id_tarif_pilih']); ?>').val(response.u_satuan).trigger("change");
                                                 $('#<?= md5('u_frekuensi' . $d_praktik_tarif['id_tarif_pilih']); ?>').val(response.u_frekuensi);
                                                 $('#<?= md5('u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>').val(response.u_kuantitas);
+                                                $('#<?= md5('u_status' . $d_praktik_tarif['id_tarif_pilih']); ?>').val(response.u_status).trigger("change");
                                                 // console.log(response.u_tarif);
                                             },
                                             error: function(response) {

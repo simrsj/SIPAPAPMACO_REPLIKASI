@@ -18,6 +18,7 @@ $h['u_tarif'] = $d["nominal_tarif_pilih"];
 $h['u_satuan'] = $d["nama_satuan_tarif_pilih"];
 $h['u_frekuensi'] = $d["frekuensi_tarif_pilih"];
 $h['u_kuantitas'] = $d["kuantitas_tarif_pilih"];
+$h['u_status'] = $d["status_tarif_pilih"];
 
 echo json_encode($h);
 
