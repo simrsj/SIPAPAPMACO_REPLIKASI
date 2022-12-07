@@ -250,6 +250,25 @@
                                                         t_kuantitas == ""
                                                     ) {
                                                         // console.log("error data");
+
+                                                        const Toast = Swal.mixin({
+                                                            toast: true,
+                                                            position: 'top-end',
+                                                            showConfirmButton: false,
+                                                            timer: 5000,
+                                                            timerProgressBar: true,
+                                                            didOpen: (toast) => {
+                                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                            }
+                                                        });
+
+                                                        Toast.fire({
+                                                            icon: 'warning',
+                                                            title: '<span class"text-center"><b>DATA ADA YANG BELUM TERISI</b></span>',
+                                                        }).then(
+                                                            function() {}
+                                                        );
                                                         if (t_jenis_tarif == "") {
                                                             $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").html("Jenis Tarif Harus Dipilih");
                                                         } else {

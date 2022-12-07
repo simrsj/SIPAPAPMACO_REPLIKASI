@@ -82,7 +82,7 @@ if ($r_praktik_tarif > 0) {
                                                     Ubah Tarif
                                                 </div>
                                                 <div class="modal-body text-md m-0">
-                                                    <form class="form-data b" method="post" id="<?= md5('form_u' . $d_praktik_tarif['id_praktik_tarif']); ?>">
+                                                    <form class="form-data b" method="post" id="<?= md5('form_u' . $d_praktik_tarif['id_tarif_pilih']); ?>">
                                                         <input type="hidden" id="<?= md5('id_tarif_pilih' . $d_praktik_tarif['id_tarif_pilih']); ?>" name="<?= md5('id_tarif_pilih' . $d_praktik_tarif['id_tarif_pilih']); ?>" value="">
                                                         Jenis Tarif : <span style="color:red">*</span><br>
                                                         <select class="select2 form-control" id="<?= md5('u_jenis_tarif' . $d_praktik_tarif['id_tarif_pilih']); ?>" name="<?= md5('u_jenis_tarif' . $d_praktik_tarif['id_tarif_pilih']); ?>" required>
@@ -142,26 +142,26 @@ if ($r_praktik_tarif > 0) {
                                                                 <div class="text-danger b i text-xs blink" id="<?= md5('err_u_satuan' . $d_praktik_tarif['id_tarif_pilih']); ?>"></div><br>
                                                             </div>
                                                         </div>
-                                                        <!-- <div class="row">
+                                                        <div class="row">
                                                             <div class="col-md">
                                                                 Frekuensi : <span style="color:red">*</span>
-                                                                <input type="number" id="<?= md5('u_frekuensi' . $d_praktik_tarif['id_praktik']); ?>" name="<?= md5('u_frekuensi' . $d_praktik_tarif['id_praktik']); ?>" class="form-control form-control-xs" min="1" placeholder="Isikan Frekeunsi" required>
-                                                                <div class="text-danger b i text-xs blink" id="<?= md5('err_u_frekuensi' . $d_praktik_tarif['id_praktik']); ?>"></div><br>
+                                                                <input type="number" id="<?= md5('u_frekuensi' . $d_praktik_tarif['id_tarif_pilih']); ?>" name="<?= md5('u_frekuensi' . $d_praktik_tarif['id_tarif_pilih']); ?>" class="form-control form-control-xs" min="1" placeholder="Isikan Frekeunsi" required>
+                                                                <div class="text-danger b i text-xs blink" id="<?= md5('err_u_frekuensi' . $d_praktik_tarif['id_tarif_pilih']); ?>"></div><br>
                                                             </div>
                                                             <div class="col-md">
                                                                 Kuantitas : <span style="color:red">*</span>
-                                                                <input type="number" id="<?= md5('u_kuantitas' . $d_praktik_tarif['id_praktik']); ?>" name="<?= md5('u_kuantitas' . $d_praktik_tarif['id_praktik']); ?>" class="form-control form-control-xs" min="1" placeholder="Isikan Kuantitas" required>
-                                                                <div class="text-danger b i text-xs blink" id="<?= md5('err_u_kuantitas' . $d_praktik_tarif['id_praktik']); ?>"></div><br>
+                                                                <input type="number" id="<?= md5('u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>" name="<?= md5('u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>" class="form-control form-control-xs" min="1" placeholder="Isikan Kuantitas" required>
+                                                                <div class="text-danger b i text-xs blink" id="<?= md5('err_u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>"></div><br>
                                                             </div>
-                                                        </div> -->
+                                                        </div>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer text-md">
-                                                    <a class="btn btn-danger btn-sm ubah_tutup<?= $v_no; ?>" data-dismiss="modal">
+                                                    <a class="btn btn-danger btn-sm" data-dismiss="modal">
                                                         Kembali
                                                     </a>
                                                     &nbsp;
-                                                    <a class="tambah btn btn-success btn-sm ubah<?= $v_no; ?>" id="<?= urlencode(base64_encode($d_praktik_tarif['id_praktik'])); ?>">
+                                                    <a class="tambah btn btn-primary btn-sm ubah<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>" id="<?= urlencode(base64_encode($d_praktik_tarif['id_tarif_pilih'])); ?>" data-dismiss="modal">
                                                         Ubah
                                                     </a>
                                                 </div>
@@ -204,6 +204,11 @@ if ($r_praktik_tarif > 0) {
                             <script>
                                 $(document).ready(function() {
                                     $('#<?= $_GET['tb'] ?>').DataTable();
+                                    $(".select2").select2({
+                                        placeholder: "-- Pilih --",
+                                        allowClear: true,
+                                        width: "100%",
+                                    });
                                 });
 
                                 <?php if ($d_prvl['u_praktik_tarif'] == 'Y') { ?>
@@ -231,7 +236,7 @@ if ($r_praktik_tarif > 0) {
                                                 $('#<?= md5('u_satuan' . $d_praktik_tarif['id_tarif_pilih']); ?>').val(response.u_satuan).trigger("change");
                                                 $('#<?= md5('u_frekuensi' . $d_praktik_tarif['id_tarif_pilih']); ?>').val(response.u_frekuensi);
                                                 $('#<?= md5('u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>').val(response.u_kuantitas);
-                                                console.log(response.u_tarif);
+                                                // console.log(response.u_tarif);
                                             },
                                             error: function(response) {
                                                 console.log(response.responseText);
@@ -239,80 +244,114 @@ if ($r_praktik_tarif > 0) {
                                         });
                                     });
 
-                                    // inisiasi klik modal ubah  tutup
-                                    $(".ubah_tutup<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>").click(function() {
-                                        // console.log("tambah_tutup<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>");
-                                        $("#form_u<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>").trigger("reset");
-                                        $('#mu<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').modal('hide');
-                                    });
-
                                     $(document).on('click', '.ubah<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>', function() {
-                                        var data_u = $('#form_u<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').serializeArray();
+                                        console.log('ubah');
+                                        var data_u = $('#<?= md5('form_u' . $d_praktik_tarif['id_tarif_pilih']); ?>').serializeArray();
                                         data_u.push({
-                                            name: "idtrf",
+                                            name: "idptrf",
                                             value: $(this).attr('id')
-                                        });
+                                        }, {
+                                            name: "idp",
+                                            value: '<?= urlencode(base64_encode($d_praktik_tarif['id_praktik'])) ?>'
+                                        }, );
 
-                                        var u_no_id = $('#u_no_id<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
+                                        var id_tarif_pilih = $('#id_tarif_pilih<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
+                                        var u_jenis_tarif = $('#u_jenis_tarif<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
                                         var u_nama = $('#u_nama<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
-                                        var u_tgl = $('#u_tgl<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
-                                        var u_alamat = $('#u_alamat<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
-                                        var u_telpon = $('#u_telpon<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
+                                        var u_tarif = $('#u_tarif<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
+                                        var u_satuan = $('#u_satuan<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
+                                        var u_frekuensi = $('#u_frekuensi<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
+                                        var u_kuantitas = $('#u_kuantitas<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>').val();
+
                                         //cek data from ubah bila tidak diiisi
                                         if (
-                                            u_no_id == "" ||
+                                            id_tarif_pilih == "" ||
+                                            u_jenis_tarif == "" ||
                                             u_nama == "" ||
-                                            u_tgl == "" ||
-                                            u_alamat == "" ||
-                                            u_telpon == ""
+                                            u_tarif == "" ||
+                                            u_satuan == "" ||
+                                            u_frekuensi == "" ||
+                                            u_kuantitas == ""
                                         ) {
-                                            if (u_no_id == "") {
-                                                document.getElementById("err_u_no_id").innerHTML = "No ID Harus Diisi";
+                                            // console.log("error data");
+
+                                            const Toast = Swal.mixin({
+                                                toast: true,
+                                                position: 'top-end',
+                                                showConfirmButton: false,
+                                                timer: 5000,
+                                                timerProgressBar: true,
+                                                didOpen: (toast) => {
+                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                }
+                                            });
+
+                                            Toast.fire({
+                                                icon: 'warning',
+                                                title: '<span class"text-center"><b>DATA ADA YANG BELUM TERISI</b></span>',
+                                            }).then(
+                                                function() {}
+                                            );
+
+                                            if (u_jenis_tarif == "") {
+                                                $("#<?= md5('err_u_jenis_tarif' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("Jenis Tarif Harus Dipilih");
                                             } else {
-                                                document.getElementById("err_u_no_id").innerHTML = "";
+                                                $("#<?= md5('err_u_jenis_tarif' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("");
                                             }
 
                                             if (u_nama == "") {
-                                                document.getElementById("err_u_nama").innerHTML = "Nama Harus Diisi";
+                                                $("#<?= md5('err_u_nama' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("Nama Tarif Harus Diisi");
                                             } else {
-                                                document.getElementById("err_u_nama").innerHTML = "";
+                                                $("#<?= md5('err_u_nama' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("");
                                             }
 
-                                            if (u_tgl == "") {
-                                                document.getElementById("err_u_tgl").innerHTML = "Tanggal Lahir Harus Dipilih";
+                                            if (u_tarif == "") {
+                                                $("#<?= md5('err_u_tarif' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("Tarif Pilih Harus Diisi");
                                             } else {
-                                                document.getElementById("err_u_tgl").innerHTML = "";
+                                                $("#<?= md5('err_u_tarif' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("");
                                             }
 
-                                            if (u_alamat == "") {
-                                                document.getElementById("err_u_alamat").innerHTML = "Alamat Harus Diisi";
+                                            if (u_satuan == "") {
+                                                $("#<?= md5('err_u_satuan' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("Satuan Pilih Harus Dipilih");
                                             } else {
-                                                document.getElementById("err_u_alamat").innerHTML = "";
+                                                $("#<?= md5('err_u_satuan' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("");
                                             }
 
-                                            if (u_telpon == "") {
-                                                document.getElementById("err_u_telpon").innerHTML = "Telpon Harus Diisi";
+                                            if (u_frekuensi == "") {
+                                                $("#<?= md5('err_u_frekuensi' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("Frekuensi Harus Diisi");
                                             } else {
-                                                document.getElementById("err_u_telpon").innerHTML = "";
+                                                $("#<?= md5('err_u_frekuensi' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("");
+                                            }
+
+                                            if (u_kuantitas == "") {
+                                                $("#<?= md5('err_u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("Kuamtitas Harus Diisi");
+                                            } else {
+                                                $("#<?= md5('err_u_kuantitas' . $d_praktik_tarif['id_tarif_pilih']); ?>").html("");
                                             }
                                         }
 
                                         //simpan data ubah bila sudah sesuai
                                         if (
-                                            u_no_id != "" &&
+                                            id_tarif_pilih != "" &&
+                                            u_jenis_tarif != "" &&
                                             u_nama != "" &&
-                                            u_tgl != "" &&
-                                            u_alamat != "" &&
-                                            u_telpon != ""
+                                            u_tarif != "" &&
+                                            u_satuan != "" &&
+                                            u_frekuensi != "" &&
+                                            u_kuantitas != ""
                                         ) {
                                             $.ajax({
                                                 type: 'POST',
-                                                url: "_admin/exc/x_v_praktikan_u.php",
+                                                url: "_admin/exc/x_v_praktik_tarif_u.php",
                                                 data: data_u,
                                                 success: function() {
                                                     $('#mu<?= md5($d_praktik_tarif['id_tarif_pilih']) ?>').on('hidden.bs.modal', function(e) {
-                                                        $('#<?= md5("data" . $d_praktik_tarif['id_praktik']); ?>')
-                                                            .load("_admin/view/v_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_praktik_tarif['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
+                                                        $('#<?= $_GET['tb'] ?>')
+                                                            .load("_admin/view/v_praktik_tarifData.php?" +
+                                                                "idu=<?= $_GET['idu']; ?>" +
+                                                                "&idp=<?= $_GET['idp']; ?>" +
+                                                                "&tb=<?= $_GET['tb']; ?>");
                                                     })
                                                     const Toast = Swal.mixin({
                                                         toast: true,
@@ -353,7 +392,7 @@ if ($r_praktik_tarif > 0) {
                                             success: function() {
 
                                                 $('#md<?= $no; ?>').on('hidden.bs.modal', function(e) {
-                                                    $('#<?= $_GET['tb'] ?>  ')
+                                                    $('#<?= $_GET['tb'] ?>')
                                                         .load("_admin/view/v_praktik_tarifData.php?" +
                                                             "idu=<?= $_GET['idu']; ?>" +
                                                             "&idp=<?= $_GET['idp']; ?>" +

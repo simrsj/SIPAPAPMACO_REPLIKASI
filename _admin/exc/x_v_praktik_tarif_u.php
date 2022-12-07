@@ -2,18 +2,22 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 // echo "<pre>";
-// var_dump($_POST);
+// print_r($_POST);
 // echo "</pre>";
 
-$sql = "UPDATE tb_praktikan SET";
-$sql .= " no_id_praktikan = '" . $_POST['u_no_id'] . "',";
-$sql .= " nama_praktikan = '" . $_POST['u_nama'] . "',";
-$sql .= " tgl_lahir_praktikan = '" . $_POST['u_tgl'] . "', ";
-$sql .= " telp_praktikan = '" . $_POST['u_telp'] . "',";
-$sql .= " wa_praktikan = '" . $_POST['u_wa'] . "',";
-$sql .= " email_praktikan = '" . $_POST['u_email'] . "',";
-$sql .= " alamat_praktikan = '" . $_POST['u_alamat'] . "'";
-$sql .= " WHERE id_praktikan = " . base64_decode(urldecode($_POST['idprkn']));
+$id_tarif_pilih = base64_decode(urldecode($_POST['idptrf']));
+
+$sql = "UPDATE tb_tarif_pilih SET";
+$sql .= " id_praktik = '" . base64_decode(urldecode($_POST['idp']))  . "',";
+$sql .= " tgl_ubah_tarif_pilih = '" . date('Y-m-d') . "',";
+$sql .= " nama_jenis_tarif_pilih = '" . $_POST[md5('u_jenis_tarif' . $id_tarif_pilih)] . "',";
+$sql .= " nama_tarif_pilih = '" . $_POST[md5('u_nama' . $id_tarif_pilih)] . "', ";
+$sql .= " nominal_tarif_pilih = '" . $_POST[md5('u_tarif' . $id_tarif_pilih)] . "',";
+$sql .= " nama_satuan_tarif_pilih = '" . $_POST[md5('u_satuan' . $id_tarif_pilih)] . "',";
+$sql .= " frekuensi_tarif_pilih = '" . $_POST[md5('u_frekuensi' . $id_tarif_pilih)] . "',";
+$sql .= " kuantitas_tarif_pilih = '" . $_POST[md5('u_kuantitas' . $id_tarif_pilih)] . "',";
+$sql .= " jumlah_tarif_pilih = '" . $_POST[md5('u_tarif' . $id_tarif_pilih)] * $_POST[md5('u_frekuensi' . $id_tarif_pilih)] * $_POST[md5('u_kuantitas' . $id_tarif_pilih)] . "'";
+$sql .= " WHERE id_tarif_pilih  = " . $id_tarif_pilih;
 
 // echo $sql . "<br>";
 try {
