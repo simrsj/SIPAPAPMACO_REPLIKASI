@@ -9,6 +9,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 $sql_prvl = "SELECT * FROM tb_user_privileges ";
 $sql_prvl .= " JOIN tb_user ON tb_user_privileges.id_user = tb_user.id_user";
 $sql_prvl .= " WHERE tb_user.id_user = " . base64_decode(urldecode($_GET['idu']));
+// echo $sql_prvl . "<br>";
 try {
     $q_prvl = $conn->query($sql_prvl);
 } catch (Exception $ex) {
@@ -16,246 +17,72 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
-if ($d_prvl['r_praktik'] == "Y") {
-    $sql_praktik = "SELECT * FROM tb_praktik ";
-    $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
-    $sql_praktik .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
-    $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
-    $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
-    $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
-    $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
-    // echo $sql_praktik;
+
+if ($d_prvl['r_praktik_bayar'] == "Y") {
+    $sql_praktik_bayar = "SELECT * FROM tb_praktik ";
+    $sql_praktik_bayar .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
+    $sql_praktik_bayar .= " WHERE status_praktik = 'Y'";
+    $sql_praktik_bayar .= " ORDER BY tb_praktik.id_praktik DESC";
+    // echo $sql_praktik_bayar . "<br>";
     try {
-        $q_praktik = $conn->query($sql_praktik);
+        $q_praktik_bayar = $conn->query($sql_praktik_bayar);
     } catch (Exception $ex) {
         echo "<script>alert('$ex -DATA PRAKTIK-');";
         echo "document.location.href='?error404';</script>";
     }
-    $r_praktik = $q_praktik->rowCount();
-    if ($r_praktik > 0) {
+    $r_praktik_bayar = $q_praktik_bayar->rowCount();
+    if ($r_praktik_bayar > 0) {
 ?>
         <div class="table-responsive text-md">
-            <div class="h6 b text-center">
-                Hilang/Munculkan Kolom Tabel:
-                <div class="m-1">
-                    <?php if ($d_prvl['level_user'] == 1) { ?>
-                        <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="1">Nama Institusi</a>
-                    <?php } ?>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="2">Nama Kelompok</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="3">Jumlah Praktik</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="4">Tanggal Mulai</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="5">Tanggal Selesai</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="6">Status Mess</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="7">Status Data Praktikan</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="8">Status Pembimbing</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="9">Status Tarif</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="10">Status Pembayaran</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="11">Status Nilai</a>
-                </div>
-            </div>
-            <hr>
             <table class="table table-striped table-bordered m-auto display" width="100%" id="table-search-each">
                 <thead class="table-dark text-center">
                     <tr>
-                        <th rowspan="2">No</th>
+                        <th>No</th>
                         <?php if ($d_prvl['level_user'] == 1) { ?>
-                            <th rowspan="2" width="150px">
-                                Nama Institusi
-                            </th>
+                            <th> Nama Institusi </th>
                         <?php } ?>
-                        <th rowspan="2">
-                            Nama Kelompok
-                        </th>
-                        <th rowspan="2">
-                            Jumlah <br> Praktikan
-                        </th>
-                        <th rowspan="2">
-                            Tgl Mulai<br> (YYYY-MM-DD)
-                        </th>
-                        <th rowspan="2">
-                            Tgl Selesai <br> (YYYY-MM-DD)
-                        </th>
-                        <th colspan="6">Status</th>
-                        <th rowspan="2">Aksi</th>
-                    </tr>
-                    <tr>
-                        <th>Mess</th>
-                        <th>Data Praktikan</th>
-                        <th>Pembimbing </th>
-                        <th>Tarif</th>
-                        <th>Bayar</th>
-                        <th>Nilai</th>
+                        <th> Nama Kelompok </th>
+                        <th> Jumlah <br> Praktikan </th>
+                        <th> Tgl Mulai<br> (YYYY-MM-DD) </th>
+                        <th> Tgl Selesai <br> (YYYY-MM-DD) </th>
+                        <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $no = 1;
-                    while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+                    while ($d_praktik_bayar = $q_praktik_bayar->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr class="text-center">
                             <td class="align-middle"><?= $no; ?></td>
                             <?php if ($d_prvl['level_user'] == 1) { ?>
-                                <td class="align-middle">
-                                    <?= $d_praktik['nama_institusi'] ?>
-                                </td>
+                                <td class="align-middle"> <?= $d_praktik_bayar['nama_institusi'] ?> </td>
                             <?php } ?>
-                            <td class="align-middle">
-                                <?= $d_praktik['nama_praktik'] ?>
-                            </td>
-                            <td class="align-middle">
-                                <?= $d_praktik['jumlah_praktik'] ?>
-                            </td>
-                            <td class="align-middle"><?= $d_praktik['tgl_mulai_praktik'] ?></td>
-                            <td class="align-middle"><?= $d_praktik['tgl_selesai_praktik'] ?></td>
-                            <!-- status mess praktik  -->
-                            <td class="align-middle">
-                                <?php if ($d_praktik['status_mess_praktik'] == 'Y') { ?>
-                                    <?php
-                                    $sql_mess_pilih = "SELECT * FROM tb_mess_pilih ";
-                                    $sql_mess_pilih .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
-                                    $sql_mess_pilih .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                    try {
-                                        $q_mess_pilih = $conn->query($sql_mess_pilih);
-                                    } catch (Exception $ex) {
-                                        echo "<script>alert('$ex -MESS PILIH PRAKTIK-');";
-                                        echo "document.location.href='?error404';</script>";
-                                    }
-                                    $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
-                                    $r_mess_pilih = $q_mess_pilih->rowCount();
-
-                                    //teks status dan privileges praktik mess
-                                    if ($d_prvl['c_praktik_mess'] == 'Y' && $r_mess_pilih < 1) {
-                                    ?>
-                                        <span class="badge badge-secondary">Belum Dipilih</span>
-                                        <br>
-                                        <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
-                                            Pilih
-                                        </a>
-                                    <?php
-                                    } else if ($d_prvl['u_praktik_mess'] == 'Y' && $r_mess_pilih > 0) {
-                                    ?>
-                                        <fieldset class="border-1 m-1 p-1">
-                                            <?= $d_mess_pilih['nama_mess']; ?>
-                                            <br>
-                                            <?= $d_mess_pilih['telp_pemilik_mess']; ?>
-                                        </fieldset>
-                                        <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
-                                            Ubah
-                                        </a>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <span class="badge badge-danger">ERROR!!!</span>
-                                    <?php
-                                    }
-                                } else { ?>
-                                    <span class="badge badge-danger">Tidak Pakai Mess</span>
-                                <?php } ?>
-                            </td>
-                            <!-- status data praktikan-->
+                            <td class="align-middle"> <?= $d_praktik_bayar['nama_praktik'] ?> </td>
+                            <td class="align-middle"> <?= $d_praktik_bayar['jumlah_praktik'] ?> </td>
+                            <td class="align-middle"> <?= $d_praktik_bayar['tgl_mulai_praktik'] ?> </td>
+                            <td class="align-middle"> <?= $d_praktik_bayar['tgl_selesai_praktik'] ?> </td>
                             <td class="align-middle">
                                 <?php
-                                $sql_praktikan = "SELECT * FROM tb_praktikan ";
-                                $sql_praktikan .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                $sql_bayar = "SELECT * FROM tb_bayar";
+                                $sql_bayar .= " WHERE id_praktik = " . $d_praktik_bayar['id_praktik'];
+                                // echo $sql_tarif_pilih . "<br>";
                                 try {
-                                    $q_praktikan = $conn->query($sql_praktikan);
+                                    $q_bayar = $conn->query($sql_bayar);
                                 } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -MESS PILIH PRAKTIK-');";
-                                    echo "document.location.href='?error404';</script>";
+                                    echo "<script> alert('$ex -DATA PRAKTIK-'); ";
+                                    echo "document.location.href='?error404'; </script>";
                                 }
-                                $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
-                                $r_praktikan = $q_praktikan->rowCount();
-
-                                if ($r_praktikan > 0) {
+                                $r_bayar = $q_bayar->rowCount();
+                                if ($r_bayar > 0) {
                                 ?>
-                                    <a href="?ptkn" class="btn btn-outline-info btn-xs">
-                                        <i class="fas fa-eye"></i> Lihat
+                                    <a class="btn btn-outline-success text-xs" href="?pbyr=&i">
+                                        <i class="fa-solid fa-money-bill"></i>
+                                        Lakukan Pembayaran
                                     </a>
                                 <?php
-
-                                } else {
-                                ?>
-                                    <span class="badge badge-secondary">Belum Dipilih</span>
-                                <?php
-                                } ?>
-                            </td>
-                            <!-- status pembimbing praktik  -->
-                            <td class="align-middle">
-                                <?php
-                                $sql_praktik_pembimbing = "SELECT * FROM tb_pembimbing_pilih ";
-                                $sql_praktik_pembimbing .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                try {
-                                    $q_praktik_pembimbing = $conn->query($sql_praktik_pembimbing);
-                                } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -PRAKTIK PEMBIMBING-');";
-                                    echo "document.location.href='?error404';</script>";
-                                }
-                                $r_praktik_pembimbing = $q_praktik_pembimbing->rowCount();
-
-                                if ($r_praktik_pembimbing > 0) {
-                                ?>
-                                    <a href="?pmbb" class="btn btn-outline-info btn-xs">
-                                        <i class="fas fa-eye"></i> Lihat
-                                    </a>
-                                <?php
-
-                                } else {
-                                ?>
-                                    <span class="badge badge-secondary">Belum Dipilih</span>
-                                <?php
-                                }
-                                ?>
-                            </td>
-                            <!-- status Tarif praktik  -->
-                            <td class="align-middle">
-                                <?php
-                                $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
-                                $sql_praktik_tarif .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                $sql_praktik_tarif .= " AND status_tarif_pilih = 'Y'";
-                                try {
-                                    $q_praktik_tarif = $conn->query($sql_praktik_tarif);
-                                } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -PRAKTIK TARIF-');";
-                                    echo "document.location.href='?error404';</script>";
-                                }
-                                $r_praktik_tarif = $q_praktik_tarif->rowCount();
-
-                                if ($r_praktik_tarif > 0) {
-                                ?>
-                                    <a href="?trf" class="btn btn-outline-info btn-xs">
-                                        <i class="fas fa-eye"></i> Lihat
-                                    </a>
-                                <?php
-
-                                } else {
-                                ?>
-                                    <span class="badge badge-secondary">Belum Dipilih</span>
-                                <?php
-                                }
-                                ?>
-                            </td>
-                            <!-- status bayar praktik  -->
-                            <td class="align-middle">
-                                <?php
-                                $sql_praktik_bayar = "SELECT * FROM tb_bayar ";
-                                $sql_praktik_bayar .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                try {
-                                    $q_praktik_bayar = $conn->query($sql_praktik_bayar);
-                                } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -PRAKTIK BAYAR-');";
-                                    echo "document.location.href='?error404';</script>";
-                                }
-                                $r_praktik_bayar = $q_praktik_bayar->rowCount();
-
-                                if ($r_praktik_tarif > 0 && $r_praktik_bayar > 0) {
-                                ?>
-                                    <span class="badge badge-success">Sudah Dibayar</span>
-                                <?php
-                                } else if ($r_praktik_tarif > 0 && $r_praktik_bayar < 1) {
-                                ?>
-                                    <span class="badge badge-danger blink">Belum Dibayar</span>
-                                <?php
-                                } else if ($r_praktik_tarif < 1) {
+                                } else if ($r_bayar < 1) {
                                 ?>
                                     <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
                                 <?php
@@ -266,157 +93,36 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 }
                                 ?>
                             </td>
-                            <!-- status nilai praktik  -->
                             <td class="align-middle">
                                 <?php
-                                // jika jurusan praktik keperawatan
-                                if ($d_praktik['id_jurusan_pdd'] == 2) {
-                                    $sql_praktik_nilai = "SELECT * FROM tb_nilai_kep";
-                                    $sql_praktik_nilai .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                }
-                                // jika jurusan praktik selain keperawatan
-                                else {
-                                    $sql_praktik_nilai = "SELECT * FROM tb_nilai_upload";
-                                    $sql_praktik_nilai .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                }
+                                $sql_tarif_pilih = "SELECT * FROM tb_tarif_pilih";
+                                $sql_tarif_pilih .= " WHERE id_praktik = " . $d_praktik_bayar['id_praktik'];
+                                $sql_tarif_pilih .= " AND status_tarif_pilih = 'Y'";
+                                // echo $sql_tarif_pilih . "<br>";
                                 try {
-                                    $q_praktik_nilai = $conn->query($sql_praktik_nilai);
+                                    $q_tarif_pilih = $conn->query($sql_tarif_pilih);
                                 } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -PRAKTIK NILAI-');";
-                                    echo "document.location.href='?error404';</script>";
+                                    echo "<script> alert('$ex -DATA PRAKTIK-'); ";
+                                    echo "document.location.href='?error404'; </script>";
                                 }
-                                $r_praktik_nilai = $q_praktik_nilai->rowCount();
-
-                                if ($r_praktik_nilai > 0) {
+                                $r_tarif_pilih = $q_tarif_pilih->rowCount();
+                                if ($r_tarif_pilih > 0) {
                                 ?>
-                                    <span class="badge badge-success">Sudah Dipilih</span>
+                                    <a class="btn btn-outline-success text-xs" href="?pbyr=&i">
+                                        <i class="fa-solid fa-money-bill"></i>
+                                        Lakukan Pembayaran
+                                    </a>
                                 <?php
-
+                                } else if ($r_tarif_pilih < 1) {
+                                ?>
+                                    <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
+                                <?php
                                 } else {
                                 ?>
-                                    <span class="badge badge-secondary">Belum Ada</span>
+                                    <span class="badge badge-danger">ERROR</span>
                                 <?php
-                                } ?>
-                            </td>
-                            <!-- Aksi praktik  -->
-                            <td class="align-middle">
-                                <div class="btn-group" role="group">
-                                    <!-- tombol modal detail praktik  -->
-                                    <a title="Detail" class='btn btn-info btn-xs' href='#' data-toggle="modal" data-target="#<?= md5($d_praktik['id_praktik']); ?>">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <!-- modal detail praktik  -->
-                                    <div class="modal fade" id="<?= md5($d_praktik['id_praktik']); ?>">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header h5">
-                                                    Detail Data Praktik
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body text-md">
-                                                    <?php if ($d_prvl['level_user'] == 1) { ?>
-                                                        Nama Institusi : <br>
-                                                        <b><?= $d_praktik['nama_institusi'] ?></b>
-                                                        <hr class="p-0 m-0 bg-gray-500 b">
-                                                    <?php } ?>
-                                                    Nama Kelompok : <br>
-                                                    <b><?= $d_praktik['nama_praktik'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
-                                                    Jumlah Praktikan Kelompok : <br>
-                                                    <b><?= $d_praktik['nama_praktik'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
-                                                    Jurusan : <br>
-                                                    <b><?= $d_praktik['nama_jurusan_pdd'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
-                                                    Jenjang : <br>
-                                                    <b><?= $d_praktik['nama_jenjang_pdd'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
-                                                    Profesi : <br>
-                                                    <b><?= $d_praktik['nama_profesi_pdd'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
-                                                    Koordinator : <br>
-                                                    <b><?= $d_praktik['nama_koordinator_praktik'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500">
-                                                    Telpon Koordinator : <br>
-                                                    <b><?= $d_praktik['telp_koordinator_praktik'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500">
-                                                    E-Mail Koordinator : <br>
-                                                    <b><?= $d_praktik['email_koordinator_praktik'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500">
-                                                    Surat Pengajuan: <br>
-                                                    <b>
-                                                        <a href="<?= $d_praktik['surat_praktik'] ?>" download="Surat Pengajuan" class="btn btn-outline-success btn-sm">
-                                                            <i class="fas fa-file"></i> Unduh Surat
-                                                        </a>
-                                                    </b>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- <a title="Ubah" class='btn btn-primary btn-xs' href='#'>
-                                        <i class="fas fa-edit"></i>
-                                    </a> -->
-                                    <?php if ($d_prvl['d_praktik'] == "Y") { ?>
-                                        <a title="Hapus" class='btn btn-danger btn-xs hapus<?= md5($d_praktik['id_praktik']); ?>' id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" href='#'>
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    <?php } ?>
-                                </div>
-                                <script>
-                                    <?php if ($d_prvl['d_praktik'] == "Y") { ?>
-                                        $(document).on('click', '.hapus<?= md5($d_praktik['id_praktik']); ?>', function() {
-                                            Swal.fire({
-                                                position: 'top',
-                                                title: 'Hapus Data Praktik ?',
-                                                icon: 'error',
-                                                showCancelButton: true,
-                                                confirmButtonColor: '#1cc88a',
-                                                cancelButtonColor: '#d33',
-                                                cancelButtonText: 'Kembali',
-                                                confirmButtonText: 'Ya',
-                                                allowOutsideClick: true
-                                            }).then((result) => {
-                                                if (result.isConfirmed) {
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: "_admin/exc/x_v_praktik_h.php",
-                                                        data: {
-                                                            "idp": $(this).attr('id')
-                                                        },
-                                                        success: function() {
-                                                            $('#data_praktik')
-                                                                .load(
-                                                                    "_admin/view/v_praktikData.php?&idu=<?= $_GET['idu']; ?>");
-                                                            const Toast = Swal.mixin({
-                                                                toast: true,
-                                                                position: 'top-end',
-                                                                showConfirmButton: false,
-                                                                timer: 5000,
-                                                                timerProgressBar: true,
-                                                                didOpen: (toast) => {
-                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                }
-                                                            });
-
-                                                            Toast.fire({
-                                                                icon: 'success',
-                                                                title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Dihapus</div>'
-                                                            });
-                                                        },
-                                                        error: function(response) {
-                                                            console.log(response.responseText);
-                                                            alert('eksekusi query gagal');
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                        });
-                                    <?php } ?>
-                                </script>
+                                }
+                                ?>
                             </td>
                         </tr>
                         <?php
@@ -435,11 +141,6 @@ if ($d_prvl['r_praktik'] == "Y") {
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
                         <td></td>
                     </tr>
                 </tfoot>
@@ -448,7 +149,7 @@ if ($d_prvl['r_praktik'] == "Y") {
     <?php
     } else {
     ?>
-        <h3 class="text-center"> Data Praktik Tidak Ada</h3>
+        <h3 class="text-center jumbotron jumbotron-fluid"> Data Bayar Tidak Ada</h3>
 <?php
     }
 } else {
