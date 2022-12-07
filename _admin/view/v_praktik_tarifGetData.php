@@ -2,17 +2,16 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 $sql = "SELECT * FROM tb_tarif_pilih";
-$sql .= " WHERE id_tarif_pilih= " . base64_decode(urldecode($_POST['idprkn']));
+$sql .= " WHERE id_tarif_pilih= " . base64_decode(urldecode($_POST['idptrf']));
 // echo "$sql <br>";
 try {
     $q = $conn->query($sql);
 } catch (Exception $ex) {
-    echo "<script>alert('$ex -DATA TARIF PILIH-');";
-    echo "document.location.href='?error404';</script>";
+    // echo $ex;
 }
 $d = $q->fetch(PDO::FETCH_ASSOC);
 $h['id_tarif_pilih'] = $d["id_tarif_pilih"];
-$h['id_praktik'] = $d["id_praktik"];
+// $h['id_praktik'] = $d["id_praktik"];
 $h['u_nama_jenis'] = $d["nama_jenis_tarif_pilih"];
 $h['u_nama'] = $d["nama_tarif_pilih"];
 $h['u_tarif'] = $d["nominal_tarif_pilih"];
