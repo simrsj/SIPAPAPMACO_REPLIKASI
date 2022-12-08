@@ -81,6 +81,50 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                     JUMLAH TOTAL PEMBAYARAN : <span class="b u"><?= "Rp " . number_format($d_jumlahTotal['jumlahTotal'], 0, ",", "."); ?> </span><br>
                                     KODE PEMBAYARAN : <span class="b u text-danger"><?= $d_praktik['kode_bayar_praktik']  ?> </span><br>
 
+                                    <!-- tombol modal rincian pembayaran -->
+                                    <a class='btn btn-outline-primary' href='#' data-toggle='modal' data-target='#rincian'>
+                                        <i class="fas fa-paper-plane"></i> Rincian Pembayaran
+                                    </a>
+
+                                    <!-- modal rincian pembayaran -->
+                                    <div class="modal fade" id="rincian" data-backdrop="">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_sbayar">
+                                                    <div class="modal-header">
+                                                        <b>BUKTI DATA PEMABAYARAN</b>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form enctype="multipart/form-data" class="form-group" method="post" action="">
+                                                            <b>Kode Pembayaran : </b><span style="color:red">*</span><br>
+                                                            <input class="form-control" type="text" name="kode_bayar" value="<?= "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>" required readonly><br>
+                                                            <b>Atas Nama : </b><span style="color:red">*</span><br>
+                                                            <input class="form-control" type="text" name="atas_nama_bayar" required><br>
+                                                            <b>No. Rekening/Lainnya : </b><span style="color:red">*</span><br>
+                                                            <input class="form-control" type="text" name="noRek_bayar" required><br>
+                                                            <b>Pembayaran Melalui : </b><span style="color:red">*</span><br>
+                                                            <input class="form-control" type="text" name="melalui_bayar" required><br>
+                                                            <b>Tanggal Transfer : </b><span style="color:red">*</span><br>
+                                                            <input class="form-control" type="date" name="tgl_bayar" required><br>
+                                                            <b>Unggah File : </b><span style="color:red">*</span><br>
+                                                            <input type="file" name="file_bayar" accept="application/pdf, image/jpg, image/png, image/jpeg" required><br>
+                                                            <i style='font-size:12px;'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 1 MB</i>
+                                                            <input name="id_praktik" value="<?= $id; ?>" hidden><br>
+                                                            <hr>
+                                                            <nav id="navbar-tarif" class="navbar justify-content-center">
+                                                                <button type="submit" name="simpan_bayar" class="nav-link btn btn-success btn-sm">
+                                                                    <i class="fas fa-paper-plane"></i> Kirim Data Pembayaran
+                                                                </button>
+                                                            </nav>
+                                                        </form>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <br>
                                 <div class="h5 text-gray-700">
@@ -138,52 +182,6 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                         </div>
                     </div>
 
-                    <!-- tombol Bukti Data Pembayaran -->
-                    <nav id="navbar-tarif" class="navbar justify-content-center">
-                        <a class='nav-link btn btn-outline-success' href='#' data-toggle='modal' data-target='#pilih_bayar'>
-                            <i class="fas fa-paper-plane"></i> Input Data Pembayaran
-                        </a>
-                    </nav>
-
-                    <!-- modal Bukti Data Pembayaran -->
-                    <div class="modal fade text-left " id="pilih_bayar" data-backdrop="static">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_sbayar">
-                                    <div class="modal-header">
-                                        <b>BUKTI DATA PEMABAYARAN</b>
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form enctype="multipart/form-data" class="form-group" method="post" action="">
-                                            <b>Kode Pembayaran : </b><span style="color:red">*</span><br>
-                                            <input class="form-control" type="text" name="kode_bayar" value="<?= "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>" required readonly><br>
-                                            <b>Atas Nama : </b><span style="color:red">*</span><br>
-                                            <input class="form-control" type="text" name="atas_nama_bayar" required><br>
-                                            <b>No. Rekening/Lainnya : </b><span style="color:red">*</span><br>
-                                            <input class="form-control" type="text" name="noRek_bayar" required><br>
-                                            <b>Pembayaran Melalui : </b><span style="color:red">*</span><br>
-                                            <input class="form-control" type="text" name="melalui_bayar" required><br>
-                                            <b>Tanggal Transfer : </b><span style="color:red">*</span><br>
-                                            <input class="form-control" type="date" name="tgl_bayar" required><br>
-                                            <b>Unggah File : </b><span style="color:red">*</span><br>
-                                            <input type="file" name="file_bayar" accept="application/pdf, image/jpg, image/png, image/jpeg" required><br>
-                                            <i style='font-size:12px;'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 1 MB</i>
-                                            <input name="id_praktik" value="<?= $id; ?>" hidden><br>
-                                            <hr>
-                                            <nav id="navbar-tarif" class="navbar justify-content-center">
-                                                <button type="submit" name="simpan_bayar" class="nav-link btn btn-success btn-sm">
-                                                    <i class="fas fa-paper-plane"></i> Kirim Data Pembayaran
-                                                </button>
-                                            </nav>
-                                        </form>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>

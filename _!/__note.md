@@ -75,7 +75,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres Status dan Tombol Pembayaran Praktik + Database"
+git commit -a -m "Progres Modal Rincian Tarif Pembayaran + Database"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git
