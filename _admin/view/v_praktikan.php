@@ -34,7 +34,6 @@
                                 <div class="card-header align-items-center bg-gray-200">
                                     <div class="row" style="font-size: small;">
                                         <br><br>
-
                                         <div class="col-sm-4 text-center m-auto">
                                             <?php if ($_SESSION['level_user'] == 1) { ?>
                                                 <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?><br>

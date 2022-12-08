@@ -147,3 +147,6 @@ tfoot {
 .i{
   font-style: italic;
 }
+.u{
+  text-decoration: underline;
+}

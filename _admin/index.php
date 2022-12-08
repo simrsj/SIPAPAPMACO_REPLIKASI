@@ -31,12 +31,14 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				<img src="./_img/rsj.svg" width="28" />
 				<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
 			</a>
-			<!-- Nav Item - Dashboard -->
-			<!-- <li class="nav-item ">
-				<a class="nav-link" href="?test">
-					<i class="fas fa-fw fa-bug"></i>
-					<span>Testing</span></a>
-			</li> -->
+			<?php if ($_SESSION['level_user'] == 1) { ?>
+				<!-- Test -->
+				<li class="nav-item ">
+					<a class="nav-link" href="?test">
+						<i class="fas fa-fw fa-bug"></i>
+						<span>Testing</span></a>
+				</li>
+			<?php } ?>
 			<li class="nav-item ">
 				<a class="nav-link" href="?">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
@@ -469,7 +471,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				}
 				//praktik bayar
 				elseif (isset($_GET['pbyr'])) {
-					if ($d_prvl['r_praktik_bayar'] == 'Y') include "_admin/view/v_praktik_bayar.php";
+					if (isset($_GET['i']) && $d_prvl['c_praktik_bayar'] == 'Y') include "_admin/insert/i_praktik_bayar.php";
+					else include "_admin/view/v_praktik_bayar.php";
 				} elseif (isset($_GET['pfs'])) {
 					include "_admin/view/v_profesi.php";
 				} elseif (isset($_GET['uni'])) {

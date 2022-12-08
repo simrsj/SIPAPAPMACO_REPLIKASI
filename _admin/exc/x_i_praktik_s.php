@@ -54,6 +54,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " nama_koordinator_praktik,";
     $sql_insert .= " email_koordinator_praktik,";
     $sql_insert .= " telp_koordinator_praktik,";
+    $sql_insert .= " kode_bayar_praktik,";
     $sql_insert .= " status_mess_praktik,";
     $sql_insert .= " status_praktik";
     $sql_insert .= " ) VALUES (";
@@ -73,6 +74,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " '" . $_POST['nama_koordinator'] . "', ";
     $sql_insert .= " '" . $_POST['email_koordinator'] . "',";
     $sql_insert .= " '" . $_POST['telp_koordinator'] . "', ";
+    $sql_insert .= " '" . date("ymdi") . "', ";
     $sql_insert .= " '" . $_POST['pilih_mess'] . "', ";
     $sql_insert .= " 'Y'";
     $sql_insert .= " )";

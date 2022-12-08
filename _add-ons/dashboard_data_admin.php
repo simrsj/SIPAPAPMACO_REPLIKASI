@@ -106,9 +106,9 @@ while ($d_dpjs = $q_dpjs->fetch(PDO::FETCH_ASSOC)) {
 $total_tarif = 0;
 $total_tarif_pilih = 0;
 $total_mess = 0;
-$sql_praktik = "SELECT * FROM tb_tarif_pilih
-            JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik
-            WHERE status_bayar_praktik =  'Y'";
+$sql_praktik = "SELECT * FROM tb_tarif_pilih";
+$sql_praktik .= " JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik";
+$sql_praktik .= " WHERE status_praktik =  'Y'";
 $q_praktik = $conn->query($sql_praktik);
 
 #semua

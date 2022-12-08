@@ -89,7 +89,7 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                             <td class="align-middle"> <?= $d_praktik_bayar['tgl_selesai_praktik'] ?> </td>
                             <td class="align-middle">
                                 <?php
-
+                                # status
                                 // jika tarif belum ada 
                                 if ($r_tarif_pilih < 1) {
                                 ?>
