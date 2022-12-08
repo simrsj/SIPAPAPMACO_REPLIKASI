@@ -41,10 +41,10 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                         <?php if ($d_prvl['level_user'] == 1) { ?>
                             <th> Nama Institusi </th>
                         <?php } ?>
-                        <th> Nama Kelompok </th>
-                        <th> Jumlah <br> Praktikan </th>
-                        <th> Tgl Mulai<br> (YYYY-MM-DD) </th>
-                        <th> Tgl Selesai <br> (YYYY-MM-DD) </th>
+                        <th>Nama Kelompok</th>
+                        <th>Jumlah<br>Praktikan</th>
+                        <th>Tgl Mulai<br>(YYYY-MM-DD)</th>
+                        <th>Tgl Selesai<br>(YYYY-MM-DD)</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -89,7 +89,7 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                             <td class="align-middle"> <?= $d_praktik_bayar['tgl_selesai_praktik'] ?> </td>
                             <td class="align-middle">
                                 <?php
-                                # status
+                                #status
                                 // jika tarif belum ada 
                                 if ($r_tarif_pilih < 1) {
                                 ?>
