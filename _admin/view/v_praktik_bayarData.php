@@ -41,8 +41,8 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                         <?php if ($d_prvl['level_user'] == 1) { ?>
                             <th> Nama Institusi </th>
                         <?php } ?>
-                        <th>Nama Kelompok</th>
-                        <th>Jumlah<br>Praktikan</th>
+                        <th>Nama<br>Kelompok</th>
+                        <th>Kode<br>Bayar</th>
                         <th>Tgl Mulai<br>(YYYY-MM-DD)</th>
                         <th>Tgl Selesai<br>(YYYY-MM-DD)</th>
                         <th>Status</th>
@@ -84,7 +84,11 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                                 <td class="align-middle"> <?= $d_praktik_bayar['nama_institusi'] ?> </td>
                             <?php } ?>
                             <td class="align-middle"> <?= $d_praktik_bayar['nama_praktik'] ?> </td>
-                            <td class="align-middle"> <?= $d_praktik_bayar['jumlah_praktik'] ?> </td>
+                            <td class="align-middle">
+                                <span class="badge badge-danger">
+                                    <?= $d_praktik_bayar['kode_bayar_praktik'] ?>
+                                </span>
+                            </td>
                             <td class="align-middle"> <?= $d_praktik_bayar['tgl_mulai_praktik'] ?> </td>
                             <td class="align-middle"> <?= $d_praktik_bayar['tgl_selesai_praktik'] ?> </td>
                             <td class="align-middle">
@@ -161,7 +165,9 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                 <tfoot>
                     <tr>
                         <td></td>
-                        <th></th>
+                        <?php if ($d_prvl['level_user'] == 1) { ?>
+                            <th></th>
+                        <?php } ?>
                         <th></th>
                         <th></th>
                         <th></th>

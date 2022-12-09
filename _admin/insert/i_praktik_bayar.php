@@ -87,7 +87,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                     </a>
 
                                     <!-- modal rincian pembayaran -->
-                                    <div class="modal fade" id="rincian" data-backdrop="">
+                                    <div class="modal fade" id="rincian" data-backdrop="static">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_sbayar">
@@ -100,7 +100,8 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                     <div class="modal-body">
                                                         <form enctype="multipart/form-data" class="form-group" method="post" action="">
                                                             <b>Kode Pembayaran : </b><span style="color:red">*</span><br>
-                                                            <input class="form-control" type="text" name="kode_bayar" value="<?= "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>" required readonly><br>
+                                                            <input type="hidden" name="kode_bayar" value="<?= $d_praktik['kode_bayar_praktik'] ?>" required>
+                                                            <span class="text-danger b"><?= $d_praktik['kode_bayar_praktik'] ?></span><br><br>
                                                             <b>Atas Nama : </b><span style="color:red">*</span><br>
                                                             <input class="form-control" type="text" name="atas_nama_bayar" required><br>
                                                             <b>No. Rekening/Lainnya : </b><span style="color:red">*</span><br>
@@ -126,60 +127,65 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <br>
-                                <div class="h5 text-gray-700">
-                                    <?php
-
-                                    $sql_praktik1 = "SELECT * FROM tb_praktik
-                                    WHERE id_praktik = " . $id_praktik;
-
-                                    $q_praktik1 = $conn->query($sql_praktik1);
-                                    $d_praktik1 = $q_praktik1->fetch(PDO::FETCH_ASSOC);
-                                    ?>
-                                    <center>
-                                        <div class="text-danger font-weight-bold">
-                                            Kode Pembayaran : <?= "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>
-                                        </div>
-                                        <br>
-                                        Perlu kami informasikan pembayaran dapat ditransfer pada <br>
-                                        <b>Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD)</b> dengan nomor : <br> <b>BJB - 0063028738002</b>.
-                                    </center>
-                                    <br>Bukti transfer dikirim juga melalui :
-                                    <br> <i class="fas fa-envelope"></i> Email diklit.rsj.jabarprov@gmail.com
-                                    <br> <i class="fab fa-whatsapp"></i> Nomor WA Bendahara Penerimaan RSJ (081321412643)<br>
+                                <hr>
+                                <div class="h5 text-gray-700 text-center">
+                                    Perlu kami informasikan pembayaran dapat ditransfer Ke Rekening <br>
+                                    Atas Nama <b>PEMEGANG KAS RSJ PROV JABAR BLUD</b> dengan nomor : <b>BJB - 0063028738002</b>.
+                                    <hr>
+                                    Bukti transfer dikirim juga melalui :
+                                    <br> <i class="fas fa-envelope"></i> <b>Email</b> diklit.rsj.jabarprov@gmail.com
+                                    <br> <i class="fab fa-whatsapp"></i> <b>WhatsApp</b> Atas Nama Bendahara Penerimaan RSJ (081321412643)<br>
                                 </div>
                             </div>
                         </div>
                         <br>
-                        <div class="table-responsive">
-                            <table class="table table-hover" id="dataTable">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Jenis</th>
-                                        <th>Nama Tarif</th>
-                                        <th>Satuan</th>
-                                        <th>Tarif</th>
-                                        <th>Frek.</th>
-                                        <th>Ktt.</th>
-                                        <th width="150px">Total Tarif</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($data as $data_) : ?>
+                        <?php
+                        if ($r_praktik_tarif > 0) {
+
+                        ?>
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="dataTable">
+                                    <thead class="table-dark">
                                         <tr>
-                                            <td><?= $data_[0]; ?></td>
-                                            <td><?= $data_[1]; ?></td>
-                                            <td><?= $data_[2]; ?></td>
-                                            <td><?= $data_[3]; ?></td>
-                                            <td><?= $data_[4]; ?></td>
-                                            <td><?= $data_[5]; ?></td>
-                                            <td><?= $data_[6]; ?></td>
+                                            <th>No</th>
+                                            <th>Nama Jenis</th>
+                                            <th>Nama Tarif</th>
+                                            <th>Satuan</th>
+                                            <th>Tarif</th>
+                                            <th>Frek.</th>
+                                            <th>Ktt.</th>
+                                            <th width="150px">Total Tarif</th>
                                         </tr>
-                                    <?php endforeach ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        while ($d_bayar = $q_bayar->fetch(PDO::FETCH_ASSOC)) {
+                                        ?>
+                                            <tr>
+                                                <td><?= $no; ?></td>
+                                                <td><?= $d_bayar['kode_bayar']; ?></td>
+                                                <td><?= $d_bayar['atas_nama_bayar']; ?></td>
+                                                <td><?= $d_bayar['noRek_bayar']; ?></td>
+                                                <td><?= $d_bayar['melalui_bayar']; ?></td>
+                                                <td><?= $d_bayar['tgl_bayar']; ?></td>
+                                                <td><?= $d_bayar['tgl_bayar']; ?></td>
+                                                <td><?= $d_bayar['file_bayar']; ?></td>
+                                            </tr>
+                                        <?php
+                                            $no++;
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php
+                        } else {
+                        ?>
+                            <h3 class="text-center jumbotron jumbotron-fluid"> Data Bayar Tidak Ada</h3>
+                        <?php
+                        }
+                        ?>
                     </div>
 
 
