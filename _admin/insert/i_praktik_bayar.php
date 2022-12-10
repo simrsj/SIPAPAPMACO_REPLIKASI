@@ -250,10 +250,13 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                 // inisiasi klik modal tambah simpan
                                 $(document).on('click', '.tambah', function() {
                                     console.log("tambah");
-                                    var data_t = $("#from_t").serializeArray();
+                                    var data_t = $("#form_t").serializeArray();
                                     data_t.push({
+                                        name: "idu",
+                                        value: '<?= urlencode(base64_encode($_SESSION['id_user'])) ?>'
+                                    }, {
                                         name: "idp",
-                                        value: '<?= base64_decode(urldecode($_GET['pbyr'])) ?>'
+                                        value: '<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>'
                                     });
 
                                     var t_atasNama = $('#t_atasNama').val();
@@ -320,38 +323,99 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                         }
                                     }
 
+
+                                    //eksekusi bila file bukti
+                                    if (t_file != "" && t_file != undefined) {
+
+                                        //Cari ekstensi file bukti yg diupload
+                                        var typeFile = document.querySelector('#t_file').value;
+                                        var getTypeFile = typeFile.split('.').pop();
+                                        // console.log(getTypeFile)
+
+                                        //cari ukuran file bukti yg diupload
+                                        var file = document.getElementById("t_file").files;
+                                        var getSizeFile = document.getElementById("t_file").files[0].size / 1024;
+                                        // console.log(getSizeFile)
+
+                                        //Toast bila upload file bukti tipe tidak sesuai
+                                        if (!(
+                                                getTypeFile == 'pdf' ||
+                                                getTypeFile == 'png' ||
+                                                getTypeFile == 'jpg' ||
+                                                getTypeFile == 'jpeg'
+                                            )) {
+                                            const Toast = Swal.mixin({
+                                                toast: true,
+                                                position: 'top-end',
+                                                showConfirmButton: false,
+                                                timer: 10000,
+                                                timerProgressBar: true,
+                                                didOpen: (toast) => {
+                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                }
+                                            });
+
+                                            Toast.fire({
+                                                icon: 'warning',
+                                                title: '<div class="text-md text-center">Data unggah harus <b>pdf/jpg/png/jpeg</b></div>'
+                                            });
+                                            $("#err_t_file").html("file bukti Harus pdf/jpg/png/jpeg");
+                                        } //Toast bila upload file bukti ukuran tidak sesuai 
+                                        else if (getSizeFile > 256) {
+                                            const Toast = Swal.mixin({
+                                                toast: true,
+                                                position: 'top-end',
+                                                showConfirmButton: false,
+                                                timer: 10000,
+                                                timerProgressBar: true,
+                                                didOpen: (toast) => {
+                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                }
+                                            });
+
+                                            Toast.fire({
+                                                icon: 'warning',
+                                                title: '<div class="text-md text-center">file bukti Harus <br><b>Kurang dari 200 Kb</b></div>'
+                                            });
+                                            $("#err_t_file").html("file bukti Harus Kurang dari 200 Kb");
+                                        }
+                                    }
+
                                     //simpan data tambah bila sudah sesuai
                                     if (
-                                        t_jenis_tarif != "" &&
-                                        t_nama != "" &&
-                                        t_tarif != "" &&
-                                        t_satuan != "" &&
-                                        t_frekuensi != "" &&
-                                        t_kuantitas != ""
+                                        t_atasNama != "" &&
+                                        t_noRek != "" &&
+                                        t_melalui != "" &&
+                                        t_tglTF != "" &&
+                                        t_file != "" &&
+                                        getTypeFile == "pdf" &&
+                                        getTypeFile == "png" &&
+                                        getTypeFile == "jpg" &&
+                                        getTypeFile == "jpeg" &&
+                                        getSizeFile < 256
                                     ) {
                                         console.log("tambah data");
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: "_admin/exc/x_v_praktik_tarif_t.php",
+                                            url: "_admin/exc/x_i_praktik_bayar_t.php",
                                             data: data_t,
                                             success: function() {
-                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                $('#data_bayar')
                                                     .load(
-                                                        "_admin/view/v_praktik_tarifData.php?" +
+                                                        "_admin/insert/i_praktik_bayarData.php?" +
                                                         "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
-                                                        "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
-                                                        "&tb=<?= md5($d_praktik['id_praktik']); ?>");
+                                                        "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>"
+                                                    );
 
-                                                $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").empty();
-                                                $('#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>').empty();
-                                                $('#<?= md5('err_t_tarif' . $d_praktik['id_praktik']); ?>').empty();
-                                                $("#<?= md5('err_t_satuan' . $d_praktik['id_praktik']); ?>").empty();
-                                                $('#<?= md5('err_t_frekuensi' . $d_praktik['id_praktik']); ?>').empty();
-                                                $('#<?= md5('err_t_kuantitas' . $d_praktik['id_praktik']); ?>').empty();
-                                                $("#<?= md5('form_t' . $d_praktik['id_praktik']); ?>").trigger("reset");
-                                                $("#<?= md5('t_jenis_tarif' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
-                                                $("#<?= md5('t_satuan' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
+                                                $("#err_t_atasNama").empty();
+                                                $("#err_t_noRek").empty();
+                                                $("#err_t_melalui").empty();
+                                                $("#err_t_tglTF").empty();
+                                                $("#err_t_file").empty();
+                                                $("#form_t").trigger("reset");
 
                                                 const Toast = Swal.mixin({
                                                     toast: true,
@@ -367,7 +431,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
 
                                                 Toast.fire({
                                                     icon: 'success',
-                                                    title: '<span class"text-centere"><b>Data Tarif</b><br>Berhasil Tersimpan',
+                                                    title: '<b>Data Tarif</b><br>Berhasil Tersimpan',
                                                 }).then(
                                                     function() {}
                                                 );

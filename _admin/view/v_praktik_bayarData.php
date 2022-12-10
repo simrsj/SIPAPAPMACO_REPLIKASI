@@ -46,7 +46,7 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                         <th>Tgl Mulai<br>(YYYY-MM-DD)</th>
                         <th>Tgl Selesai<br>(YYYY-MM-DD)</th>
                         <th>Status</th>
-                        <th>Aksi</th>
+                        <th width="120px">Data<br>Pembayaran</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,14 +138,13 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                                 <?php
                                 if ($r_tarif_pilih > 0) {
                                 ?>
-                                    <a class="btn btn-outline-success text-xs" href="?pbyr=<?= urlencode(base64_encode($d_praktik_bayar['id_praktik'])) ?>&i">
-                                        <i class="fa-solid fa-money-bill"></i>
-                                        Lakukan Pembayaran
+                                    <a class="btn btn-outline-success" href="?pbyr=<?= urlencode(base64_encode($d_praktik_bayar['id_praktik'])) ?>&i">
+                                        <i class="fa-solid fa-money-bill"></i> Cek
                                     </a>
                                 <?php
                                 } else if ($r_tarif_pilih < 1) {
                                 ?>
-                                    <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
+                                    <span class="badge badge-secondary">Tarif<br>Belum Dipilih</span>
                                 <?php
                                 } else {
                                 ?>
