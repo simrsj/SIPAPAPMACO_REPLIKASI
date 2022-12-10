@@ -2,9 +2,9 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 //alamat file surat masuk
 $alamat_unggah = "./../../_file/bayar";
 
@@ -29,13 +29,13 @@ if ($_FILES['t_file']['size'] > 0) {
     }
 }
 
-echo "<pre>";
-print_r($_FILES);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_FILES);
+// echo "</pre>";
 
 $sql_update_file = "UPDATE tb_bayar SET ";
 $sql_update_file .= " file_bayar = '" . $link_file_bayar . "' ";
 $sql_update_file .= " WHERE id_bayar = " . base64_decode(urldecode($_POST['idb']));
 
-echo $sql_update_file . "<br>";
-// $conn->query($sql_update_file);
+// echo $sql_update_file . "<br>";
+$conn->query($sql_update_file);

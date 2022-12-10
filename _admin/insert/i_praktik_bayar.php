@@ -164,7 +164,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                     <div class="modal fade" id="rincian" data-backdrop="static">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                                <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_sbayar">
+                                                <form enctype="multipart/form-data" class="form-group" method="post" id="form_t">
                                                     <div class="modal-header">
                                                         <b>BUKTI DATA PEMABAYARAN</b>
                                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -172,64 +172,62 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                         </button>
                                                     </div>
                                                     <div class="modal-body  b">
-                                                        <form enctype="multipart/form-data" class="form-group" method="post" id="form_t">
-                                                            <?php
+                                                        <?php
 
-                                                            //Cari id_bayar
-                                                            $no = 1;
-                                                            $sql = "SELECT id_bayar FROM tb_bayar ORDER BY id_bayar ASC";
-                                                            $q = $conn->query($sql);
-                                                            if ($q->rowCount() > 0) {
-                                                                while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
-                                                                    if ($no != $d['id_bayar']) {
-                                                                        break;
-                                                                    }
-                                                                    $no++;
+                                                        //Cari id_bayar
+                                                        $no = 1;
+                                                        $sql = "SELECT id_bayar FROM tb_bayar ORDER BY id_bayar ASC";
+                                                        $q = $conn->query($sql);
+                                                        if ($q->rowCount() > 0) {
+                                                            while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
+                                                                if ($no != $d['id_bayar']) {
+                                                                    break;
                                                                 }
+                                                                $no++;
                                                             }
-                                                            $id_bayar = $no;
-                                                            ?>
-                                                            <input type="hidden" id="idb" name="idb" value="<?= urlencode(base64_encode($id_bayar)) ?>" required>
-                                                            <input type="hidden" id="t_kode" name="t_kode" value="<?= $d_praktik['kode_bayar_praktik'] ?>" required>
-                                                            Kode Pembayaran : <span class="text-danger"><?= $d_praktik['kode_bayar_praktik'] ?></span><br><br>
+                                                        }
+                                                        $id_bayar = $no;
+                                                        ?>
+                                                        <input type="hidden" id="idb" name="idb" value="<?= urlencode(base64_encode($id_bayar)) ?>" required>
+                                                        <input type="hidden" id="t_kode" name="t_kode" value="<?= $d_praktik['kode_bayar_praktik'] ?>" required>
+                                                        Kode Pembayaran : <span class="text-danger"><?= $d_praktik['kode_bayar_praktik'] ?></span><br><br>
 
-                                                            Atas Nama :<span style="color:red">*</span><br>
-                                                            <input class="form-control" type="text" id="t_atasNama" name="t_atasNama" placeholder="Isikan Atas Nama Pembayaran" required>
-                                                            <div class="text-xs font-italic text-danger blink" id="err_t_atasNama"></div><br>
+                                                        Atas Nama :<span style="color:red">*</span><br>
+                                                        <input class="form-control" type="text" id="t_atasNama" name="t_atasNama" placeholder="Isikan Atas Nama Pembayaran" required>
+                                                        <div class="text-xs font-italic text-danger blink" id="err_t_atasNama"></div><br>
 
-                                                            No. Rekening/Lainnya : <span style="color:red">*</span><br>
-                                                            <input class="form-control" type="text" id="t_noRek" name="t_noRek" placeholder="Isikan No. Rekening/Lainnya" required>
-                                                            <div class="text-xs font-italic text-danger blink" id="err_t_noRek"></div><br>
+                                                        No. Rekening/Lainnya : <span style="color:red">*</span><br>
+                                                        <input class="form-control" type="text" id="t_noRek" name="t_noRek" placeholder="Isikan No. Rekening/Lainnya" required>
+                                                        <div class="text-xs font-italic text-danger blink" id="err_t_noRek"></div><br>
 
-                                                            Pembayaran: <span style="color:red">*</span><br>
-                                                            <input class="form-control" type="text" id="t_melalui" name="t_melalui" placeholder="Isikan Pembayaran Melalui" required>
-                                                            <span class='i text-xs'>BJB, BNI, BRI, BTN, Mandiri, GoPay, ShoppePay, dll.</span><br>
-                                                            <div class="text-xs font-italic text-danger blink" id="err_t_melalui"></div><br>
+                                                        Pembayaran: <span style="color:red">*</span><br>
+                                                        <input class="form-control" type="text" id="t_melalui" name="t_melalui" placeholder="Isikan Pembayaran Melalui" required>
+                                                        <span class='i text-xs'>BJB, BNI, BRI, BTN, Mandiri, GoPay, ShoppePay, dll.</span><br>
+                                                        <div class="text-xs font-italic text-danger blink" id="err_t_melalui"></div><br>
 
-                                                            Tanggal Transfer : <span style="color:red">*</span><br>
-                                                            <input class="form-control" type="date" id="t_tglTF" name="t_tglTF" required>
-                                                            <div class="text-xs font-italic text-danger blink" id="err_t_tglTF"></div><br>
+                                                        Tanggal Transfer : <span style="color:red">*</span><br>
+                                                        <input class="form-control" type="date" id="t_tglTF" name="t_tglTF" required>
+                                                        <div class="text-xs font-italic text-danger blink" id="err_t_tglTF"></div><br>
 
-                                                            Unggah File : <span style="color:red">*</span><br>
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label text-md" for="customFile" id="labelfileinput">Pilih File</label>
-                                                                <input type="file" class="custom-file-input" id="t_file" name="t_file" accept="application/pdf, image/jpg, image/png, image/jpeg" required>
-                                                                <span class='i text-xs'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 200 Kb</span><br>
-                                                                <div class="text-xs font-italic text-danger blink" id="err_t_file"></div><br>
-                                                                <script>
-                                                                    $('.custom-file-input').on('change', function() {
-                                                                        var fileName = $(this).val();
-                                                                        $('#labelfileinput').html(fileName);
-                                                                    })
-                                                                </script>
-                                                            </div>
-                                                            Keterangan : <br>
-                                                            <textarea class="form-control" id="t_ket" name="t_ket"></textarea>
-                                                            <hr>
-                                                            <a class="btn btn-outline-success tambah">
-                                                                <i class=" fas fa-paper-plane"></i> Kirim Bukti Pembayaran
-                                                            </a>
-                                                        </form>
+                                                        Unggah File : <span style="color:red">*</span><br>
+                                                        <div class="custom-file">
+                                                            <label class="custom-file-label text-md" for="customFile" id="labelfileinput">Pilih File</label>
+                                                            <input type="file" class="custom-file-input" id="t_file" name="t_file" accept="application/pdf, image/jpg, image/png, image/jpeg" required>
+                                                            <span class='i text-xs'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 200 Kb</span><br>
+                                                            <div class="text-xs font-italic text-danger blink" id="err_t_file"></div><br>
+                                                            <script>
+                                                                $('.custom-file-input').on('change', function() {
+                                                                    var fileName = $(this).val();
+                                                                    $('#labelfileinput').html(fileName);
+                                                                })
+                                                            </script>
+                                                        </div>
+                                                        Keterangan : <br>
+                                                        <textarea class="form-control" id="t_ket" name="t_ket"></textarea>
+                                                        <hr>
+                                                        <a class="btn btn-outline-success tambah">
+                                                            <i class=" fas fa-paper-plane"></i> Kirim Bukti Pembayaran
+                                                        </a>
                                                     </div>
                                                 </form>
                                             </div>
@@ -267,14 +265,6 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                 // inisiasi klik modal tambah simpan
                                 $(document).on('click', '.tambah', function() {
                                     console.log("tambah");
-                                    var data_t = $("#form_t").serializeArray();
-                                    data_t.push({
-                                        name: "idu",
-                                        value: '<?= urlencode(base64_encode($_SESSION['id_user'])) ?>'
-                                    }, {
-                                        name: "idp",
-                                        value: '<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>'
-                                    });
 
                                     var t_atasNama = $('#t_atasNama').val();
                                     var t_noRek = $('#t_noRek').val();
@@ -416,6 +406,14 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                     ) {
                                         console.log("tambah data");
 
+                                        var data_t = $("#form_t").serializeArray();
+                                        data_t.push({
+                                            name: "idu",
+                                            value: '<?= urlencode(base64_encode($_SESSION['id_user'])) ?>'
+                                        }, {
+                                            name: "idp",
+                                            value: '<?= urlencode(base64_encode($d_praktik['id_praktik'])) ?>'
+                                        });
                                         $.ajax({
                                             type: 'POST',
                                             url: "_admin/exc/x_i_praktik_bayar_t.php",

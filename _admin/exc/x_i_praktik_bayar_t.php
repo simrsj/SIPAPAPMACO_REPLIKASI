@@ -1,8 +1,8 @@
 <?php
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
@@ -37,11 +37,11 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
     $sql_insert_bayar .= " '" . date('Y-m-d') . "',";
     $sql_insert_bayar .= " '" . $_POST['t_ket'] . "'";
     $sql_insert_bayar .= " )";
-    echo $sql_insert_bayar . "<br>";
+    // echo $sql_insert_bayar . "<br>";
 
     //Eksekusi Query
     try {
-        // $conn->query($sql_insert_bayar);
+        $conn->query($sql_insert_bayar);
     } catch (Exception $ex) {
         echo "<script>alert('$ex -INSERT TARIF MESS-');";
         echo "document.location.href='?error404';</script>";
