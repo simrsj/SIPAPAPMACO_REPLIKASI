@@ -173,8 +173,25 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                     </div>
                                                     <div class="modal-body  b">
                                                         <form enctype="multipart/form-data" class="form-group" method="post" id="form_t">
-                                                            Kode Pembayaran : <span class="text-danger"><?= $d_praktik['kode_bayar_praktik'] ?></span>
-                                                            <input type="hidden" id="t_kode" name="t_kode" value="<?= $d_praktik['kode_bayar_praktik'] ?>" required><br><br>
+                                                            <?php
+
+                                                            //Cari id_bayar
+                                                            $no = 1;
+                                                            $sql = "SELECT id_bayar FROM tb_bayar ORDER BY id_bayar ASC";
+                                                            $q = $conn->query($sql);
+                                                            if ($q->rowCount() > 0) {
+                                                                while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
+                                                                    if ($no != $d['id_bayar']) {
+                                                                        break;
+                                                                    }
+                                                                    $no++;
+                                                                }
+                                                            }
+                                                            $id_bayar = $no;
+                                                            ?>
+                                                            <input type="hidden" id="idb" name="idb" value="<?= urlencode(base64_encode($id_bayar)) ?>" required>
+                                                            <input type="hidden" id="t_kode" name="t_kode" value="<?= $d_praktik['kode_bayar_praktik'] ?>" required>
+                                                            Kode Pembayaran : <span class="text-danger"><?= $d_praktik['kode_bayar_praktik'] ?></span><br><br>
 
                                                             Atas Nama :<span style="color:red">*</span><br>
                                                             <input class="form-control" type="text" id="t_atasNama" name="t_atasNama" placeholder="Isikan Atas Nama Pembayaran" required>
@@ -389,11 +406,12 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                         t_noRek != "" &&
                                         t_melalui != "" &&
                                         t_tglTF != "" &&
-                                        t_file != "" &&
-                                        getTypeFile == "pdf" &&
-                                        getTypeFile == "png" &&
-                                        getTypeFile == "jpg" &&
-                                        getTypeFile == "jpeg" &&
+                                        t_file != "" && (
+                                            getTypeFile == "pdf" ||
+                                            getTypeFile == "png" ||
+                                            getTypeFile == "jpg" ||
+                                            getTypeFile == "jpeg"
+                                        ) &&
                                         getSizeFile < 256
                                     ) {
                                         console.log("tambah data");
@@ -403,6 +421,20 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                             url: "_admin/exc/x_i_praktik_bayar_t.php",
                                             data: data_t,
                                             success: function() {
+                                                //ambil data file yang diupload
+                                                var data_file = new FormData();
+                                                var xhttp = new XMLHttpRequest();
+
+                                                var file = document.getElementById("t_file").files;
+                                                data_file.append("t_file", file[0]);
+
+                                                var idb = $("#idb").val();
+                                                data_file.append("idb", idb);
+                                                data_file.append("idp", "<?= $_GET['pbyr'] ?>");
+
+                                                xhttp.open("POST", "_admin/exc/x_i_praktik_bayar_tFile.php", true);
+                                                xhttp.send(data_file);
+
                                                 $('#data_bayar')
                                                     .load(
                                                         "_admin/insert/i_praktik_bayarData.php?" +

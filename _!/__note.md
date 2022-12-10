@@ -75,7 +75,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres Modal Rincian Tarif Pembayaran + Database"
+git commit -a -m "Berhasil Simpan File Bukti Custom Nama"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git
