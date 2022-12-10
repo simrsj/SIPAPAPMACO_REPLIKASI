@@ -29,33 +29,33 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
     }
 
     //data tarif praktik
-    $sql_praktik_tarif = "SELECT * FROM tb_bayar";
-    $sql_praktik_tarif .= " WHERE id_praktik = '" . base64_decode(urldecode($_GET['idp'])) . "'";
+    $sql_bayar = "SELECT * FROM tb_bayar";
+    $sql_bayar .= " WHERE id_praktik = '" . base64_decode(urldecode($_GET['idp'])) . "'";
     // echo $id_praktik . "<br>";
 
     try {
-        $q_praktik_tarif = $conn->query($sql_praktik_tarif);
+        $q_bayar = $conn->query($sql_bayar);
     } catch (Exception $ex) {
         echo "<script> alert('$ex -DATA BAYAR-'); ";
         echo "document.location.href='?error404'; </script>";
     }
-    $r_praktik_tarif = $q_praktik_tarif->rowCount();
+    $r_bayar = $q_bayar->rowCount();
 
-    if ($r_praktik_tarif > 0) {
+    if ($r_bayar > 0) {
 
 ?>
         <div class="table-responsive">
+            <div class="row col-lg h4 mb-2 text-gray-800">Data Pembayaran </div>
             <table class="table table-hover" id="dataTable">
                 <thead class="table-dark">
                     <tr>
                         <th>No</th>
-                        <th>Nama Jenis</th>
-                        <th>Nama Tarif</th>
-                        <th>Satuan</th>
-                        <th>Tarif</th>
-                        <th>Frek.</th>
-                        <th>Ktt.</th>
-                        <th width="150px">Total Tarif</th>
+                        <th>Atas Nama</th>
+                        <th>Pembayaran Melalui</th>
+                        <th>Nomor Rekening/Transfer</th>
+                        <th>Tanggal Transfer</th>
+                        <th>File Bukti Pembayaran</th>
+                        <th>Keterangan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,15 +65,12 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
                     ?>
                         <tr>
                             <td><?= $no; ?></td>
-                            <td><?= $d_bayar['kode_bayar']; ?></td>
                             <td><?= $d_bayar['atas_nama_bayar']; ?></td>
-                            <td><?= $d_bayar['noRek_bayar']; ?></td>
                             <td><?= $d_bayar['melalui_bayar']; ?></td>
-                            <td><?= $d_bayar['tgl_bayar']; ?></td>
-                            <td><?= $d_bayar['tgl_bayar']; ?></td>
-                            <td>
-                                <a href="<?= $d_bayar['file_bayar']; ?>" class="btn btn-outline-success" download="bukti file pembayaran">Unduh File</a>
-                            </td>
+                            <td><?= $d_bayar['noRek_bayar']; ?></td>
+                            <td><?= tanggal($d_bayar['tgl_transfer_bayar']); ?></td>
+                            <td> <a href="<?= $d_bayar['file_bayar']; ?>" class="btn btn-outline-success" download="bukti file pembayaran">Unduh File</a></td>
+                            <td><?= $d_bayar['ket_bayar']; ?></td>
                         </tr>
                     <?php
                         $no++;
@@ -85,7 +82,7 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
     <?php
     } else {
     ?>
-        <h3 class="text-center jumbotron jumbotron-fluid"> Data Bayar Tidak Ada</h3>
+        <h3 class="text-center jumbotron jumbotron-fluid"> Data Pemabayaran Tidak Ada</h3>
 <?php
     }
 } else {
