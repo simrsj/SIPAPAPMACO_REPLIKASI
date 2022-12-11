@@ -265,7 +265,7 @@ if ($r_data_praktikan > 0) {
 
                                                     Toast.fire({
                                                         icon: 'success',
-                                                        title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Dirubah',
+                                                        title: '<b>Data Praktikan</b><br>Berhasil Dirubah',
                                                     }).then(
                                                         function() {}
                                                     );
