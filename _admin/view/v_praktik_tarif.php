@@ -59,30 +59,30 @@
                                 <div class="card-header align-items-center bg-gray-200">
                                     <div class="row" style="font-size: small;" class="justify-content-center">
                                         <br><br>
-                                        <div class="col-md-4 text-center">
+                                        <div class="col-sm-4 text-center">
                                             <?php if ($_SESSION['level_user'] == 1) { ?>
                                                 <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?><br>
                                             <?php } ?>
                                             <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?= $d_praktik['nama_praktik']; ?>
                                         </div>
 
-                                        <div class="col-md-2 text-center">
+                                        <div class="col-sm-2 text-center">
                                             <b class="text-gray-800">TANGGAL MULAI : </b><br><?= tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
                                             <b class="text-gray-800">TANGGAL SELESAI : </b><br><?= tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                         </div>
-                                        <div class="col-md-2 text-center">
+                                        <div class="col-sm-2 text-center">
                                             <b class="text-gray-800">JURUSAN : </b><br><?= $d_praktik['nama_jurusan_pdd']; ?><br>
                                             <b class="text-gray-800">JENJANG : </b><br><?= $d_praktik['nama_jenjang_pdd']; ?>
                                         </div>
-                                        <div class="col-md-3 text-center">
+                                        <div class="col-sm-2 text-center">
                                             <b class="text-gray-800">PROFESI : </b><br><?= $d_praktik['nama_profesi_pdd']; ?><br>
                                             <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?= $d_praktik['jumlah_praktik']; ?>
                                         </div>
                                         <!-- tombol aksi/info proses  -->
-                                        <div class="col-md-1 my-auto text-right">
+                                        <div class="col-sm-2 my-auto text-right">
                                             <!-- tombol rincian -->
                                             <a class="btn btn-outline-info btn-sm collapsed m-0 " data-toggle="collapse" data-target="#collapse<?= $d_praktik['id_praktik']; ?>" title="Rincian">
-                                                <i class="fas fa-info-circle"></i>
+                                                <i class="fas fa-info-circle"></i> Rincian
                                             </a>
                                         </div>
                                     </div>
