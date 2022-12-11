@@ -75,7 +75,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Berhasil Simpan dan Close modal verifikasi"
+git commit -a -m "PROGRES REPLACE kata RTF ke DOC (INCONSISTEN) + DB"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git
