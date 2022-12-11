@@ -32,6 +32,31 @@
   border-width:5px !important;
 }
 
+.border-primary {
+  border-color: #5074dc;
+}
+.border-danger {
+  border-color: #e74a3b;
+}
+.border-info {
+  border-color: #36b9cc;
+}
+.border-success{
+  border-color: #169b6b;
+}
+.border-warning {
+  border-color: #f6c23e;
+}
+.border-secondary {
+  border-color: #858796;
+}
+.border-dark {
+  border-color: #0000;
+}
+.border-white {
+  border-color: #fff;
+}
+
 /* -------------------------------------------------------------- dataTable */
 #dataTable {
   width:100% !important;

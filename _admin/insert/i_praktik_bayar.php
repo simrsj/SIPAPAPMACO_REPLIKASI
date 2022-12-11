@@ -62,7 +62,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                             <b>FILE INVOICE</b>
                                                         </div>
                                                         <div class="modal-body text-center">
-                                                            <div class="border-1 rounded p-2 mb-3">
+                                                            <div class="border-2 rounded p-3 mb-3  border-secondary">
                                                                 <form id="form_non_ttd" method="POST">
                                                                     <span class="b"> Invoice untuk di Tanda Tangan </span><br><br>
                                                                     <input type="hidden" id="idp" name="idp">
@@ -71,18 +71,18 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                     Ditujukan Kepada : <span class="text-danger">*</span><br>
                                                                     <input type="text" class="form-control form-control-sm" id="kepada" name="kepada" required><br>
                                                                     <a class="btn btn-outline-primary btn-sm">
-                                                                        <i class="fa-solid fa-file-word"></i> .docx (WORD)
+                                                                        <i class="fa-solid fa-file-word"></i> WORD
                                                                     </a>
                                                                     <a class="btn btn-outline-danger btn-sm" href="<?= "./_print/p_praktik_invoice.php?idp=" . $_GET['pbyr'] .
                                                                                                                         "&ns" ?>" download="invoice_non_ttd">
-                                                                        <i class="fa-solid fa-file-pdf"></i>.pdf (PDF)
+                                                                        <i class="fa-solid fa-file-pdf"></i> PDF
                                                                     </a>
                                                                 </form>
                                                             </div>
                                                             <script>
                                                             </script>
 
-                                                            <div class="border-1 rounded p-2">
+                                                            <div class="border-2 rounded p-3 mb-3  border-secondary">
                                                                 <form id="form_non_ttd" method="POST">
                                                                     Unggah File Invoice yang Sudah di Tanda Tangan : <span style="color:red">*</span><br>
                                                                     <div class="custom-file">
