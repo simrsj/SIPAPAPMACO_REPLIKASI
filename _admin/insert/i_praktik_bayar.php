@@ -62,37 +62,42 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                             <b>FILE INVOICE</b>
                                                         </div>
                                                         <div class="modal-body text-center">
-                                                            <span class="b"> Invoice untuk di Tanda Tangan </span><br><br>
-                                                            <form id="form_non_ttd" method="POST">
-                                                                <input type="hidden" id="idp" name="idp">
-                                                                No Surat RSJ : <span class="text-danger">*</span><br>
-                                                                <input type="text" class="form-control" id="no_surat" name="no_surat" required><br>
-                                                                Ditujukan Kepada : <span class="text-danger">*</span><br>
-                                                                <input type="text" class="form-control" id="kepada" name="kepada" required><br>
-                                                                <a class="btn btn-outline-primary btn-sm">
-                                                                    <i class="fa-solid fa-file-word"></i> .docx (WORD)
-                                                                </a>
-                                                                <a class="btn btn-outline-danger btn-sm" href="<?= "./_print/p_praktik_invoice.php?idp=" . $_GET['pbyr'] .
-                                                                                                                    "&ns" ?>" download="invoice_non_ttd">
-                                                                    <i class="fa-solid fa-file-pdf"></i>.pdf (PDF)
-                                                                </a>
-                                                            </form>
+                                                            <div class="border-1 rounded p-2 mb-3">
+                                                                <form id="form_non_ttd" method="POST">
+                                                                    <span class="b"> Invoice untuk di Tanda Tangan </span><br><br>
+                                                                    <input type="hidden" id="idp" name="idp">
+                                                                    No Surat RSJ : <span class="text-danger">*</span><br>
+                                                                    <input type="text" class="form-control form-control-sm" id="no_surat" name="no_surat" required><br>
+                                                                    Ditujukan Kepada : <span class="text-danger">*</span><br>
+                                                                    <input type="text" class="form-control form-control-sm" id="kepada" name="kepada" required><br>
+                                                                    <a class="btn btn-outline-primary btn-sm">
+                                                                        <i class="fa-solid fa-file-word"></i> .docx (WORD)
+                                                                    </a>
+                                                                    <a class="btn btn-outline-danger btn-sm" href="<?= "./_print/p_praktik_invoice.php?idp=" . $_GET['pbyr'] .
+                                                                                                                        "&ns" ?>" download="invoice_non_ttd">
+                                                                        <i class="fa-solid fa-file-pdf"></i>.pdf (PDF)
+                                                                    </a>
+                                                                </form>
+                                                            </div>
                                                             <script>
                                                             </script>
-                                                            <hr>
 
-                                                            Unggah File Invoice yang Sudah di Tanda Tangan : <span style="color:red">*</span><br>
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label text-md bg-primary text-danger" for="customFile" id="labelfileinput">Pilih File</label>
-                                                                <input type="file" class="custom-file-input bg-primary text-white" id="t_file_invoice" name="t_file_invoice" accept="application/pdf" required>
-                                                                <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
-                                                                <div class="text-xs font-italic text-danger blink" id="err_t_file_invoice"></div><br>
-                                                                <script>
-                                                                    $('.custom-file-input').on('change', function() {
-                                                                        var fileName = $(this).val();
-                                                                        $('#labelfileinput').html(fileName);
-                                                                    })
-                                                                </script>
+                                                            <div class="border-1 rounded p-2">
+                                                                <form id="form_non_ttd" method="POST">
+                                                                    Unggah File Invoice yang Sudah di Tanda Tangan : <span style="color:red">*</span><br>
+                                                                    <div class="custom-file">
+                                                                        <label class="custom-file-label text-xs" for="customFile" id="labelfileinput">Pilih File</label>
+                                                                        <input type="file" class="custom-file-input mb-1" id="t_file_invoice" name="t_file_invoice" accept="application/pdf" required>
+                                                                        <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                                                        <div class="text-xs font-italic text-danger blink" id="err_t_file_invoice"></div><br>
+                                                                        <script>
+                                                                            $('.custom-file-input').on('change', function() {
+                                                                                var fileName = $(this).val();
+                                                                                $('#labelfileinput').html(fileName);
+                                                                            })
+                                                                        </script>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>

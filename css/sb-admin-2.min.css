@@ -3558,7 +3558,7 @@ input[type="submit"].btn-block {
   position: relative;
   z-index: 2;
   width: 100%;
-  height: calc(1.5em + 0.75rem + 2px);
+  height: calc(1.5em + 0.75rem + 0);
   margin: 0;
   opacity: 0;
 }
@@ -3605,7 +3605,7 @@ input[type="submit"].btn-block {
   content: "Browse";
   background-color: #eaecf4;
   border-left: inherit;
-  border-radius: 0 0.35rem 0.35rem 0;
+  border-radius: 0 0 0 0;
 }
 .custom-range {
   width: 100%;
