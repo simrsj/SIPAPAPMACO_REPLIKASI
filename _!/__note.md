@@ -75,13 +75,19 @@ git status
 
 git pull
 git add .
-git commit -a -m "Berhasil Simpan File Bukti Custom Nama"
+git commit -a -m "Berhasil Simpan dan Close modal verifikasi"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git
 
 git commit --amend
-<UBAH commit sebelumnya, bila sudah CTRL + X lalu CTRL + C lalau ketik :wq untuk ubah keterangan Commit atau :qa untuk keluar>
+<ubah commit sebelumnya, bila sudah CTRL + X lalu CTRL + C lalau ketik :wq untuk ubah keterangan Commit atau :qa untuk keluar>
+
+git commit -m "Nama Commit"
+<commit bila sudah eksekusi git add .>
+
+git commit -a -m "Nama Commit"
+<commit semua file yang dirubah>
 
 ====================================================================================================================
 

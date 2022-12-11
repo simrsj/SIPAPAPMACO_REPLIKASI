@@ -203,7 +203,6 @@ if ($d_prvl['r_praktik'] == "Y") {
                                         <i class="fas fa-eye"></i> Lihat
                                     </a>
                                 <?php
-
                                 } else {
                                 ?>
                                     <span class="badge badge-secondary">Belum Dipilih</span>
@@ -252,14 +251,38 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     echo "<script>alert('$ex -PRAKTIK BAYAR-');";
                                     echo "document.location.href='?error404';</script>";
                                 }
+                                $d_praktik_bayar = $q_praktik_bayar->fetch(PDO::FETCH_ASSOC);
                                 $r_praktik_bayar = $q_praktik_bayar->rowCount();
 
                                 if ($r_praktik_tarif > 0 && $r_praktik_bayar > 0) {
+                                    if ($d_praktik_bayar['status_bayar'] == 'T') {
                                 ?>
-                                    <span class="badge badge-success">Sudah Dibayar</span>
-                                <?php
+                                        <span class="badge badge-primary m-1">Proses Verifikasi</span><br>
+                                        <a href="?pbyr" class="btn btn-outline-info btn-xs">
+                                            <i class="fas fa-eye"></i> Lihat
+                                        </a>
+                                    <?php
+                                    } elseif ($d_praktik_bayar['status_bayar'] == 'TERIMA') {
+                                    ?>
+                                        <span class="badge badge-success  m-1">Verifikasi<br>Diterima</span><br>
+                                        <a href="?pbyr" class="btn btn-outline-info btn-xs">
+                                            <i class="fas fa-eye"></i> Lihat
+                                        </a>
+                                    <?php
+                                    } elseif ($d_praktik_bayar['status_bayar'] == 'TOLAK') {
+                                    ?>
+                                        <span class="badge badge-danger  m-1">Verifikasi<br>Ditolak</span><br>
+                                        <a href="?pbyr" class="btn btn-outline-info btn-xs">
+                                            <i class="fas fa-eye"></i> Lihat
+                                        </a>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <span class="badge badge-danger">ERROR</span>
+                                    <?php
+                                    }
                                 } else if ($r_praktik_tarif > 0 && $r_praktik_bayar < 1) {
-                                ?>
+                                    ?>
                                     <span class="badge badge-danger">Belum Dibayar</span><br>
                                     <a href="?pbyr" class="btn btn-outline-info btn-xs">
                                         <i class="fa-solid fa-money-bill"></i> Bayar

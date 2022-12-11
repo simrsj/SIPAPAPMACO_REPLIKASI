@@ -77,7 +77,7 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
                             <td><?= $d_bayar['ket_bayar']; ?></td>
                             <td>
                                 <?php if ($d_bayar['status_bayar'] == 'T') { ?>
-                                    <span class="badge badge-secondary">Belum<br>Verifikasi<br>Admin</span>
+                                    <span class="badge badge-primary">Proses<br>Verifikasi</span>
                                 <?php } elseif ($d_bayar['status_bayar'] == 'TERIMA') { ?>
                                     <span class="badge badge-success">Diterima</span>
                                 <?php } elseif ($d_bayar['status_bayar'] == 'TOLAK') { ?>
@@ -90,8 +90,8 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
                                 <!-- verfikasi pembayaran  -->
                                 <td>
                                     <!-- tombol modal detail praktik  -->
-                                    <a title="verifikasi" class='btn btn-primary btn-sm' href='#' data-toggle="modal" data-target="#verifikasi<?= md5($d_bayar['id_bayar']); ?>">
-                                        Verifikasi<br>Pembayaran
+                                    <a title="verifikasi" class='btn btn-outline-primary btn-sm' href='#' data-toggle="modal" data-target="#verifikasi<?= md5($d_bayar['id_bayar']); ?>">
+                                        Klik
                                     </a>
                                     <!-- modal detail praktik  -->
                                     <div class="modal fade" id="verifikasi<?= md5($d_bayar['id_bayar']); ?>">

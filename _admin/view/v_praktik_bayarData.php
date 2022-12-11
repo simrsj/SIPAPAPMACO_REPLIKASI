@@ -69,13 +69,15 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                         //sql bayar
                         $sql_bayar = "SELECT * FROM tb_bayar";
                         $sql_bayar .= " WHERE id_praktik = " . $d_praktik_bayar['id_praktik'];
-                        // echo $sql_tarif_pilih . "<br>";
+                        $sql_bayar .= " ORDER BY tgl_input_bayar DESC";
+                        // echo $sql_bayar . "<br>";
                         try {
                             $q_bayar = $conn->query($sql_bayar);
                         } catch (Exception $ex) {
                             echo "<script> alert('$ex -DATA BAYAR-'); ";
                             echo "document.location.href='?error404'; </script>";
                         }
+                        $d_bayar = $q_bayar->fetch(PDO::FETCH_ASSOC);
                         $r_bayar = $q_bayar->rowCount();
                     ?>
                         <tr class="text-center">
@@ -95,6 +97,7 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                                 <?php
                                 #status
                                 // jika tarif belum ada 
+
                                 if ($r_tarif_pilih < 1) {
                                 ?>
                                     <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
@@ -107,25 +110,28 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                                 <?php
                                 }
                                 // jika tarif sudah ada dan sudah dibayar, menuggu verifikasi admin
-                                else if ($r_tarif_pilih > 0 && $r_bayar > 0) {
+                                else if ($r_tarif_pilih > 0 && $r_bayar > 0 && $d_bayar['status_bayar'] == 'T') {
+                                ?>
+                                    <span class="badge badge-primary">Proses<br>Verifikasi</span>
+                                <?php
+                                }
+                                // jika tarif sudah ada dan sudah dibayar, menuggu verifikasi admin
+                                else if ($r_tarif_pilih > 0 && $r_bayar > 0 && $d_bayar['status_bayar'] == 'TERIMA') {
                                 ?>
                                     <span class="badge badge-success">Verifikasi<br>Berhasil</span>
                                 <?php
                                 }
                                 // jika tarif sudah ada dan sudah dibayar, verifikasi gagal oleh admin
-                                else if ($r_tarif_pilih > 0 && $r_bayar > 0) {
+                                else if ($r_tarif_pilih > 0 && $r_bayar > 0 && $d_bayar['status_bayar'] == 'TOLAK') {
                                 ?>
                                     <span class="badge badge-danger">Verifikasi<br>Gagal</span>
                                 <?php
                                 } else {
                                 ?>
                                     <span class="badge badge-danger">ERROR</span>
-                                    <a class="btn btn-outline-success text-xs" href="?pbyr=<?= urlencode(base64_encode($d_praktik_bayar['id_praktik'])) ?>&i">
-                                        <i class="fa-solid fa-money-bill"></i>
-                                        Lakukan Pembayaran
-                                    </a>
                                 <?php
                                 }
+
                                 ?>
                             </td>
                             <td class="align-middle">

@@ -34,7 +34,7 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
     $sql_insert_bayar .= " '" . $_POST['t_noRek'] . "',";
     $sql_insert_bayar .= " '" . $_POST['t_melalui'] . "',";
     $sql_insert_bayar .= " '" . $_POST['t_tglTF'] . "',";
-    $sql_insert_bayar .= " '" . date('Y-m-d') . "',";
+    $sql_insert_bayar .= " '" . date('Y-m-d h:i:s') . "',";
     $sql_insert_bayar .= " '" . $_POST['t_ket'] . "'";
     $sql_insert_bayar .= " )";
     // echo $sql_insert_bayar . "<br>";
