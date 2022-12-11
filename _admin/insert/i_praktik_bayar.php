@@ -46,7 +46,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                         ?>
                         <div class="jumbotron">
                             <div class="jumbotron-fluid">
-                                <div class="h5 text-gray-700 text-center">
+                                <div class="h6 text-gray-700 text-center">
                                     <div class="mb-2">
                                         <a class="btn btn-outline-success btn-sm" href="<?= $d_praktik['fileInv_praktik']; ?>" title="Invoice" download="invoice">
                                             Unduh Invoice

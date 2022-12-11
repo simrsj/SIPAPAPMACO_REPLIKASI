@@ -1,5 +1,7 @@
 <?php
 
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // echo "<pre>";
 // print_r($_POST);
 // echo "</pre>";
@@ -8,23 +10,23 @@
 // echo "</pre>";
 
 # ------------------------------------------------------------------------------------------------------------------------------------- CONNECTION
-$servername = "localhost";
-$database = "db_sm";
-$username = "root";
-$password = "simrs12345";
+// $servername = "localhost";
+// $database = "db_sm";
+// $username = "root";
+// $password = "simrs12345";
 
-try {
-    $conn = new PDO(
-        "mysql:host=$servername; dbname=$database",
-        $username,
-        $password
-    );
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// try {
+//     $conn = new PDO(
+//         "mysql:host=$servername; dbname=$database",
+//         $username,
+//         $password
+//     );
+//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    //echo "Connected successfully";
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
+//     //echo "Connected successfully";
+// } catch (PDOException $e) {
+//     echo "Connection failed: " . $e->getMessage();
+// }
 
 # ------------------------------------------------------------------------------------------------------------------------------------- EXC. DATABASE & GET VARIABLE
 

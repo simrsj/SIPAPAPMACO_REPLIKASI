@@ -460,9 +460,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				}
 				//praktikan
 				else if (isset($_GET['ptkn']) && $d_prvl['r_praktikan'] == 'Y') {
-					if (isset($_GET['i']) && $d_prvl['c_praktikan'] == 'Y') include "_admin/insert/i_praktikan.php";
+					if (isset($_GET['i']) && $d_prvl['c_praktikan'] == 'Y') include "_admin/insert/i_praktik_praktikan.php";
 					else if (isset($_GET['u']) && $d_prvl['u_praktikan'] == 'Y') include "_admin/view/u_praktikan.php";
-					else include "_admin/view/v_praktikan.php";
+					else include "_admin/view/v_praktik_praktikan.php";
 				}
 				//praktik tarif
 				elseif (isset($_GET['ptrf'])) {

@@ -46,8 +46,8 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
 ?>
         <div class="table-responsive">
             <div class="row col-lg h4 mb-2 text-gray-800">Data Pembayaran </div>
-            <table class="table table-hover" id="dataTable">
-                <thead class="table-dark">
+            <table class="table table-hover  text-md">
+                <thead class="table-dark text-md">
                     <tr>
                         <th>No</th>
                         <th>Atas Nama</th>
@@ -73,7 +73,7 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
                             <td><?= $d_bayar['melalui_bayar']; ?></td>
                             <td><?= $d_bayar['noRek_bayar']; ?></td>
                             <td><?= tanggal($d_bayar['tgl_transfer_bayar']); ?></td>
-                            <td> <a href="<?= $d_bayar['file_bayar']; ?>" class="btn btn-outline-success" download="bukti file pembayaran">Unduh File</a></td>
+                            <td> <a href="<?= $d_bayar['file_bayar']; ?>" class="btn btn-outline-success btn-sm" download="bukti file pembayaran">Unduh File</a></td>
                             <td><?= $d_bayar['ket_bayar']; ?></td>
                             <td>
                                 <?php if ($d_bayar['status_bayar'] == 'T') { ?>

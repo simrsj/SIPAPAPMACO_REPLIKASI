@@ -241,7 +241,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						include "_ip/view/v_nilai.php";
 					}
 				} elseif (isset($_GET['praktikan'])) {
-					include "_ip/view/v_praktikan.php";
+					include "_ip/view/v_praktik_praktikan.php";
 				} elseif (isset($_GET['pmbb'])) {
 					include "_ip/view/v_pembimbing.php";
 				} elseif (isset($_GET['ptk'])) {
@@ -283,7 +283,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						include "_ip/view/v_praktik.php";
 					}
 				} elseif (isset($_GET['ptkn'])) {
-					include "_ip/view/v_praktikan.php";
+					include "_ip/view/v_praktik_praktikan.php";
 				} elseif (isset($_GET['pfs'])) {
 					include "_ip/view/v_profesi.php";
 				} elseif (isset($_GET['uni'])) {
