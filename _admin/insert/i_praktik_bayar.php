@@ -48,16 +48,64 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                             <div class="jumbotron-fluid">
                                 <div class="h6 text-gray-700 text-center">
                                     <div class="mb-2">
-                                        <a class="btn btn-outline-success btn-sm" href="<?= $d_praktik['fileInv_praktik']; ?>" title="Invoice" download="invoice">
-                                            Unduh Invoice
-                                        </a>
+                                        <?php if ($d_prvl['level_user'] == 1) { ?>
+                                            <!-- tombol modal unduh/unggah invoice pembayaran -->
+                                            <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#invoice'>
+                                                Unduh dan Unggah Invoice
+                                            </a>
+
+                                            <!-- modal rincian pembayaran -->
+                                            <div class="modal fade" id="invoice">
+                                                <div class="modal-dialog modal-sm modal-dialog-scrollable" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <b>FILE INVOICE</b>
+                                                        </div>
+                                                        <div class="modal-body text-center">
+                                                            <span class="b"> Invoice untuk di Tanda Tangan </span><br><br>
+                                                            <form id="form_non_ttd" method="POST">
+                                                                <input type="hidden" id="idp" name="idp">
+                                                                No Surat RSJ : <span class="text-danger">*</span><br>
+                                                                <input type="text" class="form-control" id="no_surat" name="no_surat" required><br>
+                                                                Ditujukan Kepada : <span class="text-danger">*</span><br>
+                                                                <input type="text" class="form-control" id="kepada" name="kepada" required><br>
+                                                                <a class="btn btn-outline-primary btn-sm">
+                                                                    <i class="fa-solid fa-file-word"></i> .docx (WORD)
+                                                                </a>
+                                                                <a class="btn btn-outline-danger btn-sm" href="<?= "./_print/p_praktik_invoice.php?idp=" . $_GET['pbyr'] .
+                                                                                                                    "&ns" ?>" download="invoice_non_ttd">
+                                                                    <i class="fa-solid fa-file-pdf"></i>.pdf (PDF)
+                                                                </a>
+                                                            </form>
+                                                            <script>
+                                                            </script>
+                                                            <hr>
+
+                                                            Unggah File Invoice yang Sudah di Tanda Tangan : <span style="color:red">*</span><br>
+                                                            <div class="custom-file">
+                                                                <label class="custom-file-label text-md bg-primary text-danger" for="customFile" id="labelfileinput">Pilih File</label>
+                                                                <input type="file" class="custom-file-input bg-primary text-white" id="t_file_invoice" name="t_file_invoice" accept="application/pdf" required>
+                                                                <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                                                <div class="text-xs font-italic text-danger blink" id="err_t_file_invoice"></div><br>
+                                                                <script>
+                                                                    $('.custom-file-input').on('change', function() {
+                                                                        var fileName = $(this).val();
+                                                                        $('#labelfileinput').html(fileName);
+                                                                    })
+                                                                </script>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
                                         <!-- tombol modal rincian pembayaran -->
                                         <a class='btn btn-outline-primary btn-sm tambah_init' href='#' data-toggle='modal' data-target='#rincianTarif'>
                                             Rincian Pembayaran
                                         </a>
                                         <!-- modal rincian pembayaran -->
                                         <div class="modal fade text-left" id="rincianTarif">
-                                            <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                                            <div class="modal-dialog modal-xl" role="document">
                                                 <div class="modal-content">
                                                     <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_sbayar">
                                                         <div class="modal-header">
@@ -122,6 +170,14 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                         </div>
                                     </div>
                                     <div class="mb-2">
+                                        <?php if ($d_praktik['fileInv_praktik'] != "") { ?>
+                                            <a class="btn btn-outline-success btn-sm" href="<?= $d_praktik['fileInv_praktik']; ?>" title="Invoice" download="invoice">
+                                                Unduh Invoice
+                                            </a>
+                                        <?php } else { ?>
+                                            <span class="badge badge-primary blink">Invoice Sedang Diproses</span>
+                                        <?php } ?>
+                                        <br>
                                         Perlu kami informasikan pembayaran dapat ditransfer Ke Rekening <br>
                                         an. <b>PEMEGANG KAS RSJ PROV JABAR BLUD</b> dengan nomor : <b>BJB - 0063028738002</b>.<br>
                                     </div>
@@ -137,7 +193,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                     <!-- modal rincian pembayaran -->
                                     <div class="modal fade" id="rincian" data-backdrop="static">
                                         <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
+                                            <div class="modal-content ">
                                                 <form enctype="multipart/form-data" class="form-group" method="post" id="form_t">
                                                     <div class="modal-header">
                                                         <b>BUKTI DATA PEMABAYARAN</b>

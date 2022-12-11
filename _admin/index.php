@@ -12,7 +12,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 	$d_user = $q_user->fetch(PDO::FETCH_ASSOC);
 
 	//data privileges 
-	$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . $_SESSION['id_user'];
+	$sql_prvl = "SELECT * FROM tb_user_privileges ";
+	$sql_prvl .= " JOIN tb_user ON tb_user_privileges.id_user = tb_user.id_user";
+	$sql_prvl .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
 	try {
 		$q_prvl = $conn->query($sql_prvl);
 	} catch (Exception $ex) {
