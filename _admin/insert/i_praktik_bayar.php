@@ -30,110 +30,10 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                 <h1 class="h3 mb-2 text-gray-800">Pembayaran Praktik</h1>
             </div>
         </div>
-        <div class="row">
-            <?php
-            // echo $sql_praktik;
-            ?>
-            <!-- Data Rincian Pembayaran Chart -->
-            <div class="col-md-12">
-
-                <div class="card shadow mb-4 mt-3">
-                    <div class="card-body">
-                        <div class="row text-center h6 text-gray-900 ">
-                            <div class="col-md">
-                                Nama Kelompok : <br>
-                                <b><?= $d_praktik['nama_praktik']; ?></b>
-                                <hr>
-                                Jumlah Praktik : <br>
-                                <b><?= $d_praktik['jumlah_praktik']; ?></b>
-                            </div>
-                            <div class="col-md">
-                                Tanggal Mulai : <br>
-                                <b><?= tanggal($d_praktik['tgl_mulai_praktik']); ?></b>
-                                <hr>
-                                Tanggal Selesai : <br>
-                                <b><?= tanggal($d_praktik['tgl_selesai_praktik']); ?></b>
-                            </div>
-                            <div class="col-md-2  my-auto">
-                                <a class="btn btn-outline-success btn-sm" href="<?= $d_praktik['fileInv_praktik']; ?>" title="Invoice" download="invoice">
-                                    Unduh Invoice
-                                </a>
-                                <hr>
-                                <!-- tombol modal rincian pembayaran -->
-                                <a class='btn btn-outline-primary btn-sm tambah_init' href='#' data-toggle='modal' data-target='#rincianTarif'>
-                                    Rincian Pembayaran
-                                </a>
-                                <!-- modal rincian pembayaran -->
-                                <div class="modal fade text-left" id="rincianTarif">
-                                    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-                                        <div class="modal-content">
-                                            <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_sbayar">
-                                                <div class="modal-header">
-                                                    <b>RINCIAN PEMBAYARAN</b>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <?php
-
-                                                    //data tarif praktik
-                                                    $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih";
-                                                    $sql_praktik_tarif .= " WHERE id_praktik = '" . base64_decode(urldecode($_GET['pbyr'])) . "'";
-                                                    // echo $id_praktik . "<br>";
-
-                                                    try {
-                                                        $q_praktik_tarif = $conn->query($sql_praktik_tarif);
-                                                    } catch (Exception $ex) {
-                                                        echo "<script> alert('$ex -DATA TARIF-'); ";
-                                                        echo "document.location.href='?error404'; </script>";
-                                                    }
-
-                                                    ?>
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover" id="dataTable">
-                                                            <thead class="table-dark">
-                                                                <tr>
-                                                                    <th>No</th>
-                                                                    <th>Nama Jenis</th>
-                                                                    <th>Nama Tarif</th>
-                                                                    <th>Satuan</th>
-                                                                    <th>Tarif</th>
-                                                                    <th>Frekuensi</th>
-                                                                    <th>Kuantitas</th>
-                                                                    <th>Total Tarif</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php
-                                                                $no = 1;
-                                                                while ($d_praktik_tarif = $q_praktik_tarif->fetch(PDO::FETCH_ASSOC)) {
-                                                                ?>
-                                                                    <tr>
-                                                                        <td><?= $no; ?></td>
-                                                                        <td><?= $d_praktik_tarif['nama_jenis_tarif_pilih']; ?></td>
-                                                                        <td><?= $d_praktik_tarif['nama_tarif_pilih']; ?></td>
-                                                                        <td><?= "Rp " . number_format($d_praktik_tarif['nominal_tarif_pilih'], 0, ",", "."); ?></td>
-                                                                        <td><?= $d_praktik_tarif['nama_satuan_tarif_pilih']; ?></td>
-                                                                        <td><?= $d_praktik_tarif['frekuensi_tarif_pilih']; ?></td>
-                                                                        <td><?= $d_praktik_tarif['kuantitas_tarif_pilih']; ?></td>
-                                                                        <td><?= "Rp " . number_format($d_praktik_tarif['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
-                                                                    </tr>
-                                                                <?php
-                                                                    $no++;
-                                                                }
-                                                                ?>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card shadow mb-4">
-                    <!-- Card Body -->
+        <div class="card shadow mb-4">
+            <!-- Card Body -->
+            <div class="row">
+                <div class="col-md">
                     <div class="card-body">
                         <?php
                         $sql_jumlahTotal = "SELECT SUM(jumlah_tarif_pilih) AS jumlahTotal FROM tb_tarif_pilih";
@@ -147,6 +47,80 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                         <div class="jumbotron">
                             <div class="jumbotron-fluid">
                                 <div class="h5 text-gray-700 text-center">
+                                    <div class="mb-2">
+                                        <a class="btn btn-outline-success btn-sm" href="<?= $d_praktik['fileInv_praktik']; ?>" title="Invoice" download="invoice">
+                                            Unduh Invoice
+                                        </a>
+                                        <!-- tombol modal rincian pembayaran -->
+                                        <a class='btn btn-outline-primary btn-sm tambah_init' href='#' data-toggle='modal' data-target='#rincianTarif'>
+                                            Rincian Pembayaran
+                                        </a>
+                                        <!-- modal rincian pembayaran -->
+                                        <div class="modal fade text-left" id="rincianTarif">
+                                            <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_sbayar">
+                                                        <div class="modal-header">
+                                                            <b>RINCIAN PEMBAYARAN</b>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <?php
+
+                                                            //data tarif praktik
+                                                            $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih";
+                                                            $sql_praktik_tarif .= " WHERE id_praktik = '" . base64_decode(urldecode($_GET['pbyr'])) . "'";
+                                                            // echo $id_praktik . "<br>";
+
+                                                            try {
+                                                                $q_praktik_tarif = $conn->query($sql_praktik_tarif);
+                                                            } catch (Exception $ex) {
+                                                                echo "<script> alert('$ex -DATA TARIF-'); ";
+                                                                echo "document.location.href='?error404'; </script>";
+                                                            }
+
+                                                            ?>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover" id="dataTable">
+                                                                    <thead class="table-dark">
+                                                                        <tr>
+                                                                            <th>No</th>
+                                                                            <th>Nama Jenis</th>
+                                                                            <th>Nama Tarif</th>
+                                                                            <th>Satuan</th>
+                                                                            <th>Tarif</th>
+                                                                            <th>Frekuensi</th>
+                                                                            <th>Kuantitas</th>
+                                                                            <th>Total Tarif</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php
+                                                                        $no = 1;
+                                                                        while ($d_praktik_tarif = $q_praktik_tarif->fetch(PDO::FETCH_ASSOC)) {
+                                                                        ?>
+                                                                            <tr>
+                                                                                <td><?= $no; ?></td>
+                                                                                <td><?= $d_praktik_tarif['nama_jenis_tarif_pilih']; ?></td>
+                                                                                <td><?= $d_praktik_tarif['nama_tarif_pilih']; ?></td>
+                                                                                <td><?= "Rp " . number_format($d_praktik_tarif['nominal_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                                <td><?= $d_praktik_tarif['nama_satuan_tarif_pilih']; ?></td>
+                                                                                <td><?= $d_praktik_tarif['frekuensi_tarif_pilih']; ?></td>
+                                                                                <td><?= $d_praktik_tarif['kuantitas_tarif_pilih']; ?></td>
+                                                                                <td><?= "Rp " . number_format($d_praktik_tarif['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
+                                                                            </tr>
+                                                                        <?php
+                                                                            $no++;
+                                                                        }
+                                                                        ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="mb-2">
                                         Perlu kami informasikan pembayaran dapat ditransfer Ke Rekening <br>
                                         an. <b>PEMEGANG KAS RSJ PROV JABAR BLUD</b> dengan nomor : <b>BJB - 0063028738002</b>.<br>
@@ -240,7 +214,16 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                 </div>
                             </div>
                         </div>
-                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md">
+                <div class="card shadow mb-4">
+                    <!-- Card Body -->
+                    <div class="card-body">
                         <div id="data_bayar"></div>
                         <script>
                             $('#data_bayar')
@@ -475,8 +458,6 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                             <?php } ?>
                         </script>
                     </div>
-
-
                 </div>
             </div>
         </div>

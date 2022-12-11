@@ -109,19 +109,13 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
                                 // jika tarif sudah ada dan sudah dibayar, menuggu verifikasi admin
                                 else if ($r_tarif_pilih > 0 && $r_bayar > 0) {
                                 ?>
-                                    <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
+                                    <span class="badge badge-success">Verifikasi<br>Berhasil</span>
                                 <?php
                                 }
                                 // jika tarif sudah ada dan sudah dibayar, verifikasi gagal oleh admin
                                 else if ($r_tarif_pilih > 0 && $r_bayar > 0) {
                                 ?>
-                                    <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
-                                <?php
-                                }
-                                // jika tarif sudah ada dan sudah dibayar, sudah verifikasi gagal oleh admin
-                                else if ($r_tarif_pilih > 0 && $r_bayar > 0) {
-                                ?>
-                                    <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
+                                    <span class="badge badge-danger">Verifikasi<br>Gagal</span>
                                 <?php
                                 } else {
                                 ?>

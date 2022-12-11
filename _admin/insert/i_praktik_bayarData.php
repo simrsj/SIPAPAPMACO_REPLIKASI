@@ -56,6 +56,10 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
                         <th>Tanggal Transfer</th>
                         <th>File Bukti Pembayaran</th>
                         <th>Keterangan</th>
+                        <th>Status</th>
+                        <?php if ($d_prvl['level_user'] == "1") { ?>
+                            <th>Verifikasi</th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,6 +75,100 @@ if ($d_prvl['c_praktik_bayar'] == 'Y') {
                             <td><?= tanggal($d_bayar['tgl_transfer_bayar']); ?></td>
                             <td> <a href="<?= $d_bayar['file_bayar']; ?>" class="btn btn-outline-success" download="bukti file pembayaran">Unduh File</a></td>
                             <td><?= $d_bayar['ket_bayar']; ?></td>
+                            <td>
+                                <?php if ($d_bayar['status_bayar'] == 'T') { ?>
+                                    <span class="badge badge-secondary">Belum<br>Verifikasi<br>Admin</span>
+                                <?php } elseif ($d_bayar['status_bayar'] == 'TERIMA') { ?>
+                                    <span class="badge badge-success">Diterima</span>
+                                <?php } elseif ($d_bayar['status_bayar'] == 'TOLAK') { ?>
+                                    <span class="badge badge-danger">Ditolak</span>
+                                <?php } else { ?>
+                                    <span class="badge badge-danger">ERROR</span>
+                                <?php } ?>
+                            </td>
+                            <?php if ($d_prvl['level_user'] == "1") { ?>
+                                <!-- verfikasi pembayaran  -->
+                                <td>
+                                    <!-- tombol modal detail praktik  -->
+                                    <a title="verifikasi" class='btn btn-primary btn-sm' href='#' data-toggle="modal" data-target="#verifikasi<?= md5($d_bayar['id_bayar']); ?>">
+                                        Verifikasi<br>Pembayaran
+                                    </a>
+                                    <!-- modal detail praktik  -->
+                                    <div class="modal fade" id="verifikasi<?= md5($d_bayar['id_bayar']); ?>">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md text-left">
+                                                            Verifikasi Data Pembayaran ?
+                                                        </div>
+                                                        <div class="col-md text-right">
+                                                            <form id="form_verif" method="POST">
+                                                                <a class="btn btn-outline-success btn-sm verif<?= md5($d_bayar['id_bayar']); ?>" id="TERIMA" data-dismiss="modal">
+                                                                    Terima
+                                                                </a>
+                                                                <a class="btn btn-outline-danger btn-sm verif<?= md5($d_bayar['id_bayar']); ?>" id="TOLAK" data-dismiss="modal">
+                                                                    Tolak
+                                                                </a>
+                                                                <a class="btn btn-secondary btn-sm" data-dismiss="modal">
+                                                                    Kembali
+                                                                </a>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        <?php if ($d_prvl['level_user'] == "1") { ?>
+                                            //arsip
+                                            $(document).on('click', '.verif<?= md5($d_bayar['id_bayar']); ?>', function() {
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: "_admin/exc/x_i_praktik_bayar_verifkasi.php",
+                                                    data: {
+                                                        "status": $(this).attr('id'),
+                                                        "idb": '<?= urlencode(base64_encode($d_bayar['id_bayar'])); ?>',
+                                                    },
+                                                    success: function() {
+                                                        console.log('berhasil verifikasi')
+
+                                                        $('#verifikasi<?= md5($d_bayar['id_bayar']); ?>').on('hidden.bs.modal', function(e) {
+                                                            $('#data_bayar')
+                                                                .load(
+                                                                    "_admin/insert/i_praktik_bayarData.php?" +
+                                                                    "idu=<?= $_GET['idu'] ?>" +
+                                                                    "&idp=<?= $_GET['idp'] ?>"
+                                                                );
+                                                        });
+                                                        const Toast = Swal.mixin({
+                                                            toast: true,
+                                                            position: 'top-end',
+                                                            showConfirmButton: false,
+                                                            timer: 2500,
+                                                            timerProgressBar: true,
+                                                            didOpen: (toast) => {
+                                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                            }
+                                                        });
+
+                                                        Toast.fire({
+                                                            icon: 'success',
+                                                            title: 'Data Berhasil Diverifkasi'
+                                                        });
+                                                    },
+                                                    error: function(response) {
+                                                        console.log(response.responseText);
+                                                        alert('eksekusi query gagal');
+                                                    }
+                                                });
+                                            });
+                                        <?php } ?>
+                                    </script>
+                                </td>
+                            <?php } ?>
                         </tr>
                     <?php
                         $no++;
