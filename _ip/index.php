@@ -268,7 +268,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 					} elseif (isset($_GET['m'])) {
 						include "_ip/insert/i_praktik_mess.php";
 					} elseif (isset($_GET['p_i'])) {
-						include "_print/p_praktik_invoice.php";
+						include "_print/p_praktik_invoicePDF.php";
 					} elseif (isset($_GET['u'])) {
 						include "_ip/update/u_praktik.php";
 					} elseif (isset($_GET['ub'])) {

@@ -50,7 +50,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                     <div class="mb-2">
                                         <?php if ($d_prvl['level_user'] == 1) { ?>
                                             <!-- tombol modal unduh/unggah invoice pembayaran -->
-                                            <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#invoice'>
+                                            <a class='btn btn-danger btn-sm tambah_init_non_ttd' href='#' data-toggle='modal' data-target='#invoice'>
                                                 Unduh dan Unggah Invoice
                                             </a>
 
@@ -62,24 +62,163 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                             <b>FILE INVOICE</b>
                                                         </div>
                                                         <div class="modal-body text-center">
-                                                            <div class="border-2 rounded p-3 mb-3  border-secondary">
+                                                            <div class="border-2 rounded p-3 mb-3 border-secondary">
                                                                 <form id="form_non_ttd" method="POST">
                                                                     <span class="b"> Invoice untuk di Tanda Tangan </span><br><br>
-                                                                    <input type="hidden" id="idp" name="idp">
+                                                                    <input type="hidden" id="idp" name="idp" value="<?= $_GET['pbyr'] ?>">
                                                                     No Surat RSJ : <span class="text-danger">*</span><br>
-                                                                    <input type="text" class="form-control form-control-sm" id="no_surat" name="no_surat" required><br>
+                                                                    <input type="number" min="1" class="form-control form-control-sm" id="no_surat" name="no_surat" required>
+                                                                    <span class='i text-xs'>"420/.../Diklat-RSJ/<?= date('Y') ?>" No Surat akan diisi pada ...</span><br>
+                                                                    <div class="text-xs font-italic text-danger blink" id="err_no_surat"></div><br>
                                                                     Ditujukan Kepada : <span class="text-danger">*</span><br>
-                                                                    <input type="text" class="form-control form-control-sm" id="kepada" name="kepada" required><br>
-                                                                    <a class="btn btn-outline-primary btn-sm">
+                                                                    <input type="text" class="form-control form-control-sm" id="kepada" name="kepada" required>
+                                                                    <div class="text-xs font-italic text-danger blink" id="err_kepada"></div><br>
+                                                                    <a class="btn btn-outline-primary btn-sm download_docx">
                                                                         <i class="fa-solid fa-file-word"></i> WORD
                                                                     </a>
-                                                                    <a class="btn btn-outline-danger btn-sm" href="<?= "./_print/p_praktik_invoice.php?idp=" . $_GET['pbyr'] .
-                                                                                                                        "&ns" ?>" download="invoice_non_ttd">
+                                                                    <a class="btn btn-outline-danger btn-sm download_pdf" download="invoice_non_ttd">
                                                                         <i class="fa-solid fa-file-pdf"></i> PDF
                                                                     </a>
                                                                 </form>
                                                             </div>
                                                             <script>
+                                                                <?php if ($d_prvl['level_user'] == '1') { ?>
+                                                                    // inisiasi klik modal invoice 
+                                                                    $(".tambah_init_non_ttd").click(function() {
+                                                                        console.log("tambah_init_non_ttd");
+                                                                        $("#err_no_surat").empty();
+                                                                        $("#err_kepada").empty();
+                                                                        $("#form_non_ttd").trigger("reset");
+                                                                    });
+
+                                                                    // klik tombol download invoice docx
+                                                                    $(document).on('click', '.download_docx', function() {
+                                                                        console.log("download_docx");
+
+                                                                        var idp = $('#idp').val();
+                                                                        var no_surat = $('#no_surat').val();
+                                                                        var kepada = $('#kepada').val();
+
+                                                                        //cek data form modal download docx bila tidak diiisi
+                                                                        if (
+                                                                            no_surat == "" ||
+                                                                            kepada == ""
+                                                                        ) {
+                                                                            // console.log("error data");
+
+                                                                            const Toast = Swal.mixin({
+                                                                                toast: true,
+                                                                                position: 'top-end',
+                                                                                showConfirmButton: false,
+                                                                                timer: 5000,
+                                                                                timerProgressBar: true,
+                                                                                didOpen: (toast) => {
+                                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                }
+                                                                            });
+
+                                                                            Toast.fire({
+                                                                                icon: 'warning',
+                                                                                title: '<b>DATA ADA YANG BELUM TERISI</b>',
+                                                                            });
+
+                                                                            if (no_surat == "") {
+                                                                                $("#err_no_surat").html("Nomor Surat RSJ Harus Diisi");
+                                                                            } else {
+                                                                                $("#err_no_surat").html("");
+                                                                            }
+
+                                                                            if (kepada == "") {
+                                                                                $("#err_kepada").html("Ditujukan Kepada Harus Diisi");
+                                                                            } else {
+                                                                                $("#err_kepada").html("");
+                                                                            }
+                                                                        }
+
+                                                                        //download docx bila sudah sesuai
+                                                                        if (
+                                                                            no_surat != "" &&
+                                                                            kepada != ""
+                                                                        ) {
+                                                                            console.log("docx form_non_ttd");
+
+                                                                            var data_pdf = $("#form_non_ttd").serializeArray();
+                                                                            window.location = "_print/p_praktik_invoiceDOCX.php?" +
+                                                                                "idp=" + idp +
+                                                                                "&ns=" + no_surat +
+                                                                                "&k=" + kepada;
+
+                                                                            // $("#err_no_surat").empty();
+                                                                            // $("#err_kepada").empty();
+                                                                            // $("#form_non_ttd").trigger("reset");
+                                                                        }
+                                                                    });
+
+                                                                    // klik tombol download invoice pdf
+                                                                    $(document).on('click', '.download_pdf', function() {
+                                                                        console.log("download_pdf");
+
+                                                                        var idp = $('#idp').val();
+                                                                        var no_surat = $('#no_surat').val();
+                                                                        var kepada = $('#kepada').val();
+
+                                                                        //cek data form modal download pdf bila tidak diiisi
+                                                                        if (
+                                                                            no_surat == "" ||
+                                                                            kepada == ""
+                                                                        ) {
+                                                                            // console.log("error data");
+
+                                                                            const Toast = Swal.mixin({
+                                                                                toast: true,
+                                                                                position: 'top-end',
+                                                                                showConfirmButton: false,
+                                                                                timer: 5000,
+                                                                                timerProgressBar: true,
+                                                                                didOpen: (toast) => {
+                                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                }
+                                                                            });
+
+                                                                            Toast.fire({
+                                                                                icon: 'warning',
+                                                                                title: '<b>DATA ADA YANG BELUM TERISI</b>',
+                                                                            });
+
+                                                                            if (no_surat == "") {
+                                                                                $("#err_no_surat").html("Nomor Surat RSJ Harus Diisi");
+                                                                            } else {
+                                                                                $("#err_no_surat").html("");
+                                                                            }
+
+                                                                            if (kepada == "") {
+                                                                                $("#err_kepada").html("Ditujukan Kepada Harus Diisi");
+                                                                            } else {
+                                                                                $("#err_kepada").html("");
+                                                                            }
+                                                                        }
+
+                                                                        //download pdf bila sudah sesuai
+                                                                        if (
+                                                                            no_surat != "" &&
+                                                                            kepada != ""
+                                                                        ) {
+                                                                            console.log("pdf form_non_ttd");
+
+                                                                            var data_pdf = $("#form_non_ttd").serializeArray();
+                                                                            window.location = "_print/p_praktik_invoicePDF.php?" +
+                                                                                "idp=" + idp +
+                                                                                "&ns=" + no_surat +
+                                                                                "&k=" + kepada;
+
+                                                                            $("#err_no_surat").empty();
+                                                                            $("#err_kepada").empty();
+                                                                            $("#form_non_ttd").trigger("reset");
+                                                                        }
+                                                                    });
+                                                                <?php } ?>
                                                             </script>
 
                                                             <div class="border-2 rounded p-3 mb-3  border-secondary">
@@ -184,7 +323,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                         <?php } ?>
                                         <br>
                                         Perlu kami informasikan pembayaran dapat ditransfer Ke Rekening <br>
-                                        an. <b>PEMEGANG KAS RSJ PROV JABAR BLUD</b> dengan nomor : <b>BJB - 0063028738002</b>.<br>
+                                        an. <b>PEMEGANG KAS RSJ PROV JABAR BLUD</b> dengan nomor : <b>BJB-0063028738002</b>.<br>
                                     </div>
                                     <div class="mb-2">
                                         JUMLAH TOTAL PEMBAYARAN : <span class="b u"><?= "Rp " . number_format($d_jumlahTotal['jumlahTotal'], 0, ",", "."); ?> </span><br>

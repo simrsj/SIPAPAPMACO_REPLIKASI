@@ -78,7 +78,7 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <!-- <a title="Cetak Invoice" target="_blank" class="btn btn-warning btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>">
+                                    <!-- <a title="Cetak Invoice" target="_blank" class="btn btn-warning btn-sm" href="./_print/p_praktik_invoicePDF.php?id=<?php echo $d_praktik['id_praktik']; ?>">
                                         <i class="fas fa-print"></i>
                                     </a> -->
 

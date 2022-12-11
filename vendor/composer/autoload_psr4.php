@@ -6,5 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'PhpOffice\\PhpWord\\' => array($vendorDir . '/phpoffice/phpword/src/PhpWord'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'Laminas\\Escaper\\' => array($vendorDir . '/laminas/laminas-escaper/src'),
 );
