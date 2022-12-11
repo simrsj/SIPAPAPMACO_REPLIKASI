@@ -23,6 +23,7 @@ if ($d_prvl['r_praktik'] == "Y") {
     $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
     $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
     $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
+    $sql_praktik .= " WHERE status_praktik = 'Y' ";
     $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
     // echo $sql_praktik;
     try {
@@ -373,9 +374,15 @@ if ($d_prvl['r_praktik'] == "Y") {
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     <?php } ?>
+                                    <?php if ($d_prvl['level_user'] == "1") { ?>
+                                        <a title="Arsip" class='btn btn-outline-secondary btn-xs arsip<?= md5($d_praktik['id_praktik']); ?>' id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" href='#'>
+                                            <i class="fa-solid fa-box-archive"></i>
+                                        </a>
+                                    <?php } ?>
                                 </div>
                                 <script>
                                     <?php if ($d_prvl['d_praktik'] == "Y") { ?>
+                                        //hapus
                                         $(document).on('click', '.hapus<?= md5($d_praktik['id_praktik']); ?>', function() {
                                             Swal.fire({
                                                 position: 'top',
@@ -414,6 +421,57 @@ if ($d_prvl['r_praktik'] == "Y") {
                                                             Toast.fire({
                                                                 icon: 'success',
                                                                 title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Dihapus</div>'
+                                                            });
+                                                        },
+                                                        error: function(response) {
+                                                            console.log(response.responseText);
+                                                            alert('eksekusi query gagal');
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        });
+                                    <?php } ?>
+                                    <?php if ($d_prvl['level_user'] == "1") { ?>
+                                        //arsip
+                                        $(document).on('click', '.arsip<?= md5($d_praktik['id_praktik']); ?>', function() {
+                                            Swal.fire({
+                                                position: 'top',
+                                                title: 'Arsip Data Praktik ?',
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#1cc88a',
+                                                cancelButtonColor: '#d33',
+                                                cancelButtonText: 'Kembali',
+                                                confirmButtonText: 'Ya',
+                                                allowOutsideClick: true
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: "_admin/exc/x_v_praktik_arsip.php",
+                                                        data: {
+                                                            "idp": $(this).attr('id')
+                                                        },
+                                                        success: function() {
+                                                            $('#data_praktik')
+                                                                .load(
+                                                                    "_admin/view/v_praktikData.php?&idu=<?= $_GET['idu']; ?>");
+                                                            const Toast = Swal.mixin({
+                                                                toast: true,
+                                                                position: 'top-end',
+                                                                showConfirmButton: false,
+                                                                timer: 5000,
+                                                                timerProgressBar: true,
+                                                                didOpen: (toast) => {
+                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                }
+                                                            });
+
+                                                            Toast.fire({
+                                                                icon: 'success',
+                                                                title: '<b>Data Berhasil Diarsip</b>'
                                                             });
                                                         },
                                                         error: function(response) {
