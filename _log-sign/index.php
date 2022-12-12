@@ -6,24 +6,20 @@ if (empty($_SESSION['username_user'])) {
 	?>
 	<nav class="navbar fixed-top navbar-light bg-light">
 		<ul class="navbar-nav">
-			<li class="nav-item active">
+			<li class="nav-item">
 				<!-- <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="60px">
 				<img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="60px">
 				<img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="80px">
 				<img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="60px"> -->
-				<a class="navbar-brand bg-primary rounded p-2 text-xxl b text-white" href="?">SIPAPAP MACO</a>
+				<a class="navbar-brand bg-primary rounded p-2 text-xxl b text-white" href="?">SIPAPAP MACO</a><b>(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)</b>
 			</li>
 		</ul>
 
-		<span class="badge badge-primary text-md">
-			<?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>,
-			<span id="jam"></span>
-		</span>
-		<a class="nav-link dropdown-toggle bg-outline-primary p-2 btn btn-outline-primary" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<a class="nav-link dropdown-toggle bg-outline-primary p-2 btn btn-outline-primary" href="#">
 			<span class="mr-2 d-none d-lg-inline b">LINK</span><i class="fa-solid fa-link"></i>
 		</a>
 		<!-- Dropdown - User Information -->
-		<div class="dropdown-menu dropdown-menu-right text-center shadow p-2 rounded" aria-labelledby="userDropdown">
+		<div class="dropdown-menu dropdown-menu-right text-center shadow p-2 rounded">
 			<a class="" href="?">
 				<i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
 				Main Menu
@@ -40,6 +36,11 @@ if (empty($_SESSION['username_user'])) {
 		</div>
 	</nav>
 	<br><br><br>
+
+	<div class="text-center bg-white rounded text-md mb-2">
+		<?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>,
+		<di id="jam"></di>
+	</div>
 	<?php
 	if (isset($_GET['reg'])) include "_log-sign/register.php";
 	elseif (isset($_GET['login'])) include "_log-sign/login.php";
@@ -48,6 +49,15 @@ if (empty($_SESSION['username_user'])) {
 	?>
 
 	<script>
+		function Bukains() {
+			if ($('#instansi').val() == '0') {
+				// console.log("Pilih Institusi Lainnya");
+				$('#institusi_lainnya').append("<input type='text' class='form-control form-control' placeHolder='Isikan Nama Institusi' name='nama_institusi'>").focus();
+			} else {
+				// console.log("Tidak Pilih Institusi Lainnya");
+				$('#institusi_lainnya').empty();
+			}
+		}
 		var span = document.getElementById("jam");
 		time();
 
