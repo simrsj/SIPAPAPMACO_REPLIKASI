@@ -36,8 +36,12 @@ $sql .= " u_praktik_tarif = '" . $_POST['u_praktik_tarif'] . "', ";
 $sql .= " d_praktik_tarif = '" . $_POST['d_praktik_tarif'] . "', ";
 $sql .= " c_praktik_bayar = '" . $_POST['c_praktik_bayar'] . "',";
 $sql .= " r_praktik_bayar = '" . $_POST['r_praktik_bayar'] . "',";
-$sql .= " u_praktik_bayar = '" . $_POST['u_praktik_bayar'] . "', ";
-$sql .= " d_praktik_bayar = '" . $_POST['d_praktik_bayar'] . "'";
+$sql .= " u_praktik_bayar = '" . $_POST['u_praktik_bayar'] . "',";
+$sql .= " d_praktik_bayar = '" . $_POST['d_praktik_bayar'] . "',";
+$sql .= " c_praktik_nilai = '" . $_POST['c_praktik_nilai'] . "',";
+$sql .= " r_praktik_nilai = '" . $_POST['r_praktik_nilai'] . "',";
+$sql .= " u_praktik_nilai = '" . $_POST['u_praktik_nilai'] . "',";
+$sql .= " d_praktik_nilai = '" . $_POST['d_praktik_nilai'] . "'";
 $sql .= " WHERE id_user = " . $_POST['id_user'];
 
 // echo $sql . "<br>";
