@@ -1,5 +1,4 @@
 <?php if (isset($_GET['pbyr']) && $d_prvl['r_praktik_bayar'] == "Y") {
-    echo $d_prvl['level_user'];
 ?>
     <div class="container-fluid">
         <div class="row">
