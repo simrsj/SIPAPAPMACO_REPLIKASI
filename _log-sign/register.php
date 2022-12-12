@@ -100,6 +100,7 @@
                                                 <input type="password" class="form-control" placeholder="Ulangi Password" name="ulangi_password">
                                             </div>
                                         </div>
+                                        <div class="h-captcha" data-sitekey="985c2b81-998a-407e-b467-d456a1a0138f"></div>
                                         <input type="submit" class="btn btn-primary btn-user btn-block" value="Daftar">
                                     </form>
                                     <hr>
