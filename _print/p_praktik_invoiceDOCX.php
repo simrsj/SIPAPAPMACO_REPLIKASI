@@ -12,7 +12,7 @@ $id_praktik = base64_decode(urldecode($_GET['idp']));
 $sql_praktik = "SELECT * FROM tb_praktik";
 $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
 $sql_praktik .= " WHERE id_praktik = " . $id_praktik;
-// echo $sql_praktik;
+echo $sql_praktik;
 try {
     $q_praktik = $conn->query($sql_praktik);
 } catch (Exception $ex) {

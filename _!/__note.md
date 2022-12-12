@@ -10,15 +10,7 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 
 ## _*MINOR*_
 
-- ✅ Informasi Sisa di Modal Informasi Jadwal Praktikan
-- ✅ Perbaikan data MoU dan PKS di Admin diklat
-- 🔃 Pembuatan Aplikasi Jadwal praktikan sederhana diinputkan di zoom
-- Perubahan Daftar Mess-Pemondokan Saat Akan dipilih
-- Pembuatan Fitur Kwitansi, no Kwitansi disesuaikan dengan aplikasi
-- Perubahan "Kontak Person" Mess dan Pemondokan
-- Perubahan Data MoU saat sudah Kadaluarsa (maksimal h-7) dengan nomor PIC Kang Dian Tim Kordik
-- Pembuatan Akun User Umum
-- Pembuatan Akun User Keuangan
+- 🔃 Pembuatan File Word Invoice
 
 ====================================================================================================================
 
@@ -42,32 +34,7 @@ Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit
 
 # PERTANYAAN
 
-- Perorangan disesuaikan Mess
-- Keuangan Bridging dengan SIMRS
-- Pembayaran semuanya di akhir
-- membuat kwitansi pembayaran
-- Virutal Account Surat Pembayaran
-- Buat Pembayaran denga cara Cash atau Transfer
-- Membuat menu Pengajuan dan pendapatan naasumber/sponsorship
-- Notifikasi dan validasi Jumlah praktikan H-3 pelaksanaan
-- bagaimana proses magang Individu
-- mess wajib semua
-- buat notifikasi realtime (Websocket)
-- tgl selesai mou apakah 3 tahun ?
-- Validasi untuk pembayaran seperti apa? apakah keuangan perlu dibuatkan akun / konfirmasi pembayarannya secara manual antara diklat dengan keuangan ?
-- Keterlibatan Umum dalam Aplikasi SIPAPAP MACHO untuk apa?
-- Untuk manual yang dilakukan dan di isi di website harus sama ya
-- Untuk memilih mess pemondokan di admin ditentukan oleh admin umum, prioritas mess rsj
-- Harus ada Penanggung Jawab di Umum untuk Pemondokan
-- Daftar Harga untuk mess dan pondokan seperti biaya admin, terutama dengan kodering harus ada
-- Di MOU juga harus ada permintaan institusi yang tidak menginap
-- Di MOU harus ada ketentuan mengenai ketersediaan MESS sudah ditentukan
-- BerNotDin ke Diklat untuk diujicobakan
-- Cek Untuk narasumber dari PT dan lainnya siapa yg berwenang (Pak Narmin)
-- Diklat segera membuat notadinas untuk institusi
-- Dimulai dengan bulan Mei atau Juni
-
-===================================================================================================================
+====================================================================================================================
 
 # GIT CODE
 

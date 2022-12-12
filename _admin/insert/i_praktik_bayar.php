@@ -56,10 +56,13 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
 
                                             <!-- modal rincian pembayaran -->
                                             <div class="modal fade" id="invoice">
-                                                <div class="modal-dialog modal-sm modal-dialog-scrollable" role="document">
+                                                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <b>FILE INVOICE</b>
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
                                                         </div>
                                                         <div class="modal-body text-center">
                                                             <div class="border-2 rounded p-3 mb-3 border-secondary">
@@ -144,7 +147,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                             console.log("docx form_non_ttd");
 
                                                                             var data_pdf = $("#form_non_ttd").serializeArray();
-                                                                            window.location = "_print/p_praktik_invoiceDOCX.php?" +
+                                                                            window.location = "_print/p_praktik_invoiceDOCXTBS.php?" +
                                                                                 "idp=" + idp +
                                                                                 "&ns=" + no_surat +
                                                                                 "&k=" + kepada;
@@ -226,9 +229,9 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                     Unggah File Invoice yang Sudah di Tanda Tangan : <span style="color:red">*</span><br>
                                                                     <div class="custom-file">
                                                                         <label class="custom-file-label text-xs" for="customFile" id="labelfileinput">Pilih File</label>
-                                                                        <input type="file" class="custom-file-input mb-1" id="t_file_invoice" name="t_file_invoice" accept="application/pdf" required>
+                                                                        <input type="file" class="custom-file-input mb-1" id="file_invoice" name="file_invoice" accept="application/pdf" required>
                                                                         <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
-                                                                        <div class="text-xs font-italic text-danger blink" id="err_t_file_invoice"></div><br>
+                                                                        <div class="text-xs font-italic text-danger blink" id="err_file_invoice"></div><br>
                                                                         <script>
                                                                             $('.custom-file-input').on('change', function() {
                                                                                 var fileName = $(this).val();
@@ -236,8 +239,150 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                             })
                                                                         </script>
                                                                     </div>
+                                                                    <a class="btn btn-primary btn-sm unggah_file_invoice" id="<?= $_GET['pbyr'] ?>">
+                                                                        <i class="fa-solid fa-upload"></i> Unggah
+                                                                    </a>
                                                                 </form>
                                                             </div>
+                                                            <script>
+                                                                <?php if ($d_prvl['level_user'] == '1') { ?>
+                                                                    // inisiasi klik modal invoice 
+                                                                    $(".tambah_init_ttd").click(function() {
+                                                                        console.log("tambah_init_ttd");
+                                                                        // $("#err_file_invoice").empty();
+                                                                        // $('#file_invoice').val("").trigger("change");
+                                                                    });
+
+                                                                    // klik tombol download invoice docx
+                                                                    $(document).on('click', '.unggah_file_invoice', function() {
+                                                                        console.log("unggah_file_invoice");
+
+                                                                        var file_invoice = $('#file_invoice').val();
+
+                                                                        //cek data form modal download docx bila tidak diiisi
+                                                                        if (
+                                                                            file_invoice == ""
+                                                                        ) {
+                                                                            // console.log("error data");
+
+                                                                            const Toast = Swal.mixin({
+                                                                                toast: true,
+                                                                                position: 'top-end',
+                                                                                showConfirmButton: false,
+                                                                                timer: 5000,
+                                                                                timerProgressBar: true,
+                                                                                didOpen: (toast) => {
+                                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                }
+                                                                            });
+
+                                                                            Toast.fire({
+                                                                                icon: 'warning',
+                                                                                title: '<b>DATA ADA YANG BELUM TERISI</b>',
+                                                                            });
+
+                                                                            if (file_invoice == "") {
+                                                                                $("#err_file_invoice").html("File Harus Dipilih");
+                                                                            } else {
+                                                                                $("#err_file_invoice").html("");
+                                                                            }
+                                                                        }
+
+                                                                        //eksekusi bila file terisi
+                                                                        if (file_invoice != "") {
+
+                                                                            //Cari ekstensi file yg diupload
+                                                                            var typeInvoice = document.querySelector('#file_invoice').value;
+                                                                            var getTypeInvoice = typeInvoice.split('.').pop();
+                                                                            console.log('Type : ' + getTypeInvoice);
+
+                                                                            //cari ukuran file yg diupload
+                                                                            var fileInvoice = document.getElementById("file_invoice").files;
+                                                                            var getSizeInvoice = document.getElementById("file_invoice").files[0].size / 1024;
+                                                                            console.log('Size : ' + getSizeInvoice);
+
+                                                                            //Toast bila upload file selain pdf
+                                                                            if (getTypeInvoice != 'pdf') {
+                                                                                const Toast = Swal.mixin({
+                                                                                    toast: true,
+                                                                                    position: 'top-end',
+                                                                                    showConfirmButton: false,
+                                                                                    timer: 10000,
+                                                                                    timerProgressBar: true,
+                                                                                    didOpen: (toast) => {
+                                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                    }
+                                                                                });
+
+                                                                                Toast.fire({
+                                                                                    icon: 'warning',
+                                                                                    title: '<div class="text-md text-center">File Invoice Harus <b>.pdf</b></div>'
+                                                                                });
+                                                                                $("#err_file_invoice").html("File Invoice Harus pdf");
+                                                                            } //Toast bila upload file  diatas 200 Kb
+                                                                            else if (getSizeInvoice > 256) {
+                                                                                const Toast = Swal.mixin({
+                                                                                    toast: true,
+                                                                                    position: 'top-end',
+                                                                                    showConfirmButton: false,
+                                                                                    timer: 10000,
+                                                                                    timerProgressBar: true,
+                                                                                    didOpen: (toast) => {
+                                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                    }
+                                                                                });
+
+                                                                                Toast.fire({
+                                                                                    icon: 'warning',
+                                                                                    title: 'Ukuran File Invoice Harus <br><b>Kurang dari 200 Kb</b>'
+                                                                                });
+                                                                                $("#err_file_invoice").html("Ukuran File MoU Harus Kurang dari 200 Kb");
+                                                                            }
+                                                                        }
+                                                                        //download docx bila sudah sesuai
+                                                                        if (
+                                                                            file_invoice != "" &&
+                                                                            getTypeInvoice == "pdf" &&
+                                                                            getSizeInvoice < 256
+                                                                        ) {
+                                                                            console.log("simpan file invoice");
+
+                                                                            //ambil data file yang diupload
+                                                                            var data_file = new FormData();
+                                                                            var xhttp = new XMLHttpRequest();
+
+                                                                            var fileInvoice = document.getElementById("file_invoice").files;
+                                                                            data_file.append("file_invoice", fileInvoice[0]);
+
+                                                                            data_file.append("idp", "<?= $_GET['pbyr'] ?>");
+
+                                                                            xhttp.open("POST", "_admin/exc/x_i_praktik_bayar_uFileInvoice.php", true);
+                                                                            xhttp.send(data_file);
+                                                                            Swal.fire({
+                                                                                allowOutsideClick: false,
+                                                                                // isDismissed: false,
+                                                                                icon: 'success',
+                                                                                title: '<span class"text-xs"><b>DATA FILE INVOICE</b><br>Berhasil Tersimpan',
+                                                                                showConfirmButton: false,
+                                                                                timer: 5000,
+                                                                                timerProgressBar: true,
+                                                                                didOpen: (toast) => {
+                                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                }
+                                                                            }).then(
+                                                                                function() {
+                                                                                    // document.location.href = "?";
+                                                                                }
+                                                                            );
+                                                                        }
+                                                                    });
+
+                                                                <?php } ?>
+                                                            </script>
                                                         </div>
                                                     </div>
                                                 </div>
