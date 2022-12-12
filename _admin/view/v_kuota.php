@@ -86,7 +86,7 @@ if (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') {
     </div>
     <script>
         $(document).ready(function() {
-            $('#data_kuota').load('_admin/view/v_kuotaData.php?id=' + <?= $_SESSION['id_user'] ?>);
+            $('#data_kuota').load('_admin/view/v_kuotaData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])) ?>');
         });
 
         <?php if ($d_prvl['c_kuota'] == "Y") { ?>
@@ -134,7 +134,7 @@ if (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') {
                         data: data,
                         success: function() {
 
-                            $('#data_kuota').load('_admin/view/v_kuotaData.php?');
+                            $('#data_kuota').load('_admin/view/v_kuotaData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])) ?>');
 
                             const Toast = Swal.mixin({
                                 toast: true,

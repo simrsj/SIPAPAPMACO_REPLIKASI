@@ -65,7 +65,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</a>
 			</li>
 
-			<?php if ($d_prvl['r_kuota'] == "Y") { ?>
+			<?php if ($d_prvl['level_user'] == 1 && $d_prvl['r_kuota'] == "Y") { ?>
 				<!-- Kuota -->
 				<li class="nav-item ">
 					<a class="nav-link" href="?kta">
@@ -396,7 +396,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					}
 				} elseif (isset($_GET['akr'])) {
 					include "_admin/view/v_akreditasi.php";
-				} elseif (isset($_GET['info_diklat'])) {
+				}
+				//menu informasi dan jadwal praktik
+				elseif (isset($_GET['info_diklat'])) {
 					include "_admin/view/v_info_diklat.php";
 				} elseif (isset($_GET['ins'])) {
 					if (isset($_GET['i'])) {
@@ -414,7 +416,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					include "_admin/view/v_jurusan.php";
 				} elseif (isset($_GET['jjg'])) {
 					include "_admin/view/v_jenjang.php";
-				} elseif (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') {
+				}
+				//kuota praktik
+				elseif (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') {
 					include "_admin/view/v_kuota.php";
 				} elseif (isset($_GET['lapor'])) {
 					if (isset($_GET['dtl'])) {

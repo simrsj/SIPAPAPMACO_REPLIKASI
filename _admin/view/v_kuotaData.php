@@ -1,14 +1,23 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-$sql_prvl = "SELECT * FROM tb_user WHERE id_user = " . $_GET['id'];
+$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($_GET['idu']));
 // echo $sql_prvl;
-$q_prvl = $conn->query($sql_prvl);
+try {
+    $q_prvl = $conn->query($sql_prvl);
+} catch (Exception $ex) {
+    echo "<script>alert('$ex -DATA PRIVILEGES-');";
+    echo "document.location.href='?error404';</script>";
+}
 $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
 $sql_kuota = "SELECT * FROM tb_kuota ORDER BY tb_kuota.nama_kuota ASC";
 // echo $sql_kuota;
-
-$q_data_kuota = $conn->query($sql_kuota);
+try {
+    $q_data_kuota = $conn->query($sql_kuota);
+} catch (Exception $ex) {
+    echo "<script>alert('$ex -DATA KUOTA-');";
+    echo "document.location.href='?error404';</script>";
+}
 $r_data_kuota = $q_data_kuota->rowCount();
 
 if ($r_data_kuota > 0) {
@@ -37,7 +46,7 @@ if ($r_data_kuota > 0) {
                         <td><?php echo $d_data_kuota['ket_kuota']; ?></td>
                         <td class="text-center">
                             <?php if ($d_prvl['u_kuota'] == "Y") { ?>
-                                <button id="<?php echo $d_data_kuota['id_kuota']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH">
+                                <button id="<?php echo $d_data_kuota['id_kuota']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH" href="#page-top">
                                     <i class="fa fa-edit"></i> Ubah
                                 </button>
                             <?php } ?>
@@ -107,6 +116,8 @@ if ($r_data_kuota > 0) {
             });
 
             $("#data_tambah_test").fadeOut('slow');
+
+            $("#u_nama_kuota").focus();
         });
 
         $(".ubah_tutup").click(function() {
@@ -145,7 +156,7 @@ if ($r_data_kuota > 0) {
                     url: "_admin/exc/x_v_kuota_u.php",
                     data: data,
                     success: function() {
-                        $('#data_kuota').load('_admin/view/v_kuotaData.php?');
+                        $('#data_kuota').load('_admin/view/v_kuotaData.php?idu=<?= $_GET['idu'] ?>');
 
                         const Toast = Swal.mixin({
                             toast: true,
@@ -194,7 +205,7 @@ if ($r_data_kuota > 0) {
                             "id_kuota": $(this).attr('id')
                         },
                         success: function() {
-                            $('#data_kuota').load('_admin/view/v_kuotaData.php?');
+                            $('#data_kuota').load('_admin/view/v_kuotaData.php?idu=<?= $_GET['idu'] ?>');
 
                             const Toast = Swal.mixin({
                                 toast: true,
