@@ -57,23 +57,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				Kediklatan
 			</div>
 
-			<!-- Informasi -->
-			<li class="nav-item ">
-				<a class="nav-link" href="?info_diklat">
-					<i class="fas fa-fw fa-info-circle"></i>
-					<span>Informasi</span>
-				</a>
-			</li>
-
-			<?php if ($d_prvl['level_user'] == 1 && $d_prvl['r_kuota'] == "Y") { ?>
-				<!-- Kuota -->
-				<li class="nav-item ">
-					<a class="nav-link" href="?kta">
-						<i class="far fa-fw fa-circle"></i>
-						<span>Kuota</span>
-					</a>
-				</li>
-			<?php } ?>
 			<?php if ($d_prvl['r_praktik'] == "Y") { ?>
 				<!-- Praktik -->
 				<li class="nav-item" style=" word-wrap: break-word;">
@@ -114,10 +97,43 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 									<span>Data Pembayaran</span>
 								</a>
 							<?php } ?>
+							<?php if ($d_prvl['r_praktik_nilai'] == "Y") { ?>
+								<a class="collapse-item" href="?pnilai">
+									<i class="fas fa-fw fa-clipboard-list"></i>
+									<span>Data Nilai</span>
+								</a>
+							<?php } ?>
 						</div>
 					</div>
 				</li>
 			<?php } ?>
+			<!-- Informasi -->
+			<li class="nav-item ">
+				<a class="nav-link" href="?info_diklat">
+					<i class="fas fa-fw fa-info-circle"></i>
+					<span>Informasi</span>
+				</a>
+			</li>
+
+			<?php if ($d_prvl['level_user'] == 1 && $d_prvl['r_kuota'] == "Y") { ?>
+				<!-- Kuota -->
+				<li class="nav-item ">
+					<a class="nav-link" href="?kta">
+						<i class="far fa-fw fa-circle"></i>
+						<span>Kuota</span>
+					</a>
+				</li>
+			<?php } ?>
+			<li class="nav-item ">
+				<a class="nav-link" href="?ars">
+					<i class="fas fa-fw fa-archive"></i>
+					<span>Arsip Praktik</span>
+				</a>
+			</li>
+			<hr class="sidebar-divider">
+			<div class="sidebar-heading">
+				Narasumber
+			</div>
 			<?php if ($d_prvl['r_narsum'] == "Y") { ?>
 				<!-- Narasumber -->
 				<li class="nav-item" style=" word-wrap: break-word;">
@@ -137,25 +153,13 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</div>
 				</li>
 			<?php } ?>
-			<li class="nav-item ">
-				<a class="nav-link" href="?nil">
-					<i class="fas fa-fw fa-clipboard-list"></i>
-					<span>Data Nilai</span>
-				</a>
-			</li>
-			<li class="nav-item ">
-				<a class="nav-link" href="?ars">
-					<i class="fas fa-fw fa-archive"></i>
-					<span>Arsip Praktik</span>
-				</a>
-			</li>
-			<hr class="sidebar-divider">
+			<!-- <hr class="sidebar-divider">
 			<li class="nav-item ">
 				<a class="nav-link" href="http://192.168.7.89/kuesioner/login.php" target="_blank">
 					<i class="fas fa-fw fa-list-ul"></i>
 					<span>Survey</span>
 				</a>
-			</li>
+			</li> -->
 			<hr class="sidebar-divider">
 			<div class="sidebar-heading">
 				Data
