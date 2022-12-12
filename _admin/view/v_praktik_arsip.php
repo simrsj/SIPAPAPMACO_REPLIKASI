@@ -19,7 +19,7 @@
             $sql_praktik_a .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
             $sql_praktik_a .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
             // $sql_praktik_a .= " JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi ";
-            $sql_praktik_a .= " WHERE tb_praktik.status_praktik = 'A'";
+            $sql_praktik_a .= " WHERE tb_praktik.status_praktik = 'ARSIP'";
             $sql_praktik_a .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
 
             $q_praktik_a = $conn->query($sql_praktik_a);
@@ -59,7 +59,7 @@
                                         <button type="button" id="<?php echo $d_praktik_a['id_praktik']; ?>" class="btn btn-outline-success btn-sm aktif">
                                             Aktifkan
                                         </button> &nbsp;
-                                        <a href="?ars&dp=<?php echo $d_praktik_a['id_praktik'] ?>" class="btn btn-outline-primary btn-sm" title="Data Praktikan">
+                                        <a href="?pars&dp=<?php echo $d_praktik_a['id_praktik'] ?>" class="btn btn-outline-primary btn-sm" title="Data Praktikan">
                                             <i class="fas fa-fw fa-users"></i>
                                         </a>
                                     </td>
@@ -110,7 +110,7 @@
                             icon: 'success',
                             title: '<div class="text-center">PRAKTIKAN KEMBALI AKTIF</div>',
                             showConfirmButton: false,
-                            html: '<a href="?ars" class="btn btn-primary">OK</a>',
+                            html: '<a href="?pars" class="btn btn-primary">OK</a>',
                             timer: 5000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
@@ -119,7 +119,7 @@
                             }
                         }).then(
                             function() {
-                                document.location.href = "?ars";
+                                document.location.href = "?pars";
                             }
                         );
                     },

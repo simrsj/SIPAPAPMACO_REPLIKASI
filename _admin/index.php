@@ -125,7 +125,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				</li>
 			<?php } ?>
 			<li class="nav-item ">
-				<a class="nav-link" href="?ars">
+				<a class="nav-link" href="?pars">
 					<i class="fas fa-fw fa-archive"></i>
 					<span>Arsip Praktik</span>
 				</a>
@@ -392,7 +392,9 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 					if (isset($_GET['ha'])) include "_admin/view/v_akun_hak_akses.php";
 					else include "_admin/view/v_akun.php";
-				} elseif (isset($_GET['ars'])) {
+				}
+				//arsip praktik
+				elseif (isset($_GET['pars'])) {
 					if (isset($_GET['dp'])) {
 						include "_admin/view/v_praktik_arsip_dataPraktik.php";
 					} else {
