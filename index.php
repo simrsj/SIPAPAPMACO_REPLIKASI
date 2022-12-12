@@ -34,7 +34,7 @@ include "_add-ons/tanggal_waktu.php";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body id="page-top">
+<body id="page-top" class="bg-primary">
     <!-- <div class="preloader">
         <div class="loading">
             <img src="./_img/logorsj.png" class="rotate mb-3" width="100" height="100" />
@@ -49,10 +49,8 @@ include "_add-ons/tanggal_waktu.php";
         if ($_SESSION['status_user'] == 'Y') {
             if (isset($_GET['lo'])) {
                 include "_log-sign/log_out.php";
-            } elseif ($_SESSION['level_user'] == 1) {
+            } elseif (isset($_SESSION['level_user'])) {
                 include "_admin/index.php";
-            } elseif ($_SESSION['level_user'] == 2) {
-                include "_ip/index.php";
             }
         } elseif ($_SESSION['status_user'] == 'T') {
             echo "
@@ -62,17 +60,7 @@ include "_add-ons/tanggal_waktu.php";
         ";
             include "_log-sign/log_out.php";
         }
-    } elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) {
-        if (isset($_GET['reg'])) {
-            include "_log-sign/register.php";
-        } elseif (isset($_GET['reg_x'])) {
-            include "_log-sign/register_exc.php";
-        } else if (isset($_GET['coba'])) {
-            include "_log-sign/calendar.php";
-        } else {
-            include "_log-sign/index.php";
-        }
-    }
+    } elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
     ?>
 
     <!-- JS -->

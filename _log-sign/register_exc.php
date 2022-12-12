@@ -1,4 +1,4 @@
-<?PHP
+<?php
 $id_institusi = $_POST['id_institusi'];
 $nama_user = $_POST['nama_user'];
 $no_telp_user = $_POST['no_telp_user'];
