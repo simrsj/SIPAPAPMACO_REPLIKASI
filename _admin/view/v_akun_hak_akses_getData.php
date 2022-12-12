@@ -15,7 +15,7 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
         <table class="table table-striped" id="dataTable">
             <thead class="thead-dark">
                 <tr class="text-center">
-                    <th scope="col">Nama Hak Akses</th>
+                    <th scope="col ">Nama Hak Akses</th>
                     <th scope="col">Create/Tambah</th>
                     <th scope="col">Read/Melihat/Melihat</th>
                     <th scope="col">Update/Mengubah</th>
@@ -491,6 +491,58 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_praktik_nilai"></div>
                     </td>
                 </tr>
+                <!-- Arsip Praktik -->
+                <tr>
+                    <td>Arsip Praktik</td>
+                    <td>
+                        <?php
+                        $c_arsip_praktikY = "";
+                        $c_arsip_praktikT = "";
+                        if ($d_user_prvl['c_arsip_praktik'] == 'Y') $c_arsip_praktikY = "checked";
+                        else if ($d_user_prvl['c_arsip_praktik'] == 'T')  $c_arsip_praktikT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="c_arsip_praktik" id="c_arsip_praktikY" value="Y" <?= $c_arsip_praktikY; ?>><label for="c_arsip_praktikY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="c_arsip_praktik" id="c_arsip_praktikT" value="T" <?= $c_arsip_praktikT; ?>><label for="c_arsip_praktikT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_arsip_praktik"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $r_arsip_praktikY = "";
+                        $r_arsip_praktikT = "";
+                        if ($d_user_prvl['r_arsip_praktik'] == 'Y') $r_arsip_praktikY = "checked";
+                        else if ($d_user_prvl['r_arsip_praktik'] == 'T')  $r_arsip_praktikT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="r_arsip_praktik" id="r_arsip_praktikY" value="Y" <?= $r_arsip_praktikY; ?>><label for="r_arsip_praktikY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="r_arsip_praktik" id="r_arsip_praktikT" value="T" <?= $r_arsip_praktikT; ?>><label for="r_arsip_praktikT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_arsip_praktik"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $u_arsip_praktikY = "";
+                        $u_arsip_praktikT = "";
+                        if ($d_user_prvl['u_arsip_praktik'] == 'Y') $u_arsip_praktikY = "checked";
+                        else if ($d_user_prvl['u_arsip_praktik'] == 'T')  $u_arsip_praktikT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="u_arsip_praktik" id="u_arsip_praktikY" value="Y" <?= $u_arsip_praktikY; ?>><label for="u_arsip_praktikY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="u_arsip_praktik" id="u_arsip_praktikT" value="T" <?= $u_arsip_praktikT; ?>><label for="u_arsip_praktikT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_arsip_praktik"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $d_arsip_praktikY = "";
+                        $d_arsip_praktikT = "";
+                        if ($d_user_prvl['d_arsip_praktik'] == 'Y') $d_arsip_praktikY = "checked";
+                        else if ($d_user_prvl['d_arsip_praktik'] == 'T')  $d_arsip_praktikT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="d_arsip_praktik" id="d_arsip_praktikY" value="Y" <?= $d_arsip_praktikY; ?>><label for="d_arsip_praktikY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="d_arsip_praktik" id="d_arsip_praktikT" value="T" <?= $d_arsip_praktikT; ?>><label for="d_arsip_praktikT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_arsip_praktik"></div>
+                    </td>
+                </tr>
             </tbody>
             </tbody>
         </table>
@@ -541,6 +593,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
         var r_praktik_nilai = $("input[name='r_praktik_nilai']:checked").val();
         var u_praktik_nilai = $("input[name='u_praktik_nilai']:checked").val();
         var d_praktik_nilai = $("input[name='d_praktik_nilai']:checked").val();
+        var c_arsip_praktik = $("input[name='c_arsip_praktik']:checked").val();
+        var r_arsip_praktik = $("input[name='r_arsip_praktik']:checked").val();
+        var u_arsip_praktik = $("input[name='u_arsip_praktik']:checked").val();
+        var d_arsip_praktik = $("input[name='d_arsip_praktik']:checked").val();
         var c_praktikan = $("input[name='c_praktikan']:checked").val();
         var r_praktikan = $("input[name='r_praktikan']:checked").val();
         var u_praktikan = $("input[name='u_praktikan']:checked").val();
@@ -582,6 +638,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
             r_praktik_nilai != "" &&
             u_praktik_nilai != "" &&
             d_praktik_nilai != "" &&
+            c_arsip_praktik != "" &&
+            r_arsip_praktik != "" &&
+            u_arsip_praktik != "" &&
+            d_arsip_praktik != "" &&
             c_praktikan != "" &&
             r_praktikan != "" &&
             u_praktikan != "" &&

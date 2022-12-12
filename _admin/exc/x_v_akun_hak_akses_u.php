@@ -41,7 +41,11 @@ $sql .= " d_praktik_bayar = '" . $_POST['d_praktik_bayar'] . "',";
 $sql .= " c_praktik_nilai = '" . $_POST['c_praktik_nilai'] . "',";
 $sql .= " r_praktik_nilai = '" . $_POST['r_praktik_nilai'] . "',";
 $sql .= " u_praktik_nilai = '" . $_POST['u_praktik_nilai'] . "',";
-$sql .= " d_praktik_nilai = '" . $_POST['d_praktik_nilai'] . "'";
+$sql .= " d_praktik_nilai = '" . $_POST['d_praktik_nilai'] . "',";
+$sql .= " c_arsip_praktik = '" . $_POST['c_arsip_praktik'] . "',";
+$sql .= " r_arsip_praktik = '" . $_POST['r_arsip_praktik'] . "',";
+$sql .= " u_arsip_praktik = '" . $_POST['u_arsip_praktik'] . "',";
+$sql .= " d_arsip_praktik = '" . $_POST['d_arsip_praktik'] . "'";
 $sql .= " WHERE id_user = " . $_POST['id_user'];
 
 // echo $sql . "<br>";
