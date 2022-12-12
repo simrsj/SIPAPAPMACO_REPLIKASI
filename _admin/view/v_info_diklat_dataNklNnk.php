@@ -68,8 +68,8 @@ function generateKalenderNklNnk($date)
                         $sql_nklNnk = "SELECT * FROM tb_praktik";
                         $sql_nklNnk .= " JOIN tb_praktik_tgl  ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
                         $sql_nklNnk .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl'";
-                        $sql_nklNnk .= " AND tb_praktik.id_jurusan_pdd BETWEEN 3 AND 8";
-                        $sql_nklNnk .= " AND ((tb_praktik.status_cek_praktik = 'BYR') OR (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y')) ";
+                        $sql_nklNnk .= " AND NOT tb_praktik.id_jurusan_pdd IN (1,2)";
+                        $sql_nklNnk .= " AND status_praktik ='Y' ";
                         $sql_nklNnk .= " ";
                         // echo "$sql_kedKep<br>";
                         $q_nklNnk = $conn->query($sql_nklNnk);
