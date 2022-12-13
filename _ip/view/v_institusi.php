@@ -8,7 +8,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10">
-            <h1 class="h4 mb-2 text-gray-800">Data Institusi <b><?php echo $d['nama_institusi']; ?></b></h1>
+            <h1 class="h4 mb-2 text-gray-800">Data Institusi <b><?= $d['nama_institusi']; ?></b></h1>
         </div>
         <div class="col-lg-2 text-right">
             <a class="btn btn-outline-primary btn-sm" href="?ins&u"><i class="fas fa-edit"></i> Ubah</a>
@@ -43,16 +43,16 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                         <?php
                         } else {
                         ?>
-                            <a title="Lihat Logo" class='btn btn-info btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#see_" . $d['id_institusi']; ?>'>
+                            <a title="Lihat Logo" class='btn btn-info btn-sm' href='#' data-toggle='modal' data-target='<?= "#see_" . $d['id_institusi']; ?>'>
                                 <i class="fas fa-eye"></i> Lihat
                             </a>
 
                             <!-- Lihat Logo  -->
-                            <div class="modal fade text-center" id="<?php echo "see_" . $d['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade text-center" id="<?= "see_" . $d['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
-                                            <img src="<?php echo $d['logo_institusi']; ?>" width="250px" height="250px">
+                                            <img src="<?= $d['logo_institusi']; ?>" width="250px" height="250px">
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                         <?php
                         } else {
                         ?>
-                            <a href='<?php echo $d['fileAkred_institusi']; ?>' target=" _blank" class="btn btn-success btn-sm">
+                            <a href='<?= $d['fileAkred_institusi']; ?>' target=" _blank" class="btn btn-success btn-sm">
                                 <i class="fas fa-file-download"></i> Download
                             </a>
                         <?php
@@ -179,16 +179,16 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                             <?php
                             } else {
                             ?>
-                                <a title="Lihat Logo" class='btn btn-info btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#see_" . $d['id_institusi']; ?>'>
+                                <a title="Lihat Logo" class='btn btn-info btn-sm' href='#' data-toggle='modal' data-target='<?= "#see_" . $d['id_institusi']; ?>'>
                                     <i class="fas fa-eye"></i> Lihat
                                 </a>
 
                                 <!-- Lihat Logo  -->
-                                <div class="modal fade text-center" id="<?php echo "see_" . $d['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade text-center" id="<?= "see_" . $d['id_institusi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                                                <img src="<?php echo $d['tempLogo_institusi']; ?>" width="250px" height="250px">
+                                                <img src="<?= $d['tempLogo_institusi']; ?>" width="250px" height="250px">
                                             </div>
                                         </div>
                                     </div>
@@ -248,7 +248,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                             <?php
                             } else {
                             ?>
-                                <a href='<?php echo $d['tempFileAkred_institusi']; ?>' target=" _blank" class="btn btn-success btn-sm">
+                                <a href='<?= $d['tempFileAkred_institusi']; ?>' target=" _blank" class="btn btn-success btn-sm">
                                     <i class="fas fa-file-download"></i> Download
                                 </a>
                             <?php

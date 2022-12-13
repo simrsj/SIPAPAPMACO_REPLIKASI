@@ -62,15 +62,15 @@ while ($d_data_tarif = $q_data_tarif->fetch(PDO::FETCH_ASSOC)) {
             <div class="row text-center">
                 <div class="col-md-3 my-auto">
                     <b>Nama Institusi :</b><br>
-                    <?php echo $d_data_praktik['nama_institusi']; ?><br><br>
+                    <?= $d_data_praktik['nama_institusi']; ?><br><br>
                     <b>Kelompok / Gelombang Praktik :</b><br>
-                    <?php echo $d_data_praktik['nama_praktik']; ?><br><br>
+                    <?= $d_data_praktik['nama_praktik']; ?><br><br>
                 </div>
                 <div class="col-md-3">
                     <b>Jurusan :</b><br>
-                    <?php echo $d_data_praktik['nama_jurusan_pdd']; ?><br><br>
+                    <?= $d_data_praktik['nama_jurusan_pdd']; ?><br><br>
                     <b>Jenjang :</b><br>
-                    <?php echo $d_data_praktik['nama_jenjang_pdd']; ?><br><br>
+                    <?= $d_data_praktik['nama_jenjang_pdd']; ?><br><br>
                     <b>Profesi :</b><br>
                     <?php
                     if ($d_data_praktik['id_profesi_pdd'] == 0) {
@@ -82,17 +82,17 @@ while ($d_data_tarif = $q_data_tarif->fetch(PDO::FETCH_ASSOC)) {
                 </div>
                 <div class="col-md-3">
                     <b>Tanggal Mulai :</b><br>
-                    <?php echo tanggal($d_data_praktik['tgl_mulai_praktik']); ?><br><br>
+                    <?= tanggal($d_data_praktik['tgl_mulai_praktik']); ?><br><br>
                     <b>Tanggal Selesai :</b><br>
-                    <?php echo tanggal($d_data_praktik['tgl_selesai_praktik']); ?><br><br>
+                    <?= tanggal($d_data_praktik['tgl_selesai_praktik']); ?><br><br>
                     <b>Total Tarif :</b><br>
-                    <?php echo "Rp " . number_format($total_tarif, 0, '.', '.'); ?>
+                    <?= "Rp " . number_format($total_tarif, 0, '.', '.'); ?>
                 </div>
                 <div class="col-md-3  my-auto">
                     <div class="jumbotron ">
                         <div class="jumbotron-fluid ">
                             <b>Unduh Berkas INVOICE :</b><br><br>
-                            <a href="<?php echo $d_praktik['surat_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
+                            <a href="<?= $d_praktik['surat_praktik']; ?> " target="_blank" class="btn btn-success btn-sm">
                                 <i class="fas fa-file-download"></i> Download
                             </a>
                         </div>

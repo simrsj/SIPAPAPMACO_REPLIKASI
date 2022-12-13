@@ -10,15 +10,15 @@
                         <div class="row no-gutters align-items-center text-center">
                             <div class="col">
                                 Belum Perpanjang : <br>
-                                <span class="badge badge-danger text-lg"><?php echo $dashboard_dmbp; ?></span>
+                                <span class="badge badge-danger text-lg"><?= $dashboard_dmbp; ?></span>
                             </div>
                             <div class="col">
                                 Pengajuan Baru : <br>
-                                <span class="badge badge-primary text-lg"><?php echo $dashboard_dmpb; ?></span>
+                                <span class="badge badge-primary text-lg"><?= $dashboard_dmpb; ?></span>
                             </div>
                             <div class="col">
                                 Pengajuan Perpanjang : <br>
-                                <span class="badge badge-primary text-lg"><?php echo $dashboard_dmpl; ?></span>
+                                <span class="badge badge-primary text-lg"><?= $dashboard_dmpl; ?></span>
                             </div>
                         </div>
                     </div>

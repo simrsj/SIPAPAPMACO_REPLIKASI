@@ -50,7 +50,7 @@ abstract class SendTestCase extends PreSendTestCase
         if (file_exists(\PHPMAILER_INCLUDE_DIR . '/test/testbootstrap.php') === false) {
             throw new Exception(
                 'Test config params missing - copy testbootstrap-dist.php to testbootstrap.php and change'
-                . ' as appropriate for your own test environment setup.'
+                    . ' as appropriate for your own test environment setup.'
             );
         }
 
@@ -108,15 +108,15 @@ abstract class SendTestCase extends PreSendTestCase
  *
  * <form name="phpmailer_unit" action=__FILE__ method="get">
  * <input type="hidden" name="submitted" value="1"/>
- * From Address: <input type="text" size="50" name="mail_from" value="<?php echo get("mail_from"); ?>"/>
+ * From Address: <input type="text" size="50" name="mail_from" value="<?= get("mail_from"); ?>"/>
  * <br/>
- * To Address: <input type="text" size="50" name="mail_to" value="<?php echo get("mail_to"); ?>"/>
+ * To Address: <input type="text" size="50" name="mail_to" value="<?= get("mail_to"); ?>"/>
  * <br/>
- * Cc Address: <input type="text" size="50" name="mail_cc" value="<?php echo get("mail_cc"); ?>"/>
+ * Cc Address: <input type="text" size="50" name="mail_cc" value="<?= get("mail_cc"); ?>"/>
  * <br/>
- * Bcc Address: <input type="text" size="50" name="mail_bcc" value="<?php echo get("mail_bcc"); ?>"/>
+ * Bcc Address: <input type="text" size="50" name="mail_bcc" value="<?= get("mail_bcc"); ?>"/>
  * <br/>
- * SMTP Hostname: <input type="text" size="50" name="mail_host" value="<?php echo get("mail_host"); ?>"/>
+ * SMTP Hostname: <input type="text" size="50" name="mail_host" value="<?= get("mail_host"); ?>"/>
  * <p/>
  * <input type="submit" value="Run Test"/>
  *

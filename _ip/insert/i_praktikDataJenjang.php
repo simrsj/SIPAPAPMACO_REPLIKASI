@@ -16,8 +16,8 @@ $q_jenjang = $conn->query($sql_jenjang);
     <?php
     while ($d_jenjang = $q_jenjang->fetch(PDO::FETCH_ASSOC)) {
     ?>
-        <option value="<?php echo $d_jurusan['id_jurusan_pdd']; ?>">
-            <?php echo $d_jenjang['nama_jenjang_pdd']; ?>
+        <option value="<?= $d_jurusan['id_jurusan_pdd']; ?>">
+            <?= $d_jenjang['nama_jenjang_pdd']; ?>
         </option>
     <?php
     }

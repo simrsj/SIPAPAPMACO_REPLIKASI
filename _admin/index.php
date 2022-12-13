@@ -346,7 +346,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nama_user']; ?></span>
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['nama_user']; ?></span>
 								<i class="far fa-user"></i>
 							</a>
 							<!-- Dropdown - User Information -->
@@ -447,14 +447,14 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				elseif (isset($_GET['d_pmbb']) && $d_prvl['r_daftar_pembimbing'] == 'Y') include "_admin/view/v_daftarPembimbing.php";
 				//praktik nilai
 				elseif (isset($_GET['pnilai'])) {
-					if (isset($_GET['i']) && isset($_GET['p'])) {
-						include "_admin/insert/i_nilaiKep.php";
+					if (isset($_GET['i']) && isset($_GET['pmbb'])) {
+						include "_admin/insert/i_praktik_nilaiKep.php";
 					} elseif (isset($_GET['i']) && isset($_GET['pu'])) {
-						include "_admin/insert/i_nilai_upload.php";
-					} elseif (isset($_GET['u']) && isset($_GET['p'])) {
-						include "_admin/update/u_nilaiKep.php";
+						include "_admin/insert/i_praktik_nilai_upload.php";
+					} elseif (isset($_GET['u']) && isset($_GET['pmbb'])) {
+						include "_admin/update/u_praktik_nilaiKep.php";
 					} else {
-						include "_admin/view/v_nilai.php";
+						include "_admin/view/v_praktik_nilai.php";
 					}
 				}
 				//praktik pemibimbing
@@ -515,7 +515,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>RS Jiwa Provinsi Jawa Barat <?php echo date('Y'); ?></span>
+						<span>RS Jiwa Provinsi Jawa Barat <?= date('Y'); ?></span>
 					</div>
 				</div>
 			</footer>

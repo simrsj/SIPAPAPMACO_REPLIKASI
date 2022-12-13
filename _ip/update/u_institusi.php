@@ -18,9 +18,9 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                 <div class="card text-center shadow mb-4" style="max-width: 400px;">
                     <div class="card-body">
                         Institusi : <br>
-                        <b> <?php echo $d['nama_institusi'] ?></b><br><br>
+                        <b> <?= $d['nama_institusi'] ?></b><br><br>
                         Akronim : <span class="text-danger">*</span><br>
-                        <input type="text" class="form-control" name="akronim_institusi" id="akronim_institusi" maxlength="10" value="<?php echo $d['akronim_institusi'] ?>" required>
+                        <input type="text" class="form-control" name="akronim_institusi" id="akronim_institusi" maxlength="10" value="<?= $d['akronim_institusi'] ?>" required>
                         <span id="err_akronim" class="text-xs font-italic text-danger blink"></span>
                         <br><br>
                         Logo : <span class="text-danger">*</span>
@@ -30,7 +30,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                         <span id="approvedFiles" class="text-xs font-italic text-danger blink"></span>
                         <br><br>
                         Alamat : <span class="text-danger">*</span>
-                        <textarea class="form-control" name="alamat_institusi" id="alamat_institusi" rows="8" required><?php echo $d['alamat_institusi'] ?></textarea>
+                        <textarea class="form-control" name="alamat_institusi" id="alamat_institusi" rows="8" required><?= $d['alamat_institusi'] ?></textarea>
                         <span id="err_alamat" class="text-xs font-italic text-danger blink"></span>
                         <br><br>
                         Akreditasi : <span class="text-danger">*</span>
@@ -49,14 +49,14 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                         ?>
                         <select class="form-control" name="akred_institusi" id="akred_institusi" required>
                             <option value="">-- Pilih --</option>
-                            <option value="A" <?php echo $a; ?>>A</option>
-                            <option value="B" <?php echo $b; ?>>B</option>
-                            <option value="C" <?php echo $c; ?>>C</option>
+                            <option value="A" <?= $a; ?>>A</option>
+                            <option value="B" <?= $b; ?>>B</option>
+                            <option value="C" <?= $c; ?>>C</option>
                         </select>
                         <span id="err_akred" class="text-xs font-italic text-danger blink"></span>
                         <br><br>
                         Tanggal Berlaku Akreditasi : <span class="text-danger">*</span>
-                        <input type="date" class="form-control" name="tglAkhirAkred_institusi" id="tglAkhirAkred_institusi" value="<?php echo $d['tglAkhirAkred_institusi'] ?>" required>
+                        <input type="date" class="form-control" name="tglAkhirAkred_institusi" id="tglAkhirAkred_institusi" value="<?= $d['tglAkhirAkred_institusi'] ?>" required>
                         <span id="err_tglAkhirAkred" class="text-xs font-italic text-danger blink"></span>
                         <br><br>
                         File Akreditasi : <span class="text-danger">*</span>
@@ -67,7 +67,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                         <span class="font-weight-bold font-italic text-xs"><span class="text-danger">*</span> : Wajib Diisi</span>
                         <hr>
                         <center>
-                            <button type="button" class="btn btn-success btn-sm simpan" id="<?php echo $d['id_institusi']; ?>">
+                            <button type="button" class="btn btn-success btn-sm simpan" id="<?= $d['id_institusi']; ?>">
                                 SIMPAN DATA
                             </button>
                         </center>

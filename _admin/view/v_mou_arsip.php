@@ -45,14 +45,14 @@
                                 while ($d_mou = $q_mou_a->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
-                                        <td class="text-center my-auto"><?php echo $no; ?></td>
+                                        <td class="text-center my-auto"><?= $no; ?></td>
                                         <td class="text-center text-capitalize my-auto">
                                             <?php
 
                                             if ($d_mou['tgl_selesai_mou'] == NULL) {
                                             ?>
                                                 <span class="badge badge-primary text-xs">
-                                                    <?php echo $d_mou['ket_mou']; ?>
+                                                    <?= $d_mou['ket_mou']; ?>
                                                 </span>
                                                 <form method="POST">
                                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
@@ -75,7 +75,7 @@
 
                                                 if ($date_diff <= 0) {
                                                 ?> <span class="badge badge-success text-xs">
-                                                        <?php echo tanggal_sisa($d_mou['tgl_selesai_mou'], date('Y-m-d')); ?>
+                                                        <?= tanggal_sisa($d_mou['tgl_selesai_mou'], date('Y-m-d')); ?>
                                                     </span>
                                                 <?php
                                                 } elseif ($date_diff > 0) {
@@ -94,17 +94,17 @@
                                             }
                                             ?>
                                         </td>
-                                        <td><?php echo $d_mou['no_institusi_mou']; ?></td>
-                                        <td><?php echo $d_mou['no_rsj_mou']; ?></td>
+                                        <td><?= $d_mou['no_institusi_mou']; ?></td>
+                                        <td><?= $d_mou['no_rsj_mou']; ?></td>
                                         <td class="text-center my-auto">
 
                                             <!-- tombol rincian -->
-                                            <a title="Rincian" href='#' class="btn btn-info btn-sm" data-toggle="modal" data-target="#m_r_m<?php echo $d_mou['id_mou']; ?>">
+                                            <a title="Rincian" href='#' class="btn btn-info btn-sm" data-toggle="modal" data-target="#m_r_m<?= $d_mou['id_mou']; ?>">
                                                 <i class="fas fa-info-circle"></i> Rincian
                                             </a>
 
                                             <!-- modal rincian -->
-                                            <div class="modal fade text-left" data-backdrop="static" data-keyboard="false" id="m_r_m<?php echo $d_mou['id_mou']; ?>">
+                                            <div class="modal fade text-left" data-backdrop="static" data-keyboard="false" id="m_r_m<?= $d_mou['id_mou']; ?>">
                                                 <div class="modal-dialog modal-dialog-scrollable">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -115,19 +115,19 @@
                                                         </div>
                                                         <div class="modal-body text-center">
                                                             <b>Nama Instansi : </b><br>
-                                                            <?php echo $d_mou['nama_institusi']; ?><br><br>
+                                                            <?= $d_mou['nama_institusi']; ?><br><br>
                                                             <b>No Mou RSJ : </b>
-                                                            <?php echo $d_mou['no_rsj_mou']; ?><br><br>
+                                                            <?= $d_mou['no_rsj_mou']; ?><br><br>
                                                             <b>No Mou Institusi : </b>
-                                                            <?php echo $d_mou['no_institusi_mou']; ?><br><br>
+                                                            <?= $d_mou['no_institusi_mou']; ?><br><br>
                                                             <b>Jurusan : </b>
-                                                            <?php echo $d_mou['nama_jurusan_pdd']; ?><br><br>
+                                                            <?= $d_mou['nama_jurusan_pdd']; ?><br><br>
                                                             <b>Jenjang : </b>
-                                                            <?php echo $d_mou['nama_jenjang_pdd']; ?><br><br>
+                                                            <?= $d_mou['nama_jenjang_pdd']; ?><br><br>
                                                             <b>Profesi : </b>
-                                                            <?php echo $d_mou['nama_profesi_pdd']; ?><br><br>
+                                                            <?= $d_mou['nama_profesi_pdd']; ?><br><br>
                                                             <!-- <b>Akreditasi Institusi : </b>
-                                                            <?php echo $d_mou['nama_akreditasi']; ?><br><br> -->
+                                                            <?= $d_mou['nama_akreditasi']; ?><br><br> -->
                                                             <b>Tangga Mulai MoU : </b>
                                                             <?php
                                                             if ($d_mou['tgl_mulai_mou'] == NULL) {
@@ -170,7 +170,7 @@
                                                             <?php
                                                             } else {
                                                             ?>
-                                                                <a href="<?php echo $d_mou['file_mou']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                                <a href="<?= $d_mou['file_mou']; ?> " target="_blank" class="btn btn-success btn-sm">
                                                                     <i class="fas fa-file-download"></i> Unduh
                                                                 </a>
                                                             <?php
@@ -185,7 +185,7 @@
                                                             <?php
                                                             } else {
                                                             ?>
-                                                                <a href="<?php echo $d_mou['file_pks']; ?> " target="_blank" class="btn btn-success btn-sm">
+                                                                <a href="<?= $d_mou['file_pks']; ?> " target="_blank" class="btn btn-success btn-sm">
                                                                     <i class="fas fa-file-download"></i> Unduh
                                                                 </a>
                                                             <?php

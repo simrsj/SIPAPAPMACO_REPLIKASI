@@ -51,19 +51,19 @@
                             while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_akreditasi['nama_akreditasi']; ?></td>
+                                    <td><?= $no; ?></td>
+                                    <td><?= $d_akreditasi['nama_akreditasi']; ?></td>
                                     <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_akreditasi['id_akreditasi']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?= "#akr_u_m" . $d_akreditasi['id_akreditasi']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_d_m" . $d_akreditasi['id_akreditasi']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?= "#akr_d_m" . $d_akreditasi['id_akreditasi']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
 
 
                                         <!-- modal ubah Akreditasi  -->
-                                        <div class="modal fade" id="<?php echo "akr_u_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="<?= "akr_u_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <form method="post" action="">
@@ -71,8 +71,8 @@
                                                             Ubah Akreditasi :
                                                         </div>
                                                         <div class="modal-body">
-                                                            <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
-                                                            <input class="form-control" name="nama_akreditasi" value="<?php echo $d_akreditasi['nama_akreditasi']; ?>">
+                                                            <input name="id_akreditasi" value="<?= $d_akreditasi['id_akreditasi']; ?>" hidden>
+                                                            <input class="form-control" name="nama_akreditasi" value="<?= $d_akreditasi['nama_akreditasi']; ?>">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-primary btn-sm" name="ubah">Ubah</button>
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="modal fade" id="<?php echo "akr_d_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="<?= "akr_d_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <form method="post" action="">
@@ -91,8 +91,8 @@
                                                             Hapus Data
                                                         </div>
                                                         <div class="modal-body">
-                                                            <h6><b><?php echo $d_akreditasi['nama_akreditasi']; ?></b></h6>
-                                                            <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
+                                                            <h6><b><?= $d_akreditasi['nama_akreditasi']; ?></b></h6>
+                                                            <input name="id_akreditasi" value="<?= $d_akreditasi['id_akreditasi']; ?>" hidden>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>

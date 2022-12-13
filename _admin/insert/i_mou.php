@@ -26,7 +26,7 @@
                 $id_mou = $no;
                 ?>
                 <!-- Nama Institusi, MoU RSJ dan Institusi -->
-                <input type="hidden" name="id_mou" id="id_mou" value="<?php echo $id_mou; ?>">
+                <input type="hidden" name="id_mou" id="id_mou" value="<?= $id_mou; ?>">
                 <div class="row text-center">
                     <div class="col-md-6">
                         Nama Institusi <span style="color:red">*</span><br>
@@ -38,7 +38,7 @@
 
                             while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?php echo $d_institusi['id_institusi']; ?>">
+                                <option value="<?= $d_institusi['id_institusi']; ?>">
                                     <?php
                                     echo $d_institusi['nama_institusi'];
                                     if ($d_institusi['akronim_institusi'] != "") {
@@ -80,7 +80,7 @@
                             $x_jurusan = $conn->query("SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC");
                             while ($d_jurusan = $x_jurusan->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?php echo $d_jurusan['id_jurusan_pdd']; ?> "><?php echo $d_jurusan['nama_jurusan_pdd']; ?></option>
+                                <option value="<?= $d_jurusan['id_jurusan_pdd']; ?> "><?= $d_jurusan['nama_jurusan_pdd']; ?></option>
                             <?php
                             }
                             ?>
@@ -95,7 +95,7 @@
                             $x_spek = $conn->query("SELECT * FROM tb_profesi_pdd order by nama_profesi_pdd ASC");
                             while ($d_spek = $x_spek->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?php echo $d_spek['id_profesi_pdd']; ?> "><?php echo $d_spek['nama_profesi_pdd']; ?></option>
+                                <option value="<?= $d_spek['id_profesi_pdd']; ?> "><?= $d_spek['nama_profesi_pdd']; ?></option>
                             <?php
                             }
                             ?>
@@ -110,7 +110,7 @@
                             $x_jenjang = $conn->query("SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC");
                             while ($d_jenjang = $x_jenjang->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?php echo $d_jenjang['id_jenjang_pdd']; ?> "><?php echo $d_jenjang['nama_jenjang_pdd']; ?></option>
+                                <option value="<?= $d_jenjang['id_jenjang_pdd']; ?> "><?= $d_jenjang['nama_jenjang_pdd']; ?></option>
                             <?php
                             }
                             ?>

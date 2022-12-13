@@ -42,8 +42,8 @@
                             $q_satuan = $conn->query($sql_satuan);
                             while ($d_satuan = $q_satuan->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value='<?php echo $d_satuan['id_tarif_satuan']; ?>'>
-                                    <?php echo $d_satuan['nama_tarif_satuan']; ?>
+                                <option value='<?= $d_satuan['id_tarif_satuan']; ?>'>
+                                    <?= $d_satuan['nama_tarif_satuan']; ?>
                                 </option>
                             <?php
                                 $no++;
@@ -116,8 +116,8 @@
                             $q_satuan = $conn->query($sql_satuan);
                             while ($d_satuan = $q_satuan->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value='<?php echo $d_satuan['id_tarif_satuan']; ?>'>
-                                    <?php echo $d_satuan['nama_tarif_satuan']; ?>
+                                <option value='<?= $d_satuan['id_tarif_satuan']; ?>'>
+                                    <?= $d_satuan['nama_tarif_satuan']; ?>
                                 </option>
                             <?php
                                 $no++;

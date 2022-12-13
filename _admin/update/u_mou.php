@@ -16,7 +16,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
         <div class="card-body">
             <form method="post" class="form-data text-gray-900" enctype="multipart/form-data" id="form_mou">
                 <!-- Nama Institusi, MoU RSJ dan Institusi -->
-                <input type="hidden" name="id_mou" id="id_mou" value="<?php echo $d['id_mou']; ?>">
+                <input type="hidden" name="id_mou" id="id_mou" value="<?= $d['id_mou']; ?>">
                 <div class="row text-center">
                     <div class="col-md-6">
                         Nama Institusi <span style="color:red">*</span><br>
@@ -34,7 +34,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                                     $selected = "";
                                 }
                             ?>
-                                <option value="<?php echo $d_institusi['id_institusi']; ?>" <?php echo $selected; ?>>
+                                <option value="<?= $d_institusi['id_institusi']; ?>" <?= $selected; ?>>
                                     <?php
                                     echo $d_institusi['nama_institusi'];
                                     if ($d_institusi['akronim_institusi'] != "") {
@@ -50,12 +50,12 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <div class="col-md-3">
                         No. MoU RSJ <span style="color:red">*</span><br>
-                        <input class="form-control form-control-sm " type="text" name="no_rsj_mou" id="no_rsj_mou" value="<?php echo $d['no_rsj_mou'] ?>" required>
+                        <input class="form-control form-control-sm " type="text" name="no_rsj_mou" id="no_rsj_mou" value="<?= $d['no_rsj_mou'] ?>" required>
                         <div class="text-xs font-italic text-danger blink" id="err_no_rsj_mou"></div>
                     </div>
                     <div class="col-md-3">
                         No. MoU Institusi <span style="color:red">*</span><br>
-                        <input class="form-control form-control-sm" type="text" name="no_institusi_mou" id="no_institusi_mou" value="<?php echo $d['no_institusi_mou'] ?>" required>
+                        <input class="form-control form-control-sm" type="text" name="no_institusi_mou" id="no_institusi_mou" value="<?= $d['no_institusi_mou'] ?>" required>
                         <div class="text-xs font-italic text-danger blink" id="err_no_institusi_mou"></div>
                     </div>
                 </div>
@@ -65,12 +65,12 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                 <div class="row text-center">
                     <div class="col-md-2">
                         Tanggal Mulai MoU <span style=" color:red">*</span><br>
-                        <input class="form-control form-control-sm" type="date" name="tgl_mulai_mou" id="tgl_mulai_mou" value="<?php echo $d['tgl_mulai_mou'] ?>" required>
+                        <input class="form-control form-control-sm" type="date" name="tgl_mulai_mou" id="tgl_mulai_mou" value="<?= $d['tgl_mulai_mou'] ?>" required>
                         <div class="text-xs font-italic text-danger blink" id="err_tgl_mulai_mou"></div>
                     </div>
                     <div class="col-md-2">
                         Tanggal Selesai MoU <span style=" color:red">*</span><br>
-                        <input class="form-control form-control-sm" type="date" name="tgl_selesai_mou" id="tgl_selesai_mou" value="<?php echo $d['tgl_selesai_mou'] ?>" required>
+                        <input class="form-control form-control-sm" type="date" name="tgl_selesai_mou" id="tgl_selesai_mou" value="<?= $d['tgl_selesai_mou'] ?>" required>
                         <div class="text-xs font-italic text-danger blink" id="err_tgl_selesai_mou"></div>
                     </div>
                     <div class="col-md-3">
@@ -86,8 +86,8 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                                     $selected = "";
                                 }
                             ?>
-                                <option value="<?php echo $d_jurusan['id_jurusan_pdd']; ?>" <?php echo $selected; ?>>
-                                    <?php echo $d_jurusan['nama_jurusan_pdd']; ?>
+                                <option value="<?= $d_jurusan['id_jurusan_pdd']; ?>" <?= $selected; ?>>
+                                    <?= $d_jurusan['nama_jurusan_pdd']; ?>
                                 </option>
                             <?php
                             }
@@ -108,8 +108,8 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                                     $selected = "";
                                 }
                             ?>
-                                <option value="<?php echo $d_profesi['id_profesi_pdd']; ?>" <?php echo $selected; ?>>
-                                    <?php echo $d_profesi['nama_profesi_pdd']; ?>
+                                <option value="<?= $d_profesi['id_profesi_pdd']; ?>" <?= $selected; ?>>
+                                    <?= $d_profesi['nama_profesi_pdd']; ?>
                                 </option>
                             <?php
                             }
@@ -130,8 +130,8 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                                     $selected = "";
                                 }
                             ?>
-                                <option value="<?php echo $d_jenjang['id_jenjang_pdd']; ?>" <?php echo $selected; ?>>
-                                    <?php echo $d_jenjang['nama_jenjang_pdd']; ?>
+                                <option value="<?= $d_jenjang['id_jenjang_pdd']; ?>" <?= $selected; ?>>
+                                    <?= $d_jenjang['nama_jenjang_pdd']; ?>
                                 </option>
                             <?php
                             }
@@ -148,7 +148,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                                 <?php
                                 if ($d['file_pks'] != "") {
                                 ?>
-                                    <div class="text-xs font-italic text-primary">File MoU Sebelumnya : <a href="<?php echo $d['file_mou']; ?>" class="font-weight-bold" target="_blank">UNDUH</a></div>
+                                    <div class="text-xs font-italic text-primary">File MoU Sebelumnya : <a href="<?= $d['file_mou']; ?>" class="font-weight-bold" target="_blank">UNDUH</a></div>
                                 <?php
                                 }
                                 ?>
@@ -165,7 +165,7 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                                 <?php
                                 if ($d['file_pks'] != "") {
                                 ?>
-                                    <div class="text-xs font-italic text-primary">File PKS Sebelumnya : <a href="<?php echo $d['file_pks']; ?>" class="font-weight-bold" target="_blank">UNDUH</a></div>
+                                    <div class="text-xs font-italic text-primary">File PKS Sebelumnya : <a href="<?= $d['file_pks']; ?>" class="font-weight-bold" target="_blank">UNDUH</a></div>
                                 <?php
                                 }
                                 ?>

@@ -102,7 +102,7 @@
                         ?>
                         <h6 class="m-0 font-weight-bold text-primary">
                             Kedokteran dan Keperawatan <br>
-                            <span class="text-danger">(Kuota Harian Praktikan: <?php echo $d_kuotaKedKep['jumlah_kuota']; ?>)</span>
+                            <span class="text-danger">(Kuota Harian Praktikan: <?= $d_kuotaKedKep['jumlah_kuota']; ?>)</span>
                         </h6>
                         <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#info_status_kedKep" title="Keterangan Status">
                             <i class="fas fa-info-circle"></i> Keterangan
@@ -117,7 +117,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body text-center">
-                                        Kuota Praktikan untuk Jurusan Kedokteran dan Keparawatan Digabung <span class="text-danger">Kuota Harian : <?php echo $d_kuotaKedKep['jumlah_kuota']; ?></span>
+                                        Kuota Praktikan untuk Jurusan Kedokteran dan Keparawatan Digabung <span class="text-danger">Kuota Harian : <?= $d_kuotaKedKep['jumlah_kuota']; ?></span>
                                         <br><br>
 
                                         <button class="btn btn-outline-success btn-sm">"Tanggal"</button> = Info Kuota Praktikan Belum terisi <br><br>
@@ -191,16 +191,16 @@
                                                 $d_kuotaPeksos = $q_kuotaPeksos->fetch(PDO::FETCH_ASSOC);
                                                 ?>
                                                 <div class="col-md-4">
-                                                    Farmasi : <br><span class="badge badge-danger text-lg"><?php echo $d_kuotaFar['jumlah_kuota']; ?></span><br><br>
-                                                    Kesehatan Lingkungan (KESLING) : <br><span class="badge badge-danger text-lg"><?php echo $d_kuotaKesling['jumlah_kuota']; ?>
+                                                    Farmasi : <br><span class="badge badge-danger text-lg"><?= $d_kuotaFar['jumlah_kuota']; ?></span><br><br>
+                                                    Kesehatan Lingkungan (KESLING) : <br><span class="badge badge-danger text-lg"><?= $d_kuotaKesling['jumlah_kuota']; ?>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    Psikologi : <br><span class="badge badge-danger text-lg"><?php echo $d_kuotaPsi['jumlah_kuota']; ?></span><br><br>
-                                                    Rekam Medis (RM) : <br><span class="badge badge-danger text-lg"><?php echo $d_kuotaRm['jumlah_kuota']; ?></span>
+                                                    Psikologi : <br><span class="badge badge-danger text-lg"><?= $d_kuotaPsi['jumlah_kuota']; ?></span><br><br>
+                                                    Rekam Medis (RM) : <br><span class="badge badge-danger text-lg"><?= $d_kuotaRm['jumlah_kuota']; ?></span>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    Informasi Teknologi (IT) : <br><span class="badge badge-danger text-lg"><?php echo $d_kuotaIt['jumlah_kuota']; ?></span><br><br>
-                                                    Pekerja Sosial (PEKSOS) : <br><span class="badge badge-danger text-lg"><?php echo $d_kuotaPeksos['jumlah_kuota']; ?></span>
+                                                    Informasi Teknologi (IT) : <br><span class="badge badge-danger text-lg"><?= $d_kuotaIt['jumlah_kuota']; ?></span><br><br>
+                                                    Pekerja Sosial (PEKSOS) : <br><span class="badge badge-danger text-lg"><?= $d_kuotaPeksos['jumlah_kuota']; ?></span>
                                                 </div>
                                             </div>
                                         </div>

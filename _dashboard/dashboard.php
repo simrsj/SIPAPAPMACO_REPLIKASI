@@ -9,7 +9,7 @@
           <img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="40px">
           <img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="30px">
           DASHBOARD PRAKTIKAN DAN MESS/PEMONDOKAN
-          <span class="badge badge-primary text-md"><?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
+          <span class="badge badge-primary text-md"><?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></span>
         </li>
       </ul>
       <ul class="navbar-nav col-auto font-weight-bold">
@@ -55,7 +55,7 @@
                   <?php
                   while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
                   ?>
-                    <div class="col-md-<?php echo $round_col; ?> text-center">
+                    <div class="col-md-<?= $round_col; ?> text-center">
                       <b>
                         <?php
                         if ($d_praktik['akronim_institusi'] == NULL) {
@@ -72,9 +72,9 @@
                         $link_logo_institusi = $d_praktik['logo_institusi'];
                       }
                       ?>
-                      <img src="<?php echo $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="75px" height="75px"><br>
-                      <?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
-                      <?php echo $d_praktik['jumlah_praktik']; ?> Orang
+                      <img src="<?= $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="75px" height="75px"><br>
+                      <?= $d_praktik['nama_jurusan_pdd']; ?><br>
+                      <?= $d_praktik['jumlah_praktik']; ?> Orang
                     </div>
                   <?php
                   }
@@ -152,22 +152,22 @@
                       }
                     ?>
                       <tr>
-                        <td><?php echo $no; ?></td>
-                        <td><?php echo $d_mess['nama_mess']; ?></td>
-                        <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
-                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                        <td class="text-center"><?php echo $jumlah_terisi; ?></td>
-                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
+                        <td><?= $no; ?></td>
+                        <td><?= $d_mess['nama_mess']; ?></td>
+                        <td><?= $d_mess['nama_pemilik_mess']; ?></td>
+                        <td class="text-center"><?= $d_mess['kapasitas_t_mess']; ?></td>
+                        <td class="text-center"><?= $jumlah_terisi; ?></td>
+                        <td class="text-center"><?= $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#c_<?php echo $d_mess['id_mess']; ?>">
+                          <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#c_<?= $d_mess['id_mess']; ?>">
                             <i class="fas fa-info-circle"></i>
                           </button>
 
                           <!-- data detail mess  -->
                       <tr>
                         <td colspan="7" class="p-0">
-                          <div id="accordion<?php echo $d_mess['id_mess']; ?>">
-                            <div id="c_<?php echo $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion<?php echo $d_mess['id_mess']; ?>">
+                          <div id="accordion<?= $d_mess['id_mess']; ?>">
+                            <div id="c_<?= $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion<?= $d_mess['id_mess']; ?>">
                               <?php
                               $sql_messPraktik = "SELECT * FROM tb_praktik";
                               $sql_messPraktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
@@ -194,11 +194,11 @@
                                     while ($d_messPraktik = $q_messPraktik->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
                                       <tr>
-                                        <td><?php echo $d_messPraktik['nama_institusi']; ?></td>
-                                        <td><?php echo $d_messPraktik['nama_jurusan_pdd']; ?></td>
-                                        <td><?php echo $d_messPraktik['jumlah_praktik']; ?></td>
-                                        <td><?php echo tanggal($d_messPraktik['tgl_mulai_praktik']); ?></td>
-                                        <td><?php echo tanggal($d_messPraktik['tgl_selesai_praktik']); ?></td>
+                                        <td><?= $d_messPraktik['nama_institusi']; ?></td>
+                                        <td><?= $d_messPraktik['nama_jurusan_pdd']; ?></td>
+                                        <td><?= $d_messPraktik['jumlah_praktik']; ?></td>
+                                        <td><?= tanggal($d_messPraktik['tgl_mulai_praktik']); ?></td>
+                                        <td><?= tanggal($d_messPraktik['tgl_selesai_praktik']); ?></td>
                                       </tr>
                                     <?php
                                     }
@@ -288,22 +288,22 @@
                       }
                     ?>
                       <tr>
-                        <td><?php echo $no; ?></td>
-                        <td><?php echo $d_mess['nama_mess']; ?></td>
-                        <td><?php echo $d_mess['nama_pemilik_mess']; ?></td>
-                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
-                        <td class="text-center"><?php echo $jumlah_terisi; ?></td>
-                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
+                        <td><?= $no; ?></td>
+                        <td><?= $d_mess['nama_mess']; ?></td>
+                        <td><?= $d_mess['nama_pemilik_mess']; ?></td>
+                        <td class="text-center"><?= $d_mess['kapasitas_t_mess']; ?></td>
+                        <td class="text-center"><?= $jumlah_terisi; ?></td>
+                        <td class="text-center"><?= $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
                         <td class="text-center">
-                          <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#c_<?php echo $d_mess['id_mess']; ?>">
+                          <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#c_<?= $d_mess['id_mess']; ?>">
                             <i class="fas fa-info-circle"></i>
                           </button>
 
                           <!-- data detail mess  -->
                       <tr>
                         <td colspan="7" class="p-0">
-                          <div id="accordion<?php echo $d_mess['id_mess']; ?>">
-                            <div id="c_<?php echo $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion<?php echo $d_mess['id_mess']; ?>">
+                          <div id="accordion<?= $d_mess['id_mess']; ?>">
+                            <div id="c_<?= $d_mess['id_mess']; ?>" class="collapse" data-parent="#accordion<?= $d_mess['id_mess']; ?>">
                               <?php
                               $sql_messPraktik = "SELECT * FROM tb_praktik";
                               $sql_messPraktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
@@ -331,11 +331,11 @@
                                     while ($d_messPraktik = $q_messPraktik->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
                                       <tr>
-                                        <td><?php echo $d_messPraktik['nama_institusi']; ?></td>
-                                        <td><?php echo $d_messPraktik['nama_jurusan_pdd']; ?></td>
-                                        <td><?php echo $d_messPraktik['jumlah_praktik']; ?></td>
-                                        <td><?php echo tanggal($d_messPraktik['tgl_mulai_praktik']); ?></td>
-                                        <td><?php echo tanggal($d_messPraktik['tgl_selesai_praktik']); ?></td>
+                                        <td><?= $d_messPraktik['nama_institusi']; ?></td>
+                                        <td><?= $d_messPraktik['nama_jurusan_pdd']; ?></td>
+                                        <td><?= $d_messPraktik['jumlah_praktik']; ?></td>
+                                        <td><?= tanggal($d_messPraktik['tgl_mulai_praktik']); ?></td>
+                                        <td><?= tanggal($d_messPraktik['tgl_selesai_praktik']); ?></td>
                                       </tr>
                                     <?php
                                     }

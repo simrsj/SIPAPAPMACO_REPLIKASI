@@ -1,5 +1,4 @@
-<?php if (isset($_GET['pbyr']) && $d_prvl['r_praktik_bayar'] == "Y") {
-?>
+<?php if (isset($_GET['pbyr']) && $d_prvl['r_praktik_bayar'] == "Y") { ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">

@@ -32,7 +32,7 @@ $id = $_GET['ib'];
                         Rincian Pembayaran (INVOICE)
                     </div>
 
-                    <a class="btn btn-outline-success btn-sm" href="<?php echo $d_praktik['fileInv_praktik']; ?>" title="Invoice" target="_blank">
+                    <a class="btn btn-outline-success btn-sm" href="<?= $d_praktik['fileInv_praktik']; ?>" title="Invoice" target="_blank">
                         <i class="fas fa-file-download"></i> DOWNLOAD INVOICE
                     </a>
                 </div>
@@ -66,7 +66,7 @@ $id = $_GET['ib'];
                     <div class="jumbotron">
                         <div class="jumbotron-fluid">
                             <div class="h4 text-center text-decoration-underline text-gray-700">
-                                <u>TOTAL PEMBAYARAN : <b><?php echo "Rp " . number_format($total_tarif, 0, ",", "."); ?> </b></u>
+                                <u>TOTAL PEMBAYARAN : <b><?= "Rp " . number_format($total_tarif, 0, ",", "."); ?> </b></u>
                             </div>
                             <br>
                             <div class="h5 text-gray-700">
@@ -80,7 +80,7 @@ $id = $_GET['ib'];
                                 ?>
                                 <center>
                                     <div class="text-danger font-weight-bold">
-                                        Kode Pembayaran : <?php echo "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>
+                                        Kode Pembayaran : <?= "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>
                                     </div>
                                     <br>
                                     Perlu kami informasikan pembayaran dapat ditransfer pada <br>
@@ -109,13 +109,13 @@ $id = $_GET['ib'];
                             <tbody>
                                 <?php foreach ($data as $data_) : ?>
                                     <tr>
-                                        <td><?php echo $data_[0]; ?></td>
-                                        <td><?php echo $data_[1]; ?></td>
-                                        <td><?php echo $data_[2]; ?></td>
-                                        <td><?php echo $data_[3]; ?></td>
-                                        <td><?php echo $data_[4]; ?></td>
-                                        <td><?php echo $data_[5]; ?></td>
-                                        <td><?php echo $data_[6]; ?></td>
+                                        <td><?= $data_[0]; ?></td>
+                                        <td><?= $data_[1]; ?></td>
+                                        <td><?= $data_[2]; ?></td>
+                                        <td><?= $data_[3]; ?></td>
+                                        <td><?= $data_[4]; ?></td>
+                                        <td><?= $data_[5]; ?></td>
+                                        <td><?= $data_[6]; ?></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>
@@ -144,7 +144,7 @@ $id = $_GET['ib'];
                                 <div class="modal-body">
                                     <form enctype="multipart/form-data" class="form-group" method="post" action="">
                                         <b>Kode Pembayaran : </b><span style="color:red">*</span><br>
-                                        <input class="form-control" type="text" name="kode_bayar" value="<?php echo "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>" required readonly><br>
+                                        <input class="form-control" type="text" name="kode_bayar" value="<?= "B" . $d_praktik1['id_praktik'] . date_format(date_create($d_praktik1['tgl_input_praktik']), "ymd"); ?>" required readonly><br>
                                         <b>Atas Nama : </b><span style="color:red">*</span><br>
                                         <input class="form-control" type="text" name="atas_nama_bayar" required><br>
                                         <b>No. Rekening/Lainnya : </b><span style="color:red">*</span><br>
@@ -156,7 +156,7 @@ $id = $_GET['ib'];
                                         <b>Unggah File : </b><span style="color:red">*</span><br>
                                         <input type="file" name="file_bayar" accept="application/pdf, image/jpg, image/png, image/jpeg" required><br>
                                         <i style='font-size:12px;'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 1 MB</i>
-                                        <input name="id_praktik" value="<?php echo $id; ?>" hidden><br>
+                                        <input name="id_praktik" value="<?= $id; ?>" hidden><br>
                                         <hr>
                                         <nav id="navbar-tarif" class="navbar justify-content-center">
                                             <button type="submit" name="simpan_bayar" class="nav-link btn btn-success btn-sm">
@@ -278,7 +278,7 @@ if (isset($_POST['simpan_bayar'])) {
                         icon: 'success',
                         title: '<span class"text-xs"><b>DATA PERMBAYARAN</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
-                        html: '<a href="?ptk=<?php echo $_GET['ptk']; ?>" class="btn btn-outline-primary">OK</a>',
+                        html: '<a href="?ptk=<?= $_GET['ptk']; ?>" class="btn btn-outline-primary">OK</a>',
                         timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
@@ -287,7 +287,7 @@ if (isset($_POST['simpan_bayar'])) {
                         }
                     }).then(
                         function() {
-                            document.location.href = "?ptk=<?php echo $_GET['ptk']; ?>";
+                            document.location.href = "?ptk=<?= $_GET['ptk']; ?>";
                         }
                     );
                 });

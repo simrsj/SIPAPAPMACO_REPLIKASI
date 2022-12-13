@@ -40,17 +40,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                             while ($d_pembimbing = $q_pembimbing->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_pembimbing['no_id_pembimbing']; ?></td>
-                                    <td><?php echo $d_pembimbing['nama_pembimbing']; ?></td>
-                                    <td><?php echo $d_pembimbing['nama_pembimbing_jenis'] . " (" . $d_pembimbing['akronim_pembimbing_jenis'] . ")"; ?></td>
-                                    <td><?php echo $d_pembimbing['nama_jenjang_pdd']; ?></td>
-                                    <td class="text-center"><?php echo $d_pembimbing['kali_pembimbing']; ?></td>
+                                    <td><?= $no; ?></td>
+                                    <td><?= $d_pembimbing['no_id_pembimbing']; ?></td>
+                                    <td><?= $d_pembimbing['nama_pembimbing']; ?></td>
+                                    <td><?= $d_pembimbing['nama_pembimbing_jenis'] . " (" . $d_pembimbing['akronim_pembimbing_jenis'] . ")"; ?></td>
+                                    <td><?= $d_pembimbing['nama_jenjang_pdd']; ?></td>
+                                    <td class="text-center"><?= $d_pembimbing['kali_pembimbing']; ?></td>
                                     <td class="text-center text-md">
-                                        <a title="Ubah" class='btn btn-primary btn-xs ubah_init' id='<?php echo $d_pembimbing['id_pembimbing']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-xs ubah_init' id='<?= $d_pembimbing['id_pembimbing']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-outline-danger btn-xs hapus' id='<?php echo $d_pembimbing['id_pembimbing']; ?>'>
+                                        <a title="Hapus" class='btn btn-outline-danger btn-xs hapus' id='<?= $d_pembimbing['id_pembimbing']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                         <hr class="m-1 bg-gray-500">

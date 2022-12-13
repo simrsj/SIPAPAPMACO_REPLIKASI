@@ -78,7 +78,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 				</a>
 			</li>
 			<li class="nav-item ">
-				<a class="nav-link" href="?nil">
+				<a class="nav-link" href="?pnilai">
 					<i class="fas fa-fw fa-clipboard-list"></i>
 					<span>Data Nilai</span>
 				</a>
@@ -149,7 +149,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nama_user']; ?></span>
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['nama_user']; ?></span>
 								<i class="far fa-user"></i>
 							</a>
 							<!-- Dropdown - User Information -->
@@ -313,7 +313,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 2) {
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>RS Jiwa Provinsi Jawa Barat <?php echo date('Y'); ?></span>
+						<span>RS Jiwa Provinsi Jawa Barat <?= date('Y'); ?></span>
 					</div>
 				</div>
 			</footer>

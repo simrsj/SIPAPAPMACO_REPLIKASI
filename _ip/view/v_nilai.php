@@ -57,26 +57,26 @@
                                 <div class="row" style="font-size: small;" class="justify-content-center">
                                     <br><br>
                                     <div class="col-sm-3 text-center">
-                                        <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?><br>
-                                        <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
+                                        <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?><br>
+                                        <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?= $d_praktik['nama_praktik']; ?>
                                     </div>
 
                                     <div class="col-sm-2 text-center">
-                                        <b class="text-gray-800">TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
-                                        <b class="text-gray-800">TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
+                                        <b class="text-gray-800">TANGGAL MULAI : </b><br><?= tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
+                                        <b class="text-gray-800">TANGGAL SELESAI : </b><br><?= tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                     </div>
                                     <div class="col-sm-2 text-center">
-                                        <b class="text-gray-800">JURUSAN : </b><br><?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
-                                        <b class="text-gray-800">JENJANG : </b><br><?php echo $d_praktik['nama_jenjang_pdd']; ?>
+                                        <b class="text-gray-800">JURUSAN : </b><br><?= $d_praktik['nama_jurusan_pdd']; ?><br>
+                                        <b class="text-gray-800">JENJANG : </b><br><?= $d_praktik['nama_jenjang_pdd']; ?>
                                     </div>
                                     <div class="col-sm-2 text-center">
-                                        <b class="text-gray-800">PROFESI : </b><br><?php echo $d_praktik['nama_profesi_pdd']; ?><br>
-                                        <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?php echo $d_praktik['jumlah_praktik']; ?>
+                                        <b class="text-gray-800">PROFESI : </b><br><?= $d_praktik['nama_profesi_pdd']; ?><br>
+                                        <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?= $d_praktik['jumlah_praktik']; ?>
                                     </div>
                                     <!-- tombol aksi/info proses  -->
                                     <div class="col-sm-3 my-auto text-center">
                                         <!-- tombol rincian -->
-                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?= $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data
                                         </button>
                                         <?php
@@ -84,7 +84,7 @@
                                             if ($d_praktik['fileNilKep_praktik'] != "") {
                                         ?>
 
-                                                <a class="btn btn-outline-danger btn-sm" title="Unduh Nilai " target="_blank" href="<?php echo $d_praktik['fileNilKep_praktik'] ?>">
+                                                <a class="btn btn-outline-danger btn-sm" title="Unduh Nilai " target="_blank" href="<?= $d_praktik['fileNilKep_praktik'] ?>">
                                                     <i class="fas fa-file-download"></i> Data Nilai
                                                 </a>
                                             <?php
@@ -100,7 +100,7 @@
                             </div>
 
                             <!-- collapse data praktikan -->
-                            <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
+                            <div id="collapse<?= $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?= $d_praktik['id_praktik']; ?>" data-parent="#accordion">
                                 <div class="card-body " style="font-size: medium;">
                                     <!-- data praktikan -->
                                     <div class="text-gray-700">
@@ -127,10 +127,10 @@
                                                         while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
                                                         ?>
                                                             <tr>
-                                                                <th scope="row"><?php echo $no; ?></th>
-                                                                <td><?php echo $d_data_praktikan['nama_pembimbing']; ?></td>
-                                                                <td><?php echo $d_data_praktikan['no_id_pembimbing']; ?></td>
-                                                                <td><?php echo $d_data_praktikan['nama_unit']; ?></td>
+                                                                <th scope="row"><?= $no; ?></th>
+                                                                <td><?= $d_data_praktikan['nama_pembimbing']; ?></td>
+                                                                <td><?= $d_data_praktikan['no_id_pembimbing']; ?></td>
+                                                                <td><?= $d_data_praktikan['nama_unit']; ?></td>
 
                                                                 <!-- Data Nilai  -->
                                                                 <td class="text-center">
@@ -139,7 +139,7 @@
                                                                     //Nilai Keperawatan
                                                                     if ($d_data_praktikan['id_jurusan_pdd'] == 2) {
                                                                     ?>
-                                                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#nilai<?php echo $no; ?>" title="Rincian">
+                                                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#nilai<?= $no; ?>" title="Rincian">
                                                                             <i class="fas fa-info-circle"></i> Rincian Nilai
                                                                         </button>
                                                                         <?php
@@ -155,7 +155,7 @@
                                                                         $d_data_nilai_u = $q_data_nilai_u->fetch(PDO::FETCH_ASSOC);
                                                                         if ($r_data_nilai_u > 0) {
                                                                         ?>
-                                                                            <a href="<?php echo $d_data_nilai_u['file_nilai_upload']; ?>" target="_blank" class="btn btn-outline-success btn-sm">
+                                                                            <a href="<?= $d_data_nilai_u['file_nilai_upload']; ?>" target="_blank" class="btn btn-outline-success btn-sm">
                                                                                 <i class="fas fa-file-download"></i> Unduh Nilai
                                                                             </a>
                                                                         <?php
@@ -173,7 +173,7 @@
                                                             ?>
                                                                 <tr>
                                                                     <td colspan="6">
-                                                                        <div id="nilai<?php echo $no; ?>" class="collapse text-center" aria-labelledby="nilai<?php echo $no; ?>" data-parent="#accordion_nilai">
+                                                                        <div id="nilai<?= $no; ?>" class="collapse text-center" aria-labelledby="nilai<?= $no; ?>" data-parent="#accordion_nilai">
                                                                             <div class="card-body " style="font-size: medium;">
 
                                                                                 <?php
@@ -216,20 +216,20 @@
                                                                                                 while ($d_nilai = $q_nilai->fetch(PDO::FETCH_ASSOC)) {
                                                                                                 ?>
                                                                                                     <tr>
-                                                                                                        <td><?php echo $no1; ?></td>
-                                                                                                        <td><?php echo $d_nilai['nama_praktikan']; ?></td>
-                                                                                                        <td class="text-center"><?php echo $d_nilai['no_id_praktikan']; ?></td>
-                                                                                                        <td><?php echo $d_nilai['lp'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['prepost'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['sptk'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['penkes'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['dokep'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['komter'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['tak'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['kasus'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['ujian'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['sikap'] ?></td>
-                                                                                                        <td><?php echo $d_nilai['ket_nilai'] ?></td>
+                                                                                                        <td><?= $no1; ?></td>
+                                                                                                        <td><?= $d_nilai['nama_praktikan']; ?></td>
+                                                                                                        <td class="text-center"><?= $d_nilai['no_id_praktikan']; ?></td>
+                                                                                                        <td><?= $d_nilai['lp'] ?></td>
+                                                                                                        <td><?= $d_nilai['prepost'] ?></td>
+                                                                                                        <td><?= $d_nilai['sptk'] ?></td>
+                                                                                                        <td><?= $d_nilai['penkes'] ?></td>
+                                                                                                        <td><?= $d_nilai['dokep'] ?></td>
+                                                                                                        <td><?= $d_nilai['komter'] ?></td>
+                                                                                                        <td><?= $d_nilai['tak'] ?></td>
+                                                                                                        <td><?= $d_nilai['kasus'] ?></td>
+                                                                                                        <td><?= $d_nilai['ujian'] ?></td>
+                                                                                                        <td><?= $d_nilai['sikap'] ?></td>
+                                                                                                        <td><?= $d_nilai['ket_nilai'] ?></td>
                                                                                                     </tr>
                                                                                                 <?php
                                                                                                     $no1++;

@@ -57,26 +57,26 @@
                                 <div class="row" style="font-size: small;" class="justify-content-center">
                                     <br><br>
                                     <div class="col-sm-3 text-center">
-                                        <b class="text-gray-800">INSTITUSI : </b><br><?php echo $d_praktik['nama_institusi']; ?><br>
-                                        <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?php echo $d_praktik['nama_praktik']; ?>
+                                        <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?><br>
+                                        <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?= $d_praktik['nama_praktik']; ?>
                                     </div>
 
                                     <div class="col-sm-2 text-center">
-                                        <b class="text-gray-800">TANGGAL MULAI : </b><br><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
-                                        <b class="text-gray-800">TANGGAL SELESAI : </b><br><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?>
+                                        <b class="text-gray-800">TANGGAL MULAI : </b><br><?= tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
+                                        <b class="text-gray-800">TANGGAL SELESAI : </b><br><?= tanggal($d_praktik['tgl_selesai_praktik']); ?>
                                     </div>
                                     <div class="col-sm-2 text-center">
-                                        <b class="text-gray-800">JURUSAN : </b><br><?php echo $d_praktik['nama_jurusan_pdd']; ?><br>
-                                        <b class="text-gray-800">JENJANG : </b><br><?php echo $d_praktik['nama_jenjang_pdd']; ?>
+                                        <b class="text-gray-800">JURUSAN : </b><br><?= $d_praktik['nama_jurusan_pdd']; ?><br>
+                                        <b class="text-gray-800">JENJANG : </b><br><?= $d_praktik['nama_jenjang_pdd']; ?>
                                     </div>
                                     <div class="col-sm-2 text-center">
-                                        <b class="text-gray-800">PROFESI : </b><br><?php echo $d_praktik['nama_profesi_pdd']; ?><br>
-                                        <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?php echo $d_praktik['jumlah_praktik']; ?>
+                                        <b class="text-gray-800">PROFESI : </b><br><?= $d_praktik['nama_profesi_pdd']; ?><br>
+                                        <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?= $d_praktik['jumlah_praktik']; ?>
                                     </div>
                                     <!-- tombol aksi/info proses  -->
                                     <div class="col-sm-3 my-auto text-center">
                                         <!-- tombol rincian -->
-                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?php echo $d_praktik['id_praktik']; ?>" title="Rincian">
+                                        <button class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#collapse<?= $d_praktik['id_praktik']; ?>" title="Rincian">
                                             <i class="fas fa-info-circle"></i> Rincian Data</button>
                                         &nbsp;
                                         <?php
@@ -97,7 +97,7 @@
                             </div>
 
                             <!-- collapse data praktikan -->
-                            <div id="collapse<?php echo $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?php echo $d_praktik['id_praktik']; ?>" data-parent="#accordion">
+                            <div id="collapse<?= $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?= $d_praktik['id_praktik']; ?>" data-parent="#accordion">
                                 <div class="card-body " style="font-size: medium;">
                                     <!-- data praktikan -->
                                     <div class="text-gray-700">
@@ -124,11 +124,11 @@
                                                     while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
                                                     ?>
                                                         <tr>
-                                                            <th scope="row"><?php echo $no; ?></th>
-                                                            <td><?php echo $d_data_praktikan['nama_pembimbing']; ?></td>
-                                                            <td><?php echo $d_data_praktikan['nama_unit']; ?></td>
-                                                            <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
-                                                            <td><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
+                                                            <th scope="row"><?= $no; ?></th>
+                                                            <td><?= $d_data_praktikan['nama_pembimbing']; ?></td>
+                                                            <td><?= $d_data_praktikan['nama_unit']; ?></td>
+                                                            <td><?= $d_data_praktikan['nama_praktikan']; ?></td>
+                                                            <td><?= $d_data_praktikan['no_id_praktikan']; ?></td>
                                                         </tr>
                                                     <?php
                                                         $no++;

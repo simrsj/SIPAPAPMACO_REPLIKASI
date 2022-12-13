@@ -49,18 +49,18 @@
                             while ($d_praktik_a = $q_praktik_a->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_praktik_a['nama_institusi']; ?></td>
-                                    <td><?php echo $d_praktik_a['nama_praktik']; ?></td>
-                                    <td><?php echo $d_praktik_a['nama_jurusan_pdd']; ?></td>
-                                    <td><?php echo $d_praktik_a['nama_jenjang_pdd']; ?></td>
-                                    <td><?php echo $d_praktik_a['nama_profesi_pdd']; ?></td>
-                                    <td><?php echo tanggal_minimal($d_praktik_a['tgl_mulai_praktik']); ?> <br><?php echo tanggal_minimal($d_praktik_a['tgl_selesai_praktik']); ?></td>
+                                    <td><?= $no; ?></td>
+                                    <td><?= $d_praktik_a['nama_institusi']; ?></td>
+                                    <td><?= $d_praktik_a['nama_praktik']; ?></td>
+                                    <td><?= $d_praktik_a['nama_jurusan_pdd']; ?></td>
+                                    <td><?= $d_praktik_a['nama_jenjang_pdd']; ?></td>
+                                    <td><?= $d_praktik_a['nama_profesi_pdd']; ?></td>
+                                    <td><?= tanggal_minimal($d_praktik_a['tgl_mulai_praktik']); ?> <br><?= tanggal_minimal($d_praktik_a['tgl_selesai_praktik']); ?></td>
                                     <td>
-                                        <button type="button" id="<?php echo $d_praktik_a['id_praktik']; ?>" class="btn btn-outline-success btn-sm aktif">
+                                        <button type="button" id="<?= $d_praktik_a['id_praktik']; ?>" class="btn btn-outline-success btn-sm aktif">
                                             Aktifkan
                                         </button> &nbsp;
-                                        <a href="?ars&dp=<?php echo $d_praktik_a['id_praktik'] ?>" class="btn btn-outline-primary btn-sm" title="Data Praktikan">
+                                        <a href="?ars&dp=<?= $d_praktik_a['id_praktik'] ?>" class="btn btn-outline-primary btn-sm" title="Data Praktikan">
                                             <i class="fas fa-fw fa-users"></i>
                                         </a>
                                     </td>

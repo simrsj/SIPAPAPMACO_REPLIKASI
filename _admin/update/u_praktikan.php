@@ -19,7 +19,7 @@ if (is_numeric($_GET['u'])) {
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md">
-                            <input type="hidden" name="t_id_praktik" id="t_id_praktik" value="<?php echo $_GET['u']; ?>">
+                            <input type="hidden" name="t_id_praktik" id="t_id_praktik" value="<?= $_GET['u']; ?>">
                             NAMA : <span class="text-danger">*</span><br>
                             <input class="form-control" name="t_nama_praktikan" id="t_nama_praktikan" required>
                             <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_nama"></span>
@@ -122,7 +122,7 @@ if (is_numeric($_GET['u'])) {
     <script>
         $(document).ready(function() {
 
-            $('#data_praktikan').load('_admin/update/u_praktikanData.php?u=<?php echo $_GET['u']; ?>');
+            $('#data_praktikan').load('_admin/update/u_praktikanData.php?u=<?= $_GET['u']; ?>');
 
         });
 
@@ -213,7 +213,7 @@ if (is_numeric($_GET['u'])) {
                     success: function() {
 
                         document.getElementById("form_tambah_praktikan").reset();
-                        $('#data_praktikan').load('_admin/update/u_praktikanData.php?u=<?php echo $_GET['u']; ?>');
+                        $('#data_praktikan').load('_admin/update/u_praktikanData.php?u=<?= $_GET['u']; ?>');
 
                         const Toast = Swal.mixin({
                             toast: true,

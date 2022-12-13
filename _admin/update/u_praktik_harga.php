@@ -33,14 +33,14 @@
                             while ($d_harga_pilih = $q_harga_pilih->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $no; ?></th>
-                                    <td><?php echo $d_harga_pilih['nama_harga']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_harga_pilih['jumlah_harga'], 0, ",", "."); ?></td>
+                                    <th scope="row"><?= $no; ?></th>
+                                    <td><?= $d_harga_pilih['nama_harga']; ?></td>
+                                    <td><?= "Rp " . number_format($d_harga_pilih['jumlah_harga'], 0, ",", "."); ?></td>
                                     <td>
-                                        <input type="number" name="frek_<?php echo $d_harga_pilih['id_harga_pilih'] ?>" value="<?php echo $d_harga_pilih['frekuensi_harga_pilih']; ?>" class="form-control">
+                                        <input type="number" name="frek_<?= $d_harga_pilih['id_harga_pilih'] ?>" value="<?= $d_harga_pilih['frekuensi_harga_pilih']; ?>" class="form-control">
                                     </td>
                                     <td>
-                                        <input type="number" name="kntt_<?php echo $d_harga_pilih['id_harga_pilih'] ?>" value="<?php echo $d_harga_pilih['kuantitas_harga_pilih']; ?>" class="form-control">
+                                        <input type="number" name="kntt_<?= $d_harga_pilih['id_harga_pilih'] ?>" value="<?= $d_harga_pilih['kuantitas_harga_pilih']; ?>" class="form-control">
                                     </td>
                                 </tr>
                             <?php
@@ -55,7 +55,7 @@
         <!-- Simpan -->
         <div class="card shadow mb-4 ">
             <div class="card-body">
-                <input name="id_praktik" value="<?php echo $_GET['uh'] ?>" hidden>
+                <input name="id_praktik" value="<?= $_GET['uh'] ?>" hidden>
                 <button type="submit" class="form-control btn btn-success btn-sm" name='ubah_harga'>UBAH</button>
             </div>
         </div>

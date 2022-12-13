@@ -36,18 +36,18 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
                         while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
                         ?>
                             <tr>
-                                <td class="text-center"><?php echo $no; ?></td>
-                                <td><?php echo $d['nama_tempat']; ?></td>
-                                <td class="text-center"><?php echo $d['nama_jurusan_pdd_jenis']; ?></td>
-                                <td class="text-center"><?php echo $d['kapasitas_tempat']; ?></td>
-                                <td><?php echo $d['nama_tarif_satuan']; ?></td>
-                                <td><?php echo "Rp " . number_format($d['tarif_tempat'], 0, '.', '.'); ?></td>
-                                <td class="text-center"><?php echo $d['ket_tempat']; ?></td>
+                                <td class="text-center"><?= $no; ?></td>
+                                <td><?= $d['nama_tempat']; ?></td>
+                                <td class="text-center"><?= $d['nama_jurusan_pdd_jenis']; ?></td>
+                                <td class="text-center"><?= $d['kapasitas_tempat']; ?></td>
+                                <td><?= $d['nama_tarif_satuan']; ?></td>
+                                <td><?= "Rp " . number_format($d['tarif_tempat'], 0, '.', '.'); ?></td>
+                                <td class="text-center"><?= $d['ket_tempat']; ?></td>
                                 <td class="text-center">
-                                    <button title="Ubah" class='btn btn-primary btn-sm ubah_init' id="<?php echo $d['id_tempat']; ?>">
+                                    <button title="Ubah" class='btn btn-primary btn-sm ubah_init' id="<?= $d['id_tempat']; ?>">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button title="Hapus" class='btn btn-danger btn-sm hapus' id="<?php echo $d['id_tempat']; ?>">
+                                    <button title="Hapus" class='btn btn-danger btn-sm hapus' id="<?= $d['id_tempat']; ?>">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                     <br>

@@ -51,13 +51,13 @@ if (isset($_POST['ubah_user'])) {
                             $d_akun = $q_akun->fetch(PDO::FETCH_ASSOC);
                             ?>
                             <b>Username : </b><br>
-                            <input class="form-control" type="text" name="username_user" value="<?php echo $d_akun['username_user']; ?>" required><br>
+                            <input class="form-control" type="text" name="username_user" value="<?= $d_akun['username_user']; ?>" required><br>
                             <b>Nama Akun : </b><br>
-                            <input class="form-control" type="text" name="nama_user" value="<?php echo $d_akun['nama_user']; ?>" required><br>
+                            <input class="form-control" type="text" name="nama_user" value="<?= $d_akun['nama_user']; ?>" required><br>
                             <b>No. Telp. : </b><br>
-                            <input class="form-control" type="number" name="no_telp_user" value="<?php echo $d_akun['no_telp_user']; ?>"><br>
+                            <input class="form-control" type="number" name="no_telp_user" value="<?= $d_akun['no_telp_user']; ?>"><br>
                             <b>E-Mail : </b><br>
-                            <input class="form-control" type="email" name="email_user" value="<?php echo $d_akun['email_user']; ?>"><br>
+                            <input class="form-control" type="email" name="email_user" value="<?= $d_akun['email_user']; ?>"><br>
                             <hr>
                             <div class="font-weight-bold text-center mb-2 text-uppercase">Ubah Password</div>
                             <div class="row">

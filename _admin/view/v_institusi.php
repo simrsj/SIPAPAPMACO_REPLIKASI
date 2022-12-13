@@ -34,7 +34,7 @@
             $id_institusi = $no;
             ?>
             <!-- Nama Institusi, MoU RSJ dan Institusi -->
-            <input type="hidden" name="id_institusi" id="id_institusi" value="<?php echo $id_institusi; ?>">
+            <input type="hidden" name="id_institusi" id="id_institusi" value="<?= $id_institusi; ?>">
             <div class="row mb-4">
                 <div class="col-md-4">
                     Nama Institusi : <span class="text-danger">*</span>&nbsp;&nbsp;

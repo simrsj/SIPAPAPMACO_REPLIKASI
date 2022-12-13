@@ -20,19 +20,19 @@
                             <div class="text-md font-weight-bold  text-primary mb-1">
                                 JUMLAH DIKLAT PROSES :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?php echo $dashboard_dpp; ?></b> Kelompok
+                                    <b><?= $dashboard_dpp; ?></b> Kelompok
                                 </div>
                             </div>
                             <div class="text-md font-weight-bold text-primary mb-1">
                                 JUMLAH DIKLAT AKTIF :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?php echo $dashboard_dpa; ?></b> Kelompok
+                                    <b><?= $dashboard_dpa; ?></b> Kelompok
                                 </div>
                             </div>
                             <div class="text-md font-weight-bold text-primary mb-1">
                                 JUMLAH DIKLAT NON-AKTIF :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?php echo $dashboard_dpn; ?></b> Kelompok
+                                    <b><?= $dashboard_dpn; ?></b> Kelompok
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             <div class="text-md font-weight-bold text-success text-uppercase mb-1">
                                 TOTAL PENDAPATAN : </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo "Rp " . number_format($total_tarif, 0, '.', '.'); ?>
+                                <?= "Rp " . number_format($total_tarif, 0, '.', '.'); ?>
                             </div>
                         </div>
                     </div>
@@ -67,15 +67,15 @@
                             <div class="text-md font-weight-bold text-danger mb-1">
                                 <b>TOTAL MOU : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="badge badge-primary text-lg"><?php echo $dashboard_dmt; ?></span>
+                                    <span class="badge badge-primary text-lg"><?= $dashboard_dmt; ?></span>
                                 </div>
                                 <b>MOU BERAKHIR : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="badge badge-danger text-lg"><?php echo $dashboard_dmb; ?></span>
+                                    <span class="badge badge-danger text-lg"><?= $dashboard_dmb; ?></span>
                                 </div>
                                 <b>MOU AKTIF : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="badge badge-success text-lg"><?php echo $dashboard_dma; ?></span>
+                                    <span class="badge badge-success text-lg"><?= $dashboard_dma; ?></span>
                                 </div>
                             </div>
                         </div>
@@ -98,17 +98,17 @@
                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN PROSES: </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $dashboard_dpjp; ?> Orang
+                                <?= $dashboard_dpjp; ?> Orang
                             </div>
                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN AKTIF: </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $dashboard_dpja; ?> Orang
+                                <?= $dashboard_dpja; ?> Orang
                             </div>
                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN SELESAI: </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $dashboard_dpjs; ?> Orang
+                                <?= $dashboard_dpjs; ?> Orang
                             </div>
                         </div>
                     </div>
@@ -162,9 +162,9 @@
                                 while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
-                                        <td class="text-center"><?php echo $no; ?></td>
-                                        <td><?php echo $d_mess['nama_mess']; ?></td>
-                                        <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
+                                        <td class="text-center"><?= $no; ?></td>
+                                        <td><?= $d_mess['nama_mess']; ?></td>
+                                        <td class="text-center"><?= $d_mess['kapasitas_t_mess']; ?></td>
                                         <!-- <td><?php
                                                     // $sql_kapsTerisiMess = "SELECT * FROM tb_praktik 
                                                     // JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_mess_pilih
@@ -210,7 +210,7 @@
         <div class="col-xl-5 col-lg-6">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Persentase Jenis Diklat Tahun <?php echo date('Y'); ?></h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Persentase Jenis Diklat Tahun <?= date('Y'); ?></h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">

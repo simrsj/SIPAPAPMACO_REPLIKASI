@@ -53,19 +53,19 @@
                             while ($d_profesi_pdd = $q_profesi_pdd->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_profesi_pdd['nama_profesi_pdd']; ?></td>
+                                    <td><?= $no; ?></td>
+                                    <td><?= $d_profesi_pdd['nama_profesi_pdd']; ?></td>
                                     <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#pfs_u_m" . $d_profesi_pdd['id_profesi_pdd']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?= "#pfs_u_m" . $d_profesi_pdd['id_profesi_pdd']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#pfs_d_m" . $d_profesi_pdd['id_profesi_pdd']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?= "#pfs_d_m" . $d_profesi_pdd['id_profesi_pdd']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                     <?php $no++; ?>
                                     <!-- modal ubah profesi  -->
-                                    <div class="modal fade" id="<?php echo "pfs_u_m" . $d_profesi_pdd['id_profesi_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?= "pfs_u_m" . $d_profesi_pdd['id_profesi_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
@@ -73,8 +73,8 @@
                                                         Ubah Profesi
                                                     </div>
                                                     <div class="modal-body">
-                                                        <input name="id_profesi_pdd" value="<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>" hidden>
-                                                        <input class="form-control" name="nama_profesi_pdd" value="<?php echo $d_profesi_pdd['nama_profesi_pdd']; ?>">
+                                                        <input name="id_profesi_pdd" value="<?= $d_profesi_pdd['id_profesi_pdd']; ?>" hidden>
+                                                        <input class="form-control" name="nama_profesi_pdd" value="<?= $d_profesi_pdd['nama_profesi_pdd']; ?>">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="<?php echo "pfs_d_m" . $d_profesi_pdd['id_profesi_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?= "pfs_d_m" . $d_profesi_pdd['id_profesi_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
@@ -93,8 +93,8 @@
                                                         <h5>Hapus Data</h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h6><b><?php echo $d_profesi_pdd['nama_profesi_pdd']; ?></b></h6>
-                                                        <input name="id_profesi_pdd" value="<?php echo $d_profesi_pdd['id_profesi_pdd']; ?>" hidden>
+                                                        <h6><b><?= $d_profesi_pdd['nama_profesi_pdd']; ?></b></h6>
+                                                        <input name="id_profesi_pdd" value="<?= $d_profesi_pdd['id_profesi_pdd']; ?>" hidden>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>

@@ -15,32 +15,32 @@ if (empty($_SESSION['username_user'])) {
 			</li>
 		</ul>
 
-		<a class="nav-link dropdown-toggle bg-outline-primary p-2 btn btn-outline-primary" href="#">
+		<a class="nav-link dropdown-toggle bg-outline-primary p-2 btn btn-outline-primary" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<span class="mr-2 d-none d-lg-inline b">LINK</span><i class="fa-solid fa-link"></i>
 		</a>
 		<!-- Dropdown - User Information -->
-		<div class="dropdown-menu dropdown-menu-right text-center shadow p-2 rounded">
-			<a class="" href="?">
-				<i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
-				Main Menu
+		<div class="dropdown-menu dropdown-menu-right text-center shadow p-2 rounded" aria-labelledby="userDropdown">
+			<a class="btn btn-outline-dark btn-sm col-md mb-2" href="?">
+				<i class="fa-solid fa-house fa-fw mr-2"></i>
+				Home
 			</a>
-			<div class="dropdown-divider"></div>
-			<a class="btn btn-outline-success btn-sm col mb-2" href="?reg">
-				<i class="fas fa-sign-out-alt fa-fw mr-2"></i>
+			<a class="btn btn-outline-success btn-sm col-md mb-2" href="?reg">
+				<i class="fa-solid fa-user fa-fw mr-2"></i>
 				Register
 			</a>
-			<a class="btn btn-outline-primary btn-sm col" href="?login">
-				<i class="fas fa-sign-out-alt "></i>
+			<a class="btn btn-outline-primary btn-sm col-md" href="?login">
+				<i class="fas fa-sign-out-alt fa-fw mr-2"></i>
 				Log-In
 			</a>
 		</div>
 	</nav>
 	<br><br><br>
-
-	<div class="text-center bg-white rounded text-md mb-2">
-		<?php echo tanggal_hari(date('w')) . " " . date("d M Y"); ?>,
-		<di id="jam"></di>
+	<div class="text-center mb-1">
+		<div class="btn btn-primary">
+			<?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span>
+		</div>
 	</div>
+
 	<?php
 	if (isset($_GET['reg'])) include "_log-sign/register.php";
 	elseif (isset($_GET['login'])) include "_log-sign/login.php";
@@ -49,15 +49,6 @@ if (empty($_SESSION['username_user'])) {
 	?>
 
 	<script>
-		function Bukains() {
-			if ($('#instansi').val() == '0') {
-				// console.log("Pilih Institusi Lainnya");
-				$('#institusi_lainnya').append("<input type='text' class='form-control form-control' placeHolder='Isikan Nama Institusi' name='nama_institusi'>").focus();
-			} else {
-				// console.log("Tidak Pilih Institusi Lainnya");
-				$('#institusi_lainnya').empty();
-			}
-		}
 		var span = document.getElementById("jam");
 		time();
 
@@ -74,7 +65,7 @@ if (empty($_SESSION['username_user'])) {
 } else {
 ?>
 	<script>
-		alert('Anda sebelumnya SUDAH LOGIN dengan nama <?php echo $_SESSION['username_user ']; ?>');
+		alert('Anda sebelumnya SUDAH LOGIN dengan nama <?= $_SESSION['username_user ']; ?>');
 		alert('Anda akan diarahkan langsung ke halaman');
 	</script>
 <?php

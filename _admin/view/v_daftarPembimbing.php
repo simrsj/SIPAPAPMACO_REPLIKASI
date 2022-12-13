@@ -38,7 +38,7 @@
                             $q_jenis_pmbb = $conn->query($sql_jenis_pmbb);
                             while ($d_jenis_pmbb = $q_jenis_pmbb->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?php echo $d_jenis_pmbb['id_pembimbing_jenis'] ?>">
+                                <option value="<?= $d_jenis_pmbb['id_pembimbing_jenis'] ?>">
                                     <?php
                                     echo $d_jenis_pmbb['nama_pembimbing_jenis'] . " (" . $d_jenis_pmbb['akronim_pembimbing_jenis'] . ")";
                                     ?>
@@ -60,7 +60,7 @@
                             $q_jenjang_pmbb = $conn->query($sql_jenjang_pmbb);
                             while ($d_jenjang_pmbb = $q_jenjang_pmbb->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?php echo $d_jenjang_pmbb['id_jenjang_pdd'] ?>">
+                                <option value="<?= $d_jenjang_pmbb['id_jenjang_pdd'] ?>">
                                     <?php
                                     echo $d_jenjang_pmbb['nama_jenjang_pdd'];
                                     ?>
@@ -117,7 +117,7 @@
                             $q_jenis_pmbb = $conn->query($sql_jenis_pmbb);
                             while ($d_jenis_pmbb = $q_jenis_pmbb->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?php echo $d_jenis_pmbb['id_pembimbing_jenis'] ?>">
+                                <option value="<?= $d_jenis_pmbb['id_pembimbing_jenis'] ?>">
                                     <?php
                                     echo $d_jenis_pmbb['nama_pembimbing_jenis'] . " (" . $d_jenis_pmbb['akronim_pembimbing_jenis'] . ")";
                                     ?>
@@ -139,7 +139,7 @@
                             $q_jenjang_pmbb = $conn->query($sql_jenjang_pmbb);
                             while ($d_jenjang_pmbb = $q_jenjang_pmbb->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <option value="<?php echo $d_jenjang_pmbb['id_jenjang_pdd'] ?>">
+                                <option value="<?= $d_jenjang_pmbb['id_jenjang_pdd'] ?>">
                                     <?php
                                     echo $d_jenjang_pmbb['nama_jenjang_pdd'];
                                     ?>

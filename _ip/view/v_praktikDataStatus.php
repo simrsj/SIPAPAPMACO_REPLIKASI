@@ -126,12 +126,12 @@
         ?>
             <span class="badge badge-danger text-md">Val. PEMBAYARAN TF <i class="fas fa-times-circle"></i></span>
             <hr>
-            <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" title="KETERANGAN">
+            <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ket_kuranga_transfer<?= $d_praktik['id_praktik']; ?>" title="KETERANGAN">
                 KETERANGAN
             </a>
 
             <!-- modal pembayaran ulang -->
-            <div class="modal fade" id="ket_kuranga_transfer<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+            <div class="modal fade" id="ket_kuranga_transfer<?= $d_praktik['id_praktik']; ?>" data-backdrop="static">
                 <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
                     <div class="modal-content">
                         <div class="modal-header h5">
@@ -203,12 +203,12 @@
         ?>
         <b>CEK KETERANGAN : </b><br>
 
-        <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPraktikHarga<?php echo $d_praktik['id_praktik']; ?>" title="Keterangan Status">
+        <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPraktikHarga<?= $d_praktik['id_praktik']; ?>" title="Keterangan Status">
             KETERANGAN
         </a>
 
         <!-- modal keterangan penolakan -->
-        <div class="modal fade" id="ketTolakPraktikHarga<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+        <div class="modal fade" id="ketTolakPraktikHarga<?= $d_praktik['id_praktik']; ?>" data-backdrop="static">
             <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -218,7 +218,7 @@
                         </button>
                     </div>
                     <div class="modal-body text-lg">
-                        <?php echo '"' . $d_praktik['ket_tolakPraktikTarif_praktik'] . '"'; ?>
+                        <?= '"' . $d_praktik['ket_tolakPraktikTarif_praktik'] . '"'; ?>
                     </div>
                 </div>
             </div>
@@ -235,7 +235,7 @@
     } elseif ($d_praktik['status_cek_praktik'] == "INV") {
     ?>
         <b>PLIH : </b><br>
-        <a class="btn btn-outline-danger btn-sm" href="?ptk=<?php echo $_GET['ptk'] ?>&ib=<?php echo $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>
+        <a class="btn btn-outline-danger btn-sm" href="?ptk=<?= $_GET['ptk'] ?>&ib=<?= $d_praktik['id_praktik']; ?>">ISI PEMBAYARAN</a>
     <?php
     } elseif ($d_praktik['status_cek_praktik'] == "BYR") {
     ?>
@@ -250,12 +250,12 @@
 
         <b>PILIH : </b><br>
 
-        <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPembayaran<?php echo $d_praktik['id_praktik']; ?>" title="PEMBAYARAN">
+        <a class="btn btn-outline-danger btn-sm" href="#" data-toggle="modal" data-target="#ketTolakPembayaran<?= $d_praktik['id_praktik']; ?>" title="PEMBAYARAN">
             PEMBAYARAN
         </a>
 
         <!-- modal pembayaran ulang -->
-        <div class="modal fade" id="ketTolakPembayaran<?php echo $d_praktik['id_praktik']; ?>" data-backdrop="static">
+        <div class="modal fade" id="ketTolakPembayaran<?= $d_praktik['id_praktik']; ?>" data-backdrop="static">
             <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header h5">
@@ -283,7 +283,7 @@
                         <br>
                         <form enctype="multipart/form-data" class="form-group" method="post" action="">
                             <b>Kode Pembayaran : </b><span style="color:red">*</span><br>
-                            <input class="form-control" type="text" name="kode_bayar" value="<?php echo $d_bayar_ulang['kode_bayar'] ?>" required readonly><br>
+                            <input class="form-control" type="text" name="kode_bayar" value="<?= $d_bayar_ulang['kode_bayar'] ?>" required readonly><br>
                             <b>Atas Nama : </b><span style="color:red">*</span><br>
                             <input class="form-control" type="text" name="atas_nama_bayar" required><br>
                             <b>No. Rekening/Lainnya : </b><span style="color:red">*</span><br>
@@ -295,7 +295,7 @@
                             <b>Unggah File : </b><span style="color:red">*</span><br>
                             <input type="file" name="file_bayar" accept="application/pdf" required><br>
                             <i style='font-size:12px;'>Data unggah harus .pdf, Maksimal 1 MB</i>
-                            <input name="id_praktik" value="<?php echo $d_praktik['id_praktik']; ?>" hidden><br>
+                            <input name="id_praktik" value="<?= $d_praktik['id_praktik']; ?>" hidden><br>
                             <hr>
                             <nav id="navbar-tarif" class="navbar justify-content-center">
                                 <button type="submit" name="simpan_bayar" class="nav-link btn btn-success btn-sm">

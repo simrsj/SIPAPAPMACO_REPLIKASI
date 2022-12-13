@@ -25,21 +25,21 @@ if ($r_bayar == 0) {
                         $d_bayar = $q_bayar->fetch(PDO::FETCH_ASSOC);
                         ?>
                         <b>Atas Nama : </b><br>
-                        <input class="form-control" type="text" nama="atas_nama_bayar" value="<?php echo $d_bayar['atas_nama_bayar']; ?>"><br>
+                        <input class="form-control" type="text" nama="atas_nama_bayar" value="<?= $d_bayar['atas_nama_bayar']; ?>"><br>
                         <b>No. Rekening/Lainnya : </b><br>
-                        <input class="form-control" type="number" nama="no_bayar" value="<?php echo $d_bayar['no_bayar']; ?>"><br>
+                        <input class="form-control" type="number" nama="no_bayar" value="<?= $d_bayar['no_bayar']; ?>"><br>
                         <b>Pembayaran Melalui : </b><br>
-                        <input class="form-control" type="text" nama="melalui_bayar" value="<?php echo $d_bayar['melalui_bayar']; ?>"><br>
+                        <input class="form-control" type="text" nama="melalui_bayar" value="<?= $d_bayar['melalui_bayar']; ?>"><br>
                         <b>Tanggal Bayar : </b><br>
-                        <input class="form-control" type="date" nama="tgl_bayar" value="<?php echo $d_bayar['tgl_bayar']; ?>"><br>
+                        <input class="form-control" type="date" nama="tgl_bayar" value="<?= $d_bayar['tgl_bayar']; ?>"><br>
                         <b>Unggah File : </b><br>
                         <i style='font-size:12px;'>File sebelumnya
-                            <a href="<?php echo $d_bayar['file_bayar'] ?>">Download</a>
+                            <a href="<?= $d_bayar['file_bayar'] ?>">Download</a>
                         </i><br>
                         <input type="file" nama="file_bayar"><br>
                         <div class="modal-footer">
-                            <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
-                            <input name="id_bayar" value="<?php echo $d_bayar['id_bayar'] ?>" hidden>
+                            <input name="id_praktik" value="<?= $d_praktik['id_praktik'] ?>" hidden>
+                            <input name="id_bayar" value="<?= $d_bayar['id_bayar'] ?>" hidden>
                             <input type="submit" name="ubah_bayar" value="Ubah" class="btn btn-primary btn-sm">
                             <a href="?ptk" class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</a>
                         </div>

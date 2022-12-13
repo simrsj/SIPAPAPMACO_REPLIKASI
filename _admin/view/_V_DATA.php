@@ -9,22 +9,22 @@
                 <div class="col-lg-11">
                     <h4 class="font-weight-bold">
                         DATA MESS
-                        <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?ptk&um=<?php echo $d_praktik['id_praktik']; ?>'>
+                        <a title="Ubah Mess" class="btn btn-primary btn-sm" href='?ptk&um=<?= $d_praktik['id_praktik']; ?>'>
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                        <a title="Hapus Mess" class="btn btn-danger btn-sm" href='#' data-toggle="modal" data-target="#m_h_m<?= $d_praktik['id_praktik']; ?>">
                             <i class=" fas fa-trash-alt"></i>
                         </a>
 
                         <!-- modal hapus bayar -->
-                        <div class="modal fade text-left" id="m_h_m<?php echo $d_praktik['id_praktik']; ?>">
+                        <div class="modal fade text-left" id="m_h_m<?= $d_praktik['id_praktik']; ?>">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4>HAPUS DATA MESS ?</h4>
                                     </div>
                                     <div class="modal-footer">
-                                        <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?ptk&hm=<?php echo $d_praktik['id_praktik']; ?>'> HAPUS </a>
+                                        <a title="Hapus Pembayaran" class="btn btn-danger btn-sm" href='?ptk&hm=<?= $d_praktik['id_praktik']; ?>'> HAPUS </a>
                                         <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">KEMBALI</button>
                                     </div>
                                 </div>
@@ -52,17 +52,17 @@
                     <div class="container">
                         <fieldset class="fieldset">
                             <h5 class="text-gray-800 font-weight-bold">Nama Mess :</h5>
-                            <?php echo $d_mess_pilih['nama_mess']; ?><br><br>
+                            <?= $d_mess_pilih['nama_mess']; ?><br><br>
                             <h5 class="text-gray-800 font-weight-bold"> Nama Pemilik :</h5>
-                            <?php echo $d_mess_pilih['nama_pemilik_mess']; ?><br><br>
+                            <?= $d_mess_pilih['nama_pemilik_mess']; ?><br><br>
                             <h5 class="text-gray-800 font-weight-bold">No Pemilik :</h5>
-                            <?php echo $d_mess_pilih['no_pemilik_mess']; ?><br><br>
+                            <?= $d_mess_pilih['no_pemilik_mess']; ?><br><br>
                             <h5 class="text-gray-800 font-weight-bold"> Alamat Mess : </h5>
-                            <?php echo $d_mess_pilih['alamat_mess']; ?><br><br>
+                            <?= $d_mess_pilih['alamat_mess']; ?><br><br>
                             <!-- <h5 class="text-gray-800 font-weight-bold"> Jumlah yang diisi :</h5>
-                                                                      <?php echo $d_mess_pilih['jumlah_praktik_mess_pilih']; ?><br><br> -->
+                                                                      <?= $d_mess_pilih['jumlah_praktik_mess_pilih']; ?><br><br> -->
                             <h5 class="text-gray-800 font-weight-bold"> Jumlah Hari :</h5>
-                            <!-- <?php echo $d_mess_pilih['total_hari_mess_pilih']; ?><br><br>
+                            <!-- <?= $d_mess_pilih['total_hari_mess_pilih']; ?><br><br>
                                                                       <h5 class="text-gray-800 font-weight-bold"> Dengan Makan (3X Sehari) :</h5> -->
                             <?php
                             if ($d_mess_pilih['makan_mess_pilih'] == 'y') {
@@ -72,7 +72,7 @@
                             }
                             echo $makan; ?>
                             <!-- <h5 class="text-gray-800 font-weight-bold"> Total Tarif :</h5>
-                                                                      <?php echo "Rp " . number_format($d_mess_pilih['total_tarif_mess_pilih'], 0, ",", "."); ?> -->
+                                                                      <?= "Rp " . number_format($d_mess_pilih['total_tarif_mess_pilih'], 0, ",", "."); ?> -->
                         </fieldset>
                     </div>
                 </div>
@@ -95,12 +95,12 @@
 <hr>
 
 <!-- tombol ubah  -->
-<a <?php echo $link_ubah; ?> class="btn btn-primary btn-sm" title="Ubah">
+<a <?= $link_ubah; ?> class="btn btn-primary btn-sm" title="Ubah">
     <i class="fas fa-edit"></i>
 </a>
 
 <!-- modal ubah -->
-<div class="modal fade" id="prk_u_<?php echo $d_praktik['id_praktik']; ?>">
+<div class="modal fade" id="prk_u_<?= $d_praktik['id_praktik']; ?>">
     <div class="modal-dialog" role="document">
         <div class="modal-content text-center text-lg font-weight-bold">
             <div class="modal-body">
@@ -125,12 +125,12 @@
 </div>
 
 <!-- tombol arsip -->
-<a class='btn btn-outline-info btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?php echo $d_praktik['id_praktik']; ?>' title="arsip">
+<a class='btn btn-outline-info btn-sm' href='#' data-toggle='modal' data-target='#prk_dh_<?= $d_praktik['id_praktik']; ?>' title="arsip">
     <i class="fas fa-archive"></i>
 </a>
 
 <!-- modal arsip -->
-<div class="modal fade" id="prk_dh_<?php echo $d_praktik['id_praktik']; ?>">
+<div class="modal fade" id="prk_dh_<?= $d_praktik['id_praktik']; ?>">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -138,13 +138,13 @@
             </div>
             <div class="modal-body text-left text-md">
                 <b>Nama Institusi </b><br>
-                <?php echo $d_praktik['nama_institusi']; ?><br>
+                <?= $d_praktik['nama_institusi']; ?><br>
                 <b>Periode Praktik </b> : <br>
-                <?php echo $d_praktik['nama_praktik']; ?>
+                <?= $d_praktik['nama_praktik']; ?>
             </div>
             <div class="modal-footer">
                 <form method="post">
-                    <input name="id_praktik" value="<?php echo $d_praktik['id_praktik'] ?>" hidden>
+                    <input name="id_praktik" value="<?= $d_praktik['id_praktik'] ?>" hidden>
                     <input type="submit" name="arsip_praktik" value="Arsipkan" class="btn btn-info btn-sm">
                     <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Batal</button>
                 </form>
@@ -175,19 +175,19 @@ if ($r_akreditasi > 0) {
                 while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <tr>
-                        <td><?php echo $no; ?></td>
-                        <td><?php echo $d_akreditasi['nama_akreditasi']; ?></td>
+                        <td><?= $no; ?></td>
+                        <td><?= $d_akreditasi['nama_akreditasi']; ?></td>
                         <td>
-                            <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_u_m" . $d_akreditasi['id_akreditasi']; ?>'>
+                            <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?= "#akr_u_m" . $d_akreditasi['id_akreditasi']; ?>'>
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#akr_d_m" . $d_akreditasi['id_akreditasi']; ?>'>
+                            <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?= "#akr_d_m" . $d_akreditasi['id_akreditasi']; ?>'>
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
                         <?php $no++; ?>
                         <!-- modal ubah Akreditasi  -->
-                        <div class="modal fade" id="<?php echo "akr_u_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="<?= "akr_u_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <form method="post" action="">
@@ -195,8 +195,8 @@ if ($r_akreditasi > 0) {
                                             Ubah Akreditasi :
                                         </div>
                                         <div class="modal-body">
-                                            <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
-                                            <input class="form-control" name="nama_akreditasi" value="<?php echo $d_akreditasi['nama_akreditasi']; ?>">
+                                            <input name="id_akreditasi" value="<?= $d_akreditasi['id_akreditasi']; ?>" hidden>
+                                            <input class="form-control" name="nama_akreditasi" value="<?= $d_akreditasi['nama_akreditasi']; ?>">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary btn-sm" name="ubah">Ubah</button>
@@ -207,7 +207,7 @@ if ($r_akreditasi > 0) {
                             </div>
                         </div>
 
-                        <div class="modal fade" id="<?php echo "akr_d_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="<?= "akr_d_m" . $d_akreditasi['id_akreditasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <form method="post" action="">
@@ -215,8 +215,8 @@ if ($r_akreditasi > 0) {
                                             Hapus Data
                                         </div>
                                         <div class="modal-body">
-                                            <h6><b><?php echo $d_akreditasi['nama_akreditasi']; ?></b></h6>
-                                            <input name="id_akreditasi" value="<?php echo $d_akreditasi['id_akreditasi']; ?>" hidden>
+                                            <h6><b><?= $d_akreditasi['nama_akreditasi']; ?></b></h6>
+                                            <input name="id_akreditasi" value="<?= $d_akreditasi['id_akreditasi']; ?>" hidden>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>

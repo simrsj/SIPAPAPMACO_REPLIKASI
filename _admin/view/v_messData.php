@@ -44,20 +44,20 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                         while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
                         ?>
                             <tr>
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $d_mess['nama_mess']; ?></td>
+                                <td><?= $no; ?></td>
+                                <td><?= $d_mess['nama_mess']; ?></td>
                                 <td class="text-center">
-                                    <?php echo $d_mess['nama_pemilik_mess']; ?>
+                                    <?= $d_mess['nama_pemilik_mess']; ?>
                                     <hr class="p-0 m-0 bg-gray-100">
-                                    <?php echo $d_mess['telp_pemilik_mess']; ?>
+                                    <?= $d_mess['telp_pemilik_mess']; ?>
                                     <hr class="p-0 m-0 bg-gray-100">
-                                    <?php echo $d_mess['email_pemilik_mess']; ?>
+                                    <?= $d_mess['email_pemilik_mess']; ?>
                                 </td>
-                                <td class="text-center"><?php echo $d_mess['kapasitas_t_mess']; ?></td>
+                                <td class="text-center"><?= $d_mess['kapasitas_t_mess']; ?></td>
                                 <td class="text-center">
-                                    <?php echo "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?>
+                                    <?= "Rp " . number_format($d_mess['tarif_tanpa_makan_mess'], 0, ",", "."); ?>
                                     <hr class="p-0 m-0 bg-gray-100">
-                                    <?php echo "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?>
+                                    <?= "Rp " . number_format($d_mess['tarif_dengan_makan_mess'], 0, ",", "."); ?>
                                 </td>
                                 <td class="text-center text-md">
                                     <?php
@@ -69,10 +69,10 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     ?>
                                 </td>
                                 <td class="text-center text-md">
-                                    <button title="Ubah" class='btn btn-primary btn-xs ubah_init' id='<?php echo $d_mess['id_mess']; ?>'>
+                                    <button title="Ubah" class='btn btn-primary btn-xs ubah_init' id='<?= $d_mess['id_mess']; ?>'>
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button title="Hapus" class='btn btn-outline-danger btn-xs hapus' id='<?php echo $d_mess['id_mess']; ?>'>
+                                    <button title="Hapus" class='btn btn-outline-danger btn-xs hapus' id='<?= $d_mess['id_mess']; ?>'>
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                     <hr class="m-1 bg-gray-500">

@@ -40,18 +40,18 @@ if ($r_data_kuota > 0) {
                 while ($d_data_kuota = $q_data_kuota->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <tr>
-                        <th scope="row"><?php echo $no; ?></th>
-                        <td><?php echo $d_data_kuota['nama_kuota']; ?></td>
-                        <td><?php echo $d_data_kuota['jumlah_kuota']; ?></td>
-                        <td><?php echo $d_data_kuota['ket_kuota']; ?></td>
+                        <th scope="row"><?= $no; ?></th>
+                        <td><?= $d_data_kuota['nama_kuota']; ?></td>
+                        <td><?= $d_data_kuota['jumlah_kuota']; ?></td>
+                        <td><?= $d_data_kuota['ket_kuota']; ?></td>
                         <td class="text-center">
                             <?php if ($d_prvl['u_kuota'] == "Y") { ?>
-                                <button id="<?php echo $d_data_kuota['id_kuota']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH" href="#page-top">
+                                <button id="<?= $d_data_kuota['id_kuota']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH" href="#page-top">
                                     <i class="fa fa-edit"></i> Ubah
                                 </button>
                             <?php } ?>
                             <?php if ($d_prvl['d_kuota'] == "Y") { ?>
-                                <button id="<?php echo $d_data_kuota['id_kuota']; ?>" class="btn btn-danger btn-sm hapus" title="HAPUS">
+                                <button id="<?= $d_data_kuota['id_kuota']; ?>" class="btn btn-danger btn-sm hapus" title="HAPUS">
                                     <i class="fa fa-trash"></i> Hapus
                                 </button>
                             <?php } ?>

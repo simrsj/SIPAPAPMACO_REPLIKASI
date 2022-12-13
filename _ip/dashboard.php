@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="text-md font-weight-bold text-center text-primary mb-1">
                         <div class="h5 mb-0 font-weight-bold">
-                            <b> DATA PROFIL <br><?php echo $dAr_ins['nama_institusi']; ?></b>
+                            <b> DATA PROFIL <br><?= $dAr_ins['nama_institusi']; ?></b>
                         </div>
                     </div>
                     <hr class="bg-primary" style="height: 2px;">
@@ -57,7 +57,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-body">
-                                                            <img src="<?php echo $dAr_ins['logo_institusi']; ?>" width="250px" height="250px">
+                                                            <img src="<?= $dAr_ins['logo_institusi']; ?>" width="250px" height="250px">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -149,7 +149,7 @@
                                         <?php
                                         } else {
                                         ?>
-                                            <a title="Data Akreditasi Institusi" class="btn btn-success btn-sm" href="<?php echo $dAr_ins['fileAkred_institusi']; ?>" target="_blank">
+                                            <a title="Data Akreditasi Institusi" class="btn btn-success btn-sm" href="<?= $dAr_ins['fileAkred_institusi']; ?>" target="_blank">
                                                 <i class="fas fa-file-download"></i> Unggah File
                                             </a>
                                         <?php
@@ -189,7 +189,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <h5>
-                                    <h3>Hai <br><?php echo $dAr_ins['nama_institusi']; ?> </h3>
+                                    <h3>Hai <br><?= $dAr_ins['nama_institusi']; ?> </h3>
                                     <br />
                                     <?php if ($selesai != '' && $selesai != NULL) {
                                         if ($date_diff <= 0) {
@@ -205,7 +205,7 @@
                                                 <span class="badge badge-danger col-12">
                                                     MOU Kita sebentar lagi <b>KADALUARSA</b>
                                                     <br />tepatnya pada tanggal :
-                                                    <?php echo tanggal($dAr_ins['tgl_selesai_mou']); ?>,
+                                                    <?= tanggal($dAr_ins['tgl_selesai_mou']); ?>,
                                                     <br> Silahkan Hubungi Pihak Kami melalui nomor berikut :
                                                     <b>081321417344 (Adhie)</b>
                                                 </span>

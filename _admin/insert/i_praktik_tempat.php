@@ -21,17 +21,17 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
             <div class="row text-center h6 text-gray-900 ">
                 <div class="col-6">
                     Nama Institusi :
-                    <b><?php echo $d_praktik['nama_institusi']; ?></b>
+                    <b><?= $d_praktik['nama_institusi']; ?></b>
                     <hr>
                     Jumlah Praktik :
-                    <b><?php echo $d_praktik['jumlah_praktik']; ?></b>
+                    <b><?= $d_praktik['jumlah_praktik']; ?></b>
                 </div>
                 <div class="col-6">
                     Tanggal Mulai :
-                    <b><?php echo tanggal($d_praktik['tgl_mulai_praktik']); ?></b>
+                    <b><?= tanggal($d_praktik['tgl_mulai_praktik']); ?></b>
                     <hr>
                     Tanggal Selesai :
-                    <b><?php echo tanggal($d_praktik['tgl_selesai_praktik']); ?></b>
+                    <b><?= tanggal($d_praktik['tgl_selesai_praktik']); ?></b>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
         <div class="card-header py-3 d-flex flex-row align-items-center">
             <div class="h4 text-gray-800 font-weight-bold">
-                Menu Tarif Ruangan dan Tempat : <i style='font-size:14px;'>(Jumlah Praktik <b><?php echo $d_praktik['jumlah_praktik']; ?></b>)</i>
+                Menu Tarif Ruangan dan Tempat : <i style='font-size:14px;'>(Jumlah Praktik <b><?= $d_praktik['jumlah_praktik']; ?></b>)</i>
             </div>
         </div>
         <div class="card-body">
@@ -77,17 +77,17 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $no; ?></th>
-                                    <td><?php echo $d_tempat['nama_tempat']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."); ?></td>
-                                    <td><?php echo $d_tempat['nama_tarif_satuan']; ?></td>
-                                    <td><?php echo $d_tempat['kapasitas_tempat']; ?></td>
-                                    <td><?php echo $d_tempat['ket_tempat']; ?></td>
+                                    <th scope="row"><?= $no; ?></th>
+                                    <td><?= $d_tempat['nama_tempat']; ?></td>
+                                    <td><?= "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."); ?></td>
+                                    <td><?= $d_tempat['nama_tarif_satuan']; ?></td>
+                                    <td><?= $d_tempat['kapasitas_tempat']; ?></td>
+                                    <td><?= $d_tempat['ket_tempat']; ?></td>
                                     <td>
                                         <div class="boxed-check-group boxed-check-primary boxed-check-sm text-center">
                                             <label class="boxed-check">
-                                                <input class="boxed-check-input" type="radio" name="tempat" id="tempat" value="<?php echo $d_tempat['id_tempat'] ?>" required>
-                                                <span class="boxed-check-label"><?php echo $d_tempat['nama_tempat'] ?></span>
+                                                <input class="boxed-check-input" type="radio" name="tempat" id="tempat" value="<?= $d_tempat['id_tempat'] ?>" required>
+                                                <span class="boxed-check-label"><?= $d_tempat['nama_tempat'] ?></span>
                                             </label>
                                         </div>
                                     </td>
@@ -108,8 +108,8 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 }
                 ?>
 
-                <input type="hidden" name="path" id="path" value="<?php echo $_GET['ptk'] ?>">
-                <input type="hidden" name="id" id="id" value="<?php echo $_GET['t'] ?>">
+                <input type="hidden" name="path" id="path" value="<?= $_GET['ptk'] ?>">
+                <input type="hidden" name="id" id="id" value="<?= $_GET['t'] ?>">
                 <nav id="navbar-tarif" class="navbar justify-content-center">
                     <button type="button" id="simpan_tempat" class="nav-link btn btn-outline-success">
                         SIMPAN

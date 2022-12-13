@@ -187,14 +187,14 @@ if (isset($_POST['ubah_praktik'])) {
                                     while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
                                         if ($d_praktik_join['id_institusi'] == $d_mou['id_institusi']) {
                                     ?>
-                                            <option value='<?php echo $d_mou['id_institusi']; ?>' selected>
-                                                <?php echo $d_mou['nama_institusi']; ?>
+                                            <option value='<?= $d_mou['id_institusi']; ?>' selected>
+                                                <?= $d_mou['nama_institusi']; ?>
                                             </option>
                                         <?php
                                         } else {
                                         ?>
-                                            <option value='<?php echo $d_mou['id_institusi']; ?>'>
-                                                <?php echo $d_mou['nama_institusi']; ?>
+                                            <option value='<?= $d_mou['id_institusi']; ?>'>
+                                                <?= $d_mou['nama_institusi']; ?>
                                             </option>
                                     <?php
                                         }
@@ -212,7 +212,7 @@ if (isset($_POST['ubah_praktik'])) {
                         </div>
                         <div class="col-lg-6">
                             Gelombang/Kelompok : <span style="color:red">*</span><br>
-                            <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" value="<?php echo $d_praktik_join['nama_praktik']; ?>" required>
+                            <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" value="<?= $d_praktik_join['nama_praktik']; ?>" required>
                         </div>
                     </div>
                     <br>
@@ -234,14 +234,14 @@ if (isset($_POST['ubah_praktik'])) {
                                     while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
                                         if ($d_praktik_join['id_jurusan_pdd'] == $d_jurusan_pdd['id_jurusan_pdd']) {
                                     ?>
-                                            <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>' selected>
-                                                <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                                            <option value='<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>' selected>
+                                                <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?>
                                             </option>
                                         <?php
                                         } else {
                                         ?>
-                                            <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
-                                                <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                                            <option value='<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
+                                                <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?>
                                             </option>
                                     <?php
                                         }
@@ -272,14 +272,14 @@ if (isset($_POST['ubah_praktik'])) {
                                     while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
                                         if ($d_praktik_join['id_jenjang_pdd'] == $d_jenjang_pdd['id_jenjang_pdd']) {
                                     ?>
-                                            <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>' selected>
-                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
+                                            <option class='text-wrap' value='<?= $d_jenjang_pdd['id_jenjang_pdd']; ?>' selected>
+                                                <?= $d_jenjang_pdd['nama_jenjang_pdd']; ?>
                                             </option>
                                         <?php
                                         } else {
                                         ?>
-                                            <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
-                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
+                                            <option class='text-wrap' value='<?= $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
+                                                <?= $d_jenjang_pdd['nama_jenjang_pdd']; ?>
                                             </option>
                                     <?php
                                         }
@@ -310,14 +310,14 @@ if (isset($_POST['ubah_praktik'])) {
                                     while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
                                         if ($d_praktik_join['id_spesifikasi_pdd'] == $d_spesifikasi_pdd['id_spesifikasi_pdd']) {
                                     ?>
-                                            <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>' selected>
-                                                <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
+                                            <option value='<?= $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>' selected>
+                                                <?= $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
                                             </option>
                                         <?php
                                         } else {
                                         ?>
-                                            <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
-                                                <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
+                                            <option value='<?= $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
+                                                <?= $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
                                             </option>
                                     <?php
                                         }
@@ -348,14 +348,14 @@ if (isset($_POST['ubah_praktik'])) {
                                     while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
                                         if ($d_praktik_join['id_akreditasi'] == $d_akreditasi['id_akreditasi']) {
                                     ?>
-                                            <option class='text-wrap' value='<?php echo $d_akreditasi['id_akreditasi']; ?>' selected>
-                                                <?php echo $d_akreditasi['nama_akreditasi']; ?>
+                                            <option class='text-wrap' value='<?= $d_akreditasi['id_akreditasi']; ?>' selected>
+                                                <?= $d_akreditasi['nama_akreditasi']; ?>
                                             </option>
                                         <?php
                                         } else {
                                         ?>
-                                            <option class='text-wrap' value='<?php echo $d_akreditasi['id_akreditasi']; ?>'>
-                                                <?php echo $d_akreditasi['nama_akreditasi']; ?>
+                                            <option class='text-wrap' value='<?= $d_akreditasi['id_akreditasi']; ?>'>
+                                                <?= $d_akreditasi['nama_akreditasi']; ?>
                                             </option>
                                     <?php
                                         }
@@ -376,15 +376,15 @@ if (isset($_POST['ubah_praktik'])) {
                     <div class="row">
                         <div class="col-lg-3">
                             Jumlah Praktikan : <span style="color:red">*</span><br>
-                            <input type="number" class="form-control" name="jumlah_praktik" min="1" value="<?php echo $d_praktik_join['jumlah_praktik'] ?>" required>
+                            <input type="number" class="form-control" name="jumlah_praktik" min="1" value="<?= $d_praktik_join['jumlah_praktik'] ?>" required>
                         </div>
                         <div class="col-lg-3">
                             Tanggal Mulai : <span style="color:red">*</span><br>
-                            <input type="date" class="form-control" name="tgl_mulai_praktik" value="<?php echo $d_praktik_join['tgl_mulai_praktik'] ?>" required>
+                            <input type="date" class="form-control" name="tgl_mulai_praktik" value="<?= $d_praktik_join['tgl_mulai_praktik'] ?>" required>
                         </div>
                         <div class="col-lg-3">
                             Tanggal Akhir : <span style="color:red">*</span><br>
-                            <input type="date" class="form-control" name="tgl_selesai_praktik" value="<?php echo $d_praktik_join['tgl_selesai_praktik'] ?>" required>
+                            <input type="date" class="form-control" name="tgl_selesai_praktik" value="<?= $d_praktik_join['tgl_selesai_praktik'] ?>" required>
                         </div>
                     </div>
                     <br>
@@ -396,12 +396,12 @@ if (isset($_POST['ubah_praktik'])) {
                             if ($d_praktik_join['surat_praktik'] != '') {
                             ?>
                                 <i style='font-size:12px;'>File Surat sebelumnya
-                                    <a href="<?php echo $d_praktik_join['surat_praktik'] ?>">Download</a>
+                                    <a href="<?= $d_praktik_join['surat_praktik'] ?>">Download</a>
                                 </i><br>
                             <?php
                             }
                             ?>
-                            <input type="file" name="surat_praktik" accept="application/pdf" value="<?php echo $d_praktik_join['surat_praktik'] ?>">
+                            <input type="file" name="surat_praktik" accept="application/pdf" value="<?= $d_praktik_join['surat_praktik'] ?>">
                             <br><i style='font-size:12px;'>Data unggah harus .pdf, Maksimal 1 MB</i>
                         </div>
                         <div class="col-lg-6">
@@ -412,12 +412,12 @@ if (isset($_POST['ubah_praktik'])) {
                             if ($d_praktik_join['data_praktik'] != '') {
                             ?>
                                 <i style='font-size:12px;'>Data Praktikan sebelumnya
-                                    <a href="<?php echo $d_praktik_join['data_praktik'] ?>">Download</a>
+                                    <a href="<?= $d_praktik_join['data_praktik'] ?>">Download</a>
                                 </i><br>
                             <?php
                             }
                             ?>
-                            <input type="file" name="data_praktik" accept=".xls, .xlsx" value="<?php echo $d_praktik_join['data_praktik'] ?>">
+                            <input type="file" name="data_praktik" accept=".xls, .xlsx" value="<?= $d_praktik_join['data_praktik'] ?>">
                             <br><i style='font-size:12px;'>Data unggah harus .xls .xlsx, Maksimal 1 MB</i>
                         </div>
                     </div>
@@ -431,23 +431,23 @@ if (isset($_POST['ubah_praktik'])) {
                     <div class="row">
                         <div class="col-lg-4">
                             Nama : <span style="color:red">*</span><br>
-                            <input type="text" class="form-control" name="nama_mentor_praktik" value="<?php echo $d_praktik_join['nama_mentor_praktik']; ?>" required>
+                            <input type="text" class="form-control" name="nama_mentor_praktik" value="<?= $d_praktik_join['nama_mentor_praktik']; ?>" required>
                         </div>
                         <div class="col-lg-4">
                             Telpon : <span style="color:red">*</span><br>
-                            <input type="number" class="form-control" name="telp_mentor_praktik" min="1" value="<?php echo $d_praktik_join['telp_mentor_praktik']; ?>" required>
+                            <input type="number" class="form-control" name="telp_mentor_praktik" min="1" value="<?= $d_praktik_join['telp_mentor_praktik']; ?>" required>
                             <i style='font-size:12px;'>Isian hanya berupa angka</i>
                         </div>
                         <div class="col-lg-4">
                             Email :<br>
-                            <input type="text" class="form-control" name="email_mentor_praktik" value="<?php echo $d_praktik_join['email_mentor_praktik']; ?>">
+                            <input type="text" class="form-control" name="email_mentor_praktik" value="<?= $d_praktik_join['email_mentor_praktik']; ?>">
                         </div>
                     </div>
                     <hr>
                     <!-- Simpan -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <input name="u" value="<?php echo $_GET['u']; ?>" hidden>
+                            <input name="u" value="<?= $_GET['u']; ?>" hidden>
                             <input type="submit" name="ubah_praktik" value="Ubah" class="btn btn-success">
                         </div>
                     </div>

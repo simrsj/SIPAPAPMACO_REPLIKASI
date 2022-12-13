@@ -20,7 +20,7 @@ if ($password_user != $ulangi_password) {
 } elseif ($d_user['email_user'] == $email_user) {
 ?>
     <script>
-        alert('Alamat Email <?php echo $email_user; ?> sudah dipakai!');
+        alert('Alamat Email <?= $email_user; ?> sudah dipakai!');
         document.location.href = "?reg";
     </script>
 <?php

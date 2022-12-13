@@ -47,13 +47,13 @@
                                 while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
-                                        <th scope="row"><?php echo $no; ?></th>
-                                        <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
-                                        <td><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
-                                        <td><?php echo $d_data_praktikan['telp_praktikan']; ?></td>
-                                        <td><?php echo $d_data_praktikan['wa_praktikan']; ?></td>
-                                        <td><?php echo $d_data_praktikan['email_praktikan']; ?></td>
-                                        <td><?php echo $d_data_praktikan['kota_kab_praktikan']; ?></td>
+                                        <th scope="row"><?= $no; ?></th>
+                                        <td><?= $d_data_praktikan['nama_praktikan']; ?></td>
+                                        <td><?= $d_data_praktikan['no_id_praktikan']; ?></td>
+                                        <td><?= $d_data_praktikan['telp_praktikan']; ?></td>
+                                        <td><?= $d_data_praktikan['wa_praktikan']; ?></td>
+                                        <td><?= $d_data_praktikan['email_praktikan']; ?></td>
+                                        <td><?= $d_data_praktikan['kota_kab_praktikan']; ?></td>
                                     </tr>
                                 <?php
                                     $no++;
