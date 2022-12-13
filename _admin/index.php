@@ -447,15 +447,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				elseif (isset($_GET['d_pmbb']) && $d_prvl['r_daftar_pembimbing'] == 'Y') include "_admin/view/v_daftarPembimbing.php";
 				//praktik nilai
 				elseif (isset($_GET['pnilai'])) {
-					if (isset($_GET['i']) && isset($_GET['pmbb'])) {
-						include "_admin/insert/i_praktik_nilaiKep.php";
-					} elseif (isset($_GET['i']) && isset($_GET['pu'])) {
-						include "_admin/insert/i_praktik_nilai_upload.php";
-					} elseif (isset($_GET['u']) && isset($_GET['pmbb'])) {
-						include "_admin/update/u_praktik_nilaiKep.php";
-					} else {
-						include "_admin/view/v_praktik_nilai.php";
-					}
+					if (isset($_GET['i']) && isset($_GET['pmbb'])) include "_admin/insert/i_praktik_nilaiKep.php";
+					elseif (isset($_GET['u']) && isset($_GET['pmbb'])) include "_admin/update/u_praktik_nilaiKep.php";
+					elseif (isset($_GET['upi']) && isset($_GET['pmbb'])) include "_admin/insert/i_praktik_nilai_upload.php";
+					elseif (isset($_GET['upu']) && isset($_GET['pmbb']) && isset($_GET['idnu'])) include "_admin/update/u_praktik_nilai_upload.php";
+					else include "_admin/view/v_praktik_nilai.php";
 				}
 				//praktik pemibimbing
 				else if (isset($_GET['pmbb']) && $d_prvl['r_praktik_pembimbing'] == 'Y') {

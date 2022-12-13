@@ -1,0 +1,4436 @@
+[33mcommit 3ad7e8586ecc207c8fb4b5bb73b8bfba89d6f50e[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 13 10:43:24 2022 +0700
+
+    Berhasil Tambah dan Ubah Nilai
+
+[33mcommit d66c71c45117b65c4b0b29d02ea4974582541529[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 13 10:43:14 2022 +0700
+
+    Berhasil Tambah dan Ubah Nilai
+
+[33mcommit 1d74a4886311c63dc8d90ef843f88a83392fa886[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 13 10:35:06 2022 +0700
+
+    Berhasil Shadow dan hide resolusi kecil navbar
+
+[33mcommit e8ee3ee1b9c324166853c9fb2cdc2f5a5f5118ab[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 13 10:24:33 2022 +0700
+
+    Berhasil Tampilan Nilai
+
+[33mcommit 3392f0deea842963f18f4943e279af9a80278b29[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Dec 13 07:04:54 2022 +0700
+
+    Progres Praktik Nilai
+
+[33mcommit d106110bcefb8e8381dc96b1b2d154d8874180a0[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Dec 13 07:04:47 2022 +0700
+
+    Progres Praktik Nilai
+
+[33mcommit a819d53f38fa541f65afb4198732b2bda51de0d4[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 16:09:12 2022 +0700
+
+    Mulai Progres hChaptha + DB
+
+[33mcommit c940a16a552faa281a11d575d1a3ffd751de5475[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 16:01:52 2022 +0700
+
+    Berhasil Fix Navbar
+
+[33mcommit c84ef54644137ae621a94ed1f4b3a76b4f239588[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 14:02:08 2022 +0700
+
+    Progres hChaptha
+
+[33mcommit b32505bd6589e4fe78b860a14088ddc08d11b305[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 13:06:45 2022 +0700
+
+    Mulai Progres hChaptha + DB
+
+[33mcommit 56fa6bda1f0b324b1cd40635443607e23d84f6a4[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 11:11:10 2022 +0700
+
+    Berhasil Arsip Praktik
+
+[33mcommit 2179223fc803742edf88d0f91d42872a6b0742fb[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 11:07:40 2022 +0700
+
+    Berhasil Hak Akses Arsip Praktik
+
+[33mcommit 7ce6089c674098c1f8278dbf3b5084f1785d785c[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 10:57:18 2022 +0700
+
+    Berhasil Hak Akses Praktik Nilai
+
+[33mcommit 66e5a6096624dc523b72005e710fcbcddf82e091[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 10:54:02 2022 +0700
+
+    Berhasil Perbaikan Posisi Link Sidebar
+
+[33mcommit 86103ae0a94855fda0855f3c1b9b2c91f42e01e8[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 10:32:10 2022 +0700
+
+    Berhasil Perbaikan Kuota
+
+[33mcommit dc64c22e504385f2b50f4e43d51f36f374def775[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 10:16:14 2022 +0700
+
+    Berhasil Perbaikan Info Diklat
+
+[33mcommit 9f219f4d602b71cc6b74e7c8ac83aa39c6b8264a[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 12 10:09:04 2022 +0700
+
+    Berhasil Unggah File Invoice TTD
+
+[33mcommit c4c5abc2d2d333455b7228c912fd418c3cd33868[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 23:30:01 2022 +0700
+
+    PROGRES REPLACE kata RTF ke DOC (INCONSISTEN) + DB
+
+[33mcommit 43f95cb5cf2fa828fc54a250923bed0438fb1b54[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 22:27:18 2022 +0700
+
+    Berhasil PDF, dan DOCX->Dipelajari
+
+[33mcommit 9380db4282f4d33fd6ae79d99a8667a9ff5ba898[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 17:34:18 2022 +0700
+
+    Berhasil CSS BORDER-COLOR
+
+[33mcommit 1db3ccf8ebbc6a3c1800621559c8e772fa7f0017[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 17:20:40 2022 +0700
+
+    Berhasil Margin css custom-file-input margin 0
+
+[33mcommit ba6e30b74a44dc455000c8e15beaabffd333d86d[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 16:58:29 2022 +0700
+
+    Berhasil Scrollable Modal Unduh dan Unggah Invoice
+
+[33mcommit 6ff6cb99c494564b9312688aa4577ca6d2dcd3ba[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 16:03:07 2022 +0700
+
+    Berhasil Ubah col-md menjadi col-sm, rincian button menjado col-sm-2
+
+[33mcommit 4b9ca5413b307d924328bbe8fe72de4c3ab1527f[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 16:00:46 2022 +0700
+
+    Berhasil ubah file dan coding praktik menjadi praktik_praktikan
+
+[33mcommit 2be62ca83c20c9780448b5383f14030d56d4ad79[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 11:19:49 2022 +0700
+
+    Berhasil Status Pembayaran
+
+[33mcommit 7af53ad059293a666c556acb11494b59cf0d2efd[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 10:44:41 2022 +0700
+
+    Berhasil Simpan dan Close modal verifikasi
+
+[33mcommit ee944c6a02db1b4081d88c9418ba6a45c60dd08c[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 08:51:38 2022 +0700
+
+    Berhasil Simpan dan Close modal verifiakasi
+
+[33mcommit 05404121b59f9e20dc19a93c7377b40d3bcfb82d[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 11 07:41:22 2022 +0700
+
+    Berhasil Simpan Praktik Arsip
+
+[33mcommit 3078d2e513681bd5dc5c7daaa430b711e8e5ccfd[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Dec 10 18:41:02 2022 +0700
+
+    Berhasil Table  Data Pembayaran
+
+[33mcommit 2e75be2a5c5f768f0bac259b1328d41f0742089d[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Dec 10 18:31:35 2022 +0700
+
+    Berhasil Simpan Data Pembayaran
+
+[33mcommit cd3b8214e02e0b5ea7dbee37840a4377e15e7d3c[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Dec 10 17:19:28 2022 +0700
+
+    Berhasil Simpan File Bukti Custom Nama
+
+[33mcommit 533610eecd8af0f1e00d15a2805898886c10d6e0[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Dec 10 16:46:44 2022 +0700
+
+    Berhasil Seleksi File Tipe dan Ukuran
+
+[33mcommit c500294236fda801a704702ae10d67873dc87b89[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Dec 10 16:12:45 2022 +0700
+
+    Berhasil Input File Custom
+
+[33mcommit f47e7a686219862a80af0b2946c63136503973b1[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 9 17:41:40 2022 +0700
+
+    Progres Modal Rincian Tarif Pembayaran + Database
+
+[33mcommit 3401ddb7a7af363e7c85670a5e0bbb97c4aa2165[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 8 16:36:10 2022 +0700
+
+    Progres Modal Rincian Tarif Pembayaran + Database
+
+[33mcommit 2468568986ca8271028e188840a648ed59f99e79[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 8 16:21:26 2022 +0700
+
+    Progres Modal Rincian Tarif Pembayaran + Database
+
+[33mcommit 8d555989d7ffcdfff2d9d1f05bd0c2afb10b1457[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 8 11:50:36 2022 +0700
+
+    Pembuatan Kode Bayar Praktik
+
+[33mcommit 2fb5163a50b7f54d713b97480fdfd8551112bc32[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Dec 8 06:33:13 2022 +0700
+
+    Progres Status dan Tombol Pembayaran Praktik + Database
+
+[33mcommit da90b672ee1abf639051d31dbfecf8bf9167579d[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Dec 8 00:24:31 2022 +0700
+
+    Progres Status Pembayaran
+
+[33mcommit 9dcd46501515445450ccc0754083fc38338dd6c7[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Dec 7 23:23:47 2022 +0700
+
+    Progres Pembuatan Status Bayar
+
+[33mcommit caf83130ffb4e097c418656b012e9f7977c1c156[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 7 16:02:00 2022 +0700
+
+    Progres Pembayara Praktik + Database
+
+[33mcommit e73b008382ef796266cde214edef4ae91ce6480f[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 7 15:04:52 2022 +0700
+
+    Berhasil Status Tarif
+
+[33mcommit 4ba4171639469f10ec1926b8d342c16e69161d54[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 7 14:43:54 2022 +0700
+
+    Berhasil Hak Akes praktik_bayar
+
+[33mcommit 6700d3ac2970a3be884cd57bd4452856efa5d516[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 7 14:26:56 2022 +0700
+
+    Berhasil Ubah Tarif
+
+[33mcommit ec0467aff7a12234319f9c1174b758eee6c9b645[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 7 13:36:02 2022 +0700
+
+    Perbaikan Tambah Pilih Satuan Tarif
+
+[33mcommit 881db9e9562638e01391a64d4918495cdfe203d0[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 7 11:36:10 2022 +0700
+
+    Berhasil Tambah dan hapus Tarif
+
+[33mcommit 2b3a9debbb59b1e4738f96f9fef452aae2ceb7a7[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 7 11:21:07 2022 +0700
+
+    Berhasil Tambah Tarif
+
+[33mcommit 0f3623d25485aadfbb975ff0715067525a7394be[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 7 10:30:01 2022 +0700
+
+    Berhasil Tambah Tarif
+
+[33mcommit af9fbafc200723a44781086609f8a4ac9f616a92[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 7 10:29:42 2022 +0700
+
+    Berhasil Tambah Tarif
+
+[33mcommit ef80c4b7602a237e48d996b58904bce2657a2134[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 6 17:02:32 2022 +0700
+
+    Tambah Vendor Font Awesome v6 + Database
+
+[33mcommit 572851392cf802ffe9a9a0c2336077858bfc11cb[m
+Merge: dd91516 c56db0a
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 6 17:02:12 2022 +0700
+
+    Tambah Vendor Font Awesome v6 + Database
+
+[33mcommit dd9151666a788a82cef524043c7d81a6dba3a3d8[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 6 17:01:38 2022 +0700
+
+    Tambah Vendor Font Awesome v6 + Database
+
+[33mcommit c56db0a3e8348d1ad7d5dd5a977263d39d58a805[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Dec 6 06:36:05 2022 +0700
+
+    Progres Tarif Praktik
+
+[33mcommit 739c7d6a2d53b0ca6dc6eb90240a133f01ee665a[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 5 16:21:04 2022 +0700
+
+    Progres Tarif Praktik + Database
+
+[33mcommit 32a4558afde3efa72afcbc1fcb0db8a10d7a82da[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Dec 5 06:40:02 2022 +0700
+
+    Progres Tarif Praktik + Database
+
+[33mcommit 144ce75b0cc495e9edf8b628f9a01840f6326fae[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 4 10:05:07 2022 +0700
+
+    Perbaikan Alert Function Ubah keterangan err frekuensi dan kuantitias
+
+[33mcommit 0d6edeff1efe9872865988c2f1c897a407abe319[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 4 10:01:25 2022 +0700
+
+    Perbaikan Ubah keterangan err frekuensi dan kuantitias
+
+[33mcommit bc48034ad477744527d61f1ba6d776f33e56b4c1[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 4 09:24:46 2022 +0700
+
+    Berhasil Ubah keterangan err frekuensi dan kuantitias
+
+[33mcommit 2d68e02b53622ee1ccf552752195702cd03e4065[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Dec 4 07:42:42 2022 +0700
+
+    Berhasil ubah nama myTable > dataTable
+
+[33mcommit fa4a2e2fb430892b22c0a10e8499d54311ff5689[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Dec 3 16:06:40 2022 +0700
+
+    Berhasil Format Number Jumlah Tarif
+
+[33mcommit ca341d89ead3eca7167cc5ece6a0db7b177c20b6[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 2 16:17:09 2022 +0700
+
+    Progres Tarif Praktik + Database
+
+[33mcommit 206ca0b1da68dd92a240f177f2673b4d6e474059[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 1 16:58:25 2022 +0700
+
+    Database
+
+[33mcommit 2450b6f6b3c1f3c541f57982692aed6778730169[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 1 16:57:37 2022 +0700
+
+    Progres Tambah Praktik Tarif + Kalkukasi Jumlah dan Jumlah Total
+
+[33mcommit fe7ed4b56cd6446ec492f2bdbf8914b4b9a6302e[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 1 14:38:47 2022 +0700
+
+    Berhasil Tampilan Tarif Praktik
+
+[33mcommit 19386dd85725f563c6f10581d618c081a4a6512d[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Dec 1 07:09:02 2022 +0700
+
+    Database
+
+[33mcommit 1c9f20cb6160677ca1a48e3264f650c2f136d7d7[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Nov 30 21:13:38 2022 +0700
+
+    Berhasil Ubah Nama Var sql_praktik_pembimbing
+
+[33mcommit 5a9b8cd887b9178fe4a4660c823145caff167433[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Nov 30 21:03:16 2022 +0700
+
+    Berhasil Hak Akes Praktik Tarif
+
+[33mcommit 1e7dff1f68690ae06782e345119ca40aac83afb4[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 30 16:05:03 2022 +0700
+
+    Database
+
+[33mcommit 8d694f41bbce69e2205530039a064b7fda07f663[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 30 15:11:27 2022 +0700
+
+    Berhasil Tambah Pembimbing dan unit
+
+[33mcommit 4f86ff90f0fc2c837fcb3047dd1fe65c528b4db8[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Nov 30 06:11:27 2022 +0700
+
+    Progress Pemilihan pembimbing
+
+[33mcommit 38878224b8e94a6731ba7c36ab6e2c87504f7d73[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Nov 29 11:02:13 2022 +0700
+
+    Database
+
+[33mcommit 7d79027e6fc7d81dc54614e9e12006c1a8a0a223[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Nov 29 11:01:32 2022 +0700
+
+    Berhasil Tambah dan Ubah Praktik Mess
+
+[33mcommit 34a041b85f46d2b3fb48cd0e5c847afca5b81d78[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Nov 29 10:54:06 2022 +0700
+
+    Berhasil  Hapus Praktik
+
+[33mcommit ea5d1756a4cbc3f6513ed2bdc17192c401a5c8c0[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Nov 29 10:52:02 2022 +0700
+
+    Progres Hapus Praktik
+
+[33mcommit bd29a3a8a70451c312be0069258620b003fd2e99[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Nov 29 09:09:05 2022 +0700
+
+    Berhasil push data idu tambah praktik
+
+[33mcommit 14d7a44d479e5042eb3c1ff8cffa5a8a1a288c4e[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Nov 29 08:27:52 2022 +0700
+
+    Berhasil Unduh Surat Pengajuan Praktik
+
+[33mcommit 9c94df779f895cadff0d02a724b6525ebade0065[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 13:20:20 2022 +0700
+
+    Berhasil rubah css datatable paddning-right:30px
+
+[33mcommit a34822b374cfdf5a9971b0ea3d5dae8d91e48661[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 12:34:07 2022 +0700
+
+    Berhasil Cari Data per kolom thead
+
+[33mcommit cfe30a80badcea4ca84747cf664c783fad6715f4[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 11:42:53 2022 +0700
+
+    Berhasil Cari Data per kolom
+
+[33mcommit cc344c0312cb26fc6a7512ba725064c0f4db1bd1[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 10:02:51 2022 +0700
+
+    Berhasil privileges read praktik pebimbing
+
+[33mcommit daf82c78f66220e1860b2abade0dc7244eefd5bc[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 09:48:19 2022 +0700
+
+    Berhasil ubah index praktik pembimbing
+
+[33mcommit 3fbe867ca8ab5940797b42ef4301f0c7e9ffc405[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 09:44:41 2022 +0700
+
+    Berhasil Ubah ptk menjadi ptkn, prk menjadi ptk
+
+[33mcommit 62619c532cea593b4f3ceb72506c0147a1dcb406[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 09:34:01 2022 +0700
+
+    Berhasil Status Data Praktikan Tabel Praktik
+
+[33mcommit f472d8dcd8474750340551808036af1576c3e07a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 09:24:09 2022 +0700
+
+    Berhasil Kolom Hilan/Munculkan datatable praktik
+
+[33mcommit 99ec3300245974ebc0cd8481fe1feb33025419d1[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 09:00:32 2022 +0700
+
+    Berhasil Padding myTable Data Praktikan
+
+[33mcommit 989e0911a28a80149596f5da557b4f3a0695796a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 08:56:10 2022 +0700
+
+    Berhasil Ambil data tb setelah tambah dan hapus  data praktik
+
+[33mcommit 3b4dca9fb5be9843ff4f504556c29283f805e5d0[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 08:46:20 2022 +0700
+
+    Berhasil Ambil data tb setelah update data praktik
+
+[33mcommit 4e8c02cd6947e720e18f227143007bbc2011ba96[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 08:43:34 2022 +0700
+
+    Berhasil myTable lebih dari satu,  eksekusi dari ajax
+
+[33mcommit 6e80263bce2c2ebc1b867edfa212f2c948ac6319[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 00:47:39 2022 +0700
+
+    Berhasil Perbaikan Tambah Data Praktikan
+
+[33mcommit 4a2a54e5144acb0cf82b0cb5fa05282422b86894[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 28 00:30:20 2022 +0700
+
+    Berhasil Perbaikan Hapus Data Praktikan
+
+[33mcommit 8352f51ef2b78bedff5f7c04f3bd9213bb52c8e0[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 27 15:45:53 2022 +0700
+
+    Database
+
+[33mcommit 0166edc8b105490cce66a0176e3692437ecd220a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 27 15:44:03 2022 +0700
+
+    Progres Posisi Modal Hapus(Update Status) Data Praktikan  SweetAlert
+
+[33mcommit a021bc7d458eb76ffc70861b9262e32b20ab1fa1[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 27 15:39:35 2022 +0700
+
+    Berhasil Hapus(Update Status) Data Praktikan
+
+[33mcommit a9964fa9b88d6b4da4cfbc03d7ac60dfa2c349c6[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 27 15:27:45 2022 +0700
+
+    Berhasil Tutup Modal Lalu Reload Data Praktikan
+
+[33mcommit de604380dcc3782cb1d2377565d62b48d33e2d3b[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 27 15:20:16 2022 +0700
+
+    Berhasil Tutup Modal Lalu Reload Data Praktikan
+
+[33mcommit 29311ca64fd181218e1a41053b3b842442cee541[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 27 15:19:37 2022 +0700
+
+    Berhasil Ubah Keterangan Ubah Data Praktikan
+
+[33mcommit 5ed48b224a22d3e6aade549bf9890f803f273ed7[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 27 15:03:22 2022 +0700
+
+    Berhasil Update Data Praktikan
+
+[33mcommit 2dbee4c88423595b5eaa82d31a7afdbe8af6b2da[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 27 13:37:41 2022 +0700
+
+    Berhasil Tambilan table-striped  pengengajuan  Praktik
+
+[33mcommit 635937fa14756813c004e9f234d350826bd9215a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 27 12:52:20 2022 +0700
+
+    Berhasil Simpan Data Praktikan
+
+[33mcommit df0ccd36d9f2d96403cf3273d3bb37ae604e511a[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 25 18:19:10 2022 +0700
+
+    progres JQUERY modal insert data praktikan
+
+[33mcommit 8860ecbc1f7790704b2604ae487a52c425a39ce8[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 25 17:55:58 2022 +0700
+
+    reset value form insert data praktikan
+
+[33mcommit 74d7b4f3e40323701317fb1a18a701564a31e16f[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 25 17:41:15 2022 +0700
+
+    progres insert data praktikan
+
+[33mcommit 1297b9f2ff1db3d3d3f9c6bae9b106ddcbda726f[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 25 13:20:17 2022 +0700
+
+    perbaikan tampilan data daftar  praktik
+
+[33mcommit c4c52bda29c19aabb3a768a200400881a2ae95b3[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 25 10:53:28 2022 +0700
+
+    perbaikan tampilan data praktikan
+
+[33mcommit 4db75b1cdbf5f0e9819f8d6f07a62429987b45b4[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 25 10:16:20 2022 +0700
+
+    progres insert praktikan
+
+[33mcommit 4b24636ebe1fe3403984bac2b0bcbd1ca9b8a86a[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 25 09:58:15 2022 +0700
+
+    penambahan privileges praktikan
+
+[33mcommit 4442ce11ec99b1f3bec2a8d748e1659f424da378[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 25 09:43:43 2022 +0700
+
+    perbaikan pengajuan tampilan praktik mess
+
+[33mcommit e5ec8689f166879ef2706cd751f9fa75c4011b50[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 25 08:21:39 2022 +0700
+
+    perbaikan i_praktik_mess
+
+[33mcommit 7579b24cbd3ef41e1f6747a4c99a4f3bee14e005[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Nov 25 07:08:52 2022 +0700
+
+    progres modal detail pengajuan praktik
+
+[33mcommit 729f3db7358719aec6593efefd44831df19f1632[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 16:19:30 2022 +0700
+
+    sql progres detail praktikan dan pemilihan pembimbing
+
+[33mcommit 12eb431f5dd56cbbebfe2f89ad75a091040a3ddf[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 16:13:25 2022 +0700
+
+    sql progres detail praktikan dan pemilihan pembimbing
+
+[33mcommit 2e6ea672007ebef2b91bc48ead54cafe544a0948[m
+Merge: e35efbe 5308eed
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 16:12:21 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit e35efbec25d0c5ab20d4029b270f8e654a8df257[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 16:11:52 2022 +0700
+
+    progres modal detail daftar praktik dan pemilihan pembimbing
+
+[33mcommit 0c4558c66b785eebb9e93d5f2a3c8277070fc362[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 15:40:49 2022 +0700
+
+    penambahan hak akses praktik pembimbing
+
+[33mcommit bdfedeca1ecc769e786fcbc1de87e77cb7905ffc[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 14:36:42 2022 +0700
+
+    perbaikan update pengajuan praktik mess
+
+[33mcommit 0c92efbaa0c6772c4851fd5e7c8273989919a5e9[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 14:25:07 2022 +0700
+
+    perbaikan insert pengajuan praktik mess
+
+[33mcommit aaa7d6fc68fa0e742300fd8744038685649fc781[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 13:03:37 2022 +0700
+
+    perbaikan insert pengajuan praktik mess
+
+[33mcommit 0a67167eb2512e8efcdc6b621ff195659375dc4e[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 09:38:12 2022 +0700
+
+    perbaikan insert pengajuan praktik mess
+
+[33mcommit cc3908a809502e289958a21e793f2a8587dafeeb[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 24 08:14:44 2022 +0700
+
+    perbaikan insert pengajuan praktik mess
+
+[33mcommit 5308eedbbfb26182b58d8a75f76e1eceb301ad88[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Nov 23 17:42:34 2022 +0700
+
+    Perbaikan pengajuan pilih mess.php
+
+[33mcommit 13edd2709507e021d273b194a95be8a797b2412f[m
+Merge: 169f24d 4235e13
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Nov 23 17:41:19 2022 +0700
+
+    Perbaikan pengajuan pilih mess.php
+
+[33mcommit 169f24da1da9b2a92135b8ce30fd8a06fbf586ce[m
+Merge: 0cfc78a 46c9f8a
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Nov 23 17:18:12 2022 +0700
+
+    Perbaikan pengajuan pilih mess.php
+
+[33mcommit 4235e138ef8a75812b23a9463b32c6ac03e2d1f8[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 23 16:11:46 2022 +0700
+
+    Progres ubah Pengajuan Praktik mess
+
+[33mcommit ae96ce2a1c753ba34255c475ccbb6a1bddc76fa3[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 22 16:12:01 2022 +0700
+
+    Progres Pengajuan Praktik Pemilihan mess
+
+[33mcommit 0cfc78ac9fbb77111432e43b6fd9a7574666566b[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Nov 21 19:00:40 2022 +0700
+
+    -
+
+[33mcommit 46c9f8a0d26013d8f59d636afe665f889d152b3e[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 21 16:40:14 2022 +0700
+
+    progres perbaikan ubah praktik mess
+
+[33mcommit 696fc07f4ab1d79dd1d2c57a6949ec9561dfd3ba[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 21 16:39:43 2022 +0700
+
+    progres perbaikan ubah praktik mess
+
+[33mcommit 1402a5b526725d8826b576aa2c87c2a628c3968a[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 21 15:40:06 2022 +0700
+
+    perbaikan simpan praktik mess
+
+[33mcommit 2f8127a699f7b5c11cfeeb6c720ec5e3a53c02f8[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 21 09:15:05 2022 +0700
+
+    perbaikan pilihan mess (select option)
+
+[33mcommit 64b1303477c808fcb898a3648f0965eef7994bc7[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 21 08:49:20 2022 +0700
+
+    perbaikan data kolom status kuota
+
+[33mcommit 4711e0b172b3e5647fe2aadd8ca79fbfdbb7a27c[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 20 08:53:52 2022 +0700
+
+    Perbaikan i_praktik_mess_dataTgl.php
+
+[33mcommit a29e4915d83b3ed346aaf4f449a065fe4b7f3507[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 17 15:59:12 2022 +0700
+
+    Progres Pengajuan Praktik Pemilihan mess
+
+[33mcommit efe289e672ac0ac33fecb38d4190b9029ae117e7[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Nov 16 09:34:48 2022 +0700
+
+    Progres Pengajuan Praktik Pemilihan mess
+
+[33mcommit 9b08a5ae1097336bba183be965debe8748f0c2be[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Nov 16 09:33:24 2022 +0700
+
+    Tidak ada pemilihan makan mess
+
+[33mcommit 45266b74bcf7be74643cf18aba50a8a90d8442e6[m
+Merge: 49b7480 6c01f7e
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Nov 15 18:31:50 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 49b74801a3d8442513181878e19e76dd7f94c804[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Nov 15 18:31:14 2022 +0700
+
+    -
+
+[33mcommit 6c01f7e4046d842ead79af1dde0d6a04e1f41a60[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 15 16:11:20 2022 +0700
+
+    progres pemilihan mess di pengajuan praktik
+
+[33mcommit f882b400c6cedc16a60a0cc578085ce064a274d0[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 15 10:07:12 2022 +0700
+
+    penambahan pemilihan mess di pengajuan praktik
+
+[33mcommit ebed79f6f9b762614d773a398b9b043868fb5e68[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 15 09:21:54 2022 +0700
+
+    link file praktik berubah
+
+[33mcommit a4bdd13bddbea5e851a205b6d76be84185175a6d[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 15 08:49:49 2022 +0700
+
+    link file praktik berubah
+
+[33mcommit f1ec73d50a9e424b7973a729402eec77705e6ff2[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 14 16:06:56 2022 +0700
+
+    Progres Pengajuan Praktik mess
+
+[33mcommit 608137962cf77585183e2211b78e20804cc9dc0e[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 14 14:55:39 2022 +0700
+
+    Perbaikan Pengajuan praktik
+
+[33mcommit 349356ea86e9dba8eebf2735d0bf0d5d4ec07acc[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 14 14:54:49 2022 +0700
+
+    Perbaikan Pengajuan praktik
+
+[33mcommit 6b18d20fb19f39613162e4a0320086de8528407d[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Nov 13 13:58:02 2022 +0700
+
+    Tidak ada pemilihan makan mess
+
+[33mcommit 2340436d25ae5db617fa9562ba6d37ed69a64fb6[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 8 17:30:50 2022 +0700
+
+    perbaikan select jurusan jenjang profesi
+
+[33mcommit b89f9487ded97bcce8beb345ecea134f2c8b98b9[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 2 16:08:16 2022 +0700
+
+    progres select jurusan jenjang profesi
+
+[33mcommit 17b84f6becf10ca92ae19b8ad6647d00154e42c8[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 1 16:13:35 2022 +0700
+
+    progres select jurusan jenjang profesi
+
+[33mcommit 8c2c511f19b90f6aebc9e2c598c6121fea06c851[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 1 16:02:25 2022 +0700
+
+    progres select jurusan jenjang profesi
+
+[33mcommit 2856f6909c57bd0ee8ca335465d1e7113370ab14[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 1 16:01:03 2022 +0700
+
+    progres select jurusan jenjang profesi
+
+[33mcommit a5eb8aa943b2ad972564eef9b16a47fde332d29b[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 1 15:57:50 2022 +0700
+
+    progres select jurusan jenjang profesi
+
+[33mcommit 54d6ec26ebfd7792ec146440a42c385c106f97c5[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Oct 31 15:58:55 2022 +0700
+
+    progres insert pengajuan praktik
+
+[33mcommit 162eff073dcbb8d893552f3e9898f054518d10f2[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Oct 28 07:14:07 2022 +0700
+
+    progres insert pengajuan praktik
+
+[33mcommit 4d8c4056fc24b73995ca6a8d46e19589bff78518[m
+Merge: bb36310 d3c725a
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Oct 27 20:26:00 2022 +0700
+
+    progres insert pengajuan praktik
+
+[33mcommit bb36310341f566e79462d54af494c1840ee1ade9[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Oct 27 20:25:12 2022 +0700
+
+    progres insert pengajuan praktik
+
+[33mcommit 14dae1e73324ae540309dc530e4c353368b7f065[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Oct 27 20:25:00 2022 +0700
+
+    progres insert pengajuan praktik
+
+[33mcommit d3c725af97023e10d4329072a478f825ee5955e3[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Oct 27 15:54:58 2022 +0700
+
+    progres insert pengajuan praktik
+
+[33mcommit 39b10d65d9deac9a2fc5948f3c859b07ec3f6f89[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Oct 26 16:28:28 2022 +0700
+
+    progres isert pengajuan praktik
+
+[33mcommit 96eba2f309b1ff010c252fad4a44972f96b488f4[m[33m ([m[1;31morigin/delCSSJSVENDOR[m[33m)[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Oct 26 06:53:03 2022 +0700
+
+    hapus beberapa file css, js, dan vendor
+
+[33mcommit 52f7781c2275997100ca8c3b3affd67aa875ed95[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Oct 25 19:16:21 2022 +0700
+
+    hapus beberapa file css, js, dan vendor
+
+[33mcommit 9c90e3156ac4d5a56130d36aab1a9dd78ade026a[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Oct 25 16:38:38 2022 +0700
+
+    progres pengajuan praktik
+
+[33mcommit 7bffaea2cad33d9177d64db341facefb8478c077[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Oct 25 14:06:27 2022 +0700
+
+    perbaikan pembuatan hak akses akun
+
+[33mcommit 15b3eedf3c39167f07e832cb1dfd94c442b01e76[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Oct 24 16:08:02 2022 +0700
+
+    progres pembuatan hak akses akun
+
+[33mcommit 71aa91a4dd05891d4661a6c3c471b696ef071815[m[33m ([m[1;31morigin/dev_workPC[m[33m, [m[1;32mdev_workPC[m[33m)[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Oct 24 16:06:05 2022 +0700
+
+    progres pembuatan hak akses akun
+
+[33mcommit 1ea3271a5c869bee01013985b73ec580c332b0ef[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Oct 24 08:00:11 2022 +0700
+
+    Merge Branch origin/dev
+
+[33mcommit ce2fc98848870895fec8f8c02a6d59de0272b577[m[33m ([m[1;31morigin/dev[m[33m)[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Oct 24 00:18:28 2022 +0700
+
+    Perbaikan Ubah Akun foto
+
+[33mcommit 1810893cea99286b96d4d43d41c76619e12537ab[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Oct 24 00:17:50 2022 +0700
+
+    Perbaikan Ubah Akun foto
+
+[33mcommit 2f42b35f553db157e9404803722a52b9e55a9e67[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Oct 23 23:44:10 2022 +0700
+
+    Progres Ubah Akun
+
+[33mcommit 052970dc4d1a8505f5113d0657bd3c8f230c8db4[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Oct 23 22:26:41 2022 +0700
+
+    Perbaikan Tambah Akun
+
+[33mcommit 5b32c723ebdcedfd0e956e843a38d95f48aed64b[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Oct 23 22:00:55 2022 +0700
+
+    Perbaikan Tambah Akun
+
+[33mcommit ebf6ae0036c79ea97820f365f759a228aa37c82a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Oct 23 13:14:39 2022 +0700
+
+    Update Terakhir Login
+
+[33mcommit 98d03c3cd5a38f596b6b54b8b91cc16a525d5c43[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Oct 21 09:42:58 2022 +0700
+
+    Branch dev dibuat
+
+[33mcommit bbf563bf3a2cec6c9b086fec053a96dd27b6989a[m[33m ([m[1;31morigin/arc20221007[m[33m)[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Oct 21 09:41:23 2022 +0700
+
+    Arsip Hasil Rapat Tanggal 07 Oktober 2022
+
+[33mcommit 9703b71ec45efeb17e63a7c79ed37476d00579a8[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Oct 7 17:04:25 2022 +0700
+
+    Proses Perbaikan Data Tarif Keperawatan
+
+[33mcommit cb9056941ab0d91bbfedcbeba83559f7ac7e7f03[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Oct 4 15:32:21 2022 +0700
+
+    Database Trial
+
+[33mcommit 3955f51fd89359b4273821bdee3286b0f7be49e6[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Oct 4 15:31:22 2022 +0700
+
+    Selesai Pengajuan Keperawtan User Institusi
+
+[33mcommit ee8397b13a45fdf782a0019cbabe74e7856d8e55[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Oct 4 10:05:45 2022 +0700
+
+    Nama Institusi Pengajuan Keperawatan Disesuaikan dengan User
+
+[33mcommit 6c1c9a692c96b4883541e108db0895fc65fb14bf[m
+Author: fajar.rachmat.h <fajar.rachmat.h@gmail.com>
+Date:   Mon Oct 3 15:20:04 2022 +0700
+
+    Database Kosong
+
+[33mcommit 82531e37b1e688dbd1324df8ac4a84524a0e3261[m
+Author: fajar.rachmat.h <fajar.rachmat.h@gmail.com>
+Date:   Mon Oct 3 11:46:03 2022 +0700
+
+    Perubahan Keterangan MoU Dashboard Institusi
+
+[33mcommit be4fa175a6bdfd84b5556275c1315e3574457404[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Sep 30 06:38:04 2022 +0700
+
+    Input data praktikan farmasi profesi apoteker
+
+[33mcommit e31a137ea03bbedb61c35ca295574bf535d5c327[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Sep 29 18:26:31 2022 +0700
+
+    Input data praktikan farmasi profesi apoteker
+
+[33mcommit 8dbd927bef0516e7943d0a88a81d293f473179f0[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Sep 29 18:26:18 2022 +0700
+
+    Input data praktikan farmasi profesi apoteker
+
+[33mcommit e291f7a491bcfb36d53d3f084a25a468a2433d40[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Sep 23 16:46:56 2022 +0700
+
+    Perbaikan Menu Login
+
+[33mcommit 026632295480bb500df02dbebf8d0747cc3731fc[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Sep 14 16:21:34 2022 +0700
+
+    Perbaikan Menu Login-Registrasi-Dashboard untuk IID Kemendagri
+
+[33mcommit 3646f784e7bb30a051722cd8763b751a1916687f[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Sep 14 09:27:45 2022 +0700
+
+    Perbaikan Menu Login-Registrasi-Dashboard
+
+[33mcommit eaf13a852c68cf58549cba5c6304f281c16015f7[m
+Merge: cb92e33 80a6195
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Sep 14 07:10:22 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit cb92e337a1cb6de0a837073eb28ffd1d6d22abcf[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Sep 14 07:10:16 2022 +0700
+
+    -
+
+[33mcommit 80a6195c9ced2555c630c5797d05c523ab8b4dad[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Sep 13 16:59:19 2022 +0700
+
+    Perbaikan Menu Login-Registrasi-Dashboard
+
+[33mcommit 3d0adc8d8aa4eec9bb7c19f35f0433f21f7e43e0[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Sep 9 06:46:30 2022 +0700
+
+    -
+
+[33mcommit e526c2bfcf03d6c18e2a725aafaa839b15bda922[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Sep 9 06:46:20 2022 +0700
+
+    -
+
+[33mcommit 1185cdb20ed27b3e12c420d8de914f9a41529055[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Aug 26 09:49:53 2022 +0700
+
+    perbaikan icon dan penghapusan survey - dashboard, register, login
+
+[33mcommit 552914dcc6bb146e55b3f2fc8b161c53614d7be2[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Aug 26 09:37:34 2022 +0700
+
+    dependabot manual 'scss-tokenizer': '>=0.4.3', 'moment': '>=2.29.4'
+
+[33mcommit bfc6c4449959ed7a46afaaa78579fe567973b72d[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Aug 26 09:35:53 2022 +0700
+
+    dependabot manual 'scss-tokenizer': '>=0.4.3'
+
+[33mcommit 12c9a7509980fa0f43d8ebb742e5b687ae00f2c2[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Aug 26 09:35:21 2022 +0700
+
+    dependabot manual scss-tokenizer:
+
+[33mcommit 072fc62096f2767302b5f96e873f174832801af5[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Aug 26 09:35:06 2022 +0700
+
+    dependabot manual scss-tokenizer:
+
+[33mcommit 67a7d67cf54f6d59e48cff74f5588d42c1834df5[m
+Merge: e544e24 2666930
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Aug 26 09:29:49 2022 +0700
+
+    Note delete file
+
+[33mcommit e544e24cd841aa9d79f22d521bea56982a2d1d1b[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Aug 26 09:28:50 2022 +0700
+
+    Note delete file
+
+[33mcommit 8d4d6f9bac5219a8d8bb29d99fdea8be51f26dd2[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Aug 26 09:28:37 2022 +0700
+
+    Note delete file
+
+[33mcommit 266693077ec78c3b4ed80561d1d6bb0ee399df5a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Aug 24 03:07:07 2022 +0700
+
+    timer selesai proses pengajuan kedokteran
+
+[33mcommit 21fd967695b69fdaf7ea545e5d46c3a9f6568dc2[m
+Merge: 63017ed 59a0148
+Author: simrsj <simrsjprovjabar@gmai.com>
+Date:   Mon Aug 22 13:01:43 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 63017ed1ee8d6bfa2466860d18627dad17c21047[m
+Author: simrsj <simrsjprovjabar@gmai.com>
+Date:   Mon Aug 22 13:01:38 2022 +0700
+
+    -
+
+[33mcommit 59a01489ae3c802b94f6862a7e029b7e24aceff6[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Aug 22 13:01:02 2022 +0700
+
+    -
+
+[33mcommit 4f5b7e033d4a422c583ae3d3879f793fbe38b7b2[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Aug 1 16:11:09 2022 +0700
+
+    -
+
+[33mcommit 936b5ea0a0ace19c68fdffcfb5ea53717366603e[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Jul 21 16:46:10 2022 +0700
+
+    Progres permohonan dan tambah Penelitian
+
+[33mcommit c927f5b7c76c75c1430b374a9634bf449fe36993[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Jun 23 15:11:43 2022 +0700
+
+    Perbaikan Select Pengajuan Praktikan
+
+[33mcommit 6f3f45f0fc76345ba5b4c4b50337e91774a9dc61[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Jun 20 16:22:10 2022 +0700
+
+    Perbaikan Pilih Mess/Pemondokan
+
+[33mcommit a9b5a6960923de04509c2b10c62360a181b568e9[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Jun 8 16:25:30 2022 +0700
+
+    Perbaikan Pilih Mess/Pemondokan
+
+[33mcommit 83fad5d279077f21249f5a2ad2d29f3378c55672[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Jun 8 08:03:56 2022 +0700
+
+    Perbaikan Pilih Mess/Pemondokan
+
+[33mcommit de03aff61f601dc15b3422cefcd7e6741f751108[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Jun 7 16:12:05 2022 +0700
+
+    Perbaikan Pilih Mess/Pemondokan
+
+[33mcommit d8da500474d6baaf29d3c7b55e2ac4ef6e55ac22[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 24 17:46:33 2022 +0700
+
+    Perbaikan Pilih Mess/Pemondokan
+
+[33mcommit f53b528f727601066f024cb8f57a21f06d4d1040[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 24 10:29:06 2022 +0700
+
+    Perbaikan Pilih Mess/Pemondokan
+
+[33mcommit 2d04c7c280bb674ac9193228960b97ef879df35e[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 24 10:27:02 2022 +0700
+
+    Perbaikan package-lock.json
+
+[33mcommit a723a204423bd1140b36ad701f8e44d7316b14c5[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 24 10:26:15 2022 +0700
+
+    Perbaikan package-lock.json
+
+[33mcommit 87b7cd81a7754b602bfa54bea1dca151ba123fe5[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 24 10:25:12 2022 +0700
+
+    Perbaikan package-lock.json
+
+[33mcommit a2867478360f6c024afbc78a361d0b3acc4de3a0[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 24 09:53:50 2022 +0700
+
+    Perbaikan package-lock.json
+
+[33mcommit 8cb3687a1f58c1491dd6a54e27690cb87e9781ed[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 24 09:52:10 2022 +0700
+
+    Perbaikan package-lock.json
+
+[33mcommit 3ee256b4171cd00276d00bc8e28477a6753c8999[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 24 09:45:44 2022 +0700
+
+    Perbaikan package-lock.json
+
+[33mcommit 57591eaa63dde6467cb70395aa72f33c89077774[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon May 23 17:32:47 2022 +0700
+
+    Perbaikan Pilih Mess-Pemondokan Praktik
+
+[33mcommit a4e577dca7b6ee4f5bcb1a1301317b21ea9da69f[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri May 20 09:49:19 2022 +0700
+
+    Perbaikan Tampilan Modal Jadwal dan Status Kuota Pilih Mess-Pemondokan Praktik
+
+[33mcommit 2b290877fc3bb7f629c52989bdd1d5523e0f56f2[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri May 20 06:56:18 2022 +0700
+
+    Perbaikan Tampilan Pilih Mess-Pemondokan Praktik
+
+[33mcommit 516f3d10006179446dd18c1ad5bbde94fa620b00[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu May 19 16:01:17 2022 +0700
+
+    Perbaikan Tampilan Pilih Mess-Pemondokan Praktik
+
+[33mcommit eff624435357a8141308b2d72c537080535b1312[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed May 18 16:13:20 2022 +0700
+
+    Perbaikan Tampilan Pilih Mess-Pemondokan Praktik
+
+[33mcommit 84b8f2cb0f1a7bf01671e17e3dd7f17279111ec6[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 17 16:07:20 2022 +0700
+
+    Progres Pemilihan Mess/Pemondokan Prakrik
+
+[33mcommit a91a0bd8f5d12c47a6227825777312abbd3c3b63[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon May 16 22:44:15 2022 +0700
+
+    Progres Pemilihan Mess/Pemondokan Prakrik
+
+[33mcommit 6d96fb4a9a557a53f9a5e80e3ec5b5f23d388bad[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon May 16 22:39:30 2022 +0700
+
+    Perbaikan Pemilihan dan Makan Mess/Pemondokan Wajib
+
+[33mcommit ad0a7a6590491447638016b8e509c5f98efda5ab[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon May 16 21:52:33 2022 +0700
+
+    Progres Pemilihan dan Makan Mess/Pemondokan Wajib
+
+[33mcommit d039369fe900aa592f975c347380df2c5d2f6c93[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon May 16 21:52:23 2022 +0700
+
+    Perbaikan Pemilihan dan Makan Mess/Pemondokan Opsional
+
+[33mcommit f3fc90d77125e0039967571bfb25b3cb9fa08c2a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon May 16 20:32:13 2022 +0700
+
+    Perbaikan Pemilihan Mess/Pemondokan
+
+[33mcommit 6514e4816c0e245cdfe6d70e1a5ee88194108253[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri May 13 16:29:22 2022 +0700
+
+    Progres Pemilihan Mess Praktik Keperawatan
+
+[33mcommit fb16145825781abc49a501babefe6856718b6a3a[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu May 12 17:06:09 2022 +0700
+
+    Progres Pemilihan Mess Praktik Keperawatan
+
+[33mcommit 9c9551042817ff0ddce1cd102d121a011cfac219[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu May 12 10:22:58 2022 +0700
+
+    Perbaikan Dashboard Akun Institusi
+
+[33mcommit c34a0052e2c56b00d63cc09880c9e85147d1b6f0[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu May 12 10:14:14 2022 +0700
+
+    Perbaikan Tambah dan Ubah Institusi
+
+[33mcommit 0ca75ed8f70787f351ac38979c59270f6fa9c96f[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed May 11 16:29:08 2022 +0700
+
+    Progres Perbaikan Tambah Institusi
+
+[33mcommit fc542c6056db92ff8a57d0a7653d3ae11f45fe1b[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed May 11 16:13:32 2022 +0700
+
+    Progres Perbaikan Tambah Institusi
+
+[33mcommit 9562d3f3721712d0930af6380effb229fd9c3fdc[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed May 11 13:40:46 2022 +0700
+
+    Perbaikan favicon tab logorsj.ico
+
+[33mcommit c40b4a818789d8ffe270f7f57c62016fbb90ddd5[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed May 11 13:40:26 2022 +0700
+
+    Perbaikan favicon tab logorsj.ico
+
+[33mcommit 68149de9704b9122492699092cf8bb1d8cd670ef[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 10 16:41:08 2022 +0700
+
+    Progres tampilan tarif ujian praktik keperawatan
+
+[33mcommit 7eceffb757a3d875042cf466859583f0c6fcc8fa[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 10 16:36:02 2022 +0700
+
+    Progres tampilan tarif ujian praktik keperawatan
+
+[33mcommit cfb8db71468de13be2c00b29f2669c3c4a393901[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue May 10 10:38:30 2022 +0700
+
+    Perbaikan Ubah dan Hapus Mess/Pemondokan
+
+[33mcommit 915fcbc9c1984c722d257abebfb7edb025ac2547[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon May 9 16:05:26 2022 +0700
+
+    Progres Modul CRUD Mess/Pemondokan
+
+[33mcommit 45a5ed7c148172c8200058196e0b6ce1ce7ecaae[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon May 9 06:45:25 2022 +0700
+
+    Progres Modul CRUD Mess/Pemondokan
+
+[33mcommit 1997d1f4688be010ade212c32018eb74dacfff92[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon May 9 06:44:49 2022 +0700
+
+    Progres Modul CRUD Mess/Pemondokan
+
+[33mcommit 7d972ff6f76199a893e6343b3904807268314c22[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun May 1 15:13:00 2022 +0700
+
+    Progres Modul CRUD Mess/Pemondokan
+
+[33mcommit b7fad1eb37329bae7a9169da6afe8a4b687cb130[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun May 1 14:46:16 2022 +0700
+
+    perbaikan Modul CRUD Daftar Pembimbing
+
+[33mcommit 5125f6d89fa86890555c76a26ffc4916f82551ba[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Apr 29 14:40:45 2022 +0700
+
+    Progres Modul Tambah Data Daftar Pembimbing
+
+[33mcommit a9114dda86808a1dd474509c5c53ea9446d3b679[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Fri Apr 29 14:40:40 2022 +0700
+
+    Progres Modul Tambah Data Daftar Pembimbing
+
+[33mcommit 99478f608091bb5da3b996122d8c20fc9cc178eb[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Apr 28 15:27:43 2022 +0700
+
+    Progres Modul Tambah Data Pembimbing
+
+[33mcommit cbaa3a3251ca7df6193cb4ced67f8b5161fe97f9[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Apr 28 11:07:41 2022 +0700
+
+    Perbaikan Modul Hapus Institusi
+
+[33mcommit 293d3ffa1190b522e6bb11040c3c88f77082b121[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Thu Apr 28 11:03:53 2022 +0700
+
+    Perbaikan Modul Ubah Institusi
+
+[33mcommit b21e34a5838846118bd3fc5fa107fc2659841a3f[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Apr 27 15:14:13 2022 +0700
+
+    Progres Cetak Nilai Keperawatan
+
+[33mcommit 295e465445470fa75a42af862de95b101da4ea86[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Wed Apr 27 15:09:01 2022 +0700
+
+    Perubahan Cetak Invoice institusi
+
+[33mcommit ddc240106a585ec35f3deb6d95cd2107e481f331[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 26 16:05:14 2022 +0700
+
+    Progres Ubah institusi
+
+[33mcommit df279dcd29cef82defd633f0a2986b8d5f10b289[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 26 14:50:47 2022 +0700
+
+    Progres Ubah institusi
+
+[33mcommit 803cfddd5175c3129ed7550be54acf924eab3387[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Apr 25 16:43:25 2022 +0700
+
+    Perbaikan Modul Tambah institusi, Progres Ubah institusi
+
+[33mcommit 669cb5b72ec94bbb7deb79d81e8154023c19cc14[m
+Author: workPC <fajar.rachmat.h@gmail.com>
+Date:   Mon Apr 25 13:52:38 2022 +0700
+
+    Perbaikan Modul Tambah, Ubah, dan Hapus Tempat
+
+[33mcommit aad7a819fa366fb8b0ce471212e80e06c2373392[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Apr 25 07:22:38 2022 +0700
+
+    Perbaikan Pengajuan akun IP
+
+[33mcommit 0e25294b37cc11d99f1a76fb8a353a2d743e98be[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Apr 25 07:18:13 2022 +0700
+
+    Perbaikan Pengajuan akun IP
+
+[33mcommit 8d33e7634b47f388d763e71841e53eee5cea8f75[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Apr 24 16:11:31 2022 +0700
+
+    Perbaikan Tampilan Data MoU
+
+[33mcommit 150b022ff250fe3d67390c9204b7c24857975d9b[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Apr 24 16:09:28 2022 +0700
+
+    Perbaikan Tampilan Data MoU
+
+[33mcommit a4549a6f56ac76d6f9eacbbb2492d929c47657e2[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Apr 24 16:06:24 2022 +0700
+
+    Perbaikan Tampilan Data MoU
+
+[33mcommit a7d56443e15b22e71317e848e3adfef44713c718[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Apr 24 11:51:04 2022 +0700
+
+    Perbaikan Ubah Data MoU
+
+[33mcommit be39810a52c9bf825a05b9de175445ba327e1b85[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Apr 24 10:31:38 2022 +0700
+
+    Perbaikan Tambah Data MoU
+
+[33mcommit c6df4ede5d793f691252c2b8cdcbf203078fccf3[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Apr 24 09:27:09 2022 +0700
+
+    Perbaikan Tampilan Data MoU
+
+[33mcommit 1a4a9643ddb0f93fc46d13af395b93cbccdac5ed[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Apr 24 09:24:06 2022 +0700
+
+    Perbaikan Tambah MoU
+
+[33mcommit 41e36ebcf63b02e572801a2c5656485085af113d[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Apr 22 07:28:56 2022 +0700
+
+    Perbaikan Informasi Sisa Jadwal Diklat
+
+[33mcommit 89116529be7586518efada75d6fe650125353c39[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Apr 20 17:14:20 2022 +0700
+
+    Hasil Analisa Rapat dengan Direksi
+
+[33mcommit 03b3d9d174adf086fab985838aa8535fde976df8[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Apr 20 17:13:43 2022 +0700
+
+    Hasil Analisa Rapat dengan Direksi
+
+[33mcommit cb617014e3fca9090fb4a24d472f36de89a4a7e6[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Apr 20 09:41:35 2022 +0700
+
+    Mengubah Informasi Format Data Praktikan di admin dan ip
+
+[33mcommit d4dfe243208f566d2a312c062466895308be133c[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Apr 20 09:26:37 2022 +0700
+
+    Mengubah Informasi Format Data Praktikan + database
+
+[33mcommit 0c70103d9b81d57b711d8e1012be4364f67f1b25[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Apr 15 15:03:46 2022 +0700
+
+    Perbaikan tambah tempat
+
+[33mcommit b9e1894bb7f6e7ef6a21b63675fd344008168bd2[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Apr 14 13:52:42 2022 +0700
+
+    perbaikan database
+
+[33mcommit ae8c62aa2cb0507a01b072d0cb60874cbfccfe8c[m
+Merge: 08a86e1 6eed1f7
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Apr 14 08:53:50 2022 +0700
+
+    pindah ke xampp7
+
+[33mcommit 08a86e12444aa6897a89e1b28df5622088798de9[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Apr 14 08:53:24 2022 +0700
+
+    pindah ke xampp7
+
+[33mcommit 6eed1f7e0f789dcd1f2f70598dfaefc21ecbe791[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Apr 9 01:08:37 2022 +0700
+
+    Tambah link ke login
+
+[33mcommit d7e7603e87ed38886e9dba28261c2b9a97ad0c60[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Apr 9 00:47:52 2022 +0700
+
+    Cleaning File
+
+[33mcommit 5659c79f79c4ee7269413e4e22acaf13931f97ec[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Apr 9 00:40:51 2022 +0700
+
+    Cleaning File
+
+[33mcommit abe6112be0826eb9d35840c6c48872ba941d279b[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 15:55:01 2022 +0700
+
+    Loading Screen Setiap Menu
+
+[33mcommit 53c8b2f48b4123853519bc9a8a9e895c1fc72627[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 13:22:28 2022 +0700
+
+    Loading Screen Setiap Menu
+
+[33mcommit 7a54b9ae5c3c75b7e6dd9b6a8cfb4bbce8dbebbe[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 11:08:17 2022 +0700
+
+    Logo RSJ Akun Admin dan IP
+
+[33mcommit 17799a6e00a812f240fa10a8405a633d009a2605[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 10:06:52 2022 +0700
+
+    Logo WBK
+
+[33mcommit 9d1e36156f10fc6f3f8af7c4f180483ab2bbc0db[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 09:16:50 2022 +0700
+
+    Progres Loading Screen
+
+[33mcommit 9e450b3100dec56b68d1cb963f7e80d5edb8c992[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 09:16:32 2022 +0700
+
+    Progres sLoading Screen
+
+[33mcommit 4915191fb260804e65f8d464305c649c67a83d97[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 09:14:48 2022 +0700
+
+    Progres sLoading Screen
+
+[33mcommit f59af13451734199992f30fb146f076aacc4e58f[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 09:13:53 2022 +0700
+
+    Progres sLoading Screen
+
+[33mcommit 60816b55c919662a77e93b2f564059548ccdb3d7[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 09:04:18 2022 +0700
+
+    Progres sLoading Screen
+
+[33mcommit 40656327dd570b0be6ed654c074bc1f5e4cd412d[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Apr 5 09:03:32 2022 +0700
+
+    Progres Loading Screen
+
+[33mcommit 8b196f210479f46c8243bf9cc843391c7bad00ad[m
+Merge: 87a409e 4a8800e
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Apr 4 17:02:41 2022 +0700
+
+    Progress Loading Screen
+
+[33mcommit 87a409e2929808ff7ca1bdf58de1f91538f21043[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Apr 4 17:01:35 2022 +0700
+
+    Progress Loading Screen
+
+[33mcommit 4a8800e6ab575d4a641d93ced5a494848e66d607[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Apr 4 15:48:53 2022 +0700
+
+    Progres Loading Screen
+
+[33mcommit 127679f48a88ae60c63b436298d22419aff46237[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Apr 4 15:15:48 2022 +0700
+
+    Progres Loading Screen
+
+[33mcommit d972fe520c0799524e65df6ff3aced3d339556fe[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Apr 4 10:57:25 2022 +0700
+
+    Perbaikan Pemilihan Tempat
+
+[33mcommit 3206573502816b92eb683c709f35151bdfb66595[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Apr 4 10:55:29 2022 +0700
+
+    Perbaikan Informasi Jadwal Nakes Lainnya dan Non-Nakes
+
+[33mcommit da241b7266b435147c89c22d657661e657f1f714[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Apr 4 07:58:41 2022 +0700
+
+    Perbaikan Dashboard Admin
+
+[33mcommit 80978bcc76e85adfc626dd28ed7fb671a75dc429[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Apr 1 16:27:38 2022 +0700
+
+    Progress Loading Screen
+
+[33mcommit 66eeaff8de0534928cc65bc0798aceedf4b862cc[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Apr 1 10:14:56 2022 +0700
+
+    Progress Loading Screen
+
+[33mcommit dd92e7498075acac72397079d4334899fbd61a37[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 31 17:15:33 2022 +0700
+
+    Progress Loading Screen
+
+[33mcommit 94c2f80bf48b277522fb58e37b75e9ea373c7657[m
+Merge: 7b271ec 90cc47a
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 31 16:32:58 2022 +0700
+
+    Progress Loading Screen
+
+[33mcommit 7b271ec3ad60e9e2a13ab6e2bb0dc5c59dc68a46[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 31 16:31:53 2022 +0700
+
+    Progress Loading Screen
+
+[33mcommit 90cc47ad810b9724e18ed7e83305bc9f1709d742[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 31 14:26:37 2022 +0700
+
+    Perbaikan Judul Data Praktik
+
+[33mcommit c9d2829f75214583d3dfd4a35d8030aaf1a4cf7f[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 31 13:13:47 2022 +0700
+
+    Perbaikan Cek Jadwal Mess
+
+[33mcommit 75f996ac90b94efe2db41bf0cb9544f0d25594be[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Mar 31 07:33:27 2022 +0700
+
+    Perbaikan Judul Hal. Dashboard, Login, dan Register
+
+[33mcommit 8edde96420498495321767b6236570d8c888c4b9[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Mar 30 16:03:24 2022 +0700
+
+    Progres Jadwal Mess
+
+[33mcommit afffcbc051e61b08675c014b1dd9791b7a23c0db[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Mar 30 16:03:18 2022 +0700
+
+    Progres Jadwal Mess
+
+[33mcommit 3673a2dec35e113242ed3dc6c9e7c63ccac54e60[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 30 06:41:18 2022 +0700
+
+    Perbaikan navbar Hal. Dashboard, Login, dan Register
+
+[33mcommit 4c01e7858797a3833acecac505daa7cc23dfdfae[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 30 06:40:20 2022 +0700
+
+    Perbaikan navbar Hal. Dashboard, Login, dan Register
+
+[33mcommit 1a1babcc489ba71a91d0fb7a6b513ee23a03d0fc[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 29 19:14:39 2022 +0700
+
+    Perbaikan query data peondokan, accordioan data mess dan pemondokan
+
+[33mcommit 31275d85adf93e3f80cd211263bb5dc922d81f5b[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 29 16:43:46 2022 +0700
+
+    Progres Data Jadwal Mess
+
+[33mcommit d50e5ae402d4d58a7f9d3d0147c0d95119532eb9[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 29 16:34:21 2022 +0700
+
+    Progres Data Jadwal Mess
+
+[33mcommit f2662b6471ad32866fca05cff05484c09372d324[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 29 13:19:29 2022 +0700
+
+    Perbaikan Dashboard Utama (Data Praktik, Mess, Pemondokan)
+
+[33mcommit dfefae71d33c28a19aac03f4cd524971dc534815[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 29 13:18:18 2022 +0700
+
+    Perbaikan Dashboard Utama
+
+[33mcommit 21cecea85d3cce25974d6bfd9105483a5a91c46e[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 29 07:10:49 2022 +0700
+
+    Proges Dashboard Mess
+
+[33mcommit 2859f633755e39d4950cf28b520cf0169de9d186[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 29 07:10:39 2022 +0700
+
+    Proges Dashboard Mess
+
+[33mcommit 77460a856d5b4d5edb8b5c53b77e687f8556ac80[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Mar 28 21:13:59 2022 +0700
+
+    Perbaikan Data Nilai Keperawatan
+
+[33mcommit 70aa2b0c6a6f8501f17c6c5e02a0085c844b2b37[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Mar 28 21:13:50 2022 +0700
+
+    Perbaikan Data Nilai Keperawatan
+
+[33mcommit e304455964fe6842b575c7022eb76121372412bf[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 28 16:26:04 2022 +0700
+
+    Cleaning Index Utama LINK CSS dan JS
+
+[33mcommit 948e9b5613c03bb4f1de1a73d816bd2fe9c4b220[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 28 15:11:59 2022 +0700
+
+    Cleaning Index Utama LINK CSS dan JS
+
+[33mcommit aabf0ab625ab8d26e3bd4c1a34f9f70cba00101d[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 28 15:10:50 2022 +0700
+
+    Delete Vendor
+
+[33mcommit f0a6e4e370dc2f9a211f377f439c78a8f35ecb37[m
+Merge: ca8277f ee1b9a7
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 28 15:08:31 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit ca8277f114671b5c9523746956fa1c1a9301906a[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 28 15:08:28 2022 +0700
+
+    Ubah Tampilan Navigasi Dashboard, Login, dan Registrasi
+
+[33mcommit ee1b9a703ddae775b37577dcdc7cd185626eb3c3[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Mon Mar 28 15:04:26 2022 +0700
+
+    blm mou
+
+[33mcommit 647079cd7603d1c78958c35df6e75134f9bae8ac[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Mon Mar 28 15:03:12 2022 +0700
+
+    blm mou
+
+[33mcommit 4eb689e32ad63a0bb01962012d7ce2e9d6582e64[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Mon Mar 28 14:57:43 2022 +0700
+
+    kondisi -30 hari
+
+[33mcommit 02943f6925a0650728c4f3c1d9c8a7d10ae722ce[m
+Merge: d85fa8d 281ead0
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 28 14:40:44 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit d85fa8d2dbb1452b68ab088db5b5f068e942ba0c[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 28 14:40:41 2022 +0700
+
+    Informasi Modal Kedokteran dan Keperawatan
+
+[33mcommit 281ead096aa863dd0606b49ea895e88a9e90ade6[m
+Merge: 2ac83ce 9faa5bb
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Mon Mar 28 14:39:58 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 2ac83ce880e116c59b42102a2d5ac6e975bfec39[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Mon Mar 28 14:39:53 2022 +0700
+
+    dashboard mou ip
+
+[33mcommit 9faa5bbbf667e85fc66a191d4bcbf918105cf647[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 28 13:47:05 2022 +0700
+
+    Perbaikan query data nilai dan pembimbing akun Institusi
+
+[33mcommit c8a40134d0499deb47855359044383a1b92d157c[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Mar 28 00:05:11 2022 +0700
+
+    perbaikan Cetak Data Nilai Keperawatan
+
+[33mcommit fd6db1bec69336da9141c1fa1f9f8e78da1c1627[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Mar 27 23:55:46 2022 +0700
+
+    Cetak Invoice Tarif, Cetak Invoice Tarif (Khsusu UKM), Cetak Invoice Tarif Mess, Cetak Invoice Tarif Ujian, Cetak Data Nilai Keperawatan
+
+[33mcommit e4431949fe314d5af20f23ce0481334e651a13d5[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Mar 25 16:57:38 2022 +0700
+
+    Progres Tombol Cetak Invoice
+
+[33mcommit 57621784b0e039237fde2f2a54fe446a47b39c1d[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Mar 25 16:56:56 2022 +0700
+
+    Progres Tombol Cetak Invoice
+
+[33mcommit 1ff70d6b30a4ffbd70170372a1ca9add2cfc5f1a[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 24 16:27:23 2022 +0700
+
+    Progres Tombol Cetak Invoice
+
+[33mcommit ad4d3fabb974579208c3e0dea43cb4d69659f7ee[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 24 16:27:02 2022 +0700
+
+    Progres Tombol Cetak Invoicea
+
+[33mcommit 6bbee2b6d7a494a89f881838e9fb2e319801a543[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 24 16:18:10 2022 +0700
+
+    Progres Tombol Cetak Invoice
+
+[33mcommit cf01f84479c08ab29a5d496b59ed17aefceae5a3[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Mar 23 16:04:22 2022 +0700
+
+    Progres Tombol Cetak Invoice
+
+[33mcommit 1cc20b94ac53a1a1431af87f6d9c4e668c7cccca[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 23 06:48:45 2022 +0700
+
+    Progres Tombol Cetak Invoice
+
+[33mcommit db17d4ee25ddc7739d2f1190f28939d4a1a51b4a[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 22 17:08:58 2022 +0700
+
+    Progres Tombol Cetak Invoice
+
+[33mcommit 59f2a41a1bb8d45db433b37e922d9ec21cd16c50[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 22 07:19:54 2022 +0700
+
+    Progres Tombol Cetak Invoice
+
+[33mcommit 5e43d86137ac1cd4a31a7b2f7909a041d1fbcd9f[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 21 17:19:12 2022 +0700
+
+    Progres Tombol Cetak Invoice
+
+[33mcommit 8f4c5d4bcd6aa1f6c914c4a931912e33a6e3a4dd[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Mar 21 00:55:59 2022 +0700
+
+    Perbaikan Tombol Cetak Invoice, Perbaikan Modul Tambah dan Ubah MoU ADMIN
+
+[33mcommit 7e7e1d43a088706e131bbff3cd56ebe26f25af9b[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Mar 18 16:19:06 2022 +0700
+
+    Progres cetak invoice Tarif
+
+[33mcommit 36a56e63f4d6b2859c89dc9dbb30b21dbb1bbb02[m
+Merge: 49eba22 4a0df73
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Mar 18 15:27:00 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 49eba22037b226ad250684738baa3359b6a2c782[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Mar 18 15:26:57 2022 +0700
+
+    perbaikan val profil institusi
+
+[33mcommit 4a0df735c6e11acee4d99aec5c8fccf191989797[m
+Merge: dd12978 0786290
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Fri Mar 18 15:25:21 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit dd12978f48044af2e71e1775e7216f4d9aa70bbc[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Fri Mar 18 15:25:15 2022 +0700
+
+    cek
+
+[33mcommit 07862908d5670b594230f18bc29d142e154655d4[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Mar 18 15:23:54 2022 +0700
+
+    perbaikan val profil institusi
+
+[33mcommit 87144063c3d17d2ce8f5b5c2cef9f75c6907df25[m
+Merge: cbfde6e 36d00be
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Fri Mar 18 13:24:07 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit cbfde6eb08f21ccb883e65be6288c1f8a19f12b7[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Fri Mar 18 13:23:58 2022 +0700
+
+    cetak fix
+
+[33mcommit 36d00bee5930500d22757bb135990902b081dfda[m
+Merge: cefd6ae b5bdb5c
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Mar 18 11:23:33 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit cefd6ae8a6d11974d01a2e845479c168fa873faf[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Mar 18 11:23:29 2022 +0700
+
+    selesai val profil institusi
+
+[33mcommit b5bdb5cc56ed89f996e113e7dfd157a62d9ae8cf[m
+Merge: 7a6af85 77a186b
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Fri Mar 18 11:23:22 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 7a6af85237582f45eaa1ed62e9388663065e3eb9[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Fri Mar 18 11:23:16 2022 +0700
+
+    data praktik
+
+[33mcommit 77a186bf72e16531b3be182bfcb76927896dbf10[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Mar 18 07:34:58 2022 +0700
+
+    progress val profil institusi
+
+[33mcommit a74c893d80fba7f5bd4383b6ab23beb512a20222[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Mar 18 07:34:51 2022 +0700
+
+    progress val profil institusi
+
+[33mcommit 3bc71b320a6e12238e57c82182bec2f38f65f126[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 17 16:54:39 2022 +0700
+
+    database
+
+[33mcommit b6c568a02d9cada886209dca8d7e4bb2f999143e[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 17 16:52:55 2022 +0700
+
+    koneksi
+
+[33mcommit 85dec7f7420b5b8e262f548669a8d1f2b73acfc9[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 17 16:52:48 2022 +0700
+
+    koneksi
+
+[33mcommit 5cf808238702dc9fd9ed877997c2d595be0e6878[m
+Merge: d6d96f8 30dae14
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 17 15:18:44 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit d6d96f821c87141068a978c9106822b8a944bb61[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 17 15:18:32 2022 +0700
+
+    Progres modul profil insitusi
+
+[33mcommit 30dae14beda9b8ec5353028cacc3b170d007eb75[m
+Merge: ec38b26 840a4d7
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Thu Mar 17 15:16:13 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit ec38b26b78618c38bb945a13b6ab2265c2c82332[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Thu Mar 17 15:16:08 2022 +0700
+
+    DOMPDF BARU DAN CETAK BARU
+
+[33mcommit 840a4d7b625f31e859b225d8700b7793b1fb2188[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 16 21:22:30 2022 +0700
+
+    snippet #1
+
+[33mcommit 07db186c7be6561d289df59702c179ec645210a5[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 16 21:22:17 2022 +0700
+
+    snippet #1
+
+[33mcommit 49a6b122145b3dc5c82a16adaded238687282599[m
+Merge: f61a1c0 abefb82
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Wed Mar 16 16:33:33 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit f61a1c0e3749196f6c0ab9a284ec38a46811a0b6[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Wed Mar 16 16:33:26 2022 +0700
+
+    cetak
+
+[33mcommit abefb82c44b1941b51cf75219b551556bae4356c[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Mar 16 16:10:50 2022 +0700
+
+    Progres modul profil insitusi
+
+[33mcommit 062b50f8e852b2bb5d7c9b57db2d8987b006d1d8[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Mar 16 08:37:20 2022 +0700
+
+    Typo Penamaan Hover tombol data praktik di Menu ARSIP
+
+[33mcommit d25b5f069b7c409318fa51790522cb277d919f25[m
+Merge: 4901e31 cccc1c7
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Wed Mar 16 07:59:08 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 4901e317cec9d129af87496b403ba284b95cf8f7[m
+Author: rizkiegipurnama <rizkiegipurnama@gmail.com>
+Date:   Wed Mar 16 07:58:46 2022 +0700
+
+    jenjangprofesi
+
+[33mcommit cccc1c7920a4509eff6a4bb56f7e001432bcffa2[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 16 06:54:42 2022 +0700
+
+    perbaikan data institusi
+
+[33mcommit cde162f91440684648a312fa0565e8abe51f238b[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 16 06:52:23 2022 +0700
+
+    perbaikan data institusi
+
+[33mcommit 752334900ff4eaf9100c3d18515f6df19af1fe2a[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 15 17:57:22 2022 +0700
+
+    perbaikan data institusi
+
+[33mcommit 58e27d0cf506f47bec862851cd9f741526608190[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 15 15:20:26 2022 +0700
+
+    perbaikan akun institusi ada tombol validasi setiap alur
+
+[33mcommit f06fa85bb31aa856c1f996de4b01f8c1c5a19019[m
+Author: simrsj <simrsjprovjabar@gmai.com>
+Date:   Tue Mar 15 15:11:50 2022 +0700
+
+    , proses perbaikan akun institusi
+
+[33mcommit 1cfdb5db51e04f9969f131aa94f691ec7c1b4910[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 15 00:00:26 2022 +0700
+
+    Filter Jadwal praktik dipengajuan, proses perbaikan akun institusi
+
+[33mcommit 36aed149b40f690c8ace746a361a9dbac43c05d3[m
+Merge: f715afd 5070e2a
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 14 16:53:02 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit f715afdc9fee124a8536f5f0f7453363eb3d7eed[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 14 16:52:58 2022 +0700
+
+    progres validasi jadwal praktik
+
+[33mcommit 5070e2a8ee960711052b6384f7a0d556dfdaaa43[m
+Merge: 11c3679 9ccd56b
+Author: simrsj <simrsjprovjabar@gmai.com>
+Date:   Mon Mar 14 16:48:35 2022 +0700
+
+    delete
+
+[33mcommit 11c367907e9a7d3b5ccbd73a35b063a69b2e5f89[m
+Author: simrsj <simrsjprovjabar@gmai.com>
+Date:   Mon Mar 14 16:47:51 2022 +0700
+
+    delete
+
+[33mcommit 9ccd56b0d03c2ffa1178be308f464393417e89f5[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 14 16:39:08 2022 +0700
+
+    progres validasi jadwal praktik
+
+[33mcommit a240cdcaf2ccd64ef4dbbcca8f62ad8f3612cedf[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 14 16:38:57 2022 +0700
+
+    progres validasi jadwal praktik
+
+[33mcommit 13e925eaae04d515ef384533e3ba2a2493cb8b4c[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 14 14:11:11 2022 +0700
+
+    selesai data praktik, progres validasi jadwal praktik
+
+[33mcommit 1344b7f61772a58294a917eff1e9bfc6a9f755b5[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 14 11:35:38 2022 +0700
+
+    pemisahan file input praktik
+
+[33mcommit 5730d78485160de1408009cb8264c69a73ce2818[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Mar 13 19:59:30 2022 +0700
+
+    progres informasi dan filter jadwal praktik
+
+[33mcommit 627f9c851b9a0509df4a05dc9daef8bddc264570[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Mar 12 19:26:19 2022 +0700
+
+    perbaikan input praktik keperawatan profesi
+
+[33mcommit ab6b9c1bbc6d273731320ae758dd2328ff658ed8[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Mar 12 19:24:53 2022 +0700
+
+    perbaikan input praktik keperawatan profesi
+
+[33mcommit 26aaac0a737134b61cfcf97f9165f50d637f68fc[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Mar 12 17:21:13 2022 +0700
+
+    Selesai modul kuota, informasi jadwal praktik
+
+[33mcommit 8a280884377de732a3f63f533d55cfb33a70a970[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Mar 11 16:43:56 2022 +0700
+
+    Progres Jadwal praktik
+
+[33mcommit 1afa9d8047f28c16958f2f83e24653cb6d30ad3a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Mar 11 07:27:42 2022 +0700
+
+    Progres Jadwal praktik
+
+[33mcommit e1cdaeb5bf67452ead5008813521fcd07ce1ca93[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Mar 11 07:27:07 2022 +0700
+
+    Progres Jadwal praktik
+
+[33mcommit 78092677ebdb291d01a85b672a526bb99f354cc4[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 10 16:39:30 2022 +0700
+
+    Perbaikan Hilangkan Tarif (Keselamatan Pasin dan Log Book)
+
+[33mcommit 766f2de7727c4aeb090d8e2c58c7ed13c54259cc[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 10 16:34:34 2022 +0700
+
+    Perbaikan Hilangkan Tarif (Keselamatan Pasin dan Log Book)
+
+[33mcommit 915e74fc57aa8776626240acccc15beca6801293[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Thu Mar 10 14:39:21 2022 +0700
+
+    Progres Info Jadwal Praktik
+
+[33mcommit 9092657fa68771eb6acbfce31ba7d7d8d178b36c[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 10 13:44:34 2022 +0700
+
+    Database Update
+
+[33mcommit 8092f4fe2356e9d275ad95e8aa4d736e3e7fe6ab[m
+Merge: a95e250 4806a49
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 10 13:41:53 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit a95e2506371a8802b993a5e3d1fb5724125a2f02[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 10 13:41:48 2022 +0700
+
+    Selesai (Auto Fill Pengajuan Koordinator, Tarif Keselamatan Pasien dan Log Book, Sortir Daftar Pengajuan Praktik), note informasi Update WAG
+
+[33mcommit 4806a49424d741d6b975b58e1eb1b25ae8068783[m
+Merge: 348d45d f21d30c
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Thu Mar 10 13:38:23 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM into main
+
+[33mcommit 348d45d1b6edc2c2e662cc7810a83d8ab1e11621[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Thu Mar 10 13:38:19 2022 +0700
+
+    Coba push
+
+[33mcommit f21d30c78d2692f3f16d9f78e25ca753ecf6ce76[m
+Merge: 0194a71 c3e5d34
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 10 07:52:28 2022 +0700
+
+    proses data nilai upload
+
+[33mcommit 0194a719c1098a14d15d923fbdfe58ddc335fa08[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Mar 10 07:51:57 2022 +0700
+
+    proses data nilai upload
+
+[33mcommit c3e5d349830730592455664344a4e9e7caf43942[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Mar 10 07:13:02 2022 +0700
+
+    Progres info jadwal praktik
+
+[33mcommit f41cacea0c2cbb211b01f701683b052ae158c7a4[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 9 21:57:25 2022 +0700
+
+    selesai data nilai upload
+
+[33mcommit 0f8f18e059108b306a0578b0315352aae3963dda[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Mar 9 16:39:15 2022 +0700
+
+    proses data nilai upload
+
+[33mcommit e3a8d75ca194b3dbdcc880f754a0f72ebaaa6995[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 9 07:15:34 2022 +0700
+
+    proses data nilai upload
+
+[33mcommit 8cdf7a058a33535c16848ebcc707999c7dae581d[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 9 07:14:47 2022 +0700
+
+    proses data nilai upload
+
+[33mcommit a278107a3dc8420f315dcd891f3272ce7e4d7a31[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 8 22:19:28 2022 +0700
+
+    sukses data nilai keperawatan
+
+[33mcommit 7cd849e986940907f916988a8af8f88c85cf24d8[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 8 16:35:35 2022 +0700
+
+    fix kalender jadwal praktik
+
+[33mcommit b28ec6e4ba6300015925e0ffcdae70373000989a[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 8 16:30:00 2022 +0700
+
+    fix kalender jadwal praktik
+
+[33mcommit 3d51d0175273077d27d077be240d564a90296449[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 8 16:29:50 2022 +0700
+
+    fix kalender jadwal praktik
+
+[33mcommit 9acb2b608f81aca44e4c7f3940a8965021058078[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 8 15:00:29 2022 +0700
+
+    perbaikan input pembimbing dan tempat jika data dan jumlah praktik tidak sesuai
+
+[33mcommit bd0877d154d508c3420f37a36b11aed68f6ea47e[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 8 14:59:05 2022 +0700
+
+    perbaikan input pembimbing dan tempat jika data dan jumlah praktik tidak sesuai
+
+[33mcommit 456a96eaa2201cad0aadc932082ef9ed656e62b7[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 8 13:41:36 2022 +0700
+
+    perbaikan tarif bst profesi (ners),  nakes lainnya insitutsi fee, tidak bisa lanjut non nakes
+
+[33mcommit 6241a4b67c7a3ac21102d423a5c15882fb6b37f0[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 8 06:51:21 2022 +0700
+
+    proses data nilai keperawatan
+
+[33mcommit a6d2d04b515d9299441cd8465c6dba05a005789a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 8 06:51:13 2022 +0700
+
+    proses data nilai keperawatan
+
+[33mcommit 60953b52d2d866462b6584476112dadcff2d5024[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Mar 7 19:01:36 2022 +0700
+
+    perbaikan penamaan teks
+
+[33mcommit 2e3d31a9829d316dd61d4de79abaa7361b16ca38[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 7 16:14:02 2022 +0700
+
+    progres penilian
+
+[33mcommit 123c888568fdd159c9efaa344ee9a9633e5a4260[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 7 13:45:22 2022 +0700
+
+    modul tambah praktikan, progres simpan pembimbing dan tempat
+
+[33mcommit 641e98db5429c3aa5ff779937f97d9076995205f[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Mar 7 08:09:51 2022 +0700
+
+    ubah query v_praktik.php
+
+[33mcommit dee84affaa2cf750d19f0a92a30157e386f9fea5[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Mar 7 07:13:39 2022 +0700
+
+    proses rumus pembimbinga dan unit #1
+
+[33mcommit 3fb92c5d30eecceb219b14e48b88c4d52dec1d01[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Mar 6 10:01:58 2022 +0700
+
+    pemilihan pembimbinga dan unit #1
+
+[33mcommit 6e41e8fb34495beb9322ab586e383aa973139ec5[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Mar 6 10:01:51 2022 +0700
+
+    pemilihan pembimbinga dan unit #1
+
+[33mcommit db7a4206380fb42dd8097d83ac316181d92840c9[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Mar 6 01:19:02 2022 +0700
+
+    Ubah database pilih jenjang-profesi dan tarif, perbaikan pengajuan input praktik
+
+[33mcommit d90641d5f0114185fef5cb62fa26bd0ddcddc42b[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Mar 5 20:20:02 2022 +0700
+
+    Perbaikan ubah dan hapus praktikan
+
+[33mcommit 7074538345230d7b889326a1dd5c3ae2cc11a100[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Mar 4 08:29:31 2022 +0700
+
+    proses pilih pembimbing
+
+[33mcommit 9f4593c9263bb9cb4ecc365bf038a7c926938edc[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Fri Mar 4 08:29:22 2022 +0700
+
+    proses pilih pembimbing
+
+[33mcommit 688d72ea7c258191053e716be8442d062a07d618[m
+Merge: 5c74b5c 4db3b68
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Mar 3 21:06:48 2022 +0700
+
+    progreas ubah dan hapus praktikan
+
+[33mcommit 5c74b5cefdac632b5abe5347d37f064dbac45a08[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Mar 3 21:04:21 2022 +0700
+
+    perbaikan akreditasi
+
+[33mcommit 4db3b6845d8cb779aac30640b0d4126dba953b03[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Thu Mar 3 10:57:49 2022 +0700
+
+    coba CSRF GAGAL
+
+[33mcommit 22b6d3c268475596b3d5446a78cffc65759ec36b[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 2 20:21:13 2022 +0700
+
+    perbaikan input praktik profesi +database
+
+[33mcommit dd69e727b61f23179519d970e9d0fc3fae92c1a3[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 2 20:17:16 2022 +0700
+
+    perbaikan input praktk jenjang dan profesi
+
+[33mcommit fd2d034c7280bfa74cdcd3707af67c1e15b1a788[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 2 20:17:06 2022 +0700
+
+    perbaikan input praktk jenjang dan profesi
+
+[33mcommit 9f62f1cd8ab972920f85860ffc235c22640225b5[m
+Merge: a06380c cf01c0a
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Mar 2 15:52:04 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit a06380cb7f632ad57ac125b722c160bef9112d57[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Mar 2 15:51:58 2022 +0700
+
+    database perbaikan pembimbing dan data mess, proses data pembimbing
+
+[33mcommit cf01c0a5f2d2062d42c2b93c0484d927cf86c116[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Wed Mar 2 15:50:48 2022 +0700
+
+    database perbaikan pembimbing dan data mess, proses data pembimbing
+
+[33mcommit 6e73712412cbb1b92128593ba106141b5899d734[m
+Merge: 1520a30 471f02d
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Wed Mar 2 13:13:03 2022 +0700
+
+    data ajax
+
+[33mcommit 1520a308a0c7c55f49ffb1445e7568c83cb3dd5e[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Wed Mar 2 13:10:47 2022 +0700
+
+    ajax untuk halaman jurusan blm fix
+
+[33mcommit 471f02dd911c93c8a3ece48fa93fcf7c7fda6b6e[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Mar 2 07:07:54 2022 +0700
+
+    database perbaikan pembimbing dan data mess, proses data pembimbing
+
+[33mcommit 33d1075e42f870fd84267202a0357406c0e09dcb[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 1 23:57:01 2022 +0700
+
+    database perbaikan pembimbing dan data mess, proses data pembimbing
+
+[33mcommit 07cec7f15a5f1d651c2d2b353eb3f1b54e003465[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 1 23:56:54 2022 +0700
+
+    database perbaikan pembimbing dan data mess, proses data pembimbing
+
+[33mcommit 2c800827311e268c7fb3667f48e80f23071337e5[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 1 23:09:37 2022 +0700
+
+    perbaiki data pembimbing, perbaiki data mess
+
+[33mcommit 887b0a5bb1bc9b7a3c8dba85b296bb3815d3c64a[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 1 23:09:27 2022 +0700
+
+    perbaiki data pembimbing, perbaiki data mess
+
+[33mcommit 74879686a3d05b19e16a380a63e6240cb0b0f2a7[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 1 22:37:16 2022 +0700
+
+    Berhasil Import Data Prakikan .XLSX
+
+[33mcommit 80491cc92806e51462b8d36a8e6fc721f58e6e0b[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 1 19:30:54 2022 +0700
+
+    ubah __format_praktikan
+
+[33mcommit a83188c147981100c7fe9268ccb3edeb4c3b3683[m
+Merge: 5f1e163 0015339
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 1 19:30:26 2022 +0700
+
+    ubah __format_praktikan
+
+[33mcommit 5f1e163ffb1fd551eca8cf6c1bd8cfb1482ebb35[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 1 19:30:09 2022 +0700
+
+    ubah __format_praktikan
+
+[33mcommit 0015339e2c73323323a07a4a0a3851a0cd565b4b[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 1 16:10:46 2022 +0700
+
+    generate interval tanggal praktik
+
+[33mcommit e3263bd45b0b11a29f4a65039a7c8defb98df69f[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 1 13:51:25 2022 +0700
+
+    generate interval tanggal praktik
+
+[33mcommit 112ba1d3efa1111d5f32f6730ee067d5a2db4b96[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Mar 1 11:37:03 2022 +0700
+
+    tambah database jurusan-jenjang, tambah database jurusan-profesi, perbaikan harga institusi fee dan manajemen fee selain kedokteran, penghilangan tarif rps, perbaiki kodingan tarif BST, bukti trasnfer dengan gambar, non nakes dan nakes lainnya tanpa pilih tempat, praktik yg selesai dimunculkan
+
+[33mcommit 05172a62856d1ff22d6fa60804930838c21caefb[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Mar 1 06:55:35 2022 +0700
+
+    tambah database tb_kuota, perbaikan tb_praktikan, proses import file excel praktikan
+
+[33mcommit caab34a6e96b08f93e7df90e608a454a084f76e4[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Feb 28 18:45:19 2022 +0700
+
+    perbaiki pilih tarif materi khusus keperawatan
+
+[33mcommit 954f46a96cf60ba4e8dfcb5c286a6d98d51354aa[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Feb 28 18:45:13 2022 +0700
+
+    perbaiki pilih tarif materi khusus keperawatan
+
+[33mcommit 77655962ed79e8eb2ae1856bd4d3905a90eec8a2[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Feb 28 16:22:54 2022 +0700
+
+    tamabah data tarif farmasi dan peksos
+
+[33mcommit befdfcb2552b8999ff04f31cd543bb4e73c49fd6[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Feb 28 16:10:11 2022 +0700
+
+    perbaikan dashboard
+
+[33mcommit db81138077bfb01347f28bd07d8406e66d220947[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Feb 28 15:06:25 2022 +0700
+
+    Perbaikan alur penagjuan kedokteran PPDS (Tidak Bayar) SELESAI
+
+[33mcommit 3330e885c8f465bb0cf72ffea040e8c541168ba4[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Feb 28 11:33:49 2022 +0700
+
+    alur kedokteran PPDS SELESAI
+
+[33mcommit 1af2cfee978df5d317df83bef8b45a456c3c1526[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Feb 28 11:17:59 2022 +0700
+
+    perbaiki keterangan kekurangan pembayaran
+
+[33mcommit b828aac06191ad77655a20d551e521e67a73ba94[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Feb 28 11:05:14 2022 +0700
+
+    input tarif kedokteran
+
+[33mcommit e9a25b86641b1b6b6e4d5fc3fe5ec4fdc9c493d5[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Feb 27 17:55:17 2022 +0700
+
+    ubah nama spesifikasi ke profesi, proses kesesuian pengajuan berdasarkan jurusan
+
+[33mcommit e8ca50a08f27039fac54cfec2c714437df6fcbe9[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Feb 27 16:09:44 2022 +0700
+
+    pilih option materi UPIP NAPZA dan ket mess
+
+[33mcommit 558f0d9c3fd0bfb46018493b8f27808cdd619ade[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Feb 26 08:29:34 2022 +0700
+
+    proses input tarif kedokteran
+
+[33mcommit df12b9f7d354becf34245f400fa16db6dc4b4306[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Feb 25 19:29:03 2022 +0700
+
+    proses input tarif kedokteran
+
+[33mcommit ac95340ea82e25d248dc22615b347f0c6f4eb8eb[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Feb 25 19:28:53 2022 +0700
+
+    proses input tarif kedokteran
+
+[33mcommit 357045b299fe37790793ba4ab68f26134ee49240[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Feb 25 15:40:54 2022 +0700
+
+    ada pa nanang
+
+[33mcommit 269e9302db1fd4ed551a3c9b682318db991d9bb8[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Feb 25 11:15:18 2022 +0700
+
+    tambah praktik kedokteran, tidak pilih tempat dan mess kedokteran,
+
+[33mcommit 065389fe5f94609b7d449bbcc2e82d36cf54cfe4[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Feb 24 20:31:43 2022 +0700
+
+    ubah institusi, perbaiki tolak pengajuan praktik
+
+[33mcommit 82b7f27ca2fd7ed4b66f9f107ec7e8360650af80[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Feb 24 16:27:30 2022 +0700
+
+    tolak pembayaran dan pembayaran ulang
+
+[33mcommit 5d38ea3445e40424aa54c66cad5af6b27e5407c2[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Feb 24 16:26:49 2022 +0700
+
+    tolak pembayaran dan pembayaran ulang
+
+[33mcommit 1eb1a94c2aa40ed06d1c722521ec01fb24f30de8[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Feb 24 16:26:38 2022 +0700
+
+    tolak pembayaran dan pembayaran ulang
+
+[33mcommit 044f5aa3b7734209dd1b4f5cb16a7ee550e50989[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Feb 24 14:02:38 2022 +0700
+
+    Input Pembayaran Praktik
+
+[33mcommit 4db119b95b06160434368a24ae11e1503f0dc7f4[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Thu Feb 24 06:32:37 2022 +0700
+
+    proses pilih praktik tempat
+
+[33mcommit a8a0674c6832cc815e7f73bf3c2a52c35645ea34[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Feb 23 16:07:06 2022 +0700
+
+    proses data tarif
+
+[33mcommit ff742551104ed90dbfeefcce976eabe40adc1217[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Wed Feb 23 06:24:36 2022 +0700
+
+    proses kapasitas terisi mess
+
+[33mcommit 671944437d2f4587e19c249b0814c65b8bf4969f[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Tue Feb 22 16:23:21 2022 +0700
+
+    proses kapasitas terisi mess
+
+[33mcommit ed249a450f72a5a11a7b2c29666de5b456cb3a12[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Tue Feb 22 16:23:10 2022 +0700
+
+    proses kapasitas terisi mess
+
+[33mcommit 15aa0ba1cb8109219d39dd3a67df500337e5580e[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Tue Feb 22 14:17:13 2022 +0700
+
+    proses cek migrasi ke server
+
+[33mcommit 92b1e8f394682a1f6caa8429e34d5103fcfa9b14[m
+Merge: f935e77 673f274
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Tue Feb 22 14:16:59 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM into main
+
+[33mcommit f935e779a88f8060639ce174493fa64406d94c2e[m
+Merge: 1ea7f4e 2fac55d
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Tue Feb 22 14:16:53 2022 +0700
+
+    proses cek migrasi ke server
+
+[33mcommit 673f2740d04c3c7a50cd763dbea6a7051049e138[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 22 11:26:41 2022 +0700
+
+    -
+
+[33mcommit 43c3e16f3017623a208d4b8ead38f1b55c901d08[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 22 11:06:51 2022 +0700
+
+    -
+
+[33mcommit 1ea7f4ef950822f3b2f593adec8a79d5ea641790[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Tue Feb 22 10:54:27 2022 +0700
+
+    Koneksi Server
+
+[33mcommit 2fac55d7a419b69b6269c227bee4498b6df958be[m
+Merge: 6ff97da c0c4555
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 22 10:04:51 2022 +0700
+
+    -
+
+[33mcommit 6ff97dafa1b492e152fd13600b68b5d5d168b4e2[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 22 10:03:07 2022 +0700
+
+    -
+
+[33mcommit c0c45558d6173cf54dd44816dae654999f7a7d06[m
+Merge: 8b04c2d ce8a437
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Feb 22 06:45:08 2022 +0700
+
+    Perbaiki Database Tarif, Tempat, Mess
+
+[33mcommit 8b04c2d0e30c1e89da3ee68c732f8711acba776c[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Tue Feb 22 06:44:10 2022 +0700
+
+    Perbaiki Database Tarif, Tempat, Mess
+
+[33mcommit ce8a43725fa9efed97c97f484186708913719f18[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 21 09:46:03 2022 +0700
+
+    edit v_tarif
+
+[33mcommit 5b663cbc7f80aa769d258e2e025aac9741b8cda1[m
+Merge: 71cbe0c f20567b
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 21 08:20:36 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 71cbe0c992594e57515397fc5e0292e28cbadafd[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 21 08:20:27 2022 +0700
+
+    Error Index
+
+[33mcommit f20567b6d52759596fa6966b68209f66eff85f75[m
+Merge: a86d2fc 5ab3e37
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Mon Feb 21 08:18:36 2022 +0700
+
+    Koneksi Server
+
+[33mcommit a86d2fc9f624a86ce38295bfb1301ab2632cf01b[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Mon Feb 21 08:18:05 2022 +0700
+
+    Koneksi Server
+
+[33mcommit 5ab3e37eda9456b4090b5705b27d8822f16f1c8b[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Mon Feb 21 07:01:57 2022 +0700
+
+    Tombol Validasi Data Praktik-Tarif dan pembayaran
+
+[33mcommit aeaaa3206bc3ac8a8bed7dc1ba97121c20cd0eab[m
+Merge: 74a5504 ec112ca
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Feb 20 18:22:07 2022 +0700
+
+    Tombol Validasi Data Praktik-Tarif dan pembayaran
+
+[33mcommit 74a55048e2e854e6e7791ff7354d4fef972379ce[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sun Feb 20 18:21:07 2022 +0700
+
+    Tombol Validasi Data Praktik-Tarif dan pembayaran
+
+[33mcommit ec112ca3cf784cdf6a26bfbcd085bed826d6a5c3[m
+Merge: 86e115c bcf7c21
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Sun Feb 20 14:11:02 2022 +0700
+
+    Database
+
+[33mcommit 86e115c4dc6d790261f38906dc2b2bba6507b127[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Sun Feb 20 14:09:38 2022 +0700
+
+    Database
+
+[33mcommit bcf7c218f06bfcbfc732a58e1d790cfaf6415bea[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Feb 19 19:05:05 2022 +0700
+
+    Cleaning
+
+[33mcommit 4cc2f4791d91d050c7cf7a6ef801ac6f814ececa[m
+Author: fajarrachmath <81356042+fajarrachmath@users.noreply.github.com>
+Date:   Sat Feb 19 18:56:32 2022 +0700
+
+    Ubah Harga jadi Tarif
+
+[33mcommit 6a4c4bd6fee661c4577430b04bc588bf7d6327b6[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Feb 16 17:19:54 2022 +0700
+
+    Perbaikan Modul Pembayaran,  Proses Modul Validasi Pembayaran, perbaikan Database, pembuatan penerimaan dan penolakan pembayaran, pembuatan aktivasi prakti, pembuatan selesai praktik
+
+[33mcommit 9e0cc044ac0a3e3db775b3a7cd6ef6133be8ed64[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 15 16:01:33 2022 +0700
+
+    Perbaikan Modul Pembayaran,  Proses Modul Validasi Pembayaran, perbaikan Database, pembuatan penerimaan dan penolakan pembayaran, pembuatan aktivasi prakti, pembuatan selesai praktik
+
+[33mcommit 568caca8c8f3ba42725ae38acb3f231a2c411851[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 15 15:56:20 2022 +0700
+
+    Perbaikan Modul Pembayaran,  Proses Modul Validasi Pembayaran, perbaikan Database, pembuatan penerimaan dan penolakan pembayaran, pembuatan aktivasi prakti, pembuatan selesai praktik
+
+[33mcommit cd57779af473ae273e87cd162472cb8f7fc23ff1[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 15 13:11:15 2022 +0700
+
+    Perbaikan Modul Pembayaran,  Proses Modul Validasi Pembayaran, perbaikan Database, pembuatan penerimaan dan penolakan pembayaran, pembuatan aktivasi prakti, pembuatan selesai praktik
+
+[33mcommit c49a89a7b4f60ada551b11d5ca2a90f4c62f1a47[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 15 13:09:36 2022 +0700
+
+    Perbaikan Modul Pembayaran,  Proses Modul Validasi Pembayaran, perbaikan Database, pembuatan penerimaan dan penolakan pembayaran, pembuatan aktivasi prakti, pembuatan selesai praktik
+
+[33mcommit 621bc0b2ad79e8cf08cd6c60db264e38ea4c021c[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 15 06:38:29 2022 +0700
+
+    Perbaikan Modul Pembayaran, Perbaikan Info Status, Proses Modul Validasi Pembayaran, perbaikan Database
+
+[33mcommit 76095aea694cff0d4c10d67dd4943a5d935cc551[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 14 17:04:01 2022 +0700
+
+    Modul Tempat, proses simpan
+
+[33mcommit 431c1938f817a14bc21377a79cab0d205cb1f8cd[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 14 16:49:08 2022 +0700
+
+    Modul Tempat, proses simpan
+
+[33mcommit 988417ad679370516c600fab006355f3f01b557d[m
+Merge: 5ec814b 74f2c5e
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Mon Feb 14 08:56:51 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM into main
+
+[33mcommit 5ec814b79210ba0166d9198d8a85a27262721f53[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Mon Feb 14 08:56:45 2022 +0700
+
+    Modul Tempat, proses simpan
+
+[33mcommit 74f2c5ecde0cc3577ba50c1897c4c985d97c4f4e[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 14 08:54:30 2022 +0700
+
+    Modul Tempat, proses simpan
+
+[33mcommit 71a31563caac61a903a2eb69f3d52c90249bdb80[m
+Merge: 2e6a560 31ac2f4
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 14 08:47:53 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 2e6a56083965334b665ce81cca4dc4958d7a964c[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 14 08:47:49 2022 +0700
+
+    Modul Tempat, proses simpan
+
+[33mcommit 31ac2f4d2ead336a5a6aec3774ce687f72a6f9f1[m
+Author: Sandi Pragma <sandi.pragma@gmail.com>
+Date:   Mon Feb 14 08:33:59 2022 +0700
+
+    Modul Tempat, proses simpan
+
+[33mcommit 424f5588efc8f4be3120b1d83c94ed1fe071d7bd[m
+Merge: 4760dac 0b4c4b9
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 14 08:21:08 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 4760dac290116838a5295a2c2aa8f840da9a8ecc[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 14 08:21:06 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 0b4c4b92f42f7455059bae55d4c1b7e18e540d68[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 14 06:39:46 2022 +0700
+
+    Modul Tempat, proses simpan
+
+[33mcommit 851e627c86e50393ff3f376e8cff06b88e6ad051[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Feb 10 16:49:31 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 6cde235cefab45d2fbbe521449b8334e0c262919[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Feb 9 16:01:49 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 7236466a480853b52c00d6685184589eae289a85[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Wed Feb 9 07:13:01 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit b0aab6866f9cdd84308146d427f9afa9a062affe[m
+Merge: 60856a9 16c4da0
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 8 20:03:21 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 60856a9d1d49326ce74fee752afd75d0ef116a12[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 8 20:02:41 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 16c4da0a39ec8f298d58397f74296f239ec5119c[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Feb 8 16:51:57 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit fd012f21404a527dd770bd883ee2a1ba5d1b554b[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 7 16:39:47 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 68a5f8be8b684653f11c787d6a59a01f2f9f2f77[m
+Merge: c5f2994 622c692
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 7 07:33:02 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit c5f29947fcae75e3cde51d9b7c4835b584c64d4d[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 7 07:32:50 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 622c692ca12fe2e479bd4f2e9bb3b60a86409f98[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Feb 7 06:44:56 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 5fdc2ccc098c8721107e91d85f2d4308020760bf[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Feb 4 16:03:44 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 1ea8d173e4d82085f1f6563e772c658053f1897d[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Feb 4 16:02:44 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit b007911af01e94c654aecb9403e2082b03407f0b[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Fri Feb 4 06:38:27 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 5b865685b485e3a659fd8afffa0b2f3e9c6c0408[m
+Merge: 4b30cac 7134f44
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Thu Feb 3 17:14:09 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 4b30cac4eb1db5a8da9ffcd5e13f5b4128e8c1ab[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Thu Feb 3 17:13:15 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 7134f44ebf30021c1c7bb3c54da52f4097617cc9[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Feb 3 16:09:33 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit a5df1c23b9b9bb779daa2a86147069b75949699f[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Feb 2 16:42:42 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit aabb56a454a869c69a9065ed9b7a93998503db54[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Feb 2 11:52:16 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit ccd975bd079a0a4206003472811ff868bfab17bc[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 31 16:21:03 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 3716e9116b44e7e9a1738070b75c07b1ffc2caf6[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 31 06:07:55 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit aaa0919d55aedbdf49e3fd23174316032d39c5d8[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 31 06:07:42 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx + database
+
+[33mcommit 3e852df0f0ebfb8d24638999d55432692e04d2cd[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 31 06:06:12 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, prose simpan file pdf dan xlsx
+
+[33mcommit 51f73c9b4b8082db934821ae7f6f1b18ae3a4844[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sat Jan 29 20:10:59 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, Alur Pendaftaran dan Validasi
+
+[33mcommit e005b3fe39a6313dc18c5a30268eac4cd5849c11[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Jan 28 16:56:50 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, Alur Pendaftaran dan Validasi
+
+[33mcommit d75e83364fef876337f78f3d7cf767fa3e3f1916[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Jan 27 16:59:40 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, Alur Pendaftaran dan Validasi
+
+[33mcommit 2851b31b0360257c80d60516b9557f21c4b3ee09[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Thu Jan 27 06:39:04 2022 +0700
+
+    Modul Simpan Pendaftaran dan Harga, Alur Pendaftaran dan Validasi
+
+[33mcommit 1e23f4ef368dcd26460998f8282313d04504050d[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 24 15:59:19 2022 +0700
+
+    Modul Insert Pendaftaran dan Harga, Alur Pendaftaran dan Validasi
+
+[33mcommit 43b7a74aaa5ee8dbef0ed61e98c36cc38b778b11[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 24 06:57:16 2022 +0700
+
+    Modul Insert Pendaftaran Kedokteran, Alur Pendaftaran dan Validasi
+
+[33mcommit cfe7f7fdc0e9fff15fbba152fb181d4366593bd2[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Jan 21 16:24:46 2022 +0700
+
+    Modul Insert Pendaftaran Kedokteran, Alur Pendaftaran dan Validasi
+
+[33mcommit f79b0449e5589c653386101cafe926ca35d376ac[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Jan 20 16:24:42 2022 +0700
+
+    Modul Insert Pendaftaran Kedokteran, Alur Pendaftaran dan Validasi
+
+[33mcommit eaa21bac9b910fc9eafcd2dd6541f5cfddb095ec[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Jan 20 16:24:10 2022 +0700
+
+    Modul Insert Pendaftaran Kedokteran, Alur Pendaftaran dan Validasi
+
+[33mcommit 48cc867d06086b48a1cf0b14c869e808bc9796e9[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Jan 18 16:12:03 2022 +0700
+
+    Modul Pendaftaran Kedokteran, Alur Pendaftaran dan Validasi
+
+[33mcommit 3f0a27559437b614043daf28a6245b0e6ead9a73[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Jan 18 16:11:46 2022 +0700
+
+    Modul Pendaftaran Kedokteran, Alur Pendaftaran dan Validasi
+
+[33mcommit a24c9528300ec4591b17de73b7fdc85892578334[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 17 16:25:40 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 6d33174ddf47a4a72b1c7d6e3d303381127ccc60[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 16 10:07:15 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 45d16fa2a39f0de21712a21396e1e52dd956d37a[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Jan 14 16:36:56 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 192bfde3906aa26c496ad31e2ce0d20862b2207f[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Fri Jan 14 05:41:42 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit eda8701e59b292d8e9e6fd76a6d8cc05ce259f9a[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Jan 13 16:01:18 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 7120b162a71b43cdce1ff32202e96998545d5111[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Jan 12 16:44:38 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 2081651d13cbad2763f5a0d0e887618c01192214[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Jan 11 16:43:46 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 01f8702bd94dc3a5f8145f3dd9fbe63f0938c776[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Tue Jan 11 07:04:36 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 568f424f3dc16a14232ec40145ba12b8bf0e91a2[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 10 17:25:17 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 8baad2da92225bf28b1356ecee3f73b29fbb231f[m
+Merge: e2f0453 83889e5
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sat Jan 8 16:34:10 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit e2f04532d5098898b694f0901af517ae690d5a99[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sat Jan 8 01:51:17 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 72e173b5395648f67921031964d57c3e2d5a131a[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Fri Jan 7 18:13:27 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 83889e53247e838ee9e74ca9f4935768b4bfd86f[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Jan 7 16:44:11 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 9759561892225ea43bb3c91e00b1ab52ad7de9a6[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Jan 6 16:13:36 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit df30a72e3d749855c8f73ccc745daf83b3ffb497[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Jan 5 16:11:17 2022 +0700
+
+    Modul MoU, Alur Pendaftaran dan Validasi
+
+[33mcommit 5615624aee3ef7e576ff439a747bb7b8c436dd76[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Jan 4 16:12:41 2022 +0700
+
+    Cek Alur Keseluruhan
+
+[33mcommit 07d0aa8bd012e8ea73cf2293d39ca05fb46f95a8[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Tue Jan 4 06:41:25 2022 +0700
+
+    data Nama praktikan , ->arsip  ->Data Jadwal-arsip,  -> data nilai-arsip ->Data Harga Kedokteran-arsip
+
+[33mcommit f5b272514f2451ef5f73c838f004aaf333f24046[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 16:14:19 2022 +0700
+
+    USER , ->Data Jadwal ->Data Harga Kedokteran
+
+[33mcommit 3fdcf9f94e343d42f1bc5d9f6986084c86eb9a24[m
+Merge: c9073c3 b463304
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 11:33:31 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit c9073c3e07131e0f6b29bb56fb15384e0f9401d6[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 11:33:28 2022 +0700
+
+    USER , ->Data Jadwal ->Data Harga Kedokteran
+
+[33mcommit b4633048d7e89931709acd86e051e86e3dc92419[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Jan 3 10:53:07 2022 +0700
+
+    dashboard nambah jam
+
+[33mcommit 81625316d37de915718bcba3f3ea83e7f7db21d9[m
+Merge: ecdf9df fab1d8c
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 10:43:57 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit ecdf9df84c590c727c2ef9afe8145b4fbc8ae294[m
+Merge: 0fddbed a78a6c3
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 10:43:54 2022 +0700
+
+    Data dashboard , ->Data Jadwal ->Data Harga Kedokteran
+
+[33mcommit fab1d8c9d5b54449b1e63f61db6ea4f657017b01[m
+Merge: 2ff01cb a78a6c3
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Jan 3 10:19:19 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 2ff01cb903a0d1911c3d61a7be0b08cd2c9cd98f[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Jan 3 10:19:09 2022 +0700
+
+    data Penilaian Dokter
+
+[33mcommit 0fddbed018136333c3bcb859dd4bc06fb8db7648[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 07:46:20 2022 +0700
+
+    _note
+
+[33mcommit a78a6c384cc9ba9fb70db5cd1cbf44d5e2f0decb[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 06:44:11 2022 +0700
+
+    Database, ->Data Jadwal ->Data Harga Kedokteran ->tb_mess terisi di join kan ke tb_mess_pilih
+
+[33mcommit 5b2067520e41a3cea47e0b3543c809567a3e5510[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 06:36:54 2022 +0700
+
+    Database, ->Data Jadwal ->Data Harga Kedokteran
+
+[33mcommit 3ca1d817b26e1c2c280a88cdd5a93b70b394c092[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 06:33:13 2022 +0700
+
+    Database, ->Data Jadwal ->Data Harga Kedokteran
+
+[33mcommit 41ec9290d47feb63faf5ef38410f6e6505fc6036[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Jan 3 06:32:04 2022 +0700
+
+    Data Lapor, ->Data Jadwal ->Data Harga Kedokteran
+
+[33mcommit d60ac3f78ae0f7d34c8a5c30bb65e6da52ab64e5[m
+Merge: 0c45189 847300f
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 2 17:28:41 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 0c45189044d9ea0cf6c151fa1930dead3688c7b6[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 2 17:28:36 2022 +0700
+
+    Data Lapor, ->Data Jadwal ->Data Harga Kedokteran
+
+[33mcommit 847300f89de962fc8ea51916a9d188c44d8af438[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Sun Jan 2 16:44:05 2022 +0700
+
+    data nilai non kedokteran
+
+[33mcommit 36043f51bb4a2c882e779f704449ce1004a1f4bf[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 2 14:32:30 2022 +0700
+
+    Data dashboard, ->Data Jadwal ->Data Jadwal
+
+[33mcommit e849e2c0d373eb821224400e4ed0b58e611ffe08[m
+Merge: d41b328 ad89324
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 2 14:19:20 2022 +0700
+
+    Data dashboard, ->Data Jadwal ->Data Jadwal
+
+[33mcommit d41b3283133860b47e1c08df8e040e85188eff3e[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 2 14:13:01 2022 +0700
+
+    Data Pengaturan Akun, ->cetak Invoice ->Data Jadwal ->lapor ->dashboard
+
+[33mcommit ad893246e6a40a63e5e9b3bedbd44cae80eff060[m
+Merge: cb41a2c 126cfa2
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Sun Jan 2 14:00:11 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit cb41a2cc9fdbf1904c64308ab515b4994b38e583[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Sun Jan 2 13:59:57 2022 +0700
+
+    halaman laporan cetak
+
+[33mcommit 126cfa20acdfeac2f70f09afc237e58e03e2d37d[m
+Merge: 1eb2f11 1b94dca
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 2 11:27:32 2022 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 1eb2f118d6a6a4396a5f5de069cae13004d1f7a4[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 2 11:27:27 2022 +0700
+
+    Data Pengaturan Akun, ->cetak Invoice ->Data Jadwal ->lapor ->dashboard
+
+[33mcommit 1b94dca99b336ab9831d72790671ab37d58f2ff6[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Sun Jan 2 11:26:56 2022 +0700
+
+    laporan menu
+
+[33mcommit 4dc5806fb9bf3cfeab14838c3ac31f8763689ef3[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Sun Jan 2 10:38:58 2022 +0700
+
+    cetak invoice dan bug di detail
+
+[33mcommit d37b2b8afc3a536dd2389f682a2b6fee0993b28b[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 2 07:42:49 2022 +0700
+
+    Data Pengaturan Akun, ->cetak Invoice ->Data Jadwal ->lapor ->dashboard
+
+[33mcommit 77ba7b94558ad760b9d7c62ccdfd8d1f8bd3dd89[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sun Jan 2 07:41:43 2022 +0700
+
+    Data Pengaturan Akun, ->cetak Invoice ->Data Jadwal ->lapor ->dashboard
+
+[33mcommit 1b1c0041432e6af3be78386513add77a18d3dc74[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sat Jan 1 22:17:32 2022 +0700
+
+    Data Transaksi, ->cetak Invoice, ->Data Jadwal
+
+[33mcommit e38d227c3a040b7da73a0b52aaf1494e5f42060f[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sat Jan 1 20:51:25 2022 +0700
+
+    Data Transaksi, ->cetak Invoice, ->Data Jadwal
+
+[33mcommit 43482c242b56bec6b79a32cd984b934882ed6b1f[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sat Jan 1 16:49:28 2022 +0700
+
+    Data Praktikan, ->cetak Invoice, ->aData Jadwal
+
+[33mcommit 3b6f744405383c65d6e7284fef46d76cc640b1e0[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 31 17:17:19 2021 +0700
+
+    Alur Proses Status, ->cetak Invoice, ->akun ada institusinya
+
+[33mcommit 3dbb4f6d70fb26b60d5b154c675635d22b94b6b3[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 31 17:16:38 2021 +0700
+
+    Alur Proses Status, ->cetak Invoice, ->akun ada institusinya
+
+[33mcommit 3e076c3fec8e486746dc01b9169e20678fa41a2a[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 31 17:15:43 2021 +0700
+
+    Alur Proses Status, ->cetak Invoice, ->akun ada institusinya
+
+[33mcommit e3ec75b6678675a649e8c4e0e7660d577fb781e2[m
+Merge: cc28ec7 e43f357
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 31 08:12:38 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit cc28ec7499cb63359aa797a33c286e96b5ee1f91[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 31 08:12:27 2021 +0700
+
+    Filter file dan folder
+
+[33mcommit e43f357aabd961e40dbbe93947d7c20efc68f178[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 31 06:52:53 2021 +0700
+
+    Alur Proses Status, ->cetak Invoice, ->akun dada institusinya
+
+[33mcommit 3119b9eb29f48d712255304d4821cad2376737b5[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 30 16:53:00 2021 +0700
+
+    Alur Proses Status, ->proses Cetak Invoice
+
+[33mcommit ed2d41720dc59eb4e4ee0cbabb9e577b5ae20658[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 30 16:52:38 2021 +0700
+
+    Alur Proses Status, ->proses Cetak Invoice
+
+[33mcommit c91b910599a49a0c1d6a2c3525c5e83ab8c1a37e[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 30 06:56:44 2021 +0700
+
+    Proses CRUD DATA HARGA PENDAFTARAN
+
+[33mcommit 878da772d8bc7e76ade9653c9a836352822d8842[m
+Merge: 297b6ae 0651692
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 30 06:42:12 2021 +0700
+
+    Proses CRUD DATA HARGA PENDAFTARAN
+
+[33mcommit 0651692cd955adee92e8037d586bf8a925031de8[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 29 16:08:39 2021 +0700
+
+    Proses edit DATA HARGA
+
+[33mcommit 297b6aec1ef53c057478d519cf36e8b2d8df67f6[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 29 07:11:29 2021 +0700
+
+    Proses INPUT MESS
+
+[33mcommit 3475eb4fba6ba3c75e729da6b84c2b3e0b114dc1[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 29 06:47:21 2021 +0700
+
+    Proses INPUT MESS
+
+[33mcommit 592c169b815b8797196830bdf41fc047035299c9[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 28 16:52:27 2021 +0700
+
+    Proses harga
+
+[33mcommit 37b0807883aa7a6ef79009c86f7f5d22c292cca9[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 28 06:20:51 2021 +0700
+
+    Proses harga
+
+[33mcommit 06dd3f151883421c7ec4a0f611bc04704493d3e6[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 27 16:40:32 2021 +0700
+
+    Proses harga
+
+[33mcommit 2f7ef9381f2faabbae196882dcd451a495cb6f0b[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 27 16:40:18 2021 +0700
+
+    Proses harga
+
+[33mcommit 46b4e4ed9c25fef3495487a723c70bec683d1334[m
+Merge: a53d557 32f1224
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 27 09:48:21 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit a53d557064f2c883596c204c9387ffd90f027c39[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 27 09:48:11 2021 +0700
+
+    Proses CRUD MoU
+
+[33mcommit 32f122461ddd0f9492fc4ce1b598d4dc3ee096fd[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 27 06:59:20 2021 +0700
+
+    Proses CRUD MoU
+
+[33mcommit 72f8e13b505a597b66eeffbe0975ee0104c203bf[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 24 16:17:43 2021 +0700
+
+    Proses CRUD MoU
+
+[33mcommit 40633e783c079d6065419401f6bfe76a2a43b500[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 24 16:17:29 2021 +0700
+
+    Proses CRUD MoU
+
+[33mcommit 305a6fdd03b0eee3204df4cc04324c4fa32212f0[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 24 07:16:45 2021 +0700
+
+    Proses Modal MoU
+
+[33mcommit a4f7bc9519ba5c0947f80ffc08b794991d71817e[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 22 17:07:53 2021 +0700
+
+    Proses Modal MoU
+
+[33mcommit 6b5625bec12d3ebb90d2a026fa5273b0b49f16a6[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 21 16:41:43 2021 +0700
+
+    Proses input Harga
+
+[33mcommit c46bf751d65b246a8093cdd494c97636ef737752[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 21 09:48:24 2021 +0700
+
+    Proses input Harga
+
+[33mcommit 299494d56e2a61289a6673a2a5c6217400489a79[m
+Merge: c6dd0ca 5fed685
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 21 09:48:15 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit c6dd0cae4e5af36eb4c9828c00ce834e4afedba8[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 21 09:48:10 2021 +0700
+
+    Proses input Harga
+
+[33mcommit 5fed68524af4c37ca8c78f4b4e7bc3f5ec6c81e8[m
+Merge: b9eb3a6 e220c18
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 20 19:53:40 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit b9eb3a6e650399d0cac7b1a54df9edd5c662a4d6[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 20 19:53:39 2021 +0700
+
+    data mentor proses
+
+[33mcommit e220c18122049bd5f3e965ab61b0a58756d9bfad[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 20 16:56:28 2021 +0700
+
+    Proses input Mess
+
+[33mcommit aedbb3c8eb5fd433316f616799cb3738e8b77b0a[m
+Author: Fajar (KANTOR) <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 20 16:56:13 2021 +0700
+
+    Proses input Mess
+
+[33mcommit 0a4980fb159bae28bc7eb8cd1214f3025993bd61[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 16 15:47:01 2021 +0700
+
+    data mentor proses
+
+[33mcommit b62a969c6a9e3b7474611722bf3596f45cbb84e8[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 16 15:44:49 2021 +0700
+
+    data mentor proses
+
+[33mcommit bbcbe7b466ba47222229df5852ef02aaed4f01b8[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 15 16:18:14 2021 +0700
+
+    data mentor proses
+
+[33mcommit 1f6d0896ab2483342b883150fba9626bd49c7bf4[m
+Merge: 4e996dd f93e08b
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 15 14:32:48 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 4e996dd58210304bd811d14f07d03bcaa0f782f7[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 15 14:32:43 2021 +0700
+
+    note
+
+[33mcommit f93e08bb39e1706ac4e8c40bdc176200a04d0ef2[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Wed Dec 15 14:32:33 2021 +0700
+
+    data variabel berubah
+
+[33mcommit 59285ae39bebd6febfcf54049c328c491881ba0f[m
+Merge: fb7b613 33b5ca5
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Wed Dec 15 14:30:27 2021 +0700
+
+    konflik
+
+[33mcommit fb7b613eb85b1a7def0c0942d58ae255b838a5b0[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Wed Dec 15 14:28:19 2021 +0700
+
+    change js
+
+[33mcommit 33b5ca59b52f53349d82758800cdf3be34302e20[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 15 14:27:39 2021 +0700
+
+    Data Mentor
+
+[33mcommit 9e368d4fe8ae05c9877e2c7d3904e5edb42a3087[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 14 16:29:05 2021 +0700
+
+    Data Mess
+
+[33mcommit 9dc9c490869958979594727d035b4408efe19b5c[m
+Merge: 533c253 453fa5a
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 13 16:32:26 2021 +0700
+
+    Data Mess
+
+[33mcommit 533c25397f5aa57790651c504ba6b2bbb2a77f9d[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 13 16:31:20 2021 +0700
+
+    Data Mess
+
+[33mcommit 453fa5acb3565b685a1a0c65d54cf31aab07b5fe[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Dec 13 16:22:34 2021 +0700
+
+    data harga
+
+[33mcommit 553515f01e8ab1cd56ff8a7151e0ea99f18b0a95[m
+Merge: 36bd17d 3a575d0
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 10 16:09:35 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 36bd17daf0150c20e3a3ae5dc896ac490bb0cfdc[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 10 16:09:29 2021 +0700
+
+    Input Harga Praktikan
+
+[33mcommit 3a575d0f1fd316605491bc2381ed7b6e5f4d570f[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Fri Dec 10 16:05:26 2021 +0700
+
+    datatables baru
+
+[33mcommit e8840a062b14ba54aeccc6cc3c776c969e71cb2b[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 10 14:13:04 2021 +0700
+
+    Input Harga Praktikan
+
+[33mcommit b92d5ea7141eea0fad9b88fb78952b3e42857aff[m
+Merge: b2bd34c c9c9fdd
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 9 16:11:21 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit b2bd34c1a48a5a8b294f1a5e2d7053e823ca1ffd[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Dec 9 16:11:16 2021 +0700
+
+    Input Harga Praktikan
+
+[33mcommit c9c9fdda1ac2128b03593296ef2387a60923ce96[m
+Merge: 25febdb aab0787
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Thu Dec 9 15:55:01 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 25febdb8e1cdfee83ea3fa2b78ee29cbd97420c3[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Thu Dec 9 15:54:17 2021 +0700
+
+    coba index
+
+[33mcommit aab0787150eb66a4ba6fad954dc234d4539234fc[m
+Merge: 974c48c 45f5867
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Wed Dec 8 18:25:00 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 974c48c84692bf048e6748399568f031402c6621[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Wed Dec 8 18:22:14 2021 +0700
+
+    Data Harga
+
+[33mcommit 45f58674522faba47ae96ecaf346bf0a37a853fb[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 8 16:30:22 2021 +0700
+
+    Input Harga Praktikan
+
+[33mcommit c21d38f61829a621376ecf4f45db016101a5380a[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 8 16:30:09 2021 +0700
+
+    Input Harga Praktikan
+
+[33mcommit 8217c18ae0bddc8d3503991f9aca03d9d0947e38[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Tue Dec 7 16:36:15 2021 +0700
+
+    Data Harga
+
+[33mcommit cab3267b610c9451f5b22b69817c3a7cfa71c688[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Dec 6 16:48:11 2021 +0700
+
+    Data Harga
+
+[33mcommit 0036a83431fe582582eb62fd4aefb4b8d89b3045[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Dec 6 06:51:39 2021 +0700
+
+    Data Harga
+
+[33mcommit 58f03bd2d2d651d85e22dc16ae7d052bb99ea52c[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Sun Dec 5 07:31:23 2021 +0700
+
+    Data Harga
+
+[33mcommit 7ddd01c510a9c7c3f8e713e5a7254afdf37a6d1b[m
+Merge: da50fa4 9858fc3
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Fri Dec 3 20:52:04 2021 +0700
+
+    Data Harga
+
+[33mcommit da50fa40725c404f6c6ad26da4c3006e5b1a4e1b[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Fri Dec 3 20:49:02 2021 +0700
+
+    Data Harga
+
+[33mcommit 9858fc367bf6ff77427a1795bce3c084d54765f8[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Fri Dec 3 16:46:37 2021 +0700
+
+    proses pembuatan input praktik harga
+
+[33mcommit aebd62f9896f6e0531b7de298db498cefbf7f92b[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Dec 1 16:59:58 2021 +0700
+
+    proses pembuatan input praktik harga
+
+[33mcommit 851a3ea99433a2e0c612b0d3d0b4adc082942f4d[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 30 18:34:08 2021 +0700
+
+    proses pembuatan input praktik harga
+
+[33mcommit 484982e042c0b3080840dbced55a67c623850b3f[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 29 17:04:23 2021 +0700
+
+    proses pembuatan input praktik harga
+
+[33mcommit d88cb846884322574ab8c33d6f19931f63cac57b[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 29 17:04:01 2021 +0700
+
+    proses pembuatan input praktik harga
+
+[33mcommit 2643d664f9e4ad9335921f0a30e76354e62d12c3[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Nov 29 07:46:21 2021 +0700
+
+    proses fungsi input harga
+
+[33mcommit d55b7ab34f0704370285e33d7ee3ddb554784ffd[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Nov 29 07:45:56 2021 +0700
+
+    proses fungsi input harga
+
+[33mcommit fe66e0ede46b0c735965cd44fd9239046d9dacfd[m
+Merge: 651f90b 9168b7e
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sat Nov 27 19:22:09 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 651f90b2eeacb5f44d9f87b655198f2d0f71b25b[m
+Merge: 2979685 8fff40f
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sat Nov 27 19:21:53 2021 +0700
+
+    proses pembuatan tambah harga
+
+[33mcommit 9168b7eb7ecb4ee9d71a4b0c7249ac1ebf0d6348[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 26 16:25:48 2021 +0700
+
+    proses pembuatan ubah harga
+
+[33mcommit 88a2ad689b5dd44ce61bf8a15f4dced9823a68b8[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 26 16:25:07 2021 +0700
+
+    proses pembuatan ubah harga
+
+[33mcommit 297968578a606b860ed3ebd9cf638189d3185184[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 25 22:08:43 2021 +0700
+
+    -
+
+[33mcommit 8fff40f280b3f97a6e31b43b5b3727875c833eff[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 25 16:15:30 2021 +0700
+
+    proses pembuatan tambah harga
+
+[33mcommit c178d9a020f8997d18e11e27df0f3b5f6b5dd541[m
+Merge: bddd321 374888d
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 25 16:14:50 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit bddd321131c99a2de6eb26a4f463c57e489cb8b8[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 25 16:14:47 2021 +0700
+
+    proses pembuatan tambah harga
+
+[33mcommit 374888d316dc4363ab83b99c359e1d328b859deb[m
+Merge: 367961d 01f050e
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Thu Nov 25 16:11:05 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 367961dcdc06db7d7efbee1a3341ecbc265ea1f5[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Thu Nov 25 16:10:51 2021 +0700
+
+    batas
+
+[33mcommit 01f050e2348888289b50e9fb24eea7a18891fee5[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 25 14:14:10 2021 +0700
+
+    -
+
+[33mcommit 0e64d807cfc4ed4a73c6239013c4eb8f9cea5ec7[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 25 14:12:08 2021 +0700
+
+    -
+
+[33mcommit 7d1d76b5b3be0c9a81cc56403307cbd7a87dec8c[m
+Merge: 0f92a65 9affe6a
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 24 17:32:41 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 0f92a655f0f8bd1b0ee7026e0be175a7d9aec77e[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 24 17:32:36 2021 +0700
+
+    -
+
+[33mcommit 9affe6a752b64f530b980ae75d9022e8f16a2f1d[m
+Merge: b08b2e0 446d996
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Wed Nov 24 15:24:20 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit b08b2e04ee468190a553945b3d2b9d428284a433[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Wed Nov 24 15:24:10 2021 +0700
+
+    data hidden (blm fix)
+
+[33mcommit 446d996d05294e90de5c3edb40b6ee25efafee23[m
+Merge: 01af9ec 7f7fd9a
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 24 13:50:18 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 01af9ec0fbbbb380a6838c4c26d94e710c126b65[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 24 13:50:13 2021 +0700
+
+    -
+
+[33mcommit 7f7fd9a0a02a2b48567938c0c880a5fec08e1d7c[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Wed Nov 24 13:05:03 2021 +0700
+
+    calendar booking
+
+[33mcommit a7aaed0b8a732473d5260712201d0e9eda454687[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 23 16:31:27 2021 +0700
+
+    -
+
+[33mcommit f16ab6d493c9504123dd351fd8fd4ede3d50571e[m
+Merge: a348f36 af7c064
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Nov 22 16:48:49 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit a348f36ee4cc5f6e57ff9e84f73e560e1e620bbe[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Nov 22 16:48:44 2021 +0700
+
+    -
+
+[33mcommit af7c064bf23129b53913e19d4d3982e931a3b856[m
+Merge: 948487d 4cc757e
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 22 16:47:24 2021 +0700
+
+    -
+
+[33mcommit 948487d89571a883a9e6862945aa2f96ece7a1df[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 22 16:46:15 2021 +0700
+
+    -
+
+[33mcommit 4cc757e0156e9f790dfb089a0b17a93883fe2b78[m
+Merge: 1f17766 ebee901
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Nov 22 16:45:34 2021 +0700
+
+    Merge branch 'main' of https://github.com/fajarrachmath/SM
+
+[33mcommit 1f1776697d45b4aa97479d3fa8700b1f625b6e80[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Nov 22 16:45:31 2021 +0700
+
+    -
+
+[33mcommit ebee901c3e01902af5c1096155420f0cc3c461b2[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Nov 22 16:28:56 2021 +0700
+
+    halaman IP level 2
+
+[33mcommit fb01f77b92cfe71207021b75c075be81bf6acd5f[m
+Merge: fb4f281 7e7f6aa
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Nov 22 11:47:13 2021 +0700
+
+    index conflict
+
+[33mcommit fb4f2817813ce7a716e6765e6170a0362c08c071[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Nov 22 11:44:52 2021 +0700
+
+    coba calender
+
+[33mcommit 7e7f6aa6849885a8ac2910fd378397ead43e9ac5[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 22 11:00:51 2021 +0700
+
+    -
+
+[33mcommit 27489ef922951da841f4c094b1f895b01f0430f6[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 22 08:36:01 2021 +0700
+
+    -
+
+[33mcommit 3fe3fc9cc7ce5ba19aa98bf6fe2aa55c7f769024[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sun Nov 21 22:33:12 2021 +0700
+
+    -
+
+[33mcommit c9ca59ebdd5f73423af7a56daab3e3dd823cc594[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Sun Nov 21 08:22:07 2021 +0700
+
+    -
+
+[33mcommit e9388c1ed828c8a395989c1567180c8885d260ba[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Sun Nov 21 08:01:21 2021 +0700
+
+    -
+
+[33mcommit 56b5edcc73e9e8961ef1fcc030fa16512af4ab5a[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Wed Nov 17 22:22:52 2021 +0700
+
+    -
+
+[33mcommit 2030549ff330f623428f3031a2c221ecd7971c0c[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Wed Nov 17 22:22:19 2021 +0700
+
+    -
+
+[33mcommit 468ac2e0b7480c2f9dcfbbf1c6894cd0313e30e5[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Wed Nov 17 22:20:28 2021 +0700
+
+    UP DB, upload success
+
+[33mcommit 5343cb5e75deba7bc0e849484853209018b14a72[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 17 16:53:58 2021 +0700
+
+    UP DB
+
+[33mcommit c8e7ca5847b4e43be68b1a518db571d858320100[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 17 16:52:32 2021 +0700
+
+    Upload File Praktikan
+
+[33mcommit 8f33bfff58a54ec6903ec594ec15f5e0fefbae3d[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 16 16:45:50 2021 +0700
+
+    proses Praktik dan MOU
+
+[33mcommit 15ee6050ea70e87b64f4434d6829e467dc945c08[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 15 16:56:19 2021 +0700
+
+    database update
+
+[33mcommit 8b76479718e65a35513906bf0ca372195aebe236[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 15 16:54:17 2021 +0700
+
+    progres harga
+
+[33mcommit 0e0c0891e229314b38da8b16f10a8b3005490bd7[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Fri Nov 12 16:17:14 2021 +0700
+
+    12-NOV-2021
+
+[33mcommit b07d97f99d725763706f692975b708560c6ba0bd[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 11 16:48:55 2021 +0700
+
+    database 11-NOV-2021
+
+[33mcommit f1cdd86b0d409b86ec5a1a820af65c6798653376[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Thu Nov 11 16:34:53 2021 +0700
+
+    MoU
+
+[33mcommit 1fb6c8c69d485064d867f3ee12d867e51b240ee1[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 10 17:23:23 2021 +0700
+
+    Progres Pendaftaran dan Dashboard
+
+[33mcommit 5e8426e3b66c3caca3ba710647a20dd2423bbfa2[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Wed Nov 10 17:22:02 2021 +0700
+
+    Progres Pendaftaran dan Dasboard #1
+
+[33mcommit b2d2c07d1497bc82af2eea90490de49c275b6112[m
+Author: Fajar Rachmat H <fajar.rachmat.h@gmail.com>
+Date:   Tue Nov 9 17:09:21 2021 +0700
+
+    Daftar
+
+[33mcommit 55a33c43ced7bd2ec69f1e9ed771a4ccbf60cd65[m
+Author: fajarrachmath <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 8 15:41:49 2021 +0700
+
+    register lainnya
+
+[33mcommit c340a5827f9e29c2644c7b8fd029c3266cd43330[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Nov 8 15:35:14 2021 +0700
+
+    js + css baru
+
+[33mcommit 8584c3494dbdec99f73c1cd28c24ee39f89666c6[m
+Author: fajarrachmath <fajar.rachmat.h@gmail.com>
+Date:   Mon Nov 8 15:34:01 2021 +0700
+
+    delete css dan js
+
+[33mcommit 31fcbd54574218271c2516774a370f1adf7e0901[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sun Nov 7 20:32:17 2021 +0700
+
+    reg_exc.php
+
+[33mcommit 5ffa6291fafdb003aebcc68e3b794dac3cdcfe49[m
+Author: fajarrachmath <fajar.rachmat.h@gmail.com>
+Date:   Wed Oct 27 10:38:54 2021 +0700
+
+    REGISTER
+
+[33mcommit 79e858305564c9042f793a57b84188a06aad4ecc[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Fri Oct 22 07:27:11 2021 +0700
+
+    Register
+
+[33mcommit 8056d2f4c59173f4f0ef27b4f09bada3d54dbe5d[m
+Author: fajarrachmath <fajar.rachmat.h@gmail.com>
+Date:   Thu Oct 21 16:26:47 2021 +0700
+
+    REGISTER
+
+[33mcommit 2b8f8e8611cef2509693d428b454b4057a9f6267[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Thu Oct 7 14:45:05 2021 +0700
+
+    phpmailer dari github Synchro CS
+
+[33mcommit 532690c456510d14aaf932d99a30a4674b1ea775[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Oct 4 14:36:52 2021 +0700
+
+    Edit tabel MoU
+
+[33mcommit a234540a9ce0c508ad8a15ef03b3095af4f19a75[m
+Merge: 318bdb6 28c8fb4
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Oct 4 14:25:36 2021 +0700
+
+    tambah data instansi baru
+
+[33mcommit 318bdb66f2845c17cd9fa64b986d8e68538062fc[m
+Author: unknown <rizkiegipurnama@gmail.com>
+Date:   Mon Oct 4 14:22:05 2021 +0700
+
+    nambah form instansi baru
+
+[33mcommit 28c8fb4552aa5a431acbfbc778b4f650669f7567[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Oct 4 13:02:54 2021 +0700
+
+    Edit Register
+
+[33mcommit 002e0574475c0ad65d1ba4e17c48b804b077f946[m
+Author: Fajar Rachmat H <faja.rachmat.h@gmail.com>
+Date:   Mon Oct 4 11:47:55 2021 +0700
+
+    Register Edit
+
+[33mcommit 7c92a0b71cbef62b50014825bf8ca034e186e7bd[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sun Oct 3 05:04:59 2021 +0700
+
+    Coba Edit Problem
+
+[33mcommit 0270332e73517b1e339cfb371c87f09a69b91f7c[m
+Author: Fajar PC <fajar.rachmat.h@gmail.com>
+Date:   Sun Oct 3 04:41:14 2021 +0700
+
+    edit VS
+
+[33mcommit c39062ce81089367634e5575d6194da26408d74b[m
+Author: fajarrachmath <fajar.rachmat.h@gmail.com>
+Date:   Fri Oct 1 14:22:04 2021 +0700
+
+    App Sipapap Macho #1

@@ -19,7 +19,7 @@ if (!is_dir($alamat_unggah)) {
 
 if ($_FILES['nilai_upload']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['nilai_upload']['name'] = "nilai_upload_" . $_POST['id_praktik'] . "_" . $_POST['id_pembimbing'] . "_" . date('Y-m-d') . ".pdf";
+    $_FILES['nilai_upload']['name'] = md5($_FILES['nilai_upload']['name']) . ".pdf";
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['nilai_upload'])) {
@@ -42,12 +42,21 @@ if ($_FILES['nilai_upload']['size'] > 0) {
 // print_r($_FILES);
 // echo "</pre>";
 
-$sql_update = "INSERT INTO tb_nilai_upload ";
-$sql_update .= " (id_pembimbing, id_unit, id_praktik, file_nilai_upload)";
-$sql_update .= " VALUES";
-$sql_update .= " (" . $_POST['id_pembimbing'] . ", " . $_POST['id_unit'] . ", " . $_POST['id_praktik'] . ", '" . $link_nilai_upload . "')";
+$sql_update = "INSERT INTO tb_nilai_upload (";
+$sql_update .= " id_pembimbing, ";
+$sql_update .= " id_unit, ";
+$sql_update .= " id_praktik,";
+$sql_update .= " tgl_tambah_nilai_upload,";
+$sql_update .= " file_nilai_upload";
+$sql_update .= " )VALUES(";
+$sql_update .= " " . $_POST['id_pembimbing'] . ", ";
+$sql_update .= " " . $_POST['id_unit'] . ", ";
+$sql_update .= " " . $_POST['id_praktik'] . ", ";
+$sql_update .= " " . date('Y-m-d') . ", ";
+$sql_update .= " '" . $link_nilai_upload . "'";
+$sql_update .= " )";
 
 // echo $sql_update . "<br>";
 $conn->query($sql_update);
 
-// echo json_encode(['success' => 'Data Praktik Berhasil Disimpan']);
+echo json_encode(['success' => 'Data Praktik Berhasil Disimpan']);

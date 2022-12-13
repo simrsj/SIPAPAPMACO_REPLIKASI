@@ -39,23 +39,27 @@ Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit
 
 # GIT CODE
 
+git commit --amend
+<KET: ubah commit sebelumnya, bila sudah CTRL + X lalu CTRL + C lalau ketik :wq
+untuk ubah keterangan Commit atau :qa untuk keluar>
+
+git commit -m "Nama Commit"
+<KET: commit bila sudah eksekusi git add .>
+
+git commit -a -m "Nama Commit"
+<KET: commit semua file yang dirubah>
+
+git log namabranch
+<KET: commit histori>
+
+git clone https://github.com/fajarrachmath/SM.git
+
 git status
 
 git pull
 git add .
-git commit -a -m "Berhasil Tambah dan Ubah Nilai"
+git commit -a -m "Progres Ubah Nilai Selain Keperawatan"
 git push
-
-git clone https://github.com/fajarrachmath/SM.git
-
-git commit --amend
-<ubah commit sebelumnya, bila sudah CTRL + X lalu CTRL + C lalau ketik :wq untuk ubah keterangan Commit atau :qa untuk keluar>
-
-git commit -m "Nama Commit"
-<commit bila sudah eksekusi git add .>
-
-git commit -a -m "Nama Commit"
-<commit semua file yang dirubah>
 
 ====================================================================================================================
 

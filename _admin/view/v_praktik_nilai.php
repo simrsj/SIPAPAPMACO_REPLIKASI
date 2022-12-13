@@ -168,6 +168,19 @@
                                                                 <?php
                                                                 $no = 1;
                                                                 while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
+
+                                                                    $sql_data_nilai_u = "SELECT * FROM tb_nilai_upload ";
+                                                                    $sql_data_nilai_u .= " WHERE id_praktik = " . $d_data_praktikan['id_praktik'];
+                                                                    $sql_data_nilai_u .= " AND id_pembimbing = " . $d_data_praktikan['id_pembimbing'];
+                                                                    // echo "$sql_data_nilai_u<br>";
+                                                                    try {
+                                                                        $q_data_nilai_u = $conn->query($sql_data_nilai_u);
+                                                                    } catch (Exception $ex) {
+                                                                        echo "<script>alert('$ex -DATA PRIVILEGES-');";
+                                                                        echo "document.location.href='?error404';</script>";
+                                                                    }
+                                                                    $r_data_nilai_u = $q_data_nilai_u->rowCount();
+                                                                    $d_data_nilai_u = $q_data_nilai_u->fetch(PDO::FETCH_ASSOC);
                                                                 ?>
                                                                     <tr>
                                                                         <th scope="row"><?= $no; ?></th>
@@ -205,21 +218,10 @@
                                                                                     </a>
                                                                                     <?php
                                                                                 } else {
-                                                                                    $sql_data_nilai_u = "SELECT * FROM tb_nilai_upload ";
-                                                                                    $sql_data_nilai_u .= " WHERE id_praktik = " . $d_data_praktikan['id_praktik'];
-                                                                                    $sql_data_nilai_u .= " AND id_pembimbing = " . $d_data_praktikan['id_pembimbing'];
-                                                                                    // echo "$sql_data_nilai_u<br>";
-                                                                                    try {
-                                                                                        $q_data_nilai_u = $conn->query($sql_data_nilai_u);
-                                                                                    } catch (Exception $ex) {
-                                                                                        echo "<script>alert('$ex -DATA PRIVILEGES-');";
-                                                                                        echo "document.location.href='?error404';</script>";
-                                                                                    }
-                                                                                    $r_data_nilai_u = $q_data_nilai_u->rowCount();
-                                                                                    $d_data_nilai_u = $q_data_nilai_u->fetch(PDO::FETCH_ASSOC);
                                                                                     if ($r_data_nilai_u > 0) {
                                                                                     ?>
                                                                                         <a href="<?= $d_data_nilai_u['file_nilai_upload']; ?>" target="_blank" class="btn btn-outline-success btn-sm">
+                                                                                            <i class="fas fa-file-download"></i>
                                                                                             Unduh Nilai
                                                                                         </a>
                                                                                     <?php
@@ -240,17 +242,26 @@
                                                                                     <i class="fas fa-info-circle"></i> Rincian Nilai
                                                                                 </button>
                                                                             </td>
-                                                                        <?php
+                                                                            <?php
                                                                         } else {
-                                                                        ?>
-                                                                            <?php if ($d_prvl['level_user'] == 1) { ?>
+                                                                            if ($d_prvl['level_user'] == 1) { ?>
                                                                                 <td class="text-center">
-                                                                                    <a href="<?= "?pnilai&i=" . $d_praktik['id_praktik'] . "&pu=" . $d_data_praktikan['id_pembimbing']; ?>" class="btn btn-primary btn-sm">
-                                                                                        Unggah File Nilai
-                                                                                    </a>
+                                                                                    <?php if ($r_data_nilai_u > 0) { ?>
+                                                                                        <a href="<?= "?pnilai=" . urlencode(base64_encode($d_praktik['id_praktik'])) .
+                                                                                                        "&pmbb=" . urlencode(base64_encode($d_data_praktikan['id_pembimbing'])) .
+                                                                                                        "&idnu=" . urlencode(base64_encode($d_data_nilai_u['id_nilai_upload'])) .
+                                                                                                        "&upu" ?>" class="btn btn-outline-primary  btn-sm">
+                                                                                            <i class="fa-solid fa-file-pen"></i> Ubah File Nilai
+                                                                                        </a>
+                                                                                    <?php } else { ?>
+                                                                                        <a href="<?= "?pnilai=" . urlencode(base64_encode($d_praktik['id_praktik'])) .
+                                                                                                        "&pmbb=" . urlencode(base64_encode($d_data_praktikan['id_pembimbing'])) .
+                                                                                                        "&upi" ?>" class="btn btn-outline-success btn-sm">
+                                                                                            <i class="fas fa-file-upload"></i> Unggah File Nilai
+                                                                                        </a>
+                                                                                    <?php } ?>
                                                                                 </td>
-                                                                            <?php } ?>
-                                                                        <?php
+                                                                        <?php }
                                                                         }
                                                                         ?>
                                                                     </tr>

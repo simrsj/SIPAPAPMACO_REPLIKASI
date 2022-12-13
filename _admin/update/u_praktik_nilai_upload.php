@@ -1,4 +1,4 @@
-<?php if (isset($_GET['pnilai']) && isset($_GET['pmbb']) && isset($_GET['upi']) && $d_prvl['c_praktik_nilai'] == "Y") {
+<?php if (isset($_GET['pnilai']) && isset($_GET['pmbb']) && isset($_GET['upu']) && $d_prvl['c_praktik_nilai'] == "Y") {
     $id_praktik = base64_decode(urldecode($_GET['pnilai']));
     $id_pembimbing = base64_decode(urldecode($_GET['pmbb']));;
 
@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Input Nilai</h1>
+                <h1 class="h3 mb-2 text-gray-800">Ubah Nilai</h1>
             </div>
         </div>
         <div class="card shadow mb-4">
@@ -39,10 +39,10 @@
                                 Ruangan : <?= $d1_data_praktikan['nama_unit']; ?>
                             </div>
                             <div class="col-md-3">
-                                Unggah File :
+                                Unggah File Update :
                                 <div class="custom-file">
-                                    <label class="custom-file-label text-sm text-danger " for="customFile" id="labelfileinput">
-                                        <span class="blink">Pilih File Nilai Praktik</span>
+                                    <label class="custom-file-label text-sm text-primary " for="customFile" id="labelfileinput">
+                                        <span class="blink">Pilih Update File Nilai Praktik</span>
                                     </label>
                                     <input type="file" class="custom-file-input mb-1" id="nilai_upload" name="nilai_upload" accept="application/pdf" required placeholder="asdasd">
                                     <span class='i text-xs'>File Data Nilai Harus .pdf dan ukuran file kurang dari 1Mb</span><br>
@@ -96,8 +96,8 @@
                         <!-- tombol simpan pilih Pembimbing dan Ruangan  -->
                         <center>
                             <button type="button" name="simpan_nilai_upload" id="simpan_nilai_upload" class="btn btn-outline-success">
-                                <i class="fa-solid fa-upload"></i>
-                                Unggah Nilai Praktik
+                                <i class="fas fa-file-upload"></i>
+                                Ubah Nilai Praktik
                             </button>
                         </center>
                     </form>
@@ -206,16 +206,9 @@
                         var fileNilai = document.getElementById("nilai_upload").files;
                         data_file.append("nilai_upload", fileNilai[0]);
 
-                        var id_pembimbing = document.getElementById("id_pembimbing").value;
-                        data_file.append("id_pembimbing", id_pembimbing);
+                        data_file.append("idnu", "<?= $_GET['idnu'] ?>");
 
-                        var id_unit = document.getElementById("id_unit").value;
-                        data_file.append("id_unit", id_unit);
-
-                        var id_praktik = document.getElementById("id_praktik").value;
-                        data_file.append("id_praktik", id_praktik);
-
-                        xhttp.open("POST", "_admin/exc/x_i_praktik_nilai_upload_sFileNilai.php", true);
+                        xhttp.open("POST", "_admin/exc/x_u_praktik_nilai_upload_uFileNilai.php", true);
                         xhttp.send(data_file);
 
                         Swal.fire({
