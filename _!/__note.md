@@ -50,7 +50,7 @@ git commit -a -m "Nama Commit"
 <KET: commit semua file yang dirubah>
 
 git log namabranch
-<KET: commit histori>
+<KET: commit histori, tekan q untuk keluar>
 
 git clone https://github.com/fajarrachmath/SM.git
 
