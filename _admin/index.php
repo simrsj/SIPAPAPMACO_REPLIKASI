@@ -445,7 +445,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				}
 				//daftar data pemibimbing
 				elseif (isset($_GET['d_pmbb']) && $d_prvl['r_daftar_pembimbing'] == 'Y') include "_admin/view/v_daftarPembimbing.php";
-				elseif (isset($_GET['nil'])) {
+				//praktik nilai
+				elseif (isset($_GET['pnilai'])) {
 					if (isset($_GET['i']) && isset($_GET['p'])) {
 						include "_admin/insert/i_nilaiKep.php";
 					} elseif (isset($_GET['i']) && isset($_GET['pu'])) {

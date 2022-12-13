@@ -11,6 +11,7 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 ## _*MINOR*_
 
 - 🔃 Pembuatan File Word Invoice
+- membuat rincian praktik pembimbing
 
 ====================================================================================================================
 
