@@ -543,6 +543,58 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_arsip_praktik"></div>
                     </td>
                 </tr>
+                <!-- PKD Narsum -->
+                <tr>
+                    <td>PKD Narsum</td>
+                    <td>
+                        <?php
+                        $c_pkd_narsumY = "";
+                        $c_pkd_narsumT = "";
+                        if ($d_user_prvl['c_pkd_narsum'] == 'Y') $c_pkd_narsumY = "checked";
+                        else if ($d_user_prvl['c_pkd_narsum'] == 'T')  $c_pkd_narsumT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="c_pkd_narsum" id="c_pkd_narsumY" value="Y" <?= $c_pkd_narsumY; ?>><label for="c_pkd_narsumY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="c_pkd_narsum" id="c_pkd_narsumT" value="T" <?= $c_pkd_narsumT; ?>><label for="c_pkd_narsumT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_pkd_narsum"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $r_pkd_narsumY = "";
+                        $r_pkd_narsumT = "";
+                        if ($d_user_prvl['r_pkd_narsum'] == 'Y') $r_pkd_narsumY = "checked";
+                        else if ($d_user_prvl['r_pkd_narsum'] == 'T')  $r_pkd_narsumT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="r_pkd_narsum" id="r_pkd_narsumY" value="Y" <?= $r_pkd_narsumY; ?>><label for="r_pkd_narsumY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="r_pkd_narsum" id="r_pkd_narsumT" value="T" <?= $r_pkd_narsumT; ?>><label for="r_pkd_narsumT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_pkd_narsum"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $u_pkd_narsumY = "";
+                        $u_pkd_narsumT = "";
+                        if ($d_user_prvl['u_pkd_narsum'] == 'Y') $u_pkd_narsumY = "checked";
+                        else if ($d_user_prvl['u_pkd_narsum'] == 'T')  $u_pkd_narsumT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="u_pkd_narsum" id="u_pkd_narsumY" value="Y" <?= $u_pkd_narsumY; ?>><label for="u_pkd_narsumY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="u_pkd_narsum" id="u_pkd_narsumT" value="T" <?= $u_pkd_narsumT; ?>><label for="u_pkd_narsumT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_pkd_narsum"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $d_pkd_narsumY = "";
+                        $d_pkd_narsumT = "";
+                        if ($d_user_prvl['d_pkd_narsum'] == 'Y') $d_pkd_narsumY = "checked";
+                        else if ($d_user_prvl['d_pkd_narsum'] == 'T')  $d_pkd_narsumT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="d_pkd_narsum" id="d_pkd_narsumY" value="Y" <?= $d_pkd_narsumY; ?>><label for="d_pkd_narsumY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="d_pkd_narsum" id="d_pkd_narsumT" value="T" <?= $d_pkd_narsumT; ?>><label for="d_pkd_narsumT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_pkd_narsum"></div>
+                    </td>
+                </tr>
             </tbody>
             </tbody>
         </table>
@@ -597,6 +649,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
         var r_arsip_praktik = $("input[name='r_arsip_praktik']:checked").val();
         var u_arsip_praktik = $("input[name='u_arsip_praktik']:checked").val();
         var d_arsip_praktik = $("input[name='d_arsip_praktik']:checked").val();
+        var c_pkd_narsum = $("input[name='c_pkd_narsum']:checked").val();
+        var r_pkd_narsum = $("input[name='r_pkd_narsum']:checked").val();
+        var u_pkd_narsum = $("input[name='u_pkd_narsum']:checked").val();
+        var d_pkd_narsum = $("input[name='d_pkd_narsum']:checked").val();
         var c_praktikan = $("input[name='c_praktikan']:checked").val();
         var r_praktikan = $("input[name='r_praktikan']:checked").val();
         var u_praktikan = $("input[name='u_praktikan']:checked").val();
@@ -642,6 +698,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
             r_arsip_praktik != "" &&
             u_arsip_praktik != "" &&
             d_arsip_praktik != "" &&
+            c_pkd_narsum != "" &&
+            r_pkd_narsum != "" &&
+            u_pkd_narsum != "" &&
+            d_pkd_narsum != "" &&
             c_praktikan != "" &&
             r_praktikan != "" &&
             u_praktikan != "" &&
