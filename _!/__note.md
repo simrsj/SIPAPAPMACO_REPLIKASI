@@ -43,7 +43,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres Praktik Nilai"
+git commit -a -m "Berhasil Tambah dan Ubah Nilai"
 git push
 
 git clone https://github.com/fajarrachmath/SM.git
