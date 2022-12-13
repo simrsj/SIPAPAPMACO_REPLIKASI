@@ -4,14 +4,15 @@ if (empty($_SESSION['username_user'])) {
 	<?php
 	include "register_captcha.php";
 	?>
-	<nav class="navbar fixed-top navbar-light bg-light">
+	<nav class="navbar fixed-top navbar-light bg-light shadow-lg">
 		<ul class="navbar-nav">
 			<li class="nav-item">
 				<!-- <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="60px">
 				<img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="60px">
 				<img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="80px">
 				<img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="60px"> -->
-				<a class="navbar-brand bg-primary rounded p-2 text-xxl b text-white" href="?">SIPAPAP MACO</a><b>(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)</b>
+				<a class="navbar-brand bg-primary rounded p-2 text-xxl b text-white" href="?">SIPAPAP MACO</a><br>
+				<div class="d-none  d-lg-inline b">(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)</div>
 			</li>
 		</ul>
 
@@ -34,7 +35,7 @@ if (empty($_SESSION['username_user'])) {
 			</a>
 		</div>
 	</nav>
-	<br><br><br>
+	<br><br><br><br><br>
 	<div class="text-center mb-1">
 		<div class="btn btn-primary">
 			<?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span>
