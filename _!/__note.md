@@ -41,7 +41,7 @@ Untuk Lebih lengkap cek _*TIMELINE*_ Perubahan Aplikasi dilink ini : https://bit
 
 git commit --amend
 <KET: ubah commit sebelumnya, bila sudah CTRL + X lalu CTRL + C lalau ketik :wq
-untuk ubah keterangan Commit atau :qa untuk keluar>
+untuk ubah keterangan Commit atau :qa! untuk keluar>
 
 git commit -m "Nama Commit"
 <KET: commit bila sudah eksekusi git add .>
@@ -58,7 +58,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Perbaikan Praktik Pengajuan, Praktikan, dan Pembimbing"
+git commit -a -m "Pemu"
 git push
 
 ====================================================================================================================
