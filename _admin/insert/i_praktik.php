@@ -496,6 +496,18 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
             }
             //bila tanggal mulai dan selesai sesuai
             else { //Cek Data Ketersediaan Jadwal Praktik
+                console.log("Cek Jadwal Praktik . . .");
+                Swal.fire({
+                    title: 'Mohon Ditunggu . . .',
+                    html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />' +
+                        '  <p>Harap Tunggu</p>',
+                    // add html attribute if you want or remove
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    },
+                });
                 $.ajax({
                     type: 'POST',
                     url: "_admin/insert/i_praktik_valTgl.php",
@@ -577,7 +589,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                             html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                             showConfirmButton: false,
-                                            timer: 1231235000,
+                                            timer: 5000,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -597,11 +609,6 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                             } else console.log("Data Wajib Praktik Belum Diisi dan/ tidak sesuai");
                         } else alert("ERROR CEK TANGGAL PRAKTIK");
                     }
-                    // ,
-                    // error: function() {
-                    //     // console.log(response.responseText);
-                    //     alert('eksekusi query Val.Jadwal Praktik gagal');
-                    // }
                 });
             }
         });

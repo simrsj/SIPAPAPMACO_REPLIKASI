@@ -322,7 +322,10 @@ if ($d_prvl['r_praktik'] == "Y") {
 
                                 if ($r_praktik_nilai > 0) {
                                 ?>
-                                    <span class="badge badge-success">Sudah Dipilih</span>
+                                    <span class="badge badge-success">Sudah DiNilai</span><br>
+                                    <a href="?pnilai" class="btn btn-outline-info btn-xs">
+                                        <i class="fa-solid fa-eye"></i> Cek
+                                    </a>
                                 <?php
 
                                 } else {
