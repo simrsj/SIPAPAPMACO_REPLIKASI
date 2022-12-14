@@ -58,7 +58,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres PKD Narsum"
+git commit -a -m "Perbaikan Praktik Pengajuan, Praktikan, dan Pembimbing"
 git push
 
 ====================================================================================================================

@@ -15,9 +15,9 @@ try {
 $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
 if ($d_prvl['c_praktik'] == "Y") {
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_POST);
+    // echo "</pre>";
 
     //bila profesi tidak dipilih
     if ($_POST['profesi'] != "") $profesi = $_POST['profesi'];
@@ -79,7 +79,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " 'Y'";
     $sql_insert .= " )";
 
-    echo $sql_insert . "<br>";
+    // echo $sql_insert . "<br>";
     $conn->query($sql_insert);
     // --------------------------------------SIMPAN GENERATE TANGGAL--------------------------------------------
 

@@ -321,7 +321,7 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                             title: $title,
                             showConfirmButton: false,
                             html: '<a href="?pmbb" class="btn btn-outline-primary">OK</a>',
-                            timer: 11115000,
+                            timer: 5000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
                                 toast.addEventListener('mouseenter', Swal.stopTimer)
