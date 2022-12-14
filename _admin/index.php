@@ -134,7 +134,7 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 			<div class="sidebar-heading">
 				Narasumber
 			</div>
-			<?php if ($d_prvl['r_narsum'] == "Y") { ?>
+			<?php if ($d_prvl['r_pkd_narsum'] == "Y") { ?>
 				<!-- Narasumber -->
 				<li class="nav-item" style=" word-wrap: break-word;">
 					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_narsum" aria-expanded="true" aria-controls="collapse_narsum">
@@ -143,8 +143,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</a>
 					<div id="collapse_narsum" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<?php if ($d_prvl['r_narsum'] == "Y") { ?>
-								<a class="collapse-item" href="?narsum">
+							<?php if ($d_prvl['r_pkd_narsum'] == "Y") { ?>
+								<a class="collapse-item" href="?pkd_narsum">
 									<i class="fas fa-envelope"></i>
 									<span>Pengajuan</span>
 								</a>
@@ -402,9 +402,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					include "_admin/view/v_akreditasi.php";
 				}
 				//menu informasi dan jadwal praktik
-				elseif (isset($_GET['info_diklat'])) {
-					include "_admin/view/v_info_diklat.php";
-				} elseif (isset($_GET['ins'])) {
+				elseif (isset($_GET['info_diklat'])) include "_admin/view/v_info_diklat.php";
+				elseif (isset($_GET['ins'])) {
 					if (isset($_GET['i'])) {
 						include "_admin/insert/i_institusi.php";
 					} elseif (isset($_GET['u'])) {
@@ -422,9 +421,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					include "_admin/view/v_jenjang.php";
 				}
 				//kuota praktik
-				elseif (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') {
-					include "_admin/view/v_kuota.php";
-				} elseif (isset($_GET['lapor'])) {
+				elseif (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') include "_admin/view/v_kuota.php";
+				elseif (isset($_GET['lapor'])) {
 					if (isset($_GET['dtl'])) {
 						include "_admin/view/v_lapor_detail.php";
 					} else {
@@ -494,6 +492,11 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					} else {
 						include "_admin/view/v_transaksi.php";
 					}
+				}
+				//Narasumber
+				elseif (isset($_GET['pkd_narsum'])) {
+					if (isset($_GET['i'])) include "_admin/insert/i_pkd_narsum.php";
+					else include "_admin/view/v_pkd_narsum.php";
 				} elseif (isset($_GET['test'])) {
 					include "test.php";
 				} elseif (isset($_GET['error401'])) {

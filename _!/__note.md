@@ -58,7 +58,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres Ubah Nilai Selain Keperawatan"
+git commit -a -m "Progres PKD Narsum"
 git push
 
 ====================================================================================================================
