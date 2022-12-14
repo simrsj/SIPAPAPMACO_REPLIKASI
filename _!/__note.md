@@ -58,7 +58,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Pemu"
+git commit -a -m "database"
 git push
 
 ====================================================================================================================
