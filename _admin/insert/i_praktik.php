@@ -567,16 +567,17 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                         var id = document.getElementById("id").value;
                                         data_file.append("id", id);
 
-                                        xhttp.open("POST", "_admin/exc/x_i_praktik_fileSurat_s.php", true);
+                                        xhttp.open("POST", "_admin/exc/x_i_praktik_sFileSurat.php", true);
                                         xhttp.send(data_file);
 
                                         Swal.fire({
                                             allowOutsideClick: false,
                                             // isDismissed: false,
                                             icon: 'success',
+                                            html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                             showConfirmButton: false,
-                                            timer: 5000,
+                                            timer: 1231235000,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)
