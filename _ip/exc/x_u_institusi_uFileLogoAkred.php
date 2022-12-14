@@ -48,7 +48,7 @@ if (!is_dir($alamat_unggah)) {
 
 if ($_FILES['fileAkred_institusi']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['fileAkred_institusi']['name'] = "akred_" . $id . "_" . date('Y-m-d') . ".pdf";
+    $_FILES['fileAkred_institusi']['name'] = "akred_" . md5($_FILES['t_file']['name'] . date('Y-m-d h:i:s')) . ".pdf";
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['fileAkred_institusi'])) {

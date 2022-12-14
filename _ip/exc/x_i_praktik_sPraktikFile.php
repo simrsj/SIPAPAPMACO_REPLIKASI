@@ -15,7 +15,7 @@ if (!is_dir($alamat_unggah)) {
 
 if ($_FILES['file_surat']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['file_surat']['name'] = "surat_" . $id . "_" . date('Y-m-d') . ".pdf";
+    $_FILES['file_surat']['name'] = "surat_" . md5($_FILES['t_file']['name'] . date('Y-m-d h:i:s')) . ".pdf";
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['file_surat'])) {
@@ -33,7 +33,7 @@ if ($_FILES['file_surat']['size'] > 0) {
 
 if ($_FILES['file_data_praktikan']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['file_data_praktikan']['name'] = "data_praktikan_" . $id . "_" . date('Y-m-d') . ".xlsx";
+    $_FILES['file_data_praktikan']['name'] = "data_praktikan_" . md5($_FILES['t_file']['name'] . date('Y-m-d h:i:s')) . ".xlsx";
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['file_data_praktikan'])) {

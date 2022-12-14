@@ -200,7 +200,7 @@ if (isset($_POST['simpan_bayar'])) {
     $ext = pathinfo($path, PATHINFO_EXTENSION);
 
     //ubah Nama File
-    $_FILES['file_bayar']['name'] = "bayar_" . $no . "_" . $_POST['id_praktik'] . "_" . date('Y-m-d') . "." . $ext;
+    $_FILES['file_bayar']['name'] = "nilai_upload_" . md5($_FILES['t_file']['name'] . date('Y-m-d h:i:s')) . "." . $ext;
 
 
     // echo "<pre>";

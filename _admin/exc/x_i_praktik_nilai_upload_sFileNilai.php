@@ -19,7 +19,7 @@ if (!is_dir($alamat_unggah)) {
 
 if ($_FILES['nilai_upload']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['nilai_upload']['name'] = md5($_FILES['nilai_upload']['name']) . ".pdf";
+    $_FILES['nilai_upload']['name'] =  "nilai_upload_" . md5($_FILES['t_file']['name'] . date('Y-m-d h:i:s')) . ".pdf";
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['nilai_upload'])) {

@@ -73,7 +73,6 @@ base64_decode(urldecode())
 # TRUNCATE DATABASE (EMPTY)
 
 TRUNCATE tb_bayar;
-TRUNCATE tb_lapor;
 TRUNCATE tb_mess_pilih;
 TRUNCATE tb_nilai_kep;
 TRUNCATE tb_nilai_upload;
@@ -84,8 +83,6 @@ TRUNCATE tb_praktikan;
 TRUNCATE tb_praktik_tgl;
 TRUNCATE tb_tarif_pilih;
 TRUNCATE tb_tempat_pilih;
-TRUNCATE tb_user;
-TRUNCATE tb_user_privileges
 
 ====================================================================================================================
 

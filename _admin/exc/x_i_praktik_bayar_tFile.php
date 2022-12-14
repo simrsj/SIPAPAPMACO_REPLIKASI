@@ -13,7 +13,7 @@ $type = explode('/', $_FILES['t_file']['type']);
 if ($_FILES['t_file']['size'] > 0) {
 
     //ubah Nama File PDF
-    $_FILES['t_file']['name'] = md5($_FILES['t_file']['name']) . "." . $type[1];
+    $_FILES['t_file']['name'] = "byr_" . md5($_FILES['t_file']['name'] . date('Y-m-d h:i:s')) . "." . $type[1];
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['t_file'])) {
