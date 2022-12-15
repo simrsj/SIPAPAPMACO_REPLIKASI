@@ -163,7 +163,7 @@
                     }
                 } else {
                     ?>
-                    <h3 class='text-center'> Data Pendaftaran Praktikan Anda Tidak Ada</h3>
+                    <h3 class='text-center'> Isikan Data Praktikan Terlebih Dahulu</h3>
                 <?php
                 }
                 ?>

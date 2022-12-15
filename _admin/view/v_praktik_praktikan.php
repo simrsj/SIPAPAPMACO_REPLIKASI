@@ -29,7 +29,7 @@
                 if ($r_praktik > 0) {
                     while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
                 ?>
-                        <div id="accordion">
+                        <div id="accordion<?= md5($d_praktik['id_praktik']) ?>">
                             <div class="card">
                                 <div class="card-header align-items-center bg-gray-200">
                                     <div class="row" style="font-size: small;">
@@ -55,7 +55,7 @@
                                         <!-- tombol aksi/info proses  -->
                                         <div class="col-sm-2 my-auto text-right">
                                             <!-- tombol rincian -->
-                                            <a class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#<?= md5($d_praktik['id_praktik']); ?>" title="Rincian">
+                                            <a class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#rincian<?= md5($d_praktik['id_praktik']); ?>" title="Rincian">
                                                 <i class="fas fa-info-circle"></i> Rincian Data
                                             </a>
                                         </div>
@@ -63,7 +63,7 @@
                                 </div>
 
                                 <!-- collapse data praktikan -->
-                                <div id="<?= md5($d_praktik['id_praktik']); ?>" class="collapse" data-parent="#accordion">
+                                <div id="rincian<?= md5($d_praktik['id_praktik']); ?>" class="collapse" data-parent="#accordion<?= md5($d_praktik['id_praktik']) ?>">
                                     <div class="card-body " style="font-size: medium;">
                                         <!-- data praktikan -->
                                         <div class="text-gray-700 row mb-0">

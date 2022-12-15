@@ -58,7 +58,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "database"
+git commit -a -m "Berhasil Accordion Data Praktikan"
 git push
 
 ====================================================================================================================
