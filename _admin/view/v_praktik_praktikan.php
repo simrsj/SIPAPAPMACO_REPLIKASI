@@ -88,25 +88,25 @@
                                                                     <form class="form-data b" method="post" id="form_t<?= md5($d_praktik['id_praktik']); ?>">
                                                                         No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
                                                                         <input type="text" id="t_no_id<?= md5($d_praktik['id_praktik']); ?>" name="t_no_id" class="form-control" placeholder="Isikan No ID" required>
-                                                                        <div class="text-danger b i text-xs blink" id="err_t_no_id"></div><br>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_no_id<?= md5($d_praktik['id_praktik']); ?>"></div><br>
                                                                         Nama Siswa/Mahasiswa : <span style="color:red">*</span><br>
                                                                         <input type="text" id="t_nama<?= md5($d_praktik['id_praktik']); ?>" name="t_nama" class="form-control" placeholder="Inputkan Nama Siswa/Mahasiswa" required>
-                                                                        <div class="text-danger b i text-xs blink" id="err_t_nama"></div><br>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_nama<?= md5($d_praktik['id_praktik']); ?>"></div><br>
                                                                         Tanggal Lahir : <span style="color:red">*</span><br>
                                                                         <input type="date" id="t_tgl<?= md5($d_praktik['id_praktik']); ?>" name="t_tgl" class="form-control" required>
-                                                                        <div class="text-danger b i text-xs blink" id="err_t_tgl"></div><br>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_tgl<?= md5($d_praktik['id_praktik']); ?>"></div><br>
                                                                         Alamat : <span style="color:red">*</span><br>
                                                                         <textarea id="t_alamat<?= md5($d_praktik['id_praktik']); ?>" name="t_alamat" class="form-control" rows="2" placeholder="Inputkan Alamat"></textarea>
-                                                                        <div class="text-danger b i text-xs blink" id="err_t_alamat"></div><br>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_alamat<?= md5($d_praktik['id_praktik']); ?>"></div><br>
                                                                         No Telepon : <span style="color:red">*</span><br>
                                                                         <input type="number" id="t_telpon<?= md5($d_praktik['id_praktik']); ?>" name="t_telpon" class="form-control" min="1" placeholder="Inputkan No Telpon" required>
-                                                                        <div class="text-danger b i text-xs blink" id="err_t_telpon"></div><br>
+                                                                        <div class="text-danger b i text-xs blink" id="err_t_telpon<?= md5($d_praktik['id_praktik']); ?>"></div><br>
                                                                         No WhatsApp :<br>
                                                                         <input type="number" id="t_wa<?= md5($d_praktik['id_praktik']); ?>" name="t_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
-                                                                        <div class="text-danger b i text-xs blink" id="err_t_wa"></div><br>
+                                                                        <br>
                                                                         E-Mail : <br>
                                                                         <input type="email" id="t_email<?= md5($d_praktik['id_praktik']); ?>" name="t_email" class="form-control" placeholder="Inputkan E-Mail">
-                                                                        <div class="text-danger b i text-xs blink" id="err_t_email"></div>
+
                                                                     </form>
                                                                 </div>
                                                                 <div class="modal-footer text-md">
@@ -174,33 +174,33 @@
                                                     t_telpon == ""
                                                 ) {
                                                     if (t_no_id == "") {
-                                                        document.getElementById("err_t_no_id").innerHTML = "No ID Harus Diisi";
+                                                        $("#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>").html("No ID Harus Diisi");
                                                     } else {
-                                                        document.getElementById("err_t_no_id").innerHTML = "";
+                                                        $("#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                     }
 
                                                     if (t_nama == "") {
-                                                        document.getElementById("err_t_nama").innerHTML = "Nama Harus Diisi";
+                                                        $("#err_t_nama<?= md5($d_praktik['id_praktik']); ?>").html("Nama Harus Diisi");
                                                     } else {
-                                                        document.getElementById("err_t_nama").innerHTML = "";
+                                                        $("#err_t_nama<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                     }
 
                                                     if (t_tgl == "") {
-                                                        document.getElementById("err_t_tgl").innerHTML = "Tanggal Lahir Harus Dipilih";
+                                                        $("#err_t_tgl<?= md5($d_praktik['id_praktik']); ?>").html("Tanggal Lahir Harus Dipilih");
                                                     } else {
-                                                        document.getElementById("err_t_tgl").innerHTML = "";
+                                                        $("#err_t_tgl<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                     }
 
                                                     if (t_alamat == "") {
-                                                        document.getElementById("err_t_alamat").innerHTML = "Alamat Harus Diisi";
+                                                        $("#err_t_alamat<?= md5($d_praktik['id_praktik']); ?>").html("Alamat Harus Diisi");
                                                     } else {
-                                                        document.getElementById("err_t_alamat").innerHTML = "";
+                                                        $("#err_t_alamat<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                     }
 
                                                     if (t_telpon == "") {
-                                                        document.getElementById("err_t_telpon").innerHTML = "Telpon Harus Diisi";
+                                                        $("#err_t_telpon<?= md5($d_praktik['id_praktik']); ?>").html("Telpon Harus Diisi");
                                                     } else {
-                                                        document.getElementById("err_t_telpon").innerHTML = "";
+                                                        $("#err_t_telpon<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                     }
                                                 }
 
@@ -216,40 +216,62 @@
                                                         type: 'POST',
                                                         url: "_admin/exc/x_v_praktik_praktikan_s.php",
                                                         data: data_t,
-                                                        success: function() {
-                                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
-                                                                .load(
-                                                                    "_admin/view/v_praktik_praktikanData.php?" +
-                                                                    "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
-                                                                    "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
-                                                                    "&tb=<?= md5($d_praktik['id_praktik']); ?>");
+                                                        success: function(response) {
+                                                            if (response.ket == 'Y') {
+                                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                                    .load(
+                                                                        "_admin/view/v_praktik_praktikanData.php?" +
+                                                                        "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
+                                                                        "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
+                                                                        "&tb=<?= md5($d_praktik['id_praktik']); ?>");
 
-                                                            $('#err_t_no_id').empty();
-                                                            $('#err_t_nama').empty();
-                                                            $('#err_t_tgl').empty();
-                                                            $('#err_t_alamat').empty();
-                                                            $('#err_t_telpon').empty();
-                                                            $('#err_t_wa').empty();
-                                                            $('#err_t_email').empty();
-                                                            $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
-                                                            const Toast = Swal.mixin({
-                                                                toast: true,
-                                                                position: 'top-end',
-                                                                showConfirmButton: false,
-                                                                timer: 5000,
-                                                                timerProgressBar: true,
-                                                                didOpen: (toast) => {
-                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                }
-                                                            });
+                                                                $('#err_t_no_id').empty();
+                                                                $('#err_t_nama').empty();
+                                                                $('#err_t_tgl').empty();
+                                                                $('#err_t_alamat').empty();
+                                                                $('#err_t_telpon').empty();
+                                                                $('#err_t_wa').empty();
+                                                                $('#err_t_email').empty();
+                                                                $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
+                                                                const Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 5000,
+                                                                    timerProgressBar: true,
+                                                                    didOpen: (toast) => {
+                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                    }
+                                                                });
 
-                                                            Toast.fire({
-                                                                icon: 'success',
-                                                                title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Tersimpan',
-                                                            }).then(
-                                                                function() {}
-                                                            );
+                                                                Toast.fire({
+                                                                    icon: 'success',
+                                                                    title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Tersimpan',
+                                                                }).then(
+                                                                    function() {}
+                                                                );
+                                                            } else {
+                                                                const Toast = Swal.mixin({
+                                                                    toast: true,
+                                                                    position: 'top-end',
+                                                                    showConfirmButton: false,
+                                                                    timer: 5000,
+                                                                    timerProgressBar: true,
+                                                                    didOpen: (toast) => {
+                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                    }
+                                                                });
+
+                                                                Toast.fire({
+                                                                    icon: 'error',
+                                                                    title: 'Mohon Maaf Data Praktikan <br><b>Sudah Penuh</b>',
+                                                                }).then(
+                                                                    function() {}
+                                                                );
+
+                                                            }
                                                         },
                                                         error: function(response) {
                                                             console.log(response);
