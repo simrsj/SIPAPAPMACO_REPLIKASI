@@ -58,7 +58,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "PHPMailer GMail update 30 Mei 2022"
+git commit -a -m "Progres Register"
 git push
 
 ====================================================================================================================

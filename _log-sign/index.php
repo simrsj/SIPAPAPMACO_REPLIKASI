@@ -2,9 +2,9 @@
 if (empty($_SESSION['username_user'])) {
 ?>
 	<?php
-	include "register_captcha.php";
+	include "./_log-sign/exc/x_captcha.php";
 	?>
-	<nav class="navbar fixed-top navbar-light bg-light shadow-lg">
+	<nav class="navbar fixed-top navbar-light bg-light shadow-lg mb-5">
 		<ul class="navbar-nav">
 			<li class="nav-item">
 				<!-- <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="60px">
@@ -35,7 +35,7 @@ if (empty($_SESSION['username_user'])) {
 			</a>
 		</div>
 	</nav>
-	<br><br><br><br><br>
+	<br><br><br><br>
 	<div class="text-center mb-1">
 		<div class="btn btn-primary">
 			<?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span>
@@ -43,10 +43,10 @@ if (empty($_SESSION['username_user'])) {
 	</div>
 
 	<?php
-	if (isset($_GET['reg'])) include "_log-sign/register.php";
-	elseif (isset($_GET['login'])) include "_log-sign/login.php";
+	if (isset($_GET['reg'])) include "_log-sign/view/v_register.php";
+	elseif (isset($_GET['login'])) include "_log-sign/view/v_login.php";
 	// elseif (isset($_GET['dashboard'])) include "_log-sign/register.php";
-	else include "_log-sign/login.php";
+	else include "_log-sign/view/v_login.php";
 	?>
 
 	<script>
