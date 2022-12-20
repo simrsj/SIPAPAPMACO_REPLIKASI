@@ -53,16 +53,6 @@
                             e.preventDefault();
                         });
                     </script>
-                    <!-- <script>
-                        $(document).on('click', '#see_password', function() {
-                            var x = $("#password_user");
-                            if (x.type === "password") {
-                                x.type = "text";
-                            } else {
-                                x.type = "password";
-                            }
-                        });
-                    </script> -->
                 </div>
             </div>
         </div>
