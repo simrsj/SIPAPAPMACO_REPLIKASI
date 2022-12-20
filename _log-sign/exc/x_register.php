@@ -4,9 +4,7 @@ $nama_user = $_POST['nama_user'];
 $no_telp_user = $_POST['no_telp_user'];
 $email_user = $_POST['email_user'];
 $password_user = MD5($_POST['password_user']);
-$ulangi_password = MD5($_POST['ulangi_password']);
 $sql_email_user = "SELECT * FROM tb_user WHERE username_user = '" . $email_user . "'";
-
 echo $sql_email_user . "<br>";
 $q_user = $conn->query($sql_email_user);
 $d_user = $q_user->fetch(PDO::FETCH_ASSOC);
@@ -42,17 +40,10 @@ if ($password_user != $ulangi_password) {
         // }
 
         //cari id_institusi
-        $no = 1;
-        $sql_id_institusi = "SELECT id_institusi FROM tb_institusi ORDER BY id_institusi ASC";
+        $sql_id_institusi = "SELECT id_institusi FROM tb_institusi ORDER BY id_institusi DESC LIMIT 1";
         $q_id_institusi = $conn->query($sql_id_institusi);
-        while ($d_id_institusi = $q_id_institusi->fetch(PDO::FETCH_ASSOC)) {
-            if ($d_id_institusi['id_institusi'] != $no) {
-                $id_institusi = $no;
-                break;
-            }
-            $no++;
-            $id_institusi = $no;
-        }
+        $d_id_institusi = $q_id_institusi->fetch(PDO::FETCH_ASSOC);
+        $id_institusi = $d_id_institusi['id_institusi'] + 1;
 
         // //tambah MoU baru
         // $sql_insert_mou = "INSERT INTO `tb_mou` (id_mou, id_institusi) VALUES ('$id_mou', '$id_institusi')";
@@ -61,37 +52,47 @@ if ($password_user != $ulangi_password) {
 
         //tambah institusi baru
         $sql_insert_institusi = "INSERT INTO `tb_institusi` (id_institusi, nama_institusi) VALUES ('$id_institusi', '$nama_institusi')";
-        $conn->query($sql_insert_institusi);
-        // echo "<br>" . $sql_insert_institusi;
+        echo "<br>" . $sql_insert_institusi;
+        try {
+            // $conn->query($sql_insert_institusi);
+        } catch (Exception $ex) {
+            echo "<script>alert('$ex -DATA INSERT INSTITUSI-');";
+            echo "document.location.href='?error404';</script>";
+        }
     } else {
         $nama_institusi = NULL;
     }
 
-    $sql_insert_user = "INSERT INTO tb_user (
-    id_mou, 
-    id_institusi, 
-    username_user, 
-    password_user, 
-    nama_user, 
-    email_user, 
-    level_user, 
-    no_telp_user, 
-    tgl_buat_user, 
-    status_user
-    ) VALUES (
-        '" . $id_mou . "', 
-        '" . $id_institusi . "', 
-        '" . $email_user . "', 
-        '" . $password_user . "', 
-        '" . $nama_user . "', 
-        '" . $email_user . "', 
-        '2', 
-        '" . $no_telp_user . "',
-        '" . date('Y-m-d') . "', 
-        'Y'
-    )";
-    // echo "<br>" . $sql_insert_user;
-    $conn->query($sql_insert_user);
+    $sql_insert_user = "INSERT INTO tb_user (";
+    // $sql_insert_user .= " id_mou, ";
+    $sql_insert_user .= " id_institusi, ";
+    $sql_insert_user .= " username_user, ";
+    $sql_insert_user .= " password_user, ";
+    $sql_insert_user .= " nama_user, ";
+    $sql_insert_user .= " email_user, ";
+    $sql_insert_user .= " level_user,";
+    $sql_insert_user .= " no_telp_user, ";
+    $sql_insert_user .= " tgl_buat_user, ";
+    $sql_insert_user .= " status_user";
+    $sql_insert_user .= " ) VALUES (";
+    // $sql_insert_user .= "  '" . $id_mou . "', ";
+    $sql_insert_user .= " '" . $id_institusi . "', ";
+    $sql_insert_user .= " '" . $email_user . "', ";
+    $sql_insert_user .= " '" . $password_user . "', ";
+    $sql_insert_user .= " '" . $nama_user . "', ";
+    $sql_insert_user .= " '" . $email_user . "', ";
+    $sql_insert_user .= " '2', ";
+    $sql_insert_user .= " '" . $no_telp_user . "',";
+    $sql_insert_user .= " '" . date('Y-m-d') . "', ";
+    $sql_insert_user .= " 'Y'";
+    $sql_insert_user .= " )";
+    echo "<br>" . $sql_insert_user;
+    try {
+        // $conn->query($sql_insert_user);
+    } catch (Exception $ex) {
+        echo "<script>alert('$ex -DATA INSERT USER-');";
+        echo "document.location.href='?error404';</script>";
+    }
 ?>
     <script>
         alert('Data sudah disimpan silahkan login');

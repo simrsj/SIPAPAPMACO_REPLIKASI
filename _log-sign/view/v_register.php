@@ -11,9 +11,9 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Pendaftaran</h1>
                                 </div>
-                                <form class="form-group" method="post" id="form_reg">
+                                <form class="form-group text-center" method="post" id="form_reg">
                                     <label class="text-dark mb-0" for="instansi"> Pilih Institusi :</label>
-                                    <select class="select2" id="instansi" name="instansi" onChange='Bukains()' style="width:100%" required>
+                                    <select class="select2 text-center" id="instansi" name="instansi" onChange='Bukains()' style="width:100%" required>
                                         <option value="">--<i> Pilih Institusi </i>--</option>
                                         <?php
                                         $sql_ip = "SELECT * FROM tb_institusi";
@@ -28,11 +28,12 @@
                                         $no = 0;
                                         while ($d_ip = $q_ip->fetch(PDO::FETCH_ASSOC)) {
                                             $akronim_institusi = "";
-                                            if (!empty($d_ip['akronim_institusi'])) {
+                                            if (!empty($d_ip['akronim_institusi']))
                                                 $akronim_institusi = " (" . $d_ip['akronim_institusi'] . ")";
-                                            }
                                         ?>
-                                            <option class='text-wrap' value='<?= $d_ip['id_institusi']; ?> '> <?= $d_ip['nama_institusi'] . $akronim_institusi; ?> </option>
+                                            <option class='text-wrap' value='<?= $d_ip['id_institusi']; ?> '>
+                                                <?= $d_ip['nama_institusi'] . $akronim_institusi; ?>
+                                            </option>
                                         <?php
                                             $no++;
                                         }
@@ -147,24 +148,6 @@
         var telp = $('#telp').val();
         var password = $('#password').val();
         var password_ulangi = $('#password_ulangi').val();
-        async function validacao() {
-            var data = document.getElementById('birth').value;
-            var email = document.getElementById('email').value;
-            if (!validateBirth(data)) {
-                await Swal.fire(
-                    'title..',
-                    'text..',
-                    'type..'
-                );
-            }
-            if (!validateEmail(email)) {
-                await Swal.fire(
-                    'title..',
-                    'text..',
-                    'type..'
-                );
-            }
-        }
         //cek data from bila tidak diiisi
         if (
             institusi == "" ||
@@ -174,6 +157,23 @@
             password == "" ||
             password_ulangi == ""
         ) {
+            const Toast_isi_data = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            Toast_isi_data.fire({
+                icon: 'warning',
+                title: '<b>Data Ada yang Belum Terisi</b>',
+            });
+
             if (institusi == "") $("#err_institusi").html("Institusi Harus Dipilih");
             else $("#err_institusi").html("");
 
@@ -194,7 +194,7 @@
         }
 
         if (password != password_ulangi) {
-            const Toast = Swal.mixin({
+            const Toast_password = Swal.mixin({
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
@@ -206,7 +206,7 @@
                 }
             });
 
-            Toast.fire({
+            Toast_password.fire({
                 icon: 'error',
                 title: '<b>Password Tidak Sama</b>',
             }).then(
@@ -222,13 +222,12 @@
             nama != "" &&
             email != "" &&
             telp != "" &&
-            password != "" &&
-            password_ulangi != ""
+            password == password_ulangi
         ) {
             $.ajax({
                 type: 'POST',
-                url: "_admin/exc/x_v_praktik_praktikan_s.php",
-                data: data_t,
+                url: "_log-sign/exc/x_register.php",
+                data: data_reg,
                 success: function(response) {
                     $('#err_institusi').empty();
 
@@ -257,7 +256,7 @@
                         }
                     }).then(
                         function() {
-                            document.location.href = "?ptk";
+                            document.location.href = "?login";
                         }
                     );
                 },

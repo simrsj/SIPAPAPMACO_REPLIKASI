@@ -43,22 +43,18 @@ include "_add-ons/tanggal_waktu.php";
     </div>
     <?php
 
-    if (isset($_GET['dashboard'])) {
-        include "_dashboard/dashboard.php";
-    } elseif (isset($_SESSION['status_user'])) {
+    if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
+    elseif (isset($_SESSION['status_user'])) {
         if ($_SESSION['status_user'] == 'Y') {
-            if (isset($_GET['lo'])) {
-                include "_log-sign/log_out.php";
-            } elseif (isset($_SESSION['level_user'])) {
-                include "_admin/index.php";
-            }
+            if (isset($_GET['lo'])) include "_log-sign/exc/x_log_out.php";
+            elseif (isset($_SESSION['level_user'])) include "_admin/index.php";
         } elseif ($_SESSION['status_user'] == 'T') {
             echo "
             <script>
                 alert('Akun Sudah Tidak Aktif');
             </script>
         ";
-            include "_log-sign/log_out.php";
+            include "_log-sign/exc/x_log_out.php";
         }
     } elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
     ?>

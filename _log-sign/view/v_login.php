@@ -14,10 +14,15 @@
                                 </div>
                                 <form class="user" method="post">
                                     <div class="form-group">
-                                        <input name='username_user' placeholder='Username' class="form-control form-control-user" placeholder="Username" required="">
+                                        <input name='username_user' placeholder='Username' class="form-control" placeholder="Username" required="">
                                     </div>
-                                    <div class="form-group">
-                                        <input type='password' name='password_user' placeholder='Password' class="form-control form-control-user" required="">
+                                    <div class="form-group input-group">
+                                        <input type='password' id='password_user' name='password_user' placeholder='Password' class="form-control" required="" aria-describedby="see_password">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text bg-white" id="see_password">
+                                                <i class="bi bi-eye-slash" id="togglePassword"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                     <input type='submit' value='Login' name='Login' class="btn btn-primary btn-user btn-block">
                                 </form>
@@ -28,6 +33,36 @@
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        const togglePassword = document.querySelector("#togglePassword");
+                        const password = document.querySelector("#password_user");
+
+                        togglePassword.addEventListener("click", function() {
+                            // toggle the type attribute
+                            const type = password.getAttribute("type") === "password" ? "text" : "password";
+                            password.setAttribute("type", type);
+
+                            // toggle the icon
+                            this.classList.toggle("bi-eye");
+                        });
+
+                        // prevent form submit
+                        const form = document.querySelector("form");
+                        form.addEventListener('submit', function(e) {
+                            e.preventDefault();
+                        });
+                    </script>
+                    <!-- <script>
+                        $(document).on('click', '#see_password', function() {
+                            var x = $("#password_user");
+                            if (x.type === "password") {
+                                x.type = "text";
+                            } else {
+                                x.type = "password";
+                            }
+                        });
+                    </script> -->
                 </div>
             </div>
         </div>
