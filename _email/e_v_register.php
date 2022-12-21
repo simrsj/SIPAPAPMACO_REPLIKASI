@@ -1,15 +1,15 @@
 <?php
 
-// include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-// include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
-// include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/Exception.php";
-// include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/PHPMailer.php";
-// include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/SMTP.php";
-require_once __DIR__ . '/SM/_add-ons/koneksi.php';
-require_once __DIR__ . '/SM/_add-ons/tanggal_waktu.php';
-require_once __DIR__ . '/vendor/phpmailer/src/Exception.php';
-require_once __DIR__ . '/vendor/phpmailer/src/PHPMailer.php';
-require_once __DIR__ . '/vendor/phpmailer/src/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/Exception.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/PHPMailer.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/SMTP.php";
+
 // $sql = ' SELECT * FROM polling INNER JOIN pertanyaan ';
 // $sql .= ' ON polling.polling_pertanyaan = pertanyaan.pertanyaan_id ';
 // $sql .= ' inner join klien on klien.klien_id = polling.polling_klien ';
@@ -21,25 +21,19 @@ $isi_email = "
 <head></head>
 
 <body>
-
+CEK ZIMBRA
 </body>
 </html>
 ";
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 
-require_once __DIR__ . '/phpmailer/src/Exception.php';
-require_once __DIR__ . '/phpmailer/src/PHPMailer.php';
-require_once __DIR__ . '/phpmailer/src/SMTP.php';
 
 // passing true in constructor enables exceptions in PHPMailer
 $mail = new PHPMailer(true);
 
 try {
     // Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
     $mail->SMTPOptions = array(
         'ssl' => array(
             'verify_peer' => false,
@@ -49,18 +43,23 @@ try {
     );
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
+    // $mail->Host = 'relay.excellent.co.id';
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
 
-    $mail->Username = 'rsj@jabarprov.go.id'; // YOUR gmail email
-    $mail->Password = 'Rsjiwa*2009*'; // YOUR gmail password
+    $mail->Username = 'rsjiwajabar@gmail.com'; // YOUR gmail email
+    $mail->Password = 'jtvgvusfwgaxypyf'; // YOUR gmail password
+    // $mail->Username = 'rsj@jabarprov.go.id'; // YOUR gmail email
+    // $mail->Password = 'Rsjiwa*2009*'; // YOUR gmail password
+    // $mail->Username = 'relay.vavai@excellent.co.id'; // YOUR gmail email
+    // $mail->Password = 'StdPwdStrong2021!'; // YOUR gmail password
 
     // Sender and recipient settings
-    $mail->setFrom('rsj@jabarprov.go.id', 'RSJ PROV JABAR');
+    // $mail->setFrom('simrsjprovjabar@gmail.com', 'RSJ PROV JABAR');
     $mail->addAddress("fajar.rachmat.h@gmail.com", "RECEIVER");
-    $mail->addAddress("lukman.salehudin@gmail.com", "RECEIVER");
+    // $mail->addAddress("lukman.salehudin@gmail.com", "RECEIVER");
     // $mail->addReplyTo(base64_decode(urldecode($_GET['email'])), base64_decode(urldecode($_GET['nama'])));
 
     // Setting the email content
