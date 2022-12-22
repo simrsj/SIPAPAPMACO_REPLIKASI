@@ -73,7 +73,7 @@
                                     </div>
                                     <br>
                                     <!-- hCpatcha-->
-                                    <div class="h-captcha text-center" data-sitekey="985c2b81-998a-407e-b467-d456a1a0138f"></div>
+                                    <!-- <div class="h-captcha text-center" data-sitekey="985c2b81-998a-407e-b467-d456a1a0138f"></div> -->
                                     <hr>
                                     <a class="btn btn-primary btn-user btn-block tambah mb-2" title="Daftar">Daftar</a>
                                     <a class="btn btn-outline-danger btn-user btn-block tambah_reset mb-2" title="Reset">Reset</a>
@@ -135,12 +135,13 @@
     });
 
     // inisiasi klik modal tambah simpan
-    $(document).on('click', '.tambah', function() {
+    $(document).on('click', '.tambah', async function() {
         console.log("tambah");
         var data_reg = $("#form_reg").serializeArray();
+        var modals = [];
 
         var institusi = $('#institusi').val();
-
+        console.log(institusi);
         if ($('#err_institusi') == 0) var institusi_lain = $('#institusi_lain').val();
 
         var nama = $('#nama').val();
@@ -148,33 +149,32 @@
         var telp = $('#telp').val();
         var password = $('#password').val();
         var password_ulangi = $('#password_ulangi').val();
+
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
         //cek data from bila tidak diiisi
         if (
             institusi == "" ||
+            institusi == undefined ||
             nama == "" ||
             email == "" ||
             telp == "" ||
             password == "" ||
             password_ulangi == ""
         ) {
-            const Toast_isi_data = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
 
-            Toast_isi_data.fire({
-                icon: 'warning',
-                title: '<b>Data Ada yang Belum Terisi</b>',
-            });
-
-            if (institusi == "") $("#err_institusi").html("Institusi Harus Dipilih");
+            if (institusi == "" || institusi == undefined) $("#err_institusi").html("Institusi Harus Dipilih");
             else $("#err_institusi").html("");
 
             if (nama == "") $("#err_nama").html("Nama Koordinator Harus Diisi");
@@ -191,30 +191,21 @@
 
             if (password_ulangi == "") $("#err_password_ulangi").html("Ulangi Password Harus Diisi");
             else $("#err_password_ulangi").html("");
+
+            await Toast.fire({
+                icon: 'warning',
+                title: '<b>Data Ada yang Belum Terisi</b>',
+            });
         }
 
         if (password != password_ulangi) {
-            const Toast_password = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
+            $("#err_password").html("Password Tidak Sama");
+            $("#err_password_ulangi").html("Password Tidak Sama");
 
-            Toast_password.fire({
+            await Toast.fire({
                 icon: 'error',
                 title: '<b>Password Tidak Sama</b>',
-            }).then(
-                function() {
-                    $("#err_password").html("Password Tidak Sama");
-                    $("#err_password_ulangi").html("Password Tidak Sama");
-                }
-            );
+            });
         }
         //simpan data tambah bila sudah sesuai
         if (
@@ -246,7 +237,7 @@
                         // isDismissed: false,
                         icon: 'success',
                         // html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
-                        title: '<b>Data Registrasi Berhasil Terkirim </b><br>Silahkan Lakukan Aktivasi di Email',
+                        title: '<b>Data Registrasi Berhasil </b><br><br>Silahkan Lakukan Aktivasi di Email',
                         showConfirmButton: false,
                         timer: 10000,
                         timerProgressBar: true,
