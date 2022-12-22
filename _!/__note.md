@@ -12,6 +12,24 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 
 - 🔃 Pembuatan File Word Invoice
 - membuat rincian praktik pembimbing
+  SP CI Belum Ada Format yang Baku
+- Pembimbing dan Runagan masih ada yang Double
+- Semua Berkas di TTD Basah
+- Akun Institusi Pendidikan (IP) tidak Bisa mengubah Pembimbing tapi bias melihat
+- Keputusan Direktur untuk Kuota ada 1 Orang 2 Pasien (Keperawatan)
+- Penempatan Data Praktikan Mess berdasarkan Jenis Kelamin Berada diluar Aplikasi
+- Kalai Sesuai BOR akan sangat fleksibel
+- Perubahan Nomor Surat Invoice Praktikan menjadi …/DK/01/03/DIKLIT.RS/2022
+- Verifikasi tolak dan terimanya terbridgind dengan aplikasi SIMRS
+- Untuk Nilai Kedokteran Nilai Dulu Baru Invoice, namun bisa diakali sesuai dengan yang lainnya
+- Tarif Praktik Khusus Kedokteran Nanti disesuaikan dengan Format Excel
+- Panduan untuk Institusi Pendidikan nanti akan berubah sesuai dengan Pengembangan dari Aplikasi
+- Penambahan Upload Surat Penugasan Preceptor/Clinical Insturtur di menu “Daftar Pembimbing dan Ruangan”
+- Pengembangan Inputan Tambahan Daftar Praktik
+
+1. Sertifikasi Akredtasi Sekolah/Update
+2. Ijazah S1/D4 Khusus Co ass, Nurse, Apoteker
+3. Hasil Swab
 
 ====================================================================================================================
 
