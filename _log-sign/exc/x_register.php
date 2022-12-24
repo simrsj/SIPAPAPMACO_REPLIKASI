@@ -9,7 +9,6 @@ $nama_user = $_POST['nama'];
 $no_telp_user = $_POST['telp'];
 $email_user = $_POST['email'];
 $password_user = MD5($_POST['password']);
-$d_user = $q_user->fetch(PDO::FETCH_ASSOC);
 if ($id_institusi == 0) {
 
     $nama_institusi = $_POST['nama_institusi'];
@@ -28,7 +27,12 @@ if ($id_institusi == 0) {
 
     //cari id_institusi
     $sql_id_institusi = "SELECT id_institusi FROM tb_institusi ORDER BY id_institusi DESC LIMIT 1";
-    $q_id_institusi = $conn->query($sql_id_institusi);
+    try {
+        $q_id_institusi = $conn->query($sql_id_institusi);
+    } catch (Exception $ex) {
+        echo "<script>alert('$ex -DATA INSERT INSTITUSI-');";
+        echo "document.location.href='?error404';</script>";
+    }
     $d_id_institusi = $q_id_institusi->fetch(PDO::FETCH_ASSOC);
     $id_institusi = $d_id_institusi['id_institusi'] + 1;
 
@@ -39,7 +43,7 @@ if ($id_institusi == 0) {
 
     //tambah institusi baru
     $sql_insert_institusi = "INSERT INTO `tb_institusi` (id_institusi, nama_institusi) VALUES ('$id_institusi', '$nama_institusi')";
-    echo "<br>" . $sql_insert_institusi;
+    // echo "<br>" . $sql_insert_institusi;
     try {
         // $conn->query($sql_insert_institusi);
     } catch (Exception $ex) {

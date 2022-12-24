@@ -13,7 +13,7 @@
                                 </div>
                                 <form class="form-group text-center" method="post" id="form_reg">
                                     <label class="text-dark mb-0" for="institusi"> Pilih Institusi :</label>
-                                    <select class="select2 text-center" id="institusi" name="institusi" onChange='Bukains()' style="width:100%" required>
+                                    <select class="select2 text-center" id="institusi" name="institusi" onChange="openInstitusiLain()" style="width:100%" required>
                                         <option value="">--<i> Pilih Institusi </i>--</option>
                                         <?php
                                         $sql_ip = "SELECT * FROM tb_institusi";
@@ -75,8 +75,8 @@
                                     <!-- hCpatcha-->
                                     <!-- <div class="h-captcha text-center" data-sitekey="985c2b81-998a-407e-b467-d456a1a0138f"></div> -->
                                     <hr>
-                                    <a class="btn btn-primary btn-user btn-block tambah mb-2" title="Daftar">Daftar</a>
-                                    <a class="btn btn-outline-danger btn-user btn-block tambah_reset mb-2" title="Reset">Reset</a>
+                                    <a class="btn btn-primary btn-user btn-block registrasi mb-2" title="Daftar">Daftar</a>
+                                    <a class="btn btn-outline-danger btn-user btn-block registrasi_reset mb-2" title="Reset">Reset</a>
                                 </form>
                                 <hr>
                                 <div class="text-center">
@@ -91,20 +91,23 @@
     </div>
 </div>
 <script>
-    function Bukains() {
-        if ($('#instansi').val() == '0') {
-            // console.log("Pilih Institusi Lainnya");
-            $('#institusi_lainnya').fadeIn();
+    function openInstitusiLain() {
+        console.log('Open Institusi');
+        var idins = $('#institusi').val();
+        if (idins == 0 && idins != "") {
+            console.log("Pilih Institusi Lainnya");
+            $('#institusi_lainnya').show();
             $('#institusi_lainnya').focus();
-        } else {
+        } else if (idins != 0) {
             // console.log("Tidak Pilih Institusi Lainnya");
-            $('#institusi_lainnya').fadeOut();
+            $('#institusi_lainnya').hide();
             $('#institusi_lainnya').empty();
         }
+        console.log(idins);
     }
 
     $(document).ready(function() {
-        console.log("first");
+        // console.log("first");
         $('#err_institusi').empty();
 
         if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
@@ -118,9 +121,9 @@
         $("#institusi").val("").trigger("change");
     });
 
-    // inisiasi klik modal tambah  tutup
-    $(".tambah_reset").click(function() {
-        console.log("tambah_reset");
+    // inisiasi klik modal registrasi  tutup
+    $(".registrasi_reset").click(function() {
+        console.log("registrasi_reset");
         $('#err_institusi').empty();
 
         if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
@@ -134,9 +137,9 @@
         $("#institusi").val("").trigger("change");
     });
 
-    // inisiasi klik modal tambah simpan
-    $(document).on('click', '.tambah', async function() {
-        console.log("tambah");
+    // inisiasi klik modal registrasi simpan
+    $(document).on('click', '.registrasi', async function() {
+        console.log("registrasi");
         var data_reg = $("#form_reg").serializeArray();
 
         var institusi = $('#institusi').val();
@@ -216,7 +219,7 @@
             },
             dataType: 'JSON',
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 if (response.ket == 'Y') {
                     console.log('Email Sudah Ada');
                     Swal.fire({
@@ -237,7 +240,7 @@
                 } else if (response.ket == 'T') {
                     console.log('Email Belum Ada');
 
-                    //simpan data tambah bila sudah sesuai
+                    //simpan data registrasi bila sudah sesuai
                     if (
                         institusi != "" &&
                         institusi != undefined &&
@@ -268,7 +271,9 @@
                                     // isDismissed: false,
                                     icon: 'success',
                                     // html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
-                                    title: '<b>Data Registrasi Berhasil </b><br><br>Silahkan Lakukan Aktivasi di Email',
+                                    html: '<div class="b ">Registrasi Berhasil</div><hr>' +
+                                        'Silahkan Lakukan Aktivasi di Email : <b>' + email + '</b>',
+                                    // title: '<b> </b><br><br>',
                                     showConfirmButton: false,
                                     timer: 10000,
                                     timerProgressBar: true,
@@ -287,6 +292,8 @@
                             }
                         });
                     }
+
+                    console.log("registrasi berhasil");
                 } else {
                     console.log("ERROR");
                 }
