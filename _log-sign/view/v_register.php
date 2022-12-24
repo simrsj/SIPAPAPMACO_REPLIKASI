@@ -13,8 +13,9 @@
                                 </div>
                                 <form class="form-group text-center" method="post" id="form_reg">
                                     <label class="text-dark mb-0" for="institusi"> Pilih Institusi :</label>
-                                    <select class="select2 text-center" id="institusi" name="institusi" onChange="openInstitusiLain()" style="width:100%" required>
+                                    <select class="select2 text-center openInstitusiLain" id="institusi" name="institusi" style="width:100%" required>
                                         <option value="">--<i> Pilih Institusi </i>--</option>
+                                        <option value='0' class="text-center">-- LAINNYA --</option>
                                         <?php
                                         $sql_ip = "SELECT * FROM tb_institusi";
                                         $sql_ip .= " ORDER BY tb_institusi.nama_institusi ASC";
@@ -38,15 +39,12 @@
                                             $no++;
                                         }
                                         ?>
-                                        <option value='0'>-- <i>LAINNYA</i> --</option>
                                     </select>
                                     <div class="text-xs font-italic text-center">Pilih <b>-- LAINNYA --</b> bila nama institusi tidak terdaftar,<br> dan isikan nama institusi yang disediakan</div>
                                     <div class="text-xs text-danger i blink" mb-2 id="err_institusi"></div>
-                                    <div id="institusi_lainnya" style="display: none;">
-                                        <label class="text-dark mb-0" for="insituti_lain"> Isikan Nama Intitusi :</label>
-                                        <input type='text mb-0' id='insituti_lain' name='insituti_lain' class='form-control form-control-xs' placeHolder='Isikan Nama Institusi'>
-                                        <div class="text-xs text-danger i blink mb-2" id="err_institusi_lain"></div>
-                                    </div>
+
+                                    <!-- inputan data institusi lainnya  -->
+                                    <div id="institusi_lainnya"> </div>
 
                                     <label class="text-dark mb-0"> Nama Koordinator :</label>
                                     <input type="text" class="form-control  form-control-xs" placeholder="Nama Lengkap" id="nama" name="nama">
@@ -91,20 +89,22 @@
     </div>
 </div>
 <script>
-    function openInstitusiLain() {
+    $(document).on('change', '.openInstitusiLain', function() {
+        // function openInstitusiLain() {
         console.log('Open Institusi');
         var idins = $('#institusi').val();
         if (idins == 0 && idins != "") {
+            $('#institusi_lainnya').html('<label class="text-dark mb-0" for="insituti_lain"> Isikan Nama Intitusi: </label>' +
+                '<input type="text mb-0" id="insituti_lain" name="insituti_lain" class="form-control form-control-xs" placeHolder="Isikan Nama Institusi">' +
+                '<div class="text-xs text-danger i blink mb-2" id="err_institusi_lain"></div>'
+            );
             console.log("Pilih Institusi Lainnya");
-            $('#institusi_lainnya').show();
-            $('#institusi_lainnya').focus();
         } else if (idins != 0) {
-            // console.log("Tidak Pilih Institusi Lainnya");
-            $('#institusi_lainnya').hide();
-            $('#institusi_lainnya').empty();
+            $('#institusi_lainnya').html('');
         }
         console.log(idins);
-    }
+        // }
+    });
 
     $(document).ready(function() {
         // console.log("first");
