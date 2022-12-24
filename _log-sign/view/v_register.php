@@ -12,8 +12,8 @@
                                     <h1 class="h4 text-gray-900 mb-4">Pendaftaran</h1>
                                 </div>
                                 <form class="form-group text-center" method="post" id="form_reg">
-                                    <label class="text-dark mb-0" for="instansi"> Pilih Institusi :</label>
-                                    <select class="select2 text-center" id="instansi" name="instansi" onChange='Bukains()' style="width:100%" required>
+                                    <label class="text-dark mb-0" for="institusi"> Pilih Institusi :</label>
+                                    <select class="select2 text-center" id="institusi" name="institusi" onChange='Bukains()' style="width:100%" required>
                                         <option value="">--<i> Pilih Institusi </i>--</option>
                                         <?php
                                         $sql_ip = "SELECT * FROM tb_institusi";
@@ -138,10 +138,9 @@
     $(document).on('click', '.tambah', async function() {
         console.log("tambah");
         var data_reg = $("#form_reg").serializeArray();
-        var modals = [];
 
         var institusi = $('#institusi').val();
-        console.log(institusi);
+        // console.log('Institusi:' + institusi);
         if ($('#err_institusi') == 0) var institusi_lain = $('#institusi_lain').val();
 
         var nama = $('#nama').val();
@@ -194,50 +193,38 @@
 
             await Toast.fire({
                 icon: 'warning',
-                title: '<b>Data Ada yang Belum Terisi</b>',
+                title: 'Data Ada yang Belum Terisi',
             });
         }
 
+        //cek Pasword
         if (password != password_ulangi) {
             $("#err_password").html("Password Tidak Sama");
             $("#err_password_ulangi").html("Password Tidak Sama");
 
             await Toast.fire({
                 icon: 'error',
-                title: '<b>Password Tidak Sama</b>',
+                title: 'Password Tidak Sama',
             });
         }
-        //simpan data tambah bila sudah sesuai
-        if (
-            institusi != "" &&
-            nama != "" &&
-            email != "" &&
-            telp != "" &&
-            password == password_ulangi
-        ) {
-            $.ajax({
-                type: 'POST',
-                url: "_log-sign/exc/x_register.php",
-                data: data_reg,
-                success: function(response) {
-                    $('#err_institusi').empty();
 
-                    if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
-
-                    $('#err_nama').empty();
-                    $('#err_email').empty();
-                    $('#err_telp').empty();
-                    $('#err_password').empty();
-                    $('#err_password_ulangi').empty();
-                    $("#form_reg").trigger("reset");
-                    $("#institusi").val("").trigger("change");
-
+        $.ajax({
+            type: 'POST',
+            url: "_log-sign/exc/x_register_cekAkunEmail.php",
+            data: {
+                'email': email
+            },
+            dataType: 'JSON',
+            success: function(response) {
+                console.log(response);
+                if (response.ket == 'Y') {
+                    console.log('Email Sudah Ada');
                     Swal.fire({
                         allowOutsideClick: false,
                         // isDismissed: false,
-                        icon: 'success',
-                        // html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
-                        title: '<b>Data Registrasi Berhasil </b><br><br>Silahkan Lakukan Aktivasi di Email',
+                        icon: 'warning',
+                        html: '<div class="b ">Email :' + email + ' <br>Sudah Ada</div><hr>Silahkan ' +
+                            '<a href="?login" class="btn btn-outline-primary">Login</a>',
                         showConfirmButton: false,
                         timer: 10000,
                         timerProgressBar: true,
@@ -245,16 +232,68 @@
                             toast.addEventListener('mouseenter', Swal.stopTimer)
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
-                    }).then(
-                        function() {
-                            document.location.href = "?login";
-                        }
-                    );
-                },
-                error: function(response) {
-                    console.log(response);
+                    });
+                    $("#err_email").html("Email Sudah Ada");
+                } else if (response.ket == 'T') {
+                    console.log('Email Belum Ada');
+
+                    //simpan data tambah bila sudah sesuai
+                    if (
+                        institusi != "" &&
+                        institusi != undefined &&
+                        nama != "" &&
+                        email != "" &&
+                        telp != "" &&
+                        password == password_ulangi
+                    ) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "_log-sign/exc/x_register.php",
+                            data: data_reg,
+                            success: function(response) {
+                                $('#err_institusi').empty();
+
+                                if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
+
+                                $('#err_nama').empty();
+                                $('#err_email').empty();
+                                $('#err_telp').empty();
+                                $('#err_password').empty();
+                                $('#err_password_ulangi').empty();
+                                $("#form_reg").trigger("reset");
+                                $("#institusi").val("").trigger("change");
+
+                                Swal.fire({
+                                    allowOutsideClick: false,
+                                    // isDismissed: false,
+                                    icon: 'success',
+                                    // html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
+                                    title: '<b>Data Registrasi Berhasil </b><br><br>Silahkan Lakukan Aktivasi di Email',
+                                    showConfirmButton: false,
+                                    timer: 10000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                }).then(
+                                    function() {
+                                        // document.location.href = "?login";
+                                    }
+                                );
+                            },
+                            error: function(response) {
+                                console.log(response);
+                            }
+                        });
+                    }
+                } else {
+                    console.log("ERROR");
                 }
-            });
-        }
+            },
+            error: function(response) {
+                console.log(response);
+            }
+        });
     });
 </script>
