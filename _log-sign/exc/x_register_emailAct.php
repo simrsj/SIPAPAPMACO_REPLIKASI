@@ -1,3 +1,19 @@
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/Exception.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/PHPMailer.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/SMTP.php";
+
+// $urlserver = "http://103.147.222.122:84/SM/";
+$urlserver = "http://127.0.0.1/SM/";
+
+$isi_email = "
 <!DOCTYPE html>
 <html>
 
@@ -89,7 +105,7 @@
             </div>
             <div class='container'>
                 Silahkan Lakukan Aktivasi dengan Menekan tombol dibawah : <br>
-                <a class='btn btn-primary' href='localhost/SM/?act_user&crypt=".urlencode(base64_encode(date(' Ymd') . '12' . '_' . 'fajar.rachmat.h@gmail.com' . '_' . 'Fajar Rachmat Hermansyah' ))."' target=' _blank'>Aktivasi</a>
+                <a class='btn btn-primary' href='" . $urlserver . "?act_user&crypt=" . $_GET['crypt'] . "' target=' _blank'>Aktivasi</a>
             </div>
             <div class='fixed-footer '>
                 RS Jiwa Provinsi Jawa Barat <?= date('Y') ?>
@@ -101,3 +117,49 @@
 </body>
 
 </html>
+";
+
+
+// passing true in constructor enables exceptions in PHPMailer
+$mail = new PHPMailer(true);
+
+try {
+    // Server settings
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        )
+    );
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    // $mail->Host = 'relay.excellent.co.id';
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
+
+
+    $mail->Username = 'rsjiwajabar@gmail.com'; // YOUR gmail email
+    $mail->Password = 'jtvgvusfwgaxypyf'; // YOUR gmail password
+
+    // Sender and recipient settings
+    $mail->setFrom('rsjiwajabar@gmail.com', 'RSJ - SM');
+    $mail->addAddress(base64_decode(urldecode($_GET['email'])), base64_decode(urldecode($_GET['nama'])));
+    // $mail->addReplyTo("fajar.rachmat.h@gmail.com", "RECEIVER");
+
+    // Setting the email content
+    $mail->IsHTML(true);
+    $mail->Subject = "Aktivasi Akun SIPAPAP MACO";
+    $mail->Body = $isi_email;
+    // $mail->AltBody = 'Bayar Hutang';
+    // $mail->addAttachment('tte.png');
+    if ($mail->send()) {
+        echo json_encode(['ket' => 'Sukses']);
+    } else {
+        echo json_encode(['ket' => 'Gagal']);
+    }
+} catch (Exception $e) {
+    echo "Error in sending email. Mailer Error: {$mail->ErrorInfo}";
+}

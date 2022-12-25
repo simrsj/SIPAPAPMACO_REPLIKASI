@@ -297,6 +297,7 @@
             </div>
         </div>
     </div>
-<?php } else {
+<?php
+} else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
 }

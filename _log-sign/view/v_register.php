@@ -219,7 +219,17 @@
             },
             dataType: 'JSON',
             success: function(response) {
-                // console.log(response);
+                Swal.fire({
+                    title: 'Mohon Ditunggu . . .',
+                    html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />' +
+                        '  <p>Harap Tunggu</p>',
+                    // add html attribute if you want or remove
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    },
+                });
                 if (response.ket == 'Y') {
                     console.log('Email Sudah Ada');
                     Swal.fire({
@@ -254,6 +264,7 @@
                             url: "_log-sign/exc/x_register.php",
                             data: data_reg,
                             success: function(response) {
+
                                 $('#err_institusi').empty();
 
                                 if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
@@ -283,6 +294,11 @@
                                     }
                                 }).then(
                                     function() {
+                                        // $.ajax({
+                                        //     type: 'POST',
+                                        //     url: "_log-sign/exc/x_register_emailAct.php",
+                                        //     data: data_reg
+                                        // });
                                         // document.location.href = "?login";
                                     }
                                 );
