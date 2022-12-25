@@ -216,6 +216,7 @@
                                                         type: 'POST',
                                                         url: "_admin/exc/x_v_praktik_praktikan_s.php",
                                                         data: data_t,
+                                                        dataType: 'JSON',
                                                         success: function(response) {
                                                             if (response.ket == 'Y') {
                                                                 $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')

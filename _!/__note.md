@@ -12,7 +12,7 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 
 - 🔃 Pembuatan File Word Invoice
 - membuat rincian praktik pembimbing
-  SP CI Belum Ada Format yang Baku
+- SP CI Belum Ada Format yang Baku
 - Pembimbing dan Runagan masih ada yang Double
 - Semua Berkas di TTD Basah
 - Akun Institusi Pendidikan (IP) tidak Bisa mengubah Pembimbing tapi bias melihat
@@ -76,7 +76,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Berhasil Login Session"
+git commit -a -m "Perbaikan Tambah Data Praktikan"
 git push
 
 ====================================================================================================================
