@@ -2,6 +2,13 @@
 // error_reporting(0);
 session_start();
 
+
+$timezone = new DateTimeZone('Asia/Jakarta');
+$date = new DateTime();
+$date->setTimeZone($timezone);
+
+// echo 'Indonesian Timezone: ' . $date->format('d-m-Y H:i:s') . '<br/>';
+
 // include '_add-ons/csrf_auth.php';
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";

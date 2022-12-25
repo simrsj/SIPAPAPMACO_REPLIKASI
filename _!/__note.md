@@ -76,7 +76,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Berhasil Registrasi dan Kirim Aktivasi ke Email"
+git commit -a -m "Berhasil Login Session"
 git push
 
 ====================================================================================================================
