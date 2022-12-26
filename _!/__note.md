@@ -61,7 +61,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Merger dengan Server"
+git commit -a -m "Ubah URLSERVER Link Aktivasi Ke Email"
 git push
 
 ====================================================================================================================

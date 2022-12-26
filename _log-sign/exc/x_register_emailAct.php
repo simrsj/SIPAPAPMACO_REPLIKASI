@@ -10,8 +10,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/Exception.php
 include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/PHPMailer.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/SMTP.php";
 
-// $urlserver = "http://103.147.222.122:84/SM/";
-$urlserver = "http://127.0.0.1/SM/";
+$urlserver = "http://103.147.222.122:84/SM/";
+// $urlserver = "http://127.0.0.1/SM/";
 
 $isi_email = "
 <!DOCTYPE html>
