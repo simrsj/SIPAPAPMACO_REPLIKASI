@@ -61,7 +61,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Ubah URLSERVER Link Aktivasi Ke Email"
+git commit -a -m "Progres File Ijazah dan Swab Data Praktik"
 git push
 
 ====================================================================================================================
