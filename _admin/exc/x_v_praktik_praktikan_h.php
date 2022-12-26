@@ -8,7 +8,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 $sql = "DELETE FROM tb_praktikan ";
 $sql .= " WHERE id_praktikan=" . base64_decode(urldecode($_POST['idprkn']));
 
-// echo "$sql<br>";
+echo "$sql<br>";
 try {
     $conn->query($sql);
 } catch (Exception $ex) {

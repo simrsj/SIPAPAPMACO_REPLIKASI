@@ -105,7 +105,10 @@
                                                                         <input type="number" id="t_wa<?= md5($d_praktik['id_praktik']); ?>" name="t_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
                                                                         <br>
                                                                         E-Mail : <br>
-                                                                        <input type="email" id="t_email<?= md5($d_praktik['id_praktik']); ?>" name="t_email" class="form-control" placeholder="Inputkan E-Mail">
+                                                                        <input type="email" id="t_email<?= md5($d_praktik['id_praktik']); ?>" name="t_email" class="form-control" placeholder="Inputkan E-Mail"><br>
+                                                                        No WhatsApp :<br>
+                                                                        <input type="number" id="t_wa<?= md5($d_praktik['id_praktik']); ?>" name="t_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
+                                                                        <br>
 
                                                                     </form>
                                                                 </div>
@@ -216,6 +219,7 @@
                                                         type: 'POST',
                                                         url: "_admin/exc/x_v_praktik_praktikan_s.php",
                                                         data: data_t,
+                                                        dataType: 'JSON',
                                                         success: function(response) {
                                                             if (response.ket == 'Y') {
                                                                 $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
@@ -297,6 +301,7 @@
             </div>
         </div>
     </div>
-<?php } else {
+<?php
+} else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
 }

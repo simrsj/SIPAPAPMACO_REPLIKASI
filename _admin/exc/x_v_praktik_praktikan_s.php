@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 $id_praktik = base64_decode(urldecode($_POST['idp']));
 $sql_praktik = "SELECT * FROM tb_praktik";
 $sql_praktik .= " WHERE tb_praktik.id_praktik = " . $id_praktik;
-echo $sql_praktik . "<br>";
+// echo $sql_praktik . "<br>";
 try {
     $q_praktik = $conn->query($sql_praktik);
     $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
@@ -18,16 +18,16 @@ try {
 }
 $sql_praktikan = "SELECT * FROM tb_praktikan";
 $sql_praktikan .= " WHERE tb_praktikan.id_praktik = " . $id_praktik;
-echo $sql_praktikan . "<br>";
+// echo $sql_praktikan . "<br>";
 try {
-    $d_praktikan = $conn->query($sql_praktikan);
-    $d_praktikan = $d_praktikan->fetch(PDO::FETCH_ASSOC);
-    $r_praktikan = $d_praktikan->rowCount();
+    $q_praktikan = $conn->query($sql_praktikan);
+    // $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
+    $r_praktikan = $q_praktikan->rowCount();
 } catch (Exception $ex) {
     echo "<script>alert('$ex -SIMPAN PRAKTIKAN-');";
     echo "document.location.href='?error404';</script>";
 }
-echo $r_praktik . "asd" . $d_praktik['jumlah_praktik'];
+// echo $r_praktik . "asd" . $d_praktik['jumlah_praktik'];
 if ($r_praktikan < $d_praktik['jumlah_praktik']) {
 
     $sql = "INSERT INTO tb_praktikan (";
@@ -53,7 +53,7 @@ if ($r_praktikan < $d_praktik['jumlah_praktik']) {
     $sql .= " )";
     // echo $sql . "<br>";
     try {
-        // $conn->query($sql);
+        $conn->query($sql);
     } catch (Exception $ex) {
         echo "<script>alert('$ex -SIMPAN PRAKTIKAN-');";
         echo "document.location.href='?error404';</script>";

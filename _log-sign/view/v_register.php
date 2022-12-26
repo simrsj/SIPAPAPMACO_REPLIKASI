@@ -12,9 +12,10 @@
                                     <h1 class="h4 text-gray-900 mb-4">Pendaftaran</h1>
                                 </div>
                                 <form class="form-group text-center" method="post" id="form_reg">
-                                    <label class="text-dark mb-0" for="instansi"> Pilih Institusi :</label>
-                                    <select class="select2 text-center" id="instansi" name="instansi" onChange='Bukains()' style="width:100%" required>
+                                    <label class="text-dark mb-0" for="institusi"> Pilih Institusi :</label>
+                                    <select class="select2 text-center openInstitusiLain" id="institusi" name="institusi" style="width:100%" required>
                                         <option value="">--<i> Pilih Institusi </i>--</option>
+                                        <option value='0' class="text-center">-- LAINNYA --</option>
                                         <?php
                                         $sql_ip = "SELECT * FROM tb_institusi";
                                         $sql_ip .= " ORDER BY tb_institusi.nama_institusi ASC";
@@ -38,15 +39,12 @@
                                             $no++;
                                         }
                                         ?>
-                                        <option value='0'>-- <i>LAINNYA</i> --</option>
                                     </select>
                                     <div class="text-xs font-italic text-center">Pilih <b>-- LAINNYA --</b> bila nama institusi tidak terdaftar,<br> dan isikan nama institusi yang disediakan</div>
                                     <div class="text-xs text-danger i blink" mb-2 id="err_institusi"></div>
-                                    <div id="institusi_lainnya" style="display: none;">
-                                        <label class="text-dark mb-0" for="insituti_lain"> Isikan Nama Intitusi :</label>
-                                        <input type='text mb-0' id='insituti_lain' name='insituti_lain' class='form-control form-control-xs' placeHolder='Isikan Nama Institusi'>
-                                        <div class="text-xs text-danger i blink mb-2" id="err_institusi_lain"></div>
-                                    </div>
+
+                                    <!-- inputan data institusi lainnya  -->
+                                    <div id="institusi_lainnya"> </div>
 
                                     <label class="text-dark mb-0"> Nama Koordinator :</label>
                                     <input type="text" class="form-control  form-control-xs" placeholder="Nama Lengkap" id="nama" name="nama">
@@ -73,10 +71,10 @@
                                     </div>
                                     <br>
                                     <!-- hCpatcha-->
-                                    <div class="h-captcha text-center" data-sitekey="985c2b81-998a-407e-b467-d456a1a0138f"></div>
+                                    <!-- <div class="h-captcha text-center" data-sitekey="985c2b81-998a-407e-b467-d456a1a0138f"></div> -->
                                     <hr>
-                                    <a class="btn btn-primary btn-user btn-block tambah mb-2" title="Daftar">Daftar</a>
-                                    <a class="btn btn-outline-danger btn-user btn-block tambah_reset mb-2" title="Reset">Reset</a>
+                                    <a class="btn btn-primary btn-user btn-block registrasi mb-2" title="Daftar">Daftar</a>
+                                    <a class="btn btn-outline-danger btn-user btn-block registrasi_reset mb-2" title="Reset">Reset</a>
                                 </form>
                                 <hr>
                                 <div class="text-center">
@@ -91,20 +89,25 @@
     </div>
 </div>
 <script>
-    function Bukains() {
-        if ($('#instansi').val() == '0') {
-            // console.log("Pilih Institusi Lainnya");
-            $('#institusi_lainnya').fadeIn();
-            $('#institusi_lainnya').focus();
-        } else {
-            // console.log("Tidak Pilih Institusi Lainnya");
-            $('#institusi_lainnya').fadeOut();
-            $('#institusi_lainnya').empty();
+    $(document).on('change', '.openInstitusiLain', function() {
+        // function openInstitusiLain() {
+        console.log('Open Institusi');
+        var idins = $('#institusi').val();
+        if (idins == 0 && idins != "") {
+            $('#institusi_lainnya').html('<label class="text-dark mb-0" for="insituti_lain"> Isikan Nama Intitusi: </label>' +
+                '<input type="text mb-0" id="insituti_lain" name="insituti_lain" class="form-control form-control-xs" placeHolder="Isikan Nama Institusi">' +
+                '<div class="text-xs text-danger i blink mb-2" id="err_institusi_lain"></div>'
+            );
+            console.log("Pilih Institusi Lainnya");
+        } else if (idins != 0) {
+            $('#institusi_lainnya').html('');
         }
-    }
+        console.log(idins);
+        // }
+    });
 
     $(document).ready(function() {
-        console.log("first");
+        // console.log("first");
         $('#err_institusi').empty();
 
         if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
@@ -118,9 +121,9 @@
         $("#institusi").val("").trigger("change");
     });
 
-    // inisiasi klik modal tambah  tutup
-    $(".tambah_reset").click(function() {
-        console.log("tambah_reset");
+    // inisiasi klik modal registrasi  tutup
+    $(".registrasi_reset").click(function() {
+        console.log("registrasi_reset");
         $('#err_institusi').empty();
 
         if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
@@ -134,13 +137,13 @@
         $("#institusi").val("").trigger("change");
     });
 
-    // inisiasi klik modal tambah simpan
-    $(document).on('click', '.tambah', function() {
-        console.log("tambah");
+    // inisiasi klik modal registrasi simpan
+    $(document).on('click', '.registrasi', async function() {
+        console.log("registrasi");
         var data_reg = $("#form_reg").serializeArray();
 
         var institusi = $('#institusi').val();
-
+        // console.log('Institusi:' + institusi);
         if ($('#err_institusi') == 0) var institusi_lain = $('#institusi_lain').val();
 
         var nama = $('#nama').val();
@@ -148,33 +151,32 @@
         var telp = $('#telp').val();
         var password = $('#password').val();
         var password_ulangi = $('#password_ulangi').val();
+
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
         //cek data from bila tidak diiisi
         if (
             institusi == "" ||
+            institusi == undefined ||
             nama == "" ||
             email == "" ||
             telp == "" ||
             password == "" ||
             password_ulangi == ""
         ) {
-            const Toast_isi_data = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
 
-            Toast_isi_data.fire({
-                icon: 'warning',
-                title: '<b>Data Ada yang Belum Terisi</b>',
-            });
-
-            if (institusi == "") $("#err_institusi").html("Institusi Harus Dipilih");
+            if (institusi == "" || institusi == undefined) $("#err_institusi").html("Institusi Harus Dipilih");
             else $("#err_institusi").html("");
 
             if (nama == "") $("#err_nama").html("Nama Koordinator Harus Diisi");
@@ -191,62 +193,51 @@
 
             if (password_ulangi == "") $("#err_password_ulangi").html("Ulangi Password Harus Diisi");
             else $("#err_password_ulangi").html("");
-        }
 
-        if (password != password_ulangi) {
-            const Toast_password = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
+            await Toast.fire({
+                icon: 'warning',
+                title: 'Data Ada yang Belum Terisi',
             });
-
-            Toast_password.fire({
-                icon: 'error',
-                title: '<b>Password Tidak Sama</b>',
-            }).then(
-                function() {
-                    $("#err_password").html("Password Tidak Sama");
-                    $("#err_password_ulangi").html("Password Tidak Sama");
-                }
-            );
         }
-        //simpan data tambah bila sudah sesuai
-        if (
-            institusi != "" &&
-            nama != "" &&
-            email != "" &&
-            telp != "" &&
-            password == password_ulangi
-        ) {
-            $.ajax({
-                type: 'POST',
-                url: "_log-sign/exc/x_register.php",
-                data: data_reg,
-                success: function(response) {
-                    $('#err_institusi').empty();
 
-                    if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
+        //cek Pasword
+        if (password != password_ulangi) {
+            $("#err_password").html("Password Tidak Sama");
+            $("#err_password_ulangi").html("Password Tidak Sama");
 
-                    $('#err_nama').empty();
-                    $('#err_email').empty();
-                    $('#err_telp').empty();
-                    $('#err_password').empty();
-                    $('#err_password_ulangi').empty();
-                    $("#form_reg").trigger("reset");
-                    $("#institusi").val("").trigger("change");
+            await Toast.fire({
+                icon: 'error',
+                title: 'Password Tidak Sama',
+            });
+        }
 
+        $.ajax({
+            type: 'POST',
+            url: "_log-sign/exc/x_register_cekAkunEmail.php",
+            data: {
+                'email': email
+            },
+            dataType: 'JSON',
+            success: function(response) {
+                Swal.fire({
+                    title: 'Mohon Ditunggu . . .',
+                    html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />' +
+                        '  <p>Harap Tunggu</p>',
+                    // add html attribute if you want or remove
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    },
+                });
+                if (response.ket == 'Y') {
+                    console.log('Email Sudah Ada');
                     Swal.fire({
                         allowOutsideClick: false,
                         // isDismissed: false,
-                        icon: 'success',
-                        // html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
-                        title: '<b>Data Registrasi Berhasil Terkirim </b><br>Silahkan Lakukan Aktivasi di Email',
+                        icon: 'warning',
+                        html: '<div class="b ">Email :' + email + ' <br>Sudah Ada</div><hr>Silahkan ' +
+                            '<a href="?login" class="btn btn-outline-primary">Login</a>',
                         showConfirmButton: false,
                         timer: 10000,
                         timerProgressBar: true,
@@ -254,16 +245,78 @@
                             toast.addEventListener('mouseenter', Swal.stopTimer)
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
-                    }).then(
-                        function() {
-                            document.location.href = "?login";
-                        }
-                    );
-                },
-                error: function(response) {
-                    console.log(response);
+                    });
+                    $("#err_email").html("Email Sudah Ada");
+                } else if (response.ket == 'T') {
+                    console.log('Email Belum Ada');
+
+                    //simpan data registrasi bila sudah sesuai
+                    if (
+                        institusi != "" &&
+                        institusi != undefined &&
+                        nama != "" &&
+                        email != "" &&
+                        telp != "" &&
+                        password == password_ulangi
+                    ) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "_log-sign/exc/x_register.php",
+                            data: data_reg,
+                            success: function(response) {
+
+                                $('#err_institusi').empty();
+
+                                if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
+
+                                $('#err_nama').empty();
+                                $('#err_email').empty();
+                                $('#err_telp').empty();
+                                $('#err_password').empty();
+                                $('#err_password_ulangi').empty();
+                                $("#form_reg").trigger("reset");
+                                $("#institusi").val("").trigger("change");
+
+                                Swal.fire({
+                                    allowOutsideClick: false,
+                                    // isDismissed: false,
+                                    icon: 'success',
+                                    // html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
+                                    html: '<div class="b ">Registrasi Berhasil</div><hr>' +
+                                        'Silahkan Lakukan Aktivasi di Email : <b>' + email + '</b>',
+                                    // title: '<b> </b><br><br>',
+                                    showConfirmButton: false,
+                                    timer: 10000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                }).then(
+                                    function() {
+                                        // $.ajax({
+                                        //     type: 'POST',
+                                        //     url: "_log-sign/exc/x_register_emailAct.php",
+                                        //     data: data_reg
+                                        // });
+                                        // document.location.href = "?login";
+                                    }
+                                );
+                            },
+                            error: function(response) {
+                                console.log(response);
+                            }
+                        });
+                    }
+
+                    console.log("registrasi berhasil");
+                } else {
+                    console.log("ERROR");
                 }
-            });
-        }
+            },
+            error: function(response) {
+                console.log(response);
+            }
+        });
     });
 </script>

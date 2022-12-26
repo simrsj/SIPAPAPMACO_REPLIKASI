@@ -45,6 +45,7 @@ if (empty($_SESSION['username_user'])) {
 	<?php
 	if (isset($_GET['reg'])) include "_log-sign/view/v_register.php";
 	elseif (isset($_GET['login'])) include "_log-sign/view/v_login.php";
+	elseif (isset($_GET['act_user']) && isset($_GET['crypt'])) include "_log-sign/view/v_aktivasi_akun.php";
 	// elseif (isset($_GET['dashboard'])) include "_log-sign/register.php";
 	else include "_log-sign/view/v_login.php";
 	?>

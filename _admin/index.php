@@ -535,8 +535,8 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 ?>
 	<script>
 		alert('Anda belum Login, Silahkan Login Terlebih dahulu');
+		document.location.href = "/SM/index.php";
 	</script>
 <?php
-	header("Refresh:0; url=?ls");
 }
 ?>

@@ -2,6 +2,13 @@
 // error_reporting(0);
 session_start();
 
+
+$timezone = new DateTimeZone('Asia/Jakarta');
+$date = new DateTime();
+$date->setTimeZone($timezone);
+
+// echo 'Indonesian Timezone: ' . $date->format('d-m-Y H:i:s') . '<br/>';
+
 // include '_add-ons/csrf_auth.php';
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
@@ -56,8 +63,9 @@ include "_add-ons/tanggal_waktu.php";
         ";
             include "_log-sign/exc/x_log_out.php";
         }
-    } elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
-    else include "_admin/index.php";
+    } 
+    // Index Log-Sign
+    elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
     ?>
 
     <!-- JS -->

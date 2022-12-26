@@ -12,19 +12,21 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Login</h1>
                                 </div>
-                                <form class="user" method="post">
+                                <form class="user" method="post" id="form_login">
                                     <div class="form-group">
-                                        <input name='username_user' placeholder='Username' class="form-control" placeholder="Username" required="">
+                                        <input id='username_user' name='username_user' placeholder='Username' class="form-control" placeholder="Username">
+                                        <div class="text-xs text-danger text-center i blink mb-2" id="err_username"></div>
                                     </div>
-                                    <div class="form-group input-group">
-                                        <input type='password' id='password_user' name='password_user' placeholder='Password' class="form-control" required="" aria-describedby="see_password">
+                                    <div class="form-group input-group mb-0">
+                                        <input type='password' id='password_user' name='password_user' placeholder='Password' class="form-control" aria-describedby="see_password">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-white" id="see_password">
                                                 <i class="bi bi-eye-slash" id="togglePassword"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <input type='submit' value='Login' name='Login' class="btn btn-primary btn-user btn-block">
+                                    <div class="text-xs text-danger  text-center i blink mb-2" id="err_password"></div>
+                                    <button class="btn btn-primary btn-user btn-block login">LOGIN</button>
                                 </form>
                                 <hr>
                                 <div class="text-center">
@@ -57,84 +59,105 @@
             </div>
         </div>
     </div>
-    <?php
-    if (isset($_POST['Login'])) {
-        $username_user = $_POST['username_user'];
-        $password_user = MD5($_POST['password_user']);
-        $sql_name = "SELECT * from `tb_user` WHERE `username_user`='$username_user'";
-        $sql_pass = "SELECT * from `tb_user` WHERE `password_user`='$password_user'";
-        $sql_name_pass = "SELECT * from `tb_user` WHERE `username_user`='$username_user' AND `password_user`='$password_user' AND status_user = 'Y' ";
+    <script>
+        // inisiasi klik modal login simpan
+        $(document).on('click', '.login', function() {
+            console.log("login");
+            var data_login = $("#form_login").serializeArray();
 
-        $exc_name = $conn->query($sql_name);
-        $exc_pass = $conn->query($sql_pass);
-        $exc_name_pass = $conn->query($sql_name_pass);
-        $x_name = 0;
-        $x_pass = 0;
-        $x_name_pass = 0;
+            var username = $('#username_user').val();
+            var password = $('#password_user').val();
 
-        while ($row_name = $exc_name->fetch(PDO::FETCH_ASSOC)) {
-            $x_name++;
-        }
-        while ($row_pass = $exc_pass->fetch(PDO::FETCH_ASSOC)) {
-            $x_pass++;
-        }
-        while ($row = $exc_name_pass->fetch(PDO::FETCH_ASSOC)) {
-            $_SESSION['username_user'] = $row['username_user'];
-            $_SESSION['nama_user'] = $row['nama_user'];
-            $_SESSION['id_user'] = $row['id_user'];
-            $_SESSION['id_institusi'] = $row['id_institusi'];
-            $_SESSION['id_mou'] = $row['id_mou'];
-            $_SESSION['status_user'] = $row['status_user'];
-            $_SESSION['level_user'] = $row['level_user'];
-            // $_SESSION['id_mou'] = $row['id_mou'];
-            $id_user = $row['id_user'];
-            $x_name_pass++;
-        }
-        // print_r($_SESSION);die;
+            //Loading screen
+            Swal.fire({
+                title: 'Mohon Ditunggu . . .',
+                html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+            });
 
-        if (!$exc_name_pass) {
-    ?>
-            <script>
-                alert('QUERY GAGAL');
-            </script>
-            <?php
-        } elseif ($x_name == 0 || $x_pass == 0 || $x_name_pass == 0) {
-            if ($x_name == 0) {
-            ?>
-                <script>
-                    alert('Username tidak ada');
-                </script>
-            <?php
-            } elseif ($x_pass == 0) {
-            ?>
-                <script>
-                    alert('Password salah');
-                </script>
-            <?php
-            } elseif ($x_name_pass == 0) {
-            ?>
-                <script>
-                    alert('STATUS USER TIDAK AKTIF KONTAK ADMIN');
-                </script>
-            <?php
-            } else {
-            ?>
-                <script>
-                    alert('ERROR!');
-                </script>
-    <?php
+            //cek data from bila tidak diiisi
+            if (
+                username == "" ||
+                password == ""
+            ) {
+
+                console.log("Data Tidak Terisi");
+                if (username == "") $("#err_username").html("Username Harus Diisi");
+                else $("#err_username").html("");
+
+                if (password == "") $("#err_password").html("Password Harus Diisi");
+                else $("#err_password").html("");
+
+                Swal.fire({
+                    allowOutsideClick: true,
+                    icon: 'warning',
+                    html: '<span class="text-lg b">Data Ada yang Belum Terisi</span>',
+                    showConfirmButton: false,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
             }
-        } else {
-            $sql_update_login = "UPDATE tb_user";
-            $sql_update_login .= " SET terakhir_login_user = '" . date("Y-m-d G:i:s") . "'";
-            $sql_update_login .= " WHERE id_user ='" . $_SESSION['id_user'] . "'";
-            $conn->query($sql_update_login);
 
-            //reload ke index
-            echo "<script>document.location.href='?';</script>";
-        }
-    }
-    ?>
+            $.ajax({
+                type: 'POST',
+                url: "_log-sign/exc/x_login_cek.php",
+                data: data_login,
+                dataType: 'JSON',
+                success: function(response) {
+                    if (response.ket == 'Y') {
+                        $.ajax({
+                            type: 'POST',
+                            url: "_log-sign/exc/x_login.php",
+                            data: data_login,
+                            dataType: 'JSON',
+                            success: function(response) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    html: '<span class="text-lg b">Login Berhasil</span>',
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                }).then(
+                                    function() {
+                                        document.location.href = "?";
+                                    }
+                                );
+                            },
+                            error: function(response) {
+                                console.log(response);
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            allowOutsideClick: true,
+                            // isDismissed: false,
+                            icon: 'warning',
+                            html: '<span class="text-lg b">Cek Kembali Username dan Password</span>',
+                            showConfirmButton: false,
+                            timer: 10000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                    }
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            });
+        });
+    </script>
 </div>
 
 <div class="container">
