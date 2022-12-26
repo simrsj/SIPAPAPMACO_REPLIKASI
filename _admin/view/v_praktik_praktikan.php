@@ -106,8 +106,33 @@
                                                                         <br>
                                                                         E-Mail : <br>
                                                                         <input type="email" id="t_email<?= md5($d_praktik['id_praktik']); ?>" name="t_email" class="form-control" placeholder="Inputkan E-Mail"><br>
-                                                                        No WhatsApp :<br>
-                                                                        <input type="number" id="t_wa<?= md5($d_praktik['id_praktik']); ?>" name="t_wa" class="form-control" min="1" placeholder="Inputkan WhatsApp">
+                                                                        File Ijazah :<br>
+                                                                        <div class="custom-file">
+                                                                            <label class="custom-file-label text-xs" for="customFile" id="labelfileIjazah">Pilih File</label>
+                                                                            <input type="file" class="custom-file-ijazah mb-1" id="file_ijazah" name="file_ijazah" accept="application/pdf" required><br>
+                                                                            <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                                                            <div class="text-xs font-italic text-danger blink" id="err_file_ijazah"></div><br>
+                                                                            <script>
+                                                                                $('.custom-file-ijazah').on('change', function() {
+                                                                                    var fileNameIjazah = $(this).val();
+                                                                                    $('#labelfileIjazah').html(fileNameIjazah);
+                                                                                })
+                                                                            </script>
+                                                                        </div>
+                                                                        <br>
+                                                                        File Hasil Swab :<br>
+                                                                        <div class="custom-file">
+                                                                            <label class="custom-file-label text-xs" for="customFile" id="labelfileSwab">Pilih File</label>
+                                                                            <input type="file" class="custom-file-swab mb-1" id="file_swab" name="file_swab" accept="application/pdf" required><br>
+                                                                            <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                                                            <div class="text-xs font-italic text-danger blink" id="err_file_swab"></div><br>
+                                                                            <script>
+                                                                                $('.custom-file-swab').on('change', function() {
+                                                                                    var fileNameSwab = $(this).val();
+                                                                                    $('#labelfileSwab').html(fileNameSwab);
+                                                                                })
+                                                                            </script>
+                                                                        </div>
                                                                         <br>
 
                                                                     </form>
