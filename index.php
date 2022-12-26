@@ -57,6 +57,7 @@ include "_add-ons/tanggal_waktu.php";
             include "_log-sign/exc/x_log_out.php";
         }
     } elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
+    else include "_admin/index.php";
     ?>
 
     <!-- JS -->
