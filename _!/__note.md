@@ -61,7 +61,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Perbaikan Tambah Data Praktikan"
+git commit -a -m "Progress tambah input file ijazah(profesi) dan hasil swab"
 git push
 
 ====================================================================================================================
