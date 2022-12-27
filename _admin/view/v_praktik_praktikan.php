@@ -106,35 +106,40 @@
                                                                         <br>
                                                                         E-Mail : <br>
                                                                         <input type="email" id="t_email<?= md5($d_praktik['id_praktik']); ?>" name="t_email" class="form-control" placeholder="Inputkan E-Mail"><br>
-                                                                        File Ijazah :<br>
-                                                                        <div class="custom-file">
-                                                                            <label class="custom-file-label text-xs" for="customFile" id="labelfileIjazah">Pilih File</label>
-                                                                            <input type="file" class="custom-file-ijazah mb-1" id="file_ijazah" name="file_ijazah" accept="application/pdf" required><br>
-                                                                            <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
-                                                                            <div class="text-xs font-italic text-danger blink" id="err_file_ijazah"></div><br>
-                                                                            <script>
-                                                                                $('.custom-file-ijazah').on('change', function() {
-                                                                                    var fileNameIjazah = $(this).val();
-                                                                                    $('#labelfileIjazah').html(fileNameIjazah);
-                                                                                })
-                                                                            </script>
-                                                                        </div>
-                                                                        <br>
+                                                                        <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                                            File Ijazah :<br>
+                                                                            <div class="custom-file">
+                                                                                <label class="custom-file-label text-xs" for="customFile" id="labelfileijazah<?= md5($d_praktik['id_praktik']); ?>">Pilih File</label>
+                                                                                <input type="file" class="custom-file-input mb-1" id="t_ijazah<?= md5($d_praktik['id_praktik']); ?>" name="t_ijazah<?= md5($d_praktik['id_praktik']); ?>" accept="application/pdf" required>
+                                                                                <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                                                                <div class="text-xs font-italic text-danger blink" id="err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>"></div><br>
+                                                                                <script>
+                                                                                    $('#t_ijazah<?= md5($d_praktik['id_praktik']); ?>').on('change', function() {
+                                                                                        var fileNameIjazah = $(this).val();
+                                                                                        fileNameIjazah = fileNameIjazah.replace(/^.*[\\\/]/, '');
+                                                                                        if (fileNameIjazah == "") fileNameIjazah = "Pilih File";
+                                                                                        $('#labelfileijazah<?= md5($d_praktik['id_praktik']); ?>').html(fileNameIjazah);
+                                                                                    })
+                                                                                </script>
+                                                                            </div>
+                                                                            <br>
+                                                                        <?php } ?>
                                                                         File Hasil Swab :<br>
                                                                         <div class="custom-file">
-                                                                            <label class="custom-file-label text-xs" for="customFile" id="labelfileSwab">Pilih File</label>
-                                                                            <input type="file" class="custom-file-swab mb-1" id="file_swab" name="file_swab" accept="application/pdf" required><br>
+                                                                            <label class="custom-file-label text-xs" for="customFile" id="labelfileswab<?= md5($d_praktik['id_praktik']); ?>">Pilih File</label>
+                                                                            <input type="file" class="custom-file-input mb-1" id="t_swab<?= md5($d_praktik['id_praktik']); ?>" name="t_swab<?= md5($d_praktik['id_praktik']); ?>" accept="application/pdf" required>
                                                                             <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
-                                                                            <div class="text-xs font-italic text-danger blink" id="err_file_swab"></div><br>
+                                                                            <div class="text-xs font-italic text-danger blink" id="err_t_swab<?= md5($d_praktik['id_praktik']); ?>"></div><br>
                                                                             <script>
-                                                                                $('.custom-file-swab').on('change', function() {
+                                                                                $('#t_swab<?= md5($d_praktik['id_praktik']); ?>').on('change', function() {
                                                                                     var fileNameSwab = $(this).val();
-                                                                                    $('#labelfileSwab').html(fileNameSwab);
+                                                                                    fileNameSwab = fileNameSwab.replace(/^.*[\\\/]/, '');
+                                                                                    if (fileNameSwab == "") fileNameSwab = "Pilih File";
+                                                                                    $('#labelfileswab<?= md5($d_praktik['id_praktik']); ?>').html(fileNameSwab);
                                                                                 })
                                                                             </script>
                                                                         </div>
                                                                         <br>
-
                                                                     </form>
                                                                 </div>
                                                                 <div class="modal-footer text-md">
@@ -165,17 +170,25 @@
                                             // inisiasi klik modal tambah
                                             $(".tambah_init<?= md5($d_praktik['id_praktik']); ?>").click(function() {
                                                 console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
-                                                $('#err_t_no_id').empty();
-                                                $('#err_t_nama').empty();
-                                                $('#err_t_tgl').empty();
-                                                $('#err_t_alamat').empty();
-                                                $('#err_t_telpon').empty();
+                                                $('#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                $('#err_t_nama<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                $('#err_t_tgl<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                $('#err_t_alamat<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                $('#err_t_telpon<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                    $('#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                <?php } ?>
+                                                $('#err_t_swab<?= md5($d_praktik['id_praktik']); ?>').empty();
                                             });
 
                                             // inisiasi klik modal tambah  tutup
                                             $(".tambah_tutup<?= md5($d_praktik['id_praktik']); ?>").click(function() {
                                                 console.log("tambah_tutup<?= md5($d_praktik['id_praktik']); ?>");
                                                 $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
+                                                <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                    $("#file_ijazah<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
+                                                <?php } ?>
+                                                $("#file_swab<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
                                             });
 
                                             // inisiasi klik modal tambah simpan
@@ -192,6 +205,10 @@
                                                 var t_tgl = $('#t_tgl<?= md5($d_praktik['id_praktik']); ?>').val();
                                                 var t_alamat = $('#t_alamat<?= md5($d_praktik['id_praktik']); ?>').val();
                                                 var t_telpon = $('#t_telpon<?= md5($d_praktik['id_praktik']); ?>').val();
+                                                <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                    var t_ijazah = $('#t_ijazah<?= md5($d_praktik['id_praktik']); ?>').val();
+                                                <?php } ?>
+                                                var t_swab = $('#t_swab<?= md5($d_praktik['id_praktik']); ?>').val();
 
                                                 //cek data from modal tambah bila tidak diiisi
                                                 if (
@@ -199,7 +216,9 @@
                                                     t_nama == "" ||
                                                     t_tgl == "" ||
                                                     t_alamat == "" ||
-                                                    t_telpon == ""
+                                                    t_telpon == "" ||
+                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> t_ijazah == "" ||
+                                                    <?php } ?> t_swab == ""
                                                 ) {
                                                     if (t_no_id == "") {
                                                         $("#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>").html("No ID Harus Diisi");
@@ -230,6 +249,18 @@
                                                     } else {
                                                         $("#err_t_telpon<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                     }
+                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                        if (t_ijazah == "") {
+                                                            $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("Ijazah Harus Dipilih");
+                                                        } else {
+                                                            $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("");
+                                                        }
+                                                    <?php } ?>
+                                                    if (t_swab == "") {
+                                                        $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab Harus Dipilih");
+                                                    } else {
+                                                        $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("");
+                                                    }
                                                 }
 
                                                 //simpan data tambah bila sudah sesuai
@@ -238,7 +269,9 @@
                                                     t_nama != "" &&
                                                     t_tgl != "" &&
                                                     t_alamat != "" &&
-                                                    t_telpon != ""
+                                                    t_telpon != "" &&
+                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> t_ijazah != "" &&
+                                                    <?php } ?> t_swab != ""
                                                 ) {
                                                     $.ajax({
                                                         type: 'POST',
@@ -254,13 +287,17 @@
                                                                         "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
                                                                         "&tb=<?= md5($d_praktik['id_praktik']); ?>");
 
-                                                                $('#err_t_no_id').empty();
-                                                                $('#err_t_nama').empty();
-                                                                $('#err_t_tgl').empty();
-                                                                $('#err_t_alamat').empty();
-                                                                $('#err_t_telpon').empty();
-                                                                $('#err_t_wa').empty();
-                                                                $('#err_t_email').empty();
+                                                                $('#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                $('#err_t_nama<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                $('#err_t_tgl<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                $('#err_t_alamat<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                $('#err_t_telpon<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                $('#err_t_wa<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                $('#err_t_email<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                                    $('#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                <?php } ?>
+                                                                $('#err_t_swab<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                                 $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
                                                                 const Toast = Swal.mixin({
                                                                     toast: true,

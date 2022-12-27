@@ -3788,6 +3788,8 @@ input[type="button"].btn-block {
 }
 
 .custom-file-label {
+  overflow: hidden;
+  text-overflow: ellipsis; 
   position: absolute;
   top: 0;
   right: 0;

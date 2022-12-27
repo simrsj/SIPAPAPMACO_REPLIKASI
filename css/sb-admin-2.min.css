@@ -3577,7 +3577,12 @@ input[type="submit"].btn-block {
   content: attr(data-browse);
 }
 .custom-file-label {
+  overflow: hidden;
+  text-overflow: ellipsis; 
   position: absolute;
+  /* width: 100px; 
+  height: 1.2em;  */
+  white-space: nowrap;
   top: 0;
   right: 0;
   left: 0;
