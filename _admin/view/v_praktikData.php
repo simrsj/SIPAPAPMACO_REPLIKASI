@@ -387,6 +387,20 @@ if ($d_prvl['r_praktik'] == "Y") {
                                                             <i class="fas fa-file"></i> Unduh Surat
                                                         </a>
                                                     </b>
+                                                    <hr class="p-0 m-0 bg-gray-500">
+                                                    Akreditasi Institusi: <br>
+                                                    <b>
+                                                        <a href="<?= $d_praktik['akred_institusi_praktik'] ?>" download="Akreditasi Institusi" class="btn btn-outline-success btn-sm">
+                                                            <i class="fas fa-file"></i> Unduh File
+                                                        </a>
+                                                    </b>
+                                                    <hr class="p-0 m-0 bg-gray-500">
+                                                    Akreditasi Jurusan: <br>
+                                                    <b>
+                                                        <a href="<?= $d_praktik['akred_jurusan_praktik'] ?>" download="Akreditasi Jurusan" class="btn btn-outline-success btn-sm">
+                                                            <i class="fas fa-file"></i> Unduh File
+                                                        </a>
+                                                    </b>
                                                 </div>
                                             </div>
                                         </div>
