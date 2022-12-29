@@ -61,7 +61,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres File Ijazah dan Swab Data Praktik"
+git commit -a -m "Progres File Akreditasi Institusi dan Jurusan Input Praktik"
 git push
 
 ====================================================================================================================
