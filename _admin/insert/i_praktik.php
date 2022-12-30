@@ -3,7 +3,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-md-8">
                 <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik</h1>
             </div>
         </div>
@@ -47,7 +47,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                     <div class="card-body text-center">
                         <!-- Data Praktikan -->
                         <div class="row">
-                            <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary mb-3">DATA PRAKTIK</div>
+                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary mb-3">DATA PRAKTIK</div>
                         </div>
                         <!-- Nama Institusi, Nama Kelompok, dan Jumlah Praktik -->
                         <div class="row">
@@ -68,7 +68,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                             ?>
                             <input name="id" id="id" value="<?= urlencode(base64_encode($id_praktik)); ?>" hidden>
                             <input name="user" id="user" value="<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" hidden>
-                            <div class="col-lg">
+                            <div class="col-md">
                                 <?php if ($d_user['level_user'] == 2) {
                                     $sql_institusi = "SELECT * FROM tb_user";
                                     $sql_institusi .= " JOIN tb_institusi ON tb_user.id_institusi = tb_institusi.id_institusi ASC";
@@ -119,12 +119,12 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                     }
                                 } ?>
                             </div>
-                            <div class="col-lg">
+                            <div class="col-md">
                                 Nama Gelombang/Kelompok : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="kelompok" id="kelompok" placeholder="Isi Gelombang/Kelompok" required>
                                 <div class="text-danger b  i text-xs blink" id="err_kelompok"></div>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-md-2">
                                 Jumlah Praktik: <span style="color:red">*</span><br>
                                 <input type="number" min="1" class="form-control form-control-xs" name="jumlah" id="jumlah" placeholder="Isi Jumlah Praktik" required>
                                 <div class="text-danger b  i text-xs blink" id="err_jumlah"></div>
@@ -134,7 +134,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
                         <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-md-4">
                                 Jurusan : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_jurusan_pdd = "SELECT * FROM  tb_jurusan_pdd ORDER BY nama_jurusan_pdd ASC";
@@ -149,14 +149,14 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 </select>
                                 <div class="text-danger b i text-xs blink" id="err_jurusan"></div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-md-4">
                                 Jenjang : <span style="color:red">*</span><br>
                                 <div class="loader-small" id="jenjangLoader" style="display: none;"></div>
                                 <div id="jenjangData" style="display: none;"></div>
                                 <span id="jenjangKet" class="b i">Pilih Jurusan Terlebih Dahulu</span>
                                 <div class="text-danger b i text-xs blink" id="err_jenjang"></div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-md-4">
                                 Profesi : <span style="color:red">*</span><br>
                                 <span id="profesiData" style="display: none;">
                                     <input type="hidden" id="profesi" name="profesi" value="0">
@@ -171,22 +171,29 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
                         <!-- Tanggal Mulai, Tanggal Selesai, Unggah Surat dan Data Praktikan -->
                         <div class="row">
-                            <div class="col-lg-2">
-                                Tanggal Mulai : <span style="color:red">*</span><br>
+                            <div class="col-md-2">
+                                Tanggal Mulai Praktik : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control form-control-xs" name="tgl_mulai_praktik" id="tgl_mulai" required>
                                 <span class="text-danger b  i text-xs blink" id="err_tgl_mulai"></span>
                             </div>
-                            <div class="col-lg-2">
-                                Tanggal Selesai : <span style="color:red">*</span><br>
+                            <div class="col-md-2">
+                                Tanggal Selesai Praktik: <span style="color:red">*</span><br>
                                 <input type="date" class="form-control form-control-xs" name="tgl_selesai_praktik" id="tgl_selesai" required>
                                 <span class="text-danger b  i text-xs blink" id="err_tgl_selesai"></span>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-md">
                                 No. Surat Institusi : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="no_surat" placeholder="Isi No Surat Institusi" id="no_surat" required>
                                 <span class="text-danger b  i text-xs blink" id="err_no_surat"></span>
                             </div>
-                            <div class="col-lg">
+                            <div class="col-md-2">
+                                Tanggal Surat Institusi : <span style="color:red">*</span><br>
+                                <input type="date" class="form-control form-control-xs" name="tgl_surat" id="tgl_surat" required>
+                                <span class="text-danger b  i text-xs blink" id="err_tgl_surat"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
                                 File Surat Institusi :<br>
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfilesuratinstitusi">Pilih File</label>
@@ -203,7 +210,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                     </script>
                                 </div>
                             </div>
-                            <div class="col-lg">
+                            <div class="col-md">
                                 File Akreditasi Institusi :<br>
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfileakredinstitusi">Pilih File</label>
@@ -220,7 +227,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                     </script>
                                 </div>
                             </div>
-                            <div class="col-lg">
+                            <div class="col-md">
                                 File Akreditasi Jurusan :<br>
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfileakredjururusan">Pilih File</label>
@@ -241,20 +248,20 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
                         <!-- Koordinator -->
                         <div class=" row">
-                            <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">KORDINATOR</div>
+                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary">KORDINATOR</div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-md-4">
                                 Nama : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="nama_koordinator" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required>
                                 <span class="text-danger b  i text-xs blink" id="err_nama_koordinator"></span>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-md-4">
                                 Email :<br>
                                 <input type="text" class="form-control form-control-xs" name="email_koordinator" id="email_koordinator" placeholder="Isi Email Koordinator" value="<?= $d_user['email_user']; ?>">
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-md-4">
                                 Telpon : <span style="color:red">*</span><br>
                                 <input type="number" class="form-control form-control-xs" name="telp_koordinator" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" value="<?= $d_user['no_telp_user']; ?>" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
@@ -264,7 +271,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
                         <!-- Pakai Mess -->
                         <div class=" row">
-                            <div class="col-lg-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
+                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
                         </div>
                         <div id="data_pilih_mess">
                             <div class="text-center mb-3">
@@ -333,6 +340,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
             var tgl_mulai = $("#tgl_mulai").val();
             var tgl_selesai = $("#tgl_selesai").val();
             var no_surat = $("#no_surat").val();
+            var tgl_surat = $("#tgl_surat").val();
             var file_surat = $("#file_surat").val();
             var file_akred_institusi = $("#file_akred_institusi").val();
             var file_akred_jurusan = $("#file_akred_jurusan").val();
@@ -352,6 +360,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 tgl_mulai == "" ||
                 tgl_selesai == "" ||
                 no_surat == "" ||
+                tgl_surat == "" ||
                 file_surat == "" ||
                 file_surat == undefined ||
                 file_akred_institusi == "" ||
@@ -435,6 +444,13 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
                 //notif no_surat 
                 if (no_surat == "") {
+                    $("#err_no_surat").html("No. Surat Institusi Harus Diisi");
+                } else {
+                    $("#err_no_surat").html("");
+                }
+
+                //notif tgl_surat 
+                if (tgl_surat == "") {
                     $("#err_no_surat").html("No. Surat Institusi Harus Diisi");
                 } else {
                     $("#err_no_surat").html("");
@@ -689,6 +705,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 tgl_mulai != "" &&
                                 tgl_selesai != "" &&
                                 no_surat != "" &&
+                                tgl_surat != "" &&
                                 file_surat != undefined &&
                                 getTypeSurat == 'pdf' &&
                                 file_akred_institusi != undefined &&

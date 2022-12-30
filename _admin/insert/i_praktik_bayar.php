@@ -147,10 +147,12 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                             console.log("docx form_non_ttd");
 
                                                                             var data_pdf = $("#form_non_ttd").serializeArray();
-                                                                            window.location = "_print/p_praktik_invoiceDOCXTBS.php?" +
+                                                                            // window.location = "_print/p_praktik_invoiceDOCXTBS.php?" +
+                                                                            window.open("_print/p_praktik_invoiceDOCX(PHPWord).php?" +
                                                                                 "idp=" + idp +
                                                                                 "&ns=" + no_surat +
-                                                                                "&k=" + kepada;
+                                                                                "&k=" + kepada
+                                                                            );
 
                                                                             // $("#err_no_surat").empty();
                                                                             // $("#err_kepada").empty();

@@ -46,6 +46,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " tgl_mulai_praktik,";
     $sql_insert .= " tgl_selesai_praktik,";
     $sql_insert .= " no_surat_praktik,";
+    $sql_insert .= " tgl_surat_praktik,";
     $sql_insert .= " jumlah_praktik,";
     $sql_insert .= " id_jurusan_pdd_jenis,";
     $sql_insert .= " id_jurusan_pdd,";
@@ -66,6 +67,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " '" . $_POST['tgl_mulai_praktik'] . "', ";
     $sql_insert .= " '" . $_POST['tgl_selesai_praktik'] . "',";
     $sql_insert .= " '" . $_POST['no_surat'] . "',";
+    $sql_insert .= " '" . $_POST['tgl_surat'] . "',";
     $sql_insert .= " '" . $_POST['jumlah'] . "', ";
     $sql_insert .= " '" . $d_jenis_jurusan['id_jurusan_pdd_jenis'] . "', ";
     $sql_insert .= " '" . $_POST['jurusan'] . "',";

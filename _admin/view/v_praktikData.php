@@ -228,9 +228,7 @@ if ($d_prvl['r_praktik'] == "Y") {
 
                                     if ($r_praktik_tarif > 0) {
                                     ?>
-                                        <a href="?ptrf" class="btn btn-outline-info btn-xs">
-                                            <i class="fas fa-eye"></i> Lihat
-                                        </a>
+                                        <span class="badge badge-success">Sudah Dipilih</span>
                                     <?php
 
                                     } else {
@@ -239,6 +237,12 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <?php
                                     }
                                     ?>
+
+                                    <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
+                                        <a href="?ptrf" class="btn btn-outline-info btn-xs">
+                                            <i class="fas fa-eye"></i> Lihat
+                                        </a>
+                                    <?php } ?>
                                 </td>
                             <?php } ?>
                             <!-- status bayar praktik  -->
@@ -258,24 +262,15 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 if ($r_praktik_tarif > 0 && $r_praktik_bayar > 0) {
                                     if ($d_praktik_bayar['status_bayar'] == 'T') {
                                 ?>
-                                        <span class="badge badge-primary m-1">Proses Verifikasi</span><br>
-                                        <a href="?pbyr" class="btn btn-outline-info btn-xs">
-                                            <i class="fas fa-eye"></i> Lihat
-                                        </a>
+                                        <span class="badge badge-primary m-1">Proses Verifikasi</span>
                                     <?php
                                     } elseif ($d_praktik_bayar['status_bayar'] == 'TERIMA') {
                                     ?>
-                                        <span class="badge badge-success  m-1">Verifikasi<br>Diterima</span><br>
-                                        <a href="?pbyr" class="btn btn-outline-info btn-xs">
-                                            <i class="fas fa-eye"></i> Lihat
-                                        </a>
+                                        <span class="badge badge-success  m-1">Verifikasi<br>Diterima</span>
                                     <?php
                                     } elseif ($d_praktik_bayar['status_bayar'] == 'TOLAK') {
                                     ?>
-                                        <span class="badge badge-danger  m-1">Verifikasi<br>Ditolak</span><br>
-                                        <a href="?pbyr" class="btn btn-outline-info btn-xs">
-                                            <i class="fas fa-eye"></i> Lihat
-                                        </a>
+                                        <span class="badge badge-danger  m-1">Verifikasi<br>Ditolak</span>
                                     <?php
                                     } else {
                                     ?>
@@ -284,10 +279,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     }
                                 } else if ($r_praktik_tarif > 0 && $r_praktik_bayar < 1) {
                                     ?>
-                                    <span class="badge badge-danger">Belum Dibayar</span><br>
-                                    <a href="?pbyr" class="btn btn-outline-info btn-xs">
-                                        <i class="fa-solid fa-money-bill"></i> Bayar
-                                    </a>
+                                    <span class="badge badge-danger">Belum Dibayar</span>
                                 <?php
                                 } else if ($r_praktik_tarif < 1) {
                                 ?>
@@ -299,6 +291,10 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 <?php
                                 }
                                 ?>
+                                <br>
+                                <a href="?pbyr" class="btn btn-outline-info btn-xs">
+                                    <i class="fas fa-eye"></i> Lihat
+                                </a>
                             </td>
                             <!-- status nilai praktik  -->
                             <td class="align-middle">
@@ -324,16 +320,13 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 if ($r_praktik_nilai > 0) {
                                 ?>
                                     <span class="badge badge-success">Sudah DiNilai</span><br>
-                                    <a href="?pnilai" class="btn btn-outline-info btn-xs">
-                                        <i class="fa-solid fa-eye"></i> Cek
-                                    </a>
-                                <?php
-
-                                } else {
-                                ?>
+                                <?php } else { ?>
                                     <span class="badge badge-secondary">Belum Ada</span>
-                                <?php
-                                } ?>
+                                <?php } ?>
+                                <br>
+                                <a href="?pnilai" class="btn btn-outline-info btn-xs">
+                                    <i class="fa-solid fa-eye"></i> Cek
+                                </a>
                             </td>
                             <!-- Aksi praktik  -->
                             <td class="align-middle">

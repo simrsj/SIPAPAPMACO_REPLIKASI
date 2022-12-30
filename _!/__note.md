@@ -62,7 +62,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Berhasil Unggah File Akreditasi Institusi dan Jurusan Pengajuan Praktik"
+git commit -a -m "Progres Print DOCX RAB/INVOICE"
 git push
 
 ====================================================================================================================

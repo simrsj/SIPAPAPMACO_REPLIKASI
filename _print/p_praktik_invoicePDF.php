@@ -1,7 +1,5 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // echo "<pre>";
 // print_r($_POST);
 // echo "</pre>";
@@ -10,23 +8,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // echo "</pre>";
 
 # ------------------------------------------------------------------------------------------------------------------------------------- CONNECTION
-// $servername = "localhost";
-// $database = "db_sm";
-// $username = "root";
-// $password = "simrs12345";
 
-// try {
-//     $conn = new PDO(
-//         "mysql:host=$servername; dbname=$database",
-//         $username,
-//         $password
-//     );
-//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-//     //echo "Connected successfully";
-// } catch (PDOException $e) {
-//     echo "Connection failed: " . $e->getMessage();
-// }
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
 # ------------------------------------------------------------------------------------------------------------------------------------- VARIABLE
 $id_praktik = base64_decode(urldecode($_GET['idp']));
@@ -119,7 +103,15 @@ $ttdTembusan = '
     ' . $tembusan . '
     </td>
     <td style="text-align:center;">
-        <img src="' . $tte_elly . '" style="width: 200px !important, heigth: 100px !important;">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        dr. Hj. ELLY MARLIYANI, Sp.KJ. M.KM.<br>
+        Pembina Utama Madya <br>
+        NIP. 196608141991022004
+
     </td>
 </tr>
 </table>
@@ -268,7 +260,7 @@ $html .= '
             Perihal<br>
         </td>
         <td width="350px" style="vertical-align: text-top;">
-            : 420/' . $noSurat . '/Diklat-RSJ/' . date("Y") . '<br>
+            : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/DK.01.03/DIKLIT.RS/' . date("Y") . '<br>
             : Biasa<br>
             : -<br>
             : ' . $perihal . '<br>
@@ -312,7 +304,7 @@ $html .= '
 
 //tag buka tabel invoice
 $html .= '
-<table >
+<table  width="100%"  >
 <tr>
 <td width="67px">
 </td>
@@ -407,194 +399,6 @@ $html .= $ttdTembusan . '
 </main>
 ';
 
-# ------------------------------------------------------------------------------------------------------------------------------------- HTML TARIF MESS
-
-$html .= '
-<div class="page_break">
-</div>
-';
-
-//tag kop surat
-$html .= '
-<!--header -->
-<table width="100%" border=0 >
-    <tr>
-        <th class="text-center">
-            <img src="' . $img . '" style="width: 100px !important, heigth:150px !important;">
-        </th>
-        <td style="text-align: center;">
-            <span style="line-height: 20px">
-                <span style="font-size: 18.667px; ">PEMERINTAH DAERAH PROVINSI JAWA BARAT</span><br>
-                <span style="font-size: 21.333px;"> DINAS KESEHATAN</span><br>
-                <span style="font-weight: bold; font-size: 24px;"> RUMAH SAKIT JIWA</span><br>
-            </span>
-            <span style="line-height: 13px">
-                <span style="font-size: 13.333px;">
-                Jalan Kolonel Masturi KM. 7 – Cisarua Telepon: (022) 2700260<br>
-                Fax: (022) 2700304 Website: www.rsj.jabarprov.go.id email: rsj@jabarprov.go.id<br>
-                KABUPATEN BANDUNG BARAT – 40551
-                </span>
-            </span>
-        </td>
-    </tr>
-</table>
-<hr>
-<!--/header-->
-';
-
-//Tag judul Surat
-$html .= '
-<main>
-<table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px">
-    <tr>
-        <td colspan="2"></td>
-        <td colspan="2">Kab Bandung Barat, ' . tanggal(date("Y-m-d")) . '</td>
-    </tr>
-    <tr>
-        <td width="60px"  style="vertical-align: text-top;">
-            Nomor<br>
-            Sifat<br>
-            Lampiran<br>
-            Perihal<br>
-        </td>
-        <td width="350px" style="vertical-align: text-top;">
-            : 420/' . ($noSurat + 1) . '/Diklat-RSJ/' . date("Y") . '<br>
-            : Biasa<br>
-            : -<br>
-            : ' . $perihal . '<br>
-        </td>
-        <td style="vertical-align: text-top; width : 15px;">
-            Yth.
-        </td>
-        <td style="vertical-align: text-top; width : 210px;">
-        ' . $kepada . " " . ucwords(strtolower($d_praktik['nama_institusi'])) . '<br>
-            di <br>
-            &nbsp;&nbsp;&nbsp;Tempat
-        </td>
-    </tr>
-</table>
-';
-
-//isi
-$html .= '
-<table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px">
-    <tr>
-        <td width="67px">
-        </td>
-        <td 
-        style="text-align: justify;
-        text-justify: inter-word;
-        ">
-            <div style="
-            text-indent: 0.3in;
-            ">
-                Menindaklanjuti surat dari ' . ucwords(strtolower($d_praktik['nama_institusi'])) . ', Nomor: ' . $d_praktik['no_surat_praktik'] . ' pada tanggal ' . tanggal($d_praktik['tgl_input_praktik']) . ' perihal Permohonan Izin ' . $perihal . '. Pada dasarnya kami dapat menerima Permohonan Praktik Lapangan tersebut untuk <b>' . $d_praktik['jumlah_praktik'] . '</b> orang praktikan pada tanggal <b>' . tanggal($d_praktik['tgl_mulai_praktik']) . ' sampai dengan ' . tanggal($d_praktik['tgl_selesai_praktik']) . '.</b> <br>
-            </div>
-            <div style="
-            text-indent: 0.3in;
-            ">
-                Sesuai Peraturan Gubernur Jawa Barat Nomor 15 Tahun 2020 tentang Tarif Layanan Unit Pelaksanaan Teknis Daerah Rumah Sakit Jiwa, maka Rincian Anggaran Biaya yang harus Saudara penuhi adalah sebagai berikut :
-            </div>
-        </td>
-    </tr>
-</table>
-';
-
-//tag buka tabel invoice
-$html .= '
-<table width="100%">
-<tr>
-<td width="67px">
-</td>
-<td>
-<table width="100%" style="font-size: ' . $ukuranFontIsi . ';" class="s">
-    <tr class="s" style="font-size: ' . $ukuranFontIsi . '; background-color: #cfcfcf;">
-        <th class="s">NO</th>
-        <th class="s">JENIS KEGIATAN</th>
-        <th class="s">FREK </th>
-        <th class="s">MHS</th>
-        <th class="s">TARIF (Rp)</th>
-        <th class="s">SATUAN</th>
-        <th class="s">JUMLAH (Rp)</th>
-    </tr>';
-$no = 1;
-$jt = 0;
-while ($d_getJenisKegiatanMess = $q_getJenisKegiatanMess->fetch(PDO::FETCH_ASSOC)) {
-    $html .= '
-    <tr class="s">
-        <td class="s"style="text-align: center;"><b>' . $no . '</b></td>
-        <td class="s" colspan =6 style="text-transform: uppercase;"><b>' . $d_getJenisKegiatanMess["nama_jenis_tarif_pilih"] . '</b></td>
-    </tr>
-    ';
-
-    $sql_getTarif = "SELECT * FROM tb_tarif_pilih ";
-    $sql_getTarif .= " WHERE id_praktik = " . $id_praktik;
-    $sql_getTarif .= " AND nama_jenis_tarif_pilih='" . $d_getJenisKegiatanMess['nama_jenis_tarif_pilih'] . "'";
-    $sql_getTarif .= " AND mess_tarif_pilih IS NOT NULL";
-    $q_getTarif = $conn->query($sql_getTarif);
-    while ($d_getTarif = $q_getTarif->fetch(PDO::FETCH_ASSOC)) {
-        $html .= '
-        <tr  class="s">
-            <td class="s">  </td>
-            <td class="s">' . $d_getTarif["nama_tarif_pilih"] . '</td>
-            <td class="s" style="text-align: center;">' . $d_getTarif["frekuensi_tarif_pilih"] . '</td>
-            <td class="s" style="text-align: center;">' . $d_getTarif["kuantitas_tarif_pilih"] . '</td>
-            <td class="s" style="text-align: right;">' . number_format($d_getTarif["nominal_tarif_pilih"], 0, ",", ".") . '</td>
-            <td class="s">' . $d_getTarif["nama_satuan_tarif_pilih"] . '</td>
-            <td class="s" style="text-align: right;">' . number_format($d_getTarif["jumlah_tarif_pilih"], 0, ",", ".") . '</td>
-        </tr>
-        ';
-        $jt += $d_getTarif["jumlah_tarif_pilih"];
-    }
-    $no++;
-}
-
-//baris jumlah total tarif
-$html .= '
-<tr>
-<td class="s" colspan=6 style="text-align: right;"> <b>JUMLAH TOTAL</b>
-</td>
-<td class="s" style="text-align: right;"><b>' . number_format($jt, 0, ",", ".") . '</b></td>
-</tr>
-';
-
-//tag tutup tabel invoice
-$html .= '
-</td>
-</tr>
-</table>
-</table>
-';
-
-//tag akhir surat
-$html .= '
-<table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px">
-    <tr>
-        <td width="67px">
-        </td>
-        <td 
-        style="text-align: justify;
-        text-justify: inter-word;
-        ">
-            <div style="
-            text-indent: 0.5in;">
-                Perlu kami informasikan pembayaran ditransfer pada Rekening Pemegang Kas RS Jiwa Provinsi Jawa Barat (BLUD) 
-                dengan Nomor: <b>BJB-0063028738002</b>. Bukti transfer dapat dikirim melaui email  <u>diklit.rsj.jabarprov@gmail.com</u> 
-                dan nomor WA Bendahara Penerimaan RSJ <b>(081321412643)</b><br/>
-            </div>
-            <div style="
-            text-indent: 0.5in;">
-                Demikian agar menjadi maklum. Atas perhatian dan kerja sama Saudara kami ucapkan terima kasih.
-            </div>
-        </td>
-    </tr>
-</table>
-';
-
-//tag ttd surat dan tembusan
-$html .= $ttdTembusan . '
-</main>
-';
 # ------------------------------------------------------------------------------------------------------------------------------------- HTML TARIF UJIAN
 
 if ($r_getDataUjian > 0) {
