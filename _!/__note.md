@@ -8,7 +8,8 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 - 🔃 membuat rincian praktik pembimbing
 - 🔃 Inputan Tambahan Daftar Praktikan Ijazah(Khusus Profesi), Hasil Swab
 - 🔃 Perubahan Nomor Surat Invoice Praktikan menjadi . . . /DK.01.03/DIKLIT.RS/2022
-- 🔃 Upload Setifikat Akreditasi
+- ✅ Upload Setifikat Akreditasi Institusi dan Jurusan di Pengajuan Praktik
+- ✅ Penyesuaian Invoice dan Jenis Tarif Magang
 - Generate SP CI Sesuai dengan format
 - Semua Berkas di TTD Basah
 - Akun Institusi Pendidikan (IP) tidak Bisa mengubah Pembimbing tapi bisa melihat
@@ -61,7 +62,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres File Akreditasi Institusi dan Jurusan Input Praktik"
+git commit -a -m "Berhasil Unggah File Akreditasi Institusi dan Jurusan Pengajuan Praktik"
 git push
 
 ====================================================================================================================

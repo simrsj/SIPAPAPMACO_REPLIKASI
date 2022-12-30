@@ -40,6 +40,7 @@ foreach ($period as $key => $value) {
     //mencari kuota sesuai dengan jurusannya
     $sql_k = "SELECT * FROM tb_kuota";
     $sql_k .= " WHERE id_jurusan_pdd = " . $id_jurusan;
+    // echo $sql_k . "<br>";
 
     $q_k = $conn->query($sql_k);
     $d_k = $q_k->fetch(PDO::FETCH_ASSOC);

@@ -171,18 +171,17 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
                                 $r_praktikan = $q_praktikan->rowCount();
 
-                                if ($r_praktikan > 0) {
-                                ?>
-                                    <a href="?ptkn" class="btn btn-outline-info btn-xs">
-                                        <i class="fas fa-eye"></i> Lihat
-                                    </a>
-                                <?php
-
-                                } else {
-                                ?>
+                                if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
+                                    <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Semuanya</span>
+                                <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] == $r_praktikan) { ?>
+                                    <span class="badge badge-success">Sudah Dipilih</span>
+                                <?php } else { ?>
                                     <span class="badge badge-secondary">Belum Dipilih</span>
-                                <?php
-                                } ?>
+                                <?php } ?>
+                                <br>
+                                <a href="?ptkn" class="btn btn-outline-info btn-xs">
+                                    <i class="fas fa-eye"></i> Lihat
+                                </a>
                             </td>
                             <!-- status pembimbing praktik  -->
                             <td class="align-middle">
@@ -199,9 +198,7 @@ if ($d_prvl['r_praktik'] == "Y") {
 
                                 if ($r_praktik_pembimbing > 0) {
                                 ?>
-                                    <a href="?pmbb" class="btn btn-outline-info btn-xs">
-                                        <i class="fas fa-eye"></i> Lihat
-                                    </a>
+                                    <span class="badge badge-success">Sudah Dipilih</span>
                                 <?php
                                 } else {
                                 ?>
@@ -209,6 +206,10 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 <?php
                                 }
                                 ?>
+                                <br>
+                                <a href="?pmbb" class="btn btn-outline-info btn-xs">
+                                    <i class="fas fa-eye"></i> Lihat
+                                </a>
                             </td>
                             <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
                                 <!-- status Tarif praktik  -->
@@ -381,26 +382,32 @@ if ($d_prvl['r_praktik'] == "Y") {
                                                     E-Mail Koordinator : <br>
                                                     <b><?= $d_praktik['email_koordinator_praktik'] ?></b>
                                                     <hr class="p-0 m-0 bg-gray-500">
-                                                    Surat Pengajuan: <br>
-                                                    <b>
-                                                        <a href="<?= $d_praktik['surat_praktik'] ?>" download="Surat Pengajuan" class="btn btn-outline-success btn-sm">
-                                                            <i class="fas fa-file"></i> Unduh Surat
-                                                        </a>
-                                                    </b>
-                                                    <hr class="p-0 m-0 bg-gray-500">
-                                                    Akreditasi Institusi: <br>
-                                                    <b>
-                                                        <a href="<?= $d_praktik['akred_institusi_praktik'] ?>" download="Akreditasi Institusi" class="btn btn-outline-success btn-sm">
-                                                            <i class="fas fa-file"></i> Unduh File
-                                                        </a>
-                                                    </b>
-                                                    <hr class="p-0 m-0 bg-gray-500">
-                                                    Akreditasi Jurusan: <br>
-                                                    <b>
-                                                        <a href="<?= $d_praktik['akred_jurusan_praktik'] ?>" download="Akreditasi Jurusan" class="btn btn-outline-success btn-sm">
-                                                            <i class="fas fa-file"></i> Unduh File
-                                                        </a>
-                                                    </b>
+                                                    <div class="row">
+                                                        <div class="col-md">
+                                                            Surat Pengajuan: <br>
+                                                            <b>
+                                                                <a href="<?= $d_praktik['surat_praktik'] ?>" download="Surat Pengajuan" class="btn btn-outline-success btn-sm">
+                                                                    <i class="fas fa-file"></i> Unduh Surat
+                                                                </a>
+                                                            </b>
+                                                        </div>
+                                                        <div class="col-md">
+                                                            Akreditasi Institusi: <br>
+                                                            <b>
+                                                                <a href="<?= $d_praktik['akred_institusi_praktik'] ?>" download="Akreditasi Institusi" class="btn btn-outline-success btn-sm">
+                                                                    <i class="fas fa-file"></i> Unduh File
+                                                                </a>
+                                                            </b>
+                                                        </div>
+                                                        <div class="col-md">
+                                                            Akreditasi Jurusan: <br>
+                                                            <b>
+                                                                <a href="<?= $d_praktik['akred_jurusan_praktik'] ?>" download="Akreditasi Jurusan" class="btn btn-outline-success btn-sm">
+                                                                    <i class="fas fa-file"></i> Unduh File
+                                                                </a>
+                                                            </b>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
