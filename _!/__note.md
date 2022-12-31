@@ -4,14 +4,14 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 
 # DAFTAR PERBAIKAN
 
-- ✅ Pembuatan File Invoice/RAB .docx (WORD)
 - ✅ Inputan Tambahan Data Praktikan File Ijazah (Khusus Jenjang Profesi) dan Hasil Swab
 - ✅ Perubahan Nomor Surat Invoice Praktikan menjadi .../DK.01.03/DIKLIT.RS/2022
 - ✅ Inputan No Surat Praktik, File Setifikat Akreditasi Institusi dan Jurusan di Pengajuan Praktik
 - ✅ Penyesuaian Invoice/RAB dan Jenis Tarif Magang
 - ✅ Semua Berkas di TTD Basah
-- ✅ Tarif Praktik Khusus Kedokteran Nanti disesuaikan dengan Format Excel
+- 🔃 Tarif Praktik Khusus Kedokteran Nanti disesuaikan dengan Format Excel
 - 🔃 Membuat Rincian Praktik pembimbing
+- 🔃 Pembuatan File Invoice/RAB .docx (WORD)
 - 🔃 Generate SP CI Sesuai dengan format .docx (WORD), .PDF
 - 🔃 Akun Institusi Pendidikan (IP) tidak Bisa mengubah Pembimbing tapi bisa melihat
 - 🔃 Penambahan Upload Surat Penugasan Preceptor/Clinical Insturtur di menu “Daftar Pembimbing dan Ruangan”
@@ -63,7 +63,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Berhasil Tambah dan Ubah File Ijazah dan Swab Data Praktikan"
+git commit -a -m "Progres Invoice/RAB .docx"
 git push
 
 ====================================================================================================================

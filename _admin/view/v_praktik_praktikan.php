@@ -431,17 +431,17 @@
                                                                 $("#t_swab<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
 
                                                                 Swal.fire({
-                                                                    allowOutsideClick: true,
+                                                                    allowOutsideClick: false,
                                                                     showConfirmButton: false,
                                                                     icon: 'success',
                                                                     html: '<div class="text-lg b">Data Praktikan<br>Berhasil Tersimpan</div>',
-                                                                    timer: 10000,
+                                                                    timer: 5000,
                                                                     timerProgressBar: true,
                                                                     didOpen: (toast) => {
                                                                         toast.addEventListener('mouseenter', Swal.stopTimer)
                                                                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                                     }
-                                                                }).then({
+                                                                }).then(
                                                                     function() {
                                                                         $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
                                                                             .load(
@@ -450,7 +450,7 @@
                                                                                 "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
                                                                                 "&tb=<?= md5($d_praktik['id_praktik']); ?>");
                                                                     }
-                                                                });
+                                                                );
 
                                                             } else {
                                                                 Swal.fire({

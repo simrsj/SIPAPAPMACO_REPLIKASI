@@ -476,24 +476,24 @@ if ($r_data_praktikan > 0) {
                                                     $("#u_swab<?= md5($d_data_praktikan['id_praktik']); ?>").val("").trigger("change");
 
                                                     Swal.fire({
-                                                        allowOutsideClick: true,
+                                                        allowOutsideClick: false,
                                                         showConfirmButton: false,
                                                         icon: 'success',
                                                         html: '<div class="text-lg b">Data Praktikan<br>Berhasil Diubah</div>',
-                                                        timer: 10000,
+                                                        timer: 5000,
                                                         timerProgressBar: true,
                                                         didOpen: (toast) => {
                                                             toast.addEventListener('mouseenter', Swal.stopTimer)
                                                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                         }
-                                                    }).then({
+                                                    }).then(
                                                         function() {
                                                             $('#mu<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
                                                                 $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>')
                                                                     .load("_admin/view/v_praktik_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
                                                             })
                                                         }
-                                                    })
+                                                    )
 
                                                 },
                                                 error: function(response) {

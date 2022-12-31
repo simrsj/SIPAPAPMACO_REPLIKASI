@@ -71,7 +71,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                     <input type="hidden" id="idp" name="idp" value="<?= $_GET['pbyr'] ?>">
                                                                     No Surat RSJ : <span class="text-danger">*</span><br>
                                                                     <input type="number" min="1" class="form-control form-control-sm" id="no_surat" name="no_surat" required>
-                                                                    <span class='i text-xs'>"420/.../Diklat-RSJ/<?= date('Y') ?>" No Surat akan diisi pada ...</span><br>
+                                                                    <span class='i text-xs'>".../DK.01.03/DIKLIT.RS/<?= date('Y') ?>" No Surat akan diisi pada ...</span><br>
                                                                     <div class="text-xs font-italic text-danger blink" id="err_no_surat"></div><br>
                                                                     Ditujukan Kepada : <span class="text-danger">*</span><br>
                                                                     <input type="text" class="form-control form-control-sm" id="kepada" name="kepada" required>
