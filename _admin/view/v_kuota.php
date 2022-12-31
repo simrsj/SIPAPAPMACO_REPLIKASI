@@ -7,13 +7,13 @@ if (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') {
             <div class="col-lg-10">
                 <h1 class="h3 mb-2 text-gray-800">Data Kuota</h1>
             </div>
-            <?php if ($d_prvl['c_kuota'] == "Y") { ?>
+            <!-- <?php if ($d_prvl['c_kuota'] == "Y") { ?>
                 <div class="col-lg-2 my-auto text-right">
                     <button class="btn btn-outline-success btn-sm tambah_init">
                         <i class="fas fa-plus"></i> Tambah
                     </button>
                 </div>
-            <?php } ?>
+            <?php } ?> -->
         </div>
 
         <!-- form tambah kuota  -->

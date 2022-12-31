@@ -169,7 +169,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                         </div>
                         <br>
 
-                        <!-- Tanggal Mulai, Tanggal Selesai, Unggah Surat dan Data Praktikan -->
+                        <!-- Tanggal Mulai, Tanggal Selesai, No Surat Institusi Surat dan Tanggal Surat Institusi -->
                         <div class="row">
                             <div class="col-md-2">
                                 Tanggal Mulai Praktik : <span style="color:red">*</span><br>
@@ -192,6 +192,8 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 <span class="text-danger b  i text-xs blink" id="err_tgl_surat"></span>
                             </div>
                         </div>
+                        <br>
+                        <!-- File Surat Institusi, File Akreditasi Insitutsi, File Akreditasi Jurusan -->
                         <div class="row">
                             <div class="col-md">
                                 File Surat Institusi :<br>
@@ -325,7 +327,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />' +
                     '  <p>Harap Tunggu</p>',
                 // add html attribute if you want or remove
-                allowOutsideClick: true,
+                allowOutsideClick: false,
                 showConfirmButton: false,
             });
             var data_praktik = $('#form_praktik').serializeArray();
@@ -374,7 +376,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 console.log(file_surat);
                 //warning Toast bila ada data wajib yg berlum terisi
                 Swal.fire({
-                    allowOutsideClick: false,
+                    allowOutsideClick: true,
                     showConfirmButton: false,
                     icon: 'warning',
                     title: '<center>DATA WAJIB ADA YANG BELUM TERISI</center>',
@@ -532,7 +534,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 } //Toast bila upload file surat diatas 1 Mb 
                 else if (getSizeSurat > 1024) {
                     Swal.fire({
-                        allowOutsideClick: false,
+                        allowOutsideClick: true,
                         showConfirmButton: false,
                         icon: 'warning',
                         title: '<div class="text-md text-center">File Surat Harus <br><b>Kurang dari 1 Mb</b></div>',
@@ -563,7 +565,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 if (getTypeAkredInstitusi != 'pdf') {
 
                     Swal.fire({
-                        allowOutsideClick: false,
+                        allowOutsideClick: true,
                         showConfirmButton: false,
                         icon: 'warning',
                         title: '<div class="text-md text-center">File Akreditasi Institusi Harus <b>.pdf</b></div>',
@@ -578,7 +580,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 } //Toast bila upload file surat diatas 1 Mb 
                 else if (getSizeAkredInstitusi > 256) {
                     Swal.fire({
-                        allowOutsideClick: false,
+                        allowOutsideClick: true,
                         showConfirmButton: false,
                         icon: 'warning',
                         title: '<div class="text-md text-center">File Akreditasi Institusi Harus <br><b>Kurang dari 200 Kb</b></div>',
@@ -610,7 +612,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 if (getTypeAkredJurusan != 'pdf') {
 
                     Swal.fire({
-                        allowOutsideClick: false,
+                        allowOutsideClick: true,
                         showConfirmButton: false,
                         icon: 'warning',
                         title: '<div class="text-md text-center">File Akreditasi Jurusan Harus <b>.pdf</b></div>',
@@ -625,7 +627,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 } //Toast bila upload file surat diatas 1 Mb 
                 else if (getSizeAkredJurusan > 256) {
                     Swal.fire({
-                        allowOutsideClick: false,
+                        allowOutsideClick: true,
                         showConfirmButton: false,
                         icon: 'warning',
                         title: '<div class="text-md text-center">File Akreditasi Jurusan Harus <br><b>Kurang dari 200 Kb</b></div>',
@@ -647,7 +649,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 (tgl_mulai == "" && tgl_selesai == "")
             ) {
                 Swal.fire({
-                    allowOutsideClick: false,
+                    allowOutsideClick: true,
                     showConfirmButton: false,
                     icon: 'warning',
                     title: '<center><b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b></center>',
@@ -673,7 +675,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                         if (response.ket == 'T') {
                             console.log('Jadwal Praktik Tidak Bisa');
                             Swal.fire({
-                                allowOutsideClick: false,
+                                allowOutsideClick: true,
                                 icon: 'error',
                                 showConfirmButton: false,
                                 html: '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b>' +

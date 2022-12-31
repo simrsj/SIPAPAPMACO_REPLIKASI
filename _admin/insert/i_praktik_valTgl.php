@@ -44,14 +44,9 @@ foreach ($period as $key => $value) {
 
     $q_k = $conn->query($sql_k);
     $d_k = $q_k->fetch(PDO::FETCH_ASSOC);
-    $kuota = $d_k['jumlah_kuota'];
-
     $jumlah_keseluruhan = $jumlah_praktik + $jumlah_total;
-    if ($jumlah_keseluruhan > $kuota) {
-        $json['kuota'] = $kuota;
-        $json['jumlah_keseluruhan'] = $jumlah_keseluruhan;
+    if ($jumlah_keseluruhan > $d_k['jumlah_kuota']) {
         $json['ket'] = 'T';
-        $json['tgl_penuh'] = $value->format('Y-m-d');
         break;
     }
     $no++;

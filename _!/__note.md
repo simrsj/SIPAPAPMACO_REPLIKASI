@@ -7,7 +7,7 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 - 🔃 Pembuatan File Word Invoice
 - 🔃 membuat rincian praktik pembimbing
 - 🔃 Inputan Tambahan Daftar Praktikan Ijazah(Khusus Profesi), Hasil Swab
-- 🔃 Perubahan Nomor Surat Invoice Praktikan menjadi . . . /DK.01.03/DIKLIT.RS/2022
+- ✅ Perubahan Nomor Surat Invoice Praktikan menjadi . . . /DK.01.03/DIKLIT.RS/2022
 - ✅ Upload Setifikat Akreditasi Institusi dan Jurusan di Pengajuan Praktik
 - ✅ Penyesuaian Invoice dan Jenis Tarif Magang
 - Generate SP CI Sesuai dengan format
@@ -62,7 +62,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres Print DOCX RAB/INVOICE"
+git commit -a -m "Berhasil Hilangkan Tambah dan Hapus Kuota"
 git push
 
 ====================================================================================================================

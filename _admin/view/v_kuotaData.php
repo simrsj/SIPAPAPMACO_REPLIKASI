@@ -50,11 +50,11 @@ if ($r_data_kuota > 0) {
                                     <i class="fa fa-edit"></i> Ubah
                                 </button>
                             <?php } ?>
-                            <?php if ($d_prvl['d_kuota'] == "Y") { ?>
+                            <!-- <?php if ($d_prvl['d_kuota'] == "Y") { ?>
                                 <button id="<?= $d_data_kuota['id_kuota']; ?>" class="btn btn-danger btn-sm hapus" title="HAPUS">
                                     <i class="fa fa-trash"></i> Hapus
                                 </button>
-                            <?php } ?>
+                            <?php } ?> -->
                         </td>
                     </tr>
                 <?php

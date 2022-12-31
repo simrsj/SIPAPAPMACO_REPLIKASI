@@ -237,8 +237,8 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <?php
                                     }
                                     ?>
-
                                     <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
+                                        <br>
                                         <a href="?ptrf" class="btn btn-outline-info btn-xs">
                                             <i class="fas fa-eye"></i> Lihat
                                         </a>
@@ -349,35 +349,36 @@ if ($d_prvl['r_praktik'] == "Y") {
                                                     <?php if ($d_prvl['level_user'] == 1) { ?>
                                                         Nama Institusi : <br>
                                                         <b><?= $d_praktik['nama_institusi'] ?></b>
-                                                        <hr class="p-0 m-0 bg-gray-500 b">
+                                                        <br><br>
                                                     <?php } ?>
                                                     Nama Kelompok : <br>
                                                     <b><?= $d_praktik['nama_praktik'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
+                                                    <br><br>
                                                     Jumlah Praktikan Kelompok : <br>
                                                     <b><?= $d_praktik['nama_praktik'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
+                                                    <br><br>
                                                     Jurusan : <br>
                                                     <b><?= $d_praktik['nama_jurusan_pdd'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
+                                                    <br><br>
                                                     Jenjang : <br>
                                                     <b><?= $d_praktik['nama_jenjang_pdd'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
+                                                    <br><br>
                                                     Profesi : <br>
                                                     <b><?= $d_praktik['nama_profesi_pdd'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500 b">
+                                                    <br><br>
                                                     Koordinator : <br>
                                                     <b><?= $d_praktik['nama_koordinator_praktik'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500">
+                                                    <br><br>
                                                     Telpon Koordinator : <br>
                                                     <b><?= $d_praktik['telp_koordinator_praktik'] ?></b>
-                                                    <hr class="p-0 m-0 bg-gray-500">
+                                                    <br><br>
                                                     E-Mail Koordinator : <br>
                                                     <b><?= $d_praktik['email_koordinator_praktik'] ?></b>
+                                                    <br><br>
                                                     <hr class="p-0 m-0 bg-gray-500">
                                                     <div class="row">
                                                         <div class="col-md">
-                                                            Surat Pengajuan: <br>
+                                                            Surat Pengajuan:<br>
                                                             <b>
                                                                 <a href="<?= $d_praktik['surat_praktik'] ?>" download="Surat Pengajuan" class="btn btn-outline-success btn-sm">
                                                                     <i class="fas fa-file"></i> Unduh Surat
