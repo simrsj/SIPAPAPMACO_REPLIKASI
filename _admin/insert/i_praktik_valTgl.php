@@ -37,9 +37,13 @@ foreach ($period as $key => $value) {
         $jumlah_total += $d['jumlah_praktik'];
     }
 
+    //jika jurusannnya adalah keperawtan
+    if ($id_jurusan == 2) $id_jurusan_kep = 1;
+    else $id_jurusan_kep;
+
     //mencari kuota sesuai dengan jurusannya
     $sql_k = "SELECT * FROM tb_kuota";
-    $sql_k .= " WHERE id_jurusan_pdd = " . $id_jurusan;
+    $sql_k .= " WHERE id_jurusan_pdd = " . $id_jurusan_kep;
     // echo $sql_k . "<br>";
 
     $q_k = $conn->query($sql_k);

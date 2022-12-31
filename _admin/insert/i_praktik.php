@@ -327,7 +327,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />' +
                     '  <p>Harap Tunggu</p>',
                 // add html attribute if you want or remove
-                allowOutsideClick: false,
+                allowOutsideClick: true,
                 showConfirmButton: false,
             });
             var data_praktik = $('#form_praktik').serializeArray();

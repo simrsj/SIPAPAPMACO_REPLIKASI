@@ -62,7 +62,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Berhasil Hilangkan Tambah dan Hapus Kuota"
+git commit -a -m "Berhasil Pengabungan cek Jadwal Praktik Kedokteran-Keperawatan"
 git push
 
 ====================================================================================================================
