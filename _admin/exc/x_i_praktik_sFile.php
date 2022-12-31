@@ -71,9 +71,9 @@ if ($_FILES['file_akred_jurusan']['size'] > 0) {
 // echo $id . "_" . $link_file_surat . "  |  " . $link_file_data_praktikan;
 
 //Cek Variable File
-echo "<pre>";
-print_r($_FILES);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_FILES);
+// echo "</pre>";
 
 $sql_update = "UPDATE tb_praktik SET ";
 $sql_update .= " surat_praktik = '" . $link_file_surat . "',";
@@ -81,7 +81,7 @@ $sql_update .= " akred_institusi_praktik = '" . $link_file_akred_institusi . "',
 $sql_update .= " akred_jurusan_praktik = '" . $link_file_akred_jurusan . "'";
 $sql_update .= " WHERE id_praktik = " . $id;
 
-echo $sql_update . "<br>";
+// echo $sql_update . "<br>";
 $conn->query($sql_update);
 
 echo json_encode(['success' => 'Data Praktik Berhasil Disimpan']);

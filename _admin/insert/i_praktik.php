@@ -324,10 +324,9 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
             Swal.fire({
                 title: 'Mohon Ditunggu . . .',
-                html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />' +
-                    '  <p>Harap Tunggu</p>',
+                html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
                 // add html attribute if you want or remove
-                allowOutsideClick: true,
+                allowOutsideClick: false,
                 showConfirmButton: false,
             });
             var data_praktik = $('#form_praktik').serializeArray();
@@ -373,7 +372,6 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 telp_koordinator == "" ||
                 pilih_mess == undefined
             ) {
-                console.log(file_surat);
                 //warning Toast bila ada data wajib yg berlum terisi
                 Swal.fire({
                     allowOutsideClick: true,
@@ -519,7 +517,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 if (getTypeSurat != 'pdf') {
 
                     Swal.fire({
-                        allowOutsideClick: false,
+                        allowOutsideClick: true,
                         showConfirmButton: false,
                         icon: 'warning',
                         title: '<div class="text-md text-center">File Surat Harus <b>.pdf</b></div>',
@@ -594,7 +592,6 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                     $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Kurang dari 200 Kb");
                 }
             }
-
 
             //eksekusi bila file akreditasi institusi terisi
             if (file_akred_jurusan != "" && file_akred_jurusan != undefined) {

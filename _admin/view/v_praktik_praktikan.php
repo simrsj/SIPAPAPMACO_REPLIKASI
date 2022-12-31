@@ -107,7 +107,7 @@
                                                                         E-Mail : <br>
                                                                         <input type="email" id="t_email<?= md5($d_praktik['id_praktik']); ?>" name="t_email" class="form-control" placeholder="Inputkan E-Mail"><br>
                                                                         <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
-                                                                            File Ijazah :<br>
+                                                                            File Ijazah :<span style="color:red">*</span><br>
                                                                             <div class="custom-file">
                                                                                 <label class="custom-file-label text-xs" for="customFile" id="labelfileijazah<?= md5($d_praktik['id_praktik']); ?>">Pilih File</label>
                                                                                 <input type="file" class="custom-file-input mb-1" id="t_ijazah<?= md5($d_praktik['id_praktik']); ?>" name="t_ijazah<?= md5($d_praktik['id_praktik']); ?>" accept="application/pdf" required>
@@ -124,7 +124,7 @@
                                                                             </div>
                                                                             <br>
                                                                         <?php } ?>
-                                                                        File Hasil Swab :<br>
+                                                                        File Hasil Swab :<span style="color:red">*</span><br>
                                                                         <div class="custom-file">
                                                                             <label class="custom-file-label text-xs" for="customFile" id="labelfileswab<?= md5($d_praktik['id_praktik']); ?>">Pilih File</label>
                                                                             <input type="file" class="custom-file-input mb-1" id="t_swab<?= md5($d_praktik['id_praktik']); ?>" name="t_swab<?= md5($d_praktik['id_praktik']); ?>" accept="application/pdf" required>
@@ -167,6 +167,7 @@
                                                     "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
                                                     "&tb=<?= md5($d_praktik['id_praktik']); ?>");
 
+
                                             // inisiasi klik modal tambah
                                             $(".tambah_init<?= md5($d_praktik['id_praktik']); ?>").click(function() {
                                                 console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
@@ -191,13 +192,23 @@
                                                 $("#file_swab<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
                                             });
 
+
                                             // inisiasi klik modal tambah simpan
                                             $(document).on('click', '.tambah<?= md5($d_praktik['id_praktik']); ?>', function() {
-                                                console.log("tambah<?= md5($d_praktik['id_praktik']); ?>");
+
+                                                Swal.fire({
+                                                    title: 'Mohon Ditunggu . . .',
+                                                    html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
+                                                    // add html attribute if you want or remove
+                                                    allowOutsideClick: false,
+                                                    showConfirmButton: false,
+                                                });
+                                                // console.log("tambah<?= md5($d_praktik['id_praktik']); ?>");
+                                                var idp = $(this).attr('id');
                                                 var data_t = $("#form_t<?= md5($d_praktik['id_praktik']); ?>").serializeArray();
                                                 data_t.push({
                                                     name: "idp",
-                                                    value: $(this).attr('id')
+                                                    value: idp
                                                 });
 
                                                 var t_no_id = $('#t_no_id<?= md5($d_praktik['id_praktik']); ?>').val();
@@ -210,6 +221,102 @@
                                                 <?php } ?>
                                                 var t_swab = $('#t_swab<?= md5($d_praktik['id_praktik']); ?>').val();
 
+                                                <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                    //eksekusi bila file ijazah terisi
+                                                    if (t_ijazah != "" && t_ijazah != undefined) {
+
+                                                        //Cari ekstensi file ijazah yg diupload
+                                                        var typeIjazah = document.querySelector('#t_ijazah<?= md5($d_praktik['id_praktik']); ?>').value;
+                                                        var getTypeIjazah = typeIjazah.split('.').pop();
+
+                                                        //cari ukuran file Ijazah yg diupload
+                                                        var fileIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files;
+                                                        var getSizeIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files[0].size / 1024;
+
+                                                        // console.log("Size Ijazah : " + getSizeIjazah);
+                                                        // console.log("Size Ijazah : " + fileIjazah);
+
+                                                        //Toast bila upload file Ijazah selain pdf
+                                                        if (getTypeIjazah != 'pdf') {
+                                                            Swal.fire({
+                                                                allowOutsideClick: true,
+                                                                showConfirmButton: false,
+                                                                icon: 'warning',
+                                                                title: '<div class="text-md text-center">File Ijazah Harus <b>.pdf</b></div>',
+                                                                timer: 10000,
+                                                                timerProgressBar: true,
+                                                                didOpen: (toast) => {
+                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                }
+                                                            });
+                                                            $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("File ijazah Harus pdf");
+                                                        } //Toast bila upload file ijazah diatas 200 Kb 
+                                                        else if (getSizeIjazah > 256) {
+                                                            Swal.fire({
+                                                                allowOutsideClick: true,
+                                                                showConfirmButton: false,
+                                                                icon: 'warning',
+                                                                title: '<div class="text-md text-center">File Ijazah Harus <br><b>Kurang dari 200 Kb</b></div>',
+                                                                timer: 10000,
+                                                                timerProgressBar: true,
+                                                                didOpen: (toast) => {
+                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                }
+                                                            });
+                                                            $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("File Ijazah Harus Kurang dari 200 Kb");
+                                                        }
+                                                    }
+                                                <?php } ?>
+
+                                                //eksekusi bila file swab terisi
+                                                if (t_swab != "" && t_swab != undefined) {
+
+                                                    //Cari ekstensi file swab yg diupload
+                                                    var typeSwab = document.querySelector('#t_swab<?= md5($d_praktik['id_praktik']); ?>').value;
+                                                    var getTypeSwab = typeSwab.split('.').pop();
+
+                                                    //cari ukuran file Swab yg diupload
+                                                    var fileSwab = document.getElementById("t_swab<?= md5($d_praktik['id_praktik']); ?>").files;
+                                                    var getSizeSwab = document.getElementById("t_swab<?= md5($d_praktik['id_praktik']); ?>").files[0].size / 1024;
+
+                                                    // console.log("Size Swab : " + getSizeSwab);
+                                                    // console.log("Size Swab : " + fileSwab);
+
+                                                    //Toast bila upload file Swab selain pdf
+                                                    if (getTypeSwab != 'pdf') {
+                                                        Swal.fire({
+                                                            allowOutsideClick: true,
+                                                            showConfirmButton: false,
+                                                            icon: 'warning',
+                                                            title: '<div class="text-md text-center">File Swab Harus <b>.pdf</b></div>',
+                                                            timer: 10000,
+                                                            timerProgressBar: true,
+                                                            didOpen: (toast) => {
+                                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                            }
+                                                        });
+                                                        $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("File Hasil Swab Harus pdf");
+                                                    } //Toast bila upload file swab diatas 200 Kb 
+                                                    else if (getSizeSwab > 256) {
+                                                        Swal.fire({
+                                                            allowOutsideClick: true,
+                                                            showConfirmButton: false,
+                                                            icon: 'warning',
+                                                            title: '<div class="text-md text-center">File Swab Harus <br><b>Kurang dari 200 Kb</b></div>',
+                                                            timer: 10000,
+                                                            timerProgressBar: true,
+                                                            didOpen: (toast) => {
+                                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                            }
+                                                        });
+                                                        $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("File Hasil Swab  Harus Kurang dari 200 Kb");
+                                                    }
+                                                }
+
                                                 //cek data from modal tambah bila tidak diiisi
                                                 if (
                                                     t_no_id == "" ||
@@ -217,8 +324,8 @@
                                                     t_tgl == "" ||
                                                     t_alamat == "" ||
                                                     t_telpon == "" ||
-                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> t_ijazah == "" ||
-                                                    <?php } ?> t_swab == ""
+                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> t_ijazah == "" || t_ijazah == undefined ||
+                                                    <?php } ?> t_swab == "" || t_swab == undefined
                                                 ) {
                                                     if (t_no_id == "") {
                                                         $("#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>").html("No ID Harus Diisi");
@@ -261,6 +368,19 @@
                                                     } else {
                                                         $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                     }
+
+                                                    Swal.fire({
+                                                        allowOutsideClick: true,
+                                                        showConfirmButton: false,
+                                                        icon: 'warning',
+                                                        html: '<div class="text-lg b">DATA WAJIB ADA YANG BELUM TERISI</div>',
+                                                        timer: 5000,
+                                                        timerProgressBar: true,
+                                                        didOpen: (toast) => {
+                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                        }
+                                                    });
                                                 }
 
                                                 //simpan data tambah bila sudah sesuai
@@ -270,8 +390,8 @@
                                                     t_tgl != "" &&
                                                     t_alamat != "" &&
                                                     t_telpon != "" &&
-                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> t_ijazah != "" &&
-                                                    <?php } ?> t_swab != ""
+                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> getTypeIjazah == 'pdf' && getSizeIjazah <= 256 && t_ijazah != "" && t_ijazah != undefined &&
+                                                    <?php } ?> getTypeSwab == 'pdf' && getSizeSwab <= 256 && t_swab != "" && t_swab != undefined
                                                 ) {
                                                     $.ajax({
                                                         type: 'POST',
@@ -280,12 +400,20 @@
                                                         dataType: 'JSON',
                                                         success: function(response) {
                                                             if (response.ket == 'Y') {
-                                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
-                                                                    .load(
-                                                                        "_admin/view/v_praktik_praktikanData.php?" +
-                                                                        "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
-                                                                        "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
-                                                                        "&tb=<?= md5($d_praktik['id_praktik']); ?>");
+                                                                var data_file = new FormData();
+                                                                var xhttp = new XMLHttpRequest();
+
+                                                                var fileIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files;
+                                                                data_file.append("t_ijazah", fileIjazah[0]);
+
+                                                                var fileSwab = document.getElementById("t_swab<?= md5($d_praktik['id_praktik']); ?>").files;
+                                                                data_file.append("t_swab", fileSwab[0]);
+
+                                                                data_file.append("idpp", response.idpp);
+                                                                data_file.append("idp", idp);
+
+                                                                xhttp.open("POST", "_admin/exc/x_v_praktik_praktikan_sFile.php", true);
+                                                                xhttp.send(data_file);
 
                                                                 $('#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                                 $('#err_t_nama<?= md5($d_praktik['id_praktik']); ?>').empty();
@@ -296,47 +424,47 @@
                                                                 $('#err_t_email<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                                 <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
                                                                     $('#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                    $("#t_ijazah<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
                                                                 <?php } ?>
                                                                 $('#err_t_swab<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                                 $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
-                                                                const Toast = Swal.mixin({
-                                                                    toast: true,
-                                                                    position: 'top-end',
-                                                                    showConfirmButton: false,
-                                                                    timer: 5000,
-                                                                    timerProgressBar: true,
-                                                                    didOpen: (toast) => {
-                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                    }
-                                                                });
+                                                                $("#t_swab<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
 
-                                                                Toast.fire({
+                                                                Swal.fire({
+                                                                    allowOutsideClick: true,
+                                                                    showConfirmButton: false,
                                                                     icon: 'success',
-                                                                    title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Tersimpan',
-                                                                }).then(
-                                                                    function() {}
-                                                                );
+                                                                    html: '<div class="text-lg b">Data Praktikan<br>Berhasil Tersimpan</div>',
+                                                                    timer: 10000,
+                                                                    timerProgressBar: true,
+                                                                    didOpen: (toast) => {
+                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                    }
+                                                                }).then({
+                                                                    function() {
+                                                                        $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                                            .load(
+                                                                                "_admin/view/v_praktik_praktikanData.php?" +
+                                                                                "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
+                                                                                "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
+                                                                                "&tb=<?= md5($d_praktik['id_praktik']); ?>");
+                                                                    }
+                                                                });
+
                                                             } else {
-                                                                const Toast = Swal.mixin({
-                                                                    toast: true,
-                                                                    position: 'top-end',
+                                                                Swal.fire({
+                                                                    allowOutsideClick: true,
                                                                     showConfirmButton: false,
-                                                                    timer: 5000,
+                                                                    icon: 'warning',
+                                                                    html: '<div class="text-lg">Mohon Maaf Data Praktikan <br><b>Sudah Penuh</b></div>',
+                                                                    timer: 10000,
                                                                     timerProgressBar: true,
                                                                     didOpen: (toast) => {
                                                                         toast.addEventListener('mouseenter', Swal.stopTimer)
                                                                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                                     }
                                                                 });
-
-                                                                Toast.fire({
-                                                                    icon: 'error',
-                                                                    title: 'Mohon Maaf Data Praktikan <br><b>Sudah Penuh</b>',
-                                                                }).then(
-                                                                    function() {}
-                                                                );
-
                                                             }
                                                         },
                                                         error: function(response) {

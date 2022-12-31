@@ -17,7 +17,7 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 $sql_praktikan = "SELECT * FROM tb_praktikan";
-$sql_praktikan .= " WHERE tb_praktikan.id_praktik = " . $id_praktik;
+$sql_praktikan .= " WHERE id_praktik = " . $id_praktik;
 // echo $sql_praktikan . "<br>";
 try {
     $q_praktikan = $conn->query($sql_praktikan);
@@ -27,10 +27,25 @@ try {
     echo "<script>alert('$ex -SIMPAN PRAKTIKAN-');";
     echo "document.location.href='?error404';</script>";
 }
+
+//Cari id Prkatikan
+$sql_praktikan_id = "SELECT MAX(id_praktikan) AS ID FROM tb_praktikan";
+$sql_praktikan_id .= " WHERE id_praktik = " . $id_praktik;
+
+// echo $sql_praktikan_id . "<br>";
+try {
+    $q_praktikan_id  = $conn->query($sql_praktikan_id);
+    $d_praktikan_id  = $q_praktikan_id->fetch(PDO::FETCH_ASSOC);
+    $id_praktikan = $d_praktikan_id['ID'] + 1;
+} catch (Exception $ex) {
+    echo "<script>alert('$ex -SIMPAN PRAKTIKAN-');";
+    echo "document.location.href='?error404';</script>";
+}
 // echo $r_praktik . "asd" . $d_praktik['jumlah_praktik'];
 if ($r_praktikan < $d_praktik['jumlah_praktik']) {
 
     $sql = "INSERT INTO tb_praktikan (";
+    $sql .= " id_praktikan,";
     $sql .= " id_praktik,";
     $sql .= " tgl_tambah_praktikan,";
     $sql .= " no_id_praktikan,";
@@ -41,6 +56,7 @@ if ($r_praktikan < $d_praktik['jumlah_praktik']) {
     $sql .= " email_praktikan,";
     $sql .= " alamat_praktikan";
     $sql .= " ) VALUES (";
+    $sql .= " '" . $id_praktikan . "', ";
     $sql .= " '" . $id_praktik . "', ";
     $sql .= " '" . date("Y-m-d") . "', ";
     $sql .= " '" . $_POST['t_no_id'] . "', ";
@@ -58,7 +74,7 @@ if ($r_praktikan < $d_praktik['jumlah_praktik']) {
         echo "<script>alert('$ex -SIMPAN PRAKTIKAN-');";
         echo "document.location.href='?error404';</script>";
     }
-    echo json_encode(['ket' => 'Y']);
+    echo json_encode(['ket' => 'Y', 'idpp' => urlencode(base64_encode($id_praktikan))]);
 } else {
     echo json_encode(['ket' => 'T']);
 }

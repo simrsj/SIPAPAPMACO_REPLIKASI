@@ -4,19 +4,20 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 
 # DAFTAR PERBAIKAN
 
-- 🔃 Pembuatan File Word Invoice
-- 🔃 membuat rincian praktik pembimbing
-- 🔃 Inputan Tambahan Daftar Praktikan Ijazah(Khusus Profesi), Hasil Swab
-- ✅ Perubahan Nomor Surat Invoice Praktikan menjadi . . . /DK.01.03/DIKLIT.RS/2022
-- ✅ Upload Setifikat Akreditasi Institusi dan Jurusan di Pengajuan Praktik
-- ✅ Penyesuaian Invoice dan Jenis Tarif Magang
-- Generate SP CI Sesuai dengan format
-- Semua Berkas di TTD Basah
-- Akun Institusi Pendidikan (IP) tidak Bisa mengubah Pembimbing tapi bisa melihat
+- ✅ Pembuatan File Invoice/RAB .docx (WORD)
+- ✅ Inputan Tambahan Data Praktikan File Ijazah (Khusus Jenjang Profesi) dan Hasil Swab
+- ✅ Perubahan Nomor Surat Invoice Praktikan menjadi .../DK.01.03/DIKLIT.RS/2022
+- ✅ Inputan No Surat Praktik, File Setifikat Akreditasi Institusi dan Jurusan di Pengajuan Praktik
+- ✅ Penyesuaian Invoice/RAB dan Jenis Tarif Magang
+- ✅ Semua Berkas di TTD Basah
+- ✅ Tarif Praktik Khusus Kedokteran Nanti disesuaikan dengan Format Excel
+- 🔃 Membuat Rincian Praktik pembimbing
+- 🔃 Generate SP CI Sesuai dengan format .docx (WORD), .PDF
+- 🔃 Akun Institusi Pendidikan (IP) tidak Bisa mengubah Pembimbing tapi bisa melihat
+- 🔃 Penambahan Upload Surat Penugasan Preceptor/Clinical Insturtur di menu “Daftar Pembimbing dan Ruangan”
 - Bridgeng Data Pembayaran Praktik ke Aplikasi SIMRS
-- Tarif Praktik Khusus Kedokteran Nanti disesuaikan dengan Format Excel
 - Panduan untuk Institusi Pendidikan nanti akan berubah sesuai dengan Pengembangan dari Aplikasi
-- Penambahan Upload Surat Penugasan Preceptor/Clinical Insturtur di menu “Daftar Pembimbing dan Ruangan”
+- Pembuatan Menu Input PKD
 
 # KET :
 
@@ -62,7 +63,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Berhasil Pengabungan cek Jadwal Praktik Kedokteran-Keperawatan"
+git commit -a -m "Berhasil Tambah dan Ubah File Ijazah dan Swab Data Praktikan"
 git push
 
 ====================================================================================================================
