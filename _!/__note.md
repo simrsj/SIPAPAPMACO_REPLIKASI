@@ -2,7 +2,7 @@ SIPAPAP MACO (Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan C
 RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisarua, Kab. Bandung Barat, 40551
 ===================================================================================================================
 
-# DAFTAR PERBAIKAN
+# DAFTAR PERBAIKAN :
 
 - ✅ Inputan Tambahan Data Praktikan File Ijazah (Khusus Jenjang Profesi) dan Hasil Swab
 - ✅ Perubahan Nomor Surat Invoice Praktikan menjadi .../DK.01.03/DIKLIT.RS/2022
@@ -15,7 +15,7 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 - 🔃 Generate SP CI Sesuai dengan format .docx (WORD), .PDF
 - 🔃 Akun Institusi Pendidikan (IP) tidak Bisa mengubah Pembimbing tapi bisa melihat
 - 🔃 Penambahan Upload Surat Penugasan Preceptor/Clinical Insturtur di menu “Daftar Pembimbing dan Ruangan”
-- Bridgeng Data Pembayaran Praktik ke Aplikasi SIMRS
+- Bridging Data Pembayaran Praktik ke Aplikasi SIMRS
 - Panduan untuk Institusi Pendidikan nanti akan berubah sesuai dengan Pengembangan dari Aplikasi
 - Pembuatan Menu Input PKD
 
@@ -63,7 +63,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Progres Invoice/RAB .docx"
+git commit -a -m "Progres Print docx Invoice/RAB"
 git push
 
 ====================================================================================================================

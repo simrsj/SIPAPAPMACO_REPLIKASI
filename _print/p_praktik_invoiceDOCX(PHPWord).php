@@ -40,7 +40,7 @@ $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('p_praktik_invoice
 $templateProcessor->setValues([
     'tanggal' => tanggal(date('Y-m-d')),
     'tahun' => date('Y'),
-    'ip' => ucwords($d_praktik['nama_institusi']),
+    'ip' => ucwords(strtolower($d_praktik['nama_institusi'])),
     'kepada' => $kepada,
     'no_surat' => $noSurat,
     'no_surat_ip' => $d_praktik['no_surat_praktik'],
