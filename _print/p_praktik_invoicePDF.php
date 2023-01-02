@@ -27,52 +27,13 @@ $noSurat =   (int)$_GET['ns'];
 //kepada
 $kepada =  $_GET['k'];
 
+//ukuran font isi
+$ukuranFontIsi = "12px";
+
+//Perihal
+$perihal = "Rencana Anggaran Biaya (RAB)";
+
 # ------------------------------------------------------------------------------------------------------------------------------------- EXC. DATABASE
-$sql_praktik = "SELECT * FROM tb_praktik";
-$sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-$sql_praktik .= " WHERE id_praktik = " . $id_praktik;
-// echo $sql_praktik;
-try {
-    $q_praktik = $conn->query($sql_praktik);
-} catch (Exception $ex) {
-    echo "<script> alert('$ex -DATA praktik-'); ";
-    echo "document.location.href='?error404'; </script>";
-}
-$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
-
-//ukuran font ditentukan jurusan
-if ($d_praktik['id_jurusan_pdd'] == 1) {
-    $ukuranFontIsi = "12px";
-} else {
-    $ukuranFontIsi = "12px";
-}
-
-//perihal
-if ($d_praktik['id_jurusan_pdd'] == 1) {
-    $perihal = "Praktik Kedokteran Jiwa";
-} elseif ($d_praktik['id_jurusan_pdd'] == 2) {
-    $perihal = "Praktik Keperawatan Jiwa";
-} elseif ($d_praktik['id_jurusan_pdd'] == 3) {
-    if ($d_praktik['id_profesi_pdd'] != 0) {
-        $perihal = "Praktik Program Studi Profesi Psikologi (PSPP)";
-    } else {
-        $perihal = "Praktik Psikologi";
-    }
-} elseif ($d_praktik['id_jurusan_pdd'] == 4) {
-    $perihal = "Praktik Informasi Teknologi";
-} elseif ($d_praktik['id_jurusan_pdd'] == 5) {
-    if ($d_praktik['id_profesi_pdd'] != 0) {
-        $perihal = "Praktik Kerja Profesi Apoteker (PKPA)";
-    } else {
-        $perihal = "Praktik Farmasi";
-    }
-} elseif ($d_praktik['id_jurusan_pdd'] == 6) {
-    $perihal = "Pekerja Sosial";
-} elseif ($d_praktik['id_jurusan_pdd'] == 7) {
-    $perihal = "Kesehatan Lingkungan";
-} elseif ($d_praktik['id_jurusan_pdd'] == 8) {
-    $perihal = "Rekam Medis";
-}
 
 //tembusan
 if ($d_praktik['id_institusi'] == 19) {
@@ -107,7 +68,6 @@ $ttdTembusan = '
         <br>
         <br>
         <br>
-        <br>
         dr. Hj. ELLY MARLIYANI, Sp.KJ. M.KM.<br>
         Pembina Utama Madya <br>
         NIP. 196608141991022004
@@ -124,27 +84,6 @@ $sql_getJenisKegiatan .= " AND ujian_tarif_pilih IS NULL";
 $sql_getJenisKegiatan .= " AND mess_tarif_pilih IS NULL";
 $sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
 $q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
-
-//cari Jenis kegiatan Mess
-$sql_getJenisKegiatanMess = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
-$sql_getJenisKegiatanMess .= " WHERE id_praktik = " . $id_praktik;
-$sql_getJenisKegiatanMess .= " AND mess_tarif_pilih IS NOT NULL";
-$sql_getJenisKegiatanMess .= " GROUP BY nama_jenis_tarif_pilih";
-$q_getJenisKegiatanMess = $conn->query($sql_getJenisKegiatanMess);
-
-//Cek Data Jenis Kegiatan Ujian
-$sql_getDataUjian = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
-$sql_getDataUjian .= " WHERE id_praktik = " . $id_praktik . " AND nama_jenis_tarif_pilih = 'Ujian'";
-$sql_getDataUjian .= " GROUP BY nama_jenis_tarif_pilih";
-$q_getDataUjian = $conn->query($sql_getDataUjian);
-$r_getDataUjian = $q_getDataUjian->rowCount();
-
-//cari Jenis kegiatan Ujian
-$sql_getJenisKegiatanUjian = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
-$sql_getJenisKegiatanUjian .= " WHERE id_praktik = " . $id_praktik;
-$sql_getJenisKegiatanUjian .= " AND ujian_tarif_pilih IS NOT NULL";
-$sql_getJenisKegiatanUjian .= " GROUP BY nama_jenis_tarif_pilih";
-$q_getJenisKegiatanUjian = $conn->query($sql_getJenisKegiatanUjian);
 
 # ------------------------------------------------------------------------------------------------------------------------------------- LIB. DOMPDF
 require_once("../vendor/dompdf/autoload.inc.php");

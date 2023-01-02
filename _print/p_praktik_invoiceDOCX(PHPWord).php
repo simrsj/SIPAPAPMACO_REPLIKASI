@@ -37,6 +37,17 @@ $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
 
 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('p_praktik_invoiceDOCX(PHPWord).docx');
 
+//cari Jenis kegiatan 
+$sql_getJenisKegiatan = "SELECT nama_jenis_tarif_pilih FROM tb_tarif_pilih ";
+$sql_getJenisKegiatan .= " WHERE id_praktik = " . $id_praktik;
+$sql_getJenisKegiatan .= " AND ujian_tarif_pilih IS NULL";
+$sql_getJenisKegiatan .= " AND mess_tarif_pilih IS NULL";
+$sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
+$q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
+
+$data_invoice = "
+<table>";
+
 $templateProcessor->setValues([
     'tanggal' => tanggal(date('Y-m-d')),
     'tahun' => date('Y'),
@@ -48,8 +59,9 @@ $templateProcessor->setValues([
     'tgl_mulai' => tanggal($d_praktik['tgl_mulai_praktik']),
     'tgl_selesai' => tanggal($d_praktik['tgl_selesai_praktik']),
     'jumlah_praktik' => $d_praktik['jumlah_praktik'],
+    'data_invoice' => $data_invoice,
 ]);
 
-header("Content-Disposition: attachment; filename=Invoice.docx");
+header("Content-Disposition: attachment; filename=Invoice-RAB.docx");
 
 $templateProcessor->saveAs('php://output');

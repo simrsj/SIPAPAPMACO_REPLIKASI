@@ -119,13 +119,13 @@
                                 Swal.fire({
                                     icon: 'success',
                                     showConfirmButton: false,
-                                    html: '<span class="text-lg b">Login Berhasil</span>',
-                                    timer: 2000,
+                                    html: '<span class="text-xl b text-dark">LOGIN BERHASIL</span>',
+                                    timer: 3000,
                                     timerProgressBar: true,
-                                    didOpen: (toast) => {
-                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                    }
+                                    // didOpen: (toast) => {
+                                    //     toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    //     toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    // }
                                 }).then(
                                     function() {
                                         document.location.href = "?";
