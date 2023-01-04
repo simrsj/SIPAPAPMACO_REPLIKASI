@@ -64,17 +64,28 @@ if ($r_data_praktikan > 0) {
                         <td><?= $d_data_praktikan['wa_praktikan']; ?></td>
                         <td><?= $d_data_praktikan['email_praktikan']; ?></td>
                         <td><?= $d_data_praktikan['alamat_praktikan']; ?></td>
-                        <?php if ($d_data_praktikan['id_profesi_pdd'] > 0) { ?>
-                            <td class="text-center">
-                                <a href="<?= $d_data_praktikan['file_ijazah_praktikan']; ?>" download="Ijazah Praktikan.pdf" target="_blank" class="btn btn-outline-success btn-sm">
+                        <td class="text-center">
+                            <?php
+                            if ($d_data_praktikan['id_profesi_pdd'] > 0) {
+                                if ($d_data_praktikan['file_ijazah_praktikan'] != "") {
+                            ?>
+                                    <a href="<?= $d_data_praktikan['file_ijazah_praktikan']; ?>" download="Ijazah Praktikan.pdf" target="_blank" class="btn btn-outline-success btn-sm">
+                                        Unduh
+                                    </a>
+                                <?php } else { ?>
+                                    <span class="badge badge-warning text-dark">Belum Ada</span>
+                                <?php } ?>
+                            <?php } ?>
+
+                        </td>
+                        <td class="text-center">
+                            <?php if ($d_data_praktikan['file_ijazah_praktikan'] != "") { ?>
+                                <a href="<?= $d_data_praktikan['file_swab_praktikan']; ?>" download="Swab Praktikan.pdf" target="_blank" class="btn btn-outline-success btn-sm">
                                     Unduh
                                 </a>
-                            </td>
-                        <?php } ?>
-                        <td class="text-center">
-                            <a href="<?= $d_data_praktikan['file_swab_praktikan']; ?>" download="Swab Praktikan.pdf" target="_blank" class="btn btn-outline-success btn-sm">
-                                Unduh
-                            </a>
+                            <?php } else { ?>
+                                <span class="badge badge-warning text-dark">Belum Ada</span>
+                            <?php } ?>
                         </td>
                         <td class="text-center">
                             <div class="btn-group" role="group" role="group" aria-label="Basic example">
