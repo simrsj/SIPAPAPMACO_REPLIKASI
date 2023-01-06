@@ -12,7 +12,7 @@ $date->setTimeZone($timezone);
 // include '_add-ons/csrf_auth.php';
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
-
+// phpinfo();
 ?>
 <!DOCTYPE html>
 <html lang="id">
