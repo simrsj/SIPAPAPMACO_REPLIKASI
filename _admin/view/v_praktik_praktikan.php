@@ -160,12 +160,22 @@
                                         <!-- inisiasi tabel data praktikan -->
                                         <div id="<?= md5("data" . $d_praktik['id_praktik']); ?>"></div>
                                         <script>
-                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
-                                                .load(
-                                                    "_admin/view/v_praktik_praktikanData.php?" +
-                                                    "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
-                                                    "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
-                                                    "&tb=<?= md5($d_praktik['id_praktik']); ?>");
+                                            $(document).ready(function() {
+                                                Swal.fire({
+                                                    title: 'Mohon Ditunggu . . .',
+                                                    html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
+                                                    // add html attribute if you want or remove
+                                                    allowOutsideClick: false,
+                                                    showConfirmButton: false,
+                                                });
+                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                    .load(
+                                                        "_admin/view/v_praktik_praktikanData.php?" +
+                                                        "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
+                                                        "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
+                                                        "&tb=<?= md5($d_praktik['id_praktik']); ?>");
+                                                Swal.close();
+                                            });
 
 
                                             // inisiasi klik modal tambah
@@ -196,13 +206,6 @@
                                             // inisiasi klik modal tambah simpan
                                             $(document).on('click', '.tambah<?= md5($d_praktik['id_praktik']); ?>', function() {
 
-                                                Swal.fire({
-                                                    title: 'Mohon Ditunggu . . .',
-                                                    html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
-                                                    // add html attribute if you want or remove
-                                                    allowOutsideClick: false,
-                                                    showConfirmButton: false,
-                                                });
                                                 // console.log("tambah<?= md5($d_praktik['id_praktik']); ?>");
                                                 var idp = $(this).attr('id');
                                                 var data_t = $("#form_t<?= md5($d_praktik['id_praktik']); ?>").serializeArray();

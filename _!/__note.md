@@ -58,7 +58,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Perbaikan Ubah File Ijazah dan Hasil Swab Data Praktikan"
+git commit -a -m "Progres Print invoice/RAB"
 git push
 
 ====================================================================================================================
