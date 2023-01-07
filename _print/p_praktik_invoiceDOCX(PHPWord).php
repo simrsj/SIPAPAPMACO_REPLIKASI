@@ -46,7 +46,7 @@ $sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
 $q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
 
 $data_invoice = "
-<table>";
+asd";
 
 $templateProcessor->setValues([
     'tanggal' => tanggal(date('Y-m-d')),
