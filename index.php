@@ -42,12 +42,12 @@ include "_add-ons/tanggal_waktu.php";
 </head>
 
 <body id="page-top" class="bg-primary">
-    <div class="preloader">
+    <!-- <div class="preloader">
         <div class="loading">
             <img src="./_img/logorsj.png" class="rotate mb-3" width="100" height="100" />
             <p>Harap Tunggu</p>
         </div>
-    </div>
+    </div> -->
     <?php
 
     if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
@@ -63,7 +63,7 @@ include "_add-ons/tanggal_waktu.php";
         ";
             include "_log-sign/exc/x_log_out.php";
         }
-    } 
+    }
     // Index Log-Sign
     elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
     ?>
