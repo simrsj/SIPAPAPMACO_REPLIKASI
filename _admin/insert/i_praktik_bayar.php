@@ -77,11 +77,11 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                     <input type="text" class="form-control form-control-sm" id="kepada" name="kepada" required>
                                                                     <div class="text-xs font-italic text-danger blink" id="err_kepada"></div><br>
                                                                     <a class="btn btn-outline-primary btn-sm download_docx">
-                                                                        <i class="fa-solid fa-file-word"></i> WORD
+                                                                        <i class="fa-solid fa-file-word"></i> Unduh File .docx (WORD)
                                                                     </a>
-                                                                    <a class="btn btn-outline-danger btn-sm download_pdf" download="invoice_non_ttd">
+                                                                    <!-- <a class="btn btn-outline-danger btn-sm download_pdf" download="invoice_non_ttd">
                                                                         <i class="fa-solid fa-file-pdf"></i> PDF
-                                                                    </a>
+                                                                    </a> -->
                                                                 </form>
                                                             </div>
                                                             <script>
