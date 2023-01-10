@@ -314,9 +314,8 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 }
                                 $r_praktik_nilai = $q_praktik_nilai->rowCount();
 
-                                if ($r_praktik_nilai > 0) {
-                                ?>
-                                    <span class="badge badge-success">Sudah DiNilai</span><br>
+                                if ($r_praktik_nilai > 0) { ?>
+                                    <span class="badge badge-success">Sudah DiNilai</span>
                                 <?php } else { ?>
                                     <span class="badge badge-secondary">Belum Ada</span>
                                 <?php } ?>
