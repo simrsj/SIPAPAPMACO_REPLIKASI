@@ -159,9 +159,9 @@ if ($d_prvl['r_praktik'] == "Y") {
                             </td>
                             <!-- status data praktikan-->
                             <td class="align-middle">
-                                <?php 
+                                <?php
 
-                                
+
                                 $sql_praktikan = "SELECT * FROM tb_praktikan ";
                                 $sql_praktikan .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
                                 try {
@@ -201,10 +201,17 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 }
                                 $r_praktik_pembimbing = $q_praktik_pembimbing->rowCount();
 
-                                if ($r_praktik_pembimbing > 0) { ?><span class="badge badge-success">Sudah Dipilih</span> <?php                                
-                                } else { ?> <span class="badge badge-secondary">Belum Dipilih</span><?php
-                                }
-                                ?>
+                                if ($r_praktikan > 0) { ?>
+                                    <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Diinput</span>
+                                <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
+                                    <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Semuanya</span>
+                                <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] == $r_praktikan) { ?>
+                                    <span class="badge badge-success">Sudah Dipilih</span>
+                                <?php } else if ($r_praktik_pembimbing > 0) { ?>
+                                    <span class="badge badge-success">Sudah Dipilih</span>
+                                <?php } else { ?>
+                                    <span class="badge badge-secondary">Belum Dipilih</span>
+                                <?php } ?>
                                 <br>
                                 <a href="?pmbb" class="btn btn-outline-info btn-xs">
                                     <i class="fas fa-eye"></i> Lihat
@@ -237,10 +244,10 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <?php
                                     }
                                     ?>
-                                        <br>
-                                        <a href="?ptrf" class="btn btn-outline-info btn-xs">
-                                            <i class="fas fa-eye"></i> Lihat
-                                        </a>
+                                    <br>
+                                    <a href="?ptrf" class="btn btn-outline-info btn-xs">
+                                        <i class="fas fa-eye"></i> Lihat
+                                    </a>
                                 </td>
                             <?php } ?>
                             <!-- status bayar praktik  -->

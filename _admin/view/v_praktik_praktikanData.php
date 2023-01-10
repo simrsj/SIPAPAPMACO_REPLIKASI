@@ -12,21 +12,10 @@ try {
 }
 $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
-
-$sql_praktik = "SELECT status_mess_praktik FROM tb_praktik ";
-$sql_praktik .= " WHERE id_praktik = " . base64_decode(urldecode($_GET['idp']));
-try {
-    $q_praktik = $conn->query($sql_praktik);
-} catch (Exception $ex) {
-    echo "<script>alert('$ex -DATA PRAKTIK-');";
-    echo "document.location.href='?error404';</script>";
-}
-$d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
-
 $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
 $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
+$sql_data_praktikan .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
 $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . base64_decode(urldecode($_GET['idp']));
-// $sql_data_praktikan .= " AND tb_praktikan.status_praktikan = 'Y'";
 $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
 // echo "$sql_data_praktikan<br>";
 try {
