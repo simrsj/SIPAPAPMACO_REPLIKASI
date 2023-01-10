@@ -83,6 +83,20 @@ if ($d_prvl['c_praktik'] == "Y") {
 
     // echo $sql_insert . "<br>";
     $conn->query($sql_insert);
+    // --------------------------------------SIMPAN TARIF KEDOKTERAN--------------------------------------------
+
+
+    $sql_insert = "INSERT INTO tb_praktik ( ";
+    $sql_insert .= " id_praktik,";
+    $sql_insert .= " status_praktik";
+    $sql_insert .= " ) VALUES (";
+    $sql_insert .= " '" . base64_decode(urldecode($_POST['id'])) . "', ";
+    $sql_insert .= " '" . $_POST['pilih_mess'] . "' ";
+    $sql_insert .= " )";
+
+    // echo $sql_insert . "<br>";
+    $conn->query($sql_insert);
+
     // --------------------------------------SIMPAN GENERATE TANGGAL--------------------------------------------
 
     $d1 = $_POST['tgl_mulai_praktik'];
