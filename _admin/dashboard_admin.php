@@ -1,3 +1,4 @@
+<?php include "_admin/dashboard_adminData.php"; ?>
 <div class="container-fluid">
 
     <!-- Page Heading -->

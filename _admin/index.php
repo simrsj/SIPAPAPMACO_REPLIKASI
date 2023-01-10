@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
+if ($_SESSION['status_user'] == "Y") {
 
 	//data user 
 	$sql_user = "SELECT * FROM tb_user WHERE id_user=" . $_SESSION['id_user'];
@@ -383,9 +383,6 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 					</div>
 				</div>
 				<?php
-
-				include "./_add-ons/dashboard_data_admin.php";
-
 				//akun dan hak akses 
 				if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 					if (isset($_GET['ha'])) include "_admin/view/v_akun_hak_akses.php";
@@ -504,7 +501,12 @@ if ($_SESSION['status_user'] == "Y" && $_SESSION['level_user'] == 1) {
 				} elseif (isset($_GET['error404'])) {
 					include "_error/error404.php";
 				} else {
-					include "_admin/dashboard.php";
+					//data dashboard
+					if ($_SESSION['level_user'] == 1) {
+						include "_admin/dashboard_admin.php";
+					} else if ($_SESSION['level_user'] == 2) {
+						include "_admin/dashboard_ip.php";
+					}
 				}
 				?>
 			</div>
