@@ -18,7 +18,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     // echo "<pre>";
     // print_r($_POST);
     // echo "</pre>";
-
+    $id_praktik = base64_decode(urldecode($_POST['id']));
     //bila profesi tidak dipilih
     if ($_POST['profesi'] != "") $profesi = $_POST['profesi'];
     else $profesi = "";
@@ -60,7 +60,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " status_praktik";
     $sql_insert .= " ) VALUES (";
     $sql_insert .= " '" . base64_decode(urldecode($_POST['user'])) . "',";
-    $sql_insert .= " '" . base64_decode(urldecode($_POST['id'])) . "', ";
+    $sql_insert .= " '" . $id_praktik . "', ";
     $sql_insert .= " '" . $_POST['institusi'] . "', ";
     $sql_insert .= " '" . $_POST['kelompok'] . "',";
     $sql_insert .= " '" . date('Y-m-d') . "', ";
@@ -85,13 +85,45 @@ if ($d_prvl['c_praktik'] == "Y") {
     $conn->query($sql_insert);
     // --------------------------------------SIMPAN TARIF KEDOKTERAN--------------------------------------------
 
+    $array = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Institusional Fee", 1, $_POST['jumlah'], 50000, 1 * (int)$_POST['jumlah'] * 50000];
+    $array = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Management Fee", 1, $_POST['jumlah'], 75000, 1 * (int)$_POST['jumlah'] * 75000];
+    $array = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Alat tulis Kantor Fee", 1, $_POST['jumlah'], 5000, 1 * (int)$_POST['jumlah'] * 5000];
+
+
+    $array = [$id_praktik, date('Y-m-d'), "BIAYA HABIS PAKAI", "(<i>Handrub</i>,tisue,sabun)", 1, $_POST['jumlah'], 5000, 1 * (int)$_POST['jumlah'] * 5000];
+
+    $array = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Alat tulis Kantor Fee", 1, $_POST['jumlah'], 5000, 1 * (int)$_POST['jumlah'] * 5000];
+    $array = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Alat tulis Kantor Fee", 1, $_POST['jumlah'], 5000, 1 * (int)$_POST['jumlah'] * 5000];
+
+
+    foreach ($period as $key => $value) {
+        $sql = "INSERT INTO tb_praktik_tgl ( ";
+        $sql .= " id_praktik, ";
+        $sql .= " praktik_tgl";
+        $sql .= " ) VALUES (";
+        $sql .= " '" . $_POST['id'] . "', ";
+        $sql .= " '" . $value->format('Y-m-d') . "'";
+        $sql .= " )";
+        // echo " $sql<br>";
+        $conn->query($sql);
+    }
 
     $sql_insert = "INSERT INTO tb_praktik ( ";
     $sql_insert .= " id_praktik,";
-    $sql_insert .= " status_praktik";
+    $sql_insert .= " tgl_tambah_tarif_pilih,";
+    $sql_insert .= " nama_jenis_tarif_pilih,";
+    $sql_insert .= " nama_tarif_pilih,";
+    $sql_insert .= " nominal_tarif_pilih,";
+    $sql_insert .= " nama_satuan_tarif_pilih,";
+    $sql_insert .= " frekuensi_tarif_pilih,";
+    $sql_insert .= " kuantitas_tarif_pilih,";
+    $sql_insert .= " jumlah_tarif_pilih,";
+    $sql_insert .= " status_tarif_pilih";
     $sql_insert .= " ) VALUES (";
-    $sql_insert .= " '" . base64_decode(urldecode($_POST['id'])) . "', ";
-    $sql_insert .= " '" . $_POST['pilih_mess'] . "' ";
+    $sql_insert .= " '" . $id_praktik . "', ";
+    $sql_insert .= " '" . date('Y-m-d') . "', ";
+    $sql_insert .= " '" . date('Y-m-d') . "', ";
+    $sql_insert .= " 'T' ";
     $sql_insert .= " )";
 
     // echo $sql_insert . "<br>";
@@ -109,7 +141,6 @@ if ($d_prvl['c_praktik'] == "Y") {
         new DateTime($d2)
     );
 
-    $no = 1;
     foreach ($period as $key => $value) {
         $sql = "INSERT INTO tb_praktik_tgl ( ";
         $sql .= " id_praktik, ";
@@ -120,7 +151,6 @@ if ($d_prvl['c_praktik'] == "Y") {
         $sql .= " )";
         // echo " $sql<br>";
         $conn->query($sql);
-        $no++;
     }
 } else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
