@@ -23,6 +23,7 @@
                 $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
                 $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
                 $sql_praktik .= " JOIN tb_praktikan ON tb_praktik.id_praktik = tb_praktikan.id_praktik ";
+                $sql_praktik .= " JOIN tb_pembimbing_pilih ON tb_praktik.id_praktik = tb_pembimbing_pilih.id_praktik ";
                 $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' ";
                 $sql_praktik .= " GROUP BY tb_praktikan.id_praktik ";
                 $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";

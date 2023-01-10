@@ -131,7 +131,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     //teks status dan privileges praktik mess
                                     if ($d_prvl['c_praktik_mess'] == 'Y' && $r_mess_pilih < 1) {
                                     ?>
-                                        <span class="badge badge-secondary">Belum Dipilih</span>
+                                        <span class="badge badge-warning text-dark">Belum Dipilih</span>
                                         <br>
                                         <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
                                             Pilih
@@ -159,7 +159,9 @@ if ($d_prvl['r_praktik'] == "Y") {
                             </td>
                             <!-- status data praktikan-->
                             <td class="align-middle">
-                                <?php
+                                <?php 
+
+                                
                                 $sql_praktikan = "SELECT * FROM tb_praktikan ";
                                 $sql_praktikan .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
                                 try {
@@ -171,7 +173,9 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
                                 $r_praktikan = $q_praktikan->rowCount();
 
-                                if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
+                                if ($d_praktik['status_mess_praktik'] == 'Y' && $r_mess_pilih < 1) { ?>
+                                    <span class="badge badge-warning text-dark">Mess <br>Belum Dipilih</span>
+                                <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
                                     <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Semuanya</span>
                                 <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] == $r_praktikan) { ?>
                                     <span class="badge badge-success">Sudah Dipilih</span>
@@ -188,7 +192,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 <?php
                                 $sql_praktik_pembimbing = "SELECT * FROM tb_pembimbing_pilih ";
                                 $sql_praktik_pembimbing .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                echo $sql_praktik_pembimbing;
+                                // echo $sql_praktik_pembimbing.$d_praktik['id_praktik'];
                                 try {
                                     $q_praktik_pembimbing = $conn->query($sql_praktik_pembimbing);
                                 } catch (Exception $ex) {
@@ -197,14 +201,8 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 }
                                 $r_praktik_pembimbing = $q_praktik_pembimbing->rowCount();
 
-                                if ($r_praktik_pembimbing > 0) {
-                                ?>
-                                    <span class="badge badge-success">Sudah Dipilih</span>
-                                <?php
-                                } else {
-                                ?>
-                                    <span class="badge badge-secondary">Belum Dipilih</span>
-                                <?php
+                                if ($r_praktik_pembimbing > 0) { ?><span class="badge badge-success">Sudah Dipilih</span> <?php                                
+                                } else { ?> <span class="badge badge-secondary">Belum Dipilih</span><?php
                                 }
                                 ?>
                                 <br>
@@ -219,6 +217,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
                                     $sql_praktik_tarif .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
                                     $sql_praktik_tarif .= " AND status_tarif_pilih = 'Y'";
+                                    // echo $sql_praktik_tarif.$d_praktik['id_praktik'];
                                     try {
                                         $q_praktik_tarif = $conn->query($sql_praktik_tarif);
                                     } catch (Exception $ex) {
@@ -238,12 +237,10 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <?php
                                     }
                                     ?>
-                                    <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
                                         <br>
                                         <a href="?ptrf" class="btn btn-outline-info btn-xs">
                                             <i class="fas fa-eye"></i> Lihat
                                         </a>
-                                    <?php } ?>
                                 </td>
                             <?php } ?>
                             <!-- status bayar praktik  -->
@@ -284,7 +281,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 <?php
                                 } else if ($r_praktik_tarif < 1) {
                                 ?>
-                                    <span class="badge badge-secondary">Tarif <br>Belum Dipilih</span>
+                                    <span class="badge badge-secondary">Belum Dipilih</span>
                                 <?php
                                 } else {
                                 ?>
