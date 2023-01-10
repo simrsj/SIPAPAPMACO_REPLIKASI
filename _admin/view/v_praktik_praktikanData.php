@@ -204,6 +204,7 @@ if ($r_data_praktikan > 0) {
                             </div>
 
                             <script>
+                                $('#<?= $_GET['acc'] ?>').addClass('show');
                                 $(document).ready(function() {
                                     $('#dataTable<?= $_GET['tb'] ?>').DataTable();
                                 });

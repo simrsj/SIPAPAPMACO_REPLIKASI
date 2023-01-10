@@ -82,7 +82,7 @@
                                         <!-- tombol aksi/info proses  -->
                                         <div class="col-sm-2 my-auto text-right">
                                             <!-- tombol rincian -->
-                                            <a class="btn btn-outline-info btn-sm collapsed m-0 " data-toggle="collapse" data-target="#collapse<?= $d_praktik['id_praktik']; ?>" title="Rincian">
+                                            <a class="btn btn-outline-info btn-sm collapsed m-0 " data-toggle="collapse" data-target="#rincian<?= md5($d_praktik['id_praktik']); ?>" title="Rincian">
                                                 <i class="fas fa-info-circle"></i> Rincian
                                             </a>
                                         </div>
@@ -90,7 +90,7 @@
                                 </div>
 
                                 <!-- collapse data pembimbing -->
-                                <div id="collapse<?= $d_praktik['id_praktik']; ?>" class="collapse" aria-labelledby="heading<?= $d_praktik['id_praktik']; ?>" data-parent="#accordion">
+                                <div id="rincian<?= md5($d_praktik['id_praktik']); ?>" class="collapse" aria-labelledby="heading<?= md5($d_praktik['id_praktik']); ?>" data-parent="#accordion">
                                     <div class="card-body " style="font-size: medium;">
                                         <!-- data tarif -->
                                         <div class="row text-gray-700">
@@ -371,6 +371,18 @@
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            $(function() {
+                                // check if there is a hash in the url
+                                if (window.location.hash != '') {
+                                    // remove any accordion panels that are showing (they have a class of 'in')
+                                    $('.collapse').removeClass('in');
+
+                                    // show the panel based on the hash now:
+                                    $(window.location.hash + '.collapse').collapse('show');
+                                }
+                            });
+                        </script>
                         <hr class="bg-gray-800">
                     <?php
                         $v_no++;

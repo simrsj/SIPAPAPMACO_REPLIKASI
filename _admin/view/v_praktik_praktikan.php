@@ -177,6 +177,17 @@
                                             <div id="<?= md5("data" . $d_praktik['id_praktik']); ?>"></div>
                                             <script>
                                                 $(document).ready(function() {
+
+                                                    $(function() {
+                                                        // check if there is a hash in the url
+                                                        if (window.location.hash != '') {
+                                                            // remove any accordion panels that are showing (they have a class of 'in')
+                                                            $('.collapse').removeClass('in');
+
+                                                            // show the panel based on the hash now:
+                                                            $(window.location.hash + '.collapse').collapse('show');
+                                                        }
+                                                    });
                                                     Swal.fire({
                                                         title: 'Mohon Ditunggu . . .',
                                                         html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',

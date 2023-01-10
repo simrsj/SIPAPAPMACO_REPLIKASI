@@ -160,8 +160,6 @@ if ($d_prvl['r_praktik'] == "Y") {
                             <!-- status data praktikan-->
                             <td class="align-middle">
                                 <?php
-
-
                                 $sql_praktikan = "SELECT * FROM tb_praktikan ";
                                 $sql_praktikan .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
                                 try {
@@ -183,7 +181,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <span class="badge badge-secondary">Belum Dipilih</span>
                                 <?php } ?>
                                 <br>
-                                <a href="?ptkn" class="btn btn-outline-info btn-xs">
+                                <a href="?ptkn#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
                                     <i class="fas fa-eye"></i> Lihat
                                 </a>
                             </td>
@@ -201,19 +199,17 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 }
                                 $r_praktik_pembimbing = $q_praktik_pembimbing->rowCount();
 
-                                if ($r_praktikan > 0) { ?>
+                                if ($r_praktikan < 1) { ?>
                                     <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Diinput</span>
                                 <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
                                     <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Semuanya</span>
-                                <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] == $r_praktikan) { ?>
-                                    <span class="badge badge-success">Sudah Dipilih</span>
                                 <?php } else if ($r_praktik_pembimbing > 0) { ?>
                                     <span class="badge badge-success">Sudah Dipilih</span>
                                 <?php } else { ?>
                                     <span class="badge badge-secondary">Belum Dipilih</span>
                                 <?php } ?>
                                 <br>
-                                <a href="?pmbb" class="btn btn-outline-info btn-xs">
+                                <a href="?pmbb#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
                                     <i class="fas fa-eye"></i> Lihat
                                 </a>
                             </td>
@@ -233,19 +229,15 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     }
                                     $r_praktik_tarif = $q_praktik_tarif->rowCount();
 
-                                    if ($r_praktik_tarif > 0) {
-                                    ?>
+                                    if ($r_praktik_pembimbing < 1) { ?>
+                                        <span class="badge badge-warning text-dark">Pembimbing<br>Belum Dipilih</span>
+                                    <?php } else if ($r_praktik_tarif > 0) { ?>
                                         <span class="badge badge-success">Sudah Dipilih</span>
-                                    <?php
-
-                                    } else {
-                                    ?>
+                                    <?php } else { ?>
                                         <span class="badge badge-secondary">Belum Dipilih</span>
-                                    <?php
-                                    }
-                                    ?>
+                                    <?php } ?>
                                     <br>
-                                    <a href="?ptrf" class="btn btn-outline-info btn-xs">
+                                    <a href="?ptrf#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
                                         <i class="fas fa-eye"></i> Lihat
                                     </a>
                                 </td>
@@ -329,7 +321,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <span class="badge badge-secondary">Belum Ada</span>
                                 <?php } ?>
                                 <br>
-                                <a href="?pnilai" class="btn btn-outline-info btn-xs">
+                                <a href="?pnilai#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
                                     <i class="fa-solid fa-eye"></i> Cek
                                 </a>
                             </td>
