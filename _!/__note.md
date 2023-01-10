@@ -58,7 +58,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Perbaikan kode kuota jurusan input kedokteran"
+git commit -a -m "Progres Status di Daftar Pengajuan Praktik"
 git push
 
 ====================================================================================================================

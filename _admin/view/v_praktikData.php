@@ -188,6 +188,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 <?php
                                 $sql_praktik_pembimbing = "SELECT * FROM tb_pembimbing_pilih ";
                                 $sql_praktik_pembimbing .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                echo $sql_praktik_pembimbing;
                                 try {
                                     $q_praktik_pembimbing = $conn->query($sql_praktik_pembimbing);
                                 } catch (Exception $ex) {
