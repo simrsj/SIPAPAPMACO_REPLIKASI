@@ -58,7 +58,7 @@ git status
 
 git pull
 git add .
-git commit -a -m "Perbaikan docx invoice/RAB"
+git commit -a -m "Perbaikan kode kuota jurusan input kedokteran"
 git push
 
 ====================================================================================================================

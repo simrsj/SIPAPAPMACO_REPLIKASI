@@ -38,12 +38,12 @@ foreach ($period as $key => $value) {
     }
 
     //jika jurusannnya adalah keperawtan
-    if ($id_jurusan == 2) $id_jurusan_kep = 1;
-    else $id_jurusan_kep;
+    if ($id_jurusan == 1 && $id_jurusan == 2) $id_jurusan = 1;
+    // else $id_jurusan_kep;
 
     //mencari kuota sesuai dengan jurusannya
     $sql_k = "SELECT * FROM tb_kuota";
-    $sql_k .= " WHERE id_jurusan_pdd = " . $id_jurusan_kep;
+    $sql_k .= " WHERE id_jurusan_pdd = " . $id_jurusan;
     // echo $sql_k . "<br>";
 
     $q_k = $conn->query($sql_k);
