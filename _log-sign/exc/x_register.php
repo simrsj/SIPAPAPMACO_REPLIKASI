@@ -74,12 +74,12 @@ $sql_insert_user .= " id_user, ";
 $sql_insert_user .= " id_institusi, ";
 $sql_insert_user .= " username_user, ";
 $sql_insert_user .= " password_user, ";
-$sql_insert_user .= " kode_verif_user, ";
 $sql_insert_user .= " nama_user, ";
 $sql_insert_user .= " email_user, ";
 $sql_insert_user .= " level_user,";
 $sql_insert_user .= " no_telp_user, ";
 $sql_insert_user .= " tgl_buat_user, ";
+$sql_insert_user .= " kode_aktivasi_user, ";
 $sql_insert_user .= " status_user";
 $sql_insert_user .= " ) VALUES (";
 // $sql_insert_user .= "  '" . $id_mou . "', ";
@@ -87,12 +87,12 @@ $sql_insert_user .= " '" . $id_user . "', ";
 $sql_insert_user .= " '" . $id_institusi . "', ";
 $sql_insert_user .= " '" . $email_user . "', ";
 $sql_insert_user .= " '" . $password_user . "', ";
-$sql_insert_user .= " '" . $crypt . "', ";
 $sql_insert_user .= " '" . $nama_user . "', ";
 $sql_insert_user .= " '" . $email_user . "', ";
 $sql_insert_user .= " '2', ";
 $sql_insert_user .= " '" . $no_telp_user . "',";
 $sql_insert_user .= " '" . date('Y-m-d') . "', ";
+$sql_insert_user .= " '" . $crypt . "', ";
 $sql_insert_user .= " 'Y'";
 $sql_insert_user .= " )";
 // echo "<br>" . $sql_insert_user;
@@ -103,4 +103,5 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 
-header("location:x_register_emailAct.php?&crypt=" . $crypt . "&email=" . urlencode(base64_encode($email_user)) . '&nama=' . urlencode(base64_encode($nama_user)));
+
+echo json_encode(['idu' => urlencode(base64_encode($id_user))]);

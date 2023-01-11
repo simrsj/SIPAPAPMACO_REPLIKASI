@@ -28,6 +28,10 @@
                                     <div class="text-xs text-danger  text-center i blink mb-2" id="err_password"></div>
                                     <button class="btn btn-primary btn-user btn-block login">LOGIN</button>
                                 </form>
+                                <br>
+                                <div class="text-center">
+                                    <a class="small" href="?forgot_pass">Lupa Password</a>
+                                </div>
                                 <hr>
                                 <div class="text-center">
                                     <a class="small" href="?reg">Lakukan Pendaftaran disini</a>

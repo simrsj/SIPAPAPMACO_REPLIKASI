@@ -213,13 +213,14 @@
 
         $.ajax({
             type: 'POST',
-            url: "_log-sign/exc/x_register_cekAkunEmail.php",
+            url: "_log-sign/exc/x_cekAkunEmail.php",
             data: {
                 'email': email
             },
             dataType: 'JSON',
             success: function(response) {
                 Swal.fire({
+                    allowOutsideClick: true,
                     title: 'Mohon Ditunggu . . .',
                     html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />' +
                         '  <p>Harap Tunggu</p>',
@@ -263,45 +264,45 @@
                             type: 'POST',
                             url: "_log-sign/exc/x_register.php",
                             data: data_reg,
+                            dataType: 'JSON',
                             success: function(response) {
+                                data_reg.push({
+                                    name: "idu",
+                                    value: response.idu
+                                });
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "_log-sign/exc/x_register_emailAct.php",
+                                    data: data_reg,
+                                    dataType: 'JSON',
+                                    success: function(response) {
 
-                                $('#err_institusi').empty();
+                                        $('#err_institusi').empty();
 
-                                if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
+                                        if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
 
-                                $('#err_nama').empty();
-                                $('#err_email').empty();
-                                $('#err_telp').empty();
-                                $('#err_password').empty();
-                                $('#err_password_ulangi').empty();
-                                $("#form_reg").trigger("reset");
-                                $("#institusi").val("").trigger("change");
+                                        $('#err_nama').empty();
+                                        $('#err_email').empty();
+                                        $('#err_telp').empty();
+                                        $('#err_password').empty();
+                                        $('#err_password_ulangi').empty();
+                                        $("#form_reg").trigger("reset");
+                                        $("#institusi").val("").trigger("change");
 
-                                Swal.fire({
-                                    allowOutsideClick: false,
-                                    // isDismissed: false,
-                                    icon: 'success',
-                                    // html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
-                                    html: '<div class="b ">Registrasi Berhasil</div><hr>' +
-                                        'Silahkan Lakukan Aktivasi di Email : <b>' + email + '</b>',
-                                    // title: '<b> </b><br><br>',
-                                    showConfirmButton: false,
-                                    timer: 10000,
-                                    timerProgressBar: true,
-                                    didOpen: (toast) => {
-                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                        Swal.fire({
+                                            icon: 'success',
+                                            html: '<div class="b ">Registrasi Berhasil</div><hr>' +
+                                                'Silahkan Lakukan Aktivasi di Email : <b>' + email + '</b>',
+                                            showConfirmButton: false,
+                                            timer: 10000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        });
                                     }
-                                }).then(
-                                    function() {
-                                        // $.ajax({
-                                        //     type: 'POST',
-                                        //     url: "_log-sign/exc/x_register_emailAct.php",
-                                        //     data: data_reg
-                                        // });
-                                        // document.location.href = "?login";
-                                    }
-                                );
+                                });
                             },
                             error: function(response) {
                                 console.log(response);

@@ -10,6 +10,18 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/Exception.php
 include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/PHPMailer.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/phpmailer/src/SMTP.php";
 
+// echo "<pre>";
+// echo print_r($_POST);
+// echo "</pre>";
+
+$id_user = $_POST['idu'];
+$id_institusi = $_POST['institusi'];
+$nama_user = $_POST['nama'];
+$no_telp_user = $_POST['telp'];
+$email_user = $_POST['email'];
+$password_user = MD5($_POST['password']);
+$crypt = urlencode(base64_encode(date('Ymd') . '_' . $id_user . '_' .  $email_user .  '_' . $nama_user . '"'));
+
 $urlserver = "http://103.147.222.122:84/SM/";
 // $urlserver = "http://127.0.0.1/SM/";
 
@@ -105,7 +117,7 @@ $isi_email = "
             </div>
             <div class='container'>
                 Silahkan Lakukan Aktivasi dengan Menekan tombol dibawah : <br>
-                <a class='btn btn-primary' href='" . $urlserver . "?act_user&crypt=" . $_GET['crypt'] . "' target=' _blank'>Aktivasi</a>
+                <a class='btn btn-primary' href='" . $urlserver . "?act_user&crypt=" . $crypt . "' target=' _blank'>Aktivasi</a>
             </div>
             <div class='fixed-footer '>
                 RS Jiwa Provinsi Jawa Barat <?= date('Y') ?>
@@ -118,6 +130,7 @@ $isi_email = "
 
 </html>
 ";
+
 
 
 // passing true in constructor enables exceptions in PHPMailer
@@ -144,9 +157,10 @@ try {
     $mail->Username = 'rsjiwajabar@gmail.com'; // YOUR gmail email
     $mail->Password = 'jtvgvusfwgaxypyf'; // YOUR gmail password
 
-    // Sender and recipient settings
-    $mail->setFrom('rsjiwajabar@gmail.com', 'RSJ - SM');
-    $mail->addAddress(base64_decode(urldecode($_GET['email'])), base64_decode(urldecode($_GET['nama'])));
+    // Sender and recipient settingss
+    $mail->setFrom('rsjiwajabar@gmail.com', 'SIPAPAP MACO - AKTIVASI');
+    // $mail->addAddress(base64_decode(urldecode($_GET['email'])), base64_decode(urldecode($_GET['nama'])));
+    $mail->addAddress($_POST['email'], $_POST['nama']);
     // $mail->addReplyTo("fajar.rachmat.h@gmail.com", "RECEIVER");
 
     // Setting the email content
