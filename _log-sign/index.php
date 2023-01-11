@@ -47,6 +47,7 @@ if (empty($_SESSION['username_user'])) {
 	elseif (isset($_GET['login'])) include "_log-sign/view/v_login.php";
 	elseif (isset($_GET['act_user']) && isset($_GET['crypt'])) include "_log-sign/view/v_aktivasi_akun.php";
 	elseif (isset($_GET['forgot_pass'])) include "_log-sign/view/v_lupa_password.php";
+	elseif (isset($_GET['forgot_pass_user'])) include "_log-sign/view/v_lupa_password_isi.php";
 	// elseif (isset($_GET['dashboard'])) include "_log-sign/register.php";
 	else include "_log-sign/view/v_login.php";
 	?>

@@ -51,6 +51,9 @@ include "_add-ons/tanggal_waktu.php";
     <?php
 
     if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
+    elseif (isset($_GET['test'])) include "test.php";
+    elseif (isset($_GET['error401'])) include "_error/error401.php";
+    elseif (isset($_GET['error404'])) include "_error/error404.php";
     elseif (isset($_SESSION['status_user'])) {
         if ($_SESSION['status_user'] == 'Y') {
             if (isset($_GET['lo'])) include "_log-sign/exc/x_log_out.php";
@@ -66,6 +69,7 @@ include "_add-ons/tanggal_waktu.php";
     }
     // Index Log-Sign
     elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
+
     ?>
 
     <!-- JS -->
