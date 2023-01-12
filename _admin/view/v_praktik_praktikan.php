@@ -18,7 +18,7 @@
                 $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
                 $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' ";
                 $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
-                echo $sql_praktik . "<br>";
+                // echo $sql_praktik . "<br>";
                 try {
                     $q_praktik = $conn->query($sql_praktik);
                 } catch (Exception $ex) {
