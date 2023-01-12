@@ -196,7 +196,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                         <!-- File Surat Institusi, File Akreditasi Insitutsi, File Akreditasi Jurusan -->
                         <div class="row">
                             <div class="col-md">
-                                File Surat Institusi :<br>
+                                File Surat Institusi :<span style="color:red">*</span><br>
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfilesuratinstitusi">Pilih File</label>
                                     <input type="file" class="custom-file-input mb-1" id="file_surat" name="file_surat" accept="application/pdf" required>
@@ -213,7 +213,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 </div>
                             </div>
                             <div class="col-md">
-                                File Akreditasi Institusi :<br>
+                                File Akreditasi Institusi :<span style="color:red">*</span><br>
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfileakredinstitusi">Pilih File</label>
                                     <input type="file" class="custom-file-input mb-1" id="file_akred_institusi" name="file_akred_institusi" accept="application/pdf" required>
@@ -230,7 +230,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 </div>
                             </div>
                             <div class="col-md">
-                                File Akreditasi Jurusan :<br>
+                                File Akreditasi Jurusan :<span style="color:red">*</span><br>
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfileakredjururusan">Pilih File</label>
                                     <input type="file" class="custom-file-input mb-1" id="file_akred_jurusan" name="file_akred_jurusan" accept="application/pdf" required>
@@ -755,7 +755,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                             html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                             showConfirmButton: false,
-                                            timer: 5000,
+                                            timer: 1115000,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)

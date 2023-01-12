@@ -104,7 +104,7 @@ if ($d_prvl['c_praktik'] == "Y") {
 
         foreach ($array as $key => $value) {
 
-            $sql_insert = "INSERT INTO tb_praktik ( ";
+            $sql_insert = "INSERT INTO tb_tarif_pilih ( ";
             $sql_insert .= " id_praktik,";
             $sql_insert .= " tgl_tambah_tarif_pilih,";
             $sql_insert .= " nama_jenis_tarif_pilih,";
@@ -113,8 +113,7 @@ if ($d_prvl['c_praktik'] == "Y") {
             $sql_insert .= " nama_satuan_tarif_pilih,";
             $sql_insert .= " frekuensi_tarif_pilih,";
             $sql_insert .= " kuantitas_tarif_pilih,";
-            $sql_insert .= " jumlah_tarif_pilih,";
-            $sql_insert .= " status_tarif_pilih";
+            $sql_insert .= " jumlah_tarif_pilih";
             $sql_insert .= " ) VALUES (";
             $sql_insert .= " '" . $value[0] . "', ";
             $sql_insert .= " '" . $value[1]  . "', ";
@@ -126,8 +125,8 @@ if ($d_prvl['c_praktik'] == "Y") {
             $sql_insert .= " '" . $value[7]  . "', ";
             $sql_insert .= " '" . $value[8]  . "' ";
             $sql_insert .= " )";
-            // echo " $sql_insert<br>";
-            $conn->query($sql);
+            echo " $sql_insert<br>";
+            $conn->query($sql_insert);
         }
     }
     // --------------------------------------SIMPAN GENERATE TANGGAL--------------------------------------------
