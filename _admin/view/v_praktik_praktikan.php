@@ -18,31 +18,28 @@
                 $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
                 $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' ";
                 $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
-                // echo $sql_praktik . "<br>";
+                echo $sql_praktik . "<br>";
                 try {
                     $q_praktik = $conn->query($sql_praktik);
-                    $q_praktik1 = $conn->query($sql_praktik);
-                    $d_praktik1 = $q_praktik1->fetch(PDO::FETCH_ASSOC);
                 } catch (Exception $ex) {
                     echo "<script>alert('$ex -DATA PRAKTIK-');";
                     echo "document.location.href='?error404';</script>";
                 }
                 $r_praktik = $q_praktik->rowCount();
 
-
-                $sql_mess_pilih = "SELECT * FROM tb_mess_pilih";
-                $sql_mess_pilih .= " WHERE id_praktik =  " . $d_praktik1['id_praktik'];
-                // echo $sql_mess_pilih . "<br>";
-                try {
-                    $q_mess_pilih = $conn->query($sql_mess_pilih);
-                    $r_mess_pilih = $q_mess_pilih->rowCount();
-                } catch (Exception $ex) {
-                    echo "<script>alert('$ex -DATA MESS PILIH-');";
-                    echo "document.location.href='?error404';</script>";
-                }
-
                 if ($r_praktik > 0) {
                     while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+
+                        $sql_mess_pilih = "SELECT * FROM tb_mess_pilih";
+                        $sql_mess_pilih .= " WHERE id_praktik =  " . $d_praktik['id_praktik'];
+                        // echo $sql_mess_pilih . "<br>";
+                        try {
+                            $q_mess_pilih = $conn->query($sql_mess_pilih);
+                            $r_mess_pilih = $q_mess_pilih->rowCount();
+                        } catch (Exception $ex) {
+                            echo "<script>alert('$ex -DATA MESS PILIH-');";
+                            echo "document.location.href='?error404';</script>";
+                        }
                         if ($d_praktik['status_mess_praktik'] == 'T' || $r_mess_pilih > 0) {
                 ?>
                             <div id="accordion<?= md5($d_praktik['id_praktik']) ?>">
