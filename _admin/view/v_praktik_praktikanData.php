@@ -14,7 +14,6 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
 $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
 $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
-$sql_data_praktikan .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
 $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . base64_decode(urldecode($_GET['idp']));
 $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
 // echo "$sql_data_praktikan<br>";
@@ -204,7 +203,9 @@ if ($r_data_praktikan > 0) {
                             </div>
 
                             <script>
-                                $('#<?= $_GET['acc'] ?>').addClass('show');
+                                <?php if (isset($_GET['acc'])) { ?>
+                                    $('#<?= $_GET['acc'] ?>').addClass('show');
+                                <?php } ?>
                                 $(document).ready(function() {
                                     $('#dataTable<?= $_GET['tb'] ?>').DataTable();
                                 });

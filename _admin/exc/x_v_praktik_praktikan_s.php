@@ -16,6 +16,7 @@ try {
     echo "<script>alert('$ex -SIMPAN PRAKTIKAN-');";
     echo "document.location.href='?error404';</script>";
 }
+
 $sql_praktikan = "SELECT * FROM tb_praktikan";
 $sql_praktikan .= " WHERE id_praktik = " . $id_praktik;
 // echo $sql_praktikan . "<br>";
@@ -30,9 +31,8 @@ try {
 
 //Cari id Prkatikan
 $sql_praktikan_id = "SELECT MAX(id_praktikan) AS ID FROM tb_praktikan";
-$sql_praktikan_id .= " WHERE id_praktik = " . $id_praktik;
-
 // echo $sql_praktikan_id . "<br>";
+
 try {
     $q_praktikan_id  = $conn->query($sql_praktikan_id);
     $d_praktikan_id  = $q_praktikan_id->fetch(PDO::FETCH_ASSOC);
