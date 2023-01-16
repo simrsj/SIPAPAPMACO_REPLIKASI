@@ -1,10 +1,10 @@
 <?php
-if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
+if (isset($_GET['pkd']) && isset($_GET['i']) && $d_prvl['c_pkd'] == "Y") {
 ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik</h1>
+                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Pemakaian Kekayaan Daerah</h1>
             </div>
         </div>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_pkd">
@@ -36,137 +36,47 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                             ?>
                             <input name="id" id="id" value="<?= urlencode(base64_encode($id_praktik)); ?>" hidden>
                             <div class="col-md">
-                                <input id="pemohon" name="pemohon" class="form-control" placeholder="Isikan Pemohon Institusi/Perorangan" required>
+                                Nama Pemohon : <span style="color:red">*</span><br>
+                                <input id="pemohon" name="pemohon" class="form-control form-control-xs" placeholder="Isikan Pemohon dari Institusi/Perorangan" required>
+                                <div class="text-danger b i text-xs blink" id="err_pemohon"></div>
+                            </div>
+                            <div class="col-md-2">
+                                Tanggal Pelaksanaan: <span style="color:red">*</span><br>
+                                <input type="date" class="form-control form-control-xs" name="tgl_pel" id="tgl_pel" required>
+                                <div class="text-danger b i text-xs blink" id="err_tgl_pel"></div>
                             </div>
                             <div class="col-md">
-                                Nama Gelombang/Kelompok : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control form-control-xs" name="kelompok" id="kelompok" placeholder="Isi Gelombang/Kelompok" required>
-                                <div class="text-danger b  i text-xs blink" id="err_kelompok"></div>
-                            </div>
-                            <div class="col-md-2">
-                                Jumlah Praktik: <span style="color:red">*</span><br>
-                                <input type="number" min="1" class="form-control form-control-xs" name="jumlah" id="jumlah" placeholder="Isi Jumlah Praktik" required>
-                                <div class="text-danger b  i text-xs blink" id="err_jumlah"></div>
-                            </div>
-                        </div>
-                        <br>
-
-                        <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
-                        <div class="row">
-                            <div class="col-md-4">
-                                Jurusan : <span style="color:red">*</span><br>
-                                <?php
-                                $sql_jurusan_pdd = "SELECT * FROM  tb_jurusan_pdd ORDER BY nama_jurusan_pdd ASC";
-                                $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
-                                ?>
-
-                                <select class='select2' name='jurusan' id="jurusan" required>
-                                    <option value="">-- <i>Pilih</i>--</option>
-                                    <?php while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) { ?>
-                                        <option value='<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>'><?= $d_jurusan_pdd['nama_jurusan_pdd']; ?></option>
-                                    <?php } ?>
-                                </select>
-                                <div class="text-danger b i text-xs blink" id="err_jurusan"></div>
-                            </div>
-                            <div class="col-md-4">
-                                Jenjang : <span style="color:red">*</span><br>
-                                <div class="loader-small" id="jenjangLoader" style="display: none;"></div>
-                                <div id="jenjangData" style="display: none;"></div>
-                                <span id="jenjangKet" class="b i">Pilih Jurusan Terlebih Dahulu</span>
-                                <div class="text-danger b i text-xs blink" id="err_jenjang"></div>
-                            </div>
-                            <div class="col-md-4">
-                                Profesi : <span style="color:red">*</span><br>
-                                <span id="profesiData" style="display: none;">
-                                    <input type="hidden" id="profesi" name="profesi" value="0">
-                                </span>
-                                <span id="profesiKet" class="b i">
-                                    Pilih Jenjang Terlebih Dahulu
-                                </span>
-                                <div class="text-danger b  i text-xs blink" id="err_profesi"></div>
-                            </div>
-                        </div>
-                        <br>
-
-                        <!-- Tanggal Mulai, Tanggal Selesai, No Surat Institusi Surat dan Tanggal Surat Institusi -->
-                        <div class="row">
-                            <div class="col-md-2">
-                                Tanggal Mulai Praktik : <span style="color:red">*</span><br>
-                                <input type="date" class="form-control form-control-xs" name="tgl_mulai_praktik" id="tgl_mulai" required>
-                                <span class="text-danger b  i text-xs blink" id="err_tgl_mulai"></span>
-                            </div>
-                            <div class="col-md-2">
-                                Tanggal Selesai Praktik: <span style="color:red">*</span><br>
-                                <input type="date" class="form-control form-control-xs" name="tgl_selesai_praktik" id="tgl_selesai" required>
-                                <span class="text-danger b  i text-xs blink" id="err_tgl_selesai"></span>
-                            </div>
-                            <div class="col-md">
-                                No. Surat Institusi : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control form-control-xs" name="no_surat" placeholder="Isi No Surat Institusi" id="no_surat" required>
-                                <span class="text-danger b  i text-xs blink" id="err_no_surat"></span>
-                            </div>
-                            <div class="col-md-2">
-                                Tanggal Surat Institusi : <span style="color:red">*</span><br>
-                                <input type="date" class="form-control form-control-xs" name="tgl_surat" id="tgl_surat" required>
-                                <span class="text-danger b  i text-xs blink" id="err_tgl_surat"></span>
-                            </div>
-                        </div>
-                        <br>
-                        <!-- File Surat Institusi, File Akreditasi Insitutsi, File Akreditasi Jurusan -->
-                        <div class="row">
-                            <div class="col-md">
-                                File Surat Institusi :<span style="color:red">*</span><br>
+                                File Surat :<span style="color:red">*</span><br>
                                 <div class="custom-file">
-                                    <label class="custom-file-label text-xs" for="customFile" id="labelfilesuratinstitusi">Pilih File</label>
+                                    <label class="custom-file-label text-xs" for="customFile" id="labelfilesurat">Pilih File</label>
                                     <input type="file" class="custom-file-input mb-1" id="file_surat" name="file_surat" accept="application/pdf" required>
                                     <span class='i text-xs'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</span><br>
                                     <div class="text-xs font-italic text-danger blink" id="err_file_surat"></div><br>
                                     <script>
                                         $('#file_surat').on('change', function() {
-                                            var fileSuratInstitusi = $(this).val();
-                                            fileSuratInstitusi = fileSuratInstitusi.replace(/^.*[\\\/]/, '');
-                                            if (fileSuratInstitusi == "") fileSuratInstitusi = "Pilih File";
-                                            $('#labelfilesuratinstitusi').html(fileSuratInstitusi);
-                                        })
-                                    </script>
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                File Akreditasi Institusi :<span style="color:red">*</span><br>
-                                <div class="custom-file">
-                                    <label class="custom-file-label text-xs" for="customFile" id="labelfileakredinstitusi">Pilih File</label>
-                                    <input type="file" class="custom-file-input mb-1" id="file_akred_institusi" name="file_akred_institusi" accept="application/pdf" required>
-                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
-                                    <div class="text-xs font-italic text-danger blink" id="err_file_akred_institusi"></div><br>
-                                    <script>
-                                        $('#file_akred_institusi').on('change', function() {
-                                            var fileNameInstitusi = $(this).val();
-                                            fileNameInstitusi = fileNameInstitusi.replace(/^.*[\\\/]/, '');
-                                            if (fileNameInstitusi == "") fileNameInstitusi = "Pilih File";
-                                            $('#labelfileakredinstitusi').html(fileNameInstitusi);
-                                        })
-                                    </script>
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                File Akreditasi Jurusan :<span style="color:red">*</span><br>
-                                <div class="custom-file">
-                                    <label class="custom-file-label text-xs" for="customFile" id="labelfileakredjururusan">Pilih File</label>
-                                    <input type="file" class="custom-file-input mb-1" id="file_akred_jurusan" name="file_akred_jurusan" accept="application/pdf" required>
-                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
-                                    <div class="text-xs font-italic text-danger blink" id="err_file_akred_jurusan"></div><br>
-                                    <script>
-                                        $('#file_akred_jurusan').on('change', function() {
-                                            var fileNameAkredJur = $(this).val();
-                                            fileNameAkredJur = fileNameAkredJur.replace(/^.*[\\\/]/, '');
-                                            if (fileNameAkredJur == "") fileNameAkredJur = "Pilih File";
-                                            $('#labelfileakredjururusan').html(fileNameAkredJur);
+                                            var fileSurat = $(this).val();
+                                            fileSurat = fileSurat.replace(/^.*[\\\/]/, '');
+                                            if (fileSurat == "") fileSurat = "Pilih File";
+                                            $('#labelfilesurat').html(fileSurat);
                                         })
                                     </script>
                                 </div>
                             </div>
                         </div>
-
+                        <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
+                        <div class="row">
+                            <div class="col-md">
+                                Rincian : <span style="color:red">*</span><br>
+                                <textarea id="rincian" name="rincian" class="form-control form-control-xs" rows="4" placeholder="Isikan Rincian" required></textarea>
+                                <div class="text-danger b i text-xs blink" id="err_rincian"></div>
+                            </div>
+                            <div class="col-md">
+                                Biaya Rincian: <span style="color:red">*</span><br>
+                                <textarea id="rincian_b" name="rincian_b" class="form-control form-control-xs" rows="4" wrap placeholder="Isikan Biaya Rincian" required></textarea>
+                                <div class="text-danger b i text-xs blink" id="err_rincian_b"></div>
+                            </div>
+                        </div>
+                        <br>
                         <!-- Koordinator -->
                         <div class=" row">
                             <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary">KORDINATOR</div>
@@ -175,54 +85,28 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                         <div class="row">
                             <div class="col-md-4">
                                 Nama : <span style="color:red">*</span><br>
-                                <input type="text" class="form-control form-control-xs" name="nama_koordinator" id="nama_koordinator" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required>
+                                <input type="text" class="form-control form-control-xs" name="nama_koordinator" id="nama_koordinator" placeholder="Isi Nama Koordinator" required>
                                 <span class="text-danger b  i text-xs blink" id="err_nama_koordinator"></span>
                             </div>
                             <div class="col-md-4">
                                 Email :<br>
-                                <input type="text" class="form-control form-control-xs" name="email_koordinator" id="email_koordinator" placeholder="Isi Email Koordinator" value="<?= $d_user['email_user']; ?>">
+                                <input type="text" class="form-control form-control-xs" name="email_koordinator" id="email_koordinator" placeholder="Isi Email Koordinator">
                             </div>
                             <div class="col-md-4">
                                 Telpon : <span style="color:red">*</span><br>
-                                <input type="number" class="form-control form-control-xs" name="telp_koordinator" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" value="<?= $d_user['no_telp_user']; ?>" required>
+                                <input type="number" class="form-control form-control-xs" name="telp_koordinator" id="telp_koordinator" placeholder="Isi Telpon Koordinator" min="1" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
                                 <br><span class="text-danger b  i text-xs blink" id="err_telp_koordinator"></span>
                             </div>
                         </div>
 
-                        <!-- Pakai Mess -->
-                        <div class=" row">
-                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
-                        </div>
-                        <div id="data_pilih_mess">
-                            <div class="text-center mb-3">
-                                Pemakaian Mess/Pemondokan : <span class="text-danger">*</span><br>
-                            </div>
-                            <div class="row boxed-check-group boxed-check-xs boxed-check-primary justify-content-center">
-                                <label class="boxed-check">
-                                    <input class="boxed-check-input" type="radio" name="pilih_mess" id="pilih_mess1" value="Y">
-                                    <div class="boxed-check-label">Ya</div>
-                                </label>
-                                &nbsp;
-                                &nbsp;
-                                <label class="boxed-check">
-                                    <input class="boxed-check-input" type="radio" name="pilih_mess" id="pilih_mess2" value="T">
-                                    <div class="boxed-check-label">Tidak</div>
-                                </label>
-                            </div>
-                            <div class="text-danger b i text-xs blink" id="err_pilih_mess"></div>
-                            <hr>
-                        </div>
-
                         <!-- Tombol Simpan Praktik-->
-                        <div id="simpan_praktik_tarif" class="nav btn justify-content-center">
-                            <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
-                                <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success">
-                                    <i class="fas fa-check-circle"></i>
-                                    Simpan Data Praktik
-                                    <i class="fas fa-check-circle"></i>
-                                </button>
-                            </div>
+                        <div id="simpan_pkd" class="nav btn justify-content-center text-md">
+                            <button type="button" name="simpan" id="simpan" class="btn btn-outline-success">
+                                <i class="fas fa-check-circle"></i>
+                                Simpan Data PKD
+                                <i class="fas fa-check-circle"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
