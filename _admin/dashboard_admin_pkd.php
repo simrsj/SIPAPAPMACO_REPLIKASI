@@ -10,6 +10,8 @@
         </a> -->
     </div>
 
+    <?php
+    /*
     <!-- Content Row -->
     <div class="row">
         <!-- Diklat -->
@@ -236,5 +238,7 @@
             </div>
         </div>
     </div>
+    */
+    ?>
 </div>
 <!-- /.container-fluid -->

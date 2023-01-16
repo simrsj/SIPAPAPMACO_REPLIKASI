@@ -16,18 +16,18 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
-if ($d_prvl['r_praktik'] == "Y") {
-    $sql_pkd_narsum = "SELECT * FROM tb_pkd_narsum ";
-    $sql_pkd_narsum .= " ORDER BY tgl_tambah_pkd_narsum DESC";
-    // echo $sql_pkd_narsum."<br>";
+if ($d_prvl['c_pkd'] == "Y") {
+    $sql_pkd = "SELECT * FROM tb_pkd ";
+    $sql_pkd .= " ORDER BY tgl_tambah_pkd DESC";
+    // echo $sql_pkd."<br>";
     try {
-        $q_pkd_narsum = $conn->query($sql_pkd_narsum);
+        $q_pkd = $conn->query($sql_pkd);
     } catch (Exception $ex) {
         echo "<script>alert('$ex -DATA PKD NARSUM-');";
         echo "document.location.href='?error404';</script>";
     }
-    $r_pkd_narsum = $q_pkd_narsum->rowCount();
-    if ($r_pkd_narsum > 0) {
+    $r_pkd = $q_pkd->rowCount();
+    if ($r_pkd > 0) {
 ?>
         <div class="table-responsive text-md">
             <div class="h6 b text-center">
@@ -54,7 +54,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                 <tbody>
                     <?php
                     $no = 1;
-                    while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
+                    while ($d_pkd = $q_pkd->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr class="text-center">
                             <td class="align-middle"><?= $no; ?></td>

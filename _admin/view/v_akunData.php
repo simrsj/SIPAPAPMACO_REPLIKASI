@@ -110,16 +110,24 @@ if ($r_user > 0) {
                             ?>
                         </td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-xs ubah_init" title="Ubah Akun" id="<?= $d_user['id_user']; ?>">
-                                <i class="fas fa-edit"></i>
-                            </a>
                             <?php
+                            if ($d_prvl['u_akun'] == 'Y' && $d_user['id_user'] != 1) {
+                            ?>
+                                <a class="btn btn-primary btn-xs ubah_init" title="Ubah Akun" id="<?= $d_user['id_user']; ?>">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            <?php
+                            } else {
+                                echo "-";
+                            }
                             if ($d_prvl['u_akun'] == 'Y' && $d_user['id_user'] != 1) {
                             ?>
                                 <a href="?aku&ha=<?= $d_user['id_user']; ?>" class="btn btn-success btn-xs" title="Hak Akses">
                                     <i class="fas fa-list"></i>
                                 </a>
                             <?php
+                            } else {
+                                echo "-";
                             }
                             if ($d_prvl['d_akun'] == 'Y' && $d_user['id_user'] != 1) {
                             ?>
@@ -127,7 +135,10 @@ if ($r_user > 0) {
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             <?php
-                            } ?>
+                            } else {
+                                echo "-";
+                            }
+                            ?>
                         </td>
                     </tr>
                 <?php

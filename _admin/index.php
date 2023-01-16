@@ -389,16 +389,15 @@ if ($_SESSION['status_user'] == "Y") {
 				<?php
 				//akun dan hak akses 
 				if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
-					if (isset($_GET['ha'])) include "_admin/view/v_akun_hak_akses.php";
-					else include "_admin/view/v_akun.php";
+					if (isset($_GET['ha']) && $_SESSION['level_user'] == 1)
+						include "_admin/view/v_akun_hak_akses.php";
+					else
+						include "_admin/view/v_akun.php";
 				}
 				//arsip praktik
 				elseif (isset($_GET['pars'])) {
-					if (isset($_GET['dp'])) {
-						include "_admin/view/v_praktik_arsip_dataPraktik.php";
-					} else {
-						include "_admin/view/v_praktik_arsip.php";
-					}
+					if (isset($_GET['dp'])) include "_admin/view/v_praktik_arsip_dataPraktik.php";
+					else include "_admin/view/v_praktik_arsip.php";
 				} elseif (isset($_GET['akr'])) {
 					include "_admin/view/v_akreditasi.php";
 				}
@@ -498,21 +497,12 @@ if ($_SESSION['status_user'] == "Y") {
 				elseif (isset($_GET['pkd_narsum'])) {
 					if (isset($_GET['i'])) include "_admin/insert/i_pkd_narsum.php";
 					else include "_admin/view/v_pkd_narsum.php";
-				} elseif (isset($_GET['test'])) {
-					include "test.php";
-				} elseif (isset($_GET['error401'])) {
-					include "_error/error401.php";
-				} elseif (isset($_GET['error404'])) {
-					include "_error/error404.php";
-				} else {
+				} elseif (isset($_GET['test'])) include "test.php";
+				else {
 					//data dashboard
-					if ($_SESSION['level_user'] == 1) {
-						include "_admin/dashboard_admin.php";
-					} else if ($_SESSION['level_user'] == 2) {
-						include "_admin/dashboard_ip.php";
-					} else if ($_SESSION['level_user'] == 3) {
-						include "_admin/dashboard_pkd.php";
-					}
+					if ($_SESSION['level_user'] == 1) include "_admin/dashboard_admin.php";
+					else if ($_SESSION['level_user'] == 2) include "_admin/dashboard_ip.php";
+					else if ($_SESSION['level_user'] == 3) include "_admin/dashboard_admin_pkd.php";
 				}
 				?>
 			</div>
