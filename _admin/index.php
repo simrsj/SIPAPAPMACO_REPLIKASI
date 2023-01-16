@@ -135,26 +135,17 @@ if ($_SESSION['status_user'] == "Y") {
 				</li>
 			<?php } ?>
 			<hr class="sidebar-divider">
-			<div class="sidebar-heading">
-				Narasumber
-			</div>
-			<?php if ($d_prvl['r_pkd_narsum'] == "Y") { ?>
-				<!-- Narasumber -->
-				<li class="nav-item" style=" word-wrap: break-word;">
-					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_narsum" aria-expanded="true" aria-controls="collapse_narsum">
+			<?php if ($d_prvl['r_pkd'] == "Y") { ?>
+				<!-- Pemakaian Kekayaan Daerah (PKD) -->
+				<div class="sidebar-heading">
+					Pemakaian Kekayaan Daerah (PKD)
+				</div>
+
+				<li class="nav-item ">
+					<a class="nav-link" href="?pkd">
 						<i class="fas fa-fw fa-person-chalkboard"></i>
-						<span>Narasumber</span>
+						<span>Pengajuan</span>
 					</a>
-					<div id="collapse_narsum" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<?php if ($d_prvl['r_pkd_narsum'] == "Y") { ?>
-								<a class="collapse-item" href="?pkd_narsum">
-									<i class="fas fa-envelope"></i>
-									<span>Pengajuan</span>
-								</a>
-							<?php } ?>
-						</div>
-					</div>
 				</li>
 			<?php } ?>
 			<!-- <hr class="sidebar-divider">
@@ -493,16 +484,24 @@ if ($_SESSION['status_user'] == "Y") {
 						include "_admin/view/v_transaksi.php";
 					}
 				}
-				//Narasumber
-				elseif (isset($_GET['pkd_narsum'])) {
-					if (isset($_GET['i'])) include "_admin/insert/i_pkd_narsum.php";
-					else include "_admin/view/v_pkd_narsum.php";
-				} elseif (isset($_GET['test'])) include "test.php";
+				//PKD
+				elseif (isset($_GET['pkd'])) {
+					if (isset($_GET['i']))
+						include "_admin/insert/i_pkd.php";
+					else
+						include "_admin/view/v_pkd.php";
+				}
+				//testing 
+				elseif (isset($_GET['test']))
+					include "test.php";
+				//data dashboard
 				else {
-					//data dashboard
-					if ($_SESSION['level_user'] == 1) include "_admin/dashboard_admin.php";
-					else if ($_SESSION['level_user'] == 2) include "_admin/dashboard_ip.php";
-					else if ($_SESSION['level_user'] == 3) include "_admin/dashboard_admin_pkd.php";
+					if ($_SESSION['level_user'] == 1)
+						include "_admin/dashboard_admin.php";
+					else if ($_SESSION['level_user'] == 2)
+						include "_admin/dashboard_ip.php";
+					else if ($_SESSION['level_user'] == 3)
+						include "_admin/dashboard_admin_pkd.php";
 				}
 				?>
 			</div>
