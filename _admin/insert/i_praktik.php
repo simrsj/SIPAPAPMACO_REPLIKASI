@@ -751,13 +751,13 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                         xhttp.send(data_file);
 
                                         Swal.fire({
-                                            allowOutsideClick: false,
+                                            allowOutsideClick: true,
                                             // isDismissed: false,
                                             icon: 'success',
                                             html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                             showConfirmButton: false,
-                                            timer: 1115000,
+                                            timer: 5000,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)

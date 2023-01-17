@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2023 at 04:08 AM
+-- Generation Time: Jan 17, 2023 at 11:23 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -1501,7 +1501,7 @@ INSERT INTO `tb_user` (`id_user`, `id_mou`, `id_institusi`, `username_user`, `pa
 (1, 0, 0, 'admin', 'e1d5be1c7f2f456670de3d53c7b54f4a', '', 'ADMIN DIKLAT RS JIWA', 'admin@admin', 1, '08123145645', NULL, '2023-01-15 14:19:18', '2021-03-29', '2022-02-22', '', 'Y', 'Y'),
 (2, 0, 0, 'tehiluxu', 'f3ed11bbdb94fd9ebdefbaf646ab94d3', '', 'Et ducimus explicab', 'xufagybipy@mailinator.com', 3, '94', './_img/akun/2.jpeg', NULL, '2022-10-23 17:26:24', '2022-10-23 19:16:55', '', 'Y', 'Y'),
 (3, 0, 87, 'fajar.rachmat.h@gmail.com', '202cb962ac59075b964b07152d234b70', 'MjAyMzAxMTFfM19mYWphci5yYWNobWF0LmhAZ21haWwuY29tX1JTSiI%3D', 'RSJ', 'fajar.rachmat.h@gmail.com', 2, '0', NULL, NULL, '2023-01-11', NULL, 'MjAyMzAxMTFfM19mYWphci5yYWNobWF0LmhAZ21haWwuY29tX1JTSiI%3D', 'Y', 'Y'),
-(34, 0, 0, 'adminpkd', 'e1d5be1c7f2f456670de3d53c7b54f4a', '', 'ADMIN PKD RS JIWA', 'adminpkd@admin', 3, '-', NULL, '2023-01-16 04:53:08', '2023-01-13', '2022-02-22', '', 'Y', 'Y');
+(34, 0, 0, 'adminpkd', 'e1d5be1c7f2f456670de3d53c7b54f4a', '', 'ADMIN PKD RS JIWA', 'adminpkd@admin', 3, '-', NULL, '2023-01-17 05:40:36', '2023-01-13', '2022-02-22', '', 'Y', 'Y');
 
 -- --------------------------------------------------------
 

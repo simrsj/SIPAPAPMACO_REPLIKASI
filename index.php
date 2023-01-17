@@ -86,7 +86,9 @@ include "_add-ons/tanggal_waktu.php";
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <script>
-        // console.log('Javascript Aktif');
+        <?php
+        // include "./vendor/!custom/disable_keyboard.js"
+        ?>
     </script>
 
 </body>
