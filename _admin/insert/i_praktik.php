@@ -713,6 +713,8 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 file_surat != undefined &&
                                 getTypeSurat == 'pdf' &&
                                 getSizeSurat <= 1024 &&
+                                getSizeAkredInstitusi <= 256 &&
+                                getSizeAkredJurusan <= 256 &&
                                 nama_koordinator != "" &&
                                 telp_koordinator != "" &&
                                 pilih_mess != undefined
