@@ -1,6 +1,5 @@
 <?php
 if (isset($_GET['pkd']) && isset($_GET['i']) && $d_prvl['c_pkd'] == "Y") {
-    $GLOBALS['idu'] = urlencode(base64_encode($_SESSION['id_user']));
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -97,6 +96,11 @@ if (isset($_GET['pkd']) && isset($_GET['i']) && $d_prvl['c_pkd'] == "Y") {
                 showConfirmButton: false,
             });
             var data_pkd = $('#form_pkd').serializeArray();
+            data_pkd.push({
+                name: "idu",
+                value: '<?= urlencode(base64_encode($_SESSION['id_user'])) ?>'
+            });
+
             var pemohon = $("#pemohon").val();
             var rincian = $("#rincian").val();
             var tgl_pel = $("#tgl_pel").val();
@@ -263,7 +267,7 @@ if (isset($_GET['pkd']) && isset($_GET['i']) && $d_prvl['c_pkd'] == "Y") {
                             }
                         }).then(
                             function() {
-                                document.location.href = "?pkd";
+                                // document.location.href = "?pkd";
                             }
                         );
                     },
