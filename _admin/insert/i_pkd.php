@@ -263,7 +263,7 @@ if (isset($_GET['pkd']) && isset($_GET['i']) && $d_prvl['c_pkd'] == "Y") {
                             }
                         }).then(
                             function() {
-                                document.location.href = "?pkd";
+                                // document.location.href = "?pkd";
                             }
                         );
                     },
