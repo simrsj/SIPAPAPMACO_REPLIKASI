@@ -5,7 +5,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
 //data privileges 
-$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($GLOBALS['idu']));
+$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($_POST['idu']));
 try {
     $q_prvl = $conn->query($sql_prvl);
 } catch (Exception $ex) {
@@ -45,13 +45,18 @@ if ($d_prvl['c_pkd'] == "Y") {
     $sql_insert .= " '" . date('Y-m-d') . "', ";
     $sql_insert .= " '" . $_POST['pemohon'] . "', ";
     $sql_insert .= " '" . $_POST['rincian'] . "', ";
+    $sql_insert .= " '" . $_POST['tgl_pel'] . "', ";
     $sql_insert .= " '" . $_POST['nama_koordinator'] . "', ";
     $sql_insert .= " '" . $_POST['email_koordinator'] . "', ";
     $sql_insert .= " '" . $_POST['telp_koordinator'] . "' ";
     $sql_insert .= " )";
     echo $sql_insert . "<br>";
-    // $conn->query($sql_insert);
-
+    try {
+        // $conn->query($sql_insert);
+    } catch (Exception $ex) {
+        echo "<script>alert('$ex -INSERT PKD-');";
+        echo "document.location.href='?error404';</script>";
+    }
     echo json_encode(['id' => $id_pkd]);
 } else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
