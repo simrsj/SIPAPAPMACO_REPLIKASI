@@ -95,9 +95,36 @@ if ($d_prvl['c_pkd'] == "Y") {
                                 }
                                 ?>
                                 <br>
-                                <a href="#" class="btn btn-outline-info btn-sm" title="Rincian">
-                                    <i class="fa-solid fa-eye"></i>
+                                <!-- Tombol Modal Biaya/Tarif  -->
+                                <a title="Lihat Logo" class="btn btn-outline-info btn-sm" href="#" data-toggle="modal" data-target="#see_1">
+                                    Lihat
                                 </a>
+
+                                <!-- Modal Biaya/Tarif  -->
+                                <div class="modal fade" id="see_1">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <form id="form_t">
+                                                <div class="modal-header h4">
+                                                    Biaya/Tarif
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php
+                                                    $s
+                                                    ?>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a title="Lihat Logo" class="btn btn-outline-info btn-sm" href="#" data-toggle="modal" data-target="#see_1">
+                                                        Lihat
+                                                    </a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td class="align-middle">
                                 <a href="<?= $d_pkd['file_surat_pkd'] ?>" class="btn btn-outline-primary btn-sm" download="file_pkd">

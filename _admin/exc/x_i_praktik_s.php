@@ -85,22 +85,22 @@ if ($d_prvl['c_praktik'] == "Y") {
     $conn->query($sql_insert);
     // --------------------------------------SIMPAN TARIF KEDOKTERAN--------------------------------------------
     if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] == 1) {
-        $array[0] = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Institusional Fee", "-", 1, $_POST['jumlah'], 50000, 1 * (int)$_POST['jumlah'] * 50000];
-        $array[1] = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Management Fee", "-", 1, $_POST['jumlah'], 75000, 1 * (int)$_POST['jumlah'] * 75000];
-        $array[2]  = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Alat tulis Kantor Fee", "-", 1, $_POST['jumlah'], 5000, 1 * (int)$_POST['jumlah'] * 5000];
-        $array[3]  = [$id_praktik, date('Y-m-d'), "BIAYA HABIS PAKAI", "(<i>Handrub</i>,tisue,sabun)", "-", 1, $_POST['jumlah'], 5000, 1 * (int)$_POST['jumlah'] * 5000];
-        $array[4]  = [$id_praktik, date('Y-m-d'), "BIAYA OVERHEAD OPERASIONAL", "Log Book", "-", 1, $_POST['jumlah'], 20000, 1 * (int)$_POST['jumlah'] * 20000];
-        $array[5]  = [$id_praktik, date('Y-m-d'), "PEMAIAN KEKAYAAN DAERAH", "Kelas", "-", 0, $_POST['jumlah'], 30000, 0];
-        $array[6]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "CSS", "-", 0, $_POST['jumlah'], 37500, 0];
-        $array[7]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "CRS", "-", 0, $_POST['jumlah'], 37500, 0];
-        $array[8]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "CBD", "-", 0, $_POST['jumlah'], 37500, 0];
-        $array[9]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "Pengayaan", "-", 0, $_POST['jumlah'], 37500, 0];
-        $array[10]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "Bimbingan", "-", 0, $_POST['jumlah'], 37500, 0];
-        $array[11]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "BST", "-", 0, $_POST['jumlah'], 37500, 0];
-        $array[12]  = [$id_praktik, date('Y-m-d'), "BIAYA UJIAN", "Mini Cex", "-", 0, $_POST['jumlah'], 150000, 0];
-        $array[13]  = [$id_praktik, date('Y-m-d'), "BIAYA UJIAN", "Ujian", "-", 0, $_POST['jumlah'], 150000, 0];
-        $array[14]  = [$id_praktik, date('Y-m-d'), "BIAYA UJIAN", "Makan Pembimbing", "-", 0, $_POST['jumlah'], 20000, 0];
-        $array[15]  = [$id_praktik, date('Y-m-d'), "BIAYA UJIAN", "Standar Pasien", "-", 0, $_POST['jumlah'], 100000, 0];
+        $array[0] = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Institusional Fee", "per-siswa / periode", 1, $_POST['jumlah'], 50000, 1 * (int)$_POST['jumlah'] * 50000];
+        $array[1] = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Management Fee", "per-siswa / periode", 1, $_POST['jumlah'], 75000, 1 * (int)$_POST['jumlah'] * 75000];
+        $array[2]  = [$id_praktik, date('Y-m-d'), "BIAYA ADMINISTRASI", "Alat tulis Kantor Fee", "per-siswa / periode", 1, $_POST['jumlah'], 5000, 1 * (int)$_POST['jumlah'] * 5000];
+        $array[3]  = [$id_praktik, date('Y-m-d'), "BIAYA HABIS PAKAI", "(Handrub,tisue,sabun)", "per-siswa / periode", 1, $_POST['jumlah'], 5000, 1 * (int)$_POST['jumlah'] * 5000];
+        $array[4]  = [$id_praktik, date('Y-m-d'), "BIAYA OVERHEAD OPERASIONAL", "Log Book", "per-siswa / periode", 1, $_POST['jumlah'], 20000, 1 * (int)$_POST['jumlah'] * 20000];
+        $array[5]  = [$id_praktik, date('Y-m-d'), "PEMAIAN KEKAYAAN DAERAH", "Kelas", "per-siswa / periode", 0, $_POST['jumlah'], 30000, 0];
+        $array[6]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "CSS", "per-siswa / kali", 0, $_POST['jumlah'], 37500, 0];
+        $array[7]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "CRS", "per-siswa / kali", 0, $_POST['jumlah'], 37500, 0];
+        $array[8]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "CBD", "per-siswa / kali", 0, $_POST['jumlah'], 37500, 0];
+        $array[9]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "Pengayaan", "per-siswa / kali", 0, $_POST['jumlah'], 37500, 0];
+        $array[10]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "Bimbingan", "per-siswa / kali", 0, $_POST['jumlah'], 37500, 0];
+        $array[11]  = [$id_praktik, date('Y-m-d'), "BIAYA PEMBELAJARAN", "BST", "per-siswa / kali", 0, $_POST['jumlah'], 37500, 0];
+        $array[12]  = [$id_praktik, date('Y-m-d'), "BIAYA UJIAN", "Mini Cex", "per-siswa / kali", 0, $_POST['jumlah'], 150000, 0];
+        $array[13]  = [$id_praktik, date('Y-m-d'), "BIAYA UJIAN", "Ujian", "per-siswa / kali", 0, $_POST['jumlah'], 150000, 0];
+        $array[14]  = [$id_praktik, date('Y-m-d'), "BIAYA UJIAN", "Makan Pembimbing", "per-siswa / kali", 0, $_POST['jumlah'], 20000, 0];
+        $array[15]  = [$id_praktik, date('Y-m-d'), "BIAYA UJIAN", "Standar Pasien", "per-siswa / kali", 0, $_POST['jumlah'], 100000, 0];
 
         foreach ($array as $key => $value) {
 
