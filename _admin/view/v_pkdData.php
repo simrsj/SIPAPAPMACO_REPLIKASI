@@ -96,10 +96,13 @@ if ($d_prvl['c_pkd'] == "Y") {
                                 ?>
                                 <br>
                                 <!-- Tombol Modal Biaya/Tarif  -->
-                                <a title="Lihat Logo" class="btn btn-outline-info btn-sm" href="#" data-toggle="modal" data-target="#see_1">
-                                    Lihat
-                                </a>
 
+                                <a title="Biaya/Tarif" class='btn btn-danger btn-sm ' href='?pkdt=<?= urlencode(base64_encode($d_pkd['id_pkd'])) ?>'>
+                                    <i class="fa-solid fa-receipt"></i>
+                                </a>
+                                <a title="Rincian" class="btn btn-outline-info btn-sm" href="#" data-toggle="modal" data-target="#see_1">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
                                 <!-- Modal Biaya/Tarif  -->
                                 <div class="modal fade" id="see_1">
                                     <div class="modal-dialog modal-lg" role="document">
@@ -113,13 +116,53 @@ if ($d_prvl['c_pkd'] == "Y") {
                                                 </div>
                                                 <div class="modal-body">
                                                     <?php
-                                                    $s
+                                                    if ($r_pkdt > 0) {
                                                     ?>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <a title="Lihat Logo" class="btn btn-outline-info btn-sm" href="#" data-toggle="modal" data-target="#see_1">
-                                                        Lihat
-                                                    </a>
+                                                        <table>
+                                                            <thead>
+                                                                <tr class="text-center">
+                                                                    <th>No</th>
+                                                                    <th>Nama Tarif</th>
+                                                                    <th>Frekuensi</th>
+                                                                    <th>Tarif</th>
+                                                                    <th>Satuan</th>
+                                                                    <th>Jumlah Tarif</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                $no = 1;
+                                                                while ($d_pkd = $q_pkd->fetch(PDO::FETCH_ASSOC)) {
+                                                                ?>
+                                                                    <tr class="text-center">
+                                                                        <td><?= $no; ?></td>
+                                                                        <td><?= $d_pkd['nama_pkd_tarif']; ?></td>
+                                                                        <td><?= $d_pkd['frekuensi_pkd_tarif']; ?></td>
+                                                                        <td><?= "Rp " . number_format($d_pkd['jumlah_pkd_tarif'], 0, '.', '.'); ?></td>
+                                                                        <td><?= $d_pkd['satuan_pkd_tarif']; ?></td>
+                                                                        <td><?= "Rp " . number_format($d_pkd['total_pkd_tarif'], 0, '.', '.'); ?></td>
+                                                                        <td><?= $no; ?></td>
+                                                                    </tr>
+                                                                <?php
+                                                                    $no++;
+                                                                }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <div class="jumbotron">
+                                                            <div class="jumbotron-fluid">
+                                                                <div class="text-gray-700">
+                                                                    <h5 class="text-center">Data Biaya/Tarif Tidak Ada</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </form>
                                         </div>
@@ -133,7 +176,7 @@ if ($d_prvl['c_pkd'] == "Y") {
                             </td>
                             <td class="align-middle">
                                 <div class="btn-group" role="group">
-                                    <a title="Arsip" class='btn btn-primary btn-sm ' href=' #'>
+                                    <a title="Arsip" class='btn btn-primary btn-sm' href=' #'>
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                     <a title="Hapus" class='btn btn-danger btn-sm ' href='#'>
@@ -168,7 +211,13 @@ if ($d_prvl['c_pkd'] == "Y") {
     <?php
     } else {
     ?>
-        <h3 class="text-center"> Data Narasumber Tidak Ada</h3>
+        <div class="jumbotron">
+            <div class="jumbotron-fluid">
+                <div class="text-gray-700">
+                    <h5 class="text-center"> Data PKD Tidak Ada</h5>
+                </div>
+            </div>
+        </div>
 <?php
     }
 } else {

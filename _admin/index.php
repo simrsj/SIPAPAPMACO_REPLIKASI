@@ -488,6 +488,8 @@ if ($_SESSION['status_user'] == "Y") {
 				elseif (isset($_GET['pkd'])) {
 					if (isset($_GET['i']))
 						include "_admin/insert/i_pkd.php";
+					else if (isset($_GET['pkdt']))
+						include "_admin/insert/i_pkdt.php";
 					else
 						include "_admin/view/v_pkd.php";
 				}
