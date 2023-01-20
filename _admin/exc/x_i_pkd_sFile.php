@@ -2,9 +2,12 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
-echo "<pre>";
-print_r($_FILES);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
+// echo "<pre>";
+// print_r($_FILES);
+// echo "</pre>";
 
 $id = base64_decode(urldecode($_POST['id']));
 
@@ -17,7 +20,7 @@ if (!is_dir($alamat_unggah)) {
 }
 
 //cek data kesesuaian file 
-if ($_FILES['file_surat']['size'] > 1024) {
+if ($_FILES['file_surat']['size'] > (1024 * 1024)) {
     $ket = "size";
 } else if ($_FILES['file_surat']['type'] != "application/pdf") {
     $ket = "type";
@@ -39,18 +42,15 @@ if ($_FILES['file_surat']['size'] > 1024) {
             $link_file_surat = "{$alamat_unggah_file_surat}/{$file_surat->name}";
         }
     }
-    // echo $id . "_" . $link_file_surat . "  |  " . $link_file_data_praktikan;
 
-    //Cek Variable File
-    // echo "<pre>";
-    // print_r($_FILES);
-    // echo "</pre>";
-
+    $q = base64_decode(urldecode($_POST['q']));
     $sql_update = "UPDATE tb_pkd SET ";
     $sql_update .= " file_surat_pkd = '" . $link_file_surat . "'";
     $sql_update .= " WHERE id_pkd = " . $id;
+    // echo $q . "<br>";
     // echo $sql_update . "<br>";
     try {
+        $conn->query($q);
         $conn->query($sql_update);
         $ket = "Berhasil Tersimpan";
     } catch (Exception $ex) {
@@ -59,4 +59,4 @@ if ($_FILES['file_surat']['size'] > 1024) {
     }
 }
 
-echo json_encode(['Ket' => $ket]);
+echo json_encode(['ket' => $ket]);

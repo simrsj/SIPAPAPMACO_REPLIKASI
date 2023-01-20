@@ -22,15 +22,15 @@ if ($d_prvl['c_pkd'] == "Y") {
     // echo $sql_pkd."<br>";
     try {
         $q_pkd = $conn->query($sql_pkd);
+        $r_pkd = $q_pkd->rowCount();
     } catch (Exception $ex) {
         echo "<script>alert('$ex -DATA PKD NARSUM-');";
         echo "document.location.href='?error404';</script>";
     }
-    $r_pkd = $q_pkd->rowCount();
     if ($r_pkd > 0) {
 ?>
         <div class="table-responsive text-md">
-            <div class="h6 b text-center">
+            <!-- <div class="h6 b text-center">
                 Hilang/Munculkan Kolom Tabel:
                 <div class="m-1">
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="1">Nama Institusi</a>
@@ -38,16 +38,20 @@ if ($d_prvl['c_pkd'] == "Y") {
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="3">Nama Institusi</a>
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="4">Nama Institusi</a>
                 </div>
-            </div>
-            <hr>
+            </div> 
+            <hr>-->
             <table class="table table-striped table-bordered m-auto display" width="100%" id="table-search-each">
                 <thead class="table-dark text-center">
                     <tr>
-                        <th>No</th>
-                        <th>Instansi/Pengguna</th>
-                        <th>Alamat</th>
-                        <th>Nomor Surat</th>
-                        <th>File</th>
+                        <th>No&nbsp;&nbsp;</th>
+                        <th>Pemohon</th>
+                        <th width="30%">Rincian</th>
+                        <th>Tgl<br>Pelaksanaan</th>
+                        <th>Nama<br>Koordinator</th>
+                        <th>Telpon<br>Koordinator</th>
+                        <th>E-Mail<br>Koordinator</th>
+                        <th>Biaya/Tarif</th>
+                        <th>File<br>Surat&nbsp;&nbsp;&nbsp;</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -58,11 +62,58 @@ if ($d_prvl['c_pkd'] == "Y") {
                     ?>
                         <tr class="text-center">
                             <td class="align-middle"><?= $no; ?></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
+                            <td class="align-middle"><?= $d_pkd['nama_pemohon_pkd'] ?></td>
+                            <td class="align-middle"><?= $d_pkd['rincian_pkd'] ?></td>
+                            <td class="align-middle"><?= tanggal($d_pkd['tgl_pel_pkd']) ?></td>
+                            <td class="align-middle"><?= $d_pkd['nama_kor_pkd'] ?></td>
+                            <td class="align-middle"><?= $d_pkd['telp_kor_pkd'] ?></td>
+                            <td class="align-middle"><?= $d_pkd['email_kor_pkd'] ?></td>
+                            <td class="align-middle">
+                                <?php
+                                $sql_pkdt = "SELECT * FROM tb_pkd_tarif";
+                                $sql_pkdt .= " WHERE id_pkd = " . $d_pkd['id_pkd'];
+                                // echo $sql_pkdt."<br>";
+                                $sql_pkdtt = "SELECT SUM(total_pkd_tarif) FROM tb_pkd_tarif WHERE id_pkd = " . $d_pkd['id_pkd'];
+                                // echo $sql_pkdtt . "<br>";
+                                try {
+                                    $q_pkdt = $conn->query($sql_pkdt);
+                                    $q_pkdtt = $conn->query($sql_pkdtt);
+                                    $d_pkdtt = $q_pkdtt->fetch(PDO::FETCH_ASSOC);
+                                    $r_pkdt = $q_pkdt->rowCount();
+                                } catch (Exception $ex) {
+                                    echo "<script>alert('$ex -DATA PKD NARSUM-');";
+                                    echo "document.location.href='?error404';</script>";
+                                }
+                                if ($r_pkdt > 0) {
+                                ?>
+                                    <?= "Rp " . number_format($d_pkdtt[0], 0, '.', '.'); ?>
+                                <?php
+                                } else {
+                                ?>
+                                    <span class="badge badge-danger">Data Biaya/Tarif Tidak Ada</span>
+                                <?php
+                                }
+                                ?>
+                                <br>
+                                <a href="#" class="btn btn-outline-info btn-sm" title="Rincian">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
+                            <td class="align-middle">
+                                <a href="<?= $d_pkd['file_surat_pkd'] ?>" class="btn btn-outline-primary btn-sm" download="file_pkd">
+                                    <i class="fa-solid fa-file-arrow-down"></i>
+                                </a>
+                            </td>
+                            <td class="align-middle">
+                                <div class="btn-group" role="group">
+                                    <a title="Arsip" class='btn btn-primary btn-sm ' href=' #'>
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a title="Hapus" class='btn btn-danger btn-sm ' href='#'>
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                         <?php
                         $no++;
@@ -78,6 +129,10 @@ if ($d_prvl['c_pkd'] == "Y") {
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <td></td>
                         <td></td>
                     </tr>
                 </tfoot>

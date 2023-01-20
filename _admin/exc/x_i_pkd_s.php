@@ -15,9 +15,9 @@ try {
 $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
 if ($d_prvl['c_pkd'] == "Y") {
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_POST);
+    // echo "</pre>";
 
     //Cari id_pkd
     $sql_id_pkd = "SELECT MAX(id_pkd) AS ID FROM tb_pkd";
@@ -50,14 +50,10 @@ if ($d_prvl['c_pkd'] == "Y") {
     $sql_insert .= " '" . $_POST['email_koordinator'] . "', ";
     $sql_insert .= " '" . $_POST['telp_koordinator'] . "' ";
     $sql_insert .= " )";
-    echo $sql_insert . "<br>";
-    try {
-        // $conn->query($sql_insert);
-    } catch (Exception $ex) {
-        echo "<script>alert('$ex -INSERT PKD-');";
-        echo "document.location.href='?error404';</script>";
-    }
-    echo json_encode(['id' => $id_pkd]);
+    // echo $sql_insert . "<br>";
+    $dataJSON['id'] = urlencode(base64_encode($id_pkd));
+    $dataJSON['q'] = urlencode(base64_encode($sql_insert));
+    echo json_encode($dataJSON);
 } else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
 }

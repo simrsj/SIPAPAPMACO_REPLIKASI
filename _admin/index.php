@@ -137,8 +137,8 @@ if ($_SESSION['status_user'] == "Y") {
 			<hr class="sidebar-divider">
 			<?php if ($d_prvl['r_pkd'] == "Y") { ?>
 				<!-- Pemakaian Kekayaan Daerah (PKD) -->
-				<div class="sidebar-heading">
-					Pemakaian Kekayaan Daerah (PKD)
+				<div class="sidebar-heading text-center">
+					Pemakaian Kekayaan Daerah
 				</div>
 
 				<li class="nav-item ">

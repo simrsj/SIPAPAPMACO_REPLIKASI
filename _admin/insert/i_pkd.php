@@ -239,6 +239,7 @@ if (isset($_GET['pkd']) && isset($_GET['i']) && $d_prvl['c_pkd'] == "Y") {
                     type: 'POST',
                     url: "_admin/exc/x_i_pkd_s.php?",
                     data: data_pkd,
+                    dataType: "json",
                     success: function(response) {
                         //ambil data file yang diupload
                         var data_file = new FormData();
@@ -246,30 +247,53 @@ if (isset($_GET['pkd']) && isset($_GET['i']) && $d_prvl['c_pkd'] == "Y") {
 
                         var fileSurat = document.getElementById("file_surat").files;
                         data_file.append("file_surat", fileSurat[0]);
-
                         data_file.append("id", response.id);
-
+                        data_file.append("q", response.q);
+                        xhttp.responseType = 'json';
                         xhttp.open("POST", "_admin/exc/x_i_pkd_sFile.php", true);
+                        xhttp.onload = function() {
+                            if (xhttp.response == "size") {
+                                Swal.fire({
+                                    allowOutsideClick: true,
+                                    icon: 'warning',
+                                    html: '<span class="text-danger text-lg text-center">Ukuran File Terlalu Besar</span>',
+                                    showConfirmButton: false,
+                                    timer: 5000,
+                                    timerProgressBar: true
+                                });
+                            } else if (xhttp.response == "type") {
+                                Swal.fire({
+                                    allowOutsideClick: true,
+                                    icon: 'warning',
+                                    html: '<span class="text-danger text-lg text-center">Tipe File Harus PDF</span>',
+                                    showConfirmButton: false,
+                                    timer: 5000,
+                                    timerProgressBar: true
+                                });
+                            } else {
+                                Swal.fire({
+                                    allowOutsideClick: true,
+                                    // isDismissed: false,
+                                    icon: 'success',
+                                    title: '<span class"text-xs"><b>DATA PKD</b><br>Berhasil Tersimpan',
+                                    // html: '<a href="?pkd" class="btn btn-outline-primary">OK</a>',
+                                    showConfirmButton: false,
+                                    timer: 5000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                }).then(
+                                    function() {
+                                        document.location.href = "?pkd";
+                                    }
+                                );
+                            }
+                        }
                         xhttp.send(data_file);
 
-                        Swal.fire({
-                            allowOutsideClick: true,
-                            // isDismissed: false,
-                            icon: 'success',
-                            html: '<a href="?pkd" class="btn btn-outline-primary">OK</a>',
-                            title: '<span class"text-xs"><b>DATA PKD</b><br>Berhasil Tersimpan',
-                            showConfirmButton: false,
-                            timer: 1115000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        }).then(
-                            function() {
-                                // document.location.href = "?pkd";
-                            }
-                        );
+
                     },
                     error: function(response) {
                         console.log(response.responseText);
