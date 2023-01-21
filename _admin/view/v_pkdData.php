@@ -68,12 +68,12 @@ if ($d_prvl['c_pkd'] == "Y") {
                             <td class="align-middle"><?= $d_pkd['nama_kor_pkd'] ?></td>
                             <td class="align-middle"><?= $d_pkd['telp_kor_pkd'] ?></td>
                             <td class="align-middle"><?= $d_pkd['email_kor_pkd'] ?></td>
-                            <td class="align-middle">
+                            <td class="align-middle b">
                                 <?php
                                 $sql_pkdt = "SELECT * FROM tb_pkd_tarif";
                                 $sql_pkdt .= " WHERE id_pkd = " . $d_pkd['id_pkd'];
                                 // echo $sql_pkdt."<br>";
-                                $sql_pkdtt = "SELECT SUM(total_pkd_tarif) FROM tb_pkd_tarif WHERE id_pkd = " . $d_pkd['id_pkd'];
+                                $sql_pkdtt = "SELECT SUM(total_pkd_tarif) AS total FROM tb_pkd_tarif WHERE id_pkd = " . $d_pkd['id_pkd'];
                                 // echo $sql_pkdtt . "<br>";
                                 try {
                                     $q_pkdt = $conn->query($sql_pkdt);
@@ -86,7 +86,7 @@ if ($d_prvl['c_pkd'] == "Y") {
                                 }
                                 if ($r_pkdt > 0) {
                                 ?>
-                                    <?= "Rp " . number_format($d_pkdtt[0], 0, '.', '.'); ?>
+                                    <?= "Rp " . number_format($d_pkdtt['total'], 0, '.', '.'); ?>
                                 <?php
                                 } else {
                                 ?>
@@ -97,77 +97,9 @@ if ($d_prvl['c_pkd'] == "Y") {
                                 <br>
                                 <!-- Tombol Modal Biaya/Tarif  -->
 
-                                <a title="Biaya/Tarif" class='btn btn-danger btn-sm ' href='?pkdt=<?= urlencode(base64_encode($d_pkd['id_pkd'])) ?>'>
-                                    <i class="fa-solid fa-receipt"></i>
+                                <a title="Rincian Biaya/Tarif" class='btn btn-outline-info btn-sm ' href='?pkd=<?= urlencode(base64_encode($d_pkd['id_pkd'])) ?>&pkdt'>
+                                    <i class="fa-solid fa-circle-info"></i> Rincian
                                 </a>
-                                <a title="Rincian" class="btn btn-outline-info btn-sm" href="#" data-toggle="modal" data-target="#see_1">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </a>
-                                <!-- Modal Biaya/Tarif  -->
-                                <div class="modal fade" id="see_1">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <form id="form_t">
-                                                <div class="modal-header h4">
-                                                    Biaya/Tarif
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <?php
-                                                    if ($r_pkdt > 0) {
-                                                    ?>
-                                                        <table>
-                                                            <thead>
-                                                                <tr class="text-center">
-                                                                    <th>No</th>
-                                                                    <th>Nama Tarif</th>
-                                                                    <th>Frekuensi</th>
-                                                                    <th>Tarif</th>
-                                                                    <th>Satuan</th>
-                                                                    <th>Jumlah Tarif</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php
-                                                                $no = 1;
-                                                                while ($d_pkd = $q_pkd->fetch(PDO::FETCH_ASSOC)) {
-                                                                ?>
-                                                                    <tr class="text-center">
-                                                                        <td><?= $no; ?></td>
-                                                                        <td><?= $d_pkd['nama_pkd_tarif']; ?></td>
-                                                                        <td><?= $d_pkd['frekuensi_pkd_tarif']; ?></td>
-                                                                        <td><?= "Rp " . number_format($d_pkd['jumlah_pkd_tarif'], 0, '.', '.'); ?></td>
-                                                                        <td><?= $d_pkd['satuan_pkd_tarif']; ?></td>
-                                                                        <td><?= "Rp " . number_format($d_pkd['total_pkd_tarif'], 0, '.', '.'); ?></td>
-                                                                        <td><?= $no; ?></td>
-                                                                    </tr>
-                                                                <?php
-                                                                    $no++;
-                                                                }
-                                                                ?>
-                                                            </tbody>
-                                                        </table>
-                                                    <?php
-                                                    } else {
-                                                    ?>
-                                                        <div class="jumbotron">
-                                                            <div class="jumbotron-fluid">
-                                                                <div class="text-gray-700">
-                                                                    <h5 class="text-center">Data Biaya/Tarif Tidak Ada</h5>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
                             <td class="align-middle">
                                 <a href="<?= $d_pkd['file_surat_pkd'] ?>" class="btn btn-outline-primary btn-sm" download="file_pkd">

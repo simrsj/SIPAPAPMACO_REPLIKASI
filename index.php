@@ -87,7 +87,7 @@ include "_add-ons/tanggal_waktu.php";
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <script>
         <?php
-        include "./vendor/!custom/disable_keyboard.js"
+        // include "./vendor/!custom/disable_keyboard.js"
         ?>
     </script>
 

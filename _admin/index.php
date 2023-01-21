@@ -485,11 +485,11 @@ if ($_SESSION['status_user'] == "Y") {
 					}
 				}
 				//PKD
-				elseif (isset($_GET['pkd'])) {
-					if (isset($_GET['i']))
+				elseif (isset($_GET['pkd']) && $d_prvl['r_pkd'] == 'Y') {
+					if (isset($_GET['i']) && $d_prvl['c_pkd'] == 'Y')
 						include "_admin/insert/i_pkd.php";
-					else if (isset($_GET['pkdt']))
-						include "_admin/insert/i_pkdt.php";
+					else if (isset($_GET['pkdt']) && $d_prvl['c_pkd'] == 'Y')
+						include "_admin/view/v_pkd_tarif.php";
 					else
 						include "_admin/view/v_pkd.php";
 				}
