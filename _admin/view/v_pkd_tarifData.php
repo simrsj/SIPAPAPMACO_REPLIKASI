@@ -72,15 +72,15 @@ if ($d_prvl['r_pkd'] == "Y") {
                                                         Ubah Tarif
                                                     </div>
                                                     <div class="modal-body text-md">
-                                                        <form class="form-data b" method="post" id="form_u">
+                                                        <form class="form-data b" method="post" id="form_u<?= $no ?>">
                                                             Nama Tarif : <span style="color:red">*</span><br>
                                                             <input type="text" id="u_nama<?= $no ?>" name="u_nama" class="form-control" placeholder="Isikan nama Tarif" required>
-                                                            <div class="text-danger b i text-xs blink" id="err_u_nama"></div><br>
+                                                            <div class="text-danger b i text-xs blink" id="err_u_nama<?= $no ?>"></div><br>
                                                             <div class="row">
                                                                 <div class="col-md">
                                                                     Frekuensi : <span style="color:red">*</span><br>
                                                                     <input type="number" min="1" id="u_frek<?= $no ?>" name="u_frek" class="form-control form-control-xs" placeholder="Isikan Frekuensi" required>
-                                                                    <div class="text-danger b i text-xs blink" id="err_u_frek"></div>
+                                                                    <div class="text-danger b i text-xs blink" id="err_u_frek<?= $no ?>"></div>
                                                                 </div>
                                                                 <div class="col-md">
                                                                     Satuan : <span style="color:red">*</span>
@@ -105,12 +105,12 @@ if ($d_prvl['r_pkd'] == "Y") {
                                                                         }
                                                                         ?>
                                                                     </select>
-                                                                    <div class="text-danger b i text-xs blink" id="err_u_satuan"></div>
+                                                                    <div class="text-danger b i text-xs blink" id="err_u_satuan<?= $no ?>"></div>
                                                                 </div>
                                                                 <div class="col-md">
                                                                     Tarif (Rp) : <span style="color:red">*</span><br>
                                                                     <input type="number" min="1" id="u_jumlah<?= $no ?>" name="u_jumlah" class="form-control form-control-xs" placeholder="Isikan Tarif" required>
-                                                                    <div class="text-danger b i text-xs blink" id="err_u_tarif"></div>
+                                                                    <div class="text-danger b i text-xs blink" id="err_u_tarif<?= $no ?>"></div>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -167,11 +167,11 @@ if ($d_prvl['r_pkd'] == "Y") {
                                 //ubah initial
                                 $(".ubah_init<?= $no ?>").click(function() {
                                     console.log("ubah_init");
-                                    $("#err_u_nama").empty();
-                                    $("#err_u_frek").empty();
-                                    $("#err_u_satuan").empty();
-                                    $("#err_u_tarif").empty();
-                                    $("#form_u").trigger("reset");
+                                    $("#err_u_nama<?= $no ?>").empty();
+                                    $("#err_u_frek<?= $no ?>").empty();
+                                    $("#err_u_satuan<?= $no ?>").empty();
+                                    $("#err_u_tarif<?= $no ?>").empty();
+                                    $("#form_u<?= $no ?>").trigger("reset");
                                     $("#u_satuan<?= $no ?>").val("").trigger("change");
                                     $.ajax({
                                         type: 'POST',
@@ -196,7 +196,7 @@ if ($d_prvl['r_pkd'] == "Y") {
                                 // ubah data tarif 
                                 $(document).on('click', '.ubah<?= $no; ?>', function() {
                                     console.log("ubah");
-                                    var data_u = $("#form_u").serializeArray();
+                                    var data_u = $("#form_u<?= $no; ?>").serializeArray();
                                     data_u.push({
                                         name: "idu",
                                         value: "<?= $_GET['idu']; ?>"
@@ -209,36 +209,40 @@ if ($d_prvl['r_pkd'] == "Y") {
                                     var u_frek = $('#t_frek<?= $no; ?>').val();
                                     var u_satuan = $('#t_satuan<?= $no; ?>').val();
                                     var u_tarif = $('#t_tarif<?= $no; ?>').val();
+                                    console.log(u_satuan);
 
                                     //cek data from modal ubah bila tidak diiisi
                                     if (
                                         u_nama == "" ||
                                         u_frek == "" ||
                                         u_satuan == "" ||
+                                        u_satuan == undefined ||
                                         u_tarif == ""
                                     ) {
                                         if (u_nama == "") {
-                                            $("#err_u_nama").html("Nama Harus Diisi");
+                                            $("#err_u_nama<?= $no ?>").html("Nama Harus Diisi");
                                         } else {
-                                            $("#err_u_nama").html("");
+                                            $("#err_u_nama<?= $no ?>").html("");
                                         }
 
                                         if (u_frek == "") {
-                                            $("#err_u_frek").html("Frekuensi Harus Diisi");
+                                            $("#err_u_frek<?= $no ?>").html("Frekuensi Harus Diisi");
                                         } else {
-                                            $("#err_u_frek").html("");
+                                            $("#err_u_frek<?= $no ?>").html("");
                                         }
 
-                                        if (u_satuan == "") {
-                                            $("#err_u_satuan").html("Satuan Harus Dipilih");
+                                        if (u_satuan == "" || u_satuan == undefined) {
+                                            $("#err_u_satuan<?= $no ?>").html("Satuan Harus Dipilih");
+                                            // console.log("CEK1")
                                         } else {
-                                            $("#err_u_satuan").html("");
+                                            $("#err_u_satuan<?= $no ?>").html("");
+                                            // console.log("CEK2")
                                         }
 
                                         if (u_tarif == "") {
-                                            $("#err_u_tarif").html("Tarif Harus Diisi");
+                                            $("#err_u_tarif<?= $no ?>").html("Tarif Harus Diisi");
                                         } else {
-                                            $("#err_u_tarif").html("");
+                                            $("#err_u_tarif<?= $no ?>").html("");
                                         }
 
                                         Swal.fire({
@@ -253,44 +257,45 @@ if ($d_prvl['r_pkd'] == "Y") {
                                                 toast.addEventListener('mouseleave', Swal.resumeTimer)
                                             }
                                         });
-                                    }
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: "_admin/exc/x_v_pkd_tarif_u.php",
-                                        data: data_u,
-                                        success: function() {
-                                            Swal.fire({
-                                                allowOutsideClick: true,
-                                                showConfirmButton: false,
-                                                backdrop: true,
-                                                icon: 'success',
-                                                html: '<div class="text-lg b">Data Tarif <br>Berhasil Diubah</div>',
-                                                timer: 5000,
-                                                timerProgressBar: true,
-                                            }).then(
-                                                function() {
-                                                    Swal.fire({
-                                                        title: 'Mohon Ditunggu . . .',
-                                                        html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
-                                                        // add html attribute if you want or remove
-                                                        allowOutsideClick: false,
-                                                        showConfirmButton: false,
-                                                        backdrop: true,
+                                    } else {
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: "_admin/exc/x_v_pkd_tarif_u.php",
+                                            data: data_u,
+                                            success: function() {
+                                                Swal.fire({
+                                                    allowOutsideClick: true,
+                                                    showConfirmButton: false,
+                                                    backdrop: true,
+                                                    icon: 'success',
+                                                    html: '<div class="text-lg b">Data Tarif <br>Berhasil Diubah</div>',
+                                                    timer: 5000,
+                                                    timerProgressBar: true,
+                                                }).then(
+                                                    function() {
+                                                        Swal.fire({
+                                                            title: 'Mohon Ditunggu . . .',
+                                                            html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
+                                                            // add html attribute if you want or remove
+                                                            allowOutsideClick: false,
+                                                            showConfirmButton: false,
+                                                            backdrop: true,
+                                                        });
+                                                        $('#<?= md5("data" . base64_decode(urldecode($_GET['idpkd']))); ?>')
+                                                            .load(
+                                                                "_admin/view/v_pkd_tarifData.php?" +
+                                                                "idpkd=<?= $_GET['idpkd']; ?>&" +
+                                                                "idu=<?= $_GET['idu'] ?>");
+                                                        $('#update<?= $no; ?>').modal('toggle');
+                                                        Swal.close();
                                                     });
-                                                    $('#<?= md5("data" . base64_decode(urldecode($_GET['idpkd']))); ?>')
-                                                        .load(
-                                                            "_admin/view/v_pkd_tarifData.php?" +
-                                                            "idpkd=<?= $_GET['idpkd']; ?>&" +
-                                                            "idu=<?= $_GET['idu'] ?>");
-                                                    $('#update<?= $no; ?>').modal('toggle');
-                                                    Swal.close();
-                                                });
-                                        },
-                                        error: function(response) {
-                                            console.log(response);
-                                            alert('eksekusi query gagal');
-                                        }
-                                    });
+                                            },
+                                            error: function(response) {
+                                                console.log(response);
+                                                alert('eksekusi query gagal');
+                                            }
+                                        });
+                                    }
                                 });
                             <?php } ?>
                             <?php if ($d_prvl['d_pkd'] == 'Y') { ?>
