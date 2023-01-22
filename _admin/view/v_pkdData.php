@@ -108,12 +108,88 @@ if ($d_prvl['c_pkd'] == "Y") {
                             </td>
                             <td class="align-middle">
                                 <div class="btn-group" role="group">
-                                    <a title="Arsip" class='btn btn-primary btn-sm' href=' #'>
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a title="Hapus" class='btn btn-danger btn-sm ' href='#'>
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
+                                    <?php if ($d_prvl['u_pkd'] == 'Y') { ?>
+                                        <!-- tombol modal ubah tarif  -->
+                                        <a title="Ubah" class='btn btn-outline-primary btn-sm' href='?pkd=<?= urlencode(base64_encode($d_pkd['id_pkd'])) ?>&u'>
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                    <?php } ?>
+                                    <?php if ($d_prvl['d_pkd'] == 'Y') { ?>
+                                        <!-- tombol modal hapus pilih tarif  -->
+                                        <a title="Hapus" class='btn btn-outline-danger btn-sm' href='#' data-toggle="modal" data-target="#md<?= $no; ?>">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+
+                                        <!-- modal hapus pilih tarif  -->
+                                        <div class="modal fade text-center" id="md<?= $no; ?>">
+                                            <div class="modal-dialog modal-dialog-scrollable  modal-md">
+                                                <div class="modal-content">
+                                                    <div class="modal-body h5">
+                                                        <div class="row">
+                                                            <div class="col-lg text-left">
+                                                                Hapus Data PKD ?
+                                                            </div>
+                                                            <div class="col-lg text-right">
+                                                                <a class="btn btn-outline-secondary btn-sm" data-dismiss="modal">
+                                                                    Kembali
+                                                                </a>
+                                                                &nbsp;
+                                                                <a class="btn btn-outline-danger btn-sm hapus<?= $no; ?>" id="<?= urlencode(base64_encode($d_pkd['id_pkd'])); ?>" data-dismiss="modal">
+                                                                    Hapus
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                    <script>
+                                        <?php if ($d_prvl['d_pkd'] == 'Y') { ?>
+                                            // hapus data tarif 
+                                            $(document).on('click', '.hapus<?= $no; ?>', function() {
+                                                console.log("hapus data tarif Pilih");
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: "_admin/exc/x_v_pkd_h.php",
+                                                    data: {
+                                                        "idpkd": $(this).attr('id'),
+                                                        "idu": "<?= $_GET['idu'] ?>"
+                                                    },
+                                                    success: function() {
+                                                        Swal.fire({
+                                                            allowOutsideClick: true,
+                                                            showConfirmButton: false,
+                                                            backdrop: true,
+                                                            icon: 'success',
+                                                            html: '<div class="text-lg b">Data PKD <br>Berhasil Dihapus</div>',
+                                                            timer: 5000,
+                                                            timerProgressBar: true,
+                                                        }).then(
+                                                            function() {
+
+                                                                Swal.fire({
+                                                                    title: 'Mohon Ditunggu . . .',
+                                                                    html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100">',
+                                                                    // add html attribute if you want or remove
+                                                                    allowOutsideClick: false,
+                                                                    showConfirmButton: false,
+                                                                    backdrop: true,
+                                                                });
+                                                                $('#data_pdk')
+                                                                    .load("_admin/view/v_pkdData.php?&idu=<?= $_GET['idu']; ?>");
+                                                                Swal.close();
+                                                            }
+                                                        );
+                                                    },
+                                                    error: function(response) {
+                                                        console.log(response);
+                                                        alert('eksekusi query gagal');
+                                                    }
+                                                });
+                                            });
+                                        <?php } ?>
+                                    </script>
                                 </div>
                             </td>
                         </tr>

@@ -488,6 +488,8 @@ if ($_SESSION['status_user'] == "Y") {
 				elseif (isset($_GET['pkd']) && $d_prvl['r_pkd'] == 'Y') {
 					if (isset($_GET['i']) && $d_prvl['c_pkd'] == 'Y')
 						include "_admin/insert/i_pkd.php";
+					else if (isset($_GET['u']) && $d_prvl['u_pkd'] == 'Y')
+						include "_admin/update/u_pkd.php";
 					else if (isset($_GET['pkdt']) && $d_prvl['c_pkd'] == 'Y')
 						include "_admin/view/v_pkd_tarif.php";
 					else

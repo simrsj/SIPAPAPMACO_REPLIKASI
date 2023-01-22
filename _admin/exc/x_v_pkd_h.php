@@ -15,13 +15,13 @@ if ($d_prvl['d_pkd'] == "Y") {
     // echo "<pre>";
     // print_r($_POST);
     // echo "</pre>";
-    $sql = "DELETE FROM tb_pkd_tarif";
-    $sql .= " WHERE id_pkd_tarif=  " . base64_decode(urldecode($_POST['idpkd']));
+    $sql = "DELETE FROM tb_pkd";
+    $sql .= " WHERE id_pkd=  " . base64_decode(urldecode($_POST['idpkdt']));
     // echo "$sql<br>";
     try {
         $conn->query($sql);
     } catch (Exception $ex) {
-        echo "<script>alert('$ex -HAPUS PKD-');";
+        echo "<script>alert('$ex -HAPUS TARIF PKD-');";
         echo "document.location.href='?error404';</script>";
     }
 

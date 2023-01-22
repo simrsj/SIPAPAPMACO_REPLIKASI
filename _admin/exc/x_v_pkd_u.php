@@ -2,7 +2,6 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
-// include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
 
 //data privileges 
 $sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($_POST['idu']));

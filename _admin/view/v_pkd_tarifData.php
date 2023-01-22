@@ -158,193 +158,193 @@ if ($d_prvl['r_pkd'] == "Y") {
                                             </div>
                                         </div>
                                     <?php } ?>
+
+                                    <script>
+                                        <?php if ($d_prvl['u_pkd'] == 'Y') { ?>
+                                            //ubah initial
+                                            $(".ubah_init<?= $no ?>").click(function() {
+                                                console.log("ubah_init");
+                                                $("#err_u_nama<?= $no ?>").empty();
+                                                $("#err_u_frek<?= $no ?>").empty();
+                                                $("#err_u_satuan<?= $no ?>").empty();
+                                                $("#err_u_tarif<?= $no ?>").empty();
+                                                $("#form_u<?= $no ?>").trigger("reset");
+                                                $("#u_satuan<?= $no ?>").val("").trigger("change");
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: "_admin/view/v_pkd_tarifGetData.php",
+                                                    data: {
+                                                        idpkdt: '<?= urlencode(base64_encode($d_pkd_tarif['id_pkd_tarif'])) ?>'
+                                                    },
+                                                    dataType: 'json',
+                                                    success: function(response) {
+                                                        $('#idpkdt<?= $no; ?>').val(response.idpkdt);
+                                                        $('#u_nama<?= $no; ?>').val(response.u_nama);
+                                                        $('#u_frek<?= $no; ?>').val(response.u_frek);
+                                                        $('#u_satuan<?= $no; ?>').val(response.u_satuan).trigger("change");
+                                                        $('#u_jumlah<?= $no; ?>').val(response.u_jumlah);
+                                                    },
+                                                    error: function(response) {
+                                                        console.log(response.responseText);
+                                                    }
+                                                });
+                                            });
+
+                                            // ubah data tarif 
+                                            $(document).on('click', '.ubah<?= $no; ?>', function() {
+                                                console.log("ubah");
+                                                var data_u = $("#form_u<?= $no; ?>").serializeArray();
+                                                data_u.push({
+                                                    name: "idu",
+                                                    value: "<?= $_GET['idu']; ?>"
+                                                }, {
+                                                    name: "idpkdt",
+                                                    value: "<?= urlencode(base64_encode($d_pkd_tarif['id_pkd_tarif'])); ?>"
+                                                });
+
+                                                var u_nama = $('#u_nama<?= $no; ?>').val();
+                                                var u_frek = $('#u_frek<?= $no; ?>').val();
+                                                var u_satuan = $('#u_satuan<?= $no; ?>').val();
+                                                var u_tarif = $('#u_tarif<?= $no; ?>').val();
+                                                // console.log(u_satuan);
+
+                                                //cek data from modal ubah bila tidak diiisi
+                                                if (
+                                                    u_nama == "" ||
+                                                    u_frek == "" ||
+                                                    u_satuan == "" ||
+                                                    u_satuan == undefined ||
+                                                    u_tarif == ""
+                                                ) {
+                                                    if (u_nama == "") {
+                                                        $("#err_u_nama<?= $no ?>").html("Nama Harus Diisi");
+                                                    } else {
+                                                        $("#err_u_nama<?= $no ?>").html("");
+                                                    }
+
+                                                    if (u_frek == "") {
+                                                        $("#err_u_frek<?= $no ?>").html("Frekuensi Harus Diisi");
+                                                    } else {
+                                                        $("#err_u_frek<?= $no ?>").html("");
+                                                    }
+
+                                                    if (u_satuan == "" || u_satuan == undefined) {
+                                                        $("#err_u_satuan<?= $no ?>").html("Satuan Harus Dipilih");
+                                                    } else {
+                                                        $("#err_u_satuan<?= $no ?>").html("");
+                                                    }
+
+                                                    if (u_tarif == "") {
+                                                        $("#err_u_tarif<?= $no ?>").html("Tarif Harus Diisi");
+                                                    } else {
+                                                        $("#err_u_tarif<?= $no ?>").html("");
+                                                    }
+
+                                                    Swal.fire({
+                                                        allowOutsideClick: true,
+                                                        showConfirmButton: false,
+                                                        icon: 'warning',
+                                                        html: '<div class="text-lg b">DATA WAJIB ADA YANG BELUM TERISI</div>',
+                                                        timer: 5000,
+                                                        timerProgressBar: true,
+                                                        didOpen: (toast) => {
+                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                        }
+                                                    });
+                                                } else {
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: "_admin/exc/x_v_pkd_tarif_u.php",
+                                                        data: data_u,
+                                                        success: function() {
+                                                            Swal.fire({
+                                                                allowOutsideClick: true,
+                                                                showConfirmButton: false,
+                                                                backdrop: true,
+                                                                icon: 'success',
+                                                                html: '<div class="text-lg b">Data Tarif <br>Berhasil Diubah</div>',
+                                                                timer: 5000,
+                                                                timerProgressBar: true,
+                                                            }).then(
+                                                                function() {
+                                                                    Swal.fire({
+                                                                        title: 'Mohon Ditunggu . . .',
+                                                                        html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
+                                                                        // add html attribute if you want or remove
+                                                                        allowOutsideClick: false,
+                                                                        showConfirmButton: false,
+                                                                        backdrop: true,
+                                                                    });
+                                                                    $('#<?= md5("data" . base64_decode(urldecode($_GET['idpkd']))); ?>')
+                                                                        .load(
+                                                                            "_admin/view/v_pkd_tarifData.php?" +
+                                                                            "idpkd=<?= $_GET['idpkd']; ?>&" +
+                                                                            "idu=<?= $_GET['idu'] ?>");
+                                                                    $('#update<?= $no; ?>').modal('toggle');
+                                                                    Swal.close();
+                                                                });
+                                                        },
+                                                        error: function(response) {
+                                                            console.log(response);
+                                                            alert('eksekusi query gagal');
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        <?php } ?>
+                                        <?php if ($d_prvl['d_pkd'] == 'Y') { ?>
+                                            // hapus data tarif 
+                                            $(document).on('click', '.hapus<?= $no; ?>', function() {
+                                                console.log("hapus data tarif Pilih");
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: "_admin/exc/x_v_pkd_tarif_h.php",
+                                                    data: {
+                                                        "idpkdt": $(this).attr('id'),
+                                                        "idu": "<?= $_GET['idu'] ?>"
+                                                    },
+                                                    success: function() {
+
+                                                        Swal.fire({
+                                                            allowOutsideClick: true,
+                                                            showConfirmButton: false,
+                                                            backdrop: true,
+                                                            icon: 'success',
+                                                            html: '<div class="text-lg b">Data Tarif <br>Berhasil Dihapus</div>',
+                                                            timer: 5000,
+                                                            timerProgressBar: true,
+                                                        }).then(
+                                                            function() {
+
+                                                                Swal.fire({
+                                                                    title: 'Mohon Ditunggu . . .',
+                                                                    html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
+                                                                    // add html attribute if you want or remove
+                                                                    allowOutsideClick: false,
+                                                                    showConfirmButton: false,
+                                                                    backdrop: true,
+                                                                });
+                                                                $('#<?= md5("data" . base64_decode(urldecode($_GET['idpkd']))); ?>')
+                                                                    .load(
+                                                                        "_admin/view/v_pkd_tarifData.php?" +
+                                                                        "idpkd=<?= $_GET['idpkd']; ?>&" +
+                                                                        "idu=<?= $_GET['idu'] ?>");
+                                                                Swal.close();
+                                                            }
+                                                        );
+                                                    },
+                                                    error: function(response) {
+                                                        console.log(response);
+                                                        alert('eksekusi query gagal');
+                                                    }
+                                                });
+                                            });
+                                        <?php } ?>
+                                    </script>
                                 </div>
                             </td>
                         </tr>
-
-                        <script>
-                            <?php if ($d_prvl['u_pkd'] == 'Y') { ?>
-                                //ubah initial
-                                $(".ubah_init<?= $no ?>").click(function() {
-                                    console.log("ubah_init");
-                                    $("#err_u_nama<?= $no ?>").empty();
-                                    $("#err_u_frek<?= $no ?>").empty();
-                                    $("#err_u_satuan<?= $no ?>").empty();
-                                    $("#err_u_tarif<?= $no ?>").empty();
-                                    $("#form_u<?= $no ?>").trigger("reset");
-                                    $("#u_satuan<?= $no ?>").val("").trigger("change");
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: "_admin/view/v_pkd_tarifGetData.php",
-                                        data: {
-                                            idpkdt: '<?= urlencode(base64_encode($d_pkd_tarif['id_pkd_tarif'])) ?>'
-                                        },
-                                        dataType: 'json',
-                                        success: function(response) {
-                                            $('#idpkdt<?= $no; ?>').val(response.idpkdt);
-                                            $('#u_nama<?= $no; ?>').val(response.u_nama);
-                                            $('#u_frek<?= $no; ?>').val(response.u_frek);
-                                            $('#u_satuan<?= $no; ?>').val(response.u_satuan).trigger("change");
-                                            $('#u_jumlah<?= $no; ?>').val(response.u_jumlah);
-                                        },
-                                        error: function(response) {
-                                            console.log(response.responseText);
-                                        }
-                                    });
-                                });
-
-                                // ubah data tarif 
-                                $(document).on('click', '.ubah<?= $no; ?>', function() {
-                                    console.log("ubah");
-                                    var data_u = $("#form_u<?= $no; ?>").serializeArray();
-                                    data_u.push({
-                                        name: "idu",
-                                        value: "<?= $_GET['idu']; ?>"
-                                    }, {
-                                        name: "idpkdt",
-                                        value: "<?= urlencode(base64_encode($d_pkd_tarif['id_pkd_tarif'])); ?>"
-                                    });
-
-                                    var u_nama = $('#u_nama<?= $no; ?>').val();
-                                    var u_frek = $('#u_frek<?= $no; ?>').val();
-                                    var u_satuan = $('#u_satuan<?= $no; ?>').val();
-                                    var u_tarif = $('#u_tarif<?= $no; ?>').val();
-                                    // console.log(u_satuan);
-
-                                    //cek data from modal ubah bila tidak diiisi
-                                    if (
-                                        u_nama == "" ||
-                                        u_frek == "" ||
-                                        u_satuan == "" ||
-                                        u_satuan == undefined ||
-                                        u_tarif == ""
-                                    ) {
-                                        if (u_nama == "") {
-                                            $("#err_u_nama<?= $no ?>").html("Nama Harus Diisi");
-                                        } else {
-                                            $("#err_u_nama<?= $no ?>").html("");
-                                        }
-
-                                        if (u_frek == "") {
-                                            $("#err_u_frek<?= $no ?>").html("Frekuensi Harus Diisi");
-                                        } else {
-                                            $("#err_u_frek<?= $no ?>").html("");
-                                        }
-
-                                        if (u_satuan == "" || u_satuan == undefined) {
-                                            $("#err_u_satuan<?= $no ?>").html("Satuan Harus Dipilih");
-                                        } else {
-                                            $("#err_u_satuan<?= $no ?>").html("");
-                                        }
-
-                                        if (u_tarif == "") {
-                                            $("#err_u_tarif<?= $no ?>").html("Tarif Harus Diisi");
-                                        } else {
-                                            $("#err_u_tarif<?= $no ?>").html("");
-                                        }
-
-                                        Swal.fire({
-                                            allowOutsideClick: true,
-                                            showConfirmButton: false,
-                                            icon: 'warning',
-                                            html: '<div class="text-lg b">DATA WAJIB ADA YANG BELUM TERISI</div>',
-                                            timer: 5000,
-                                            timerProgressBar: true,
-                                            didOpen: (toast) => {
-                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            }
-                                        });
-                                    } else {
-                                        $.ajax({
-                                            type: 'POST',
-                                            url: "_admin/exc/x_v_pkd_tarif_u.php",
-                                            data: data_u,
-                                            success: function() {
-                                                Swal.fire({
-                                                    allowOutsideClick: true,
-                                                    showConfirmButton: false,
-                                                    backdrop: true,
-                                                    icon: 'success',
-                                                    html: '<div class="text-lg b">Data Tarif <br>Berhasil Diubah</div>',
-                                                    timer: 5000,
-                                                    timerProgressBar: true,
-                                                }).then(
-                                                    function() {
-                                                        Swal.fire({
-                                                            title: 'Mohon Ditunggu . . .',
-                                                            html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
-                                                            // add html attribute if you want or remove
-                                                            allowOutsideClick: false,
-                                                            showConfirmButton: false,
-                                                            backdrop: true,
-                                                        });
-                                                        $('#<?= md5("data" . base64_decode(urldecode($_GET['idpkd']))); ?>')
-                                                            .load(
-                                                                "_admin/view/v_pkd_tarifData.php?" +
-                                                                "idpkd=<?= $_GET['idpkd']; ?>&" +
-                                                                "idu=<?= $_GET['idu'] ?>");
-                                                        $('#update<?= $no; ?>').modal('toggle');
-                                                        Swal.close();
-                                                    });
-                                            },
-                                            error: function(response) {
-                                                console.log(response);
-                                                alert('eksekusi query gagal');
-                                            }
-                                        });
-                                    }
-                                });
-                            <?php } ?>
-                            <?php if ($d_prvl['d_pkd'] == 'Y') { ?>
-                                // hapus data tarif 
-                                $(document).on('click', '.hapus<?= $no; ?>', function() {
-                                    console.log("hapus data tarif Pilih");
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: "_admin/exc/x_v_pkd_tarif_h.php",
-                                        data: {
-                                            "idpkdt": $(this).attr('id'),
-                                            "idu": "<?= $_GET['idu'] ?>"
-                                        },
-                                        success: function() {
-
-                                            Swal.fire({
-                                                allowOutsideClick: true,
-                                                showConfirmButton: false,
-                                                backdrop: true,
-                                                icon: 'success',
-                                                html: '<div class="text-lg b">Data Tarif <br>Berhasil Dihapus</div>',
-                                                timer: 5000,
-                                                timerProgressBar: true,
-                                            }).then(
-                                                function() {
-
-                                                    Swal.fire({
-                                                        title: 'Mohon Ditunggu . . .',
-                                                        html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
-                                                        // add html attribute if you want or remove
-                                                        allowOutsideClick: false,
-                                                        showConfirmButton: false,
-                                                        backdrop: true,
-                                                    });
-                                                    $('#<?= md5("data" . base64_decode(urldecode($_GET['idpkd']))); ?>')
-                                                        .load(
-                                                            "_admin/view/v_pkd_tarifData.php?" +
-                                                            "idpkd=<?= $_GET['idpkd']; ?>&" +
-                                                            "idu=<?= $_GET['idu'] ?>");
-                                                    Swal.close();
-                                                }
-                                            );
-                                        },
-                                        error: function(response) {
-                                            console.log(response);
-                                            alert('eksekusi query gagal');
-                                        }
-                                    });
-                                });
-                            <?php } ?>
-                        </script>
                     <?php
                         $no++;
                     }
