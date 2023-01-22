@@ -504,7 +504,7 @@ if ($r_data_praktikan > 0) {
                                                             $('#mu<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
                                                                 $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>')
                                                                     .load("_admin/view/v_praktik_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
-                                                            })
+                                                            });
                                                         }
                                                     )
 

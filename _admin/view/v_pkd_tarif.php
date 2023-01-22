@@ -36,7 +36,7 @@
                                                     <?php
                                                     $sql_satuan_tarif = "SELECT * FROM tb_tarif_satuan";
                                                     $sql_satuan_tarif .= " ORDER BY nama_tarif_satuan ASC";
-                                                    echo $sql_satuan_tarif . "<br>";
+                                                    // echo $sql_satuan_tarif . "<br>";
                                                     try {
                                                         $q_satuan_tarif = $conn->query($sql_satuan_tarif);
                                                     } catch (Exception $ex) {
