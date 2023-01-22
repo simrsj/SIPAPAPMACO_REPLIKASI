@@ -206,10 +206,10 @@ if ($d_prvl['r_pkd'] == "Y") {
                                     });
 
                                     var u_nama = $('#u_nama<?= $no; ?>').val();
-                                    var u_frek = $('#t_frek<?= $no; ?>').val();
-                                    var u_satuan = $('#t_satuan<?= $no; ?>').val();
-                                    var u_tarif = $('#t_tarif<?= $no; ?>').val();
-                                    console.log(u_satuan);
+                                    var u_frek = $('#u_frek<?= $no; ?>').val();
+                                    var u_satuan = $('#u_satuan<?= $no; ?>').val();
+                                    var u_tarif = $('#u_tarif<?= $no; ?>').val();
+                                    // console.log(u_satuan);
 
                                     //cek data from modal ubah bila tidak diiisi
                                     if (
@@ -233,10 +233,8 @@ if ($d_prvl['r_pkd'] == "Y") {
 
                                         if (u_satuan == "" || u_satuan == undefined) {
                                             $("#err_u_satuan<?= $no ?>").html("Satuan Harus Dipilih");
-                                            // console.log("CEK1")
                                         } else {
                                             $("#err_u_satuan<?= $no ?>").html("");
-                                            // console.log("CEK2")
                                         }
 
                                         if (u_tarif == "") {
