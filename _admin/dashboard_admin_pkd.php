@@ -10,75 +10,30 @@
         </a> -->
     </div>
 
-    <?php
-    /*
-    <!-- Content Row -->
-    <div class="row">
-        <!-- Diklat -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col">
-                            <div class="text-md font-weight-bold  text-primary mb-1">
-                                JUMLAH DIKLAT PROSES :
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?= $dashboard_dpp; ?></b> Kelompok
-                                </div>
-                            </div>
-                            <div class="text-md font-weight-bold text-primary mb-1">
-                                JUMLAH DIKLAT AKTIF :
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?= $dashboard_dpa; ?></b> Kelompok
-                                </div>
-                            </div>
-                            <div class="text-md font-weight-bold text-primary mb-1">
-                                JUMLAH DIKLAT NON-AKTIF :
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?= $dashboard_dpn; ?></b> Kelompok
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="row justify-content-md-center">
 
-        <!-- Pendapatan -->
+        <!-- Data PKD -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col">
-                            <div class="text-md font-weight-bold text-success text-uppercase mb-1">
-                                TOTAL PENDAPATAN : </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?= "Rp " . number_format($total_tarif, 0, '.', '.'); ?>
+                            <div class="text-md font-weight-bold  text-success mb-1 b">
+                                JUMLAH PENDAPATAN PKD YANG AKAN DATANG :
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <?= "Rp " . number_format($ds_pdpt_tmd, 0, '.', '.'); ?>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- MoU -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col">
-                            <div class="text-md font-weight-bold text-danger mb-1">
-                                <b>TOTAL MOU : </b>
+                            <div class="text-md font-weight-bold text-success mb-1 b">
+                                JUMLAH PENDAPATAN PKD SELESAI :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="badge badge-primary text-lg"><?= $dashboard_dmt; ?></span>
+                                    <?= "Rp " . number_format($ds_pdpt_ts, 0, '.', '.'); ?>
                                 </div>
-                                <b>MOU BERAKHIR : </b>
+                            </div>
+                            <div class="text-md font-weight-bold text-success mb-1 b">
+                                JUMLAH TOTAL PENDAPATAN PKD :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="badge badge-danger text-lg"><?= $dashboard_dmb; ?></span>
-                                </div>
-                                <b>MOU AKTIF : </b>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <span class="badge badge-success text-lg"><?= $dashboard_dma; ?></span>
+                                    <?= "Rp " . number_format($ds_pdpt_t, 0, '.', '.'); ?>
                                 </div>
                             </div>
                         </div>
@@ -87,31 +42,29 @@
             </div>
         </div>
 
-        <!-- Praktikan -->
+        <!-- Pendapatan PKD -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col">
-                            <!-- <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
-                                JUMLAH PRAKTIKAN : </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php $jumlah_praktik_total; ?> Orang
-                            </div> -->
-                            <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
-                                JUMLAH PRAKTIKAN PROSES: </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?= $dashboard_dpjp; ?> Orang
+                            <div class="text-md font-weight-bold  text-primary mb-1 b">
+                                JUMLAH PKD YANG AKAN DATANG :
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <b><?= $ds_keg_tmd; ?></b> Kegiatan
+                                </div>
                             </div>
-                            <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
-                                JUMLAH PRAKTIKAN AKTIF: </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?= $dashboard_dpja; ?> Orang
+                            <div class="text-md font-weight-bold text-primary mb-1 b">
+                                JUMLAH PKD SELESAI :
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <b><?= $ds_keg_ts; ?></b> Kegiatan
+                                </div>
                             </div>
-                            <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
-                                JUMLAH PRAKTIKAN SELESAI: </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?= $dashboard_dpjs; ?> Orang
+                            <div class="text-md font-weight-bold text-primary mb-1 b">
+                                JUMLAH TOTAL PKD :
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <b><?= $ds_keg_t; ?></b> Kegiatan
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,84 +75,56 @@
 
     <!-- Content Row -->
     <div class="row">
-        <!-- Data Mess -->
-        <div class="col-xl-7 col-lg-6">
-            <div class="card shadow mb-4">
+        <!-- Data Tabel PKD -->
+        <div class="col-xl-7 col-lg-6  mb-4">
+            <div class="card shadow mb-4 h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Data Mess</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div> -->
-                    </div>
+                    <h6 class="m-0 font-weight-bold text-primary">Data PKD</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <?php
-                    $sql_mess = "SELECT * FROM tb_mess order by nama_mess ASC";
-                    $q_mess = $conn->query($sql_mess);
-                    $r_mess = $q_mess->rowCount();
+                    $sql_pkd = "SELECT * FROM tb_pkd order by tgl_pel_pkd DESC";
+                    try {
+                        $q_pkd = $conn->query($sql_pkd);
+                        $r_pkd = $q_pkd->rowCount();
+                    } catch (Exception $ex) {
+                        echo "<script>alert('$ex -DATA PKD-');";
+                        echo "document.location.href='?error404';</script>";
+                    }
                     ?>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="dataTable">
                             <thead class="table-dark">
                                 <tr class="text-center">
                                     <th scope='col'>No</th>
-                                    <th>Nama Mess</th>
-                                    <th>Kapasitas Total</th>
-                                    <!-- <th>Kapasitas Terisi</th> -->
+                                    <th>Nama Pemohon</th>
+                                    <th>Rincian Kegiatan</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $no = 1;
-                                while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
+                                while ($d_pkd = $q_pkd->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
                                         <td class="text-center"><?= $no; ?></td>
-                                        <td><?= $d_mess['nama_mess']; ?></td>
-                                        <td class="text-center"><?= $d_mess['kapasitas_t_mess']; ?></td>
-                                        <!-- <td><?php
-                                                    // $sql_kapsTerisiMess = "SELECT * FROM tb_praktik 
-                                                    // JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_mess_pilih
-                                                    // WHERE tb_praktik.status_cek_praktik = 'BYR_Y' 
-                                                    // AND tb_praktik.status_cek_praktik = 'AKV'
-                                                    // AND tb_mess.id_mess = ".d_mess['id_mess'];                                      "; 
-
-                                                    // $q_kapsTerisiMess = $conn->query($sql_kapsTerisiMess);
-                                                    // while ($d_kapsTerisiMess = $q_kapsTerisiMess->fetch(PDO::FETCH_ASSOC)){
-                                                    //     $d_kapsTerisiMess['jumlah_praktik'];
-                                                    // }
-                                                    // echo $d_kapsTerisiMess['jumlah_praktik']; 
-                                                    ?>
-                                        </td> -->
-                                        <td class="text-center">
-                                            <?php
-                                            if ($d_mess['status_mess'] == 'Y') {
-                                            ?>
-                                                <div class="btn btn-sm btn-success">Aktif</div>
-                                            <?php
-                                            } elseif ($d_mess['status_mess'] == 'T') {
-                                            ?>
-                                                <div class="btn btn-sm btn-danger">Non-Aktif</div>
-                                            <?php
-                                            }
-                                            ?>
+                                        <td><?= $d_pkd['nama_pemohon_pkd']; ?></td>
+                                        <td><?= $d_pkd['rincian_pkd']; ?></td>
+                                        <td class="text-center text-lg">
+                                            <?php if ($d_pkd['tgl_pel_pkd'] > date('Y-m-d')) { ?>
+                                                <span class="badge badge-success">Yang Akan Datang</span>
+                                            <?php } else if ($d_pkd['tgl_pel_pkd'] < date('Y-m-d')) { ?>
+                                                <span class="badge badge-primary">Selesai</span>
+                                            <?php } else { ?>
+                                                <span class="badge badge-warning text-dark">Sedang<br>Berlangsung</span>
+                                            <?php } ?>
                                         </td>
-                                        <?php
-                                        $no++;
-                                        ?>
                                     </tr>
                                 <?php
+                                    $no++;
                                 }
                                 ?>
                             </tbody>
@@ -209,36 +134,77 @@
             </div>
         </div>
 
-        <!-- Data Praktik Tahunan -->
-        <div class="col-xl-5 col-lg-6">
-            <div class="card shadow mb-4">
+        <!-- Data Presentase PKD -->
+        <div class="col-xl-5 col-lg-6  mb-4">
+            <div class="card shadow mb-4 shadow h-100">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Persentase Jenis Diklat Tahun <?= date('Y'); ?></h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Persentase PKD</h6>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> Kedokteran
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Keperawatan
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-warning"></i> Nakes Lainnya
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-danger"></i> Non-Nakes
-                        </span>
-                    </div>
+                <div class="card-body" height="100%">
+                    <canvas id="grafikPemohon"></canvas>
+                    <script>
+                        var grafikPemohon = document.getElementById("grafikPemohon");
+
+                        Chart.defaults.global.defaultFontFamily = "Lato";
+                        Chart.defaults.global.defaultFontSize = 13;
+                        Chart.defaults.global.legend.display = false;
+
+                        var jumlahPermohonan = {
+                            label: false,
+                            data: [
+                                <?php
+                                foreach ($ds_jumlahPemohon_ar as $nomor_ar => $isi) {
+                                    echo "'" . $isi . "',";
+                                }
+                                ?>
+                            ],
+                            backgroundColor: '#4e73df',
+                            borderColor: 'rgba(0, 99, 132, 1)',
+                            yAxisID: "y-axis-jumlahPemohon"
+                        };
+                        // var gravityData = {
+                        //     label: false,
+                        //     data: [3.7, 8.9, 9.8, 3.7, 23.1, 9.0, 8.7, 11.0],
+                        //     backgroundColor: 'rgba(99, 132, 0, 0.6)',
+                        //     borderColor: 'rgba(99, 132, 0, 1)',
+                        //     yAxisID: "y-axis-gravity"
+                        // };
+                        var namaPemohon = {
+                            labels: [
+                                <?php
+                                foreach ($ds_pemohon_ar as $nomor_ar => $isi) {
+                                    echo "'" . $isi . "',";
+                                }
+                                ?>
+                            ],
+                            // datasets: [densityData, gravityData]
+                            datasets: [jumlahPermohonan]
+                        };
+                        var chartOptions = {
+                            scales: {
+                                xAxes: [{
+                                    barPercentage: 1,
+                                    categoryPercentage: 0.6
+                                }],
+                                yAxes: [{
+                                    id: "y-axis-jumlahPemohon",
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        };
+                        var barChart = new Chart(grafikPemohon, {
+                            type: 'bar',
+                            data: namaPemohon,
+                            options: chartOptions
+                        });
+                    </script>
                 </div>
+
             </div>
         </div>
     </div>
-    */
-    ?>
 </div>
 <!-- /.container-fluid -->

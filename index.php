@@ -32,13 +32,11 @@ include "_add-ons/tanggal_waktu.php";
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet">
-    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.css" rel="stylesheet" /> -->
     <link href="vendor/sw2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
     <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
-
-    <!-- <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="vendor/chart.js/Chart.js"></script>
 </head>
 
 <body id="page-top" class="bg-primary">
@@ -80,10 +78,9 @@ include "_add-ons/tanggal_waktu.php";
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
     <script src="vendor/select2/dist/js/select2.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.js"></script> -->
     <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
     <script src="vendor/!custom/jsCustom.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <script>
         <?php
