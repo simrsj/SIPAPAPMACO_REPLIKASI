@@ -37,6 +37,7 @@ include "_add-ons/tanggal_waktu.php";
     <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="vendor/chart.js/Chart.js"></script>
+    <script src="vendor/!custom/jsCustom.js"></script>
 </head>
 
 <body id="page-top" class="bg-primary">
