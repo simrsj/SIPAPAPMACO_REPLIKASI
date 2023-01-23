@@ -35,16 +35,18 @@ include "_add-ons/tanggal_waktu.php";
     <link href="vendor/sw2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
     <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
+    <link href="vendor/!custom/cs_loader.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="vendor/chart.js/Chart.js"></script>
     <script src="vendor/!custom/jsCustom.js"></script>
+
 </head>
 
 <body id="page-top" class="bg-primary">
     <div class="preloader">
-        <div class="loading">
+        <div class="loading text-center">
             <img src="./_img/logorsj.png" class="rotate mb-3" width="100" height="100" />
-            <p>Harap Tunggu</p>
+            <div class="h5 b">Harap Tunggu</div>
         </div>
     </div>
     <?php

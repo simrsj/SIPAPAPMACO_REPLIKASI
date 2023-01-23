@@ -1,49 +1,35 @@
 .loader {
-  position: relative;
-  width: 120px;
-  height: 90px;
-  margin: 0 auto;
-}
-.loader:before {
-  content: "";
-  position: absolute;
-  bottom: 30px;
-  left: 50px;
-  height: 30px;
-  width: 30px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: #4e73df;
-  animation: loading-bounce 0.5s ease-in-out infinite alternate;
+  left: 45%;
+  position: relative;
+  animation: rotate 1s linear infinite
 }
-.loader:after {
+.loader::before , .loader::after {
   content: "";
+  box-sizing: border-box;
   position: absolute;
-  right: 0;
-  top: 0;
-  height: 7px;
-  width: 45px;
-  border-radius: 4px;
-  box-shadow: 0 5px 0 #169b6b, -35px 50px 0 #169b6b, -70px 95px 0 #169b6b;
-  animation: loading-step 1s ease-in-out infinite;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #1CC88A;
+  animation: prixClipFix 2s linear infinite ;
+}
+.loader::after{
+  border-color: #4e73df;
+  animation: prixClipFix 2s linear infinite , rotate 0.5s linear infinite reverse;
+  inset: 7px;
 }
 
-@keyframes loading-bounce {
-  0% { transform: scale(1, 0.7)}
-  40% { transform: scale(0.8, 1.2)}
-  60% { transform: scale(1, 1)}
-  100% { bottom: 140px }
+@keyframes rotate {
+  0%   {transform: rotate(0deg)}
+  100%   {transform: rotate(360deg)}
 }
-@keyframes loading-step {
-  0% {
-    box-shadow: 0 10px 0 rgba(0,0,0,0),
-                0 10px 0 #169b6b,
-              -35px 50px 0 #169b6b,
-              -70px 90px 0 #169b6b;
-  }
-  100% {
-    box-shadow: 0 10px 0 #169b6b,
-              -35px 50px 0 #169b6b,
-              -70px 90px 0 #169b6b,
-              -70px 90px 0 rgba(0,0,0,0);
-  }
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
 }
