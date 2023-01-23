@@ -167,7 +167,6 @@ if ($d_prvl['c_pkd'] == "Y") {
                                                             timerProgressBar: true,
                                                         }).then(
                                                             function() {
-
                                                                 Swal.fire({
                                                                     title: 'Mohon Ditunggu . . .',
                                                                     html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100">',
@@ -216,6 +215,11 @@ if ($d_prvl['c_pkd'] == "Y") {
                 </tfoot>
             </table>
         </div>
+        <script>
+            <?php
+            include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/jsCustom.js";
+            ?>
+        </script>
     <?php
     } else {
     ?>
@@ -229,5 +233,5 @@ if ($d_prvl['c_pkd'] == "Y") {
 <?php
     }
 } else {
-    echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
+    echo "<script>alert('unauthorized');document.location.href='?error401';</>";
 }
