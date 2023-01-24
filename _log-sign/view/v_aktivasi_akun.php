@@ -26,6 +26,21 @@ if (isset($_GET['act_user']) && isset($_GET['crypt'])) {
         $sql_u_aktivasi = "UPDATE tb_user SET";
         $sql_u_aktivasi .= " status_aktivasi_user = 'Y'";
         $sql_u_aktivasi .= " WHERE id_user = " . base64_decode(urldecode($arr[1]));
+
+        $sql_u_aktivasi_privilages = "UPDATE tb_user_privilages SET";
+        $sql_u_aktivasi_privilages .= " c_praktik = 'Y'";
+        $sql_u_aktivasi_privilages .= " r_praktik = 'Y'";
+        $sql_u_aktivasi_privilages .= " c_praktikan = 'Y'";
+        $sql_u_aktivasi_privilages .= " r_praktikan = 'Y'";
+        $sql_u_aktivasi_privilages .= " u_praktikan = 'Y'";
+        $sql_u_aktivasi_privilages .= " d_praktikan = 'Y'";
+        $sql_u_aktivasi_privilages .= " r_praktik_mess = 'Y'";
+        $sql_u_aktivasi_privilages .= " status_aktivasi_user = 'Y'";
+        $sql_u_aktivasi_privilages .= " status_aktivasi_user = 'Y'";
+        $sql_u_aktivasi_privilages .= " status_aktivasi_user = 'Y'";
+        $sql_u_aktivasi_privilages .= " status_aktivasi_user = 'Y'";
+        $sql_u_aktivasi_privilages .= " status_aktivasi_user = 'Y'";
+        $sql_u_aktivasi_privilages .= " WHERE id_user = " . base64_decode(urldecode($arr[1]));
         // echo "<br>" . $sql_u_aktivasi;
         try {
             $conn->query($sql_u_aktivasi);

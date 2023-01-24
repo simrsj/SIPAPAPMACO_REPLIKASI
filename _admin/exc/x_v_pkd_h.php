@@ -16,7 +16,7 @@ if ($d_prvl['d_pkd'] == "Y") {
     // print_r($_POST);
     // echo "</pre>";
     $sql = "DELETE FROM tb_pkd";
-    $sql .= " WHERE id_pkd=  " . base64_decode(urldecode($_POST['idpkdt']));
+    $sql .= " WHERE id_pkd=  " . base64_decode(urldecode($_POST['idpkd']));
     // echo "$sql<br>";
     try {
         $conn->query($sql);
