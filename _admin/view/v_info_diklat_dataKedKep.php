@@ -183,7 +183,7 @@ function generateKalenderKedKep($date)
                                                 } else {
                                                 ?>
                                                     <div class="jumbotron">
-                                                        <div class="jumbotron-fluid font-weight-bold">
+                                                        <div class="jumbotron-fluid font-weight-bold text-center">
                                                             DATA PRAKTIK TIDAK ADA
                                                         </div>
                                                     </div>

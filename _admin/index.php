@@ -60,56 +60,6 @@ if ($_SESSION['status_user'] == "Y") {
 					Kediklatan
 				</div>
 
-				<?php if ($d_prvl['r_praktik'] == "Y") { ?>
-					<!-- Praktik -->
-					<li class="nav-item" style=" word-wrap: break-word;">
-						<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapse_prk">
-							<i class="fa-solid fa-fw fa-user-graduate"></i>
-							<span>Praktik</span>
-						</a>
-						<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-							<div class="bg-white py-2 collapse-inner rounded">
-								<?php if ($d_prvl['r_praktik'] == "Y") { ?>
-									<a class="collapse-item" href="?ptk">
-										<i class="fas fa-envelope"></i>
-										<span>Daftar Pengajuan</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktikan'] == "Y") { ?>
-									<!-- Praktikan -->
-									<a class="collapse-item" href="?ptkn">
-										<i class="far fa-fw fa-address-book"></i>
-										<span>Data Praktikan</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktik_pembimbing'] == "Y") { ?>
-									<a class="collapse-item" href="?pmbb">
-										<i class="fas fa-fw fa-users"></i>
-										<span>Pembimbing-Ruangan</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktik_tarif'] == "Y") { ?>
-									<a class="collapse-item" href="?ptrf">
-										<i class="fas fa-fw fa-receipt"></i>
-										<span>Tarif Praktik</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktik_bayar'] == "Y") { ?>
-									<a class="collapse-item" href="?pbyr">
-										<i class="fas fa-fw fa-wallet"></i>
-										<span>Data Pembayaran</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktik_nilai'] == "Y") { ?>
-									<a class="collapse-item" href="?pnilai">
-										<i class="fas fa-fw fa-clipboard-list"></i>
-										<span>Data Nilai</span>
-									</a>
-								<?php } ?>
-							</div>
-						</div>
-					</li>
-				<?php } ?>
 				<!-- Informasi -->
 				<li class="nav-item ">
 					<a class="nav-link" href="?info_diklat">
@@ -167,12 +117,65 @@ if ($_SESSION['status_user'] == "Y") {
 						</div>
 					</li>
 				<?php } ?>
-				<li class="nav-item ">
-					<a class="nav-link" href="?pars">
-						<i class="fas fa-fw fa-archive"></i>
-						<span>Arsip Praktik</span>
-					</a>
-				</li>
+
+				<?php if ($d_prvl['r_praktik'] == "Y") { ?>
+					<!-- Praktik -->
+					<li class="nav-item" style=" word-wrap: break-word;">
+						<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapse_prk">
+							<i class="fa-solid fa-fw fa-user-graduate"></i>
+							<span>Praktik</span>
+						</a>
+						<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+							<div class="bg-white py-2 collapse-inner rounded">
+								<?php if ($d_prvl['r_praktik'] == "Y") { ?>
+									<a class="collapse-item" href="?ptk">
+										<i class="fas fa-envelope"></i>
+										<span>Daftar Pengajuan</span>
+									</a>
+								<?php } ?>
+								<?php if ($d_prvl['r_praktikan'] == "Y") { ?>
+									<!-- Praktikan -->
+									<a class="collapse-item" href="?ptkn">
+										<i class="far fa-fw fa-address-book"></i>
+										<span>Data Praktikan</span>
+									</a>
+								<?php } ?>
+								<?php if ($d_prvl['r_praktik_pembimbing'] == "Y") { ?>
+									<a class="collapse-item" href="?pmbb">
+										<i class="fas fa-fw fa-users"></i>
+										<span>Pembimbing-Ruangan</span>
+									</a>
+								<?php } ?>
+								<?php if ($d_prvl['r_praktik_tarif'] == "Y") { ?>
+									<a class="collapse-item" href="?ptrf">
+										<i class="fas fa-fw fa-receipt"></i>
+										<span>Tarif Praktik</span>
+									</a>
+								<?php } ?>
+								<?php if ($d_prvl['r_praktik_bayar'] == "Y") { ?>
+									<a class="collapse-item" href="?pbyr">
+										<i class="fas fa-fw fa-wallet"></i>
+										<span>Data Pembayaran</span>
+									</a>
+								<?php } ?>
+								<?php if ($d_prvl['r_praktik_nilai'] == "Y") { ?>
+									<a class="collapse-item" href="?pnilai">
+										<i class="fas fa-fw fa-clipboard-list"></i>
+										<span>Data Nilai</span>
+									</a>
+								<?php } ?>
+							</div>
+						</div>
+					</li>
+				<?php } ?>
+				<?php if ($d_prvl['r_praktik'] == "Y") { ?>
+					<li class="nav-item ">
+						<a class="nav-link" href="?pars">
+							<i class="fas fa-fw fa-archive"></i>
+							<span>Arsip Praktik</span>
+						</a>
+					</li>
+				<?php } ?>
 			<?php } ?>
 			<hr class="sidebar-divider">
 			<?php if ($d_prvl['r_pkd'] == "Y") { ?>
@@ -222,45 +225,6 @@ if ($_SESSION['status_user'] == "Y") {
 								<i class="fas fa-fw fa-table"></i>
 								<span>Laporan Mess</span>
 
-						</div>
-					</div>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						<i class="fas fa-fw fa-table"></i>
-						<span>Data Pendukung</span>
-					</a>
-					<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">Daftar Data Pendukung :</h6>
-							<a class="collapse-item" href="?ins">
-								<i class="fas fa-fw fa-university"></i>
-								<span>Institusi</span>
-							</a>
-							<a class="collapse-item" href="?d_pmbb">
-								<i class="fas fa-fw fa-portrait"></i>
-								<span>Mentor/Pembimbing</span>
-							</a>
-							<a class="collapse-item" href="?mes">
-								<i class="fas fa-fw fa-bed"></i>
-								<span>Mess/Pemondokan</span>
-							</a>
-							<a class="collapse-item" href="?mou">
-								<i class="fas fa-fw fa-handshake"></i>
-								<span>MoU</span>
-							</a>
-							<a class="collapse-item" href="?trf">
-								<i class="fas fa-fw fa-money-bill-wave"></i>
-								<span>Tarif</span>
-							</a>
-							<a class="collapse-item" href="?tmp">
-								<i class="fas fa-school"></i>
-								<span>Tempat</span>
-							</a>
-							<a class="collapse-item" href="?uni">
-								<i class="fas fa-fw fa-house-user"></i>
-								<span>Unit</span>
-							</a>
 						</div>
 					</div>
 				</li>
@@ -475,7 +439,7 @@ if ($_SESSION['status_user'] == "Y") {
 				//daftar data pemibimbing
 				elseif (isset($_GET['d_pmbb']) && $d_prvl['r_daftar_pembimbing'] == 'Y') {
 					if (isset($_GET['detail']))
-						include "_admin/view/v_daftarPembimbing_detail.php";
+						include "_admin/view/v_daftarPembimbingDetail.php";
 					else
 						include "_admin/view/v_daftarPembimbing.php";
 				}

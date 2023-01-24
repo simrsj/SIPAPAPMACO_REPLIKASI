@@ -53,15 +53,21 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     <td class="text-center">
                                         <?php
 
-                                        $sql_kali = "SELECT * FROM tb_pembimbing_pilih GROUP BY id_praktik";
+                                        $sql_kali = "SELECT * FROM tb_pembimbing_pilih ";
+                                        $sql_kali .= " WHERE id_pembimbing = " . $d_pembimbing['id_pembimbing'];
+                                        $sql_kali .= " GROUP BY id_praktik";
                                         try {
-                                            $q_pkd = $conn->query($sql_pkd);
-                                            $r_pkd = $q_pkd->rowCount();
+                                            $q_kali = $conn->query($sql_kali);
+                                            echo $q_kali->rowCount();
                                         } catch (Exception $ex) {
-                                            echo "<script>alert('$ex -DATA PKD-');";
+                                            echo "<script>alert('$ex -KALI PEMBIMBING-');";
                                             echo "document.location.href='?error404';</script>";
                                         }
-                                        $d_pembimbing['kali_pembimbing']; ?></td>
+                                        ?>
+                                        <br>
+                                        <a href="?d_pmbb=<?= bin2hex(urlencode(base64_encode($d_pembimbing['id_pembimbing']))) ?>&detail" class="btn btn-outline-info btn-xs">
+                                            <i class="fas fa-eye"></i> Lihat
+                                        </a>
                                     <td class="text-center text-md">
                                         <a title="Ubah" class='btn btn-primary btn-xs ubah_init' id='<?= $d_pembimbing['id_pembimbing']; ?>'>
                                             <i class="fas fa-edit"></i>
