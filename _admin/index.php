@@ -126,6 +126,46 @@ if ($_SESSION['status_user'] == "Y") {
 							<span>Kuota</span>
 						</a>
 					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							<i class="fas fa-fw fa-table"></i>
+							<span>Data Pendukung</span>
+						</a>
+						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+							<div class="bg-white py-2 collapse-inner rounded">
+								<h6 class="collapse-header">Daftar Data Pendukung :</h6>
+								<a class="collapse-item" href="?ins">
+									<i class="fas fa-fw fa-university"></i>
+									<span>Institusi</span>
+								</a>
+								<a class="collapse-item" href="?d_pmbb">
+									<i class="fas fa-fw fa-portrait"></i>
+									<span>Mentor/Pembimbing</span>
+								</a>
+								<a class="collapse-item" href="?mes">
+									<i class="fas fa-fw fa-bed"></i>
+									<span>Mess/Pemondokan</span>
+								</a>
+								<a class="collapse-item" href="?mou">
+									<i class="fas fa-fw fa-handshake"></i>
+									<span>MoU</span>
+								</a>
+								<a class="collapse-item" href="?trf">
+									<i class="fas fa-fw fa-money-bill-wave"></i>
+									<span>Tarif</span>
+								</a>
+								<a class="collapse-item" href="?tmp">
+									<i class="fas fa-school"></i>
+									<span>Tempat</span>
+								</a>
+								<a class="collapse-item" href="?uni">
+									<i class="fas fa-fw fa-house-user"></i>
+									<span>Unit</span>
+								</a>
+							</div>
+						</div>
+					</li>
 				<?php } ?>
 				<li class="nav-item ">
 					<a class="nav-link" href="?pars">
@@ -433,7 +473,12 @@ if ($_SESSION['status_user'] == "Y") {
 					}
 				}
 				//daftar data pemibimbing
-				elseif (isset($_GET['d_pmbb']) && $d_prvl['r_daftar_pembimbing'] == 'Y') include "_admin/view/v_daftarPembimbing.php";
+				elseif (isset($_GET['d_pmbb']) && $d_prvl['r_daftar_pembimbing'] == 'Y') {
+					if (isset($_GET['detail']))
+						include "_admin/view/v_daftarPembimbing_detail.php";
+					else
+						include "_admin/view/v_daftarPembimbing.php";
+				}
 				//praktik nilai
 				elseif (isset($_GET['pnilai'])) {
 					if (isset($_GET['i']) && isset($_GET['pmbb'])) include "_admin/insert/i_praktik_nilaiKep.php";

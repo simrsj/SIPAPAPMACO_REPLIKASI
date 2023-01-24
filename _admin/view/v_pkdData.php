@@ -43,15 +43,15 @@ if ($d_prvl['c_pkd'] == "Y") {
             <table class="table table-striped table-bordered m-auto display" width="100%" id="table-search-each">
                 <thead class="table-dark text-center">
                     <tr>
-                        <th>No&nbsp;&nbsp;</th>
-                        <th>Pemohon</th>
-                        <th width="30%">Rincian</th>
-                        <th>Tgl<br>Pelaksanaan</th>
-                        <th>Nama<br>Koordinator</th>
-                        <th>Telpon<br>Koordinator</th>
-                        <th>E-Mail<br>Koordinator</th>
-                        <th>Biaya/Tarif</th>
-                        <th>File<br>Surat&nbsp;&nbsp;&nbsp;</th>
+                        <th>No<br><br></th>
+                        <th>Pemohon<br><br></th>
+                        <th width="30%">Rincian<br><br></th>
+                        <th>Tgl<br>Pelaksanaan<br><br></th>
+                        <th>Nama<br>Koordinator<br><br></th>
+                        <th>Telpon<br>Koordinator<br><br></th>
+                        <th>E-Mail<br>Koordinator<br><br></th>
+                        <th>Biaya/Tarif<br><br></th>
+                        <th>File<br>Surat<br><br></th>
                         <th></th>
                     </tr>
                 </thead>

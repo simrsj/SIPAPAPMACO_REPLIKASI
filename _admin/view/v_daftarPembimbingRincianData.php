@@ -12,13 +12,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
             $sql_pembimbing .= " JOIN tb_jenjang_pdd ON tb_pembimbing.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
             $sql_pembimbing .= " ORDER BY nama_pembimbing ASC";
 
-            try {
-                $q_pembimbing = $conn->query($sql_pembimbing);
-                $r_pembimbing = $q_pembimbing->rowCount();
-            } catch (Exception $ex) {
-                echo "<script>alert('$ex -DATA PKD-');";
-                echo "document.location.href='?error404';</script>";
-            }
+            $q_pembimbing = $conn->query($sql_pembimbing);
+            $r_pembimbing = $q_pembimbing->rowCount();
 
             if ($r_pembimbing > 0) {
             ?>
@@ -50,18 +45,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
                                     <td><?= $d_pembimbing['nama_pembimbing']; ?></td>
                                     <td><?= $d_pembimbing['nama_pembimbing_jenis'] . " (" . $d_pembimbing['akronim_pembimbing_jenis'] . ")"; ?></td>
                                     <td><?= $d_pembimbing['nama_jenjang_pdd']; ?></td>
-                                    <td class="text-center">
-                                        <?php
-
-                                        $sql_kali = "SELECT * FROM tb_pembimbing_pilih GROUP BY id_praktik";
-                                        try {
-                                            $q_pkd = $conn->query($sql_pkd);
-                                            $r_pkd = $q_pkd->rowCount();
-                                        } catch (Exception $ex) {
-                                            echo "<script>alert('$ex -DATA PKD-');";
-                                            echo "document.location.href='?error404';</script>";
-                                        }
-                                        $d_pembimbing['kali_pembimbing']; ?></td>
+                                    <td class="text-center"><?= $d_pembimbing['kali_pembimbing']; ?></td>
                                     <td class="text-center text-md">
                                         <a title="Ubah" class='btn btn-primary btn-xs ubah_init' id='<?= $d_pembimbing['id_pembimbing']; ?>'>
                                             <i class="fas fa-edit"></i>
