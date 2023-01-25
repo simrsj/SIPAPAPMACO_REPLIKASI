@@ -45,7 +45,7 @@ $sql_getJenisKegiatan .= " AND mess_tarif_pilih IS NULL";
 $sql_getJenisKegiatan .= " GROUP BY nama_jenis_tarif_pilih";
 $q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
 
-$data_invoice = "DATA TABEL RAB";
+$data_invoice = 'asdasd';
 
 $templateProcessor->setValues([
     'tanggal' => tanggal(date('Y-m-d')),
