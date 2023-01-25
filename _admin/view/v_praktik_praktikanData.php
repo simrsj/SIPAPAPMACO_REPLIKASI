@@ -301,7 +301,7 @@ if ($r_data_praktikan > 0) {
                                                         showConfirmButton: false,
                                                         icon: 'warning',
                                                         title: '<div class="text-md text-center">File Ijazah Harus <b>.pdf</b></div>',
-                                                        timer: 10000,
+                                                        timer: 3000,
                                                         timerProgressBar: true,
                                                         didOpen: (toast) => {
                                                             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -316,7 +316,7 @@ if ($r_data_praktikan > 0) {
                                                         showConfirmButton: false,
                                                         icon: 'warning',
                                                         title: '<div class="text-md text-center">File Ijazah Harus <br><b>Kurang dari 200 Kb</b></div>',
-                                                        timer: 10000,
+                                                        timer: 3000,
                                                         timerProgressBar: true,
                                                         didOpen: (toast) => {
                                                             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -432,7 +432,7 @@ if ($r_data_praktikan > 0) {
                                                 showConfirmButton: false,
                                                 icon: 'warning',
                                                 html: '<div class="text-lg b">DATA WAJIB ADA YANG BELUM TERISI</div>',
-                                                timer: 5000,
+                                                timer: 3000,
                                                 timerProgressBar: true,
                                                 didOpen: (toast) => {
                                                     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -488,24 +488,24 @@ if ($r_data_praktikan > 0) {
                                                     $("#form_u<?= md5($d_data_praktikan['id_praktik']); ?>").trigger("reset");
                                                     $("#u_swab<?= md5($d_data_praktikan['id_praktik']); ?>").val("").trigger("change");
 
+                                                    $('#mu<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
+                                                        $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>')
+                                                            .load("_admin/view/v_praktik_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
+                                                    });
+                                                    $('#update<?= $no; ?>').modal('toggle');
                                                     Swal.fire({
                                                         allowOutsideClick: false,
                                                         showConfirmButton: false,
                                                         icon: 'success',
                                                         html: '<div class="text-lg b">Data Praktikan<br>Berhasil Diubah</div>',
-                                                        timer: 5000,
+                                                        timer: 3000,
                                                         timerProgressBar: true,
                                                         didOpen: (toast) => {
                                                             toast.addEventListener('mouseenter', Swal.stopTimer)
                                                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                         }
                                                     }).then(
-                                                        function() {
-                                                            $('#mu<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
-                                                                $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>')
-                                                                    .load("_admin/view/v_praktik_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
-                                                            });
-                                                        }
+                                                        function() {}
                                                     )
 
                                                 },
@@ -536,7 +536,7 @@ if ($r_data_praktikan > 0) {
                                                     toast: true,
                                                     position: 'top-end',
                                                     showConfirmButton: false,
-                                                    timer: 5000,
+                                                    timer: 3000,
                                                     timerProgressBar: true,
                                                     didOpen: (toast) => {
                                                         toast.addEventListener('mouseenter', Swal.stopTimer)

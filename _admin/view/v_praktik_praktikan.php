@@ -401,7 +401,7 @@
                                                             showConfirmButton: false,
                                                             icon: 'warning',
                                                             html: '<div class="text-lg b">DATA WAJIB ADA YANG BELUM TERISI</div>',
-                                                            timer: 5000,
+                                                            timer: 3000,
                                                             timerProgressBar: true,
                                                             didOpen: (toast) => {
                                                                 toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -458,11 +458,11 @@
                                                                     $("#t_swab<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
 
                                                                     Swal.fire({
-                                                                        allowOutsideClick: false,
-                                                                        showConfirmButton: false,
+                                                                        allowOutsideClick: true,
+                                                                        showConfirmButton: true,
                                                                         icon: 'success',
                                                                         html: '<div class="text-lg b">Data Praktikan<br>Berhasil Tersimpan</div>',
-                                                                        timer: 5000,
+                                                                        timer: 3000,
                                                                         timerProgressBar: true,
                                                                         didOpen: (toast) => {
                                                                             toast.addEventListener('mouseenter', Swal.stopTimer)

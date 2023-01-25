@@ -1,5 +1,5 @@
 <?php
-// error_reporting(0);
+error_reporting(0);
 session_start();
 // phpinfo();
 
@@ -37,8 +37,6 @@ include "_add-ons/tanggal_waktu.php";
     <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
     <link href="vendor/!custom/cs_loader.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="vendor/chart.js/Chart.js"></script>
-    <script src="vendor/!custom/jsCustom.js"></script>
 
 </head>
 
@@ -85,9 +83,12 @@ include "_add-ons/tanggal_waktu.php";
     <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
     <script src="vendor/!custom/jsCustom.js"></script>
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script src="vendor/chart.js/Chart.js"></script>
+    <script src="vendor/!custom/jsCustom.js"> </script>
     <script>
         <?php
-        // include "./vendor/!custom/disable_keyboard.js"
+        // include "./vendor/!custom/disable_keyboard.js";
+        include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
         ?>
     </script>
 
