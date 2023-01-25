@@ -139,6 +139,22 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                                                     }
                                                     ?>
                                                 </select>
+                                                <script>
+                                                    var options = $('#id_pembimbing<?= $no; ?> option');
+                                                    var arr = options.map(function(_, o) {
+                                                        return {
+                                                            t: $(o).text(),
+                                                            v: o.value
+                                                        };
+                                                    }).get();
+                                                    arr.sort(function(o1, o2) {
+                                                        return o1.t > o2.t ? 1 : o1.t < o2.t ? -1 : 0;
+                                                    });
+                                                    options.each(function(i, o) {
+                                                        o.value = arr[i].v;
+                                                        $(o).text(arr[i].t);
+                                                    });
+                                                </script>
                                                 <span id="err_pmbb<?= $no; ?>" class="text-danger text-xs font-italic blink"></span>
                                             </td>
                                             <?php
@@ -314,13 +330,12 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                     data: data_pembimbing,
                     success: function() {
                         Swal.fire({
-                            allowOutsideClick: false,
+                            allowOutsideClick: true,
                             // isDismissed: false,
                             icon: 'success',
 
                             title: $title,
                             showConfirmButton: false,
-                            html: '<a href="?pmbb" class="btn btn-outline-primary">OK</a>',
                             timer: 5000,
                             timerProgressBar: true,
                             didOpen: (toast) => {
@@ -329,7 +344,7 @@ if (isset($_GET['pmbb']) && isset($_GET['i']) && $d_prvl['c_praktik_pembimbing']
                             }
                         }).then(
                             function() {
-                                document.location.href = "?pmbb";
+                                document.location.href = "?pmbb#rincian<?= md5(base64_decode(urldecode($_GET['pmbb']))); ?>";
                             }
                         );
                     },
