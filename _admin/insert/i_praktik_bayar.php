@@ -76,7 +76,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                     Ditujukan Kepada : <span class="text-danger">*</span><br>
                                                                     <input type="text" class="form-control form-control-sm" id="kepada" name="kepada" required>
                                                                     <div class="text-xs font-italic text-danger blink" id="err_kepada"></div><br>
-                                                                    <a class="btn btn-outline-primary btn-sm download_docx">
+                                                                    <a class="btn btn-outline-primary btn-sm download_docx" download="invoice_non_ttd">
                                                                         <i class="fa-solid fa-file-word"></i> Unduh File .docx (WORD)
                                                                     </a>
                                                                     <!-- <a class="btn btn-outline-danger btn-sm download_pdf" download="invoice_non_ttd">
@@ -138,13 +138,12 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                                 $("#err_kepada").html("");
                                                                             }
                                                                         }
-
                                                                         //download docx bila sudah sesuai
-                                                                        if (
+                                                                        else if (
                                                                             no_surat != "" &&
                                                                             kepada != ""
                                                                         ) {
-                                                                            console.log("docx form_non_ttd");
+                                                                            // console.log("docx form_non_ttd");
 
                                                                             var data_pdf = $("#form_non_ttd").serializeArray();
                                                                             // window.location = "_print/p_praktik_invoiceDOCXTBS.php?" +

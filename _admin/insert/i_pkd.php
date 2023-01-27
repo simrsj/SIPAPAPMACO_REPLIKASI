@@ -292,8 +292,6 @@ if (isset($_GET['pkd']) && isset($_GET['i']) && $d_prvl['c_pkd'] == "Y") {
                             }
                         }
                         xhttp.send(data_file);
-
-
                     },
                     error: function(response) {
                         console.log(response.responseText);
