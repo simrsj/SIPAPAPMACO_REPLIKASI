@@ -160,7 +160,7 @@
                                                                             Kembali
                                                                         </a>
                                                                         &nbsp;
-                                                                        <a class="tambah btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
+                                                                        <a class="btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
                                                                             Simpan
                                                                         </a>
                                                                     </div>

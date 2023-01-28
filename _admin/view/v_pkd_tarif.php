@@ -108,7 +108,7 @@ if (isset($_GET['pkd']) && isset($_GET['pkdt']) && $d_prvl['r_pkd'] == "Y") {
                                                 Kembali
                                             </a>
                                             &nbsp;
-                                            <a class="tambah btn btn-success btn-sm tambah" id="<?= $_GET['pkd']; ?>">
+                                            <a class="btn btn-success btn-sm tambah" id="<?= $_GET['pkd']; ?>">
                                                 Simpan
                                             </a>
                                         </div>

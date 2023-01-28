@@ -170,7 +170,7 @@ if ($r_praktik_tarif > 0) {
                                                         Kembali
                                                     </a>
                                                     &nbsp;
-                                                    <a class="tambah btn btn-primary btn-sm ubah<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>" id="<?= urlencode(base64_encode($d_praktik_tarif['id_tarif_pilih'])); ?>" data-dismiss="modal">
+                                                    <a class="btn btn-primary btn-sm ubah<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>" id="<?= urlencode(base64_encode($d_praktik_tarif['id_tarif_pilih'])); ?>" data-dismiss="modal">
                                                         Ubah
                                                     </a>
                                                 </div>

@@ -190,7 +190,7 @@
                                                                         Kembali
                                                                     </a>
                                                                     &nbsp;
-                                                                    <a class="tambah btn btn-success btn-sm tambah<?= $v_no; ?>" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
+                                                                    <a class=" btn btn-success btn-sm tambah<?= $v_no; ?>" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
                                                                         Tambah
                                                                     </a>
                                                                 </div>
