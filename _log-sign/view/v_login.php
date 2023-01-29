@@ -167,6 +167,6 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <a href="./_file/panduan_aplikasi_sm.pdf" class="btn btn-danger" target="_blank">PANDUAN APLIKASI</a>
+        <a href="panduan_aplikasi_sm.pdf" class="btn btn-danger" target="_blank">PANDUAN APLIKASI</a>
     </div>
 </div>
