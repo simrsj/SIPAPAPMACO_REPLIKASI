@@ -1,22 +1,11 @@
 <?php
 error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-echo "<pre>" . print_r($_FILES) . "</pre>";
-echo "<pre>" . print_r($_POST) . "</pre>";
+// echo "<pre>" . print_r($_FILES) . "</pre>";
+// echo "<pre>" . print_r($_POST) . "</pre>";
+
 $exp_arr_idpp = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idpp']))));
 $idpp = $exp_arr_idpp[0];
-$exp_arr_idp = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idp']))));
-$idp = $exp_arr_idp[0];
-$sql_praktik = "SELECT * FROM tb_praktik ";
-$sql_praktik .= " WHERE id_praktik = " . $idp;
-// echo $sql_praktik . "<br>";
-try {
-    $q_praktik = $conn->query($sql_praktik);
-    $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
-} catch (Exception $ex) {
-    echo "<script>alert('$ex -DATA PRAKTIK-');";
-    echo "document.location.href='?error404';</script>";
-}
 //alamat file
 $alamat_unggah = "./../../_file/praktik/praktikan";
 
@@ -73,7 +62,7 @@ if ($_FILES['t_swab']['size'] > (1024 * 256) || $_FILES['t_foto']['size'] > (102
     $sql_update .= " file_swab_praktikan = '" . $link_t_swab . "'";
     $sql_update .= " WHERE id_praktikan = " . $idpp;
     // echo $q . "<br>";
-    echo $sql_update . "<br>";
+    // echo $sql_update . "<br>";
     $exp_arr_q = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['q']))));
     $q = $exp_arr_q[0];
 
@@ -81,3 +70,4 @@ if ($_FILES['t_swab']['size'] > (1024 * 256) || $_FILES['t_foto']['size'] > (102
     $conn->query($sql_update);
     $ket = "sesuai";
 }
+echo json_encode(['ket' => bin2hex(urlencode(base64_encode($ket)))]);

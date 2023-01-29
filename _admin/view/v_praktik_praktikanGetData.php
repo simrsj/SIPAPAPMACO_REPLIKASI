@@ -1,8 +1,9 @@
 <?php
+error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-
-$sql = "SELECT * FROM tb_praktikan";
-$sql .= " WHERE id_praktikan= " . base64_decode(urldecode($_POST['idprkn']));
+$exp_ar_idprkn = explode('*sm*', base64_decode(urldecode(hex2bin($_POST['idprkn']))));
+$idprkn = $exp_ar_idprkn[0];
+$sql = "SELECT * FROM tb_praktikan WHERE id_praktikan= " . $idprkn;
 // echo "$sql <br>";
 try {
     $q = $conn->query($sql);
@@ -11,7 +12,7 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 $d = $q->fetch(PDO::FETCH_ASSOC);
-$h['idprkn'] = $d["id_praktikan"];
+$h['idprkn'] = bin2hex(urlencode(base64_encode($d["id_praktikan"] . "*sm*" . date('Y-m-d h:i:s'))));
 $h['u_no_id'] = $d["no_id_praktikan"];
 $h['u_nama'] = $d["nama_praktikan"];
 $h['u_tgl'] = $d["tgl_lahir_praktikan"];

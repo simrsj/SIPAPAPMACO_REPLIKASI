@@ -126,15 +126,10 @@
                                                                                             }
                                                                                             fr.readAsDataURL(files[0]);
                                                                                         }
-                                                                                        //disable drag
-                                                                                        document.getElementById('t_fotoout<?= md5($d_praktik['id_praktik']); ?>').setAttribute('draggable', false);
-                                                                                        // $('#t_fotoout<?= md5($d_praktik['id_praktik']); ?>').setAttribute('draggable', false);
 
                                                                                     });
                                                                                 </script>
                                                                             </div>
-                                                                            <script>
-                                                                            </script>
                                                                             No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
                                                                             <input type="text" id="t_no_id<?= md5($d_praktik['id_praktik']); ?>" name="t_no_id" class="form-control" placeholder="Isikan No ID" required>
                                                                             <div class="text-danger b i text-xs blink" id="err_t_no_id<?= md5($d_praktik['id_praktik']); ?>"></div><br>
@@ -223,10 +218,10 @@
                                                     });
                                                     Swal.fire({
                                                         title: 'Mohon Ditunggu . . .',
-                                                        html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
-                                                        // add html attribute if you want or remove
+                                                        html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                         allowOutsideClick: false,
                                                         showConfirmButton: false,
+                                                        backdrop: true
                                                     });
                                                     $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
                                                         .load(
