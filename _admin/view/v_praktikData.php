@@ -1,14 +1,16 @@
 <?php
-
+error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
+// echo "<pre>" . print_r($_POST) . "</pre>";
 //data privileges 
+$exp_ar = explode('*sm*', base64_decode(urldecode(hex2bin($_GET['idu']))));
+// echo "<pre>" . print_r($exp_ar) . "</pre>";
+$id = $exp_ar[0];
+
 $sql_prvl = "SELECT * FROM tb_user_privileges ";
 $sql_prvl .= " JOIN tb_user ON tb_user_privileges.id_user = tb_user.id_user";
-$sql_prvl .= " WHERE tb_user.id_user = " . base64_decode(urldecode($_GET['idu']));
+$sql_prvl .= " WHERE tb_user.id_user = " . $id;
 try {
     $q_prvl = $conn->query($sql_prvl);
 } catch (Exception $ex) {

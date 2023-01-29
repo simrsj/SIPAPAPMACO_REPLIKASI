@@ -91,7 +91,7 @@
                                                         </a>
 
                                                         <!-- modal tambah praktikan  -->
-                                                        <div class="modal fade text-center" id="mi<?= md5($d_praktik['id_praktik']); ?>" data-backdrop="static">
+                                                        <div class="modal text-center" id="mi<?= md5($d_praktik['id_praktik']); ?>" data-backdrop="static">
                                                             <div class="modal-dialog modal-dialog-scrollable  modal-md">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header h5">
@@ -99,6 +99,42 @@
                                                                     </div>
                                                                     <div class="modal-body text-md">
                                                                         <form class="form-data b" method="post" id="form_t<?= md5($d_praktik['id_praktik']); ?>">
+                                                                            Foto Formal : <span style="color:red">*</span><br>
+                                                                            <img width="100px" height="120px" id="t_fotoout<?= md5($d_praktik['id_praktik']); ?>" class="mb-2" style="width: 100px; height: 120px; background: url(./_img/defaultfoto.png) center center/cover no-repeat;">
+                                                                            <br>
+                                                                            <div class="custom-file">
+                                                                                <label class="custom-file-label text-xs" for="customFile" id="labelfoto<?= md5($d_praktik['id_praktik']); ?>">Pilih File</label>
+                                                                                <input type="file" class="custom-file-input mb-1" name="t_foto" id="t_foto<?= md5($d_praktik['id_praktik']); ?>" accept=".jpg">
+                                                                                <span class='i text-xs'>Data unggah harus jpg, Maksimal 200 Kb</span><br>
+                                                                                <div class="text-danger b i text-xs blink" id="err_t_foto<?= md5($d_praktik['id_praktik']); ?>"></div><br>
+                                                                                <script>
+                                                                                    $('#t_foto<?= md5($d_praktik['id_praktik']); ?>').on('change', function(evt) {
+                                                                                        //label input
+                                                                                        var fileFoto = $(this).val();
+                                                                                        fileFoto = fileFoto.replace(/^.*[\\\/]/, '');
+                                                                                        if (fileFoto == "") fileFoto = "Pilih File Foto";
+                                                                                        $('#labelfoto<?= md5($d_praktik['id_praktik']); ?>').html(fileFoto);
+
+                                                                                        // load Image
+                                                                                        var tgt = evt.target || window.event.srcElement,
+                                                                                            files = tgt.files;
+
+                                                                                        if (FileReader && files && files.length) {
+                                                                                            var fr = new FileReader();
+                                                                                            fr.onload = function() {
+                                                                                                document.getElementById('t_fotoout<?= md5($d_praktik['id_praktik']); ?>').src = fr.result;
+                                                                                            }
+                                                                                            fr.readAsDataURL(files[0]);
+                                                                                        }
+                                                                                        //disable drag
+                                                                                        document.getElementById('t_fotoout<?= md5($d_praktik['id_praktik']); ?>').setAttribute('draggable', false);
+                                                                                        // $('#t_fotoout<?= md5($d_praktik['id_praktik']); ?>').setAttribute('draggable', false);
+
+                                                                                    });
+                                                                                </script>
+                                                                            </div>
+                                                                            <script>
+                                                                            </script>
                                                                             No. ID Praktikan (NIM/NPM/NIP) : <span style="color:red">*</span><br>
                                                                             <input type="text" id="t_no_id<?= md5($d_praktik['id_praktik']); ?>" name="t_no_id" class="form-control" placeholder="Isikan No ID" required>
                                                                             <div class="text-danger b i text-xs blink" id="err_t_no_id<?= md5($d_praktik['id_praktik']); ?>"></div><br>
@@ -137,7 +173,7 @@
                                                                                 </div>
                                                                                 <br>
                                                                             <?php } ?>
-                                                                            File Hasil Swab :<span style="color:red">*</span><br>
+                                                                            File Swab/Serfikat Vaksin :<span style="color:red">*</span><br>
                                                                             <div class="custom-file">
                                                                                 <label class="custom-file-label text-xs" for="customFile" id="labelfileswab<?= md5($d_praktik['id_praktik']); ?>">Pilih File</label>
                                                                                 <input type="file" class="custom-file-input mb-1" id="t_swab<?= md5($d_praktik['id_praktik']); ?>" name="t_swab<?= md5($d_praktik['id_praktik']); ?>" accept="application/pdf" required>
@@ -160,7 +196,7 @@
                                                                             Kembali
                                                                         </a>
                                                                         &nbsp;
-                                                                        <a class="btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>">
+                                                                        <a class="btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d h:i:s')))); ?>">
                                                                             Simpan
                                                                         </a>
                                                                     </div>
@@ -195,8 +231,8 @@
                                                     $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
                                                         .load(
                                                             "_admin/view/v_praktik_praktikanData.php?" +
-                                                            "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
-                                                            "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
+                                                            "idu=<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" +
+                                                            "&idp=<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" +
                                                             "&tb=<?= md5($d_praktik['id_praktik']); ?>");
                                                     Swal.close();
                                                 });
@@ -205,6 +241,7 @@
                                                 // inisiasi klik modal tambah
                                                 $(".tambah_init<?= md5($d_praktik['id_praktik']); ?>").click(function() {
                                                     console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
+                                                    $('#err_t_foto<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                     $('#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                     $('#err_t_nama<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                     $('#err_t_tgl<?= md5($d_praktik['id_praktik']); ?>').empty();
@@ -224,6 +261,7 @@
                                                         $("#file_ijazah<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
                                                     <?php } ?>
                                                     $("#file_swab<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
+                                                    $("#t_foto<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
                                                 });
 
 
@@ -237,7 +275,7 @@
                                                         name: "idp",
                                                         value: idp
                                                     });
-
+                                                    var t_foto = $('#t_foto<?= md5($d_praktik['id_praktik']); ?>').val();
                                                     var t_no_id = $('#t_no_id<?= md5($d_praktik['id_praktik']); ?>').val();
                                                     var t_nama = $('#t_nama<?= md5($d_praktik['id_praktik']); ?>').val();
                                                     var t_tgl = $('#t_tgl<?= md5($d_praktik['id_praktik']); ?>').val();
@@ -248,6 +286,20 @@
                                                     <?php } ?>
                                                     var t_swab = $('#t_swab<?= md5($d_praktik['id_praktik']); ?>').val();
 
+                                                    //eksekusi bila file swab terisi
+                                                    if (t_foto != "" && t_foto != undefined) {
+
+                                                        //Cari ekstensi file swab yg diupload
+                                                        var typeFoto = document.querySelector('#t_foto<?= md5($d_praktik['id_praktik']); ?>').value;
+                                                        var getTypeFoto = typeFoto.split('.').pop();
+
+                                                        //cari ukuran file Swab yg diupload
+                                                        var fileFoto = document.getElementById("t_foto<?= md5($d_praktik['id_praktik']); ?>").files;
+                                                        var getSizeFoto = document.getElementById("t_foto<?= md5($d_praktik['id_praktik']); ?>").files[0].size / 1024;
+
+                                                        console.log("getTypeFoto : " + getTypeFoto);
+                                                        console.log("getSizeFoto : " + getSizeFoto);
+                                                    }
                                                     <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
                                                         //eksekusi bila file ijazah terisi
                                                         if (t_ijazah != "" && t_ijazah != undefined) {
@@ -260,40 +312,8 @@
                                                             var fileIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files;
                                                             var getSizeIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files[0].size / 1024;
 
-                                                            // console.log("Size Ijazah : " + getSizeIjazah);
-                                                            // console.log("Size Ijazah : " + fileIjazah);
-
-                                                            //Toast bila upload file Ijazah selain pdf
-                                                            if (getTypeIjazah != 'pdf') {
-                                                                Swal.fire({
-                                                                    allowOutsideClick: true,
-                                                                    showConfirmButton: false,
-                                                                    icon: 'warning',
-                                                                    title: '<div class="text-md text-center">File Ijazah Harus <b>.pdf</b></div>',
-                                                                    timer: 10000,
-                                                                    timerProgressBar: true,
-                                                                    didOpen: (toast) => {
-                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                    }
-                                                                });
-                                                                $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("File ijazah Harus pdf");
-                                                            } //Toast bila upload file ijazah diatas 200 Kb 
-                                                            else if (getSizeIjazah > 256) {
-                                                                Swal.fire({
-                                                                    allowOutsideClick: true,
-                                                                    showConfirmButton: false,
-                                                                    icon: 'warning',
-                                                                    title: '<div class="text-md text-center">File Ijazah Harus <br><b>Kurang dari 200 Kb</b></div>',
-                                                                    timer: 10000,
-                                                                    timerProgressBar: true,
-                                                                    didOpen: (toast) => {
-                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                    }
-                                                                });
-                                                                $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("File Ijazah Harus Kurang dari 200 Kb");
-                                                            }
+                                                            console.log("getTypeIjazah : " + getTypeIjazah);
+                                                            console.log("getSizeIjazah : " + getSizeIjazah);
                                                         }
                                                     <?php } ?>
 
@@ -308,52 +328,67 @@
                                                         var fileSwab = document.getElementById("t_swab<?= md5($d_praktik['id_praktik']); ?>").files;
                                                         var getSizeSwab = document.getElementById("t_swab<?= md5($d_praktik['id_praktik']); ?>").files[0].size / 1024;
 
-                                                        // console.log("Size Swab : " + getSizeSwab);
-                                                        // console.log("Size Swab : " + fileSwab);
-
-                                                        //Toast bila upload file Swab selain pdf
-                                                        if (getTypeSwab != 'pdf') {
-                                                            Swal.fire({
-                                                                allowOutsideClick: true,
-                                                                showConfirmButton: false,
-                                                                icon: 'warning',
-                                                                title: '<div class="text-md text-center">File Swab Harus <b>.pdf</b></div>',
-                                                                timer: 10000,
-                                                                timerProgressBar: true,
-                                                                didOpen: (toast) => {
-                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                }
-                                                            });
-                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("File Hasil Swab Harus pdf");
-                                                        } //Toast bila upload file swab diatas 200 Kb 
-                                                        else if (getSizeSwab > 256) {
-                                                            Swal.fire({
-                                                                allowOutsideClick: true,
-                                                                showConfirmButton: false,
-                                                                icon: 'warning',
-                                                                title: '<div class="text-md text-center">File Swab Harus <br><b>Kurang dari 200 Kb</b></div>',
-                                                                timer: 10000,
-                                                                timerProgressBar: true,
-                                                                didOpen: (toast) => {
-                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                }
-                                                            });
-                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("File Hasil Swab  Harus Kurang dari 200 Kb");
-                                                        }
+                                                        console.log("getTypeSwab : " + getSizeSwab);
+                                                        console.log("getSizeSwab : " + fileSwab);
                                                     }
 
                                                     //cek data from modal tambah bila tidak diiisi
                                                     if (
+                                                        getTypeFoto != 'jpg' ||
+                                                        getSizeFoto > 256 ||
+                                                        t_foto == "" ||
+                                                        t_foto == undefined ||
+                                                        t_foto == "" ||
                                                         t_no_id == "" ||
                                                         t_nama == "" ||
                                                         t_tgl == "" ||
                                                         t_alamat == "" ||
                                                         t_telpon == "" ||
-                                                        <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> t_ijazah == "" || t_ijazah == undefined ||
-                                                        <?php } ?> t_swab == "" || t_swab == undefined
+                                                        <?php
+                                                        if ($d_praktik['id_profesi_pdd'] > 0) {
+                                                        ?> getTypeIjazah != 'pdf' ||
+                                                            getSizeIjazah > 256 ||
+                                                            t_ijazah == "" ||
+                                                            t_ijazah == undefined ||
+                                                        <?php
+                                                        }
+                                                        ?> getTypeSwab != 'pdf' ||
+                                                        getSizeSwab > 256 ||
+                                                        t_swab == "" ||
+                                                        t_swab == undefined
                                                     ) {
+
+                                                        if (t_foto == "" || t_foto == undefined)
+                                                            $("#err_t_foto<?= md5($d_praktik['id_praktik']); ?>").html("Foto Harus Dipilih");
+                                                        else if (getTypeFoto != "jpg")
+                                                            $("#err_t_foto<?= md5($d_praktik['id_praktik']); ?>").html("File Foto Harus jpg");
+                                                        else if (getSizeFoto > 256)
+                                                            $("#err_t_foto<?= md5($d_praktik['id_praktik']); ?>").html("File Foto Harus Kurang dari 200 Kb");
+                                                        else
+                                                            $("#err_t_foto<?= md5($d_praktik['id_praktik']); ?>").html("");
+
+
+                                                        <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                            if (t_ijazah == "" || t_ijazah == undefined)
+                                                                $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("Ijazah Harus Dipilih");
+                                                            else if (getTypeIjazah != "pdf")
+                                                                $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("File Ijazah Harus pdf");
+                                                            else if (getSizeIjazah > 256)
+                                                                $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("File Ijazah Harus Kurang dari 200 Kb");
+                                                            else
+                                                                $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("");
+                                                        <?php } ?>
+
+                                                        if (t_swab == "" || t_swab == undefined)
+                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus Dipilih");
+                                                        else if (getTypeSwab != "pdf")
+                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus pdf");
+                                                        else if (getSizeSwab > 256)
+                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus Kurang dari 200 Kb");
+                                                        else
+                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("");
+
+
                                                         if (t_no_id == "") {
                                                             $("#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>").html("No ID Harus Diisi");
                                                         } else {
@@ -383,43 +418,23 @@
                                                         } else {
                                                             $("#err_t_telpon<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                         }
-                                                        <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
-                                                            if (t_ijazah == "") {
-                                                                $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("Ijazah Harus Dipilih");
-                                                            } else {
-                                                                $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("");
-                                                            }
-                                                        <?php } ?>
-                                                        if (t_swab == "") {
-                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab Harus Dipilih");
-                                                        } else {
-                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("");
-                                                        }
 
                                                         Swal.fire({
                                                             allowOutsideClick: true,
                                                             showConfirmButton: false,
                                                             icon: 'warning',
-                                                            html: '<div class="text-lg b">DATA WAJIB ADA YANG BELUM TERISI</div>',
+                                                            html: '<div class="text-lg b">DATA ADA YANG TIDAK SESUAI</div>',
                                                             timer: 3000,
                                                             timerProgressBar: true,
+                                                            backdrop: true,
                                                             didOpen: (toast) => {
                                                                 toast.addEventListener('mouseenter', Swal.stopTimer)
                                                                 toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                             }
                                                         });
                                                     }
-
                                                     //simpan data tambah bila sudah sesuai
-                                                    if (
-                                                        t_no_id != "" &&
-                                                        t_nama != "" &&
-                                                        t_tgl != "" &&
-                                                        t_alamat != "" &&
-                                                        t_telpon != "" &&
-                                                        <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> getTypeIjazah == 'pdf' && getSizeIjazah <= 256 && t_ijazah != "" && t_ijazah != undefined &&
-                                                        <?php } ?> getTypeSwab == 'pdf' && getSizeSwab <= 256 && t_swab != "" && t_swab != undefined
-                                                    ) {
+                                                    else {
                                                         $.ajax({
                                                             type: 'POST',
                                                             url: "_admin/exc/x_v_praktik_praktikan_s.php",
@@ -430,55 +445,89 @@
                                                                     var data_file = new FormData();
                                                                     var xhttp = new XMLHttpRequest();
 
+                                                                    var fileFoto = document.getElementById("t_foto<?= md5($d_praktik['id_praktik']); ?>").files;
+                                                                    data_file.append("t_foto", fileFoto[0]);
                                                                     var fileIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files;
                                                                     data_file.append("t_ijazah", fileIjazah[0]);
-
                                                                     var fileSwab = document.getElementById("t_swab<?= md5($d_praktik['id_praktik']); ?>").files;
                                                                     data_file.append("t_swab", fileSwab[0]);
 
+                                                                    data_file.append("q", response.q);
                                                                     data_file.append("idpp", response.idpp);
                                                                     data_file.append("idp", idp);
 
                                                                     xhttp.open("POST", "_admin/exc/x_v_praktik_praktikan_sFile.php", true);
+
+                                                                    xhttp.onload = function() {
+                                                                        if (xhttp.response == "<?= base64_decode(urldecode(hex2bin("size"))) ?>") {
+                                                                            console.log("size too big");
+                                                                            Swal.fire({
+                                                                                allowOutsideClick: true,
+                                                                                icon: 'warning',
+                                                                                html: '<span class="text-danger text-lg text-center">Ukuran File Terlalu Besar</span>',
+                                                                                showConfirmButton: false,
+                                                                                backdrop: true,
+                                                                                timer: 5000,
+                                                                                timerProgressBar: true
+                                                                            });
+                                                                        } else if (xhttp.response == "<?= base64_decode(urldecode(hex2bin("type"))) ?>") {
+                                                                            console.log("Tipe Different");
+                                                                            Swal.fire({
+                                                                                allowOutsideClick: true,
+                                                                                icon: 'warning',
+                                                                                html: '<span class="text-danger text-lg text-center">Tipe File Berbeda</span>',
+                                                                                showConfirmButton: false,
+                                                                                backdrop: true,
+                                                                                timer: 5000,
+                                                                                timerProgressBar: true
+                                                                            });
+                                                                        } else {
+                                                                            console.log("Success");
+                                                                            Swal.fire({
+                                                                                allowOutsideClick: true,
+                                                                                // isDismissed: false,
+                                                                                icon: 'success',
+                                                                                html: '<span class="text-lg b">Data Berhasil Tersimpan</span>',
+                                                                                // html: '<a href="?pkd" class="btn btn-outline-primary">OK</a>',
+                                                                                showConfirmButton: false,
+                                                                                backdrop: true,
+                                                                                timer: 5000,
+                                                                                timerProgressBar: true,
+                                                                                didOpen: (toast) => {
+                                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                }
+                                                                            }).then(
+                                                                                function() {
+                                                                                    $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                                                        .load(
+                                                                                            "_admin/view/v_praktik_praktikanData.php?" +
+                                                                                            "idu=<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" +
+                                                                                            "&idp=<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" +
+                                                                                            "&tb=<?= md5($d_praktik['id_praktik']); ?>");
+
+                                                                                    $('#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                    $('#err_t_nama<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                    $('#err_t_tgl<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                    $('#err_t_alamat<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                    $('#err_t_telpon<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                    $('#err_t_wa<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                    $('#err_t_email<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                                                        $('#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                        $("#t_ijazah<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
+                                                                                    <?php } ?>
+                                                                                    $('#err_t_swab<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                    $('#err_t_foto<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                                                    $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
+                                                                                    $("#t_swab<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
+                                                                                    $("#t_foto<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
+                                                                                }
+
+                                                                            );
+                                                                        }
+                                                                    }
                                                                     xhttp.send(data_file);
-
-                                                                    $('#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>').empty();
-                                                                    $('#err_t_nama<?= md5($d_praktik['id_praktik']); ?>').empty();
-                                                                    $('#err_t_tgl<?= md5($d_praktik['id_praktik']); ?>').empty();
-                                                                    $('#err_t_alamat<?= md5($d_praktik['id_praktik']); ?>').empty();
-                                                                    $('#err_t_telpon<?= md5($d_praktik['id_praktik']); ?>').empty();
-                                                                    $('#err_t_wa<?= md5($d_praktik['id_praktik']); ?>').empty();
-                                                                    $('#err_t_email<?= md5($d_praktik['id_praktik']); ?>').empty();
-                                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
-                                                                        $('#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>').empty();
-                                                                        $("#t_ijazah<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
-                                                                    <?php } ?>
-                                                                    $('#err_t_swab<?= md5($d_praktik['id_praktik']); ?>').empty();
-                                                                    $("#form_t<?= md5($d_praktik['id_praktik']); ?>").trigger("reset");
-                                                                    $("#t_swab<?= md5($d_praktik['id_praktik']); ?>").val("").trigger("change");
-
-                                                                    Swal.fire({
-                                                                        allowOutsideClick: true,
-                                                                        showConfirmButton: true,
-                                                                        icon: 'success',
-                                                                        html: '<div class="text-lg b">Data Praktikan<br>Berhasil Tersimpan</div>',
-                                                                        timer: 3000,
-                                                                        timerProgressBar: true,
-                                                                        didOpen: (toast) => {
-                                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                        }
-                                                                    }).then(
-                                                                        function() {
-                                                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
-                                                                                .load(
-                                                                                    "_admin/view/v_praktik_praktikanData.php?" +
-                                                                                    "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
-                                                                                    "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
-                                                                                    "&tb=<?= md5($d_praktik['id_praktik']); ?>");
-                                                                        }
-                                                                    );
-
                                                                 } else {
                                                                     Swal.fire({
                                                                         allowOutsideClick: true,

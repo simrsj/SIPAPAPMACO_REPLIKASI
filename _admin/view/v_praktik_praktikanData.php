@@ -1,9 +1,16 @@
 <?php
+error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
+$exp_ar_id = explode('*sm*', base64_decode(urldecode(hex2bin($_GET['idu']))));
+$id = $exp_ar_id[0];
+$exp_ar_idp = explode('*sm*', base64_decode(urldecode(hex2bin($_GET['idp']))));
+$idp = $exp_ar_idp[0];
+// echo "<pre>" . print_r($exp_ar_id) . "</pre>";
+
 $sql_prvl = "SELECT * FROM tb_user_privileges ";
 $sql_prvl .= " JOIN tb_user ON tb_user_privileges.id_user = tb_user.id_user";
-$sql_prvl .= " WHERE tb_user.id_user = " . base64_decode(urldecode($_GET['idu']));
+$sql_prvl .= " WHERE tb_user.id_user = " . $id;
 try {
     $q_prvl = $conn->query($sql_prvl);
 } catch (Exception $ex) {
@@ -14,7 +21,7 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
 $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
 $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
-$sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . base64_decode(urldecode($_GET['idp']));
+$sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . $idp;
 $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
 // echo "$sql_data_praktikan<br>";
 try {
@@ -44,7 +51,8 @@ if ($r_data_praktikan > 0) {
                     <?php if ($d_data_praktikan1['id_profesi_pdd'] > 0) { ?>
                         <th scope="col">IJAZAH</th>
                     <?php } ?>
-                    <th scope="col">HASIL SWAB</th>
+                    <th scope="col">SWAB/Sertifikat<br>Vaksin</th>
+                    <th scope="col">Foto</th>
                     <th scope="col">AKSI</th>
                 </tr>
             </thead>
@@ -78,10 +86,32 @@ if ($r_data_praktikan > 0) {
 
                         </td>
                         <td class="text-center">
-                            <?php if ($d_data_praktikan['file_ijazah_praktikan'] != "") { ?>
-                                <a href="<?= $d_data_praktikan['file_swab_praktikan']; ?>" download="Swab Praktikan.pdf" target="_blank" class="btn btn-outline-success btn-sm">
+                            <?php if ($d_data_praktikan['file_swab_praktikan'] != "") { ?>
+                                <a href="<?= $d_data_praktikan['file_swab_praktikan']; ?>" download="Swab_Serfikat Vaksin Praktikan.pdf" target="_blank" class="btn btn-outline-success btn-sm">
                                     Unduh
                                 </a>
+                            <?php } else { ?>
+                                <span class="badge badge-warning text-dark">Belum Ada</span>
+                            <?php } ?>
+                        </td>
+                        <td class="text-center">
+                            <?php if ($d_data_praktikan['foto_praktikan'] != "") { ?>
+
+                                <!-- tombol modal foto praktikan  -->
+                                <a title="tambah praktikan" class='btn btn-info btn-sm' href='#' data-toggle="modal" data-target="#foto<?= md5($d_data_praktikan['id_praktikan']); ?>">
+                                    <i class="fas fa-eye"></i> Lihat
+                                </a>
+
+                                <!-- modal foto praktikan  -->
+                                <div class="modal " id="foto<?= md5($d_data_praktikan['id_praktikan']); ?>">
+                                    <div class="modal-dialog modal-xs">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <img src="<?= $d_data_praktikan['foto_praktikan'] ?>" width="150px" height="200px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php } else { ?>
                                 <span class="badge badge-warning text-dark">Belum Ada</span>
                             <?php } ?>
@@ -143,7 +173,7 @@ if ($r_data_praktikan > 0) {
                                                             </div>
                                                             <br>
                                                         <?php } ?>
-                                                        File Hasil Swab :<span style="color:red">*</span><br>
+                                                        File Swab/Serfikat Vaksin :<span style="color:red">*</span><br>
                                                         <div class="custom-file">
                                                             <label class="custom-file-label text-xs" for="customFile" id="labelfileswabu<?= md5($d_data_praktikan['id_praktik']); ?>">Pilih File</label>
                                                             <input type="file" class="custom-file-input mb-1" id="u_swab<?= md5($d_data_praktikan['id_praktik']); ?>" name="u_swab<?= md5($d_data_praktikan['id_praktik']); ?>" accept="application/pdf" required>
@@ -348,7 +378,7 @@ if ($r_data_praktikan > 0) {
                                                     allowOutsideClick: true,
                                                     showConfirmButton: false,
                                                     icon: 'warning',
-                                                    title: '<div class="text-md text-center">File Swab Harus <b>.pdf</b></div>',
+                                                    title: '<div class="text-md text-center">File Swab/Serfikat Vaksin Harus <b>.pdf</b></div>',
                                                     timer: 10000,
                                                     timerProgressBar: true,
                                                     didOpen: (toast) => {
@@ -356,14 +386,14 @@ if ($r_data_praktikan > 0) {
                                                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                     }
                                                 });
-                                                $("#err_u_swab<?= md5($d_data_praktikan['id_praktik']); ?>").html("File Hasil Swab Harus pdf");
+                                                $("#err_u_swab<?= md5($d_data_praktikan['id_praktik']); ?>").html("File Hasil Swab/Serfikat Vaksin Harus pdf");
                                             } //Toast bila upload file swab diatas 200 Kb 
                                             else if (getSizeSwabu > 256) {
                                                 Swal.fire({
                                                     allowOutsideClick: true,
                                                     showConfirmButton: false,
                                                     icon: 'warning',
-                                                    title: '<div class="text-md text-center">File Swab Harus <br><b>Kurang dari 200 Kb</b></div>',
+                                                    title: '<div class="text-md text-center">File Swab/Serfikat Vaksin Harus <br><b>Kurang dari 200 Kb</b></div>',
                                                     timer: 10000,
                                                     timerProgressBar: true,
                                                     didOpen: (toast) => {
@@ -371,7 +401,7 @@ if ($r_data_praktikan > 0) {
                                                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                     }
                                                 });
-                                                $("#err_u_swab<?= md5($d_data_praktikan['id_praktik']); ?>").html("File Hasil Swab  Harus Kurang dari 200 Kb");
+                                                $("#err_u_swab<?= md5($d_data_praktikan['id_praktik']); ?>").html("File Hasil Swab/Serfikat Vaksin  Harus Kurang dari 200 Kb");
                                             }
                                         }
 

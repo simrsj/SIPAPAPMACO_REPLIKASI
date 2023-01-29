@@ -1,10 +1,12 @@
 <?php
+error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-// include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/csrf.php";
-
-$idpp = base64_decode(urldecode($_POST['idpp']));
-$idp = base64_decode(urldecode($_POST['idp']));
-
+echo "<pre>" . print_r($_FILES) . "</pre>";
+echo "<pre>" . print_r($_POST) . "</pre>";
+$exp_arr_idpp = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idpp']))));
+$idpp = $exp_arr_idpp[0];
+$exp_arr_idp = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idp']))));
+$idp = $exp_arr_idp[0];
 $sql_praktik = "SELECT * FROM tb_praktik ";
 $sql_praktik .= " WHERE id_praktik = " . $idp;
 // echo $sql_praktik . "<br>";
@@ -16,102 +18,66 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 //alamat file
-$alamat_unggah = "./../../_file/praktik";
-
-// echo $alamat_unggah . "<br>";
+$alamat_unggah = "./../../_file/praktik/praktikan";
 
 //pembuatan alamat bila tidak ada
 if (!is_dir($alamat_unggah)) {
     mkdir($alamat_unggah, 0777, $rekursif = true);
 }
 
-if ($d_praktik['id_profesi_pdd'] > 0) {
-    if ($_FILES['t_ijazah']['size'] > 0) {
-        //ubah Nama File PDF
-        $_FILES['t_ijazah']['name'] = "file_ijazah_" . md5($_FILES['t_ijazah']['name'] . date('Y-m-d h:i:s')) . ".pdf";
-
-        //unggah ijazah
-        if (!is_null($_FILES['t_ijazah'])) {
-            $file_ijazah = (object) @$_FILES['t_ijazah'];
-
-            //mulai unggah file ijazah
-            $unggah_file_ijazah = move_uploaded_file(
-                $file_ijazah->tmp_name,
-                "{$alamat_unggah}/{$file_ijazah->name}"
-            );
-            $alamat_unggah_file_ijazah = "./_file/praktik";
-            $link_file_ijazah = "{$alamat_unggah_file_ijazah}/{$file_ijazah->name}";
-        }
-    }
-}
-
-if ($_FILES['t_swab']['size'] > 0) {
-    //ubah Nama File PDF
-    $_FILES['t_swab']['name'] = "file_swab" . md5($_FILES['t_swab']['name'] . date('Y-m-d h:i:s')) . ".pdf";
-
-    //unggah surat dan data praktik
+//cek data kesesuaian file tambah
+if ($_FILES['t_swab']['size'] > (1024 * 256) || $_FILES['t_foto']['size'] > (1024 * 256) || $_FILES['t_ijazah']['size'] > (1024 * 256)) {
+    $ket = "size";
+} else if ($_FILES['t_swab']['type'] != "application/pdf" || $_FILES['t_ijazah']['type'] != "application/pdf" || $_FILES['t_foto']['type'] != "image/jpeg") {
+    $ket = "type";
+} else {
+    $_FILES['t_swab']['name'] = md5($_FILES['t_swab']['name'] . $_FILES['t_swab']['size'] . date('Y-m-d h:i:s')) . ".pdf";
     if (!is_null($_FILES['t_swab'])) {
-        $file_swab = (object) @$_FILES['t_swab'];
+        $t_swab = (object) @$_FILES['t_swab'];
 
-        //mulai unggah file surat praktik
-        $unggah_file_swab = move_uploaded_file(
-            $file_swab->tmp_name,
-            "{$alamat_unggah}/{$file_swab->name}"
+        $unggah_t_swab = move_uploaded_file(
+            $t_swab->tmp_name,
+            "{$alamat_unggah}/{$t_swab->name}"
         );
-        $alamat_unggah_file_swab = "./_file/praktik";
-        $link_file_swab = "{$alamat_unggah_file_swab}/{$file_swab->name}";
+        $alamat_unggah_t_swab = "./_file/praktik/praktikan";
+        $link_t_swab = "{$alamat_unggah_t_swab}/{$t_swab->name}";
     }
-}
-if ($d_praktik['id_profesi_pdd'] > 0) {
-    if ($_FILES['u_ijazah']['size'] > 0) {
-        //ubah Nama File PDF
-        $_FILES['u_ijazah']['name'] = "file_ijazah_" . md5($_FILES['u_ijazah']['name'] . date('Y-m-d h:i:s')) . ".pdf";
 
-        //unggah ijazah
-        if (!is_null($_FILES['u_ijazah'])) {
-            $file_ijazah = (object) @$_FILES['u_ijazah'];
+    $_FILES['t_ijazah']['name'] = md5($_FILES['t_ijazah']['name'] . $_FILES['t_ijazah']['size'] . date('Y-m-d h:i:s')) . ".pdf";
+    if (!is_null($_FILES['t_ijazah'])) {
+        $t_ijazah = (object) @$_FILES['t_ijazah'];
 
-            //mulai unggah file ijazah
-            $unggah_file_ijazah = move_uploaded_file(
-                $file_ijazah->tmp_name,
-                "{$alamat_unggah}/{$file_ijazah->name}"
-            );
-            $alamat_unggah_file_ijazah = "./_file/praktik";
-            $link_file_ijazah = "{$alamat_unggah_file_ijazah}/{$file_ijazah->name}";
-        }
-    }
-}
-
-if ($_FILES['u_swab']['size'] > 0) {
-    //ubah Nama File PDF
-    $_FILES['u_swab']['name'] = "file_swab" . md5($_FILES['u_swab']['name'] . date('Y-m-d h:i:s')) . ".pdf";
-
-    //unggah surat dan data praktik
-    if (!is_null($_FILES['u_swab'])) {
-        $file_swab = (object) @$_FILES['u_swab'];
-
-        //mulai unggah file surat praktik
-        $unggah_file_swab = move_uploaded_file(
-            $file_swab->tmp_name,
-            "{$alamat_unggah}/{$file_swab->name}"
+        $unggah_t_ijazah = move_uploaded_file(
+            $t_ijazah->tmp_name,
+            "{$alamat_unggah}/{$t_ijazah->name}"
         );
-        $alamat_unggah_file_swab = "./_file/praktik";
-        $link_file_swab = "{$alamat_unggah_file_swab}/{$file_swab->name}";
+        $alamat_unggah_t_ijazah = "./_file/praktik/praktikan";
+        $link_t_ijazah = "{$alamat_unggah_t_ijazah}/{$t_ijazah->name}";
     }
+
+    $_FILES['t_foto']['name'] = md5($_FILES['t_foto']['name'] . $_FILES['t_foto']['size'] . date('Y-m-d h:i:s')) . ".jpg";
+    if (!is_null($_FILES['t_foto'])) {
+        $t_foto = (object) @$_FILES['t_foto'];
+
+        $unggah_t_foto = move_uploaded_file(
+            $t_foto->tmp_name,
+            "{$alamat_unggah}/{$t_foto->name}"
+        );
+        $alamat_unggah_t_foto = "./_file/praktik/praktikan";
+        $link_t_foto = "{$alamat_unggah_t_foto}/{$t_foto->name}";
+    }
+
+    $sql_update = "UPDATE tb_praktikan SET ";
+    $sql_update .= " foto_praktikan = '" . $link_t_foto . "',";
+    $sql_update .= " file_ijazah_praktikan = '" . $link_t_ijazah . "',";
+    $sql_update .= " file_swab_praktikan = '" . $link_t_swab . "'";
+    $sql_update .= " WHERE id_praktikan = " . $idpp;
+    // echo $q . "<br>";
+    echo $sql_update . "<br>";
+    $exp_arr_q = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['q']))));
+    $q = $exp_arr_q[0];
+
+    $conn->query($q);
+    $conn->query($sql_update);
+    $ket = "sesuai";
 }
-// echo $id . "_" . $link_file_surat . "  |  " . $link_file_data_praktikan;
-
-//Cek Variable File
-// echo "<pre>";
-// print_r($_FILES);
-// echo "</pre>";
-
-$sql_update = "UPDATE tb_praktikan SET ";
-$sql_update .= " file_ijazah_praktikan = '" . $link_file_ijazah . "',";
-$sql_update .= " file_swab_praktikan = '" . $link_file_swab . "'";
-$sql_update .= " WHERE id_praktikan = " . $idpp;
-
-// echo $sql_update . "<br>";
-$conn->query($sql_update);
-
-echo json_encode(['success' => 'Data Berhasil Disimpan']);

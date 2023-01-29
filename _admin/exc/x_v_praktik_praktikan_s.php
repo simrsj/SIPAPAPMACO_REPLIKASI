@@ -1,12 +1,12 @@
 <?php
+error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
-$id_praktik = base64_decode(urldecode($_POST['idp']));
+// echo "<pre>" . print_r($_POST) . "</pre>";
+$exp_arr_idp = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idp']))));
+$idp = $exp_arr_idp[0];
 $sql_praktik = "SELECT * FROM tb_praktik";
-$sql_praktik .= " WHERE tb_praktik.id_praktik = " . $id_praktik;
+$sql_praktik .= " WHERE id_praktik = " . $idp;
 // echo $sql_praktik . "<br>";
 try {
     $q_praktik = $conn->query($sql_praktik);
@@ -18,7 +18,7 @@ try {
 }
 
 $sql_praktikan = "SELECT * FROM tb_praktikan";
-$sql_praktikan .= " WHERE id_praktik = " . $id_praktik;
+$sql_praktikan .= " WHERE id_praktik = " . $idp;
 // echo $sql_praktikan . "<br>";
 try {
     $q_praktikan = $conn->query($sql_praktikan);
@@ -57,7 +57,7 @@ if ($r_praktikan < $d_praktik['jumlah_praktik']) {
     $sql .= " alamat_praktikan";
     $sql .= " ) VALUES (";
     $sql .= " '" . $id_praktikan . "', ";
-    $sql .= " '" . $id_praktik . "', ";
+    $sql .= " '" . $idp . "', ";
     $sql .= " '" . date("Y-m-d") . "', ";
     $sql .= " '" . $_POST['t_no_id'] . "', ";
     $sql .= " '" . $_POST['t_nama'] . "',";
@@ -68,13 +68,10 @@ if ($r_praktikan < $d_praktik['jumlah_praktik']) {
     $sql .= " '" . $_POST['t_alamat'] . "'";
     $sql .= " )";
     // echo $sql . "<br>";
-    try {
-        $conn->query($sql);
-    } catch (Exception $ex) {
-        echo "<script>alert('$ex -SIMPAN PRAKTIKAN-');";
-        echo "document.location.href='?error404';</script>";
-    }
-    echo json_encode(['ket' => 'Y', 'idpp' => urlencode(base64_encode($id_praktikan))]);
+    $dataJSON['idpp'] = bin2hex(urlencode(base64_encode($id_praktikan)));
+    $dataJSON['q'] = bin2hex(urlencode(base64_encode($sql)));
+    $dataJSON['ket'] = 'Y';
+    echo json_encode($dataJSON);
 } else {
     echo json_encode(['ket' => 'T']);
 }

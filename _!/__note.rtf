@@ -4,10 +4,17 @@ RS Jiwa Provinsi Jawa Barat, Jl. Kolonel Maturi KM.7, Desa Jambudipa, Kec. Cisar
 
 # DAFTAR PERBAIKAN :
 - ✅ Membuat Rincian Praktik pembimbing
+- ✅ Penambahan Keterangan Sertifikat Vaksin
+- ✅ Penambahan Input Foto Praktikan 
+- 🔃 e-Log Book Kedokteran Praktikan
+- 🔃 e-Log Book Kedokteran Pembimbing
+- 🔃 e-Log Book Keperawatan Praktikan
+- 🔃 e-Log Book Keperawatan Pembimbing
 - 🔃 Pembuatan File Invoice/RAB .docx (WORD)
 - 🔃 Generate SP Pembimbing Kedokteran dengan format .docx (WORD), .PDF
 - 🔃 Generate SP Pembimbing Keperawatan dengan format .docx (WORD), .PDF
 - 🔃 Penambahan Upload Surat Penugasan Preceptor/Clinical Insturtur di menu “Daftar Pembimbing dan Ruangan”
+- 
 - Bridging Data Pembayaran Praktik ke Aplikasi SIMRS
 - Panduan untuk Institusi Pendidikan nanti akan berubah sesuai dengan Pengembangan dari Aplikasi
 
@@ -72,6 +79,7 @@ base64_decode(urldecode())
 
 bin2hex(urlencode(base64_encode()))
 base64_decode(urldecode(hex2bin()))
+<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>
 
 ====================================================================================================================
 
