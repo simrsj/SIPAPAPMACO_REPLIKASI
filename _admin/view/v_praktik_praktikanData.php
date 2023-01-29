@@ -238,6 +238,13 @@ if ($r_data_praktikan > 0) {
                                         $(".ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>").click(function() {
                                             // console.log("ubah_init");
 
+                                            Swal.fire({
+                                                title: 'Mohon Ditunggu . . .',
+                                                html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                                                allowOutsideClick: false,
+                                                showConfirmButton: false,
+                                                backdrop: true
+                                            });
                                             $('#err_u_foto<?= md5($d_data_praktikan['id_praktikan']); ?>').empty();
                                             $('#err_u_no_id<?= md5($d_data_praktikan['id_praktikan']); ?>').empty();
                                             $('#err_u_nama<?= md5($d_data_praktikan['id_praktikan']); ?>').empty();
@@ -278,6 +285,7 @@ if ($r_data_praktikan > 0) {
                                             <?php } ?>
                                             $('#err_u_swab<?= md5($d_data_praktikan['id_praktikan']); ?>').empty();
                                             $('#err_u_foto<?= md5($d_data_praktikan['id_praktikan']); ?>').empty();
+                                            Swal.close();
                                         });
 
                                         // inisiasi klik modal ubah  tutup
@@ -288,6 +296,14 @@ if ($r_data_praktikan > 0) {
                                         });
 
                                         $(document).on('click', '.ubah<?= md5($d_data_praktikan['id_praktikan']); ?>', function() {
+
+                                            Swal.fire({
+                                                title: 'Mohon Ditunggu . . .',
+                                                html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                                                allowOutsideClick: false,
+                                                showConfirmButton: false,
+                                                backdrop: true
+                                            });
                                             var u_foto = $('#u_foto<?= md5($d_data_praktikan['id_praktikan']); ?>').val();
                                             var u_no_id = $('#u_no_id<?= md5($d_data_praktikan['id_praktikan']); ?>').val();
                                             var u_nama = $('#u_nama<?= md5($d_data_praktikan['id_praktikan']); ?>').val();
@@ -380,7 +396,6 @@ if ($r_data_praktikan > 0) {
                                                 u_swab == "" ||
                                                 u_swab == undefined
                                             ) {
-
                                                 if (u_foto == "" || u_foto == undefined)
                                                     $("#err_u_foto<?= md5($d_data_praktikan['id_praktikan']); ?>").html("Foto Harus Dipilih");
                                                 else if (getTypeFoto != "jpg")
@@ -520,13 +535,6 @@ if ($r_data_praktikan > 0) {
                                                                     }
                                                                 }).then(
                                                                     function() {
-                                                                        Swal.fire({
-                                                                            title: 'Mohon Ditunggu . . .',
-                                                                            html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                                                                            allowOutsideClick: false,
-                                                                            showConfirmButton: false,
-                                                                            backdrop: true
-                                                                        });
                                                                         $('#mu<?= md5($d_data_praktikan['id_praktikan']) ?>').on('hidden.bs.modal', function(e) {
                                                                             $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>')
                                                                                 .load("_admin/view/v_praktik_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= $_GET['idp']; ?>&tb=<?= $_GET['tb'] ?>");
@@ -569,7 +577,7 @@ if ($r_data_praktikan > 0) {
                                     </a>
 
                                     <!-- modal hapus praktikan  -->
-                                    <div class="modal fade text-center" id="md<?= md5($d_data_praktikan['id_praktikan']); ?>">
+                                    <div class="modal text-center" id="md<?= md5($d_data_praktikan['id_praktikan']); ?>">
                                         <div class="modal-dialog modal-dialog-scrollable  modal-md">
                                             <div class="modal-content">
                                                 <div class="modal-header h5">
@@ -580,7 +588,7 @@ if ($r_data_praktikan > 0) {
                                                         Kembali
                                                     </a>
                                                     &nbsp;
-                                                    <a class="btn btn-outline-danger btn-sm hapus<?= md5($d_data_praktikan['id_praktikan']); ?>" id="<?= urlencode(base64_encode($d_data_praktikan['id_praktikan'])); ?>" data-dismiss="modal">
+                                                    <a class="btn btn-outline-danger btn-sm hapus<?= md5($d_data_praktikan['id_praktikan']); ?>" id="<?= bin2hex(urlencode(base64_encode($d_data_praktikan['id_praktikan'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" data-dismiss="modal">
                                                         Hapus
                                                     </a>
                                                 </div>
@@ -597,27 +605,26 @@ if ($r_data_praktikan > 0) {
                                                     "idprkn": $(this).attr('id')
                                                 },
                                                 success: function() {
-
-                                                    $('#md<?= md5($d_data_praktikan['id_praktikan']); ?>').on('hidden.bs.modal', function(e) {
-                                                        $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>')
-                                                            .load("_admin/view/v_praktik_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= urlencode(base64_encode($d_data_praktikan['id_praktik'])); ?>&tb=<?= $_GET['tb'] ?>");
-                                                    })
-                                                    const Toast = Swal.mixin({
-                                                        toast: true,
-                                                        position: 'top-end',
+                                                    Swal.fire({
+                                                        allowOutsideClick: true,
                                                         showConfirmButton: false,
+                                                        backdrop: true,
+                                                        icon: 'success',
+                                                        html: '<div class="text-lg b">Data Praktikan<br>Berhasil Diubah</div>',
                                                         timer: 3000,
                                                         timerProgressBar: true,
                                                         didOpen: (toast) => {
                                                             toast.addEventListener('mouseenter', Swal.stopTimer)
                                                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                                                         }
-                                                    });
-
-                                                    Toast.fire({
-                                                        icon: 'success',
-                                                        title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Dihapus</b></div>'
-                                                    });
+                                                    }).then(
+                                                        function() {
+                                                            $('#<?= md5("data" . $d_data_praktikan['id_praktik']); ?>')
+                                                                .load("_admin/view/v_praktik_praktikanData.php?idu=<?= $_GET['idu']; ?>&idp=<?= $_GET['idp']; ?>&tb=<?= $_GET['tb'] ?>");
+                                                            $('#md<?= md5($d_data_praktikan['id_praktikan']); ?>').modal('hide');
+                                                            Swal.close();
+                                                        }
+                                                    );
                                                 },
                                                 error: function(response) {
                                                     console.log(response);

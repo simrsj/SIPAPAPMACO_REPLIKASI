@@ -206,6 +206,13 @@
                                             <script>
                                                 $(document).ready(function() {
 
+                                                    Swal.fire({
+                                                        title: 'Mohon Ditunggu . . .',
+                                                        html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                                                        allowOutsideClick: false,
+                                                        showConfirmButton: false,
+                                                        backdrop: true
+                                                    });
                                                     $(function() {
                                                         // check if there is a hash in the url
                                                         if (window.location.hash != '') {
@@ -215,13 +222,6 @@
                                                             // show the panel based on the hash now:
                                                             $(window.location.hash + '.collapse').collapse('show');
                                                         }
-                                                    });
-                                                    Swal.fire({
-                                                        title: 'Mohon Ditunggu . . .',
-                                                        html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                                                        allowOutsideClick: false,
-                                                        showConfirmButton: false,
-                                                        backdrop: true
                                                     });
                                                     $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
                                                         .load(
@@ -236,6 +236,14 @@
                                                 // inisiasi klik modal tambah
                                                 $(".tambah_init<?= md5($d_praktik['id_praktik']); ?>").click(function() {
                                                     console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
+
+                                                    Swal.fire({
+                                                        title: 'Mohon Ditunggu . . .',
+                                                        html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                                                        allowOutsideClick: false,
+                                                        showConfirmButton: false,
+                                                        backdrop: true
+                                                    });
                                                     $('#err_t_foto<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                     $('#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                     $('#err_t_nama<?= md5($d_praktik['id_praktik']); ?>').empty();
@@ -246,6 +254,7 @@
                                                         $('#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                     <?php } ?>
                                                     $('#err_t_swab<?= md5($d_praktik['id_praktik']); ?>').empty();
+                                                    Swal.close();
                                                 });
 
                                                 // inisiasi klik modal tambah  tutup
@@ -263,6 +272,13 @@
                                                 // inisiasi klik modal tambah simpan
                                                 $(document).on('click', '.tambah<?= md5($d_praktik['id_praktik']); ?>', function() {
 
+                                                    Swal.fire({
+                                                        title: 'Mohon Ditunggu . . .',
+                                                        html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                                                        allowOutsideClick: false,
+                                                        showConfirmButton: false,
+                                                        backdrop: true
+                                                    });
                                                     // console.log("tambah<?= md5($d_praktik['id_praktik']); ?>");
                                                     var idp = $(this).attr('id');
                                                     var data_t = $("#form_t<?= md5($d_praktik['id_praktik']); ?>").serializeArray();
