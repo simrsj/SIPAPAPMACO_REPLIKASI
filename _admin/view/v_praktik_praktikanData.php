@@ -99,15 +99,15 @@ if ($r_data_praktikan > 0) {
 
                                 <!-- tombol modal foto praktikan  -->
                                 <a title="tambah praktikan" class='btn btn-info btn-sm' href='#' data-toggle="modal" data-target="#foto<?= md5($d_data_praktikan['id_praktikan']); ?>">
-                                    <i class="fas fa-eye"></i> Lihat
+                                    <i class="fas fa-eye"></i>
                                 </a>
 
                                 <!-- modal foto praktikan  -->
                                 <div class="modal " id="foto<?= md5($d_data_praktikan['id_praktikan']); ?>">
-                                    <div class="modal-dialog modal-xs">
+                                    <div class="modal-dialog modal-xs" style="width: 230px; height:260px">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                                                <img src="<?= $d_data_praktikan['foto_praktikan'] ?>" width="150px" height="200px">
+                                                <img src="<?= $d_data_praktikan['foto_praktikan'] ?>" width="200px" height="250px">
                                             </div>
                                         </div>
                                     </div>

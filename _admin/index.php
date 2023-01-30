@@ -46,14 +46,6 @@ if ($_SESSION['status_user'] == "Y") {
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span></a>
 			</li>
-			<?php if ($_SESSION['level_user'] == 1) { ?>
-				<li class="nav-item ">
-					<a class="nav-link" href="?mou">
-						<i class="fas fa-fw fa-handshake"></i>
-						<span>MoU-Kerjasama</span></a>
-				</li>
-			<?php } ?>
-
 			<?php if ($_SESSION['level_user'] != 3) { ?>
 				<hr class="sidebar-divider">
 				<div class="sidebar-heading">
@@ -68,7 +60,7 @@ if ($_SESSION['status_user'] == "Y") {
 					</a>
 				</li>
 
-				<?php if ($d_prvl['level_user'] == 1 && $d_prvl['r_kuota'] == "Y") { ?>
+				<?php if ($d_prvl['level_user'] == 1) { ?>
 					<!-- Kuota -->
 					<li class="nav-item ">
 						<a class="nav-link" href="?kta">
