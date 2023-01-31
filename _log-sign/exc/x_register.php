@@ -3,7 +3,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // echo "<pre>";
 // print_r($_POST);
 // echo "</pre>";
-
+// error_reporting(0);
 //cari id_user 
 $sql_id_user = "SELECT id_user FROM tb_user  ORDER BY id_user DESC LIMIT 1";
 try {
@@ -95,13 +95,19 @@ $sql_insert_user .= " '" . date('Y-m-d') . "', ";
 $sql_insert_user .= " '" . $crypt . "', ";
 $sql_insert_user .= " 'Y'";
 $sql_insert_user .= " )";
-// echo "<br>" . $sql_insert_user;
+
+$sql_insert_user_prvl = "INSERT INTO tb_user_privileges (";
+$sql_insert_user_prvl .= "id_user";
+$sql_insert_user_prvl .= " ) VALUES (";
+$sql_insert_user_prvl .= " '" . $id_user . "'";
+$sql_insert_user_prvl .= " )";
+// echo "<br>" . $sql_insert_user_prvl;
 try {
     $conn->query($sql_insert_user);
+    $conn->query($sql_insert_user_prvl);
 } catch (Exception $ex) {
     echo "<script>alert('$ex -DATA INSERT USER-');";
     echo "document.location.href='?error404';</script>";
 }
-
 
 echo json_encode(['idu' => urlencode(base64_encode($id_user))]);

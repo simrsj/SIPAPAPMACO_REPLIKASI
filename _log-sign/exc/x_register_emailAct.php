@@ -112,7 +112,6 @@ $isi_email = "
                 <b>
                     SIPAPAP MACO<br>
                     (Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)
-
                 </b>
             </div>
             <div class='container'>
@@ -131,14 +130,12 @@ $isi_email = "
 </html>
 ";
 
-
-
 // passing true in constructor enables exceptions in PHPMailer
 $mail = new PHPMailer(true);
 
 try {
     // Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
+    $mail->SMTPDebug = 2; // for detailed debug output
     $mail->SMTPOptions = array(
         'ssl' => array(
             'verify_peer' => false,
@@ -147,19 +144,23 @@ try {
         )
     );
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    // $mail->Host = 'relay.excellent.co.id';
+
+    $mail->Host = 'smtp.jabarprov.go.id';
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
+    $mail->Username = 'rsj@jabarprov.go.id';
+    $mail->Password = 'Rsjiwa*2009*';
 
+    // $mail->Host = 'smtp.gmail.com';
+    // $mail->SMTPAuth = true;
+    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    // $mail->Port = 587;
+    // $mail->Username = 'rsjiwajabar@gmail.com';
+    // $mail->Password = 'jtvgvusfwgaxypyf';
 
-    $mail->Username = 'rsjiwajabar@gmail.com'; // YOUR gmail email
-    $mail->Password = 'jtvgvusfwgaxypyf'; // YOUR gmail password
-
-    // Sender and recipient settingss
-    $mail->setFrom('rsjiwajabar@gmail.com', 'SIPAPAP MACO - AKTIVASI');
-    // $mail->addAddress(base64_decode(urldecode($_GET['email'])), base64_decode(urldecode($_GET['nama'])));
+    // Sender and recipient settings
+    $mail->setFrom('rsj@jabarprov.go.id', 'SIPAPAP MACO - AKTIVASI');
     $mail->addAddress($_POST['email'], $_POST['nama']);
     // $mail->addReplyTo("fajar.rachmat.h@gmail.com", "RECEIVER");
 

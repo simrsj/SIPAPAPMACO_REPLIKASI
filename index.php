@@ -56,7 +56,12 @@ include "_add-ons/tanggal_waktu.php";
     elseif (isset($_SESSION['status_user'])) {
         if ($_SESSION['status_user'] == 'Y') {
             if (isset($_GET['lo'])) include "_log-sign/exc/x_log_out.php";
-            elseif (isset($_SESSION['level_user'])) include "_admin/index.php";
+            elseif (
+                $_SESSION['level_user'] == 1 ||
+                $_SESSION['level_user'] == 2 ||
+                $_SESSION['level_user'] == 3
+            ) include "_admin/index.php";
+            elseif ($_SESSION['level_user'] == 4) include "_pembimbing/index.php";
         } elseif ($_SESSION['status_user'] == 'T') {
             echo "
             <script>
