@@ -291,7 +291,7 @@
                                         Swal.fire({
                                             icon: 'success',
                                             html: '<div class="b ">Registrasi Berhasil</div><hr>' +
-                                                'Silahkan Lakukan Aktivasi di Email : <b>' + email + '</b>',
+                                                'Silahkan Lakukan Aktivasi di Kotak Masuk Email : <br><b>' + email + '</b>',
                                             showConfirmButton: false,
                                             timer: 10000,
                                             timerProgressBar: true,

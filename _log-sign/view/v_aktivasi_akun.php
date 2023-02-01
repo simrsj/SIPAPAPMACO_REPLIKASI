@@ -2,15 +2,16 @@
 // include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 if (isset($_GET['act_user']) && isset($_GET['crypt'])) {
 
-    $crypt_decode = base64_decode(urldecode($_GET['crypt']));
+    $crypt_decode = base64_decode(urldecode(hex2bin($_GET['crypt'])));
     // echo $crypt_decode . "<br>";
-    $arr = explode("_",  $crypt_decode);
+    $arr = explode("*sm*",  $crypt_decode);
+    $id_user = bin2hex(urlencode(base64_encode($arr[1])));
     // echo "<pre>";
     // echo print_r($arr);
     // echo "</pre>";
 
     $sql_akun = "SELECT * FROM tb_user";
-    $sql_akun .= " WHERE id_user = " . base64_decode(urldecode($arr[1]));
+    $sql_akun .= " WHERE id_user = " . $id_user;
     // echo "<br>" . $sql_akun;
     try {
         $q_akun = $conn->query($sql_akun);
@@ -25,7 +26,7 @@ if (isset($_GET['act_user']) && isset($_GET['crypt'])) {
 
         $sql_u_aktivasi = "UPDATE tb_user SET";
         $sql_u_aktivasi .= " status_aktivasi_user = 'Y'";
-        $sql_u_aktivasi .= " WHERE id_user = " . base64_decode(urldecode($arr[1]));
+        $sql_u_aktivasi .= " WHERE id_user = " . $id_user;
         echo "<br>" . $sql_u_aktivasi;
 
         $sql_u_aktivasi_privilages = "UPDATE tb_user_privilages SET";
@@ -45,7 +46,7 @@ if (isset($_GET['act_user']) && isset($_GET['crypt'])) {
         $sql_u_aktivasi_privilages .= " r_praktik_nilai = 'Y',";
         $sql_u_aktivasi_privilages .= " r_arsip_praktik = 'Y',";
         $sql_u_aktivasi_privilages .= " c_arsip_praktik = 'Y'";
-        $sql_u_aktivasi_privilages .= " WHERE id_user = " . base64_decode(urldecode($arr[1]));
+        $sql_u_aktivasi_privilages .= " WHERE id_user = " . $id_user;
         echo "<br>" . $sql_u_aktivasi_privilages;
         try {
             $conn->query($sql_u_aktivasi);

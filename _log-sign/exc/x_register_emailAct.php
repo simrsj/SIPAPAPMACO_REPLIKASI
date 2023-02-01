@@ -20,10 +20,10 @@ $nama_user = $_POST['nama'];
 $no_telp_user = $_POST['telp'];
 $email_user = $_POST['email'];
 $password_user = MD5($_POST['password']);
-$crypt = urlencode(base64_encode(date('Ymd') . '_' . $id_user . '_' .  $email_user .  '_' . $nama_user . '"'));
+$crypt = bin2hex(urlencode(base64_encode(date('Ymd') . '*sm*' . $id_user . '*sm*' .  $email_user .  '*sm*' . $nama_user . '"')));
 
-$urlserver = "http://103.147.222.122:84/SM/";
-// $urlserver = "http://127.0.0.1/SM/";
+// $urlserver = "http://103.147.222.122:84/SM/";
+$urlserver = "http://127.0.0.1/SM/";
 
 $isi_email = "
 <!DOCTYPE html>
@@ -134,8 +134,11 @@ $isi_email = "
 $mail = new PHPMailer(true);
 
 try {
+    // cek Debug 
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    // $mail->SMTPDebug = 2;
+
     // Server settings
-    $mail->SMTPDebug = 2; // for detailed debug output
     $mail->SMTPOptions = array(
         'ssl' => array(
             'verify_peer' => false,
