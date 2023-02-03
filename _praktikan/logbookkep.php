@@ -3,7 +3,6 @@ if ($_SESSION['status_user'] == "Y") {
 
 	//data user 
 	$sql_user = "SELECT * FROM tb_user WHERE id_user=" . $_SESSION['id_user'];
-	// echo $sql_user;
 	try {
 		$q_user = $conn->query($sql_user);
 	} catch (Exception $ex) {
@@ -16,7 +15,6 @@ if ($_SESSION['status_user'] == "Y") {
 	$sql_prvl = "SELECT * FROM tb_user_privileges ";
 	$sql_prvl .= " JOIN tb_user ON tb_user_privileges.id_user = tb_user.id_user";
 	$sql_prvl .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
-	// echo $sql_prvl;
 	try {
 		$q_prvl = $conn->query($sql_prvl);
 	} catch (Exception $ex) {
@@ -376,19 +374,6 @@ if ($_SESSION['status_user'] == "Y") {
 					</div>
 				</div>
 				<?php
-				//alert jika akun belum diverifikasi
-				if ($d_user['status_aktivasi_user'] == "T") {
-				?>
-					<div class="alert alert-danger alert-dismissible show m-4 text-center" role="alert">
-						Akun Anda <span class="text-danger blink b">Belum Aktif</span>, Silahkan Lakukan Aktivasi dengan menekan <span class="text-primary blink b">Tombol Aktivasi</span> di E-Mail : <span class="text-dark b"><?= $d_user['email_user'] ?></span>
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-				<?php
-				}
-
-
 				//akun dan hak akses 
 				if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 					if (isset($_GET['ha']) && $_SESSION['level_user'] == 1)

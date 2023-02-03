@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 session_start();
 // phpinfo();
 
@@ -41,16 +41,18 @@ include "_add-ons/tanggal_waktu.php";
 </head>
 
 <body id="page-top" class="bg-primary">
-    <div class="preloader">
+    <!-- <div class="preloader">
         <div class="loading text-center">
             <img src="./_img/logorsj.png" class="rotate mb-3" width="100" height="100" />
             <div class="h5 b">Harap Tunggu</div>
         </div>
-    </div>
+    </div> -->
     <?php
 
     if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
     elseif (isset($_GET['test'])) include "test.php";
+    elseif (isset($_GET['logbookked'])) include "_praktikan\logbookked.php";
+    elseif (isset($_GET['logbookkep'])) include "_praktikan\logbookkep.php";
     elseif (isset($_GET['error401'])) include "_error/error401.php";
     elseif (isset($_GET['error404'])) include "_error/error404.php";
     elseif (isset($_SESSION['status_user'])) {

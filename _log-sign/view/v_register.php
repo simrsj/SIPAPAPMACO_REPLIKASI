@@ -299,6 +299,8 @@
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)
                                                 toast.addEventListener('mouseleave', Swal.resumeTimer)
                                             }
+                                        }).then(function() {
+                                            document.location.href = "?login";
                                         });
                                     }
                                 });

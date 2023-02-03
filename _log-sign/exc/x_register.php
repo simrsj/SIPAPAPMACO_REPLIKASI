@@ -13,7 +13,7 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 $d_id_user = $q_id_user->fetch(PDO::FETCH_ASSOC);
-$id_user = $d_id_user['id_user'] + 1;
+$id_user = bin2hex(urlencode(base64_encode($d_id_user['id_user'] + 1)));
 
 $id_institusi = $_POST['institusi'];
 $nama_user = $_POST['nama'];
@@ -110,4 +110,4 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 
-echo json_encode(['idu' => urlencode(base64_encode($id_user))]);
+echo json_encode(['idu' => $id_user]);

@@ -116,8 +116,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                             <td class="align-middle"><?= $d_praktik['tgl_selesai_praktik'] ?></td>
                             <!-- status mess praktik  -->
                             <td class="align-middle">
-                                <?php if ($d_praktik['status_mess_praktik'] == 'Y') { ?>
-                                    <?php
+                                <?php if ($d_praktik['status_mess_praktik'] == 'Y') {
                                     $sql_mess_pilih = "SELECT * FROM tb_mess_pilih ";
                                     $sql_mess_pilih .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
                                     $sql_mess_pilih .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
@@ -131,31 +130,24 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     $r_mess_pilih = $q_mess_pilih->rowCount();
 
                                     //teks status dan privileges praktik mess
-                                    if ($d_prvl['c_praktik_mess'] == 'Y' && $r_mess_pilih < 1) {
-                                    ?>
+                                    if ($d_prvl['c_praktik_mess'] == 'Y' && $r_mess_pilih < 1) { ?>
                                         <span class="badge badge-warning text-dark">Belum Dipilih</span>
                                         <br>
                                         <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
                                             Pilih
                                         </a>
-                                    <?php
-                                    } else if ($d_prvl['u_praktik_mess'] == 'Y' && $r_mess_pilih > 0) {
-                                    ?>
+                                    <?php } else if ($d_prvl['u_praktik_mess'] == 'Y' && $r_mess_pilih > 0) { ?>
+                                        <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
+                                            Ubah
+                                        </a>
+                                    <?php } else {  ?>
                                         <fieldset class="border-1 m-1 p-1">
                                             <?= $d_mess_pilih['nama_mess']; ?>
                                             <br>
                                             <?= $d_mess_pilih['telp_pemilik_mess']; ?>
                                         </fieldset>
-                                        <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
-                                            Ubah
-                                        </a>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <span class="badge badge-danger">ERROR!!!</span>
-                                    <?php
-                                    }
-                                } else { ?>
+                                    <?php } ?>
+                                <?php } else { ?>
                                     <span class="badge badge-danger">Tidak Pakai Mess</span>
                                 <?php } ?>
                             </td>
@@ -535,7 +527,9 @@ if ($d_prvl['r_praktik'] == "Y") {
                 <tfoot>
                     <tr>
                         <td></td>
-                        <th></th>
+                        <?php if ($d_prvl['level_user'] == 1) { ?>
+                            <th></th>
+                        <?php } ?>
                         <th></th>
                         <th></th>
                         <th></th>

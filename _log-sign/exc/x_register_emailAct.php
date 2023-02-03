@@ -22,8 +22,8 @@ $email_user = $_POST['email'];
 $password_user = MD5($_POST['password']);
 $crypt = bin2hex(urlencode(base64_encode(date('Ymd') . '*sm*' . $id_user . '*sm*' .  $email_user .  '*sm*' . $nama_user . '"')));
 
-// $urlserver = "http://103.147.222.122:84/SM/";
-$urlserver = "http://127.0.0.1/SM/";
+$urlserver = "http://103.147.222.122:84/SM/";
+// $urlserver = "http://127.0.0.1/SM/";
 
 $isi_email = "
 <!DOCTYPE html>
