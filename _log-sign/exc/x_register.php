@@ -5,7 +5,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // echo "</pre>";
 // error_reporting(0);
 //cari id_user 
-$sql_id_user = "SELECT id_user FROM tb_user  ORDER BY id_user DESC LIMIT 1";
+$sql_id_user = "SELECT MAX(id_user) AS ID FROM tb_user";
 try {
     $q_id_user  = $conn->query($sql_id_user);
 } catch (Exception $ex) {
@@ -13,7 +13,7 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 $d_id_user = $q_id_user->fetch(PDO::FETCH_ASSOC);
-$id_user = bin2hex(urlencode(base64_encode($d_id_user['id_user'] + 1)));
+$id_user = bin2hex(urlencode(base64_encode($d_id_user['ID'] + 1)));
 
 $id_institusi = $_POST['institusi'];
 $nama_user = $_POST['nama'];
@@ -83,7 +83,7 @@ $sql_insert_user .= " kode_aktivasi_user, ";
 $sql_insert_user .= " status_user";
 $sql_insert_user .= " ) VALUES (";
 // $sql_insert_user .= "  '" . $id_mou . "', ";
-$sql_insert_user .= " '" . $id_user . "', ";
+$sql_insert_user .= " '" . base64_decode(urldecode(hex2bin($id_user))) . "', ";
 $sql_insert_user .= " '" . $id_institusi . "', ";
 $sql_insert_user .= " '" . $email_user . "', ";
 $sql_insert_user .= " '" . $password_user . "', ";
@@ -95,11 +95,12 @@ $sql_insert_user .= " '" . date('Y-m-d') . "', ";
 $sql_insert_user .= " '" . $crypt . "', ";
 $sql_insert_user .= " 'Y'";
 $sql_insert_user .= " )";
+// echo "<br>" . $sql_insert_user;
 
 $sql_insert_user_prvl = "INSERT INTO tb_user_privileges (";
 $sql_insert_user_prvl .= "id_user";
 $sql_insert_user_prvl .= " ) VALUES (";
-$sql_insert_user_prvl .= " '" . $id_user . "'";
+$sql_insert_user_prvl .= " '" . base64_decode(urldecode(hex2bin($id_user))) . "'";
 $sql_insert_user_prvl .= " )";
 // echo "<br>" . $sql_insert_user_prvl;
 try {

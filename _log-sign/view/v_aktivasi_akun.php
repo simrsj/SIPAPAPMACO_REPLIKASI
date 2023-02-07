@@ -87,7 +87,7 @@ if (isset($_GET['act_user']) && isset($_GET['crypt'])) {
     }
     //jika data akun aktivasi tidak ada di database
     else {
-        echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
+        // echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
     }
 } else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
