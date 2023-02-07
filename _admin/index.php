@@ -388,7 +388,6 @@ if ($_SESSION['status_user'] == "Y") {
 				<?php
 				}
 
-
 				//akun dan hak akses 
 				if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 					if (isset($_GET['ha']) && $_SESSION['level_user'] == 1)
