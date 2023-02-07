@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // echo "<pre>" . print_r($_POST) . "</pre>";
@@ -11,6 +11,7 @@ $id = $exp_ar[0];
 $sql_prvl = "SELECT * FROM tb_user_privileges ";
 $sql_prvl .= " JOIN tb_user ON tb_user_privileges.id_user = tb_user.id_user";
 $sql_prvl .= " WHERE tb_user.id_user = " . $id;
+// echo $sql_prvl;
 try {
     $q_prvl = $conn->query($sql_prvl);
 } catch (Exception $ex) {
@@ -26,6 +27,9 @@ if ($d_prvl['r_praktik'] == "Y") {
     $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
     $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
     $sql_praktik .= " WHERE status_praktik = 'Y' ";
+    if ($d_prvl['level_user'] == 2) {
+        $sql_praktik .= " AND  tb_institusi.id_institusi = " . $d_prvl['id_institusi'];
+    }
     $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
     // echo $sql_praktik;
     try {
