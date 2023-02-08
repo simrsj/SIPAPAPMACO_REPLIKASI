@@ -404,15 +404,20 @@ if ($d_prvl['r_praktik'] == "Y") {
                                         </div>
                                     </div>
 
-                                    <!-- <a title="Ubah" class='btn btn-primary btn-xs' href='#'>
-                                        <i class="fas fa-edit"></i>
-                                    </a> -->
+                                    <?php if ($d_prvl['u_praktik'] == "Y") { ?>
+                                        <!-- tombol ubah praktik  -->
+                                        <a title="Ubah" class='btn btn-primary btn-xs' href='?ptk&u&idp=<?= bin2hex(urlencode(base64_encode(date('Ymd') . "*sm*" . $d_praktik['id_praktik']))); ?>'>
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </a>
+                                    <?php } ?>
                                     <?php if ($d_prvl['d_praktik'] == "Y") { ?>
+                                        <!-- tombol modal hapus praktik  -->
                                         <a title="Hapus" class='btn btn-danger btn-xs hapus<?= md5($d_praktik['id_praktik']); ?>' id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" href='#'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     <?php } ?>
                                     <?php if ($d_prvl['level_user'] == "1") { ?>
+                                        <!-- tombol modal arsip praktik  -->
                                         <a title="Arsip" class='btn btn-outline-secondary btn-xs arsip<?= md5($d_praktik['id_praktik']); ?>' id="<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" href='#'>
                                             <i class="fa-solid fa-box-archive"></i>
                                         </a>

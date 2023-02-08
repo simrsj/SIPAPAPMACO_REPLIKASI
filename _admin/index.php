@@ -452,6 +452,7 @@ if ($_SESSION['status_user'] == "Y") {
 				//praktik
 				else if (isset($_GET['ptk']) && $d_prvl['r_praktik'] == 'Y') {
 					if (isset($_GET['i']) && $d_prvl['c_praktik'] == 'Y') include "_admin/insert/i_praktik.php";
+					else if (isset($_GET['u']) && $d_prvl['u_praktik'] == 'Y') include "_admin/update/u_praktik.php";
 					elseif (isset($_GET['m_i']) && $d_prvl['c_praktik_mess'] == 'Y') include "_admin/insert/i_praktik_mess.php";
 					elseif (isset($_GET['m_u']) && $d_prvl['u_praktik_mess'] == 'Y') include "_admin/update/u_praktik_mess.php";
 					else include "_admin/view/v_praktik.php";

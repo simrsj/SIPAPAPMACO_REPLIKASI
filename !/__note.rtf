@@ -31,8 +31,8 @@ username : adminpkd
 password : 1243
 
 # LINK :
-Link Dalam (Local) : http://192.168.7.89/SM/
-Link Luar (Public) : http://103.147.222.122:84/SM/
+Link Dalam (Local) : https://bit.ly/rsjsmlocal
+Link Luar (Public) : https://bit.ly/rsjsmpublic
 
 # Note :
 Perbaikan yang sudah selesai akan dihilangkan diudate selanjutnya.
@@ -67,7 +67,7 @@ git status
 
 git pull 
 git add . 
-git commit -a -m "Perbaikan Tambah Praktik" 
+git commit -a -m "Progres Ubah Praktik" 
 git push
 
 ====================================================================================================================
@@ -79,7 +79,8 @@ base64_decode(urldecode())
 
 bin2hex(urlencode(base64_encode()))
 base64_decode(urldecode(hex2bin()))
-<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>
+bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $id_praktik)))
+<?= base64_decode(urldecode(hex2bin($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>
 
 ====================================================================================================================
 
