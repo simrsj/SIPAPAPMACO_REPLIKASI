@@ -552,8 +552,9 @@ if ($d_prvl['r_praktik'] == "Y") {
             </table>
         </div>
         <script>
+            alert = function() {};
             <?php
-            // include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
+            include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
             ?>
         </script>
     <?php

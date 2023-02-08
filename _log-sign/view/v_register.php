@@ -297,7 +297,7 @@
                                                 html: '<div class="b ">Registrasi Berhasil</div><hr>' +
                                                     'Silahkan Lakukan Aktivasi di Kotak Masuk Email : <br><b>' + email + '</b>',
                                                 showConfirmButton: false,
-                                                timer: 1002300,
+                                                timer: 10000,
                                                 timerProgressBar: true,
                                                 didOpen: (toast) => {
                                                     toast.addEventListener('mouseenter', Swal.stopTimer)
