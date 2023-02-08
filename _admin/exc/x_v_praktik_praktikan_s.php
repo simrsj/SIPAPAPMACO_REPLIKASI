@@ -68,8 +68,8 @@ if ($r_praktikan < $d_praktik['jumlah_praktik']) {
     $sql .= " '" . $_POST['t_alamat'] . "'";
     $sql .= " )";
     // echo $sql . "<br>";
-    $dataJSON['idpp'] = bin2hex(urlencode(base64_encode($id_praktikan)));
-    $dataJSON['q'] = bin2hex(urlencode(base64_encode($sql)));
+    $dataJSON['idpp'] = bin2hex(urlencode(base64_encode(date("Ymd") . "*sm*" . $id_praktikan)));
+    $dataJSON['q'] = bin2hex(urlencode(base64_encode(date("Ymd") . "*sm*" . $sql)));
     $dataJSON['ket'] = 'Y';
     echo json_encode($dataJSON);
 } else {

@@ -132,25 +132,26 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     }
                                     $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
                                     $r_mess_pilih = $q_mess_pilih->rowCount();
-
-                                    if ($r_mess_pilih > 0) { ?>
+                                ?>
+                                    <?php if ($r_mess_pilih > 0) { ?>
                                         <fieldset class="border-1 m-1 p-1">
                                             <?= $d_mess_pilih['nama_mess']; ?>
                                             <br>
                                             <?= $d_mess_pilih['telp_pemilik_mess']; ?>
                                         </fieldset>
-                                    <?php }
-
+                                    <?php } else if ($r_mess_pilih < 1) { ?>
+                                        <span class="badge badge-warning text-dark">Belum Dipilih <br>Admin</span>
+                                        <br>
+                                    <?php } ?>
+                                    <?php
                                     //teks status dan privileges praktik mess
                                     if ($d_prvl['c_praktik_mess'] == 'Y' && $r_mess_pilih < 1) { ?>
-                                        <span class="badge badge-warning text-dark">Belum Dipilih</span>
-                                        <br>
-                                        <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
-                                            Pilih
+                                        <a title="Lihat" class='btn btn-outline-primary  btn-sm text-sm' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_i'>
+                                            <i class="fa-regular fa-circle-check"></i> Pilih
                                         </a>
                                     <?php } else if ($d_prvl['u_praktik_mess'] == 'Y') { ?>
-                                        <a title="Lihat" class='btn btn-outline-primary btn-xs text-xs' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
-                                            Ubah
+                                        <a title="Lihat" class='btn btn-outline-primary btn-sm text-sm' href='?ptk=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>&m_u'>
+                                            <font-awesome-icon icon="fa-regular fa-pen-to-square" /> Ubah
                                         </a>
                                     <?php } ?>
                                 <?php } else { ?>

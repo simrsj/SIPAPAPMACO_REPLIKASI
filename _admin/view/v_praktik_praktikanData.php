@@ -74,20 +74,18 @@ if ($r_data_praktikan > 0) {
                         <td><?= $d_data_praktikan['wa_praktikan']; ?></td>
                         <td><?= $d_data_praktikan['email_praktikan']; ?></td>
                         <td><?= $d_data_praktikan['alamat_praktikan']; ?></td>
-                        <td class="text-center">
-                            <?php
-                            if ($d_data_praktikan['id_profesi_pdd'] > 0) {
-                                if ($d_data_praktikan['file_ijazah_praktikan'] != "") {
-                            ?>
+                        <?php if ($d_data_praktikan1['id_profesi_pdd'] > 0) { ?>
+                            <td class="text-center">
+                                <?php if ($d_data_praktikan['file_ijazah_praktikan'] != "") { ?>
                                     <a href="<?= $d_data_praktikan['file_ijazah_praktikan']; ?>" download="Ijazah Praktikan.pdf" target="_blank" class="btn btn-outline-success btn-sm">
                                         Unduh
                                     </a>
                                 <?php } else { ?>
                                     <span class="badge badge-warning text-dark">Belum Ada</span>
                                 <?php } ?>
-                            <?php } ?>
 
-                        </td>
+                            </td>
+                        <?php } ?>
                         <td class="text-center">
                             <?php if ($d_data_praktikan['file_swab_praktikan'] != "") { ?>
                                 <a href="<?= $d_data_praktikan['file_swab_praktikan']; ?>" download="Swab_Serfikat Vaksin Praktikan.pdf" target="_blank" class="btn btn-outline-success btn-sm">
@@ -357,8 +355,6 @@ if ($r_data_praktikan > 0) {
                                                 }
                                             <?php } ?>
 
-                                            console.log("getTypeIjazah : " + getTypeIjazah);
-                                            console.log("getSizeIjazah : " + getSizeIjazah);
                                             //eksekusi bila file swab terisi
                                             if (u_swab != "" && u_swab != undefined) {
 
@@ -488,19 +484,22 @@ if ($r_data_praktikan > 0) {
 
                                                         var fileFoto = document.getElementById("u_foto<?= md5($d_data_praktikan['id_praktikan']); ?>").files;
                                                         data_file.append("t_foto", fileFoto[0]);
-                                                        var fileIjazah = document.getElementById("u_ijazah<?= md5($d_data_praktikan['id_praktikan']); ?>").files;
-                                                        data_file.append("t_ijazah", fileIjazah[0]);
+                                                        <?php if ($d_data_praktikan['id_profesi_pdd'] > 0) { ?>
+                                                            var fileIjazah = document.getElementById("u_ijazah<?= md5($d_data_praktikan['id_praktikan']); ?>").files;
+                                                            data_file.append("t_ijazah", fileIjazah[0]);
+                                                        <?php } ?>
                                                         var fileSwab = document.getElementById("u_swab<?= md5($d_data_praktikan['id_praktikan']); ?>").files;
                                                         data_file.append("t_swab", fileSwab[0]);
 
                                                         data_file.append("q", response.q);
                                                         data_file.append("idpp", response.idpp);
+                                                        data_file.append("profesi", "<?= bin2hex(urlencode(base64_encode(date("Ymd") . "*sm*" . $d_data_praktikan['id_profesi_pdd']))) ?>");
                                                         console.log(response.q);
                                                         console.log(response.idpp);
                                                         xhttp.open("POST", "_admin/exc/x_v_praktik_praktikan_sFile.php", true);
 
                                                         xhttp.onload = function() {
-                                                            if (xhttp.response == "<?= base64_decode(urldecode(hex2bin("size"))) ?>") {
+                                                            if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("size"))) ?>") {
                                                                 console.log("size too big");
                                                                 Swal.fire({
                                                                     allowOutsideClick: true,
@@ -511,7 +510,7 @@ if ($r_data_praktikan > 0) {
                                                                     timer: 5000,
                                                                     timerProgressBar: true
                                                                 });
-                                                            } else if (xhttp.response == "<?= base64_decode(urldecode(hex2bin("type"))) ?>") {
+                                                            } else if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("type"))); ?>") {
                                                                 console.log("Tipe Different");
                                                                 Swal.fire({
                                                                     allowOutsideClick: true,
