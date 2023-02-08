@@ -22,6 +22,9 @@ if ($d_prvl['r_praktik_bayar'] == "Y") {
     $sql_praktik_bayar = "SELECT * FROM tb_praktik ";
     $sql_praktik_bayar .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
     $sql_praktik_bayar .= " WHERE status_praktik = 'Y'";
+    if ($d_prvl['level_user'] == 2) {
+        $sql_praktik_bayar .= " AND tb_praktik.id_institusi = " . $d_prvl['id_institusi'];
+    }
     $sql_praktik_bayar .= " ORDER BY tb_praktik.id_praktik DESC";
     // echo $sql_praktik_bayar . "<br>";
     try {

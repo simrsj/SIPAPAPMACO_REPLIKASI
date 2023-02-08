@@ -17,6 +17,9 @@
                 // $sql_praktik .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
                 $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
                 $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' ";
+                if ($d_prvl['level_user'] == 2) {
+                    $sql_praktik .= " AND tb_praktik.id_institusi = " . $d_prvl['id_institusi'];
+                }
                 $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
                 // echo $sql_praktik . "<br>";
                 try {
@@ -470,7 +473,7 @@
                                                                     xhttp.open("POST", "_admin/exc/x_v_praktik_praktikan_sFile.php", true);
 
                                                                     xhttp.onload = function() {
-                                                                        if (xhttp.response == "<?= base64_decode(urldecode(hex2bin("size"))) ?>") {
+                                                                        if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("size"))) ?>") {
                                                                             console.log("size too big");
                                                                             Swal.fire({
                                                                                 allowOutsideClick: true,
@@ -481,7 +484,7 @@
                                                                                 timer: 5000,
                                                                                 timerProgressBar: true
                                                                             });
-                                                                        } else if (xhttp.response == "<?= base64_decode(urldecode(hex2bin("type"))) ?>") {
+                                                                        } else if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("type"))); ?>") {
                                                                             console.log("Tipe Different");
                                                                             Swal.fire({
                                                                                 allowOutsideClick: true,

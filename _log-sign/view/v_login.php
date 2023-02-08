@@ -14,7 +14,7 @@
                                 </div>
                                 <form class="user" method="post" id="form_login">
                                     <div class="form-group">
-                                        <input id='username_user' name='username_user' placeholder='Username' class="form-control" placeholder="Username">
+                                        <input id='username_user' name='username_user' placeholder='Email/Username' class="form-control">
                                         <div class="text-xs text-danger text-center i blink mb-2" id="err_username"></div>
                                     </div>
                                     <div class="form-group input-group mb-0">

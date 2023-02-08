@@ -25,6 +25,9 @@
                 $sql_praktik .= " JOIN tb_praktikan ON tb_praktik.id_praktik = tb_praktikan.id_praktik ";
                 $sql_praktik .= " JOIN tb_pembimbing_pilih ON tb_praktik.id_praktik = tb_pembimbing_pilih.id_praktik ";
                 $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' ";
+                if ($d_prvl['level_user'] == 2) {
+                    $sql_praktik .= " AND tb_praktik.id_institusi = " . $d_prvl['id_institusi'];
+                }
                 $sql_praktik .= " GROUP BY tb_praktikan.id_praktik ";
                 $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
                 // echo "$sql_praktik<br>";

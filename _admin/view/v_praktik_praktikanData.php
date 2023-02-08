@@ -22,6 +22,9 @@ $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 $sql_data_praktikan = "SELECT * FROM tb_praktikan ";
 $sql_data_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
 $sql_data_praktikan .= " WHERE tb_praktik.id_praktik = " . $idp;
+if ($d_prvl['level_user'] == 2) {
+    $sql_data_praktikan .= " AND tb_praktik.id_institusi = " . $d_prvl['id_institusi'];
+}
 $sql_data_praktikan .= " ORDER BY tb_praktikan.nama_praktikan ASC";
 // echo "$sql_data_praktikan<br>";
 try {

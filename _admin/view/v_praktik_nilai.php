@@ -397,7 +397,7 @@
                     }
                 } else {
                     ?>
-                    <h3 class='text-center'> Data Pendaftaran Praktikan Anda Tidak Ada</h3>
+                    <h3 class='text-center'>Isikan Data Praktikan dan Pembimbing oleh Admin Terlebih Dahulu</h3>
                 <?php
                 }
                 ?>
