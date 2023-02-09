@@ -67,7 +67,7 @@ git status
 
 git pull 
 git add . 
-git commit -a -m "Perbaikan Tarif di Akun Admin dan IP" 
+git commit -a -m "Perbaikan pinda index_data.php, aktivasi akun IP, Tarif di Akun IP" 
 git push
 
 ====================================================================================================================
@@ -80,7 +80,7 @@ base64_decode(urldecode())
 bin2hex(urlencode(base64_encode()))
 base64_decode(urldecode(hex2bin()))
 bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $id_praktik)))
-<?= base64_decode(urldecode(hex2bin($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>
+base64_decode(urldecode(hex2bin(date("Ymd") . time() . "*sm*" . $id_praktik)))
 
 ====================================================================================================================
 

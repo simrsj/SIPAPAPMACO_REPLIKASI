@@ -41,12 +41,12 @@ include "_add-ons/tanggal_waktu.php";
 </head>
 
 <body id="page-top" class="bg-primary">
-    <div class="preloader">
+    <!-- <div class="preloader">
         <div class="loading text-center">
             <img src="./_img/logorsj.png" class="rotate mb-3" width="100" height="100" />
             <div class="h5 b">Harap Tunggu</div>
         </div>
-    </div>
+    </div> -->
     <?php
 
     if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
