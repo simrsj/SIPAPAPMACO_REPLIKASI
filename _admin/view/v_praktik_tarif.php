@@ -45,18 +45,22 @@
                     $v_no = 1;
                     while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
 
-                        $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
-                        $sql_praktik_tarif .= " JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik ";
-                        $sql_praktik_tarif .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
-                        $sql_praktik_tarif .= " ORDER BY tb_tarif_pilih.nama_tarif_pilih ASC";
+                        // $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
+                        // $sql_praktik_tarif .= " JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik ";
+                        // $sql_praktik_tarif .= " WHERE tb_praktik.status_praktik = 'Y' ";
+                        // $sql_praktik_tarif .= " AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+                        // if ($d_prvl['level_user'] == 1) {
+                        //     $sql_praktik_tarif .= " AND tb_tarif_pilih.status_tarif_pilih = 'Y'";
+                        // }
+                        // $sql_praktik_tarif .= " ORDER BY tb_tarif_pilih.nama_tarif_pilih ASC";
                         // echo "$sql_praktik_tarif<br>";
-                        try {
-                            $q_praktik_tarif = $conn->query($sql_praktik_tarif);
-                        } catch (Exception $ex) {
-                            echo "<script>alert('$ex -DATA PRAKTIK');";
-                            echo "document.location.href='?error404';</script>";
-                        }
-                        $r_praktik_tarif = $q_praktik_tarif->rowCount();
+                        // try {
+                        //     $q_praktik_tarif = $conn->query($sql_praktik_tarif);
+                        // } catch (Exception $ex) {
+                        //     echo "<script>alert('$ex -DATA PRAKTIK');";
+                        //     echo "document.location.href='?error404';</script>";
+                        // }
+                        // $r_praktik_tarif = $q_praktik_tarif->rowCount();
                     ?>
                         <div id="accordion">
                             <div class="card">
@@ -108,7 +112,7 @@
                                                     </a>
 
                                                     <!-- modal tambah tarif  -->
-                                                    <div class="modal fade text-center" id="mi<?= $v_no; ?>" data-backdrop="static">
+                                                    <div class="modal text-center" id="mi<?= $v_no; ?>" data-backdrop="static">
                                                         <div class="modal-dialog modal-dialog-scrollable modal-md">
                                                             <div class="modal-content">
                                                                 <div class="modal-header h5">
@@ -206,169 +210,179 @@
                                         <!-- inisiasi tabel data tarif -->
                                         <div id="<?= md5("data" . $d_praktik['id_praktik']); ?>"></div>
                                         <script>
-                                            $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
-                                                .load(
-                                                    "_admin/view/v_praktik_tarifData.php?" +
-                                                    "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
-                                                    "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
-                                                    "&tb=<?= md5($d_praktik['id_praktik']); ?>");
-
-                                            <?php if ($d_prvl['c_praktik_tarif'] == 'Y') { ?>
-                                                // inisiasi klik modal tambah
-                                                $(".tambah_init<?= $v_no; ?>").click(function() {
-                                                    console.log("tambah_init");
-                                                    $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").empty();
-                                                    $('#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>').empty();
-                                                    $('#<?= md5('err_t_tarif' . $d_praktik['id_praktik']); ?>').empty();
-                                                    $("#<?= md5('err_t_satuan' . $d_praktik['id_praktik']); ?>").empty();
-                                                    $('#<?= md5('err_t_frekuensi' . $d_praktik['id_praktik']); ?>').empty();
-                                                    $('#<?= md5('err_t_kuantitas' . $d_praktik['id_praktik']); ?>').empty();
-                                                    $("#<?= md5('form_t' . $d_praktik['id_praktik']); ?>").trigger("reset");
-                                                    $("#<?= md5('t_jenis_tarif' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
-                                                    $("#<?= md5('t_satuan' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
+                                            $(document).ready(function() {
+                                                Swal.fire({
+                                                    title: "Mohon Ditunggu . . .",
+                                                    html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                                                    // html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
+                                                    allowOutsideClick: false,
+                                                    showConfirmButton: false,
+                                                    backdrop: true,
                                                 });
+                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                    .load(
+                                                        "_admin/view/v_praktik_tarifData.php?" +
+                                                        "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
+                                                        "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
+                                                        "&tb=<?= md5($d_praktik['id_praktik']); ?>");
 
-                                                // inisiasi klik modal tambah simpan
-                                                $(document).on('click', '.tambah<?= $v_no; ?>', function() {
-                                                    console.log("tambah");
-                                                    var data_t = $("#<?= md5('form_t' . $d_praktik['id_praktik']); ?>").serializeArray();
-                                                    data_t.push({
-                                                        name: "idp",
-                                                        value: $(this).attr('id')
+                                                <?php if ($d_prvl['c_praktik_tarif'] == 'Y') { ?>
+                                                    // inisiasi klik modal tambah
+                                                    $(".tambah_init<?= $v_no; ?>").click(function() {
+                                                        console.log("tambah_init");
+                                                        $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").empty();
+                                                        $('#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>').empty();
+                                                        $('#<?= md5('err_t_tarif' . $d_praktik['id_praktik']); ?>').empty();
+                                                        $("#<?= md5('err_t_satuan' . $d_praktik['id_praktik']); ?>").empty();
+                                                        $('#<?= md5('err_t_frekuensi' . $d_praktik['id_praktik']); ?>').empty();
+                                                        $('#<?= md5('err_t_kuantitas' . $d_praktik['id_praktik']); ?>').empty();
+                                                        $("#<?= md5('form_t' . $d_praktik['id_praktik']); ?>").trigger("reset");
+                                                        $("#<?= md5('t_jenis_tarif' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
+                                                        $("#<?= md5('t_satuan' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
                                                     });
 
-                                                    var t_jenis_tarif = $('#<?= md5('t_jenis_tarif' . $d_praktik['id_praktik']); ?>').val();
-                                                    var t_nama = $('#<?= md5('t_nama' . $d_praktik['id_praktik']); ?>').val();
-                                                    var t_tarif = $('#<?= md5('t_tarif' . $d_praktik['id_praktik']); ?>').val();
-                                                    var t_satuan = $('#<?= md5('t_satuan' . $d_praktik['id_praktik']); ?>').val();
-                                                    var t_frekuensi = $('#<?= md5('t_frekuensi' . $d_praktik['id_praktik']); ?>').val();
-                                                    var t_kuantitas = $('#<?= md5('t_kuantitas' . $d_praktik['id_praktik']); ?>').val();
-
-                                                    //cek data from modal tambah bila tidak diiisi
-                                                    if (
-                                                        t_jenis_tarif == "" ||
-                                                        t_nama == "" ||
-                                                        t_tarif == "" ||
-                                                        t_satuan == "" ||
-                                                        t_frekuensi == "" ||
-                                                        t_kuantitas == ""
-                                                    ) {
-                                                        // console.log("error data");
-
-                                                        const Toast = Swal.mixin({
-                                                            toast: true,
-                                                            position: 'top-end',
-                                                            showConfirmButton: false,
-                                                            timer: 5000,
-                                                            timerProgressBar: true,
-                                                            didOpen: (toast) => {
-                                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                            }
+                                                    // inisiasi klik modal tambah simpan
+                                                    $(document).on('click', '.tambah<?= $v_no; ?>', function() {
+                                                        console.log("tambah");
+                                                        var data_t = $("#<?= md5('form_t' . $d_praktik['id_praktik']); ?>").serializeArray();
+                                                        data_t.push({
+                                                            name: "idp",
+                                                            value: $(this).attr('id')
                                                         });
 
-                                                        Toast.fire({
-                                                            icon: 'warning',
-                                                            title: '<span class"text-center"><b>DATA ADA YANG BELUM TERISI</b></span>',
-                                                        }).then(
-                                                            function() {}
-                                                        );
-                                                        if (t_jenis_tarif == "") {
-                                                            $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").html("Jenis Tarif Harus Dipilih");
-                                                        } else {
-                                                            $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").html("");
-                                                        }
+                                                        var t_jenis_tarif = $('#<?= md5('t_jenis_tarif' . $d_praktik['id_praktik']); ?>').val();
+                                                        var t_nama = $('#<?= md5('t_nama' . $d_praktik['id_praktik']); ?>').val();
+                                                        var t_tarif = $('#<?= md5('t_tarif' . $d_praktik['id_praktik']); ?>').val();
+                                                        var t_satuan = $('#<?= md5('t_satuan' . $d_praktik['id_praktik']); ?>').val();
+                                                        var t_frekuensi = $('#<?= md5('t_frekuensi' . $d_praktik['id_praktik']); ?>').val();
+                                                        var t_kuantitas = $('#<?= md5('t_kuantitas' . $d_praktik['id_praktik']); ?>').val();
 
-                                                        if (t_nama == "") {
-                                                            $("#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>").html("Nama Tarif Harus Diisi");
-                                                        } else {
-                                                            $("#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>").html("");
-                                                        }
+                                                        //cek data from modal tambah bila tidak diiisi
+                                                        if (
+                                                            t_jenis_tarif == "" ||
+                                                            t_nama == "" ||
+                                                            t_tarif == "" ||
+                                                            t_satuan == "" ||
+                                                            t_frekuensi == "" ||
+                                                            t_kuantitas == ""
+                                                        ) {
+                                                            // console.log("error data");
 
-                                                        if (t_tarif == "") {
-                                                            $("#<?= md5('err_t_tarif' . $d_praktik['id_praktik']); ?>").html("Tarif Pilih Harus Diisi");
-                                                        } else {
-                                                            $("#<?= md5('err_t_tarif' . $d_praktik['id_praktik']); ?>").html("");
-                                                        }
+                                                            const Toast = Swal.mixin({
+                                                                toast: true,
+                                                                position: 'top-end',
+                                                                showConfirmButton: false,
+                                                                timer: 5000,
+                                                                timerProgressBar: true,
+                                                                didOpen: (toast) => {
+                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                }
+                                                            });
 
-                                                        if (t_satuan == "") {
-                                                            $("#<?= md5('err_t_satuan' . $d_praktik['id_praktik']); ?>").html("Satuan Pilih Harus Dipilih");
-                                                        } else {
-                                                            $("#<?= md5('err_t_satuan' . $d_praktik['id_praktik']); ?>").html("");
-                                                        }
-
-                                                        if (t_frekuensi == "") {
-                                                            $("#<?= md5('err_t_frekuensi' . $d_praktik['id_praktik']); ?>").html("Frekuensi Harus Diisi");
-                                                        } else {
-                                                            $("#<?= md5('err_t_frekuensi' . $d_praktik['id_praktik']); ?>").html("");
-                                                        }
-
-                                                        if (t_kuantitas == "") {
-                                                            $("#<?= md5('err_t_kuantitas' . $d_praktik['id_praktik']); ?>").html("Kuamtitas Harus Diisi");
-                                                        } else {
-                                                            $("#<?= md5('err_t_kuantitas' . $d_praktik['id_praktik']); ?>").html("");
-                                                        }
-                                                    }
-
-                                                    //simpan data tambah bila sudah sesuai
-                                                    if (
-                                                        t_jenis_tarif != "" &&
-                                                        t_nama != "" &&
-                                                        t_tarif != "" &&
-                                                        t_satuan != "" &&
-                                                        t_frekuensi != "" &&
-                                                        t_kuantitas != ""
-                                                    ) {
-                                                        console.log("tambah data");
-
-                                                        $.ajax({
-                                                            type: 'POST',
-                                                            url: "_admin/exc/x_v_praktik_tarif_t.php",
-                                                            data: data_t,
-                                                            success: function() {
-                                                                $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
-                                                                    .load(
-                                                                        "_admin/view/v_praktik_tarifData.php?" +
-                                                                        "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
-                                                                        "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
-                                                                        "&tb=<?= md5($d_praktik['id_praktik']); ?>");
-
-                                                                $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").empty();
-                                                                $('#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>').empty();
-                                                                $('#<?= md5('err_t_tarif' . $d_praktik['id_praktik']); ?>').empty();
-                                                                $("#<?= md5('err_t_satuan' . $d_praktik['id_praktik']); ?>").empty();
-                                                                $('#<?= md5('err_t_frekuensi' . $d_praktik['id_praktik']); ?>').empty();
-                                                                $('#<?= md5('err_t_kuantitas' . $d_praktik['id_praktik']); ?>').empty();
-                                                                $("#<?= md5('form_t' . $d_praktik['id_praktik']); ?>").trigger("reset");
-                                                                $("#<?= md5('t_jenis_tarif' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
-                                                                $("#<?= md5('t_satuan' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
-
-                                                                const Toast = Swal.mixin({
-                                                                    toast: true,
-                                                                    position: 'top-end',
-                                                                    showConfirmButton: false,
-                                                                    timer: 5000,
-                                                                    timerProgressBar: true,
-                                                                    didOpen: (toast) => {
-                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                    }
-                                                                });
-
-                                                                Toast.fire({
-                                                                    icon: 'success',
-                                                                    title: '<span class"text-centere"><b>Data Tarif</b><br>Berhasil Tersimpan',
-                                                                }).then(
-                                                                    function() {}
-                                                                );
-                                                            },
-                                                            error: function(response) {
-                                                                console.log(response);
+                                                            Toast.fire({
+                                                                icon: 'warning',
+                                                                title: '<span class"text-center"><b>DATA ADA YANG BELUM TERISI</b></span>',
+                                                            }).then(
+                                                                function() {}
+                                                            );
+                                                            if (t_jenis_tarif == "") {
+                                                                $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").html("Jenis Tarif Harus Dipilih");
+                                                            } else {
+                                                                $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").html("");
                                                             }
-                                                        });
-                                                    }
-                                                });
-                                            <?php } ?>
+
+                                                            if (t_nama == "") {
+                                                                $("#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>").html("Nama Tarif Harus Diisi");
+                                                            } else {
+                                                                $("#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>").html("");
+                                                            }
+
+                                                            if (t_tarif == "") {
+                                                                $("#<?= md5('err_t_tarif' . $d_praktik['id_praktik']); ?>").html("Tarif Pilih Harus Diisi");
+                                                            } else {
+                                                                $("#<?= md5('err_t_tarif' . $d_praktik['id_praktik']); ?>").html("");
+                                                            }
+
+                                                            if (t_satuan == "") {
+                                                                $("#<?= md5('err_t_satuan' . $d_praktik['id_praktik']); ?>").html("Satuan Pilih Harus Dipilih");
+                                                            } else {
+                                                                $("#<?= md5('err_t_satuan' . $d_praktik['id_praktik']); ?>").html("");
+                                                            }
+
+                                                            if (t_frekuensi == "") {
+                                                                $("#<?= md5('err_t_frekuensi' . $d_praktik['id_praktik']); ?>").html("Frekuensi Harus Diisi");
+                                                            } else {
+                                                                $("#<?= md5('err_t_frekuensi' . $d_praktik['id_praktik']); ?>").html("");
+                                                            }
+
+                                                            if (t_kuantitas == "") {
+                                                                $("#<?= md5('err_t_kuantitas' . $d_praktik['id_praktik']); ?>").html("Kuamtitas Harus Diisi");
+                                                            } else {
+                                                                $("#<?= md5('err_t_kuantitas' . $d_praktik['id_praktik']); ?>").html("");
+                                                            }
+                                                        }
+
+                                                        //simpan data tambah bila sudah sesuai
+                                                        if (
+                                                            t_jenis_tarif != "" &&
+                                                            t_nama != "" &&
+                                                            t_tarif != "" &&
+                                                            t_satuan != "" &&
+                                                            t_frekuensi != "" &&
+                                                            t_kuantitas != ""
+                                                        ) {
+                                                            console.log("tambah data");
+
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                url: "_admin/exc/x_v_praktik_tarif_t.php",
+                                                                data: data_t,
+                                                                success: function() {
+                                                                    $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
+                                                                        .load(
+                                                                            "_admin/view/v_praktik_tarifData.php?" +
+                                                                            "idu=<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" +
+                                                                            "&idp=<?= urlencode(base64_encode($d_praktik['id_praktik'])); ?>" +
+                                                                            "&tb=<?= md5($d_praktik['id_praktik']); ?>");
+
+                                                                    $("#<?= md5('err_t_jenis_tarif' . $d_praktik['id_praktik']); ?>").empty();
+                                                                    $('#<?= md5('err_t_nama' . $d_praktik['id_praktik']); ?>').empty();
+                                                                    $('#<?= md5('err_t_tarif' . $d_praktik['id_praktik']); ?>').empty();
+                                                                    $("#<?= md5('err_t_satuan' . $d_praktik['id_praktik']); ?>").empty();
+                                                                    $('#<?= md5('err_t_frekuensi' . $d_praktik['id_praktik']); ?>').empty();
+                                                                    $('#<?= md5('err_t_kuantitas' . $d_praktik['id_praktik']); ?>').empty();
+                                                                    $("#<?= md5('form_t' . $d_praktik['id_praktik']); ?>").trigger("reset");
+                                                                    $("#<?= md5('t_jenis_tarif' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
+                                                                    $("#<?= md5('t_satuan' . $d_praktik['id_praktik']); ?>").val("").trigger("change");
+
+                                                                    const Toast = Swal.mixin({
+                                                                        toast: true,
+                                                                        position: 'top-end',
+                                                                        showConfirmButton: false,
+                                                                        timer: 5000,
+                                                                        timerProgressBar: true,
+                                                                        didOpen: (toast) => {
+                                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                        }
+                                                                    });
+
+                                                                    Toast.fire({
+                                                                        icon: 'success',
+                                                                        title: '<span class"text-centere"><b>Data Tarif</b><br>Berhasil Tersimpan',
+                                                                    }).then(
+                                                                        function() {}
+                                                                    );
+                                                                },
+                                                                error: function(response) {
+                                                                    console.log(response);
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                <?php } ?>
+                                            });
                                         </script>
                                     </div>
                                 </div>
