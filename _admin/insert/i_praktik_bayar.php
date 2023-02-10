@@ -1,27 +1,25 @@
 <?php
 if (isset($_GET['pbyr']) && isset($_GET['i'])) {
 
-    //query data praktik
-    $sql_praktik = "SELECT * FROM tb_praktik ";
-    $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-    $sql_praktik .= " WHERE id_praktik = " . base64_decode(urldecode($_GET['pbyr']));
     try {
+        //query data praktik
+        $sql_praktik = "SELECT * FROM tb_praktik ";
+        $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+        $sql_praktik .= " WHERE id_praktik = " . base64_decode(urldecode($_GET['pbyr']));
         $q_praktik = $conn->query($sql_praktik);
         $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
     } catch (Exception $ex) {
-        echo "<script>alert('$ex -DATA PRAKTIK-');document.location.href='?error404';</script>";
+        echo "<script>alert('ERROR DATA PRAKTIK');document.location.href='?error404';</script>";
     }
 
-    //data tarif praktik
-    $sql_praktik_tarif = "SELECT * FROM tb_bayar";
-    $sql_praktik_tarif .= " WHERE id_praktik = '" . base64_decode(urldecode($_GET['pbyr'])) . "'";
-    // echo $id_praktik . "<br>";
-
     try {
+        //data tarif praktik
+        $sql_praktik_tarif = "SELECT * FROM tb_bayar";
+        $sql_praktik_tarif .= " WHERE id_praktik = '" . base64_decode(urldecode($_GET['pbyr'])) . "'";
+        // echo $id_praktik . "<br>";
         $q_praktik_tarif = $conn->query($sql_praktik_tarif);
     } catch (Exception $ex) {
-        echo "<script> alert('$ex -DATA BAYAR-'); ";
-        echo "document.location.href='?error404'; </script>";
+        echo "<script>alert('ERROR DATA BAYAR');document.location.href='?error404';</script>";
     }
 ?>
     <div class="container-fluid">

@@ -1,7 +1,4 @@
-var table = $("#dataTable").DataTable({
-  //   paging: false,
-  //   searching: false,
-});
+var table = $("#dataTable").DataTable();
 
 //hilangkan colom table
 $("a.toggle-vis").on("click", function (e) {
