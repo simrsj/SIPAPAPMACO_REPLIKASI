@@ -80,8 +80,8 @@ if ($_FILES['t_swab']['size'] > (1024 * 256) || $_FILES['t_foto']['size'] > (102
 
     $conn->query($q);
     $conn->query($sql_update);
-    $dataJSON['q'] = $q;
-    $dataJSON['sql_update'] = $sql_update;
+    // $dataJSON['q'] = $q;
+    // $dataJSON['sql_update'] = $sql_update;
     $ket = "sesuai";
 }
 $dataJSON['ket'] = $ket;
