@@ -112,7 +112,7 @@ if ($_SESSION['status_user'] == "Y") {
 					</li>
 				<?php } ?>
 
-				<?php if ($d_prvl['r_praktik'] == "Y") { ?>
+				<?php if ($d_prvl['r_praktik'] == "Y" && $d_prvl['status_aktivasi_user'] == "Y") { ?>
 					<!-- Praktik -->
 					<li class="nav-item" style=" word-wrap: break-word;">
 						<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapse_prk">
@@ -161,8 +161,8 @@ if ($_SESSION['status_user'] == "Y") {
 							</div>
 						</div>
 					</li>
-				<?php } ?>
-				<?php if ($d_prvl['r_praktik'] == "Y") { ?>
+
+					<!-- Arsip Praktik -->
 					<li class="nav-item ">
 						<a class="nav-link" href="?pars">
 							<i class="fas fa-fw fa-archive"></i>

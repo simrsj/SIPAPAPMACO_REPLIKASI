@@ -7,7 +7,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 		include "_admin/view/v_akun.php";
 }
 //arsip praktik
-elseif (isset($_GET['pars'])) {
+elseif (isset($_GET['pars']) && $d_prvl['status_aktivasi_user'] == "Y") {
 	if (isset($_GET['dp'])) include "_admin/view/v_praktik_arsip_dataPraktik.php";
 	else include "_admin/view/v_praktik_arsip.php";
 } elseif (isset($_GET['akr'])) {
@@ -61,7 +61,7 @@ elseif (isset($_GET['d_pmbb']) && $d_prvl['r_daftar_pembimbing'] == 'Y') {
 		include "_admin/view/v_daftarPembimbing.php";
 }
 //praktik
-else if (isset($_GET['ptk']) && $d_prvl['r_praktik'] == 'Y') {
+else if (isset($_GET['ptk']) && $d_prvl['r_praktik'] == 'Y' && $d_prvl['status_aktivasi_user'] == "Y") {
 	if (isset($_GET['i']) && $d_prvl['c_praktik'] == 'Y') include "_admin/insert/i_praktik.php";
 	else if (isset($_GET['u']) && $d_prvl['u_praktik'] == 'Y') include "_admin/update/u_praktik.php";
 	elseif (isset($_GET['m_i']) && $d_prvl['c_praktik_mess'] == 'Y') include "_admin/insert/i_praktik_mess.php";
@@ -69,13 +69,13 @@ else if (isset($_GET['ptk']) && $d_prvl['r_praktik'] == 'Y') {
 	else include "_admin/view/v_praktik.php";
 }
 //praktikan
-else if (isset($_GET['ptkn']) && $d_prvl['r_praktikan'] == 'Y') {
+else if (isset($_GET['ptkn']) && $d_prvl['r_praktikan'] == 'Y' && $d_prvl['status_aktivasi_user'] == "Y") {
 	if (isset($_GET['i']) && $d_prvl['c_praktikan'] == 'Y') include "_admin/insert/i_praktik_praktikan.php";
 	else if (isset($_GET['u']) && $d_prvl['u_praktikan'] == 'Y') include "_admin/view/u_praktikan.php";
 	else include "_admin/view/v_praktik_praktikan.php";
 }
 //praktik pemibimbing
-else if (isset($_GET['pmbb']) && $d_prvl['r_praktik_pembimbing'] == 'Y') {
+else if (isset($_GET['pmbb']) && $d_prvl['r_praktik_pembimbing'] == 'Y' && $d_prvl['status_aktivasi_user'] == "Y") {
 	if (isset($_GET['i'])) include "_admin/insert/i_praktik_pembimbing.php";
 	else include "_admin/view/v_praktik_pembimbing.php";
 }
@@ -85,12 +85,12 @@ elseif (isset($_GET['ptrf']) && $d_prvl['r_praktik_tarif'] == 'Y') {
 	else include "_admin/view/v_praktik_tarif.php";
 }
 //praktik bayar
-elseif (isset($_GET['pbyr'])) {
+elseif (isset($_GET['pbyr']) && $d_prvl['status_aktivasi_user'] == "Y") {
 	if (isset($_GET['i']) && $d_prvl['c_praktik_bayar'] == 'Y') include "_admin/insert/i_praktik_bayar.php";
 	else include "_admin/view/v_praktik_bayar.php";
 }
 //praktik nilai
-elseif (isset($_GET['pnilai'])) {
+elseif (isset($_GET['pnilai']) && $d_prvl['status_aktivasi_user'] == "Y") {
 	if (isset($_GET['i']) && isset($_GET['pmbb'])) include "_admin/insert/i_praktik_nilaiKep.php";
 	elseif (isset($_GET['u']) && isset($_GET['pmbb'])) include "_admin/update/u_praktik_nilaiKep.php";
 	elseif (isset($_GET['upi']) && isset($_GET['pmbb'])) include "_admin/insert/i_praktik_nilai_upload.php";

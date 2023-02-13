@@ -56,7 +56,9 @@ if ($d_prvl['r_praktik'] == "Y") {
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="<?= $no_col++ ?>">Mess</a>
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="<?= $no_col++ ?>">Data Praktikan</a>
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="<?= $no_col++ ?>">Pembimbing</a>
-                    <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="<?= $no_col++ ?>">Tarif</a>
+                    <?php if ($d_prvl['level_user'] == 1) { ?>
+                        <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="<?= $no_col++ ?>">Tarif</a>
+                    <?php } ?>
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="<?= $no_col++ ?>">Pembayaran</a>
                     <a class="toggle-vis btn btn-outline-primary btn-xs" data-column="<?= $no_col++ ?>">Nilai</a>
                 </div>
@@ -86,7 +88,9 @@ if ($d_prvl['r_praktik'] == "Y") {
                         <th>Mess</th>
                         <th>Data Praktikan</th>
                         <th>Pembimbing </th>
-                        <th>Tarif</th>
+                        <?php if ($d_prvl['level_user'] == 1) { ?>
+                            <th>Tarif</th>
+                        <?php } ?>
                         <th>Pembayaran</th>
                         <th>Nilai</th>
                         <th rowspan="">Aksi</th>
@@ -208,35 +212,38 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <i class="fas fa-eye"></i> Lihat
                                 </a>
                             </td>
-                            <!-- status Tarif praktik  -->
-                            <td class="align-middle">
-                                <?php
+                            <?php
+                            try {
                                 $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
                                 $sql_praktik_tarif .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
                                 $sql_praktik_tarif .= " AND status_tarif_pilih = 'Y'";
                                 // echo $sql_praktik_tarif.$d_praktik['id_praktik'];
-                                try {
-                                    $q_praktik_tarif = $conn->query($sql_praktik_tarif);
-                                } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -PRAKTIK TARIF-');";
-                                    echo "document.location.href='?error404';</script>";
-                                }
+                                $q_praktik_tarif = $conn->query($sql_praktik_tarif);
                                 $r_praktik_tarif = $q_praktik_tarif->rowCount();
-
-                                if ($r_praktik_pembimbing < 1) { ?>
-                                    <span class="badge badge-warning text-dark">Pembimbing<br>Belum Dipilih</span>
-                                <?php } else if ($r_praktik_tarif > 0) { ?>
-                                    <span class="badge badge-success">Sudah Dipilih</span>
-                                <?php } else { ?>
-                                    <span class="badge badge-secondary">Belum Dipilih</span>
-                                <?php } ?>
-                                <br>
-                                <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
-                                    <a href="?ptrf#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
-                                        <i class="fas fa-eye"></i> Lihat
-                                    </a>
-                                <?php } ?>
-                            </td>
+                            } catch (Exception $ex) {
+                                echo "<script>alert('$ex -PRAKTIK TARIF-');";
+                                echo "document.location.href='?error404';</script>";
+                            }
+                            ?>
+                            <?php if ($d_prvl['level_user'] == 1) { ?>
+                                <!-- status Tarif praktik  -->
+                                <td class="align-middle">
+                                    <?php
+                                    if ($r_praktik_pembimbing < 1) { ?>
+                                        <span class="badge badge-warning text-dark">Pembimbing<br>Belum Dipilih</span>
+                                    <?php } else if ($r_praktik_tarif > 0) { ?>
+                                        <span class="badge badge-success">Sudah Dipilih</span>
+                                    <?php } else { ?>
+                                        <span class="badge badge-secondary">Belum Dipilih</span>
+                                    <?php } ?>
+                                    <br>
+                                    <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
+                                        <a href="?ptrf#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
+                                            <i class="fas fa-eye"></i> Lihat
+                                        </a>
+                                    <?php } ?>
+                                </td>
+                            <?php } ?>
                             <!-- status bayar praktik  -->
                             <td class="align-middle">
                                 <?php
@@ -544,7 +551,9 @@ if ($d_prvl['r_praktik'] == "Y") {
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
+                        <?php if ($d_prvl['level_user'] == 1) { ?>
+                            <th></th>
+                        <?php } ?>
                         <th></th>
                         <td></td>
                     </tr>
@@ -556,6 +565,7 @@ if ($d_prvl['r_praktik'] == "Y") {
             <?php
             include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
             ?>
+            $('#loader').hide();
         </script>
     <?php
     } else {
