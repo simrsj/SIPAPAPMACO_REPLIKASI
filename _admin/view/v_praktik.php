@@ -13,7 +13,7 @@
             <?php } ?>
         </div>
         <div class="card shadow mb-4">
-            <div class="loader mt-5 text-center" id="loader"></div>
+            <div class="loader mt-5 text-center"></div>
             <div class="card-body">
                 <div id="data_praktik"></div>
             </div>

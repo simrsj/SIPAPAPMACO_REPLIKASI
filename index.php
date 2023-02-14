@@ -36,7 +36,7 @@ include "_add-ons/tanggal_waktu.php";
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
     <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
     <link href="vendor/!custom/cs_loader.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="vendor/jquery3.6.0.min.js"></script>
 
 </head>
 
@@ -64,6 +64,7 @@ include "_add-ons/tanggal_waktu.php";
                 $_SESSION['level_user'] == 3
             ) include "_admin/index.php";
             elseif ($_SESSION['level_user'] == 4) include "_pembimbing/index.php";
+            elseif ($_SESSION['level_user'] == 5) include "_praktikan/index.php";
         } elseif ($_SESSION['status_user'] == 'T') {
             echo "
             <script>

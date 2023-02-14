@@ -1,4 +1,4 @@
-<?php if (isset($_GET['pars']) && $d_prvl['r_praktik_arsip'] == "Y") { ?>
+<?php if (isset($_GET['pars']) && $d_prvl['r_arsip_praktik'] == "Y" && $d_prvl['status_aktivasi_user'] == "Y") { ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
