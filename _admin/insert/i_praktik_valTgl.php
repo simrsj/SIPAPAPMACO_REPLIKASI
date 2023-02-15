@@ -20,40 +20,46 @@ $period = new DatePeriod(
 // echo "</pre>";
 
 $no = 1;
-$json['ket'] = 'Y';
+$dataJSON['ket'] = 'Y';
 foreach ($period as $key => $value) {
 
-    //mencari jumlah praktikan sesuai dengan tanggal praktik
-    $sql = "SELECT * FROM tb_praktik ";
-    $sql .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik ";
-    $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
-    $sql .= " AND tb_praktik.id_jurusan_pdd = " . $id_jurusan;
-    $sql .= " AND tb_praktik.status_praktik = 'Y'";
-    // echo "$sql<br>";
-    $q = $conn->query($sql);
+    try {
+        //mencari jumlah praktikan sesuai dengan tanggal praktik
+        $sql = "SELECT * FROM tb_praktik ";
+        $sql .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik ";
+        $sql .= " WHERE tb_praktik_tgl.praktik_tgl = '" . $value->format('Y-m-d') . "' ";
+        $sql .= " AND tb_praktik.id_jurusan_pdd = " . $id_jurusan;
+        $sql .= " AND tb_praktik.status_praktik = 'Y'";
+        // echo "$sql<br>";
+        $q = $conn->query($sql);
+    } catch (PDOException $e) {
+        echo "<script>alert('$-DATA PRAKTIK-');document.location.href='?error404';</script>";
+    }
 
     $jumlah_total = 0;
     while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
         $jumlah_total += $d['jumlah_praktik'];
     }
 
-    //jika jurusannnya adalah keperawtan
-    if ($id_jurusan == 1 && $id_jurusan == 2) $id_jurusan = 1;
-    // else $id_jurusan_kep;
+    //jika jurusannnya adalah keperawatan
+    if ($id_jurusan == 1 || $id_jurusan == 2)
+        $id_jurusan = 1;
 
-    //mencari kuota sesuai dengan jurusannya
-    $sql_k = "SELECT * FROM tb_kuota";
-    $sql_k .= " WHERE id_jurusan_pdd = " . $id_jurusan;
-    // echo $sql_k . "<br>";
-
-    $q_k = $conn->query($sql_k);
-    $d_k = $q_k->fetch(PDO::FETCH_ASSOC);
+    try {
+        //mencari kuota sesuai dengan jurusannya
+        $sql_k = "SELECT * FROM tb_kuota";
+        $sql_k .= " WHERE id_jurusan_pdd = " . $id_jurusan;
+        // echo $sql_k . "<br>";
+        $q_k = $conn->query($sql_k);
+        $d_k = $q_k->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "<script>alert('$-DATA PRAKTIK-');document.location.href='?error404';</script>";
+    }
     $jumlah_keseluruhan = $jumlah_praktik + $jumlah_total;
     if ($jumlah_keseluruhan > $d_k['jumlah_kuota']) {
-        $json['ket'] = 'T';
+        $dataJSON['ket'] = 'T';
         break;
     }
     $no++;
 }
-
-echo json_encode($json);
+echo json_encode($dataJSON);
