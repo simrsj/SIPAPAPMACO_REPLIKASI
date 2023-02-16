@@ -33,6 +33,10 @@ if (empty($_SESSION['username_user'])) {
 				<i class="fas fa-sign-out-alt fa-fw mr-2"></i>
 				Log-In
 			</a>
+			<a class="btn btn-outline-primary btn-sm col-md" href="?panduan">
+				<i class="fas fa-sign-out-alt fa-fw mr-2"></i>
+				Panduan
+			</a>
 		</div>
 	</nav>
 	<br><br><br><br>
@@ -48,6 +52,7 @@ if (empty($_SESSION['username_user'])) {
 	elseif (isset($_GET['act_user']) && isset($_GET['crypt'])) include "_log-sign/view/v_aktivasi_akun.php";
 	elseif (isset($_GET['forgot_pass'])) include "_log-sign/view/v_lupa_password.php";
 	elseif (isset($_GET['forgot_pass_user'])) include "_log-sign/view/v_lupa_password_isi.php";
+	elseif (isset($_GET['panduan'])) include "panduan.php";
 	// elseif (isset($_GET['dashboard'])) include "_log-sign/register.php";
 	else include "_log-sign/view/v_login.php";
 	?>

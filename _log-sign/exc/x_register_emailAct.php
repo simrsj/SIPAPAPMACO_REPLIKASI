@@ -34,21 +34,14 @@ $isi_email = "
     <style type='text/css'>
         .body {
             font-family: Arial, Helvetica, sans-serif;
-            /* width: 100%; */
-            /* max-width: 60%; */
             margin: auto;
-            /* padding: 10px; */
-            /* border: 2px solid #ccc !important; */
-            /* border-radius: 16px; */
             background: rgb(236, 239, 244);
             word-wrap: break-word;
         }
 
         .container {
             width: 100%;
-            /* margin: 0 auto; */
             padding: 10px 10px 10px 10px;
-            /* Center the DIV horizontally */
             background: #fff;
             font-size: 12px;
             max-width: 60%;
@@ -56,7 +49,6 @@ $isi_email = "
 
         .fixed-header,
         .fixed-footer {
-            /* border-radius: 13px; */
             width: 100%;
             background: #4e73df;
             padding: 10px 10px 10px 10px;
@@ -79,7 +71,6 @@ $isi_email = "
 
         .btn {
             background-color: #4e73df;
-            /* Green */
             border: none;
             color: white;
             padding: 5px 5px;

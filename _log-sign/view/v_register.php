@@ -102,7 +102,7 @@
         } else if (idins != 0) {
             $('#institusi_lainnya').html('');
         }
-        console.log(idins);
+        // console.log(idins);
         // }
     });
 

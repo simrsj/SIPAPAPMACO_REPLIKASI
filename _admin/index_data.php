@@ -125,6 +125,9 @@ elseif (isset($_GET['pkd']) && $d_prvl['r_pkd'] == 'Y') {
 //testing 
 elseif (isset($_GET['test']))
 	include "test.php";
+//panduan
+elseif (isset($_GET['panduan']))
+	include "panduan.php";
 //data dashboard
 else {
 	if ($_SESSION['level_user'] == 1)

@@ -263,34 +263,10 @@ if ($_SESSION['status_user'] == "Y") {
 
 			<!-- Tutorial Panduan -->
 			<li class="nav-item" style=" word-wrap: break-word;">
-				<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_panduan" aria-expanded="true" aria-controls="collapse_panduan">
+				<a class="nav-link" href="?panduan">
 					<i class="fa-brands fa-fw fa-leanpub"></i>
 					<span>Panduan</span>
 				</a>
-				<div id="collapse_panduan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<?php
-						if ($_SESSION['level_user'] == 1)
-							$link_panduan = "panduan4dmin";
-						else if ($_SESSION['level_user'] == 2)
-							$link_panduan = "panduan_ip";
-						else if ($_SESSION['level_user'] == 3)
-							$link_panduan = "panduan_pkd";
-						else if ($_SESSION['level_user'] == 4)
-							$link_panduan = "panduan_pmbb";
-						else if ($_SESSION['level_user'] == 5)
-							$link_panduan = "panduan_praktikan";
-						?>
-						<a class="collapse-item" href="<?= $link_panduan; ?>.pptx" download="<?= $link_panduan; ?>.pdf">
-							<i class="fa-solid fa-file-pdf"></i>
-							<span>PDF</span>
-						</a>
-						<a class="collapse-item" href="?panduan_video=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $link_panduan))); ?>">
-							<i class="fa-brands fa-youtube"></i>
-							<span>Video</span>
-						</a>
-					</div>
-				</div>
 			</li>
 
 			<!-- Sidebar Toggler (Sidebar) -->
