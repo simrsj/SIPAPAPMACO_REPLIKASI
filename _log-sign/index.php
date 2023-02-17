@@ -4,41 +4,37 @@ if (empty($_SESSION['username_user'])) {
 	<?php
 	include "./_log-sign/exc/x_captcha.php";
 	?>
-	<nav class="navbar fixed-top navbar-light bg-light shadow-lg mb-5">
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<!-- <img src="./_img/logopemprov.png" class="img-fluid" alt="Responsive image" width="60px">
-				<img src="./_img/logorsj.png" class="img-fluid" alt="Responsive image" width="60px">
-				<img src="./_img/paripurnakars.png" class="img-fluid" alt="Responsive image" width="80px">
-				<img src="./_img/wbk.png" class="img-fluid" alt="Responsive image" width="60px"> -->
-				<a class="navbar-brand bg-primary rounded p-2 text-xxl b text-white" href="?">SIPAPAP MACO</a><br>
-				<div class="d-none  d-lg-inline b">(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)</div>
-			</li>
-		</ul>
-
-		<a class="nav-link dropdown-toggle bg-outline-primary p-2 btn btn-outline-primary" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<span class="mr-2 d-none d-lg-inline b">LINK</span><i class="fa-solid fa-link"></i>
-		</a>
-		<!-- Dropdown - User Information -->
-		<div class="dropdown-menu dropdown-menu-right text-center shadow p-2 rounded" aria-labelledby="userDropdown">
-			<a class="btn btn-outline-dark btn-sm col-md mb-2" href="?">
-				<i class="fa-solid fa-house fa-fw mr-2"></i>
-				Home
-			</a>
-			<a class="btn btn-outline-success btn-sm col-md mb-2" href="?reg">
-				<i class="fa-solid fa-user fa-fw mr-2"></i>
-				Register
-			</a>
-			<a class="btn btn-outline-primary btn-sm col-md" href="?login">
-				<i class="fas fa-sign-out-alt fa-fw mr-2"></i>
-				Log-In
-			</a>
-			<a class="btn btn-outline-primary btn-sm col-md" href="?panduan">
-				<i class="fas fa-sign-out-alt fa-fw mr-2"></i>
-				Panduan
-			</a>
+	<div class="">
+		<div class="row p-2 fixed-top bg-light shadow-lg mb-5 ">
+			<div class="col-11">
+				<a class="badge badge-primary text-lg b text-white text-decoration-none" href="?">SIPAPAP MACO</a><br>
+				<div class=" d-none d-lg-inline b">(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)</div>
+			</div>
+			<div class="col-1">
+				<a class="dropdown-toggle btn btn-outline-primary  btn-sm  my-auto" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class=" d-none d-lg-inline b">LINK</span>
+					<i class="fa fa-bars"></i>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right text-center shadow p-2 rounded" aria-labelledby="userDropdown">
+					<a class="btn btn-danger btn-sm col-md mb-2" href="?">
+						<span class="b">PANDUAN</span>
+					</a>
+					<a class="btn btn-outline-dark btn-sm col-md mb-2" href="?">
+						<i class="fa-solid fa-house fa-fw mr-2"></i>
+						Home
+					</a>
+					<a class="btn btn-outline-success btn-sm col-md mb-2" href="?reg">
+						<i class="fa-solid fa-user fa-fw mr-2"></i>
+						Register
+					</a>
+					<a class="btn btn-outline-primary btn-sm col-md" href="?login">
+						<i class="fas fa-sign-out-alt fa-fw mr-2"></i>
+						Log-In
+					</a>
+				</div>
+			</div>
 		</div>
-	</nav>
+	</div>
 	<br><br><br><br>
 	<div class="text-center mb-1">
 		<div class="btn btn-primary">
