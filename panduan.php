@@ -6,7 +6,7 @@
                     Pendaftaran dan Aktivasi Akun
                 </div>
                 <div class="card-body">
-                    <iframe width="100%" height="415" src="https://www.youtube.com/embed/kzhpveycDlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    <iframe width="100%" height="415" src="https://www.youtube.com/embed/kzhpveycDlA" title="Pendaftaran dan Aktivasi Akun" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                     </iframe>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                     Pengajuan Praktik + Mess
                 </div>
                 <div class="card-body">
-                    <iframe width="100%" height="415" src="https://www.youtube.com/embed/cKkwinBaqBk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    <iframe width="100%" height="415" src="https://www.youtube.com/embed/cKkwinBaqBk" title="Pengajuan Praktik" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                     </iframe>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     Daftar Praktikan + Pembimbing
                 </div>
                 <div class="card-body">
-                    <iframe class="d-flex" width="100%" height="415" src="https://www.youtube.com/embed/kzhpveycDlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    <iframe class="d-flex" width="100%" height="415" src="https://www.youtube.com/embed/3Bg3LkG-JR0" title="Daftar Praktikan + Pembimbing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                     </iframe>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     Tarif Praktik dan Kirim Bukti Pembayaran Praktik
                 </div>
                 <div class="card-body">
-                    <iframe class="d-flex" width="100%" height="415" src="https://www.youtube.com/embed/kzhpveycDlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    <iframe class="d-flex" width="100%" height="415" src="https://www.youtube.com/embed/kzhpveycDlA" title="Tarif Praktik dan Kirim Bukti Pembayaran Praktik" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                     </iframe>
                 </div>
             </div>

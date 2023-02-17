@@ -16,7 +16,7 @@ if (empty($_SESSION['username_user'])) {
 					<i class="fa fa-bars"></i>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right text-center shadow p-2 rounded" aria-labelledby="userDropdown">
-					<a class="btn btn-danger btn-sm col-md mb-2" href="?">
+					<a class="btn btn-danger btn-sm col-md mb-2" href="?panduan">
 						<span class="b">PANDUAN</span>
 					</a>
 					<a class="btn btn-outline-dark btn-sm col-md mb-2" href="?">
