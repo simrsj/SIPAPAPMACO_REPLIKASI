@@ -240,7 +240,7 @@ if ($r_data_praktikan > 0) {
                                             // console.log("ubah_init");
 
                                             Swal.fire({
-                                                title: 'Mohon Ditunggu . . .',
+                                                title: 'Mohon Ditunggu',
                                                 html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                 allowOutsideClick: false,
                                                 showConfirmButton: false,
@@ -299,7 +299,7 @@ if ($r_data_praktikan > 0) {
                                         $(document).on('click', '.ubah<?= md5($d_data_praktikan['id_praktikan']); ?>', function() {
 
                                             Swal.fire({
-                                                title: 'Mohon Ditunggu . . .',
+                                                title: 'Mohon Ditunggu',
                                                 html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                 allowOutsideClick: false,
                                                 showConfirmButton: false,

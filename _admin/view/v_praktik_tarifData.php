@@ -62,11 +62,11 @@ if ($r_praktik_tarif > 0) {
                         <td class="align-middle "><?= $no; ?></td>
                         <td class="align-middle "><?= $d_praktik_tarif['nama_jenis_tarif_pilih']; ?></td>
                         <td class="align-middle "><?= $d_praktik_tarif['nama_tarif_pilih']; ?></td>
-                        <td class="align-middle "><?= "Rp " . number_format($d_praktik_tarif['nominal_tarif_pilih'], 0, ",", "."); ?></td>
+                        <td class="align-middle text-left"><?= "Rp" . number_format($d_praktik_tarif['nominal_tarif_pilih'], 0, ",", "."); ?></td>
                         <td class="align-middle "><?= $d_praktik_tarif['nama_satuan_tarif_pilih']; ?></td>
                         <td class="align-middle "><?= $d_praktik_tarif['frekuensi_tarif_pilih']; ?></td>
                         <td class="align-middle "><?= $d_praktik_tarif['kuantitas_tarif_pilih']; ?></td>
-                        <td class="align-middle "> <?= "Rp " . number_format($d_praktik_tarif['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
+                        <td class="align-middle text-left"> <?= "Rp" . number_format($d_praktik_tarif['jumlah_tarif_pilih'], 0, ",", "."); ?></td>
                         <td class="align-middle ">
                             <?php if ($d_praktik_tarif['status_tarif_pilih'] == 'Y') { ?>
                                 <span class="badge badge-success">Aktif</span>
@@ -191,7 +191,7 @@ if ($r_praktik_tarif > 0) {
                                         $(".ubah_init<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>").click(function() {
 
                                             Swal.fire({
-                                                title: "Mohon Ditunggu . . .",
+                                                title: "Mohon Ditunggu",
                                                 html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                 // html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
                                                 allowOutsideClick: false,
@@ -232,6 +232,13 @@ if ($r_praktik_tarif > 0) {
                                         });
 
                                         $(document).on('click', '.ubah<?= md5($d_praktik_tarif['id_tarif_pilih']); ?>', function() {
+                                            Swal.fire({
+                                                title: "Mohon Ditunggu",
+                                                html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                                                allowOutsideClick: false,
+                                                showConfirmButton: false,
+                                                backdrop: true,
+                                            });
                                             console.log('ubah');
                                             var data_u = $('#<?= md5('form_u' . $d_praktik_tarif['id_tarif_pilih']); ?>').serializeArray();
                                             data_u.push({
@@ -334,30 +341,31 @@ if ($r_praktik_tarif > 0) {
                                                     data: data_u,
                                                     success: function() {
 
-                                                        Swal.fire({
-                                                            icon: 'success',
-                                                            title: '<span class"text-centere"><b>Data Praktikan</b><br>Berhasil Dirubah',
-                                                            allowOutsideClick: true,
-                                                            showConfirmButton: false,
-                                                            backdrop: true,
-                                                            timer: 3000,
-                                                            timerProgressBar: true,
-                                                            didOpen: (toast) => {
-                                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                            }
-                                                        }).then(
-                                                            function() {
-                                                                $('#mu<?= md5($d_praktik_tarif['id_tarif_pilih']) ?>').on('hidden.bs.modal', function(e) {
+                                                        $('#mu<?= md5($d_praktik_tarif['id_tarif_pilih']) ?>').on('hidden.bs.modal', function(e) {});
+                                                        $('#<?= $_GET['tb'] ?>')
+                                                            .load("_admin/view/v_praktik_tarifData.php?" +
+                                                                "idu=<?= $_GET['idu']; ?>" +
+                                                                "&idp=<?= $_GET['idp']; ?>" +
+                                                                "&tb=<?= $_GET['tb']; ?>",
+                                                                function() {
 
-                                                                });
-                                                                $('#<?= $_GET['tb'] ?>')
-                                                                    .load("_admin/view/v_praktik_tarifData.php?" +
-                                                                        "idu=<?= $_GET['idu']; ?>" +
-                                                                        "&idp=<?= $_GET['idp']; ?>" +
-                                                                        "&tb=<?= $_GET['tb']; ?>");
-                                                            }
-                                                        )
+                                                                    const Toast = Swal.mixin({
+                                                                        toast: true,
+                                                                        position: 'top-end',
+                                                                        showConfirmButton: false,
+                                                                        timer: 5000,
+                                                                        timerProgressBar: true,
+                                                                        didOpen: (toast) => {
+                                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                        }
+                                                                    });
+
+                                                                    Toast.fire({
+                                                                        icon: 'success',
+                                                                        title: '<span class="b text-center">Data Tarif Berhasil Dirubah</center>'
+                                                                    });
+                                                                })
                                                     },
                                                     error: function(response) {
                                                         console.log(response);
@@ -476,3 +484,6 @@ if ($r_praktik_tarif > 0) {
 <?php
 }
 ?>
+<script>
+    Swal.close();
+</script>

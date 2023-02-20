@@ -210,7 +210,7 @@
                                                 $(document).ready(function() {
 
                                                     Swal.fire({
-                                                        title: 'Mohon Ditunggu . . .',
+                                                        title: 'Mohon Ditunggu',
                                                         html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                         allowOutsideClick: false,
                                                         showConfirmButton: false,
@@ -241,7 +241,7 @@
                                                     console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
 
                                                     Swal.fire({
-                                                        title: 'Mohon Ditunggu . . .',
+                                                        title: 'Mohon Ditunggu',
                                                         html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                         allowOutsideClick: false,
                                                         showConfirmButton: false,
@@ -276,7 +276,7 @@
                                                 $(document).on('click', '.tambah<?= md5($d_praktik['id_praktik']); ?>', function() {
 
                                                     Swal.fire({
-                                                        title: 'Mohon Ditunggu . . .',
+                                                        title: 'Mohon Ditunggu',
                                                         html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                         allowOutsideClick: false,
                                                         showConfirmButton: false,
