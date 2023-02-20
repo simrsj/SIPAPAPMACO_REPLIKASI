@@ -42,7 +42,7 @@
                     Tarif Praktik dan Kirim Bukti Pembayaran Praktik
                 </div>
                 <div class="card-body">
-                    <iframe class="d-flex" width="100%" height="415" src="https://www.youtube.com/embed/kzhpveycDlA" title="Tarif Praktik dan Kirim Bukti Pembayaran Praktik" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    <iframe class="d-flex" width="100%" height="415" src="https://www.youtube.com/embed/ygqM_5mkvb8" title="Tarif Praktik dan Kirim Bukti Pembayaran Praktik" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                     </iframe>
                 </div>
             </div>
