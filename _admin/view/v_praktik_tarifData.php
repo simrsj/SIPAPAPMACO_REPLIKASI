@@ -348,23 +348,7 @@ if ($r_praktik_tarif > 0) {
                                                                 "&idp=<?= $_GET['idp']; ?>" +
                                                                 "&tb=<?= $_GET['tb']; ?>",
                                                                 function() {
-
-                                                                    const Toast = Swal.mixin({
-                                                                        toast: true,
-                                                                        position: 'top-end',
-                                                                        showConfirmButton: false,
-                                                                        timer: 5000,
-                                                                        timerProgressBar: true,
-                                                                        didOpen: (toast) => {
-                                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                        }
-                                                                    });
-
-                                                                    Toast.fire({
-                                                                        icon: 'success',
-                                                                        title: '<span class="b text-center">Data Tarif Berhasil Dirubah</center>'
-                                                                    });
+                                                                    Swal.close();
                                                                 })
                                                     },
                                                     error: function(response) {
