@@ -259,9 +259,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                         var file_invoice = $('#file_invoice').val();
 
                                                                         //cek data form modal download docx bila tidak diiisi
-                                                                        if (
-                                                                            file_invoice == ""
-                                                                        ) {
+                                                                        if (file_invoice == "") {
                                                                             // console.log("error data");
 
                                                                             const Toast = Swal.mixin({
@@ -374,12 +372,11 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                                 }
                                                                             }).then(
                                                                                 function() {
-                                                                                    // document.location.href = "?";
+                                                                                    document.location.href = "?pbyr=<?= $_GET['pbyr'] ?>&i";
                                                                                 }
                                                                             );
                                                                         }
                                                                     });
-
                                                                 <?php } ?>
                                                             </script>
                                                         </div>
@@ -529,9 +526,9 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
 
                                                         Unggah File : <span style="color:red">*</span><br>
                                                         <div class="custom-file">
-                                                            <label class="custom-file-label text-md" for="customFile" id="labelfileinput">Pilih File</label>
-                                                            <input type="file" class="custom-file-input" id="t_file" name="t_file" accept="application/pdf, image/jpg, image/png, image/jpeg" required>
-                                                            <span class='i text-xs'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 200 Kb</span><br>
+                                                            <label class="custom-file-label text-md " for="customFile" id="labelfileinput">Pilih File</label>
+                                                            <input type="file" class="custom-file-input mb-3" id="t_file" name="t_file" accept="application/pdf, image/jpg, image/png, image/jpeg" required>
+                                                            <div class='i text-xs'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 200 Kb</div><br>
                                                             <div class="text-xs font-italic text-danger blink" id="err_t_file"></div><br>
                                                             <script>
                                                                 $('.custom-file-input').on('change', function() {

@@ -282,7 +282,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                 <?php
                                 } else if ($r_praktik_tarif < 1) {
                                 ?>
-                                    <span class="badge badge-secondary">Belum Dipilih</span>
+                                    <span class="badge badge-secondary">Tarif Praktik<br>Belum Dipilih</span>
                                 <?php
                                 } else {
                                 ?>

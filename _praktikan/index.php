@@ -17,6 +17,7 @@ if ($_SESSION['status_user'] == "Y") {
 		$sql_praktikan .= " JOIN tb_user ON tb_praktikan.id_user = tb_user.id_user";
 		$sql_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
 		$sql_praktikan .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
+		// echo $sql_praktikan;
 		$q_praktikan = $conn->query($sql_praktikan);
 	} catch (Exception $ex) {
 		echo "<script>alert('-DATA PRAKTIKAN-');document.location.href='?error404';</script>";
