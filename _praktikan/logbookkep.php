@@ -1,19 +1,125 @@
 <h4 class="text-center mb-2">TUJUAN PEMBELAJARAN</h4>
 Setelah menjalani stase Ilmu Kedokteran Jiwa di Rumah Sakit Jiwa Provinsi Jawa Barat, mahasiswa tahap profesi diharapkan akan mampu :
 <ol>
-    <li>Membentuk rapport yang baik dalam hubungan dokter-pasien</li>
-    <li>Melakukan investigasi (observasi serta anamnesis) psikiatrik</li>
-    <li>Melakukan pemeriksaan status mental sesuai pedoman yang ditetapkan</li>
-    <li>Menegakkan Diagnosis Multiaksial, dan/Diagnosis Kerja dan Diagnosis Banding (DK/DD)</li>
-    <li>Memperkirakan prognosis</li>
-    <li>Memelih serta mengusulkan pemeriksaan tambahan /penunjang yang dibutuhkan</li>
-    <li>Merencanakan Penatalaksanaan yang benar dan rasional</li>
-    <li>Membantu secara ilmiah serta selalu tanggap terhadap apa yang terjadi/ mungkin terjadi pada pasien yang dikelola</li>
-    <li>Melaksanakan pelayanan & kesehatan jiwa rawatjalan/rawat inap/intensif/IGD</li>
-    <li>Melaksanakan penyuluhan kesehatan jiwa masyarakat</li>
-    <li>Melakukan pengelolaan awal dan rujukan pada kasus-kasus gangguan jiwa</li>
-    <li>Bersikap professional dalam melakukan pelayanan medis yang dilandasi oleh <em>Good Medical Practitice. </em></li>
+    <li>
+        Setiap mahasiswa wajib bersikap sopan dan menghargai pembimbing ruangan, pembimbing akademik, mahasiswa lain serta tim sejawat.
+    </li>
+    <li>
+        Setiap mahasiswa hadir 15 menit sebelum praktik dimulai.
+    </li>
+    <li>
+        Mahasiswa yang terlambat praktik lebih dari 30 menit wajib mengganti jam praktik, dengan ketentuan :
+        <ol type="a">
+            <li>
+                Terlambat > 1 jam: mengganti dinas 1 shift
+            </li>
+            <li>
+                Tidakhadir karena sakit /izin ; mengganti sesuai jumlah hari tidak masuk
+            </li>
+            <li>
+                Tidak hadir tanpa keterangan ; mengganti 3 hari
+            </li>
+        </ol>
+    </li>
+    <li>
+        Ketentuan jadwal dinas adalah semua mahasiswa melakukan dinas pagi mulai jam 07.00 sd 14.00 WIB dan dines siang mulai jam 14.00 sd 19.00 WIB.
+    </li>
+    <li>
+        Peserta didik harus mengikuti jadwal dinas yang telah ditetapkan dan tidak diperbolehkan mengganti dinas tanpa sepengetahuan pembimbing akademik maupun CI tempat praktik.
+    </li>
+    <li>
+        Kehadiran peserta didik dalam praktik klinik wajib 100%. Apabila peserta didik berhalangan oleh karena alasan apapun diharuskan mengganti waktu praktik atas seizin koordinator praktik.
+    </li>
+    <li>
+        Peserta didik mengikuti semua rangkaian kegiatan belajar, termasuk pre dan post conference dengan pembimbing.
+    </li>
+    <li>
+        Mahasiswa diharuskan menandatangani daftar hadir setiap hari sebanyak 2 (dua) kali, yaitu pada saat datang dan saat selesai menjalankan kegiatan praktik.
+    </li>
+    <li>
+        Apabila mahasiswa akan meninggalkan kegiatan praktik, harus seijin pembimbing dan Koordinator Pendidikan Keperawatan
+    </li>
+    <li>
+        Mahasiswa tidak diperkenankan menggunakan perhiasan berlebihan, tidak merias muka secara mencolok, kuku pendek, rambut tidak gondrong untuk pria, dan tidak memakai sandal.
+    </li>
+    <li>
+        Untuk mahasiswa putri yang tidak menggunakan hijab, rambut disanggul/ tidak menyentuh leher. Dan bagi yang memakai hijab, disarankan menggunakan jilbab terusan dengan pertimbangan keamanan.
+    </li>
+    <li>
+
+        Menggunakan seragam sesuai dengan ketentuan akademik dengan atribut lengkap.
+    </li>
+    <li>
+        Tugas dan laporan dibuat sesuai dengan format yang telah disediakan dan dikumpulkan paling lambat 3 hari setelah praktik selesai pada koordinator praktik.
+    </li>
+    <li>
+
+        Keterlambatan pengumpulan tugas akan dikenai sanksi pengurangan nilai laporan 0,5%/ hari.
+    </li>
+    <li>
+        Mahasiswa yang tidak mengikuti kegiatan praktik selama lebih dari 2 (dua) hari tidak dapatmengikuti ujian.
+    </li>
+    <li>
+        Seluruh kegiatan di Rumah Sakit Jiwa Provinsi Jawa Barat baik dalam bidang pendidikan, pelayanan, maupun administrasi ditulis didalam Buku Log dan ditandatangani oleh perawat pembimbing.
+    </li>
+    <li>
+
+        Menggunakan name tag atau kartu identitas diri yang resmi selama berada di lingkungan rumah sakit.
+    </li>
+    <li>
+        Tidak merokok dalam lingkungan pendidikan dan rumah sakit.
+    </li>
+    <li>
+        Tidak mengkonsumsi minum-minuman keras dalam lingkungan pendidikan dan rumahsakit.
+    </li>
+    <li>
+        Tidak menggunakan obat-obatan yang terlarang
+    </li>
+    <li>
+        Menjaga kerahasiaan pasien, tidak mempublikasikan identitas dan kondisi pasien pada masyarakat umum termasuk melalui sosial media.
+    </li>
+    <li>
+        Memahami dan melaksanakan semua ketentuan yang tertulis dalam janji kepanitraan.
+    </li>
+    <li>
+        Bagi mahasiswa yang melanggar tata tertib praktik akan dikenakan
+        sanksi sebagai berikut:
+        <ol type="a">
+            <li>
+                a) Teguran atau peringatan lisan atau tulisan
+            </li>
+            <li>
+                b) Tidak lulus mata kuliah
+            </li>
+        </ol>
+    </li>
 </ol>
+<hr style="background-color: black; height: 2px; border: 0;">
+<div class="">
+    <div class="text-center h4 mb-4">SURAT PERNYATAAN</div>
+    Saya, mahasiswa peserta pendidikan klinis Ilmu Keperawatan Jiwa di RS Jiwa Provinsi Jawa Barat, yang bertanda tangan di bawah ini :
+    <div class="m-4">
+        <table>
+            <tr>
+                <td width="110px">Nama</td>
+                <td>: <?= $d_praktikan['nama_praktikan'] ?></td>
+            </tr>
+            <tr>
+                <td>NIM</td>
+                <td>: <?= $d_praktikan['no_id_praktikan'] ?></td>
+            </tr>
+            <tr>
+                <td>Universitas</td>
+                <td>: <?= $d_praktikan['nama_institusi'] ?></td>
+            </tr>
+            <tr>
+                <td>Periode Stase</td>
+                <td> : <?= tanggal($d_praktikan['tgl_mulai_praktik']) . " - " . tanggal($d_praktikan['tgl_selesai_praktik']) ?></td>
+            </tr>
+        </table>
+    </div>
+    Setelah membaca dan memahami tata tertib serta uraian tugas dan wewenang di bagian ilmu Keperawatan jiwa, saya berjanji akan mentaati peraturan yang berlaku sesuai yang tercantum. Jika saya terbukti melanggar aturan, amak saya bersedia dikenakan sangsi sesuai dengan aturan yang berlaku.
+</div>
 <hr style="background-color: black; height: 2px; border: 0;">
 <div class="table-responsive">
     <table class='table table-striped'>

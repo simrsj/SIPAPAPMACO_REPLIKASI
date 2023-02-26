@@ -5,24 +5,25 @@ if ($_SESSION['status_user'] == "Y") {
 	try {
 		$sql_user = "SELECT * FROM tb_user WHERE id_user=" . $_SESSION['id_user'];
 		$q_user = $conn->query($sql_user);
+		$d_user = $q_user->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
 		echo "<script>alert('$ex -DATA PRIVILEGES-');";
 		echo "document.location.href='?error404';</script>";
 	}
-	$d_user = $q_user->fetch(PDO::FETCH_ASSOC);
 
 	//data praktikan dan user 
 	try {
 		$sql_praktikan = "SELECT * FROM tb_praktikan ";
 		$sql_praktikan .= " JOIN tb_user ON tb_praktikan.id_user = tb_user.id_user";
 		$sql_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
+		$sql_praktikan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
 		$sql_praktikan .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
 		// echo $sql_praktikan;
 		$q_praktikan = $conn->query($sql_praktikan);
+		$d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
 		echo "<script>alert('-DATA PRAKTIKAN-');document.location.href='?error404';</script>";
 	}
-	$d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
 ?>
 
 	<!-- Page Wrapper -->
@@ -38,13 +39,14 @@ if ($_SESSION['status_user'] == "Y") {
 						<img src="./_img/rsj.svg" width="28" />
 						<span class="text-primary b m-2 ">SIPAPAP MACO</span>
 					</a>
+					<button class="btn btn-link d-md-none rounded-circle mr-3"><i class="fa fa-bars"></i></button>
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown no-arrow mx-1">
-							<!-- <a class="nav-link dropdown-toggle" href="#" id="notifikasi" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" href="#" id="notifikasi" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-bell fa-fw"></i>
 								<span class="badge badge-danger badge-counter">3+</span>
-							</a> -->
+							</a>
 							<!-- Dropdown - Alerts -->
 							<div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-xl shadow animated--grow-in" aria-labelledby="notifikasi">
 								<h6 class="dropdown-header">
@@ -124,23 +126,29 @@ if ($_SESSION['status_user'] == "Y") {
 						</div>
 					</div>
 				</div>
-				<?php if ($d_praktikan['tatatertib_praktikan'] == 'T') { ?>
+				<?php if ($d_praktikan['pernyataan_praktikan'] == 'T') { ?>
 
 					<!-- Modal-->
 					<div class="modal fade" id="tatatertib" data-backdrop="static">
 						<div class="modal-dialog modal-xl  modal-dialog-scrollable" role="document">
 							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Tata Tertib Praktikan</h5>
-								</div>
-								<div class="modal-body">
+								<div class="modal-body" height="100%">
 									<?php
 									if ($d_praktikan['id_jurusan_pdd'] == 1) {
-										include "_praktikan/logbookked.php";
+										$jurusan = "ked";
 									} else if ($d_praktikan['id_jurusan_pdd'] == 2) {
-										include_once "_praktikan/logbookkep.php";
+										$jurusan = "kep";
 									}
 									?>
+									<iframe src="./_file/<?= $jurusan ?>_tatatertib.pdf" width="100%" height="100%"></iframe>
+									<hr style="background-color: gray; height: 2px; border: 0;">
+									<?php
+									include $jurusan . "_pernyataan.php"
+									?><br>
+									<div class="font-italic text-danger text-center text-sm ">dengan mengklik tombol dibawah anda <b>SETUJU</b> dengan mentaati peraturan yang berlaku sesuai yang tercantum</div>
+									<form id="form_pernyataan">
+										<input type="button" class="btn btn-outline-danger col pernyataan" value="SETUJU" name="pernyataan" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktikan['id_praktikan']))) ?>">
+									</form>
 								</div>
 							</div>
 						</div>
@@ -148,20 +156,52 @@ if ($_SESSION['status_user'] == "Y") {
 					<script>
 						$(document).ready(function() {
 							$('#tatatertib').modal('show');
+
+							$(".pernyataan").click(function() {
+
+								$.ajax({
+									type: 'POST',
+									url: "_praktikan/exc/x_pernyataan.php",
+									data: {
+										"id": $(this).attr('id'),
+										"pernyataan": 'Y',
+									},
+									dataType: 'json',
+									success: function(response) {
+										//ambil data file yang diupload
+										if (response.ket == "SETUJU") {
+
+											Swal.fire({
+												icon: 'success',
+												showConfirmButton: false,
+												html: '<span class"text-xs"><b>SURAT PERNYATAAN</b><br>DISETUJUI<br>' +
+													'<a href="?" class="btn btn-outline-primary">OK</a>',
+												timer: 5000,
+												timerProgressBar: true,
+												didOpen: (toast) => {
+													toast.addEventListener('mouseenter', Swal.stopTimer)
+													toast.addEventListener('mouseleave', Swal.resumeTimer)
+												}
+											}).then(
+												function() {
+													document.location.href = "?";
+												}
+											);
+										} else {
+											document.location.href = "?";
+										}
+									},
+									error: function(response) {
+										console.log(response.responseText);
+										alert('eksekusi query gagal');
+									}
+								});
+							});
 						});
 					</script>
-				<?php } else if ($d_praktikan['tatatertib_praktikan'] == 'Y') { ?>
+				<?php } else if ($d_praktikan['pernyataan_praktikan'] == 'Y') { ?>
 
-				<?php
-				}
-				//akun dan hak akses 
-				if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
-					if (isset($_GET['ha']) && $_SESSION['level_user'] == 1)
-						include "_admin/view/v_akun_hak_akses.php";
-					else
-						include "_admin/view/v_akun.php";
-				}
-				?>
+				<?php } ?>
 			</div>
 			<!-- End of Main Content -->
 
