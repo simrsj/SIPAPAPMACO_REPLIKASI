@@ -59,70 +59,34 @@ Setelah menjalani stase Ilmu Kedokteran Jiwa di Rumah Sakit Jiwa Provinsi Jawa B
                 <td> Definisi, diagnosis, pemeriksaan tatalaksana awal, rujukan </td>
             </tr>
             <tr>
-                <td>
-                    7
-                </td>
-                <td>
-                    Retardasi Mental
-                </td>
-                <td>
-                    Definisi, diagnosis, pemeriksaan&nbsp; tatalaksana awal, rujukan
-                </td>
+                <td> 7 </td>
+                <td> Retardasi Mental </td>
+                <td> Definisi, diagnosis, pemeriksaan&nbsp; tatalaksana awal, rujukan </td>
             </tr>
             <tr>
-                <td>
-                    8
-                </td>
-                <td>
-                    Gangguan spektrum autisme, GPPH, Gangguan tingkah laku
-                </td>
-                <td>
-                    Definisi, Diagnosis, rujukan
-                </td>
+                <td> 8 </td>
+                <td> Gangguan spektrum autisme, GPPH, Gangguan tingkah laku </td>
+                <td> Definisi, Diagnosis, rujukan </td>
             </tr>
             <tr>
-                <td>
-                    10
-                </td>
-                <td>
-                    Gangguan makan
-                </td>
-                <td>
-                    Definisi, diagnosis, rujukan
-                </td>
+                <td> 10 </td>
+                <td> Gangguan makan </td>
+                <td> Definisi, diagnosis, rujukan </td>
             </tr>
             <tr>
-                <td>
-                    11
-                </td>
-                <td>
-                    Gangguan mood
-                </td>
-                <td>
-                    Definisi, diagnosis, pemeriksaan&nbsp; tatalaksana awal, rujukan
-                </td>
+                <td> 11 </td>
+                <td> Gangguan mood </td>
+                <td> Definisi, diagnosis, pemeriksaan&nbsp; tatalaksana awal, rujukan </td>
             </tr>
             <tr>
-                <td>
-                    10
-                </td>
-                <td>
-                    Gangguan kepribadian dan perilaku masa dewasa
-                </td>
-                <td>
-                    Definisi, diagnosis, rujukan
-                </td>
+                <td> 10 </td>
+                <td> Gangguan kepribadian dan perilaku masa dewasa </td>
+                <td> Definisi, diagnosis, rujukan </td>
             </tr>
             <tr>
-                <td>
-                    11
-                </td>
-                <td>
-                    Adiksi/ketergantungan narkoba
-                </td>
-                <td>
-                    Definisi, diagnosis, pemeriksaan&nbsp; tatalaksana awal, rujukan
-                </td>
+                <td> 11 </td>
+                <td> Adiksi/ketergantungan narkoba </td>
+                <td> Definisi, diagnosis, pemeriksaan&nbsp; tatalaksana awal, rujukan </td>
             </tr>
         </tbody>
     </table>
