@@ -20,6 +20,8 @@ if ($_SESSION['status_user'] == "Y") {
 		$sql_praktikan .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
 		$sql_praktikan .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
 		$sql_praktikan .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+		$sql_praktikan .= " JOIN tb_pembimbing_pilih ON tb_praktikan.id_praktikan = tb_pembimbing_pilih.id_praktikan";
+		$sql_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing";
 		$sql_praktikan .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
 		// echo $sql_praktikan;
 		$q_praktikan = $conn->query($sql_praktikan);
@@ -47,19 +49,24 @@ if ($_SESSION['status_user'] == "Y") {
 						<!-- Nav Item - Menu 3 Bar -->
 						<li class="nav-item dropdown no-arrow  my-auto align-middle">
 							<a class="nav-item dropdown-toggle d-flex btn btn-outline-primary btn-sm" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<div class="d-none d-sm-block">Menu &nbsp;</div>
+								<div class="d-none d-md-block">Menu &nbsp;</div>
 								<div class="fa fa-bars my-auto"></div>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
-								
+
+								<a class="dropdown-item hover-primary" href="#" data-toggle="modal" data-target="#tatatertib">
+									Tatatertib
+								</a>
+
+								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="?matrix_keg">
 									<i class="fa-solid fa-table fa-sm fa-fw mr-2"></i>
 									Matrix Kegiatan
 								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="?">
-									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+								<a class="dropdown-item" href="?matrix_keg">
+									<i class="fa-solid fa-table fa-sm fa-fw mr-2"></i>
 									Matrix Kegiatan
 								</a>
 							</div>
@@ -84,33 +91,50 @@ if ($_SESSION['status_user'] == "Y") {
 								</a>
 							</div>
 						</li>
-
-						<!-- Logout Modal-->
-						<div class="modal fade" id="log-out" tabindex="-1" role="dialog" aria-labelledby="log-out" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
-										<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">×</span>
-										</button>
-									</div>
-									<div class="modal-footer">
-										<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-										<a class="btn btn-danger" href="?lo">Ya</a>
-									</div>
-								</div>
-							</div>
-						</div>
 					</ul>
 				</nav>
+				<!-- Logout Modal-->
+				<div class="modal fade" id="log-out">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Yakin Keluar?</h5>
+								<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+								<a class="btn btn-danger" href="?lo">Ya</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal Tatatertib dan Pernyataan-->
+				<div class="modal fade" id="tatatertib">
+					<div class="modal-dialog modal-xl  modal-dialog-scrollable" role="document">
+						<div class="modal-content">
+							<div class="modal-body" height="100%">
+								<?php
+								if ($d_praktikan['id_jurusan_pdd'] == 1) {
+									$jurusan = "ked";
+								} else if ($d_praktikan['id_jurusan_pdd'] == 2) {
+									$jurusan = "kep";
+								}
+								?>
+								<iframe src="./_file/<?= $jurusan ?>_tatatertib.pdf" width="100%" height="100%"></iframe>
+							</div>
+						</div>
+					</div>
+				</div>
 				<br>
 				<br>
 				<br>
 				<div class="wrapper mb-4">
 					<?php if ($d_praktikan['pernyataan_praktikan'] == 'T') { ?>
 
-						<!-- Modal-->
+						<!-- Modal Tatatertib dan Pernyataan-->
 						<div class="modal fade" id="tatatertib" data-backdrop="static">
 							<div class="modal-dialog modal-xl  modal-dialog-scrollable" role="document">
 								<div class="modal-content">
@@ -196,10 +220,6 @@ if ($_SESSION['status_user'] == "Y") {
 				</footer>
 			</div>
 			<!-- End of Main Content -->
-
-			<!-- Footer -->
-			<!-- End of Footer -->
-
 		</div>
 		<!-- End of Content Wrapper -->
 
