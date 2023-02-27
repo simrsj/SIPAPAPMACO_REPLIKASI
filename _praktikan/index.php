@@ -45,44 +45,30 @@ if ($_SESSION['status_user'] == "Y") {
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 						<!-- Nav Item - Menu 3 Bar -->
-						<li class="nav-item dropdown no-arrow d-sm-none rounded my-auto">
-							<a class="nav-item dropdown-toggle" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-sm-inline text-gray-600 small"><?= $d_praktikan['nama_praktikan']; ?></span>
-								<i class="fa fa-bars"></i>
+						<li class="nav-item dropdown no-arrow  my-auto align-middle">
+							<a class="nav-item dropdown-toggle d-flex btn btn-outline-primary btn-sm" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<div class="d-none d-sm-block">Menu &nbsp;</div>
+								<div class="fa fa-bars my-auto"></div>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
-								<!-- <a class="dropdown-item" href="?aku">
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									Pengaturan
-								</a> -->
-								<!-- <div class="dropdown-divider"></div> -->
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#log-out">
+								
+								<a class="dropdown-item" href="?matrix_keg">
+									<i class="fa-solid fa-table fa-sm fa-fw mr-2"></i>
+									Matrix Kegiatan
+								</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="?">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-									Logout
+									Matrix Kegiatan
 								</a>
 							</div>
-						</li>
-						<li class="nav-item rounded-circle no-arrow my-auto d-none d-sm-block mr-1">
-							<a href="?asd" class="btn btn-success btn-sm">
-								Matrix Kegiatan
-							</a>
-						</li>
-						<li class="nav-item rounded-circle no-arrow my-auto d-none d-sm-block mr-1">
-							<a href="?asd" class="btn btn-success btn-sm">
-								Matrix Kegiatan
-							</a>
-						</li>
-						<li class="nav-item rounded-circle no-arrow my-auto d-none d-sm-block mr-1">
-							<a href="?asd" class="btn btn-success btn-sm">
-								Matrix Kegiatan
-							</a>
 						</li>
 						<div class="topbar-divider"></div>
 						<!-- Nav Item - User -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $d_praktikan['nama_praktikan']; ?></span>
+								<span class="mr-2 d-none d-md-block text-gray-600 small"><?= $d_praktikan['nama_praktikan']; ?></span>
 								<i class="far fa-user"></i>
 							</a>
 							<!-- Dropdown - User Information -->
