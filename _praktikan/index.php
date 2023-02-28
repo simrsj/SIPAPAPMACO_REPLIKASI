@@ -4,6 +4,7 @@ if ($_SESSION['status_user'] == "Y") {
 	//data user 
 	try {
 		$sql_user = "SELECT * FROM tb_user WHERE id_user=" . $_SESSION['id_user'];
+		// echo $sql_user;
 		$q_user = $conn->query($sql_user);
 		$d_user = $q_user->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
@@ -45,7 +46,7 @@ if ($_SESSION['status_user'] == "Y") {
 						<span class="text-primary b m-2 ">SIPAPAP MACO</span>
 					</a>
 					<!-- Topbar Navbar -->
-					<ul class="navbar-nav ml-auto">
+					<ul class="navbar-nav ml-auto ">
 						<!-- Nav Item - Menu 3 Bar -->
 						<li class="nav-item dropdown no-arrow  my-auto align-middle">
 							<a class="nav-item dropdown-toggle d-flex btn btn-outline-primary btn-sm" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,22 +54,37 @@ if ($_SESSION['status_user'] == "Y") {
 								<div class="fa fa-bars my-auto"></div>
 							</a>
 							<!-- Dropdown - User Information -->
-							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
+							<div class=" dropdown-menu scrollable-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
 
-								<a class="dropdown-item hover-primary" href="#" data-toggle="modal" data-target="#tatatertib">
-									Tatatertib
-								</a>
-
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="?matrix_keg">
-									<i class="fa-solid fa-table fa-sm fa-fw mr-2"></i>
-									Matrix Kegiatan
-								</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="?matrix_keg">
-									<i class="fa-solid fa-table fa-sm fa-fw mr-2"></i>
-									Matrix Kegiatan
-								</a>
+								<?php if ($d_praktikan['id_jurusan_pdd'] == 1) { ?>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
+										Tatatertib
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrix-kegiatan">
+										Matrix Kegiatan
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="?matrix_keg">
+										<i class="fa-solid fa-table fa-sm fa-fw mr-2"></i>
+										Matrix Kegiatan
+									</a>
+								<?php } else if ($d_praktikan['id_jurusan_pdd'] == 2) { ?>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib" style="transition: none !important; box-shadow: none !important;">
+										<img src="./_img/icongif/checklist.gif" width="15px" height="15px">
+										Tatatertib
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrixkegiatan" style="transition: none; box-shadow: none;">
+										<img src="./_img/icongif/document.gif" width="15px" height="15px">
+										Matrix Kegiatan
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="?kep_kompetensi" style="transition: none; box-shadow: none;">
+										<img src="./_img/icongif/medicine.gif" width="15px" height="15px">
+										Kompetensi Keperawatan
+									</a>
+								<?php } ?>
 							</div>
 						</li>
 						<div class="topbar-divider"></div>
@@ -93,44 +109,15 @@ if ($_SESSION['status_user'] == "Y") {
 						</li>
 					</ul>
 				</nav>
-				<!-- Logout Modal-->
-				<div class="modal fade" id="log-out">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">Yakin Keluar?</h5>
-								<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
-							<div class="modal-footer">
-								<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-								<a class="btn btn-danger" href="?lo">Ya</a>
-							</div>
-						</div>
+				<?php include "modal.php" ?>
+				<br>
+				<br>
+				<br>
+				<div class="container text-center ">
+					<div class="badge badge-primary b">
+						<?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span>
 					</div>
 				</div>
-
-				<!-- Modal Tatatertib dan Pernyataan-->
-				<div class="modal fade" id="tatatertib">
-					<div class="modal-dialog modal-xl  modal-dialog-scrollable" role="document">
-						<div class="modal-content">
-							<div class="modal-body" height="100%">
-								<?php
-								if ($d_praktikan['id_jurusan_pdd'] == 1) {
-									$jurusan = "ked";
-								} else if ($d_praktikan['id_jurusan_pdd'] == 2) {
-									$jurusan = "kep";
-								}
-								?>
-								<iframe src="./_file/<?= $jurusan ?>_tatatertib.pdf" width="100%" height="100%"></iframe>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br>
-				<br>
-				<br>
 				<div class="wrapper mb-4">
 					<?php if ($d_praktikan['pernyataan_praktikan'] == 'T') { ?>
 
@@ -148,9 +135,31 @@ if ($_SESSION['status_user'] == "Y") {
 										?>
 										<iframe src="./_file/<?= $jurusan ?>_tatatertib.pdf" width="100%" height="100%"></iframe>
 										<hr style="background-color: gray; height: 2px; border: 0;">
-										<?php
-										include $jurusan . "_pernyataan.php"
-										?><br>
+										<div class="text-gray-900">
+											<div class="text-center h5 mb-4 b">SURAT PERNYATAAN</div>
+											Saya, mahasiswa peserta pendidikan klinis Ilmu Keperawatan Jiwa di RS Jiwa Provinsi Jawa Barat, yang bertanda tangan di bawah ini :
+											<div class="m-4">
+												<table>
+													<tr>
+														<td width="110px">Nama</td>
+														<td>: <?= $d_praktikan['nama_praktikan'] ?></td>
+													</tr>
+													<tr>
+														<td>NIM</td>
+														<td>: <?= $d_praktikan['no_id_praktikan'] ?></td>
+													</tr>
+													<tr>
+														<td>Universitas</td>
+														<td>: <?= $d_praktikan['nama_institusi'] ?></td>
+													</tr>
+													<tr>
+														<td>Periode Stase</td>
+														<td> : <?= tanggal($d_praktikan['tgl_mulai_praktik']) . " - " . tanggal($d_praktikan['tgl_selesai_praktik']) ?></td>
+													</tr>
+												</table>
+											</div>
+											Setelah membaca dan memahami tata tertib serta uraian tugas dan wewenang di bagian ilmu Keperawatan jiwa, saya berjanji akan mentaati peraturan yang berlaku sesuai yang tercantum. Jika saya terbukti melanggar aturan, amak saya bersedia dikenakan sangsi sesuai dengan aturan yang berlaku.
+										</div><br>
 										<div class="font-italic text-danger text-center text-sm ">dengan mengklik tombol dibawah anda <b>SETUJU</b> dengan mentaati peraturan yang berlaku sesuai yang tercantum</div>
 										<form id="form_pernyataan">
 											<input type="button" class="btn btn-outline-danger col pernyataan" value="SETUJU" name="pernyataan" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktikan['id_praktikan']))) ?>">
@@ -219,17 +228,26 @@ if ($_SESSION['status_user'] == "Y") {
 					</div>
 				</footer>
 			</div>
-			<!-- End of Main Content -->
 		</div>
-		<!-- End of Content Wrapper -->
 
 	</div>
-	<!-- End of Page Wrapper -->
-
-	<!-- Scroll to Top Button-->
 	<a class="scroll-to-top rounded" href="#page-top">
 		<i class="fas fa-angle-up"></i>
 	</a>
+
+	<script>
+		var span = document.getElementById("jam");
+		time();
+
+		function time() {
+			var d = new Date();
+			var s = formattedNumber = ("0" + d.getSeconds()).slice(-2);
+			var m = formattedNumber = ("0" + d.getMinutes()).slice(-2);
+			var h = formattedNumber = ("0" + d.getHours()).slice(-2);
+			span.textContent = h + ":" + m + ":" + s;
+		}
+		setInterval(time, 1000);
+	</script>
 <?php
 } else {
 ?>
