@@ -70,12 +70,12 @@ if ($_SESSION['status_user'] == "Y") {
 										Matrix Kegiatan
 									</a>
 								<?php } else if ($d_praktikan['id_jurusan_pdd'] == 2) { ?>
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib" style="transition: none !important; box-shadow: none !important;">
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
 										<img src="./_img/icongif/checklist.gif" width="15px" height="15px">
 										Tatatertib
 									</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrixkegiatan" style="transition: none; box-shadow: none;">
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrixkegiatan">
 										<img src="./_img/icongif/document.gif" width="15px" height="15px">
 										Matrix Kegiatan
 									</a>
