@@ -20,7 +20,7 @@ if ($_SESSION['status_user'] == "Y") {
 	try {
 		$q_prvl = $conn->query($sql_prvl);
 	} catch (Exception $ex) {
-		echo "<script>alert('$ex -DATA PRIVILEGES-');";
+		echo "<script>alert('DATA PRIVILEGES-');";
 		echo "document.location.href='?error404';</script>";
 	}
 	$d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);

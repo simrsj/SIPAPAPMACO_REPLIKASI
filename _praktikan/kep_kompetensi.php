@@ -23,8 +23,8 @@
                                     <select class="select2" name="kompetensi" id="kompetensi" style="width: 100%;" required>
                                         <option value="">-- Pilih --</option>
                                         <?php
-                                        $komp = $conn->query("SELECT * FROM tb_logbook_kep_kompetensi order by nama ASC");
-                                        while ($d_komp = $komp->fetch(PDO::FETCH_ASSOC)) {
+                                        $q_komp = $conn->query("SELECT * FROM tb_logbook_kep_kompetensi_nama");
+                                        while ($d_komp = $q_komp->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
                                             <option value="<?= $d_komp['nama']; ?> "><?= $d_komp['nama']; ?></option>
                                         <?php
@@ -35,7 +35,7 @@
                                     Tanggal Pelaksanaan <span style="color:red">*</span><br>
                                     <input class="form-control form-control-sm" type="date" name="tgl_pel" id="tgl_pel" required>
                                     <div class="text-xs font-italic text-danger blink b" id="err_tgl_pel"></div><br>
-                                    <a href="#" class="btn btn-success btn-sm tambah col" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>">
+                                    <a href="#" class="btn btn-success btn-sm tambah col">
                                         SIMPAN
                                     </a>
 
@@ -50,8 +50,14 @@
                                             showConfirmButton: false,
                                             backdrop: true
                                         });
-                                        var id = $(this).attr('id');
                                         var data_form = $("#form").serializeArray();
+                                        data_form.push({
+                                            name: "idu",
+                                            value: "<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>"
+                                        }, {
+                                            name: "idprkn",
+                                            value: "<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktikan['id_praktikan']))) ?>"
+                                        });
 
                                         var kompetensi = $('#kompetensi').val();
                                         var tgl_pel = $('#tgl_pel').val();
@@ -129,11 +135,12 @@
                                                             function() {
                                                                 $('#data_kep_kompetensi')
                                                                     .load(
-                                                                        "data_kep_kompetensi");
-                                                                $('#err_t_foto').empty();
-                                                                $("#form_t").trigger("reset");
+                                                                        "_praktikan/kep_kompetensiData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))); ?>")
+                                                                $('#err_kompetensi').empty();
+                                                                $('#err_tgl_pel').empty();
+                                                                $("#kompetensi").val("").trigger("change");
+                                                                $("#tgl_pel").val("");
                                                             }
-
                                                         );
                                                     }
                                                 },
