@@ -28,7 +28,7 @@ if ($_SESSION['status_user'] == "Y") {
 		$q_praktikan = $conn->query($sql_praktikan);
 		$d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
-		echo "<script>alert('-DATA PRAKTIKAN- $sql_praktikan');document.location.href='?error404';</script>";
+		echo "<script>alert('-DATA PRAKTIKAN-');document.location.href='?error404';</script>";
 	}
 ?>
 

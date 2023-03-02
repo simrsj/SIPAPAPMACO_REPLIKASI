@@ -14,21 +14,14 @@ if ($_SESSION['status_user'] == "Y") {
 
 	//data praktikan dan user 
 	try {
-		$sql_praktikan = "SELECT * FROM tb_praktikan ";
-		$sql_praktikan .= " JOIN tb_user ON tb_praktikan.id_user = tb_user.id_user";
-		$sql_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
-		$sql_praktikan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-		$sql_praktikan .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-		$sql_praktikan .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
-		$sql_praktikan .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
-		$sql_praktikan .= " JOIN tb_pembimbing_pilih ON tb_praktikan.id_praktikan = tb_pembimbing_pilih.id_praktikan";
-		$sql_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing";
+		$sql_praktikan = "SELECT * FROM tb_pembimbing ";
+		$sql_praktikan .= " JOIN tb_user ON tb_pembimbing.id_user = tb_user.id_user";
 		$sql_praktikan .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
 		// echo $sql_praktikan;
 		$q_praktikan = $conn->query($sql_praktikan);
-		$d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
+		$d_pembimbing = $q_praktikan->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
-		echo "<script>alert('-DATA PRAKTIKAN- $sql_praktikan');document.location.href='?error404';</script>";
+		echo "<script>alert('-DATA PEMBIMBING-');document.location.href='?error404';</script>";
 	}
 ?>
 
@@ -56,34 +49,20 @@ if ($_SESSION['status_user'] == "Y") {
 							<!-- Dropdown - User Information -->
 							<div class=" dropdown-menu scrollable-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
 
-								<?php if ($d_praktikan['id_jurusan_pdd'] == 1) { ?>
+								<?php if ($d_pembimbing['id_jurusan_pdd'] == 1) { ?>
 									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
-										Tatatertib
+										Penilaian Laporan Pendahuluan (LP)
 									</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrix-kegiatan">
 										Matrix Kegiatan
 									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="?matrix_keg">
-										<i class="fa-solid fa-table fa-sm fa-fw mr-2"></i>
-										Matrix Kegiatan
-									</a>
-								<?php } else if ($d_praktikan['id_jurusan_pdd'] == 2) { ?>
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
-										<img src="./_img/icongif/checklist.gif" width="15px" height="15px">
-										Tatatertib
+								<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
+									<a class="dropdown-item" href="?kep_penilaian">
+										<i class="fa-regular fa-pen-to-square"></i>
+										Penilaian Praktikan
 									</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrixkegiatan">
-										<img src="./_img/icongif/document.gif" width="15px" height="15px">
-										Matrix Kegiatan
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="?kep_kompetensi" style="transition: none; box-shadow: none;">
-										<img src="./_img/icongif/medicine.gif" width="15px" height="15px">
-										Kompetensi Keperawatan
-									</a>
 								<?php } ?>
 							</div>
 						</li>
@@ -91,16 +70,11 @@ if ($_SESSION['status_user'] == "Y") {
 						<!-- Nav Item - User -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-md-block text-gray-600 small"><?= $d_praktikan['nama_praktikan']; ?></span>
+								<span class="mr-2 d-none d-md-block text-gray-600 small"><?= $d_pembimbing['nama_pembimbing']; ?></span>
 								<i class="far fa-user"></i>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<!-- <a class="dropdown-item" href="?aku">
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									Pengaturan
-								</a> -->
-								<!-- <div class="dropdown-divider"></div> -->
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#log-out">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout
@@ -109,7 +83,6 @@ if ($_SESSION['status_user'] == "Y") {
 						</li>
 					</ul>
 				</nav>
-				<?php include "modal.php" ?>
 				<br>
 				<br>
 				<br>
@@ -119,106 +92,9 @@ if ($_SESSION['status_user'] == "Y") {
 					</div>
 				</div>
 				<div class="wrapper mb-4">
-					<?php if ($d_praktikan['pernyataan_praktikan'] == 'T') { ?>
-
-						<!-- Modal Tatatertib dan Pernyataan-->
-						<div class="modal fade" id="tatatertib" data-backdrop="static">
-							<div class="modal-dialog modal-xl  modal-dialog-scrollable" role="document">
-								<div class="modal-content">
-									<div class="modal-body" height="100%">
-										<?php
-										if ($d_praktikan['id_jurusan_pdd'] == 1) {
-											$jurusan = "ked";
-										} else if ($d_praktikan['id_jurusan_pdd'] == 2) {
-											$jurusan = "kep";
-										}
-										?>
-										<iframe src="./_file/<?= $jurusan ?>_tatatertib.pdf" width="100%" height="100%"></iframe>
-										<hr style="background-color: gray; height: 2px; border: 0;">
-										<div class="text-gray-900">
-											<div class="text-center h5 mb-4 b">SURAT PERNYATAAN</div>
-											Saya, mahasiswa peserta pendidikan klinis Ilmu Keperawatan Jiwa di RS Jiwa Provinsi Jawa Barat, yang bertanda tangan di bawah ini :
-											<div class="m-4">
-												<table>
-													<tr>
-														<td width="110px">Nama</td>
-														<td>: <?= $d_praktikan['nama_praktikan'] ?></td>
-													</tr>
-													<tr>
-														<td>NIM</td>
-														<td>: <?= $d_praktikan['no_id_praktikan'] ?></td>
-													</tr>
-													<tr>
-														<td>Universitas</td>
-														<td>: <?= $d_praktikan['nama_institusi'] ?></td>
-													</tr>
-													<tr>
-														<td>Periode Stase</td>
-														<td> : <?= tanggal($d_praktikan['tgl_mulai_praktik']) . " - " . tanggal($d_praktikan['tgl_selesai_praktik']) ?></td>
-													</tr>
-												</table>
-											</div>
-											Setelah membaca dan memahami tata tertib serta uraian tugas dan wewenang di bagian ilmu Keperawatan jiwa, saya berjanji akan mentaati peraturan yang berlaku sesuai yang tercantum. Jika saya terbukti melanggar aturan, amak saya bersedia dikenakan sangsi sesuai dengan aturan yang berlaku.
-										</div><br>
-										<div class="font-italic text-danger text-center text-sm ">dengan mengklik tombol dibawah anda <b>SETUJU</b> dengan mentaati peraturan yang berlaku sesuai yang tercantum</div>
-										<form id="form_pernyataan">
-											<input type="button" class="btn btn-outline-danger col pernyataan" value="SETUJU" name="pernyataan" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktikan['id_praktikan']))) ?>">
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-						<script>
-							$(document).ready(function() {
-								$('#tatatertib').modal('show');
-
-								$(".pernyataan").click(function() {
-
-									$.ajax({
-										type: 'POST',
-										url: "_praktikan/exc/x_pernyataan.php",
-										data: {
-											"id": $(this).attr('id'),
-											"pernyataan": 'Y',
-										},
-										dataType: 'json',
-										success: function(response) {
-											//ambil data file yang diupload
-											if (response.ket == "SETUJU") {
-
-												Swal.fire({
-													icon: 'success',
-													showConfirmButton: false,
-													html: '<span class"text-xs"><b>SURAT PERNYATAAN</b><br>DISETUJUI<br>' +
-														'<a href="?" class="btn btn-outline-primary">OK</a>',
-													timer: 5000,
-													timerProgressBar: true,
-													didOpen: (toast) => {
-														toast.addEventListener('mouseenter', Swal.stopTimer)
-														toast.addEventListener('mouseleave', Swal.resumeTimer)
-													}
-												}).then(
-													function() {
-														document.location.href = "?";
-													}
-												);
-											} else {
-												document.location.href = "?";
-											}
-										},
-										error: function(response) {
-											console.log(response.responseText);
-											alert('eksekusi query gagal');
-										}
-									});
-								});
-							});
-						</script>
-					<?php } else if ($d_praktikan['pernyataan_praktikan'] == 'Y') { ?>
-						<?php
-						include "_praktikan/index_data.php";
-						?>
-					<?php } ?>
+					<?php
+					include "_pembimbing/index_data.php";
+					?>
 				</div>
 				<footer class="footer sticky-footer bg-white">
 					<div class="container my-auto">

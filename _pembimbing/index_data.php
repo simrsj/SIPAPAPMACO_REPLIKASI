@@ -1,11 +1,11 @@
 <?php
 //akun dan hak akses 
-if (isset($_GET['kep_kompetensi'])) {
-	include "_praktikan/kep_kompetensi.php";
-} else if (isset($_GET['aku'])) {
-	include "_admin/view/v_akun.php";
+if (isset($_GET['kep_penilaian'])) {
+	include "_pembimbing/kep_penilaian.php";
+} elseif (isset($_GET['kep_nil_lap_pen'])) {
+	include "_pembimbing/kep_nil_lap_pen.php";
 }
 //data dashboard
 else {
-	include "_praktikan/dashboard_praktikan.php";
+	include "_pembimbing/dashboard_pembimbing.php";
 }
