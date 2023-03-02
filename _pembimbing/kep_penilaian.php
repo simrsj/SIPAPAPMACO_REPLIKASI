@@ -136,7 +136,7 @@
                                                                         <?php if ($r_kep_nil_lap_pen > 0) { ?>
                                                                         <?php } else { ?>
                                                                             <span class="badge badge-danger">Nilai Belum Ada</span><br>
-                                                                            <a href="?kep_nil_lap_pen" class="btn btn-outline-danger btn-sm">
+                                                                            <a href="?kep_nil_lap_pen&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
                                                                                 <i class="fa-regular fa-pen-to-square"></i>
                                                                             </a>
                                                                         <?php } ?>
