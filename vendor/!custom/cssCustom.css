@@ -65,6 +65,23 @@
   width:100% !important;
 }
 
+/* -------------------------------------------------------------- Footer */
+
+
+.wrapper {
+  min-height: calc(100vh - 100px); /* Adjust the height of the wrapper to account for the height of the footer */
+  padding-bottom: 60px; /* Set the padding-bottom equal to the height of the footer */
+  position: relative;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the height of the footer */
+}
+
+
 /* -------------------------------------------------------------- Fieldset, Legend */
 fieldset {
   min-width: 0;

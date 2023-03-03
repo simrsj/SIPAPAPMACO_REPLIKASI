@@ -14,7 +14,7 @@
                                 </div>
                                 <form class="user" method="post" id="form_login">
                                     <div class="form-group">
-                                        <input id='username_user' name='username_user' placeholder='Username' class="form-control" placeholder="Username">
+                                        <input id='username_user' name='username_user' placeholder='Email/Username' class="form-control">
                                         <div class="text-xs text-danger text-center i blink mb-2" id="err_username"></div>
                                     </div>
                                     <div class="form-group input-group mb-0">
@@ -74,7 +74,7 @@
 
             //Loading screen
             Swal.fire({
-                title: 'Mohon Ditunggu . . .',
+                title: 'Mohon Ditunggu',
                 // html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
                 html: '<div class="loader mb-5 mt-5 text-center"></div>',
                 allowOutsideClick: false,
@@ -167,6 +167,6 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <a href="panduan_aplikasi_sm.pdf" class="btn btn-danger" target="_blank">PANDUAN APLIKASI</a>
+        <!-- <a href="panduan_aplikasi_sm.pdf" class="btn btn-danger" target="_blank"> APLIKASI</a> -->
     </div>
 </div>

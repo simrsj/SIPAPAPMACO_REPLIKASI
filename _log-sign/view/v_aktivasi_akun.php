@@ -37,7 +37,7 @@ if (isset($_GET['act_user']) && isset($_GET['crypt'])) {
         $sql_u_aktivasi_privilages .= " d_praktikan = 'Y',";
         $sql_u_aktivasi_privilages .= " r_praktik_mess = 'Y',";
         $sql_u_aktivasi_privilages .= " r_praktik_pembimbing = 'Y',";
-        $sql_u_aktivasi_privilages .= " r_praktik_tarif = 'Y',";
+        // $sql_u_aktivasi_privilages .= " r_praktik_tarif = 'Y',";
         $sql_u_aktivasi_privilages .= " c_praktik_bayar = 'Y',";
         $sql_u_aktivasi_privilages .= " r_praktik_bayar = 'Y',";
         $sql_u_aktivasi_privilages .= " u_praktik_bayar = 'Y',";
@@ -87,7 +87,7 @@ if (isset($_GET['act_user']) && isset($_GET['crypt'])) {
     }
     //jika data akun aktivasi tidak ada di database
     else {
-        echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
+        // echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
     }
 } else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";

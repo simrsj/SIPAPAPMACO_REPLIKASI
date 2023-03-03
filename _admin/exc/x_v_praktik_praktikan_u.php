@@ -17,7 +17,7 @@ $sql .= " alamat_praktikan = '" . $_POST['u_alamat'] . "'";
 $sql .= " WHERE id_praktikan = " . $idpp;
 // echo $sql . "<br>";
 
-$dataJSON['idpp'] = bin2hex(urlencode(base64_encode($idpp)));
-$dataJSON['q'] = bin2hex(urlencode(base64_encode($sql)));
+$dataJSON['idpp'] = bin2hex(urlencode(base64_encode(date("Ymd") . "*sm*" . $idpp)));
+$dataJSON['q'] = bin2hex(urlencode(base64_encode(date("Ymd") . "*sm*" . $sql)));
 $dataJSON['ket'] = 'Y';
 echo json_encode($dataJSON);

@@ -1,5 +1,8 @@
 <?php
 if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
+    // echo "<pre>";
+    // echo print_r($_SESSION);
+    // echo "</pre>";
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -54,34 +57,29 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                             <?php
                             //Cari id_praktik
                             $no = 1;
-                            $sql = "SELECT id_praktik FROM tb_praktik ORDER BY id_praktik ASC";
+                            $sql = "SELECT MAX(id_praktik) AS ID FROM tb_praktik ORDER BY id_praktik ASC";
                             $q = $conn->query($sql);
-                            if ($q->rowCount() > 0) {
-                                while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
-                                    if ($no != $d['id_praktik']) {
-                                        break;
-                                    }
-                                    $no++;
-                                }
-                            }
-                            $id_praktik = $no;
+                            $d = $q->fetch(PDO::FETCH_ASSOC);
+                            $id_praktik = $d['ID'] + 1;
                             ?>
                             <input name="id" id="id" value="<?= urlencode(base64_encode($id_praktik)); ?>" hidden>
                             <input name="user" id="user" value="<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" hidden>
                             <div class="col-md">
                                 <?php if ($d_user['level_user'] == 2) {
                                     $sql_institusi = "SELECT * FROM tb_user";
-                                    $sql_institusi .= " JOIN tb_institusi ON tb_user.id_institusi = tb_institusi.id_institusi ASC";
-                                    $sql_institusi .= " WHERE tb_user.id_user ASC";
+                                    $sql_institusi .= " JOIN tb_institusi ON tb_user.id_institusi = tb_institusi.id_institusi";
+                                    $sql_institusi .= " WHERE tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
+                                    // echo $sql_institusi;
                                     $q_institusi = $conn->query($sql_institusi);
                                     $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
                                 ?>
+                                    Nama Institusi :
                                     <div class="b text-uppercase">
                                         <?php
-                                        $d_institusi['nama_institusi'];
+                                        echo $d_institusi['nama_institusi'];
                                         if ($d_institusi['akronim_institusi'] != "") echo " (" . $d_institusi['akronim_institusi'] . ")";
                                         ?>
-                                        <input name="institusi" id="institusi" value="<?= $d_institusi['id_institusi']; ?>" hidden>
+                                        <input name="institusi" id="institusi" value="<?= $_SESSION['id_institusi']; ?>" hidden>
                                     </div>
                                 <?php
                                 } else {
@@ -323,7 +321,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
         $("#simpan_praktik").click(function() {
 
             Swal.fire({
-                title: 'Mohon Ditunggu . . .',
+                title: 'Mohon Ditunggu',
                 html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-4 mt-4" width="100" height="100" />',
                 allowOutsideClick: false,
                 showConfirmButton: false,

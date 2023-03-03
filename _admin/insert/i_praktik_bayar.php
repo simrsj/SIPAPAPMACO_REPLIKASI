@@ -1,27 +1,25 @@
 <?php
 if (isset($_GET['pbyr']) && isset($_GET['i'])) {
 
-    //query data praktik
-    $sql_praktik = "SELECT * FROM tb_praktik ";
-    $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-    $sql_praktik .= " WHERE id_praktik = " . base64_decode(urldecode($_GET['pbyr']));
     try {
+        //query data praktik
+        $sql_praktik = "SELECT * FROM tb_praktik ";
+        $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+        $sql_praktik .= " WHERE id_praktik = " . base64_decode(urldecode($_GET['pbyr']));
         $q_praktik = $conn->query($sql_praktik);
         $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
     } catch (Exception $ex) {
-        echo "<script>alert('$ex -DATA PRAKTIK-');document.location.href='?error404';</script>";
+        echo "<script>alert('ERROR DATA PRAKTIK');document.location.href='?error404';</script>";
     }
 
-    //data tarif praktik
-    $sql_praktik_tarif = "SELECT * FROM tb_bayar";
-    $sql_praktik_tarif .= " WHERE id_praktik = '" . base64_decode(urldecode($_GET['pbyr'])) . "'";
-    // echo $id_praktik . "<br>";
-
     try {
+        //data tarif praktik
+        $sql_praktik_tarif = "SELECT * FROM tb_bayar";
+        $sql_praktik_tarif .= " WHERE id_praktik = '" . base64_decode(urldecode($_GET['pbyr'])) . "'";
+        // echo $id_praktik . "<br>";
         $q_praktik_tarif = $conn->query($sql_praktik_tarif);
     } catch (Exception $ex) {
-        echo "<script> alert('$ex -DATA BAYAR-'); ";
-        echo "document.location.href='?error404'; </script>";
+        echo "<script>alert('ERROR DATA BAYAR');document.location.href='?error404';</script>";
     }
 ?>
     <div class="container-fluid">
@@ -261,9 +259,7 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                         var file_invoice = $('#file_invoice').val();
 
                                                                         //cek data form modal download docx bila tidak diiisi
-                                                                        if (
-                                                                            file_invoice == ""
-                                                                        ) {
+                                                                        if (file_invoice == "") {
                                                                             // console.log("error data");
 
                                                                             const Toast = Swal.mixin({
@@ -376,12 +372,11 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
                                                                                 }
                                                                             }).then(
                                                                                 function() {
-                                                                                    // document.location.href = "?";
+                                                                                    document.location.href = "?pbyr=<?= $_GET['pbyr'] ?>&i";
                                                                                 }
                                                                             );
                                                                         }
                                                                     });
-
                                                                 <?php } ?>
                                                             </script>
                                                         </div>
@@ -531,9 +526,9 @@ if (isset($_GET['pbyr']) && isset($_GET['i'])) {
 
                                                         Unggah File : <span style="color:red">*</span><br>
                                                         <div class="custom-file">
-                                                            <label class="custom-file-label text-md" for="customFile" id="labelfileinput">Pilih File</label>
-                                                            <input type="file" class="custom-file-input" id="t_file" name="t_file" accept="application/pdf, image/jpg, image/png, image/jpeg" required>
-                                                            <span class='i text-xs'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 200 Kb</span><br>
+                                                            <label class="custom-file-label text-md " for="customFile" id="labelfileinput">Pilih File</label>
+                                                            <input type="file" class="custom-file-input mb-3" id="t_file" name="t_file" accept="application/pdf, image/jpg, image/png, image/jpeg" required>
+                                                            <div class='i text-xs'>Data unggah harus pdf/jpg/png/jpeg, Maksimal 200 Kb</div><br>
                                                             <div class="text-xs font-italic text-danger blink" id="err_t_file"></div><br>
                                                             <script>
                                                                 $('.custom-file-input').on('change', function() {

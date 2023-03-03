@@ -1,7 +1,4 @@
-var table = $("#dataTable").DataTable({
-  //   paging: false,
-  //   searching: false,
-});
+var table = $("#dataTable").DataTable();
 
 //hilangkan colom table
 $("a.toggle-vis").on("click", function (e) {
@@ -26,6 +23,8 @@ $("#table-search-each tfoot tr th").each(function () {
 
 //inisiasi baris search
 var table = $("#table-search-each").DataTable({
+  // processing: true,
+  // scrollX: true,
   initComplete: function () {
     // Apply the search
     this.api()

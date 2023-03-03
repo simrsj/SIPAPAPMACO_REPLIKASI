@@ -17,6 +17,9 @@
                 // $sql_praktik .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
                 $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
                 $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' ";
+                if ($d_prvl['level_user'] == 2) {
+                    $sql_praktik .= " AND tb_praktik.id_institusi = " . $d_prvl['id_institusi'];
+                }
                 $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
                 // echo $sql_praktik . "<br>";
                 try {
@@ -26,58 +29,58 @@
                     echo "document.location.href='?error404';</script>";
                 }
                 $r_praktik = $q_praktik->rowCount();
-
-                if ($r_praktik > 0) {
-                    while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
-
-                        $sql_mess_pilih = "SELECT * FROM tb_mess_pilih";
-                        $sql_mess_pilih .= " WHERE id_praktik =  " . $d_praktik['id_praktik'];
-                        // echo $sql_mess_pilih . "<br>";
-                        try {
-                            $q_mess_pilih = $conn->query($sql_mess_pilih);
-                            $r_mess_pilih = $q_mess_pilih->rowCount();
-                        } catch (Exception $ex) {
-                            echo "<script>alert('$ex -DATA MESS PILIH-');";
-                            echo "document.location.href='?error404';</script>";
-                        }
-                        if ($d_praktik['status_mess_praktik'] == 'T' || $r_mess_pilih > 0) {
                 ?>
-                            <div id="accordion<?= md5($d_praktik['id_praktik']) ?>">
-                                <div class="card">
-                                    <div class="card-header align-items-center bg-gray-200">
-                                        <div class="row" style="font-size: small;">
-                                            <br><br>
-                                            <div class="col-sm-4 text-center m-auto">
-                                                <?php if ($_SESSION['level_user'] == 1) { ?>
-                                                    <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?><br>
-                                                <?php } ?>
-                                                <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?= $d_praktik['nama_praktik']; ?>
-                                            </div>
-                                            <div class="col-sm-2 text-center">
-                                                <b class="text-gray-800">TANGGAL MULAI : </b><br><?= tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
-                                                <b class="text-gray-800">TANGGAL SELESAI : </b><br><?= tanggal($d_praktik['tgl_selesai_praktik']); ?>
-                                            </div>
-                                            <div class="col-sm-2 text-center">
-                                                <b class="text-gray-800">JURUSAN : </b><br><?= $d_praktik['nama_jurusan_pdd']; ?><br>
-                                                <b class="text-gray-800">JENJANG : </b><br><?= $d_praktik['nama_jenjang_pdd']; ?>
-                                            </div>
-                                            <div class="col-sm-2 text-center">
-                                                <b class="text-gray-800">PROFESI : </b><br><?= $d_praktik['nama_profesi_pdd']; ?><br>
-                                                <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?= $d_praktik['jumlah_praktik']; ?>
-                                            </div>
-                                            <!-- tombol aksi/info proses  -->
-                                            <div class="col-sm-2 my-auto text-right">
-                                                <!-- tombol rincian -->
-                                                <a class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#rincian<?= md5($d_praktik['id_praktik']); ?>" title="Rincian">
-                                                    <i class="fas fa-info-circle"></i> Rincian Data
-                                                </a>
-                                            </div>
+                <?php if ($r_praktik > 0) { ?>
+                    <?php while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) { ?>
+                        <div id="accordion<?= md5($d_praktik['id_praktik']) ?>">
+                            <div class="card">
+                                <div class="card-header align-items-center bg-gray-200">
+                                    <div class="row" style="font-size: small;">
+                                        <br><br>
+                                        <div class="col-sm-4 text-center m-auto">
+                                            <?php if ($_SESSION['level_user'] == 1) { ?>
+                                                <b class="text-gray-800">INSTITUSI : </b><br><?= $d_praktik['nama_institusi']; ?><br>
+                                            <?php } ?>
+                                            <b class="text-gray-800">GELOMBANG/KELOMPOK : </b><br><?= $d_praktik['nama_praktik']; ?>
+                                        </div>
+                                        <div class="col-sm-2 text-center">
+                                            <b class="text-gray-800">TANGGAL MULAI : </b><br><?= tanggal($d_praktik['tgl_mulai_praktik']); ?><br>
+                                            <b class="text-gray-800">TANGGAL SELESAI : </b><br><?= tanggal($d_praktik['tgl_selesai_praktik']); ?>
+                                        </div>
+                                        <div class="col-sm-2 text-center">
+                                            <b class="text-gray-800">JURUSAN : </b><br><?= $d_praktik['nama_jurusan_pdd']; ?><br>
+                                            <b class="text-gray-800">JENJANG : </b><br><?= $d_praktik['nama_jenjang_pdd']; ?>
+                                        </div>
+                                        <div class="col-sm-2 text-center">
+                                            <b class="text-gray-800">PROFESI : </b><br><?= $d_praktik['nama_profesi_pdd']; ?><br>
+                                            <b class="text-gray-800">JUMLAH PRAKTIKAN : </b><br><?= $d_praktik['jumlah_praktik']; ?>
+                                        </div>
+                                        <!-- tombol aksi/info proses  -->
+                                        <div class="col-sm-2 my-auto text-right">
+                                            <!-- tombol rincian -->
+                                            <a class="btn btn-info btn-sm collapsed" data-toggle="collapse" data-target="#rincian<?= md5($d_praktik['id_praktik']); ?>" title="Rincian">
+                                                <i class="fas fa-info-circle"></i> Rincian Data
+                                            </a>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <!-- collapse data praktikan -->
-                                    <div id="rincian<?= md5($d_praktik['id_praktik']); ?>" class="collapse" data-parent="#accordion<?= md5($d_praktik['id_praktik']) ?>">
-                                        <div class="card-body " style="font-size: medium;">
+                                <!-- collapse data praktikan -->
+                                <div id="rincian<?= md5($d_praktik['id_praktik']); ?>" class="collapse" data-parent="#accordion<?= md5($d_praktik['id_praktik']) ?>">
+                                    <div class="card-body " style="font-size: medium;">
+                                        <?php
+                                        $sql_mess_pilih = "SELECT * FROM tb_mess_pilih";
+                                        $sql_mess_pilih .= " WHERE id_praktik = " . $d_praktik['id_praktik'];
+                                        // echo $sql_mess_pilih . "<br>";
+                                        try {
+                                            $q_mess_pilih = $conn->query($sql_mess_pilih);
+                                            $r_mess_pilih = $q_mess_pilih->rowCount();
+                                        } catch (Exception $ex) {
+                                            echo "<script> alert('$ex -DATA MESS PILIH-');";
+                                            echo "document.location.href='?error404';</script>";
+                                        }
+                                        ?>
+                                        <?php if ($d_praktik['status_mess_praktik'] == 'T' || $r_mess_pilih > 0) { ?>
                                             <!-- data praktikan -->
                                             <div class="text-gray-700 row mb-0">
                                                 <div class="col">
@@ -207,7 +210,7 @@
                                                 $(document).ready(function() {
 
                                                     Swal.fire({
-                                                        title: 'Mohon Ditunggu . . .',
+                                                        title: 'Mohon Ditunggu',
                                                         html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                         allowOutsideClick: false,
                                                         showConfirmButton: false,
@@ -238,7 +241,7 @@
                                                     console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
 
                                                     Swal.fire({
-                                                        title: 'Mohon Ditunggu . . .',
+                                                        title: 'Mohon Ditunggu',
                                                         html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                         allowOutsideClick: false,
                                                         showConfirmButton: false,
@@ -273,7 +276,7 @@
                                                 $(document).on('click', '.tambah<?= md5($d_praktik['id_praktik']); ?>', function() {
 
                                                     Swal.fire({
-                                                        title: 'Mohon Ditunggu . . .',
+                                                        title: 'Mohon Ditunggu',
                                                         html: '<div class="loader mb-5 mt-5 text-center"></div>',
                                                         allowOutsideClick: false,
                                                         showConfirmButton: false,
@@ -458,19 +461,22 @@
 
                                                                     var fileFoto = document.getElementById("t_foto<?= md5($d_praktik['id_praktik']); ?>").files;
                                                                     data_file.append("t_foto", fileFoto[0]);
-                                                                    var fileIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files;
-                                                                    data_file.append("t_ijazah", fileIjazah[0]);
+                                                                    <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
+                                                                        var fileIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files;
+                                                                        data_file.append("t_ijazah", fileIjazah[0]);
+                                                                    <?php } ?>
                                                                     var fileSwab = document.getElementById("t_swab<?= md5($d_praktik['id_praktik']); ?>").files;
                                                                     data_file.append("t_swab", fileSwab[0]);
 
                                                                     data_file.append("q", response.q);
                                                                     data_file.append("idpp", response.idpp);
+                                                                    data_file.append("profesi", "<?= bin2hex(urlencode(base64_encode(date("Ymd") . "*sm*" . $d_praktik['id_profesi_pdd']))) ?>");
                                                                     data_file.append("idp", idp);
 
                                                                     xhttp.open("POST", "_admin/exc/x_v_praktik_praktikan_sFile.php", true);
 
                                                                     xhttp.onload = function() {
-                                                                        if (xhttp.response == "<?= base64_decode(urldecode(hex2bin("size"))) ?>") {
+                                                                        if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("size"))) ?>") {
                                                                             console.log("size too big");
                                                                             Swal.fire({
                                                                                 allowOutsideClick: true,
@@ -481,7 +487,7 @@
                                                                                 timer: 5000,
                                                                                 timerProgressBar: true
                                                                             });
-                                                                        } else if (xhttp.response == "<?= base64_decode(urldecode(hex2bin("type"))) ?>") {
+                                                                        } else if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("type"))); ?>") {
                                                                             console.log("Tipe Different");
                                                                             Swal.fire({
                                                                                 allowOutsideClick: true,
@@ -561,21 +567,24 @@
                                                     }
                                                 });
                                             </script>
-                                        </div>
+                                        <?php } else { ?>
+                                            <div class="jumbotron">
+                                                <div class="jumbotron-fluid">
+                                                    <div class="text-gray-700">
+                                                        <h5 class="text-center">Mess Belum Dipilih Admin</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
-                            <hr class="bg-gray-800">
-                    <?php
-                        }
-                    }
-                } else {
-                    ?>
+                        </div>
+                        <hr class="bg-gray-800">
+                    <?php } ?>
+                <?php } else { ?>
                     <h3 class='text-center'> Data Pendaftaran Praktikan Anda Tidak Ada</h3>
-                <?php
-                }
-                ?>
-
+                <?php } ?>
             </div>
         </div>
     </div>

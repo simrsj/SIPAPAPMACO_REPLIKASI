@@ -13,6 +13,7 @@
             <?php } ?>
         </div>
         <div class="card shadow mb-4">
+            <div class="loader mt-5 text-center"></div>
             <div class="card-body">
                 <div id="data_praktik"></div>
             </div>
@@ -21,7 +22,8 @@
     <script>
         $('#data_praktik')
             .load(
-                "_admin/view/v_praktikData.php?&idu=<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>");
+                "_admin/view/v_praktikData.php?&idu=<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>"
+            );
     </script>
 <?php } else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";

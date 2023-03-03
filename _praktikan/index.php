@@ -2,351 +2,105 @@
 if ($_SESSION['status_user'] == "Y") {
 
 	//data user 
-	$sql_user = "SELECT * FROM tb_user WHERE id_user=" . $_SESSION['id_user'];
 	try {
+		$sql_user = "SELECT * FROM tb_user WHERE id_user=" . $_SESSION['id_user'];
+		// echo $sql_user;
 		$q_user = $conn->query($sql_user);
+		$d_user = $q_user->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
 		echo "<script>alert('$ex -DATA PRIVILEGES-');";
 		echo "document.location.href='?error404';</script>";
 	}
-	$d_user = $q_user->fetch(PDO::FETCH_ASSOC);
 
-	//data privileges 
-	$sql_prvl = "SELECT * FROM tb_user_privileges ";
-	$sql_prvl .= " JOIN tb_user ON tb_user_privileges.id_user = tb_user.id_user";
-	$sql_prvl .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
+	//data praktikan dan user 
 	try {
-		$q_prvl = $conn->query($sql_prvl);
+		$sql_praktikan = "SELECT * FROM tb_praktikan ";
+		$sql_praktikan .= " JOIN tb_user ON tb_praktikan.id_user = tb_user.id_user";
+		$sql_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
+		$sql_praktikan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+		$sql_praktikan .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+		$sql_praktikan .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+		$sql_praktikan .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+		$sql_praktikan .= " JOIN tb_pembimbing_pilih ON tb_praktikan.id_praktikan = tb_pembimbing_pilih.id_praktikan";
+		$sql_praktikan .= " JOIN tb_pembimbing ON tb_pembimbing_pilih.id_pembimbing = tb_pembimbing.id_pembimbing";
+		$sql_praktikan .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
+		// echo $sql_praktikan;
+		$q_praktikan = $conn->query($sql_praktikan);
+		$d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
-		echo "<script>alert('$ex -DATA PRIVILEGES-');";
-		echo "document.location.href='?error404';</script>";
+		echo "<script>alert('-DATA PRAKTIKAN-');document.location.href='?error404';</script>";
 	}
-	$d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 ?>
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-		<!-- Sidebar -->
-		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="?">
-				<img src="./_img/rsj.svg" width="28" />
-				<div class="sidebar-brand-text mx-3">SIPAPAP MACO</div>
-			</a>
-			<?php if ($_SESSION['level_user'] == 1) { ?>
-				<!-- Test -->
-				<li class="nav-item ">
-					<a class="nav-link" href="?test">
-						<i class="fas fa-fw fa-bug"></i>
-						<span>Testing</span></a>
-				</li>
-			<?php } ?>
-			<li class="nav-item ">
-				<a class="nav-link" href="?">
-					<i class="fas fa-fw fa-tachometer-alt"></i>
-					<span>Dashboard</span></a>
-			</li>
-			<?php if ($_SESSION['level_user'] != 3) { ?>
-				<hr class="sidebar-divider">
-				<div class="sidebar-heading">
-					Kediklatan
-				</div>
-
-				<!-- Informasi -->
-				<li class="nav-item ">
-					<a class="nav-link" href="?info_diklat">
-						<i class="fas fa-fw fa-info-circle"></i>
-						<span>Informasi</span>
-					</a>
-				</li>
-
-				<?php if ($d_prvl['level_user'] == 1) { ?>
-					<!-- Kuota -->
-					<li class="nav-item ">
-						<a class="nav-link" href="?kta">
-							<i class="far fa-fw fa-circle"></i>
-							<span>Kuota</span>
-						</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-							<i class="fas fa-fw fa-table"></i>
-							<span>Data Pendukung</span>
-						</a>
-						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-							<div class="bg-white py-2 collapse-inner rounded">
-								<h6 class="collapse-header">Daftar Data Pendukung :</h6>
-								<a class="collapse-item" href="?ins">
-									<i class="fas fa-fw fa-university"></i>
-									<span>Institusi</span>
-								</a>
-								<a class="collapse-item" href="?d_pmbb">
-									<i class="fas fa-fw fa-portrait"></i>
-									<span>Mentor/Pembimbing</span>
-								</a>
-								<a class="collapse-item" href="?mes">
-									<i class="fas fa-fw fa-bed"></i>
-									<span>Mess/Pemondokan</span>
-								</a>
-								<a class="collapse-item" href="?mou">
-									<i class="fas fa-fw fa-handshake"></i>
-									<span>MoU</span>
-								</a>
-								<a class="collapse-item" href="?trf">
-									<i class="fas fa-fw fa-money-bill-wave"></i>
-									<span>Tarif</span>
-								</a>
-								<a class="collapse-item" href="?tmp">
-									<i class="fas fa-school"></i>
-									<span>Tempat</span>
-								</a>
-								<a class="collapse-item" href="?uni">
-									<i class="fas fa-fw fa-house-user"></i>
-									<span>Unit</span>
-								</a>
-							</div>
-						</div>
-					</li>
-				<?php } ?>
-
-				<?php if ($d_prvl['r_praktik'] == "Y") { ?>
-					<!-- Praktik -->
-					<li class="nav-item" style=" word-wrap: break-word;">
-						<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse_prk" aria-expanded="true" aria-controls="collapse_prk">
-							<i class="fa-solid fa-fw fa-user-graduate"></i>
-							<span>Praktik</span>
-						</a>
-						<div id="collapse_prk" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-							<div class="bg-white py-2 collapse-inner rounded">
-								<?php if ($d_prvl['r_praktik'] == "Y") { ?>
-									<a class="collapse-item" href="?ptk">
-										<i class="fas fa-envelope"></i>
-										<span>Daftar Pengajuan</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktikan'] == "Y") { ?>
-									<!-- Praktikan -->
-									<a class="collapse-item" href="?ptkn">
-										<i class="far fa-fw fa-address-book"></i>
-										<span>Data Praktikan</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktik_pembimbing'] == "Y") { ?>
-									<a class="collapse-item" href="?pmbb">
-										<i class="fas fa-fw fa-users"></i>
-										<span>Pembimbing-Ruangan</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktik_tarif'] == "Y") { ?>
-									<a class="collapse-item" href="?ptrf">
-										<i class="fas fa-fw fa-receipt"></i>
-										<span>Tarif Praktik</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktik_bayar'] == "Y") { ?>
-									<a class="collapse-item" href="?pbyr">
-										<i class="fas fa-fw fa-wallet"></i>
-										<span>Data Pembayaran</span>
-									</a>
-								<?php } ?>
-								<?php if ($d_prvl['r_praktik_nilai'] == "Y") { ?>
-									<a class="collapse-item" href="?pnilai">
-										<i class="fas fa-fw fa-clipboard-list"></i>
-										<span>Data Nilai</span>
-									</a>
-								<?php } ?>
-							</div>
-						</div>
-					</li>
-				<?php } ?>
-				<?php if ($d_prvl['r_praktik'] == "Y") { ?>
-					<li class="nav-item ">
-						<a class="nav-link" href="?pars">
-							<i class="fas fa-fw fa-archive"></i>
-							<span>Arsip Praktik</span>
-						</a>
-					</li>
-				<?php } ?>
-			<?php } ?>
-			<hr class="sidebar-divider">
-			<?php if ($d_prvl['r_pkd'] == "Y") { ?>
-				<!-- Pemakaian Kekayaan Daerah (PKD) -->
-				<div class="sidebar-heading text-center">
-					Pemakaian Kekayaan Daerah
-				</div>
-
-				<li class="nav-item ">
-					<a class="nav-link" href="?pkd">
-						<i class="fas fa-fw fa-person-chalkboard"></i>
-						<span>Pengajuan</span>
-					</a>
-				</li>
-			<?php } ?>
-			<!-- <hr class="sidebar-divider">
-			<li class="nav-item ">
-				<a class="nav-link" href="http://192.168.7.89/kuesioner/login.php" target="_blank">
-					<i class="fas fa-fw fa-list-ul"></i>
-					<span>Survey</span>
-				</a>
-			</li> -->
-			<hr class="sidebar-divider">
-			<div class="sidebar-heading">
-				Data
-			</div>
-
-			<?php if ($_SESSION['level_user'] == 1) { ?>
-				<li class="nav-item">
-					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseLap" aria-expanded="true" aria-controls="collapseOne">
-						<i class="far fa-fw fa-file-alt"></i>
-						<span>Laporan</span>
-					</a>
-					<div id="collapseLap" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">Daftar Data Laporan :</h6>
-							<a class="collapse-item" href="_print/p_mou.php" target="_blank">
-								<i class="fas fa-fw fa-table"></i>
-								<span>Laporan MOU</span>
-							</a>
-							<a class="collapse-item" href="_print/p_pembimbing.php" target="_blank">
-								<i class="fas fa-fw fa-table"></i>
-								<span>Laporan Pembimbing</span>
-							</a>
-
-							<a class="collapse-item" href="_print/p_mess.php" target="_blank">
-								<i class="fas fa-fw fa-table"></i>
-								<span>Laporan Mess</span>
-
-						</div>
-					</div>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-						<i class="fas fa-fw fa-database"></i>
-						<span>Basis Data</span>
-					</a>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">Daftar Basis Data :</h6>
-							<a class="collapse-item" href="?akr">
-								<i class="fas fa-fw fa-award"></i>
-								<span>Akreditasi</span>
-							</a>
-							<a class="collapse-item" href="?jjg">
-								<i class="fas fa-fw fa-table"></i>
-								<span>Jenjang Pendidikan</span>
-							</a>
-							<a class="collapse-item" href="?jrs">
-								<i class="fas fa-fw fa-table"></i>
-								<span>Jurusan Pendidikan</span>
-							</a>
-							<a class="collapse-item" href="?pfs">
-								<i class="fas fa-fw fa-table"></i>
-								<span>Profesi Pendidikan</span>
-							</a>
-						</div>
-					</div>
-				</li>
-			<?php } ?>
-
-			<!-- Pengaturan Akun -->
-			<?php if ($d_prvl['r_akun'] == "Y") { ?>
-				<li class="nav-item">
-					<a class="nav-link" href="?aku">
-						<i class="fas fa-fw fa-user-cog"></i>
-						<span>Pengaturan Akun</span>
-					</a>
-				</li>
-			<?php } ?>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
-
-			<!-- Sidebar Toggler (Sidebar) -->
-			<div class="text-center d-none d-md-inline">
-				<button class="rounded-circle border-0" id="sidebarToggle"></button>
-			</div>
-			<!-- <div class="sidebar-card">
-				<i class="fas fa-3x fa-exclamation-circle"></i>
-				<p class="text-center mb-2">Bila terjadi kesalahan <br><strong>(<i>ERROR</i>)</strong><br> <strong>LAPORKAN</strong> dengan meng-klik tombol dibawah ini</p>
-				<a class="btn btn-success btn-sm" href="?lapor">Lapor !</a>
-			</div> -->
-		</ul>
-		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
 
 			<!-- Main Content -->
 			<div id="content">
-				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-					<!-- Sidebar Toggle (Topbar) -->
-					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-						<i class="fa fa-bars"></i>
-					</button>
-
+				<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar  static-top shadow">
+					<a class="text-decoration-none " href="?">
+						<img src="./_img/rsj.svg" width="28" />
+						<span class="text-primary b m-2 ">SIPAPAP MACO</span>
+					</a>
 					<!-- Topbar Navbar -->
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item dropdown no-arrow mx-1">
-							<!-- <a class="nav-link dropdown-toggle" href="#" id="notifikasi" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-bell fa-fw"></i>
-								<span class="badge badge-danger badge-counter">3+</span>
-							</a> -->
-							<!-- Dropdown - Alerts -->
-							<div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-xl shadow animated--grow-in" aria-labelledby="notifikasi">
-								<h6 class="dropdown-header">
-									Notifikasi </h6>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-primary">
-											<i class="fas fa-file-alt text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 12, 2019</div>
-										<span class="font-weight-bold">A new monthly report is ready to download!</span>
-									</div>
-								</a>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-success">
-											<i class="fas fa-donate text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 7, 2019</div>
-										$290.29 has been deposited into your account!
-									</div>
-								</a>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-warning">
-											<i class="fas fa-exclamation-triangle text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 2, 2019</div>
-										Spending Alert: We've noticed unusually high spending for your account.
-									</div>
-								</a>
-								<a class="dropdown-item text-center small text-gray-800 font-weight-bold" href="#">Lihat Semua Notifikasi</a>
+					<ul class="navbar-nav ml-auto ">
+						<!-- Nav Item - Menu 3 Bar -->
+						<li class="nav-item dropdown no-arrow  my-auto align-middle">
+							<a class="nav-item dropdown-toggle d-flex btn btn-outline-primary btn-sm" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<div class="d-none d-md-block">Menu &nbsp;</div>
+								<div class="fa fa-bars my-auto"></div>
+							</a>
+							<!-- Dropdown - User Information -->
+							<div class=" dropdown-menu scrollable-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
+
+								<?php if ($d_praktikan['id_jurusan_pdd'] == 1) { ?>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
+										Tatatertib
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrix-kegiatan">
+										Matrix Kegiatan
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="?matrix_keg">
+										<i class="fa-solid fa-table fa-sm fa-fw mr-2"></i>
+										Matrix Kegiatan
+									</a>
+								<?php } else if ($d_praktikan['id_jurusan_pdd'] == 2) { ?>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
+										<img src="./_img/icongif/checklist.gif" width="15px" height="15px">
+										Tatatertib
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrixkegiatan">
+										<img src="./_img/icongif/document.gif" width="15px" height="15px">
+										Matrix Kegiatan
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="?kep_kompetensi" style="transition: none; box-shadow: none;">
+										<img src="./_img/icongif/medicine.gif" width="15px" height="15px">
+										Kompetensi Keperawatan
+									</a>
+								<?php } ?>
 							</div>
 						</li>
-						<div class="topbar-divider d-none d-sm-block"></div>
-						<!-- Nav Item - User Information -->
+						<div class="topbar-divider"></div>
+						<!-- Nav Item - User -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['nama_user']; ?></span>
+								<span class="mr-2 d-none d-md-block text-gray-600 small"><?= $d_praktikan['nama_praktikan']; ?></span>
 								<i class="far fa-user"></i>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="?aku">
+								<!-- <a class="dropdown-item" href="?aku">
 									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 									Pengaturan
-								</a>
-								<div class="dropdown-divider"></div>
+								</a> -->
+								<!-- <div class="dropdown-divider"></div> -->
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#log-out">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout
@@ -355,183 +109,145 @@ if ($_SESSION['status_user'] == "Y") {
 						</li>
 					</ul>
 				</nav>
+				<?php include "modal.php" ?>
+				<br>
+				<br>
+				<br>
+				<div class="container text-center ">
+					<div class="badge badge-primary b">
+						<?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span>
+					</div>
+				</div>
+				<div class="wrapper mb-4">
+					<?php if ($d_praktikan['pernyataan_praktikan'] == 'T') { ?>
 
-				<!-- Logout Modal-->
-				<div class="modal fade" id="log-out" tabindex="-1" role="dialog" aria-labelledby="log-out" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Yakin Keluar?</h5>
-								<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
-							<div class="modal-footer">
-								<button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-								<a class="btn btn-danger" href="?lo">Ya</a>
+						<!-- Modal Tatatertib dan Pernyataan-->
+						<div class="modal fade" id="tatatertib" data-backdrop="static">
+							<div class="modal-dialog modal-xl  modal-dialog-scrollable" role="document">
+								<div class="modal-content">
+									<div class="modal-body" height="100%">
+										<?php
+										if ($d_praktikan['id_jurusan_pdd'] == 1) {
+											$jurusan = "ked";
+										} else if ($d_praktikan['id_jurusan_pdd'] == 2) {
+											$jurusan = "kep";
+										}
+										?>
+										<iframe src="./_file/<?= $jurusan ?>_tatatertib.pdf" width="100%" height="100%"></iframe>
+										<hr style="background-color: gray; height: 2px; border: 0;">
+										<div class="text-gray-900">
+											<div class="text-center h5 mb-4 b">SURAT PERNYATAAN</div>
+											Saya, mahasiswa peserta pendidikan klinis Ilmu Keperawatan Jiwa di RS Jiwa Provinsi Jawa Barat, yang bertanda tangan di bawah ini :
+											<div class="m-4">
+												<table>
+													<tr>
+														<td width="110px">Nama</td>
+														<td>: <?= $d_praktikan['nama_praktikan'] ?></td>
+													</tr>
+													<tr>
+														<td>NIM</td>
+														<td>: <?= $d_praktikan['no_id_praktikan'] ?></td>
+													</tr>
+													<tr>
+														<td>Universitas</td>
+														<td>: <?= $d_praktikan['nama_institusi'] ?></td>
+													</tr>
+													<tr>
+														<td>Periode Stase</td>
+														<td> : <?= tanggal($d_praktikan['tgl_mulai_praktik']) . " - " . tanggal($d_praktikan['tgl_selesai_praktik']) ?></td>
+													</tr>
+												</table>
+											</div>
+											Setelah membaca dan memahami tata tertib serta uraian tugas dan wewenang di bagian ilmu Keperawatan jiwa, saya berjanji akan mentaati peraturan yang berlaku sesuai yang tercantum. Jika saya terbukti melanggar aturan, amak saya bersedia dikenakan sangsi sesuai dengan aturan yang berlaku.
+										</div><br>
+										<div class="font-italic text-danger text-center text-sm ">dengan mengklik tombol dibawah anda <b>SETUJU</b> dengan mentaati peraturan yang berlaku sesuai yang tercantum</div>
+										<form id="form_pernyataan">
+											<input type="button" class="btn btn-outline-danger col pernyataan" value="SETUJU" name="pernyataan" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktikan['id_praktikan']))) ?>">
+										</form>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
+						<script>
+							$(document).ready(function() {
+								$('#tatatertib').modal('show');
+
+								$(".pernyataan").click(function() {
+
+									$.ajax({
+										type: 'POST',
+										url: "_praktikan/exc/x_pernyataan.php",
+										data: {
+											"id": $(this).attr('id'),
+											"pernyataan": 'Y',
+										},
+										dataType: 'json',
+										success: function(response) {
+											//ambil data file yang diupload
+											if (response.ket == "SETUJU") {
+
+												Swal.fire({
+													icon: 'success',
+													showConfirmButton: false,
+													html: '<span class"text-xs"><b>SURAT PERNYATAAN</b><br>DISETUJUI<br>' +
+														'<a href="?" class="btn btn-outline-primary">OK</a>',
+													timer: 5000,
+													timerProgressBar: true,
+													didOpen: (toast) => {
+														toast.addEventListener('mouseenter', Swal.stopTimer)
+														toast.addEventListener('mouseleave', Swal.resumeTimer)
+													}
+												}).then(
+													function() {
+														document.location.href = "?";
+													}
+												);
+											} else {
+												document.location.href = "?";
+											}
+										},
+										error: function(response) {
+											console.log(response.responseText);
+											alert('eksekusi query gagal');
+										}
+									});
+								});
+							});
+						</script>
+					<?php } else if ($d_praktikan['pernyataan_praktikan'] == 'Y') { ?>
+						<?php
+						include "_praktikan/index_data.php";
+						?>
+					<?php } ?>
 				</div>
-				<?php
-				//akun dan hak akses 
-				if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
-					if (isset($_GET['ha']) && $_SESSION['level_user'] == 1)
-						include "_admin/view/v_akun_hak_akses.php";
-					else
-						include "_admin/view/v_akun.php";
-				}
-				//arsip praktik
-				elseif (isset($_GET['pars'])) {
-					if (isset($_GET['dp'])) include "_admin/view/v_praktik_arsip_dataPraktik.php";
-					else include "_admin/view/v_praktik_arsip.php";
-				} elseif (isset($_GET['akr'])) {
-					include "_admin/view/v_akreditasi.php";
-				}
-				//menu informasi dan jadwal praktik
-				elseif (isset($_GET['info_diklat'])) include "_admin/view/v_info_diklat.php";
-				elseif (isset($_GET['ins'])) {
-					if (isset($_GET['i'])) {
-						include "_admin/insert/i_institusi.php";
-					} elseif (isset($_GET['u'])) {
-						include "_admin/update/u_institusi.php";
-					} elseif (isset($_GET['d'])) {
-						include "_admin/delete/d_institusi.php";
-					} elseif (isset($_GET['val'])) {
-						include "_admin/view/v_institusi_val.php";
-					} else {
-						include "_admin/view/v_institusi.php";
-					}
-				} elseif (isset($_GET['jrs'])) {
-					include "_admin/view/v_jurusan.php";
-				} elseif (isset($_GET['jjg'])) {
-					include "_admin/view/v_jenjang.php";
-				}
-				//kuota praktik
-				elseif (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') include "_admin/view/v_kuota.php";
-				elseif (isset($_GET['lapor'])) {
-					if (isset($_GET['dtl'])) {
-						include "_admin/view/v_lapor_detail.php";
-					} else {
-						include "_admin/view/v_lapor.php";
-					}
-				} elseif (isset($_GET['mes'])) {
-					include "_admin/view/v_mess.php";
-				} elseif (isset($_GET['mou'])) {
-					if (isset($_GET['i'])) {
-						include "_admin/insert/i_mou.php";
-					} elseif (isset($_GET['u'])) {
-						include "_admin/update/u_mou.php";
-					} elseif (isset($_GET['a'])) {
-						include "_admin/view/v_mou_arsip.php";
-					} else {
-						include "_admin/view/v_mou.php";
-					}
-				}
-				//daftar data pemibimbing
-				elseif (isset($_GET['d_pmbb']) && $d_prvl['r_daftar_pembimbing'] == 'Y') {
-					if (isset($_GET['detail']))
-						include "_admin/view/v_daftarPembimbingDetail.php";
-					else
-						include "_admin/view/v_daftarPembimbing.php";
-				}
-				//praktik
-				else if (isset($_GET['ptk']) && $d_prvl['r_praktik'] == 'Y') {
-					if (isset($_GET['i']) && $d_prvl['c_praktik'] == 'Y') include "_admin/insert/i_praktik.php";
-					elseif (isset($_GET['m_i']) && $d_prvl['c_praktik_mess'] == 'Y') include "_admin/insert/i_praktik_mess.php";
-					elseif (isset($_GET['m_u']) && $d_prvl['u_praktik_mess'] == 'Y') include "_admin/update/u_praktik_mess.php";
-					else include "_admin/view/v_praktik.php";
-				}
-				//praktikan
-				else if (isset($_GET['ptkn']) && $d_prvl['r_praktikan'] == 'Y') {
-					if (isset($_GET['i']) && $d_prvl['c_praktikan'] == 'Y') include "_admin/insert/i_praktik_praktikan.php";
-					else if (isset($_GET['u']) && $d_prvl['u_praktikan'] == 'Y') include "_admin/view/u_praktikan.php";
-					else include "_admin/view/v_praktik_praktikan.php";
-				}
-				//praktik pemibimbing
-				else if (isset($_GET['pmbb']) && $d_prvl['r_praktik_pembimbing'] == 'Y') {
-					if (isset($_GET['i'])) include "_admin/insert/i_praktik_pembimbing.php";
-					else include "_admin/view/v_praktik_pembimbing.php";
-				}
-				//praktik tarif
-				elseif (isset($_GET['ptrf'])) {
-					if (isset($_GET['i']) && $d_prvl['c_praktik_tarif'] == 'Y') include "_admin/insert/i_praktik_tarif.php";
-					else include "_admin/view/v_praktik_tarif.php";
-				}
-				//praktik bayar
-				elseif (isset($_GET['pbyr'])) {
-					if (isset($_GET['i']) && $d_prvl['c_praktik_bayar'] == 'Y') include "_admin/insert/i_praktik_bayar.php";
-					else include "_admin/view/v_praktik_bayar.php";
-				}
-				//praktik nilai
-				elseif (isset($_GET['pnilai'])) {
-					if (isset($_GET['i']) && isset($_GET['pmbb'])) include "_admin/insert/i_praktik_nilaiKep.php";
-					elseif (isset($_GET['u']) && isset($_GET['pmbb'])) include "_admin/update/u_praktik_nilaiKep.php";
-					elseif (isset($_GET['upi']) && isset($_GET['pmbb'])) include "_admin/insert/i_praktik_nilai_upload.php";
-					elseif (isset($_GET['upu']) && isset($_GET['pmbb']) && isset($_GET['idnu'])) include "_admin/update/u_praktik_nilai_upload.php";
-					else include "_admin/view/v_praktik_nilai.php";
-				} elseif (isset($_GET['pfs'])) {
-					include "_admin/view/v_profesi.php";
-				} elseif (isset($_GET['uni'])) {
-					include "_admin/view/v_unit.php";
-				} elseif (isset($_GET['tmp'])) {
-					include "_admin/view/v_tempat.php";
-				} elseif (isset($_GET['trf'])) {
-					include "_admin/view/v_tarif.php";
-				} elseif (isset($_GET['trs'])) {
-					if (isset($_GET['dtl'])) {
-						include "_admin/view/v_transaksi_detail.php";
-					} else {
-						include "_admin/view/v_transaksi.php";
-					}
-				}
-				//PKD
-				elseif (isset($_GET['pkd']) && $d_prvl['r_pkd'] == 'Y') {
-					if (isset($_GET['i']) && $d_prvl['c_pkd'] == 'Y')
-						include "_admin/insert/i_pkd.php";
-					else if (isset($_GET['u']) && $d_prvl['u_pkd'] == 'Y')
-						include "_admin/update/u_pkd.php";
-					else if (isset($_GET['pkdt']) && $d_prvl['c_pkd'] == 'Y')
-						include "_admin/view/v_pkd_tarif.php";
-					else
-						include "_admin/view/v_pkd.php";
-				}
-				//testing 
-				elseif (isset($_GET['test']))
-					include "test.php";
-				//data dashboard
-				else {
-					if ($_SESSION['level_user'] == 1)
-						include "_admin/dashboard_admin.php";
-					else if ($_SESSION['level_user'] == 2)
-						include "_admin/dashboard_ip.php";
-					else if ($_SESSION['level_user'] == 3)
-						include "_admin/dashboard_admin_pkd.php";
-				}
-				?>
+				<footer class="footer sticky-footer bg-white">
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>RS Jiwa Provinsi Jawa Barat <?= date('Y'); ?></span>
+						</div>
+					</div>
+				</footer>
 			</div>
-			<!-- End of Main Content -->
-
-			<!-- Footer -->
-			<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>RS Jiwa Provinsi Jawa Barat <?= date('Y'); ?></span>
-					</div>
-				</div>
-			</footer>
-			<!-- End of Footer -->
-
 		</div>
-		<!-- End of Content Wrapper -->
 
 	</div>
-	<!-- End of Page Wrapper -->
-
-	<!-- Scroll to Top Button-->
 	<a class="scroll-to-top rounded" href="#page-top">
 		<i class="fas fa-angle-up"></i>
 	</a>
+
+	<script>
+		var span = document.getElementById("jam");
+		time();
+
+		function time() {
+			var d = new Date();
+			var s = formattedNumber = ("0" + d.getSeconds()).slice(-2);
+			var m = formattedNumber = ("0" + d.getMinutes()).slice(-2);
+			var h = formattedNumber = ("0" + d.getHours()).slice(-2);
+			span.textContent = h + ":" + m + ":" + s;
+		}
+		setInterval(time, 1000);
+	</script>
 <?php
 } else {
 ?>

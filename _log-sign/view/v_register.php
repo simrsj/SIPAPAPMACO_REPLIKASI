@@ -102,7 +102,7 @@
         } else if (idins != 0) {
             $('#institusi_lainnya').html('');
         }
-        console.log(idins);
+        // console.log(idins);
         // }
     });
 
@@ -165,6 +165,19 @@
             }
         });
 
+
+
+        //cek Pasword
+        if (password != password_ulangi) {
+            $("#err_password").html("Password Tidak Sama");
+            $("#err_password_ulangi").html("Password Tidak Sama");
+
+            await Toast.fire({
+                icon: 'error',
+                title: 'Password Tidak Sama',
+            });
+        }
+
         //cek data from bila tidak diiisi
         if (
             institusi == "" ||
@@ -173,7 +186,8 @@
             email == "" ||
             telp == "" ||
             password == "" ||
-            password_ulangi == ""
+            password_ulangi == "" ||
+            password != password_ulangi
         ) {
 
             if (institusi == "" || institusi == undefined) $("#err_institusi").html("Institusi Harus Dipilih");
@@ -198,127 +212,118 @@
                 icon: 'warning',
                 title: 'Data Ada yang Belum Terisi',
             });
-        }
-
-        //cek Pasword
-        if (password != password_ulangi) {
-            $("#err_password").html("Password Tidak Sama");
-            $("#err_password_ulangi").html("Password Tidak Sama");
-
-            await Toast.fire({
-                icon: 'error',
-                title: 'Password Tidak Sama',
-            });
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: "_log-sign/exc/x_cekAkunEmail.php",
-            data: {
-                'email': email
-            },
-            dataType: 'JSON',
-            success: function(response) {
-                Swal.fire({
-                    title: 'Mohon Ditunggu . . .',
-                    html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />' +
-                        '  <p>Harap Tunggu</p>',
-                    // add html attribute if you want or remove
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                    onBeforeOpen: () => {
-                        Swal.showLoading()
-                    },
-                });
-                if (response.ket == 'Y') {
-                    console.log('Email Sudah Ada');
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: "_log-sign/exc/x_cekAkunEmail.php",
+                data: {
+                    'email': email
+                },
+                dataType: 'JSON',
+                success: function(response) {
                     Swal.fire({
+                        title: 'Mohon Ditunggu',
+                        html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />' +
+                            '  <p>Harap Tunggu</p>',
+                        // add html attribute if you want or remove
                         allowOutsideClick: false,
-                        // isDismissed: false,
-                        icon: 'warning',
-                        html: '<div class="b ">Email :' + email + ' <br>Sudah Ada</div><hr>Silahkan ' +
-                            '<a href="?login" class="btn btn-outline-primary">Login</a>',
                         showConfirmButton: false,
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
+                        backdrop: true,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                        },
                     });
-                    $("#err_email").html("Email Sudah Ada");
-                } else if (response.ket == 'T') {
-                    console.log('Email Belum Ada');
-
-                    //simpan data registrasi bila sudah sesuai
-                    if (
-                        institusi != "" &&
-                        institusi != undefined &&
-                        nama != "" &&
-                        email != "" &&
-                        telp != "" &&
-                        password == password_ulangi
-                    ) {
-                        $.ajax({
-                            type: 'POST',
-                            url: "_log-sign/exc/x_register.php",
-                            data: data_reg,
-                            dataType: 'JSON',
-                            success: function(response) {
-                                data_reg.push({
-                                    name: "idu",
-                                    value: response.idu
-                                });
-                                $.ajax({
-                                    type: 'POST',
-                                    url: "_log-sign/exc/x_register_emailAct.php",
-                                    data: data_reg,
-                                    dataType: 'JSON',
-                                    success: function(response) {
-
-                                        $('#err_institusi').empty();
-
-                                        if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
-
-                                        $('#err_nama').empty();
-                                        $('#err_email').empty();
-                                        $('#err_telp').empty();
-                                        $('#err_password').empty();
-                                        $('#err_password_ulangi').empty();
-                                        $("#form_reg").trigger("reset");
-                                        $("#institusi").val("").trigger("change");
-
-                                        Swal.fire({
-                                            icon: 'success',
-                                            html: '<div class="b ">Registrasi Berhasil</div><hr>' +
-                                                'Silahkan Lakukan Aktivasi di Kotak Masuk Email : <br><b>' + email + '</b>',
-                                            showConfirmButton: false,
-                                            timer: 10000,
-                                            timerProgressBar: true,
-                                            didOpen: (toast) => {
-                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            }
-                                        }).then(function() {
-                                            document.location.href = "?login";
-                                        });
-                                    }
-                                });
-                            },
-                            error: function(response) {
-                                console.log(response);
+                    if (response.ket == 'Y') {
+                        console.log('Email Sudah Ada');
+                        Swal.fire({
+                            allowOutsideClick: false,
+                            backdrop: true,
+                            // isDismissed: false,
+                            icon: 'warning',
+                            html: '<div class="b ">Email :' + email + ' <br>Sudah Ada</div><hr>Silahkan ' +
+                                '<a href="?login" class="btn btn-outline-primary">Login</a>',
+                            showConfirmButton: false,
+                            timer: 10000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
                             }
                         });
-                    }
+                        $("#err_email").html("Email Sudah Ada");
+                    } else if (response.ket == 'T') {
+                        console.log('Email Belum Ada');
 
-                    console.log("registrasi berhasil");
-                } else {
-                    console.log("ERROR");
+                        //simpan data registrasi bila sudah sesuai
+                        if (
+                            institusi != "" &&
+                            institusi != undefined &&
+                            nama != "" &&
+                            email != "" &&
+                            telp != "" &&
+                            password == password_ulangi
+                        ) {
+                            $.ajax({
+                                type: 'POST',
+                                url: "_log-sign/exc/x_register.php",
+                                data: data_reg,
+                                dataType: 'JSON',
+                                success: function(response) {
+                                    data_reg.push({
+                                        name: "idu",
+                                        value: response.idu
+                                    });
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "_log-sign/exc/x_register_emailAct.php",
+                                        data: data_reg,
+                                        dataType: 'JSON',
+                                        success: function(response) {
+
+                                            $('#err_institusi').empty();
+
+                                            if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
+
+                                            $('#err_nama').empty();
+                                            $('#err_email').empty();
+                                            $('#err_telp').empty();
+                                            $('#err_password').empty();
+                                            $('#err_password_ulangi').empty();
+                                            $("#form_reg").trigger("reset");
+                                            $("#institusi").val("").trigger("change");
+
+                                            Swal.fire({
+                                                icon: 'success',
+                                                html: '<div class="b ">Registrasi Berhasil</div><hr>' +
+                                                    'Silahkan Lakukan Aktivasi di Kotak Masuk Email : <br><b>' + email + '</b>',
+                                                showConfirmButton: false,
+                                                timer: 10000,
+                                                timerProgressBar: true,
+                                                didOpen: (toast) => {
+                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                }
+                                            }).then(function() {
+                                                document.location.href = "?login";
+                                            });
+                                        }
+                                    });
+                                },
+                                error: function(response) {
+                                    console.log(response);
+                                }
+                            });
+                        }
+
+                        console.log("registrasi berhasil");
+                    } else {
+                        console.log("ERROR");
+                    }
+                },
+                error: function(response) {
+                    console.log(response);
                 }
-            },
-            error: function(response) {
-                console.log(response);
-            }
-        });
+            });
+        }
     });
 </script>
