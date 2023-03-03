@@ -1,15 +1,13 @@
 <?php if ($_SESSION['level_user'] == 4) { ?>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-10">
-                <h1 class="h3 mb-2 text-gray-800">Form Penilaian Laporan Pendahuluan (LP)</h1>
-            </div>
-        </div>
+
+        <!-- data praktik dan praktikan  -->
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="row" style="font-size: small;" class="justify-content-center">
-
                     <?php
+                    $exp_arr_idprkn = explode("*sm*", base64_decode(urldecode(hex2bin($_GET['idprkn']))));
+                    $idprkn = $exp_arr_idprkn[1];
                     try {
                         $sql_praktik = "SELECT * FROM tb_praktik ";
                         $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
@@ -22,7 +20,7 @@
                         $sql_praktik .= " JOIN tb_pembimbing ON tb_pembimbing.id_pembimbing = tb_pembimbing_pilih.id_pembimbing ";
                         $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' ";
                         $sql_praktik .= " AND tb_pembimbing.id_pembimbing = " . $d_pembimbing['id_pembimbing'];
-                        $sql_praktik .= " AND tb_praktikan.id_praktikan = " . $id_praktikan;
+                        $sql_praktik .= " AND tb_praktikan.id_praktikan = " . $idprkn;
                         $sql_praktik .= " GROUP BY tb_praktikan.id_praktik";
                         $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
                         // echo "$sql_praktik<br>";
@@ -53,7 +51,175 @@
                 </div>
             </div>
         </div>
+        <!-- Input nilai  -->
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                Form Penilaian Laporan Pendahuluan (LP)
+            </div>
+            <div class="card-body">
+                <div class="table-responsive-md">
+                    <form action="?x_kep_nil_lap_pen">
+                        <table class="table table-bordered ">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th width="12px">No</th>
+                                    <th>ASPEK YANG DINILAI</th>
+                                    <th colspan="4">NILAI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="b text-center table-secondary">
+                                    <td>A</td>
+                                    <td>ISI</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Lengkap</td>
+                                    <td>
+                                        <input type="radio" class="form-radio" name="A1" value="1">
+                                    </td>
+                                    <td>
+                                        <input type="radio" class="form-radio" name="A1" value="2">
+                                    </td>
+                                    <td>
+                                        <input type="radio" class="form-radio" name="A1" value="3">
+                                    </td>
+                                    <td>
+                                        <input type="radio" class="form-radio" name="A1" value="4">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Sistematika Benar</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Waktu Pengumpulan Tepat</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Bukan Repetisi dan Plagiasi</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6"></td>
+                                </tr>
+                                <tr class="b text-center table-secondary">
+                                    <td>B</td>
+                                    <td>RESPONSI LP</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mampu menguraikan pengertian</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Mampu menguraikan faktor penyebab</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Mampu menjelaskan proses terjadinya masalah</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Mampu menyebutkan masalah Keperawatan jiwa yang Muncul</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Mampu menjelaskan tindakan Keperawatan jiwa</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Mampu menyebutkan tindakan dalam aplikasi (contoh kalimat langsung)</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6"></td>
+                                </tr>
+                                <tr class="b text-center table-secondary">
+                                    <td>C</td>
+                                    <td>REFERENSI</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Pustaka yang digunakan 10 tahun terakhir</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Pustaka relevan dengan keperawatan jiwa</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Menggunakan lebih dari 3 referensi text book</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <input type="submit" value="SIMPAN" class="col btn btn-success btn-sm">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 <?php } else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
 }
+?>
