@@ -93,6 +93,24 @@ include "_add-ons/tanggal_waktu.php";
     <script src="vendor/chart.js/Chart.js"></script>
     <script src="vendor/!custom/jsCustom.js"> </script>
     <script>
+        window.top == window &&
+            window.console &&
+            (setTimeout(
+                    console.log.bind(
+                        console,
+                        "%c%s",
+                        "color: white; background: blue; font-size: 20px;",
+                        " SIPAPAP MACO "
+                    )
+                ),
+                setTimeout(
+                    console.log.bind(
+                        console,
+                        "%c%s",
+                        "font-size: 14px;",
+                        "(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)  "
+                    )
+                ));
         <?php
         // include "./vendor/!custom/disable_keyboard.js";
         include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
@@ -103,10 +121,6 @@ include "_add-ons/tanggal_waktu.php";
                 return false; // do nothing!
             }
         });
-    </script>
-
-
-    <script>
     </script>
 </body>
 
