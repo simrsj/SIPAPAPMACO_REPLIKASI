@@ -54,9 +54,10 @@ if ($_SESSION['status_user'] == "Y") {
 								<div class="fa fa-bars my-auto"></div>
 							</a>
 							<!-- Dropdown - User Information -->
-							<div class=" dropdown-menu scrollable-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
+							<div class="dropdown-menu dropdown-menu-right shadow p-2 rounded animated--grow-in" aria-labelledby="menu">
 
 								<?php if ($d_praktikan['id_jurusan_pdd'] == 1) { ?>
+									<!-- Menu dokter  -->
 									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
 										Tatatertib
 									</a>
@@ -70,18 +71,18 @@ if ($_SESSION['status_user'] == "Y") {
 										Matrix Kegiatan
 									</a>
 								<?php } else if ($d_praktikan['id_jurusan_pdd'] == 2) { ?>
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
-										<img src="./_img/icongif/checklist.gif" width="15px" height="15px">
-										Tatatertib
+									<!-- Menu Keperawatan  -->
+									<a href="./_file/kep_tatatertib.pdf" class=" text-left btn btn-danger btn-sm col mb-2" target="_blank">
+										<i class="fa-solid fa-users-rectangle fa-fw mr-2"></i>
+										Tata Tertib
 									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrixkegiatan">
-										<img src="./_img/icongif/document.gif" width="15px" height="15px">
+									<a href="./_file/kep_martrix_keg.pdf" class="text-left  btn btn-danger btn-sm col" target="_blank">
+										<i class="fa-solid fa-table-cells fa-fw mr-2"></i>
 										Matrix Kegiatan
 									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="?kep_kompetensi" style="transition: none; box-shadow: none;">
-										<img src="./_img/icongif/medicine.gif" width="15px" height="15px">
+									<div class="dropdown-divider text-dark border-1"></div>
+									<a class="dropdown-item bg-success rounded text-light" href="?kep_kompetensi">
+										<i class="fa-solid fa-user-nurse fa-fw mr-2"></i>
 										Kompetensi Keperawatan
 									</a>
 								<?php } ?>
@@ -108,51 +109,7 @@ if ($_SESSION['status_user'] == "Y") {
 							</div>
 						</li>
 					</ul>
-				</nav><?php if ($d_praktikan['id_jurusan_pdd'] == 1) { ?>
-					<!-- Modal Tatatertib dan Pernyataan-->
-					<div class="modal fade" id="tatatertib">
-						<div class="modal-dialog modal-xl" role="document">
-							<div class="modal-content" style="height: 500px;">
-								<div class="modal-body">
-									<iframe src="./_file/ked_tatatertib.pdf" width="100%" height="100%"></iframe>
-								</div>
-							</div>
-						</div>
-					</div>
-				<?php } else if ($d_praktikan['id_jurusan_pdd'] == 2) { ?>
-					<!-- Modal Tatatertib dan Pernyataan-->
-					<div class="modal fade" id="tatatertib">
-						<div class="modal-dialog modal-xl" role="document">
-							<div class="modal-content" style="height: 500px;">
-								<div class="modal-header">
-									Tatatertib
-									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">×</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<iframe src="./_file/kep_tatatertib.pdf" width="100%" height="100%"></iframe>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Modal Matrix Kegiatan-->
-					<div class="modal fade" id="matrixkegiatan">
-						<div class="modal-dialog modal-xl" role="document">
-							<div class="modal-content" style="height: 500px;">
-								<div class="modal-header">
-									Matrix Kegiatans
-									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">×</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<iframe src="./_file/kep_martrix_keg.pdf" width="100%" height="100%"></iframe>
-								</div>
-							</div>
-						</div>
-					</div>
-				<?php } ?>
+				</nav>
 
 				<!-- Logout Modal-->
 				<div class="modal fade" id="log-out">

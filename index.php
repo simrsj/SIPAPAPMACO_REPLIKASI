@@ -99,7 +99,7 @@ include "_add-ons/tanggal_waktu.php";
                     console.log.bind(
                         console,
                         "%c%s",
-                        "color: white; background: blue; font-size: 20px;",
+                        "color: white; background: #4e73df; font-size: 20px;",
                         " SIPAPAP MACO "
                     )
                 ),
