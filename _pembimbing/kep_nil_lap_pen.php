@@ -58,9 +58,9 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive-md">
-                    <form action="?x_kep_nil_lap_pen">
-                        <table class="table table-bordered ">
-                            <thead class="table-dark text-center">
+                    <form action="?x_kep_nil_lap_pen" method="post">
+                        <table class="table table-bordered " id="dataTable">
+                            <thead class="thead-dark text-center">
                                 <tr>
                                     <th width="12px">No</th>
                                     <th>ASPEK YANG DINILAI</th>
@@ -68,6 +68,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- A  -->
                                 <tr class="b text-center table-secondary">
                                     <td>A</td>
                                     <td>ISI</td>
@@ -80,45 +81,150 @@
                                     <td>1</td>
                                     <td>Lengkap</td>
                                     <td>
-                                        <input type="radio" class="form-radio" name="A1" value="1">
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A1" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
                                     </td>
                                     <td>
-                                        <input type="radio" class="form-radio" name="A1" value="2">
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A1" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
                                     </td>
                                     <td>
-                                        <input type="radio" class="form-radio" name="A1" value="3">
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A1" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
                                     </td>
                                     <td>
-                                        <input type="radio" class="form-radio" name="A1" value="4">
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A1" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>Sistematika Benar</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A2" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A2" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A2" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A2" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>Waktu Pengumpulan Tepat</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A3" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A3" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A3" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A3" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>Bukan Repetisi dan Plagiasi</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A4" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A4" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A4" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="A4" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="6"></td>
                                 </tr>
+                                <!-- B  -->
                                 <tr class="b text-center table-secondary">
                                     <td>B</td>
                                     <td>RESPONSI LP</td>
@@ -130,54 +236,223 @@
                                 <tr>
                                     <td>1</td>
                                     <td>Mampu menguraikan pengertian</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B1" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B1" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B1" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B1" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>Mampu menguraikan faktor penyebab</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B2" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B2" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B2" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B2" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>Mampu menjelaskan proses terjadinya masalah</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B3" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B3" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B3" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B3" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>Mampu menyebutkan masalah Keperawatan jiwa yang Muncul</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B4" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B4" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B4" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B4" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
                                     <td>Mampu menjelaskan tindakan Keperawatan jiwa</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B5" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B5" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B5" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B5" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
                                     <td>Mampu menyebutkan tindakan dalam aplikasi (contoh kalimat langsung)</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B6" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B6" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B6" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="B6" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="6"></td>
                                 </tr>
+                                <!-- C -->
                                 <tr class="b text-center table-secondary">
                                     <td>C</td>
                                     <td>REFERENSI</td>
@@ -189,26 +464,109 @@
                                 <tr>
                                     <td>1</td>
                                     <td>Pustaka yang digunakan 10 tahun terakhir</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C1" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C1" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C1" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C1" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>Pustaka relevan dengan keperawatan jiwa</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C2" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C2" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C2" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C2" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 <tr>
                                     <td>3</td>
                                     <td>Menggunakan lebih dari 3 referensi text book</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C3" value="1" required>
+                                                <span class="boxed-check-label">1</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C3" value="2" required>
+                                                <span class="boxed-check-label">2</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C3" value="3" required>
+                                                <span class="boxed-check-label">3</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="boxed-check-group boxed-check-success boxed-check-sm text-center">
+                                            <label class="boxed-check">
+                                                <input class="boxed-check-input" type="radio" name="C3" value="4" required>
+                                                <span class="boxed-check-label">4</span>
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

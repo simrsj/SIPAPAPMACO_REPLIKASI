@@ -35,7 +35,7 @@
   .boxed-check
   .boxed-check-input:not(:disabled)
   + .boxed-check-label:hover {
-  border-color: #198754;
+  border-color: #1cc88a;
 }
 .boxed-check-group
   .boxed-check
@@ -117,14 +117,14 @@
   .boxed-check
   .boxed-check-input:not(:disabled)
   + .boxed-check-label:hover {
-  border-color: #198754;
+  border-color: #1cc88a;
   background-color: #fff;
 }
 .boxed-check-group.boxed-check-outline-default
   .boxed-check
   .boxed-check-input:checked
   + .boxed-check-label::before {
-  border-color: #198754;
+  border-color: #1cc88a;
 }
 .boxed-check-group.boxed-check-primary
   .boxed-check
@@ -210,7 +210,7 @@
   .boxed-check-input:checked
   + .boxed-check-label {
   color: #fff;
-  background-color: #198754;
+  background-color: #1cc88a;
 }
 .boxed-check-group.boxed-check-success
   .boxed-check
@@ -232,7 +232,7 @@
   .boxed-check
   .boxed-check-input:not(:disabled)
   + .boxed-check-label:hover {
-  border-color: #198754;
+  border-color: #1cc88a;
 }
 .boxed-check-group.boxed-check-danger
   .boxed-check
