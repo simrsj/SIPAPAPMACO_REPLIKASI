@@ -58,7 +58,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive-md">
-                    <form action="?x_kep_nil_lap_pen_s" method="post">
+                    <form action="?x_i_kep_nil_lap_pen" method="post">
                         <input type="hidden" name="idprkn" value="<?= $_GET['idprkn'] ?>" required readonly>
                         <input type="hidden" name="idp" value="<?= $_GET['idp'] ?>" required readonly>
                         <table class="table table-bordered " id="dataTable">
