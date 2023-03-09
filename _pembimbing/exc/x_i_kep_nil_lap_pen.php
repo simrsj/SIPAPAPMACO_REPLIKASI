@@ -44,7 +44,7 @@ try {
     $sql_insert .= " )";
     // echo $sql_insert . "<br>";
     $conn->query($sql_insert);
-    echo "<script>document.location.href='?kep_penilaian&ket=" . bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "SUCCESS"))) . "#rincian" . $_POST['idp'] . "';</script>";
+    echo "<script>document.location.href='?kep_penilaian&ket=" . bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "TAMBAH"))) . "#rincian" . $_POST['idp'] . "';</script>";
 
     // $dataJSON['ket'] = "Y";
 } catch (PDOException $e) {
