@@ -1,16 +1,16 @@
 <div class="card bg-light text-black shadow m-2">
     <div class="card-body">
-        <div class="position-fixed">
+        <div class="toast-container position-fixed bottom-0 right-0">
 
             <!-- Create the toast message -->
-            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="5000" id="toast_success">
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="10000" id="toast_success">
 
                 <!-- Create the toast header -->
                 <div class="toast-header  bg-success text-light">
                     <strong class="mr-auto">ERROR</strong>
-                    <!-- <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button> -->
+                    </button>
                 </div>
 
                 <!-- Create the toast body -->
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <!-- Create the toast message -->
-            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="5000" id="toast_danger">
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="10000" id="toast_danger">
 
                 <!-- Create the toast header -->
                 <div class="toast-header  bg-danger text-light">
@@ -50,7 +50,7 @@
                     ERRRO CUY
                 </div>
             </div>
-        </div>
+        </div><br><br><br><br><br><br><br><br><br><br><br>
     </div>
 </div>
 <script>
