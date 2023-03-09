@@ -347,50 +347,60 @@
                                 <tr>
                                     <?php
                                     if ($d_kep_nil_lap_pen['B5'] == 1)
-                                        $B4_1 = "checked";
+                                        $B5_1 = "checked";
                                     else if ($d_kep_nil_lap_pen['B5'] == 2)
-                                        $B4_2 = "checked";
+                                        $B5_2 = "checked";
                                     else if ($d_kep_nil_lap_pen['B5'] == 3)
-                                        $B4_3 = "checked";
+                                        $B5_3 = "checked";
                                     else if ($d_kep_nil_lap_pen['B5'] == 4)
-                                        $B4_4 = "checked";
+                                        $B5_4 = "checked";
                                     ?>
                                     <td>5</td>
                                     <td>Mampu menjelaskan tindakan Keperawatan jiwa</td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="B5" value="1" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="B5" value="1" style="width: 30px;  height: 30px;" <?= $B5_1 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="B5" value="2" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="B5" value="2" style="width: 30px;  height: 30px;" <?= $B5_2 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="B5" value="3" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="B5" value="3" style="width: 30px;  height: 30px;" <?= $B5_3 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="B5" value="4" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="B5" value="4" style="width: 30px;  height: 30px;" <?= $B5_4 ?> required>
 
                                     </td>
                                 </tr>
                                 <tr>
+                                    <?php
+                                    if ($d_kep_nil_lap_pen['B6'] == 1)
+                                        $B6_1 = "checked";
+                                    else if ($d_kep_nil_lap_pen['B6'] == 2)
+                                        $B6_2 = "checked";
+                                    else if ($d_kep_nil_lap_pen['B6'] == 3)
+                                        $B6_3 = "checked";
+                                    else if ($d_kep_nil_lap_pen['B6'] == 4)
+                                        $B6_4 = "checked";
+                                    ?>
                                     <td>6</td>
                                     <td>Mampu menyebutkan tindakan dalam aplikasi (contoh kalimat langsung)</td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="B6" value="1" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="B6" value="1" style="width: 30px;  height: 30px;" <?= $B6_1 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="B6" value="2" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="B6" value="2" style="width: 30px;  height: 30px;" <?= $B6_2 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="B6" value="3" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="B6" value="3" style="width: 30px;  height: 30px;" <?= $B6_3 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="B6" value="4" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="B6" value="4" style="width: 30px;  height: 30px;" <?= $B6_4 ?> required>
 
                                     </td>
                                 </tr>
@@ -407,61 +417,93 @@
                                     <td>4</td>
                                 </tr>
                                 <tr>
+
+                                    <?php
+                                    if ($d_kep_nil_lap_pen['C1'] == 1)
+                                        $C1_1 = "checked";
+                                    else if ($d_kep_nil_lap_pen['C1'] == 2)
+                                        $C1_2 = "checked";
+                                    else if ($d_kep_nil_lap_pen['C1'] == 3)
+                                        $C1_3 = "checked";
+                                    else if ($d_kep_nil_lap_pen['C1'] == 4)
+                                        $C1_4 = "checked";
+                                    ?>
                                     <td>1</td>
                                     <td>Pustaka yang digunakan 10 tahun terakhir</td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C1" value="1" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C1" value="1" style="width: 30px;  height: 30px;" <?= $C1_1 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C1" value="2" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C1" value="2" style="width: 30px;  height: 30px;" <?= $C1_2 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C1" value="3" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C1" value="3" style="width: 30px;  height: 30px;" <?= $C1_3 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C1" value="4" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C1" value="4" style="width: 30px;  height: 30px;" <?= $C1_4 ?> required>
 
                                     </td>
                                 </tr>
                                 <tr>
+
+                                    <?php
+                                    if ($d_kep_nil_lap_pen['C2'] == 1)
+                                        $C2_1 = "checked";
+                                    else if ($d_kep_nil_lap_pen['C2'] == 2)
+                                        $C2_2 = "checked";
+                                    else if ($d_kep_nil_lap_pen['C2'] == 3)
+                                        $C2_3 = "checked";
+                                    else if ($d_kep_nil_lap_pen['C2'] == 4)
+                                        $C2_4 = "checked";
+                                    ?>
                                     <td>2</td>
                                     <td>Pustaka relevan dengan keperawatan jiwa</td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C2" value="1" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C2" value="1" style="width: 30px;  height: 30px;" <?= $C2_1 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C2" value="2" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C2" value="2" style="width: 30px;  height: 30px;" <?= $C2_2 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C2" value="3" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C2" value="3" style="width: 30px;  height: 30px;" <?= $C2_3 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C2" value="4" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C2" value="4" style="width: 30px;  height: 30px;" <?= $C2_4 ?> required>
 
                                     </td>
                                 <tr>
+                                    <?php
+                                    if ($d_kep_nil_lap_pen['C3'] == 1)
+                                        $C3_1 = "checked";
+                                    else if ($d_kep_nil_lap_pen['C3'] == 2)
+                                        $C3_2 = "checked";
+                                    else if ($d_kep_nil_lap_pen['C3'] == 3)
+                                        $C3_3 = "checked";
+                                    else if ($d_kep_nil_lap_pen['C3'] == 4)
+                                        $C3_4 = "checked";
+                                    ?>
                                     <td>3</td>
                                     <td>Menggunakan lebih dari 3 referensi text book</td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C3" value="1" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C3" value="1" style="width: 30px;  height: 30px;" <?= $C3_1 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C3" value="2" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C3" value="2" style="width: 30px;  height: 30px;" <?= $C3_2 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C3" value="3" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C3" value="3" style="width: 30px;  height: 30px;" <?= $C3_3 ?> required>
 
                                     </td>
                                     <td class="text-center">
-                                        <input class="boxed-check-input" type="radio" name="C3" value="4" style="width: 30px;  height: 30px;" required>
+                                        <input class="boxed-check-input" type="radio" name="C3" value="4" style="width: 30px;  height: 30px;" <?= $C4_4 ?> required>
 
                                     </td>
                                 </tr>

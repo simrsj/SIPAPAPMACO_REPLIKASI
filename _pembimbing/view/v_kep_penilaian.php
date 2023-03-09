@@ -1,5 +1,21 @@
 <?php if ($_SESSION['level_user'] == 4) { ?>
     <div class="container-fluid">
+        <div class="toast-container position-fixed bottom-0 right-0">
+
+            <!-- Create the toast message -->
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="10000" id="toast_success">
+
+                <!-- Create the toast header -->
+                <div class="toast-header  bg-success text-light">
+                    <strong class="mr-auto">ERROR</strong>
+                </div>
+
+                <!-- Create the toast body -->
+                <div class="toast-body">
+                    ERRRO CUY
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-10">
                 <h1 class="h3 mb-2 text-gray-800">Daftar Bimbingan Praktik</h1>
