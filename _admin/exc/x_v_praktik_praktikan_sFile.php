@@ -2,7 +2,7 @@
 // error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // echo "<pre>" . print_r($_FILES) . "</pre>";
-// echo "<pre>" . print_r($_POST) . "</pre>";base64_decode(urldecode(hex2bin()))
+// echo "<pre>" . print_r($_POST) . "</pre>";
 
 $exp_arr_idpp = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idpp']))));
 $idpp = $exp_arr_idpp[1];
@@ -17,27 +17,58 @@ if (!is_dir($alamat_unggah)) {
 }
 
 //cek data kesesuaian file tambah
-if ($_FILES['t_swab']['size'] > (1024 * 256) || $_FILES['t_foto']['size'] > (1024 * 256)) {
+
+//FILE WAJIB t_swab SIZE
+// if ($_FILES['t_swab']['size'] > (1024 * 256) || $_FILES['t_foto']['size'] > (1024 * 256)) {
+//     if ($profesi != 0 && $_FILES['t_ijazah']['size'] > (1024 * 256)) {
+//         $ket = "size";
+//     }
+//     $ket = "size";
+// }
+if ($_FILES['t_foto']['size'] > (1024 * 256)) {
     if ($profesi != 0 && $_FILES['t_ijazah']['size'] > (1024 * 256)) {
         $ket = "size";
     }
     $ket = "size";
-} else if ($_FILES['t_swab']['type'] != "application/pdf" || $_FILES['t_foto']['type'] != "image/jpeg") {
+}
+//FILE WAJIB t_swab TYPE
+// } else if ($_FILES['t_swab']['type'] != "application/pdf" || $_FILES['t_foto']['type'] != "image/jpeg") {
+//     if ($profesi != 0 && $_FILES['t_ijazah']['type'] != "application/pdf") {
+//         $ket = "type";
+//     }
+//     $ket = "type";
+// } 
+else if ($_FILES['t_foto']['type'] != "image/jpeg") {
     if ($profesi != 0 && $_FILES['t_ijazah']['type'] != "application/pdf") {
         $ket = "type";
     }
     $ket = "type";
 } else {
-    $_FILES['t_swab']['name'] = md5($_FILES['t_swab']['name'] . $_FILES['t_swab']['size'] . date('Y-m-d h:i:s')) . ".pdf";
-    if (!is_null($_FILES['t_swab'])) {
-        $t_swab = (object) @$_FILES['t_swab'];
 
-        $unggah_t_swab = move_uploaded_file(
-            $t_swab->tmp_name,
-            "{$alamat_unggah}/{$t_swab->name}"
-        );
-        $alamat_unggah_t_swab = "./_file/praktik/praktikan";
-        $link_t_swab = "{$alamat_unggah_t_swab}/{$t_swab->name}";
+
+    $exp_arr_q = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['q']))));
+    $q = $exp_arr_q[1];
+
+    $conn->query($q);
+
+    //Bila t_swab di unggah
+    if (isset($_FILES['t_swab'])) {
+        $_FILES['t_swab']['name'] = md5($_FILES['t_swab']['name'] . $_FILES['t_swab']['size'] . date('Y-m-d h:i:s')) . ".pdf";
+        if (!is_null($_FILES['t_swab'])) {
+            $t_swab = (object) @$_FILES['t_swab'];
+
+            $unggah_t_swab = move_uploaded_file(
+                $t_swab->tmp_name,
+                "{$alamat_unggah}/{$t_swab->name}"
+            );
+            $alamat_unggah_t_swab = "./_file/praktik/praktikan";
+            $link_t_swab = "{$alamat_unggah_t_swab}/{$t_swab->name}";
+        }
+        $sql_update_swab_sertifikat = "UPDATE tb_praktikan SET ";
+        $sql_update_swab_sertifikat .= " file_swab_praktikan = '" . $link_t_swab . "'";
+        $sql_update_swab_sertifikat .= " WHERE id_praktikan = " . $idpp;
+        // echo $sql_update_swab_sertifikat;
+        $conn->query($sql_update_swab_sertifikat);
     }
 
     if ($profesi != 0) {
@@ -52,6 +83,11 @@ if ($_FILES['t_swab']['size'] > (1024 * 256) || $_FILES['t_foto']['size'] > (102
             $alamat_unggah_t_ijazah = "./_file/praktik/praktikan";
             $link_t_ijazah = "{$alamat_unggah_t_ijazah}/{$t_ijazah->name}";
         }
+        $sql_update_ijazah = "UPDATE tb_praktikan SET ";
+        $sql_update_ijazah .= " file_ijazah_praktikan = '" . $link_t_ijazah . "'";
+        $sql_update_ijazah .= " WHERE id_praktikan = " . $idpp;
+        echo $sql_update_ijazah;
+        $conn->query($sql_update_ijazah);
     }
 
     $_FILES['t_foto']['name'] = md5($_FILES['t_foto']['name'] . $_FILES['t_foto']['size'] . date('Y-m-d h:i:s')) . ".jpg";
@@ -64,24 +100,13 @@ if ($_FILES['t_swab']['size'] > (1024 * 256) || $_FILES['t_foto']['size'] > (102
         );
         $alamat_unggah_t_foto = "./_file/praktik/praktikan";
         $link_t_foto = "{$alamat_unggah_t_foto}/{$t_foto->name}";
-    }
 
-    $sql_update = "UPDATE tb_praktikan SET ";
-    $sql_update .= " foto_praktikan = '" . $link_t_foto . "',";
-    if ($profesi != 0) {
-        $sql_update .= " file_ijazah_praktikan = '" . $link_t_ijazah . "',";
+        $sql_update_foto = "UPDATE tb_praktikan SET ";
+        $sql_update_foto .= " foto_praktikan = '" . $link_t_foto . "'";
+        $sql_update_foto .= " WHERE id_praktikan = " . $idpp;
+        echo $sql_update_foto;
+        $conn->query($sql_update_foto);
     }
-    $sql_update .= " file_swab_praktikan = '" . $link_t_swab . "'";
-    $sql_update .= " WHERE id_praktikan = " . $idpp;
-    // echo $q . "<br>";
-    // echo $sql_update . "<br>";
-    $exp_arr_q = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['q']))));
-    $q = $exp_arr_q[1];
-
-    $conn->query($q);
-    $conn->query($sql_update);
-    // $dataJSON['q'] = $q;
-    // $dataJSON['sql_update'] = $sql_update;
     $ket = "sesuai";
 }
 $dataJSON['ket'] = $ket;

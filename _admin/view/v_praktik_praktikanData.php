@@ -205,7 +205,7 @@ if ($r_data_praktikan > 0) {
                                                             </div>
                                                             <br>
                                                         <?php } ?>
-                                                        File Swab/Serfikat Vaksin :<span style="color:red">*</span><br>
+                                                        File Swab/Sertifikat Vaksin :<span style="color:red">*</span><br>
                                                         <div class="custom-file">
                                                             <label class="custom-file-label text-xs" for="customFile" id="labelfileswabu<?= md5($d_data_praktikan['id_praktikan']); ?>">Pilih File</label>
                                                             <input type="file" class="custom-file-input mb-1" id="u_swab<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_swab<?= md5($d_data_praktikan['id_praktik']); ?>" accept="application/pdf" required>

@@ -171,7 +171,7 @@
                                                                                 </div>
                                                                                 <br>
                                                                             <?php } ?>
-                                                                            File Swab/Serfikat Vaksin :<span style="color:red">*</span><br>
+                                                                            File Swab/Sertifikat Vaksin :<br>
                                                                             <div class="custom-file">
                                                                                 <label class="custom-file-label text-xs" for="customFile" id="labelfileswab<?= md5($d_praktik['id_praktik']); ?>">Pilih File</label>
                                                                                 <input type="file" class="custom-file-input mb-1" id="t_swab<?= md5($d_praktik['id_praktik']); ?>" name="t_swab<?= md5($d_praktik['id_praktik']); ?>" accept="application/pdf" required>
@@ -311,8 +311,8 @@
                                                         var fileFoto = document.getElementById("t_foto<?= md5($d_praktik['id_praktik']); ?>").files;
                                                         var getSizeFoto = document.getElementById("t_foto<?= md5($d_praktik['id_praktik']); ?>").files[0].size / 1024;
 
-                                                        console.log("getTypeFoto : " + getTypeFoto);
-                                                        console.log("getSizeFoto : " + getSizeFoto);
+                                                        // console.log("getTypeFoto : " + getTypeFoto);
+                                                        // console.log("getSizeFoto : " + getSizeFoto);
                                                     }
                                                     <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
                                                         //eksekusi bila file ijazah terisi
@@ -326,8 +326,8 @@
                                                             var fileIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files;
                                                             var getSizeIjazah = document.getElementById("t_ijazah<?= md5($d_praktik['id_praktik']); ?>").files[0].size / 1024;
 
-                                                            console.log("getTypeIjazah : " + getTypeIjazah);
-                                                            console.log("getSizeIjazah : " + getSizeIjazah);
+                                                            // console.log("getTypeIjazah : " + getTypeIjazah);
+                                                            // console.log("getSizeIjazah : " + getSizeIjazah);
                                                         }
                                                     <?php } ?>
 
@@ -342,34 +342,30 @@
                                                         var fileSwab = document.getElementById("t_swab<?= md5($d_praktik['id_praktik']); ?>").files;
                                                         var getSizeSwab = document.getElementById("t_swab<?= md5($d_praktik['id_praktik']); ?>").files[0].size / 1024;
 
-                                                        console.log("getTypeSwab : " + getSizeSwab);
-                                                        console.log("getSizeSwab : " + fileSwab);
+                                                        // console.log("getTypeSwab : " + getSizeSwab);
+                                                        // console.log("getSizeSwab : " + fileSwab);
                                                     }
 
                                                     //cek data from modal tambah bila tidak diiisi
                                                     if (
-                                                        getTypeFoto != 'jpg' ||
-                                                        getSizeFoto > 256 ||
-                                                        t_foto == "" ||
-                                                        t_foto == undefined ||
-                                                        t_foto == "" ||
                                                         t_no_id == "" ||
                                                         t_nama == "" ||
                                                         t_tgl == "" ||
                                                         t_alamat == "" ||
                                                         t_telpon == "" ||
-                                                        <?php
-                                                        if ($d_praktik['id_profesi_pdd'] > 0) {
-                                                        ?> getTypeIjazah != 'pdf' ||
+                                                        <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> getTypeIjazah != 'pdf' ||
                                                             getSizeIjazah > 256 ||
                                                             t_ijazah == "" ||
                                                             t_ijazah == undefined ||
-                                                        <?php
-                                                        }
-                                                        ?> getTypeSwab != 'pdf' ||
-                                                        getSizeSwab > 256 ||
-                                                        t_swab == "" ||
-                                                        t_swab == undefined
+                                                        <?php } ?>
+                                                        //  getTypeSwab != 'pdf' ||
+                                                        // getSizeSwab > 256 ||
+                                                        // t_swab == "" ||
+                                                        // t_swab == undefined
+                                                        getTypeFoto != 'jpg' ||
+                                                        getSizeFoto > 256 ||
+                                                        t_foto == "" ||
+                                                        t_foto == undefined
                                                     ) {
 
                                                         if (t_foto == "" || t_foto == undefined)
@@ -380,7 +376,6 @@
                                                             $("#err_t_foto<?= md5($d_praktik['id_praktik']); ?>").html("File Foto Harus Kurang dari 200 Kb");
                                                         else
                                                             $("#err_t_foto<?= md5($d_praktik['id_praktik']); ?>").html("");
-
 
                                                         <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?>
                                                             if (t_ijazah == "" || t_ijazah == undefined)
@@ -393,15 +388,14 @@
                                                                 $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                         <?php } ?>
 
-                                                        if (t_swab == "" || t_swab == undefined)
-                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus Dipilih");
-                                                        else if (getTypeSwab != "pdf")
-                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus pdf");
-                                                        else if (getSizeSwab > 256)
-                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus Kurang dari 200 Kb");
-                                                        else
-                                                            $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("");
-
+                                                        // if (t_swab == "" || t_swab == undefined)
+                                                        //     $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus Dipilih");
+                                                        // else if (getTypeSwab != "pdf")
+                                                        //     $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus pdf");
+                                                        // else if (getSizeSwab > 256)
+                                                        //     $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus Kurang dari 200 Kb");
+                                                        // else
+                                                        //     $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("");
 
                                                         if (t_no_id == "") {
                                                             $("#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>").html("No ID Harus Diisi");
