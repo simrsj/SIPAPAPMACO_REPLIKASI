@@ -86,7 +86,7 @@ else if ($_FILES['t_foto']['type'] != "image/jpeg") {
         $sql_update_ijazah = "UPDATE tb_praktikan SET ";
         $sql_update_ijazah .= " file_ijazah_praktikan = '" . $link_t_ijazah . "'";
         $sql_update_ijazah .= " WHERE id_praktikan = " . $idpp;
-        echo $sql_update_ijazah;
+        // echo $sql_update_ijazah;
         $conn->query($sql_update_ijazah);
     }
 
@@ -104,7 +104,7 @@ else if ($_FILES['t_foto']['type'] != "image/jpeg") {
         $sql_update_foto = "UPDATE tb_praktikan SET ";
         $sql_update_foto .= " foto_praktikan = '" . $link_t_foto . "'";
         $sql_update_foto .= " WHERE id_praktikan = " . $idpp;
-        echo $sql_update_foto;
+        // echo $sql_update_foto;
         $conn->query($sql_update_foto);
     }
     $ket = "sesuai";
