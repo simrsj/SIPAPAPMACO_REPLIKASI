@@ -205,6 +205,7 @@
                                                 <?php } ?>
                                             </div>
                                             <!-- inisiasi tabel data praktikan -->
+                                            <div class="loader mt-5 text-center" id="loader<?= md5($d_praktik['id_praktik']); ?>"></div>
                                             <div id="<?= md5("data" . $d_praktik['id_praktik']); ?>"></div>
                                             <script>
                                                 $(document).ready(function() {

@@ -654,6 +654,13 @@ if ($r_data_praktikan > 0) {
             </tbody>
         </table>
     </div>
+    <script>
+        $('.loader').hide();
+        alert = function() {};
+        <?php
+        include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
+        ?>
+    </script>
 <?php
 } else {
 ?>
