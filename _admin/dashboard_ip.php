@@ -203,24 +203,28 @@
                                             <?php
                                             } else {
                                             ?>
-                                                <span class="badge badge-danger col-12">
-                                                    MOU Kita sebentar lagi <b>KADALUARSA</b>
+                                                <div class="jumbotron">
+                                                    MOU Kita sebentar lagi <b class="text-orange">KADALUARSA</b>
                                                     <br />tepatnya pada tanggal :
                                                     <?= tanggal($dAr_ins['tgl_selesai_mou']); ?>,
-                                                    <br> Silahkan Hubungi Pihak Kami melalui nomor berikut :
-                                                    <b>081321417344 (Adhie)</b>
-                                                </span>
+                                                    <br> Silahkan Hubungi Pihak Kami melalui nomor berikut :<br>
+                                                    <b>082126795147 (ABDUL ROHMAN, S.S.T.)</b><br>
+                                                    <a href="https://wa.me/6282126795147" class="btn btn-outline-success btn-sm">
+                                                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                                                    </a></br>
+                                                </div>
                                             <?php
                                             }
                                         } elseif ($date_diff > 0) {
                                             ?>
-                                            <span class="badge badge-dark ">
-                                                Mohon Maaf MOU Kita
-                                                <b>SUDAH KADALUARSA</b>,
-                                                <br>
-                                                Silahkan Hubungi Pihak Kami melalui nomor berikut :
-                                                <b>081321417344 (Adhie)</b>
-                                            </span>
+                                            <div class="jumbotron">
+                                                Mohon Maaf MOU Kita <b>SUDAH KADALUARSA</b>, <br>
+                                                Silahkan Hubungi Pihak Kami melalui nomor berikut :<br>
+                                                <b>082126795147 (ABDUL ROHMAN, S.S.T.)</b><br>
+                                                <a href="https://wa.me/6282126795147" class="btn btn-outline-success btn-sm">
+                                                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                                                </a></br>
+                                            </div>
                                         <?php
                                         }
                                     } else {
@@ -228,8 +232,11 @@
                                         <span class="badge badge-orange col-12">
                                             Mohon Maaf Kita
                                             <b>BELUM MOU</b>,
-                                            <br> Silahkan Hubungi Pihak Kami melalui nomor berikut :
-                                            <b>081321417344 (Adhie)</b>
+                                            <br>Silahkan Hubungi Pihak Kami melalui nomor berikut :<br>
+                                            <b>082126795147 (ABDUL ROHMAN, S.S.T.)</b><br>
+                                            <a href="https://wa.me/6282126795147" class="btn btn-outline-success btn-sm">
+                                                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                                            </a></br>
                                         </span>
                                     <?php
                                     }
