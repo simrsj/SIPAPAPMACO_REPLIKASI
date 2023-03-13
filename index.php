@@ -43,7 +43,7 @@ include "_add-ons/tanggal_waktu.php";
 <body id="page-top" class="bg-primary">
     <div class="preloader">
         <div class="loading">
-            <div class="loader"></div>
+            <div class="loader loader-main"></div>
         </div>
     </div>
     <?php
