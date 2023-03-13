@@ -43,7 +43,7 @@ include "_add-ons/tanggal_waktu.php";
 <body id="page-top" class="bg-primary">
     <div class="preloader">
         <div class="loading text-center">
-            <div class="loader mb-5 mt-5 text-center"></div>
+            <div class="loader align-middle text-center"></div>
         </div>
     </div>
     <?php
