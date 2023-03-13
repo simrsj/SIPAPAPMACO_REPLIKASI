@@ -2,7 +2,7 @@
 if (empty($_SESSION['username_user'])) {
 ?>
 	<?php
-	include "./_log-sign/exc/x_captcha.php";
+	// include "./_log-sign/exc/x_captcha.php";
 	?>
 	<div class="">
 		<div class="row p-2 fixed-top bg-light shadow-lg mb-5 ">
@@ -37,8 +37,8 @@ if (empty($_SESSION['username_user'])) {
 	</div>
 	<br><br><br><br>
 	<div class="text-center mb-1">
-		<div class="btn btn-primary">
-			<?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span>
+		<div class="btn btn-light b text-primary">
+			<?= tanggal_hari(date('w')) . ", " . tanggal(date("Y-m-d")); ?>, <span id="jam"></span>
 		</div>
 	</div>
 
