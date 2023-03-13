@@ -2,7 +2,7 @@
 if (empty($_SESSION['username_user'])) {
 ?>
 	<?php
-	include "./_log-sign/exc/x_captcha.php";
+	// include "./_log-sign/exc/x_captcha.php";
 	?>
 	<div class="">
 		<div class="row p-2 fixed-top bg-light shadow-lg mb-5 ">
