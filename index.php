@@ -10,7 +10,7 @@ $date->setTimeZone($timezone);
 // echo 'Indonesian Timezone: ' . $date->format('d-m-Y H:i:s') . '<br/>';
 
 // include '_add-ons/csrf_auth.php';
-include "_add-ons/koneksi.php";
+include "_add-ons/koneksi.phps";
 include "_add-ons/tanggal_waktu.php";
 // phpinfo();
 ?>
@@ -42,8 +42,8 @@ include "_add-ons/tanggal_waktu.php";
 
 <body id="page-top" class="bg-primary">
     <div class="preloader">
-        <div class="loading text-center">
-            <div class="loader align-middle text-center"></div>
+        <div class="loading">
+            <div class="loader"></div>
         </div>
     </div>
     <?php
