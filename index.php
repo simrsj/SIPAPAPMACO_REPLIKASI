@@ -41,11 +41,11 @@ include "_add-ons/tanggal_waktu.php";
 </head>
 
 <body id="page-top" class="bg-primary">
-    <!-- <div class="preloader">
+    <div class="preloader">
         <div class="loading text-center">
             <div class="loader mb-5 mt-5 text-center"></div>
         </div>
-    </div> -->
+    </div>
     <?php
 
     if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
@@ -90,8 +90,6 @@ include "_add-ons/tanggal_waktu.php";
     <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
     <script src="vendor/!custom/jsCustom.js"></script>
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <script src="vendor/chart.js/Chart.js"></script>
-    <script src="vendor/!custom/jsCustom.js"> </script>
     <script>
         window.top == window &&
             window.console &&
