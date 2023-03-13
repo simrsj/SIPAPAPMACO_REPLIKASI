@@ -15,7 +15,7 @@
                                     <label class="text-dark mb-0" for="institusi"> Pilih Institusi :</label>
                                     <select class="select2 text-center openInstitusiLain" id="institusi" name="institusi" style="width:100%" required>
                                         <option value="">--<i> Pilih Institusi </i>--</option>
-                                        <option value='0' class="text-center">-- LAINNYA --</option>
+                                        <!-- <option value='0' class="text-center">-- LAINNYA --</option> -->
                                         <?php
                                         $sql_ip = "SELECT * FROM tb_institusi";
                                         $sql_ip .= " ORDER BY tb_institusi.nama_institusi ASC";
@@ -40,8 +40,14 @@
                                         }
                                         ?>
                                     </select>
-                                    <div class="text-xs font-italic text-center">Pilih <b>-- LAINNYA --</b> bila nama institusi tidak terdaftar,<br> dan isikan nama institusi yang disediakan</div>
-                                    <div class="text-xs text-danger i blink" mb-2 id="err_institusi"></div>
+                                    <div class="text-xs font-italic text-center">
+                                        Bila Tidak Ada Nama Institusi Kontak Admin<br>
+                                        <b>082126795147 (ABDUL ROHMAN, S.S.T.)</b><br>
+                                        <a href="https://wa.me/6282126795147" class="btn btn-outline-success btn-sm">
+                                            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                                        </a>
+                                    </div>
+                                    <div class="text-xs text-danger i blink mb-2" id="err_institusi"></div>
 
                                     <!-- inputan data institusi lainnya  -->
                                     <div id="institusi_lainnya"> </div>
