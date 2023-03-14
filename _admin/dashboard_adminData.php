@@ -19,6 +19,7 @@ $dashboard_dmb = $q_dmb->rowCount();
 //////////////////// DATA MOU BELUM PENGAJUAN ////////////////////
 $sql_dmbp = "SELECT * FROM tb_mou 
 WHERE tgl_selesai_mou < CURDATE()";
+// echo $sql_dmbp;
 $q_dmbp = $conn->query($sql_dmbp);
 $dashboard_dmbp = $q_dmbp->rowCount();
 
