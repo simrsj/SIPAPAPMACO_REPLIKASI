@@ -19,7 +19,7 @@ $dashboard_dmb = $q_dmb->rowCount();
 
 //////////////////// DATA PRAKTIK PROSES ////////////////////
 $sql_dpp = "SELECT * FROM tb_praktik";
-$sql_dpp .= " WHERE tgl_mulai_praktik < CURDATE()";
+$sql_dpp .= " WHERE tgl_mulai_praktik > CURDATE()";
 $q_dpp = $conn->query($sql_dpp);
 $dashboard_dpp = $q_dpp->rowCount();
 
@@ -31,7 +31,7 @@ $dashboard_dpa = $q_dpa->rowCount();
 
 //////////////////// DATA PRAKTIK SELESAI ////////////////////
 $sql_dps = "SELECT * FROM tb_praktik";
-$sql_dps .= " WHERE tgl_selesai_praktik > CURDATE()";
+$sql_dps .= " WHERE tgl_selesai_praktik < CURDATE()";
 // echo $sql_dps;
 $q_dps = $conn->query($sql_dps);
 $dashboard_dps = $q_dps->rowCount();
@@ -40,7 +40,7 @@ $dashboard_dps = $q_dps->rowCount();
 
 //////////////////// DATA PRAKTIKAN JUMLAH PROSES ////////////////////
 $sql_dprtknp = "SELECT SUM(jumlah_praktik) AS JP FROM tb_praktik";
-$sql_dprtknp .= " WHERE tgl_mulai_praktik < CURDATE()";
+$sql_dprtknp .= " WHERE tgl_mulai_praktik > CURDATE()";
 $q_dprtknp = $conn->query($sql_dprtknp);
 $d_dprtknp = $q_dprtknp->fetch(PDO::FETCH_ASSOC);
 $dashboard_dprtknp = $d_dprtknp['JP'];
@@ -60,7 +60,7 @@ if ($dashboard_dprtkna == NULL)
 
 //////////////////// DATA PRAKTIKAN JUMLAH SELESAI ////////////////////
 $sql_dprtkns = "SELECT SUM(JUMLAH_PRAKTIK) AS JP FROM tb_praktik";
-$sql_dprtkns .= " WHERE tgl_selesai_praktik > CURDATE()";
+$sql_dprtkns .= " WHERE tgl_selesai_praktik < CURDATE()";
 // echo $sql_dps;
 $q_dprtkns = $conn->query($sql_dprtkns);
 $d_dprtkns = $q_dprtkns->fetch(PDO::FETCH_ASSOC);
