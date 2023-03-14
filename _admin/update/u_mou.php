@@ -1,6 +1,9 @@
 <?php
+
+$exp_arr_id_mou = explode("*sm*", base64_decode(urldecode(hex2bin($_GET['u']))));
+$id_mou = $exp_arr_id_mou[1];
 $sql = "SELECT * FROM tb_mou";
-$sql .= " WHERE id_mou = " . $_GET['u'];
+$sql .= " WHERE id_mou = " . $id_mou;
 
 $q = $conn->query($sql);
 $d = $q->fetch(PDO::FETCH_ASSOC);

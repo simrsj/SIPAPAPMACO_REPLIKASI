@@ -1,7 +1,9 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
-$id = $_POST['id_mou'];
+
+$exp_arr_id_mou = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['id_mou']))));
+$id_mou = $exp_arr_id_mou[1];
 
 $alamat_unggah = "./../../_file/mou-pks";
 
@@ -12,7 +14,7 @@ if (!is_dir($alamat_unggah)) {
 
 if ($_FILES['file_mou']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['file_mou']['name'] = "mou_" . $id . "_" . date('Y-m-d') . ".pdf";
+    $_FILES['file_mou']['name'] = "mou_" . md5($id_mou . date('Y-m-d')) . ".pdf";
 
     //unggah 
     if (!is_null($_FILES['file_mou'])) {
@@ -32,7 +34,7 @@ if ($_FILES['file_mou']['size'] > 0) {
 
 if ($_FILES['file_pks']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['file_pks']['name'] = "pks_" . $id . "_" . date('Y-m-d') . ".pdf";
+    $_FILES['file_pks']['name'] = "pks_" . md5($id_mou . date('Y-m-d')) . ".pdf";
 
     //unggah 
     if (!is_null($_FILES['file_pks'])) {
@@ -58,15 +60,9 @@ if ($_FILES['file_pks']['size'] > 0) {
 $sql_u_mou = "UPDATE tb_mou SET ";
 $sql_u_mou .= " file_mou = '" . $link_file_mou . "',";
 $sql_u_mou .= " file_pks = '" . $link_file_pks . "'";
-$sql_u_mou .= " WHERE id_mou = " . $id;
-
-// $sql_u_mou_arsip = "UPDATE tb_mou_arsip SET ";
-// $sql_u_mou_arsip .= " file_mou_arsip = '" . $link_file_mou . "',";
-// $sql_u_mou_arsip .= " file_pks_arsip = '" . $link_file_pks . "'";
-// $sql_u_mou_arsip .= " WHERE id_mou_arsip = " . $id;
+$sql_u_mou .= " WHERE id_mou = " . $id_mou;
 
 // echo $sql_u_mou . "<br>";
-// echo $sql_u_mou_arsip . "<br>";
 $conn->query($sql_u_mou);
 // $conn->query($sql_u_mou_arsip);
 

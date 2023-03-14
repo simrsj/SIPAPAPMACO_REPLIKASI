@@ -55,17 +55,13 @@ if ($r_mou > 0) {
             <tbody>
                 <?php
                 $q_mou_a = $conn->query($sql_mou);
-
                 $no = 1;
-                while ($d_mou = $q_mou_a->fetch(PDO::FETCH_ASSOC)) {
                 ?>
+                <?php while ($d_mou = $q_mou_a->fetch(PDO::FETCH_ASSOC)) { ?>
                     <tr>
                         <td class="text-center my-auto"><?= $no; ?></td>
                         <td class="text-center text-capitalize my-auto">
-                            <?php
-
-                            if ($d_mou['tgl_selesai_mou'] == NULL) {
-                            ?>
+                            <?php if ($d_mou['tgl_selesai_mou'] == NULL) { ?>
                                 <span class="badge badge-primary text-xs">
                                     <?= $d_mou['ket_mou']; ?>
                                 </span>
@@ -80,34 +76,29 @@ if ($r_mou > 0) {
                                         </button>
                                     </div>
                                 </form>
+                            <?php } else { ?>
                                 <?php
-                            } else {
                                 echo tanggal_min_alt($d_mou['tgl_selesai_mou']) . "<br>";
 
                                 $date_end = strtotime($d_mou['tgl_selesai_mou']);
                                 $date_now = strtotime(date('Y-m-d'));
                                 $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
+                                ?>
 
-                                if ($date_diff <= 0) {
-                                ?> <span class="badge badge-success text-xs">
+                                <?php if ($date_diff <= 0) { ?>
+                                    <span class="badge badge-success text-xs">
                                         <?= tanggal_sisa($d_mou['tgl_selesai_mou'], date('Y-m-d')); ?>
                                     </span>
-                                <?php
-                                } elseif ($date_diff > 0) {
-                                ?>
+                                <?php } else if ($date_diff > 0) { ?>
                                     <span class="badge badge-danger text-xs">Tidak Berlaku</span>
-                            <?php
-                                }
-                            }
-                            ?>
+                                <?php } ?>
+                            <?php } ?>
                         </td>
                         <td>
-                            <?php
-                            echo $d_mou['nama_institusi'];
-                            if ($d_mou['akronim_institusi'] != NULL) {
-                                echo " (" . $d_mou['akronim_institusi'] . ")";
-                            }
-                            ?>
+                            <?= $d_mou['nama_institusi']; ?>
+                            <?php if ($d_mou['akronim_institusi'] != NULL) { ?>
+                                <?= " (" . $d_mou['akronim_institusi'] . ")"; ?>
+                            <?php } ?>
                         </td>
                         <td><?= $d_mou['no_institusi_mou']; ?></td>
                         <td><?= $d_mou['no_rsj_mou']; ?></td>
@@ -212,7 +203,7 @@ if ($r_mou > 0) {
                             </div>
 
                             <!-- tombol ubah  -->
-                            <a title="Ubah" href='?mou&u=<?= $d_mou['id_mou']; ?>' class=" btn btn-primary btn-sm">
+                            <a title="Ubah" href='?mou&u=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_mou['id_mou']))); ?>' class=" btn btn-primary btn-sm">
                                 <i class="fas fa-edit"></i>
                             </a>
 
