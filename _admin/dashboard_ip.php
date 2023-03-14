@@ -191,56 +191,39 @@
                             <div class="col-12">
                                 <h5>
                                     <h3>Hai <br><?= $dAr_ins['nama_institusi']; ?> </h3>
-                                    <br />
-                                    <?php if ($selesai != '' && $selesai != NULL) {
-                                        if ($date_diff <= 0) {
-                                            if ($before_end <= 0) {
-                                    ?>
-                                                <span class="badge badge-success col-12">
-                                                    MOU Kita masih <b>AKTIF</b>,
-                                                    <br> Terima Kasih Telah Ber-MOU dengan Kami
-                                                </span>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <div class="jumbotron">
-                                                    MOU Kita sebentar lagi <b class="text-orange">KADALUARSA</b>
+                                    <div class="jumbotron">
+                                        <?php if ($selesai != '' && $selesai != NULL) { ?>
+                                            <?php if ($date_diff <= 0) { ?>
+                                                <?php if ($before_end <= 0) { ?>
+                                                    KERJASAMA Kita masih <span class="badge badge-success b">BERLAKU</span>,
+                                                    <br> Terima Kasih Telah Berkerjasama dengan Kami
+                                                <?php } else { ?>
+                                                    KERJASAMA Kita <span class="badge badge-warning text-dark blink b">DALAM WAKTU DEKAT BERAKHIR</span>
                                                     <br />tepatnya pada tanggal :
                                                     <?= tanggal($dAr_ins['tgl_selesai_mou']); ?>,
                                                     <br> Silahkan Hubungi Pihak Kami melalui nomor berikut :<br>
                                                     <b>082126795147 (ABDUL ROHMAN, S.S.T.)</b><br>
                                                     <a href="https://wa.me/6282126795147" class="btn btn-outline-success btn-sm">
                                                         <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                                                    </a></br>
-                                                </div>
-                                            <?php
-                                            }
-                                        } elseif ($date_diff > 0) {
-                                            ?>
-                                            <div class="jumbotron">
-                                                Mohon Maaf MOU Kita <b>SUDAH KADALUARSA</b>, <br>
+                                                    </a>
+                                                <?php } ?>
+                                            <?php } elseif ($date_diff > 0) { ?>
+                                                Mohon Maaf KERJASAMA Kita <span class="badge badge-danger blink b">SUDAH BERAKHIR</span>, <br>
                                                 Silahkan Hubungi Pihak Kami melalui nomor berikut :<br>
                                                 <b>082126795147 (ABDUL ROHMAN, S.S.T.)</b><br>
                                                 <a href="https://wa.me/6282126795147" class="btn btn-outline-success btn-sm">
                                                     <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                                                </a></br>
-                                            </div>
-                                        <?php
-                                        }
-                                    } else {
-                                        ?>
-                                        <span class="badge badge-orange col-12">
-                                            Mohon Maaf Kita
-                                            <b>BELUM MOU</b>,
-                                            <br>Silahkan Hubungi Pihak Kami melalui nomor berikut :<br>
+                                                </a>
+                                            <?php } ?>
+                                        <?php } else { ?>
+                                            Mohon Maaf Kita <span class="badge badge-dark blink b">BELUM BERKERJASAMA</span>, <br>
+                                            Silahkan Hubungi Pihak Kami melalui nomor berikut :<br>
                                             <b>082126795147 (ABDUL ROHMAN, S.S.T.)</b><br>
                                             <a href="https://wa.me/6282126795147" class="btn btn-outline-success btn-sm">
                                                 <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                                            </a></br>
-                                        </span>
-                                    <?php
-                                    }
-                                    ?>
+                                            </a>
+                                        <?php } ?>
+                                    </div>
                                 </h5>
                             </div>
                         </div>
