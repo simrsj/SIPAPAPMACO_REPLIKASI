@@ -9,7 +9,7 @@
             <form action="" method="post" class="form-data text-gray-900" enctype="multipart/form-data" id="form_mou">
                 <?php
                 try {
-                    $sql_id_mou = "SELECT MAX(id_mou) AS ID FROM tb_mou";
+                    $sql_id_mou = "SELECT MAX(id) AS ID FROM tb_kerjasama";
                     // echo $sql_id_pkd . "<br>";
                     $q_id_mou  = $conn->query($sql_id_mou);
                     $d_id_mou  = $q_id_mou->fetch(PDO::FETCH_ASSOC);
@@ -47,12 +47,12 @@
                         <div class="text-xs font-italic text-danger blink" id="err_id_institusi"></div>
                     </div>
                     <div class="col-md-3">
-                        No. MoU RSJ <span style="color:red">*</span><br>
+                        No. PKS RSJ <span style="color:red">*</span><br>
                         <input class="form-control form-control-sm " type="text" name="no_rsj_mou" id="no_rsj_mou" required>
                         <div class="text-xs font-italic text-danger blink" id="err_no_rsj_mou"></div>
                     </div>
                     <div class="col-md-3">
-                        No. MoU Institusi <span style="color:red">*</span><br>
+                        No. PKS Institusi <span style="color:red">*</span><br>
                         <input class="form-control form-control-sm" type="text" name="no_institusi_mou" id="no_institusi_mou" required>
                         <div class="text-xs font-italic text-danger blink" id="err_no_institusi_mou"></div>
                     </div>
@@ -62,12 +62,12 @@
                 <!-- Tgl Mulai mou, Jurusan, profesi, Jenjang-->
                 <div class="row text-center">
                     <div class="col-md-2">
-                        Tanggal Mulai MoU <span style=" color:red">*</span><br>
+                        Tanggal Mulai <span style=" color:red">*</span><br>
                         <input class="form-control form-control-sm" type="date" name="tgl_mulai_mou" id="tgl_mulai_mou" required>
                         <div class="text-xs font-italic text-danger blink" id="err_tgl_mulai_mou"></div>
                     </div>
                     <div class="col-md-2">
-                        Tanggal Selesai MoU <span style=" color:red">*</span><br>
+                        Tanggal Selesai <span style=" color:red">*</span><br>
                         <input class="form-control form-control-sm" type="date" name="tgl_selesai_mou" id="tgl_selesai_mou" required>
                         <div class="text-xs font-italic text-danger blink" id="err_tgl_selesai_mou"></div>
                     </div>
@@ -357,7 +357,7 @@
                         }
                     }).then(
                         function() {
-                            document.location.href = "?mou";
+                            document.location.href = "?kerjasama";
                         }
                     );
                 },

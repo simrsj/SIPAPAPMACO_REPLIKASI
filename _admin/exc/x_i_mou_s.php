@@ -10,14 +10,14 @@ $id_mou = $exp_arr_id_mou[1];
 
 // echo $tgl_selesai_mou . "<br>";
 try {
-    $sql_i_mou = "INSERT INTO tb_mou (";
-    $sql_i_mou .= " id_mou, ";
+    $sql_i_mou = "INSERT INTO tb_kerjasama (";
+    $sql_i_mou .= " id, ";
     $sql_i_mou .= " id_institusi, ";
     $sql_i_mou .= " tgl_input_mou, ";
     $sql_i_mou .= " tgl_mulai_mou, ";
     $sql_i_mou .= " tgl_selesai_mou, ";
-    $sql_i_mou .= " no_rsj_mou, ";
-    $sql_i_mou .= " no_institusi_mou, ";
+    $sql_i_mou .= " no_pks_rsj, ";
+    $sql_i_mou .= " no_pks_institusi, ";
     $sql_i_mou .= " id_jurusan_pdd, ";
     $sql_i_mou .= " id_profesi_pdd, ";
     $sql_i_mou .= " id_jenjang_pdd ";

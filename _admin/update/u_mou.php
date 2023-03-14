@@ -2,32 +2,42 @@
 
 $exp_arr_id_mou = explode("*sm*", base64_decode(urldecode(hex2bin($_GET['u']))));
 $id_mou = $exp_arr_id_mou[1];
-$sql = "SELECT * FROM tb_mou";
-$sql .= " WHERE id_mou = " . $id_mou;
 
-$q = $conn->query($sql);
-$d = $q->fetch(PDO::FETCH_ASSOC);
+try {
+    $sql = "SELECT * FROM tb_kerjasama";
+    $sql .= " WHERE id = " . $id_mou;
 
+    $q = $conn->query($sql);
+    $d = $q->fetch(PDO::FETCH_ASSOC);
+} catch (Exception $ex) {
+    echo "<script>alert('- MoU-');";
+    echo "document.location.href='?error404';</script>";
+}
 ?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8">
-            <h1 class="h3 mb-2 text-gray-800">Ubah Data MoU</h1>
+            <h1 class="h3 mb-2 text-gray-800">Ubah Data Kerjasama</h1>
         </div>
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
             <form method="post" class="form-data text-gray-900" enctype="multipart/form-data" id="form_mou">
                 <!-- Nama Institusi, MoU RSJ dan Institusi -->
-                <input type="hidden" name="id_mou" id="id_mou" value="<?= $d['id_mou']; ?>">
+                <input type="hidden" name="id_mou" id="id_mou" value="<?= $id_mou; ?>">
                 <div class="row text-center">
                     <div class="col-md-6">
                         Nama Institusi <span style="color:red">*</span><br>
                         <select class="select2-long " name="id_institusi" id="id_institusi" style="width: 100%;" required>
                             <option value="">-- Pilih --</option>
                             <?php
-                            $sql_institusi = "SELECT * FROM tb_institusi ORDER BY nama_institusi ASC";
-                            $q_institusi = $conn->query($sql_institusi);
+                            try {
+                                $sql_institusi = "SELECT * FROM tb_institusi ORDER BY nama_institusi ASC";
+                                $q_institusi = $conn->query($sql_institusi);
+                            } catch (Exception $ex) {
+                                echo "<script>alert('- MoU-');";
+                                echo "document.location.href='?error404';</script>";
+                            }
 
                             while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
                                 if ($d['id_institusi'] == $d_institusi['id_institusi']) {
@@ -52,13 +62,13 @@ $d = $q->fetch(PDO::FETCH_ASSOC);
                         <div class="text-xs font-italic text-danger blink" id="err_id_institusi"></div>
                     </div>
                     <div class="col-md-3">
-                        No. MoU RSJ <span style="color:red">*</span><br>
-                        <input class="form-control form-control-sm " type="text" name="no_rsj_mou" id="no_rsj_mou" value="<?= $d['no_rsj_mou'] ?>" required>
+                        No. PKS RSJ <span style="color:red">*</span><br>
+                        <input class="form-control form-control-sm " type="text" name="no_rsj_mou" id="no_rsj_mou" value="<?= $d['no_pks_rsj'] ?>" required>
                         <div class="text-xs font-italic text-danger blink" id="err_no_rsj_mou"></div>
                     </div>
                     <div class="col-md-3">
-                        No. MoU Institusi <span style="color:red">*</span><br>
-                        <input class="form-control form-control-sm" type="text" name="no_institusi_mou" id="no_institusi_mou" value="<?= $d['no_institusi_mou'] ?>" required>
+                        No. PKS Institusi <span style="color:red">*</span><br>
+                        <input class="form-control form-control-sm" type="text" name="no_institusi_mou" id="no_institusi_mou" value="<?= $d['no_pks_institusi'] ?>" required>
                         <div class="text-xs font-italic text-danger blink" id="err_no_institusi_mou"></div>
                     </div>
                 </div>

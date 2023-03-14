@@ -41,11 +41,11 @@ include "_add-ons/tanggal_waktu.php";
 </head>
 
 <body id="page-top" class="bg-primary">
-    <div class="preloader">
+    <!-- <div class="preloader">
         <div class="loading">
             <div class="loader loader-main"></div>
         </div>
-    </div>
+    </div> -->
     <?php
 
     if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";

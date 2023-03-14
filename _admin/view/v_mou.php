@@ -1,14 +1,14 @@
     <div class="container-fluid">
         <div class="row justify-content-center mb-2">
             <div class="col-md my-auto">
-                <h1 class="h4 text-gray-800">Daftar MoU-Kerjasama</h1>
+                <h1 class="h4 text-gray-800">Daftar Kerjasama</h1>
             </div>
             <!-- Card Data Mou Belum Perpanjang, Pengajuan Baru, Pengajuan Perbanjang -->
             <div class="col-md-2 text-right my-auto">
-                <a href="?mou&i" class="btn btn-outline-success btn-sm">
+                <a href="?kerjasama&i" class="btn btn-outline-success btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
-                <a href="?mou&a" class="btn btn-outline-secondary btn-sm">
+                <a href="?kerjasama&a" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-archive"></i> Arsip
                 </a>
             </div>
@@ -25,7 +25,7 @@
         $(document).ready(function() {
             $('#data_mou').load("_admin/view/v_mouData.php");
 
-            $(".arsip_mou").click(function() {
+            $(".arsip").click(function() {
                 var id = $(this).attr('id');
                 $.ajax({
                     type: 'POST',

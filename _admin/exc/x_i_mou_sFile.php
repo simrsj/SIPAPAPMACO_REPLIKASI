@@ -57,13 +57,17 @@ if ($_FILES['file_pks']['size'] > 0) {
 // print_r($_FILES);
 // echo "</pre>";
 
-$sql_u_mou = "UPDATE tb_mou SET ";
-$sql_u_mou .= " file_mou = '" . $link_file_mou . "',";
-$sql_u_mou .= " file_pks = '" . $link_file_pks . "'";
-$sql_u_mou .= " WHERE id_mou = " . $id_mou;
+try {
+    $sql_u_mou = "UPDATE tb_kerjasama SET ";
+    $sql_u_mou .= " file_mou = '" . $link_file_mou . "',";
+    $sql_u_mou .= " file_pks = '" . $link_file_pks . "'";
+    $sql_u_mou .= " WHERE id = " . $id_mou;
 
-// echo $sql_u_mou . "<br>";
-$conn->query($sql_u_mou);
-// $conn->query($sql_u_mou_arsip);
+    // echo $sql_u_mou . "<br>";
+    $conn->query($sql_u_mou);
+} catch (Exception $ex) {
+    echo "<script>alert('-MoU-');";
+    echo "document.location.href='?error404';</script>";
+}
 
 echo json_encode(['success' => 'Data Praktik Berhasil Disimpan']);

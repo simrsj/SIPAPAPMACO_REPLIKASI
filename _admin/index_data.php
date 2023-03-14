@@ -42,7 +42,7 @@ elseif (isset($_GET['lapor'])) {
 	}
 } elseif (isset($_GET['mes'])) {
 	include "_admin/view/v_mess.php";
-} elseif (isset($_GET['mou'])) {
+} elseif (isset($_GET['kerjasama'])) {
 	if (isset($_GET['i'])) {
 		include "_admin/insert/i_mou.php";
 	} elseif (isset($_GET['u'])) {

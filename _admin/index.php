@@ -91,9 +91,9 @@ if ($_SESSION['status_user'] == "Y") {
 									<i class="fas fa-fw fa-bed"></i>
 									<span>Mess/Pemondokan</span>
 								</a>
-								<a class="collapse-item" href="?mou">
+								<a class="collapse-item" href="?kerjasama">
 									<i class="fas fa-fw fa-handshake"></i>
-									<span>MoU</span>
+									<span>Kerjasama</span>
 								</a>
 								<a class="collapse-item" href="?trf">
 									<i class="fas fa-fw fa-money-bill-wave"></i>
