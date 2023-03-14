@@ -1,7 +1,7 @@
 <div class="card bg-light text-black shadow m-2">
     <div class="card-body">
         <?php
-        $x = "undefined";
+        echo md5('Fajar Rachmat Hermansyah, S.Kom.');
 
         ?>
     </div>

@@ -19,21 +19,21 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col">
                             <div class="text-md font-weight-bold  text-primary mb-1">
-                                JUMLAH DIKLAT PROSES :
+                                JUMLAH PRAKTIK PROSES :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     <b><?= $dashboard_dpp; ?></b> Kelompok
                                 </div>
                             </div>
                             <div class="text-md font-weight-bold text-primary mb-1">
-                                JUMLAH DIKLAT AKTIF :
+                                JUMLAH PRAKTIK AKTIF :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     <b><?= $dashboard_dpa; ?></b> Kelompok
                                 </div>
                             </div>
                             <div class="text-md font-weight-bold text-primary mb-1">
-                                JUMLAH DIKLAT NON-AKTIF :
+                                JUMLAH PRAKTIK SELESAI :
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <b><?= $dashboard_dpn; ?></b> Kelompok
+                                    <b><?= $dashboard_dps; ?></b> Kelompok
                                 </div>
                             </div>
                         </div>
@@ -66,15 +66,15 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col">
                             <div class="text-md font-weight-bold text-danger mb-1">
-                                <b>TOTAL MOU : </b>
+                                <b>TOTAL KERJASAMA : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     <span class="badge badge-primary text-lg"><?= $dashboard_dmt; ?></span>
                                 </div>
-                                <b>MOU BERAKHIR : </b>
+                                <b>KERJASAMA BERAKHIR : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     <span class="badge badge-danger text-lg"><?= $dashboard_dmb; ?></span>
                                 </div>
-                                <b>MOU AKTIF : </b>
+                                <b>KERJASAMA AKTIF : </b>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     <span class="badge badge-success text-lg"><?= $dashboard_dma; ?></span>
                                 </div>
@@ -91,25 +91,20 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col">
-                            <!-- <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
-                                JUMLAH PRAKTIKAN : </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php $jumlah_praktik_total; ?> Orang
-                            </div> -->
                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN PROSES: </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?= $dashboard_dpjp; ?> Orang
+                                <?= $dashboard_dprtknp; ?> Orang
                             </div>
                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN AKTIF: </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?= $dashboard_dpja; ?> Orang
+                                <?= $dashboard_dprtkna; ?> Orang
                             </div>
                             <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                 JUMLAH PRAKTIKAN SELESAI: </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?= $dashboard_dpjs; ?> Orang
+                                <?= $dashboard_dprtkns; ?> Orang
                             </div>
                         </div>
                     </div>

@@ -1,106 +1,74 @@
 <?php
-//////////////////// DATA MOU TOTAL ////////////////////
+//////////////////// DATA KERJASAMA TOTAL ////////////////////
 $sql_dmt = "SELECT * FROM tb_kerjasama ";
 $q_dmt = $conn->query($sql_dmt);
 $dashboard_dmt = $q_dmt->rowCount();
 
-//////////////////// DATA MOU AKTIF ////////////////////
+//////////////////// DATA KERJASAMA AKTIF //////////////////////
 $sql_dma = "SELECT * FROM tb_kerjasama ";
 $sql_dma .= " WHERE tgl_selesai_mou >= CURDATE() AND arsip IS NULL";
 $q_dma = $conn->query($sql_dma);
 $dashboard_dma = $q_dma->rowCount();
 
-//////////////////// DATA MOU BERAKHIR ////////////////////
+//////////////////// DATA KERJASAMA BERAKHIR ////////////////////
 $sql_dmb = "SELECT * FROM tb_kerjasama ";
 $sql_dmb .= " WHERE tgl_selesai_mou < CURDATE() AND arsip IS NULL";
 $q_dmb = $conn->query($sql_dmb);
 $dashboard_dmb = $q_dmb->rowCount();
+/*--------------------------------------------------------------*/
 
-//////////////////// DATA MOU BELUM PENGAJUAN ////////////////////
-$sql_dmbp = "SELECT * FROM tb_kerjasama 
-WHERE tgl_selesai_mou < CURDATE()";
-// echo $sql_dmbp;
-$q_dmbp = $conn->query($sql_dmbp);
-$dashboard_dmbp = $q_dmbp->rowCount();
-
-//////////////////// DATA MOU PENGAJUAN BARU ////////////////////
-$sql_dmpb = "SELECT * FROM tb_kerjasama 
--- WHERE ket_mou = 'proses pengajuan perpanjang'";
-$q_dmpb = $conn->query($sql_dmpb);
-$dashboard_dmpb = $q_dmpb->rowCount();
-
-//////////////////// DATA MOU PENGAJUAN LAMA ////////////////////
-$sql_dmpl = "SELECT * FROM tb_kerjasama 
--- WHERE ket_mou = 'proses pengajuan perpanjang'";
-$q_dmpl = $conn->query($sql_dmpl);
-$dashboard_dmpl = $q_dmpl->rowCount();
-
-//////////////////// DATA PRAKTIK SEMUA ////////////////////
-$sql_dps = "SELECT * FROM tb_praktik";
-$q_dps = $conn->query($sql_dps);
-$dashboard_dps = $q_dps->rowCount();
-
-//////////////////// DATA PRAKTIKAN PROSES ////////////////////
-$sql_dpp = "SELECT * FROM tb_praktik
-WHERE status_praktik='D'";
+//////////////////// DATA PRAKTIK PROSES ////////////////////
+$sql_dpp = "SELECT * FROM tb_praktik";
+$sql_dpp .= " WHERE tgl_mulai_praktik < CURDATE()";
 $q_dpp = $conn->query($sql_dpp);
 $dashboard_dpp = $q_dpp->rowCount();
 
-//////////////////// DATA PRAKTIKAN AKTIF ////////////////////
-$sql_dpa = "SELECT * FROM tb_praktik
-WHERE status_praktik = 'Y'";
+//////////////////// DATA PRAKTIK AKTIF ////////////////////
+$sql_dpa = "SELECT * FROM tb_praktik";
+$sql_dpa .= " WHERE CURDATE() BETWEEN tgl_mulai_praktik AND tgl_selesai_praktik";
 $q_dpa = $conn->query($sql_dpa);
 $dashboard_dpa = $q_dpa->rowCount();
 
-//////////////////// DATA PRAKTIKAN SELESAI ////////////////////
-$sql_dpn = "SELECT * FROM tb_praktik
-WHERE status_praktik='ARSIP'";
-$q_dpn = $conn->query($sql_dpn);
-$dashboard_dpn = $q_dpn->rowCount();
+//////////////////// DATA PRAKTIK SELESAI ////////////////////
+$sql_dps = "SELECT * FROM tb_praktik";
+$sql_dps .= " WHERE tgl_selesai_praktik > CURDATE()";
+// echo $sql_dps;
+$q_dps = $conn->query($sql_dps);
+$dashboard_dps = $q_dps->rowCount();
 
-//////////////////// DATA PRAKTIKAN JUMLAH ////////////////////
-$sql_dpj = "SELECT * FROM tb_praktik";
-$q_dpj = $conn->query($sql_dpj);
-
-$jumlah_praktik_total = 0;
-while ($d_dpj = $q_dpj->fetch(PDO::FETCH_ASSOC)) {
-    $dashboard_dpj = $jumlah_praktik_total + $d_dpj['jumlah_praktik'];
-}
+/*--------------------------------------------------------------*/
 
 //////////////////// DATA PRAKTIKAN JUMLAH PROSES ////////////////////
-$sql_dpjp = "SELECT * FROM tb_praktik
-WHERE status_praktik='Y'";
-$q_dpjp = $conn->query($sql_dpjp);
+$sql_dprtknp = "SELECT SUM(jumlah_praktik) AS JP FROM tb_praktik";
+$sql_dprtknp .= " WHERE tgl_mulai_praktik < CURDATE()";
+$q_dprtknp = $conn->query($sql_dprtknp);
+$d_dprtknp = $q_dprtknp->fetch(PDO::FETCH_ASSOC);
+$dashboard_dprtknp = $d_dprtknp['JP'];
+if ($dashboard_dprtknp == NULL)
+    $dashboard_dprtknp = 0;
 
-$jumlah_praktik_proses = 0;
-$dashboard_dpjp = 0;
-while ($d_dpjp = $q_dpjp->fetch(PDO::FETCH_ASSOC)) {
-    $dashboard_dpjp = $jumlah_praktik_proses + $d_dpjp['jumlah_praktik'];
-}
+//////////////////// DATA PRAKTIKAN JUMLAH AKTIF /////////////////////
+$sql_dprtkna = "SELECT SUM(JUMLAH_PRAKTIK) AS JP FROM tb_praktik";
+$sql_dprtkna .= " WHERE CURDATE() BETWEEN tgl_mulai_praktik AND tgl_selesai_praktik";
+$dashboard_dprtkna = 0;
+$q_dprtkna = $conn->query($sql_dprtkna);
+$d_dprtkna = $q_dprtkna->fetch(PDO::FETCH_ASSOC);
+$dashboard_dprtkna = $d_dprtkna['JP'];
+if ($dashboard_dprtkna == NULL)
+    $dashboard_dprtkna = 0;
 
-//////////////////// DATA PRAKTIKAN JUMLAH AKTIF ////////////////////
-$sql_dpja = "SELECT * FROM tb_praktik
-WHERE status_praktik='Y'";
-$q_dpja = $conn->query($sql_dpja);
-
-$jumlah_praktik_aktif = 0;
-$dashboard_dpja = 0;
-
-while ($d_dpja = $q_dpja->fetch(PDO::FETCH_ASSOC)) {
-    $dashboard_dpja = $jumlah_praktik_aktif + $d_dpja['jumlah_praktik'];
-}
 
 //////////////////// DATA PRAKTIKAN JUMLAH SELESAI ////////////////////
-$sql_dpjs = "SELECT * FROM tb_praktik
-WHERE status_praktik='Y'";
-$q_dpjs = $conn->query($sql_dpjs);
+$sql_dprtkns = "SELECT SUM(JUMLAH_PRAKTIK) AS JP FROM tb_praktik";
+$sql_dprtkns .= " WHERE tgl_selesai_praktik > CURDATE()";
+// echo $sql_dps;
+$q_dprtkns = $conn->query($sql_dprtkns);
+$d_dprtkns = $q_dprtkns->fetch(PDO::FETCH_ASSOC);
+$dashboard_dprtkns = $d_dprtkns['JP'];
+if ($dashboard_dprtkns == NULL)
+    $dashboard_dprtkns = 0;
 
-$jumlah_praktik_selesai = 0;
-$dashboard_dpjs = 0;
-
-while ($d_dpjs = $q_dpjs->fetch(PDO::FETCH_ASSOC)) {
-    $dashboard_dpjs = $jumlah_praktik_selesai + $d_dpjs['jumlah_praktik'];
-}
+/*--------------------------------------------------------------*/
 
 //////////////////// PENDAPATAN////////////////////
 
@@ -109,7 +77,8 @@ $total_tarif_pilih = 0;
 $total_mess = 0;
 $sql_praktik = "SELECT * FROM tb_tarif_pilih";
 $sql_praktik .= " JOIN tb_praktik ON tb_tarif_pilih.id_praktik = tb_praktik.id_praktik";
-$sql_praktik .= " WHERE status_praktik =  'Y'";
+$sql_praktik .= " JOIN tb_bayar ON tb_bayar.id_praktik = tb_praktik.id_praktik";
+$sql_praktik .= " WHERE tb_bayar.status_bayar =  'TERIMA'";
 $q_praktik = $conn->query($sql_praktik);
 
 #semua
