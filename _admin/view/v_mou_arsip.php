@@ -1,7 +1,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center mb-2 ">
             <div class="col-md my-auto">
-                <h1 class="h4 text-gray-800">Arsip MoU-Kerjasama</h1>
+                <h1 class="h4 text-gray-800">Arsip KERJASAMA</h1>
             </div>
         </div>
 
@@ -9,12 +9,12 @@
         <div class="card shadow mb-4">
             <div class="card-body">
                 <?php
-                $sql_mou = "SELECT * FROM tb_mou ";
-                $sql_mou .= " JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi";
-                $sql_mou .= " JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-                $sql_mou .= " JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
-                $sql_mou .= " JOIN tb_profesi_pdd ON tb_mou.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
-                $sql_mou .= " WHERE tb_mou.arsip_mou = 'Y'";
+                $sql_mou = "SELECT * FROM tb_kerjasama ";
+                $sql_mou .= " JOIN tb_institusi ON tb_kerjasama.id_institusi = tb_institusi.id_institusi";
+                $sql_mou .= " JOIN tb_jurusan_pdd ON tb_kerjasama.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+                $sql_mou .= " JOIN tb_jenjang_pdd ON tb_kerjasama.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+                $sql_mou .= " JOIN tb_profesi_pdd ON tb_kerjasama.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+                $sql_mou .= " WHERE tb_kerjasama.arsip = 'Y'";
                 $sql_mou .= " ORDER BY tb_institusi.nama_institusi ASC";
 
                 // echo "$sql_mou<br>";
@@ -32,8 +32,8 @@
                                     <th scope='col'>No</th>
                                     <th width="150px">Tanggal Akhir MoU <br> (Status)</th>
                                     <th>Nama Institusi</th>
-                                    <th>No <br> Mou Institusi</th>
-                                    <th>No <br>Mou RSJ</th>
+                                    <th>No <br>PKS Institusi</th>
+                                    <th>No <br>PKS RSJ</th>
                                     <th width="150px"></th>
                                 </tr>
                             </thead>
@@ -94,17 +94,17 @@
                                             }
                                             ?>
                                         </td>
-                                        <td><?= $d_mou['no_institusi_mou']; ?></td>
-                                        <td><?= $d_mou['no_rsj_mou']; ?></td>
+                                        <td><?= $d_mou['no_pks_institusi']; ?></td>
+                                        <td><?= $d_mou['no_pks_rsj']; ?></td>
                                         <td class="text-center my-auto">
 
                                             <!-- tombol rincian -->
-                                            <a title="Rincian" href='#' class="btn btn-info btn-sm" data-toggle="modal" data-target="#m_r_m<?= $d_mou['id_mou']; ?>">
+                                            <a title="Rincian" href='#' class="btn btn-info btn-sm" data-toggle="modal" data-target="#m_r_m<?= $d_mou['id']; ?>">
                                                 <i class="fas fa-info-circle"></i> Rincian
                                             </a>
 
                                             <!-- modal rincian -->
-                                            <div class="modal fade text-left" data-backdrop="static" data-keyboard="false" id="m_r_m<?= $d_mou['id_mou']; ?>">
+                                            <div class="modal fade text-left" data-backdrop="static" data-keyboard="false" id="m_r_m<?= $d_mou['id']; ?>">
                                                 <div class="modal-dialog modal-dialog-scrollable">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -117,9 +117,9 @@
                                                             <b>Nama Instansi : </b><br>
                                                             <?= $d_mou['nama_institusi']; ?><br><br>
                                                             <b>No Mou RSJ : </b>
-                                                            <?= $d_mou['no_rsj_mou']; ?><br><br>
+                                                            <?= $d_mou['no_pks_rsj']; ?><br><br>
                                                             <b>No Mou Institusi : </b>
-                                                            <?= $d_mou['no_institusi_mou']; ?><br><br>
+                                                            <?= $d_mou['no_pks_institusi']; ?><br><br>
                                                             <b>Jurusan : </b>
                                                             <?= $d_mou['nama_jurusan_pdd']; ?><br><br>
                                                             <b>Jenjang : </b>

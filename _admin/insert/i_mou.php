@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8">
-            <h1 class="h3 mb-2 text-gray-800">Tambah Data MoU</h1>
+            <h1 class="h3 mb-2 text-gray-800">Tambah Data Kerjasama</h1>
         </div>
     </div>
     <div class="card shadow mb-4">
@@ -165,7 +165,7 @@
                 <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
                 <div class="row col-md-auto justify-content-center">
                     <button type="button" id="tombol_data_phn" class="btn btn-outline-success" onclick="simpan_mou()">
-                        &nbsp;Simpan Data MoU &nbsp;
+                        &nbsp;Simpan Data Kerjasama &nbsp;
                     </button>
                 </div>
             </form>

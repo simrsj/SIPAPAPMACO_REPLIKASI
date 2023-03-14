@@ -208,7 +208,7 @@ if ($r_mou > 0) {
                             </a>
 
                             <!-- tombol arsip  -->
-                            <button title="Arsip" id="<?= $d_mou['id']; ?>" class="btn btn-secondary btn-sm arsip">
+                            <button title="Arsip" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_mou['id']))); ?>" class="btn btn-secondary btn-sm arsip">
                                 <i class="fas fa-archive"></i>
                             </button>
                         </td>
@@ -224,13 +224,13 @@ if ($r_mou > 0) {
         $(document).ready(function() {
             $('#dataTable').DataTable();
         });
-        $(".arsip_mou").click(function() {
+        $(".arsip").click(function() {
             var id = $(this).attr('id');
             Swal.fire({
                 position: 'top',
                 title: 'Yakin ?',
-                html: "<span class='text-secondary text-uppercase font-weight-bold'>ARSIPKAN</span> MOU <br> " +
-                    "<span class='font-weight-bold text-danger'>''Setelah data diarsipkan tidak akan bisa kembali diaktifkan''</span>",
+                html: "<span class='b'>ARSIPKAN</span> KERJASAMA <br> " +
+                    "<span class='b text-danger blink'>Setelah data diarsipkan tidak akan bisa kembali diaktifkan''</span>",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1cc88a',

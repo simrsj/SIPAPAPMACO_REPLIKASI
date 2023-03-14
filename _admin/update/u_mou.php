@@ -219,7 +219,7 @@ try {
                 <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
                 <div class="row col-md-auto justify-content-center">
                     <button type="button" id="tombol_data_phn" class="btn btn-outline-primary" onclick="ubah_mou()">
-                        &nbsp;Ubah Data MoU &nbsp;
+                        &nbsp;Ubah Data Kerjasama &nbsp;
                     </button>
                 </div>
             </form>
