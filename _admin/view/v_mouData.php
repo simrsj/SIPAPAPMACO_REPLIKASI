@@ -257,7 +257,7 @@ if ($r_mou > 0) {
                                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                                 }
                             }).then(
-                                $('#data_mou').load("_admin/view/v_mouData.php")
+                                $('#data_kerjasama').load("_admin/view/v_mouData.php")
                             );
                         },
                         error: function(response) {
@@ -276,3 +276,7 @@ if ($r_mou > 0) {
 <?php
 }
 ?>
+<script>
+    $('.loader').hide();
+    alert = function() {};
+</script>

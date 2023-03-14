@@ -24,7 +24,7 @@ try {
         <div class="card-body">
             <form method="post" class="form-data text-gray-900" enctype="multipart/form-data" id="form_mou">
                 <!-- Nama Institusi, MoU RSJ dan Institusi -->
-                <input type="hidden" name="id_mou" id="id_mou" value="<?= $id_mou; ?>">
+                <input type="hidden" name="id_mou" id="id_mou" value="<?= $_GET['u']; ?>">
                 <div class="row text-center">
                     <div class="col-md-6">
                         Nama Institusi <span style="color:red">*</span><br>
@@ -77,12 +77,12 @@ try {
                 <!-- Tgl Mulai mou,Tgl Selesai mou, Jurusan, profesi, Jenjang-->
                 <div class="row text-center">
                     <div class="col-md-2">
-                        Tanggal Mulai MoU <span style=" color:red">*</span><br>
+                        Tanggal Mulai <span style=" color:red">*</span><br>
                         <input class="form-control form-control-sm" type="date" name="tgl_mulai_mou" id="tgl_mulai_mou" value="<?= $d['tgl_mulai_mou'] ?>" required>
                         <div class="text-xs font-italic text-danger blink" id="err_tgl_mulai_mou"></div>
                     </div>
                     <div class="col-md-2">
-                        Tanggal Selesai MoU <span style=" color:red">*</span><br>
+                        Tanggal Selesai <span style=" color:red">*</span><br>
                         <input class="form-control form-control-sm" type="date" name="tgl_selesai_mou" id="tgl_selesai_mou" value="<?= $d['tgl_selesai_mou'] ?>" required>
                         <div class="text-xs font-italic text-danger blink" id="err_tgl_selesai_mou"></div>
                     </div>
@@ -166,10 +166,23 @@ try {
                                 }
                                 ?>
                             </legend>
-                            <input type="file" name="file_mou" id="file_mou" class="form-control-file" accept="application/pdf" required>
+
+                            <div class="custom-file">
+                                <label class="custom-file-label text-xs" for="customFile" id="file_mou_label">Pilih File</label>
+                                <input type="file" class="custom-file-input mb-1" type="file" name="file_mou" id="file_mou" accept="application/pdf" required>
+                                <div class="text-xs font-italic">File harus pdf dan ukuranya kurang dari 1 Mb</div>
+                                <div class="text-xs font-italic text-danger blink" id="err_file_mou"></div>
+                                <script>
+                                    $('#file_mou').on('change', function(evt) {
+                                        //label input
+                                        var label = $(this).val();
+                                        label = label.replace(/^.*[\\\/]/, '');
+                                        if (label == "") label = "Pilih File";
+                                        $('#file_mou_label').html(label);
+                                    });
+                                </script>
+                            </div>
                         </fieldset>
-                        <div class="text-xs font-italic">File harus pdf dan ukuranya kurang dari 1 Mb</div>
-                        <div class="text-xs font-italic text-danger blink" id="err_file_mou"></div>
                     </div>
                     <div class="col-md-6">
                         <fieldset class="border p-2">
@@ -183,17 +196,30 @@ try {
                                 }
                                 ?>
                             </legend>
-                            <input type="file" name="file_pks" id="file_pks" class="form-control-file" accept="application/pdf" required>
+                            <div class="custom-file">
+                                <label class="custom-file-label text-xs" for="customFile" id="file_pks_label">Pilih File</label>
+                                <input type="file" class="custom-file-input mb-1" type="file" name="file_pks" id="file_pks" accept="application/pdf" required>
+                                <div class="text-xs font-italic">File harus pdf dan ukuranya kurang dari 1 Mb</div>
+                                <div class="text-xs font-italic text-danger blink" id="err_file_pks"></div>
+                                <script>
+                                    $('#file_pks').on('change', function(evt) {
+                                        //label input
+                                        var label = $(this).val();
+                                        label = label.replace(/^.*[\\\/]/, '');
+                                        if (label == "") label = "Pilih File";
+                                        $('#file_pks_label').html(label);
+
+                                    });
+                                </script>
+                            </div>
                         </fieldset>
-                        <div class="text-xs font-italic">File harus pdf dan ukuranya kurang dari 1 Mb</div>
-                        <div class="text-xs font-italic text-danger blink" id="err_file_pks"></div>
                     </div>
                 </div>
                 <hr>
                 <i class="font-weight-bold"><span style="color:red">*</span> : Wajib diisi</i>
                 <div class="row col-md-auto justify-content-center">
-                    <button type="button" id="tombol_data_phn" class="btn btn-outline-success" onclick="ubah_mou()">
-                        &nbsp;Simpan Data MoU &nbsp;
+                    <button type="button" id="tombol_data_phn" class="btn btn-outline-primary" onclick="ubah_mou()">
+                        &nbsp;Ubah Data MoU &nbsp;
                     </button>
                 </div>
             </form>
@@ -208,12 +234,40 @@ try {
         var no_rsj_mou = document.getElementById("no_rsj_mou").value;
         var no_institusi_mou = document.getElementById("no_institusi_mou").value;
         var tgl_mulai_mou = document.getElementById("tgl_mulai_mou").value;
-        var tgl_selesai_mou = document.getElementById("tgl_selesai_mou").value;
+        var tgl_mulai_mou = document.getElementById("tgl_selesai_mou").value;
         var id_jurusan_pdd = document.getElementById("id_jurusan_pdd").value;
         var id_profesi_pdd = document.getElementById("id_profesi_pdd").value;
         var id_jenjang_pdd = document.getElementById("id_jenjang_pdd").value;
         var file_mou = document.getElementById("file_mou").value;
         var file_pks = document.getElementById("file_pks").value;
+
+        var getTypeMOU = "";
+        var getSizeMOU = "";
+        //eksekusi bila file MoU terisi
+        if (file_mou != "") {
+            //Cari ekstensi file MoU yg diupload
+            var typeMOU = document.querySelector('#file_mou').value;
+            var getTypeMOU = typeMOU.split('.').pop();
+
+            //cari ukuran file MoU yg diupload
+            var fileMOU = document.getElementById("file_mou").files;
+            var getSizeMOU = document.getElementById("file_mou").files[0].size / 1024;
+        } else {
+            var getTypeMOU = "pdf";
+            var getSizeMOU = 1;
+        }
+
+        //eksekusi bila file PKS terisi
+        if (file_pks != "") {
+
+            //Cari ekstensi file PKS yg diupload
+            var typePKS = document.querySelector('#file_pks').value;
+            var getTypePKS = typePKS.split('.').pop();
+
+            //cari ukuran file PKS yg diupload
+            var filePKS = document.getElementById("file_pks").files;
+            var getSizePKS = document.getElementById("file_pks").files[0].size / 1024;
+        }
 
         //Notif Bila tidak diisi
         if (
@@ -225,7 +279,11 @@ try {
             id_jurusan_pdd == "" ||
             id_profesi_pdd == "" ||
             id_jenjang_pdd == "" ||
-            file_pks == ""
+            file_pks == "" ||
+            getTypeMOU != 'pdf' ||
+            getSizeMOU > 1024 ||
+            getTypePKS != 'pdf' ||
+            getSizePKS > 1024
         ) {
 
             //warning Toast bila ada data wajib yg berlum terisi
@@ -299,133 +357,29 @@ try {
             } else {
                 document.getElementById("err_file_pks").innerHTML = "";
             }
-        }
 
-        //eksekusi bila file MoU terisi
-        if (file_mou != "") {
-
-            //Cari ekstensi file MoU yg diupload
-            var typeMOU = document.querySelector('#file_mou').value;
-            var getTypeMOU = typeMOU.split('.').pop();
-
-            //cari ukuran file MoU yg diupload
-            var fileMOU = document.getElementById("file_mou").files;
-            var getSizeMOU = document.getElementById("file_mou").files[0].size / 1024;
 
             //Toast bila upload file MoU selain pdf
             if (getTypeMOU != 'pdf') {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">File Surat Harus <b>.pdf</b></div>'
-                });
                 document.getElementById("err_file_mou").innerHTML = "File MoU Harus pdf";
             } //Toast bila upload file MoU diatas 1 Mb 
             else if (getSizeMOU > 1024) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">Ukuran File MoU Harus <br><b>Kurang dari 1 Mb</b></div>'
-                });
                 document.getElementById("err_file_mou").innerHTML = "Ukuran File MoU Harus Kurang dari 1 Mb";
             }
-        }
-
-        //eksekusi bila file PKS terisi
-        if (file_pks != "") {
-
-            //Cari ekstensi file PKS yg diupload
-            var typePKS = document.querySelector('#file_pks').value;
-            var getTypePKS = typePKS.split('.').pop();
-
-            //cari ukuran file PKS yg diupload
-            var filePKS = document.getElementById("file_pks").files;
-            var getSizePKS = document.getElementById("file_pks").files[0].size / 1024;
 
             //Toast bila upload file PKS selain pdf
             if (getTypePKS != 'pdf') {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">File PKS Harus <b>.pdf</b></div>'
-                });
                 document.getElementById("err_file_pks").innerHTML = "File PKS Harus pdf";
             } //Toast bila upload file proposal_kak diatas 1 Mb
             else if (getSizePKS > 1024) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-
-                Toast.fire({
-                    icon: 'warning',
-                    title: '<div class="text-md text-center">Ukuran File PKS Harus <br><b>Kurang dari 1 Mb</b></div>'
-                });
                 document.getElementById("err_file_pks").innerHTML = "Ukuran File PKS Harus Kurang dari 1 Mb";
             }
-        }
-
-        if (
-            id_institusi != "" &&
-            no_rsj_mou != "" &&
-            no_institusi_mou != "" &&
-            tgl_mulai_mou != "" &&
-            tgl_selesai_mou != "" &&
-            id_jurusan_pdd != "" &&
-            id_profesi_pdd != "" &&
-            id_jenjang_pdd != "" &&
-            file_mou != "" &&
-            getTypeMOU == 'pdf' &&
-            getSizeMOU <= 1024 &&
-            file_pks != "" &&
-            getTypePKS == 'pdf' &&
-            getSizePKS <= 1024
-        ) {
-            var data_mou = $('#form_mou').serializeArray();
+        } else {
+            var data_kerjasama = $('#form_mou').serializeArray();
             $.ajax({
                 type: 'POST',
                 url: "_admin/exc/x_u_mou_s.php",
-                data: data_mou,
+                data: data_kerjasama,
                 success: function() {
                     //ambil data file yang diupload
                     var data_file = new FormData();
@@ -446,9 +400,9 @@ try {
                         allowOutsideClick: false,
                         // isDismissed: false,
                         icon: 'success',
-                        title: '<span class"text-xs"><b>DATA MOU</b><br>Berhasil Tersimpan',
+                        title: '<span class"text-xs"><b>DATA KERJASAMA</b><br>Berhasil Terubah',
                         showConfirmButton: false,
-                        html: '<a href="?mou" class="btn btn-outline-primary">OK</a>',
+                        html: '<a href="?kerjasama" class="btn btn-outline-primary">OK</a>',
                         timer: 10000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
@@ -457,7 +411,7 @@ try {
                         }
                     }).then(
                         function() {
-                            document.location.href = "?mou";
+                            document.location.href = "?kerjasama";
                         }
                     );
                 },

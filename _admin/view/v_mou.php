@@ -17,13 +17,14 @@
         <!-- Data Tabel MoU -->
         <div class="card shadow mb-4">
             <div class="card-body">
-                <div id="data_mou"></div>
+                <div class="loader text-center"></div>
+                <div id="data_kerjasama"></div>
             </div>
         </div>
     </div>
     <script>
         $(document).ready(function() {
-            $('#data_mou').load("_admin/view/v_mouData.php");
+            $('#data_kerjasama').load("_admin/view/v_mouData.php");
 
             $(".arsip").click(function() {
                 var id = $(this).attr('id');
@@ -54,7 +55,7 @@
                     }
                 });
 
-                $('#data_mou').load("_admin/view/v_mouData.php");
+                $('#data_kerjasama').load("_admin/view/v_mouData.php");
             });
         });
     </script>

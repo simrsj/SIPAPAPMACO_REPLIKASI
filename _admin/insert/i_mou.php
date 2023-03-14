@@ -321,11 +321,11 @@
                 document.getElementById("err_file_pks").innerHTML = "Ukuran File PKS Harus Kurang dari 1 Mb";
             }
         } else {
-            var data_mou = $('#form_mou').serializeArray();
+            var data_kerjasama = $('#form_mou').serializeArray();
             $.ajax({
                 type: 'POST',
                 url: "_admin/exc/x_i_mou_s.php",
-                data: data_mou,
+                data: data_kerjasama,
                 success: function() {
                     //ambil data file yang diupload
                     var data_file = new FormData();
@@ -346,9 +346,9 @@
                         allowOutsideClick: false,
                         // isDismissed: false,
                         icon: 'success',
-                        title: '<span class"text-xs"><b>DATA MOU</b><br>Berhasil Tersimpan',
+                        title: '<span class"text-xs"><b>DATA DATA KERJASAMA</b><br>Berhasil Tersimpan',
                         showConfirmButton: false,
-                        html: '<a href="?mou" class="btn btn-outline-primary">OK</a>',
+                        html: '<a href="?kerjasama" class="btn btn-outline-primary">OK</a>',
                         timer: 10000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
