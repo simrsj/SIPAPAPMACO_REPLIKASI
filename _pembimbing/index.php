@@ -14,12 +14,11 @@ if ($_SESSION['status_user'] == "Y") {
 
 	//data praktikan dan user 
 	try {
-		$sql_praktikan = "SELECT * FROM tb_pembimbing ";
-		$sql_praktikan .= " JOIN tb_user ON tb_pembimbing.id_user = tb_user.id_user";
-		$sql_praktikan .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
-		// echo $sql_praktikan;
-		$q_praktikan = $conn->query($sql_praktikan);
-		$d_pembimbing = $q_praktikan->fetch(PDO::FETCH_ASSOC);
+		$sql_pembimbing = "SELECT * FROM tb_pembimbing ";
+		$sql_pembimbing .= " JOIN tb_user ON tb_pembimbing.id_user = tb_user.id_user";
+		$sql_pembimbing .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
+		$q_pembimbing = $conn->query($sql_pembimbing);
+		$d_pembimbing = $q_pembimbing->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
 		echo "<script>alert('-DATA PEMBIMBING-');document.location.href='?error404';</script>";
 	}
