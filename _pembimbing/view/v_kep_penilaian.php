@@ -153,12 +153,12 @@
                                                                         ?>
                                                                         <?php if ($r_kep_nil_lap_pen < 1) { ?>
                                                                             <span class="badge badge-danger">Nilai Belum Ada</span><br>
-                                                                            <a href="?i_kep_nil_lap_pen&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
+                                                                            <a href="?i_kep_nil_lap_pen&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik_pembimbing['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
                                                                                 <i class="fa-regular fa-pen-to-square"></i> Isi
                                                                             </a>
                                                                         <?php } else { ?>
                                                                             <span class="badge badge-success">Nilai Sudah Ada</span><br>
-                                                                            <a href="?u_kep_nil_lap_pen&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktikan']))) ?>" class="btn btn-outline-primary btn-sm">
+                                                                            <a href="?u_kep_nil_lap_pen&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik_pembimbing['id_praktikan']))) ?>" class="btn btn-outline-primary btn-sm">
                                                                                 <i class="fa-regular fa-pen-to-square"></i> Ubah
                                                                             </a>
                                                                         <?php } ?>
