@@ -54,11 +54,11 @@
         <!-- Input nilai  -->
         <div class="card shadow mb-4">
             <div class="card-header">
-                Form Penilaian Laporan Pendahuluan (LP)
+                Strategi Pelaksanaan Tindakan Keperawatan (SPTK)
             </div>
             <div class="card-body">
                 <div class="table-responsive-md">
-                    <form action="?kep_nil_lap_pen&data=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "i_x"))) ?>" method="post">
+                    <form action="?x_i_kep_nil_lap_pen" method="post">
                         <input type="hidden" name="idprkn" value="<?= $_GET['idprkn'] ?>" required readonly>
                         <input type="hidden" name="idp" value="<?= $_GET['idp'] ?>" required readonly>
                         <table class="table table-bordered " id="dataTable">
@@ -73,7 +73,7 @@
                                 <!-- A  -->
                                 <tr class="b text-center table-secondary">
                                     <td>A</td>
-                                    <td>ISI</td>
+                                    <td>FORMAT SP</td>
                                     <td>1</td>
                                     <td>2</td>
                                     <td>3</td>
@@ -81,7 +81,7 @@
                                 </tr>
                                 <tr>
                                     <td>1</td>
-                                    <td>Lengkap</td>
+                                    <td>Sesuai kaidah Terisi kalimat Langung</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A1" value="1" style="width: 30px;  height: 30px;" required>
 
@@ -101,7 +101,7 @@
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>Sistematika Benar</td>
+                                    <td>Format SP Terisi Lengkap</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A2" value="1" style="width: 30px;  height: 30px;" required>
 

@@ -1,5 +1,59 @@
 <?php if ($_SESSION['level_user'] == 4) { ?>
     <div class="container-fluid">
+        <?php
+
+        $exp_arr_ket = explode("*sm*", base64_decode(urldecode(hex2bin($_GET['ket']))));
+        $ket = $exp_arr_ket[1];
+        ?>
+        <?php if ($_SESSION['ket_nilai'] == "TAMBAH") { ?>
+            <div class="toast fixed-top topbar align-center mx-auto mt-5 shadow  " role="alert" aria-live="assertive" aria-atomic="true" id="toast_success">
+                <div class="toast-header text-light bg-success">
+                    Berhasil Ditambah
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Hello, world! This is a toast message.
+                </div>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $('#toast_success').toast("show");
+                });
+            </script>
+            <?php unset($_SESSION['ket_nilai']); ?>
+        <?php } else if ($ket == "UBAH") { ?>
+            <!-- Create the toast message -->
+            <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center fixed-top topbar  static-top shadow">
+
+                <!-- Then put toasts within -->
+                <div class="toast justify-content-center align-items-center fixed-top topbar  static-top shadow" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="10000" id="toast_primary">
+                    <div class="toast-header  bg-primary text-light">
+                        <strong class="mr-auto">Data Berhasil Dirubah</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="10000" id="">
+
+                <!-- Create the toast header -->
+                <div class="toast-header  bg-primary text-light">
+                    <strong class="mr-auto">ERROR</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $('#toast_primary').toast("show");
+                });
+            </script>
+            <?php unset($_SESSION['ket_nilai']); ?>
+        <?php } ?>
         <div class="toast-container position-fixed bottom-0 right-0">
 
             <!-- Create the toast message -->
@@ -153,110 +207,22 @@
                                                                         ?>
                                                                         <?php if ($r_kep_nil_lap_pen < 1) { ?>
                                                                             <span class="badge badge-danger">Nilai Belum Ada</span><br>
-                                                                            <a href="?i_kep_nil_lap_pen&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik_pembimbing['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
+                                                                            <a href="?kep_nil_lap_pen&data=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "i"))) ?>&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik_pembimbing['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
                                                                                 <i class="fa-regular fa-pen-to-square"></i> Isi
                                                                             </a>
                                                                         <?php } else { ?>
                                                                             <span class="badge badge-success">Nilai Sudah Ada</span><br>
-                                                                            <a href="?u_kep_nil_lap_pen&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik_pembimbing['id_praktikan']))) ?>" class="btn btn-outline-primary btn-sm">
+                                                                            <a href="?kep_nil_lap_pen&data=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "u"))) ?>&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik_pembimbing['id_praktikan']))) ?>" class="btn btn-outline-primary btn-sm">
                                                                                 <i class="fa-regular fa-pen-to-square"></i> Ubah
                                                                             </a>
                                                                         <?php } ?>
                                                                     </td>
                                                                     <!-- Nilai Strategi Pelaksanaan Tindakan Keperawatan (SPTK)  -->
-                                                                    <td>
-                                                                        <?php
-                                                                        try {
-                                                                            $sql_kep_nil_sptk = "SELECT * FROM tb_kep_nil_sptk ";
-                                                                            $sql_kep_nil_sptk .= " WHERE id_praktikan = " . $d_praktik_pembimbing['id_praktikan'];
-                                                                            // echo "$sql_kep_nil_sptk<br>";
-                                                                            $q_kep_nil_sptk = $conn->query($sql_kep_nil_sptk);
-                                                                            $r_kep_nil_sptk = $q_kep_nil_sptk->rowCount();
-                                                                        } catch (Exception $ex) {
-                                                                            echo "<script>alert('-DATA NILAI');";
-                                                                            echo "document.location.href='?error404';</script>";
-                                                                        }
-                                                                        ?>
-                                                                        <?php if ($r_kep_nil_sptk < 1) { ?>
-                                                                            <span class="badge badge-danger">Nilai Belum Ada</span><br>
-                                                                            <a href="?i_kep_nil_sptk&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
-                                                                                <i class="fa-regular fa-pen-to-square"></i> Isi
-                                                                            </a>
-                                                                        <?php } else { ?>
-                                                                            <span class="badge badge-success">Nilai Sudah Ada</span><br>
-                                                                            <a href="?u_kep_nil_sptk&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
-                                                                                <i class="fa-regular fa-pen-to-square"></i> Ubah
-                                                                            </a>
-                                                                        <?php } ?>
-                                                                    </td>
+                                                                    <td></td>
                                                                     <!-- Dokumen Asuhan Keperawatan Jiwa -->
-                                                                    <td>
-                                                                        <?php
-                                                                        try {
-                                                                            $sql_kep_nil_dokaskep = "SELECT * FROM tb_kep_nil_dokaskep ";
-                                                                            $sql_kep_nil_dokaskep .= " WHERE id_praktikan = " . $d_praktik_pembimbing['id_praktikan'];
-                                                                            // echo "$sql_kep_nil_dokaskep<br>";
-                                                                            $q_kep_nil_dokaskep = $conn->query($sql_kep_nil_dokaskep);
-                                                                            $r_kep_nil_dokaskep = $q_kep_nil_dokaskep->rowCount();
-                                                                        } catch (Exception $ex) {
-                                                                            echo "<script>alert('-DATA NILAI');";
-                                                                            echo "document.location.href='?error404';</script>";
-                                                                        }
-                                                                        ?>
-                                                                        <?php if ($r_kep_nil_dokaskep < 1) { ?>
-                                                                            <span class="badge badge-danger">Nilai Belum Ada</span><br>
-                                                                            <a href="?i_kep_nil_dokaskep&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
-                                                                                <i class="fa-regular fa-pen-to-square"></i> Isi
-                                                                            </a>
-                                                                        <?php } else { ?>
-                                                                            <span class="badge badge-success">Nilai Sudah Ada</span><br>
-                                                                            <a href="?u_kep_nil_sptk&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
-                                                                                <i class="fa-regular fa-pen-to-square"></i> Ubah
-                                                                            </a>
-                                                                        <?php } ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php
-                                                                        try {
-                                                                            $sql_kep_nil_lap_pen = "SELECT * FROM tb_kep_nil_lap_pen ";
-                                                                            $sql_kep_nil_lap_pen .= " WHERE id_praktikan = " . $d_praktik_pembimbing['id_praktikan'];
-                                                                            // echo "$sql_praktik_pembimbing<br>";
-                                                                            $q_kep_nil_lap_pen = $conn->query($sql_kep_nil_lap_pen);
-                                                                            $r_kep_nil_lap_pen = $q_kep_nil_lap_pen->rowCount();
-                                                                        } catch (Exception $ex) {
-                                                                            echo "<script>alert('-DATA PRAKTIK');";
-                                                                            echo "document.location.href='?error404';</script>";
-                                                                        }
-                                                                        ?>
-                                                                        <?php if ($r_kep_nil_lap_pen > 0) { ?>
-                                                                        <?php } else { ?>
-                                                                            <span class="badge badge-danger">Nilai Belum Ada</span><br>
-                                                                            <a href="?kep_nil_lap_pen" class="btn btn-outline-danger btn-sm">
-                                                                                <i class="fa-regular fa-pen-to-square"></i>
-                                                                            </a>
-                                                                        <?php } ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php
-                                                                        try {
-                                                                            $sql_kep_nil_lap_pen = "SELECT * FROM tb_kep_nil_lap_pen ";
-                                                                            $sql_kep_nil_lap_pen .= " WHERE id_praktikan = " . $d_praktik_pembimbing['id_praktikan'];
-                                                                            // echo "$sql_praktik_pembimbing<br>";
-                                                                            $q_kep_nil_lap_pen = $conn->query($sql_kep_nil_lap_pen);
-                                                                            $r_kep_nil_lap_pen = $q_kep_nil_lap_pen->rowCount();
-                                                                        } catch (Exception $ex) {
-                                                                            echo "<script>alert('-DATA PRAKTIK');";
-                                                                            echo "document.location.href='?error404';</script>";
-                                                                        }
-                                                                        ?>
-                                                                        <?php if ($r_kep_nil_lap_pen > 0) { ?>
-                                                                        <?php } else { ?>
-                                                                            <span class="badge badge-danger">Nilai Belum Ada</span><br>
-                                                                            <a href="?kep_nil_lap_pen" class="btn btn-outline-danger btn-sm">
-                                                                                <i class="fa-regular fa-pen-to-square"></i>
-                                                                            </a>
-                                                                        <?php } ?>
-                                                                    </td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
                                                                     <td>
                                                                         DATA NILAI
                                                                     </td>

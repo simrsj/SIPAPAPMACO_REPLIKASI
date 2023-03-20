@@ -45,7 +45,7 @@ try {
     // echo $sql_insert . "<br>";
     $conn->query($sql_insert);
     echo "<script>document.location.href='?kep_penilaian&ket=" . bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "TAMBAH"))) . "#rincian" . $_POST['idp'] . "';</script>";
-
+    $_SESSION['ket_nilai'] = "TAMBAH";
     // $dataJSON['ket'] = "Y";
 } catch (PDOException $e) {
     echo "<script>alert('DATA INSERT KEP KOMPETENSI-');";

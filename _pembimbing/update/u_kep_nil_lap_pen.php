@@ -57,7 +57,7 @@
         try {
             $sql_kep_nil_lap_pen = "SELECT * FROM tb_kep_nil_lap_pen ";
             $sql_kep_nil_lap_pen .= " WHERE id_praktikan = " . $idprkn;
-            // echo "$sql_praktik<br>";
+            // echo "$sql_kep_nil_lap_pen<br>";
             $q_kep_nil_lap_pen = $conn->query($sql_kep_nil_lap_pen);
             $d_kep_nil_lap_pen = $q_kep_nil_lap_pen->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $ex) {
