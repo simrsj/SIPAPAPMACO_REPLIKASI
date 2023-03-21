@@ -70,7 +70,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- A  -->
+                                <!-- A -->
                                 <tr class="b text-center table-secondary">
                                     <td>A</td>
                                     <td>ISI</td>
@@ -84,19 +84,15 @@
                                     <td>Lengkap</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A1" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A1" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A1" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A1" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -104,39 +100,30 @@
                                     <td>Sistematika Benar</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A2" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A2" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A2" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A2" value="4" style="width: 30px;  height: 30px;" required>
-
-                                    </td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>Waktu Pengumpulan Tepat</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A3" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A3" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A3" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A3" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -144,19 +131,15 @@
                                     <td>Bukan Repetisi dan Plagiasi</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A4" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A4" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A4" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="A4" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -176,19 +159,15 @@
                                     <td>Mampu menguraikan pengertian</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B1" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B1" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B1" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B1" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -196,19 +175,15 @@
                                     <td>Mampu menguraikan faktor penyebab</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B2" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B2" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B2" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B2" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -216,19 +191,15 @@
                                     <td>Mampu menjelaskan proses terjadinya masalah</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B3" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B3" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B3" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B3" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -236,19 +207,15 @@
                                     <td>Mampu menyebutkan masalah Keperawatan jiwa yang Muncul</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B4" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B4" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B4" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B4" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -256,19 +223,15 @@
                                     <td>Mampu menjelaskan tindakan Keperawatan jiwa</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B5" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B5" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B5" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B5" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -276,19 +239,15 @@
                                     <td>Mampu menyebutkan tindakan dalam aplikasi (contoh kalimat langsung)</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B6" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B6" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B6" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="B6" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -308,19 +267,15 @@
                                     <td>Pustaka yang digunakan 10 tahun terakhir</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C1" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C1" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C1" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C1" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -328,38 +283,30 @@
                                     <td>Pustaka relevan dengan keperawatan jiwa</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C2" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C2" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C2" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C2" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 <tr>
                                     <td>3</td>
                                     <td>Menggunakan lebih dari 3 referensi text book</td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C3" value="1" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C3" value="2" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C3" value="3" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                     <td class="text-center">
                                         <input class="boxed-check-input" type="radio" name="C3" value="4" style="width: 30px;  height: 30px;" required>
-
                                     </td>
                                 </tr>
                             </tbody>

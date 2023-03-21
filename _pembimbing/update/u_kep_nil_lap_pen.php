@@ -71,7 +71,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive-md">
-                    <form action="?x_u_kep_nil_lap_pen" method="post">
+                    <form action="?kep_nil_lap_pen&data=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "u_x"))) ?>" method="post">
                         <input type="hidden" name="idprkn" value="<?= $_GET['idprkn'] ?>" required readonly>
                         <input type="hidden" name="idp" value="<?= $_GET['idp'] ?>" required readonly>
                         <table class="table table-bordered " id="dataTable">
