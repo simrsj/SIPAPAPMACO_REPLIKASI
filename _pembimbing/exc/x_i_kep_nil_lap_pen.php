@@ -3,6 +3,7 @@
 // echo "<pre>";
 // print_r($_POST);
 // echo "</pre>";
+error_reporting(0);
 
 $exp_arr_idprkn = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idprkn']))));
 $idprkn = $exp_arr_idprkn[1];

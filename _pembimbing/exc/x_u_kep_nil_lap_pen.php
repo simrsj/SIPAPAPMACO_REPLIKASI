@@ -1,13 +1,10 @@
 <?php
-
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
+error_reporting(0);
 $exp_arr_idprkn = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idprkn']))));
 $idprkn = $exp_arr_idprkn[1];
-
-
 try {
     $sql_update = "UPDATE tb_kep_nil_lap_pen SET ";
     $sql_update .= " tgl_ubah = '" . date('Y-m-d') . "', ";
@@ -26,13 +23,10 @@ try {
     $sql_update .= " C3 = '" . $_POST['C3'] . "' ";
     $sql_update .= " WHERE id_praktikan = '" . $idprkn . "'";
     // echo $sql_update . "<br>";
-    // $conn->query($sql_update);
-    echo "<script>document.location.href='?kep_penilaian&ket=" . bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "UBAH"))) . "#rincian" . $_POST['idp'] . "';</script>";
-
-    // $dataJSON['ket'] = "Y";
+    $conn->query($sql_update);
+    echo "<script>document.location.href='?kep_penilaian#rincian" . $_POST['idp'] . "';</script>";
+    $_SESSION['ket_nilai'] = "UBAH";
 } catch (PDOException $e) {
     echo "<script>alert('DATA UBAH KEP KOMPETENSI-');";
-    // echo "document.location.href='?error404';</script>";
-    // $dataJSON['ket'] = "T";
+    echo "document.location.href='?error404';</script>";
 }
-// echo json_encode($dataJSON);
