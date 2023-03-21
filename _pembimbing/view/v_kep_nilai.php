@@ -156,19 +156,20 @@
                                                                     <td>
                                                                         <?php
                                                                         try {
-                                                                            $sql_kep_nil_lap_pen = "SELECT * FROM tb_kep_nil_lap_pen ";
-                                                                            $sql_kep_nil_lap_pen .= " WHERE id_praktikan = " . $d_praktik_pembimbing['id_praktikan'];
+                                                                            $sql_kep_nilai = "SELECT * FROM tb_kep_nilai ";
+                                                                            $sql_kep_nilai .= " WHERE id_praktikan = " . $d_praktik_pembimbing['id_praktikan'];
+                                                                            $sql_kep_nilai .= " AND id_praktikan = " . $d_praktik_pembimbing['id_praktikan'];
                                                                             // echo "$sql_praktik_pembimbing<br>";
-                                                                            $q_kep_nil_lap_pen = $conn->query($sql_kep_nil_lap_pen);
-                                                                            $r_kep_nil_lap_pen = $q_kep_nil_lap_pen->rowCount();
+                                                                            $q_kep_nilai = $conn->query($sql_kep_nilai);
+                                                                            $r_kep_nilai = $q_kep_nilai->rowCount();
                                                                         } catch (Exception $ex) {
                                                                             echo "<script>alert('-DATA PRAKTIK');";
                                                                             echo "document.location.href='?error404';</script>";
                                                                         }
                                                                         ?>
-                                                                        <?php if ($r_kep_nil_lap_pen < 1) { ?>
+                                                                        <?php if ($r_kep_nilai < 1) { ?>
                                                                             <span class="badge badge-danger">Nilai Belum Ada</span><br>
-                                                                            <a href="?kep_nil_lap_pen&data=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "i"))) ?>&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik_pembimbing['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
+                                                                            <a href="?kep_nilai&data=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "LP"))) ?>&idp=<?= md5($d_praktik['id_praktik']); ?>&idprkn=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik_pembimbing['id_praktikan']))) ?>" class="btn btn-outline-danger btn-sm">
                                                                                 <i class="fa-regular fa-pen-to-square"></i> Isi
                                                                             </a>
                                                                         <?php } else { ?>
@@ -183,57 +184,32 @@
                                                                                 <div class="modal-dialog" role="document">
                                                                                     <div class="modal-content">
                                                                                         <div class="modal-body">
-                                                                                            <?php
-                                                                                            $no = 1;
-                                                                                            while ($d_kep_nil_lap_pen = $q_kep_nil_lap_pen->fetch(PDO::FETCH_ASSOC)) {
-                                                                                            ?>
-                                                                                                <div class="table-responsive">
-                                                                                                    <table class="table table-hover" id="dataTable">
-                                                                                                        <thead class="table-dark">
-                                                                                                            <tr class="text-center">
-                                                                                                                <th scope='col'>No</th>
-                                                                                                                <th>ASPEK YANG DINILAI</th>
-                                                                                                                <th>Nilai</th>
-                                                                                                            </tr>
-                                                                                                        </thead>
-                                                                                                        <tbody>
+                                                                                            <div class="table-responsive">
+                                                                                                <table class="table table-hover" id="dataTable">
+                                                                                                    <thead class="table-dark">
+                                                                                                        <tr class="text-center">
+                                                                                                            <th scope='col'>No</th>
+                                                                                                            <th>ASPEK YANG DINILAI</th>
+                                                                                                            <th>Nilai</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <?php
+                                                                                                        $no1 = 1;
+                                                                                                        while ($d_kep_nil_lap_pen = $q_kep_nil_lap_pen->fetch(PDO::FETCH_ASSOC)) {
+                                                                                                        ?>
                                                                                                             <tr>
-                                                                                                                <td> <?= $no; ?> </td>
+                                                                                                                <td> <?= $no1; ?> </td>
                                                                                                                 <td> Lenkap </td>
                                                                                                                 <td> <?= $d_kep_nil_lap_pen['A1']; ?> </td>
                                                                                                             </tr>
-                                                                                                            <tr>
-                                                                                                                <td> <?= $no; ?> </td>
-                                                                                                                <td> Sistematika Benar </td>
-                                                                                                                <td> <?= $d_kep_nil_lap_pen['A2']; ?> </td>
-                                                                                                            </tr>
-                                                                                                            <tr>
-                                                                                                                <td> <?= $no; ?> </td>
-                                                                                                                <td> Waktu Pengumpulan Tepat </td>
-                                                                                                                <td> <?= $d_kep_nil_lap_pen['A3']; ?> </td>
-                                                                                                            </tr>
-                                                                                                            <tr>
-                                                                                                                <td> <?= $no; ?> </td>
-                                                                                                                <td> Bukan Repetisi dan Plagiasi </td>
-                                                                                                                <td> <?= $d_kep_nil_lap_pen['A4']; ?> </td>
-                                                                                                            </tr>
-                                                                                                            <tr>
-                                                                                                                <td> <?= $no; ?> </td>
-                                                                                                                <td> Lenkap </td>
-                                                                                                                <td> <?= $d_kep_nil_lap_pen['A1']; ?> </td>
-                                                                                                            </tr>
-                                                                                                            <tr>
-                                                                                                                <td> <?= $no; ?> </td>
-                                                                                                                <td> Lenkap </td>
-                                                                                                                <td> <?= $d_kep_nil_lap_pen['A1']; ?> </td>
-                                                                                                            </tr>
-                                                                                                        </tbody>
-                                                                                                    </table>
-                                                                                                </div>
-                                                                                            <?php
-                                                                                                $no++;
-                                                                                            }
-                                                                                            ?>
+                                                                                                        <?php
+                                                                                                            $no1++;
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

@@ -57,7 +57,7 @@ if ($_SESSION['status_user'] == "Y") {
 										Matrix Kegiatan
 									</a>
 								<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
-									<a class="dropdown-item" href="?kep_penilaian">
+									<a class="dropdown-item" href="?kep_nil">
 										<i class="fa-regular fa-pen-to-square"></i>
 										Penilaian Praktikan
 									</a>
