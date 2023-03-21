@@ -1,75 +1,36 @@
 <?php if ($_SESSION['level_user'] == 4) { ?>
     <div class="container-fluid">
         <?php
-
-        $exp_arr_ket = explode("*sm*", base64_decode(urldecode(hex2bin($_GET['ket']))));
-        $ket = $exp_arr_ket[1];
+        $exp_arr_data = explode("*sm*", base64_decode(urldecode(hex2bin($_GET['data']))));
+        $ket = $exp_arr_data[2];
         ?>
-        <?php if ($_SESSION['ket_nilai'] == "TAMBAH") { ?>
-            <div class="toast fixed-top topbar align-center mx-auto mt-5 shadow  " role="alert" aria-live="assertive" aria-atomic="true" id="toast_success">
-                <div class="toast-header text-light bg-success">
-                    Berhasil Ditambah
+        <?php
+        if (
+            $_SESSION['ket_nilai'] == "TAMBAH" ||
+            $_SESSION['ket_nilai'] == "UBAH"
+        ) {
+            if ($_SESSION['ket_nilai'] == "TAMBAH")  $x = "success";
+            else if ($_SESSION['ket_nilai'] == "UBAH") $x = "primary";
+        ?>
+            <div class="toast fixed-top mx-auto mt-5 shadow-lg  bg-<?= $x ?> " role="alert" data-autohide="true" data-delay="10000" id="toast_<?= $x ?>">
+                <div class="m-0 p-2 text-center">
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    Hello, world! This is a toast message.
-                </div>
-            </div>
-            <script>
-                $(document).ready(function() {
-                    $('#toast_success').toast("show");
-                });
-            </script>
-            <?php unset($_SESSION['ket_nilai']); ?>
-        <?php } else if ($ket == "UBAH") { ?>
-            <!-- Create the toast message -->
-            <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center fixed-top topbar  static-top shadow">
-
-                <!-- Then put toasts within -->
-                <div class="toast justify-content-center align-items-center fixed-top topbar  static-top shadow" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="10000" id="toast_primary">
-                    <div class="toast-header  bg-primary text-light">
-                        <strong class="mr-auto">Data Berhasil Dirubah</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="10000" id="">
-
-                <!-- Create the toast header -->
-                <div class="toast-header  bg-primary text-light">
-                    <strong class="mr-auto">ERROR</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <strong class="mr-auto">
+                            DATA BERHASIL DI<?= $_SESSION['ket_nilai'] ?>
+                        </strong>
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
             </div>
             <script>
                 $(document).ready(function() {
-                    $('#toast_primary').toast("show");
+                    $('#toast_<?= $x ?>').toast("show");
                 });
             </script>
             <?php unset($_SESSION['ket_nilai']); ?>
-        <?php } ?>
-        <div class="toast-container position-fixed bottom-0 right-0">
-
-            <!-- Create the toast message -->
-            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="10000" id="toast_success">
-
-                <!-- Create the toast header -->
-                <div class="toast-header  bg-success text-light">
-                    <strong class="mr-auto">ERROR</strong>
-                </div>
-
-                <!-- Create the toast body -->
-                <div class="toast-body">
-                    ERRRO CUY
-                </div>
-            </div>
-        </div>
+        <?php
+        }
+        ?>
         <div class="row">
             <div class="col-lg-10">
                 <h1 class="h3 mb-2 text-gray-800">Daftar Bimbingan Praktik</h1>

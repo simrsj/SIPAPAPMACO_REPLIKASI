@@ -7,7 +7,6 @@
 $exp_arr_idprkn = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idprkn']))));
 $idprkn = $exp_arr_idprkn[1];
 
-
 try {
     $sql_insert = "INSERT INTO tb_kep_nil_lap_pen ( ";
     $sql_insert .= " tgl_input, ";
@@ -44,7 +43,7 @@ try {
     $sql_insert .= " )";
     // echo $sql_insert . "<br>";
     $conn->query($sql_insert);
-    echo "<script>document.location.href='?kep_penilaian&ket=" . bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "TAMBAH"))) . "#rincian" . $_POST['idp'] . "';</script>";
+    echo "<script>document.location.href='?kep_penilaian#rincian" . $_POST['idp'] . "';</script>";
     $_SESSION['ket_nilai'] = "TAMBAH";
     // $dataJSON['ket'] = "Y";
 } catch (PDOException $e) {
