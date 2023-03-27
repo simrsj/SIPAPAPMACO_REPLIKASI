@@ -11,20 +11,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 	<!-- Custom fonts for this template -->
 	<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-
-	<!-- Custom styles for this template -->
 	<link href="../css/sb-admin-2.min.css" rel="stylesheet">
-	<!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" /> -->
-
-	<!-- Add-ons -->
 </head>
 
 <body>
 
 	<center>
 
-		<h2>LAPORAN MOU RS JIWA PROVINSI JAWA BARAT</h2>
+		<h2>LAPORAN KERJASAMA INSTITUSI PENDIDIKAN <br>DI RS JIWA PROVINSI JAWA BARAT</h2>
 		<br />
 		<br />
 		<br />
@@ -39,18 +33,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 			</tr>
 			<?php
 			$no = 1;
-			$sql_mou = "SELECT * FROM tb_mou ";
-			$sql_mou .= " JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi ";
-			// $sql_mou .= " JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-			// $sql_mou .= " JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
-			// $sql_mou .= " JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd";
-			// $sql_mou .= " JOIN tb_akreditasi ON tb_mou.id_akreditasi = tb_akreditasi.id_akreditasi";
-			$sql_mou .= " ORDER BY tb_institusi.nama_institusi ASC";
-			// echo $sql_mou;
-			$q_mou = $conn->query($sql_mou);
+			$sql_kerjasama = "SELECT * FROM tb_kerjasama ";
+			$sql_kerjasama .= " JOIN tb_institusi ON tb_kerjasama.id_institusi = tb_institusi.id_institusi ";
+			$sql_kerjasama .= " ORDER BY tb_institusi.nama_institusi ASC";
+			// echo $sql_kerjasama;
+			$q_kerjasama = $conn->query($sql_kerjasama);
 			$berlaku = 0;
 			$tb = 0;
-			while ($data = $q_mou->fetch(PDO::FETCH_ASSOC)) {
+			while ($data = $q_kerjasama->fetch(PDO::FETCH_ASSOC)) {
 				$date_end = strtotime($data['tgl_selesai_mou']);
 				$date_now = strtotime(date('Y-m-d'));
 				$date_diff = ($date_now - $date_end) / 24 / 60 / 60;
@@ -67,8 +57,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 					<td><?= $no++; ?></td>
 					<td><?= $data['nama_institusi']; ?></td>
 					<td><?= tanggal($data['tgl_selesai_mou']); ?></td>
-					<td><?= $data['no_rsj_mou']; ?></td>
-					<td><?= $data['no_institusi_mou']; ?></td>
+					<td><?= $data['no_pks_rsj']; ?></td>
+					<td><?= $data['no_pks_institusi']; ?></td>
 					<td align="center"><?= $status; ?></td>
 				</tr>
 			<?php
