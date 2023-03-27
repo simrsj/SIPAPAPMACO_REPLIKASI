@@ -29,8 +29,8 @@ function generateKalenderKedKep($date)
         <table class='table table-striped'>
             <thead class=" thead-dark">
                 <tr>
-                    <th colspan="<?php echo JUMLAH_KOLOM1 ?>" class="text-center">
-                        <?php echo $title . " " . $year; ?>
+                    <th colspan="<?= JUMLAH_KOLOM1 ?>" class="text-center">
+                        <?= $title . " " . $year; ?>
                     </th>
                 </tr>
             </thead>
@@ -39,7 +39,7 @@ function generateKalenderKedKep($date)
                     <?php
                     foreach ($weekDays as $key => $weekDay) {
                     ?>
-                        <td class="text-center"><?php echo $weekDay ?></td>
+                        <td class="text-center"><?= $weekDay ?></td>
                     <?php
                     }
                     ?>
@@ -71,19 +71,28 @@ function generateKalenderKedKep($date)
                         $sql_messTgl .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
                         $sql_messTgl .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl' AND tb_mess.id_mess = " . $_GET['id'];
                         // echo "$sql_messTgl<br>";
-                        $q_mess = $conn->query($sql_messTgl);
-                        $q1_mess = $conn->query($sql_messTgl);
+                        try {
+                            $q_mess = $conn->query($sql_messTgl);
+                            $q1_mess = $conn->query($sql_messTgl);
+                        } catch (Exception $ex) {
+
+                            echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+                        }
 
                         $jp_jt = 0;
                         while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-                            $nama_mess = $d_mess['nama_mess'];
                             $jp_jt += $d_mess['jumlah_praktik'];
                         }
 
                         $sql_kuotaMess = "SELECT * FROM tb_mess";
                         $sql_kuotaMess .= " WHERE id_mess= " .  $_GET['id'];
+                        try {
+                            $q_kuotaMess = $conn->query($sql_kuotaMess);
+                        } catch (Exception $ex) {
 
-                        $q_kuotaMess = $conn->query($sql_kuotaMess);
+                            echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+                        }
+
                         $d_kuotaMess = $q_kuotaMess->fetch(PDO::FETCH_ASSOC);
                         $kuota_messTotal = $d_kuotaMess['kapasitas_t_mess'];
 
@@ -97,31 +106,36 @@ function generateKalenderKedKep($date)
                         } else {
                             $btn_mess = "secondary";
                         }
-                        // echo $jp_jt . "-" . $kuota_ked . "-" . $kuota_kep . "<br>";
 
                         $sql_infoMess = " SELECT * FROM tb_mess ";
                         $sql_infoMess .= " WHERE tb_mess.id_mess = " . $_GET['id'];
                         // echo $sql_infoMess . "<br>";
-                        $q_infoMess = $conn->query($sql_infoMess);
+                        try {
+                            $q_infoMess = $conn->query($sql_infoMess);
+                        } catch (Exception $ex) {
+
+                            echo "<script>alert('Maaf Data Tidak Ada');document.location.href='?error404';</script>";
+                        }
+
                         $d_infoMess = $q_infoMess->fetch(PDO::FETCH_ASSOC);
                         $kuota_sisa = $kuota_messTotal - $jp_jt;
                         if ($day == $i) {
                     ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $_GET['id'] . $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-<?= $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?= $_GET['id'] . $tgl; ?>" title="<?= tanggal($year . "-" . $month . "-" . $i); ?>"><?= $i; ?></button>
 
                                 <!-- modal   -->
-                                <div class="modal fade text-gray-800" id="tlg<?php echo $_GET['id'] . $tgl; ?>">
+                                <div class="modal fade text-gray-800" id="tlg<?= $_GET['id'] . $tgl; ?>">
                                     <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="text-center text-lg text-uppercase">INFO MESS <?php echo $d_infoMess['nama_mess']; ?>, TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
+                                                <div class="text-center text-lg text-uppercase">INFO MESS <?= $d_infoMess['nama_mess']; ?>, TANGGAL <b><?= tanggal($tgl); ?></b></div>
                                             </div>
                                             <div class="modal-body">
-                                                JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
-                                                KUOTA MESS : <?php echo $kuota_messTotal; ?><br>
-                                                KUOTA SISA : <?php echo $kuota_sisa; ?>
+                                                JUMLAH PRAKTIK : <?= $jp_jt; ?><br>
+                                                KUOTA MESS : <?= $kuota_messTotal; ?><br>
+                                                KUOTA SISA : <?= $kuota_sisa; ?>
                                                 <hr>
                                                 <?php
                                                 if ($q1_mess->rowCount() > 0) {
@@ -142,11 +156,11 @@ function generateKalenderKedKep($date)
                                                                 while ($d1_mess = $q1_mess->fetch(PDO::FETCH_ASSOC)) {
                                                                 ?>
                                                                     <tr>
-                                                                        <td><?php echo $d1_mess['nama_institusi']; ?></td>
-                                                                        <td><?php echo $d1_mess['nama_jurusan_pdd']; ?></td>
-                                                                        <td><?php echo $d1_mess['jumlah_praktik']; ?></td>
-                                                                        <td><?php echo tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
-                                                                        <td><?php echo tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
+                                                                        <td><?= $d1_mess['nama_institusi']; ?></td>
+                                                                        <td><?= $d1_mess['nama_jurusan_pdd']; ?></td>
+                                                                        <td><?= $d1_mess['jumlah_praktik']; ?></td>
+                                                                        <td><?= tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
+                                                                        <td><?= tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
                                                                     </tr>
                                                                 <?php
                                                                 }
@@ -175,19 +189,19 @@ function generateKalenderKedKep($date)
                         ?>
                             <td>
                                 <!-- tombol modal -->
-                                <button type="button" class="btn btn-outline-<?php echo $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?php echo $_GET['id'] . $tgl; ?>" title="<?php echo tanggal($year . "-" . $month . "-" . $i); ?>"><?php echo $i; ?></button>
+                                <button type="button" class="btn btn-outline-<?= $btn_mess; ?> btn-sm form-control" data-toggle="modal" data-target="#tlg<?= $_GET['id'] . $tgl; ?>" title="<?= tanggal($year . "-" . $month . "-" . $i); ?>"><?= $i; ?></button>
 
                                 <!-- modal   -->
-                                <div class="modal fade text-gray-800" id="tlg<?php echo $_GET['id'] . $tgl; ?>">
+                                <div class="modal fade text-gray-800" id="tlg<?= $_GET['id'] . $tgl; ?>">
                                     <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="text-center text-lg text-uppercase">INFO MESS <?php echo $d_infoMess['nama_mess']; ?>, TANGGAL <b><?php echo tanggal($tgl); ?></b></div>
+                                                <div class="text-center text-lg text-uppercase">INFO MESS <?= $d_infoMess['nama_mess']; ?>, TANGGAL <b><?= tanggal($tgl); ?></b></div>
                                             </div>
                                             <div class="modal-body">
-                                                JUMLAH PRAKTIK : <?php echo $jp_jt; ?><br>
-                                                KUOTA MESS : <?php echo $kuota_messTotal; ?><br>
-                                                KUOTA SISA : <?php echo $kuota_sisa; ?>
+                                                JUMLAH PRAKTIK : <?= $jp_jt; ?><br>
+                                                KUOTA MESS : <?= $kuota_messTotal; ?><br>
+                                                KUOTA SISA : <?= $kuota_sisa; ?>
                                                 <hr>
                                                 <?php
                                                 if ($q1_mess->rowCount() > 0) {
@@ -208,11 +222,11 @@ function generateKalenderKedKep($date)
                                                                 while ($d1_mess = $q1_mess->fetch(PDO::FETCH_ASSOC)) {
                                                                 ?>
                                                                     <tr>
-                                                                        <td><?php echo $d1_mess['nama_institusi']; ?></td>
-                                                                        <td><?php echo $d1_mess['nama_jurusan_pdd']; ?></td>
-                                                                        <td><?php echo $d1_mess['jumlah_praktik']; ?></td>
-                                                                        <td><?php echo tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
-                                                                        <td><?php echo tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
+                                                                        <td><?= $d1_mess['nama_institusi']; ?></td>
+                                                                        <td><?= $d1_mess['nama_jurusan_pdd']; ?></td>
+                                                                        <td><?= $d1_mess['jumlah_praktik']; ?></td>
+                                                                        <td><?= tanggal($d1_mess['tgl_mulai_praktik']); ?></td>
+                                                                        <td><?= tanggal($d1_mess['tgl_selesai_praktik']); ?></td>
                                                                     </tr>
                                                                 <?php
                                                                 }
@@ -260,42 +274,25 @@ function generateKalenderKedKep($date)
     </div>
 <?php
 }
-?>
-<div class="preloader<?php echo $_GET['id']; ?>">
-    <div class="loading<?php echo $_GET['id']; ?>">
-        <center>
-            <br>
-            <img src="_img/logorsj.png" class="rotate" width="100" height="100" />
-            <br><br>
-            <p>Harap Tunggu</p>
-        </center>
-    </div>
-</div>
-
-<div class="isi<?php echo $_GET['id']; ?>" style="display: none">
-    <?php
-
-    /* Set the default timezone */
-    date_default_timezone_set("Asia/Jakarta");
-    $tahun_sekarang = date('Y');
-    $bulan_sekarang = date('m') - 1;
-    // $tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
-    for ($iterateYear = $tahun_sekarang; $iterateYear <= ($tahun_sekarang + 1); $iterateYear++) {
-        for ($iterateMonth = 1; $iterateMonth <= 12; $iterateMonth++) {
-            // TAHUN BERJALAN 
-            if ($iterateYear == $tahun_sekarang) {
-                if ($bulan_sekarang < $iterateMonth) {
-                    /* Set the date */
-                    $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
-                    generateKalenderKedKep($date);
-                }
-            } else {
-
+/* Set the default timezone */
+date_default_timezone_set("Asia/Jakarta");
+$tahun_sekarang = date('Y');
+$bulan_sekarang = date('m') - 1;
+// $tahun_10 = date("Y", strtotime(date("Y", strtotime($StaringDate)) . " + 1 year"));
+for ($iterateYear = $tahun_sekarang; $iterateYear <= ($tahun_sekarang + 1); $iterateYear++) {
+    for ($iterateMonth = 1; $iterateMonth <= 12; $iterateMonth++) {
+        // TAHUN BERJALAN 
+        if ($iterateYear == $tahun_sekarang) {
+            if ($bulan_sekarang < $iterateMonth) {
                 /* Set the date */
                 $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
                 generateKalenderKedKep($date);
             }
+        } else {
+
+            /* Set the date */
+            $date = strtotime(sprintf('%s-%s-01', $iterateYear, $iterateMonth));
+            generateKalenderKedKep($date);
         }
     }
-    ?>
-</div>
+}

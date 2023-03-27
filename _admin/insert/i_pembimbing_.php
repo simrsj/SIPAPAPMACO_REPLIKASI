@@ -125,7 +125,7 @@ if (isset($_POST['ubah'])) {
     $conn->query($sql);
 ?>
     <script>
-        document.location.href = "?praktikan&u=<?php echo $_GET['u']; ?>";
+        document.location.href = "?praktikan&u=<?= $_GET['u']; ?>";
     </script>
 <?php
 } elseif (isset($_POST['hapus'])) {
@@ -135,13 +135,13 @@ if (isset($_POST['ubah'])) {
     $conn->query($sql);
 ?>
     <script>
-        document.location.href = "?praktikan&u=<?php echo $_GET['u']; ?>";
+        document.location.href = "?praktikan&u=<?= $_GET['u']; ?>";
     </script>
 <?php
 }
 ?>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 </script>

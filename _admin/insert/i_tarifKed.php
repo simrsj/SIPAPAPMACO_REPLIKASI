@@ -27,11 +27,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         <div class='card shadow mb-4' id="tarif_praktik">
             <div class='card-body'>
                 <div class="text-lg font-weight-bold text-center">DATA TARIF</div>
-                <input type="hidden" name="path" id="path" value="<?php echo $_GET['prk']; ?>">
-                <input type="hidden" name="id" id="id" value="<?php echo $_GET['it_ked']; ?>">
+                <input type="hidden" name="path" id="path" value="<?= $_GET['ptk']; ?>">
+                <input type="hidden" name="id" id="id" value="<?= $_GET['it_ked']; ?>">
                 <!-- Menu Tarif wajib disesuaikan dengan jenis jurusan -->
                 <div class="text-gray-700">
-                    <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
+                    <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?></div>
                 </div>
                 <hr>
                 <?php
@@ -68,16 +68,16 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 while ($d_tarif_jurusan = $q_tarif_jurusan->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
-                                        <th scope="row"><?php echo $no; ?></th>
-                                        <td><?php echo $d_tarif_jurusan['nama_tarif_jenis']; ?></td>
-                                        <td><?php echo $d_tarif_jurusan['nama_tarif']; ?></td>
-                                        <td><?php echo $d_tarif_jurusan['nama_tarif_satuan']; ?></td>
-                                        <td><?php echo "Rp " . number_format($d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?></td>
+                                        <th scope="row"><?= $no; ?></th>
+                                        <td><?= $d_tarif_jurusan['nama_tarif_jenis']; ?></td>
+                                        <td><?= $d_tarif_jurusan['nama_tarif']; ?></td>
+                                        <td><?= $d_tarif_jurusan['nama_tarif_satuan']; ?></td>
+                                        <td><?= "Rp " . number_format($d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?></td>
                                         <td>
-                                            <input class="form-control tw" type="number" min="0" name="frek<?php echo $d_tarif_jurusan['id_tarif']; ?>" id="frek<?php echo $d_tarif_jurusan['id_tarif']; ?>">
+                                            <input class="form-control tw" type="number" min="0" name="frek<?= $d_tarif_jurusan['id_tarif']; ?>" id="frek<?= $d_tarif_jurusan['id_tarif']; ?>">
                                         </td>
                                         <td>
-                                            <input class="form-control tw" type="number" min="0" name="ktt<?php echo $d_tarif_jurusan['id_tarif']; ?>" id="ktt<?php echo $d_tarif_jurusan['id_tarif']; ?>">
+                                            <input class="form-control tw" type="number" min="0" name="ktt<?= $d_tarif_jurusan['id_tarif']; ?>" id="ktt<?= $d_tarif_jurusan['id_tarif']; ?>">
                                         </td>
                                         <!-- <td><span id="jumlah_tw"></span></td> -->
                                         <?php
@@ -98,7 +98,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 <!-- Menu Tarif Ujian disesuaikan dengan Jenis Jurusan -->
                 <div class="text-gray-700">
                     <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                        Pakai Tarif Ujian <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?> <span class="text-danger">*</span>
+                        Pakai Tarif Ujian <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?> <span class="text-danger">*</span>
                     </div>
                     <div class="h5 font-weight-bold text-center mt-3 mb-3">
                         <span class="text-danger font-weight-bold font-italic text-md blink" id="err_cek_pilih_ujian"></span>
@@ -150,13 +150,13 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 while ($d_tarif_ujian = $q_tarif_ujian->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
-                                        <th scope="row"><?php echo $no; ?></th>
-                                        <td><?php echo $d_tarif_ujian['nama_tarif_jenis']; ?></td>
-                                        <td><?php echo $d_tarif_ujian['nama_tarif']; ?></td>
-                                        <td><?php echo $d_tarif_ujian['nama_tarif_satuan']; ?></td>
-                                        <td> <?php echo "Rp " . number_format($d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
-                                        <td><input class="form-control" type="number" min="0" name="frek<?php echo $d_tarif_ujian['id_tarif'] ?>"></td>
-                                        <td><input class="form-control" type="number" min="0" name="ktt<?php echo $d_tarif_ujian['id_tarif'] ?>"></td>
+                                        <th scope="row"><?= $no; ?></th>
+                                        <td><?= $d_tarif_ujian['nama_tarif_jenis']; ?></td>
+                                        <td><?= $d_tarif_ujian['nama_tarif']; ?></td>
+                                        <td><?= $d_tarif_ujian['nama_tarif_satuan']; ?></td>
+                                        <td> <?= "Rp " . number_format($d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
+                                        <td><input class="form-control" type="number" min="0" name="frek<?= $d_tarif_ujian['id_tarif'] ?>"></td>
+                                        <td><input class="form-control" type="number" min="0" name="ktt<?= $d_tarif_ujian['id_tarif'] ?>"></td>
                                     </tr>
                                 <?php
                                     $no++;
@@ -171,7 +171,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                 <hr>
                 <div class="text-gray-700">
                     <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                        Menu Tarif Ruang Belajar/Diskusi <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                        Menu Tarif Ruang Belajar/Diskusi <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?>
                     </div>
                 </div>
                 <?php
@@ -207,13 +207,13 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
                                     <tr>
-                                        <th scope="row"><?php echo $no; ?></th>
-                                        <td><?php echo $d_tempat['nama_tarif_jenis']; ?></td>
-                                        <td><?php echo $d_tempat['nama_tempat']; ?></td>
-                                        <td><?php echo $d_tempat['nama_tarif_satuan']; ?></td>
-                                        <td> <?php echo "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."); ?></td>
-                                        <td><input class="form-control" type="number" min="0" name="frek<?php echo $d_tempat['id_tempat'] ?>"></td>
-                                        <td><input class="form-control" type="number" min="0" name="ktt<?php echo $d_tempat['id_tempat'] ?>"></td>
+                                        <th scope="row"><?= $no; ?></th>
+                                        <td><?= $d_tempat['nama_tarif_jenis']; ?></td>
+                                        <td><?= $d_tempat['nama_tempat']; ?></td>
+                                        <td><?= $d_tempat['nama_tarif_satuan']; ?></td>
+                                        <td> <?= "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."); ?></td>
+                                        <td><input class="form-control" type="number" min="0" name="frek<?= $d_tempat['id_tempat'] ?>"></td>
+                                        <td><input class="form-control" type="number" min="0" name="ktt<?= $d_tempat['id_tempat'] ?>"></td>
                                     </tr>
                                 <?php
                                     $no++;
@@ -345,7 +345,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                     icon: 'success',
                     title: '<span class"text-xs"><b>DATA TARIF</b><br>Berhasil Tersimpan',
                     showConfirmButton: false,
-                    html: '<a href="?prk=' + document.getElementById("path").value + '" class="btn btn-outline-primary">OK</a>',
+                    html: '<a href="?ptk=' + document.getElementById("path").value + '" class="btn btn-outline-primary">OK</a>',
                 });
             },
             error: function(response) {

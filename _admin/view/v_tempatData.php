@@ -4,17 +4,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 <div class="card shadow mb-4">
     <div class="card-body">
         <?php
-        $sql = "SELECT * FROM tb_tempat 
-            JOIN tb_jurusan_pdd_jenis ON tb_tempat.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis 
-            JOIN tb_harga_satuan ON tb_tempat.id_harga_satuan = tb_harga_satuan.id_harga_satuan
-            WHERE status_tempat = 'y'
-            ORDER BY nama_tempat ASC";
+        $sql = "SELECT * FROM tb_tempat ";
+        $sql .= " JOIN tb_jurusan_pdd_jenis ON tb_tempat.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis";
+        $sql .= " JOIN tb_tarif_satuan ON tb_tempat.id_tarif_satuan = tb_tarif_satuan.id_tarif_satuan";
+        // $sql .= " WHERE status_tempat = 'Y'";
+        $sql .= " ORDER BY nama_tempat ASC";
         $q = $conn->query($sql);
         if ($q->rowCount() > 0) {
         ?>
             <div class="table-responsive">
-                <table class="table table-hover" id="myTable">
-                    <thead class="table-dark">
+                <table class="table table-hover" id="dataTable">
+                    <thead class="table-dark text-center">
                         <tr>
                             <th scope='col'>No</th>
                             <th>Nama Tempat</th>
@@ -23,8 +23,11 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
                             <th>Satuan</th>
                             <th>Harga</th>
                             <th>Keterangan</th>
-                            <th>Tanggal Input</th>
-                            <th></th>
+                            <th>
+                                Tombol
+                                <hr class="p-0 m-0 bg-gray-100">
+                                Status
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,114 +36,32 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
                         while ($d = $q->fetch(PDO::FETCH_ASSOC)) {
                         ?>
                             <tr>
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $d['nama_tempat']; ?></td>
-                                <td><?php echo $d['nama_jurusan_pdd_jenis']; ?></td>
-                                <td><?php echo $d['kapasitas_tempat']; ?></td>
-                                <td><?php echo $d['nama_harga_satuan']; ?></td>
-                                <td><?php echo "Rp " . number_format($d['harga_tempat'], 0, '.', '.'); ?></td>
-                                <td><?php echo $d['ket_tempat']; ?></td>
-                                <td><?php echo $d['tgl_input_tempat']; ?></td>
-                                <td>
-
-                                    <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#tmp_u_m" . $d['id_tempat']; ?>'>
+                                <td class="text-center"><?= $no; ?></td>
+                                <td><?= $d['nama_tempat']; ?></td>
+                                <td class="text-center"><?= $d['nama_jurusan_pdd_jenis']; ?></td>
+                                <td class="text-center"><?= $d['kapasitas_tempat']; ?></td>
+                                <td><?= $d['nama_tarif_satuan']; ?></td>
+                                <td><?= "Rp " . number_format($d['tarif_tempat'], 0, '.', '.'); ?></td>
+                                <td class="text-center"><?= $d['ket_tempat']; ?></td>
+                                <td class="text-center">
+                                    <button title="Ubah" class='btn btn-primary btn-sm ubah_init' id="<?= $d['id_tempat']; ?>">
                                         <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#tmp_d_m" . $d['id_tempat']; ?>'>
+                                    </button>
+                                    <button title="Hapus" class='btn btn-danger btn-sm hapus' id="<?= $d['id_tempat']; ?>">
                                         <i class="fas fa-trash-alt"></i>
-                                    </a>
-
-                                    <!-- modal ubah tempat  -->
-                                    <div class="modal fade" id="<?php echo "tmp_u_m" . $d['id_tempat']; ?>" data-backdrop="static" data-keyboard="false">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_uTempat">
-                                                    <div class="modal-header">
-                                                        <b>UBAH TEMPAT</b>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Nama Tempat : <span style="color:red">*</span><br>
-                                                        <input type="text" class="form-control" name="nama" id="namau" value="<?php echo $d['nama_tempat']; ?>" required>
-                                                        <div id="err_namau" class="text-danger text-xs font-italic"></div><br>
-                                                        Kapasitas : <span style="color:red">*</span><br>
-                                                        <input type="number" min="1" class="form-control" name="kapasitas" id="kapasitasu" value="<?php echo $d['kapasitas_tempat']; ?>" required>
-                                                        <div id="err_kapasitasu" class="text-danger text-xs font-italic"></div><br>
-                                                        Harga : <span style="color:red">*</span><br>
-                                                        <input type="number" min="1" class="form-control" name="harga" id="hargau" value="<?php echo $d['harga_tempat']; ?>" required>
-                                                        <div id="err_hargau" class="text-danger text-xs font-italic"></div><br>
-                                                        Satuan : <span style="color:red">*</span><br>
-                                                        <?php
-                                                        $sql_satuan = "SELECT * FROM tb_harga_satuan ORDER BY nama_harga_satuan ASC";
-                                                        $q_satuan = $conn->query($sql_satuan);
-                                                        ?>
-                                                        <select class='js-example-placeholder-single form-control' name='satuan' id="satuanu" required>
-                                                            <option value="">-- <i>Pilih</i>--</option>
-                                                            <?php
-                                                            while ($d_satuan = $q_satuan->fetch(PDO::FETCH_ASSOC)) {
-                                                                if ($d['id_harga_sautan'] == $d_satuan['id_harga_sautan']) {
-                                                                    $cek = 'selected';
-                                                                } else {
-                                                                    $cek = '';
-                                                                }
-                                                            ?>
-                                                                <option value='<?php echo $d_satuan['id_harga_satuan']; ?>' <?php echo $cek; ?>>
-                                                                    <?php echo $d_satuan['nama_harga_satuan']; ?>
-                                                                </option>
-                                                            <?php
-                                                                $no++;
-                                                            }
-                                                            ?>
-                                                        </select><br>
-                                                        <div class="text-danger font-weight-bold  font-italic text-xs" id="err_satuanu"></div>
-                                                        Jenis Jurusan : <span style="color:red">*</span><br>
-                                                        <div class="boxed-check-group boxed-check-primary boxed-check-sm">
-                                                            <?php
-
-                                                            $jj1 = "";
-                                                            $jj2 = "";
-                                                            $jj3 = "";
-                                                            $jj4 = "";
-                                                            if ($d['id_jurusan_pdd_jenis'] == 1) {
-                                                                $jj1 = 'checked';
-                                                            } elseif ($d['id_jurusan_pdd_jenis'] == 2) {
-                                                                $jj2 = 'checked';
-                                                            } elseif ($d['id_jurusan_pdd_jenis'] == 3) {
-                                                                $jj3 = 'checked';
-                                                            } else {
-                                                                $jj4 = 'checked';
-                                                            }
-
-                                                            ?>
-                                                            <label class="boxed-check">
-                                                                <input class="boxed-check-input" type="radio" name="jenis_jurusan" id="jenis_jurusan1u" value="1" required <?php echo $jj1; ?>>
-                                                                <span class="boxed-check-label">Kedokteran</span>
-                                                            </label>
-                                                            <label class="boxed-check">
-                                                                <input class="boxed-check-input" type="radio" name="jenis_jurusan" id="jenis_jurusan2u" value="2" <?php echo $jj2; ?>>
-                                                                <span class="boxed-check-label">Keperawatan</span>
-                                                            </label>
-                                                            <label class="boxed-check">
-                                                                <input class="boxed-check-input" type="radio" name="jenis_jurusan" id="jenis_jurusan3u" value="3" <?php echo $jj3; ?>>
-                                                                <span class="boxed-check-label">Nakes Lainnya</span>
-                                                            </label>
-                                                            <label class="boxed-check">
-                                                                <input class="boxed-check-input" type="radio" name="jenis_jurusan" id="jenis_jurusan4u" value="4" <?php echo $jj4; ?>>
-                                                                <span class="boxed-check-label">Non-Nakes</span>
-                                                            </label>
-                                                        </div>
-                                                        <div id="err_jenis_jurusanu" class="text-danger text-xs font-italic"></div><br>
-                                                        Keterangan : <br>
-                                                        <textarea name="keterangan" class="form-control"><?php echo $d['ket_tempat']; ?></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <input name="id" value="<?php echo $d['id_tempat']; ?>" hidden>
-                                                        <button class="btn btn-success btn-sm" type="button" name="ubah_tempat" id="ubah_tempat">Ubah</button>
-                                                        <button class="btn btn-outline-dark btn-sm" type="button" data-dismiss="modal">Kembali</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </button>
+                                    <br>
+                                    <?php
+                                    if ($d['status_tempat'] == 'Y') {
+                                    ?>
+                                        <div class="badge badge-success">Aktif</div>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <div class="badge badge-danger">Tidak Aktif</div>
+                                    <?php
+                                    }
+                                    ?>
                                 </td>
                             </tr>
                         <?php
@@ -159,3 +80,205 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
         ?>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
+    });
+
+    $(".ubah_init").click(function() {
+        document.getElementById("err_u_nama_tempat").innerHTML = "";
+        document.getElementById("err_u_kapasitas_tempat").innerHTML = "";
+        document.getElementById("err_u_tarif_tempat").innerHTML = "";
+        document.getElementById("err_u_tarif_satuan").innerHTML = "";
+        document.getElementById("err_u_jenis_jurusan").innerHTML = "";
+        document.getElementById("form_ubah_tempat").reset();
+        $("#data_ubah_tempat").fadeIn(1);
+        $("#data_tambah_tempat").fadeOut(1);
+
+        var id = $(this).attr('id');
+        $.ajax({
+            type: 'POST',
+            url: "_admin/view/v_tempatGetData.php",
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(response) {
+
+                document.getElementById("form_ubah_tempat").reset();
+                // $("#form_ubah_tempat").empty();
+
+                document.getElementById("u_id_tempat").value = response.u_id_tempat;
+                // document.getElementById("u_id_tarif_jenis").value = response.u_id_tarif_jenis;
+                document.getElementById("u_nama_tempat").value = response.u_nama_tempat;
+                document.getElementById("u_kapasitas_tempat").value = response.u_kapasitas_tempat;
+                // document.getElementById("u_jenis_jurusan").value = response.u_id_jurusan_pdd_jenis;
+                $('#u_jenis_jurusan').val(response.u_id_jurusan_pdd_jenis).trigger('change');
+                document.getElementById("u_tarif_tempat").value = response.u_tarif_tempat;
+                // document.getElementById("u_tarif_satuan").value = response.u_id_tarif_satuan;
+                $('#u_tarif_satuan').val(response.u_id_tarif_satuan).trigger('change');
+
+
+                document.getElementById("u_ket_tempat").value = response.u_ket_tempat;
+                // document.getElementById("u_status_tempat").value = response.u_status_tempat;
+                $('#u_status_tempat').val(response.u_status_tempat).trigger('change');
+            },
+            error: function(response) {
+                alert(response.responseText);
+                console.log(response.responseText);
+            }
+        });
+
+        $("#data_tambah_tempat").fadeOut(1);
+        $('#u_nama_tempat').focus();
+    });
+
+    $(".ubah_tutup").click(function() {
+        document.getElementById("err_u_nama_tempat").innerHTML = "";
+        document.getElementById("err_u_kapasitas_tempat").innerHTML = "";
+        document.getElementById("err_u_tarif_tempat").innerHTML = "";
+        document.getElementById("err_u_tarif_satuan").innerHTML = "";
+        document.getElementById("err_u_jenis_jurusan").innerHTML = "";
+        document.getElementById("form_ubah_tempat").reset();
+        $("#data_ubah_tempat").fadeOut(1);
+    });
+
+    $(document).on('click', '.ubah', function() {
+        var data = $('#form_ubah_tempat').serialize();
+
+        var u_nama_tempat = $('#u_nama_tempat').val();
+        var u_kapasitas_tempat = $('#u_kapasitas_tempat').val();
+        var u_tarif_tempat = $('#u_tarif_tempat').val();
+        var u_tarif_satuan = $('#u_tarif_satuan').val();
+        var u_jenis_jurusan = $('#u_jenis_jurusan').val();
+        var u_ket_tempat = $('#u_ket_tempat').val();
+        var u_status_tempat = $('#u_status_tempat').val();
+
+        //cek data from ubah bila tidak diiisi
+
+        if (
+            u_nama_tempat == "" ||
+            u_kapasitas_tempat == "" ||
+            u_tarif_tempat == "" ||
+            u_tarif_satuan == "" ||
+            u_jenis_jurusan == "" ||
+            u_ket_tempat == "" ||
+            u_status_tempat == ""
+        ) {
+            if (u_nama_tempat == "") {
+                document.getElementById("err_u_nama_tempat").innerHTML = "Nama Harus Diisi";
+            } else {
+                document.getElementById("err_u_nama_tempat").innerHTML = "";
+            }
+
+            if (u_kapasitas_tempat == "") {
+                document.getElementById("err_u_kapasitas_tempat").innerHTML = "Kapasitas Harus Diisi";
+            } else {
+                document.getElementById("err_u_kapasitas_tempat").innerHTML = "";
+            }
+
+            if (u_tarif_tempat == "") {
+                document.getElementById("err_u_tarif_tempat").innerHTML = "Tarif Harus Diisi";
+            } else {
+                document.getElementById("err_u_tarif_tempat").innerHTML = "";
+            }
+
+            if (u_tarif_satuan == "") {
+                document.getElementById("err_u_tarif_satuan").innerHTML = "Satuan Harus Dipilih";
+            } else {
+                document.getElementById("err_u_tarif_satuan").innerHTML = "";
+            }
+
+            if (u_jenis_jurusan == "") {
+                document.getElementById("err_u_jenis_jurusan").innerHTML = "Jenis jurusan Harus Dipilih";
+            } else {
+                document.getElementById("err_u_jenis_jurusan").innerHTML = "";
+            }
+
+            if (u_status_tempat == "") {
+                document.getElementById("err_u_status_tempat").innerHTML = "Status Harus Dipilih";
+            } else {
+                document.getElementById("err_u_status_tempat").innerHTML = "";
+            }
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: "_admin/exc/x_v_tempat_u.php",
+                data: data,
+                success: function() {
+                    $('#data_tempat').load('_admin/view/v_tempatData.php?');
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Diubah</b></div>'
+                    });
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
+    });
+
+    $(document).on('click', '.hapus', function() {
+        console.log("hapus");
+        Swal.fire({
+            position: 'top',
+            title: 'Hapus Data Tempat ?',
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#1cc88a',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Kembali',
+            confirmButtonText: 'Ya',
+            allowOutsideClick: false,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: "_admin/exc/x_v_tempat_h.php",
+                    data: {
+                        "id_tempat": $(this).attr('id')
+                    },
+                    success: function() {
+                        $('#data_tempat').load('_admin/view/v_tempatData.php?');
+
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 5000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil DIHAPUS</b></div>'
+                        });
+                    },
+                    error: function(response) {
+                        console.log(response.responseText);
+                        alert('eksekusi query gagal');
+                    }
+                });
+            }
+        })
+    });
+</script>

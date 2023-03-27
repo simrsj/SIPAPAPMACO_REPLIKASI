@@ -27,8 +27,8 @@
                                     $q_jurusan_pdd_jenis = $conn->query($sql_jurusan_pdd_jenis);
                                     while ($d_jurusan_pdd_jenis = $q_jurusan_pdd_jenis->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
-                                        <option value="<?php echo $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] ?>">
-                                            <?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd_jenis']; ?>
+                                        <option value="<?= $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] ?>">
+                                            <?= $d_jurusan_pdd_jenis['nama_jurusan_pdd_jenis']; ?>
                                         </option>
                                     <?php
                                     }
@@ -58,7 +58,7 @@
                 $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
                 if ($r_jurusan_pdd > 0) {
                 ?>
-                    <table class='table table-striped' id="myTable">
+                    <table class='table table-striped' id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
@@ -73,20 +73,20 @@
                             while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></td>
-                                    <td><?php echo $d_jurusan_pdd['nama_jurusan_pdd_jenis']; ?></td>
+                                    <td><?= $no; ?></td>
+                                    <td><?= $d_jurusan_pdd['nama_jurusan_pdd']; ?></td>
+                                    <td><?= $d_jurusan_pdd['nama_jurusan_pdd_jenis']; ?></td>
                                     <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#jrs_u_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?= "#jrs_u_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#jrs_d_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?= "#jrs_d_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                     <?php $no++; ?>
                                     <!-- modal ubah jurusan  -->
-                                    <div class="modal fade" id="<?php echo "jrs_u_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?= "jrs_u_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" class="form-group" action="">
@@ -94,9 +94,9 @@
                                                         Ubah Jurusan :
                                                     </div>
                                                     <div class="modal-body">
-                                                        <input name="id_jurusan_pdd" value="<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>" hidden>
+                                                        <input name="id_jurusan_pdd" value="<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>" hidden>
                                                         <h6>Nama Jurusan :</h6>
-                                                        <input class="form-control" name="nama_jurusan_pdd" value="<?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>">
+                                                        <input class="form-control" name="nama_jurusan_pdd" value="<?= $d_jurusan_pdd['nama_jurusan_pdd']; ?>">
                                                         <br>
                                                         <h6>Jenis Jurusan :</h6>
                                                         <select class="form-control" name="id_jurusan_pdd_jenis" required>
@@ -111,7 +111,7 @@
                                                                     $selected = "";
                                                                 }
                                                             ?>
-                                                                <option value="<?php echo $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] ?>" <?php echo $selected ?>><?php echo $d_jurusan_pdd_jenis['nama_jurusan_pdd_jenis']; ?></option>
+                                                                <option value="<?= $d_jurusan_pdd_jenis['id_jurusan_pdd_jenis'] ?>" <?= $selected ?>><?= $d_jurusan_pdd_jenis['nama_jurusan_pdd_jenis']; ?></option>
                                                             <?php
                                                             }
                                                             ?>
@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="<?php echo "jrs_d_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?= "jrs_d_m" . $d_jurusan_pdd['id_jurusan_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
@@ -134,8 +134,8 @@
                                                         <h5>Hapus Data</h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h6><b><?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?></b></h6>
-                                                        <input name="id_jurusan_pdd" value="<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>" hidden>
+                                                        <h6><b><?= $d_jurusan_pdd['nama_jurusan_pdd']; ?></b></h6>
+                                                        <input name="id_jurusan_pdd" value="<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>" hidden>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>

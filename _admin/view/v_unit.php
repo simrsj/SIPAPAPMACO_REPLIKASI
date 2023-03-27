@@ -38,7 +38,7 @@
                 $r_unit = $q_unit->rowCount();
                 if ($r_unit > 0) {
                 ?>
-                    <table class='table table-striped' id="myTable">
+                    <table class='table table-striped' id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
@@ -52,19 +52,19 @@
                             while ($d_unit = $q_unit->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_unit['nama_unit']; ?></td>
+                                    <td><?= $no; ?></td>
+                                    <td><?= $d_unit['nama_unit']; ?></td>
                                     <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#uni_u_m" . $d_unit['id_unit']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?= "#uni_u_m" . $d_unit['id_unit']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#uni_d_m" . $d_unit['id_unit']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?= "#uni_d_m" . $d_unit['id_unit']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                     <?php $no++; ?>
                                     <!-- modal ubah Unit  -->
-                                    <div class="modal fade" id="<?php echo "uni_u_m" . $d_unit['id_unit']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?= "uni_u_m" . $d_unit['id_unit']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
@@ -72,8 +72,8 @@
                                                         Ubah Unit
                                                     </div>
                                                     <div class="modal-body">
-                                                        <input name="id_unit" value="<?php echo $d_unit['id_unit']; ?>" hidden>
-                                                        <input class="form-control" name="nama_unit" value="<?php echo $d_unit['nama_unit']; ?>">
+                                                        <input name="id_unit" value="<?= $d_unit['id_unit']; ?>" hidden>
+                                                        <input class="form-control" name="nama_unit" value="<?= $d_unit['nama_unit']; ?>">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-success btn-sm" name="ubah">Ubah</button>
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="<?php echo "uni_d_m" . $d_unit['id_unit']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?= "uni_d_m" . $d_unit['id_unit']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
@@ -92,8 +92,8 @@
                                                         <h5>Hapus Data</h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h6><b><?php echo $d_unit['nama_unit']; ?></b></h6>
-                                                        <input name="id_unit" value="<?php echo $d_unit['id_unit']; ?>" hidden>
+                                                        <h6><b><?= $d_unit['nama_unit']; ?></b></h6>
+                                                        <input name="id_unit" value="<?= $d_unit['id_unit']; ?>" hidden>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-danger" name="hapus">Ya</button>
@@ -148,6 +148,6 @@ if (isset($_POST['ubah'])) {
 <script type="text/javascript" charset="utf8" src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 </script>

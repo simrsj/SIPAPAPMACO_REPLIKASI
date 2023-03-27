@@ -18,7 +18,7 @@
 
             if ($r_transaksi > 0) {
             ?>
-                <table class='table table-striped' id="myTable">
+                <table class='table table-striped' id="dataTable">
                     <thead class="thead-dark text-center">
                         <tr>
                             <th scope='col'>No</th>
@@ -53,13 +53,13 @@
 
                         ?>
                             <tr class="text-center">
-                                <td><?php echo $no; ?></td>
-                                <td><?php echo $d_transaksi['nama_institusi']; ?></td>
-                                <td><?php echo $d_transaksi['nama_praktik']; ?></td>
-                                <td><?php echo tanggal($d_transaksi['tgl_mulai_praktik']); ?></td>
-                                <td><?php echo tanggal($d_transaksi['tgl_selesai_praktik']); ?></td>
-                                <td><?php echo $d_transaksi['jumlah_praktik']; ?></td>
-                                <td><?php echo "Rp " . number_format($total_tarif, 0, '.', ','); ?></td>
+                                <td><?= $no; ?></td>
+                                <td><?= $d_transaksi['nama_institusi']; ?></td>
+                                <td><?= $d_transaksi['nama_praktik']; ?></td>
+                                <td><?= tanggal($d_transaksi['tgl_mulai_praktik']); ?></td>
+                                <td><?= tanggal($d_transaksi['tgl_selesai_praktik']); ?></td>
+                                <td><?= $d_transaksi['jumlah_praktik']; ?></td>
+                                <td><?= "Rp " . number_format($total_tarif, 0, '.', ','); ?></td>
                                 <td class="text-lg">
                                     <?php
                                     if ($d_transaksi['status_praktik'] == 'Y') {
@@ -78,11 +78,11 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <!-- <a title="Cetak Invoice" target="_blank" class="btn btn-warning btn-sm" href="./_print/p_praktik_invoice.php?id=<?php echo $d_praktik['id_praktik']; ?>">
+                                    <!-- <a title="Cetak Invoice" target="_blank" class="btn btn-warning btn-sm" href="./_print/p_praktik_invoicePDF.php?id=<?= $d_praktik['id_praktik']; ?>">
                                         <i class="fas fa-print"></i>
                                     </a> -->
 
-                                    <a title="Detail Tarif" class='btn btn-info btn-sm' href='<?php echo "?trs&dtl=" . $d_transaksi['id_praktik']; ?>'>
+                                    <a title="Detail Tarif" class='btn btn-info btn-sm' href='<?= "?trs&dtl=" . $d_transaksi['id_praktik']; ?>'>
                                         <i class="fas fa-info-circle"></i> Rincian
                                     </a>
                                 </td>

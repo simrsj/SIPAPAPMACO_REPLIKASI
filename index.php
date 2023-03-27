@@ -1,11 +1,14 @@
 <?php
-// error_reporting(0);
+error_reporting(0);
 session_start();
+// phpinfo();
 
-// include '_add-ons/csrf_auth.php';
+$timezone = new DateTimeZone('Asia/Jakarta');
+$date = new DateTime();
+$date->setTimeZone($timezone);
+
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -16,8 +19,11 @@ include "_add-ons/tanggal_waktu.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>SIPAPAP MACO</title>
+    <link rel="icon" href="./_img/logorsj.ico">
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="vendor/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -25,45 +31,47 @@ include "_add-ons/tanggal_waktu.php";
     <link href="vendor/sw2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
     <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
+    <link href="vendor/!custom/cs_loader.css" rel="stylesheet">
+    <script src="vendor/jquery3.6.0.min.js"></script>
 
-
-    <script rel="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- SCRIPT JS  -->
 </head>
 
-<body>
+<body id="page-top" class="bg-primary">
+    <div class="preloader">
+        <div class="loading">
+            <div class="loader loader-main"></div>
+        </div>
+    </div>
     <?php
 
-    if (isset($_GET['dashboard'])) {
-        include "_dashboard/dashboard.php";
-    } elseif (isset($_SESSION['status_user'])) {
+    if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
+    elseif (isset($_GET['test'])) include "test.php";
+    elseif (isset($_GET['logbookked'])) include "_praktikan\logbookked.php";
+    elseif (isset($_GET['logbookkep'])) include "_praktikan\logbookkep.php";
+    elseif (isset($_GET['error401'])) include "_error/error401.php";
+    elseif (isset($_GET['error404'])) include "_error/error404.php";
+    elseif (isset($_SESSION['status_user'])) {
         if ($_SESSION['status_user'] == 'Y') {
-            if (isset($_GET['lo'])) {
-                include "_log-sign/log_out.php";
-            } elseif ($_SESSION['level_user'] == 1) {
-                include "_admin/index.php";
-            } elseif ($_SESSION['level_user'] == 2) {
-                include "_ip/index.php";
-            }
+            if (isset($_GET['lo'])) include "_log-sign/exc/x_log_out.php";
+            elseif (
+                $_SESSION['level_user'] == 1 ||
+                $_SESSION['level_user'] == 2 ||
+                $_SESSION['level_user'] == 3
+            ) include "_admin/index.php";
+            elseif ($_SESSION['level_user'] == 4) include "_pembimbing/index.php";
+            elseif ($_SESSION['level_user'] == 5) include "_praktikan/index.php";
         } elseif ($_SESSION['status_user'] == 'T') {
             echo "
             <script>
                 alert('Akun Sudah Tidak Aktif');
             </script>
         ";
-            include "_log-sign/log_out.php";
-        }
-    } elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) {
-        if (isset($_GET['reg'])) {
-            include "_log-sign/register.php";
-        } elseif (isset($_GET['reg_x'])) {
-            include "_log-sign/register_exc.php";
-        } else if (isset($_GET['coba'])) {
-            include "_log-sign/calendar.php";
-        } else {
-            include "_log-sign/index.php";
+            include "_log-sign/exc/x_log_out.php";
         }
     }
+    // Index Log-Sign
+    elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
+
     ?>
 
     <!-- JS -->
@@ -75,8 +83,39 @@ include "_add-ons/tanggal_waktu.php";
     <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
     <script src="vendor/select2/dist/js/select2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
     <script src="vendor/!custom/jsCustom.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script>
+        window.top == window &&
+            window.console &&
+            (setTimeout(
+                    console.log.bind(
+                        console,
+                        "%c%s",
+                        "color: white; background: #4e73df; font-size: 20px;",
+                        " SIPAPAP MACO "
+                    )
+                ),
+                setTimeout(
+                    console.log.bind(
+                        console,
+                        "%c%s",
+                        "font-size: 14px;",
+                        "(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)  "
+                    )
+                ));
+        <?php
+        // include "./vendor/!custom/disable_keyboard.js";
+        include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
+        ?>
+        alert = function() {};
+        $('img').mousedown(function(e) {
+            if (e.button == 2) { // right click
+                return false; // do nothing!
+            }
+        });
+    </script>
 </body>
 
 </html>

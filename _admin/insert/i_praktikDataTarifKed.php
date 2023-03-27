@@ -23,11 +23,11 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 <div class='card shadow mb-4' id="tarif_praktik">
     <div class='card-body'>
         <div class="text-lg font-weight-bold text-center">DATA TARIF</div>
-        <input type="hidden" name="path" id="path" value="<?php echo $_GET['it_ked']; ?>">
+        <input type="hidden" name="path" id="path" value="<?= $_GET['it_ked']; ?>">
 
         <!-- Menu Tarif wajib disesuaikan dengan jenis jurusan -->
         <div class="text-gray-700">
-            <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?php echo $d_praktik['nama_jurusan_pdd']; ?></div>
+            <div class="h5 font-weight-bold text-center mt-2">Menu Tarif Wajib <?= $d_praktik['nama_jurusan_pdd']; ?></div>
         </div>
         <hr>
         <?php
@@ -65,15 +65,15 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                     while ($d_tarif_jurusan = $q_tarif_jurusan->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr>
-                            <th scope="row"><?php echo $no; ?></th>
-                            <td><?php echo $d_tarif_jurusan['nama_tarif_jenis']; ?></td>
-                            <td><?php echo $d_tarif_jurusan['nama_tarif']; ?></td>
-                            <td><?php echo $d_tarif_jurusan['nama_tarif_satuan']; ?></td>
-                            <td><?php echo "Rp " . number_format($d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?></td>
-                            <td> <?php echo $_POST['frek' . $d_tarif_jurusan['id_tarif']]; ?></td>
-                            <td> <?php echo $_POST['ktt' . $d_tarif_jurusan['id_tarif']]; ?></td>
+                            <th scope="row"><?= $no; ?></th>
+                            <td><?= $d_tarif_jurusan['nama_tarif_jenis']; ?></td>
+                            <td><?= $d_tarif_jurusan['nama_tarif']; ?></td>
+                            <td><?= $d_tarif_jurusan['nama_tarif_satuan']; ?></td>
+                            <td><?= "Rp " . number_format($d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?></td>
+                            <td> <?= $_POST['frek' . $d_tarif_jurusan['id_tarif']]; ?></td>
+                            <td> <?= $_POST['ktt' . $d_tarif_jurusan['id_tarif']]; ?></td>
                             <td>
-                                <?php echo "Rp " . number_format($_POST['frek' . $d_tarif_jurusan['id_tarif']] * $_POST['ktt' . $d_tarif_jurusan['id_tarif']] * $d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?>
+                                <?= "Rp " . number_format($_POST['frek' . $d_tarif_jurusan['id_tarif']] * $_POST['ktt' . $d_tarif_jurusan['id_tarif']] * $d_tarif_jurusan['jumlah_tarif'], 0, ",", "."); ?>
                             </td>
                             <?php
                             $jumlah_total_wajib = ($_POST['frek' . $d_tarif_jurusan['id_tarif']] * $_POST['ktt' . $d_tarif_jurusan['id_tarif']] * $d_tarif_jurusan['jumlah_tarif']) + $jumlah_total_wajib;
@@ -87,7 +87,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                     ?>
                     <tr>
                         <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
-                        <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_wajib, 0, ",", "."); ?></td>
+                        <td class="font-weight-bold"><?= "Rp " . number_format($jumlah_total_wajib, 0, ",", "."); ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -103,7 +103,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         ?>
             <div class="text-gray-700">
                 <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                    Pakai Tarif Ujian <?php echo $d_praktik['nama_jurusan_pdd']; ?>
+                    Pakai Tarif Ujian <?= $d_praktik['nama_jurusan_pdd']; ?>
                 </div>
             </div>
             <?php
@@ -140,15 +140,15 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                         while ($d_tarif_ujian = $q_tarif_ujian->fetch(PDO::FETCH_ASSOC)) {
                         ?>
                             <tr>
-                                <th scope="row"><?php echo $no; ?></th>
-                                <td><?php echo $d_tarif_ujian['nama_tarif_jenis']; ?></td>
-                                <td><?php echo $d_tarif_ujian['nama_tarif']; ?></td>
-                                <td><?php echo $d_tarif_ujian['nama_tarif_satuan']; ?></td>
-                                <td> <?php echo "Rp " . number_format($d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
-                                <td> <?php echo $_POST['frek' . $d_tarif_ujian['id_tarif']]; ?></td>
-                                <td> <?php echo $_POST['ktt' . $d_tarif_ujian['id_tarif']]; ?></td>
+                                <th scope="row"><?= $no; ?></th>
+                                <td><?= $d_tarif_ujian['nama_tarif_jenis']; ?></td>
+                                <td><?= $d_tarif_ujian['nama_tarif']; ?></td>
+                                <td><?= $d_tarif_ujian['nama_tarif_satuan']; ?></td>
+                                <td> <?= "Rp " . number_format($d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?></td>
+                                <td> <?= $_POST['frek' . $d_tarif_ujian['id_tarif']]; ?></td>
+                                <td> <?= $_POST['ktt' . $d_tarif_ujian['id_tarif']]; ?></td>
                                 <td>
-                                    <?php echo "Rp " . number_format($_POST['frek' . $d_tarif_ujian['id_tarif']] * $_POST['ktt' . $d_tarif_ujian['id_tarif']] * $d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?>
+                                    <?= "Rp " . number_format($_POST['frek' . $d_tarif_ujian['id_tarif']] * $_POST['ktt' . $d_tarif_ujian['id_tarif']] * $d_tarif_ujian['jumlah_tarif'], 0, ",", "."); ?>
                                 </td>
                             </tr>
                         <?php
@@ -160,7 +160,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                         ?>
                         <tr>
                             <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
-                            <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_ujian, 0, ",", "."); ?></td>
+                            <td class="font-weight-bold"><?= "Rp " . number_format($jumlah_total_ujian, 0, ",", "."); ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -171,7 +171,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
         ?>
         <div class="text-gray-700">
             <div class="h5 font-weight-bold text-center mt-3 mb-3">
-                Menu Tarif Ruang Belajar/Diskusi <?php echo $d_praktik['nama_jurusan_pdd']; ?>
+                Menu Tarif Ruang Belajar/Diskusi <?= $d_praktik['nama_jurusan_pdd']; ?>
             </div>
             <?php
             $sql_tempat = " SELECT * FROM tb_tempat
@@ -208,13 +208,13 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                             while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $no; ?></th>
-                                    <td><?php echo $d_tempat['nama_tarif_jenis']; ?></td>
-                                    <td><?php echo $d_tempat['nama_tempat']; ?></td>
-                                    <td><?php echo $d_tempat['nama_tarif_satuan']; ?></td>
-                                    <td> <?php echo "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."); ?></td>
-                                    <td> <?php echo $_POST['frek' . $d_tempat['id_tempat']]; ?></td>
-                                    <td> <?php echo $_POST['ktt' . $d_tempat['id_tempat']]; ?></td>
+                                    <th scope="row"><?= $no; ?></th>
+                                    <td><?= $d_tempat['nama_tarif_jenis']; ?></td>
+                                    <td><?= $d_tempat['nama_tempat']; ?></td>
+                                    <td><?= $d_tempat['nama_tarif_satuan']; ?></td>
+                                    <td> <?= "Rp " . number_format($d_tempat['tarif_tempat'], 0, ",", "."); ?></td>
+                                    <td> <?= $_POST['frek' . $d_tempat['id_tempat']]; ?></td>
+                                    <td> <?= $_POST['ktt' . $d_tempat['id_tempat']]; ?></td>
                                     <td>
                                         <?php
                                         echo "Rp " . number_format($_POST['frek' . $d_tempat['id_tempat']] * $_POST['ktt' . $d_tempat['id_tempat']] * $d_tempat['tarif_tempat'], 0, ",", ".");
@@ -229,7 +229,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
                                 ?>
                                 <tr>
                                     <td colspan="7" class="font-weight-bold text-right">JUMLAH TOTAL : </td>
-                                    <td class="font-weight-bold"><?php echo "Rp " . number_format($jumlah_total_tempat, 0, ",", "."); ?></td>
+                                    <td class="font-weight-bold"><?= "Rp " . number_format($jumlah_total_tempat, 0, ",", "."); ?></td>
                                 </tr>
                         </tbody>
                     </table>
@@ -241,7 +241,7 @@ $jumlah_praktik = $d_praktik['jumlah_praktik'];
 
             <center>
                 <span class="badge badge-primary text-lg">
-                    <?php echo "JUMLAH TOTAL KESELURUHAN : Rp" . number_format($jumlah_total, 0, ",", "."); ?>
+                    <?= "JUMLAH TOTAL KESELURUHAN : Rp" . number_format($jumlah_total, 0, ",", "."); ?>
                 </span>
             </center>
 

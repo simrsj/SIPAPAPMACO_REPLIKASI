@@ -29,8 +29,8 @@ function generateKalenderNklNnk($date)
         <table class='table table-striped'>
             <thead class="thead-dark">
                 <tr>
-                    <th colspan="<?php echo JUMLAH_KOLOM2 ?>" class="text-center">
-                        <?php echo $title . " " . $year; ?>
+                    <th colspan="<?= JUMLAH_KOLOM2 ?>" class="text-center">
+                        <?= $title . " " . $year; ?>
                     </th>
                 </tr>
             </thead>
@@ -39,7 +39,7 @@ function generateKalenderNklNnk($date)
                     <?php
                     foreach ($weekDays as $key => $weekDay) {
                     ?>
-                        <td class="text-center"><?php echo $weekDay ?></td>
+                        <td class="text-center"><?= $weekDay ?></td>
                     <?php
                     }
                     ?>
@@ -68,8 +68,8 @@ function generateKalenderNklNnk($date)
                         $sql_nklNnk = "SELECT * FROM tb_praktik";
                         $sql_nklNnk .= " JOIN tb_praktik_tgl  ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
                         $sql_nklNnk .= " WHERE tb_praktik_tgl.praktik_tgl = '$tgl'";
-                        $sql_nklNnk .= " AND tb_praktik.id_jurusan_pdd BETWEEN 3 AND 8";
-                        $sql_nklNnk .= " AND ((tb_praktik.status_cek_praktik = 'BYR') OR (tb_praktik.status_praktik = 'W' OR tb_praktik.status_praktik = 'Y')) ";
+                        $sql_nklNnk .= " AND NOT tb_praktik.id_jurusan_pdd IN (1,2)";
+                        $sql_nklNnk .= " AND status_praktik ='Y' ";
                         $sql_nklNnk .= " ";
                         // echo "$sql_kedKep<br>";
                         $q_nklNnk = $conn->query($sql_nklNnk);
@@ -167,18 +167,18 @@ function generateKalenderNklNnk($date)
                             <td>
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item dropdown no-arrow mx-1">
-                                        <button type="button" class="btn btn-outline-primary btn-sm nav-link dropdown-toggle form-control" data-toggle="dropdown" id="tlg2<?php echo $tgl; ?>" title="<?php echo tanggal($tgl); ?>">
-                                            <?php echo $i; ?>
+                                        <button type="button" class="btn btn-outline-primary btn-sm form-control" data-toggle="dropdown" id="tlg2<?= $tgl; ?>" title="<?= tanggal($tgl); ?>">
+                                            <?= $i; ?>
                                         </button>
 
                                         <!-- Dropdown - Alerts -->
-                                        <div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-xl shadow" aria-labelledby="tgl2<?php echo $tgl; ?>">
+                                        <div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-xl shadow" aria-labelledby="tgl2<?= $tgl; ?>">
                                             <h5 class="text-gray-800 text-center font-weight-bold">
-                                                <?php echo tanggal($tgl); ?> </h5>
+                                                <?= tanggal($tgl); ?> </h5>
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Farmasi</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_far; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_far; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalFar = $totalKuotaFar - $kuota_far;
@@ -195,7 +195,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Kesehatang Lingkungan</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_kl; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_kl; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalKl = $totalKuotaKl - $kuota_kl;
@@ -212,7 +212,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Psikologi</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_psi; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_psi; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalPsi = $totalKuotaPsi - $kuota_psi;
@@ -229,7 +229,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Rekam Medis</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_rm; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_rm; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalRm = $totalKuotaRm - $kuota_rm;
@@ -246,7 +246,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Informasi Teknologi</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_it; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_it; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalIt = $totalKuotaIt - $kuota_it;
@@ -263,7 +263,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Pekerja Sosial</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_ps; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_ps; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalPs = $totalKuotaPs - $kuota_ps;
@@ -287,18 +287,18 @@ function generateKalenderNklNnk($date)
                             <td>
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item dropdown no-arrow mx-1">
-                                        <button type="button" class="btn btn-outline-primary btn-sm nav-link dropdown-toggle form-control" data-toggle="dropdown" id="tlg2<?php echo $tgl; ?>" title="<?php echo tanggal($tgl); ?>">
-                                            <?php echo $i; ?>
+                                        <button type="button" class="btn btn-outline-primary btn-sm form-control" data-toggle="dropdown" id="tlg2<?= $tgl; ?>" title="<?= tanggal($tgl); ?>">
+                                            <?= $i; ?>
                                         </button>
 
                                         <!-- Dropdown - Alerts -->
-                                        <div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-xl shadow" aria-labelledby="tgl2<?php echo $tgl; ?>">
+                                        <div class="dropdown-list dropdown-menu dropdown-menu-right dropdown-menu-xl shadow" aria-labelledby="tgl2<?= $tgl; ?>">
                                             <h5 class="text-gray-800 text-center font-weight-bold">
-                                                <?php echo tanggal($tgl); ?> </h5>
+                                                <?= tanggal($tgl); ?> </h5>
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Farmasi</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_far; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_far; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalFar = $totalKuotaFar - $kuota_far;
@@ -315,7 +315,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Kesehatang Lingkungan</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_kl; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_kl; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalKl = $totalKuotaKl - $kuota_kl;
@@ -332,7 +332,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Psikologi</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_psi; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_psi; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalPsi = $totalKuotaPsi - $kuota_psi;
@@ -349,7 +349,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Rekam Medis</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_rm; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_rm; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalRm = $totalKuotaRm - $kuota_rm;
@@ -366,7 +366,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Informasi Teknologi</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_it; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_it; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalIt = $totalKuotaIt - $kuota_it;
@@ -383,7 +383,7 @@ function generateKalenderNklNnk($date)
                                             <div class="dropdown-item d-flex align-items-center">
                                                 <div>
                                                     <div class="text-gray-600 font-weight-bold">Pekerja Sosial</div>
-                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?php echo $kuota_ps; ?></span> </span> &nbsp;
+                                                    <span class="badge badge-primary text-md">Terisi : <span class="badge badge-dark"><?= $kuota_ps; ?></span> </span> &nbsp;
                                                     <span class="badge badge-primary text-md">Sisa : <span class="badge badge-light">
                                                             <?php
                                                             $kalPs = $totalKuotaPs - $kuota_ps;

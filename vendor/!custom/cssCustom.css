@@ -1,16 +1,94 @@
-@charset "UTF-8"; /*!
- * Bootstrap v5.0.0-beta3 (https://getbootstrap.com/)
- * Copyright 2011-2021 The Bootstrap Authors
- * Copyright 2011-2021 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+@charset "UTF-8";
+ 
+/* -------------------------------------------------------------- Blink */
+.blink {
+  animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* -------------------------------------------------------------- Border, hr Thickness */
+.border-1 {
+  border: 1px solid;
+  border-width:1px !important;
+}
+.border-2 {
+  border: 2px solid;
+  border-width:2px !important;
+}
+.border-3 {
+  border: 3px solid;
+  border-width:3px !important;
+}
+.border-4 {
+  border: 4px solid;
+  border-width:4px !important;
+}
+.border-5 {
+  border: 5px solid;
+  border-width:5px !important;
+}
+
+.border-primary {
+  border-color: #5074dc;
+}
+.border-danger {
+  border-color: #e74a3b;
+}
+.border-info {
+  border-color: #36b9cc;
+}
+.border-success{
+  border-color: #169b6b;
+}
+.border-warning {
+  border-color: #f6c23e;
+}
+.border-secondary {
+  border-color: #858796;
+}
+.border-dark {
+  border-color: #0000;
+}
+.border-white {
+  border-color: #fff;
+}
+
+/* -------------------------------------------------------------- dataTable */
+#dataTable {
+  width:100% !important;
+}
+#dataTable_2 {
+  width:100% !important;
+}
+
+/* -------------------------------------------------------------- Footer */
+
+
+.wrapper {
+  min-height: calc(100vh - 100px); /* Adjust the height of the wrapper to account for the height of the footer */
+  padding-bottom: 60px; /* Set the padding-bottom equal to the height of the footer */
+  position: relative;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the height of the footer */
+}
+
+
+/* -------------------------------------------------------------- Fieldset, Legend */
 fieldset {
   min-width: 0;
   padding: 0;
   margin: 0;
   border: 0;
 }
-
 legend {
   float: left;
   width: 100%;
@@ -19,18 +97,18 @@ legend {
   font-size: calc(1.275rem + 0.3vw);
   line-height: inherit;
 }
-
-.blink {
-  animation: blinker 1s linear infinite;
+/* -------------------------------------------------------------- Input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
 }
-
-
+/* -------------------------------------------------------------- Loader */
 .preloader {
   position: fixed;
   top: 0;
@@ -48,9 +126,8 @@ legend {
   font: 14px arial;
 }
 .rotate {
-  animation: rotation 3s infinite linear;
+  animation: rotation 2s infinite linear;
 }
-
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -58,4 +135,54 @@ legend {
   to {
     transform: rotate(359deg);
   }
+}
+
+
+.loader-small {
+  border: 4px solid #73be44;
+  border-radius: 50%;
+  border-top: 4px solid #598eca;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(359deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(359deg); }
+}
+
+/* -------------------------------------------------------------- Select2 */
+.select2-selection__rendered{
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  padding-right: 12px !important;
+}
+
+/* -------------------------------------------------------------- Table tfoot */
+table{
+  width: 100% !important;
+}
+
+tfoot {
+  display: table-header-group;
+}
+
+/* -------------------------------------------------------------- text */
+.b{
+  font-weight: bolder;
+}
+.i{
+  font-style: italic;
+}
+.u{
+  text-decoration: underline;
 }

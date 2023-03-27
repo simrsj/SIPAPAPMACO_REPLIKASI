@@ -1,11 +1,3 @@
-<div class="page-wrap d-flex flex-row align-items-center">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 text-center">
-                <span class="display-1 d-block">404</span>
-                <div class="mb-4 lead">Halaman Tidak Ada.</div>
-                <a href="./" class="btn btn-outline-primary">Kembali ke Halaman Utama</a>
-            </div>
-        </div>
-    </div>
-</div>
+<script type="text/javascript">
+    document.location.href = "/SM/index.php";
+</script>

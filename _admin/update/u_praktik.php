@@ -1,460 +1,864 @@
 <?php
-if (isset($_POST['ubah_praktik'])) {
-
-    $id_praktik = $_POST['u'];
-
-    $sql_praktik_join = "SELECT * FROM tb_praktik 
-    WHERE tb_praktik.id_praktik = $id_praktik
-    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
-
-    $q_praktik_join = $conn->query($sql_praktik_join);
-    $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
-
-    echo "<pre>";
-    print_r($_FILES);
-    echo "</pre>";
-
-    //mencari data id_praktikan yg belum ada
-    $q_praktik = $conn->query("SELECT id_praktik FROM tb_praktik ORDER BY id_praktik ASC");
-    //alamat file surat masuk
-    $alamat_unggah = "./_file/praktikan";
-
-    //pembuatan alamat bila tidak ada
-    if (!is_dir($alamat_unggah)) {
-        mkdir($alamat_unggah, 0777, $rekursif = true);
+if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
+    // echo "<pre>";
+    // echo print_r($_SESSION);
+    // echo "</pre>";
+    $exp_arr_idp = explode("*sm*", base64_decode(urldecode(hex2bin($_GET['idp']))));
+    $idp = $exp_arr_idp[1];
+    $sql_praktik = "SELECT * FROM tb_praktik ";
+    $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
+    $sql_praktik .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
+    $sql_praktik .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
+    $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
+    $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
+    $sql_praktik .= " WHERE status_praktik = 'Y' ";
+    $sql_praktik .= " AND tb_praktik.id_praktik = " . $idp;
+    $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
+    // echo $sql_praktik;
+    try {
+        $q_praktik = $conn->query($sql_praktik);
+        $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $ex) {
+        echo "<script>alert('$ex -DATA PRAKTIK-');";
+        echo "document.location.href='?error404';</script>";
     }
-
-    //unggah surat dan data praktik
-    if ($_FILES['surat_praktik']['size'] > 0) {
-
-        //ubah Nama File PDF
-        $_FILES['surat_praktik']['name'] = "surat_praktik_" . $id_praktik . "_" . date('Y-m-d') . ".pdf";
-
-        $file_surat_praktik = (object) @$_FILES['surat_praktik'];
-
-        //mulai unggah file surat praktik
-        if ($file_surat_praktik->size > 1000 * 1000) {
-            echo "
-            <script>
-                alert('File Surat Praktik Harus Kurang dari 1 Mb');
-                document.location.href = '';
-            </script>
-            ";
-        } elseif ($file_surat_praktik->type !== 'application/pdf') {
-            echo "
-            <script>
-                alert('File Surat Praktik Harus .pdf');
-                document.location.href = '';
-            </script>
-            ";
-        } else {
-            $unggah_surat_praktik = move_uploaded_file(
-                $file_surat_praktik->tmp_name,
-                "{$alamat_unggah}/{$file_surat_praktik->name}"
-            );
-            $link_surat_praktik = "{$alamat_unggah}/{$file_surat_praktik->name}";
-        }
-    } else {
-        $link_surat_praktik = NULL;
-    }
-
-    if ($_FILES['data_praktik']['size'] > 0) {
-
-        $_FILES['data_praktik']['name'] = "data_praktik_" . $id_praktik . "_" . date('Y-m-d') . ".xlsx";
-
-        $file_data_praktik = (object) @$_FILES['data_praktik'];
-
-        //mulai unggah file data praktik
-        if ($file_data_praktik->size > 1000 * 1000) {
-            echo "
-            <script>
-                alert('File Data Praktik Harus Kurang dari 1 Mb');
-                document.location.href = '';
-            </script>
-            ";
-        } elseif ($file_data_praktik->type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-            echo "
-            <script>
-                alert('File Data Praktik Harus .xlsx, download dan pakai format yang sudah disediakan');
-                document.location.href = '';
-            </script>
-            ";
-        } else {
-            $unggah_data_praktik = move_uploaded_file(
-                $file_data_praktik->tmp_name,
-                "{$alamat_unggah}/{$file_data_praktik->name}"
-            );
-            $link_data_praktik = "{$alamat_unggah}/{$file_data_praktik->name}";
-        }
-    } else {
-        $link_data_praktik = NULL;
-    }
-
-    //bila file surat_praktik tidak diisi, diambil dari sebelumnya
-    if ($_FILES['surat_praktik']['size'] == 0 || $file_surat_praktik->size > 1000 * 1000) {
-        $surat_praktik = $d_praktik_join['surat_praktik'];
-    } else {
-        $surat_praktik = $link_surat_praktik;
-    }
-
-    //bila file data_praktik tidak diisi diambil dari sebelumnya
-    if ($_FILES['data_praktik']['size'] == 0 || $file_data_praktik->size > 1000 * 1000) {
-        $data_praktik = $d_praktik_join['data_praktik'];
-    } else {
-        $data_praktik = $link_data_praktik;
-    }
-
-    $sql_update = " UPDATE `tb_praktik` SET
-        `id_mou` = '" . $_POST['id_mou'] . "', 
-        `id_institusi` = '" . $_POST['id_institusi'] . "', 
-        `nama_praktik` = '" . $_POST['nama_praktik'] . "', 
-        `tgl_ubah_praktik` = '" . date('Y-m-d') . "', 
-        `tgl_mulai_praktik` = '" . $_POST['tgl_mulai_praktik'] . "', 
-        `tgl_selesai_praktik` = '" . $_POST['tgl_selesai_praktik'] . "', 
-        `jumlah_praktik` = '" . $_POST['jumlah_praktik'] . "', 
-        `surat_praktik` = '" . $surat_praktik . "', 
-        `data_praktik` = '" . $data_praktik . "', 
-        `id_spesifikasi_pdd` = '" . $_POST['id_spesifikasi_pdd'] . "', 
-        `id_jenjang_pdd` = '" . $_POST['id_jenjang_pdd'] . "', 
-        `id_jurusan_pdd` = '" . $_POST['id_jurusan_pdd'] . "', 
-        `id_akreditasi` = '" . $_POST['id_akreditasi'] . "', 
-        `id_user` = '" . $_SESSION['id_user'] . "',
-        `email_mentor_praktik` = '" . $_POST['email_mentor_praktik'] . "',
-        `telp_mentor_praktik` = '" . $_POST['telp_mentor_praktik'] . "'
-        WHERE `tb_praktik`.`id_praktik` = " . $id_praktik;
-
-    // echo $sql_update;
-    $conn->query($sql_update);
-?>
-    <script type="text/javascript">
-        document.location.href = "?prk";
-    </script>
-<?php
-} else {
-    $id_praktik = $_GET['u'];
-
-    $sql_praktik_join = "SELECT * FROM tb_praktik 
-    JOIN tb_mou ON tb_praktik.id_mou = tb_mou.id_mou
-    JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi
-    JOIN tb_spesifikasi_pdd ON tb_praktik.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
-    JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-    JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-    JOIN tb_akreditasi ON tb_praktik.id_akreditasi = tb_akreditasi.id_akreditasi 
-    WHERE tb_praktik.id_praktik = $id_praktik
-    ORDER BY tb_praktik.tgl_selesai_praktik ASC";
-
-    $q_praktik_join = $conn->query($sql_praktik_join);
-    $d_praktik_join = $q_praktik_join->fetch(PDO::FETCH_ASSOC);
-
 ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8">
-                <h1 class="h3 mb-2 text-gray-800">Ubah Data Praktikan</h1>
+            <div class="col-md-8">
+                <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Ubah Pengajuan Praktik</h1>
             </div>
         </div>
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                <form action="" class="form-group" method="post" enctype="multipart/form-data">
-                    <!-- Data Praktikan -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <b>Data Praktikan</b>
+        <style>
+            .loader {
+                border: 8px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 8px solid #3498db;
+                width: 15px;
+                height: 15px;
+                -webkit-animation: spin 2s linear infinite;
+                /* Safari */
+                animation: spin 2s linear infinite;
+            }
+
+            /* Safari */
+            @-webkit-keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+        <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
+            <!-- Data Pengajuan Praktik  -->
+            <div id="data_praktik_input">
+                <div class="card shadow mb-4">
+                    <div class="card-body text-center">
+                        <!-- Data Praktikan -->
+                        <div class="row">
+                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary mb-3">DATA PRAKTIK</div>
                         </div>
-                    </div>
-                    <!-- Mou dan Nama Praktikan -->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            Institusi : <span style="color:red">*</span><br>
-                            <?php
-
-                            #MOU yang aktif
-                            // $sql_mou = "SELECT * FROM tb_mou 
-                            //     JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi  
-                            //     WHERE tb_mou.tgl_selesai_mou >= CURDATE() ORDER BY tb_institusi.nama_institusi ASC";
-
-                            $sql_mou = "SELECT * FROM tb_mou 
-                                JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi  
-                                ORDER BY tb_institusi.nama_institusi ASC";
-
-                            $q_mou = $conn->query($sql_mou);
-                            $r_mou = $q_mou->rowCount();
-                            if ($r_mou > 0) {
-                            ?>
-                                <select class='form-control' aria-label='Default select example' name='id_institusi' required>
-                                    <option value="">-- <i>Pilih</i>--</option>
-                                    <?php
-                                    while ($d_mou = $q_mou->fetch(PDO::FETCH_ASSOC)) {
-                                        if ($d_praktik_join['id_institusi'] == $d_mou['id_institusi']) {
-                                    ?>
-                                            <option value='<?php echo $d_mou['id_institusi']; ?>' selected>
-                                                <?php echo $d_mou['nama_institusi']; ?>
-                                            </option>
+                        <!-- Nama Institusi, Nama Kelompok, dan Jumlah Praktik -->
+                        <div class="row">
+                            <input name="idp" id="idp" value="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $idp))); ?>" hidden>
+                            <input name="user" id="user" value="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))); ?>" hidden>
+                            <div class="col-md">
+                                <?php if ($_SESSION['level_user'] == 2) {
+                                    $sql_institusi = "SELECT * FROM tb_user";
+                                    $sql_institusi .= " JOIN tb_institusi ON tb_user.id_institusi = tb_institusi.id_institusi";
+                                    $sql_institusi .= " WHERE tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
+                                    // echo $sql_institusi;
+                                    $q_institusi = $conn->query($sql_institusi);
+                                    $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
+                                ?>
+                                    Nama Institusi :
+                                    <div class="b text-uppercase">
                                         <?php
-                                        } else {
+                                        echo $d_institusi['nama_institusi'];
+                                        if ($d_institusi['akronim_institusi'] != "") echo " (" . $d_institusi['akronim_institusi'] . ")";
                                         ?>
-                                            <option value='<?php echo $d_mou['id_institusi']; ?>'>
-                                                <?php echo $d_mou['nama_institusi']; ?>
-                                            </option>
+                                        <input name="institusi" id="institusi" value="<?= $_SESSION['id_institusi']; ?>" hidden>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    Nama Institusi : <span style="color:red">*</span><br>
                                     <?php
-                                        }
-                                    }
+                                    $sql_institusi = "SELECT * FROM tb_institusi";
+                                    $sql_institusi .= " ORDER BY tb_institusi.nama_institusi ASC";
+
+                                    $q_institusi = $conn->query($sql_institusi);
+                                    $r_institusi = $q_institusi->rowCount();
+                                    if ($r_institusi > 0) {
+                                        $no = 1;
                                     ?>
-                                </select>
-                                <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del>
-                            <?php
-                            } else {
-                            ?>
-                                <b><i>Data MoU Tidak Ada</i></b>
-                            <?php
-                            }
-                            ?>
+                                        <select class='select2 form-control' name='institusi' id="institusi" required>
+                                            <option value="">-- <i>Pilih</i>--</option>
+                                            <?php
+                                            while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                                <option value='<?= $d_institusi['id_institusi']; ?>'>
+                                                    <?= $d_institusi['nama_institusi'];
+                                                    if ($d_institusi['akronim_institusi'] != '') {
+                                                        echo " (" . $d_institusi['akronim_institusi'] . ")";
+                                                    }
+                                                    ?>
+                                                </option>
+                                            <?php
+                                                $no++;
+                                            }
+                                            ?>
+                                        </select>
+                                        <script>
+                                            $('#institusi').val(<?= $d_praktik['id_institusi'] ?>).trigger("change");
+                                        </script>
+                                        <!-- <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del> -->
+                                        <div class="text-danger b  i text-xs blink" id="err_institusi"></div>
+                                <?php
+                                    }
+                                } ?>
+                            </div>
+                            <div class="col-md">
+                                Nama Gelombang/Kelompok : <span style="color:red">*</span><br>
+                                <input type="text" class="form-control form-control-xs" name="kelompok" id="kelompok" value="<?= $d_praktik['nama_praktik'] ?>" placeholder="Isi Gelombang/Kelompok" required>
+                                <div class="text-danger b  i text-xs blink" id="err_kelompok"></div>
+                            </div>
+                            <div class="col-md-2">
+                                Jumlah Praktik: <span style="color:red">*</span><br>
+                                <input type="number" min="1" class="form-control form-control-xs" name="jumlah" id="jumlah" value="<?= $d_praktik['jumlah_praktik'] ?>" placeholder="Isi Jumlah Praktik" required>
+                                <div class="text-danger b  i text-xs blink" id="err_jumlah"></div>
+                            </div>
                         </div>
-                        <div class="col-lg-6">
-                            Gelombang/Kelompok : <span style="color:red">*</span><br>
-                            <input type="text" class="form-control" name="nama_praktik" placeholder="Isi Gelombang/Kelompok" value="<?php echo $d_praktik_join['nama_praktik']; ?>" required>
-                        </div>
-                    </div>
-                    <br>
-                    <!-- Jurusan, Jenjang, Spesifikasi dan Akreditasi -->
-                    <div class="row">
-                        <div class="col-lg-3">
-                            Pilih Jurusan : <span style="color:red">*</span><br>
-                            <?php
-                            $sql_jurusan_pdd = "SELECT * FROM tb_jurusan_pdd order by nama_jurusan_pdd ASC";
+                        <br>
 
-                            $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
-                            $r_jurusan_pdd = $q_jurusan_pdd->rowCount();
+                        <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                Jurusan : <span style="color:red">*</span><br>
+                                <?php
+                                $sql_jurusan_pdd = "SELECT * FROM  tb_jurusan_pdd ORDER BY nama_jurusan_pdd ASC";
+                                $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
+                                ?>
 
-                            if ($r_jurusan_pdd > 0) {
-                            ?>
-                                <select class='form-control' aria-label='Default select example' name='id_jurusan_pdd' required>
+                                <select class='select2' name='jurusan' id="jurusan" required>
                                     <option value="">-- <i>Pilih</i>--</option>
-                                    <?php
-                                    while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                        if ($d_praktik_join['id_jurusan_pdd'] == $d_jurusan_pdd['id_jurusan_pdd']) {
-                                    ?>
-                                            <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>' selected>
-                                                <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
-                                            </option>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
-                                                <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
-                                            </option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
+                                    <?php while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) { ?>
+                                        <option value='<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>'><?= $d_jurusan_pdd['nama_jurusan_pdd']; ?></option>
+                                    <?php } ?>
                                 </select>
+                                <div class="text-danger b i text-xs blink" id="err_jurusan"></div>
+                            </div>
+                            <div class="col-md-4">
+                                Jenjang : <span style="color:red">*</span><br>
+                                <div class="loader-small" id="jenjangLoader" style="display: none;"></div>
+                                <div id="jenjangData" style="display: none;"></div>
+                                <span id="jenjangKet" class="b i">Pilih Jurusan Terlebih Dahulu</span>
+                                <div class="text-danger b i text-xs blink" id="err_jenjang"></div>
+                            </div>
+                            <div class="col-md-4">
+                                Profesi : <span style="color:red">*</span><br>
+                                <span id="profesiData" style="display: none;">
+                                    <input type="hidden" id="profesi" name="profesi" value="0">
+                                </span>
+                                <span id="profesiKet" class="b i">
+                                    Pilih Jenjang Terlebih Dahulu
+                                </span>
+                                <div class="text-danger b  i text-xs blink" id="err_profesi"></div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!-- Tanggal Mulai, Tanggal Selesai, No Surat Institusi Surat dan Tanggal Surat Institusi -->
+                        <div class="row">
+                            <div class="col-md-2">
+                                Tanggal Mulai Praktik : <span style="color:red">*</span><br>
+                                <input type="date" class="form-control form-control-xs" name="tgl_mulai_praktik" id="tgl_mulai" value="<?= $d_praktik['tgl_mulai_praktik'] ?>" required>
+                                <span class="text-danger b  i text-xs blink" id="err_tgl_mulai"></span>
+                            </div>
+                            <div class="col-md-2">
+                                Tanggal Selesai Praktik: <span style="color:red">*</span><br>
+                                <input type="date" class="form-control form-control-xs" name="tgl_selesai_praktik" id="tgl_selesai" value="<?= $d_praktik['tgl_selesai_praktik'] ?>" required>
+                                <span class="text-danger b  i text-xs blink" id="err_tgl_selesai"></span>
+                            </div>
+                            <div class="col-md">
+                                No. Surat Institusi : <span style="color:red">*</span><br>
+                                <input type="text" class="form-control form-control-xs" name="no_surat" placeholder="Isi No Surat Institusi" id="no_surat" value="<?= $d_praktik['no_surat_praktik'] ?>" required>
+                                <span class="text-danger b  i text-xs blink" id="err_no_surat"></span>
+                            </div>
+                            <div class="col-md-2">
+                                Tanggal Surat Institusi : <span style="color:red">*</span><br>
+                                <input type="date" class="form-control form-control-xs" name="tgl_surat" id="tgl_surat" value="<?= $d_praktik['tgl_surat_praktik'] ?>" required>
+                                <span class="text-danger b  i text-xs blink" id="err_tgl_surat"></span>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- File Surat Institusi, File Akreditasi Insitutsi, File Akreditasi Jurusan -->
+                        <div class="row">
+                            <div class="col-md">
+                                File Surat Institusi :<span style="color:red">*</span><br>
+                                <div class="custom-file">
+                                    <label class="custom-file-label text-xs" for="customFile" id="labelfilesuratinstitusi">Pilih File</label>
+                                    <input type="file" class="custom-file-input mb-1" id="file_surat" name="file_surat" accept="application/pdf" required>
+                                    <span class='i text-xs'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</span><br>
+                                    <div class="text-xs font-italic text-danger blink" id="err_file_surat"></div><br>
+                                    <script>
+                                        $('#file_surat').on('change', function() {
+                                            var fileSuratInstitusi = $(this).val();
+                                            fileSuratInstitusi = fileSuratInstitusi.replace(/^.*[\\\/]/, '');
+                                            if (fileSuratInstitusi == "") fileSuratInstitusi = "Pilih File";
+                                            $('#labelfilesuratinstitusi').html(fileSuratInstitusi);
+                                        })
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                File Akreditasi Institusi :<span style="color:red">*</span><br>
+                                <div class="custom-file">
+                                    <label class="custom-file-label text-xs" for="customFile" id="labelfileakredinstitusi">Pilih File</label>
+                                    <input type="file" class="custom-file-input mb-1" id="file_akred_institusi" name="file_akred_institusi" accept="application/pdf" required>
+                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                    <div class="text-xs font-italic text-danger blink" id="err_file_akred_institusi"></div><br>
+                                    <script>
+                                        $('#file_akred_institusi').on('change', function() {
+                                            var fileNameInstitusi = $(this).val();
+                                            fileNameInstitusi = fileNameInstitusi.replace(/^.*[\\\/]/, '');
+                                            if (fileNameInstitusi == "") fileNameInstitusi = "Pilih File";
+                                            $('#labelfileakredinstitusi').html(fileNameInstitusi);
+                                        })
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                File Akreditasi Jurusan :<span style="color:red">*</span><br>
+                                <div class="custom-file">
+                                    <label class="custom-file-label text-xs" for="customFile" id="labelfileakredjururusan">Pilih File</label>
+                                    <input type="file" class="custom-file-input mb-1" id="file_akred_jurusan" name="file_akred_jurusan" accept="application/pdf" required>
+                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                    <div class="text-xs font-italic text-danger blink" id="err_file_akred_jurusan"></div><br>
+                                    <script>
+                                        $('#file_akred_jurusan').on('change', function() {
+                                            var fileNameAkredJur = $(this).val();
+                                            fileNameAkredJur = fileNameAkredJur.replace(/^.*[\\\/]/, '');
+                                            if (fileNameAkredJur == "") fileNameAkredJur = "Pilih File";
+                                            $('#labelfileakredjururusan').html(fileNameAkredJur);
+                                        })
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Koordinator -->
+                        <div class=" row">
+                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary">KORDINATOR</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Nama : <span style="color:red">*</span><br>
+                                <input type="text" class="form-control form-control-xs" name="nama_koordinator" id="nama_koordinator" value="<?= $d_praktik['nama_koordinator_praktik'] ?>" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required>
+                                <span class="text-danger b  i text-xs blink" id="err_nama_koordinator"></span>
+                            </div>
+                            <div class="col-md-4">
+                                Email :<br>
+                                <input type="text" class="form-control form-control-xs" name="email_koordinator" id="email_koordinator" value="<?= $d_praktik['email_koordinator_praktik'] ?>" placeholder="Isi Email Koordinator" value="<?= $d_user['email_user']; ?>">
+                            </div>
+                            <div class="col-md-4">
+                                Telpon : <span style="color:red">*</span><br>
+                                <input type="number" class="form-control form-control-xs" name="telp_koordinator" id="telp_koordinator" value="<?= $d_praktik['telp_koordinator_praktik'] ?>" placeholder="Isi Telpon Koordinator" min="1" value="<?= $d_user['no_telp_user']; ?>" required>
+                                <i style='font-size:12px;'>Isian hanya berupa angka</i>
+                                <br><span class="text-danger b  i text-xs blink" id="err_telp_koordinator"></span>
+                            </div>
+                        </div>
+
+                        <!-- Pakai Mess -->
+                        <div class=" row">
+                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
+                        </div>
+                        <div id="data_pilih_mess">
+                            <div class="text-center mb-3">
+                                Pemakaian Mess/Pemondokan : <span class="text-danger">*</span><br>
+                            </div>
                             <?php
+                            if ($d_praktik['status_mess_praktik'] == "Y") {
+                                $messY = "checked";
+                                $messT = "";
                             } else {
-                            ?>
-                                <b><i>Data Jurusan Tidak Ada</i></b>
-                            <?php
+                                $messY = "";
+                                $messT = "checked";
                             }
                             ?>
+                            <div class="row boxed-check-group boxed-check-xs boxed-check-primary justify-content-center">
+                                <label class="boxed-check">
+                                    <input class="boxed-check-input" type="radio" name="pilih_mess" id="pilih_mess1" value="Y" <?= $messY ?>>
+                                    <div class="boxed-check-label">Ya</div>
+                                </label>
+                                &nbsp;
+                                &nbsp;
+                                <label class="boxed-check">
+                                    <input class="boxed-check-input" type="radio" name="pilih_mess" id="pilih_mess2" value="T" <?= $messT ?>>
+                                    <div class="boxed-check-label">Tidak</div>
+                                </label>
+                            </div>
+                            <div class="text-danger b i text-xs blink" id="err_pilih_mess"></div>
+                            <hr>
                         </div>
-                        <div class="col-lg-3">
-                            Pilih Jenjang : <br>
-                            <?php
-                            $sql_jenjang_pdd = "SELECT * FROM tb_jenjang_pdd order by nama_jenjang_pdd ASC";
 
-                            $q_jenjang_pdd = $conn->query($sql_jenjang_pdd);
-                            $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
-
-                            if ($r_jenjang_pdd > 0) {
-                            ?>
-                                <select class='form-control' aria-label='Default select example' name='id_jenjang_pdd'>
-                                    <option value="">-- <i>Pilih</i>--</option>
-                                    <?php
-                                    while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                        if ($d_praktik_join['id_jenjang_pdd'] == $d_jenjang_pdd['id_jenjang_pdd']) {
-                                    ?>
-                                            <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>' selected>
-                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
-                                            </option>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            <option class='text-wrap' value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
-                                                <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
-                                            </option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            <?php
-                            } else {
-                            ?>
-                                <b><i>Data Jurusan Tidak Ada</i></b>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                        <div class="col-lg-3">
-                            Pilih Spesifikasi : <br>
-                            <?php
-                            $sql_spesifikasi_pdd = "SELECT * FROM tb_spesifikasi_pdd order by nama_spesifikasi_pdd ASC";
-
-                            $q_spesifikasi_pdd = $conn->query($sql_spesifikasi_pdd);
-                            $r_spesifikasi_pdd = $q_spesifikasi_pdd->rowCount();
-
-                            if ($r_spesifikasi_pdd > 0) {
-                            ?>
-                                <select class='form-control' aria-label='Default select example' name='id_spesifikasi_pdd'>
-                                    <option value="">-- <i>Pilih</i>--</option>
-                                    <?php
-                                    while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
-                                        if ($d_praktik_join['id_spesifikasi_pdd'] == $d_spesifikasi_pdd['id_spesifikasi_pdd']) {
-                                    ?>
-                                            <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>' selected>
-                                                <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
-                                            </option>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
-                                                <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
-                                            </option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            <?php
-                            } else {
-                            ?>
-                                <b><i>Data Spesifikasi Tidak Ada</i></b>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                        <div class="col-lg-3">
-                            Akreditasi : <span style="color:red">*</span><br>
-                            <?php
-                            $sql_akreditasi = "SELECT * FROM tb_akreditasi";
-
-                            $q_akreditasi = $conn->query($sql_akreditasi);
-                            $r_akreditasi = $q_akreditasi->rowCount();
-
-                            if ($r_akreditasi > 0) {
-                            ?>
-                                <select class='form-control' aria-label='Default select example' name='id_akreditasi' required>
-                                    <option value="">-- <i>Pilih</i>--</option>
-                                    <?php
-                                    while ($d_akreditasi = $q_akreditasi->fetch(PDO::FETCH_ASSOC)) {
-                                        if ($d_praktik_join['id_akreditasi'] == $d_akreditasi['id_akreditasi']) {
-                                    ?>
-                                            <option class='text-wrap' value='<?php echo $d_akreditasi['id_akreditasi']; ?>' selected>
-                                                <?php echo $d_akreditasi['nama_akreditasi']; ?>
-                                            </option>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            <option class='text-wrap' value='<?php echo $d_akreditasi['id_akreditasi']; ?>'>
-                                                <?php echo $d_akreditasi['nama_akreditasi']; ?>
-                                            </option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            <?php
-                            } else {
-                            ?>
-                                <b><i>Data Akreditasi Tidak Ada</i></b>
-                            <?php
-                            }
-                            ?>
+                        <!-- Tombol Simpan Praktik-->
+                        <div id="simpan_praktik_tarif" class="nav btn justify-content-center">
+                            <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
+                                <button type="button" name="ubah_praktik" id="ubah_praktik" class="btn btn-outline-primary">
+                                    <i class="fas fa-check-circle"></i>
+                                    Ubah Data Praktik
+                                    <i class="fas fa-check-circle"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <!-- Jumlah Praktikan, Tanggal Mulai, Tanggal Selesai, dan Unggah Surat -->
-                    <div class="row">
-                        <div class="col-lg-3">
-                            Jumlah Praktikan : <span style="color:red">*</span><br>
-                            <input type="number" class="form-control" name="jumlah_praktik" min="1" value="<?php echo $d_praktik_join['jumlah_praktik'] ?>" required>
-                        </div>
-                        <div class="col-lg-3">
-                            Tanggal Mulai : <span style="color:red">*</span><br>
-                            <input type="date" class="form-control" name="tgl_mulai_praktik" value="<?php echo $d_praktik_join['tgl_mulai_praktik'] ?>" required>
-                        </div>
-                        <div class="col-lg-3">
-                            Tanggal Akhir : <span style="color:red">*</span><br>
-                            <input type="date" class="form-control" name="tgl_selesai_praktik" value="<?php echo $d_praktik_join['tgl_selesai_praktik'] ?>" required>
-                        </div>
-                    </div>
-                    <br>
-                    <!-- unggah berkas -->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            Unggah Surat : <br>
-                            <?php
-                            if ($d_praktik_join['surat_praktik'] != '') {
-                            ?>
-                                <i style='font-size:12px;'>File Surat sebelumnya
-                                    <a href="<?php echo $d_praktik_join['surat_praktik'] ?>">Download</a>
-                                </i><br>
-                            <?php
-                            }
-                            ?>
-                            <input type="file" name="surat_praktik" accept="application/pdf" value="<?php echo $d_praktik_join['surat_praktik'] ?>">
-                            <br><i style='font-size:12px;'>Data unggah harus .pdf, Maksimal 1 MB</i>
-                        </div>
-                        <div class="col-lg-6">
-                            Unggah Data Praktikan :
-                            <i style='font-size:12px;'><a href="./_file/format_data_praktikan.xlsx">Download Format</a></i><br>
-                            <?php
-
-                            if ($d_praktik_join['data_praktik'] != '') {
-                            ?>
-                                <i style='font-size:12px;'>Data Praktikan sebelumnya
-                                    <a href="<?php echo $d_praktik_join['data_praktik'] ?>">Download</a>
-                                </i><br>
-                            <?php
-                            }
-                            ?>
-                            <input type="file" name="data_praktik" accept=".xls, .xlsx" value="<?php echo $d_praktik_join['data_praktik'] ?>">
-                            <br><i style='font-size:12px;'>Data unggah harus .xls .xlsx, Maksimal 1 MB</i>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- Penanggung Jawab/Pembimbing/Mentor -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <b>Penanggung Jawab/Pembimbing/Mentor</b>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            Nama : <span style="color:red">*</span><br>
-                            <input type="text" class="form-control" name="nama_mentor_praktik" value="<?php echo $d_praktik_join['nama_mentor_praktik']; ?>" required>
-                        </div>
-                        <div class="col-lg-4">
-                            Telpon : <span style="color:red">*</span><br>
-                            <input type="number" class="form-control" name="telp_mentor_praktik" min="1" value="<?php echo $d_praktik_join['telp_mentor_praktik']; ?>" required>
-                            <i style='font-size:12px;'>Isian hanya berupa angka</i>
-                        </div>
-                        <div class="col-lg-4">
-                            Email :<br>
-                            <input type="text" class="form-control" name="email_mentor_praktik" value="<?php echo $d_praktik_join['email_mentor_praktik']; ?>">
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- Simpan -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <input name="u" value="<?php echo $_GET['u']; ?>" hidden>
-                            <input type="submit" name="ubah_praktik" value="Ubah" class="btn btn-success">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+                </div>
+        </form>
     </div>
-<?php
+
+    <script type="text/javascript">
+        $('#jurusan').on('select2:select', function() {
+            console.log("pilih jurusan");
+            $('#jenjangData').load('_admin/insert/i_praktikDataJenjang.php?jur=' + $("#jurusan").val());
+            $('#jenjangKet').fadeOut(0);
+            $('#jenjangData').fadeIn(0);
+            $('#profesiData').fadeOut(0);
+            $('#profesiKet').fadeIn(0);
+        });
+
+        $("#ubah_praktik").click(function() {
+
+            Swal.fire({
+                title: 'Mohon Ditunggu',
+                html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-4 mt-4" width="100" height="100" />',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+            });
+            var data_praktik = $('#form_praktik').serializeArray();
+            var id = $("#id").val();
+            var user = $("#user").val();
+            var institusi = $("#institusi").val();
+            var kelompok = $("#kelompok").val();
+            var jumlah = $("#jumlah").val();
+            var jurusan = $("#jurusan").val();
+            var jenjang = $("#jenjang").val();
+            var profesi = $("#profesi").val();
+            var tgl_mulai = $("#tgl_mulai").val();
+            var tgl_selesai = $("#tgl_selesai").val();
+            var no_surat = $("#no_surat").val();
+            var tgl_surat = $("#tgl_surat").val();
+            var file_surat = $("#file_surat").val();
+            var file_akred_institusi = $("#file_akred_institusi").val();
+            var file_akred_jurusan = $("#file_akred_jurusan").val();
+            var nama_koordinator = $("#nama_koordinator").val();
+            var email_koordinator = $("#email_koordinator").val();
+            var telp_koordinator = $("#telp_koordinator").val();
+            var pilih_mess = $('input[name="pilih_mess"]:checked').val();
+
+            //Notif Bila tidak diisi
+            if (
+                institusi == "" ||
+                kelompok == "" ||
+                jumlah == "" ||
+                jurusan == "" ||
+                jenjang == "" ||
+                profesi == "" ||
+                tgl_mulai == "" ||
+                tgl_selesai == "" ||
+                no_surat == "" ||
+                tgl_surat == "" ||
+                file_surat == "" ||
+                file_surat == undefined ||
+                file_akred_institusi == "" ||
+                file_akred_institusi == undefined ||
+                file_akred_jurusan == "" ||
+                file_akred_jurusan == undefined ||
+                nama_koordinator == "" ||
+                telp_koordinator == "" ||
+                pilih_mess == undefined
+            ) {
+                //warning Toast bila ada data wajib yg berlum terisi
+                Swal.fire({
+                    allowOutsideClick: true,
+                    showConfirmButton: false,
+                    icon: 'warning',
+                    title: '<center>DATA WAJIB ADA YANG BELUM TERISI</center>',
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                //notif institusi 
+                if (institusi == "") {
+                    $("#err_institusi").html("Institusi Harus Dipilih");
+                } else {
+                    $("#err_institusi").html("");
+                }
+
+                //notif kelompok 
+                if (kelompok == "") {
+                    $("#err_kelompok").html("Nama Kelompok Harus Diisi");
+                } else {
+                    $("#err_kelompok").html("");
+                }
+
+                //notif jumlah 
+                if (jumlah == "") {
+                    $("#err_jumlah").html("Jumlah Praktik Harus Diisi");
+                } else {
+                    $("#err_jumlah").html("");
+                }
+
+                //notif jurusan 
+                if (jurusan == "") {
+                    $("#err_jurusan").html("Jurusan Harus Diisi");
+                } else {
+                    $("#err_jurusan").html("");
+                }
+
+                //notif jenjang 
+                if (jenjang == "") {
+                    $("#err_jenjang").html("Jenjang Harus Diisi");
+                } else {
+                    $("#err_jenjang").html("");
+                }
+
+                //notif profesi 
+                if (profesi == "") {
+                    $("#err_profesi").html("Profesi Harus Diisi");
+                } else {
+                    $("#err_profesi").html("");
+                }
+
+                //notif tgl_mulai 
+                if (tgl_mulai == "") {
+                    $("#err_tgl_mulai").html("Tanggal Mulai Praktik Harus Diisi");
+                } else {
+                    $("#err_tgl_mulai").html("");
+                }
+
+                //notif tgl_selesai 
+                if (tgl_selesai == "") {
+                    $("#err_tgl_selesai").html("Tanggal Selesai Praktik Harus Diisi");
+                } else {
+                    $("#err_tgl_selesai").html("");
+                }
+
+                //notif no_surat 
+                if (no_surat == "") {
+                    $("#err_no_surat").html("No. Surat Institusi Harus Diisi");
+                } else {
+                    $("#err_no_surat").html("");
+                }
+
+                //notif tgl_surat 
+                if (tgl_surat == "") {
+                    $("#err_no_surat").html("No. Surat Institusi Harus Diisi");
+                } else {
+                    $("#err_no_surat").html("");
+                }
+
+                // notif file_surat
+                if (file_surat == "" || file_surat == undefined) {
+                    $("#err_file_surat").html("File Surat Harus Unggah");
+                } else {
+                    $("#err_file_surat").html("");
+                }
+
+                // notif file_akred_institusi
+                if (file_akred_institusi == "" || file_akred_institusi == undefined) {
+                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Unggah");
+                } else {
+                    $("#err_file_akred_institusi").html("");
+                }
+
+                // notif file_akred_jurusan
+                if (file_akred_jurusan == "" || file_akred_jurusan == undefined) {
+                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Unggah");
+                } else {
+                    $("#err_file_akred_jurusan").html("");
+                }
+
+                //notif nama_koordinator
+                if (nama_koordinator == "") {
+                    $("#err_nama_koordinator").html("Nama Koordinator Harus Diisi");
+                } else {
+                    $("#err_nama_koordinator").html("");
+                }
+
+                //notif telp_koordinator
+                if (telp_koordinator == "") {
+                    $("#err_telp_koordinator").html("Telpon Koordinator Harus Diisi");
+                } else {
+                    $("#err_telp_koordinator").html("");
+                }
+
+                //notif telp_koordinator
+                if (pilih_mess == undefined) {
+                    $("#err_pilih_mess").html("Pemakaian Mess Harus Dipilih");
+                } else {
+                    $("#err_pilih_mess").html("");
+                }
+            }
+
+            //eksekusi bila file surat terisi
+            if (file_surat != "" && file_surat != undefined) {
+
+                //Cari ekstensi file surat yg diupload
+                var typeSurat = document.querySelector('#file_surat').value;
+                var getTypeSurat = typeSurat.split('.').pop();
+
+                //cari ukuran file surat yg diupload
+                var fileSurat = document.getElementById("file_surat").files;
+                var getSizeSurat = document.getElementById("file_surat").files[0].size / 1024;
+
+                // console.log("Size Surat : " + getSizeSurat);
+                // console.log("Size Surat : " + fileSurat);
+
+                //Toast bila upload file surat selain pdf
+                if (getTypeSurat != 'pdf') {
+
+                    Swal.fire({
+                        allowOutsideClick: true,
+                        showConfirmButton: false,
+                        icon: 'warning',
+                        title: '<div class="text-md text-center">File Surat Harus <b>.pdf</b></div>',
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                    $("#err_file_surat").html("File Surat Harus pdf");
+                } //Toast bila upload file surat diatas 1 Mb 
+                else if (getSizeSurat > 1024) {
+                    Swal.fire({
+                        allowOutsideClick: true,
+                        showConfirmButton: false,
+                        icon: 'warning',
+                        title: '<div class="text-md text-center">File Surat Harus <br><b>Kurang dari 1 Mb</b></div>',
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                    $("#err_file_surat").html("File Surat Harus Kurang dari 1 Mb");
+                }
+            }
+
+            //eksekusi bila file akreditasi institusi terisi
+            if (file_akred_institusi != "" && file_akred_institusi != undefined) {
+
+                //Cari ekstensi file surat yg diupload
+                var typeAkredInstitusi = document.querySelector('#file_akred_institusi').value;
+                var getTypeAkredInstitusi = typeAkredInstitusi.split('.').pop();
+
+                //cari ukuran file surat yg diupload
+                var fileAkredInstitusi = document.getElementById("file_akred_institusi").files;
+                var getSizeAkredInstitusi = document.getElementById("file_akred_institusi").files[0].size / 1024;
+
+
+                //Toast bila upload file surat selain pdf
+                if (getTypeAkredInstitusi != 'pdf') {
+
+                    Swal.fire({
+                        allowOutsideClick: true,
+                        showConfirmButton: false,
+                        icon: 'warning',
+                        title: '<div class="text-md text-center">File Akreditasi Institusi Harus <b>.pdf</b></div>',
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus pdf");
+                } //Toast bila upload file surat diatas 1 Mb 
+                else if (getSizeAkredInstitusi > 256) {
+                    Swal.fire({
+                        allowOutsideClick: true,
+                        showConfirmButton: false,
+                        icon: 'warning',
+                        title: '<div class="text-md text-center">File Akreditasi Institusi Harus <br><b>Kurang dari 200 Kb</b></div>',
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Kurang dari 200 Kb");
+                }
+            }
+
+            //eksekusi bila file akreditasi institusi terisi
+            if (file_akred_jurusan != "" && file_akred_jurusan != undefined) {
+
+                //Cari ekstensi file surat yg diupload
+                var typeAkredJurusan = document.querySelector('#file_akred_jurusan').value;
+                var getTypeAkredJurusan = typeAkredJurusan.split('.').pop();
+
+                //cari ukuran file surat yg diupload
+                var fileAkredJurusan = document.getElementById("file_akred_jurusan").files;
+                var getSizeAkredJurusan = document.getElementById("file_akred_jurusan").files[0].size / 1024;
+
+
+                //Toast bila upload file surat selain pdf
+                if (getTypeAkredJurusan != 'pdf') {
+
+                    Swal.fire({
+                        allowOutsideClick: true,
+                        showConfirmButton: false,
+                        icon: 'warning',
+                        title: '<div class="text-md text-center">File Akreditasi Jurusan Harus <b>.pdf</b></div>',
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus pdf");
+                } //Toast bila upload file surat diatas 1 Mb 
+                else if (getSizeAkredJurusan > 256) {
+                    Swal.fire({
+                        allowOutsideClick: true,
+                        showConfirmButton: false,
+                        icon: 'warning',
+                        title: '<div class="text-md text-center">File Akreditasi Jurusan Harus <br><b>Kurang dari 200 Kb</b></div>',
+                        timer: 10000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Kurang dari 200 Kb");
+                }
+            }
+
+            //Alert jika Tanggal Selesai kurang dari tanggal mulai
+            if (
+                (tgl_selesai <= tgl_mulai) &&
+                (tgl_mulai != "" && tgl_selesai != "") ||
+                (tgl_mulai == "" && tgl_selesai == "")
+            ) {
+                Swal.fire({
+                    allowOutsideClick: true,
+                    showConfirmButton: false,
+                    icon: 'warning',
+                    title: '<center><b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b></center>',
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+                $("#err_tgl_selesai").html("<b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b>");
+            }
+            //bila tanggal mulai dan selesai sesuai
+            else { //Cek Data Ketersediaan Jadwal Praktik
+                console.log("Cek Jadwal Praktik . . .");
+                $.ajax({
+                    type: 'POST',
+                    url: "_admin/insert/i_praktik_valTgl.php",
+                    data: data_praktik,
+                    dataType: 'json',
+                    success: function(response) {
+                        //notif jika jadwal dan/ jumlah praktik melebihi kuota
+                        if (response.ket == 'T') {
+                            console.log('Jadwal Praktik Tidak Bisa');
+                            Swal.fire({
+                                allowOutsideClick: true,
+                                icon: 'error',
+                                showConfirmButton: false,
+                                html: '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b>' +
+                                    '<br>Silahkan Cek Kembali Informasi Jadwal Praktik<br><br>' +
+                                    '<a href="?info_diklat" class="btn btn-outline-primary">Cek Informasi Jadwal Praktik</a>',
+                                timer: 10000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            }).then(
+                                function() {
+                                    // document.location.href = "?ptk";
+                                }
+                            );
+                        }
+                        //eksekusi bila jadwal tersedia
+                        else if (response.ket == 'Y') {
+                            console.log('Jadwal Praktik Bisa');
+                            //simpan data praktik dan data tarif
+                            if (
+                                institusi != "" &&
+                                kelompok != "" &&
+                                jumlah != "" &&
+                                jurusan != "" &&
+                                jenjang != "" &&
+                                profesi != "" &&
+                                tgl_mulai != "" &&
+                                tgl_selesai != "" &&
+                                no_surat != "" &&
+                                tgl_surat != "" &&
+                                file_surat != undefined &&
+                                getTypeSurat == 'pdf' &&
+                                file_akred_institusi != undefined &&
+                                getTypeAkredInstitusi == 'pdf' &&
+                                file_akred_jurusan != undefined &&
+                                getTypeAkredJurusan == 'pdf' &&
+                                file_surat != undefined &&
+                                getTypeSurat == 'pdf' &&
+                                getSizeSurat <= 1024 &&
+                                getSizeAkredInstitusi <= 256 &&
+                                getSizeAkredJurusan <= 256 &&
+                                nama_koordinator != "" &&
+                                telp_koordinator != "" &&
+                                pilih_mess != undefined
+                            ) {
+                                //push data pilih_mess
+                                data_praktik.push({
+                                    name: 'pilih_mess',
+                                    value: pilih_mess
+                                });
+                                //push data pilih_mess
+                                data_praktik.push({
+                                    name: 'idu',
+                                    value: '<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))); ?>'
+                                });
+
+                                //Simpan Data Praktik dan Tarif
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "_admin/exc/x_u_praktik_u.php?",
+                                    data: data_praktik,
+                                    dataType: "json",
+                                    success: function(response) {
+                                        if (response.ket == 'Y') {
+                                            //ambil data file yang diupload
+                                            var data_file = new FormData();
+                                            var xhttp = new XMLHttpRequest();
+
+
+                                            var fileSurat = document.getElementById("file_surat").files;
+                                            data_file.append("file_surat", fileSurat[0]);
+
+                                            var fileAkredInstitusi = document.getElementById("file_akred_institusi").files;
+                                            data_file.append("file_akred_institusi", fileAkredInstitusi[0]);
+
+                                            var fileAkredJurusan = document.getElementById("file_akred_jurusan").files;
+                                            data_file.append("file_akred_jurusan", fileAkredJurusan[0]);
+
+                                            var id = document.getElementById("id").value;
+                                            data_file.append("id", id);
+
+                                            xhttp.open("POST", "_admin/exc/x_i_praktik_sFile.php", true);
+                                            xhttp.send(data_file);
+
+                                            data_file.append("q", response.q);
+                                            data_file.append("idpp", response.idpp);
+                                            data_file.append("profesi", "<?= bin2hex(urlencode(base64_encode(date("Ymd") . "*sm*" . $d_praktik['id_profesi_pdd']))) ?>");
+                                            data_file.append("idp", idp);
+
+                                            xhttp.open("POST", "_admin/exc/x_u_praktik_sFile.php", true);
+
+                                            xhttp.onload = function() {
+                                                if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("size"))) ?>") {
+                                                    console.log("size too big");
+                                                    Swal.fire({
+                                                        allowOutsideClick: true,
+                                                        icon: 'warning',
+                                                        html: '<span class="text-danger text-lg text-center">Ukuran File Terlalu Besar</span>',
+                                                        showConfirmButton: false,
+                                                        backdrop: true,
+                                                        timer: 5000,
+                                                        timerProgressBar: true
+                                                    });
+                                                } else if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("type"))); ?>") {
+                                                    console.log("Tipe Different");
+                                                    Swal.fire({
+                                                        allowOutsideClick: true,
+                                                        icon: 'warning',
+                                                        html: '<span class="text-danger text-lg text-center">Tipe File Berbeda</span>',
+                                                        showConfirmButton: false,
+                                                        backdrop: true,
+                                                        timer: 5000,
+                                                        timerProgressBar: true
+                                                    });
+                                                } else {
+                                                    console.log("Success");
+                                                    Swal.fire({
+                                                        allowOutsideClick: true,
+                                                        // isDismissed: false,
+                                                        icon: 'success',
+                                                        html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
+                                                        title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
+                                                        showConfirmButton: false,
+                                                        timer: 5000,
+                                                        timerProgressBar: true,
+                                                        didOpen: (toast) => {
+                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                        }
+                                                    }).then(
+                                                        function() {
+                                                            document.location.href = "?ptk";
+                                                        }
+                                                    );
+                                                }
+                                            }
+                                            xhttp.send(data_file);
+                                        } else {
+                                            Swal.fire({
+                                                allowOutsideClick: true,
+                                                showConfirmButton: false,
+                                                icon: 'warning',
+                                                html: '<div class="text-lg">Mohon Maaf Data Praktikan <br><b>Sudah Penuh</b></div>',
+                                                timer: 10000,
+                                                timerProgressBar: true,
+                                                didOpen: (toast) => {
+                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                }
+                                            });
+                                        }
+                                    },
+                                    error: function(response) {
+                                        console.log(response.responseText);
+                                        alert('eksekusi query gagal');
+                                    }
+                                });
+                            } else console.log("Data Wajib Praktik Belum Diisi dan/ tidak sesuai");
+                        } else alert("ERROR CEK TANGGAL PRAKTIK");
+                    }
+                });
+            }
+        });
+    </script>
+<?php } else {
+    echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
 }
-?>

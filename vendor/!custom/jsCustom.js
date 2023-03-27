@@ -1,15 +1,21 @@
 $(document).ready(function () {
-  $("#myTable").dataTable();
+  /* -------------------------------------------------------------- Loader */
+  $(".preloader").fadeOut();
 
-  $("#myTable_2").dataTable();
+  /* -------------------------------------------------------------- dataTable */
+  $("#dataTable").DataTable();
+  $("#dataTable_2").dataTable();
 
-  $(".js-example-placeholder-single-long").select2({
-    placeholder: "-------------- Pilih --------------",
-    allowClear: true,
-  });
-
-  $(".js-example-placeholder-single").select2({
+  /* -------------------------------------------------------------- select2 */
+  $(".select2").select2({
     placeholder: "-- Pilih --",
     allowClear: true,
+    width: "100%",
+  });
+
+  $(".select2-long").select2({
+    placeholder: "-------------- Pilih --------------",
+    allowClear: true,
+    width: "100%",
   });
 });

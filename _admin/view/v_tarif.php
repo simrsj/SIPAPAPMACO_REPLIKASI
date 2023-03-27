@@ -36,8 +36,8 @@
                                             <?php
                                             while ($d_tarif_satuan = $q_tarif_satuan->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
-                                                <option value='<?php echo $d_tarif_satuan['id_tarif_satuan']; ?>'>
-                                                    <?php echo $d_tarif_satuan['nama_tarif_satuan']; ?>
+                                                <option value='<?= $d_tarif_satuan['id_tarif_satuan']; ?>'>
+                                                    <?= $d_tarif_satuan['nama_tarif_satuan']; ?>
                                                 </option>
                                             <?php
                                             }
@@ -83,8 +83,8 @@
                                             <?php
                                             while ($d_tarif_jenis = $q_tarif_jenis->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
-                                                <option value='<?php echo $d_tarif_jenis['id_tarif_jenis']; ?>'>
-                                                    <?php echo $d_tarif_jenis['nama_tarif_jenis']; ?>
+                                                <option value='<?= $d_tarif_jenis['id_tarif_jenis']; ?>'>
+                                                    <?= $d_tarif_jenis['nama_tarif_jenis']; ?>
                                                 </option>
                                             <?php
                                             }
@@ -113,8 +113,8 @@
                                             <?php
                                             while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
-                                                <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
-                                                    <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                                                <option value='<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>'>
+                                                    <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?>
                                                 </option>
                                             <?php
                                             }
@@ -143,8 +143,8 @@
                                             <?php
                                             while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
-                                                <option value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
-                                                    <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
+                                                <option value='<?= $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
+                                                    <?= $d_jenjang_pdd['nama_jenjang_pdd']; ?>
                                                 </option>
                                             <?php
                                             }
@@ -173,8 +173,8 @@
                                             <?php
                                             while ($d_spesifikasi_pdd = $q_spesifikasi_pdd->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
-                                                <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
-                                                    <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
+                                                <option value='<?= $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>'>
+                                                    <?= $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
                                                 </option>
                                             <?php
                                             }
@@ -263,7 +263,7 @@
                 // data satuan Tarif
                 if (isset($_GET['dts'])) {
                 ?>
-                    <table class="table table-striped" id="myTable">
+                    <table class="table table-striped" id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">No</th>
@@ -285,21 +285,21 @@
 
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $no; ?></th>
-                                    <td><?php echo $d_tarif_satuan['nama_tarif_satuan']; ?></td>
-                                    <td><?php echo $d_tarif_satuan['ket_tarif_satuan']; ?></td>
+                                    <th scope="row"><?= $no; ?></th>
+                                    <td><?= $d_tarif_satuan['nama_tarif_satuan']; ?></td>
+                                    <td><?= $d_tarif_satuan['ket_tarif_satuan']; ?></td>
                                     <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dts_u_m" . $d_tarif_satuan['id_tarif_satuan']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?= "#dts_u_m" . $d_tarif_satuan['id_tarif_satuan']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#dts_d_m" . $d_tarif_satuan['id_tarif_satuan']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?= "#dts_d_m" . $d_tarif_satuan['id_tarif_satuan']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>
 
                                 <!-- modal ubah Satuan Tarif  -->
-                                <div class="modal fade" id="<?php echo "dts_u_m" . $d_tarif_satuan['id_tarif_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?= "dts_u_m" . $d_tarif_satuan['id_tarif_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method="post" action="" class="form-group">
@@ -309,13 +309,13 @@
                                                 <div class="modal-body">
 
                                                     <!-- id_tarif_satuan -->
-                                                    <input name="id_tarif_satuan" value="<?php echo $d_tarif_satuan['id_tarif_satuan']; ?>" hidden>
+                                                    <input name="id_tarif_satuan" value="<?= $d_tarif_satuan['id_tarif_satuan']; ?>" hidden>
 
                                                     Nama Tarif Satuan : <span class="text-danger">*</span><br>
-                                                    <input class="form-control" name="nama_tarif_satuan" value="<?php echo $d_tarif_satuan['nama_tarif_satuan']; ?>" required><br>
+                                                    <input class="form-control" name="nama_tarif_satuan" value="<?= $d_tarif_satuan['nama_tarif_satuan']; ?>" required><br>
 
                                                     Keterangan Tarif Satuan : <br>
-                                                    <input class="form-control" name="ket_tarif_satuan" value="<?php echo $d_tarif_satuan['ket_tarif_satuan']; ?>"><br>
+                                                    <input class="form-control" name="ket_tarif_satuan" value="<?= $d_tarif_satuan['ket_tarif_satuan']; ?>"><br>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <br>
@@ -328,7 +328,7 @@
                                 </div>
 
                                 <!-- modal hapus satuan tarif  -->
-                                <div class="modal fade" id="<?php echo "dts_d_m" . $d_tarif_satuan['id_tarif_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?= "dts_d_m" . $d_tarif_satuan['id_tarif_satuan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method="post" action="">
@@ -336,8 +336,8 @@
                                                     <h5>Hapus Data</h5>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h6><b><?php echo $d_tarif_satuan['nama_tarif_satuan']; ?></b></h6>
-                                                    <input name="id_tarif_satuan" value="<?php echo $d_tarif_satuan['id_tarif_satuan']; ?>" hidden>
+                                                    <h6><b><?= $d_tarif_satuan['nama_tarif_satuan']; ?></b></h6>
+                                                    <input name="id_tarif_satuan" value="<?= $d_tarif_satuan['id_tarif_satuan']; ?>" hidden>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn btn-danger btn-sm" name="hapus_tarif_satuan">Ya</button>
@@ -358,7 +358,7 @@
                 //data tarif
                 else {
                 ?>
-                    <table class="table table-striped" id="myTable">
+                    <table class="table table-striped" id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">No</th>
@@ -390,11 +390,11 @@
 
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $no; ?></th>
-                                    <td><?php echo $d_tarif['nama_tarif']; ?></td>
-                                    <td><?php echo $d_tarif['nama_tarif_satuan']; ?></td>
-                                    <td><?php echo "Rp " . number_format($d_tarif['jumlah_tarif'], 0, ",", "."); ?></td>
-                                    <td><?php echo $d_tarif['nama_jurusan_pdd']; ?></td>
+                                    <th scope="row"><?= $no; ?></th>
+                                    <td><?= $d_tarif['nama_tarif']; ?></td>
+                                    <td><?= $d_tarif['nama_tarif_satuan']; ?></td>
+                                    <td><?= "Rp " . number_format($d_tarif['jumlah_tarif'], 0, ",", "."); ?></td>
+                                    <td><?= $d_tarif['nama_jurusan_pdd']; ?></td>
                                     <td>
                                         <?php
                                         if ($d_tarif['nama_jenjang_pdd'] == "-- Lainnya --") {
@@ -405,17 +405,17 @@
                                         ?>
                                     </td>
                                     <td class="text-center">
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#trf_u_m" . $d_tarif['id_tarif']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?= "#trf_u_m" . $d_tarif['id_tarif']; ?>'>
                                             <i class="fas fa-edit"></i> UBAH
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#trf_d_m" . $d_tarif['id_tarif']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?= "#trf_d_m" . $d_tarif['id_tarif']; ?>'>
                                             <i class="fas fa-trash-alt"></i> HAPUS
                                         </a>
                                     </td>
                                 </tr>
 
                                 <!-- modal ubah Tarif  -->
-                                <div class="modal fade" id="<?php echo "trf_u_m" . $d_tarif['id_tarif']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?= "trf_u_m" . $d_tarif['id_tarif']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method="post" action="" class="form-group">
@@ -425,10 +425,10 @@
                                                 <div class="modal-body">
 
                                                     <!-- id_tarif -->
-                                                    <input name="id_tarif" value="<?php echo $d_tarif['id_tarif']; ?>" hidden>
+                                                    <input name="id_tarif" value="<?= $d_tarif['id_tarif']; ?>" hidden>
 
                                                     Nama Tarif : <span class="text-danger">*</span><br>
-                                                    <input class="form-control" name="nama_tarif" value="<?php echo $d_tarif['nama_tarif']; ?>" required><br>
+                                                    <input class="form-control" name="nama_tarif" value="<?= $d_tarif['nama_tarif']; ?>" required><br>
 
                                                     Satuan Tarif : <span class="text-danger">*</span><br>
                                                     <?php
@@ -447,8 +447,8 @@
                                                                     $selected = "";
                                                                 }
                                                             ?>
-                                                                <option value='<?php echo $d_tarif_satuan['id_tarif_satuan']; ?>' <?php echo $selected; ?>>
-                                                                    <?php echo $d_tarif_satuan['nama_tarif_satuan']; ?>
+                                                                <option value='<?= $d_tarif_satuan['id_tarif_satuan']; ?>' <?= $selected; ?>>
+                                                                    <?= $d_tarif_satuan['nama_tarif_satuan']; ?>
                                                                 </option>
                                                             <?php
                                                             }
@@ -488,19 +488,19 @@
                                                         }
 
                                                         ?>
-                                                        <option value="SEKALI" <?php echo $cek1; ?>>Sekali</option>
-                                                        <option value="INPUT" <?php echo $cek2; ?>>Diinput Manual</option>
-                                                        <option value="HARI-" <?php echo $cek3; ?>>Harian Tidak Termasuk Sabtu Minggu</option>
-                                                        <option value="HARI+" <?php echo $cek4; ?>>Harian Termasuk Sabtu Minggu</option>
-                                                        <option value="MINGGUAN" <?php echo $cek5; ?>>Mingguan</option>
-                                                        <option value="-- LAINNYA --" <?php echo $cek6; ?>>-- LAINNYA --</option>
+                                                        <option value="SEKALI" <?= $cek1; ?>>Sekali</option>
+                                                        <option value="INPUT" <?= $cek2; ?>>Diinput Manual</option>
+                                                        <option value="HARI-" <?= $cek3; ?>>Harian Tidak Termasuk Sabtu Minggu</option>
+                                                        <option value="HARI+" <?= $cek4; ?>>Harian Termasuk Sabtu Minggu</option>
+                                                        <option value="MINGGUAN" <?= $cek5; ?>>Mingguan</option>
+                                                        <option value="-- LAINNYA --" <?= $cek6; ?>>-- LAINNYA --</option>
                                                     </select>
                                                     <br>
 
                                                     <div id="ubahFrekKuanTarif"></div>
 
                                                     Jumlah Tarif : <i style='font-size:12px;'>(Rp)</i><span class="text-danger">*</span><br>
-                                                    <input class="form-control" name="jumlah_tarif" type="number" min="1" value="<?php echo $d_tarif['jumlah_tarif']; ?>" required>
+                                                    <input class="form-control" name="jumlah_tarif" type="number" min="1" value="<?= $d_tarif['jumlah_tarif']; ?>" required>
                                                     <i style='font-size:12px;'>Isian hanya berupa angka</i><br><br>
 
                                                     Jenis Tarif : <span class="text-danger">*</span><br>
@@ -520,8 +520,8 @@
                                                                     $selected = "";
                                                                 }
                                                             ?>
-                                                                <option value='<?php echo $d_tarif_jenis['id_tarif_jenis']; ?>' <?php echo $selected; ?>>
-                                                                    <?php echo $d_tarif_jenis['nama_tarif_jenis']; ?>
+                                                                <option value='<?= $d_tarif_jenis['id_tarif_jenis']; ?>' <?= $selected; ?>>
+                                                                    <?= $d_tarif_jenis['nama_tarif_jenis']; ?>
                                                                 </option>
                                                             <?php
                                                             }
@@ -553,8 +553,8 @@
                                                                     $selected = "";
                                                                 }
                                                             ?>
-                                                                <option value='<?php echo $d_jurusan_pdd['id_jurusan_pdd']; ?>' <?php echo $selected; ?>>
-                                                                    <?php echo $d_jurusan_pdd['nama_jurusan_pdd']; ?>
+                                                                <option value='<?= $d_jurusan_pdd['id_jurusan_pdd']; ?>' <?= $selected; ?>>
+                                                                    <?= $d_jurusan_pdd['nama_jurusan_pdd']; ?>
                                                                 </option>
                                                             <?php
                                                             }
@@ -567,7 +567,7 @@
                                                     <?php
                                                     }
                                                     ?>
-                                                    <div id="u_i_id_jurusan_pdd<?php echo $d_tarif['id_tarif']; ?>">
+                                                    <div id="u_i_id_jurusan_pdd<?= $d_tarif['id_tarif']; ?>">
                                                     </div><br>
 
                                                     Jenjang : <span class="text-danger">*</span><br>
@@ -587,8 +587,8 @@
                                                                     $selected = "";
                                                                 }
                                                             ?>
-                                                                <option value='<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>' <?php echo $selected; ?>>
-                                                                    <?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>
+                                                                <option value='<?= $d_jenjang_pdd['id_jenjang_pdd']; ?>' <?= $selected; ?>>
+                                                                    <?= $d_jenjang_pdd['nama_jenjang_pdd']; ?>
                                                                 </option>
                                                             <?php
                                                             }
@@ -620,8 +620,8 @@
                                                                     $selected = "";
                                                                 }
                                                             ?>
-                                                                <option value='<?php echo $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>' <?php echo $selected; ?>>
-                                                                    <?php echo $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
+                                                                <option value='<?= $d_spesifikasi_pdd['id_spesifikasi_pdd']; ?>' <?= $selected; ?>>
+                                                                    <?= $d_spesifikasi_pdd['nama_spesifikasi_pdd']; ?>
                                                                 </option>
                                                             <?php
                                                             }
@@ -650,22 +650,22 @@
                                                             $pilih_tarif_3 = "checked";
                                                         }
                                                         ?>
-                                                        <input class="form-check-input" type="radio" name="pilih_tarif" value="1" required <?php echo $pilih_tarif_1; ?>>
+                                                        <input class="form-check-input" type="radio" name="pilih_tarif" value="1" required <?= $pilih_tarif_1; ?>>
                                                         <label class="form-check-label">
                                                             Harus
                                                         </label><br>
-                                                        <input class="form-check-input" type="radio" name="pilih_tarif" value="2" <?php echo $pilih_tarif_2; ?>>
+                                                        <input class="form-check-input" type="radio" name="pilih_tarif" value="2" <?= $pilih_tarif_2; ?>>
                                                         <label class="form-check-label">
                                                             Pilih Salah Satu
                                                         </label><br>
-                                                        <input class="form-check-input" type="radio" name="pilih_tarif" value="3" <?php echo $pilih_tarif_3; ?>>
+                                                        <input class="form-check-input" type="radio" name="pilih_tarif" value="3" <?= $pilih_tarif_3; ?>>
                                                         <label class="form-check-label">
                                                             Opsional
                                                         </label>
                                                     </div>
 
                                                     Keterangan : <br>
-                                                    <textarea class="form-control" name="ket_tarif"><?php echo $d_tarif['ket_tarif'] ?></textarea>
+                                                    <textarea class="form-control" name="ket_tarif"><?= $d_tarif['ket_tarif'] ?></textarea>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input name="cari" value="cs" hidden>
@@ -678,7 +678,7 @@
                                 </div>
 
                                 <!-- modal hapus Tarif  -->
-                                <div class="modal fade" id="<?php echo "trf_d_m" . $d_tarif['id_tarif']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?= "trf_d_m" . $d_tarif['id_tarif']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <form method="post" action="">
@@ -686,8 +686,8 @@
                                                     <h5>Hapus Data</h5>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h6><b><?php echo $d_tarif['nama_tarif']; ?></b></h6>
-                                                    <input name="id_tarif" value="<?php echo $d_tarif['id_tarif']; ?>" hidden>
+                                                    <h6><b><?= $d_tarif['nama_tarif']; ?></b></h6>
+                                                    <input name="id_tarif" value="<?= $d_tarif['id_tarif']; ?>" hidden>
                                                     <input name="cari" value="cs" hidden>
                                                 </div>
                                                 <div class="modal-footer">

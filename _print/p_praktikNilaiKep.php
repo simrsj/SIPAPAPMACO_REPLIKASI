@@ -41,6 +41,9 @@ $ukuranFontIsi = "16px";
 //logo Gambar
 $img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
 
+//spesimen tte edi sutardi
+$tte_edi =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/tte/edi_sutardi.jpeg';
+
 //Cari Data Nilai
 $sql_nilai = " SELECT * FROM `tb_pembimbing_pilih`";
 $sql_nilai .= " JOIN tb_nilai_kep ON tb_pembimbing_pilih.id_pembimbing = tb_nilai_kep.id_pembimbing";
@@ -345,24 +348,24 @@ $html .= '
 
 //tag ttd surat
 $html .= '
-<table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px">
-    <tr>
-        <td width="420px">
-        </td>
-        <td style="text-align:center;">
-            <br>
-            Kab. Bandung Barat, ' . tanggal(date("Y-m-d")) . '<br>
-            KEPALA BAGIAN<br>
-            PENDIDIKAN, PELATIHAN, <br>
-            PENELITIAN DAN PENGEMBANGAN<br>
-            RS JIWA PROVINSI JAWA BARAT<br><br><br><br>
-            <b>Edi Sutardi, S.K.M, M.Kes</b><br>
-            <b>Pembina / IVa</b><br>
-            <b>NIP. 196410271989031004</b>
-        </td>
-    </tr>
+<table border="1" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px; width: 100% !important">
+<tr>
+    <td width="420px">
+    </td>
+    <td style="text-align:center;">
+        KEPALA BAGIAN<br>
+        PENDIDIKAN, PELATIHAN, <br>
+        PENELITIAN DAN PENGEMBANGAN<br>
+    </td>
+</tr>
+<tr>
+    <td width="420px">
+    </td>
+    <td style="text-align:center;">
+        <img src="' . $tte_edi . '" style="width: 200px !important, heigth: 100px !important;">
+    </td>
+</tr>
 </table>
-</main>
 ';
 
 //tag tutup body

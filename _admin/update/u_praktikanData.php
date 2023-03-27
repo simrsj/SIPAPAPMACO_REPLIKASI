@@ -13,7 +13,7 @@ $r_data_praktikan = $q_data_praktikan->rowCount();
 if ($r_data_praktikan > 0) {
 ?>
     <div class="table-responsive text-xs">
-        <table class="table table-striped" id="myTable">
+        <table class="table table-striped" id="dataTable">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">No</th>
@@ -34,13 +34,13 @@ if ($r_data_praktikan > 0) {
                 while ($d_data_praktikan = $q_data_praktikan->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <tr>
-                        <th scope="row"><?php echo $no; ?></th>
-                        <td><?php echo $d_data_praktikan['nama_praktikan']; ?></td>
-                        <td><?php echo $d_data_praktikan['no_id_praktikan']; ?></td>
-                        <td><?php echo $d_data_praktikan['telp_praktikan']; ?></td>
-                        <td><?php echo $d_data_praktikan['wa_praktikan']; ?></td>
-                        <td><?php echo $d_data_praktikan['email_praktikan']; ?></td>
-                        <td><?php echo $d_data_praktikan['kota_kab_praktikan']; ?></td>
+                        <th scope="row"><?= $no; ?></th>
+                        <td><?= $d_data_praktikan['nama_praktikan']; ?></td>
+                        <td><?= $d_data_praktikan['no_id_praktikan']; ?></td>
+                        <td><?= $d_data_praktikan['telp_praktikan']; ?></td>
+                        <td><?= $d_data_praktikan['wa_praktikan']; ?></td>
+                        <td><?= $d_data_praktikan['email_praktikan']; ?></td>
+                        <td><?= $d_data_praktikan['kota_kab_praktikan']; ?></td>
                         <td>
                             <?php
                             if ($d_data_praktikan['status_praktikan'] == 'y') {
@@ -60,8 +60,8 @@ if ($r_data_praktikan > 0) {
                             ?>
                         </td>
                         <td>
-                            <button id="<?php echo $d_data_praktikan['id_praktikan']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH"> <i class="fa fa-edit"></i> </button>
-                            <button id="<?php echo $d_data_praktikan['id_praktikan']; ?>" class="btn btn-danger btn-sm hapus" title="HAPUS"> <i class="fa fa-trash"></i> </button>
+                            <button id="<?= $d_data_praktikan['id_praktikan']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH"> <i class="fa fa-edit"></i> </button>
+                            <button id="<?= $d_data_praktikan['id_praktikan']; ?>" class="btn btn-danger btn-sm hapus" title="HAPUS"> <i class="fa fa-trash"></i> </button>
                         </td>
                     </tr>
                 <?php
@@ -88,7 +88,7 @@ if ($r_data_praktikan > 0) {
 </div>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#dataTable').DataTable();
     });
 
     $(".ubah_init").click(function() {
@@ -202,7 +202,7 @@ if ($r_data_praktikan > 0) {
                 url: "_admin/exc/x_u_praktikan_u.php",
                 data: data,
                 success: function() {
-                    $('#data_praktikan').load('_admin/update/u_praktikanData.php?u=<?php echo $_GET['u']; ?>');
+                    $('#data_praktikan').load('_admin/update/u_praktikanData.php?u=<?= $_GET['u']; ?>');
 
                     const Toast = Swal.mixin({
                         toast: true,
@@ -249,7 +249,7 @@ if ($r_data_praktikan > 0) {
                         "id_praktikan": $(this).attr('id')
                     },
                     success: function() {
-                        $('#data_praktikan').load('_admin/update/u_praktikanData.php?u=<?php echo $_GET['u']; ?>');
+                        $('#data_praktikan').load('_admin/update/u_praktikanData.php?u=<?= $_GET['u']; ?>');
 
                         const Toast = Swal.mixin({
                             toast: true,

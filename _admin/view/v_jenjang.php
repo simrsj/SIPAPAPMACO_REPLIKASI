@@ -38,7 +38,7 @@
                 $r_jenjang_pdd = $q_jenjang_pdd->rowCount();
                 if ($r_jenjang_pdd > 0) {
                 ?>
-                    <table class='table table-striped' id="myTable">
+                    <table class='table table-striped' id="dataTable">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope='col'>No</th>
@@ -52,19 +52,19 @@
                             while ($d_jenjang_pdd = $q_jenjang_pdd->fetch(PDO::FETCH_ASSOC)) {
                             ?>
                                 <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?></td>
+                                    <td><?= $no; ?></td>
+                                    <td><?= $d_jenjang_pdd['nama_jenjang_pdd']; ?></td>
                                     <td>
-                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#jjg_u_m" . $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-sm' href='#' data-toggle='modal' data-target='<?= "#jjg_u_m" . $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?php echo "#jjg_d_m" . $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
+                                        <a title="Hapus" class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='<?= "#jjg_d_m" . $d_jenjang_pdd['id_jenjang_pdd']; ?>'>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                     <?php $no++; ?>
                                     <!-- modal ubah jurusan  -->
-                                    <div class="modal fade" id="<?php echo "jjg_u_m" . $d_jenjang_pdd['id_jenjang_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?= "jjg_u_m" . $d_jenjang_pdd['id_jenjang_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
@@ -72,8 +72,8 @@
                                                         Ubah Jenjang :
                                                     </div>
                                                     <div class="modal-body">
-                                                        <input name="id_jenjang_pdd" value="<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>" hidden>
-                                                        <input class="form-control" name="nama_jenjang_pdd" value="<?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?>">
+                                                        <input name="id_jenjang_pdd" value="<?= $d_jenjang_pdd['id_jenjang_pdd']; ?>" hidden>
+                                                        <input class="form-control" name="nama_jenjang_pdd" value="<?= $d_jenjang_pdd['nama_jenjang_pdd']; ?>">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-success btn-sm" name="ubah">Ubah</button>
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="<?php echo "jjg_d_m" . $d_jenjang_pdd['id_jenjang_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="<?= "jjg_d_m" . $d_jenjang_pdd['id_jenjang_pdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <form method="post" action="">
@@ -92,8 +92,8 @@
                                                         <h5>Hapus Data</h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h6><b><?php echo $d_jenjang_pdd['nama_jenjang_pdd']; ?></b></h6>
-                                                        <input name="id_jenjang_pdd" value="<?php echo $d_jenjang_pdd['id_jenjang_pdd']; ?>" hidden>
+                                                        <h6><b><?= $d_jenjang_pdd['nama_jenjang_pdd']; ?></b></h6>
+                                                        <input name="id_jenjang_pdd" value="<?= $d_jenjang_pdd['id_jenjang_pdd']; ?>" hidden>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-danger btn-sm" name="hapus">Ya</button>
