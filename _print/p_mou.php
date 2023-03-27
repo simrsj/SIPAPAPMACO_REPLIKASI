@@ -1,3 +1,7 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal.php";
+?>
 <!DOCTYPE html>
 <html>
 
@@ -24,12 +28,6 @@
 		<br />
 		<br />
 		<br />
-
-		<?php
-		include_once "koneksi.php";
-		include_once "tanggal.php";
-		?>
-
 		<table border="1" class='table table-striped table-hover'>
 			<tr align="center">
 				<th>NO</th>
@@ -41,8 +39,8 @@
 			</tr>
 			<?php
 			$no = 1;
-			$sql_mou = "SELECT * FROM tb_mou 
-                    JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi
+			$sql_mou = "SELECT * FROM tb_mou ";
+			$sql_mou = " JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi
                     JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
                     JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
                     JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd

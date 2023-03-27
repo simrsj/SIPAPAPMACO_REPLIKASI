@@ -121,8 +121,8 @@
                                                 $q_praktik_pembimbing = $conn->query($sql_praktik_pembimbing);
                                                 $r_praktik_pembimbing = $q_praktik_pembimbing->rowCount();
                                             } catch (Exception $ex) {
-                                                echo "<script>alert('-DATA PRAKTIK');";
-                                                echo "document.location.href='?error404';</script>";
+                                                echo "<script>alert('-DATA PRAKTIK-PEMBIMBING-');";
+                                                // echo "document.location.href='?error404';</script>";
                                             }
 
                                             if ($r_praktik_pembimbing > 0) {
@@ -157,14 +157,15 @@
                                                                         <?php
                                                                         try {
                                                                             $sql_kep_nilai = "SELECT * FROM tb_kep_nilai ";
+                                                                            $sql_kep_nilai .= " JOIN tb_kep_nilai_data ON tb_kep_nilai.jenis_nilai = tb_kep_nilai_data.jenis_nilai";
                                                                             $sql_kep_nilai .= " WHERE id_praktikan = " . $d_praktik_pembimbing['id_praktikan'];
-                                                                            $sql_kep_nilai .= " AND id_praktikan = " . $d_praktik_pembimbing['id_praktikan'];
-                                                                            // echo "$sql_praktik_pembimbing<br>";
+                                                                            $sql_kep_nilai .= " AND tb_kep_nilai.jenis_nilai = 'LAPORAN PENDAHULUAN'";
+                                                                            // echo "$sql_kep_nilai<br>";
                                                                             $q_kep_nilai = $conn->query($sql_kep_nilai);
                                                                             $r_kep_nilai = $q_kep_nilai->rowCount();
                                                                         } catch (Exception $ex) {
-                                                                            echo "<script>alert('-DATA PRAKTIK');";
-                                                                            echo "document.location.href='?error404';</script>";
+                                                                            echo "<script>alert('DATA PRAKTIK NILAI LP');";
+                                                                            // echo "document.location.href='?error404';</script>"; 
                                                                         }
                                                                         ?>
                                                                         <?php if ($r_kep_nilai < 1) { ?>

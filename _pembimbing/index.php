@@ -20,7 +20,8 @@ if ($_SESSION['status_user'] == "Y") {
 		$q_pembimbing = $conn->query($sql_pembimbing);
 		$d_pembimbing = $q_pembimbing->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
-		echo "<script>alert('-DATA PEMBIMBING-');document.location.href='?error404';</script>";
+		echo "<script>alert('-DATA PEMBIMBING-');";
+		echo "document.location.href='?error404';</script>";
 	}
 ?>
 
@@ -57,7 +58,7 @@ if ($_SESSION['status_user'] == "Y") {
 										Matrix Kegiatan
 									</a>
 								<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
-									<a class="dropdown-item" href="?kep_nil">
+									<a class="dropdown-item" href="?kep_nilai">
 										<i class="fa-regular fa-pen-to-square"></i>
 										Penilaian Praktikan
 									</a>
