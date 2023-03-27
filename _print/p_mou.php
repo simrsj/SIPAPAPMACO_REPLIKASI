@@ -1,6 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,12 +40,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal.php";
 			<?php
 			$no = 1;
 			$sql_mou = "SELECT * FROM tb_mou ";
-			$sql_mou = " JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi
-                    JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd
-                    JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd
-                    JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd
-                    JOIN tb_akreditasi ON tb_mou.id_akreditasi = tb_akreditasi.id_akreditasi
-                    ORDER BY tb_institusi.nama_institusi ASC";
+			$sql_mou .= " JOIN tb_institusi ON tb_mou.id_institusi = tb_institusi.id_institusi ";
+			// $sql_mou .= " JOIN tb_jurusan_pdd ON tb_mou.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+			// $sql_mou .= " JOIN tb_jenjang_pdd ON tb_mou.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+			// $sql_mou .= " JOIN tb_spesifikasi_pdd ON tb_mou.id_spesifikasi_pdd = tb_spesifikasi_pdd.id_spesifikasi_pdd";
+			// $sql_mou .= " JOIN tb_akreditasi ON tb_mou.id_akreditasi = tb_akreditasi.id_akreditasi";
+			$sql_mou .= " ORDER BY tb_institusi.nama_institusi ASC";
+			// echo $sql_mou;
 			$q_mou = $conn->query($sql_mou);
 			$berlaku = 0;
 			$tb = 0;
@@ -55,14 +56,12 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal.php";
 				$date_diff = ($date_now - $date_end) / 24 / 60 / 60;
 
 				if ($date_diff <= 0) {
-
-					$status = "<span class='alert-success'>BERLAKU</span";
+					$status = "<span class='alert-success'>BERLAKU</span>";
 					$berlaku = $berlaku + 1;
 				} elseif ($date_diff > 0) {
 					$status = "<span class='alert-danger'>TIDAK BERLAKU</span>";
 					$tb = $tb + 1;
 				}
-
 			?>
 				<tr>
 					<td><?= $no++; ?></td>
