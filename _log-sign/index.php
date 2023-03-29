@@ -4,18 +4,32 @@ if (empty($_SESSION['username_user'])) {
 	<?php
 	// include "./_log-sign/exc/x_captcha.php";
 	?>
-	<div class="">
-		<div class="row p-2 fixed-top bg-light shadow-lg mb-5 ">
-			<div class="col-11">
-				<a class="badge badge-primary text-lg b text-white text-decoration-none" href="?">SIPAPAP MACO</a><br>
-				<div class=" d-none d-lg-inline b">(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)</div>
+	<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar static-top shadow">
+		<a class="text-decoration-none" href="?">
+			<div class="row">
+				<div class="col-auto my-auto">
+					<img src="./_img/rsj.svg" width="28" />
+				</div>
+				<div class="col">
+					<span class="text-primary text-left b">
+						SIPAPAP MACO
+						<span class="d-none d-md-block">
+							(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)
+						</span>
+					</span>
+				</div>
 			</div>
-			<div class="col-1">
-				<a class="dropdown-toggle btn btn-outline-primary  btn-sm  my-auto" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<span class=" d-none d-lg-inline b">LINK</span>
-					<i class="fa fa-bars"></i>
+		</a>
+		<!-- Topbar Navbar -->
+		<ul class="navbar-nav ml-auto ">
+			<!-- Nav Item - Menu 3 Bar -->
+			<li class="nav-item dropdown no-arrow  my-auto align-middle">
+				<a class="nav-item dropdown-toggle d-flex btn btn-outline-primary btn-sm" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<div class="d-none d-md-block">Menu &nbsp;</div>
+					<div class="fa fa-bars my-auto"></div>
 				</a>
-				<div class="dropdown-menu dropdown-menu-right text-center shadow p-2 rounded" aria-labelledby="userDropdown">
+				<!-- Dropdown - User Information -->
+				<div class="dropdown-menu dropdown-menu-right shadow p-2 rounded animated--grow-in" aria-labelledby="menu">
 					<a class="btn btn-danger btn-sm col-md mb-2" href="?panduan">
 						<span class="b">PANDUAN</span>
 					</a>
@@ -32,16 +46,15 @@ if (empty($_SESSION['username_user'])) {
 						Log-In
 					</a>
 				</div>
-			</div>
-		</div>
-	</div>
+			</li>
+		</ul>
+	</nav>
 	<br><br><br><br>
 	<div class="text-center mb-1">
 		<div class="btn btn-light b text-primary">
 			<?= tanggal_hari(date('w')) . ", " . tanggal(date("Y-m-d")); ?>, <span id="jam"></span>
 		</div>
 	</div>
-
 	<?php
 	if (isset($_GET['reg'])) include "_log-sign/view/v_register.php";
 	elseif (isset($_GET['login'])) include "_log-sign/view/v_login.php";
@@ -50,7 +63,7 @@ if (empty($_SESSION['username_user'])) {
 	elseif (isset($_GET['forgot_pass_user'])) include "_log-sign/view/v_lupa_password_isi.php";
 	elseif (isset($_GET['panduan'])) include "panduan.php";
 	// elseif (isset($_GET['dashboard'])) include "_log-sign/register.php";
-	else include "_log-sign/view/v_login.php";
+	else include "_log-sign/view/v_dashboard.php";
 	?>
 
 	<script>
@@ -66,6 +79,8 @@ if (empty($_SESSION['username_user'])) {
 		}
 		setInterval(time, 1000);
 	</script>
+	</div>
+	</div>
 <?php
 } else {
 ?>

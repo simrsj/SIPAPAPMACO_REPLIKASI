@@ -31,14 +31,8 @@ if ($_SESSION['status_user'] == "Y") {
 		echo "<script>alert('-DATA PRAKTIKAN-');document.location.href='?error404';</script>";
 	}
 ?>
-
-	<!-- Page Wrapper -->
 	<div id="wrapper">
-
-		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
-
-			<!-- Main Content -->
 			<div id="content">
 				<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar  static-top shadow">
 					<a class="text-decoration-none " href="?">
@@ -145,17 +139,42 @@ if ($_SESSION['status_user'] == "Y") {
 								<div class="modal-content">
 									<div class="modal-body" height="100%">
 										<?php
+										//Kedokteran
 										if ($d_praktikan['id_jurusan_pdd'] == 1) {
-											$jurusan = "ked";
-										} else if ($d_praktikan['id_jurusan_pdd'] == 2) {
+											//Program Pendidikan Dokter Spesialis (PPDS)/Residence 
+											if ($d_praktikan['id_profesi_pdd'] == 1) {
+											}
+											//Program Studi Pendidikan Dokter (PSPD)/Co-ass
+											else if ($d_praktikan['id_profesi_pdd'] == 2) {
+												$jurusan = "ked_ppds-coass";
+												$ket1 = "
+												Saya, mahasiswa peserta pendidikan klinis Ilmu Kedokteran Jiwa di RS Jiwa Provinsi Jawa Barat, 
+												yang bertanda tangan di bawah ini :
+												";
+												$ket2 = "
+												Saya, mahasiswa peserta pendidikan klinis Ilmu Kedokteran Jiwa di RS Jiwa Provinsi Jawa Barat, 
+												yang bertanda tangan di bawah ini :
+												";
+											}
+										}
+										//Keperawatan
+										else if ($d_praktikan['id_jurusan_pdd'] == 2) {
 											$jurusan = "kep";
+											$ket1 = "
+											Saya, mahasiswa peserta pendidikan klinis Ilmu Keperawatan Jiwa di RS Jiwa Provinsi Jawa Barat, 
+											yang bertanda tangan di bawah ini : 
+											";
+											$ket2 = "Setelah membaca dan memahami tata tertib serta uraian tugas dan wewenang di bagian ilmu Keperawatan jiwa, 
+											saya berjanji akan mentaati peraturan yang berlaku sesuai yang tercantum. 
+											Jika saya terbukti melanggar aturan, amak saya bersedia dikenakan sangsi sesuai dengan aturan yang berlaku.
+											";
 										}
 										?>
-										<iframe src="./_file/<?= $jurusan ?>_tatatertib.pdf" width="100%" height="100%"></iframe>
+										<embed src="./_file/<?= $jurusan ?>_tatatertib.pdf" width="100%" height="100%"></embed>
 										<hr style="background-color: gray; height: 2px; border: 0;">
 										<div class="text-gray-900">
 											<div class="text-center h5 mb-4 b">SURAT PERNYATAAN</div>
-											Saya, mahasiswa peserta pendidikan klinis Ilmu Keperawatan Jiwa di RS Jiwa Provinsi Jawa Barat, yang bertanda tangan di bawah ini :
+											<?= $ket1; ?>
 											<div class="m-4">
 												<table>
 													<tr>
@@ -176,7 +195,7 @@ if ($_SESSION['status_user'] == "Y") {
 													</tr>
 												</table>
 											</div>
-											Setelah membaca dan memahami tata tertib serta uraian tugas dan wewenang di bagian ilmu Keperawatan jiwa, saya berjanji akan mentaati peraturan yang berlaku sesuai yang tercantum. Jika saya terbukti melanggar aturan, amak saya bersedia dikenakan sangsi sesuai dengan aturan yang berlaku.
+											<?= $ket2; ?>
 										</div><br>
 										<div class="font-italic text-danger text-center text-sm ">dengan mengklik tombol dibawah anda <b>SETUJU</b> dengan mentaati peraturan yang berlaku sesuai yang tercantum</div>
 										<form id="form_pernyataan">
