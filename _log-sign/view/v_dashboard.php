@@ -1,11 +1,11 @@
   <!-- DATA PRAKTIKAN -->
-  <div class="card o-hidden border-0 shadow-lg my-3">
+  <div class="card o-hidden border-0 shadow-lg my-3 m-2">
     <div class="card-body p-0">
       <div class="row">
         <div class="col-lg-12">
           <div class="p-3">
             <div class="text-center">
-              <div class="h5 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA PRAKTIKAN</span></div>
+              <div class="h6 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA PRAKTIKAN</span></div>
             </div>
             <hr>
             <?php
@@ -19,9 +19,7 @@
             // $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
             // $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y'";
             // $sql_praktik .= " ORDER BY tb_praktik.tgl_selesai_praktik ASC";
-
             // echo $sql_praktik;
-
             $q_praktik = $conn->query($sql_praktik);
             $r_praktik = $q_praktik->rowCount();
 
@@ -29,7 +27,7 @@
             if ($r_praktik > 0) {
               $round_col = ceil(12 / $r_praktik);
             ?>
-              <div class="row">
+              <div class="row text-xs">
                 <?php
                 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
                 ?>
@@ -50,7 +48,7 @@
                       $link_logo_institusi = $d_praktik['logo_institusi'];
                     }
                     ?>
-                    <img src="<?= $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="75px" height="75px"><br>
+                    <img src="<?= $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="30px" height="30px"><br>
                     <?= $d_praktik['nama_jurusan_pdd']; ?><br>
                     <?= $d_praktik['jumlah_praktik']; ?> Orang
                   </div>
@@ -78,13 +76,13 @@
   </div>
 
   <!-- DATA MESS -->
-  <div class="card o-hidden border-0 shadow-lg my-3">
+  <div class="card o-hidden border-0 shadow-lg my-3  m-2">
     <div class="card-body p-0">
       <div class="row">
         <div class="col-lg-12">
           <div class="p-3">
             <div class="text-center">
-              <div class="h5 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA MESS</span></div>
+              <div class="h6 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA MESS</span></div>
             </div>
             <?php
             $sql_mess = "SELECT * FROM tb_mess ";
@@ -94,7 +92,7 @@
             $q_mess = $conn->query($sql_mess);
             $r_mess = $q_mess->rowCount();
             ?>
-            <div class="table-responsive">
+            <div class="table-responsive text-xs">
               <table class="table">
                 <thead class="table-dark">
                   <tr class="font-weight-bold text-center">
@@ -135,7 +133,7 @@
                       <td class="text-center"><?= $jumlah_terisi; ?></td>
                       <td class="text-center"><?= $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
                       <td class="text-center">
-                        <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#c_<?= $d_mess['id_mess']; ?>">
+                        <button class="btn btn-outline-primary btn-xs" data-toggle="collapse" data-target="#c_<?= $d_mess['id_mess']; ?>">
                           <i class="fas fa-info-circle"></i>
                         </button>
 
@@ -212,13 +210,13 @@
   </div>
 
   <!-- DATA PEMONDOKAN -->
-  <div class="card o-hidden border-0 shadow-lg my-3">
+  <div class="card o-hidden border-0 shadow-lg my-3  m-2">
     <div class="card-body p-0">
       <div class="row">
         <div class="col-lg-12">
           <div class="p-3">
             <div class="text-center">
-              <div class="h5 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA PEMONDOKAN</span></div>
+              <div class="h6 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA PEMONDOKAN</span></div>
             </div>
             <?php
             $sql_mess = "SELECT * FROM tb_mess ";
@@ -228,7 +226,7 @@
             $q_mess = $conn->query($sql_mess);
             $r_mess = $q_mess->rowCount();
             ?>
-            <div class="table-responsive">
+            <div class="table-responsive text-xs">
               <table class="table">
                 <thead class="table-dark">
                   <tr class="font-weight-bold text-center">
@@ -269,7 +267,7 @@
                       <td class="text-center"><?= $jumlah_terisi; ?></td>
                       <td class="text-center"><?= $d_mess['kapasitas_t_mess'] - $jumlah_terisi; ?></td>
                       <td class="text-center">
-                        <button class="btn btn-outline-primary btn-sm" data-toggle="collapse" data-target="#c_<?= $d_mess['id_mess']; ?>">
+                        <button class="btn btn-outline-primary btn-xs" data-toggle="collapse" data-target="#c_<?= $d_mess['id_mess']; ?>">
                           <i class="fas fa-info-circle"></i>
                         </button>
 
