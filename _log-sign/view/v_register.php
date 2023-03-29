@@ -301,7 +301,8 @@
                                             Swal.fire({
                                                 icon: 'success',
                                                 html: '<div class="b ">Registrasi Berhasil</div><hr>' +
-                                                    'Silahkan Lakukan Aktivasi di Kotak Masuk Email : <br><b>' + email + '</b>',
+                                                    'Silahkan Lakukan Aktivasi di Kotak Masuk Email : <br><b>' + email + '</b>' +
+                                                    'Bila Tidak ada Kotak Masuk (<em>Inbox</em>) silahkan cek Kotak <em class="b">SPAM</em> Email Anda',
                                                 showConfirmButton: false,
                                                 timer: 10000,
                                                 timerProgressBar: true,
