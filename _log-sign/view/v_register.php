@@ -301,10 +301,10 @@
                                             Swal.fire({
                                                 icon: 'success',
                                                 html: '<div class="b ">Registrasi Berhasil</div><hr>' +
-                                                    'Silahkan Lakukan Aktivasi di Kotak Masuk Email : <br><b>' + email + '</b>' +
-                                                    'Bila Tidak ada Kotak Masuk (<em>Inbox</em>) silahkan cek Kotak <em class="b">SPAM</em> Email Anda',
+                                                    'Silahkan Lakukan Aktivasi di Kotak Masuk E-Mail : <br><b>' + email + '</b><br>' +
+                                                    'Bila Tidak ada di Kotak Masuk (<em>Inbox</em>) silahkan cek Kotak <em class="b">SPAM</em> E-Mail Anda',
                                                 showConfirmButton: false,
-                                                timer: 10000,
+                                                timer: 15000,
                                                 timerProgressBar: true,
                                                 didOpen: (toast) => {
                                                     toast.addEventListener('mouseenter', Swal.stopTimer)
