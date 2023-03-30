@@ -4,7 +4,7 @@ if (empty($_SESSION['username_user'])) {
 	<?php
 	// include "./_log-sign/exc/x_captcha.php";
 	?>
-	<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar static-top shadow">
+	<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar static-top shadow " style="opacity: 0.95;">
 		<a class="text-decoration-none" href="?">
 			<div class="row">
 				<div class="col-auto my-auto">

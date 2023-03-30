@@ -1,5 +1,9 @@
 @charset "UTF-8";
  
+.bg-sipapapmaco{
+  background: rgb(0,128,0);
+  background: linear-gradient(180deg, rgba(0,128,0,0.8015581232492998) 5%, rgba(0,0,255,0.7959558823529411) 25%);
+}
 /* -------------------------------------------------------------- Blink */
 .blink {
   animation: blinker 1s linear infinite;
