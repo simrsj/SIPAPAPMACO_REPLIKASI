@@ -170,7 +170,7 @@ try {
                             <div class="custom-file">
                                 <label class="custom-file-label text-xs" for="customFile" id="file_mou_label">Pilih File</label>
                                 <input type="file" class="custom-file-input mb-1" type="file" name="file_mou" id="file_mou" accept="application/pdf" required>
-                                <div class="text-xs font-italic">File harus pdf dan ukuranya kurang dari 1 Mb</div>
+                                <div class="text-xs font-italic">File harus pdf dan ukuranya kurang dari 2 Mb</div>
                                 <div class="text-xs font-italic text-danger blink" id="err_file_mou"></div>
                                 <script>
                                     $('#file_mou').on('change', function(evt) {
@@ -199,7 +199,7 @@ try {
                             <div class="custom-file">
                                 <label class="custom-file-label text-xs" for="customFile" id="file_pks_label">Pilih File</label>
                                 <input type="file" class="custom-file-input mb-1" type="file" name="file_pks" id="file_pks" accept="application/pdf" required>
-                                <div class="text-xs font-italic">File harus pdf dan ukuranya kurang dari 1 Mb</div>
+                                <div class="text-xs font-italic">File harus pdf dan ukuranya kurang dari 2 Mb</div>
                                 <div class="text-xs font-italic text-danger blink" id="err_file_pks"></div>
                                 <script>
                                     $('#file_pks').on('change', function(evt) {
@@ -281,9 +281,9 @@ try {
             id_jenjang_pdd == "" ||
             file_pks == "" ||
             getTypeMOU != 'pdf' ||
-            getSizeMOU > 1024 ||
+            getSizeMOU > 2048 ||
             getTypePKS != 'pdf' ||
-            getSizePKS > 1024
+            getSizePKS > 2048
         ) {
 
             //warning Toast bila ada data wajib yg berlum terisi

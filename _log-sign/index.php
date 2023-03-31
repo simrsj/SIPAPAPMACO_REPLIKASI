@@ -12,7 +12,7 @@ if (empty($_SESSION['username_user'])) {
 				</div>
 				<div class="col">
 					<span class="text-primary text-left b">
-						SIPAPAP MACO
+						SIPAPAP MACO <span class="badge badge-primary"> <?= tanggal_hari(date('w')) . ", " . tanggal(date("Y-m-d")); ?>, <span id="jam"></span></span>
 						<span class="d-none d-md-block">
 							(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)
 						</span>
@@ -49,12 +49,7 @@ if (empty($_SESSION['username_user'])) {
 			</li>
 		</ul>
 	</nav>
-	<br><br><br><br>
-	<div class="text-center mb-1">
-		<div class="btn btn-light b text-primary">
-			<?= tanggal_hari(date('w')) . ", " . tanggal(date("Y-m-d")); ?>, <span id="jam"></span>
-		</div>
-	</div>
+	<br><br><br>
 	<?php
 	if (isset($_GET['reg'])) include "_log-sign/view/v_register.php";
 	elseif (isset($_GET['login'])) include "_log-sign/view/v_login.php";
@@ -79,8 +74,6 @@ if (empty($_SESSION['username_user'])) {
 		}
 		setInterval(time, 1000);
 	</script>
-	</div>
-	</div>
 <?php
 } else {
 ?>

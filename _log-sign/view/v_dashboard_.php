@@ -1,9 +1,9 @@
   <!-- DATA PRAKTIKAN -->
-  <div class="row m-1">
-    <div class="col-md p-0">
-      <div class="card o-hidden border-0 shadow-lg m-1">
-        <div class="card-body p-0">
-          <div class="p-1">
+  <div class="card o-hidden border-0 shadow-lg my-3 m-2">
+    <div class="card-body p-0">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="p-3">
             <div class="text-center">
               <div class="h6 text-gray-900 mb-1"><span class="badge badge-primary">DATA PRAKTIKAN</span></div>
             </div>
@@ -30,14 +30,14 @@
                 <?php
                 while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
                 ?>
-                  <div class="col-md-<?= $round_col; ?> text-center ">
-                    <span class="b text-dark">
+                  <div class="col-md-<?= $round_col; ?> text-center border-2 border-primary m-0 pr-1">
+                    <b>
                       <?php if ($d_praktik['akronim_institusi'] == NULL) { ?>
                         <?= $d_praktik['nama_institusi']; ?>
                       <?php } else { ?>
                         <?= $d_praktik['akronim_institusi']; ?>
                       <?php } ?>
-                    </span><br>
+                    </b><br>
                     <?php
                     if ($d_praktik['logo_institusi'] == '') {
                       $link_logo_institusi = "./_img/logo_institusi/default.png";
@@ -71,14 +71,12 @@
     </div>
   </div>
 
-  <!-- DATA MESS, KETERANGAN DAN PEMONDOKAN-->
-  <div class="row m-1">
-    <!-- DATA MESS DAN KETERANGAN  -->
-    <div class="col-md-6 m-0 p-0">
-      <!-- DATA MESS-->
-      <div class="card o-hidden border-0 shadow-lg m-1 mb-2">
-        <div class="card-body p-0">
-          <div class="p-2">
+  <!-- DATA MESS -->
+  <div class="card o-hidden border-0 shadow-lg my-3  m-2">
+    <div class="card-body p-0">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="p-3">
             <div class="text-center">
               <div class="h6 text-gray-900 mb-1"><span class="badge badge-primary">DATA MESS</span></div>
             </div>
@@ -90,9 +88,9 @@
             $q_mess = $conn->query($sql_mess);
             $r_mess = $q_mess->rowCount();
             ?>
-            <div class="table-responsive text-xs border-1 border-primary">
-              <table class="table table-hover m-0">
-                <thead class="table-primary   text-gray-900">
+            <div class="table-responsive text-xs">
+              <table class="table">
+                <thead class="table-dark">
                   <tr class="font-weight-bold text-center">
                     <th scope='col'>NO</th>
                     <th>NAMA MESS</th>
@@ -204,73 +202,17 @@
           </div>
         </div>
       </div>
-      <!-- DATA KETERANGAN-->
-      <div class="p-2 shadow-lg border-1 border-primary m-1">
-        <div class="h6 text-light mb-1 text-sm b">KETERANGAN :</div>
-        <?php
-        $sql_mess = "SELECT * FROM tb_mess ";
-        $sql_mess .= " WHERE nama_pemilik_mess = 'RS Jiwa Provinsi Jawa Barat' ";
-        $sql_mess .= " ORDER BY tb_mess.nama_mess ASC";
-
-        $q_mess = $conn->query($sql_mess);
-        $r_mess = $q_mess->rowCount();
-        ?>
-        <div class="table-responsive  text-xs">
-          <table class="m-0">
-            <thead class="text-light">
-              <tr class="font-weight-bold">
-                <th scope='col'>NO</th>
-                <th>NAMA MESS/PEMONDOKAN</th>
-                <th>TOTAL KAPASITAS</th>
-                <th>TOTAL TERISI</th>
-                <th>BOR</th>
-                <th>LOS</th>
-                <th>TOI</th>
-              </tr>
-            </thead>
-            <tbody class="text-light">
-              <?php
-              $no = 1;
-              $jumlah_terisi = 0;
-              while ($d_mess = $q_mess->fetch(PDO::FETCH_ASSOC)) {
-                $sql_mess1 = "SELECT tb_praktik.id_praktik, nama_mess, nama_institusi, nama_jurusan_pdd, jumlah_praktik, tgl_mulai_praktik, tgl_selesai_praktik, praktik_tgl  FROM tb_praktik";
-                $sql_mess1 .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-                $sql_mess1 .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-                $sql_mess1 .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
-                $sql_mess1 .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
-                $sql_mess1 .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
-                $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "' AND  tb_mess.id_mess = " . $d_mess['id_mess'];
-                $sql_mess1 .= " ORDER BY tb_mess.nama_mess ASC";
-                // echo $sql_mess1 . "<br>";
-                $q_mess1 = $conn->query($sql_mess1);
-                $jumlah_terisi = 0;
-                while ($d_mess1 = $q_mess1->fetch(PDO::FETCH_ASSOC)) {
-                  $jumlah_terisi += $d_mess1['jumlah_praktik'];
-                }
-              ?>
-                <tr>
-                  <td><?= $no; ?></td>
-                  <td><?= $d_mess['nama_mess']; ?></td>
-                  <td><?= $d_mess['nama_pemilik_mess']; ?></td>
-                  <td><?= $d_mess['nama_pemilik_mess']; ?></td>
-                </tr>
-              <?php
-                $no++;
-              }
-              ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
+  </div>
 
-    <!-- DATA PEMONDOKAN-->
-    <div class="col-md-6 p-0">
-      <div class="card o-hidden border-0 shadow-lg m-1">
-        <div class="card-body p-0">
-          <div class="p-2">
+  <!-- DATA PEMONDOKAN -->
+  <div class="card o-hidden border-0 shadow-lg my-3  m-2">
+    <div class="card-body p-0">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="p-3">
             <div class="text-center">
-              <div class="h6 text-gray-900 mb-1"><span class="badge badge-primary">DATA PEMONDOKAN</span></div>
+              <div class="h6 text-gray-900 mb-1"><span class="badge badge-primary text-lg">DATA PEMONDOKAN</span></div>
             </div>
             <?php
             $sql_mess = "SELECT * FROM tb_mess ";
@@ -280,9 +222,9 @@
             $q_mess = $conn->query($sql_mess);
             $r_mess = $q_mess->rowCount();
             ?>
-            <div class="table-responsive border-1 border-primary text-xs">
-              <table class="table table-hover m-0">
-                <thead class="table-primary text-gray-900">
+            <div class="table-responsive text-xs">
+              <table class="table">
+                <thead class="table-dark">
                   <tr class="font-weight-bold text-center">
                     <th scope='col'>NO</th>
                     <th>NAMA MESS</th>
@@ -397,6 +339,7 @@
       </div>
     </div>
   </div>
+
   <script type="text/javascript">
     var span = document.getElementById("jam");
     time();
