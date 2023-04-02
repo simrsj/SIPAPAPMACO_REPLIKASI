@@ -23,11 +23,11 @@
         if ($r_praktik > 0) {
           $round_col = ceil(12 / $r_praktik);
         ?>
-          <div class="row text-xs align-center justify-content-center my-auto mr-auto text-light">
+          <div class="row text-xs align-center justify-content-center my-auto mr-auto text-light  ">
             <?php
             while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
             ?>
-              <div class="col-md-<?= $round_col; ?> text-center mb-2">
+              <div class="col-md-<?= $round_col; ?> text-center mb-2 ">
                 <span class="b">
                   <?php if ($d_praktik['akronim_institusi'] == NULL) { ?>
                     <?= $d_praktik['nama_institusi']; ?>
@@ -42,7 +42,9 @@
                   $link_logo_institusi = $d_praktik['logo_institusi'];
                 }
                 ?>
-                <img src="<?= $link_logo_institusi; ?>" class="img-fluid rounded" alt="Responsive image" width="30px" height="30px"><br>
+                <div class="flip-container">
+                  <img src="<?= $link_logo_institusi; ?>" class="img-fluid rounded flip-image" alt="Responsive image" width="30px" height="30px">
+                </div>
                 <?= $d_praktik['nama_jurusan_pdd']; ?><br>
                 <?= $d_praktik['jumlah_praktik']; ?> Orang
               </div>
