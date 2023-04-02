@@ -47,8 +47,11 @@
                   <img src="<?= $link_logo_institusi; ?>" class="img-fluid rounded flip-image" alt="Responsive image" width="30px" height="30px">
                 </div>
                 <?= $d_praktik['nama_jurusan_pdd']; ?>
+                <br>
                 <?php if ($d_praktik['id_profesi_pdd'] != 0) { ?>
                   (<?= $d_praktik['nama_profesi_pdd']; ?>)
+                <?php } else { ?>
+                  (-)
                 <?php } ?>
                 <br>
                 <?= $d_praktik['jumlah_praktik']; ?> Orang
