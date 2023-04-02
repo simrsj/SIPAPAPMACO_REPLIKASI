@@ -30,20 +30,20 @@ if (empty($_SESSION['username_user'])) {
 					<div class="fa fa-bars my-auto"></div>
 				</a>
 				<!-- Dropdown - User Information -->
-				<div class="dropdown-menu dropdown-menu-right shadow p-2 rounded animated--grow-in" aria-labelledby="menu">
+				<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right shadow p-2 rounded animated--grow-in" aria-labelledby="menu">
 					<a class="btn btn-danger btn-sm col-md mb-2" href="?panduan">
 						<span class="b">PANDUAN</span>
 					</a>
 					<a class="btn btn-outline-dark btn-sm col-md mb-2" href="?">
-						<i class="fa-solid fa-house fa-fw mr-2"></i>
-						Home
+						Dashboard
+					</a>
+					<a class="btn btn-outline-info btn-sm col-md mb-2" href="?info_diklat">
+						Jadwal
 					</a>
 					<a class="btn btn-outline-success btn-sm col-md mb-2" href="?reg">
-						<i class="fa-solid fa-user fa-fw mr-2"></i>
 						Register
 					</a>
 					<a class="btn btn-outline-primary btn-sm col-md" href="?login">
-						<i class="fas fa-sign-out-alt fa-fw mr-2"></i>
 						Log-In
 					</a>
 				</div>
@@ -58,7 +58,7 @@ if (empty($_SESSION['username_user'])) {
 	elseif (isset($_GET['forgot_pass'])) include "_log-sign/view/v_lupa_password.php";
 	elseif (isset($_GET['forgot_pass_user'])) include "_log-sign/view/v_lupa_password_isi.php";
 	elseif (isset($_GET['panduan'])) include "panduan.php";
-	// elseif (isset($_GET['dashboard'])) include "_log-sign/register.php";
+	elseif (isset($_GET['info_diklat'])) include "_log-sign/view/v_info_diklat.php";
 	else include "_log-sign/view/v_dashboard.php";
 	?>
 
