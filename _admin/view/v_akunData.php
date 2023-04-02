@@ -28,6 +28,7 @@ if ($r_user > 0) {
                     <th scope="col">Terakhir Login</th>
                     <th scope="col">Level</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Aktivasi</th>
                     <th scope="col" width="80px"></th>
                 </tr>
             </thead>
@@ -98,6 +99,25 @@ if ($r_user > 0) {
                             <?php
 
                             } else if ($d_user['status_user'] == 'T') {
+                            ?>
+                                <span class="badge badge-danger">TIDAK AKTIF</span>
+                            <?php
+                            } else {
+                            ?>
+                                <span class="text-danger">ERROR!</span>
+
+                            <?php
+                            }
+                            ?>
+                        </td>
+                        <td class="text-center">
+                            <?php
+                            if ($d_user['status_aktivasi_user'] == 'Y') {
+                            ?>
+                                <span class="badge badge-success">AKTIF</span>
+                            <?php
+
+                            } else if ($d_user['status_aktivasi_user'] == 'T') {
                             ?>
                                 <span class="badge badge-danger">TIDAK AKTIF</span>
                             <?php
