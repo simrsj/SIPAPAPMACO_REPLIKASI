@@ -16,7 +16,7 @@ if (empty($_SESSION['username_user'])) {
 						<span class="d-none d-md-block">
 							(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)<br>
 						</span>
-						<span class="badge badge-primary"> <?= tanggal_hari(date('w', time())) . ", " . tanggal(date("Y-m-d h:i:s", time())); ?>, <span id="jam"></span></span>
+						<span class="badge badge-primary"> <?= tanggal_hari(date('w', time())) . ", " . tanggal(date("Y-m-d", time())); ?>, <span id="jam"></span></span>
 					</span>
 				</div>
 			</div>
