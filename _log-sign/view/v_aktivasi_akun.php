@@ -15,7 +15,7 @@ if (isset($_GET['act_user']) && isset($_GET['crypt'])) {
     try {
         $q_akun = $conn->query($sql_akun);
     } catch (Exception $ex) {
-        echo "<script>alert('$ex -DATA USER-');";
+        echo "<script>alert('ERROR DATA USER');";
         echo "document.location.href='?error404';</script>";
     }
     $r_akun = $q_akun->rowCount();
@@ -87,7 +87,7 @@ if (isset($_GET['act_user']) && isset($_GET['crypt'])) {
     }
     //jika data akun aktivasi tidak ada di database
     else {
-        // echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
+        echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
     }
 } else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
