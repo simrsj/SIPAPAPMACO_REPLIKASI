@@ -8,6 +8,7 @@
         $sql_praktik = "SELECT * FROM tb_praktik";
         $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
         $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+        $sql_praktik .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
         $sql_praktik .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
         $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d', time()) . "'";
         // $sql_praktik = "SELECT * FROM tb_praktik";
@@ -45,7 +46,11 @@
                 <div class="flip-container">
                   <img src="<?= $link_logo_institusi; ?>" class="img-fluid rounded flip-image" alt="Responsive image" width="30px" height="30px">
                 </div>
-                <?= $d_praktik['nama_jurusan_pdd']; ?><br>
+                <?= $d_praktik['nama_jurusan_pdd']; ?>
+                <?php if ($d_praktik['id_profesi_pdd'] != 0) { ?>
+                  (<?= $d_praktik['nama_profesi_pdd']; ?>)
+                <?php } ?>
+                <br>
                 <?= $d_praktik['jumlah_praktik']; ?> Orang
               </div>
             <?php
