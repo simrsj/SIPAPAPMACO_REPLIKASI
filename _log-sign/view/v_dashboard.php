@@ -42,7 +42,7 @@
                   $link_logo_institusi = $d_praktik['logo_institusi'];
                 }
                 ?>
-                <img src="<?= $link_logo_institusi; ?>" class="img-fluid" alt="Responsive image" width="30px" height="30px"><br>
+                <img src="<?= $link_logo_institusi; ?>" class="img-fluid rounded" alt="Responsive image" width="30px" height="30px"><br>
                 <?= $d_praktik['nama_jurusan_pdd']; ?><br>
                 <?= $d_praktik['jumlah_praktik']; ?> Orang
               </div>
