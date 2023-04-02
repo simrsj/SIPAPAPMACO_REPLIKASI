@@ -3,9 +3,14 @@ error_reporting(0);
 session_start();
 // phpinfo();
 
-$timezone = new DateTimeZone('Asia/Jakarta');
-$date = new DateTime();
-$date->setTimeZone($timezone);
+
+date_default_timezone_set('Asia/Jakarta');
+
+// Get the current time
+$current_time = new DateTime();
+
+// Add 1 minute to the current time
+$current_time->add(new DateInterval('PT1M'));
 
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
@@ -30,13 +35,13 @@ include "_add-ons/tanggal_waktu.php";
     <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet">
     <link href="vendor/sw2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
-    <link href="vendor/!custom/cssCustom.css" rel="stylesheet">
-    <link href="vendor/!custom/cs_loader.css" rel="stylesheet">
+    <link href="vendor/custom/cssCustom.css" rel="stylesheet">
+    <link href="vendor/custom/cs_loader.css" rel="stylesheet">
     <script src="vendor/jquery3.6.0.min.js"></script>
 
 </head>
 
-<body id="page-top" class="bg-primary">
+<body id="page-top" class="bg-sipapapmaco-abstrack1">
     <div class="preloader">
         <div class="loading">
             <div class="loader loader-main"></div>
@@ -84,7 +89,7 @@ include "_add-ons/tanggal_waktu.php";
     <script src="vendor/select2/dist/js/select2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
-    <script src="vendor/!custom/jsCustom.js"></script>
+    <script src="vendor/custom/jsCustom.js"></script>
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <script>
         window.top == window &&
@@ -106,8 +111,8 @@ include "_add-ons/tanggal_waktu.php";
                     )
                 ));
         <?php
-        // include "./vendor/!custom/disable_keyboard.js";
-        include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
+        // include "./vendor/custom/disable_keyboard.js";
+        include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/custom/cs_datatable.js";
         ?>
         alert = function() {};
         $('img').mousedown(function(e) {

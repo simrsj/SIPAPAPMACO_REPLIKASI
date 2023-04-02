@@ -12,7 +12,7 @@ try {
     echo "document.location.href='?error404';</script>";
 }
 $d = $q->fetch(PDO::FETCH_ASSOC);
-$h['idprkn'] = bin2hex(urlencode(base64_encode($d["id_praktikan"] . "*sm*" . date('Y-m-d h:i:s'))));
+$h['idprkn'] = bin2hex(urlencode(base64_encode($d["id_praktikan"] . "*sm*" . date('Y-m-d H:i:s', time()))));
 $h['u_no_id'] = $d["no_id_praktikan"];
 $h['u_nama'] = $d["nama_praktikan"];
 $h['u_tgl'] = $d["tgl_lahir_praktikan"];

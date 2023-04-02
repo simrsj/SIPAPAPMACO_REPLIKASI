@@ -121,7 +121,7 @@ if ($r_data_praktikan > 0) {
                             <div class="btn-group" role="group" role="group" aria-label="Basic example">
                                 <?php if ($d_prvl['u_praktikan'] == 'Y') { ?>
                                     <!-- tombol modal ubah praktikan  -->
-                                    <a title="Ubah" class='btn btn-outline-primary ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>' id="<?= bin2hex(urlencode(base64_encode($d_data_praktikan['id_praktikan'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" href='#' data-toggle="modal" data-target="#mu<?= md5($d_data_praktikan['id_praktikan']); ?>">
+                                    <a title="Ubah" class='btn btn-outline-primary ubah_init<?= md5($d_data_praktikan['id_praktikan']); ?>' id="<?= bin2hex(urlencode(base64_encode($d_data_praktikan['id_praktikan'] . "*sm*" . date('Y-m-d H:i:s', time())))); ?>" href='#' data-toggle="modal" data-target="#mu<?= md5($d_data_praktikan['id_praktikan']); ?>">
                                         <i class="far fa-edit"></i>
                                     </a>
 
@@ -228,7 +228,7 @@ if ($r_data_praktikan > 0) {
                                                         Kembali
                                                     </a>
                                                     &nbsp;
-                                                    <a class="btn btn-primary btn-sm ubah<?= md5($d_data_praktikan['id_praktikan']); ?>" id="<?= bin2hex(urlencode(base64_encode($d_data_praktikan['id_praktikan'] . "*sm*" . date('Y-m-d h:i:s')))); ?>">
+                                                    <a class="btn btn-primary btn-sm ubah<?= md5($d_data_praktikan['id_praktikan']); ?>" id="<?= bin2hex(urlencode(base64_encode($d_data_praktikan['id_praktikan'] . "*sm*" . date('Y-m-d H:i:s', time())))); ?>">
                                                         Ubah
                                                     </a>
                                                 </div>
@@ -590,7 +590,7 @@ if ($r_data_praktikan > 0) {
                                                         Kembali
                                                     </a>
                                                     &nbsp;
-                                                    <a class="btn btn-outline-danger btn-sm hapus<?= md5($d_data_praktikan['id_praktikan']); ?>" id="<?= bin2hex(urlencode(base64_encode($d_data_praktikan['id_praktikan'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" data-dismiss="modal">
+                                                    <a class="btn btn-outline-danger btn-sm hapus<?= md5($d_data_praktikan['id_praktikan']); ?>" id="<?= bin2hex(urlencode(base64_encode($d_data_praktikan['id_praktikan'] . "*sm*" . date('Y-m-d H:i:s', time())))); ?>" data-dismiss="modal">
                                                         Hapus
                                                     </a>
                                                 </div>
@@ -658,7 +658,7 @@ if ($r_data_praktikan > 0) {
         $('.loader').hide();
         alert = function() {};
         <?php
-        include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
+        include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/custom/cs_datatable.js";
         ?>
     </script>
 <?php

@@ -71,7 +71,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     $sql_insert_tarif_mess .= " ) VALUES (";
     $sql_insert_tarif_mess .= " '" . $id_tarif_pilih . "',";
     $sql_insert_tarif_mess .= " '" . $_POST['id'] . "',";
-    $sql_insert_tarif_mess .= " '" . date('Y-m-d') . "',";
+    $sql_insert_tarif_mess .= " '" . date('Y-m-d', time()) . "',";
     $sql_insert_tarif_mess .= " '" . $d_mess['nama_tarif_jenis'] . "',";
     $sql_insert_tarif_mess .= " '" . $d_mess['nama_mess'] . "',";
     $sql_insert_tarif_mess .= " '" . $d_mess['tarif_tanpa_makan_mess'] .    "',";
@@ -92,7 +92,7 @@ if ($d_prvl['c_praktik_mess'] == 'Y') {
     $sql_insert_pilih_mess .= " '" . $_POST['id'] . "',";
     $sql_insert_pilih_mess .= " '" . $_POST['id_mess'] . "',";
     $sql_insert_pilih_mess .= " '" . $id_tarif_pilih . "',";
-    $sql_insert_pilih_mess .= " '" . date('Y-m-d') . "',";
+    $sql_insert_pilih_mess .= " '" . date('Y-m-d', time()) . "',";
     $sql_insert_pilih_mess .= " '" . $jumlah_hari_praktik . "',";
     $sql_insert_pilih_mess .= " '" . $total_tarif_mess_pilih . "'";
     $sql_insert_pilih_mess .= " )";

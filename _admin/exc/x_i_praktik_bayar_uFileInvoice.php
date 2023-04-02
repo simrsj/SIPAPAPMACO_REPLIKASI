@@ -14,7 +14,7 @@ $type = explode('/', $_FILES['file_invoice']['type']);
 if ($_FILES['file_invoice']['size'] > 0) {
 
     //ubah Nama File PDF
-    $_FILES['file_invoice']['name'] = "invoice_" .   md5($_FILES['t_file']['name'] . date('Y-m-d h:i:s')) . "." . $type[1];
+    $_FILES['file_invoice']['name'] = "invoice_" .   md5($_FILES['t_file']['name'] . date('Y-m-d H:i:s', time())) . "." . $type[1];
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['file_invoice'])) {

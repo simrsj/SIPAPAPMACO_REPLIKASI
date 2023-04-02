@@ -54,7 +54,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y') {
 
     //update ke tb_tarif_pilih
     $sql_update_tarif_mess = "UPDATE tb_tarif_pilih SET";
-    $sql_update_tarif_mess .= " tgl_ubah_tarif_pilih = '" . date('Y-m-d') . "',";
+    $sql_update_tarif_mess .= " tgl_ubah_tarif_pilih = '" . date('Y-m-d', time()) . "',";
     $sql_update_tarif_mess .= " nama_tarif_pilih = '" . $d_mess['nama_mess'] . "',";
     $sql_update_tarif_mess .= " nominal_tarif_pilih = '" . $d_mess['tarif_tanpa_makan_mess'] . "',";
     $sql_update_tarif_mess .= " frekuensi_tarif_pilih = '" . $jumlah_hari_praktik . "',";
@@ -66,7 +66,7 @@ if ($d_prvl['u_praktik_mess'] == 'Y') {
     $sql_update_pilih_mess = "UPDATE tb_mess_pilih SET";
     $sql_update_pilih_mess .= " id_praktik = '" . $id_praktik . "',";
     $sql_update_pilih_mess .= " id_mess = '" . $id_mess . "',";
-    $sql_update_pilih_mess .= " tgl_ubah_mess_pilih = '" . date('Y-m-d') . "',";
+    $sql_update_pilih_mess .= " tgl_ubah_mess_pilih = '" . date('Y-m-d', time()) . "',";
     $sql_update_pilih_mess .= " jumlah_hari_mess_pilih = '" . $jumlah_hari_praktik . "',";
     $sql_update_pilih_mess .= " total_tarif_mess_pilih = '" . $total_tarif_mess_pilih . "'";
     $sql_update_pilih_mess .= " WHERE id_tarif_pilih = " . $id_tarif_pilih;

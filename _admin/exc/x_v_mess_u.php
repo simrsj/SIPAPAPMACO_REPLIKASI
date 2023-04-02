@@ -6,7 +6,7 @@ print_r($_POST);
 echo "</pre>";
 
 $sql = "UPDATE tb_mess SET";
-$sql .= " tgl_ubah_mess = '" . date('Y-m-d') . "',";
+$sql .= " tgl_ubah_mess = '" . date('Y-m-d', time()) . "',";
 $sql .= " nama_mess = '" . $_POST['u_nama_mess'] . "',";
 $sql .= " kapasitas_t_mess = '" . $_POST['u_kapasitas_total_mess'] . "',";
 $sql .= " alamat_mess = '" . $_POST['u_alamat_mess'] . "',";

@@ -12,7 +12,7 @@ if (!is_dir($alamat_unggah)) {
 
 if ($_FILES['file_mou']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['file_mou']['name'] = "mou_" . md5($id_mou . date('Y-m-d')) . ".pdf";
+    $_FILES['file_mou']['name'] = "mou_" . md5($id_mou . date('Y-m-d', time())) . ".pdf";
 
     //unggah 
     if (!is_null($_FILES['file_mou'])) {
@@ -32,7 +32,7 @@ if ($_FILES['file_mou']['size'] > 0) {
 
 if ($_FILES['file_pks']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['file_pks']['name'] = "pks_" . md5($id_mou . date('Y-m-d')) . ".pdf";
+    $_FILES['file_pks']['name'] = "pks_" . md5($id_mou . date('Y-m-d', time())) . ".pdf";
 
     //unggah 
     if (!is_null($_FILES['file_pks'])) {

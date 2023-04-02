@@ -412,7 +412,7 @@
         $alamat_unggah = "./_file/nilai";
 
         //ubah Nama File
-        $_FILES['file_nilai_kep']['name'] = "nilai_kep_" . md5($_FILES['t_file']['name'] . date('Y-m-d h:i:s')) . ".pdf";
+        $_FILES['file_nilai_kep']['name'] = "nilai_kep_" . md5($_FILES['t_file']['name'] . date('Y-m-d H:i:s', time())) . ".pdf";
 
         // echo "<pre>";
         // print_r($_FILES);

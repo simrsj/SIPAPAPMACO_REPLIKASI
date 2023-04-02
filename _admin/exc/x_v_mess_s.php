@@ -21,7 +21,7 @@ $sql = "INSERT INTO tb_mess (
     fasilitas_mess,
     status_mess
     ) VALUES (
-        '" . date('Y-m-d') . "',
+        '" . date('Y-m-d', time()) . "',
         '" . $_POST['t_nama_mess'] . "', 
         '" . $_POST['t_kapsitas_total_mess'] . "', 
         '" . $_POST['t_alamat_mess'] . "', 

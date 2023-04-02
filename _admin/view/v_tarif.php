@@ -781,7 +781,7 @@ if (isset($_POST['tambah_tarif'])) {
             '" . $_POST['id_tarif_jenis'] . "',
             '" . $_POST['ket_tarif'] . "',
             '" . $_POST['pilih_tarif'] . "',
-            '" . date('Y-m-d') . "',
+            '" . date('Y-m-d', time()) . "',
             'y'
             )";
 
@@ -822,7 +822,7 @@ if (isset($_POST['tambah_tarif'])) {
     `id_jurusan_pdd` = '" . $_POST['id_jurusan_pdd'] . "',
     `id_jenjang_pdd` = '" . $_POST['id_jenjang_pdd'] . "',
     `id_spesifikasi_pdd` = '" . $_POST['id_spesifikasi_pdd'] . "',
-    `tgl_tarif` = '" . date('Y-m-d') . "',
+    `tgl_tarif` = '" . date('Y-m-d', time()) . "',
     `ket_tarif` = '" . $_POST['ket_tarif'] . "',
     `pilih_tarif` = '" . $_POST['pilih_tarif'] . "'
     WHERE `tb_tarif`.`id_tarif` = " . $_POST['id_tarif'];

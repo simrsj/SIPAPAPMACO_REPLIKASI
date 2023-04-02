@@ -189,7 +189,7 @@ $html .= '
 <table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px">
     <tr>
         <td colspan="2"></td>
-        <td colspan="2">Kab Bandung Barat, ' . tanggal(date("Y-m-d")) . '</td>
+        <td colspan="2">Kab Bandung Barat, ' . tanggal(date('Y-m-d', time())) . '</td>
     </tr>
     <tr>
         <td width="60px"  style="vertical-align: text-top;">
@@ -382,7 +382,7 @@ if ($r_getDataUjian > 0) {
     <table border="0" style="font-size: ' . $ukuranFontIsi . '; line-height: 18px">
         <tr>
             <td colspan="2"></td>
-            <td colspan="2">Kab Bandung Barat, ' . tanggal(date("Y-m-d")) . '</td>
+            <td colspan="2">Kab Bandung Barat, ' . tanggal(date('Y-m-d', time())) . '</td>
         </tr>
         <tr>
             <td width="60px"  style="vertical-align: text-top;">

@@ -10,7 +10,7 @@ $alamat_unggah = "./../../_file/praktik";
 
 if ($_FILES['file_data_praktikan']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['file_data_praktikan']['name'] = "data_praktikan_" . $id . "_" . date('Y-m-d') . ".xlsx";
+    $_FILES['file_data_praktikan']['name'] = "data_praktikan_" . $id . "_" . date('Y-m-d', time()) . ".xlsx";
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['file_data_praktikan'])) {

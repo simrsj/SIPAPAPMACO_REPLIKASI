@@ -28,7 +28,7 @@ if (isset($_POST['ubah_praktik'])) {
     if ($_FILES['surat_praktik']['size'] > 0) {
 
         //ubah Nama File PDF
-        $_FILES['surat_praktik']['name'] = "surat_praktik_" . $id_praktik . "_" . date('Y-m-d') . ".pdf";
+        $_FILES['surat_praktik']['name'] = "surat_praktik_" . $id_praktik . "_" . date('Y-m-d', time()) . ".pdf";
 
         $file_surat_praktik = (object) @$_FILES['surat_praktik'];
 
@@ -60,7 +60,7 @@ if (isset($_POST['ubah_praktik'])) {
 
     if ($_FILES['data_praktik']['size'] > 0) {
 
-        $_FILES['data_praktik']['name'] = "data_praktik_" . $id_praktik . "_" . date('Y-m-d') . ".xlsx";
+        $_FILES['data_praktik']['name'] = "data_praktik_" . $id_praktik . "_" . date('Y-m-d', time()) . ".xlsx";
 
         $file_data_praktik = (object) @$_FILES['data_praktik'];
 
@@ -108,7 +108,7 @@ if (isset($_POST['ubah_praktik'])) {
         `id_mou` = '" . $_POST['id_mou'] . "', 
         `id_institusi` = '" . $_POST['id_institusi'] . "', 
         `nama_praktik` = '" . $_POST['nama_praktik'] . "', 
-        `tgl_ubah_praktik` = '" . date('Y-m-d') . "', 
+        `tgl_ubah_praktik` = '" . date('Y-m-d', time()) . "', 
         `tgl_mulai_praktik` = '" . $_POST['tgl_mulai_praktik'] . "', 
         `tgl_selesai_praktik` = '" . $_POST['tgl_selesai_praktik'] . "', 
         `jumlah_praktik` = '" . $_POST['jumlah_praktik'] . "', 

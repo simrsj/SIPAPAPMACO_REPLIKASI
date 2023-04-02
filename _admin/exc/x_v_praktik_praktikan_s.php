@@ -58,7 +58,7 @@ if ($r_praktikan < $d_praktik['jumlah_praktik']) {
     $sql .= " ) VALUES (";
     $sql .= " '" . $id_praktikan . "', ";
     $sql .= " '" . $idp . "', ";
-    $sql .= " '" . date("Y-m-d") . "', ";
+    $sql .= " '" . date('Y-m-d', time()) . "', ";
     $sql .= " '" . $_POST['t_no_id'] . "', ";
     $sql .= " '" . $_POST['t_nama'] . "',";
     $sql .= " '" . $_POST['t_tgl'] . "', ";

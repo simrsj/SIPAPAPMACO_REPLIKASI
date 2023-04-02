@@ -24,7 +24,7 @@ try {
     $sql_i_mou .= " ) VALUES (";
     $sql_i_mou .= " '" . $id_mou . "',";
     $sql_i_mou .= " '" . $_POST['id_institusi'] . "',";
-    $sql_i_mou .= " '" . date('Y-m-d') . "',";
+    $sql_i_mou .= " '" . date('Y-m-d', time()) . "',";
     $sql_i_mou .= " '" . $_POST['tgl_mulai_mou'] . "',";
     $sql_i_mou .= " '" . $_POST['tgl_selesai_mou'] . "',";
     $sql_i_mou .= " '" . $_POST['no_rsj_mou'] . "',";

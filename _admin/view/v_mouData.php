@@ -81,13 +81,13 @@ if ($r_mou > 0) {
                                 echo tanggal_min_alt($d_mou['tgl_selesai_mou']) . "<br>";
 
                                 $date_end = strtotime($d_mou['tgl_selesai_mou']);
-                                $date_now = strtotime(date('Y-m-d'));
+                                $date_now = strtotime(date('Y-m-d', time()));
                                 $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
                                 ?>
 
                                 <?php if ($date_diff <= 0) { ?>
                                     <span class="badge badge-success text-xs">
-                                        <?= tanggal_sisa($d_mou['tgl_selesai_mou'], date('Y-m-d')); ?>
+                                        <?= tanggal_sisa($d_mou['tgl_selesai_mou'], date('Y-m-d', time())); ?>
                                     </span>
                                 <?php } else if ($date_diff > 0) { ?>
                                     <span class="badge badge-danger text-xs">Tidak Berlaku</span>
@@ -154,7 +154,7 @@ if ($r_mou > 0) {
                                             <b>Status MoU : </b>
                                             <?php
                                             $date_end = strtotime($d_mou['tgl_selesai_mou']);
-                                            $date_now = strtotime(date('Y-m-d'));
+                                            $date_now = strtotime(date('Y-m-d', time()));
                                             $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
 
                                             if ($date_diff <= 0) {

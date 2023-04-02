@@ -53,7 +53,7 @@ else if ($_FILES['t_foto']['type'] != "image/jpeg") {
 
     //Bila t_swab di unggah
     if (isset($_FILES['t_swab'])) {
-        $_FILES['t_swab']['name'] = md5($_FILES['t_swab']['name'] . $_FILES['t_swab']['size'] . date('Y-m-d h:i:s')) . ".pdf";
+        $_FILES['t_swab']['name'] = md5($_FILES['t_swab']['name'] . $_FILES['t_swab']['size'] . date('Y-m-d H:i:s', time())) . ".pdf";
         if (!is_null($_FILES['t_swab'])) {
             $t_swab = (object) @$_FILES['t_swab'];
 
@@ -72,7 +72,7 @@ else if ($_FILES['t_foto']['type'] != "image/jpeg") {
     }
 
     if ($profesi != 0) {
-        $_FILES['t_ijazah']['name'] = md5($_FILES['t_ijazah']['name'] . $_FILES['t_ijazah']['size'] . date('Y-m-d h:i:s')) . ".pdf";
+        $_FILES['t_ijazah']['name'] = md5($_FILES['t_ijazah']['name'] . $_FILES['t_ijazah']['size'] . date('Y-m-d H:i:s', time())) . ".pdf";
         if (!is_null($_FILES['t_ijazah'])) {
             $t_ijazah = (object) @$_FILES['t_ijazah'];
 
@@ -90,7 +90,7 @@ else if ($_FILES['t_foto']['type'] != "image/jpeg") {
         $conn->query($sql_update_ijazah);
     }
 
-    $_FILES['t_foto']['name'] = md5($_FILES['t_foto']['name'] . $_FILES['t_foto']['size'] . date('Y-m-d h:i:s')) . ".jpg";
+    $_FILES['t_foto']['name'] = md5($_FILES['t_foto']['name'] . $_FILES['t_foto']['size'] . date('Y-m-d H:i:s', time())) . ".jpg";
     if (!is_null($_FILES['t_foto'])) {
         $t_foto = (object) @$_FILES['t_foto'];
 

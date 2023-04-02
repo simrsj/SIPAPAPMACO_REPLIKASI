@@ -2,7 +2,7 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 
 $sql = "UPDATE tb_pembimbing SET";
-$sql .= " tgl_ubah_pembimbing = '" . date('Y-m-d') . "',";
+$sql .= " tgl_ubah_pembimbing = '" . date('Y-m-d', time()) . "',";
 $sql .= " no_id_pembimbing = '" . $_POST['u_nipnipk_pembimbing'] . "',";
 $sql .= " nama_pembimbing = '" . $_POST['u_nama_pembimbing'] . "', ";
 $sql .= " id_pembimbing_jenis = '" . $_POST['u_jenis_pembimbing'] . "',";

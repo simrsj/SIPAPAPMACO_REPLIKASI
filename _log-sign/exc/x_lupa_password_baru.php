@@ -18,7 +18,7 @@ if ($password != $password_u) {
     $hasil['ket'] = "T";
 } else {
     $sql_update = "UPDATE tb_user SET";
-    $sql_update .= " hash_password_user = '" . md5(date('Y-m-d') . $_POST['idu']) . "',";
+    $sql_update .= " hash_password_user = '" . md5(date('Y-m-d', time()) . $_POST['idu']) . "',";
     $sql_update .= " password_user = '" . md5($password) . "'";
     $sql_update .= " WHERE id_user = " . base64_decode(urldecode($_POST['idu']));
     // echo $sql_update . "<br>";

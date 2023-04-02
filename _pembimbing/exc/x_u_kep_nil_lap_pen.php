@@ -7,7 +7,7 @@ $exp_arr_idprkn = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idprkn
 $idprkn = $exp_arr_idprkn[1];
 try {
     $sql_update = "UPDATE tb_kep_nil_lap_pen SET ";
-    $sql_update .= " tgl_ubah = '" . date('Y-m-d') . "', ";
+    $sql_update .= " tgl_ubah = '" . date('Y-m-d', time()) . "', ";
     $sql_update .= " A1 = '" . $_POST['A1'] . "', ";
     $sql_update .= " A2 = '" . $_POST['A2'] . "', ";
     $sql_update .= " A3 = '" . $_POST['A3'] . "', ";

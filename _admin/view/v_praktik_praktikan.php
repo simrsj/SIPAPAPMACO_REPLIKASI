@@ -194,7 +194,7 @@
                                                                             Kembali
                                                                         </a>
                                                                         &nbsp;
-                                                                        <a class="btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d h:i:s')))); ?>">
+                                                                        <a class="btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d H:i:s', time())))); ?>">
                                                                             Simpan
                                                                         </a>
                                                                     </div>
@@ -230,8 +230,8 @@
                                                     $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
                                                         .load(
                                                             "_admin/view/v_praktik_praktikanData.php?" +
-                                                            "idu=<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" +
-                                                            "&idp=<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" +
+                                                            "idu=<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d H:i:s', time())))); ?>" +
+                                                            "&idp=<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d H:i:s', time())))); ?>" +
                                                             "&tb=<?= md5($d_praktik['id_praktik']); ?>");
                                                     Swal.close();
                                                 });
@@ -514,8 +514,8 @@
                                                                                     $('#<?= md5("data" . $d_praktik['id_praktik']); ?>')
                                                                                         .load(
                                                                                             "_admin/view/v_praktik_praktikanData.php?" +
-                                                                                            "idu=<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" +
-                                                                                            "&idp=<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d h:i:s')))); ?>" +
+                                                                                            "idu=<?= bin2hex(urlencode(base64_encode($_SESSION['id_user'] . "*sm*" . date('Y-m-d H:i:s', time())))); ?>" +
+                                                                                            "&idp=<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d H:i:s', time())))); ?>" +
                                                                                             "&tb=<?= md5($d_praktik['id_praktik']); ?>");
 
                                                                                     $('#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>').empty();

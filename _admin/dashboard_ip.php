@@ -117,13 +117,13 @@
                                         } else {
                                             tanggal($dAr_ins['tglAkhirAkred_institusi']);
                                             $date_end = strtotime($dAr_ins['tglAkhirAkred_institusi']);
-                                            $date_now = strtotime(date('Y-m-d'));
+                                            $date_now = strtotime(date('Y-m-d', time()));
                                             $date_diff = ($date_now - $date_end) / 24 / 60 / 60;
 
                                             if ($date_diff <= 0) {
                                             ?>
                                                 <span class="badge badge-success text-md">
-                                                    <?= tanggal_sisa($dAr_ins['tglAkhirAkred_institusi'], date('Y-m-d')); ?>
+                                                    <?= tanggal_sisa($dAr_ins['tglAkhirAkred_institusi'], date('Y-m-d', time())); ?>
                                                 </span>
                                             <?php
                                             } elseif ($date_diff > 0) {
@@ -175,10 +175,10 @@
                         </div>
                     </div>
                     <?php
-                    $now = date('Y-m-d');
+                    $now = date('Y-m-d', time());
                     $selesai = $dAr_ins['tgl_selesai_mou'];
                     $date_end = strtotime($dAr_ins['tgl_selesai_mou']);
-                    $date_now = strtotime(date('Y-m-d'));
+                    $date_now = strtotime(date('Y-m-d', time()));
                     $date_before_end = strtotime(manipulasiTanggal($dAr_ins['tgl_selesai_mou'], '-1', 'months'));
                     // var_dump(tanggal($date_before_end));
                     $date_diff = ($date_now - $date_end) / 24 / 60 / 60;

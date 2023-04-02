@@ -1,4 +1,13 @@
 <?php
+
+date_default_timezone_set('Asia/Jakarta');
+
+// Get the current time
+$current_time = new DateTime();
+
+// Add 1 minute to the current time
+$current_time->add(new DateInterval('PT1M'));
+
 function tanggal($tanggal)
 {
 	$bulan = array(

@@ -68,7 +68,7 @@ if (isset($_POST['ubah_bayar'])) {
     $alamat_unggah = "./_file/bayar";
 
     //ubah Nama File
-    $_FILES['file_bayar']['name'] = "bayar_" . $no_id_bayar . "_" . $_POST['id_praktik'] . "-" . date('Y-m-d') . ".pdf";
+    $_FILES['file_bayar']['name'] = "bayar_" . $no_id_bayar . "_" . $_POST['id_praktik'] . "-" . date('Y-m-d', time()) . ".pdf";
 
     echo "<pre>";
     print_r($_FILES);

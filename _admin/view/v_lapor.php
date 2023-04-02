@@ -19,7 +19,7 @@ if (isset($_POST['tambah_lapor'])) {
     $link_file_lapor = '';
     if ($_FILES['file_lapor']['size'] > 0) {
         //ubah Nama File PDF
-        $_FILES['file_lapor']['name'] = "lapor_" . $no . "_" . date('Y-m-d') . "." . substr($_FILES['file_lapor']['type'], 6);
+        $_FILES['file_lapor']['name'] = "lapor_" . $no . "_" . date('Y-m-d', time()) . "." . substr($_FILES['file_lapor']['type'], 6);
 
         // echo "<pre>";
         // print_r($_FILES);
@@ -78,7 +78,7 @@ if (isset($_POST['tambah_lapor'])) {
         '" . $_POST['judul_lapor'] . "',
         '" . $_POST['deskripsi_lapor'] . "',
         '" . $_POST['level_lapor'] . "',
-        '" . date('Y-m-d') . "',
+        '" . date('Y-m-d', time()) . "',
         '" . $_POST['nama_lapor'] . "',
         '" . $_POST['link_lapor'] . "',
         'cek',
@@ -98,7 +98,7 @@ if (isset($_POST['tambah_lapor'])) {
     //jika foto diupload
     if ($_FILES['file_lapor']['size'] > 0) {
         //ubah Nama File PDF
-        $_FILES['file_lapor']['name'] = "lapor_" . $_POST['id_lapor'] . "_" . date('Y-m-d') . "." . substr($_FILES['file_lapor']['type'], 6);
+        $_FILES['file_lapor']['name'] = "lapor_" . $_POST['id_lapor'] . "_" . date('Y-m-d', time()) . "." . substr($_FILES['file_lapor']['type'], 6);
 
         // echo "<pre>";
         // print_r($_FILES);

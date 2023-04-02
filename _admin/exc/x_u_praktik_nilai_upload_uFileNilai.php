@@ -43,7 +43,7 @@ if ($_FILES['nilai_upload']['size'] > 0) {
 // echo "</pre>";
 
 $sql_update = "UPDATE tb_nilai_upload SET";
-$sql_update .= " tgl_ubah_nilai_upload = '" . date('Y-m-d') . "',";
+$sql_update .= " tgl_ubah_nilai_upload = '" . date('Y-m-d', time()) . "',";
 $sql_update .= " file_nilai_upload = '" . $link_nilai_upload . "'";
 $sql_update .= " WHERE id_nilai_upload = " . base64_decode(urldecode($_POST['idnu']));
 

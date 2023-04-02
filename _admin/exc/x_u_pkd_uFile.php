@@ -27,7 +27,7 @@ if ($_FILES['file_surat']['size'] > (1024 * 1024)) {
 } else {
     if ($_FILES['file_surat']['size'] > 0) {
         //ubah Nama File PDF
-        $_FILES['file_surat']['name'] = "file_surat_pkd" . md5($_FILES['file_surat']['name'] . date('Y-m-d h:i:s')) . ".pdf";
+        $_FILES['file_surat']['name'] = "file_surat_pkd" . md5($_FILES['file_surat']['name'] . date('Y-m-d H:i:s', time())) . ".pdf";
 
         //unggah surat dan data praktik
         if (!is_null($_FILES['file_surat'])) {

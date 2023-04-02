@@ -26,7 +26,7 @@ try {
     $sql_insert .= " C2, ";
     $sql_insert .= " C3 ";
     $sql_insert .= " ) VALUES (";
-    $sql_insert .= " '" . date('Y-m-d') . "', ";
+    $sql_insert .= " '" . date('Y-m-d', time()) . "', ";
     $sql_insert .= " '" . $idprkn . "', ";
     $sql_insert .= " '" . $_POST['A1'] . "', ";
     $sql_insert .= " '" . $_POST['A2'] . "', ";

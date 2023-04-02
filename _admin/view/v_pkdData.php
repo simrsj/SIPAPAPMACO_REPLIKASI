@@ -217,7 +217,7 @@ if ($d_prvl['c_pkd'] == "Y") {
         </div>
         <script>
             <?php
-            include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/!custom/cs_datatable.js";
+            include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/custom/cs_datatable.js";
             ?>
         </script>
     <?php

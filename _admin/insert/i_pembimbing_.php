@@ -119,7 +119,7 @@ if (isset($_POST['ubah'])) {
     $sql .= " `wa_praktikan` = '" . $_POST['wa_praktikan'] . "', ";
     $sql .= " `email_praktikan` = '" . $_POST['email_praktikan'] . "', ";
     $sql .= " `kota_kab_praktikan` = '" . $_POST['kota_kab_praktikan'] . "', ";
-    $sql .= " `tgl_ubah_praktikan` = '" . date('Y-m-d') . "'";
+    $sql .= " `tgl_ubah_praktikan` = '" . date('Y-m-d', time()) . "'";
     $sql .= " WHERE id_praktikan  = " . $_POST['id_praktikan'];
     echo $sql;
     $conn->query($sql);

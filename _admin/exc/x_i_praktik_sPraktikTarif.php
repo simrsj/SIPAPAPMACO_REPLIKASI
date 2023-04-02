@@ -81,7 +81,7 @@ $sql_insert = "INSERT INTO tb_praktik (
         '" . $_POST['id'] . "', 
         '" . $_POST['institusi'] . "', 
         '" . $_POST['nama_praktik'] . "',
-        '" . date('Y-m-d') . "', 
+        '" . date('Y-m-d', time()) . "', 
         '" . $_POST['tgl_mulai_praktik'] . "', 
         '" . $_POST['tgl_selesai_praktik'] . "',
         '" . $_POST['no_surat'] . "',
@@ -224,7 +224,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
         jumlah_tarif_pilih
         ) VALUES (
             '" . $id_praktik . "', 
-            '" . date('Y-m-d') . "',
+            '" . date('Y-m-d', time()) . "',
             '" . $d_tarif_jurusan['nama_tarif_jenis'] . "', 
             '" . $nama_tarif . "', 
             '" . $d_tarif_jurusan['jumlah_tarif'] . "',  
@@ -290,7 +290,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
                 jumlah_tarif_pilih
             ) VALUES (
                 '" . $id_praktik . "', 
-                '" . date('Y-m-d') . "', 
+                '" . date('Y-m-d', time()) . "', 
                 '" . $d_tarif_jenjang['nama_tarif_jenis'] . "', 
                 '" . $d_tarif_jenjang['nama_tarif'] . "', 
                 '" . $d_tarif_jenjang['jumlah_tarif'] . "',  
@@ -362,7 +362,7 @@ if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] != 1) {
                 ujian_tarif_pilih
             ) VALUES (
                 '" . $id_praktik . "', 
-                '" . date('Y-m-d') . "', 
+                '" . date('Y-m-d', time()) . "', 
                 '" . $d_tarif_ujian['nama_tarif_jenis'] . "', 
                 '" . $d_tarif_ujian['nama_tarif'] . "', 
                 '" . $d_tarif_ujian['jumlah_tarif'] . "',  

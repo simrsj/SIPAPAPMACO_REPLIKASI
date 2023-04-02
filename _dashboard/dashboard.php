@@ -35,7 +35,7 @@
               $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
               $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
               $sql_praktik .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
-              $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "'";
+              $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d', time()) . "'";
               // $sql_praktik = "SELECT * FROM tb_praktik ";
               // $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
               // $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
@@ -142,7 +142,7 @@
                       $sql_mess1 .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
                       $sql_mess1 .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
                       $sql_mess1 .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
-                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "' AND  tb_mess.id_mess = " . $d_mess['id_mess'];
+                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d', time()) . "' AND  tb_mess.id_mess = " . $d_mess['id_mess'];
                       $sql_mess1 .= " ORDER BY tb_mess.nama_mess ASC";
                       // echo $sql_mess1 . "<br>";
                       $q_mess1 = $conn->query($sql_mess1);
@@ -174,7 +174,7 @@
                               $sql_messPraktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
                               $sql_messPraktik .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
                               $sql_messPraktik .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
-                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "'  AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
+                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d', time()) . "'  AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
                               // echo $sql_messPraktik . "<br>";
                               $q_messPraktik = $conn->query($sql_messPraktik);
                               if ($q_messPraktik->rowCount() > 0) {
@@ -278,7 +278,7 @@
                       $sql_mess1 .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
                       $sql_mess1 .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
                       $sql_mess1 .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
-                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "' AND  tb_mess.id_mess = " . $d_mess['id_mess'];
+                      $sql_mess1 .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d', time()) . "' AND  tb_mess.id_mess = " . $d_mess['id_mess'];
                       $sql_mess1 .= " ORDER BY tb_mess.nama_mess ASC";
                       // echo $sql_mess1 . "<br>";
                       $q_mess1 = $conn->query($sql_mess1);
@@ -310,7 +310,7 @@
                               $sql_messPraktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
                               $sql_messPraktik .= " JOIN tb_mess_pilih ON tb_praktik.id_praktik = tb_mess_pilih.id_praktik";
                               $sql_messPraktik .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
-                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d') . "'  AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
+                              $sql_messPraktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d', time()) . "'  AND tb_mess_pilih.id_mess = " . $d_mess['id_mess'];
 
                               // echo $sql_messPraktik . "<br>";
                               $q_messPraktik = $conn->query($sql_messPraktik);

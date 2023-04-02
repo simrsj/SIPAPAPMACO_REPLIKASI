@@ -22,7 +22,7 @@ try {
     $sql_insert .= " ) VALUES (";
     $sql_insert .= " '" . $idu . "', ";
     $sql_insert .= " '" . $idprkn . "', ";
-    $sql_insert .= " '" . date('Y-m-d') . "', ";
+    $sql_insert .= " '" . date('Y-m-d', time()) . "', ";
     $sql_insert .= " '" . date("h:i:s") . "', ";
     $sql_insert .= " '" . $_POST['kompetensi'] . "', ";
     $sql_insert .= " '" . $_POST['tgl_pel'] . "' ";

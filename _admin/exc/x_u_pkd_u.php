@@ -20,7 +20,7 @@ if ($d_prvl['u_pkd'] == "Y") {
     // echo "</pre>";
 
     $sql_update = "UPDATE tb_pkd SET ";
-    $sql_update .= " tgl_ubah_pkd ='" . date('Y-m-d') . "', ";
+    $sql_update .= " tgl_ubah_pkd ='" . date('Y-m-d', time()) . "', ";
     $sql_update .= " nama_pemohon_pkd ='" . $_POST['pemohon'] . "', ";
     $sql_update .= " rincian_pkd = '" . $_POST['rincian'] . "', ";
     $sql_update .= " tgl_pel_pkd = '" . $_POST['tgl_pel'] . "', ";

@@ -114,9 +114,9 @@
                                         <td><?= $d_pkd['nama_pemohon_pkd']; ?></td>
                                         <td><?= $d_pkd['rincian_pkd']; ?></td>
                                         <td class="text-center text-lg">
-                                            <?php if ($d_pkd['tgl_pel_pkd'] > date('Y-m-d')) { ?>
+                                            <?php if ($d_pkd['tgl_pel_pkd'] > date('Y-m-d', time())) { ?>
                                                 <span class="badge badge-success">Yang Akan Datang</span>
-                                            <?php } else if ($d_pkd['tgl_pel_pkd'] < date('Y-m-d')) { ?>
+                                            <?php } else if ($d_pkd['tgl_pel_pkd'] < date('Y-m-d', time())) { ?>
                                                 <span class="badge badge-primary">Selesai</span>
                                             <?php } else { ?>
                                                 <span class="badge badge-warning text-dark">Sedang<br>Berlangsung</span>

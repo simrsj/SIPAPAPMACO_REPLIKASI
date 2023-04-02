@@ -41,7 +41,7 @@ while ($d_tarif_jurusan = $q_tarif_jurusan->fetch(PDO::FETCH_ASSOC)) {
         jumlah_tarif_pilih
         ) VALUES (
             '" . $id_praktik . "', 
-            '" . date('Y-m-d') . "',
+            '" . date('Y-m-d', time()) . "',
             '" . $d_tarif_jurusan['nama_tarif_jenis'] . "', 
             '" . $d_tarif_jurusan['nama_tarif'] . "', 
             '" . $d_tarif_jurusan['jumlah_tarif'] . "',  
@@ -80,7 +80,7 @@ if ($_POST['cek_pilih_ujian'] == 'y') {
             jumlah_tarif_pilih
             ) VALUES (
                 '" . $id_praktik . "', 
-                '" . date('Y-m-d') . "',
+                '" . date('Y-m-d', time()) . "',
                 '" . $d_tarif_ujian['nama_tarif_jenis'] . "', 
                 '" . $d_tarif_ujian['nama_tarif'] . "', 
                 '" . $d_tarif_ujian['jumlah_tarif'] . "',  
@@ -119,7 +119,7 @@ while ($d_tempat = $q_tempat->fetch(PDO::FETCH_ASSOC)) {
         jumlah_tarif_pilih
         ) VALUES (
             '" . $id_praktik . "', 
-            '" . date('Y-m-d') . "',
+            '" . date('Y-m-d', time()) . "',
             '" . $d_tempat['nama_tarif_jenis'] . "', 
             '" . $d_tempat['nama_tempat'] . "', 
             '" . $d_tempat['tarif_tempat'] . "',  

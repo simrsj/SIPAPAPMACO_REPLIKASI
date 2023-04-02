@@ -9,7 +9,7 @@ $exp_arr_id_mou = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['id_mou
 $id_mou = $exp_arr_id_mou[1];
 try {
     $sql_u_mou = "UPDATE tb_kerjasama SET";
-    $sql_u_mou .= " tgl_ubah_mou = '" . date('Y-m-d') . "',";
+    $sql_u_mou .= " tgl_ubah_mou = '" . date('Y-m-d', time()) . "',";
     $sql_u_mou .= " tgl_mulai_mou = '" . $_POST['tgl_mulai_mou'] . "',";
     $sql_u_mou .= " tgl_selesai_mou = '" . $_POST['tgl_selesai_mou'] . "',";
     $sql_u_mou .= " no_pks_rsj = '" . $_POST['no_rsj_mou'] . "',";

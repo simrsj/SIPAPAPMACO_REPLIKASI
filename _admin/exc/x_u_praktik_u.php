@@ -44,7 +44,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql .= " id_user= '" . $idu . "'";
     $sql .= " id_praktik= '" . $ipd . "'";
     $sql .= " id_institusi = '" . $_POST['institusi'] . "',";
-    $sql .= " tgl_ubah_praktik = '" . date("Y-m-d") . "',";
+    $sql .= " tgl_ubah_praktik = '" . date('Y-m-d', time()) . "',";
     $sql .= " tgl_mulai_praktik = '" . $_POST['tgl_mulai_praktik'] . "',";
     $sql .= " tgl_selesai_praktik = '" . $_POST['tgl_selesai_praktik'] . "',";
     $sql .= " no_surat_praktik = '" . $_POST['no_surat'] . "',";

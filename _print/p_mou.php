@@ -42,7 +42,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 			$tb = 0;
 			while ($data = $q_kerjasama->fetch(PDO::FETCH_ASSOC)) {
 				$date_end = strtotime($data['tgl_selesai_mou']);
-				$date_now = strtotime(date('Y-m-d'));
+				$date_now = strtotime(date('Y-m-d', time()));
 				$date_diff = ($date_now - $date_end) / 24 / 60 / 60;
 
 				if ($date_diff <= 0) {
@@ -70,7 +70,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 		</table>
 		<h5 align="right" class="alert-danger">JUMLAH MOU TIDAK BERLAKU : <?= $tb; ?> Institusi</h5>
 		<h5 align="right">JUMLAH MOU YANG MASIH BERLAKU : <?= $berlaku; ?> Institusi</h5>
-		<h5 align="right">Dicetak Pada : <?= tanggal(date('Y-m-d')); ?></h5>
+		<h5 align="right">Dicetak Pada : <?= tanggal(date('Y-m-d', time())); ?></h5>
 		<br />
 
 		<!-- <a href="cetak.php" target="_blank">CETAK</a> -->

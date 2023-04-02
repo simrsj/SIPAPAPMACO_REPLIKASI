@@ -10,7 +10,7 @@ $sql = "INSERT INTO tb_pembimbing (
     kali_pembimbing,
     status_pembimbing
     ) VALUES (
-        '" . date('Y-m-d') . "',
+        '" . date('Y-m-d', time()) . "',
         '" . $_POST['t_nipnipk_pembimbing'] . "', 
         '" . $_POST['t_nama_pembimbing'] . "', 
         '" . $_POST['t_jenis_pembimbing'] . "', 

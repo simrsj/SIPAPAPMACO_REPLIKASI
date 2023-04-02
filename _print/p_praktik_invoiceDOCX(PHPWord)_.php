@@ -48,7 +48,7 @@ $q_getJenisKegiatan = $conn->query($sql_getJenisKegiatan);
 $data_invoice = 'asdasd';
 
 $templateProcessor->setValues([
-    'tanggal' => tanggal(date('Y-m-d')),
+    'tanggal' => tanggal(date('Y-m-d', time())),
     'tahun' => date('Y'),
     'ip' => ucwords(strtolower($d_praktik['nama_institusi'])),
     'kepada' => $kepada,

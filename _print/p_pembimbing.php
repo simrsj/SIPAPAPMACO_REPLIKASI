@@ -63,7 +63,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
 
 		</table>
-		<h5 align="right">Dicetak Pada : <?= tanggal(date('Y-m-d')); ?></h5>
+		<h5 align="right">Dicetak Pada : <?= tanggal(date('Y-m-d', time())); ?></h5>
 		<br />
 
 		<!-- <a href="cetak.php" target="_blank">CETAK</a> -->

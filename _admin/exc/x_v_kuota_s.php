@@ -7,7 +7,7 @@ $sql = "INSERT INTO tb_kuota (
     jumlah_kuota,
     ket_kuota
     ) VALUES (
-        '" . date('Y-m-d') . "', 
+        '" . date('Y-m-d', time()) . "', 
         '" . $_POST['t_nama_kuota'] . "', 
         '" . $_POST['t_jumlah_kuota'] . "', 
         '" . $_POST['t_ket_kuota'] . "'

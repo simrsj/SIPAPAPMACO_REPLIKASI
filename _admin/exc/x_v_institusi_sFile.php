@@ -18,7 +18,7 @@ if (!is_dir($alamat_unggah_file_akred)) {
 
 if ($_FILES['t_fileAkred_institusi']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['t_fileAkred_institusi']['name'] = "akred_" . $id . "_" . date('Y-m-d') . ".pdf";
+    $_FILES['t_fileAkred_institusi']['name'] = "akred_" . $id . "_" . date('Y-m-d', time()) . ".pdf";
 
     //unggah 
     if (!is_null($_FILES['t_fileAkred_institusi'])) {

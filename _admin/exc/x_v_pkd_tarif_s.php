@@ -29,7 +29,7 @@ if ($d_prvl['c_pkd'] == "Y") {
     $sql_insert .= " total_pkd_tarif";
     $sql_insert .= " ) VALUES (";
     $sql_insert .= " '" . base64_decode(urldecode($_POST['idpkd'])) . "', ";
-    $sql_insert .= " '" . date('Y-m-d') . "', ";
+    $sql_insert .= " '" . date('Y-m-d', time()) . "', ";
     $sql_insert .= " '" . $_POST['t_nama'] . "', ";
     $sql_insert .= " '" . $_POST['t_frek'] . "', ";
     $sql_insert .= " '" . $_POST['t_satuan'] . "', ";

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package dompdf
  * @link    http://dompdf.github.com/
@@ -255,7 +256,7 @@ class PDFLib implements Canvas
         // Silence pedantic warnings about missing TZ settings
         $tz = @date_default_timezone_get();
         date_default_timezone_set("UTC");
-        $this->_pdf->set_info("Date", date("Y-m-d"));
+        $this->_pdf->set_info("Date", date('Y-m-d'));
         date_default_timezone_set($tz);
 
         if (self::$IN_MEMORY) {
@@ -431,7 +432,8 @@ class PDFLib implements Canvas
         $where = $this->_objs[$object]["where"];
 
         // Place the object on this page if required
-        if ($this->_page_number >= $start &&
+        if (
+            $this->_page_number >= $start &&
             (($this->_page_number % 2 == 0 && $where === "even") ||
                 ($this->_page_number % 2 == 1 && $where === "odd") ||
                 ($where === "all"))
@@ -454,7 +456,8 @@ class PDFLib implements Canvas
             $where = $props["where"];
 
             // Place the object on this page if required
-            if ($this->_page_number >= $start &&
+            if (
+                $this->_page_number >= $start &&
                 (($this->_page_number % 2 == 0 && $where === "even") ||
                     ($this->_page_number % 2 == 1 && $where === "odd") ||
                     ($where === "all"))
@@ -1035,12 +1038,12 @@ class PDFLib implements Canvas
         // line: right edge, top end
         $path = $this->_pdf->add_path_point($path, 0 + $w, 0 - $rTR + $h, "line", "");
         // curve: top-right corner
-        $path = $this->_pdf->add_path_point($path, 0 - $rTR + $w, 0 +$h, "elliptical", "radius=$rTR clockwise=false");
+        $path = $this->_pdf->add_path_point($path, 0 - $rTR + $w, 0 + $h, "elliptical", "radius=$rTR clockwise=false");
         // line: top edge, left end
         $path = $this->_pdf->add_path_point($path, 0 + $rTL, 0 + $h, "line", "");
         // curve: top-left corner
         $path = $this->_pdf->add_path_point($path, 0, 0 - $rTL + $h, "elliptical", "radius=$rTL clockwise=false");
-        $this->_pdf->draw_path($path, $x1, $this->_height-$y1-$h, "clip=true");
+        $this->_pdf->draw_path($path, $x1, $this->_height - $y1 - $h, "clip=true");
     }
 
     /**
@@ -1300,8 +1303,14 @@ class PDFLib implements Canvas
             // Local link
             $name = substr($url, 1);
             if ($name) {
-                $this->_pdf->create_annotation($x, $y, $x + $width, $y + $height, 'Link',
-                    "contents={$url} destname=" . substr($url, 1) . " linewidth=0");
+                $this->_pdf->create_annotation(
+                    $x,
+                    $y,
+                    $x + $width,
+                    $y + $height,
+                    'Link',
+                    "contents={$url} destname=" . substr($url, 1) . " linewidth=0"
+                );
             }
         } else {
             list($proto, $host, $path, $file) = Helpers::explode_url($url);
@@ -1458,8 +1467,11 @@ class PDFLib implements Canvas
 
                 switch ($_t) {
                     case "text":
-                        $text = str_replace(["{PAGE_NUM}", "{PAGE_COUNT}"],
-                            [$p, $this->_page_count], $text);
+                        $text = str_replace(
+                            ["{PAGE_NUM}", "{PAGE_COUNT}"],
+                            [$p, $this->_page_count],
+                            $text
+                        );
                         $this->text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
                         break;
 
@@ -1478,7 +1490,6 @@ class PDFLib implements Canvas
                     case "line":
                         $this->line($x1, $y1, $x2, $y2, $color, $width, $style);
                         break;
-
                 }
             }
 

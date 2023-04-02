@@ -9,7 +9,7 @@ $id_tarif_pilih = base64_decode(urldecode($_POST['idptrf']));
 
 $sql = "UPDATE tb_tarif_pilih SET";
 $sql .= " id_praktik = '" . base64_decode(urldecode($_POST['idp']))  . "',";
-$sql .= " tgl_ubah_tarif_pilih = '" . date('Y-m-d') . "',";
+$sql .= " tgl_ubah_tarif_pilih = '" . date('Y-m-d', time()) . "',";
 $sql .= " nama_jenis_tarif_pilih = '" . $_POST[md5('u_jenis_tarif' . $id_tarif_pilih)] . "',";
 $sql .= " nama_tarif_pilih = '" . $_POST[md5('u_nama' . $id_tarif_pilih)] . "', ";
 $sql .= " nominal_tarif_pilih = '" . $_POST[md5('u_tarif' . $id_tarif_pilih)] . "',";

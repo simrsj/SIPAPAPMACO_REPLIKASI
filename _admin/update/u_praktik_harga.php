@@ -73,7 +73,7 @@ if (isset($_POST['ubah_harga'])) {
     $q_harga_pilih = $conn->query($sql_harga_pilih);
     while ($d_harga_pilih = $q_harga_pilih->fetch(PDO::FETCH_ASSOC)) {
         $sql_update_harga_pilih = " UPDATE `tb_harga_pilih` SET
-        `tgl_ubah_harga_pilih` = '" . date('Y-m-d') . "', 
+        `tgl_ubah_harga_pilih` = '" . date('Y-m-d', time()) . "', 
         `frekuensi_harga_pilih` = '" . $_POST['frek_' . $d_harga_pilih['id_harga_pilih']] . "', 
         `kuantitas_harga_pilih` = '" . $_POST['kntt_' . $d_harga_pilih['id_harga_pilih']] . "', 
         `jumlah_harga_pilih` = '" . $_POST['frek_' . $d_harga_pilih['id_harga_pilih']] * $_POST['kntt_' . $d_harga_pilih['id_harga_pilih']] * $d_harga_pilih['jumlah_harga'] . "'

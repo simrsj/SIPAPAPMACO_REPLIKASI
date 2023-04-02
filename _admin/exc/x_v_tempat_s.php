@@ -12,7 +12,7 @@ $sql = "INSERT INTO tb_tempat (
     ket_tempat,
     status_tempat
     ) VALUES (
-        '" . date('Y-m-d') . "', 
+        '" . date('Y-m-d', time()) . "', 
         '7', 
         '" . $_POST['t_nama_tempat'] . "', 
         '" . $_POST['t_kapasitas_tempat'] . "', 

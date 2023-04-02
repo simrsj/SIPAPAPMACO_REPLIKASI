@@ -32,7 +32,7 @@ if ($d_prvl['c_praktik_tarif'] == 'Y') {
         $sql_insert_tarif .= " jumlah_tarif_pilih";
         $sql_insert_tarif .= " ) VALUES (";
         $sql_insert_tarif .= " '" . base64_decode(urldecode($_POST['idp'])) . "',";
-        $sql_insert_tarif .= " '" . date('Y-m-d') . "',";
+        $sql_insert_tarif .= " '" . date('Y-m-d', time()) . "',";
         $sql_insert_tarif .= " '" . $_POST['nama_tarif_jenis' . $no] . "',";
         $sql_insert_tarif .= " '" . $_POST['nama_tarif' . $no] . "',";
         $sql_insert_tarif .= " '" . $_POST['tarif' . $no] . "',";

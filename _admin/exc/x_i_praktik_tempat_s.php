@@ -39,7 +39,7 @@ $sql_t = "INSERT INTO tb_tarif_pilih (
     jumlah_tarif_pilih
     ) VALUES (
         '" . $_POST['id'] . "', 
-            '" . date('Y-m-d') . "',
+            '" . date('Y-m-d', time()) . "',
             '" . $d_tempat['nama_tarif_jenis'] . "', 
             '" . $d_tempat['nama_tempat'] . "', 
             '" . $d_tempat['tarif_tempat'] . "',  

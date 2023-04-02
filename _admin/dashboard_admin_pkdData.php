@@ -7,14 +7,14 @@ $ds_pdpt_t = $d_pdpt_t['total'];
 //////////////////// PENDAPATAN SELESAI////////////////////
 $sql_pdpt_ts = "SELECT SUM(total_pkd_tarif) AS total FROM tb_pkd_tarif ";
 $sql_pdpt_ts .= "JOIN tb_pkd ON tb_pkd_tarif.id_pkd = tb_pkd.id_pkd ";
-$sql_pdpt_ts .= "WHERE tgl_pel_pkd <= '" . date('Y-m-d') . "'";
+$sql_pdpt_ts .= "WHERE tgl_pel_pkd <= '" . date('Y-m-d', time()) . "'";
 $q_pdpt_ts = $conn->query($sql_pdpt_ts);
 $d_pdpt_ts = $q_pdpt_ts->fetch(PDO::FETCH_ASSOC);
 $ds_pdpt_ts = $d_pdpt_ts['total'];
 //////////////////// PENDAPATAN YG AKAN DATANG////////////////////
 $sql_pdpt_tmd = "SELECT SUM(total_pkd_tarif) AS total FROM tb_pkd_tarif ";
 $sql_pdpt_tmd .= "JOIN tb_pkd ON tb_pkd_tarif.id_pkd = tb_pkd.id_pkd ";
-$sql_pdpt_tmd .= "WHERE tgl_pel_pkd > '" . date('Y-m-d') . "'";
+$sql_pdpt_tmd .= "WHERE tgl_pel_pkd > '" . date('Y-m-d', time()) . "'";
 $q_pdpt_tmd = $conn->query($sql_pdpt_tmd);
 $d_pdpt_tmd = $q_pdpt_tmd->fetch(PDO::FETCH_ASSOC);
 $ds_pdpt_tmd = $d_pdpt_tmd['total'];
@@ -23,11 +23,11 @@ $sql_keg_t = "SELECT *  FROM tb_pkd";
 $q_keg_t = $conn->query($sql_keg_t);
 $ds_keg_t = $q_keg_t->rowCount();
 //////////////////// PENDAPATAN SELESAI////////////////////
-$sql_keg_ts = "SELECT *  FROM tb_pkd WHERE tgl_pel_pkd <= '" . date('Y-m-d') . "'";
+$sql_keg_ts = "SELECT *  FROM tb_pkd WHERE tgl_pel_pkd <= '" . date('Y-m-d', time()) . "'";
 $q_keg_ts = $conn->query($sql_keg_ts);
 $ds_keg_ts = $q_keg_ts->rowCount();
 //////////////////// PENDAPATAN YG AKAN DATANG////////////////////
-$sql_keg_tmd = "SELECT *  FROM tb_pkd WHERE tgl_pel_pkd > '" . date('Y-m-d') . "'";
+$sql_keg_tmd = "SELECT *  FROM tb_pkd WHERE tgl_pel_pkd > '" . date('Y-m-d', time()) . "'";
 $q_keg_tmd = $conn->query($sql_keg_tmd);
 $ds_keg_tmd = $q_keg_tmd->rowCount();
 

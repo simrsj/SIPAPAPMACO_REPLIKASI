@@ -19,7 +19,7 @@ if (!is_dir($alamat_unggah)) {
 
 if ($_FILES['nilai_upload']['size'] > 0) {
     //ubah Nama File PDF
-    $_FILES['nilai_upload']['name'] =  "nilai_upload_" . md5($_FILES['t_file']['name'] . date('Y-m-d h:i:s')) . ".pdf";
+    $_FILES['nilai_upload']['name'] =  "nilai_upload_" . md5($_FILES['t_file']['name'] . date('Y-m-d H:i:s', time())) . ".pdf";
 
     //unggah surat dan data praktik
     if (!is_null($_FILES['nilai_upload'])) {
@@ -52,7 +52,7 @@ $sql_update .= " )VALUES(";
 $sql_update .= " " . $_POST['id_pembimbing'] . ", ";
 $sql_update .= " " . $_POST['id_unit'] . ", ";
 $sql_update .= " " . $_POST['id_praktik'] . ", ";
-$sql_update .= " " . date('Y-m-d') . ", ";
+$sql_update .= " " . date('Y-m-d', time()) . ", ";
 $sql_update .= " '" . $link_nilai_upload . "'";
 $sql_update .= " )";
 

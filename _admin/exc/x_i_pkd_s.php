@@ -42,7 +42,7 @@ if ($d_prvl['c_pkd'] == "Y") {
     $sql_insert .= " telp_kor_pkd ";
     $sql_insert .= " ) VALUES (";
     $sql_insert .= " '" . $id_pkd . "', ";
-    $sql_insert .= " '" . date('Y-m-d') . "', ";
+    $sql_insert .= " '" . date('Y-m-d', time()) . "', ";
     $sql_insert .= " '" . $_POST['pemohon'] . "', ";
     $sql_insert .= " '" . $_POST['rincian'] . "', ";
     $sql_insert .= " '" . $_POST['tgl_pel'] . "', ";
