@@ -4,7 +4,7 @@ if (empty($_SESSION['username_user'])) {
 	<?php
 	// include "./_log-sign/exc/x_captcha.php";
 	?>
-	<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar static-top shadow " style="opacity: 0.95;">
+	<nav class="navbar navbar-expand navbar-light fixed-top bg-light topbar static-top shadow opacity-1">
 		<a class="text-decoration-none" href="?">
 			<div class="row">
 				<div class="col-auto my-auto">
@@ -12,10 +12,11 @@ if (empty($_SESSION['username_user'])) {
 				</div>
 				<div class="col">
 					<span class="text-primary text-left b">
-						SIPAPAP MACO <span class="badge badge-primary"> <?= tanggal_hari(date('w')) . ", " . tanggal(date("Y-m-d")); ?>, <span id="jam"></span></span>
+						SIPAPAP MACO<br>
 						<span class="d-none d-md-block">
-							(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)
+							(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)<br>
 						</span>
+						<span class="badge badge-primary"> <?= tanggal_hari(date('w', time())) . ", " . tanggal(date("Y-m-d h:i:s", time())); ?>, <span id="jam"></span></span>
 					</span>
 				</div>
 			</div>
