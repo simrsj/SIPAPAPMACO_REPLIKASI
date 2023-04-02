@@ -2,16 +2,15 @@
   <div class="row m-1">
     <div class="col-md p-0">
       <div class=" p-2 shadow-lg m-1 mb-2 bd-blur">
-        <div class="text-center">
-          <div class="h6 text-gray-900 mb-1"><span class="badge badge-primary">DATA PRAKTIKAN</span></div>
-        </div>
+        <div class="h6 text-center text-gray-900 mb-1"><span class="badge badge-primary">DATA PRAKTIK</span></div>
+        <hr class="border-light m-2">
         <?php
         $sql_praktik = "SELECT * FROM tb_praktik";
         $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
         $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
         $sql_praktik .= " JOIN tb_praktik_tgl ON tb_praktik.id_praktik = tb_praktik_tgl.id_praktik";
         $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik_tgl.praktik_tgl = '" . date('Y-m-d', time()) . "'";
-        // $sql_praktik = "SELECT * FROM tb_praktik ";
+        // $sql_praktik = "SELECT * FROM tb_praktik";
         // $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
         // $sql_praktik .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
         // $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y'";
@@ -29,7 +28,7 @@
             while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
             ?>
               <div class="col-md-<?= $round_col; ?> text-center ">
-                <span class="b text-dark">
+                <span class="b">
                   <?php if ($d_praktik['akronim_institusi'] == NULL) { ?>
                     <?= $d_praktik['nama_institusi']; ?>
                   <?php } else { ?>
