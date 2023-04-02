@@ -23,7 +23,7 @@
         if ($r_praktik > 0) {
           $round_col = ceil(12 / $r_praktik);
         ?>
-          <div class="row text-xs align-center justify-content-center my-auto mr-auto text-light">
+          <div class="row text-xs align-center justify-content-center my-auto mr-auto text-light mb-2">
             <?php
             while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
             ?>
