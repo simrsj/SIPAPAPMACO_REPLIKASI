@@ -274,7 +274,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                             <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
                         </div>
                         <div id="data_pilih_mess">
-                            <div class="text-center mb-3">
+                            <div class="text-center mb-1">
                                 Pemakaian Mess/Pemondokan : <span class="text-danger">*</span><br>
                             </div>
                             <div class="row boxed-check-group boxed-check-xs boxed-check-primary justify-content-center">
@@ -289,14 +289,60 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                     <div class="boxed-check-label">Tidak</div>
                                 </label>
                             </div>
-                            <div class="text-danger b i text-xs blink" id="err_pilih_mess"></div>
+                            <div class="text-danger b i text-xs blink mb-4" id="err_pilih_mess"></div>
+                            <div class=" col-6 mx-auto animated--grow-in alasan" style="display: none;">
+                                <div class="text-center">
+                                    Alasan<span class="text-danger">*</span><br>
+                                </div>
+                                <textarea id="uraian_alasan" name="uraian_alasan" class="form-control"></textarea>
+                                <div class="text-danger b i text-xs blink" id="err_uraian_alasan"></div>
+                                Minimal 100 Karakter, <span id="count_text" style="display: none;">Karakter yang telah diinputkan <span id="count_alasan" class="b">0</span></span>
+                            </div>
+
+                            <script>
+                                $(document).ready(function() {
+                                    $('#pilih_mess1').on('click', function() {
+                                        $(".alasan").css("display", "none");
+                                        $('#simpan_praktik').attr('disabled', false);
+                                    });
+                                    $('#pilih_mess2').on('click', function() {
+                                        $(".alasan").css("display", "block");
+                                        $('#simpan_praktik').attr('disabled', true);
+                                    });
+                                    // ketika pengguna mengetik di dalam textarea
+                                    $('#uraian_alasan').on('input', function() {
+
+                                        $("#count_text").css("display", "block");
+                                        // hitung jumlah karakter yang dimasukkan
+                                        var count = $(this).val().length;
+
+                                        // tampilkan jumlah karakter di dalam span
+                                        $('#count_alasan').text(count);
+
+                                        // jika jumlah karakter kurang dari 100
+                                        if (count < 100) {
+                                            // nonaktifkan tombol submit
+                                            $('#simpan_praktik').attr('disabled', true);
+                                            $("#count_alasan").addClass("text-danger");
+                                        } else {
+                                            // aktifkan tombol submit
+                                            $('#simpan_praktik').attr('disabled', false);
+                                            $("#count_alasan").removeClass("text-danger");
+                                            $("#count_alasan").addClass("text-success");
+                                        }
+                                    });
+                                });
+                            </script>
                             <hr>
+                            <div class="i text-left mb-3">
+                                <span class="text-danger">*</span>: Wajib Diisi/Dipilih
+                            </div>
                         </div>
 
                         <!-- Tombol Simpan Praktik-->
                         <div id="simpan_praktik_tarif" class="nav btn justify-content-center">
                             <div id="simpan_praktik_tarif" class="nav btn justify-content-center text-md">
-                                <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-outline-success">
+                                <button type="button" name="simpan_praktik" id="simpan_praktik" class="btn btn-success">
                                     <i class="fas fa-check-circle"></i>
                                     Simpan Data Praktik
                                     <i class="fas fa-check-circle"></i>
