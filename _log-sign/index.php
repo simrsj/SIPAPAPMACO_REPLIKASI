@@ -11,13 +11,13 @@ if (empty($_SESSION['username_user'])) {
 					<img src="./_img/rsj.svg" width="28" />
 				</div>
 				<div class="col">
-					<span class="text-primary text-left b">
-						SIPAPAP MACO<br>
+					<span class="text-primary text-left  d-flex b">
+						SIPAPAP MACO &nbsp;
 						<span class="d-none d-md-block">
 							(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)<br>
 						</span>
-						<span class="badge badge-primary"> <?= tanggal_hari(date('w', time())) . ", " . tanggal(date("Y-m-d", time())); ?>, <span id="jam"></span></span>
 					</span>
+					<span class="badge badge-primary"> <?= tanggal_hari(date('w', time())) . ", " . tanggal(date("Y-m-d", time())); ?>, <span id="jam"></span></span>
 				</div>
 			</div>
 		</a>
