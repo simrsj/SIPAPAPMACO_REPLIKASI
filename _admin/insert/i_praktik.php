@@ -10,39 +10,6 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Pengajuan Praktik</h1>
             </div>
         </div>
-        <style>
-            .loader {
-                border: 8px solid #f3f3f3;
-                border-radius: 50%;
-                border-top: 8px solid #3498db;
-                width: 15px;
-                height: 15px;
-                -webkit-animation: spin 2s linear infinite;
-                /* Safari */
-                animation: spin 2s linear infinite;
-            }
-
-            /* Safari */
-            @-webkit-keyframes spin {
-                0% {
-                    -webkit-transform: rotate(0deg);
-                }
-
-                100% {
-                    -webkit-transform: rotate(360deg);
-                }
-            }
-
-            @keyframes spin {
-                0% {
-                    transform: rotate(0deg);
-                }
-
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-        </style>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
             <!-- Data Pengajuan Praktik  -->
             <div id="data_praktik_input">
@@ -65,25 +32,22 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                             <input name="id" id="id" value="<?= urlencode(base64_encode($id_praktik)); ?>" hidden>
                             <input name="user" id="user" value="<?= urlencode(base64_encode($_SESSION['id_user'])); ?>" hidden>
                             <div class="col-md">
-                                <?php if ($d_user['level_user'] == 2) {
+                                <?php if ($d_user['level_user'] == 2) { ?>
+                                    <?php
                                     $sql_institusi = "SELECT * FROM tb_user";
                                     $sql_institusi .= " JOIN tb_institusi ON tb_user.id_institusi = tb_institusi.id_institusi";
                                     $sql_institusi .= " WHERE tb_institusi.id_institusi = " . $_SESSION['id_institusi'];
                                     // echo $sql_institusi;
                                     $q_institusi = $conn->query($sql_institusi);
                                     $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
-                                ?>
+                                    ?>
                                     Nama Institusi :
                                     <div class="b text-uppercase">
-                                        <?php
-                                        echo $d_institusi['nama_institusi'];
-                                        if ($d_institusi['akronim_institusi'] != "") echo " (" . $d_institusi['akronim_institusi'] . ")";
-                                        ?>
+                                        <?= $d_institusi['nama_institusi']; ?>
+                                        <?php if ($d_institusi['akronim_institusi'] != "") echo " (" . $d_institusi['akronim_institusi'] . ")"; ?>
                                         <input name="institusi" id="institusi" value="<?= $_SESSION['id_institusi']; ?>" hidden>
                                     </div>
-                                <?php
-                                } else {
-                                ?>
+                                <?php } else { ?>
                                     Nama Institusi : <span style="color:red">*</span><br>
                                     <?php
                                     $sql_institusi = "SELECT * FROM tb_institusi";
@@ -91,12 +55,12 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
                                     $q_institusi = $conn->query($sql_institusi);
                                     $r_institusi = $q_institusi->rowCount();
-                                    if ($r_institusi > 0) {
-                                        $no = 1;
                                     ?>
+                                    <?php if ($r_institusi > 0) { ?>
                                         <select class='select2 form-control' name='institusi' id="institusi" required>
                                             <option value="">-- <i>Pilih</i>--</option>
                                             <?php
+                                            $no = 1;
                                             while ($d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC)) {
                                             ?>
                                                 <option value='<?= $d_institusi['id_institusi']; ?>'>
@@ -113,9 +77,8 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                         </select>
                                         <!-- <del><i style='font-size:12px;'>Daftar Institusi yang MoU-nya masih berlaku</i></del> -->
                                         <div class="text-danger b  i text-xs blink" id="err_institusi"></div>
-                                <?php
-                                    }
-                                } ?>
+                                    <?php } ?>
+                                <?php } ?>
                             </div>
                             <div class="col-md">
                                 Nama Gelombang/Kelompok : <span style="color:red">*</span><br>
