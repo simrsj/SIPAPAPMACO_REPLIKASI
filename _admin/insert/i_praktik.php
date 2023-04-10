@@ -161,7 +161,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfilesuratinstitusi">Pilih File</label>
                                     <input type="file" class="custom-file-input mb-1" id="file_surat" name="file_surat" accept="application/pdf" required>
-                                    <span class='i text-xs'>Data unggah harus .pdf dan maksimal ukuran file 1 Mb</span><br>
+                                    <span class='i text-xs'>Data unggah harus .pdf dan maksimal ukuran file 3 Mb</span><br>
                                     <div class="text-xs font-italic text-danger blink" id="err_file_surat"></div><br>
                                     <script>
                                         $('#file_surat').on('change', function() {
@@ -178,7 +178,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfileakredinstitusi">Pilih File</label>
                                     <input type="file" class="custom-file-input mb-1" id="file_akred_institusi" name="file_akred_institusi" accept="application/pdf" required>
-                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 3 Mb</span><br>
                                     <div class="text-xs font-italic text-danger blink" id="err_file_akred_institusi"></div><br>
                                     <script>
                                         $('#file_akred_institusi').on('change', function() {
@@ -195,7 +195,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfileakredjururusan">Pilih File</label>
                                     <input type="file" class="custom-file-input mb-1" id="file_akred_jurusan" name="file_akred_jurusan" accept="application/pdf" required>
-                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 3 Mb</span><br>
                                     <div class="text-xs font-italic text-danger blink" id="err_file_akred_jurusan"></div><br>
                                     <script>
                                         $('#file_akred_jurusan').on('change', function() {
@@ -356,6 +356,42 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
             var telp_koordinator = $("#telp_koordinator").val();
             var pilih_mess = $('input[name="pilih_mess"]:checked').val();
 
+            //eksekusi bila file surat terisi
+            if (file_surat != "" && file_surat != undefined) {
+
+                //Cari ekstensi file surat yg diupload
+                var typeSurat = document.querySelector('#file_surat').value;
+                var getTypeSurat = typeSurat.split('.').pop();
+
+                //cari ukuran file surat yg diupload
+                var fileSurat = document.getElementById("file_surat").files;
+                var getSizeSurat = document.getElementById("file_surat").files[0].size / 1024;
+            }
+
+            //eksekusi bila file akreditasi institusi terisi
+            if (file_akred_institusi != "" && file_akred_institusi != undefined) {
+
+                //Cari ekstensi file surat yg diupload
+                var typeAkredInstitusi = document.querySelector('#file_akred_institusi').value;
+                var getTypeAkredInstitusi = typeAkredInstitusi.split('.').pop();
+
+                //cari ukuran file surat yg diupload
+                var fileAkredInstitusi = document.getElementById("file_akred_institusi").files;
+                var getSizeAkredInstitusi = document.getElementById("file_akred_institusi").files[0].size / 1024;
+            }
+
+            //eksekusi bila file akreditasi institusi terisi
+            if (file_akred_jurusan != "" && file_akred_jurusan != undefined) {
+
+                //Cari ekstensi file surat yg diupload
+                var typeAkredJurusan = document.querySelector('#file_akred_jurusan').value;
+                var getTypeAkredJurusan = typeAkredJurusan.split('.').pop();
+
+                //cari ukuran file surat yg diupload
+                var fileAkredJurusan = document.getElementById("file_akred_jurusan").files;
+                var getSizeAkredJurusan = document.getElementById("file_akred_jurusan").files[0].size / 1024;
+            }
+
             //Notif Bila tidak diisi
             if (
                 institusi == "" ||
@@ -376,14 +412,20 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 file_akred_jurusan == undefined ||
                 nama_koordinator == "" ||
                 telp_koordinator == "" ||
-                pilih_mess == undefined
+                pilih_mess == undefined ||
+                getTypeSurat != 'pdf' ||
+                getSizeSurat > 3072 ||
+                getTypeAkredInstitusi != 'pdf' ||
+                getSizeAkredInstitusi > 3072 ||
+                getTypeAkredJurusan != 'pdf' ||
+                getSizeAkredJurusan > 3072
             ) {
                 //warning Toast bila ada data wajib yg berlum terisi
                 Swal.fire({
                     allowOutsideClick: true,
                     showConfirmButton: false,
                     icon: 'warning',
-                    title: '<center>DATA WAJIB ADA YANG BELUM TERISI</center>',
+                    title: '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>',
                     timer: 10000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
@@ -391,6 +433,33 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                 });
+
+                //notif File Surat Institusi 
+                if (getTypeSurat == "") {
+                    $("#err_file_surat").html("File Surat Institusi Harus pdf");
+                } else if (getSizeSurat == "") {
+                    $("#err_file_surat").html("File Surat Institusi Harus Kurang dari 3 Mb");
+                } else {
+                    $("#err_file_surat").html("");
+                }
+
+                //notif File Akreditasi Institusi 
+                if (getTypeAkredInstitusi == "") {
+                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus pdf");
+                } else if (getSizeAkredInstitusi == "") {
+                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Kurang dari 3 Mb");
+                } else {
+                    $("#err_file_akred_institusi").html("");
+                }
+
+                //notif File Akreditasi Jurusan 
+                if (getTypeAkredJurusan == "") {
+                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus pdf");
+                } else if (getSizeAkredJurusan == "") {
+                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Kurang dari 3 Mb");
+                } else {
+                    $("#err_file_akred_jurusan").html("");
+                }
 
                 //notif institusi 
                 if (institusi == "") {
@@ -505,146 +574,6 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 }
             }
 
-            //eksekusi bila file surat terisi
-            if (file_surat != "" && file_surat != undefined) {
-
-                //Cari ekstensi file surat yg diupload
-                var typeSurat = document.querySelector('#file_surat').value;
-                var getTypeSurat = typeSurat.split('.').pop();
-
-                //cari ukuran file surat yg diupload
-                var fileSurat = document.getElementById("file_surat").files;
-                var getSizeSurat = document.getElementById("file_surat").files[0].size / 1024;
-
-                // console.log("Size Surat : " + getSizeSurat);
-                // console.log("Size Surat : " + fileSurat);
-
-                //Toast bila upload file surat selain pdf
-                if (getTypeSurat != 'pdf') {
-
-                    Swal.fire({
-                        allowOutsideClick: true,
-                        showConfirmButton: false,
-                        icon: 'warning',
-                        title: '<div class="text-md text-center">File Surat Harus <b>.pdf</b></div>',
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-                    $("#err_file_surat").html("File Surat Harus pdf");
-                } //Toast bila upload file surat diatas 1 Mb 
-                else if (getSizeSurat > 1024) {
-                    Swal.fire({
-                        allowOutsideClick: true,
-                        showConfirmButton: false,
-                        icon: 'warning',
-                        title: '<div class="text-md text-center">File Surat Harus <br><b>Kurang dari 1 Mb</b></div>',
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-                    $("#err_file_surat").html("File Surat Harus Kurang dari 1 Mb");
-                }
-            }
-
-            //eksekusi bila file akreditasi institusi terisi
-            if (file_akred_institusi != "" && file_akred_institusi != undefined) {
-
-                //Cari ekstensi file surat yg diupload
-                var typeAkredInstitusi = document.querySelector('#file_akred_institusi').value;
-                var getTypeAkredInstitusi = typeAkredInstitusi.split('.').pop();
-
-                //cari ukuran file surat yg diupload
-                var fileAkredInstitusi = document.getElementById("file_akred_institusi").files;
-                var getSizeAkredInstitusi = document.getElementById("file_akred_institusi").files[0].size / 1024;
-
-
-                //Toast bila upload file surat selain pdf
-                if (getTypeAkredInstitusi != 'pdf') {
-
-                    Swal.fire({
-                        allowOutsideClick: true,
-                        showConfirmButton: false,
-                        icon: 'warning',
-                        title: '<div class="text-md text-center">File Akreditasi Institusi Harus <b>.pdf</b></div>',
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus pdf");
-                } //Toast bila upload file surat diatas 1 Mb 
-                else if (getSizeAkredInstitusi > 256) {
-                    Swal.fire({
-                        allowOutsideClick: true,
-                        showConfirmButton: false,
-                        icon: 'warning',
-                        title: '<div class="text-md text-center">File Akreditasi Institusi Harus <br><b>Kurang dari 200 Kb</b></div>',
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Kurang dari 200 Kb");
-                }
-            }
-
-            //eksekusi bila file akreditasi institusi terisi
-            if (file_akred_jurusan != "" && file_akred_jurusan != undefined) {
-
-                //Cari ekstensi file surat yg diupload
-                var typeAkredJurusan = document.querySelector('#file_akred_jurusan').value;
-                var getTypeAkredJurusan = typeAkredJurusan.split('.').pop();
-
-                //cari ukuran file surat yg diupload
-                var fileAkredJurusan = document.getElementById("file_akred_jurusan").files;
-                var getSizeAkredJurusan = document.getElementById("file_akred_jurusan").files[0].size / 1024;
-
-
-                //Toast bila upload file surat selain pdf
-                if (getTypeAkredJurusan != 'pdf') {
-
-                    Swal.fire({
-                        allowOutsideClick: true,
-                        showConfirmButton: false,
-                        icon: 'warning',
-                        title: '<div class="text-md text-center">File Akreditasi Jurusan Harus <b>.pdf</b></div>',
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus pdf");
-                } //Toast bila upload file surat diatas 1 Mb 
-                else if (getSizeAkredJurusan > 256) {
-                    Swal.fire({
-                        allowOutsideClick: true,
-                        showConfirmButton: false,
-                        icon: 'warning',
-                        title: '<div class="text-md text-center">File Akreditasi Jurusan Harus <br><b>Kurang dari 200 Kb</b></div>',
-                        timer: 10000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Kurang dari 200 Kb");
-                }
-            }
-
             //Alert jika Tanggal Selesai kurang dari tanggal mulai
             if (
                 (tgl_selesai <= tgl_mulai) &&
@@ -719,9 +648,9 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 getTypeAkredJurusan == 'pdf' &&
                                 file_surat != undefined &&
                                 getTypeSurat == 'pdf' &&
-                                getSizeSurat <= 1024 &&
-                                getSizeAkredInstitusi <= 256 &&
-                                getSizeAkredJurusan <= 256 &&
+                                getSizeSurat <= 3072 &&
+                                getSizeAkredInstitusi <= 3072 &&
+                                getSizeAkredJurusan <= 3072 &&
                                 nama_koordinator != "" &&
                                 telp_koordinator != "" &&
                                 pilih_mess != undefined
