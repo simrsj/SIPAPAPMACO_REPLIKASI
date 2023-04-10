@@ -192,7 +192,7 @@ if ($r_data_praktikan > 0) {
                                                             <div class="custom-file">
                                                                 <label class="custom-file-label text-xs" for="customFile" id="labelfileijazahu<?= md5($d_data_praktikan['id_praktikan']); ?>">Pilih File</label>
                                                                 <input type="file" class="custom-file-input mb-1" id="u_ijazah<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_ijazah<?= md5($d_data_praktikan['id_praktik']); ?>" accept="application/pdf" required>
-                                                                <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                                                <span class='i text-xs'>Data unggah harus pdf, Maksimal 3 Mb</span><br>
                                                                 <div class="text-xs font-italic text-danger blink" id="err_u_ijazah<?= md5($d_data_praktikan['id_praktikan']); ?>"></div><br>
                                                                 <script>
                                                                     $('#u_ijazah<?= md5($d_data_praktikan['id_praktikan']); ?>').on('change', function() {
@@ -209,7 +209,7 @@ if ($r_data_praktikan > 0) {
                                                         <div class="custom-file">
                                                             <label class="custom-file-label text-xs" for="customFile" id="labelfileswabu<?= md5($d_data_praktikan['id_praktikan']); ?>">Pilih File</label>
                                                             <input type="file" class="custom-file-input mb-1" id="u_swab<?= md5($d_data_praktikan['id_praktikan']); ?>" name="u_swab<?= md5($d_data_praktikan['id_praktik']); ?>" accept="application/pdf" required>
-                                                            <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                                            <span class='i text-xs'>Data unggah harus pdf, Maksimal 3 Mb</span><br>
                                                             <div class="text-xs font-italic text-danger blink" id="err_u_swab<?= md5($d_data_praktikan['id_praktikan']); ?>"></div><br>
                                                             <script>
                                                                 $('#u_swab<?= md5($d_data_praktikan['id_praktikan']); ?>').on('change', function() {
@@ -334,8 +334,6 @@ if ($r_data_praktikan > 0) {
                                                 var fileFoto = document.getElementById("u_foto<?= md5($d_data_praktikan['id_praktikan']); ?>").files;
                                                 var getSizeFoto = document.getElementById("u_foto<?= md5($d_data_praktikan['id_praktikan']); ?>").files[0].size / 1024;
 
-                                                console.log("getTypeFoto : " + getTypeFoto);
-                                                console.log("getSizeFoto : " + getSizeFoto);
                                             }
 
                                             <?php if ($d_data_praktikan['id_profesi_pdd'] > 0) { ?>
@@ -350,8 +348,6 @@ if ($r_data_praktikan > 0) {
                                                     var fileIjazah = document.getElementById("u_ijazah<?= md5($d_data_praktikan['id_praktikan']); ?>").files;
                                                     var getSizeIjazah = document.getElementById("u_ijazah<?= md5($d_data_praktikan['id_praktikan']); ?>").files[0].size / 1024;
 
-                                                    console.log("getTypeIjazah : " + getTypeIjazah);
-                                                    console.log("getSizeIjazah : " + getSizeIjazah);
                                                 }
                                             <?php } ?>
 
@@ -366,8 +362,6 @@ if ($r_data_praktikan > 0) {
                                                 var fileSwab = document.getElementById("u_swab<?= md5($d_data_praktikan['id_praktikan']); ?>").files;
                                                 var getSizeSwab = document.getElementById("u_swab<?= md5($d_data_praktikan['id_praktikan']); ?>").files[0].size / 1024;
 
-                                                console.log("getTypeSwab : " + getSizeSwab);
-                                                console.log("getSizeSwab : " + fileSwab);
                                             }
 
                                             //cek data from modal tambah bila tidak diiisi
@@ -380,7 +374,7 @@ if ($r_data_praktikan > 0) {
                                                 <?php
                                                 if ($d_data_praktikan['id_profesi_pdd'] > 0) {
                                                 ?> getTypeIjazah != 'pdf' ||
-                                                    getSizeIjazah > 256 ||
+                                                    getSizeIjazah > 3072 ||
                                                     u_ijazah == "" ||
                                                     u_ijazah == undefined ||
                                                 <?php

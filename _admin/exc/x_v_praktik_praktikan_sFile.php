@@ -26,7 +26,7 @@ if (!is_dir($alamat_unggah)) {
 //     $ket = "size";
 // }
 if ($_FILES['t_foto']['size'] > (1024 * 256)) {
-    if ($profesi != 0 && $_FILES['t_ijazah']['size'] > (1024 * 256)) {
+    if ($profesi != 0 && $_FILES['t_ijazah']['size'] > (1024 * 3072)) {
         $ket = "size";
     }
     $ket = "size";

@@ -158,7 +158,7 @@
                                                                                 <div class="custom-file">
                                                                                     <label class="custom-file-label text-xs" for="customFile" id="labelfileijazah<?= md5($d_praktik['id_praktik']); ?>">Pilih File</label>
                                                                                     <input type="file" class="custom-file-input mb-1" id="t_ijazah<?= md5($d_praktik['id_praktik']); ?>" name="t_ijazah<?= md5($d_praktik['id_praktik']); ?>" accept="application/pdf" required>
-                                                                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                                                                    <span class='i text-xs'>Data unggah harus pdf, Maksimal 3 Mb</span><br>
                                                                                     <div class="text-xs font-italic text-danger blink" id="err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>"></div><br>
                                                                                     <script>
                                                                                         $('#t_ijazah<?= md5($d_praktik['id_praktik']); ?>').on('change', function() {
@@ -175,7 +175,7 @@
                                                                             <div class="custom-file">
                                                                                 <label class="custom-file-label text-xs" for="customFile" id="labelfileswab<?= md5($d_praktik['id_praktik']); ?>">Pilih File</label>
                                                                                 <input type="file" class="custom-file-input mb-1" id="t_swab<?= md5($d_praktik['id_praktik']); ?>" name="t_swab<?= md5($d_praktik['id_praktik']); ?>" accept="application/pdf" required>
-                                                                                <span class='i text-xs'>Data unggah harus pdf, Maksimal 200 Kb</span><br>
+                                                                                <span class='i text-xs'>Data unggah harus pdf, Maksimal 3 Mb</span><br>
                                                                                 <div class="text-xs font-italic text-danger blink" id="err_t_swab<?= md5($d_praktik['id_praktik']); ?>"></div><br>
                                                                                 <script>
                                                                                     $('#t_swab<?= md5($d_praktik['id_praktik']); ?>').on('change', function() {
@@ -355,7 +355,7 @@
                                                         t_alamat == "" ||
                                                         t_telpon == "" ||
                                                         <?php if ($d_praktik['id_profesi_pdd'] > 0) { ?> getTypeIjazah != 'pdf' ||
-                                                            getSizeIjazah > 256 ||
+                                                            getSizeIjazah > 3072 ||
                                                             t_ijazah == "" ||
                                                             t_ijazah == undefined ||
                                                         <?php } ?>
@@ -383,7 +383,7 @@
                                                                 $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("Ijazah Harus Dipilih");
                                                             else if (getTypeIjazah != "pdf")
                                                                 $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("File Ijazah Harus pdf");
-                                                            else if (getSizeIjazah > 256)
+                                                            else if (getSizeIjazah > 3072)
                                                                 $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("File Ijazah Harus Kurang dari 200 Kb");
                                                             else
                                                                 $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("");

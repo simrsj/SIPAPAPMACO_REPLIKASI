@@ -385,7 +385,7 @@ if ($_SESSION['status_user'] == "Y") {
 				if ($d_user['status_aktivasi_user'] == "T") {
 				?>
 					<div class="alert alert-danger alert-dismissible show m-4 text-center" role="alert">
-						Akun Anda <span class="text-danger blink b">Belum Aktif</span>, Silahkan Lakukan Aktivasi dengan menekan <span class="text-primary blink b">Tombol Aktivasi</span> di E-Mail : <span class="text-dark b"><?= $d_user['email_user'] ?></span>
+						Akun Anda <span class="text-danger blink b">Belum Aktif</span>, Silahkan Lakukan Aktivasi dengan menekan <span class="text-success b">Tombol Aktivasi</span> di E-Mail : <span class="text-dark b"><?= $d_user['email_user'] ?></span>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
