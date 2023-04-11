@@ -1,5 +1,6 @@
 <div class="card bg-light text-black shadow m-2">
     <div class="card-body">
+        <?= date("Y-m-d") ?><br>
         <textarea id="text" name="text"></textarea>
         <p><span id="count">0</span>/100</p>
         <button id="submit">Submit</button>

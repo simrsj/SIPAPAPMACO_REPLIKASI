@@ -355,6 +355,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
             var email_koordinator = $("#email_koordinator").val();
             var telp_koordinator = $("#telp_koordinator").val();
             var pilih_mess = $('input[name="pilih_mess"]:checked').val();
+            var alasan_mess = $("#uraian_alasan").val();
 
             //eksekusi bila file surat terisi
             if (file_surat != "" && file_surat != undefined) {
@@ -435,143 +436,89 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 });
 
                 //notif File Surat Institusi 
-                if (getTypeSurat == "") {
-                    $("#err_file_surat").html("File Surat Institusi Harus pdf");
-                } else if (getSizeSurat == "") {
-                    $("#err_file_surat").html("File Surat Institusi Harus Kurang dari 3 Mb");
-                } else {
-                    $("#err_file_surat").html("");
-                }
+                if (getTypeSurat == "") $("#err_file_surat").html("File Surat Institusi Harus pdf");
+                else if (getSizeSurat == "") $("#err_file_surat").html("File Surat Institusi Harus Kurang dari 3 Mb");
+                else $("#err_file_surat").html("");
 
                 //notif File Akreditasi Institusi 
-                if (getTypeAkredInstitusi == "") {
-                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus pdf");
-                } else if (getSizeAkredInstitusi == "") {
-                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Kurang dari 3 Mb");
-                } else {
-                    $("#err_file_akred_institusi").html("");
-                }
+                if (getTypeAkredInstitusi == "") $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus pdf");
+                else if (getSizeAkredInstitusi == "") $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Kurang dari 3 Mb");
+                else $("#err_file_akred_institusi").html("");
 
                 //notif File Akreditasi Jurusan 
-                if (getTypeAkredJurusan == "") {
-                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus pdf");
-                } else if (getSizeAkredJurusan == "") {
-                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Kurang dari 3 Mb");
-                } else {
-                    $("#err_file_akred_jurusan").html("");
-                }
+                if (getTypeAkredJurusan == "") $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus pdf");
+                else if (getSizeAkredJurusan == "") $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Kurang dari 3 Mb");
+                else $("#err_file_akred_jurusan").html("");
 
                 //notif institusi 
-                if (institusi == "") {
-                    $("#err_institusi").html("Institusi Harus Dipilih");
-                } else {
-                    $("#err_institusi").html("");
-                }
+                if (institusi == "") $("#err_institusi").html("Institusi Harus Dipilih");
+                else $("#err_institusi").html("");
 
                 //notif kelompok 
-                if (kelompok == "") {
-                    $("#err_kelompok").html("Nama Kelompok Harus Diisi");
-                } else {
-                    $("#err_kelompok").html("");
-                }
+                if (kelompok == "") $("#err_kelompok").html("Nama Kelompok Harus Diisi");
+                else $("#err_kelompok").html("");
 
                 //notif jumlah 
-                if (jumlah == "") {
-                    $("#err_jumlah").html("Jumlah Praktik Harus Diisi");
-                } else {
-                    $("#err_jumlah").html("");
-                }
+                if (jumlah == "") $("#err_jumlah").html("Jumlah Praktik Harus Diisi");
+                else $("#err_jumlah").html("");
 
                 //notif jurusan 
-                if (jurusan == "") {
-                    $("#err_jurusan").html("Jurusan Harus Diisi");
-                } else {
-                    $("#err_jurusan").html("");
-                }
+                if (jurusan == "") $("#err_jurusan").html("Jurusan Harus Diisi");
+                else $("#err_jurusan").html("");
 
                 //notif jenjang 
-                if (jenjang == "") {
-                    $("#err_jenjang").html("Jenjang Harus Diisi");
-                } else {
-                    $("#err_jenjang").html("");
-                }
+                if (jenjang == "") $("#err_jenjang").html("Jenjang Harus Diisi");
+                else $("#err_jenjang").html("");
 
                 //notif profesi 
-                if (profesi == "") {
-                    $("#err_profesi").html("Profesi Harus Diisi");
-                } else {
-                    $("#err_profesi").html("");
-                }
+                if (profesi == "") $("#err_profesi").html("Profesi Harus Diisi");
+                else $("#err_profesi").html("");
 
                 //notif tgl_mulai 
-                if (tgl_mulai == "") {
-                    $("#err_tgl_mulai").html("Tanggal Mulai Praktik Harus Diisi");
-                } else {
-                    $("#err_tgl_mulai").html("");
-                }
+                if (tgl_mulai == "") $("#err_tgl_mulai").html("Tanggal Mulai Praktik Harus Diisi");
+                else $("#err_tgl_mulai").html("");
 
                 //notif tgl_selesai 
-                if (tgl_selesai == "") {
-                    $("#err_tgl_selesai").html("Tanggal Selesai Praktik Harus Diisi");
-                } else {
-                    $("#err_tgl_selesai").html("");
-                }
+                if (tgl_selesai == "") $("#err_tgl_selesai").html("Tanggal Selesai Praktik Harus Diisi");
+                else $("#err_tgl_selesai").html("");
 
                 //notif no_surat 
-                if (no_surat == "") {
-                    $("#err_no_surat").html("No. Surat Institusi Harus Diisi");
-                } else {
-                    $("#err_no_surat").html("");
-                }
+                if (no_surat == "") $("#err_no_surat").html("No. Surat Institusi Harus Diisi");
+                else $("#err_no_surat").html("");
 
                 //notif tgl_surat 
-                if (tgl_surat == "") {
-                    $("#err_no_surat").html("No. Surat Institusi Harus Diisi");
-                } else {
-                    $("#err_no_surat").html("");
-                }
+                if (tgl_surat == "") $("#err_tgl_surat").html("Tanggal Surat Institusi Harus Diisi");
+                else $("#err_tgl_surat").html("");
 
                 // notif file_surat
-                if (file_surat == "" || file_surat == undefined) {
-                    $("#err_file_surat").html("File Surat Harus Unggah");
-                } else {
-                    $("#err_file_surat").html("");
-                }
+                if (file_surat == "" || file_surat == undefined) $("#err_file_surat").html("File Surat Harus Unggah");
+                else $("#err_file_surat").html("");
 
                 // notif file_akred_institusi
-                if (file_akred_institusi == "" || file_akred_institusi == undefined) {
-                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Unggah");
-                } else {
-                    $("#err_file_akred_institusi").html("");
-                }
+                if (file_akred_institusi == "" || file_akred_institusi == undefined) $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Unggah");
+                else $("#err_file_akred_institusi").html("");
 
                 // notif file_akred_jurusan
-                if (file_akred_jurusan == "" || file_akred_jurusan == undefined) {
-                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Unggah");
-                } else {
-                    $("#err_file_akred_jurusan").html("");
-                }
+                if (file_akred_jurusan == "" || file_akred_jurusan == undefined) $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Unggah");
+                else $("#err_file_akred_jurusan").html("");
 
                 //notif nama_koordinator
-                if (nama_koordinator == "") {
-                    $("#err_nama_koordinator").html("Nama Koordinator Harus Diisi");
-                } else {
-                    $("#err_nama_koordinator").html("");
-                }
+                if (nama_koordinator == "") $("#err_nama_koordinator").html("Nama Koordinator Harus Diisi");
+                else $("#err_nama_koordinator").html("");
 
                 //notif telp_koordinator
-                if (telp_koordinator == "") {
-                    $("#err_telp_koordinator").html("Telpon Koordinator Harus Diisi");
-                } else {
-                    $("#err_telp_koordinator").html("");
-                }
+                if (telp_koordinator == "") $("#err_telp_koordinator").html("Telpon Koordinator Harus Diisi");
+                else $("#err_telp_koordinator").html("");
 
                 //notif telp_koordinator
-                if (pilih_mess == undefined) {
-                    $("#err_pilih_mess").html("Pemakaian Mess Harus Dipilih");
-                } else {
-                    $("#err_pilih_mess").html("");
-                }
+                if (pilih_mess == undefined) $("#err_pilih_mess").html("Pemakaian Mess Harus Dipilih");
+                else $("#err_pilih_mess").html("");
+            }
+
+            //notif alasan mess 
+            if (pilih_mess == "T") {
+                if (alasan_mess == "") $("#err_pilih_mess").html("Alasan Tidak Memilih Mess Harus Diisi");
+                else $("#err_pilih_mess").html("");
             }
 
             //Alert jika Tanggal Selesai kurang dari tanggal mulai
@@ -595,7 +542,8 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 $("#err_tgl_selesai").html("<b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b>");
             }
             //bila tanggal mulai dan selesai sesuai
-            else { //Cek Data Ketersediaan Jadwal Praktik
+            else {
+                //Cek Data Ketersediaan Jadwal Praktik
                 console.log("Cek Jadwal Praktik . . .");
                 $.ajax({
                     type: 'POST',
@@ -693,7 +641,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                             html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
                                             showConfirmButton: false,
-                                            timer: 5000,
+                                            timer: 10000123,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)

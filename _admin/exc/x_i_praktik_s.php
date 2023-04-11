@@ -83,6 +83,20 @@ if ($d_prvl['c_praktik'] == "Y") {
 
     // echo $sql_insert . "<br>";
     $conn->query($sql_insert);
+
+    if ($_POST['pilih_mess'] == "T") {
+        $sql_insert = "INSERT INTO tb_praktik_mess_alasan ( ";
+        $sql_insert .= " id_praktik, ";
+        $sql_insert .= " tgl_tambah, ";
+        $sql_insert .= " alasan_institusi";
+        $sql_insert .= " ) VALUES (";
+        $sql_insert .= " '" . $id_praktik . "', ";
+        $sql_insert .= " '" . date("Y-m-d") . "', ";
+        $sql_insert .= " '" . $_POST['uraian_alasan'] . "'";
+        $sql_insert .= " )";
+        echo $sql_insert . "<br>";
+        $conn->query($sql_insert);
+    }
     // --------------------------------------SIMPAN TARIF KEDOKTERAN--------------------------------------------
     if (
         $d_jenis_jurusan['id_jurusan_pdd_jenis'] == 1 ||
