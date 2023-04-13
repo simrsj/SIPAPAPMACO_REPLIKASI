@@ -639,7 +639,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                             // isDismissed: false,
                                             icon: 'success',
                                             html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
-                                            title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
+                                            title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan</span>',
                                             showConfirmButton: false,
                                             timer: 10000123,
                                             timerProgressBar: true,

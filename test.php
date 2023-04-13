@@ -1,37 +1,45 @@
 <div class="card bg-light text-black shadow m-2">
     <div class="card-body">
-        <?= date("Y-m-d") ?><br>
-        <textarea id="text" name="text"></textarea>
-        <p><span id="count">0</span>/100</p>
-        <button id="submit">Submit</button>
+        <label for="redRadio">Red</label>
+        <input type="radio" name="color" id="redRadio" class="color-radio red">
+        <label for="greenRadio">Green</label>
+        <input type="radio" name="color" id="greenRadio" class="color-radio green">
 
-        <script>
-            $(document).ready(function() {
-                // ketika pengguna mengetik di dalam textarea
-                $('#text').on('input', function() {
-                    // hitung jumlah karakter yang dimasukkan
-                    var count = $(this).val().length;
+        <style>
+            /* Style for radio buttons */
+            input[type="radio"] {
+                display: none;
+                /* Hide the default radio buttons */
+            }
 
-                    // tampilkan jumlah karakter di dalam span
-                    $('#count').text(count);
+            /* Style for labels */
+            label {
+                display: inline-block;
+                padding: 5px 10px;
+                background-color: #f2f2f2;
+                color: #000;
+                cursor: pointer;
+            }
 
-                    // jika jumlah karakter kurang dari 100
-                    if (count < 100) {
-                        // nonaktifkan tombol submit
-                        $('#submit').attr('disabled', true);
-                    } else {
-                        // aktifkan tombol submit
-                        $('#submit').attr('disabled', false);
-                    }
-                });
+            /* Style for selected radio buttons */
+            .color-radio:checked {
+                border-color: transparent;
+                /* Hide the radio button's border */
+            }
 
-                // ketika tombol submit diklik
-                $('#submit').on('click', function() {
-                    // kirim data textarea ke server
-                    var text = $('#text').val();
-                    console.log(text);
-                });
-            });
-        </script>
+            .color-radio.red:checked+label {
+                background-color: red;
+                /* Change to desired red color */
+                color: #fff;
+                /* Change to desired text color */
+            }
+
+            .color-radio.green:checked+label {
+                background-color: green;
+                /* Change to desired green color */
+                color: #fff;
+                /* Change to desired text color */
+            }
+        </style>
     </div>
 </div>

@@ -102,35 +102,41 @@ if ($d_prvl['r_praktik'] == "Y") {
                     while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr class="text-center">
+                            <!-- No Urut -->
                             <td class="align-middle"><?= $no; ?></td>
                             <?php if ($d_prvl['level_user'] == 1) { ?>
                                 <td class="align-middle">
                                     <?= $d_praktik['nama_institusi'] ?>
                                 </td>
                             <?php } ?>
+                            <!-- Nama Praktik -->
                             <td class="align-middle">
                                 <?= $d_praktik['nama_praktik'] ?>
                             </td>
+                            <!-- Jumlah Praktik -->
                             <td class="align-middle">
                                 <?= $d_praktik['jumlah_praktik'] ?>
                             </td>
+                            <!-- Tgl Mulai Praktik -->
                             <td class="align-middle"><?= $d_praktik['tgl_mulai_praktik'] ?></td>
+                            <!-- Tgl Selesai Praktik -->
                             <td class="align-middle"><?= $d_praktik['tgl_selesai_praktik'] ?></td>
-                            <!-- status mess praktik  -->
+                            <!-- Status Mess Praktik  -->
                             <td class="align-middle">
-                                <?php if ($d_praktik['status_mess_praktik'] == 'Y') {
+                                <?php if ($d_praktik['status_mess_praktik'] == 'Y') { ?>
+                                    <?php
                                     $sql_mess_pilih = "SELECT * FROM tb_mess_pilih ";
                                     $sql_mess_pilih .= " JOIN tb_mess ON tb_mess_pilih.id_mess = tb_mess.id_mess";
                                     $sql_mess_pilih .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
                                     try {
                                         $q_mess_pilih = $conn->query($sql_mess_pilih);
+                                        $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
+                                        $r_mess_pilih = $q_mess_pilih->rowCount();
                                     } catch (Exception $ex) {
-                                        echo "<script>alert('$ex -MESS PILIH PRAKTIK-');";
+                                        echo "<script>alert('- STATUS MESS PRAKTIK-');";
                                         echo "document.location.href='?error404';</script>";
                                     }
-                                    $d_mess_pilih = $q_mess_pilih->fetch(PDO::FETCH_ASSOC);
-                                    $r_mess_pilih = $q_mess_pilih->rowCount();
-                                ?>
+                                    ?>
                                     <?php if ($r_mess_pilih > 0) { ?>
                                         <fieldset class="border-1 m-1 p-1">
                                             <?= $d_mess_pilih['nama_mess']; ?>
@@ -138,8 +144,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                             <?= $d_mess_pilih['telp_pemilik_mess']; ?>
                                         </fieldset>
                                     <?php } else if ($r_mess_pilih < 1) { ?>
-                                        <span class="badge badge-warning text-dark">Belum Dipilih <br>Admin</span>
-                                        <br>
+                                        <div class="badge badge-warning text-dark">Belum Dipilih <br>Admin</div>
                                     <?php } ?>
                                     <?php
                                     //teks status dan privileges praktik mess
@@ -154,6 +159,105 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <?php } ?>
                                 <?php } else { ?>
                                     <span class="badge badge-danger">Tidak Pakai Mess</span>
+
+                                    <!-- tombol modal Alasan Tidak Memilih Mess  -->
+                                    <a title="Alasan Tidak Memilih Mess" class='btn btn-outline-danger btn-xs m-1' href='#' data-toggle="modal" data-target="#alasan_mess_<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>">
+                                        <i class="fa-solid fa-circle-info"></i> Cek Alasan
+                                    </a>
+
+                                    <!-- modal Alasan Tidak Memilih Mess  -->
+                                    <div class="modal text-center" id="alasan_mess_<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>">
+                                        <div class="modal-dialog modal-lg text-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header h5 bg-danger text-white">
+                                                    Alasan Penolakaan Mess/Pemondokan
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="badge badge-success">Alasan Institusi</div>
+                                                    <p>"<?= $d_praktik['alasan_institusi']; ?>"</p>
+                                                    <hr>
+                                                    <div class="badge badge-primary">Alasan Admin</div>
+                                                    <?php if ($d_praktik['alasan_admin'] != "") { ?>
+                                                        <p>"<?= $d_praktik['alasan_admin']; ?>"</p>
+                                                    <?php } else { ?>
+                                                        <div class="i text-danger">Belum direspon ADMIN</div>
+                                                        <br>
+                                                    <?php } ?>
+
+                                                    <?php if ($d_prvl['level_user'] == 1) { ?>
+                                                        <div class="jumbotron">
+                                                            <div class="jumbotron-fluid">
+                                                                <form class="form-group justify-content-center" id="form_alasan<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>">
+                                                                    <div class="boxed-check-group boxed-check-primary justify-content-center">
+                                                                        <label class="boxed-check">
+                                                                            <input class="boxed-check-input" type="radio" name="radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" id="respond_alasan_mess1<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" value="Y">
+                                                                            <div class="boxed-check-label">Ya</div>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="boxed-check-group boxed-check-danger justify-content-center">
+                                                                        <label class="boxed-check">
+                                                                            <input class="boxed-check-input" type="radio" name="radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" id="respond_alasan_mess2<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" value="T">
+                                                                            <div class="boxed-check-label">Tidak</div>
+                                                                        </label>
+                                                                    </div>
+                                                                    <br>
+                                                                    Keterangan <span class="text-danger">*</span><br>
+                                                                    <textarea class="form-control" id="ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" name="ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" rows="4"></textarea>
+                                                                    <a class="btn btn-success simpan_alasan<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktik']))) ?>">
+                                                                        Simpan
+                                                                    </a>
+                                                                </form>
+                                                                <script>
+                                                                    $(document).on('click', '.simpan_alasan<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>', function() {
+
+                                                                        var data_alasan = $('#form_alasan<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>').serializeArray();
+                                                                        data_alasan.push({
+                                                                            name: 'idp',
+                                                                            value: $(this).attr('id')
+                                                                        });
+
+                                                                        //Simpan Data Praktik dan Tarif
+                                                                        $.ajax({
+                                                                            type: 'POST',
+                                                                            url: "_admin/exc/x_v_praktikData_alasan.php?",
+                                                                            data: data_praktik,
+                                                                            success: function() {
+
+                                                                                Swal.fire({
+                                                                                    allowOutsideClick: true,
+                                                                                    // isDismissed: false,
+                                                                                    icon: 'success',
+                                                                                    title: '<span class"text-xs"><b>DATA ALASAN</b><br>Berhasil Tersimpan</span>',
+                                                                                    showConfirmButton: false,
+                                                                                    timer: 10000123,
+                                                                                    timerProgressBar: true,
+                                                                                    didOpen: (toast) => {
+                                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                    }
+                                                                                }).then(
+                                                                                    function() {
+                                                                                        $('#data_praktik')
+                                                                                            .load(
+                                                                                                "_admin/view/v_praktikData.php?&idu=<?= $_GET['idu'] ?>"
+                                                                                            );
+                                                                                    }
+                                                                                );
+                                                                            },
+                                                                            error: function(response) {
+                                                                                console.log(response.responseText);
+                                                                                alert('eksekusi query gagal');
+                                                                            }
+                                                                        });
+                                                                    });
+                                                                </script>
+                                                            </div>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <?php } ?>
                             </td>
                             <!-- status data praktikan-->

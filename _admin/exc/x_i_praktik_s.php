@@ -31,11 +31,15 @@ if ($d_prvl['c_praktik'] == "Y") {
 
     try {
         $q_jenis_jurusan = $conn->query($sql_jenis_jurusan);
+        $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
     } catch (Exception $ex) {
         echo "<script>alert('$ex -DATA JENIS JURUSAN-');";
         echo "document.location.href='?error404';</script>";
     }
-    $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
+
+    // variable alasan_mess
+    if ($_POST['pilih_mess'] == "T") $alasan_mess = $_POST['uraian_alasan'];
+    else $alasan_mess = NULL;
 
     $sql_insert = "INSERT INTO tb_praktik ( ";
     $sql_insert .= " id_user,";
@@ -57,6 +61,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " telp_koordinator_praktik,";
     $sql_insert .= " kode_bayar_praktik,";
     $sql_insert .= " status_mess_praktik,";
+    $sql_insert .= " alasan_institusi";
     $sql_insert .= " status_praktik";
     $sql_insert .= " ) VALUES (";
     $sql_insert .= " '" . base64_decode(urldecode($_POST['user'])) . "',";
@@ -78,32 +83,21 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " '" . $_POST['telp_koordinator'] . "', ";
     $sql_insert .= " '" . date("ymdi") . "', ";
     $sql_insert .= " '" . $_POST['pilih_mess'] . "', ";
+    $sql_insert .= " '" . $alasan_mess . "', ";
     $sql_insert .= " 'Y'";
     $sql_insert .= " )";
-
     // echo $sql_insert . "<br>";
     $conn->query($sql_insert);
 
-    if ($_POST['pilih_mess'] == "T") {
-        $sql_insert = "INSERT INTO tb_praktik_mess_alasan ( ";
-        $sql_insert .= " id_praktik, ";
-        $sql_insert .= " tgl_tambah, ";
-        $sql_insert .= " alasan_institusi";
-        $sql_insert .= " ) VALUES (";
-        $sql_insert .= " '" . $id_praktik . "', ";
-        $sql_insert .= " '" . date("Y-m-d") . "', ";
-        $sql_insert .= " '" . $_POST['uraian_alasan'] . "'";
-        $sql_insert .= " )";
-        echo $sql_insert . "<br>";
-        $conn->query($sql_insert);
-    }
-    // --------------------------------------SIMPAN TARIF KEDOKTERAN--------------------------------------------
+    // --------------------------------------SIMPAN FORMAT TARIF--------------------------------------------
+
+    //seleksi profesi kedokteran
     if (
         $d_jenis_jurusan['id_jurusan_pdd_jenis'] == 1 ||
         $d_jenis_jurusan['id_jurusan_pdd_jenis'] == 2
     ) {
+        //Tarif Program Pendidikan Dokter Spesialis (PPDS)/Residence
         if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] == 1) {
-
             $array[0] = [$id_praktik, date('Y-m-d', time()), "BIAYA ADMINISTRASI", "Institusional Fee", 50000, "per-siswa / periode", 1, $_POST['jumlah'],  1 * (int)$_POST['jumlah'] * 50000];
             $array[1] = [$id_praktik, date('Y-m-d', time()), "BIAYA ADMINISTRASI", "Management Fee", 75000, "per-siswa / periode", 1, $_POST['jumlah'],  1 * (int)$_POST['jumlah'] * 75000];
             $array[2]  = [$id_praktik, date('Y-m-d', time()), "BIAYA ADMINISTRASI", "Alat tulis Kantor Fee", 5000, "per-siswa / periode", 1, $_POST['jumlah'],  1 * (int)$_POST['jumlah'] * 5000];
@@ -120,8 +114,9 @@ if ($d_prvl['c_praktik'] == "Y") {
             $array[13]  = [$id_praktik, date('Y-m-d', time()), "BIAYA UJIAN", "Ujian",  150000, "per-siswa / kali", 0, $_POST['jumlah'], 0];
             $array[14]  = [$id_praktik, date('Y-m-d', time()), "BIAYA UJIAN", "Makan Pembimbing", 20000, "per-siswa / kali", 0, $_POST['jumlah'],  0];
             $array[15]  = [$id_praktik, date('Y-m-d', time()), "BIAYA UJIAN", "Standar Pasien", 100000, "per-siswa / kali", 0, $_POST['jumlah'],  0];
-        } else if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] == 2) {
-
+        }
+        //Tarif Program Pendidikan Dokter Spesialis (PPDS)/Residence
+        else if ($d_jenis_jurusan['id_jurusan_pdd_jenis'] == 2) {
             $array[0] = [$id_praktik, date('Y-m-d', time()), "BIAYA ADMINISTRASI", "Institusional Fee", 20000, "per-siswa / periode", 1, $_POST['jumlah'],  1 * (int)$_POST['jumlah'] * 20000];
             $array[1] = [$id_praktik, date('Y-m-d', time()), "BIAYA ADMINISTRASI", "Management Fee", 20000, "per-siswa / periode", 1, $_POST['jumlah'],  1 * (int)$_POST['jumlah'] * 20000];
             $array[2]  = [$id_praktik, date('Y-m-d', time()), "BIAYA HABIS PAKAI", "(Handrub,tisue,sabun)", 20000, "per-siswa / periode", 1, $_POST['jumlah'],  1 * (int)$_POST['jumlah'] * 20000];
@@ -131,8 +126,9 @@ if ($d_prvl['c_praktik'] == "Y") {
             $array[6]  = [$id_praktik, date('Y-m-d', time()), "BIAYA PEMBELAJARAN", "BST / Bimbingan", 75000, "per-siswa / minggu", 0, $_POST['jumlah'],  0];
             $array[7]  = [$id_praktik, date('Y-m-d', time()), "BIAYA PEMBELAJARAN", "Materi (TAK, Komter, Dokep)", 150000, "per-periode / materi", 0, 1,  0];
         }
-        foreach ($array as $key => $value) {
 
+        // Eksekusi tarif
+        foreach ($array as $key => $value) {
             $sql_insert = "INSERT INTO tb_tarif_pilih ( ";
             $sql_insert .= " id_praktik,";
             $sql_insert .= " tgl_tambah_tarif_pilih,";
