@@ -15,9 +15,9 @@ try {
 $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
 if ($d_prvl['c_praktik'] == "Y") {
-    // echo "<pre>";
-    // print_r($_POST);
-    // echo "</pre>";
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
     $id_praktik = base64_decode(urldecode($_POST['id']));
     //bila profesi tidak dipilih
     if ($_POST['profesi'] != "") $profesi = $_POST['profesi'];
@@ -41,6 +41,10 @@ if ($d_prvl['c_praktik'] == "Y") {
     if ($_POST['pilih_mess'] == "T") $alasan_mess = $_POST['uraian_alasan'];
     else $alasan_mess = NULL;
 
+    // variable status_alasan
+    if ($_POST['status_mess_praktik'] == "Y") $status_alasan =  'Y';
+    else $status_alasan = NULL;
+
     $sql_insert = "INSERT INTO tb_praktik ( ";
     $sql_insert .= " id_user,";
     $sql_insert .= " id_praktik, ";
@@ -61,8 +65,9 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " telp_koordinator_praktik,";
     $sql_insert .= " kode_bayar_praktik,";
     $sql_insert .= " status_mess_praktik,";
-    $sql_insert .= " alasan_institusi";
-    $sql_insert .= " status_praktik";
+    $sql_insert .= " alasan_institusi,";
+    $sql_insert .= " status_praktik,";
+    $sql_insert .= " status_alasan";
     $sql_insert .= " ) VALUES (";
     $sql_insert .= " '" . base64_decode(urldecode($_POST['user'])) . "',";
     $sql_insert .= " '" . $id_praktik . "', ";
@@ -84,7 +89,8 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " '" . date("ymdi") . "', ";
     $sql_insert .= " '" . $_POST['pilih_mess'] . "', ";
     $sql_insert .= " '" . $alasan_mess . "', ";
-    $sql_insert .= " 'Y'";
+    $sql_insert .= " 'Y',";
+    $sql_insert .= " '" . $status_alasan . "'";
     $sql_insert .= " )";
     // echo $sql_insert . "<br>";
     $conn->query($sql_insert);

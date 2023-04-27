@@ -171,6 +171,9 @@ if ($d_prvl['r_praktik'] == "Y") {
                                             <div class="modal-content">
                                                 <div class="modal-header h5 bg-danger text-white">
                                                     Alasan Penolakaan Mess/Pemondokan
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="badge badge-success">Alasan Institusi</div>
@@ -202,7 +205,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                                                     </div>
                                                                     <br>
                                                                     Keterangan <span class="text-danger">*</span><br>
-                                                                    <textarea class="form-control" id="ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" name="ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" rows="4"></textarea>
+                                                                    <textarea class="form-control mb-2" id="ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" name="ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" rows="4"></textarea>
                                                                     <a class="btn btn-success simpan_alasan<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktik']))) ?>">
                                                                         Simpan
                                                                     </a>
@@ -280,6 +283,8 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Semuanya</span>
                                 <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] == $r_praktikan) { ?>
                                     <span class="badge badge-success">Sudah Dipilih</span>
+                                <?php } else if ($d_praktik['status_alasan'] == NULL) { ?>
+                                    <span class="badge badge-primary">Alasan Sedang Proses<br>Validasi Admin</span>
                                 <?php } else { ?>
                                     <span class="badge badge-secondary">Belum Dipilih</span>
                                 <?php } ?>

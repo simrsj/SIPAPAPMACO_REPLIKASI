@@ -649,7 +649,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                             }
                                         }).then(
                                             function() {
-                                                document.location.href = "?ptk";
+                                                // document.location.href = "?ptk";
                                             }
                                         );
                                     },
