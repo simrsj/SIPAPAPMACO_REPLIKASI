@@ -223,7 +223,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                                                         $.ajax({
                                                                             type: 'POST',
                                                                             url: "_admin/exc/x_v_praktikData_alasan.php?",
-                                                                            data: data_praktik,
+                                                                            data: data_alasan,
                                                                             success: function() {
 
                                                                                 Swal.fire({
@@ -234,6 +234,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                                                                                     showConfirmButton: false,
                                                                                     timer: 10000123,
                                                                                     timerProgressBar: true,
+                                                                                    alowOutsideClick: true,
                                                                                     didOpen: (toast) => {
                                                                                         toast.addEventListener('mouseenter', Swal.stopTimer)
                                                                                         toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -679,7 +680,7 @@ if ($d_prvl['r_praktik'] == "Y") {
     <?php } ?>
     <script>
         $('.loader').hide();
-        alert = function() {};
+        // alert = function() {};
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/custom/cs_datatable.js";
         ?>
