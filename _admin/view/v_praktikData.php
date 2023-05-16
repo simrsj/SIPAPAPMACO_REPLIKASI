@@ -191,21 +191,26 @@ if ($d_prvl['r_praktik'] == "Y") {
                                                         <div class="jumbotron">
                                                             <div class="jumbotron-fluid">
                                                                 <form class="form-group justify-content-center" id="form_alasan<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>">
-                                                                    <div class="boxed-check-group boxed-check-primary justify-content-center">
-                                                                        <label class="boxed-check">
-                                                                            <input class="boxed-check-input" type="radio" name="radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" id="respond_alasan_mess1<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" value="Y">
-                                                                            <div class="boxed-check-label">Ya</div>
-                                                                        </label>
+                                                                    <div class="row justify-content-center">
+                                                                        <div class="col-auto boxed-check-group boxed-check-primary justify-content-center">
+                                                                            <label class="boxed-check">
+                                                                                <input class="boxed-check-input" type="radio" name="radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" id="respond_alasan_mess1<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" value="Y">
+                                                                                <div class="boxed-check-label">Ya</div>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-auto boxed-check-group boxed-check-danger justify-content-center">
+                                                                            <label class="boxed-check">
+                                                                                <input class="boxed-check-input" type="radio" name="radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" id="respond_alasan_mess2<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" value="T">
+                                                                                <div class="boxed-check-label">Tidak</div>
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="boxed-check-group boxed-check-danger justify-content-center">
-                                                                        <label class="boxed-check">
-                                                                            <input class="boxed-check-input" type="radio" name="radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" id="respond_alasan_mess2<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" value="T">
-                                                                            <div class="boxed-check-label">Tidak</div>
-                                                                        </label>
-                                                                    </div>
+                                                                    <div id="err_radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" class="text-xs text-danger font-italic blink"></div>
                                                                     <br>
                                                                     Keterangan <span class="text-danger">*</span><br>
                                                                     <textarea class="form-control mb-2" id="ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" name="ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" rows="4"></textarea>
+                                                                    <div id="err_ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" class="text-xs font-italic  blink text-danger "></div>
+                                                                    <br>
                                                                     <a class="btn btn-success simpan_alasan<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_praktik['id_praktik']))) ?>">
                                                                         Simpan
                                                                     </a>
@@ -214,45 +219,76 @@ if ($d_prvl['r_praktik'] == "Y") {
                                                                     $(document).on('click', '.simpan_alasan<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>', function() {
 
                                                                         var data_alasan = $('#form_alasan<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>').serializeArray();
+                                                                        var radio = $('input[name="radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>"]:checked').val();
+                                                                        var ket = $("#ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>").val();
+
                                                                         data_alasan.push({
                                                                             name: 'idp',
                                                                             value: $(this).attr('id')
+                                                                        }, {
+                                                                            name: 'encrypt',
+                                                                            value: '<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>'
                                                                         });
 
-                                                                        //Simpan Data Praktik dan Tarif
-                                                                        $.ajax({
-                                                                            type: 'POST',
-                                                                            url: "_admin/exc/x_v_praktikData_alasan.php?",
-                                                                            data: data_alasan,
-                                                                            success: function() {
 
-                                                                                Swal.fire({
-                                                                                    allowOutsideClick: true,
-                                                                                    // isDismissed: false,
-                                                                                    icon: 'success',
-                                                                                    title: '<span class"text-xs"><b>DATA ALASAN</b><br>Berhasil Tersimpan</span>',
-                                                                                    showConfirmButton: false,
-                                                                                    timer: 10000123,
-                                                                                    timerProgressBar: true,
-                                                                                    alowOutsideClick: true,
-                                                                                    didOpen: (toast) => {
-                                                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                                    }
-                                                                                }).then(
-                                                                                    function() {
-                                                                                        $('#data_praktik')
-                                                                                            .load(
-                                                                                                "_admin/view/v_praktikData.php?&idu=<?= $_GET['idu'] ?>"
-                                                                                            );
-                                                                                    }
-                                                                                );
-                                                                            },
-                                                                            error: function(response) {
-                                                                                console.log(response.responseText);
-                                                                                alert('eksekusi query gagal');
-                                                                            }
-                                                                        });
+                                                                        //Notif Bila tidak diisi
+                                                                        if (
+                                                                            radio == undefined ||
+                                                                            ket == ""
+                                                                        ) {
+                                                                            //warning Toast bila ada data wajib yg berlum terisi
+                                                                            Swal.fire({
+                                                                                allowOutsideClick: true,
+                                                                                showConfirmButton: false,
+                                                                                icon: 'warning',
+                                                                                title: '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>',
+                                                                                timer: 10000,
+                                                                                timerProgressBar: true,
+                                                                                didOpen: (toast) => {
+                                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                }
+                                                                            });
+
+                                                                            //notif telp_koordinator
+                                                                            if (radio == undefined) $("#err_radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>").html(" Pilih Respond");
+                                                                            else $("#err_radio<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>").html("");
+
+                                                                            //notif telp_koordinator
+                                                                            if (ket == "") $("#err_ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>").html("Keterangan Harus Dipilih");
+                                                                            else $("#err_ket<?= md5(date('Y-m-d', time()) . $d_praktik['id_praktik']); ?>").html("");
+                                                                        } else {
+                                                                            //Simpan Data Praktik dan Tarif
+                                                                            $.ajax({
+                                                                                type: 'POST',
+                                                                                url: "_admin/exc/x_v_praktikData_alasan.php?",
+                                                                                data: data_alasan,
+                                                                                success: function() {
+
+                                                                                    Swal.fire({
+                                                                                        allowOutsideClick: true,
+                                                                                        // isDismissed: false,
+                                                                                        icon: 'success',
+                                                                                        title: '<span class"text-xs"><b>DATA ALASAN</b><br>Berhasil Tersimpan</span>',
+                                                                                        showConfirmButton: false,
+                                                                                        timer: 5000,
+                                                                                        timerProgressBar: true,
+                                                                                        didOpen: (toast) => {
+                                                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                                                        }
+                                                                                    }).then(
+                                                                                        function() {
+                                                                                            location.reload();
+                                                                                        }
+                                                                                    );
+                                                                                },
+                                                                                error: function(response) {
+                                                                                    console.log(response.responseText);
+                                                                                    alert('eksekusi query gagal');
+                                                                                }
+                                                                            });
+                                                                        }
                                                                     });
                                                                 </script>
                                                             </div>
