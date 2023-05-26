@@ -6,6 +6,16 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 	else
 		include "_admin/view/v_akun.php";
 }
+//kuesioner pembimbing 
+elseif (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
+	if (isset($_GET['jawaban'])) include "_admin/view/v_kuesioner_pembimbing_jawaban.php";
+	else include "_admin/view/v_kuesioner_pembimbing.php";
+}
+//kuesioner sarpras
+elseif (isset($_GET['kuesioner_sarpras']) && $d_prvl['level_user'] == 1) {
+	if (isset($_GET['jawaban'])) include "_admin/view/v_kuesioner_sarpras_jawaban.php";
+	else include "_admin/view/v_kuesioner_sarpras.php";
+}
 //arsip praktik
 elseif (isset($_GET['pars']) && $d_prvl['status_aktivasi_user'] == "Y") {
 	if (isset($_GET['dp'])) include "_admin/view/v_praktik_arsip_dataPraktik.php";

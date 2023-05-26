@@ -72,6 +72,33 @@ if ($_SESSION['status_user'] == "Y") {
 					</li>
 
 					<li class="nav-item">
+						<a class="nav-link" href="#" data-toggle="collapse" data-target="#kuesioner" aria-expanded="true" aria-controls="collapseOne">
+							<i class="fas fa-fw fa-clipboard-question"></i>
+							<span>Kuesioner/Survei</span>
+						</a>
+						<div id="kuesioner" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+							<div class="bg-white py-2 collapse-inner rounded">
+								<a class="collapse-item" href="?kuesioner_pembimbing">
+									<i class="fas fa-fw fa-circle"></i>
+									<span>Pertanyaan<br>Pembimbing</span>
+								</a>
+								<a class="collapse-item" href="?kuesioner_pembimbing&jawaban">
+									<i class="fas fa-fw fa-circle"></i>
+									<span>Jawaban<br>Pembimbing</span>
+								</a>
+								<a class="collapse-item" href="?kuesioner_sarpras">
+									<i class="fas fa-fw fa-circle"></i>
+									<span>Pertanyaan<br>Sarana dan Prasarana</span>
+								</a>
+								<a class="collapse-item" href="?kuesioner_sarpras&jawaban">
+									<i class="fas fa-fw fa-circle"></i>
+									<span>Jawaban<br>Sarana dan Prasarana</span>
+								</a>
+							</div>
+						</div>
+					</li>
+
+					<li class="nav-item">
 						<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 							<i class="fas fa-fw fa-table"></i>
 							<span>Data Pendukung</span>

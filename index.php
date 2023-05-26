@@ -74,7 +74,6 @@ include "_add-ons/tanggal_waktu.php";
     }
     // Index Log-Sign
     elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
-
     ?>
 
     <!-- JS -->
@@ -86,9 +85,9 @@ include "_add-ons/tanggal_waktu.php";
     <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
     <script src="vendor/select2/dist/js/select2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
-    <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
     <script src="vendor/custom/jsCustom.js"></script>
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
+    <!-- <script src="https://js.hcaptcha.com/1/api.js" async defer></script> -->
     <script>
         window.top == window &&
             window.console &&
