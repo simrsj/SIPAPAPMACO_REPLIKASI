@@ -5,13 +5,13 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-10">
-                <h1 class="h3 mb-2 text-gray-800">Data Kuesioner Pembimbing</h1>
+                <h1 class="h3 mb-2 text-gray-800">Pertanyaan Kuesioner Pembimbing</h1>
             </div>
             <div class="col-lg-2 my-auto text-right">
 
                 <!-- tombol modal tambah praktikan  -->
                 <a title="tambah pertanyaan" class='btn btn-success btn-sm tambah_ini' href='#' data-toggle="modal" data-target="#mt">
-                    <i class="fas fa-plus"></i> Tambah Data
+                    <i class="fas fa-plus"></i> Tambah
                 </a>
 
                 <!-- modal tambah praktikan  -->
@@ -26,6 +26,9 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
                                     Tambah Pertanyaan <span style="color:red">*</span><br>
                                     <input type="text" id="t_pertanyaan" name="t_pertanyaan" class="form-control" placeholder="isikan pertanyaan" required>
                                     <div class="text-danger b i text-xs blink" id="err_t_pertanyaan"></div>
+                                    Keterangan<br>
+                                    <textarea id="t_ket" name="t_ket" class="form-control"> </textarea>
+                                    <div class="text-danger b i text-xs blink" id="err_t_ket"></div>
                                 </form>
                             </div>
                             <div class="modal-footer text-md">
@@ -33,7 +36,7 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
                                     Kembali
                                 </a>
                                 &nbsp;
-                                <a class="btn btn-success btn-sm tambah">
+                                <a class="btn btn-success btn-sm tambah" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>">
                                     Simpan
                                 </a>
                             </div>
@@ -42,154 +45,130 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
                 </div>
             </div>
         </div>
-
-        <!-- form tambah kuota  -->
-        <?php if ($d_prvl['c_kuota'] == "Y") { ?>
-            <div class="card shadow mb-4 card-body" id="data_tambah_kuota" style="display: none;">
-                <form class="form-inline" method="post" id="form_tambah_kuota">
-                    <div class="form-group mx-sm-3 mb-2">
-                        Nama Kuota : <span class="text-danger">*</span>&nbsp;&nbsp;
-                        <input class="form-control" name="t_nama_kuota" id="t_nama_kuota" required>
-                        <br>
-                        <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_t_nama"></div>
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        Jumlah Kuota : <span class="text-danger mb-2">*</span>&nbsp;&nbsp;
-                        <input class="form-control" type="number" min="0" name="t_jumlah_kuota" id="t_jumlah_kuota" required>
-                        <div class="text-danger font-weight-bold  font-italic text-xs blink" id="err_t_jumlah"></div>
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        Keterangan : &nbsp;&nbsp;
-                        <textarea class="form-control" name="t_ket_kuota" id="t_ket_kuota"></textarea>
-                    </div>
-                </form>
-                <hr>
-                <div class="form-inline navbar  nav-link justify-content-end">
-                    <button type="button" name="tambah" class="btn btn-success mb-2 tambah">
-                        Tambah
-                    </button>
-                    &nbsp;&nbsp;
-                    <button type="button" class="btn btn-outline-danger mb-2 tambah_tutup">
-                        Tutup
-                    </button>
-                </div>
-            </div>
-        <?php } ?>
-
-        <!-- form ubah kuota  -->
-        <div class="card shadow mb-4 card-body" id="data_ubah_kuota" style="display: none;">
-            <form class="form-inline" method="post" id="form_ubah_kuota">
-                <input type="hidden" name="u_id_kuota" id="u_id_kuota">
-                <div class="form-group mx-sm-3 mb-2">
-                    Nama Kuota : <span class="text-danger">*</span>&nbsp;&nbsp;
-                    <input class="form-control" name="u_nama_kuota" id="u_nama_kuota" required>
-                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_u_nama"></span>
-                </div>
-                <div class="form-group mx-sm-3 mb-2">
-                    Jumlah Kuota : <span class="text-danger mb-2">*</span>&nbsp;&nbsp;
-                    <input class="form-control" type="number" min="0" name="u_jumlah_kuota" id="u_jumlah_kuota" required>
-                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_u_jumlah"></span>
-                </div>
-                <div class="form-group mx-sm-3 mb-2">
-                    Keterangan : &nbsp;&nbsp;
-                    <textarea class="form-control" name="u_ket_kuota" id="u_ket_kuota"></textarea>
-                    <span class="text-danger font-weight-bold  font-italic text-xs blink" id="err_u_ket"></span>
-                </div>
-            </form>
-            <hr>
-            <div class="form-inline navbar  nav-link justify-content-end">
-                <button type="button" name="ubah" class="btn btn-primary mb-2 ubah">
-                    Ubah
-                </button>
-                &nbsp;&nbsp;
-                <button type="button" class="btn btn-outline-danger mb-2 ubah_tutup">
-                    Tutup
-                </button>
-            </div>
-            </form>
-        </div>
-
-        <div class="card shadow mb-4 card-body" id="data_kuota"></div>
+        <div class="card shadow mb-4 card-body" id="data_pertanyaan"></div>
     </div>
+
     <script>
         $(document).ready(function() {
-            $('#data_kuota').load('_admin/view/v_kuotaData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])) ?>');
+            Swal.fire({
+                title: 'Mohon Ditunggu',
+                html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                backdrop: true
+            });
+            $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>');
+            Swal.close();
         });
 
-        <?php if ($d_prvl['c_kuota'] == "Y") { ?>
-            $(".tambah_init").click(function() {
-                document.getElementById("err_t_nama").innerHTML = "";
-                document.getElementById("err_t_jumlah").innerHTML = "";
-                document.getElementById("form_tambah_kuota").reset();
-                $("#data_tambah_kuota").fadeIn('slow');
-                $("#data_ubah_kuota").fadeOut('fast');
+        // inisiasi klik modal tambah
+        $(".tambah_init").click(function() {
+            Swal.fire({
+                title: 'Mohon Ditunggu',
+                html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                backdrop: true
             });
+            $('#err_t_pertanyaan').empty();
+            $('#err_t_ket').empty();
+            Swal.close();
+        });
 
-            $(".tambah_tutup").click(function() {
-                document.getElementById("err_t_nama").innerHTML = "";
-                document.getElementById("err_t_jumlah").innerHTML = "";
-                document.getElementById("form_tambah_kuota").reset();
-                $("#data_tambah_kuota").fadeOut('slow');
+        // inisiasi klik modal tambah tutup
+        $(".tambah_tutup").click(function() {
+            $('#err_t_pertanyaan').empty();
+            $('#err_t_ket').empty();
+        });
+
+
+        // inisiasi klik modal tambah simpan
+        $(document).on('click', '.tambah', function() {
+
+            Swal.fire({
+                title: 'Mohon Ditunggu',
+                html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                backdrop: true
             });
-            $(document).on('click', '.tambah', function() {
-                var data = $('#form_tambah_kuota').serialize();
-                var nama_kuota = document.getElementById("t_nama_kuota").value;
-                var jumlah_kuota = document.getElementById("t_jumlah_kuota").value;
-                var ket_kuota = document.getElementById("t_ket_kuota").value;
+            var idu = $(this).attr('id');
+            var data_t = $("#form_t").serializeArray();
+            data_t.push({
+                name: "idu",
+                value: idu
+            });
+            var t_pertanyaan = $('#t_pertanyaan').val();
 
-                //cek data from ubah bila tidak diiisi
-                if (
-                    nama_kuota == "" ||
-                    jumlah_kuota == ""
-                ) {
-                    if (nama_kuota == "") {
-                        document.getElementById("err_t_nama").innerHTML = "Nama Harus Diisi";
-                    } else {
-                        document.getElementById("err_t_nama").innerHTML = "";
-                    }
+            //cek data from modal tambah bila tidak diiisi
+            if (
+                t_pertanyaan == ""
+            ) {
 
-                    if (jumlah_kuota == "") {
-                        document.getElementById("err_t_jumlah").innerHTML = "Jumlah Kuota Harus Diisi";
-                    } else {
-                        document.getElementById("err_t_jumlah").innerHTML = "";
-                    }
-
+                if (t_pertanyaan == "") {
+                    $("#err_t_pertanyaan").html("Pertanyaan Harus Diisi");
                 } else {
-                    $.ajax({
-                        type: 'POST',
-                        url: "_admin/exc/x_v_kuota_s.php",
-                        data: data,
-                        success: function() {
-
-                            $('#data_kuota').load('_admin/view/v_kuotaData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])) ?>');
-
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 5000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            });
-
-                            Toast.fire({
-                                icon: 'success',
-                                title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Ditambah</b></div>'
-                            });
-                            document.getElementById("err_t_nama").innerHTML = "";
-                            document.getElementById("err_t_jumlah").innerHTML = "";
-                            document.getElementById("form_tambah_kuota").reset();
-                        },
-                        error: function(response) {
-                            console.log(response.responseText);
-                        }
-                    });
+                    $("#err_t_pertanyaan").html("");
                 }
-            });
-        <?php } ?>
+
+                Swal.fire({
+                    allowOutsideClick: true,
+                    showConfirmButton: false,
+                    icon: 'warning',
+                    html: '<div class="text-lg b">DATA ADA YANG KOSONG / TIDAK SESUAI</div>',
+                    timer: 5000,
+                    timerProgressBar: true,
+                    backdrop: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+            }
+            //simpan data tambah bila sudah sesuai
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: "_admin/exc/x_v_kuesioner_pembimbing_s.php",
+                    data: data_t,
+                    success: function() {
+                        Swal.fire({
+                            allowOutsideClick: true,
+                            // isDismissed: false,
+                            icon: 'success',
+                            html: '<span class="text-lg b">Data Berhasil Tersimpan</span>',
+                            // html: '<a href="?pkd" class="btn btn-outline-primary">OK</a>',
+                            showConfirmButton: false,
+                            backdrop: true,
+                            timer: 5000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        }).then(
+                            function() {
+
+                                Swal.fire({
+                                    title: 'Mohon Ditunggu',
+                                    html: '<div class="loader mb-5 mt-5 text-center"></div>',
+                                    allowOutsideClick: false,
+                                    showConfirmButton: false,
+                                    backdrop: true
+                                });
+                                $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>');
+                                $('#err_t_pertanyaan').empty();
+                                Swal.close();
+                            }
+                        );
+                    },
+                    error: function() {
+                        console.log("ERROR SIMPAN PERTANYAAN PEMBIMBING");
+                        Swal.close();
+                    }
+                });
+            }
+        });
     </script>
 <?php
 } else {

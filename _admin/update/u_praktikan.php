@@ -121,12 +121,8 @@ if (is_numeric($_GET['u'])) {
     </div>
     <script>
         $(document).ready(function() {
-
             $('#data_praktikan').load('_admin/update/u_praktikanData.php?u=<?= $_GET['u']; ?>');
-
         });
-
-
 
         $(".tambah_init").click(function() {
             document.getElementById("err_nama").innerHTML = "";

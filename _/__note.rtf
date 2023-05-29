@@ -98,9 +98,10 @@ base64_decode(urldecode())
 
 bin2hex(urlencode(base64_encode()))
 base64_decode(urldecode(hex2bin()))
-bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $id_praktik)))
-base64_decode(urldecode(hex2bin(date("Ymd") . time() . "*sm*" . $id_praktik)))
 
+bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $id_praktik)))
+
+base64_decode(urldecode(hex2bin(date("Ymd") . time() . "*sm*" . $id_praktik)))
 $exp_arr_idu = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idu']))));
 $idu = $exp_arr_idu[1];
 
