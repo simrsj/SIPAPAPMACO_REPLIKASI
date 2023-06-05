@@ -26,11 +26,11 @@ try {
     <div class="table-responsive">
         <table class="table table-striped" id="dataTable">
             <thead class="thead-dark">
-                <tr>
+                <tr class="text-center">
                     <th scope="col">No</th>
                     <th scope="col">Pertanyaan</th>
-                    <th scope="col">Tanggal<br>Ubah</th>
-                    <th scope="col">Tanggal<br>Tambah</th>
+                    <th scope="col">Waktu Tambah</th>
+                    <th scope="col">Waktu Ubah</th>
                     <th scope="col">Keterangan </th>
                     <th scope="col"></th>
                 </tr>
