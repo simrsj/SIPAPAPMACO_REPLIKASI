@@ -17,6 +17,7 @@ if ($_SESSION['status_user'] == "Y") {
 		$sql_pembimbing = "SELECT * FROM tb_pembimbing ";
 		$sql_pembimbing .= " JOIN tb_user ON tb_pembimbing.id_user = tb_user.id_user";
 		$sql_pembimbing .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
+		// echo $sql_pembimbing;
 		$q_pembimbing = $conn->query($sql_pembimbing);
 		$d_pembimbing = $q_pembimbing->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
@@ -33,23 +34,26 @@ if ($_SESSION['status_user'] == "Y") {
 
 			<!-- Main Content -->
 			<div id="content">
-				<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar  static-top shadow">
-					<a class="text-decoration-none " href="?">
-						<img src="./_img/rsj.svg" width="28" />
-						<span class="text-primary b m-2 ">SIPAPAP MACO</span>
+				<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar  bg-sipapapmaco-abstrack1 static-top shadow">
+					<a class="text-decoration-none d-flex " href="?">
+						<img src="./_img/rsj.svg" width="28" class="" />
+						<span class="text-primary b m-2 text-light ">SIPAPAP MACO</span>
 					</a>
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto ">
 						<!-- Nav Item - Menu 3 Bar -->
 						<li class="nav-item dropdown no-arrow  my-auto align-middle">
-							<a class="nav-item dropdown-toggle d-flex btn btn-outline-primary btn-sm" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<div class="d-none d-md-block">Menu &nbsp;</div>
-								<div class="fa fa-bars my-auto"></div>
+							<a class="nav-item dropdown-toggle d-flex btn btn-light btn-sm" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<div class="d-none d-md-block text-primary">Menu</div>
+								<div class="fa fa-bars d-md-none my-auto"></div>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class=" dropdown-menu scrollable-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
 
 								<?php if ($d_pembimbing['id_jurusan_pdd'] == 1) { ?>
+									<?php if ($d_pembimbing['id_jurusan_pdd'] == 1) { ?>
+									<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
+									<?php } ?>
 									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
 										Penilaian Laporan Pendahuluan (LP)
 									</a>
@@ -69,12 +73,16 @@ if ($_SESSION['status_user'] == "Y") {
 						<div class="topbar-divider"></div>
 						<!-- Nav Item - User -->
 						<li class="nav-item dropdown no-arrow">
-							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-md-block text-gray-600 small"><?= $d_pembimbing['nama_pembimbing']; ?></span>
+							<a class="nav-link dropdown-toggle  text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="mr-2 d-none d-md-block small"><?= $d_pembimbing['nama_pembimbing']; ?></span>
 								<i class="far fa-user"></i>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+								<a class="dropdown-item" href="?setting">
+									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+									Pengaturan
+								</a>
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#log-out">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout
