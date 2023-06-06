@@ -84,7 +84,7 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="?lo">Klik disini, jika sudah punya akun</a>
+                                    <a class="small" href="?login">Klik disini, jika sudah punya akun</a>
                                 </div>
                             </div>
                         </div>
