@@ -51,16 +51,17 @@ if ($_SESSION['status_user'] == "Y") {
 							<div class=" dropdown-menu scrollable-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
 
 								<?php if ($d_pembimbing['id_jurusan_pdd'] == 1) { ?>
-									<?php if ($d_pembimbing['id_jurusan_pdd'] == 1) { ?>
-									<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
+									<?php if ($d_pembimbing['id_profesi_pdd'] == 1) { ?>
+									<?php } else if ($d_pembimbing['id_profesi_pdd'] == 2) { ?>
+										<!-- Kedokteran Co-Ass  -->
+										<a class="dropdown-item" href="?menu=<?=  ?>" >
+											Penilaian 
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="">
+											Link
+										</a>
 									<?php } ?>
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#tatatertib">
-										Penilaian Laporan Pendahuluan (LP)
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#matrix-kegiatan">
-										Matrix Kegiatan
-									</a>
 								<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
 									<a class="dropdown-item" href="?kep_nilai">
 										<i class="fa-regular fa-pen-to-square"></i>
