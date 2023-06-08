@@ -54,8 +54,8 @@ if ($_SESSION['status_user'] == "Y") {
 									<?php if ($d_pembimbing['id_profesi_pdd'] == 1) { ?>
 									<?php } else if ($d_pembimbing['id_profesi_pdd'] == 2) { ?>
 										<!-- Kedokteran Co-Ass  -->
-										<a class="dropdown-item" href="?menu=<?=  ?>" >
-											Penilaian 
+										<a class="dropdown-item" href="?menu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "ked_coass_nilai"))) ?>">
+											Penilaian
 										</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="">
