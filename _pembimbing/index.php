@@ -54,7 +54,7 @@ if ($_SESSION['status_user'] == "Y") {
 									<?php if ($d_pembimbing['id_profesi_pdd'] == 1) { ?>
 									<?php } else if ($d_pembimbing['id_profesi_pdd'] == 2) { ?>
 										<!-- Kedokteran Co-Ass  -->
-										<a class="dropdown-item" href="?menu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . "ked_coass_nilai"))) ?>">
+										<a class="dropdown-item" href="?menu=<?= md5(date("Ymd") . "*sm*" . "ked_coass_nilai") ?>">
 											Penilaian
 										</a>
 										<div class="dropdown-divider"></div>
@@ -73,10 +73,12 @@ if ($_SESSION['status_user'] == "Y") {
 						</li>
 						<div class="topbar-divider"></div>
 						<!-- Nav Item - User -->
-						<li class="nav-item dropdown no-arrow">
-							<a class="nav-link dropdown-toggle  text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="mr-2 d-none d-md-block small"><?= $d_pembimbing['nama_pembimbing']; ?></span>
-								<i class="far fa-user"></i>
+						<li class="nav-item dropdown no-arrow ">
+							<a class="nav-link dropdown-toggle accordion pl-0 pr-0" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="d-none d-md-block badge badge-light text-primary b shadow-lg">
+									<?= $d_pembimbing['nama_pembimbing']; ?>&nbsp;
+									<i class="far fa-user"></i>
+								</span>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -113,12 +115,7 @@ if ($_SESSION['status_user'] == "Y") {
 				<br>
 				<br>
 				<br>
-				<div class="container text-center ">
-					<div class="badge badge-primary b">
-						<?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span>
-					</div>
-				</div>
-				<div class="wrapper mb-4">
+				<div class="wrapper mt-4 mb-4">
 					<?php
 					include "_pembimbing/index_data.php";
 					?>
