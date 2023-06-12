@@ -82,7 +82,7 @@
                                         <td><?= $d_nilai['osler'] == NULL ? "-" : $d_nilai['osler'] ?></td>
                                         <td><?= $d_nilai['dops'] == NULL ? "-" : $d_nilai['dops'] ?></td>
                                         <td>
-                                            <a class="btn btn-success btn-sm" href="">Nilai</a>
+                                            <a class="btn btn-success btn-sm" href="?ked_coass_nilai&u=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_bimbingan['id_praktikan']))) ?>">Nilai</a>
                                         </td>
                                     </tr>
                                 <?php

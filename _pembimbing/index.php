@@ -54,7 +54,7 @@ if ($_SESSION['status_user'] == "Y") {
 									<?php if ($d_pembimbing['id_profesi_pdd'] == 1) { ?>
 									<?php } else if ($d_pembimbing['id_profesi_pdd'] == 2) { ?>
 										<!-- Kedokteran Co-Ass  -->
-										<a class="dropdown-item" href="?menu=<?= md5(date("Ymd") . "*sm*" . "ked_coass_nilai") ?>">
+										<a class="dropdown-item" href="?ked_coass_nilai">
 											Penilaian
 										</a>
 										<div class="dropdown-divider"></div>
@@ -74,7 +74,7 @@ if ($_SESSION['status_user'] == "Y") {
 						<div class="topbar-divider"></div>
 						<!-- Nav Item - User -->
 						<li class="nav-item dropdown no-arrow ">
-							<a class="nav-link dropdown-toggle accordion pl-0 pr-0" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link h-0 dropdown-toggle accordion pl-0 pr-0" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="d-none d-md-block badge badge-light text-primary b shadow-lg">
 									<?= $d_pembimbing['nama_pembimbing']; ?>&nbsp;
 									<i class="far fa-user"></i>
@@ -91,6 +91,9 @@ if ($_SESSION['status_user'] == "Y") {
 									Logout
 								</a>
 							</div>
+							<a>
+								<div class="badge badge-primary text-md"><?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></div>
+							</a>
 						</li>
 					</ul>
 				</nav>
