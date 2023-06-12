@@ -1,7 +1,7 @@
 <?php
 //Kedokteran (Co-Ass)
-if (isset($_GET["ked_coass_nilai"])) {
-	if (isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_nilai.php";
+if ($_GET['menu'] == md5(date("Ymd") . "*sm*" . "ked_coass_nilai")) {
+	if ($submenu == "i") include "_pembimbing/insert/i_kep_nil_lap_pen.php";
 	else include "_pembimbing/view/v_ked_coass_nilai.php";
 }
 //data dashboard
