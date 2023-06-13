@@ -29,25 +29,25 @@
                                     <th scope="col">Nama Institusi</th>
                                     <th scope="col">Nama Praktikan</th>
                                     <th scope="col" data-toggle="tooltip" data-placement="top" title="BEDSIDE TEACHING">
-                                        BST
+                                        BST &nbsp;&nbsp;
                                     </th>
                                     <th scope="col" data-toggle="tooltip" data-placement="top" title="CASE REPORT SESSION/TUTORIAL">
-                                        CRS
+                                        CRS&nbsp;&nbsp;
                                     </th>
                                     <th scope="col" data-toggle="tooltip" data-placement="top" title="CLINICAL SCIENCE SESSION/REFERAT/JOURNAL READING">
-                                        CSS
+                                        CSS&nbsp;&nbsp;
                                     </th>
                                     <th scope="col" data-toggle="tooltip" data-placement="top" title="MINI CLINICAL EXAMINATION">
-                                        MINI C-EX
+                                        MINI C-EX&nbsp;&nbsp;
                                     </th>
                                     <th scope="col" data-toggle="tooltip" data-placement="top" title="RESOURCE PERSON SESION">
-                                        RPS
+                                        RPS&nbsp;&nbsp;
                                     </th>
                                     <th scope="col" data-toggle="tooltip" data-placement="top" title="OBJECTIVE STRUKTURED LONG EXAMINATION STRUKTURED">
-                                        OSLER
+                                        OSLER&nbsp;&nbsp;
                                     </th>
                                     <th scope="col" data-toggle="tooltip" data-placement="top" title="DIRECT OBSERVATION PROCEDURAL SKILLS">
-                                        DOPS
+                                        DOPS&nbsp;&nbsp;
                                     </th>
                                     <th scope="col">Nilai</th>
                                 </tr>
@@ -81,8 +81,10 @@
                                         <td><?= $d_nilai['rps'] == NULL ? "-" : $d_nilai['rps'] ?></td>
                                         <td><?= $d_nilai['osler'] == NULL ? "-" : $d_nilai['osler'] ?></td>
                                         <td><?= $d_nilai['dops'] == NULL ? "-" : $d_nilai['dops'] ?></td>
-                                        <td>
-                                            <a class="btn btn-success btn-sm" href="?ked_coass_nilai&u=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_bimbingan['id_praktikan']))) ?>">Nilai</a>
+                                        <td class=" text-center">
+                                            <a class="btn btn-success btn-sm" href="?ked_coass_nilai&u=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_bimbingan['id_praktikan']))) ?>">
+                                                Nilai
+                                            </a>
                                         </td>
                                     </tr>
                                 <?php

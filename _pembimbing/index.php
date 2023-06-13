@@ -37,7 +37,10 @@ if ($_SESSION['status_user'] == "Y") {
 				<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar  bg-sipapapmaco-abstrack1 static-top shadow">
 					<a class="text-decoration-none d-flex " href="?">
 						<img src="./_img/rsj.svg" width="28" class="" />
-						<span class="text-primary b m-2 text-light ">SIPAPAP MACO</span>
+						<span class="text-primary b m-2 text-light ">
+							SIPAPAP MACO
+							<span class="d-none d-md-block">(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)</span>
+						</span>
 					</a>
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto ">
@@ -45,7 +48,7 @@ if ($_SESSION['status_user'] == "Y") {
 						<li class="nav-item dropdown no-arrow  my-auto align-middle">
 							<a class="nav-item dropdown-toggle d-flex btn btn-light btn-sm" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<div class="d-none d-md-block text-primary">Menu</div>
-								<div class="fa fa-bars d-md-none my-auto"></div>
+								<div class="fa fa-bars d-md-none my-auto text-primary"></div>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class=" dropdown-menu scrollable-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
@@ -79,6 +82,9 @@ if ($_SESSION['status_user'] == "Y") {
 									<?= $d_pembimbing['nama_pembimbing']; ?>&nbsp;
 									<i class="far fa-user"></i>
 								</span>
+								<span class="d-md-none my-auto text-primary badge badge-light b shadow-lg">
+									<i class="far fa-user"></i>
+								</span>
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -91,7 +97,7 @@ if ($_SESSION['status_user'] == "Y") {
 									Logout
 								</a>
 							</div>
-							<a>
+							<a class="d-none d-md-block ">
 								<div class="badge badge-primary text-md"><?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></div>
 							</a>
 						</li>
