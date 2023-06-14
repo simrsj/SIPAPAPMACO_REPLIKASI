@@ -4,6 +4,7 @@
             $sql_bimbingan = "SELECT * FROM tb_praktikan ";
             $sql_bimbingan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
             $sql_bimbingan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+            $sql_bimbingan .= " JOIN tb_nilai_ked_coass ON tb_praktikan.id_praktikan = tb_nilai_ked_coass.id_praktikan";
             $sql_bimbingan .= " WHERE id_pembimbing = " . $d_pembimbing['id_pembimbing'];
             $sql_bimbingan .= " AND status_praktik = 'Y'";
             $sql_bimbingan .= " ORDER BY tb_praktik.id_praktik ASC";
@@ -57,32 +58,19 @@
                                 $no = 1;
                                 while ($d_bimbingan = $q_bimbingan->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
-
-                                    <?php
-                                    try {
-                                        $sql_nilai = "SELECT * FROM tb_nilai_ked_coass ";
-                                        $sql_nilai .= " WHERE id_praktikan = " . $d_pembimbing['id_pembimbing'];
-                                        // echo "$sql_nilai<br>";
-                                        $q_nilai = $conn->query($sql_nilai);
-                                        $d_nilai = $q_nilai->fetch(PDO::FETCH_ASSOC);
-                                    } catch (Exception $ex) {
-                                        echo "<script>alert('DATA BIMBINGAN PRAKTIKAN');";
-                                        echo "document.location.href='?error404';</script>";
-                                    }
-                                    ?>
-                                    <tr>
+                                    <tr class="text-center">
                                         <th scope="row"><?= $no; ?></th>
                                         <td><?= $d_bimbingan['nama_institusi']; ?></td>
                                         <td><?= $d_bimbingan['nama_praktikan']; ?></td>
-                                        <td><?= $d_nilai['bst'] == NULL ? "-" : $d_nilai['bst'] ?></td>
-                                        <td><?= $d_nilai['crs'] == NULL ? "-" : $d_nilai['crs'] ?></td>
-                                        <td><?= $d_nilai['css'] == NULL ? "-" : $d_nilai['css'] ?></td>
-                                        <td><?= $d_nilai['mini_cex'] == NULL ? "-" : $d_nilai['mini_cex'] ?></td>
-                                        <td><?= $d_nilai['rps'] == NULL ? "-" : $d_nilai['rps'] ?></td>
-                                        <td><?= $d_nilai['osler'] == NULL ? "-" : $d_nilai['osler'] ?></td>
-                                        <td><?= $d_nilai['dops'] == NULL ? "-" : $d_nilai['dops'] ?></td>
+                                        <td><?= $d_bimbingan['bst'] == NULL ? "-" : $d_bimbingan['bst'] ?></td>
+                                        <td><?= $d_bimbingan['crs'] == NULL ? "-" : $d_bimbingan['crs'] ?></td>
+                                        <td><?= $d_bimbingan['css'] == NULL ? "-" : $d_bimbingan['css'] ?></td>
+                                        <td><?= $d_bimbingan['minicex'] == NULL ? "-" : $d_bimbingan['minicex'] ?></td>
+                                        <td><?= $d_bimbingan['rps'] == NULL ? "-" : $d_bimbingan['rps'] ?></td>
+                                        <td><?= $d_bimbingan['osler'] == NULL ? "-" : $d_bimbingan['osler'] ?></td>
+                                        <td><?= $d_bimbingan['dops'] == NULL ? "-" : $d_bimbingan['dops'] ?></td>
                                         <td class=" text-center">
-                                            <a class="btn btn-success btn-sm" href="?ked_coass_nilai&u=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_bimbingan['id_praktikan']))) ?>">
+                                            <a class="btn btn-outline-success btn-sm" href="?ked_coass_nilai&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
                                                 Nilai
                                             </a>
                                         </td>
@@ -97,9 +85,11 @@
                 </div>
             </div>
         <?php } else { ?>
-            <div class="row">
-                <div class="col-lg-10">
-                    <h1 class="h3 mb-2 text-gray-800">Daftar Bimbingan Praktik</h1>
+            <div class="jumbotron border-2 shadow">
+                <div class="jumbotron-fluid">
+                    <div class="text-gray-700">
+                        <h5 class="text-center">Data Praktikan Tidak Ada</h5>
+                    </div>
                 </div>
             </div>
         <?php } ?>

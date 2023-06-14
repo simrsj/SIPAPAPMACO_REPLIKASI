@@ -34,7 +34,7 @@ if ($_SESSION['status_user'] == "Y") {
 
 			<!-- Main Content -->
 			<div id="content">
-				<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar  bg-sipapapmaco-abstrack1 static-top shadow">
+				<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar  bg-sipapapmaco-abstrack1 static-top shadow-lg">
 					<a class="text-decoration-none d-flex " href="?">
 						<img src="./_img/rsj.svg" width="28" class="" />
 						<span class="text-primary b m-2 text-light ">
@@ -61,8 +61,8 @@ if ($_SESSION['status_user'] == "Y") {
 											Penilaian
 										</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="">
-											Link
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
 										</a>
 									<?php } ?>
 								<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
