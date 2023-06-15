@@ -102,7 +102,11 @@
 #dataTable_2 {
   width:100% !important;
 }
-
+/* -------------------------------------------------------------- dropdown */
+.dropdown-menu-scroll {
+  max-height: 280px;
+  overflow-y: auto;
+}
 /* -------------------------------------------------------------- Flip */
 
 .flip-container {

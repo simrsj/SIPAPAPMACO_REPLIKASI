@@ -51,7 +51,7 @@ if ($_SESSION['status_user'] == "Y") {
 								<div class="fa fa-bars d-md-none my-auto text-primary"></div>
 							</a>
 							<!-- Dropdown - User Information -->
-							<div class=" dropdown-menu scrollable-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
+							<div class=" dropdown-menu dropdown-menu-scroll dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
 
 								<?php if ($d_pembimbing['id_jurusan_pdd'] == 1) { ?>
 									<?php if ($d_pembimbing['id_profesi_pdd'] == 1) { ?>
@@ -61,6 +61,63 @@ if ($_SESSION['status_user'] == "Y") {
 											Penilaian
 										</a>
 										<div class="dropdown-divider"></div>
+										<div class="text-center">
+											<span class="badge badge-dark text-md">e-Log Book</span>
+										</div>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item" href="?p3d">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
 										<a class="dropdown-item" href="?p3d">
 											Pencapaian Kompetensi Keterampilan P3D
 										</a>
@@ -77,6 +134,9 @@ if ($_SESSION['status_user'] == "Y") {
 						<div class="topbar-divider"></div>
 						<!-- Nav Item - User -->
 						<li class="nav-item dropdown no-arrow ">
+							<a class="d-none d-md-block ">
+								<div class="badge badge-primary text-md"><?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></div>
+							</a>
 							<a class="nav-link h-0 dropdown-toggle accordion pl-0 pr-0" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="d-none d-md-block badge badge-light text-primary b shadow-lg">
 									<?= $d_pembimbing['nama_pembimbing']; ?>&nbsp;
@@ -86,7 +146,6 @@ if ($_SESSION['status_user'] == "Y") {
 									<i class="far fa-user"></i>
 								</span>
 							</a>
-							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 								<a class="dropdown-item" href="?setting">
 									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -97,9 +156,6 @@ if ($_SESSION['status_user'] == "Y") {
 									Logout
 								</a>
 							</div>
-							<a class="d-none d-md-block ">
-								<div class="badge badge-primary text-md"><?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></div>
-							</a>
 						</li>
 					</ul>
 				</nav>
