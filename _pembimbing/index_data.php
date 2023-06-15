@@ -5,11 +5,23 @@ if (isset($_GET["ked_coass_nilai"])) {
 	else include "_pembimbing/view/v_ked_coass_nilai.php";
 }
 //data logbook
-else if (isset($_GET["logbook"])) {
-	if ($_GET['logbook'] == "p3d") include "_pembimbing/update/v_p3d.php";
-	else include "_pembimbing/view/v_p3d.php";
-}
-//data dashboard
-else {
-	include "_pembimbing/dashboard_pembimbing.php";
+else if (isset($_GET["elogbook"])) {
+	if ($_GET["elogbook"] == "p3d") {
+		if (isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_p3d.php";
+		else include "_pembimbing/view/v_ked_coass_p3d.php";
+	} else blankpage();
+} else blankpage();
+
+function blankpage()
+{
+	echo
+	'
+	<div class="jumbotron border-2 m-2  shadow">
+		<div class="jumbotron-fluid">
+			<div class="text-gray-700">
+				<h5 class="text-center">Silahkan Pilih <b>Menu</b> diatas</h5>
+			</div>
+		</div>
+	</div>
+	';
 }

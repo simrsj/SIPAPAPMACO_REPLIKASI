@@ -42,7 +42,7 @@
                                         <td><?= $d_bimbingan['nama_institusi']; ?></td>
                                         <td><?= $d_bimbingan['nama_praktikan']; ?></td>
                                         <td class=" text-center">
-                                            <a class="btn btn-outline-success btn-sm" href="?ked_coass_nilai&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
+                                            <a class="btn btn-outline-success btn-sm" href="?elogbook=p3d&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
                                                 Pencapaian Komptensi Keterampilan P3D
                                             </a>
                                         </td>

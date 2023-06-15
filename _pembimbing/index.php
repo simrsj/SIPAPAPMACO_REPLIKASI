@@ -57,68 +57,16 @@ if ($_SESSION['status_user'] == "Y") {
 									<?php if ($d_pembimbing['id_profesi_pdd'] == 1) { ?>
 									<?php } else if ($d_pembimbing['id_profesi_pdd'] == 2) { ?>
 										<!-- Kedokteran Co-Ass  -->
-										<a class="dropdown-item" href="?ked_coass_nilai">
+										<a class="dropdown-item b " href="?ked_coass_nilai">
 											Penilaian
 										</a>
-										<div class="dropdown-divider"></div>
-										<div class="text-center">
-											<span class="badge badge-dark text-md">e-Log Book</span>
+										<div class="text-center mb-2">
+											<span class="badge badge-dark text-md col">e-Log Book</span>
 										</div>
-										<a class="dropdown-item" href="?p3d">
+										<a class="dropdown-item " href="?elogbook=p3d">
 											Pencapaian Kompetensi Keterampilan P3D
 										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item" href="?p3d">
+										<a class="dropdown-item " href="?elogbook=p3d">
 											Pencapaian Kompetensi Keterampilan P3D
 										</a>
 									<?php } ?>
