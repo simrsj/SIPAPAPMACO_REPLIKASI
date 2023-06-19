@@ -29,7 +29,9 @@
                                     <th scope="col">No</th>
                                     <th scope="col">Nama Institusi</th>
                                     <th scope="col">Nama Praktikan</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Data P3D</th>
+                                    <th scope="col">Isi Data P3D</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,8 +43,94 @@
                                         <th scope="row"><?= $no; ?></th>
                                         <td><?= $d_bimbingan['nama_institusi']; ?></td>
                                         <td><?= $d_bimbingan['nama_praktikan']; ?></td>
+                                        <td>
+                                            <?php
+                                            try {
+                                                $sql_pertanyaan = "SELECT * FROM tb_logbook_ked_coass_p3d ";
+                                                $sql_pertanyaan .= " WHERE id_praktikan = " . $d_bimbingan['id_praktikan'];
+                                                // echo "$sql_pertanyaan<br>";
+                                                $q_pertanyaan = $conn->query($sql_pertanyaan);
+                                                $r_pertanyaan = $q_pertanyaan->rowCount();
+                                                echo $r_pertanyaan != NULL ? "<span class='badge badge-success'>Data Sudah Ada</span>" : "<span class='badge badge-secondary'>Data Belum Ada</span>";
+                                            } catch (Exception $ex) {
+                                                echo "<script>alert('DATA PRAKTIKAN');</script>";
+                                                echo "<script>document.location.href='?error404';</script>";
+                                            }
+                                            ?>
+                                        </td>
                                         <td class=" text-center">
-                                            <a class="btn btn-outline-success btn-sm" href="?elogbook=p3d&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
+                                            <?php if ($r_pertanyaan > 0) { ?>
+                                                <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_p3d<?= $no ?>">
+                                                    <i class="fas fa-eye"></i> Lihat
+                                                </a>
+                                                <!-- Logout Modal-->
+                                                <div class="modal  fade" id="modal_data_p3d<?= $no ?>" tabindex="-1" role="dialog" aria-labelledby="modal_data_p3d<?= $no ?>" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-secondary text-light">
+                                                                Pencapaian Komptensi Keterampilan P3D
+                                                                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                                    X
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <table class="table table-striped table-bordered ">
+                                                                    <thead class="table-dark">
+                                                                        <tr class="text-center">
+                                                                            <th scope='col'>No</th>
+                                                                            <th>Pertanyaan</th>
+                                                                            <th>I</th>
+                                                                            <th>II</th>
+                                                                            <th>III</th>
+                                                                            <th>IV</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php
+                                                                        try {
+                                                                            $sql_pertanyaan = "SELECT * FROM tb_pertanyaan ";
+                                                                            $sql_pertanyaan .= " WHERE kategori_pertanyaan = 'P3D'";
+                                                                            // echo "$sql_pertanyaan<br>";
+                                                                            $q_pertanyaan = $conn->query($sql_pertanyaan);
+                                                                        } catch (Exception $ex) {
+                                                                            echo "<script>alert('DATA PRAKTIKAN');</script>";
+                                                                            echo "<script>document.location.href='?error404';</script>";
+                                                                        }
+                                                                        $no = 1;
+                                                                        while ($d_bimbingan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {
+                                                                        ?>
+                                                                            <tr>
+                                                                                <td class="text-center"><?= $no; ?></td>
+                                                                                <td><?= $d_bimbingan['pertanyaan']; ?></td>
+                                                                                <td>
+                                                                                    <input type="checkbox" class="checkbox-md checkboxi" id="i<?= $no ?>" name="i<?= $no ?>" onclick="checkboxi()" value="Y">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <input type="checkbox" class="checkbox-md checkboxii" id="ii<?= $no ?>" name="ii<?= $no ?>" onclick="checkboxii()" value="Y">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <input type="checkbox" class="checkbox-md checkboxiii" id="iii<?= $no ?>" name="iii<?= $no ?>" onclick="checkboxii()" value="Y">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <input type="checkbox" class="checkbox-md checkboxiv" id="iv<?= $no ?>" name="iv<?= $no ?>" onclick="checkboxiv()" value="Y">
+                                                                                </td>
+                                                                            </tr>
+                                                                        <?php
+                                                                            $no++;
+                                                                        }
+                                                                        ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php } else { ?>
+                                                <span class='badge badge-secondary'>Data Belum Ada</span>
+                                            <?php } ?>
+                                        </td>
+                                        <td class=" text-center">
+                                            <a class="btn btn-success btn-sm" href="?elogbook=p3d&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
                                                 Pencapaian Komptensi Keterampilan P3D
                                             </a>
                                         </td>
