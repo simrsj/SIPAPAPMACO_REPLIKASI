@@ -217,7 +217,7 @@
                                                             Swal.fire({
                                                                 allowOutsideClick: true,
                                                                 icon: 'error',
-                                                                title: '<span><b>DATA GAGAL DISIMAPAN</b></span>',
+                                                                title: '<span><b>DATA GAGAL DISIMPAN</b></span>',
                                                                 showConfirmButton: false,
                                                                 timer: 10000,
                                                                 timerProgressBar: true,

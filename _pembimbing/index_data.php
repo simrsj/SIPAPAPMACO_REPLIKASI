@@ -4,9 +4,15 @@ if (isset($_GET["ked_coass_nilai"])) {
 	if (isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_nilai.php";
 	else include "_pembimbing/view/v_ked_coass_nilai.php";
 }
-//data logbook
+//data Log Book
 else if (isset($_GET["elogbook"])) {
+	//data Log Book Pencapaian Komptensi Keterampilan P3D
 	if ($_GET["elogbook"] == "p3d") {
+		if (isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_p3d.php";
+		else include "_pembimbing/view/v_ked_coass_p3d.php";
+	}
+	//data Log Book Pencapaian Komptensi Keterampilan P3D
+	else if ($_GET["elogbook"] == "p3d") {
 		if (isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_p3d.php";
 		else include "_pembimbing/view/v_ked_coass_p3d.php";
 	} else blankpage();

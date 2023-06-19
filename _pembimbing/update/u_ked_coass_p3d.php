@@ -99,7 +99,7 @@
                                     ?>
                                         <tr>
                                             <td class="text-center"><?= $no; ?></td>
-                                            <td><?= $d_bimbingan_isi['pertanyaan']; ?></td>
+                                            <td class="text-left"><?= $d_bimbingan_isi['pertanyaan']; ?></td>
                                             <td>
                                                 <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
                                             </td>
@@ -214,7 +214,7 @@
                                                         Swal.fire({
                                                             allowOutsideClick: true,
                                                             icon: 'error',
-                                                            title: '<span><b>DATA GAGAL DISIMAPAN</b></span>',
+                                                            title: '<span><b>DATA GAGAL DISIMPAN</b></span>',
                                                             showConfirmButton: false,
                                                             timer: 10000,
                                                             timerProgressBar: true,
