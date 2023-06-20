@@ -13,15 +13,6 @@
         echo "<script>alert('DATA BIMBINGAN PRAKTIKAN')</script>;";
         // echo "<script>document.location.href='?error404';</script>";
     }
-    try {
-        $sql_pertanyaan = "SELECT * FROM tb_pertanyaan ";
-        $sql_pertanyaan .= " WHERE kategori_pertanyaan = 'P3D'";
-        // echo "$sql_pertanyaan<br>";
-        $q_pertanyaan = $conn->query($sql_pertanyaan);
-    } catch (Exception $ex) {
-        echo "<script>alert('DATA PRAKTIKAN');</script>";
-        echo "<script>document.location.href='?error404';</script>";
-    }
     ?>
     <div class="card shadow  m-2">
         <div class="card-header b text-center">
@@ -162,11 +153,11 @@
                                         echo "<script>document.location.href='?error404';</script>";
                                     }
                                     $no = 1;
-                                    while ($d_bimbingan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {
+                                    while ($d_pertanyaan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
                                         <tr>
                                             <td class="text-center"><?= $no; ?></td>
-                                            <td><?= $d_bimbingan_isi['pertanyaan']; ?></td>
+                                            <td><?= $d_bimbingan['pertanyaan']; ?></td>
                                             <td>
                                                 <input type="checkbox" class="checkbox-md checkboxi" id="i<?= $no ?>" name="i<?= $no ?>" onclick="checkboxi()" value="Y">
                                             </td>
@@ -234,6 +225,9 @@
                                 data_form.push({
                                     name: "idpr",
                                     value: "<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>"
+                                }, {
+                                    name: "no",
+                                    value: "<?= $q_pertanyaan->rowCount(); ?>"
                                 });
                                 $.ajax({
                                     type: 'POST',
@@ -245,7 +239,7 @@
                                             Swal.fire({
                                                 allowOutsideClick: true,
                                                 icon: 'error',
-                                                title: '<span><b>DATA GAGAL DISIMAPAN</b></span>',
+                                                title: '<span><b>DATA GAGAL DISIMPAN</b></span>',
                                                 showConfirmButton: false,
                                                 timer: 10000,
                                                 timerProgressBar: true,
