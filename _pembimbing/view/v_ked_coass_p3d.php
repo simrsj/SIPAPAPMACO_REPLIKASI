@@ -93,26 +93,40 @@
                                                                             // echo "$sql_pertanyaan<br>";
                                                                             $q_pertanyaan = $conn->query($sql_pertanyaan);
                                                                         } catch (Exception $ex) {
-                                                                            echo "<script>alert('DATA PRAKTIKAN');</script>";
-                                                                            echo "<script>document.location.href='?error404';</script>";
+                                                                            // echo "<script>alert('DATA PRAKTIKAN');</script>";
+                                                                            // echo "<script>document.location.href='?error404';</script>";
                                                                         }
                                                                         $no = 1;
-                                                                        while ($d_bimbingan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {
+                                                                        while ($d_pertanyaan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {
                                                                         ?>
                                                                             <tr>
                                                                                 <td class="text-center"><?= $no; ?></td>
-                                                                                <td><?= $d_bimbingan['pertanyaan']; ?></td>
+                                                                                <td><?= $d_pertanyaan['pertanyaan']; ?></td>
                                                                                 <td>
-                                                                                    <input type="checkbox" class="checkbox-md checkboxi" id="i<?= $no ?>" name="i<?= $no ?>" onclick="checkboxi()" value="Y">
+                                                                                    <?php
+
+                                                                                    try {
+                                                                                        $sql_p3d = "SELECT * FROM tb_logbook_ked_coass_p3d ";
+                                                                                        $sql_p3d .= " WHERE id_praktikan = " . $d_bimbingan['id_praktikan'];
+                                                                                        $sql_p3d .= " AND id_pertanyaan = " . $d_pertanyaan['id'];
+                                                                                        // echo "$sql_p3d<br>";
+                                                                                        $q_p3d = $conn->query($sql_p3d);
+                                                                                        $d_p3d = $q_p3d->fetch(PDO::FETCH_ASSOC);
+                                                                                    } catch (Exception $ex) {
+                                                                                        // echo "<script>alert('DATA PRAKTIKAN');</script>";
+                                                                                        // echo "<script>document.location.href='?error404';</script>";
+                                                                                    }
+                                                                                    ?>
+                                                                                    <?= $d_p3d['i'] == 'Y' ? '<i class="fa-solid fa-circle-check text-success"></i>' : '<i class="fa-solid fa-circle-xmark text-danger"></i>'; ?>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <input type="checkbox" class="checkbox-md checkboxii" id="ii<?= $no ?>" name="ii<?= $no ?>" onclick="checkboxii()" value="Y">
+                                                                                    <?= $d_p3d['ii'] == 'Y' ? '<i class="fa-solid fa-circle-check text-success"></i>' : '<i class="fa-solid fa-circle-xmark text-danger"></i>'; ?>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <input type="checkbox" class="checkbox-md checkboxiii" id="iii<?= $no ?>" name="iii<?= $no ?>" onclick="checkboxii()" value="Y">
+                                                                                    <?= $d_p3d['iii'] == 'Y' ? '<i class="fa-solid fa-circle-check text-success"></i>' : '<i class="fa-solid fa-circle-xmark text-danger"></i>'; ?>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <input type="checkbox" class="checkbox-md checkboxiv" id="iv<?= $no ?>" name="iv<?= $no ?>" onclick="checkboxiv()" value="Y">
+                                                                                    <?= $d_p3d['iv'] == 'Y' ? '<i class="fa-solid fa-circle-check text-success"></i>' : '<i class="fa-solid fa-circle-xmark text-danger"></i>'; ?>
                                                                                 </td>
                                                                             </tr>
                                                                         <?php
