@@ -96,11 +96,11 @@
                                                                             // echo "<script>alert('DATA PRAKTIKAN');</script>";
                                                                             // echo "<script>document.location.href='?error404';</script>";
                                                                         }
-                                                                        $no = 1;
+                                                                        $no0 = 1;
                                                                         while ($d_pertanyaan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {
                                                                         ?>
                                                                             <tr>
-                                                                                <td class="text-center"><?= $no; ?></td>
+                                                                                <td class="text-center"><?= $no0; ?></td>
                                                                                 <td><?= $d_pertanyaan['pertanyaan']; ?></td>
                                                                                 <td>
                                                                                     <?php
@@ -130,7 +130,7 @@
                                                                                 </td>
                                                                             </tr>
                                                                         <?php
-                                                                            $no++;
+                                                                            $no0++;
                                                                         }
                                                                         ?>
                                                                     </tbody>
