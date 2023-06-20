@@ -191,6 +191,18 @@ input[type=number] {
     -moz-appearance:textfield; /* Firefox */
     appearance:textfield;
 }
+
+.checkbox-md{
+  transform: scale(1.5); 
+  width: 15px; 
+  height: 15px;
+}
+  
+.checkbox-lg{
+  transform: scale(1.5); 
+  width: 25px; 
+height: 25px;
+}
 /* -------------------------------------------------------------- Loader */
 .preloader {
   position: fixed;
