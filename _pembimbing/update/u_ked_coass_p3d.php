@@ -157,7 +157,7 @@
                                     ?>
                                         <tr>
                                             <td class="text-center"><?= $no; ?></td>
-                                            <td><?= $d_bimbingan['pertanyaan']; ?></td>
+                                            <td><?= $d_pertanyaan['pertanyaan']; ?></td>
                                             <td>
                                                 <input type="checkbox" class="checkbox-md checkboxi" id="i<?= $no ?>" name="i<?= $no ?>" onclick="checkboxi()" value="Y">
                                             </td>
@@ -165,7 +165,7 @@
                                                 <input type="checkbox" class="checkbox-md checkboxii" id="ii<?= $no ?>" name="ii<?= $no ?>" onclick="checkboxii()" value="Y">
                                             </td>
                                             <td>
-                                                <input type="checkbox" class="checkbox-md checkboxiii" id="iii<?= $no ?>" name="iii<?= $no ?>" onclick="checkboxii()" value="Y">
+                                                <input type="checkbox" class="checkbox-md checkboxiii" id="iii<?= $no ?>" name="iii<?= $no ?>" onclick="checkboxiii()" value="Y">
                                             </td>
                                             <td>
                                                 <input type="checkbox" class="checkbox-md checkboxiv" id="iv<?= $no ?>" name="iv<?= $no ?>" onclick="checkboxiv()" value="Y">
@@ -201,27 +201,6 @@
                             $(document).on('click', '.simpan', function() {
                                 var data_form = $("#form_nilai").serializeArray();
 
-                                Swal.fire({
-                                    allowOutsideClick: true,
-                                    icon: 'warning',
-                                    title: '<span><b>NILAI ADA YANG TIDAK SESUAI</b></span>',
-                                    showConfirmButton: false,
-                                    timer: 5000,
-                                    timerProgressBar: true,
-                                    backdrop: true,
-                                    didOpen: (toast) => {
-                                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                    }
-                                });
-                                bst < 0 || bst > 100 ? $("#err_bst").html("Tidak Sesuai") : $("#err_bst").html("");
-                                crs < 0 || crs > 100 ? $("#err_crs").html("Tidak Sesuai") : $("#err_crs").html("");
-                                css < 0 || css > 100 ? $("#err_css").html("Tidak Sesuai") : $("#err_css").html("");
-                                minicex < 0 || minicex > 100 ? $("#err_minicex").html("Tidak Sesuai") : $("#err_minicex").html("");
-                                rps < 0 || rps > 100 ? $("#err_rps").html("Tidak Sesuai") : $("#err_rps").html("");
-                                osler < 0 || osler > 100 ? $("#err_osler").html("Tidak Sesuai") : $("#err_osler").html("");
-                                dops < 0 || dops > 100 ? $("#err_dops").html("Tidak Sesuai") : $("#err_dops").html("");
-                            } else {
                                 data_form.push({
                                     name: "idpr",
                                     value: "<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>"
@@ -231,7 +210,7 @@
                                 });
                                 $.ajax({
                                     type: 'POST',
-                                    url: "_pembimbing/exc/x_u_ked_coass_nilai.php",
+                                    url: "_pembimbing/exc/x_u_ked_coass_p3d.php",
                                     data: data_form,
                                     dataType: "JSON",
                                     success: function(response) {
@@ -264,7 +243,7 @@
                                                 }
                                             }).then(
                                                 function() {
-                                                    document.location.href = "?ked_coass_nilai";
+                                                    document.location.href = "?elogbook=<?= $_GET['elogbook'] ?>";
                                                 }
                                             );
                                         }
@@ -273,11 +252,8 @@
                                         console.log(response);
                                     }
                                 });
-                            }
                             });
                         </script>
-                        </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

@@ -37,12 +37,12 @@ try {
         $no++;
     }
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'ket' => 'SUCCESS'
     ]);
 } catch (Exception $ex) {
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'ket' => 'ERROR'
     ]);
 }
