@@ -113,8 +113,8 @@
                                                                                         $q_p3d = $conn->query($sql_p3d);
                                                                                         $d_p3d = $q_p3d->fetch(PDO::FETCH_ASSOC);
                                                                                     } catch (Exception $ex) {
-                                                                                        // echo "<script>alert('DATA PRAKTIKAN');</script>";
-                                                                                        // echo "<script>document.location.href='?error404';</script>";
+                                                                                        echo "<script>alert('DATA PRAKTIKAN');</script>";
+                                                                                        echo "<script>document.location.href='?error404';</script>";
                                                                                     }
                                                                                     ?>
                                                                                     <?= $d_p3d['i'] == 'Y' ? '<i class="fa-solid fa-circle-check text-success"></i>' : '<i class="fa-solid fa-circle-xmark text-danger"></i>'; ?>

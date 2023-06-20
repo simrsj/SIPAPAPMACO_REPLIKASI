@@ -66,8 +66,8 @@ if ($_SESSION['status_user'] == "Y") {
 										<a class="dropdown-item " href="?elogbook=p3d">
 											Pencapaian Kompetensi Keterampilan P3D
 										</a>
-										<a class="dropdown-item " href="?elogbook=p3d">
-											Pencapaian Kompetensi Keterampilan P3D
+										<a class="dropdown-item " href="?elogbook=jkh">
+											Jadwal Kegiatan Harian
 										</a>
 									<?php } ?>
 								<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>

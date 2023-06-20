@@ -12,9 +12,9 @@ else if (isset($_GET["elogbook"])) {
 		else include "_pembimbing/view/v_ked_coass_p3d.php";
 	}
 	//data Log Book Pencapaian Komptensi Keterampilan P3D
-	else if ($_GET["elogbook"] == "p3d") {
+	else if ($_GET["elogbook"] == "jkh") {
 		if (isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_p3d.php";
-		else include "_pembimbing/view/v_ked_coass_p3d.php";
+		else include "_pembimbing/view/v_ked_coass_jkh.php";
 	} else blankpage();
 } else blankpage();
 
