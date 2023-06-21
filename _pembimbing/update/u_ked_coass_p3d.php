@@ -153,8 +153,8 @@
                                         echo "<script>document.location.href='?error404';</script>";
                                     }
                                     $no = 1;
-                                    while ($d_pertanyaan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {
                                     ?>
+                                    <?php while ($d_pertanyaan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) { ?>
                                         <tr>
                                             <td class="text-center"><?= $no; ?></td>
                                             <td><?= $d_pertanyaan['pertanyaan']; ?></td>
@@ -171,10 +171,8 @@
                                                 <input type="checkbox" class="checkbox-md checkboxiv" id="iv<?= $no ?>" name="iv<?= $no ?>" onclick="checkboxiv()" value="Y">
                                             </td>
                                         </tr>
-                                    <?php
-                                        $no++;
-                                    }
-                                    ?>
+                                        <?php $no++; ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                             <a class="btn btn-success btn-sm col" href="#" data-toggle="modal" data-target="#modal_simpan">

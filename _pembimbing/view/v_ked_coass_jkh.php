@@ -31,6 +31,7 @@
                                     <th scope="col">Nama Praktikan</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Kegiatan</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,7 +74,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <table class="table table-striped table-bordered ">
+                                                                <table class="table table-striped table-bordered " id="dataTable_2">
                                                                     <thead class="table-dark">
                                                                         <tr class="text-center">
                                                                             <th scope='col'>No</th>
@@ -89,9 +90,9 @@
                                                                         ?>
                                                                             <tr>
                                                                                 <td class="text-center"><?= $no0; ?></td>
-                                                                                <td><?= $d_jkh['tgl']; ?></td>
-                                                                                <td><?= $d_jkh['Kegiatan']; ?></td>
-                                                                                <td><?= $d_jkh['Topik']; ?></td>
+                                                                                <td><?= tanggal($d_jkh['tgl']); ?></td>
+                                                                                <td><?= $d_jkh['kegiatan']; ?></td>
+                                                                                <td><?= $d_jkh['topik']; ?></td>
                                                                             </tr>
                                                                         <?php
                                                                             $no0++;
@@ -106,6 +107,11 @@
                                             <?php } else { ?>
                                                 <span class='badge badge-secondary'>Data Belum Ada</span>
                                             <?php } ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="btn btn-outline-info btn-sm" href="?elogbook=jkh&data=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
+                                                Tamba/Ubah
+                                            </a>
                                         </td>
                                     </tr>
                                 <?php
