@@ -13,7 +13,7 @@ else if (isset($_GET["elogbook"])) {
 	}
 	//data Log Book Pencapaian Komptensi Keterampilan P3D
 	else if ($_GET["elogbook"] == "jkh") {
-		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_jkh_data.php";
+		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_jkh_input.php";
 		else include "_pembimbing/view/v_ked_coass_jkh.php";
 	} else blankpage();
 } else blankpage();

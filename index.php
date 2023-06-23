@@ -87,6 +87,7 @@ include "_add-ons/crypt.php";
     <script src="vendor/select2/dist/js/select2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/custom/jsCustom.js"></script>
+    <script src="vendor/custom/alert.js"></script>
     <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
     <!-- <script src="https://js.hcaptcha.com/1/api.js" async defer></script> -->
     <script>
