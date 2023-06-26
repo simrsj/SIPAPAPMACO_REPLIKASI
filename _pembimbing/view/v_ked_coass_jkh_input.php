@@ -11,7 +11,7 @@
         $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
     } catch (Exception $ex) {
         echo "<script>alert('DATA BIMBINGAN PRAKTIKAN')</script>;";
-        // echo "<script>document.location.href='?error404';</script>";
+        echo "<script>document.location.href='?error404';</script>";
     }
     ?>
     <div class="card shadow  m-2">
@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-md-10">Data Jadwal Kegiatan Harian</div>
                         <div class="col-md-2 text-right">
-                            <a class="btn btn-success btn-sm" href="#" data-toggle="modal" data-target="#modal_tambah">
+                            <a class="btn btn-success btn-sm tambah_init" href="#" data-toggle="modal" data-target="#modal_tambah">
                                 <i class="fa-solid fa-plus"></i> Tambah
                             </a>
                             <div class="modal  fade" id="modal_tambah" tabindex="-1" role="dialog" aria-labelledby="modal_tambah" aria-hidden="true">
@@ -58,20 +58,20 @@
                                             </button>
                                         </div>
                                         <div class="modal-body text-left">
-                                            <form id="form" method="post">
+                                            <form id="form_t" method="post">
                                                 <label for="tgl">Tanggal</label>
-                                                <input type="date" class="form-control mb-2" id="tgl" name="tgl"><br>
-                                                <div id="err_tgl" class="i text-danger text-xs blink"></div>
+                                                <input type="date" class="form-control" id="tgl" name="tgl">
+                                                <div id="err_tgl" class="i text-danger text-center text-xs blink  mb-2"></div>
                                                 <label for="kegiatan">Kegiatan</label>
-                                                <textarea id="kegiatan" name="kegiatan" class="form-control mb-2" rows="3"></textarea>
-                                                <div id="err_kegiatan" class="i text-danger text-xs blink"></div>
+                                                <textarea id="kegiatan" name="kegiatan" class="form-control " rows="3"></textarea>
+                                                <div id="err_kegiatan" class="i text-danger text-center text-xs blink  mb-2"></div>
                                                 <label for="topik">Topik</label>
-                                                <textarea id="topik" name="topik" class="form-control mb-2" rows="3"></textarea>
-                                                <div id="err_topik" class="i text-danger text-xs blink"></div>
+                                                <textarea id="topik" name="topik" class="form-control" rows="3"></textarea>
+                                                <div id="err_topik" class="i text-danger text-center text-xs blink"></div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <a href="#" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Simpan</a>
+                                            <a href="#" class="btn btn-success btn-sm tambah"><i class="fa fa-save"></i> Simpan</a>
                                         </div>
                                     </div>
                                 </div>
@@ -79,14 +79,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="data">
                     <div id="loader" class="loader mb-5 mt-5 text-center"></div>
                     <div id="data_jkh"></div>
                 </div>
 
                 <script>
                     $(document).ready(function() {
-                        loading_sw2();
                         $('#data_jkh')
                             .load(
                                 "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['data'] ?>");
@@ -95,15 +94,23 @@
                     });
 
                     $(".tambah_init").click(function() {
+                        $('#tgl').attr('class', 'form-control');
                         $("#err_tgl").html("");
+                        $('#kegiatan').attr('class', 'form-control');
                         $("#err_kegiatan").html("");
+                        $('#topik').attr('class', 'form-control');
                         $("#err_topik").html("");
+                        $("#form_t").trigger("reset");
                     });
                     $(document).on('click', '.tambah', function() {
-                        var data_form = $('#form').serialize();
-                        var tgl = $("#tgl").value();
-                        var kegiatan = $("#kegiatan").value();
-                        var topik = $("#topik").value();
+                        var data_form = $('#form_t').serializeArray();
+                        data_form.push({
+                            name: "idpr",
+                            value: "<?= $_GET['data'] ?>"
+                        });
+                        var tgl = $("#tgl").val();
+                        var kegiatan = $("#kegiatan").val();
+                        var topik = $("#topik").val();
 
                         //cek data from ubah bila tidak diiisi
                         if (
@@ -111,46 +118,49 @@
                             kegiatan == "" ||
                             topik == ""
                         ) {
-                            loading();
-                            if (tgl == "") $("#err_tgl").html("Pilih Tanggal");
-                            else $("#err_tgl").html("");
-                            if (kegiatan == "") $("#err_kegiatan").html("Isikan Kegiatan");
-                            else $("#err_kegiatan").html("");
-                            if (topik == "") $("#topik").html("Isiskan Topik");
-                            else $("#topik").html("");
+                            simpan_tidaksesuai();
+                            if (tgl == "") {
+                                $('#tgl').attr('class', 'border-danger border-2  form-control');
+                                $("#err_tgl").html("Pilih Tanggal");
+                            } else {
+                                $('#tgl').attr('class', 'form-control');
+                                $("#err_tgl").html("");
+                            }
 
+                            if (kegiatan == "") {
+                                $('#kegiatan').attr('class', 'border-danger border-2 form-control');
+                                $("#err_kegiatan").html("Isikan Kegiatan");
+                            } else {
+                                $('#kegiatan').attr('class', 'form-control');
+                                $("#err_kegiatan").html("");
+                            }
+
+                            if (topik == "") {
+                                $('#topik').attr('class', 'border-danger border-2 form-control');
+                                $("#err_topik").html("Isikan Topik");
+                            } else {
+                                $('#topik').attr('class', 'form-control');
+                                $("#err_topik").html("");
+                            }
                         } else {
                             $.ajax({
                                 type: 'POST',
-                                url: "_admin/exc/x_v_kuota_s.php",
-                                data: data,
-                                success: function() {
-
-                                    $('#data_kuota').load('_admin/view/v_kuotaData.php?idu=<?= urlencode(base64_encode($_SESSION['id_user'])) ?>');
-                                    Swal.fire({
-                                        allowOutsideClick: false,
-                                        // isDismissed: false,
-                                        icon: 'error',
-                                        title: '<span class"text-xs">' +
-                                            '<b>DATA PRAKTIKAN</b> <br> ' +
-                                            'TIDAK SESUAI DENGAN<br>' +
-                                            '<b>JUMLAH PRAKTIK</b><br>' +
-                                            'Sesuaikan kembali di menu <b>DATA PRAKTIKAN praktikan</b><br>' +
-                                            '</span>',
-                                        showConfirmButton: false,
-                                        timer: 5000,
-                                        timerProgressBar: true,
-                                        didOpen: (toast) => {
-                                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                        }
-                                    });
-                                    document.getElementById("err_t_nama").innerHTML = "";
-                                    document.getElementById("err_t_jumlah").innerHTML = "";
-                                    document.getElementById("form_tambah_kuota").reset();
+                                url: "_pembimbing/exc/x_v_ked_coass_jkh_input_t.php",
+                                data: data_form,
+                                dataType: "JSON",
+                                success: function(response) {
+                                    if (response.ket == "SUCCESS") {
+                                        simpan_berhasil();
+                                        $('#modal_tambah').modal('hide')
+                                        loading_sw2();
+                                        $('#data_jkh')
+                                            .load(
+                                                "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['data'] ?>");
+                                        swal.close();
+                                    } else simpan_gagal_database();
                                 },
                                 error: function(response) {
-                                    console.log(response.responseText);
+                                    console.log(response.ket);
                                 }
                             });
                         }

@@ -8,6 +8,7 @@
     try {
         $sql_jkh = "SELECT * FROM tb_logbook_ked_coass_jkh ";
         $sql_jkh .= " WHERE id_praktikan = " . $idpr;
+        $sql_jkh .= " ORDER BY tgl_ubah DESC, tgl_tambah DESC";
         // echo "$sql_jkh<br>";
         $q_jkh = $conn->query($sql_jkh);
         $r_jkh = $q_jkh->rowCount();
