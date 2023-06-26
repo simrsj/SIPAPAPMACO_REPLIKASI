@@ -30,7 +30,7 @@ if (empty($_SESSION['username_user'])) {
 					<div class="fa fa-bars my-auto"></div>
 				</a>
 				<!-- Dropdown - User Information -->
-				<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right shadow p-2 rounded animated--grow-in" aria-labelledby="menu">
+				<div class="dropdown-menu dropdown-menu-right dropdown-menu-scroll dropdown-menu-lg-right shadow p-2 rounded animated--grow-in" aria-labelledby="menu">
 					<a class="btn btn-danger btn-sm col-md mb-2" href="?panduan">
 						<span class="b">PANDUAN</span>
 					</a>
