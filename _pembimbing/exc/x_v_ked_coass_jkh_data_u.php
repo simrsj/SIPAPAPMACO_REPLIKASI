@@ -14,12 +14,12 @@ try {
     $sql .= " WHERE id = " . decryptString($_POST['id'], $customkey);
     $conn->query($sql);
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'ket' => 'SUCCESS'
     ]);
 } catch (Exception $ex) {
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'ket' => 'ERROR'
     ]);
 }

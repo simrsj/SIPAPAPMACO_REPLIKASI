@@ -64,7 +64,7 @@
                                                     <i class="fas fa-eye"></i> Lihat
                                                 </a>
                                                 <!-- Logout Modal-->
-                                                <div class="modal  fade" id="modal_data_jkh<?= $no ?>" tabindex="-1" role="dialog" aria-labelledby="modal_data_jkh<?= $no ?>" aria-hidden="true">
+                                                <div class="modal" id="modal_data_jkh<?= $no ?>" tabindex="-1" role="dialog" aria-labelledby="modal_data_jkh<?= $no ?>" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-secondary text-light">

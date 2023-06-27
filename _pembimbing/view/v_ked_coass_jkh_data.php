@@ -19,7 +19,7 @@
     ?>
     <?php if ($r_jkh > 0) { ?>
         <div class="table-responsive">
-            <table class="table table-striped table-bordered " id="dataTables">
+            <table class="table table-striped table-bordered " id="dataTable">
                 <thead class="table-dark">
                     <tr class="text-center">
                         <th scope='col'>No</th>
@@ -44,7 +44,7 @@
                                     <i class=" fa fa-edit"></i> Ubah
                                 </a>
 
-                                <div class="modal  fade" id="modal_ubah<?= $no0; ?>" tabindex="-1" role="dialog" aria-labelledby="modal_ubah<?= $no0; ?>" aria-hidden="true">
+                                <div class="modal" id="modal_ubah<?= $no0; ?>" tabindex="-1" role="dialog" aria-labelledby="modal_ubah<?= $no0; ?>" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header bg-primary text-light">
@@ -118,15 +118,11 @@
                                                             dataType: "json",
                                                             success: function(response) {
                                                                 if (response.ket == "SUCCESS") {
-                                                                    $('#modal_ubah<?= $no0 ?>').hide().then(function() {
-                                                                        simpan_berhasil().then(function() {
-                                                                            loading_sw2()
-                                                                            $('#data_jkh')
-                                                                                .load(
-                                                                                    "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                                                            swal.close();
-                                                                        })
-                                                                    });
+                                                                    $('#modal_ubah<?= $no0 ?>').modal('hide');
+                                                                    simpan_berhasil();
+                                                                    $('#data_jkh')
+                                                                        .load(
+                                                                            "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
                                                                 } else simpan_gagal_database();
                                                             },
                                                             error: function(response) {

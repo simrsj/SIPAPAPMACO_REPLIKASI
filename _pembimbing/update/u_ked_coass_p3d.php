@@ -179,7 +179,7 @@
                                 SIMPAN
                             </a>
                             <!-- Logout Modal-->
-                            <div class="modal  fade" id="modal_simpan" tabindex="-1" role="dialog" aria-labelledby="modal_simpan" aria-hidden="true">
+                            <div class="modal" id="modal_simpan" tabindex="-1" role="dialog" aria-labelledby="modal_simpan" aria-hidden="true">
                                 <div class="modal-dialog modal-sm" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
