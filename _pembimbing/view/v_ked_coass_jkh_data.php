@@ -119,10 +119,13 @@
                                                             success: function(response) {
                                                                 if (response.ket == "SUCCESS") {
                                                                     $('#modal_ubah<?= $no0 ?>').modal('hide');
-                                                                    simpan_berhasil();
-                                                                    $('#data_jkh')
-                                                                        .load(
-                                                                            "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                                                    ubah_berhasil();
+                                                                    setTimeout(function() {
+                                                                        loading_sw2();
+                                                                        $('#data_jkh')
+                                                                            .load(
+                                                                                "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                                                    }, 5000);
                                                                 } else simpan_gagal_database();
                                                             },
                                                             error: function(response) {
@@ -135,7 +138,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
+
+                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_jkh['id'], $customkey) ?>">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </a>
                             </td>
                         </tr>
                     <?php
@@ -149,6 +155,43 @@
             $(document).ready(function() {
                 Swal.close();
                 $('#dataTable').DataTable();
+            });
+
+            $(document).on('click', '.hapus', function() {
+                Swal.fire({
+                    title: 'Anda Yakin?',
+                    text: "Data akan Permanen Terhapus!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e74a3b',
+                    cancelButtonColor: '#858796',
+                    confirmButtonText: 'Hapus',
+                    cancelButtonText: 'Kembali'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "_pembimbing/exc/x_v_ked_coass_jkh_data_h.php",
+                            data: {
+                                id: $(this).attr('id')
+                            },
+                            dataType: "json",
+                            success: function(response) {
+                                if (response.ket == "SUCCESS") {
+                                    hapus_berhasil();
+                                    setTimeout(function() {
+                                        $('#data_jkh')
+                                            .load(
+                                                "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                    }, 5000);
+                                } else simpan_gagal_database();
+                            },
+                            error: function(response) {
+                                error();
+                            }
+                        });
+                    }
+                })
             });
         </script>
     <?php } else { ?>

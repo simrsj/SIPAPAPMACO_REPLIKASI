@@ -48,7 +48,7 @@
                             <a class="btn btn-success btn-sm tambah_init" href="#" data-toggle="modal" data-target="#modal_tambah">
                                 <i class="fa-solid fa-plus"></i> Tambah
                             </a>
-                            <div class="modal" id="modal_tambah" tabindex="-1" role="dialog" aria-labelledby="modal_tambah" aria-hidden="true">
+                            <div class="modal  fade" id="modal_tambah" tabindex="-1" role="dialog" aria-labelledby="modal_tambah" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header bg-secondary text-light">
@@ -92,7 +92,6 @@
                         $('#loader').remove();
 
                     });
-
                     $(".tambah_init").click(function() {
                         $('#tgl').attr('class', 'form-control');
                         $("#err_tgl").html("");
@@ -111,8 +110,6 @@
                         var tgl = $("#tgl").val();
                         var kegiatan = $("#kegiatan").val();
                         var topik = $("#topik").val();
-
-                        //cek data from ubah bila tidak diiisi
                         if (
                             tgl == "" ||
                             kegiatan == "" ||
@@ -150,13 +147,14 @@
                                 dataType: "JSON",
                                 success: function(response) {
                                     if (response.ket == "SUCCESS") {
-                                        simpan_berhasil();
                                         $('#modal_tambah').modal('hide')
-                                        loading_sw2();
-                                        $('#data_jkh')
-                                            .load(
-                                                "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['data'] ?>");
-                                        swal.close();
+                                        simpan_berhasil();
+                                        setTimeout(function() {
+                                            loading_sw2();
+                                            $('#data_jkh')
+                                                .load(
+                                                    "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['data'] ?>");
+                                        }, 5000);
                                     } else simpan_gagal_database();
                                 },
                                 error: function(response) {

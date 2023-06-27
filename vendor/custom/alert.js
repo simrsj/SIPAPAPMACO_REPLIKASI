@@ -56,6 +56,53 @@ function simpan_gagal_database() {
   });
 }
 
+function ubah_berhasil() {
+  Swal.fire({
+    allowOutsideClick: true,
+    backdrop: true,
+    icon: "success",
+    title: "DATA BERHASIL DIUBAH",
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+}
+
+function ubah_gagal_database() {
+  Swal.fire({
+    allowOutsideClick: true,
+    backdrop: true,
+    icon: "error",
+    title: "DATA GAGAL DISIMPAN KE DATABASE",
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+}
+
+function hapus_berhasil() {
+  Swal.fire({
+    allowOutsideClick: true,
+    backdrop: true,
+    icon: "success",
+    title: "DATA BERHASIL DIHAPUS!",
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+}
 function error() {
   Swal.fire({
     allowOutsideClick: true,
