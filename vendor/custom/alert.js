@@ -11,6 +11,7 @@ function loading_sw2() {
 function simpan_tidaksesuai() {
   Swal.fire({
     allowOutsideClick: true,
+    backdrop: true,
     icon: "warning",
     title: "DATA ADA YANG TIDAK SESUAI",
     showConfirmButton: false,
@@ -26,6 +27,7 @@ function simpan_tidaksesuai() {
 function simpan_berhasil() {
   Swal.fire({
     allowOutsideClick: true,
+    backdrop: true,
     icon: "success",
     title: "DATA BERHASIL DISIMPAN",
     showConfirmButton: false,
@@ -41,8 +43,25 @@ function simpan_berhasil() {
 function simpan_gagal_database() {
   Swal.fire({
     allowOutsideClick: true,
+    backdrop: true,
     icon: "error",
     title: "DATA GAGAL DISIMPAN KE DATABASE",
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+}
+
+function error() {
+  Swal.fire({
+    allowOutsideClick: true,
+    backdrop: true,
+    icon: "error",
+    html: "<div class='b'>Data Error!</div>",
     showConfirmButton: false,
     timer: 5000,
     timerProgressBar: true,

@@ -40,7 +40,105 @@
                             <td><?= $d_jkh['kegiatan']; ?></td>
                             <td><?= $d_jkh['topik']; ?></td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
+                                <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
+                                    <i class=" fa fa-edit"></i> Ubah
+                                </a>
+
+                                <div class="modal  fade" id="modal_ubah<?= $no0; ?>" tabindex="-1" role="dialog" aria-labelledby="modal_ubah<?= $no0; ?>" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary text-light">
+                                                Ubah Jadwal Kegiatan Harian
+                                                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                    X
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-left">
+                                                <form id="form_u<?= $no0 ?>" method="post">
+                                                    <label for="tgl<?= $no0 ?>">Tanggal</label>
+                                                    <input type="date" class="form-control" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_jkh['tgl'] ?>">
+                                                    <div id="err_tgl<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                    <label for="kegiatan<?= $no0 ?>">Kegiatan</label>
+                                                    <textarea id="kegiatan<?= $no0 ?>" name="kegiatan" class="form-control " rows="3"><?= $d_jkh['kegiatan'] ?></textarea>
+                                                    <div id="err_kegiatan<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                    <label for="topik<?= $no0 ?>">Topik</label>
+                                                    <textarea id="topik<?= $no0 ?>" name="topik" class="form-control" rows="3"><?= $d_jkh['kegiatan'] ?></textarea>
+                                                    <div id="err_topik<?= $no0 ?>" class="i text-danger text-center text-xs blink"></div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="#" class="btn btn-primary btn-sm ubah<?= $no0; ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                            </div>
+                                            <script>
+                                                $(document).on('click', '.ubah<?= $no0; ?>', function() {
+                                                    var data_form = $('#form_u<?= $no0; ?>').serializeArray();
+
+                                                    data_form.push({
+                                                        name: "id",
+                                                        value: '<?= encryptString($d_jkh['id'], $customkey) ?>'
+                                                    });
+                                                    var tgl = $("#tgl<?= $no0; ?>").val();
+                                                    var kegiatan = $("#kegiatan<?= $no0; ?>").val();
+                                                    var topik = $("#topik<?= $no0; ?>").val();
+
+                                                    if (
+                                                        tgl == "" ||
+                                                        kegiatan == "" ||
+                                                        topik == ""
+                                                    ) {
+                                                        simpan_tidaksesuai();
+                                                        if (tgl == "") {
+                                                            $('#tgl<?= $no0; ?>').attr('class', 'border-danger border-2  form-control');
+                                                            $("#err_tgl<?= $no0; ?>").html("Pilih Tanggal");
+                                                        } else {
+                                                            $('#tgl<?= $no0; ?>').attr('class', 'form-control');
+                                                            $("#err_tgl<?= $no0; ?>").html("");
+                                                        }
+
+                                                        if (kegiatan == "") {
+                                                            $('#kegiatan<?= $no0; ?>').attr('class', 'border-danger border-2 form-control');
+                                                            $("#err_kegiatan<?= $no0; ?>").html("Isikan Kegiatan");
+                                                        } else {
+                                                            $('#kegiatan<?= $no0; ?>').attr('class', 'form-control');
+                                                            $("#err_kegiatan<?= $no0; ?>").html("");
+                                                        }
+
+                                                        if (topik == "") {
+                                                            $('#topik<?= $no0; ?>').attr('class', 'border-danger border-2 form-control');
+                                                            $("#err_topik<?= $no0; ?>").html("Isikan Topik");
+                                                        } else {
+                                                            $('#topik<?= $no0; ?>').attr('class', 'form-control');
+                                                            $("#err_topik<?= $no0; ?>").html("");
+                                                        }
+                                                    } else {
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            url: "_pembimbing/exc/x_v_ked_coass_jkh_data_u.php",
+                                                            data: data_form,
+                                                            dataType: "json",
+                                                            success: function(response) {
+                                                                if (response.ket == "SUCCESS") {
+                                                                    $('#modal_ubah<?= $no0 ?>').hide().then(function() {
+                                                                        simpan_berhasil().then(function() {
+                                                                            loading_sw2()
+                                                                            $('#data_jkh')
+                                                                                .load(
+                                                                                    "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                                                            swal.close();
+                                                                        })
+                                                                    });
+                                                                } else simpan_gagal_database();
+                                                            },
+                                                            error: function(response) {
+                                                                error();
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
                                 <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
                             </td>
                         </tr>
@@ -51,6 +149,12 @@
                 </tbody>
             </table>
         </div>
+        <script>
+            $(document).ready(function() {
+                Swal.close();
+                $('#dataTable').DataTable();
+            });
+        </script>
     <?php } else { ?>
         <div class="jumbotron border-2 m-2 shadow">
             <div class="jumbotron-fluid">
@@ -60,7 +164,3 @@
             </div>
         </div>
     <?php } ?>
-    <script>
-        Swal.close();
-        $("#dataTables").DataTable();
-    </script>
