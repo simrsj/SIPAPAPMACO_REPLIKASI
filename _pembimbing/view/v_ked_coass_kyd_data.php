@@ -1,0 +1,256 @@
+    <?php
+
+    include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
+    error_reporting(0);
+    $idpr = decryptString($_GET['idpr'], $customkey);
+    try {
+        $sql_kyd = "SELECT * FROM tb_logbook_ked_coass_kyd ";
+        $sql_kyd .= " WHERE id_praktikan = " . $idpr;
+        $sql_kyd .= " ORDER BY tgl_ubah DESC, tgl_tambah DESC";
+        // echo "$sql_kyd<br>";
+        $q_kyd = $conn->query($sql_kyd);
+        $r_kyd = $q_kyd->rowCount();
+    } catch (PDOException $ex) {
+        echo "<script>alert('ERROR DATA JADWAL KEGIATAN HARIAN INPUT');</script>";
+        echo "<script>document.location.href='?error404';</script>";
+    }
+    ?>
+    <?php if ($r_kyd > 0) { ?>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered " id="dataTable">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th scope='col'>No</th>
+                        <th>Raung</th>
+                        <th>Tanggal</th>
+                        <th>Nama Pasien</th>
+                        <th>Usia</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Medrec</th>
+                        <th>Diagnosis</th>
+                        <th>Terapi</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $no0 = 1;
+                    while ($d_kyd = $q_kyd->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                        <tr>
+                            <td class="text-center"><?= $no0; ?></td>
+                            <td><?= $d_kyd['ruang']; ?></td>
+                            <td><?= tanggal($d_kyd['tgl']); ?></td>
+                            <td><?= $d_kyd['Nama Pasien']; ?></td>
+                            <td><?= $d_kyd['Usia']; ?></td>
+                            <td>
+                                <?= $d_kyd['jenis_kelamin'] == "L" ? "Laki-Laki" : "Perempuan"; ?>
+                            </td>
+                            <td><?= $d_kyd['medrec']; ?></td>
+                            <td><?= $d_kyd['diagnosis']; ?></td>
+                            <td><?= $d_kyd['terapi']; ?></td>
+                            <td class="text-center">
+                                <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
+                                    <i class=" fa fa-edit"></i> Ubah
+                                </a>
+
+                                <div class="modal" id="modal_ubah<?= $no0; ?>" tabindex="-1" role="dialog" aria-labelledby="modal_ubah<?= $no0; ?>" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary text-light">
+                                                Ubah Kegiatan yang Ditemukan
+                                                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                    X
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-left">
+                                                <form id="form_u<?= $no0 ?>" method="post">
+                                                    <label for="ruang<?= $no0 ?>">Ruang</label>
+                                                    <select id="ruang<?= $no0 ?>" name="ruang">
+                                                        <option value="" class="text-center">-- Pilih --</option>
+                                                        <option value="Poliklinik/Rawat Jalan">Poliklinik/Rawat Jalan</option>
+                                                        <option value="Intensif/Rawat Inap">Intensif/Rawat Inap</option>
+                                                        <option value="IGD">IGD</option>
+                                                        <option value="Rehabilitasi Napza">Rehabilitasi Napza</option>
+                                                        <option value="ECT">ECT</option>
+                                                    </select>
+                                                    <div id="err_ruang<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+
+                                                    <label for="tgl<?= $no0 ?>">Tanggal</label>
+                                                    <input type="date" id="tgl<?= $no0 ?>" name="tgl">
+                                                    <div id="err_tgl<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+
+                                                    <label for="nama_pasien<?= $no0 ?>">Nama Pasien</label>
+                                                    <input id="nama_pasien<?= $no0 ?>" name="nama_pasien">
+                                                    <div id="err_nama_pasien<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+
+                                                    <div class="row">
+                                                        <div class="col-md">
+                                                            <label for="usia<?= $no0 ?>">Usia</label>
+                                                            <input type="number" min="0" id="usia<?= $no0 ?>" name="usia">
+                                                            <div class="i text-center text-xs"><label for="usia">Isian Hanya Angka</label></div>
+                                                            <div id="err_usia<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <label for="jenis_kelamin<?= $no0 ?>">Jenis Kelamin</label>
+                                                            <select id="jenis_kelamin<?= $no0 ?>" name="jenis_kelamin">
+                                                                <option value="" class="text-center">-- Pilih --</option>
+                                                                <option value="L">Laki-laki</option>
+                                                                <option value="P">Perempuan</option>
+                                                            </select>
+                                                            <div id="err_jenis_kelamin<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <label for="medrec<?= $no0 ?>">Medrec</label>
+                                                    <input id="medrec<?= $no0 ?>" name="medrec">
+                                                    <div id="err_medrec<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+
+                                                    <label for="diagnosis<?= $no0 ?>">Diagnosis</label>
+                                                    <textarea id="diagnosis<?= $no0 ?>" name="diagnosis" rows="3"></textarea>
+                                                    <div id="err_diagnosis<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+
+                                                    <label for="terapi<?= $no0 ?>">Terapi</label>
+                                                    <textarea id="terapi<?= $no0 ?>" name="terapi" rows="3"></textarea>
+                                                    <div id="err_terapi<?= $no0 ?>" class="i text-danger text-center text-xs blink"></div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="#" class="btn btn-primary btn-sm ubah<?= $no0; ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                            </div>
+                                            <script>
+                                                $(document).on('click', '.ubah<?= $no0; ?>', function() {
+                                                    var data_form = $('#form_u<?= $no0; ?>').serializeArray();
+
+                                                    data_form.push({
+                                                        name: "id",
+                                                        value: '<?= encryptString($d_kyd['id'], $customkey) ?>'
+                                                    });
+                                                    var tgl = $("#tgl<?= $no0; ?>").val();
+                                                    var kegiatan = $("#kegiatan<?= $no0; ?>").val();
+                                                    var topik = $("#topik<?= $no0; ?>").val();
+
+                                                    if (
+                                                        tgl == "" ||
+                                                        kegiatan == "" ||
+                                                        topik == ""
+                                                    ) {
+                                                        simpan_tidaksesuai();
+                                                        if (tgl == "") {
+                                                            $('#tgl<?= $no0; ?>').attr('class', 'border-danger border-2  form-control');
+                                                            $("#err_tgl<?= $no0; ?>").html("Pilih Tanggal");
+                                                        } else {
+                                                            $('#tgl<?= $no0; ?>').attr('class', 'form-control');
+                                                            $("#err_tgl<?= $no0; ?>").html("");
+                                                        }
+
+                                                        if (kegiatan == "") {
+                                                            $('#kegiatan<?= $no0; ?>').attr('class', 'border-danger border-2 form-control');
+                                                            $("#err_kegiatan<?= $no0; ?>").html("Isikan Kegiatan");
+                                                        } else {
+                                                            $('#kegiatan<?= $no0; ?>').attr('class', 'form-control');
+                                                            $("#err_kegiatan<?= $no0; ?>").html("");
+                                                        }
+
+                                                        if (topik == "") {
+                                                            $('#topik<?= $no0; ?>').attr('class', 'border-danger border-2 form-control');
+                                                            $("#err_topik<?= $no0; ?>").html("Isikan Topik");
+                                                        } else {
+                                                            $('#topik<?= $no0; ?>').attr('class', 'form-control');
+                                                            $("#err_topik<?= $no0; ?>").html("");
+                                                        }
+                                                    } else {
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            url: "_pembimbing/exc/x_v_ked_coass_kyd_data_u.php",
+                                                            data: data_form,
+                                                            dataType: "json",
+                                                            success: function(response) {
+                                                                if (response.ket == "SUCCESS") {
+                                                                    $('#modal_ubah<?= $no0 ?>').modal('hide');
+                                                                    ubah_berhasil();
+                                                                    loading_sw2();
+                                                                    $('#data_kyd')
+                                                                        .load(
+                                                                            "_pembimbing/view/v_ked_coass_kyd_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                                                } else simpan_gagal_database();
+                                                            },
+                                                            error: function(response) {
+                                                                error();
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_kyd['id'], $customkey) ?>">
+                                    <i class="fa fa-trash"></i> Hapus
+                                </a>
+                            </td>
+                        </tr>
+                    <?php
+                        $no0++;
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            $(document).on('click', '.hapus', function() {
+                Swal.fire({
+                    title: 'Anda Yakin?',
+                    text: "Data akan Permanen Terhapus!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e74a3b',
+                    cancelButtonColor: '#858796',
+                    confirmButtonText: 'Hapus',
+                    cancelButtonText: 'Kembali'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "_pembimbing/exc/x_v_ked_coass_kyd_data_h.php",
+                            data: {
+                                id: $(this).attr('id')
+                            },
+                            dataType: "json",
+                            success: function(response) {
+                                if (response.ket == "SUCCESS") {
+                                    hapus_berhasil();
+                                    loading_sw2();
+                                    $('#data_kyd')
+                                        .load(
+                                            "_pembimbing/view/v_ked_coass_kyd_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                } else simpan_gagal_database();
+                            },
+                            error: function(response) {
+                                error();
+                            }
+                        });
+                    }
+                })
+            });
+        </script>
+    <?php } else { ?>
+        <div class="jumbotron border-2 m-2 shadow">
+            <div class="jumbotron-fluid">
+                <div class="text-gray-700">
+                    <h5 class="text-center">Data Tidak Ada</h5>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+
+    <script>
+        $(document).ready(function() {
+            Swal.close();
+            $('#dataTable').DataTable();
+        });
+    </script>

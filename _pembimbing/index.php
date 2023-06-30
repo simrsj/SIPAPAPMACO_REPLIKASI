@@ -69,6 +69,9 @@ if ($_SESSION['status_user'] == "Y") {
 										<a class="dropdown-item " href="?elogbook=jkh">
 											Jadwal Kegiatan Harian
 										</a>
+										<a class="dropdown-item " href="?elogbook=kyd">
+											Kasus Yang Ditemukan
+										</a>
 									<?php } ?>
 								<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
 									<a class="dropdown-item" href="?kep_nilai">
