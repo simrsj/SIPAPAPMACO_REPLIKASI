@@ -28,8 +28,8 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Nama Institusi</th>
+                                    <th scope="col">Kelompok/Gelombang</th>
                                     <th scope="col">Nama Praktikan</th>
-                                    <th scope="col">Status</th>
                                     <th scope="col">Kegiatan</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -42,8 +42,9 @@
                                     <tr class="text-center">
                                         <th scope="row"><?= $no; ?></th>
                                         <td><?= $d_bimbingan['nama_institusi']; ?></td>
+                                        <td><?= $d_bimbingan['nama_praktik']; ?></td>
                                         <td><?= $d_bimbingan['nama_praktikan']; ?></td>
-                                        <td>
+                                        <td class=" text-center">
                                             <?php
                                             try {
                                                 $sql_jkh = "SELECT * FROM tb_logbook_ked_coass_jkh ";
@@ -51,14 +52,11 @@
                                                 // echo "$sql_jkh<br>";
                                                 $q_jkh = $conn->query($sql_jkh);
                                                 $r_jkh = $q_jkh->rowCount();
-                                                echo $r_jkh != NULL ? "<span class='badge badge-success'>Data Sudah Ada</span>" : "<span class='badge badge-secondary'>Data Belum Ada</span>";
                                             } catch (Exception $ex) {
                                                 echo "<script>alert('DATA JADWAL KEGIATAN HARIAN');</script>";
                                                 echo "<script>document.location.href='?error404';</script>";
                                             }
                                             ?>
-                                        </td>
-                                        <td class=" text-center">
                                             <?php if ($r_jkh > 0) { ?>
                                                 <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_jkh<?= $no ?>">
                                                     <i class="fas fa-eye"></i> Lihat
