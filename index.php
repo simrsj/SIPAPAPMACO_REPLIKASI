@@ -113,7 +113,7 @@ include "_add-ons/crypt.php";
         // include "./vendor/custom/disable_keyboard.js";
         include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/custom/cs_datatable.js";
         ?>
-        alert = function() {};
+        // alert = function() {};
         $('img').mousedown(function(e) {
             if (e.button == 2) { // right click
                 return false; // do nothing!

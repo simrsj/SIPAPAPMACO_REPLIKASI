@@ -3,8 +3,8 @@
     include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
-
-    $idpr = urldecode(decryptString($_GET['idpr'], $customkey));
+    error_reporting(0);
+    $idpr = decryptString($_GET['idpr'], $customkey);
     try {
         $sql_jkh = "SELECT * FROM tb_logbook_ked_coass_jkh ";
         $sql_jkh .= " WHERE id_praktikan = " . $idpr;
@@ -12,8 +12,8 @@
         // echo "$sql_jkh<br>";
         $q_jkh = $conn->query($sql_jkh);
         $r_jkh = $q_jkh->rowCount();
-    } catch (Exception $ex) {
-        echo "<script>alert('DATA JADWAL KEGIATAN HARIAN');</script>";
+    } catch (PDOException $ex) {
+        echo "<script>alert('ERROR DATA JADWAL KEGIATAN HARIAN INPUT');</script>";
         echo "<script>document.location.href='?error404';</script>";
     }
     ?>
@@ -120,12 +120,10 @@
                                                                 if (response.ket == "SUCCESS") {
                                                                     $('#modal_ubah<?= $no0 ?>').modal('hide');
                                                                     ubah_berhasil();
-                                                                    setTimeout(function() {
-                                                                        loading_sw2();
-                                                                        $('#data_jkh')
-                                                                            .load(
-                                                                                "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                                                    }, 5000);
+                                                                    loading_sw2();
+                                                                    $('#data_jkh')
+                                                                        .load(
+                                                                            "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
                                                                 } else simpan_gagal_database();
                                                             },
                                                             error: function(response) {
@@ -152,11 +150,6 @@
             </table>
         </div>
         <script>
-            $(document).ready(function() {
-                Swal.close();
-                $('#dataTable').DataTable();
-            });
-
             $(document).on('click', '.hapus', function() {
                 Swal.fire({
                     title: 'Anda Yakin?',
@@ -179,11 +172,10 @@
                             success: function(response) {
                                 if (response.ket == "SUCCESS") {
                                     hapus_berhasil();
-                                    setTimeout(function() {
-                                        $('#data_jkh')
-                                            .load(
-                                                "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                    }, 5000);
+                                    loading_sw2();
+                                    $('#data_jkh')
+                                        .load(
+                                            "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
                                 } else simpan_gagal_database();
                             },
                             error: function(response) {
@@ -203,3 +195,10 @@
             </div>
         </div>
     <?php } ?>
+
+    <script>
+        $(document).ready(function() {
+            Swal.close();
+            $('#dataTable').DataTable();
+        });
+    </script>

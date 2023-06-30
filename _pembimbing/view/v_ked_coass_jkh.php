@@ -11,15 +11,15 @@
             // echo "$sql_bimbingan<br>";
             $q_bimbingan = $conn->query($sql_bimbingan);
             $r_bimbingan = $q_bimbingan->rowCount();
-        } catch (Exception $ex) {
+        } catch (PDOException $ex) {
             echo "<script>alert('DATA BIMBINGAN PRAKTIKAN');";
             echo "document.location.href='?error404';</script>";
         }
         ?>
         <?php if ($r_bimbingan > 0) { ?>
             <div class="card shadow mb-4">
-                <div class="card-header bg-primary text-light b">
-                    Pencapaian Komptensi Keterampilan P3D
+                <div class="card-header bg-primary text-light b text-uppercase">
+                    Jadwal Kegiatan Harian
                 </div>
                 <div class="card-body p-2">
                     <div class="table-responsive">
@@ -74,7 +74,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <table class="table table-striped table-bordered " id="dataTable_2">
+                                                                <table class="table table-striped table-bordered " id="dataTable<?= $no; ?>">
                                                                     <thead class="table-dark">
                                                                         <tr class="text-center">
                                                                             <th scope='col'>No</th>
@@ -101,6 +101,11 @@
                                                                     </tbody>
                                                                 </table>
                                                             </div>
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    $("#dataTable<?= $no ?>").DataTable();
+                                                                });
+                                                            </script>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -109,7 +114,7 @@
                                             <?php } ?>
                                         </td>
                                         <td class="text-center">
-                                            <a class="btn btn-outline-info btn-sm" href="?elogbook=jkh&data=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
+                                            <a class="btn btn-outline-info btn-sm" href="?elogbook=jkh&data=<?= encryptString($d_bimbingan['id_praktikan'], $customkey) ?>">
                                                 Tamba/Ubah
                                             </a>
                                         </td>

@@ -4,17 +4,17 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 // echo "<pre>";
 // print_r($_POST);
 // echo "</pre>";
-// error_reporting(0);
+error_reporting(0);
 try {
     $sql = "DELETE FROM tb_logbook_ked_coass_jkh WHERE id = " . decryptString($_POST['id'], $customkey);
     $conn->query($sql);
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'ket' => 'SUCCESS'
     ]);
 } catch (Exception $ex) {
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'ket' => 'ERROR'
     ]);
 }

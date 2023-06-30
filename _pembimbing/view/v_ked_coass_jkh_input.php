@@ -9,8 +9,8 @@
         // echo "$sql_praktikan<br>";
         $q_praktikan = $conn->query($sql_praktikan);
         $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
-    } catch (Exception $ex) {
-        echo "<script>alert('DATA BIMBINGAN PRAKTIKAN')</script>;";
+    } catch (PDOException $ex) {
+        echo "<script>alert('ERROR DATA BIMBINGAN PRAKTIKAN')</script>;";
         echo "<script>document.location.href='?error404';</script>";
     }
     ?>
@@ -149,12 +149,10 @@
                                     if (response.ket == "SUCCESS") {
                                         $('#modal_tambah').modal('hide')
                                         simpan_berhasil();
-                                        setTimeout(function() {
-                                            loading_sw2();
-                                            $('#data_jkh')
-                                                .load(
-                                                    "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['data'] ?>");
-                                        }, 5000);
+                                        loading_sw2();
+                                        $('#data_jkh')
+                                            .load(
+                                                "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['data'] ?>");
                                     } else simpan_gagal_database();
                                 },
                                 error: function(response) {
