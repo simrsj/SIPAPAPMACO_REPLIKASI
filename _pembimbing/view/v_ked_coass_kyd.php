@@ -62,8 +62,8 @@
                                                     <i class="fas fa-eye"></i> Lihat
                                                 </a>
                                                 <!-- Logout Modal-->
-                                                <div class="modal" id="modal_data_kyd<?= $no ?>" tabindex="-1" role="dialog" aria-labelledby="modal_data_kyd<?= $no ?>" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                                <div class="modal" id="modal_data_kyd<?= $no ?>" role="dialog" aria-labelledby="modal_data_kyd<?= $no ?>" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-secondary text-light">
                                                                 Kegiatan Yang Ditemukan
@@ -72,30 +72,30 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="row rounded-1 border-1">
+                                                                <div class="row">
                                                                     <?php
                                                                     try {
-                                                                        $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . "AND ruang = 'Poliklinik/Rawat Jalan'")->rowCount();
-                                                                        $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . "AND ruang = 'Intensif/Rawat Inap'")->rowCount();
-                                                                        $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . "AND ruang = 'IGD'")->rowCount();
-                                                                        $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . "AND ruang = 'Rehabilitasi Napza'")->rowCount();
-                                                                        $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . "AND ruang = 'ECT'")->rowCount();
+                                                                        $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Poliklinik/Rawat Jalan'")->rowCount();
+                                                                        $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Intensif/Rawat Inap'")->rowCount();
+                                                                        $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'IGD'")->rowCount();
+                                                                        $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Rehabilitasi Napza'")->rowCount();
+                                                                        $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'ECT'")->rowCount();
                                                                     } catch (PDOException $ex) {
                                                                         echo "<script>alert('$ex');</script>";
                                                                         echo "<script>document.location.href='?error404';</script>";
                                                                     }
                                                                     ?>
                                                                     <div class="col-md">
-                                                                        Poliklinik/Rawat Jalan : <span class="badge badge-danger"><?= $r_1 ?><br>
-                                                                            Intensif/Rawat Inap : <span class="badge badge-danger"><?= $r_2 ?><br>
-                                                                                IGD : <span class="badge badge-danger"><?= $r_3 ?><br>
+                                                                        Poliklinik/Rawat Jalan : <div class="badge badge-danger"><?= $r_1 ?></div><br>
+                                                                        Intensif/Rawat Inap : <div class="badge badge-danger"><?= $r_2 ?></div><br>
+                                                                        IGD : <div class="badge badge-danger"><?= $r_3 ?></div>
                                                                     </div>
-                                                                    <div class="col-md">
-                                                                        Rehabilitasi Napza : <span class="badge badge-danger"><?= $r_4 ?><br>
-                                                                            ECT : <span class="badge badge-danger"><?= $r_5 ?><br>
+                                                                    <div class="col-md my-auto">
+                                                                        Rehabilitasi Napza : <div class="badge badge-danger"><?= $r_4 ?></div><br>
+                                                                        ECT : <div class="badge badge-danger"><?= $r_5 ?></div>
                                                                     </div>
                                                                 </div>
-                                                                <hr class="m-0 p-0">
+                                                                <hr class="border-1">
                                                                 <table class="table table-striped table-bordered " id="dataTable<?= $no; ?>">
                                                                     <thead class="table-dark">
                                                                         <tr class="text-center">
@@ -121,7 +121,13 @@
                                                                                 <td><?= tanggal($d_kyd['tgl']); ?></td>
                                                                                 <td><?= $d_kyd['nama_pasien']; ?></td>
                                                                                 <td><?= $d_kyd['usia']; ?></td>
-                                                                                <td><?= $d_kyd['jenis_kelamin']; ?></td>
+                                                                                <td>
+                                                                                    <?php
+                                                                                    if ($d_kyd['jenis_kelamin'] == "L") echo "Laki-laki";
+                                                                                    elseif ($d_kyd['jenis_kelamin'] == "P") echo "Perempuan";
+                                                                                    else echo "<span class='badge badge-danger'>ERROR</span>";
+                                                                                    ?>
+                                                                                </td>
                                                                                 <td><?= $d_kyd['medrec']; ?></td>
                                                                                 <td><?= $d_kyd['diagnosis']; ?></td>
                                                                                 <td><?= $d_kyd['terapi']; ?></td>

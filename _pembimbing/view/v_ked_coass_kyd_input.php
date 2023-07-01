@@ -60,7 +60,7 @@
                                         <div class="modal-body text-left">
                                             <form id="form_t" method="post">
                                                 <label for="ruang">Ruang</label>
-                                                <select id="ruang" name="ruang">
+                                                <select class="form-control" id="ruang" name="ruang">
                                                     <option value="" class="text-center">-- Pilih --</option>
                                                     <option value="Poliklinik/Rawat Jalan">Poliklinik/Rawat Jalan</option>
                                                     <option value="Intensif/Rawat Inap">Intensif/Rawat Inap</option>
@@ -68,46 +68,46 @@
                                                     <option value="Rehabilitasi Napza">Rehabilitasi Napza</option>
                                                     <option value="ECT">ECT</option>
                                                 </select>
-                                                <div id="err_ruang" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                <div id="err_ruang" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                 <label for="tgl">Tanggal</label>
-                                                <input type="date" id="tgl" name="tgl">
-                                                <div id="err_tgl" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                <input class="form-control" type="date" id="tgl" name="tgl">
+                                                <div id="err_tgl" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                 <label for="nama_pasien">Nama Pasien</label>
-                                                <input id="nama_pasien" name="nama_pasien">
-                                                <div id="err_nama_pasien" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                <input class="form-control" id="nama_pasien" name="nama_pasien">
+                                                <div id="err_nama_pasien" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                 <div class="row">
                                                     <div class="col-md">
                                                         <label for="usia">Usia</label>
-                                                        <input type="number" min="0" id="usia" name="usia">
-                                                        <div class="i text-center text-xs"><label for="usia">Isian Hanya Angka</label></div>
-                                                        <div id="err_usia" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                        <input class="form-control" type="number" min="0" id="usia" name="usia">
+                                                        <div class="i text-center text-xs "><label for="usia" class="m-0">Isian Hanya Angka</label></div>
+                                                        <div id="err_usia" class="err i text-danger text-center text-xs blink mb-2"></div>
                                                     </div>
                                                     <div class="col-md">
                                                         <label for="jenis_kelamin">Jenis Kelamin</label>
-                                                        <select id="jenis_kelamin" name="jenis_kelamin">
+                                                        <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
                                                             <option value="" class="text-center">-- Pilih --</option>
                                                             <option value="L">Laki-laki</option>
                                                             <option value="P">Perempuan</option>
                                                         </select>
-                                                        <div id="err_jenis_kelamin" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                        <div id="err_jenis_kelamin" class="err i text-danger text-center text-xs blink mb-2"></div>
                                                     </div>
                                                 </div>
 
 
                                                 <label for="medrec">Medrec</label>
-                                                <input id="medrec" name="medrec">
-                                                <div id="err_medrec" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                <input class="form-control " id="medrec" name="medrec">
+                                                <div id="err_medrec" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                 <label for="diagnosis">Diagnosis</label>
-                                                <textarea id="diagnosis" name="diagnosis" rows="3"></textarea>
-                                                <div id="err_diagnosis" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3"></textarea>
+                                                <div id="err_diagnosis" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                 <label for="terapi">Terapi</label>
-                                                <textarea id="terapi" name="terapi" rows="3"></textarea>
-                                                <div id="err_terapi" class="i text-danger text-center text-xs blink"></div>
+                                                <textarea class="form-control" id="terapi" name="terapi" rows="3"></textarea>
+                                                <div id="err_terapi" class="err i text-danger text-center text-xs blink"></div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -133,22 +133,7 @@
 
                     });
                     $(".tambah_init").click(function() {
-                        $('#ruang').attr('class', 'form-control');
-                        $("#err_ruang").html("");
-                        $('#tgl').attr('class', 'form-control');
-                        $("#err_tgl").html("");
-                        $('#nama_pasien').attr('class', 'form-control');
-                        $("#err_nama_pasien").html("");
-                        $('#usia').attr('class', 'form-control');
-                        $("#err_usia").html("");
-                        $('#jenis_kelamin').attr('class', 'form-control');
-                        $("#err_jenis_kelamin").html("");
-                        $('#medrec').attr('class', 'form-control');
-                        $("#err_medrec").html("");
-                        $('#diagnosis').attr('class', 'form-control');
-                        $("#err_diagnosis").html("");
-                        $('#terapi').attr('class', 'form-control');
-                        $("#err_terapi").html("");
+                        $(".err").html("");
                         $("#form_t").trigger("reset");
                     });
                     $(document).on('click', '.tambah', function() {
@@ -162,7 +147,6 @@
                         var nama_pasien = $("#nama_pasien").val();
                         var usia = $("#usia").val();
                         var jenis_kelamin = $("#jenis_kelamin").val();
-                        console.log(jenis_kelamin);
                         var medrec = $("#medrec").val();
                         var diagnosis = $("#diagnosis").val();
                         var terapi = $("#terapi").val();
@@ -177,69 +161,14 @@
                             terapi == ""
                         ) {
                             simpan_tidaksesuai();
-                            if (ruang == "") {
-                                $('#ruang').attr('class', 'border-danger border-2  form-control');
-                                $("#err_ruang").html("Pilih Ruang");
-                            } else {
-                                $('#ruang').attr('class', 'form-control');
-                                $("#err_ruang").html("");
-                            }
-
-                            if (tgl == "") {
-                                $('#tgl').attr('class', 'border-danger border-2  form-control');
-                                $("#err_tgl").html("Pilih Tanggal");
-                            } else {
-                                $('#tgl').attr('class', 'form-control');
-                                $("#err_tgl").html("");
-                            }
-
-                            if (nama_pasien == "") {
-                                $('#nama_pasien').attr('class', 'border-danger border-2 form-control');
-                                $("#err_nama_pasien").html("Isikan Nama Pasien");
-                            } else {
-                                $('#nama_pasien').attr('class', 'form-control');
-                                $("#err_nama_pasien").html("");
-                            }
-
-                            if (usia == "") {
-                                $('#usia').attr('class', 'border-danger border-2 form-control');
-                                $("#err_usia").html("Isikan Usia");
-                            } else {
-                                $('#usia').attr('class', 'form-control');
-                                $("#err_usia").html("");
-                            }
-
-                            if (jenis_kelamin == "") {
-                                $('#jenis_kelamin').attr('class', 'border-danger border-2 form-control');
-                                $("#err_jenis_kelamin").html("Pilih Jenis Kelamin");
-                            } else {
-                                $('#jenis_kelamin').attr('class', 'form-control');
-                                $("#err_jenis_kelamin").html("");
-                            }
-
-                            if (medrec == "") {
-                                $('#medrec').attr('class', 'border-danger border-2 form-control');
-                                $("#err_medrec").html("Isikan Medrec");
-                            } else {
-                                $('#medrec').attr('class', 'form-control');
-                                $("#err_medrec").html("");
-                            }
-
-                            if (diagnosis == "") {
-                                $('#diagnosis').attr('class', 'border-danger border-2 form-control');
-                                $("#err_diagnosis").html("Isikan Diagnosis");
-                            } else {
-                                $('#diagnosis').attr('class', 'form-control');
-                                $("#err_diagnosis").html("");
-                            }
-
-                            if (terapi == "") {
-                                $('#terapi').attr('class', 'border-danger border-2 form-control');
-                                $("#err_terapi").html("Isikan Terapi");
-                            } else {
-                                $('#terapi').attr('class', 'form-control');
-                                $("#err_terapi").html("");
-                            }
+                            ruang == "" ? $("#err_ruang").html("Pilih Ruang") : $("#err_ruang").html("");
+                            tgl == "" ? $("#err_tgl").html("Pilih Tanggal") : $("#err_tgl").html("");
+                            nama_pasien == "" ? $("#err_nama_pasien").html("Isikan Nama Pasien") : $("#err_nama_pasien").html("")
+                            usia == "" ? $("#err_usia").html("Isikan Usia") : $("#err_usia").html("")
+                            jenis_kelamin == "" ? $("#err_jenis_kelamin").html("Pilih Jenis Kelamin") : $("#err_jenis_kelamin").html("")
+                            medrec == "" ? $("#err_medrec").html("Isikan Medrec") : $("#err_medrec").html("")
+                            diagnosis == "" ? $("#err_diagnosis").html("Isikan Diagnosis") : ("#err_diagnosis").html("")
+                            terapi == "" ? $("#err_terapi").html("Isikan Terapi") : $("#err_terapi").html("")
                         } else {
                             $.ajax({
                                 type: 'POST',

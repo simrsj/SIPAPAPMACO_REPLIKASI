@@ -14,7 +14,7 @@
         $r_kyd = $q_kyd->rowCount();
     } catch (PDOException $ex) {
         echo "<script>alert('ERROR DATA JADWAL KEGIATAN HARIAN INPUT');</script>";
-        echo "<script>document.location.href='?error404';</script>";
+        // echo "<script>document.location.href='?error404';</script>";
     }
     ?>
     <?php if ($r_kyd > 0) { ?>
@@ -43,8 +43,8 @@
                             <td class="text-center"><?= $no0; ?></td>
                             <td><?= $d_kyd['ruang']; ?></td>
                             <td><?= tanggal($d_kyd['tgl']); ?></td>
-                            <td><?= $d_kyd['Nama Pasien']; ?></td>
-                            <td><?= $d_kyd['Usia']; ?></td>
+                            <td><?= $d_kyd['nama_pasien']; ?></td>
+                            <td><?= $d_kyd['usia']; ?></td>
                             <td>
                                 <?= $d_kyd['jenis_kelamin'] == "L" ? "Laki-Laki" : "Perempuan"; ?>
                             </td>
@@ -52,7 +52,7 @@
                             <td><?= $d_kyd['diagnosis']; ?></td>
                             <td><?= $d_kyd['terapi']; ?></td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
+                                <a class="btn btn-primary btn-sm ubah_init<?= $no0 ?> " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
                                     <i class=" fa fa-edit"></i> Ubah
                                 </a>
 
@@ -68,7 +68,21 @@
                                             <div class="modal-body text-left">
                                                 <form id="form_u<?= $no0 ?>" method="post">
                                                     <label for="ruang<?= $no0 ?>">Ruang</label>
-                                                    <select id="ruang<?= $no0 ?>" name="ruang">
+                                                    <select class="form-control" id="ruang<?= $no0 ?>" name="ruang">
+                                                        <!-- <?php
+                                                                $d_kyd['ruang'] == "Poliklinik/Rawat Jalan" ? $s1_1 = "selected" : $s1_1 = "";
+                                                                $d_kyd['ruang'] == "Intensif/Rawat Inap" ? $s1_2 = "selected" : $s1_2 = "";
+                                                                $d_kyd['ruang'] == "IGD" ? $s1_3 = "selected" : $s1_3 = "";
+                                                                $d_kyd['ruang'] == "Rehabilitasi Napza" ? $s1_4 = "selected" : $s1_4 = "";
+                                                                $d_kyd['ruang'] == "ECT" ? $s1_5 = "selected" : $s1_5 = "";
+                                                                ?>
+                                                        <option value="" class="text-center">-- Pilih --</option>
+                                                        <option value="Poliklinik/Rawat Jalan" <?= $s1_1 ?>>Poliklinik/Rawat Jalan</option>
+                                                        <option value="Intensif/Rawat Inap" <?= $s1_2 ?>>Intensif/Rawat Inap</option>
+                                                        <option value="IGD" <?= $s1_3 ?>>IGD</option>
+                                                        <option value="Rehabilitasi Napza" <?= $s1_4 ?>>Rehabilitasi Napza</option>
+                                                        <option value="ECT" <?= $s1_5 ?>>ECT</option> -->
+
                                                         <option value="" class="text-center">-- Pilih --</option>
                                                         <option value="Poliklinik/Rawat Jalan">Poliklinik/Rawat Jalan</option>
                                                         <option value="Intensif/Rawat Inap">Intensif/Rawat Inap</option>
@@ -76,101 +90,120 @@
                                                         <option value="Rehabilitasi Napza">Rehabilitasi Napza</option>
                                                         <option value="ECT">ECT</option>
                                                     </select>
-                                                    <div id="err_ruang<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                    <div id="err_ruang<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="tgl<?= $no0 ?>">Tanggal</label>
-                                                    <input type="date" id="tgl<?= $no0 ?>" name="tgl">
-                                                    <div id="err_tgl<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                    <input class="form-control" type="date" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_kyd['tgl'] ?>">
+                                                    <div id="err_tgl<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="nama_pasien<?= $no0 ?>">Nama Pasien</label>
-                                                    <input id="nama_pasien<?= $no0 ?>" name="nama_pasien">
-                                                    <div id="err_nama_pasien<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                    <input class="form-control" id="nama_pasien<?= $no0 ?>" name="nama_pasien" value="<?= $d_kyd['nama_pasien'] ?>">
+                                                    <div id="err_nama_pasien<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <div class="row">
                                                         <div class="col-md">
                                                             <label for="usia<?= $no0 ?>">Usia</label>
-                                                            <input type="number" min="0" id="usia<?= $no0 ?>" name="usia">
-                                                            <div class="i text-center text-xs"><label for="usia">Isian Hanya Angka</label></div>
-                                                            <div id="err_usia<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                            <input class="form-control" type="number" min="0" id="usia<?= $no0 ?>" name="usia" value="<?= $d_kyd['usia'] ?>">
+                                                            <div class="i text-center text-xs"><label for="usia" class="m-0">Isian Hanya Angka</label></div>
+                                                            <div id="err_usia<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                         <div class="col-md">
                                                             <label for="jenis_kelamin<?= $no0 ?>">Jenis Kelamin</label>
-                                                            <select id="jenis_kelamin<?= $no0 ?>" name="jenis_kelamin">
+                                                            <select class="form-control" id="jenis_kelamin<?= $no0 ?>" name="jenis_kelamin">
                                                                 <option value="" class="text-center">-- Pilih --</option>
                                                                 <option value="L">Laki-laki</option>
                                                                 <option value="P">Perempuan</option>
                                                             </select>
-                                                            <div id="err_jenis_kelamin<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                            <div id="err_jenis_kelamin<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                     </div>
 
 
                                                     <label for="medrec<?= $no0 ?>">Medrec</label>
-                                                    <input id="medrec<?= $no0 ?>" name="medrec">
-                                                    <div id="err_medrec<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                    <input class="form-control" id="medrec<?= $no0 ?>" name="medrec" value="<?= $d_kyd['medrec'] ?>">
+                                                    <div id="err_medrec<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="diagnosis<?= $no0 ?>">Diagnosis</label>
-                                                    <textarea id="diagnosis<?= $no0 ?>" name="diagnosis" rows="3"></textarea>
-                                                    <div id="err_diagnosis<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
+                                                    <textarea class="form-control" id="diagnosis<?= $no0 ?>" name="diagnosis" rows="3"><?= $d_kyd['diagnosis'] ?>"</textarea>
+                                                    <div id="err_diagnosis<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="terapi<?= $no0 ?>">Terapi</label>
-                                                    <textarea id="terapi<?= $no0 ?>" name="terapi" rows="3"></textarea>
-                                                    <div id="err_terapi<?= $no0 ?>" class="i text-danger text-center text-xs blink"></div>
+                                                    <textarea class="form-control" id="terapi<?= $no0 ?>" name="terapi" rows="3"><?= $d_kyd['terapi'] ?>"</textarea>
+                                                    <div id="err_terapi<?= $no0 ?>" class="err i text-danger text-center text-xs blink"></div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="#" class="btn btn-primary btn-sm ubah<?= $no0; ?>"><i class="fa fa-edit"></i> Ubah</a>
                                             </div>
                                             <script>
-                                                $(document).on('click', '.ubah<?= $no0; ?>', function() {
-                                                    var data_form = $('#form_u<?= $no0; ?>').serializeArray();
-
+                                                $(".ubah_init<?= $no0 ?>").click(function() {
+                                                    $(".err").html("");
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: "_pembimbing/view/v_ked_coass_kyd_dataGetData.php",
+                                                        data: {
+                                                            id: '<?= encryptString($d_kyd['id'], $customkey) ?>'
+                                                        },
+                                                        dataType: "JSON",
+                                                        success: function(response) {
+                                                            if (response.ket == "SUCCESS") {
+                                                                $('#ruang<?= $no0 ?>').val(response.ruang);
+                                                                $('#tgl<?= $no0 ?>').val(response.tgl);
+                                                                $('#nama_pasien<?= $no0 ?>').val(response.nama_pasien);
+                                                                $('#usia<?= $no0 ?>').val(response.usia);
+                                                                $('#jenis_kelamin<?= $no0 ?>').val(response.jenis_kelamin);
+                                                                $('#medrec<?= $no0 ?>').val(response.medrec);
+                                                                $('#diagnosis<?= $no0 ?>').val(response.diagnosis);
+                                                                $('#terapi<?= $no0 ?>').val(response.terapi);
+                                                            } else error();
+                                                        },
+                                                        error: function(response) {
+                                                            error();
+                                                        }
+                                                    });
+                                                });
+                                                $(document).on('click', '.ubah<?= $no0 ?>', function() {
+                                                    var data_form = $('#form_u<?= $no0 ?>').serializeArray();
                                                     data_form.push({
                                                         name: "id",
-                                                        value: '<?= encryptString($d_kyd['id'], $customkey) ?>'
+                                                        value: "<?= encryptString($d_kyd['id'], $customkey) ?>"
                                                     });
-                                                    var tgl = $("#tgl<?= $no0; ?>").val();
-                                                    var kegiatan = $("#kegiatan<?= $no0; ?>").val();
-                                                    var topik = $("#topik<?= $no0; ?>").val();
-
+                                                    var ruang = $("#ruang<?= $no0 ?>").val();
+                                                    var tgl = $("#tgl<?= $no0 ?>").val();
+                                                    var nama_pasien = $("#nama_pasien<?= $no0 ?>").val();
+                                                    var usia = $("#usia<?= $no0 ?>").val();
+                                                    var jenis_kelamin = $("#jenis_kelamin<?= $no0 ?>").val();
+                                                    var medrec = $("#medrec<?= $no0 ?>").val();
+                                                    var diagnosis = $("#diagnosis<?= $no0 ?>").val();
+                                                    var terapi = $("#terapi<?= $no0 ?>").val();
                                                     if (
+                                                        ruang == "" ||
                                                         tgl == "" ||
-                                                        kegiatan == "" ||
-                                                        topik == ""
+                                                        nama_pasien == "" ||
+                                                        usia == "" ||
+                                                        jenis_kelamin == "" ||
+                                                        medrec == "" ||
+                                                        diagnosis == "" ||
+                                                        terapi == ""
                                                     ) {
                                                         simpan_tidaksesuai();
-                                                        if (tgl == "") {
-                                                            $('#tgl<?= $no0; ?>').attr('class', 'border-danger border-2  form-control');
-                                                            $("#err_tgl<?= $no0; ?>").html("Pilih Tanggal");
-                                                        } else {
-                                                            $('#tgl<?= $no0; ?>').attr('class', 'form-control');
-                                                            $("#err_tgl<?= $no0; ?>").html("");
-                                                        }
-
-                                                        if (kegiatan == "") {
-                                                            $('#kegiatan<?= $no0; ?>').attr('class', 'border-danger border-2 form-control');
-                                                            $("#err_kegiatan<?= $no0; ?>").html("Isikan Kegiatan");
-                                                        } else {
-                                                            $('#kegiatan<?= $no0; ?>').attr('class', 'form-control');
-                                                            $("#err_kegiatan<?= $no0; ?>").html("");
-                                                        }
-
-                                                        if (topik == "") {
-                                                            $('#topik<?= $no0; ?>').attr('class', 'border-danger border-2 form-control');
-                                                            $("#err_topik<?= $no0; ?>").html("Isikan Topik");
-                                                        } else {
-                                                            $('#topik<?= $no0; ?>').attr('class', 'form-control');
-                                                            $("#err_topik<?= $no0; ?>").html("");
-                                                        }
+                                                        ruang == "" ? $("#err_ruang<?= $no0 ?>").html("Pilih Ruang") : $("#err_ruang<?= $no0 ?>").html("");
+                                                        tgl == "" ? $("#err_tgl<?= $no0 ?>").html("Pilih Tanggal") : $("#err_tgl<?= $no0 ?>").html("");
+                                                        nama_pasien == "" ? $("#err_nama_pasien<?= $no0 ?>").html("Isikan Nama Pasien") : $("#err_nama_pasien<?= $no0 ?>").html("")
+                                                        usia == "" ? $("#err_usia<?= $no0 ?>").html("Isikan Usia") : $("#err_usia<?= $no0 ?>").html("")
+                                                        jenis_kelamin == "" ? $("#err_jenis_kelamin<?= $no0 ?>").html("Pilih Jenis Kelamin") : $("#err_jenis_kelamin<?= $no0 ?>").html("")
+                                                        medrec == "" ? $("#err_medrec<?= $no0 ?>").html("Isikan Medrec") : $("#err_medrec<?= $no0 ?>").html("")
+                                                        diagnosis == "" ? $("#err_diagnosis<?= $no0 ?>").html("Isikan Diagnosis") : ("#err_diagnosis<?= $no0 ?>").html("")
+                                                        terapi == "" ? $("#err_terapi<?= $no0 ?>").html("Isikan Terapi") : $("#err_terapi<?= $no0 ?>").html("")
                                                     } else {
                                                         $.ajax({
                                                             type: 'POST',
                                                             url: "_pembimbing/exc/x_v_ked_coass_kyd_data_u.php",
                                                             data: data_form,
-                                                            dataType: "json",
+                                                            dataType: "JSON",
                                                             success: function(response) {
                                                                 if (response.ket == "SUCCESS") {
-                                                                    $('#modal_ubah<?= $no0 ?>').modal('hide');
+                                                                    $('#modal_ubah<?= $no0 ?>').modal('hide')
                                                                     ubah_berhasil();
                                                                     loading_sw2();
                                                                     $('#data_kyd')

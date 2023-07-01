@@ -5394,10 +5394,16 @@ a.close.disabled {
   .modal-xl {
     max-width: 800px;
   }
+  .modal-xxl {
+    max-width: 900px;
+  }
 }
 @media (min-width: 1200px) {
   .modal-xl {
     max-width: 1140px;
+  }
+  .modal-xxl{
+    max-width: 90%;
   }
 }
 .tooltip {
