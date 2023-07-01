@@ -3,7 +3,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // echo "<pre>";
 // print_r($_POST);
 // echo "</pre>";
-// error_reporting(0);
+error_reporting(0);
 //cari id_user 
 $sql_id_user = "SELECT MAX(id_user) AS ID FROM tb_user";
 try {

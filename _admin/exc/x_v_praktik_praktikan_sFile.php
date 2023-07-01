@@ -1,5 +1,5 @@
 <?php
-// error_reporting(0);
+error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 // echo "<pre>" . print_r($_FILES) . "</pre>";
 // echo "<pre>" . print_r($_POST) . "</pre>";

@@ -6,30 +6,28 @@
     error_reporting(0);
     $idpr = decryptString($_GET['idpr'], $customkey);
     try {
-        $sql_kyd = "SELECT * FROM tb_logbook_ked_coass_kyd ";
-        $sql_kyd .= " WHERE id_praktikan = " . $idpr;
-        $sql_kyd .= " ORDER BY tgl_ubah DESC, tgl_tambah DESC";
-        // echo "$sql_kyd<br>";
-        $q_kyd = $conn->query($sql_kyd);
-        $r_kyd = $q_kyd->rowCount();
+        $sql_psw = "SELECT * FROM tb_logbook_ked_coass_psw ";
+        $sql_psw .= " WHERE id_praktikan = " . $idpr;
+        $sql_psw .= " ORDER BY tgl_ubah DESC, tgl_tambah DESC";
+        // echo "$sql_psw<br>";
+        $q_psw = $conn->query($sql_psw);
+        $r_psw = $q_psw->rowCount();
     } catch (PDOException $ex) {
         echo "<script>alert('ERROR DATA JADWAL KEGIATAN HARIAN INPUT');</script>";
         // echo "<script>document.location.href='?error404';</script>";
     }
     ?>
-    <?php if ($r_kyd > 0) { ?>
+    <?php if ($r_psw > 0) { ?>
         <div class="table-responsive">
             <table class="table table-striped table-bordered " id="dataTable">
                 <thead class="table-dark">
                     <tr class="text-center">
                         <th scope='col'>No</th>
                         <th>Ruang</th>
-                        <th>Tanggal</th>
-                        <th>Nama Pasien</th>
+                        <th>Nama</th>
                         <th>Usia</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Medrec</th>
-                        <th>Diagnosis</th>
+                        <th>DD</th>
+                        <th>Diagnosis Kerja</th>
                         <th>Terapi</th>
                         <th></th>
                     </tr>
@@ -37,20 +35,16 @@
                 <tbody>
                     <?php
                     $no0 = 1;
-                    while ($d_kyd = $q_kyd->fetch(PDO::FETCH_ASSOC)) {
+                    while ($d_psw = $q_psw->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr>
                             <td class="text-center"><?= $no0; ?></td>
-                            <td><?= $d_kyd['ruang']; ?></td>
-                            <td><?= tanggal($d_kyd['tgl']); ?></td>
-                            <td><?= $d_kyd['nama_pasien']; ?></td>
-                            <td><?= $d_kyd['usia']; ?></td>
-                            <td>
-                                <?= $d_kyd['jenis_kelamin'] == "L" ? "Laki-Laki" : "Perempuan"; ?>
-                            </td>
-                            <td><?= $d_kyd['medrec']; ?></td>
-                            <td><?= $d_kyd['diagnosis']; ?></td>
-                            <td><?= $d_kyd['terapi']; ?></td>
+                            <td><?= $d_psw['ruang']; ?></td>
+                            <td><?= $d_psw['nama']; ?></td>
+                            <td><?= $d_psw['usia']; ?></td>
+                            <td><?= $d_psw['dd']; ?></td>
+                            <td><?= $d_psw['diagnosis_kerja']; ?></td>
+                            <td><?= $d_psw['terapi']; ?></td>
                             <td class="text-center">
                                 <a class="btn btn-primary btn-sm ubah_init<?= $no0 ?> " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
                                     <i class=" fa fa-edit"></i> Ubah
@@ -79,17 +73,17 @@
                                                     <div id="err_ruang<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="tgl<?= $no0 ?>">Tanggal</label>
-                                                    <input class="form-control" type="date" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_kyd['tgl'] ?>">
+                                                    <input class="form-control" type="date" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_psw['tgl'] ?>">
                                                     <div id="err_tgl<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="nama_pasien<?= $no0 ?>">Nama Pasien</label>
-                                                    <input class="form-control" id="nama_pasien<?= $no0 ?>" name="nama_pasien" value="<?= $d_kyd['nama_pasien'] ?>">
+                                                    <input class="form-control" id="nama_pasien<?= $no0 ?>" name="nama_pasien" value="<?= $d_psw['nama_pasien'] ?>">
                                                     <div id="err_nama_pasien<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <div class="row">
                                                         <div class="col-md">
                                                             <label for="usia<?= $no0 ?>">Usia</label>
-                                                            <input class="form-control" type="number" min="0" id="usia<?= $no0 ?>" name="usia" value="<?= $d_kyd['usia'] ?>">
+                                                            <input class="form-control" type="number" min="0" id="usia<?= $no0 ?>" name="usia" value="<?= $d_psw['usia'] ?>">
                                                             <div class="i text-center text-xs"><label for="usia" class="m-0">Isian Hanya Angka</label></div>
                                                             <div id="err_usia<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
@@ -106,15 +100,15 @@
 
 
                                                     <label for="medrec<?= $no0 ?>">Medrec</label>
-                                                    <input class="form-control" id="medrec<?= $no0 ?>" name="medrec" value="<?= $d_kyd['medrec'] ?>">
+                                                    <input class="form-control" id="medrec<?= $no0 ?>" name="medrec" value="<?= $d_psw['medrec'] ?>">
                                                     <div id="err_medrec<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="diagnosis<?= $no0 ?>">Diagnosis</label>
-                                                    <textarea class="form-control" id="diagnosis<?= $no0 ?>" name="diagnosis" rows="3"><?= $d_kyd['diagnosis'] ?>"</textarea>
+                                                    <textarea class="form-control" id="diagnosis<?= $no0 ?>" name="diagnosis" rows="3"><?= $d_psw['diagnosis'] ?>"</textarea>
                                                     <div id="err_diagnosis<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="terapi<?= $no0 ?>">Terapi</label>
-                                                    <textarea class="form-control" id="terapi<?= $no0 ?>" name="terapi" rows="3"><?= $d_kyd['terapi'] ?>"</textarea>
+                                                    <textarea class="form-control" id="terapi<?= $no0 ?>" name="terapi" rows="3"><?= $d_psw['terapi'] ?>"</textarea>
                                                     <div id="err_terapi<?= $no0 ?>" class="err i text-danger text-center text-xs blink"></div>
                                                 </form>
                                             </div>
@@ -126,9 +120,9 @@
                                                     $(".err").html("");
                                                     $.ajax({
                                                         type: 'POST',
-                                                        url: "_pembimbing/view/v_ked_coass_kyd_dataGetData.php",
+                                                        url: "_pembimbing/view/v_ked_coass_psw_dataGetData.php",
                                                         data: {
-                                                            id: '<?= encryptString($d_kyd['id'], $customkey) ?>'
+                                                            id: '<?= encryptString($d_psw['id'], $customkey) ?>'
                                                         },
                                                         dataType: "JSON",
                                                         success: function(response) {
@@ -152,7 +146,7 @@
                                                     var data_form = $('#form_u<?= $no0 ?>').serializeArray();
                                                     data_form.push({
                                                         name: "id",
-                                                        value: "<?= encryptString($d_kyd['id'], $customkey) ?>"
+                                                        value: "<?= encryptString($d_psw['id'], $customkey) ?>"
                                                     });
                                                     var ruang = $("#ruang<?= $no0 ?>").val();
                                                     var tgl = $("#tgl<?= $no0 ?>").val();
@@ -184,7 +178,7 @@
                                                     } else {
                                                         $.ajax({
                                                             type: 'POST',
-                                                            url: "_pembimbing/exc/x_v_ked_coass_kyd_data_u.php",
+                                                            url: "_pembimbing/exc/x_v_ked_coass_psw_data_u.php",
                                                             data: data_form,
                                                             dataType: "JSON",
                                                             success: function(response) {
@@ -192,9 +186,9 @@
                                                                     $('#modal_ubah<?= $no0 ?>').modal('hide')
                                                                     ubah_berhasil();
                                                                     loading_sw2();
-                                                                    $('#data_kyd')
+                                                                    $('#data_psw')
                                                                         .load(
-                                                                            "_pembimbing/view/v_ked_coass_kyd_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                                                            "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
                                                                 } else simpan_gagal_database();
                                                             },
                                                             error: function(response) {
@@ -208,7 +202,7 @@
                                     </div>
                                 </div>
 
-                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_kyd['id'], $customkey) ?>">
+                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_psw['id'], $customkey) ?>">
                                     <i class="fa fa-trash"></i> Hapus
                                 </a>
                             </td>
@@ -235,7 +229,7 @@
                     if (result.value) {
                         $.ajax({
                             type: 'POST',
-                            url: "_pembimbing/exc/x_v_ked_coass_kyd_data_h.php",
+                            url: "_pembimbing/exc/x_v_ked_coass_psw_data_h.php",
                             data: {
                                 id: $(this).attr('id')
                             },
@@ -244,9 +238,9 @@
                                 if (response.ket == "SUCCESS") {
                                     hapus_berhasil();
                                     loading_sw2();
-                                    $('#data_kyd')
+                                    $('#data_psw')
                                         .load(
-                                            "_pembimbing/view/v_ked_coass_kyd_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                            "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
                                 } else simpan_gagal_database();
                             },
                             error: function(response) {

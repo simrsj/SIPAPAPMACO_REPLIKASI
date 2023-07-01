@@ -18,9 +18,6 @@
         ?>
         <?php if ($r_bimbingan > 0) { ?>
             <div class="card shadow mb-4">
-                <div class="card-header bg-primary text-light b text-uppercase">
-                    Kasus yang Ditemukan
-                </div>
                 <div class="card-body p-2">
                     <div class="table-responsive">
                         <table class="table table-striped" id="dataTable">
@@ -47,22 +44,22 @@
                                         <td class=" text-center">
                                             <?php
                                             try {
-                                                $sql_kyd = "SELECT * FROM tb_logbook_ked_coass_kyd ";
-                                                $sql_kyd .= " WHERE id_praktikan = " . $d_bimbingan['id_praktikan'];
-                                                // echo "$sql_kyd<br>";
-                                                $q_kyd = $conn->query($sql_kyd);
-                                                $r_kyd = $q_kyd->rowCount();
+                                                $sql_psw = "SELECT * FROM tb_logbook_ked_coass_psw ";
+                                                $sql_psw .= " WHERE id_praktikan = " . $d_bimbingan['id_praktikan'];
+                                                // echo "$sql_psw<br>";
+                                                $q_psw = $conn->query($sql_psw);
+                                                $r_psw = $q_psw->rowCount();
                                             } catch (PDOException $ex) {
                                                 echo "<script>alert('$ex');</script>";
                                                 echo "<script>document.location.href='?error404';</script>";
                                             }
                                             ?>
-                                            <?php if ($r_kyd > 0) { ?>
-                                                <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_kyd<?= $no ?>">
+                                            <?php if ($r_psw > 0) { ?>
+                                                <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_psw<?= $no ?>">
                                                     <i class="fas fa-eye"></i> Lihat
                                                 </a>
                                                 <!-- Logout Modal-->
-                                                <div class="modal" id="modal_data_kyd<?= $no ?>" role="dialog" aria-labelledby="modal_data_kyd<?= $no ?>" aria-hidden="true">
+                                                <div class="modal" id="modal_data_psw<?= $no ?>" role="dialog" aria-labelledby="modal_data_psw<?= $no ?>" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-secondary text-light">
@@ -75,11 +72,11 @@
                                                                 <div class="row">
                                                                     <?php
                                                                     try {
-                                                                        $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Poliklinik/Rawat Jalan'")->rowCount();
-                                                                        $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Intensif/Rawat Inap'")->rowCount();
-                                                                        $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'IGD'")->rowCount();
-                                                                        $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Rehabilitasi Napza'")->rowCount();
-                                                                        $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'ECT'")->rowCount();
+                                                                        $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Poliklinik/Rawat Jalan'")->rowCount();
+                                                                        $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Intensif/Rawat Inap'")->rowCount();
+                                                                        $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'IGD'")->rowCount();
+                                                                        $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Rehabilitasi Napza'")->rowCount();
+                                                                        $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'ECT'")->rowCount();
                                                                     } catch (PDOException $ex) {
                                                                         echo "<script>alert('$ex');</script>";
                                                                         echo "<script>document.location.href='?error404';</script>";
@@ -113,24 +110,24 @@
                                                                     <tbody>
                                                                         <?php
                                                                         $no0 = 1;
-                                                                        while ($d_kyd = $q_kyd->fetch(PDO::FETCH_ASSOC)) {
+                                                                        while ($d_psw = $q_psw->fetch(PDO::FETCH_ASSOC)) {
                                                                         ?>
                                                                             <tr>
                                                                                 <td class="text-center"><?= $no0; ?></td>
-                                                                                <td><?= $d_kyd['ruang']; ?></td>
-                                                                                <td><?= tanggal($d_kyd['tgl']); ?></td>
-                                                                                <td><?= $d_kyd['nama_pasien']; ?></td>
-                                                                                <td><?= $d_kyd['usia']; ?></td>
+                                                                                <td><?= $d_psw['ruang']; ?></td>
+                                                                                <td><?= tanggal($d_psw['tgl']); ?></td>
+                                                                                <td><?= $d_psw['nama_pasien']; ?></td>
+                                                                                <td><?= $d_psw['usia']; ?></td>
                                                                                 <td>
                                                                                     <?php
-                                                                                    if ($d_kyd['jenis_kelamin'] == "L") echo "Laki-laki";
-                                                                                    elseif ($d_kyd['jenis_kelamin'] == "P") echo "Perempuan";
+                                                                                    if ($d_psw['jenis_kelamin'] == "L") echo "Laki-laki";
+                                                                                    elseif ($d_psw['jenis_kelamin'] == "P") echo "Perempuan";
                                                                                     else echo "<span class='badge badge-danger'>ERROR</span>";
                                                                                     ?>
                                                                                 </td>
-                                                                                <td><?= $d_kyd['medrec']; ?></td>
-                                                                                <td><?= $d_kyd['diagnosis']; ?></td>
-                                                                                <td><?= $d_kyd['terapi']; ?></td>
+                                                                                <td><?= $d_psw['medrec']; ?></td>
+                                                                                <td><?= $d_psw['diagnosis']; ?></td>
+                                                                                <td><?= $d_psw['terapi']; ?></td>
                                                                             </tr>
                                                                         <?php
                                                                             $no0++;
@@ -152,7 +149,7 @@
                                             <?php } ?>
                                         </td>
                                         <td class="text-center">
-                                            <a class="btn btn-outline-info btn-sm" href="?elogbook=kyd&data=<?= encryptString($d_bimbingan['id_praktikan'], $customkey) ?>">
+                                            <a class="btn btn-outline-info btn-sm" href="?elogbook=psw&data=<?= encryptString($d_bimbingan['id_praktikan'], $customkey) ?>">
                                                 Tamba/Ubah
                                             </a>
                                         </td>

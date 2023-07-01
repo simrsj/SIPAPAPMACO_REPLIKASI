@@ -20,6 +20,11 @@ else if (isset($_GET["elogbook"])) {
 	else if ($_GET["elogbook"] == "kyd") {
 		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_kyd_input.php";
 		else include "_pembimbing/view/v_ked_coass_kyd.php";
+	}
+	//data Log Book Pembuatan Status Wajib
+	else if ($_GET["elogbook"] == "psw") {
+		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_psw_input.php";
+		else include "_pembimbing/view/v_ked_coass_psw.php";
 	} else pilihmenu();
 } else pilihmenu();
 

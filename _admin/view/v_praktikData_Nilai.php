@@ -1,5 +1,5 @@
 <?php
-// error_reporting(0);
+error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // echo "<pre>" . print_r($_POST) . "</pre>";
