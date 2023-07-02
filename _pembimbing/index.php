@@ -101,6 +101,9 @@ if ($_SESSION['status_user'] == "Y") {
 								</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+								<div class="dropdown-item d-md-none text-center b  text-primary text-decoration-none" href="?setting">
+									<?= $d_pembimbing['nama_pembimbing']; ?>
+								</div>
 								<a class="dropdown-item" href="?setting">
 									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 									Pengaturan
