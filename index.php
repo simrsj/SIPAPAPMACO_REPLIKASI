@@ -69,16 +69,10 @@ include "_add-ons/crypt.php";
                 setTimeout(function() {
                     idle_logout();
                     $.ajax({
-                        // type: 'POST',
                         url: "_log-sign/exc/x_log_out.php",
-                        // data: data_kerjasama,
-                        success: function() {},
-                        error: function() {
-                            error()
-                        }
                     });
-                    // }, 7200000);
-                }, 5000);
+                }, 7200000);
+                // }, 5000);
             </script>
     <?php
         } elseif ($_SESSION['status_user'] == 'T') {

@@ -85,10 +85,6 @@
                                                     </div>
                                                 </div>
 
-                                                <label for="medrec">Medrec</label>
-                                                <input class="form-control " id="medrec" name="medrec">
-                                                <div id="err_medrec" class="err i text-danger text-center text-xs blink mb-2"></div>
-
                                                 <label for="dd">DD</label>
                                                 <textarea class="form-control" id="dd" name="dd" rows="3"></textarea>
                                                 <div id="err_dd" class="err i text-danger text-center text-xs blink mb-2"></div>

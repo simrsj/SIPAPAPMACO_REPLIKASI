@@ -18,6 +18,10 @@
         ?>
         <?php if ($r_bimbingan > 0) { ?>
             <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-light b text-uppercase">
+                    Pembuatan Status Wajib
+
+                </div>
                 <div class="card-body p-2">
                     <div class="table-responsive">
                         <table class="table table-striped" id="dataTable">
@@ -58,12 +62,11 @@
                                                 <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_psw<?= $no ?>">
                                                     <i class="fas fa-eye"></i> Lihat
                                                 </a>
-                                                <!-- Logout Modal-->
                                                 <div class="modal" id="modal_data_psw<?= $no ?>" role="dialog" aria-labelledby="modal_data_psw<?= $no ?>" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-secondary text-light">
-                                                                Kegiatan Yang Ditemukan
+                                                                Pembuatan Status Wajib
                                                                 <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
                                                                     X
                                                                 </button>
@@ -72,69 +75,63 @@
                                                                 <div class="row">
                                                                     <?php
                                                                     try {
-                                                                        $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Poliklinik/Rawat Jalan'")->rowCount();
-                                                                        $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Intensif/Rawat Inap'")->rowCount();
-                                                                        $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'IGD'")->rowCount();
-                                                                        $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Rehabilitasi Napza'")->rowCount();
-                                                                        $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'ECT'")->rowCount();
+                                                                        $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Rawat Inap'")->rowCount();
+                                                                        $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Rawat Jalan'")->rowCount();
+                                                                        $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Keswara'")->rowCount();
+                                                                        $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Napza'")->rowCount();
+                                                                        $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Psikogeriatri'")->rowCount();
+                                                                        $r_6 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'IGD'")->rowCount();
                                                                     } catch (PDOException $ex) {
                                                                         echo "<script>alert('$ex');</script>";
                                                                         echo "<script>document.location.href='?error404';</script>";
                                                                     }
                                                                     ?>
                                                                     <div class="col-md">
-                                                                        Poliklinik/Rawat Jalan : <div class="badge badge-danger"><?= $r_1 ?></div><br>
-                                                                        Intensif/Rawat Inap : <div class="badge badge-danger"><?= $r_2 ?></div><br>
-                                                                        IGD : <div class="badge badge-danger"><?= $r_3 ?></div>
+                                                                        Rawat Inap : <?= $r_1 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
+                                                                        Rawat Jalan : <?= $r_2 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
+                                                                        Keswara : <?= $r_3 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
                                                                     </div>
                                                                     <div class="col-md my-auto">
-                                                                        Rehabilitasi Napza : <div class="badge badge-danger"><?= $r_4 ?></div><br>
-                                                                        ECT : <div class="badge badge-danger"><?= $r_5 ?></div>
+                                                                        Napza : <?= $r_4 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
+                                                                        Psikogeriatri : <?= $r_5 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
+                                                                        IGD : <?= $r_6 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
                                                                     </div>
                                                                 </div>
                                                                 <hr class="border-1">
-                                                                <table class="table table-striped table-bordered " id="dataTable<?= $no; ?>">
-                                                                    <thead class="table-dark">
-                                                                        <tr class="text-center">
-                                                                            <th scope='col'>No</th>
-                                                                            <th>Ruang</th>
-                                                                            <th>Tanggal</th>
-                                                                            <th>Nama Pasien</th>
-                                                                            <th>Usia</th>
-                                                                            <th>Jenis Kelamin</th>
-                                                                            <th>Medrec</th>
-                                                                            <th>Diagnosis</th>
-                                                                            <th>Terapi</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php
-                                                                        $no0 = 1;
-                                                                        while ($d_psw = $q_psw->fetch(PDO::FETCH_ASSOC)) {
-                                                                        ?>
-                                                                            <tr>
-                                                                                <td class="text-center"><?= $no0; ?></td>
-                                                                                <td><?= $d_psw['ruang']; ?></td>
-                                                                                <td><?= tanggal($d_psw['tgl']); ?></td>
-                                                                                <td><?= $d_psw['nama_pasien']; ?></td>
-                                                                                <td><?= $d_psw['usia']; ?></td>
-                                                                                <td>
-                                                                                    <?php
-                                                                                    if ($d_psw['jenis_kelamin'] == "L") echo "Laki-laki";
-                                                                                    elseif ($d_psw['jenis_kelamin'] == "P") echo "Perempuan";
-                                                                                    else echo "<span class='badge badge-danger'>ERROR</span>";
-                                                                                    ?>
-                                                                                </td>
-                                                                                <td><?= $d_psw['medrec']; ?></td>
-                                                                                <td><?= $d_psw['diagnosis']; ?></td>
-                                                                                <td><?= $d_psw['terapi']; ?></td>
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped table-bordered" id="dataTable<?= $no; ?>">
+                                                                        <thead class="table-dark">
+                                                                            <tr class="text-center">
+                                                                                <th scope='col'>No</th>
+                                                                                <th>Ruang</th>
+                                                                                <th>Nama</th>
+                                                                                <th>Usia</th>
+                                                                                <th>DD</th>
+                                                                                <th>Diagnosis Kerja</th>
+                                                                                <th>Terapi</th>
                                                                             </tr>
-                                                                        <?php
-                                                                            $no0++;
-                                                                        }
-                                                                        ?>
-                                                                    </tbody>
-                                                                </table>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php
+                                                                            $no0 = 1;
+                                                                            while ($d_psw = $q_psw->fetch(PDO::FETCH_ASSOC)) {
+                                                                            ?>
+                                                                                <tr>
+                                                                                    <td class="text-center"><?= $no0; ?></td>
+                                                                                    <td><?= $d_psw['ruang']; ?></td>
+                                                                                    <td><?= $d_psw['nama']; ?></td>
+                                                                                    <td><?= $d_psw['usia']; ?></td>
+                                                                                    <td><?= $d_psw['dd']; ?></td>
+                                                                                    <td><?= $d_psw['diagnosis_kerja']; ?></td>
+                                                                                    <td><?= $d_psw['terapi']; ?></td>
+                                                                                </tr>
+                                                                            <?php
+                                                                                $no0++;
+                                                                            }
+                                                                            ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                             <script>
                                                                 $(document).ready(function() {

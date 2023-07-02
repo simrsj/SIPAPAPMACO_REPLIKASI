@@ -61,54 +61,42 @@
                                             </div>
                                             <div class="modal-body text-left">
                                                 <form id="form_u<?= $no0 ?>" method="post">
-                                                    <label for="ruang<?= $no0 ?>">Ruang</label>
+                                                    <label for="ruang">Ruang</label>
                                                     <select class="form-control" id="ruang<?= $no0 ?>" name="ruang">
                                                         <option value="" class="text-center">-- Pilih --</option>
-                                                        <option value="Poliklinik/Rawat Jalan">Poliklinik/Rawat Jalan</option>
-                                                        <option value="Intensif/Rawat Inap">Intensif/Rawat Inap</option>
+                                                        <option value="Rawat Inap">Rawat Inap</option>
+                                                        <option value="Rawat Jalan">Rawat Jalan</option>
+                                                        <option value="Keswara">Keswara</option>
+                                                        <option value="Napza">Napza</option>
+                                                        <option value="Psikogeriatri">Psikogeriatri</option>
                                                         <option value="IGD">IGD</option>
-                                                        <option value="Rehabilitasi Napza">Rehabilitasi Napza</option>
-                                                        <option value="ECT">ECT</option>
                                                     </select>
                                                     <div id="err_ruang<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
-                                                    <label for="tgl<?= $no0 ?>">Tanggal</label>
-                                                    <input class="form-control" type="date" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_psw['tgl'] ?>">
-                                                    <div id="err_tgl<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
-
-                                                    <label for="nama_pasien<?= $no0 ?>">Nama Pasien</label>
-                                                    <input class="form-control" id="nama_pasien<?= $no0 ?>" name="nama_pasien" value="<?= $d_psw['nama_pasien'] ?>">
-                                                    <div id="err_nama_pasien<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
-
                                                     <div class="row">
-                                                        <div class="col-md">
-                                                            <label for="usia<?= $no0 ?>">Usia</label>
-                                                            <input class="form-control" type="number" min="0" id="usia<?= $no0 ?>" name="usia" value="<?= $d_psw['usia'] ?>">
-                                                            <div class="i text-center text-xs"><label for="usia" class="m-0">Isian Hanya Angka</label></div>
-                                                            <div id="err_usia<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
+                                                        <div class="col-md-9">
+                                                            <label for="nama<?= $no0 ?>">Nama</label>
+                                                            <input class="form-control" id="nama<?= $no0 ?>" name="nama">
+                                                            <div id="err_nama<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
-                                                        <div class="col-md">
-                                                            <label for="jenis_kelamin<?= $no0 ?>">Jenis Kelamin</label>
-                                                            <select class="form-control" id="jenis_kelamin<?= $no0 ?>" name="jenis_kelamin">
-                                                                <option value="" class="text-center">-- Pilih --</option>
-                                                                <option value="L">Laki-laki</option>
-                                                                <option value="P">Perempuan</option>
-                                                            </select>
-                                                            <div id="err_jenis_kelamin<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
+                                                        <div class="col-md-3">
+                                                            <label for="usia<?= $no0 ?>">Usia</label>
+                                                            <input class="form-control" type="number" min="0" id="usia<?= $no0 ?>" name="usia">
+                                                            <div class="i text-center text-xs "><label for="usia<?= $no0 ?>" class="m-0">Isian Hanya Angka</label></div>
+                                                            <div id="err_usia<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                     </div>
 
+                                                    <label for="dd<?= $no0 ?>">DD</label>
+                                                    <textarea class="form-control" id="dd<?= $no0 ?>" name="dd" rows="3"></textarea>
+                                                    <div id="err_dd<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
-                                                    <label for="medrec<?= $no0 ?>">Medrec</label>
-                                                    <input class="form-control" id="medrec<?= $no0 ?>" name="medrec" value="<?= $d_psw['medrec'] ?>">
-                                                    <div id="err_medrec<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
-
-                                                    <label for="diagnosis<?= $no0 ?>">Diagnosis</label>
-                                                    <textarea class="form-control" id="diagnosis<?= $no0 ?>" name="diagnosis" rows="3"><?= $d_psw['diagnosis'] ?>"</textarea>
-                                                    <div id="err_diagnosis<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
+                                                    <label for="diagnosis_kerja<?= $no0 ?>">Diagnosis Kerja</label>
+                                                    <textarea class="form-control" id="diagnosis_kerja<?= $no0 ?>" name="diagnosis_kerja" rows="3"></textarea>
+                                                    <div id="err_diagnosis_kerja<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="terapi<?= $no0 ?>">Terapi</label>
-                                                    <textarea class="form-control" id="terapi<?= $no0 ?>" name="terapi" rows="3"><?= $d_psw['terapi'] ?>"</textarea>
+                                                    <textarea class="form-control" id="terapi<?= $no0 ?>" name="terapi" rows="3"></textarea>
                                                     <div id="err_terapi<?= $no0 ?>" class="err i text-danger text-center text-xs blink"></div>
                                                 </form>
                                             </div>
@@ -117,6 +105,7 @@
                                             </div>
                                             <script>
                                                 $(".ubah_init<?= $no0 ?>").click(function() {
+                                                    loading_sw2();
                                                     $(".err").html("");
                                                     $.ajax({
                                                         type: 'POST',
@@ -128,14 +117,14 @@
                                                         success: function(response) {
                                                             if (response.ket == "SUCCESS") {
                                                                 $('#ruang<?= $no0 ?>').val(response.ruang);
-                                                                $('#tgl<?= $no0 ?>').val(response.tgl);
-                                                                $('#nama_pasien<?= $no0 ?>').val(response.nama_pasien);
+                                                                $('#nama<?= $no0 ?>').val(response.nama);
                                                                 $('#usia<?= $no0 ?>').val(response.usia);
-                                                                $('#jenis_kelamin<?= $no0 ?>').val(response.jenis_kelamin);
-                                                                $('#medrec<?= $no0 ?>').val(response.medrec);
-                                                                $('#diagnosis<?= $no0 ?>').val(response.diagnosis);
+                                                                $('#dd<?= $no0 ?>').val(response.dd);
+                                                                $('#diagnosis_kerja<?= $no0 ?>').val(response.diagnosis_kerja);
                                                                 $('#terapi<?= $no0 ?>').val(response.terapi);
                                                             } else error();
+                                                            swal.close();
+
                                                         },
                                                         error: function(response) {
                                                             error();
@@ -176,6 +165,7 @@
                                                         diagnosis == "" ? $("#err_diagnosis<?= $no0 ?>").html("Isikan Diagnosis") : ("#err_diagnosis<?= $no0 ?>").html("")
                                                         terapi == "" ? $("#err_terapi<?= $no0 ?>").html("Isikan Terapi") : $("#err_terapi<?= $no0 ?>").html("")
                                                     } else {
+                                                        loading_sw2();
                                                         $.ajax({
                                                             type: 'POST',
                                                             url: "_pembimbing/exc/x_v_ked_coass_psw_data_u.php",
@@ -185,10 +175,11 @@
                                                                 if (response.ket == "SUCCESS") {
                                                                     $('#modal_ubah<?= $no0 ?>').modal('hide')
                                                                     ubah_berhasil();
-                                                                    loading_sw2();
-                                                                    $('#data_psw')
-                                                                        .load(
-                                                                            "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                                                    setTimeout(function() {
+                                                                        $('#data_psw')
+                                                                            .load(
+                                                                                "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                                                    }, 5000);
                                                                 } else simpan_gagal_database();
                                                             },
                                                             error: function(response) {
@@ -226,6 +217,7 @@
                     confirmButtonText: 'Hapus',
                     cancelButtonText: 'Kembali'
                 }).then((result) => {
+                    loading_sw2();
                     if (result.value) {
                         $.ajax({
                             type: 'POST',
@@ -237,11 +229,11 @@
                             success: function(response) {
                                 if (response.ket == "SUCCESS") {
                                     hapus_berhasil();
-                                    loading_sw2();
                                     $('#data_psw')
                                         .load(
                                             "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
                                 } else simpan_gagal_database();
+                                swal.close();
                             },
                             error: function(response) {
                                 error();

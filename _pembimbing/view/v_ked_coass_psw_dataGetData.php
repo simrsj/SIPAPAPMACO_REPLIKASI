@@ -6,17 +6,15 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 // echo "</pre>";
 error_reporting(0);
 try {
-    $sql = "SELECT *  FROM tb_logbook_ked_coass_kyd WHERE id = " . decryptString($_POST['id'], $customkey);
+    $sql = "SELECT *  FROM tb_logbook_ked_coass_psw WHERE id = " . decryptString($_POST['id'], $customkey);
     // $conn->query($sql);
     $d = $conn->query($sql)->fetch(PDO::FETCH_ASSOC);
     echo json_encode([
         'ruang' => $d['ruang'],
-        'tgl' => $d['tgl'],
-        'nama_pasien' => $d['nama_pasien'],
+        'nama' => $d['nama'],
         'usia' => $d['usia'],
-        'jenis_kelamin' => $d['jenis_kelamin'],
-        'medrec' => $d['medrec'],
-        'diagnosis' => $d['diagnosis'],
+        'dd' => $d['dd'],
+        'diagnosis_kerja' => $d['diagnosis_kerja'],
         'terapi' => $d['terapi'],
         'ket' => 'SUCCESS'
     ]);

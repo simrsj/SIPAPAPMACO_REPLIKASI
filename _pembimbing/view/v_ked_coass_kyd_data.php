@@ -124,6 +124,7 @@
                                             <script>
                                                 $(".ubah_init<?= $no0 ?>").click(function() {
                                                     $(".err").html("");
+                                                    loading_sw2();
                                                     $.ajax({
                                                         type: 'POST',
                                                         url: "_pembimbing/view/v_ked_coass_kyd_dataGetData.php",
@@ -142,6 +143,7 @@
                                                                 $('#diagnosis<?= $no0 ?>').val(response.diagnosis);
                                                                 $('#terapi<?= $no0 ?>').val(response.terapi);
                                                             } else error();
+                                                            swal.close();
                                                         },
                                                         error: function(response) {
                                                             error();
@@ -182,6 +184,7 @@
                                                         diagnosis == "" ? $("#err_diagnosis<?= $no0 ?>").html("Isikan Diagnosis") : ("#err_diagnosis<?= $no0 ?>").html("")
                                                         terapi == "" ? $("#err_terapi<?= $no0 ?>").html("Isikan Terapi") : $("#err_terapi<?= $no0 ?>").html("")
                                                     } else {
+                                                        loading_sw2();
                                                         $.ajax({
                                                             type: 'POST',
                                                             url: "_pembimbing/exc/x_v_ked_coass_kyd_data_u.php",
@@ -196,6 +199,7 @@
                                                                         .load(
                                                                             "_pembimbing/view/v_ked_coass_kyd_data.php?idpr=<?= $_GET['idpr'] ?>");
                                                                 } else simpan_gagal_database();
+                                                                swal.close();
                                                             },
                                                             error: function(response) {
                                                                 error();
