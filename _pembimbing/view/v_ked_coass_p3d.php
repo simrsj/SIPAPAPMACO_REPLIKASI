@@ -94,7 +94,7 @@
                                                                             $q_pertanyaan = $conn->query($sql_pertanyaan);
                                                                         } catch (Exception $ex) {
                                                                             // echo "<script>alert('DATA PRAKTIKAN');</script>";
-                                                                            // echo "<script>document.location.href='?error404';</script>";
+                                                                            echo "<script>document.location.href='?error404';</script>";
                                                                         }
                                                                         $no0 = 1;
                                                                         while ($d_pertanyaan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {

@@ -11,7 +11,7 @@
         $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
     } catch (Exception $ex) {
         echo "<script>alert('DATA BIMBINGAN PRAKTIKAN')</script>;";
-        // echo "<script>document.location.href='?error404';</script>";
+        echo "<script>document.location.href='?error404';</script>";
     }
     ?>
     <div class="card shadow  m-2">

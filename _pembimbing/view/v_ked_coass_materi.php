@@ -30,7 +30,7 @@
                                     <th scope="col">Nama Institusi</th>
                                     <th scope="col">Kelompok/Gelombang</th>
                                     <th scope="col">Nama Praktikan</th>
-                                    <th scope="col">Kegiatan</th>
+                                    <th scope="col">Materi</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
@@ -47,25 +47,25 @@
                                         <td class=" text-center">
                                             <?php
                                             try {
-                                                $sql_psw = "SELECT * FROM tb_logbook_ked_coass_psw ";
-                                                $sql_psw .= " WHERE id_praktikan = " . $d_bimbingan['id_praktikan'];
-                                                // echo "$sql_psw<br>";
-                                                $q_psw = $conn->query($sql_psw);
-                                                $r_psw = $q_psw->rowCount();
+                                                $sql_materi = "SELECT * FROM tb_logbook_ked_coass_materi ";
+                                                $sql_materi .= " WHERE id_praktikan = " . $d_bimbingan['id_praktikan'];
+                                                // echo "$sql_materi<br>";
+                                                $q_materi = $conn->query($sql_materi);
+                                                $r_materi = $q_materi->rowCount();
                                             } catch (PDOException $ex) {
                                                 echo "<script>alert('$ex');</script>";
                                                 echo "<script>document.location.href='?error404';</script>";
                                             }
                                             ?>
-                                            <?php if ($r_psw > 0) { ?>
-                                                <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_psw<?= $no ?>">
+                                            <?php if ($r_materi > 0) { ?>
+                                                <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_materi<?= $no ?>">
                                                     <i class="fas fa-eye"></i> Lihat
                                                 </a>
-                                                <div class="modal" id="modal_data_psw<?= $no ?>" role="dialog" aria-labelledby="modal_data_psw<?= $no ?>" aria-hidden="true">
+                                                <div class="modal" id="modal_data_materi<?= $no ?>" role="dialog" aria-labelledby="modal_data_materi<?= $no ?>" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-secondary text-light">
-                                                                Pembuatan Status Wajib
+                                                                Daftar Materi
                                                                 <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
                                                                     X
                                                                 </button>
@@ -74,26 +74,28 @@
                                                                 <div class="row">
                                                                     <?php
                                                                     try {
-                                                                        $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Rawat Inap'")->rowCount();
-                                                                        $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Rawat Jalan'")->rowCount();
-                                                                        $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Keswara'")->rowCount();
-                                                                        $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Napza'")->rowCount();
-                                                                        $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Psikogeriatri'")->rowCount();
-                                                                        $r_6 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'IGD'")->rowCount();
+                                                                        $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND materi = 'Kuliah Pengayaan'")->rowCount();
+                                                                        $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND materi = 'Mini C-Ex'")->rowCount();
+                                                                        $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND materi = 'RPS'")->rowCount();
+                                                                        $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND materi = 'CRS'")->rowCount();
+                                                                        $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND materi = 'CSS'")->rowCount();
+                                                                        $r_6 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND materi = 'OSLER'")->rowCount();
+                                                                        $r_7 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND materi = 'DPS'")->rowCount();
                                                                     } catch (PDOException $ex) {
                                                                         echo "<script>alert('$ex');</script>";
                                                                         echo "<script>document.location.href='?error404';</script>";
                                                                     }
                                                                     ?>
                                                                     <div class="col-md">
-                                                                        Rawat Inap : <?= $r_1 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
-                                                                        Rawat Jalan : <?= $r_2 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
-                                                                        Keswara : <?= $r_3 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
+                                                                        Kuliah Pengayaan <div class="badge badge-danger"><?= $r_1 ?></div><br>
+                                                                        Mini C-Ex <div class="badge badge-danger"><?= $r_2 ?></div><br>
+                                                                        RPS <div class="badge badge-danger"><?= $r_3 ?></div><br>
+                                                                        CRS <div class="badge badge-danger"><?= $r_4 ?></div><br>
                                                                     </div>
                                                                     <div class="col-md my-auto">
-                                                                        Napza : <?= $r_4 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
-                                                                        Psikogeriatri : <?= $r_5 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
-                                                                        IGD : <?= $r_6 > 0 ? "<i class='fa-solid fa-circle-check text-success'></i>" : "<i class='fa-solid fa-circle-xmark text-danger'></i>" ?><br>
+                                                                        CSS <div class="badge badge-danger"><?= $r_5 ?></div><br>
+                                                                        OSLER <div class="badge badge-danger"><?= $r_6 ?></div><br>
+                                                                        DPS <div class="badge badge-danger"><?= $r_7 ?></div><br>
                                                                     </div>
                                                                 </div>
                                                                 <hr class="border-1">
@@ -102,27 +104,25 @@
                                                                         <thead class="table-dark">
                                                                             <tr class="text-center">
                                                                                 <th scope='col'>No</th>
-                                                                                <th>Ruang</th>
-                                                                                <th>Nama</th>
-                                                                                <th>Usia</th>
-                                                                                <th>DD</th>
-                                                                                <th>Diagnosis Kerja</th>
-                                                                                <th>Terapi</th>
+                                                                                <th>Materi</th>
+                                                                                <th>tgl</th>
+                                                                                <th>Topik</th>
+                                                                                <th>LK</th>
+                                                                                <th>Dosen Pembimbing</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                             <?php
                                                                             $no0 = 1;
-                                                                            while ($d_psw = $q_psw->fetch(PDO::FETCH_ASSOC)) {
+                                                                            while ($d_materi = $q_materi->fetch(PDO::FETCH_ASSOC)) {
                                                                             ?>
                                                                                 <tr>
                                                                                     <td class="text-center"><?= $no0; ?></td>
-                                                                                    <td><?= $d_psw['ruang']; ?></td>
-                                                                                    <td><?= $d_psw['nama']; ?></td>
-                                                                                    <td><?= $d_psw['usia']; ?></td>
-                                                                                    <td><?= $d_psw['dd']; ?></td>
-                                                                                    <td><?= $d_psw['diagnosis_kerja']; ?></td>
-                                                                                    <td><?= $d_psw['terapi']; ?></td>
+                                                                                    <td><?= $d_materi['materi']; ?></td>
+                                                                                    <td><?= tanggal($d_materi['tgl']); ?></td>
+                                                                                    <td><?= $d_materi['topik']; ?></td>
+                                                                                    <td><?= $d_materi['lk']; ?></td>
+                                                                                    <td><?= $d_materi['dosen_pembimbing']; ?></td>
                                                                                 </tr>
                                                                             <?php
                                                                                 $no0++;
@@ -145,7 +145,7 @@
                                             <?php } ?>
                                         </td>
                                         <td class="text-center">
-                                            <a class="btn btn-outline-info btn-sm" href="?elogbook=psw&data=<?= encryptString($d_bimbingan['id_praktikan'], $customkey) ?>">
+                                            <a class="btn btn-outline-info btn-sm" href="?elogbook=materi&data=<?= encryptString($d_bimbingan['id_praktikan'], $customkey) ?>">
                                                 Tamba/Ubah
                                             </a>
                                         </td>

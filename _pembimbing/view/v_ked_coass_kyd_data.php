@@ -14,7 +14,7 @@
         $r_kyd = $q_kyd->rowCount();
     } catch (PDOException $ex) {
         echo "<script>alert('ERROR DATA JADWAL KEGIATAN HARIAN INPUT');</script>";
-        // echo "<script>document.location.href='?error404';</script>";
+        echo "<script>document.location.href='?error404';</script>";
     }
     ?>
     <?php if ($r_kyd > 0) { ?>

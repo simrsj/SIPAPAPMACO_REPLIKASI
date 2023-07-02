@@ -6,45 +6,43 @@
     error_reporting(0);
     $idpr = decryptString($_GET['idpr'], $customkey);
     try {
-        $sql_psw = "SELECT * FROM tb_logbook_ked_coass_psw ";
-        $sql_psw .= " WHERE id_praktikan = " . $idpr;
-        $sql_psw .= " ORDER BY tgl_ubah DESC, tgl_tambah DESC";
-        // echo "$sql_psw<br>";
-        $q_psw = $conn->query($sql_psw);
-        $r_psw = $q_psw->rowCount();
+        $sql_materi = "SELECT * FROM tb_logbook_ked_coass_materi ";
+        $sql_materi .= " WHERE id_praktikan = " . $idpr;
+        $sql_materi .= " ORDER BY tgl_ubah DESC, tgl_tambah DESC";
+        // echo "$sql_materi<br>";
+        $q_materi = $conn->query($sql_materi);
+        $r_materi = $q_materi->rowCount();
     } catch (PDOException $ex) {
         echo "<script>alert('ERROR DATA JADWAL KEGIATAN HARIAN INPUT');</script>";
-        // echo "<script>document.location.href='?error404';</script>";
+        echo "<script>document.location.href='?error404';</script>";
     }
     ?>
-    <?php if ($r_psw > 0) { ?>
+    <?php if ($r_materi > 0) { ?>
         <div class="table-responsive">
-            <table class="table table-striped table-bordered " id="dataTable">
+            <table class="table table-striped table-bordered" id="dataTable">
                 <thead class="table-dark">
                     <tr class="text-center">
                         <th scope='col'>No</th>
-                        <th>Ruang</th>
-                        <th>Nama</th>
-                        <th>Usia</th>
-                        <th>DD</th>
-                        <th>Diagnosis Kerja</th>
-                        <th>Terapi</th>
+                        <th>Materi</th>
+                        <th>Tanggal</th>
+                        <th>Topik</th>
+                        <th>LK</th>
+                        <th>Dosen Pembimbing</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $no0 = 1;
-                    while ($d_psw = $q_psw->fetch(PDO::FETCH_ASSOC)) {
+                    while ($d_materi = $q_materi->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr>
                             <td class="text-center"><?= $no0; ?></td>
-                            <td><?= $d_psw['ruang']; ?></td>
-                            <td><?= $d_psw['nama']; ?></td>
-                            <td><?= $d_psw['usia']; ?></td>
-                            <td><?= $d_psw['dd']; ?></td>
-                            <td><?= $d_psw['diagnosis_kerja']; ?></td>
-                            <td><?= $d_psw['terapi']; ?></td>
+                            <td><?= $d_materi['materi']; ?></td>
+                            <td><?= tanggal($d_materi['tgl']); ?></td>
+                            <td><?= $d_materi['topik']; ?></td>
+                            <td><?= $d_materi['lk']; ?></td>
+                            <td><?= $d_materi['dosen_pembimbing']; ?></td>
                             <td class="text-center">
                                 <a class="btn btn-primary btn-sm ubah_init<?= $no0 ?> " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
                                     <i class=" fa fa-edit"></i> Ubah
@@ -61,43 +59,34 @@
                                             </div>
                                             <div class="modal-body text-left">
                                                 <form id="form_u<?= $no0 ?>" method="post">
-                                                    <label for="ruang">Ruang</label>
-                                                    <select class="form-control" id="ruang<?= $no0 ?>" name="ruang">
+                                                    <label for="materi<?= $no0 ?>">Materi</label>
+                                                    <select class="form-control" id="materi<?= $no0 ?>" name="materi">
                                                         <option value="" class="text-center">-- Pilih --</option>
-                                                        <option value="Rawat Inap">Rawat Inap</option>
-                                                        <option value="Rawat Jalan">Rawat Jalan</option>
-                                                        <option value="Keswara">Keswara</option>
-                                                        <option value="Napza">Napza</option>
-                                                        <option value="Psikogeriatri">Psikogeriatri</option>
-                                                        <option value="IGD">IGD</option>
+                                                        <option value="Kuliah Pengayaan">Kuliah Pengayaan</option>
+                                                        <option value="Mini C-Ex">Mini C-Ex</option>
+                                                        <option value="RPS">RPS</option>
+                                                        <option value="CRS">CRS</option>
+                                                        <option value="CSS">CSS</option>
+                                                        <option value="OSLER">OSLER</option>
+                                                        <option value="DPS">DPS</option>
                                                     </select>
-                                                    <div id="err_ruang<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
+                                                    <div id="err_materi<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
-                                                    <div class="row">
-                                                        <div class="col-md-9">
-                                                            <label for="nama<?= $no0 ?>">Nama</label>
-                                                            <input class="form-control" id="nama<?= $no0 ?>" name="nama">
-                                                            <div id="err_nama<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label for="usia<?= $no0 ?>">Usia</label>
-                                                            <input class="form-control" type="number" min="0" id="usia<?= $no0 ?>" name="usia">
-                                                            <div class="i text-center text-xs "><label for="usia<?= $no0 ?>" class="m-0">Isian Hanya Angka</label></div>
-                                                            <div id="err_usia<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
-                                                        </div>
-                                                    </div>
+                                                    <label for="tgl<?= $no0 ?>">Tanggal</label>
+                                                    <input class="form-control" type="date" id="tgl<?= $no0 ?>" name="tgl">
+                                                    <div id="err_tgl<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
-                                                    <label for="dd<?= $no0 ?>">DD</label>
-                                                    <textarea class="form-control" id="dd<?= $no0 ?>" name="dd" rows="3"></textarea>
-                                                    <div id="err_dd<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
+                                                    <label for="topik<?= $no0 ?>">Topik</label>
+                                                    <textarea class="form-control" id="topik<?= $no0 ?>" name="topik" rows="3"></textarea>
+                                                    <div id="err_topik<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
-                                                    <label for="diagnosis_kerja<?= $no0 ?>">Diagnosis Kerja</label>
-                                                    <textarea class="form-control" id="diagnosis_kerja<?= $no0 ?>" name="diagnosis_kerja" rows="3"></textarea>
-                                                    <div id="err_diagnosis_kerja<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
+                                                    <label for="lk<?= $no0 ?>">LK</label>
+                                                    <input class="form-control" id="lk<?= $no0 ?>" name="lk">
+                                                    <div id="err_lk<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
-                                                    <label for="terapi<?= $no0 ?>">Terapi</label>
-                                                    <textarea class="form-control" id="terapi<?= $no0 ?>" name="terapi" rows="3"></textarea>
-                                                    <div id="err_terapi<?= $no0 ?>" class="err i text-danger text-center text-xs blink"></div>
+                                                    <label for="dosen_pembimbing<?= $no0 ?>">Dosen Pembimbing</label>
+                                                    <input class="form-control" id="dosen_pembimbing<?= $no0 ?>" name="dosen_pembimbing">
+                                                    <div id="err_dosen_pembimbing<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
@@ -109,22 +98,20 @@
                                                     $(".err").html("");
                                                     $.ajax({
                                                         type: 'POST',
-                                                        url: "_pembimbing/view/v_ked_coass_psw_dataGetData.php",
+                                                        url: "_pembimbing/view/v_ked_coass_materi_dataGetData.php",
                                                         data: {
-                                                            id: '<?= encryptString($d_psw['id'], $customkey) ?>'
+                                                            id: '<?= encryptString($d_materi['id'], $customkey) ?>'
                                                         },
                                                         dataType: "JSON",
                                                         success: function(response) {
                                                             if (response.ket == "SUCCESS") {
-                                                                $('#ruang<?= $no0 ?>').val(response.ruang);
-                                                                $('#nama<?= $no0 ?>').val(response.nama);
-                                                                $('#usia<?= $no0 ?>').val(response.usia);
-                                                                $('#dd<?= $no0 ?>').val(response.dd);
-                                                                $('#diagnosis_kerja<?= $no0 ?>').val(response.diagnosis_kerja);
-                                                                $('#terapi<?= $no0 ?>').val(response.terapi);
+                                                                $('#materi<?= $no0 ?>').val(response.materi);
+                                                                $('#tgl<?= $no0 ?>').val(response.tgl);
+                                                                $('#topik<?= $no0 ?>').val(response.topik);
+                                                                $('#lk<?= $no0 ?>').val(response.lk);
+                                                                $('#dosen_pembimbing<?= $no0 ?>').val(response.dosen_pembimbing);
                                                             } else error();
                                                             swal.close();
-
                                                         },
                                                         error: function(response) {
                                                             error();
@@ -135,51 +122,39 @@
                                                     var data_form = $('#form_u<?= $no0 ?>').serializeArray();
                                                     data_form.push({
                                                         name: "id",
-                                                        value: "<?= encryptString($d_psw['id'], $customkey) ?>"
+                                                        value: "<?= encryptString($d_materi['id'], $customkey) ?>"
                                                     });
-                                                    var ruang = $("#ruang<?= $no0 ?>").val();
+                                                    var materi = $("#materi<?= $no0 ?>").val();
                                                     var tgl = $("#tgl<?= $no0 ?>").val();
-                                                    var nama_pasien = $("#nama_pasien<?= $no0 ?>").val();
-                                                    var usia = $("#usia<?= $no0 ?>").val();
-                                                    var jenis_kelamin = $("#jenis_kelamin<?= $no0 ?>").val();
-                                                    var medrec = $("#medrec<?= $no0 ?>").val();
-                                                    var diagnosis = $("#diagnosis<?= $no0 ?>").val();
-                                                    var terapi = $("#terapi<?= $no0 ?>").val();
+                                                    var topik = $("#topik<?= $no0 ?>").val();
+                                                    var lk = $("#lk<?= $no0 ?>").val();
+                                                    var dosen_pembimbing = $("#dosen_pembimbing<?= $no0 ?>").val();
                                                     if (
-                                                        ruang == "" ||
+                                                        materi == "" ||
                                                         tgl == "" ||
-                                                        nama_pasien == "" ||
-                                                        usia == "" ||
-                                                        jenis_kelamin == "" ||
-                                                        medrec == "" ||
-                                                        diagnosis == "" ||
-                                                        terapi == ""
+                                                        topik == "" ||
+                                                        lk == "" ||
+                                                        dosen_pembimbing == ""
                                                     ) {
                                                         simpan_tidaksesuai();
-                                                        ruang == "" ? $("#err_ruang<?= $no0 ?>").html("Pilih Ruang") : $("#err_ruang<?= $no0 ?>").html("");
+                                                        materi == "" ? $("#err_materi<?= $no0 ?>").html("Pilih Materi") : $("#err_materi<?= $no0 ?>").html("");
                                                         tgl == "" ? $("#err_tgl<?= $no0 ?>").html("Pilih Tanggal") : $("#err_tgl<?= $no0 ?>").html("");
-                                                        nama_pasien == "" ? $("#err_nama_pasien<?= $no0 ?>").html("Isikan Nama Pasien") : $("#err_nama_pasien<?= $no0 ?>").html("")
-                                                        usia == "" ? $("#err_usia<?= $no0 ?>").html("Isikan Usia") : $("#err_usia<?= $no0 ?>").html("")
-                                                        jenis_kelamin == "" ? $("#err_jenis_kelamin<?= $no0 ?>").html("Pilih Jenis Kelamin") : $("#err_jenis_kelamin<?= $no0 ?>").html("")
-                                                        medrec == "" ? $("#err_medrec<?= $no0 ?>").html("Isikan Medrec") : $("#err_medrec<?= $no0 ?>").html("")
-                                                        diagnosis == "" ? $("#err_diagnosis<?= $no0 ?>").html("Isikan Diagnosis") : ("#err_diagnosis<?= $no0 ?>").html("")
-                                                        terapi == "" ? $("#err_terapi<?= $no0 ?>").html("Isikan Terapi") : $("#err_terapi<?= $no0 ?>").html("")
+                                                        topik == "" ? $("#err_topik<?= $no0 ?>").html("Isikan Topik") : $("#err_topik<?= $no0 ?>").html("")
+                                                        lk == "" ? $("#err_lk<?= $no0 ?>").html("Isikan LK") : $("#err_lk<?= $no0 ?>").html("")
+                                                        dosen_pembimbing == "" ? $("#err_dosen_pembimbing<?= $no0 ?>").html("Isikan Dosen Pembimbing") : $("#err_dosen_pembimbing<?= $no0 ?>").html("")
                                                     } else {
                                                         loading_sw2();
                                                         $.ajax({
                                                             type: 'POST',
-                                                            url: "_pembimbing/exc/x_v_ked_coass_psw_data_u.php",
+                                                            url: "_pembimbing/exc/x_v_ked_coass_materi_data_u.php",
                                                             data: data_form,
                                                             dataType: "JSON",
                                                             success: function(response) {
                                                                 if (response.ket == "SUCCESS") {
                                                                     $('#modal_ubah<?= $no0 ?>').modal('hide')
-                                                                    ubah_berhasil();
-                                                                    setTimeout(function() {
-                                                                        $('#data_psw')
-                                                                            .load(
-                                                                                "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                                                    }, 5000);
+                                                                    $('#data_materi')
+                                                                        .load(
+                                                                            "_pembimbing/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");
                                                                 } else simpan_gagal_database();
                                                             },
                                                             error: function(response) {
@@ -193,7 +168,7 @@
                                     </div>
                                 </div>
 
-                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_psw['id'], $customkey) ?>">
+                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_materi['id'], $customkey) ?>">
                                     <i class="fa fa-trash"></i> Hapus
                                 </a>
                             </td>
@@ -221,7 +196,7 @@
                     if (result.value) {
                         $.ajax({
                             type: 'POST',
-                            url: "_pembimbing/exc/x_v_ked_coass_psw_data_h.php",
+                            url: "_pembimbing/exc/x_v_ked_coass_materi_data_h.php",
                             data: {
                                 id: $(this).attr('id')
                             },
@@ -229,9 +204,9 @@
                             success: function(response) {
                                 if (response.ket == "SUCCESS") {
                                     hapus_berhasil();
-                                    $('#data_psw')
+                                    $('#data_materi')
                                         .load(
-                                            "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                            "_pembimbing/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");
                                 } else simpan_gagal_database();
                                 swal.close();
                             },

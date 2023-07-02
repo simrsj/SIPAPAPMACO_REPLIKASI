@@ -14,7 +14,7 @@
         $r_psw = $q_psw->rowCount();
     } catch (PDOException $ex) {
         echo "<script>alert('ERROR DATA JADWAL KEGIATAN HARIAN INPUT');</script>";
-        // echo "<script>document.location.href='?error404';</script>";
+        echo "<script>document.location.href='?error404';</script>";
     }
     ?>
     <?php if ($r_psw > 0) { ?>
@@ -138,31 +138,25 @@
                                                         value: "<?= encryptString($d_psw['id'], $customkey) ?>"
                                                     });
                                                     var ruang = $("#ruang<?= $no0 ?>").val();
-                                                    var tgl = $("#tgl<?= $no0 ?>").val();
-                                                    var nama_pasien = $("#nama_pasien<?= $no0 ?>").val();
+                                                    var nama = $("#nama<?= $no0 ?>").val();
                                                     var usia = $("#usia<?= $no0 ?>").val();
-                                                    var jenis_kelamin = $("#jenis_kelamin<?= $no0 ?>").val();
-                                                    var medrec = $("#medrec<?= $no0 ?>").val();
-                                                    var diagnosis = $("#diagnosis<?= $no0 ?>").val();
+                                                    var dd = $("#dd<?= $no0 ?>").val();
+                                                    var diagnosis_kerja = $("#diagnosis_kerja<?= $no0 ?>").val();
                                                     var terapi = $("#terapi<?= $no0 ?>").val();
                                                     if (
                                                         ruang == "" ||
-                                                        tgl == "" ||
-                                                        nama_pasien == "" ||
+                                                        nama == "" ||
                                                         usia == "" ||
-                                                        jenis_kelamin == "" ||
-                                                        medrec == "" ||
-                                                        diagnosis == "" ||
+                                                        dd == "" ||
+                                                        diagnosis_kerja == "" ||
                                                         terapi == ""
                                                     ) {
                                                         simpan_tidaksesuai();
                                                         ruang == "" ? $("#err_ruang<?= $no0 ?>").html("Pilih Ruang") : $("#err_ruang<?= $no0 ?>").html("");
-                                                        tgl == "" ? $("#err_tgl<?= $no0 ?>").html("Pilih Tanggal") : $("#err_tgl<?= $no0 ?>").html("");
-                                                        nama_pasien == "" ? $("#err_nama_pasien<?= $no0 ?>").html("Isikan Nama Pasien") : $("#err_nama_pasien<?= $no0 ?>").html("")
+                                                        nama == "" ? $("#err_nama<?= $no0 ?>").html("Isikan Nama Pasien") : $("#err_nama<?= $no0 ?>").html("")
                                                         usia == "" ? $("#err_usia<?= $no0 ?>").html("Isikan Usia") : $("#err_usia<?= $no0 ?>").html("")
-                                                        jenis_kelamin == "" ? $("#err_jenis_kelamin<?= $no0 ?>").html("Pilih Jenis Kelamin") : $("#err_jenis_kelamin<?= $no0 ?>").html("")
-                                                        medrec == "" ? $("#err_medrec<?= $no0 ?>").html("Isikan Medrec") : $("#err_medrec<?= $no0 ?>").html("")
-                                                        diagnosis == "" ? $("#err_diagnosis<?= $no0 ?>").html("Isikan Diagnosis") : ("#err_diagnosis<?= $no0 ?>").html("")
+                                                        dd == "" ? $("#err_dd<?= $no0 ?>").html("Isiskan DD") : $("#err_dd<?= $no0 ?>").html("")
+                                                        diagnosis_kerja == "" ? $("#err_diagnosis<?= $no0 ?>").html("Isikan Diagnosis") : ("#err_diagnosis<?= $no0 ?>").html("")
                                                         terapi == "" ? $("#err_terapi<?= $no0 ?>").html("Isikan Terapi") : $("#err_terapi<?= $no0 ?>").html("")
                                                     } else {
                                                         loading_sw2();
@@ -174,12 +168,9 @@
                                                             success: function(response) {
                                                                 if (response.ket == "SUCCESS") {
                                                                     $('#modal_ubah<?= $no0 ?>').modal('hide')
-                                                                    ubah_berhasil();
-                                                                    setTimeout(function() {
-                                                                        $('#data_psw')
-                                                                            .load(
-                                                                                "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                                                    }, 5000);
+                                                                    $('#data_psw')
+                                                                        .load(
+                                                                            "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
                                                                 } else simpan_gagal_database();
                                                             },
                                                             error: function(response) {
