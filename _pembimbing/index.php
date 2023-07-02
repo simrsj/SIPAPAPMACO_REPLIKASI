@@ -75,6 +75,9 @@ if ($_SESSION['status_user'] == "Y") {
 										<a class="dropdown-item " href="?elogbook=psw">
 											Pembuatan Status Wajib
 										</a>
+										<a class="dropdown-item " href="?elogbook=materi">
+											Materi
+										</a>
 									<?php } ?>
 								<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
 									<a class="dropdown-item" href="?kep_nilai">

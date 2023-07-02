@@ -25,6 +25,11 @@ else if (isset($_GET["elogbook"])) {
 	else if ($_GET["elogbook"] == "psw") {
 		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_psw_input.php";
 		else include "_pembimbing/view/v_ked_coass_psw.php";
+	}
+	//data Log Book materi
+	else if ($_GET["elogbook"] == "materi") {
+		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_materi_input.php";
+		else include "_pembimbing/view/v_ked_coass_materi.php";
 	} else pilihmenu();
 } else pilihmenu();
 
