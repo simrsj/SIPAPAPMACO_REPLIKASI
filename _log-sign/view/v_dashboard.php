@@ -36,22 +36,16 @@
                     <?= $d_praktik['akronim_institusi']; ?>
                   <?php } ?>
                 </span><br>
-                <?php
-                if ($d_praktik['logo_institusi'] == '') {
-                  $link_logo_institusi = "./_img/logo_institusi/default.png";
-                } else {
-                  $link_logo_institusi = $d_praktik['logo_institusi'];
-                }
-                ?>
                 <div class="flip-container">
-                  <img src="<?= $link_logo_institusi; ?>" class="img-fluid rounded flip-image" alt="Responsive image" width="30px" height="30px">
+                  <?php if ($d_praktik['logo_institusi'] == '') { ?>
+                    <span class="badge badge-danger">Data Logo Tidak Ada</span>
+                  <?php } else { ?>
+                    <img src="<?= $d_praktik['logo_institusi']; ?>" class="img-fluid rounded flip-image" alt="<?= $d_praktik['nama_institusi']; ?>" width="30px" height="30px">
+                  <?php }  ?>
                 </div>
-                <?= $d_praktik['nama_jurusan_pdd']; ?>
-                <br>
+                <?= $d_praktik['nama_jurusan_pdd']; ?> &nbsp;
                 <?php if ($d_praktik['id_profesi_pdd'] != 0) { ?>
                   (<?= $d_praktik['nama_profesi_pdd']; ?>)
-                <?php } else { ?>
-                  (-)
                 <?php } ?>
                 <br>
                 <?= $d_praktik['jumlah_praktik']; ?> Orang
