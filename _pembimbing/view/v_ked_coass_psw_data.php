@@ -50,7 +50,7 @@
                                     <i class=" fa fa-edit"></i> Ubah
                                 </a>
 
-                                <div class="modal" id="modal_ubah<?= $no0; ?>" tabindex="-1" role="dialog" aria-labelledby="modal_ubah<?= $no0; ?>" aria-hidden="true">
+                                <div class="modal" id="modal_ubah<?= $no0; ?>" role="dialog" aria-labelledby="modal_ubah<?= $no0; ?>" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header bg-primary text-light">

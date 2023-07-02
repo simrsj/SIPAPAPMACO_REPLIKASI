@@ -103,6 +103,7 @@ function hapus_berhasil() {
     },
   });
 }
+
 function error() {
   Swal.fire({
     allowOutsideClick: true,
@@ -116,5 +117,22 @@ function error() {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
+  });
+}
+
+function idle_logout() {
+  Swal.fire({
+    allowOutsideClick: false,
+    backdrop: true,
+    icon: "warning",
+    html: "Anda <b>IDLE/AFK</b> selama 2 Jam, akan <b>LOGOUT</b> secara Otomatis",
+    showConfirmButton: true,
+    timer: 60000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  }).then(function () {
+    document.location.href = "?lo";
   });
 }

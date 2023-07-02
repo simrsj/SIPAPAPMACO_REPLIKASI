@@ -14,6 +14,7 @@ include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
 include "_add-ons/crypt.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -23,7 +24,7 @@ include "_add-ons/crypt.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>SIPAPAP MACO</title>
-    <link rel="icon" href="./_img/logorsj.ico">
+    <link rel="icon" href="_img/logorsj.ico">
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -41,13 +42,12 @@ include "_add-ons/crypt.php";
 </head>
 
 <body id="page-top" class="bg-sipapapmaco-abstrack1">
-    <!-- <div class="preloader">
+    <div class="preloader">
         <div class="loading">
             <div class="loader loader-main"></div>
         </div>
-    </div> -->
+    </div>
     <?php
-
     if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
     elseif (isset($_GET['test'])) include "test.php";
     elseif (isset($_GET['logbookked'])) include "_praktikan\logbookked.php";
@@ -64,6 +64,23 @@ include "_add-ons/crypt.php";
             ) include "_admin/index.php";
             elseif ($_SESSION['level_user'] == 4) include "_pembimbing/index.php";
             elseif ($_SESSION['level_user'] == 5) include "_praktikan/index.php";
+    ?>
+            <script>
+                setTimeout(function() {
+                    idle_logout();
+                    $.ajax({
+                        // type: 'POST',
+                        url: "_log-sign/exc/x_log_out.php",
+                        // data: data_kerjasama,
+                        success: function() {},
+                        error: function() {
+                            error()
+                        }
+                    });
+                    // }, 7200000);
+                }, 5000);
+            </script>
+    <?php
         } elseif ($_SESSION['status_user'] == 'T') {
             echo "
             <script>
@@ -115,8 +132,8 @@ include "_add-ons/crypt.php";
         ?>
         // alert = function() {};
         $('img').mousedown(function(e) {
-            if (e.button == 2) { // right click
-                return false; // do nothing!
+            if (e.button == 2) {
+                return false;
             }
         });
     </script>

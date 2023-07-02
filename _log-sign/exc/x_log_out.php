@@ -1,4 +1,5 @@
 <?php
+session_start();
 $GLOBALS['idu'] = null;
 session_destroy();
 ?>
