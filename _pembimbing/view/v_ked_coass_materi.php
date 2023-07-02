@@ -19,7 +19,7 @@
         <?php if ($r_bimbingan > 0) { ?>
             <div class="card shadow mb-4">
                 <div class="card-header bg-primary text-light b text-uppercase">
-                    Daftar Praktikan
+                    Daftar Praktikan (Materi)
                 </div>
                 <div class="card-body p-2">
                     <div class="table-responsive">

@@ -19,7 +19,7 @@
         <?php if ($r_bimbingan > 0) { ?>
             <div class="card shadow mb-4">
                 <div class="card-header bg-primary text-light b">
-                    Pencapaian Komptensi Keterampilan P3D
+                    Daftar Praktikan (Pencapaian Komptensi Keterampilan/P3D)
                 </div>
                 <div class="card-body p-2">
                     <div class="table-responsive">
