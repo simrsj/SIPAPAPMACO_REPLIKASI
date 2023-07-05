@@ -30,6 +30,11 @@ else if (isset($_GET["elogbook"])) {
 	else if ($_GET["elogbook"] == "materi") {
 		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_materi_input.php";
 		else include "_pembimbing/view/v_ked_coass_materi.php";
+	}
+	//data Log Book materi
+	else if ($_GET["elogbook"] == "lppp") {
+		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_materi_lppp.php";
+		else include "_pembimbing/view/v_ked_coass_lppp.php";
 	} else pilihmenu();
 } else pilihmenu();
 
