@@ -50,6 +50,9 @@
                                     <th scope="col" data-toggle="tooltip" data-placement="top" title="DIRECT OBSERVATION PROCEDURAL SKILLS">
                                         DOPS&nbsp;&nbsp;
                                     </th>
+                                    <th scope="col" data-toggle="tooltip" data-placement="top" title="CASE BASED DISCUSSION">
+                                        CBD&nbsp;&nbsp;
+                                    </th>
                                     <th scope="col">Nilai</th>
                                 </tr>
                             </thead>
@@ -69,6 +72,7 @@
                                         <td><?= $d_bimbingan['rps'] == NULL ? "-" : $d_bimbingan['rps'] ?></td>
                                         <td><?= $d_bimbingan['osler'] == NULL ? "-" : $d_bimbingan['osler'] ?></td>
                                         <td><?= $d_bimbingan['dops'] == NULL ? "-" : $d_bimbingan['dops'] ?></td>
+                                        <td><?= $d_bimbingan['cbd'] == NULL ? "-" : $d_bimbingan['cbd'] ?></td>
                                         <td class=" text-center">
                                             <a class="btn btn-outline-success btn-sm" href="?ked_coass_nilai&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
                                                 Nilai

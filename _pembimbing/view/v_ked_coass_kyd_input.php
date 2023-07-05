@@ -178,7 +178,7 @@
                                 success: function(response) {
                                     if (response.ket == "SUCCESS") {
                                         $('#modal_tambah').modal('hide')
-                                        simpan_berhasil();
+                                        simpan_berhasil("");
                                         loading_sw2();
                                         $('#data_kyd')
                                             .load(

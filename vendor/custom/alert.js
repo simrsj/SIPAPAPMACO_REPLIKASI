@@ -24,7 +24,7 @@ function simpan_tidaksesuai() {
   });
 }
 
-function simpan_berhasil() {
+function simpan_berhasil(link) {
   Swal.fire({
     allowOutsideClick: true,
     backdrop: true,
@@ -37,6 +37,8 @@ function simpan_berhasil() {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
+  }).then(function () {
+    document.location.href = link;
   });
 }
 
