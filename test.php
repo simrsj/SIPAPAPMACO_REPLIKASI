@@ -1,28 +1,44 @@
 <div class="card bg-light text-black shadow m-2">
+    <style>
+        .radio {
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="radio"]:checked+label {
+            color: white;
+        }
+
+        input[type="radio"][id="red"]:checked+label {
+            background-color: red;
+        }
+
+        input[type="radio"][id="yellow"]:checked+label {
+            background-color: yellow;
+        }
+
+        input[type="radio"][id="green"]:checked+label {
+            background-color: green;
+        }
+    </style>
     <div class="card-body">
-        <?php
+        <input type="radio" name="color" id="red" checked>
+        <label for="red" class="radio">Red</label>
 
-        // KEY:
-        $key = "SIPAPAPMACORSJPROVJABAR";
-        $string = "SM";
-        $key = "your-secret-key";
-        $data = "123abcXYZ";
-        $method = "aes-256-cbc";
-        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($method));
-        $encrypted = openssl_encrypt($data, $method, $key, OPENSSL_RAW_DATA, $iv);
-        $result = base64_encode($iv . $encrypted);
-        echo $result;
+        <input type="radio" name="color" id="yellow">
+        <label for="yellow" class="radio">Yellow</label>
 
-        $key = "your-secret-key";
-        $encrypted = base64_decode($result);
-        $method = "aes-256-cbc";
-        $iv_length = openssl_cipher_iv_length($method);
-        $iv = substr($encrypted, 0, $iv_length);
-        $data = substr($encrypted, $iv_length);
-        $decrypted = openssl_decrypt($data, $method, $key, OPENSSL_RAW_DATA, $iv);
-        echo $decrypted;
+        <input type="radio" name="color" id="green">
+        <label for="green" class="radio">Green</label>
 
-        ?>
 
     </div>
 </div>

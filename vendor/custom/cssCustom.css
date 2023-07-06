@@ -220,6 +220,7 @@ height: 25px;
   transform: translate(-50%, -50%);
   font: 14px arial;
 }
+
 .rotate {
   animation: rotation 2s infinite linear;
 }
@@ -302,4 +303,37 @@ tfoot {
 }
 .u{
   text-decoration: underline;
+}
+
+.radio {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+}
+
+input[class="radio"] {
+  display: none;
+}
+
+  .primary:checked+label {
+  color: white;
+  background-color: #4D72DD;
+}
+
+  .success:checked+label {
+  color: white;
+  background-color: #1CC88A;
+}
+
+  .warning:checked+label {
+  color: white;
+  background-color: #F6C23E;
+}
+
+.danger:checked+label {
+  color: white;
+  background-color: #E74A3B;
 }

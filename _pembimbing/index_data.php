@@ -33,7 +33,7 @@ else if (isset($_GET["elogbook"])) {
 	}
 	//data Log Book materi
 	else if ($_GET["elogbook"] == "lppp") {
-		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_materi_lppp.php";
+		if (isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_lppp.php";
 		else include "_pembimbing/view/v_ked_coass_lppp.php";
 	} else pilihmenu();
 } else pilihmenu();

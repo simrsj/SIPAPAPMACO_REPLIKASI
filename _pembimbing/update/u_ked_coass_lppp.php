@@ -42,7 +42,7 @@
         <div class="col-md">
             <div class="card shadow m-2 rounded-5">
                 <div class="card-header b ">
-                    Data Nilai
+                    Lembar Penilaian Perilaku Profesional
                 </div>
                 <div class="card-body text-center">
                     <div class="table-responsive text-sm">
@@ -51,19 +51,21 @@
                                 <thead class="table-dark">
                                     <tr class="text-center">
                                         <th scope='col'>No</th>
-                                        <th>Pertanyaan</th>
-                                        <th>I</th>
-                                        <th>II</th>
-                                        <th>III</th>
-                                        <th>IV</th>
+                                        <th>Aspek Penilaian</th>
+                                        <th>Ket Skor <span class="badge badge-danger">1</span></th>
+                                        <th>Ket Skor <span class="badge badge-warning">2</span></th>
+                                        <th>Ket Skor <span class="badge badge-success">3</span></th>
+                                        <th width="200px">Pilih SKOR</th>
                                     </tr>
                                     <tr class="text-center bg-secondary">
-                                        <th colspan="2 text-right" class="text-right">Pilih Semua-></th>
-                                        <th class="text-center"><input type="checkbox" class="checkbox-md" id="i_all"></th>
-                                        <th class="text-center"><input type="checkbox" class="checkbox-md" id="ii_all"></th>
-                                        <th class="text-center"><input type="checkbox" class="checkbox-md" id="iii_all"></th>
-                                        <th class="text-center"><input type="checkbox" class="checkbox-md" id="iv_all"></th>
-
+                                        <th colspan="5 text-right" class="text-right">Pilih Semua-></th>
+                                        <th class="text-center">
+                                            <div class="row">
+                                                <div class="col"><span class="badge badge-danger">1</span><br><input type="radio" name="ck" class="checkbox-md" id="i_all"></div>
+                                                <div class="col"><span class="badge badge-warning">2</span><br><input type="radio" name="ck" class="checkbox-md" id="ii_all"></div>
+                                                <div class="col"><span class="badge badge-success">3</span><br><input type="radio" name="ck" class="checkbox-md" id="iii_all"></div>
+                                            </div>
+                                        </th>
                                         <script>
                                             function checkboxi() {
                                                 var totalCheckbox = $('.checkboxi').length;
@@ -97,17 +99,6 @@
                                                     $("#iii_all").prop("checked", false);
                                                 }
                                             }
-
-                                            function checkboxiv() {
-                                                var totalCheckbox = $('.checkboxiv').length;
-                                                var totalChecked = $('.checkboxiv:checked').length;
-
-                                                if (totalChecked == totalCheckbox) {
-                                                    $("#iv_all").prop("checked", true);
-                                                } else {
-                                                    $("#iv_all").prop("checked", false);
-                                                }
-                                            }
                                             $(document).ready(function() {
                                                 $("#i_all").click(function() {
                                                     if ($(this).is(":checked")) {
@@ -130,13 +121,6 @@
                                                         $(".checkboxiii").prop("checked", false);
                                                     }
                                                 });
-                                                $("#iv_all").click(function() {
-                                                    if ($(this).is(":checked")) {
-                                                        $(".checkboxiv").prop("checked", true);
-                                                    } else {
-                                                        $(".checkboxiv").prop("checked", false);
-                                                    }
-                                                });
                                             });
                                         </script>
                                     </tr>
@@ -145,7 +129,7 @@
                                     <?php
                                     try {
                                         $sql_pertanyaan = "SELECT * FROM tb_pertanyaan ";
-                                        $sql_pertanyaan .= " WHERE kategori_pertanyaan = 'P3D'";
+                                        $sql_pertanyaan .= " WHERE kategori_pertanyaan = 'LPPP'";
                                         // echo "$sql_pertanyaan<br>";
                                         $q_pertanyaan = $conn->query($sql_pertanyaan);
                                     } catch (Exception $ex) {
@@ -155,20 +139,27 @@
                                     $no = 1;
                                     ?>
                                     <?php while ($d_pertanyaan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) { ?>
-                                        <tr>
+                                        <tr class="m-auto">
                                             <td class="text-center"><?= $no; ?></td>
                                             <td><?= $d_pertanyaan['pertanyaan']; ?></td>
-                                            <td>
-                                                <input type="checkbox" class="checkbox-md checkboxi" id="i<?= $no ?>" name="i<?= $no ?>" onclick="checkboxi()" value="Y">
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" class="checkbox-md checkboxii" id="ii<?= $no ?>" name="ii<?= $no ?>" onclick="checkboxii()" value="Y">
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" class="checkbox-md checkboxiii" id="iii<?= $no ?>" name="iii<?= $no ?>" onclick="checkboxiii()" value="Y">
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" class="checkbox-md checkboxiv" id="iv<?= $no ?>" name="iv<?= $no ?>" onclick="checkboxiv()" value="Y">
+                                            <td><?= $d_pertanyaan['p1']; ?></td>
+                                            <td><?= $d_pertanyaan['p2']; ?></td>
+                                            <td><?= $d_pertanyaan['p3']; ?></td>
+                                            <td style="vertical-align: middle; text-align: center;">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="radio" class="checkbox-md checkboxi danger" id="i<?= $no ?>" name="skor<?= $no ?>" onclick="checkboxi()" value="1">
+                                                        <label for="i<?= $no ?>" class="radio ">1</label>
+                                                    </div>
+                                                    <div class="col warning">
+                                                        <input type="radio" class="checkbox-md checkboxii warning" id="ii<?= $no ?>" name="skor<?= $no ?>" onclick="checkboxii()" value="2">
+                                                        <label for="ii<?= $no ?>" class="radio">2</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="radio" class="checkbox-md checkboxiii success" id="iii<?= $no ?>" name="skor<?= $no ?>" onclick="checkboxiii()" value="3">
+                                                        <label for="iii<?= $no ?>" class="radio">3</label>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <?php $no++; ?>
@@ -198,6 +189,7 @@
                         <script>
                             $(document).on('click', '.simpan', function() {
                                 var data_form = $("#form_nilai").serializeArray();
+
                                 data_form.push({
                                     name: "idpr",
                                     value: "<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>"
@@ -207,14 +199,14 @@
                                 });
                                 $.ajax({
                                     type: 'POST',
-                                    url: "_pembimbing/exc/x_u_ked_coass_p3d.php",
+                                    url: "_pembimbing/exc/x_u_ked_coass_lppp.php",
                                     data: data_form,
                                     dataType: "JSON",
                                     success: function(response) {
-                                        response.ket == "ERROR" ? simpan_gagal_database() : simpan_berhasil("?elogbook=<?= $_GET['elogbook'] ?>")
+                                        response.ket == "SUCCESS" ? simpan_berhasil("?elogbook=<?= $_GET['elogbook'] ?>") : simpan_gagal_database()
                                     },
                                     error: function(response) {
-                                        console.log(response);
+                                        error();
                                     }
                                 });
                             });
