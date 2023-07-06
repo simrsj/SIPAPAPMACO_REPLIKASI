@@ -56,11 +56,11 @@
                                         }
                                         ?>
                                         <?php if ($r_pertanyaan > 0) { ?>
-                                            <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_p3d<?= $no ?>">
+                                            <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_lppp<?= $no ?>">
                                                 <i class="fas fa-eye"></i> Lihat
                                             </a>
                                             <!-- Logout Modal-->
-                                            <div class="modal" id="modal_data_p3d<?= $no ?>" tabindex="-1" role="dialog" aria-labelledby="modal_data_p3d<?= $no ?>" aria-hidden="true">
+                                            <div class="modal" id="modal_data_lppp<?= $no ?>" role="dialog" aria-labelledby="modal_data_lppp<?= $no ?>" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header bg-secondary text-light">
@@ -117,6 +117,30 @@
                                                                     ?>
                                                                 </tbody>
                                                             </table>
+                                                            <?php
+                                                            try {
+                                                                $sql_ket = "SELECT * FROM tb_logbook_ked_coass_lppp_ket ";
+                                                                $sql_ket .= " WHERE id_praktikan = " . $d_bimbingan['id_praktikan'];
+                                                                echo "$sql_ket<br>";
+                                                                $q_ket = $conn->query($sql_ket);
+                                                                $d_ket = $q_ket->fetch(PDO::FETCH_ASSOC);
+                                                            } catch (PDOException $ex) {
+                                                                echo "<script>alert('DATA KET');</script>";
+                                                                echo "<script>document.location.href='?error404';</script>";
+                                                            }
+                                                            ?>
+                                                            <div class="text-center mb-2">
+                                                                Kejadian-kejadian terkait dengan perilaku Profesional selama kegiatan kepaniteraan berlangsung
+                                                                <div class="border-1">
+                                                                    <?php if ($r_ket > 0) { ?>
+                                                                        <?php
+                                                                        echo $d_ket['ket']
+                                                                        ?>
+                                                                    <?php } else { ?>
+                                                                        <div class='text-danger'>DATA TIDAK ADA</div>
+                                                                    <?php } ?>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

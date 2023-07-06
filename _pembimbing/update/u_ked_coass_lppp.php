@@ -166,11 +166,16 @@
                                     <?php } ?>
                                 </tbody>
                             </table>
+                            <div class="text-center mb-2">
+                                Kejadian-kejadian terkait dengan perilaku Profesional selama kegiatan kepaniteraan berlangsung
+                                <div class="text-danger text-xs">Bila tidak kejadian yang perlu dilaporkan maka diisi <b>NIHIL</b></div>
+                                <textarea class="form-control" rows="3" id="ket" nama="ket"></textarea>
+                                <div id="err_ket" class="text-xs text-danger i blink"></div>
+                            </div>
                             <a class="btn btn-success btn-sm col" href="#" data-toggle="modal" data-target="#modal_simpan">
                                 SIMPAN
                             </a>
-                            <!-- Logout Modal-->
-                            <div class="modal" id="modal_simpan" tabindex="-1" role="dialog" aria-labelledby="modal_simpan" aria-hidden="true">
+                            <div class="modal" id="modal_simpan" role="dialog" aria-labelledby="modal_simpan" aria-hidden="true">
                                 <div class="modal-dialog modal-sm" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -189,26 +194,34 @@
                         <script>
                             $(document).on('click', '.simpan', function() {
                                 var data_form = $("#form_nilai").serializeArray();
+                                var ket = $('#ket').val();
 
                                 data_form.push({
                                     name: "idpr",
                                     value: "<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>"
                                 }, {
-                                    name: "no",
-                                    value: "<?= $q_pertanyaan->rowCount(); ?>"
+                                    name: "ket",
+                                    value: ket
                                 });
-                                $.ajax({
-                                    type: 'POST',
-                                    url: "_pembimbing/exc/x_u_ked_coass_lppp.php",
-                                    data: data_form,
-                                    dataType: "JSON",
-                                    success: function(response) {
-                                        response.ket == "SUCCESS" ? simpan_berhasil("?elogbook=<?= $_GET['elogbook'] ?>") : simpan_gagal_database()
-                                    },
-                                    error: function(response) {
-                                        error();
-                                    }
-                                });
+                                // console.log('keterangan' + ket)
+                                if (ket == "") {
+                                    simpan_tidaksesuai();
+                                    ket == "" ? $("#err_ket").html("Isikan Datanya") : $("#err_ket").html("");
+                                    $('#modal_simpan').modal('hide');
+                                } else {
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "_pembimbing/exc/x_u_ked_coass_lppp.php",
+                                        data: data_form,
+                                        dataType: "JSON",
+                                        success: function(response) {
+                                            response.ket == "SUCCESS" ? simpan_berhasil("?elogbook=<?= $_GET['elogbook'] ?>") : simpan_gagal_database()
+                                        },
+                                        error: function(response) {
+                                            error();
+                                        }
+                                    });
+                                }
                             });
                         </script>
                     </div>
