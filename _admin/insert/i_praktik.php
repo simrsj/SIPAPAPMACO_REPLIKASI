@@ -641,7 +641,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                             html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
                                             title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan</span>',
                                             showConfirmButton: false,
-                                            timer: 10000123,
+                                            timer: 5000,
                                             timerProgressBar: true,
                                             didOpen: (toast) => {
                                                 toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -649,7 +649,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                             }
                                         }).then(
                                             function() {
-                                                // document.location.href = "?ptk";
+                                                document.location.href = "?ptk";
                                             }
                                         );
                                     },

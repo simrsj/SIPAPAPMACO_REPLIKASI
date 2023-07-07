@@ -307,24 +307,44 @@ if ($d_prvl['r_praktik'] == "Y") {
                             </td>
                             <!-- status data praktikan-->
                             <td class="align-middle">
-                                <?php
-                                $sql_praktikan = "SELECT * FROM tb_praktikan ";
-                                $sql_praktikan .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                try {
-                                    $q_praktikan = $conn->query($sql_praktikan);
-                                } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -MESS PILIH PRAKTIK-');";
-                                    echo "document.location.href='?error404';</script>";
-                                }
-                                $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
-                                $r_praktikan = $q_praktikan->rowCount();
-                                ?>
+                                <?php if ($d_praktik['status_alasan'] == "T") { ?>
+                                    <div class="badge badge-danger">Alasan Mess Ditolak</div>
+                                <?php } else { ?>
+                                    <?php
+                                    $sql_praktikan = "SELECT * FROM tb_praktikan ";
+                                    $sql_praktikan .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                    try {
+                                        $q_praktikan = $conn->query($sql_praktikan);
+                                    } catch (Exception $ex) {
+                                        echo "<script>alert('$ex -MESS PILIH PRAKTIK-');";
+                                        echo "document.location.href='?error404';</script>";
+                                    }
+                                    $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
+                                    $r_praktikan = $q_praktikan->rowCount();
+                                    ?>
 
-                                <?php if ($d_praktik['status_mess_praktik'] == 'T') { ?>
-                                    <?php if ($d_praktik['status_alasan'] == 'T') { ?>
-                                        <span class="badge badge-danger">Alasan Mess Ditolak</span>
-                                    <?php } else if ($d_praktik['status_alasan'] == 'Y') { ?>
-                                        <?php if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
+                                    <?php if ($d_praktik['status_mess_praktik'] == 'T') { ?>
+                                        <?php if ($d_praktik['status_alasan'] == 'T') { ?>
+                                            <span class="badge badge-danger">Alasan Mess Ditolak</span>
+                                        <?php } else if ($d_praktik['status_alasan'] == 'Y') { ?>
+                                            <?php if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
+                                                <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Semuanya</span>
+                                            <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] == $r_praktikan) { ?>
+                                                <span class="badge badge-success">Sudah Dipilih</span>
+                                            <?php } else { ?>
+                                                <span class="badge badge-secondary">Belum Dipilih</span>
+                                            <?php } ?>
+                                            <br>
+                                            <a href="?ptkn#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
+                                                <i class="fas fa-eye"></i> Lihat
+                                            </a>
+                                        <?php } else { ?>
+                                            <span class="badge badge-secondary text-wrap">Alasan Mess<br>Belum direspon ADMIN</span>
+                                        <?php } ?>
+                                    <?php } else if ($d_praktik['status_mess_praktik'] == 'Y') { ?>
+                                        <?php if ($d_praktik['status_mess_praktik'] == 'Y' && $r_mess_pilih < 1) { ?>
+                                            <span class="badge badge-warning text-dark">Mess <br>Belum Dipilih</span>
+                                        <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
                                             <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Semuanya</span>
                                         <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] == $r_praktikan) { ?>
                                             <span class="badge badge-success">Sudah Dipilih</span>
@@ -335,52 +355,40 @@ if ($d_prvl['r_praktik'] == "Y") {
                                         <a href="?ptkn#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
                                             <i class="fas fa-eye"></i> Lihat
                                         </a>
-                                    <?php } else { ?>
-                                        <span class="badge badge-secondary text-wrap">Alasan Mess<br>Belum direspon ADMIN</span>
                                     <?php } ?>
-                                <?php } else if ($d_praktik['status_mess_praktik'] == 'Y') { ?>
-                                    <?php if ($d_praktik['status_mess_praktik'] == 'Y' && $r_mess_pilih < 1) { ?>
-                                        <span class="badge badge-warning text-dark">Mess <br>Belum Dipilih</span>
+                                <?php } ?>
+                            </td>
+                            <!-- status pembimbing praktik  -->
+                            <td class="align-middle">
+                                <?php if ($d_praktik['status_alasan'] == "T") { ?>
+                                    <div class="badge badge-danger">Alasan Mess Ditolak</div>
+                                <?php } else { ?>
+                                    <?php
+                                    $sql_praktik_pembimbing = "SELECT * FROM tb_pembimbing_pilih ";
+                                    $sql_praktik_pembimbing .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                    // echo $sql_praktik_pembimbing.$d_praktik['id_praktik'];
+                                    try {
+                                        $q_praktik_pembimbing = $conn->query($sql_praktik_pembimbing);
+                                    } catch (Exception $ex) {
+                                        echo "<script>alert('$ex -PRAKTIK PEMBIMBING-');";
+                                        echo "document.location.href='?error404';</script>";
+                                    }
+                                    $r_praktik_pembimbing = $q_praktik_pembimbing->rowCount();
+
+                                    if ($r_praktikan < 1) { ?>
+                                        <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Diinput</span>
                                     <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
                                         <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Semuanya</span>
-                                    <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] == $r_praktikan) { ?>
+                                    <?php } else if ($r_praktik_pembimbing > 0) { ?>
                                         <span class="badge badge-success">Sudah Dipilih</span>
                                     <?php } else { ?>
                                         <span class="badge badge-secondary">Belum Dipilih</span>
                                     <?php } ?>
                                     <br>
-                                    <a href="?ptkn#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
+                                    <a href="?pmbb#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
                                         <i class="fas fa-eye"></i> Lihat
                                     </a>
                                 <?php } ?>
-                            </td>
-                            <!-- status pembimbing praktik  -->
-                            <td class="align-middle">
-                                <?php
-                                $sql_praktik_pembimbing = "SELECT * FROM tb_pembimbing_pilih ";
-                                $sql_praktik_pembimbing .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                // echo $sql_praktik_pembimbing.$d_praktik['id_praktik'];
-                                try {
-                                    $q_praktik_pembimbing = $conn->query($sql_praktik_pembimbing);
-                                } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -PRAKTIK PEMBIMBING-');";
-                                    echo "document.location.href='?error404';</script>";
-                                }
-                                $r_praktik_pembimbing = $q_praktik_pembimbing->rowCount();
-
-                                if ($r_praktikan < 1) { ?>
-                                    <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Diinput</span>
-                                <?php } else if ($r_praktikan > 0 && $d_praktik['jumlah_praktik'] != $r_praktikan) { ?>
-                                    <span class="badge badge-warning text-dark">Data Praktikan<br>Belum Semuanya</span>
-                                <?php } else if ($r_praktik_pembimbing > 0) { ?>
-                                    <span class="badge badge-success">Sudah Dipilih</span>
-                                <?php } else { ?>
-                                    <span class="badge badge-secondary">Belum Dipilih</span>
-                                <?php } ?>
-                                <br>
-                                <a href="?pmbb#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
-                                    <i class="fas fa-eye"></i> Lihat
-                                </a>
                             </td>
                             <?php
                             try {
@@ -398,102 +406,114 @@ if ($d_prvl['r_praktik'] == "Y") {
                             <?php if ($d_prvl['level_user'] == 1) { ?>
                                 <!-- status Tarif praktik  -->
                                 <td class="align-middle">
-                                    <?php
-                                    if ($r_praktik_pembimbing < 1) { ?>
-                                        <span class="badge badge-warning text-dark">Pembimbing<br>Belum Dipilih</span>
-                                    <?php } else if ($r_praktik_tarif > 0) { ?>
-                                        <span class="badge badge-success">Sudah Dipilih</span>
+                                    <?php if ($d_praktik['status_alasan'] == "T") { ?>
+                                        <div class="badge badge-danger">Alasan Mess Ditolak</div>
                                     <?php } else { ?>
-                                        <span class="badge badge-secondary">Belum Dipilih</span>
-                                    <?php } ?>
-                                    <br>
-                                    <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
-                                        <a href="?ptrf#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
-                                            <i class="fas fa-eye"></i> Lihat
-                                        </a>
+                                        <?php
+                                        if ($r_praktik_pembimbing < 1) { ?>
+                                            <span class="badge badge-warning text-dark">Pembimbing<br>Belum Dipilih</span>
+                                        <?php } else if ($r_praktik_tarif > 0) { ?>
+                                            <span class="badge badge-success">Sudah Dipilih</span>
+                                        <?php } else { ?>
+                                            <span class="badge badge-secondary">Belum Dipilih</span>
+                                        <?php } ?>
+                                        <br>
+                                        <?php if ($d_prvl['r_praktik_tarif'] == 'Y') { ?>
+                                            <a href="?ptrf#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
+                                                <i class="fas fa-eye"></i> Lihat
+                                            </a>
+                                        <?php } ?>
                                     <?php } ?>
                                 </td>
                             <?php } ?>
                             <!-- status bayar praktik  -->
                             <td class="align-middle">
-                                <?php
-                                $sql_praktik_bayar = "SELECT * FROM tb_bayar ";
-                                $sql_praktik_bayar .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                try {
-                                    $q_praktik_bayar = $conn->query($sql_praktik_bayar);
-                                } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -PRAKTIK BAYAR-');";
-                                    echo "document.location.href='?error404';</script>";
-                                }
-                                $d_praktik_bayar = $q_praktik_bayar->fetch(PDO::FETCH_ASSOC);
-                                $r_praktik_bayar = $q_praktik_bayar->rowCount();
+                                <?php if ($d_praktik['status_alasan'] == "T") { ?>
+                                    <div class="badge badge-danger">Alasan Mess Ditolak</div>
+                                <?php } else { ?>
+                                    <?php
+                                    $sql_praktik_bayar = "SELECT * FROM tb_bayar ";
+                                    $sql_praktik_bayar .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                    try {
+                                        $q_praktik_bayar = $conn->query($sql_praktik_bayar);
+                                    } catch (Exception $ex) {
+                                        echo "<script>alert('$ex -PRAKTIK BAYAR-');";
+                                        echo "document.location.href='?error404';</script>";
+                                    }
+                                    $d_praktik_bayar = $q_praktik_bayar->fetch(PDO::FETCH_ASSOC);
+                                    $r_praktik_bayar = $q_praktik_bayar->rowCount();
 
-                                if ($r_praktik_tarif > 0 && $r_praktik_bayar > 0) {
-                                    if ($d_praktik_bayar['status_bayar'] == 'T') {
-                                ?>
-                                        <span class="badge badge-primary m-1">Proses Verifikasi</span>
-                                    <?php
-                                    } elseif ($d_praktik_bayar['status_bayar'] == 'TERIMA') {
+                                    if ($r_praktik_tarif > 0 && $r_praktik_bayar > 0) {
+                                        if ($d_praktik_bayar['status_bayar'] == 'T') {
                                     ?>
-                                        <span class="badge badge-success  m-1">Verifikasi<br>Diterima</span>
+                                            <span class="badge badge-primary m-1">Proses Verifikasi</span>
+                                        <?php
+                                        } elseif ($d_praktik_bayar['status_bayar'] == 'TERIMA') {
+                                        ?>
+                                            <span class="badge badge-success  m-1">Verifikasi<br>Diterima</span>
+                                        <?php
+                                        } elseif ($d_praktik_bayar['status_bayar'] == 'TOLAK') {
+                                        ?>
+                                            <span class="badge badge-danger  m-1">Verifikasi<br>Ditolak</span>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <span class="badge badge-danger">ERROR</span>
+                                        <?php
+                                        }
+                                    } else if ($r_praktik_tarif > 0 && $r_praktik_bayar < 1) {
+                                        ?>
+                                        <span class="badge badge-danger">Belum Dibayar</span>
                                     <?php
-                                    } elseif ($d_praktik_bayar['status_bayar'] == 'TOLAK') {
+                                    } else if ($r_praktik_tarif < 1) {
                                     ?>
-                                        <span class="badge badge-danger  m-1">Verifikasi<br>Ditolak</span>
+                                        <span class="badge badge-secondary">Tarif Praktik<br>Belum Dipilih</span>
                                     <?php
                                     } else {
                                     ?>
                                         <span class="badge badge-danger">ERROR</span>
                                     <?php
                                     }
-                                } else if ($r_praktik_tarif > 0 && $r_praktik_bayar < 1) {
                                     ?>
-                                    <span class="badge badge-danger">Belum Dibayar</span>
-                                <?php
-                                } else if ($r_praktik_tarif < 1) {
-                                ?>
-                                    <span class="badge badge-secondary">Tarif Praktik<br>Belum Dipilih</span>
-                                <?php
-                                } else {
-                                ?>
-                                    <span class="badge badge-danger">ERROR</span>
-                                <?php
-                                }
-                                ?>
-                                <br>
-                                <a href="?pbyr" class="btn btn-outline-info btn-xs">
-                                    <i class="fas fa-eye"></i> Lihat
-                                </a>
+                                    <br>
+                                    <a href="?pbyr" class="btn btn-outline-info btn-xs">
+                                        <i class="fas fa-eye"></i> Lihat
+                                    </a>
+                                <?php } ?>
                             </td>
                             <!-- status nilai praktik  -->
                             <td class="align-middle">
-                                <?php
-                                try {
-                                    // jika jurusan praktik keperawatan
-                                    if ($d_praktik['id_jurusan_pdd'] == 2) {
-                                        $sql_praktik_nilai = "SELECT * FROM tb_nilai_kep";
-                                    }
-                                    // jika jurusan praktik selain keperawatan
-                                    else {
-                                        $sql_praktik_nilai = "SELECT * FROM tb_nilai_upload";
-                                    }
-                                    $sql_praktik_nilai .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                    $q_praktik_nilai = $conn->query($sql_praktik_nilai);
-                                } catch (Exception $ex) {
-                                    echo "<script>alert('$ex -PRAKTIK NILAI-');";
-                                    echo "document.location.href='?error404';</script>";
-                                }
-                                $r_praktik_nilai = $q_praktik_nilai->rowCount();
-                                ?>
-                                <?php if ($r_praktik_nilai > 0) { ?>
-                                    <span class="badge badge-success">Sudah DiNilai</span>
+                                <?php if ($d_praktik['status_alasan'] == "T") { ?>
+                                    <div class="badge badge-danger">Alasan Mess Ditolak</div>
                                 <?php } else { ?>
-                                    <span class="badge badge-secondary">Belum Ada</span>
+                                    <?php
+                                    try {
+                                        // jika jurusan praktik keperawatan
+                                        if ($d_praktik['id_jurusan_pdd'] == 2) {
+                                            $sql_praktik_nilai = "SELECT * FROM tb_nilai_kep";
+                                        }
+                                        // jika jurusan praktik selain keperawatan
+                                        else {
+                                            $sql_praktik_nilai = "SELECT * FROM tb_nilai_upload";
+                                        }
+                                        $sql_praktik_nilai .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                        $q_praktik_nilai = $conn->query($sql_praktik_nilai);
+                                    } catch (Exception $ex) {
+                                        echo "<script>alert('$ex -PRAKTIK NILAI-');";
+                                        echo "document.location.href='?error404';</script>";
+                                    }
+                                    $r_praktik_nilai = $q_praktik_nilai->rowCount();
+                                    ?>
+                                    <?php if ($r_praktik_nilai > 0) { ?>
+                                        <span class="badge badge-success">Sudah DiNilai</span>
+                                    <?php } else { ?>
+                                        <span class="badge badge-secondary">Belum Ada</span>
+                                    <?php } ?>
+                                    <br>
+                                    <a href="?pnilai#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
+                                        <i class="fa-solid fa-eye"></i> Cek
+                                    </a>
                                 <?php } ?>
-                                <br>
-                                <a href="?pnilai#rincian<?= md5($d_praktik['id_praktik']); ?>" class="btn btn-outline-info btn-xs">
-                                    <i class="fa-solid fa-eye"></i> Cek
-                                </a>
                             </td>
                             <!-- Aksi praktik  -->
                             <td class="align-middle">

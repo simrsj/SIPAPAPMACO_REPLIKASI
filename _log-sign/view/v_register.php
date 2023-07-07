@@ -285,34 +285,37 @@
                                         data: data_reg,
                                         dataType: 'JSON',
                                         success: function(response) {
+                                            if (response.ket == 'ERROR') {
+                                                error();
+                                            } else {
+                                                $('#err_institusi').empty();
 
-                                            $('#err_institusi').empty();
+                                                if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
 
-                                            if ($('#err_institusi') == 0) $('#err_institusi_lain').empty();
+                                                $('#err_nama').empty();
+                                                $('#err_email').empty();
+                                                $('#err_telp').empty();
+                                                $('#err_password').empty();
+                                                $('#err_password_ulangi').empty();
+                                                $("#form_reg").trigger("reset");
+                                                $("#institusi").val("").trigger("change");
 
-                                            $('#err_nama').empty();
-                                            $('#err_email').empty();
-                                            $('#err_telp').empty();
-                                            $('#err_password').empty();
-                                            $('#err_password_ulangi').empty();
-                                            $("#form_reg").trigger("reset");
-                                            $("#institusi").val("").trigger("change");
-
-                                            Swal.fire({
-                                                icon: 'success',
-                                                html: '<div class="b ">Registrasi Berhasil</div><hr>' +
-                                                    'Silahkan Lakukan Aktivasi di Kotak Masuk E-Mail : <br><b>' + email + '</b><br>' +
-                                                    'Bila Tidak ada di Kotak Masuk (<em>Inbox</em>) silahkan cek Kotak <em class="b">SPAM</em> E-Mail Anda',
-                                                showConfirmButton: false,
-                                                timer: 15000,
-                                                timerProgressBar: true,
-                                                didOpen: (toast) => {
-                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                }
-                                            }).then(function() {
-                                                document.location.href = "?login";
-                                            });
+                                                Swal.fire({
+                                                    icon: 'success',
+                                                    html: '<div class="b ">Registrasi Berhasil</div><hr>' +
+                                                        'Silahkan Lakukan Aktivasi di Kotak Masuk E-Mail : <br><b>' + email + '</b><br>' +
+                                                        'Bila Tidak ada di Kotak Masuk (<em>Inbox</em>) silahkan cek Kotak <em class="b">SPAM</em> E-Mail Anda',
+                                                    showConfirmButton: false,
+                                                    timer: 15000,
+                                                    timerProgressBar: true,
+                                                    didOpen: (toast) => {
+                                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                    }
+                                                }).then(function() {
+                                                    document.location.href = "?login";
+                                                });
+                                            }
                                         }
                                     });
                                 },

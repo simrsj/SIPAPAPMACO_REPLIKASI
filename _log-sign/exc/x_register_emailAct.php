@@ -142,50 +142,55 @@ $isi_email = "
 $mail = new PHPMailer(true);
 
 try {
-    // cek Debug 
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-    // $mail->SMTPDebug = 2;
+  // cek Debug 
+  // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+  // $mail->SMTPDebug = 2;
 
-    // Server settings
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        )
-    );
-    $mail->isSMTP();
+  // Server settings
+  $mail->SMTPOptions = array(
+    'ssl' => array(
+      'verify_peer' => false,
+      'verify_peer_name' => false,
+      'allow_self_signed' => true
+    )
+  );
+  $mail->isSMTP();
 
-    $mail->Host = 'smtp.jabarprov.go.id';
-    $mail->SMTPAuth = true;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
-    $mail->Username = 'rsj@jabarprov.go.id';
-    $mail->Password = 'Rsjiwa*2009*';
+  // $mail->Host = 'smtp.jabarprov.go.id';
+  // $mail->SMTPAuth = true;
+  // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+  // $mail->Port = 587;
+  // $mail->Username = 'rsj@jabarprov.go.id';
+  // $mail->Password = 'Rsjiwa*2009*';
 
-    // $mail->Host = 'smtp.gmail.com';
-    // $mail->SMTPAuth = true;
-    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    // $mail->Port = 587;
-    // $mail->Username = 'rsjiwajabar@gmail.com';
-    // $mail->Password = 'jtvgvusfwgaxypyf';
+  $mail->Host = 'smtp.gmail.com';
+  $mail->SMTPAuth = true;
+  $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+  $mail->Port = 587;
+  $mail->Username = 'rsjiwajabar@gmail.com';
+  $mail->Password = 'jtvgvusfwgaxypyf';
 
-    // Sender and recipient settings
-    $mail->setFrom('rsj@jabarprov.go.id', 'SIPAPAP MACO - AKTIVASI');
-    $mail->addAddress($_POST['email'], $_POST['nama']);
-    // $mail->addReplyTo("fajar.rachmat.h@gmail.com", "RECEIVER");
+  // Sender and recipient settings
+  $mail->setFrom('rsj@jabarprov.go.id', 'SIPAPAP MACO - AKTIVASI');
+  $mail->addAddress($_POST['email'], $_POST['nama']);
+  // $mail->addReplyTo("fajar.rachmat.h@gmail.com", "RECEIVER");
 
-    // Setting the email content
-    $mail->IsHTML(true);
-    $mail->Subject = "Aktivasi Akun SIPAPAP MACO";
-    $mail->Body = $isi_email;
-    // $mail->AltBody = 'Bayar Hutang';
-    // $mail->addAttachment('tte.png');
-    if ($mail->send()) {
-        echo json_encode(['ket' => 'Sukses']);
-    } else {
-        echo json_encode(['ket' => 'Gagal']);
-    }
+  // Setting the email content
+  $mail->IsHTML(true);
+  $mail->Subject = "Aktivasi Akun SIPAPAP MACO";
+  $mail->Body = $isi_email;
+  // $mail->AltBody = 'Bayar Hutang';
+  // $mail->addAttachment('tte.png');
+  if ($mail->send()) {
+    echo json_encode(['ket' => 'Sukses']);
+  } else {
+    echo json_encode(['ket' => 'Gagal']);
+  }
 } catch (Exception $e) {
-    echo "Error in sending email. Mailer Error: {$mail->ErrorInfo}";
+  echo "Error in sending email. Mailer Error: {$mail->ErrorInfo}";
+
+  echo json_encode([
+    'detail' => $mail->ErrorInfo,
+    'ket' => 'ERROR'
+  ]);
 }
