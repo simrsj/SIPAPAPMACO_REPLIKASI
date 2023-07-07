@@ -213,13 +213,7 @@
                                                 <script>
                                                     $(document).ready(function() {
 
-                                                        Swal.fire({
-                                                            title: 'Mohon Ditunggu',
-                                                            html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                                                            allowOutsideClick: false,
-                                                            showConfirmButton: false,
-                                                            backdrop: true
-                                                        });
+                                                        loading_sw2();
                                                         $(function() {
                                                             // check if there is a hash in the url
                                                             if (window.location.hash != '') {
@@ -244,13 +238,8 @@
                                                     $(".tambah_init<?= md5($d_praktik['id_praktik']); ?>").click(function() {
                                                         console.log("tambah_init<?= md5($d_praktik['id_praktik']); ?>");
 
-                                                        Swal.fire({
-                                                            title: 'Mohon Ditunggu',
-                                                            html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                                                            allowOutsideClick: false,
-                                                            showConfirmButton: false,
-                                                            backdrop: true
-                                                        });
+
+                                                        loading_sw2();
                                                         $('#err_t_foto<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                         $('#err_t_no_id<?= md5($d_praktik['id_praktik']); ?>').empty();
                                                         $('#err_t_nama<?= md5($d_praktik['id_praktik']); ?>').empty();
@@ -279,13 +268,8 @@
                                                     // inisiasi klik modal tambah simpan
                                                     $(document).on('click', '.tambah<?= md5($d_praktik['id_praktik']); ?>', function() {
 
-                                                        Swal.fire({
-                                                            title: 'Mohon Ditunggu',
-                                                            html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                                                            allowOutsideClick: false,
-                                                            showConfirmButton: false,
-                                                            backdrop: true
-                                                        });
+
+                                                        loading_sw2();
                                                         // console.log("tambah<?= md5($d_praktik['id_praktik']); ?>");
                                                         var idp = $(this).attr('id');
                                                         var data_t = $("#form_t<?= md5($d_praktik['id_praktik']); ?>").serializeArray();
@@ -391,7 +375,6 @@
                                                                 else
                                                                     $("#err_t_ijazah<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                             <?php } ?>
-
                                                             // if (t_swab == "" || t_swab == undefined)
                                                             //     $("#err_t_swab<?= md5($d_praktik['id_praktik']); ?>").html("Swab/Serfikat Vaksin Harus Dipilih");
                                                             // else if (getTypeSwab != "pdf")
@@ -431,19 +414,7 @@
                                                                 $("#err_t_telpon<?= md5($d_praktik['id_praktik']); ?>").html("");
                                                             }
 
-                                                            Swal.fire({
-                                                                allowOutsideClick: true,
-                                                                showConfirmButton: false,
-                                                                icon: 'warning',
-                                                                html: '<div class="text-lg b">DATA ADA YANG TIDAK SESUAI</div>',
-                                                                timer: 3000,
-                                                                timerProgressBar: true,
-                                                                backdrop: true,
-                                                                didOpen: (toast) => {
-                                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                                }
-                                                            });
+                                                            simpan_tidaksesuai()
                                                         }
                                                         //simpan data tambah bila sudah sesuai
                                                         else {
@@ -474,28 +445,11 @@
                                                                         xhttp.open("POST", "_admin/exc/x_v_praktik_praktikan_sFile.php", true);
 
                                                                         xhttp.onload = function() {
-                                                                            if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("size"))) ?>") {
-                                                                                console.log("size too big");
-                                                                                Swal.fire({
-                                                                                    allowOutsideClick: true,
-                                                                                    icon: 'warning',
-                                                                                    html: '<span class="text-danger text-lg text-center">Ukuran File Terlalu Besar</span>',
-                                                                                    showConfirmButton: false,
-                                                                                    backdrop: true,
-                                                                                    timer: 5000,
-                                                                                    timerProgressBar: true
-                                                                                });
-                                                                            } else if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("type"))); ?>") {
-                                                                                console.log("Tipe Different");
-                                                                                Swal.fire({
-                                                                                    allowOutsideClick: true,
-                                                                                    icon: 'warning',
-                                                                                    html: '<span class="text-danger text-lg text-center">Tipe File Berbeda</span>',
-                                                                                    showConfirmButton: false,
-                                                                                    backdrop: true,
-                                                                                    timer: 5000,
-                                                                                    timerProgressBar: true
-                                                                                });
+                                                                            if (
+                                                                                xhttp.response == "<?= bin2hex(urlencode(base64_encode("size"))) ?>" ||
+                                                                                xhttp.response == "<?= bin2hex(urlencode(base64_encode("type"))); ?>"
+                                                                            ) {
+                                                                                simpan_tidaksesuai();
                                                                             } else {
                                                                                 console.log("Success");
                                                                                 Swal.fire({
