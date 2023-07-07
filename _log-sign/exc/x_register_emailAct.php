@@ -156,30 +156,26 @@ try {
   );
   $mail->isSMTP();
 
-  // $mail->Host = 'smtp.jabarprov.go.id';
-  // $mail->SMTPAuth = true;
-  // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-  // $mail->Port = 587;
-  // $mail->Username = 'rsj@jabarprov.go.id';
-  // $mail->Password = 'Rsjiwa*2009*';
-
   $mail->Host = 'smtp.gmail.com';
   $mail->SMTPAuth = true;
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
   $mail->Port = 587;
   $mail->Username = 'rsjiwajabar@gmail.com';
-  $mail->Password = 'jtvgvusfwgaxypyf';
+  // $mail->Password = 'jtvgvusfwgaxypyf';
+  $mail->Password = 'oofwfputqejdizob';
+
+
 
   // Sender and recipient settings
   $mail->setFrom('rsj@jabarprov.go.id', 'SIPAPAP MACO - AKTIVASI');
   $mail->addAddress($_POST['email'], $_POST['nama']);
-  // $mail->addReplyTo("fajar.rachmat.h@gmail.com", "RECEIVER");
+  // $mail->addReplyTo("simrsjprovjabar@gmail.com", "RECEIVER");
 
   // Setting the email content
   $mail->IsHTML(true);
   $mail->Subject = "Aktivasi Akun SIPAPAP MACO";
   $mail->Body = $isi_email;
-  // $mail->AltBody = 'Bayar Hutang';
+  // $mail->AltBody = 'Aktivasi Akun SIPAPAP MACO';
   // $mail->addAttachment('tte.png');
   if ($mail->send()) {
     echo json_encode(['ket' => 'Sukses']);
@@ -187,8 +183,6 @@ try {
     echo json_encode(['ket' => 'Gagal']);
   }
 } catch (Exception $e) {
-  echo "Error in sending email. Mailer Error: {$mail->ErrorInfo}";
-
   echo json_encode([
     'detail' => $mail->ErrorInfo,
     'ket' => 'ERROR'
