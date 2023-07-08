@@ -75,27 +75,9 @@
                                         ) {
                                         ?>
                                             <div class="col-md text-center my-auto">
-                                                <a title="download akun praktikan" class='btn btn-success btn-sm' data-toggle="modal" data-target="#akun_praktik<?= $no; ?>">
+                                                <a title="download akun praktikan" class='btn btn-success btn-sm' href="_print/p_akun_praktikan.php?data=<?= encryptString($d_praktik['id_praktik'], $customkey); ?>" download>
                                                     <i class="fa-solid fa-users"></i> Unduh<br>Akun Praktikan
                                                 </a>
-
-                                                <div class="modal text-center" id="akun_praktik<?= $no; ?>" data-backdrop="static">
-                                                    <div class="modal-dialog modal-dialog-scrollable  modal-md">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header h5">
-                                                                Akun Praktikan
-                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">×</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body text-center">
-                                                                <a class="btn btn-success" href="_print/p_akun_praktikan.php?data=<?= encryptString($d_praktik['id_praktik'], $customkey); ?>" download>
-                                                                    Unduh
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         <?php } ?>
                                         <!-- tombol aksi/info proses  -->

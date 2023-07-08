@@ -187,7 +187,7 @@ try {
 }
 $no = 1;
 while ($d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC)) {
-    $username = $id_praktik . $d_praktikan['id_praktikan'] . "#PRAKTIKAN";
+    $username = date('y') . $id_praktik . $d_praktikan['id_praktikan'];
     $password = "@RSJJABARSM" . $no;
     $html .= '
     <tr class="s" style="font-size: 12px;">
@@ -229,7 +229,7 @@ while ($d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC)) {
     $sql_insert_user .= " '" . $id_user . "', ";
     $sql_insert_user .= " '" . $d_institusi['id_institusi'] . "', ";
     $sql_insert_user .= " '" . $username . "', ";
-    $sql_insert_user .= " '" . $password . "', ";
+    $sql_insert_user .= " '" . md5($password) . "', ";
     $sql_insert_user .= " '" . $d_praktikan['nama_praktikan'] . "', ";
     $sql_insert_user .= " '" . $d_praktikan['email_praktikan'] . "', ";
     $sql_insert_user .= " '5', ";
