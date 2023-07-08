@@ -308,7 +308,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                             <!-- status data praktikan-->
                             <td class="align-middle">
                                 <?php if ($d_praktik['status_alasan'] == "T") { ?>
-                                    <div class="badge badge-danger">Alasan Mess Ditolak</div>
+                                    <div class="badge badge-danger text-center">Alasan Mess Ditolak</div>
                                 <?php } else { ?>
                                     <?php
                                     $sql_praktikan = "SELECT * FROM tb_praktikan ";
@@ -361,7 +361,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                             <!-- status pembimbing praktik  -->
                             <td class="align-middle">
                                 <?php if ($d_praktik['status_alasan'] == "T") { ?>
-                                    <div class="badge badge-danger">Alasan Mess Ditolak</div>
+                                    <div class="badge badge-danger text-center">Alasan Mess Ditolak</div>
                                 <?php } else { ?>
                                     <?php
                                     $sql_praktik_pembimbing = "SELECT * FROM tb_pembimbing_pilih ";
@@ -390,24 +390,24 @@ if ($d_prvl['r_praktik'] == "Y") {
                                     </a>
                                 <?php } ?>
                             </td>
-                            <?php
-                            try {
-                                $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
-                                $sql_praktik_tarif .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
-                                $sql_praktik_tarif .= " AND status_tarif_pilih = 'Y'";
-                                // echo $sql_praktik_tarif.$d_praktik['id_praktik'];
-                                $q_praktik_tarif = $conn->query($sql_praktik_tarif);
-                                $r_praktik_tarif = $q_praktik_tarif->rowCount();
-                            } catch (Exception $ex) {
-                                echo "<script>alert('$ex -PRAKTIK TARIF-');";
-                                echo "document.location.href='?error404';</script>";
-                            }
-                            ?>
                             <?php if ($d_prvl['level_user'] == 1) { ?>
                                 <!-- status Tarif praktik  -->
+                                <?php
+                                try {
+                                    $sql_praktik_tarif = "SELECT * FROM tb_tarif_pilih ";
+                                    $sql_praktik_tarif .= " WHERE id_praktik=" . $d_praktik['id_praktik'];
+                                    $sql_praktik_tarif .= " AND status_tarif_pilih = 'Y'";
+                                    // echo $sql_praktik_tarif.$d_praktik['id_praktik'];
+                                    $q_praktik_tarif = $conn->query($sql_praktik_tarif);
+                                    $r_praktik_tarif = $q_praktik_tarif->rowCount();
+                                } catch (Exception $ex) {
+                                    echo "<script>alert('-PRAKTIK TARIF-');";
+                                    echo "document.location.href='?error404';</script>";
+                                }
+                                ?>
                                 <td class="align-middle">
                                     <?php if ($d_praktik['status_alasan'] == "T") { ?>
-                                        <div class="badge badge-danger">Alasan Mess Ditolak</div>
+                                        <div class="badge badge-danger text-center">Alasan Mess Ditolak</div>
                                     <?php } else { ?>
                                         <?php
                                         if ($r_praktik_pembimbing < 1) { ?>
@@ -429,7 +429,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                             <!-- status bayar praktik  -->
                             <td class="align-middle">
                                 <?php if ($d_praktik['status_alasan'] == "T") { ?>
-                                    <div class="badge badge-danger">Alasan Mess Ditolak</div>
+                                    <div class="badge badge-danger text-center">Alasan Mess Ditolak</div>
                                 <?php } else { ?>
                                     <?php
                                     $sql_praktik_bayar = "SELECT * FROM tb_bayar ";
@@ -484,7 +484,7 @@ if ($d_prvl['r_praktik'] == "Y") {
                             <!-- status nilai praktik  -->
                             <td class="align-middle">
                                 <?php if ($d_praktik['status_alasan'] == "T") { ?>
-                                    <div class="badge badge-danger">Alasan Mess Ditolak</div>
+                                    <div class="badge badge-danger text-center">Alasan Mess Ditolak</div>
                                 <?php } else { ?>
                                     <?php
                                     try {
@@ -519,11 +519,11 @@ if ($d_prvl['r_praktik'] == "Y") {
                             <td class="align-middle">
                                 <div class="btn-group" role="group">
                                     <!-- tombol modal detail praktik  -->
-                                    <a title="Detail" class='btn btn-info btn-xs' href='#' data-toggle="modal" data-target="#<?= md5($d_praktik['id_praktik']); ?>">
+                                    <a title="Detail" class='btn btn-info btn-xs' data-toggle="modal" data-target="#detail<?= $no; ?>">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <!-- modal detail praktik  -->
-                                    <div class="modal fade" id="<?= md5($d_praktik['id_praktik']); ?>">
+                                    <div class="modal" id="detail<?= $no; ?>">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header h5">

@@ -164,12 +164,10 @@ try {
   // $mail->Password = 'jtvgvusfwgaxypyf';
   $mail->Password = 'oofwfputqejdizob';
 
-
-
   // Sender and recipient settings
   $mail->setFrom('rsj@jabarprov.go.id', 'SIPAPAP MACO - AKTIVASI');
   $mail->addAddress($_POST['email'], $_POST['nama']);
-  // $mail->addReplyTo("simrsjprovjabar@gmail.com", "RECEIVER");
+  // $mail->addReplyTo("simrsjprovjabar@gmail.com", "SIPAPAP MACO - AKTIVASI (RECEIVER)");
 
   // Setting the email content
   $mail->IsHTML(true);
