@@ -82,6 +82,7 @@ else if (isset($_GET['ptk']) && $d_prvl['r_praktik'] == 'Y' && $d_prvl['status_a
 else if (isset($_GET['ptkn']) && $d_prvl['r_praktikan'] == 'Y' && $d_prvl['status_aktivasi_user'] == "Y") {
 	if (isset($_GET['i']) && $d_prvl['c_praktikan'] == 'Y') include "_admin/insert/i_praktik_praktikan.php";
 	else if (isset($_GET['u']) && $d_prvl['u_praktikan'] == 'Y') include "_admin/view/u_praktikan.php";
+	else if (isset($_GET['akun_praktikan'])) include "_print/p_akun_praktikan.php";
 	else include "_admin/view/v_praktik_praktikan.php";
 }
 //praktik pemibimbing

@@ -84,17 +84,13 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header h5">
                                                                 Akun Praktikan
+                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
                                                             </div>
-                                                            <div class="modal-body text-md">
-
-                                                            </div>
-                                                            <div class="modal-footer text-md">
-                                                                <a class="btn btn-danger btn-sm tambah_tutup<?= md5($d_praktik['id_praktik']); ?>" data-dismiss="modal">
-                                                                    Kembali
-                                                                </a>
-                                                                &nbsp;
-                                                                <a class="btn btn-success btn-sm tambah<?= md5($d_praktik['id_praktik']); ?>" id="<?= bin2hex(urlencode(base64_encode($d_praktik['id_praktik'] . "*sm*" . date('Y-m-d H:i:s', time())))); ?>">
-                                                                    Simpan
+                                                            <div class="modal-body text-center">
+                                                                <a class="btn btn-success" href="_print/p_akun_praktikan.php?data=<?= encryptString($d_praktik['id_praktik'], $customkey); ?>" download>
+                                                                    Unduh
                                                                 </a>
                                                             </div>
                                                         </div>

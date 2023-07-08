@@ -90,7 +90,7 @@
                         $q_pkd = $conn->query($sql_pkd);
                         $r_pkd = $q_pkd->rowCount();
                     } catch (Exception $ex) {
-                        echo "<script>alert('$ex -DATA PKD-');";
+                        echo "<script>alert('-DATA PKD-');";
                         echo "document.location.href='?error404';</script>";
                     }
                     ?>

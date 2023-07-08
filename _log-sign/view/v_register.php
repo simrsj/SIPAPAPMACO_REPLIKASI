@@ -22,7 +22,7 @@
                                         try {
                                             $q_ip = $conn->query($sql_ip);
                                         } catch (Exception $ex) {
-                                            echo "<script>alert('$ex -DATA PRIVILEGES-');";
+                                            echo "<script>alert('$ex -DATA INSTITUSI-');";
                                             echo "document.location.href='?error404';</script>";
                                         }
                                         $r_ip = $q_ip->rowCount();
@@ -170,8 +170,6 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         });
-
-
 
         //cek Pasword
         if (password != password_ulangi) {
