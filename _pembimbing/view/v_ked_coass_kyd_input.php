@@ -10,7 +10,7 @@
         $q_praktikan = $conn->query($sql_praktikan);
         $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $ex) {
-        echo "<script>alert('$ex')</script>;";
+        echo "<script>alert('DATA PRAKTIKAN')</script>;";
         echo "<script>document.location.href='?error404';</script>";
     }
     ?>

@@ -3,7 +3,7 @@
     include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
     include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
-    error_reporting(0);
+    // error_reporting(0);
     $idpr = decryptString($_GET['idpr'], $customkey);
     try {
         $sql_jkh = "SELECT * FROM tb_logbook_ked_coass_jkh ";

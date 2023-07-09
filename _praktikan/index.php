@@ -30,7 +30,7 @@ if ($_SESSION['status_user'] == "Y") {
 		// echo "document.location.href='?error404';</script>";
 	}
 
-	$_SESSION['id_praktikan'] = $d_praktikan['id_praktikan'];
+	$_SESSION['id_praktikan'] = encryptString($d_praktikan['id_praktikan'], $customkey);
 ?>
 
 	<!-- Page Wrapper -->
@@ -74,16 +74,16 @@ if ($_SESSION['status_user'] == "Y") {
 										<a class="dropdown-item " href="?ked_coass_elogbook=p3d">
 											Pencapaian Kompetensi Keterampilan P3D
 										</a>
-										<a class="dropdown-item " href="?ked_coass_elogbook=jkh">
+										<a class="dropdown-item " href="?ked_coass_elogbook=jkh&data=<?= $_SESSION['id_praktikan'] ?>">
 											Jadwal Kegiatan Harian
 										</a>
-										<a class="dropdown-item " href="?ked_coass_elogbook=kyd">
+										<a class="dropdown-item " href="?ked_coass_elogbook=kyd&data=<?= $_SESSION['id_praktikan'] ?>">
 											Kasus Yang Ditemukan
 										</a>
-										<a class="dropdown-item " href="?ked_coass_elogbook=psw">
+										<a class="dropdown-item " href="?ked_coass_elogbook=psw&data=<?= $_SESSION['id_praktikan'] ?>">
 											Pembuatan Status Wajib
 										</a>
-										<a class="dropdown-item " href="?ked_coass_elogbook=materi">
+										<a class="dropdown-item " href="?ked_coass_elogbook=materi&data=<?= $_SESSION['id_praktikan'] ?>">
 											Materi
 										</a>
 										<a class="dropdown-item " href="?ked_coass_elogbook=lppp">

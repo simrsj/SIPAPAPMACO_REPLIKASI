@@ -41,8 +41,8 @@
     <div class="row">
         <div class="col-md">
             <div class="card shadow m-2 rounded-5">
-                <div class="card-header b">
-                    Pencapaian Kompetensi Keterampilan (P3D)
+                <div class="card-header b ">
+                    Lembar Penilaian Perilaku Profesional
                 </div>
                 <div class="card-body text-center">
                     <div class="table-responsive text-sm">
@@ -51,18 +51,18 @@
                                 <thead class="table-dark">
                                     <tr class="text-center">
                                         <th scope='col'>No</th>
-                                        <th>Pertanyaan</th>
-                                        <th>I</th>
-                                        <th>II</th>
-                                        <th>III</th>
-                                        <th>IV</th>
+                                        <th>Aspek Penilaian</th>
+                                        <th>Ket Skor <span class="badge badge-danger">1</span></th>
+                                        <th>Ket Skor <span class="badge badge-warning">2</span></th>
+                                        <th>Ket Skor <span class="badge badge-success">3</span></th>
+                                        <th width="200px">SKOR</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     try {
                                         $sql_pertanyaan = "SELECT * FROM tb_pertanyaan ";
-                                        $sql_pertanyaan .= " WHERE kategori_pertanyaan = 'P3D'";
+                                        $sql_pertanyaan .= " WHERE kategori_pertanyaan = 'LPPP'";
                                         // echo "$sql_pertanyaan<br>";
                                         $q_pertanyaan = $conn->query($sql_pertanyaan);
                                     } catch (Exception $ex) {
@@ -72,29 +72,62 @@
                                     $no = 1;
                                     while ($d_pertanyaan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {
                                         try {
-                                            $sql_nilai_p3d = "SELECT * FROM tb_logbook_ked_coass_p3d ";
-                                            $sql_nilai_p3d .= " WHERE id_praktikan = " . $idpr;
-                                            $sql_nilai_p3d .= " AND id_pertanyaan = " . $d_pertanyaan['id'];
+                                            $sql_lppp = "SELECT * FROM tb_logbook_ked_coass_lppp ";
+                                            $sql_lppp .= " WHERE id_praktikan = " . $idpr;
+                                            $sql_lppp .= " AND id_pertanyaan = " . $d_pertanyaan['id'];
                                             // echo "$sql_nilai_p3d<br>";
-                                            $q_nilai_p3d = $conn->query($sql_nilai_p3d);
-                                            $d_nilai_p3d = $q_nilai_p3d->fetch(PDO::FETCH_ASSOC);
+                                            $q_lppp = $conn->query($sql_lppp);
+                                            $d_lppp = $q_lppp->fetch(PDO::FETCH_ASSOC);
                                         } catch (Exception $ex) {
                                             echo "<script>alert('DATA NILAI P3D');</script>";
                                             echo "<script>document.location.href='?error404';</script>";
                                         }
                                     ?>
-                                        <tr>
+                                        <tr class="m-auto">
                                             <td class="text-center"><?= $no; ?></td>
                                             <td><?= $d_pertanyaan['pertanyaan']; ?></td>
-                                            <td><?= $d_nilai_p3d['i'] == "Y" ? '<i class="fa-solid  text-lg fa-circle-check text-success"></i>' : '<i class="fa-solid  text-lg fa-circle-xmark text-danger"></i>'; ?></td>
-                                            <td><?= $d_nilai_p3d['ii'] == "Y" ? '<i class="fa-solid  text-lg fa-circle-check text-success"></i>' : '<i class="fa-solid  text-lg fa-circle-xmark text-danger"></i>'; ?></td>
-                                            <td><?= $d_nilai_p3d['iii'] == "Y" ? '<i class="fa-solid  text-lg fa-circle-check text-success"></i>' : '<i class="fa-solid  text-lg fa-circle-xmark text-danger"></i>'; ?></td>
-                                            <td><?= $d_nilai_p3d['iv'] == "Y" ? '<i class="fa-solid  text-lg fa-circle-check text-success"></i>' : '<i class="fa-solid  text-lg fa-circle-xmark text-danger"></i>'; ?></td>
+                                            <td><?= $d_pertanyaan['p1']; ?></td>
+                                            <td><?= $d_pertanyaan['p2']; ?></td>
+                                            <td><?= $d_pertanyaan['p3']; ?></td>
+                                            <td style="vertical-align: middle; text-align: center;">
+                                                <?php
+                                                if ($d_lppp['skor'] == 1) echo '<span class="text-lg badge badge-danger">1</span>';
+                                                elseif ($d_lppp['skor'] == 2) echo '<span class="text-lg badge badge-warning">2</span>';
+                                                elseif ($d_lppp['skor'] == 3) echo '<span class="text-lg badge badge-success">3</span>';
+                                                else echo '<span class="text-lg badge badge-danger">ERROR!</span>';
+                                                ?>
+                                            </td>
                                         </tr>
                                         <?php $no++; ?>
                                     <?php } ?>
                                 </tbody>
                             </table>
+                            <div class="text-center mb-2">
+                                Kejadian-kejadian terkait dengan perilaku Profesional selama kegiatan kepaniteraan berlangsung
+                                <?php
+                                try {
+                                    $sql_lppp_ket = "SELECT * FROM tb_logbook_ked_coass_lppp_ket ";
+                                    $sql_lppp_ket .= " WHERE id_praktikan = " . $idpr;
+                                    // echo "$sql_nilai_p3d<br>";
+                                    $q_lppp_ket = $conn->query($sql_lppp_ket);
+                                    $r_lppp_ket = $q_lppp_ket->rowCount();
+                                    $d_lppp_ket = $q_lppp_ket->fetch(PDO::FETCH_ASSOC);
+                                } catch (Exception $ex) {
+                                    echo "<script>alert('DATA NILAI P3D');</script>";
+                                    echo "<script>document.location.href='?error404';</script>";
+                                }
+                                ?>
+                                <div class="jumbotron">
+                                    <div class="jumbotron-fluid ">
+                                        <h5 class="text-center">
+                                            <?php
+                                            if ($r_lppp_ket > 0) echo $d_lppp_ket['ket'];
+                                            else echo "<span class='badge badge-danger text-lg'>DATA TIDAK ADA</span>"
+                                            ?>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
     <div class="container-fluid">
         <?php
-        $idpr = $_SESSION['id_praktikan'];
+        $idpr = urldecode(decryptString($_SESSION['id_praktikan'], $customkey));
         try {
             $sql_praktikan = "SELECT * FROM tb_praktikan ";
             $sql_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
@@ -11,7 +11,7 @@
             $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $ex) {
             echo "<script>alert('DATA BIMBINGAN PRAKTIKAN')</script>;";
-            // echo "<script>document.location.href='?error404';</script>";
+            echo "<script>document.location.href='?error404';</script>";
         }
         try {
             $sql_nilai = "SELECT * FROM tb_nilai_ked_coass ";
