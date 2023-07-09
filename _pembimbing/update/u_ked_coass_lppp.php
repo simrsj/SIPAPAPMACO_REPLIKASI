@@ -215,7 +215,7 @@
                                         data: data_form,
                                         dataType: "JSON",
                                         success: function(response) {
-                                            response.ket == "SUCCESS" ? simpan_berhasil("?elogbook=<?= $_GET['elogbook'] ?>") : simpan_gagal_database()
+                                            response.ket == "SUCCESS" ? simpan_berhasil("?ked_coass_elogbook=<?= $_GET['ked_coass_elogbook'] ?>") : simpan_gagal_database()
                                         },
                                         error: function(response) {
                                             error();

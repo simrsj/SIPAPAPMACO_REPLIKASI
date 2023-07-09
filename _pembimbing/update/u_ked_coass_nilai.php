@@ -121,7 +121,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="text-center">7</td>
+                                            <td class="text-center">8</td>
                                             <td>CBD (CASE BASED DISCUSSION)</td>
                                             <td>
                                                 <input class="form-control" type="number" min=0 max=100 name="cbd" id="cbd" value="<?= $d_praktikan['cbd'] ?>">

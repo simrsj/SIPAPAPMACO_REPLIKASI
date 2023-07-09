@@ -52,7 +52,6 @@ if ($_SESSION['status_user'] == "Y") {
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class=" dropdown-menu dropdown-menu-scroll dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
-
 								<?php if ($d_pembimbing['id_jurusan_pdd'] == 1) { ?>
 									<?php if ($d_pembimbing['id_profesi_pdd'] == 1) { ?>
 									<?php } else if ($d_pembimbing['id_profesi_pdd'] == 2) { ?>
@@ -63,22 +62,22 @@ if ($_SESSION['status_user'] == "Y") {
 										<div class="text-center mb-2">
 											<span class="badge badge-dark text-md col">e-Log Book</span>
 										</div>
-										<a class="dropdown-item " href="?elogbook=p3d">
+										<a class="dropdown-item " href="?ked_coass_elogbook=p3d">
 											Pencapaian Kompetensi Keterampilan P3D
 										</a>
-										<a class="dropdown-item " href="?elogbook=jkh">
+										<a class="dropdown-item " href="?ked_coass_elogbook=jkh">
 											Jadwal Kegiatan Harian
 										</a>
-										<a class="dropdown-item " href="?elogbook=kyd">
+										<a class="dropdown-item " href="?ked_coass_elogbook=kyd">
 											Kasus Yang Ditemukan
 										</a>
-										<a class="dropdown-item " href="?elogbook=psw">
+										<a class="dropdown-item " href="?ked_coass_elogbook=psw">
 											Pembuatan Status Wajib
 										</a>
-										<a class="dropdown-item " href="?elogbook=materi">
+										<a class="dropdown-item " href="?ked_coass_elogbook=materi">
 											Materi
 										</a>
-										<a class="dropdown-item " href="?elogbook=lppp">
+										<a class="dropdown-item " href="?ked_coass_elogbook=lppp">
 											Lembar Penilaian Perilaku Profesional
 										</a>
 									<?php } ?>
@@ -89,6 +88,11 @@ if ($_SESSION['status_user'] == "Y") {
 									</a>
 									<div class="dropdown-divider"></div>
 								<?php } ?>
+								<hr>
+								<a class="dropdown-item text-center rounded-sm b text-danger" href="#" data-toggle="modal" data-target="#log-out">
+									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+									Logout
+								</a>
 							</div>
 						</li>
 						<div class="topbar-divider"></div>

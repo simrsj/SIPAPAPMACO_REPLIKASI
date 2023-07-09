@@ -144,7 +144,7 @@
                                             <?php } ?>
                                         </td>
                                         <td class=" text-center">
-                                            <a class="btn btn-success btn-sm" href="?elogbook=p3d&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
+                                            <a class="btn btn-success btn-sm" href="?ked_coass_elogbook=p3d&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
                                                 Pencapaian Komptensi Keterampilan P3D
                                             </a>
                                         </td>

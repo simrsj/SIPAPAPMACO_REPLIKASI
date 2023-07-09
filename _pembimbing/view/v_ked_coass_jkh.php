@@ -112,7 +112,7 @@
                                             <?php } ?>
                                         </td>
                                         <td class="text-center">
-                                            <a class="btn btn-outline-info btn-sm" href="?elogbook=jkh&data=<?= encryptString($d_bimbingan['id_praktikan'], $customkey) ?>">
+                                            <a class="btn btn-outline-info btn-sm" href="?ked_coass_elogbook=jkh&data=<?= encryptString($d_bimbingan['id_praktikan'], $customkey) ?>">
                                                 Tamba/Ubah
                                             </a>
                                         </td>

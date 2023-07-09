@@ -150,7 +150,7 @@
                                         <?php } ?>
                                     </td>
                                     <td class=" text-center">
-                                        <a class="btn btn-info btn-sm" href="?elogbook=lppp&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
+                                        <a class="btn btn-info btn-sm" href="?ked_coass_elogbook=lppp&u=<?= urlencode(encryptString($d_bimbingan['id_praktikan'], $customkey)) ?>">
                                             Lembar Penilaian Perilaku Profesional
                                         </a>
                                     </td>
