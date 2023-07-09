@@ -2,10 +2,10 @@
     <?php
     try {
         $sql_bimbingan = "SELECT * FROM tb_praktikan ";
+        $sql_bimbingan .= " JOIN tb_pembimbing_pilih ON tb_praktikan.id_praktikan = tb_pembimbing_pilih.id_praktikan";
         $sql_bimbingan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
         $sql_bimbingan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-        $sql_bimbingan .= " JOIN tb_nilai_ked_coass ON tb_praktikan.id_praktikan = tb_nilai_ked_coass.id_praktikan";
-        $sql_bimbingan .= " WHERE id_pembimbing = " . $d_pembimbing['id_pembimbing'];
+        $sql_bimbingan .= " WHERE tb_pembimbing_pilih.id_pembimbing = " . $d_pembimbing['id_pembimbing'];
         $sql_bimbingan .= " AND status_praktik = 'Y'";
         $sql_bimbingan .= " ORDER BY tb_praktik.id_praktik ASC";
         // echo "$sql_bimbingan<br>";

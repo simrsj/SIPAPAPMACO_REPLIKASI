@@ -23,7 +23,21 @@ include "_add-ons/crypt.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>SIPAPAP MACO</title>
+    <title>
+
+        <?php
+        if (isset($_GET['reg'])) echo "REGISTER | ";
+        elseif (isset($_GET['panduan'])) echo "PANDUAN | ";
+        elseif (isset($_GET['info_diklat'])) echo "INFO DIKLAT | ";
+        elseif (isset($_GET['login'])) echo "LOGIN | ";
+        elseif ($_SESSION['level_user'] == 1) echo "ADMIN | ";
+        elseif ($_SESSION['level_user'] == 2) echo "IP | ";
+        elseif ($_SESSION['level_user'] == 3) echo "ADMIN PKD | ";
+        elseif ($_SESSION['level_user'] == 4) echo "CI | ";
+        elseif ($_SESSION['level_user'] == 5) echo "PRAKTIKAN | ";
+        ?>
+        SIPAPAP MACO
+    </title>
     <link rel="icon" href="_img/logorsj.ico">
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -58,8 +72,8 @@ include "_add-ons/crypt.php";
         if ($_SESSION['status_user'] == 'Y') {
             if (isset($_GET['lo'])) include "_log-sign/exc/x_log_out.php";
             elseif (
-                $_SESSION['level_user'] == 1 ||
-                $_SESSION['level_user'] == 2 ||
+                $_SESSION['level_user'] == 1  |
+                $_SESSION['level_user'] == 2  |
                 $_SESSION['level_user'] == 3
             ) include "_admin/index.php";
             elseif ($_SESSION['level_user'] == 4) include "_pembimbing/index.php";
@@ -85,7 +99,7 @@ include "_add-ons/crypt.php";
         }
     }
     // Index Log-Sign
-    elseif (empty($_SESSION['id_user']) || isset($_GET['ls'])) include "_log-sign/index.php";
+    elseif (empty($_SESSION['id_user'])  |  isset($_GET['ls'])) include "_log-sign/index.php";
     ?>
 
     <!-- JS -->

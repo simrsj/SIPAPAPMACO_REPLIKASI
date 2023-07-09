@@ -14,33 +14,38 @@ if ($_SESSION['status_user'] == "Y") {
 
 	//data praktikan dan user 
 	try {
-		$sql_pembimbing = "SELECT * FROM tb_praktikan ";
-		$sql_pembimbing .= " JOIN tb_user ON tb_praktikan.id_user = tb_user.id_user";
-		$sql_pembimbing .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
-		$sql_pembimbing .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
-		echo $sql_pembimbing;
-		$q_pembimbing = $conn->query($sql_pembimbing);
-		$d_pembimbing = $q_pembimbing->fetch(PDO::FETCH_ASSOC);
+		$sql_praktikan = "SELECT * FROM tb_praktikan ";
+		$sql_praktikan .= " JOIN tb_user ON tb_praktikan.id_user = tb_user.id_user";
+		$sql_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik= tb_praktik.id_praktik";
+		$sql_praktikan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
+		$sql_praktikan .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+		$sql_praktikan .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+		$sql_praktikan .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+		$sql_praktikan .= " WHERE tb_user.id_user = " . $_SESSION['id_user'];
+		// echo $sql_praktikan;
+		$q_praktikan = $conn->query($sql_praktikan);
+		$d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
 	} catch (Exception $ex) {
-		echo "<script>alert('-DATA PEMBIMBING-');";
-		echo "document.location.href='?error404';</script>";
+		// echo "<script>alert('-DATA PEMBIMBING-');";
+		// echo "document.location.href='?error404';</script>";
 	}
 ?>
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
-
 			<!-- Main Content -->
 			<div id="content">
 				<nav class="navbar navbar-expand navbar-light bg-white fixed-top topbar  bg-sipapapmaco-abstrack1 static-top shadow-lg">
 					<a class="text-decoration-none d-flex " href="?">
 						<img src="./_img/rsj.svg" width="28" class="" />
-						<span class="text-primary b m-2 text-light ">
+						<span class="b m-2 text-light">
 							SIPAPAP MACO
-							<span class="d-none d-md-block">(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)</span>
+							<div class="d-md-none">
+								<div class="badge badge-primary text-md"><?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam1"></span></div>
+							</div>
+							<span class="d-none d-md-block text-light">(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)</span>
 						</span>
 					</a>
 					<!-- Topbar Navbar -->
@@ -54,9 +59,9 @@ if ($_SESSION['status_user'] == "Y") {
 							<!-- Dropdown - User Information -->
 							<div class=" dropdown-menu dropdown-menu-scroll dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
 
-								<?php if ($d_pembimbing['id_jurusan_pdd'] == 1) { ?>
-									<?php if ($d_pembimbing['id_profesi_pdd'] == 1) { ?>
-									<?php } else if ($d_pembimbing['id_profesi_pdd'] == 2) { ?>
+								<?php if ($d_praktikan['id_jurusan_pdd'] == 1) { ?>
+									<?php if ($d_praktikan['id_profesi_pdd'] == 1) { ?>
+									<?php } else if ($d_praktikan['id_profesi_pdd'] == 2) { ?>
 										<!-- Kedokteran Co-Ass  -->
 										<a class="dropdown-item b " href="?ked_coass_nilai">
 											Penilaian
@@ -83,7 +88,7 @@ if ($_SESSION['status_user'] == "Y") {
 											Lembar Penilaian Perilaku Profesional
 										</a>
 									<?php } ?>
-								<?php } else if ($d_pembimbing['id_jurusan_pdd'] == 2) { ?>
+								<?php } else if ($d_praktikan['id_jurusan_pdd'] == 2) { ?>
 									<a class="dropdown-item" href="?kep_nilai">
 										<i class="fa-regular fa-pen-to-square"></i>
 										Penilaian Praktikan
@@ -96,11 +101,12 @@ if ($_SESSION['status_user'] == "Y") {
 						<!-- Nav Item - User -->
 						<li class="nav-item dropdown no-arrow ">
 							<a class="d-none d-md-block ">
-								<div class="badge badge-primary text-md"><?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam"></span></div>
+								<div class="badge badge-primary text-md"><?= tanggal_hari(date('w')) . " " . date("d M Y"); ?>, <span id="jam2"></span>
+								</div>
 							</a>
 							<a class="nav-link h-0 dropdown-toggle accordion pl-0 pr-0" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="d-none d-md-block badge badge-light text-primary b shadow-lg">
-									<?= $d_pembimbing['nama_pembimbing']; ?>&nbsp;
+									<?= $d_praktikan['nama_praktikan']; ?>&nbsp;
 									<i class="far fa-user"></i>
 								</span>
 								<span class="d-md-none my-auto text-primary badge badge-light b shadow-lg">
@@ -109,7 +115,7 @@ if ($_SESSION['status_user'] == "Y") {
 							</a>
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 								<div class="dropdown-item d-md-none text-center b  text-primary text-decoration-none" href="?setting">
-									<?= $d_pembimbing['nama_pembimbing']; ?>
+									<?= $d_praktikan['nama_praktikan']; ?>
 								</div>
 								<a class="dropdown-item" href="?setting">
 									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -146,7 +152,7 @@ if ($_SESSION['status_user'] == "Y") {
 				<br>
 				<div class="wrapper mt-4 mb-4">
 					<?php
-					include "_pembimbing/index_data.php";
+					include "_praktikan/index_data.php";
 					?>
 				</div>
 				<footer class="footer sticky-footer bg-white">
@@ -165,7 +171,8 @@ if ($_SESSION['status_user'] == "Y") {
 	</a>
 
 	<script>
-		var span = document.getElementById("jam");
+		var span1 = document.getElementById("jam1");
+		var span2 = document.getElementById("jam2");
 		time();
 
 		function time() {
@@ -173,7 +180,8 @@ if ($_SESSION['status_user'] == "Y") {
 			var s = formattedNumber = ("0" + d.getSeconds()).slice(-2);
 			var m = formattedNumber = ("0" + d.getMinutes()).slice(-2);
 			var h = formattedNumber = ("0" + d.getHours()).slice(-2);
-			span.textContent = h + ":" + m + ":" + s;
+			span1.textContent = h + ":" + m + ":" + s;
+			span2.textContent = h + ":" + m + ":" + s;
 		}
 		setInterval(time, 1000);
 	</script>

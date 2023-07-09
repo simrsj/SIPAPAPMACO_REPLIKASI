@@ -84,7 +84,7 @@
                                                 <input class="form-control" id="lk" name="lk">
                                                 <div id="err_lk" class="err i text-danger text-center text-xs blink mb-2"></div>
 
-                                                <label for="dosen_pembimbing">LK</label>
+                                                <label for="dosen_pembimbing">Dosen Pembimbing</label>
                                                 <input class="form-control" id="dosen_pembimbing" name="dosen_pembimbing">
                                                 <div id="err_dosen_pembimbing" class="err i text-danger text-center text-xs blink mb-2"></div>
                                             </form>

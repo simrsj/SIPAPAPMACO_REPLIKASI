@@ -1,6 +1,10 @@
 <div class="container-fluid">
 
-    <div class="text-center text-primary mb-4">Selamat Datang</div>
+    <div class="card shadow mb-4">
+        <div class="card-header text-center bg-success text-light text-lg rounded-sm b">
+            Selamat Datang
+        </div>
+    </div>
     <div class="card shadow mb-4">
         <div class="card-header bg-primary text-light b">
             Data Identitas Anda
