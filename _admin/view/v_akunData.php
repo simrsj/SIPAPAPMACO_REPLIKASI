@@ -575,4 +575,5 @@ if ($r_user > 0) {
             });
         });
     <?php } ?>
+    $('.loader').hide();
 </script>

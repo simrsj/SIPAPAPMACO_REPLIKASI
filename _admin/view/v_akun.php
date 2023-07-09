@@ -237,11 +237,12 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
             </div>
         <?php } ?>
 
-        <div class="card shadow mb-4 card-body" id="data_akun"></div>
+        <div class="card shadow mb-4 card-body" id="data_akun">
+            <div class="loader mt-5 text-center"></div>
+        </div>
     </div>
     <script>
         $(document).ready(function() {
-            $('#dataTable').DataTable();
             $('#data_akun').load('_admin/view/v_akunData.php?id=<?= encryptString($_SESSION['id_user'], $customkey) ?>');
         });
 
