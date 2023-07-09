@@ -1,8 +1,9 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
-
-$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . $_GET['id'];
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
+// error_reporting(0);
+$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . decryptString($_GET['id'], $customkey);
 $q_prvl = $conn->query($sql_prvl);
 $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
 
@@ -14,8 +15,13 @@ $r_user = $q_user->rowCount();
 
 if ($r_user > 0) {
 ?>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
     <div class="table-responsive">
-        <table class="table table-striped text-xs" id="dataTable">
+        <table class="table table-striped text-sm" id="dataTable">
             <thead class="thead-dark">
                 <tr class="text-center">
                     <th scope="col">No</th>
@@ -82,7 +88,11 @@ if ($r_user > 0) {
                             <?php
                             } elseif ($d_user['level_user'] == 4) {
                             ?>
-                                <span class="badge badge-secondary">PEMBIMBING</span>
+                                <span class="badge badge-primary">PEMBIMBING</span>
+                            <?php
+                            } elseif ($d_user['level_user'] == 5) {
+                            ?>
+                                <span class="badge badge-success">PRAKTIKAN</span>
                             <?php
                             } else {
                             ?>
@@ -176,10 +186,6 @@ if ($r_user > 0) {
 }
 ?>
 <script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable();
-    });
-
     <?php if ($d_prvl['u_akun'] == "Y") { ?>
         $(".ubah_init").click(function() {
             document.getElementById("err_u_nama").innerHTML = "";

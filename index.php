@@ -85,8 +85,8 @@ include "_add-ons/crypt.php";
                     $.ajax({
                         url: "_log-sign/exc/x_log_out.php",
                     });
-                }, 7200000);
-                // }, 5000);
+                }, 14400000);
+                // }, 10000);
             </script>
     <?php
         } elseif ($_SESSION['status_user'] == 'T') {

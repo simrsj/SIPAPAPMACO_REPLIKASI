@@ -4,11 +4,56 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-md">
                 <h1 class="h3 mb-2 text-gray-800">Data Akun</h1>
             </div>
             <?php if ($d_prvl['c_akun'] == "Y") { ?>
-                <div class="col-lg-2 my-auto text-right">
+                <div class="col-md my-auto text-right">
+                    <a class="btn btn-outline-danger btn-sm laporan_init" data-toggle="modal" data-target="#laporan">
+                        <i class="fa-solid fa-file-pdf"></i> Laporan
+                    </a>
+
+                    <div class="modal text-left" id="laporan">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form class="form-group" method="post" id="form">
+                                    <div class="modal-header text-white bg-danger h4">
+                                        Pengaturan Unduh Laporan
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="b h5 mb-2 text-center">LEVEL AKUN</div>
+                                        <input type="checkbox" class="checkbox-md" id="admin" name="admin" value="1"> &nbsp;&nbsp;<label for="admin"> Admin</label><br>
+                                        <input type="checkbox" class="checkbox-md" id="ip" name="ip" value="2"> &nbsp;&nbsp;<label for="ip"> Institusi Pendidikan</label><br>
+                                        <input type="checkbox" class="checkbox-md" id="adminpkd" name="adminpkd" value="3"> &nbsp;&nbsp;<label for="adminpkd"> Admin PKD</label><br>
+                                        <input type="checkbox" class="checkbox-md" id="ci" name="ci" value="4"> &nbsp;&nbsp;<label for="ci"> CI/Perseptor</label><br>
+                                        <input type="checkbox" class="checkbox-md" id="praktikan" name="praktikan" value="5"> &nbsp;&nbsp;<label for="praktikan"> Praktikan</label><br>
+                                        <hr>
+                                        <div class="b h5 mb-2 text-center">RETANG TANGGAL DAFTAR</div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <input type="date" class="form-control" id="tgl-a" name="tgl-a">
+                                            </div>
+                                            <div class="col-md">
+                                                <input type="date" class="form-control" id="tgl-b" name="tgl-b">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="" class="btn btn-danger laporan_unduh" disabled><i class="fa-solid fa-file-pdf"></i> UNDUH PDF</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $(".laporan_init").click(function() {});
+                        $(document).on('click', '.laporan_unduh', function() {
+
+                        });
+                    </script>
                     <button class="btn btn-outline-success btn-sm tambah_init">
                         <i class="fas fa-plus"></i> Tambah
                     </button>
@@ -196,11 +241,11 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
     </div>
     <script>
         $(document).ready(function() {
-            $('#data_akun').load('_admin/view/v_akunData.php?id=' + <?= $_SESSION['id_user'] ?>);
+            $('#dataTable').DataTable();
+            $('#data_akun').load('_admin/view/v_akunData.php?id=<?= encryptString($_SESSION['id_user'], $customkey) ?>');
         });
 
-        <?php if ($d_prvl['c_akun'] == "Y") { ?>
-            $(".tambah_init").click(function() {
+        <?php if ($d_prvl['c_akun'] == "Y") { ?> $(".tambah_init").click(function() {
                 document.getElementById("err_c_nama").innerHTML = "";
                 document.getElementById("err_c_telp").innerHTML = "";
                 document.getElementById("err_c_email").innerHTML = "";

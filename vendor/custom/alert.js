@@ -127,7 +127,7 @@ function idle_logout() {
     allowOutsideClick: false,
     backdrop: true,
     icon: "warning",
-    html: "Anda <b>IDLE/AFK</b> selama 2 Jam, akan <b>LOGOUT</b> secara Otomatis",
+    html: "Anda <b>IDLE/AFK</b> selama 4 Jam, akan <b>LOGOUT</b> secara Otomatis",
     showConfirmButton: true,
     timer: 60000,
     timerProgressBar: true,
