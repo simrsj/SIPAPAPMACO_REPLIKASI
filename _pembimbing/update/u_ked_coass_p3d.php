@@ -42,7 +42,7 @@
         <div class="col-md">
             <div class="card shadow m-2 rounded-5">
                 <div class="card-header b ">
-                    Data Nilai
+                    Pencapaian Kompetensi Keterampilan (P3D)
                 </div>
                 <div class="card-body text-center">
                     <div class="table-responsive text-sm">
@@ -211,7 +211,7 @@
                                     data: data_form,
                                     dataType: "JSON",
                                     success: function(response) {
-                                        response.ket == "ERROR" ? simpan_gagal_database() : simpan_berhasil("?ked_coass_elogbook=<?= $_GET['ked_coass_elogbook'] ?>")
+                                        response.ket == "ERROR" ? simpan_gagal_database() : simpan_berhasil("?elogbook=<?= $_GET['elogbook'] ?>")
                                     },
                                     error: function(response) {
                                         console.log(response);

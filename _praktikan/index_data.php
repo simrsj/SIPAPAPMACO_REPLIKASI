@@ -6,10 +6,7 @@ else if (isset($_GET["ked_coass_nilai"])) include "_praktikan/view/v_ked_coass_n
 //data Log Book Kedokteran Co-Ass
 else if (isset($_GET["ked_coass_elogbook"])) {
 	//data Log Book Pencapaian Komptensi Keterampilan P3D
-	if ($_GET["ked_coass_elogbook"] == "p3d") {
-		if (isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_p3d.php";
-		else include "_pembimbing/view/v_ked_coass_p3d.php";
-	}
+	if ($_GET["ked_coass_elogbook"] == "p3d") include "_praktikan/view/v_ked_coass_p3d.php";
 	//data Log Book Jadwal Kegiatan Harian
 	else if ($_GET["ked_coass_elogbook"] == "jkh") {
 		if (isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_jkh_input.php";
