@@ -50,26 +50,14 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
 
     <script>
         $(document).ready(function() {
-            Swal.fire({
-                title: 'Mohon Ditunggu',
-                html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                backdrop: true
-            });
+            loading_sw2();
             $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>');
             Swal.close();
         });
 
         // inisiasi klik modal tambah
         $(".tambah_init").click(function() {
-            Swal.fire({
-                title: 'Mohon Ditunggu',
-                html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                backdrop: true
-            });
+            loading_sw2();
             $('#err_t_pertanyaan').empty();
             $('#err_t_ket').empty();
             Swal.close();
@@ -85,13 +73,7 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
         // inisiasi klik modal tambah simpan
         $(document).on('click', '.tambah', function() {
 
-            Swal.fire({
-                title: 'Mohon Ditunggu',
-                html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                backdrop: true
-            });
+            loading_sw2();
             var idu = $(this).attr('id');
             var data_t = $("#form_t").serializeArray();
             data_t.push({
@@ -104,26 +86,8 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
             if (
                 t_pertanyaan == ""
             ) {
-
-                if (t_pertanyaan == "") {
-                    $("#err_t_pertanyaan").html("Pertanyaan Harus Diisi");
-                } else {
-                    $("#err_t_pertanyaan").html("");
-                }
-
-                Swal.fire({
-                    allowOutsideClick: true,
-                    showConfirmButton: false,
-                    icon: 'warning',
-                    html: '<div class="text-lg b">DATA ADA YANG KOSONG / TIDAK SESUAI</div>',
-                    timer: 5000,
-                    timerProgressBar: true,
-                    backdrop: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
+                t_pertanyaan == "" ? $("#err_t_pertanyaan").html("Pertanyaan Harus Diisi") : $("#err_t_pertanyaan").html("");
+                simpan_tidaksesuai();
             }
             //simpan data tambah bila sudah sesuai
             else {
