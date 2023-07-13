@@ -1,44 +1,35 @@
 <div class="card bg-light text-black shadow m-2">
-    <style>
-        .radio {
-            display: inline-block;
-            padding: 5px 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: white;
-        }
+    <form id="myForm" action="_print/lap_akun_pdf/" method="post" target="_blank">
+        <label>
+            <input type="checkbox" name="checkbox1"> Checkbox 1
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" name="checkbox2"> Checkbox 2
+        </label>
+        <br>
+        <label>
+            Date: <input type="date" name="selectedDate">
+        </label>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
 
-        input[type="radio"] {
-            display: none;
-        }
+    <script>
+        $(document).ready(function() {
+            $("#myForm").submit(function(event) {
+                var checkbox1 = $("input[name='checkbox1']");
+                var checkbox2 = $("input[name='checkbox2']");
+                var selectedDate = $("input[name='selectedDate']");
 
-        input[type="radio"]:checked+label {
-            color: white;
-        }
-
-        input[type="radio"][id="red"]:checked+label {
-            background-color: red;
-        }
-
-        input[type="radio"][id="yellow"]:checked+label {
-            background-color: yellow;
-        }
-
-        input[type="radio"][id="green"]:checked+label {
-            background-color: green;
-        }
-    </style>
-    <div class="card-body">
-        <input type="radio" name="color" id="red" checked>
-        <label for="red" class="radio">Red</label>
-
-        <input type="radio" name="color" id="yellow">
-        <label for="yellow" class="radio">Yellow</label>
-
-        <input type="radio" name="color" id="green">
-        <label for="green" class="radio">Green</label>
-
-
-    </div>
+                if (!checkbox1.is(":checked") && !checkbox2.is(":checked")) {
+                    alert("Please choose at least one checkbox.");
+                    event.preventDefault(); // Prevent form submission
+                } else if (selectedDate.val() === "") {
+                    alert("Please fill in the date field.");
+                    event.preventDefault(); // Prevent form submission
+                }
+            });
+        });
+    </script>
 </div>

@@ -16,7 +16,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                     <div class="modal text-left" id="laporan">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form class="form-group" method="post" id="form">
+                                <form class="form-group" id="form" action="_print/lap_akun_pdf/" method="post">
                                     <div class="modal-header text-white bg-danger h4">
                                         Pengaturan Unduh Laporan
                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -25,6 +25,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                                     </div>
                                     <div class="modal-body">
                                         <div class="b h5 mb-2 text-center">LEVEL AKUN</div>
+                                        <div id="err_level_akun" class="err i text-danger text-center text-xs blink mb-2"></div>
                                         <input type="checkbox" class="checkbox-md" id="admin" name="admin" value="1"> &nbsp;&nbsp;<label for="admin"> Admin</label><br>
                                         <input type="checkbox" class="checkbox-md" id="ip" name="ip" value="2"> &nbsp;&nbsp;<label for="ip"> Institusi Pendidikan</label><br>
                                         <input type="checkbox" class="checkbox-md" id="adminpkd" name="adminpkd" value="3"> &nbsp;&nbsp;<label for="adminpkd"> Admin PKD</label><br>
@@ -34,24 +35,61 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
                                         <div class="b h5 mb-2 text-center">RETANG TANGGAL DAFTAR</div>
                                         <div class="row">
                                             <div class="col-md">
-                                                <input type="date" class="form-control" id="tgl-a" name="tgl-a">
+                                                <input type="date" class="form-control" id="tgl_a" name="tgl_a">
                                             </div>
                                             <div class="col-md">
-                                                <input type="date" class="form-control" id="tgl-b" name="tgl-b">
+                                                <input type="date" class="form-control" id="tgl_b" name="tgl_b">
                                             </div>
                                         </div>
+                                        <div id="err_tgl" class="err i text-danger text-center text-xs blink mb-2"></div>
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="" class="btn btn-danger laporan_unduh" disabled><i class="fa-solid fa-file-pdf"></i> UNDUH PDF</a>
+                                        <button class="btn btn-danger laporan_akun_unduh" type="submit"><i class="fa-solid fa-file-pdf"></i> UNDUH PDF</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <script>
-                        $(".laporan_init").click(function() {});
-                        $(document).on('click', '.laporan_unduh', function() {
+                        $(document).ready(function() {
+                            $(document).on('click', '.laporan_init', function() {
+                                $(".err").html("");
+                                $("#form").reset();
+                            });
 
+                            $("#form").submit(function(event) {
+                                var admin = $("input[name='admin']");
+                                var ip = $("input[name='ip']");
+                                var adminpkd = $("input[name='adminpkd']");
+                                var ci = $("input[name='ci']");
+                                var praktikan = $("input[name='praktikan']");
+                                var tgl_a = $("input[name='tgl_a']");
+                                var tgl_b = $("input[name='tgl_b']");
+
+                                if (
+                                    !admin.is(":checked") &&
+                                    !ip.is(":checked") &&
+                                    !adminpkd.is(":checked") &&
+                                    !ci.is(":checked") &&
+                                    !ip.is(":checked") ||
+                                    tgl_a.val() === "" ||
+                                    tgl_b.val() === ""
+                                ) {
+                                    simpan_tidaksesuai()
+                                    if (
+                                        !admin.is(":checked") &&
+                                        !ip.is(":checked") &&
+                                        !adminpkd.is(":checked") &&
+                                        !ci.is(":checked") &&
+                                        !ip.is(":checked")
+                                    ) $("#err_level_akun").html("Level Akun Harus Dipilih Minimal 1");
+                                    if (
+                                        tgl_a.val() === "" ||
+                                        tgl_b.val() === ""
+                                    ) $("#err_tgl").html("Level Akun Harus Dipilih Minimal 1");
+                                    event.preventDefault(); // Prevent form submission
+                                }
+                            });
                         });
                     </script>
                     <button class="btn btn-outline-success btn-sm tambah_init">

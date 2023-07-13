@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 session_start();
 // phpinfo();
 date_default_timezone_set('Asia/Jakarta');
@@ -35,6 +35,7 @@ include "_add-ons/crypt.php";
         elseif ($_SESSION['level_user'] == 3) echo "ADMIN PKD | ";
         elseif ($_SESSION['level_user'] == 4) echo "CI | ";
         elseif ($_SESSION['level_user'] == 5) echo "PRAKTIKAN | ";
+        else echo "";
         ?>
         SIPAPAP MACO
     </title>
@@ -56,11 +57,11 @@ include "_add-ons/crypt.php";
 </head>
 
 <body id="page-top" class="bg-sipapapmaco-abstrack1">
-    <div class="preloader">
+    <!-- <div class="preloader">
         <div class="loading">
             <div class="loader loader-main"></div>
         </div>
-    </div>
+    </div> -->
     <?php
     if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
     elseif (isset($_GET['test'])) include "test.php";

@@ -435,7 +435,7 @@ if ($r_user > 0) {
                             data: data,
                             success: function() {
 
-                                $('#data_akun').load('_admin/view/v_akunData.php?id=' + <?= $_GET['id'] ?>);
+                                $('#data_akun').load('_admin/view/v_akunData.php?id=<?= $_GET['id'] ?>');
 
                                 var data_file = new FormData();
                                 var xhttp = new XMLHttpRequest();
@@ -489,7 +489,7 @@ if ($r_user > 0) {
                         data: data,
                         success: function() {
 
-                            $('#data_akun').load('_admin/view/v_akunData.php?id=' + <?= $_GET['id'] ?>);
+                            $('#data_akun').load('_admin/view/v_akunData.php?id=<?= $_GET['id'] ?>');
 
                             Swal.fire({
                                 allowOutsideClick: false,
@@ -547,7 +547,7 @@ if ($r_user > 0) {
                             "id_user": $(this).attr('id')
                         },
                         success: function() {
-                            $('#data_akun').load('_admin/view/v_akunData.php?id=' + <?= $_GET['id']; ?>);
+                            $('#data_akun').load('_admin/view/v_akunData.php?id=<?= $_GET['id']; ?>');
 
                             const Toast = Swal.mixin({
                                 toast: true,

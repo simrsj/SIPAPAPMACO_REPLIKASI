@@ -133,12 +133,12 @@ elseif (isset($_GET['pkd']) && $d_prvl['r_pkd'] == 'Y') {
 	else
 		include "_admin/view/v_pkd.php";
 }
+//PRINT 
+elseif (isset($_GET['lap_akun_pdf'])) include "_print/p_akun_praktikan.php";
 //testing 
-elseif (isset($_GET['test']))
-	include "test.php";
+elseif (isset($_GET['test']))	include "test.php";
 //panduan
-elseif (isset($_GET['panduan']))
-	include "panduan.php";
+elseif (isset($_GET['panduan']))	include "panduan.php";
 //data dashboard
 else {
 	if ($_SESSION['level_user'] == 1)
