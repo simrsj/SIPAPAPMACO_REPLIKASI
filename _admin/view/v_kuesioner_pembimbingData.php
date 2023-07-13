@@ -1,16 +1,5 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-$exp_arr_idu = explode("*sm*", base64_decode(urldecode(hex2bin($_GET['idu']))));
-$idu = $exp_arr_idu[1];
-$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . $idu;
-// echo $sql_prvl;
-try {
-    $q_prvl = $conn->query($sql_prvl);
-    $d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
-} catch (Exception $ex) {
-    echo "<script>alert('-DATA PRIVILEGES-');";
-    echo "document.location.href='?error404';</script>";
-}
 
 $sql_pertanyaan = "SELECT * FROM tb_kuesioner_pembimbing";
 // echo $sql_kuota;

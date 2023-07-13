@@ -36,7 +36,7 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
                                     Kembali
                                 </a>
                                 &nbsp;
-                                <a class="btn btn-success btn-sm tambah" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>">
+                                <a class="btn btn-success btn-sm tambah">
                                     Simpan
                                 </a>
                             </div>
@@ -51,7 +51,7 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
     <script>
         $(document).ready(function() {
             loading_sw2();
-            $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>');
+            $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php');
             Swal.close();
         });
 
@@ -63,29 +63,14 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
             Swal.close();
         });
 
-        // inisiasi klik modal tambah tutup
-        $(".tambah_tutup").click(function() {
-            $('#err_t_pertanyaan').empty();
-            $('#err_t_ket').empty();
-        });
-
-
         // inisiasi klik modal tambah simpan
         $(document).on('click', '.tambah', function() {
-
             loading_sw2();
-            var idu = $(this).attr('id');
             var data_t = $("#form_t").serializeArray();
-            data_t.push({
-                name: "idu",
-                value: idu
-            });
             var t_pertanyaan = $('#t_pertanyaan').val();
 
             //cek data from modal tambah bila tidak diiisi
-            if (
-                t_pertanyaan == ""
-            ) {
+            if (t_pertanyaan == "") {
                 t_pertanyaan == "" ? $("#err_t_pertanyaan").html("Pertanyaan Harus Diisi") : $("#err_t_pertanyaan").html("");
                 simpan_tidaksesuai();
             }
@@ -96,38 +81,16 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
                     url: "_admin/exc/x_v_kuesioner_pembimbing_s.php",
                     data: data_t,
                     success: function() {
-                        Swal.fire({
-                            allowOutsideClick: true,
-                            // isDismissed: false,
-                            icon: 'success',
-                            html: '<span class="text-lg b">Data Berhasil Tersimpan</span>',
-                            // html: '<a href="?pkd" class="btn btn-outline-primary">OK</a>',
-                            showConfirmButton: false,
-                            backdrop: true,
-                            timer: 5000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        }).then(
-                            function() {
-
-                                Swal.fire({
-                                    title: 'Mohon Ditunggu',
-                                    html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                                    allowOutsideClick: false,
-                                    showConfirmButton: false,
-                                    backdrop: true
-                                });
-                                $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>');
-                                $('#err_t_pertanyaan').empty();
-                                Swal.close();
-                            }
-                        );
+                        simpan_berhasil("");
+                        setTimeout(function() {
+                            loading_sw2()
+                            $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>');
+                            $('#err_t_pertanyaan').empty();
+                            Swal.close();
+                        }, 5000);
                     },
                     error: function() {
-                        console.log("ERROR SIMPAN PERTANYAAN PEMBIMBING");
+                        console.log("ERROR SIMPAN KUESIONER PEMBIMBING");
                         Swal.close();
                     }
                 });
