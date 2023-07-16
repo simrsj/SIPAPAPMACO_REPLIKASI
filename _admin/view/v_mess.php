@@ -314,7 +314,7 @@
                         icon: 'success',
                         title: '<span class"text-xs"><b>Data Mess</b><br>Berhasil Tersimpan',
                         showConfirmButton: true,
-                        timer: 5000123,
+                        timer: 5000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', SwalButton.stopTimer)

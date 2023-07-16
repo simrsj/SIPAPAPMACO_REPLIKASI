@@ -1,5 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 
 $sql_pertanyaan = "SELECT * FROM tb_kuesioner_pembimbing";
 // echo $sql_kuota;
@@ -34,9 +35,68 @@ try {
                         <td><?= $d_pertanyaan['tgl_ubah']; ?></td>
                         <td class="text-center"></td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-primary btn-sm ubah" id="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $d_pertanyaan['id']))); ?>">
-                                <i class="fa fa-edit"></i> Ubah
-                            </a>
+                            <div class="col-lg-2 my-auto text-right">
+
+                                <!-- tombol modal ubah  -->
+                                <a href="#" class="btn btn-primary btn-sm ubah_init" data-toggle="modal" data-target="#<?= md5("ubah" . $d_pertanyaan['id']) ?>">
+                                    <i class="fa fa-edit"></i> Ubah
+                                </a>
+                                <script>
+                                    $(".ubah_init").click(function() {
+                                        loading_sw2();
+                                        $('.err').html("");
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: "v_kuesioner_pembimbingGetData.php",
+                                            data: data_t,
+                                            success: function() {
+                                                simpan_berhasil("");
+                                                setTimeout(function() {
+                                                    loading_sw2()
+                                                    $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>');
+                                                    $('#err_t_pertanyaan').empty();
+                                                    Swal.close();
+                                                }, 5000);
+                                            },
+                                            error: function() {
+                                                console.log("ERROR SIMPAN KUESIONER PEMBIMBING");
+                                                Swal.close();
+                                            }
+                                        });
+                                        Swal.close();
+                                    });
+                                </script>
+                                <!-- modal tambah  -->
+                                <div class="modal text-center" id="mt" data-backdrop="static">
+                                    <div class="modal-dialog modal-dialog-scrollable  modal-md">
+                                        <div class="modal-content">
+                                            <div class="modal-header h5">
+                                                Ubah Pertanyaan
+                                            </div>
+                                            <div class="modal-body text-md">
+                                                <form class="form-data b" method="post" id="form_t">
+                                                    Ubah Pertanyaan <span style="color:red">*</span><br>
+                                                    <input type="text" id="t_pertanyaan" name="t_pertanyaan" class="form-control" placeholder="isikan pertanyaan" required>
+                                                    <div class="text-danger b i text-xs blink err" id="err_t_pertanyaan"></div>
+                                                    Keterangan<br>
+                                                    <textarea id="t_ket" name="t_ket" class="form-control"> </textarea>
+                                                    <div class="text-danger b i text-xs blink err" id="err_t_ket"></div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer text-md">
+                                                <a class="btn btn-danger btn-sm tambah_tutup" data-dismiss="modal">
+                                                    Kembali
+                                                </a>
+                                                &nbsp;
+                                                <a class="btn btn-success btn-sm tambah" id="<?= encryptString($d_pertanyaan['id'], $customkey); ?>">
+                                                    Simpan
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <!-- tombol modal hapus pertanyaan   -->
                             <button title="Hapus Pertanyaan" class='btn btn-danger btn-sm' data-toggle="modal" data-target="#<?= md5("hapus" . $d_pertanyaan['id']) ?>">
@@ -86,5 +146,6 @@ try {
 <script>
     $(document).ready(function() {
         $('#dataTable').DataTable();
+        Swal.close();
     });
 </script>

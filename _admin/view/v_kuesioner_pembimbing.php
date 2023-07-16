@@ -9,12 +9,12 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
             </div>
             <div class="col-lg-2 my-auto text-right">
 
-                <!-- tombol modal tambah praktikan  -->
+                <!-- tombol modal tambah  -->
                 <a title="tambah pertanyaan" class='btn btn-success btn-sm tambah_ini' href='#' data-toggle="modal" data-target="#mt">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
 
-                <!-- modal tambah praktikan  -->
+                <!-- modal tambah  -->
                 <div class="modal text-center" id="mt" data-backdrop="static">
                     <div class="modal-dialog modal-dialog-scrollable  modal-md">
                         <div class="modal-content">
@@ -52,7 +52,6 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
         $(document).ready(function() {
             loading_sw2();
             $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php');
-            Swal.close();
         });
 
         // inisiasi klik modal tambah
