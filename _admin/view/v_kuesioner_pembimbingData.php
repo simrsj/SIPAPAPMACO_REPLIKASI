@@ -33,78 +33,112 @@ try {
                         <td><?= $d_pertanyaan['pertanyaan']; ?></td>
                         <td><?= $d_pertanyaan['tgl_tambah']; ?></td>
                         <td><?= $d_pertanyaan['tgl_ubah']; ?></td>
-                        <td class="text-center"></td>
+                        <td class="text-center"><?= $d_pertanyaan['ket']; ?></td>
                         <td class="text-center">
-                            <div class="col-lg-2 my-auto text-right">
 
-                                <!-- tombol modal ubah  -->
-                                <a href="#" class="btn btn-primary btn-sm ubah_init" data-toggle="modal" data-target="#<?= md5("ubah" . $d_pertanyaan['id']) ?>">
-                                    <i class="fa fa-edit"></i> Ubah
-                                </a>
-                                <script>
-                                    $(".ubah_init").click(function() {
-                                        loading_sw2();
-                                        $('.err').html("");
-                                        $.ajax({
-                                            type: 'POST',
-                                            url: "v_kuesioner_pembimbingGetData.php",
-                                            data: data_t,
-                                            success: function() {
-                                                simpan_berhasil("");
-                                                setTimeout(function() {
-                                                    loading_sw2()
-                                                    $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>');
-                                                    $('#err_t_pertanyaan').empty();
-                                                    Swal.close();
-                                                }, 5000);
-                                            },
-                                            error: function() {
-                                                console.log("ERROR SIMPAN KUESIONER PEMBIMBING");
-                                                Swal.close();
-                                            }
-                                        });
-                                        Swal.close();
-                                    });
-                                </script>
-                                <!-- modal tambah  -->
-                                <div class="modal text-center" id="mt" data-backdrop="static">
-                                    <div class="modal-dialog modal-dialog-scrollable  modal-md">
-                                        <div class="modal-content">
-                                            <div class="modal-header h5">
-                                                Ubah Pertanyaan
-                                            </div>
-                                            <div class="modal-body text-md">
-                                                <form class="form-data b" method="post" id="form_t">
-                                                    Ubah Pertanyaan <span style="color:red">*</span><br>
-                                                    <input type="text" id="t_pertanyaan" name="t_pertanyaan" class="form-control" placeholder="isikan pertanyaan" required>
-                                                    <div class="text-danger b i text-xs blink err" id="err_t_pertanyaan"></div>
-                                                    Keterangan<br>
-                                                    <textarea id="t_ket" name="t_ket" class="form-control"> </textarea>
-                                                    <div class="text-danger b i text-xs blink err" id="err_t_ket"></div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer text-md">
-                                                <a class="btn btn-danger btn-sm tambah_tutup" data-dismiss="modal">
-                                                    Kembali
-                                                </a>
-                                                &nbsp;
-                                                <a class="btn btn-success btn-sm tambah" id="<?= encryptString($d_pertanyaan['id'], $customkey); ?>">
-                                                    Simpan
-                                                </a>
-                                            </div>
+                            <!-- tombol modal ubah  -->
+                            <a href="#" class="btn btn-primary btn-sm ubah_init<?= md5($no . $customkey); ?>" data-toggle="modal" data-target="#mubah<?= md5($no . $customkey); ?>">
+                                <i class="fa fa-edit"></i> Ubah
+                            </a>
+                            <!-- modal tambah  -->
+                            <div class="modal text-center" id="mubah<?= md5($no . $customkey); ?>" data-backdrop="static">
+                                <div class="modal-dialog modal-dialog-scrollable  modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header h5 bg-primary text-light">
+                                            Ubah Pertanyaan
+                                        </div>
+                                        <div class="modal-body text-md">
+                                            <form class="form-data b" method="post" id="form<?= md5($no . $customkey); ?>">
+                                                Ubah Pertanyaan <span style="color:red">*</span><br>
+                                                <input type="text" id="pertanyaan<?= md5($no . $customkey); ?>" name="pertanyaan" class="form-control" placeholder="isikan pertanyaan" required>
+                                                <div class="text-danger b i text-xs blink err" id="err_pertanyaan"></div>
+                                                Keterangan<br>
+                                                <textarea id="ket<?= md5($no . $customkey); ?>" name="ket" class="form-control"> </textarea>
+                                                <input type="hidden" id="id<?= md5($no . $customkey); ?>" name="id">
+
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer text-md">
+                                            <a class="btn btn-danger btn-sm tambah_tutup" data-dismiss="modal">
+                                                Kembali
+                                            </a>
+                                            &nbsp;
+                                            <a class="btn btn-primary btn-sm ubah<?= md5($no . $customkey); ?>" id="<?= encryptString($d_pertanyaan['id'], $customkey); ?>">
+                                                Ubah
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <script>
+                                $(".ubah_init<?= md5($no . $customkey); ?>").click(function() {
+                                    loading_sw2();
+                                    $('.err').html("");
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "_admin/view/v_kuesioner_pembimbingGetData.php",
+                                        data: {
+                                            id: "<?= encryptString($d_pertanyaan['id'], $customkey); ?>"
+                                        },
+                                        dataType: "JSON",
+                                        success: function(response) {
+                                            if (response.ket == "success") {
+                                                $('#pertanyaan<?= md5($no . $customkey); ?>').val(response.pertanyaan);
+                                                $('#ket<?= md5($no . $customkey); ?>').val(response.keterangan);
+                                                $('#id<?= md5($no . $customkey); ?>').val(response.id);
+                                                Swal.close();
+                                            } else error();
+                                        },
+                                        error: function() {
+                                            error();
+                                        }
+                                    });
+                                });
+                                $(".ubah<?= md5($no . $customkey); ?>").click(function() {
+                                    loading_sw2();
+                                    var data = $("#form<?= md5($no . $customkey); ?>").serializeArray();
+                                    var pertanyaan = $('#pertanyaan<?= md5($no . $customkey); ?>').val();
 
+                                    //cek data from modal tambah bila tidak diiisi
+                                    if (pertanyaan == "") {
+                                        pertanyaan == "" ? $("#err_pertanyaan").html("Pertanyaan Harus Diisi") : $("#err_pertanyaan").html("");
+                                        simpan_tidaksesuai();
+                                    }
+                                    //simpan data tambah bila sudah sesuai
+                                    else {
+                                        loading_sw2();
+                                        $('.err').html("");
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: "_admin/exc/x_v_kuesioner_pembimbing_u.php",
+                                            data: data,
+                                            dataType: "JSON",
+                                            success: function(response) {
+                                                if (response.ket == "success") {
+                                                    simpan_berhasil("");
+                                                    setTimeout(function() {
+                                                        loading_sw2()
+                                                        $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php');
+                                                        $('#err_pertanyaan').empty();
+                                                        Swal.close();
+                                                    }, 1235000);
+                                                } else simpan_tidaksesuai();
+                                            },
+                                            error: function() {
+                                                error();
+                                            }
+                                        });
+                                    }
+                                });
+                            </script>
 
                             <!-- tombol modal hapus pertanyaan   -->
-                            <button title="Hapus Pertanyaan" class='btn btn-danger btn-sm' data-toggle="modal" data-target="#<?= md5("hapus" . $d_pertanyaan['id']) ?>">
+                            <a title="Hapus Pertanyaan" class='btn btn-danger btn-sm' data-toggle="modal" data-target="#<?= md5("hapus" . $no) ?>">
                                 <i class="fas fa-trash"></i> Hapus
-                            </button>
+                            </a>
 
                             <!-- modal hapus pertanyaan   -->
-                            <div class="modal text-center" id="<?= md5("hapus" . $d_pertanyaan['id']) ?>" data-backdrop="static">
+                            <div class="modal text-center" id="<?= md5("hapus" . $no) ?>" data-backdrop="static">
                                 <div class="modal-dialog modal-dialog-scrollable  modal-md">
                                     <div class="modal-content">
                                         <div class="modal-header h5 bg-danger text-light">

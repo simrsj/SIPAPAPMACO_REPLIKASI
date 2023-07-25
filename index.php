@@ -2,13 +2,6 @@
 error_reporting(0);
 session_start();
 // phpinfo();
-date_default_timezone_set('Asia/Jakarta');
-
-// Get the current time
-$current_time = new DateTime();
-
-// Add 1 minute to the current time
-$current_time->add(new DateInterval('PT1M'));
 
 include "_add-ons/koneksi.php";
 include "_add-ons/tanggal_waktu.php";
