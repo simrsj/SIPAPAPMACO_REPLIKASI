@@ -133,7 +133,7 @@ try {
                             </script>
 
                             <!-- tombol modal hapus pertanyaan   -->
-                            <a title="Hapus Pertanyaan" class='btn btn-danger btn-sm' data-toggle="modal" data-target="#<?= md5("hapus" . $no) ?>">
+                            <a title="Hapus Pertanyaan" class='btn btn-danger btn-sm hapus' id="<?= encryptString($d_pertanyaan['id'], $customkey) ?>">
                                 <i class="fas fa-trash"></i> Hapus
                             </a>
 
@@ -182,7 +182,6 @@ try {
         Swal.close();
         $(document).on('click', '.hapus', function() {
             console.log("AKTIF");
-            var id = $(this).attr('id');
             Swal.fire({
                 position: 'top',
                 html: "<span class='b'>HAPUS DATA?</span>",
@@ -199,11 +198,11 @@ try {
                         type: 'POST',
                         url: "_admin/exc/x_v_kuesioner_pembimbing_h.php",
                         data: {
-                            "id": id
+                            "id": $(this).attr('id')
                         },
                         dataType: "JSON",
                         success: function(response) {
-                            response.ket == "ERROR" ? simpan_gagal_database() : simpan_berhasil("?elogbook=<?= $_GET['elogbook'] ?>")
+                            response.ket == "error" ? hapus_gagal() : hapus_berhasil("?kuesioner_pembimbing");
                         },
                         error: function() {
                             error();

@@ -22,12 +22,12 @@ try {
     $sql .= ")";
     $conn->query($sql);
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'ket' => 'success'
     ]);
 } catch (Exception $ex) {
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'ket' => 'error'
     ]);
 }

@@ -108,6 +108,22 @@ function hapus_berhasil(link) {
   });
 }
 
+function hapus_gagal() {
+  Swal.fire({
+    allowOutsideClick: true,
+    backdrop: true,
+    icon: "error",
+    title: "DATA GAGAL DIHAPUS!",
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+}
+
 function error() {
   Swal.fire({
     allowOutsideClick: true,

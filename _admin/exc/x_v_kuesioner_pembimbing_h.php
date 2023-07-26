@@ -10,15 +10,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 
 try {
     $sql = "DELETE FROM tb_kuesioner_pembimbing";
-    $sql .= " WHERE id=" . $_POST['id'];
+    $sql .= " WHERE id=" . decryptString($_POST['id'], $customkey);
     $conn->query($sql);
     echo json_encode([
         // 'sql' => $sql,
         'ket' => "success"
     ]);
-} catch (Exception $ex) {
+} catch (PDOException $ex) {
     echo json_encode([
         // 'sql' => $sql,
-        'ket' => 'error'
+        'ket' => 'error',
+        'ket_detail' => $ex->getMessage()
     ]);
 }
