@@ -1,19 +1,13 @@
 <div class="card bg-light text-black shadow m-2">
-    <form id="myForm" action="_print/lap_akun_pdf/" method="post" target="_blank">
-        <label>
-            <input type="checkbox" name="checkbox1"> Checkbox 1
-        </label>
-        <br>
-        <label>
-            <input type="checkbox" name="checkbox2"> Checkbox 2
-        </label>
-        <br>
-        <label>
-            Date: <input type="date" name="selectedDate">
-        </label>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
+    <!-- Your content here -->
+
+    <!-- Floating alert at the top -->
+    <div class="alert alert-warning alert-dismissible fixed-top m-5">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Warning!</strong> This is a floating alert at the top of the screen.
+    </div>
+
+    <!-- More content here -->
 
     <script>
         $(document).ready(function() {

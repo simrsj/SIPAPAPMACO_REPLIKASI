@@ -3,9 +3,9 @@ error_reporting(0);
 session_start();
 // phpinfo();
 
-include "_add-ons/koneksi.php";
-include "_add-ons/tanggal_waktu.php";
-include "_add-ons/crypt.php";
+require_once "_add-ons/koneksi.php";
+require_once "_add-ons/tanggal_waktu.php";
+require_once "_add-ons/crypt.php";
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +62,7 @@ include "_add-ons/crypt.php";
     elseif (isset($_GET['logbookkep'])) include "_praktikan\logbookkep.php";
     elseif (isset($_GET['error401'])) include "_error/error401.php";
     elseif (isset($_GET['error404'])) include "_error/error404.php";
+    elseif (isset($_GET['error503'])) include "_error/error503.php";
     elseif (isset($_SESSION['status_user'])) {
         if ($_SESSION['status_user'] == 'Y') {
             if (isset($_GET['lo'])) include "_log-sign/exc/x_log_out.php";
@@ -77,19 +78,17 @@ include "_add-ons/crypt.php";
                 setTimeout(function() {
                     idle_logout();
                     $.ajax({
-                        url: "_log-sign/exc/x_log_out.php",
+                        url: "?lo",
                     });
                 }, 14400000);
-                // }, 10000);
+                // }, 5000);
             </script>
-    <?php
-        } elseif ($_SESSION['status_user'] == 'T') {
-            echo "
+        <?php } elseif ($_SESSION['status_user'] == 'T') { ?>
             <script>
                 alert('Akun Sudah Tidak Aktif');
+                document.location.href = "?lo";
             </script>
-        ";
-            include "_log-sign/exc/x_log_out.php";
+    <?php
         }
     }
     // Index Log-Sign

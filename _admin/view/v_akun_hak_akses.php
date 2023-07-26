@@ -24,6 +24,6 @@ if (isset($_GET['aku']) && isset($_GET['ha']) && $d_prvl['u_akun'] == 'Y') {
     </script>
 <?php
 } else {
-    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?';</script>";
+    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?error401';</script>";
 }
 ?>

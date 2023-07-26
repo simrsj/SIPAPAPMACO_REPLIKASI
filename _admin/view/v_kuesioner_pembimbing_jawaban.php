@@ -209,6 +209,6 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
     </script>
 <?php
 } else {
-    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?';</script>";
+    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?error401';</script>";
 }
 ?>

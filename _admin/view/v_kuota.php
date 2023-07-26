@@ -166,6 +166,6 @@ if (isset($_GET['kta']) && $d_prvl['r_kuota'] == 'Y') {
     </script>
 <?php
 } else {
-    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?';</script>";
+    echo "<script>alert('Maaf anda tidak punya hak akses');document.location.href='?error401';</script>";
 }
 ?>
