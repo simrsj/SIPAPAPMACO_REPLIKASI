@@ -167,5 +167,4 @@ $dompdf->loadHtml($html);
 $dompdf->render();
 
 // Melakukan output file Pdf
-$dompdf->stream('akun_praktikan__.pdf');
-exit();
+$dompdf->stream('akun_praktikan_' . $d_praktik['tgl_mulai_praktik'] . '_' . $d_praktik['tgl_selesai_praktik'] . '_' . $d_institusi['nama_institusi'] . '_' . $d_praktik['nama_praktik'] . '_.pdf');
