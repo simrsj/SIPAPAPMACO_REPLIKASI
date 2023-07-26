@@ -219,7 +219,7 @@
                             dataType: "json",
                             success: function(response) {
                                 if (response.ket == "SUCCESS") {
-                                    hapus_berhasil();
+                                    hapus_berhasil("");
                                     $('#data_psw')
                                         .load(
                                             "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");

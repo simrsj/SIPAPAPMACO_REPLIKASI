@@ -203,7 +203,7 @@
                             dataType: "json",
                             success: function(response) {
                                 if (response.ket == "SUCCESS") {
-                                    hapus_berhasil();
+                                    hapus_berhasil("");
                                     $('#data_materi')
                                         .load(
                                             "_pembimbing/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");

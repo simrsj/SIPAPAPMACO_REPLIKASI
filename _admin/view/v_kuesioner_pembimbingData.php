@@ -176,10 +176,41 @@ try {
     </div>
 <?php } ?>
 </div>
-</div>
 <script>
     $(document).ready(function() {
         $('#dataTable').DataTable();
         Swal.close();
+        $(document).on('click', '.hapus', function() {
+            console.log("AKTIF");
+            var id = $(this).attr('id');
+            Swal.fire({
+                position: 'top',
+                html: "<span class='b'>HAPUS DATA?</span>",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1cc88a',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Ya',
+                allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "_admin/exc/x_v_kuesioner_pembimbing_h.php",
+                        data: {
+                            "id": id
+                        },
+                        dataType: "JSON",
+                        success: function(response) {
+                            response.ket == "ERROR" ? simpan_gagal_database() : simpan_berhasil("?elogbook=<?= $_GET['elogbook'] ?>")
+                        },
+                        error: function() {
+                            error();
+                        }
+                    });
+                }
+            })
+        });
     });
 </script>

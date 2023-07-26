@@ -90,7 +90,7 @@ function ubah_gagal_database() {
   });
 }
 
-function hapus_berhasil() {
+function hapus_berhasil(link) {
   Swal.fire({
     allowOutsideClick: true,
     backdrop: true,
@@ -103,6 +103,8 @@ function hapus_berhasil() {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
+  }).then(function () {
+    document.location.href = link;
   });
 }
 

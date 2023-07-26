@@ -246,7 +246,7 @@
                             dataType: "json",
                             success: function(response) {
                                 if (response.ket == "SUCCESS") {
-                                    hapus_berhasil();
+                                    hapus_berhasil("");
                                     loading_sw2();
                                     $('#data_kyd')
                                         .load(
