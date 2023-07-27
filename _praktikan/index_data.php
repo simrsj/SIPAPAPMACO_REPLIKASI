@@ -2,7 +2,7 @@
 //akun dan hak akses 
 if (isset($_GET['kep_kompetensi']))	include "_praktikan/kep_kompetensi.php";
 //nilai Kedokteran (Co-Ass)
-else if (isset($_GET["ked_coass_nilai"])) include "_praktikan/view/v_ked_coass_nilai.php";
+// else if (isset($_GET["ked_coass_nilai"])) include "_praktikan/view/v_ked_coass_nilai.php";
 //data Log Book Kedokteran Co-Ass
 else if (isset($_GET["ked_coass_elogbook"])) {
 	//data Log Book Pencapaian Komptensi Keterampilan P3D

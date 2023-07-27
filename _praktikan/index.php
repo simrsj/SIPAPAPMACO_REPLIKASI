@@ -65,9 +65,9 @@ if ($_SESSION['status_user'] == "Y") {
 									<?php if ($d_praktikan['id_profesi_pdd'] == 1) { ?>
 									<?php } else if ($d_praktikan['id_profesi_pdd'] == 2) { ?>
 										<!-- Kedokteran Co-Ass  -->
-										<a class="dropdown-item b " href="?ked_coass_nilai">
+										<!-- <a class="dropdown-item b " href="?ked_coass_nilai">
 											Penilaian
-										</a>
+										</a> -->
 										<div class="text-center mb-2">
 											<span class="badge badge-dark text-md col">e-Log Book</span>
 										</div>
