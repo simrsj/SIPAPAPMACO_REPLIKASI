@@ -185,10 +185,10 @@ if ($_SESSION['status_user'] == "Y") {
 										<span>Data Nilai</span>
 									</a>
 								<?php } ?>
-								<?php if ($d_prvl['r_log_book'] == "Y") { ?>
+								<?php if ($d_prvl['r_logbook'] == "Y") { ?>
 									<a class="collapse-item" href="?logbook">
 										<i class="fas fa-fw fa-clipboard-list"></i>
-										<span>Data Log Book</span>
+										<span>Log Book</span>
 									</a>
 								<?php } ?>
 							</div>

@@ -4,6 +4,11 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 	if (isset($_GET['ha']) && $_SESSION['level_user'] == 1) include "_admin/view/v_akun_hak_akses.php";
 	else include "_admin/view/v_akun.php";
 }
+//log book 
+elseif (isset($_GET['logbook']) && $d_prvl['r_logbook'] == 'Y') {
+	if (isset($_GET['data'])) include "_admin/view/v_logbook_detail.php";
+	else include "_admin/view/v_logbook.php";
+}
 //kuesioner pembimbing 
 elseif (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
 	if (isset($_GET['jawaban'])) include "_admin/view/v_kuesioner_pembimbing_jawaban.php";
