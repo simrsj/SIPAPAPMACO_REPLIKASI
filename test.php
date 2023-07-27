@@ -1,11 +1,16 @@
 <div class="card bg-light text-black shadow m-2">
     <!-- Your content here -->
-
-    <!-- Floating alert at the top -->
-    <div class="alert alert-warning alert-dismissible fixed-top m-5">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Warning!</strong> This is a floating alert at the top of the screen.
+    <!-- Block level -->
+    <div class="row">
+        <div class="col-2 text-truncate">
+            Praeterea iter est quasdam res quas ex communi.
+        </div>
     </div>
+
+    <!-- Inline level -->
+    <span class="d-inline-block text-truncate" style="max-width: 150px;">
+        Praeterea iter est quasdam res quas ex communi.
+    </span>
 
     <!-- More content here -->
 

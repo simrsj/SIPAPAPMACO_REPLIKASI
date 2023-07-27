@@ -112,7 +112,7 @@ if ($_SESSION['status_user'] == "Y") {
 								</div>
 							</a>
 							<a class="nav-link h-0 dropdown-toggle accordion pl-0 pr-0" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="d-none d-md-block badge badge-light text-primary b shadow-lg">
+								<span class="d-none d-md-block badge badge-light text-truncate text-primary b shadow-lg" style="max-width: 200px;">
 									<?= $d_praktikan['nama_praktikan']; ?>&nbsp;
 									<i class="far fa-user"></i>
 								</span>

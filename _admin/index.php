@@ -185,6 +185,12 @@ if ($_SESSION['status_user'] == "Y") {
 										<span>Data Nilai</span>
 									</a>
 								<?php } ?>
+								<?php if ($d_prvl['r_log_book'] == "Y") { ?>
+									<a class="collapse-item" href="?logbook">
+										<i class="fas fa-fw fa-clipboard-list"></i>
+										<span>Data Log Book</span>
+									</a>
+								<?php } ?>
 							</div>
 						</div>
 					</li>

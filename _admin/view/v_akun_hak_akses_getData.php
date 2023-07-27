@@ -595,6 +595,58 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
                         <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_pkd"></div>
                     </td>
                 </tr>
+                <!-- Log Book -->
+                <tr>
+                    <td>Log Book</td>
+                    <td>
+                        <?php
+                        $c_logbookY = "";
+                        $c_logbookT = "";
+                        if ($d_user_prvl['c_logbook'] == 'Y') $c_logbookY = "checked";
+                        else if ($d_user_prvl['c_logbook'] == 'T')  $c_logbookT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="c_logbook" id="c_logbookY" value="Y" <?= $c_logbookY; ?>><label for="c_logbookY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="c_logbook" id="c_logbookT" value="T" <?= $c_logbookT; ?>><label for="c_logbookT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_c_logbook"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $r_logbookY = "";
+                        $r_logbookT = "";
+                        if ($d_user_prvl['r_logbook'] == 'Y') $r_logbookY = "checked";
+                        else if ($d_user_prvl['r_logbook'] == 'T')  $r_logbookT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="r_logbook" id="r_logbookY" value="Y" <?= $r_logbookY; ?>><label for="r_logbookY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="r_logbook" id="r_logbookT" value="T" <?= $r_logbookT; ?>><label for="r_logbookT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_r_logbook"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $u_logbookY = "";
+                        $u_logbookT = "";
+                        if ($d_user_prvl['u_logbook'] == 'Y') $u_logbookY = "checked";
+                        else if ($d_user_prvl['u_logbook'] == 'T')  $u_logbookT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="u_logbook" id="u_logbookY" value="Y" <?= $u_logbookY; ?>><label for="u_logbookY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="u_logbook" id="u_logbookT" value="T" <?= $u_logbookT; ?>><label for="u_logbookT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_u_logbook"></div>
+                    </td>
+                    <td>
+                        <?php
+                        $d_logbookY = "";
+                        $d_logbookT = "";
+                        if ($d_user_prvl['d_logbook'] == 'Y') $d_logbookY = "checked";
+                        else if ($d_user_prvl['d_logbook'] == 'T')  $d_logbookT = "checked";
+                        else echo "ERROR!";
+                        ?>
+                        <input type="radio" name="d_logbook" id="d_logbookY" value="Y" <?= $d_logbookY; ?>><label for="d_logbookY">Ya</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="d_logbook" id="d_logbookT" value="T" <?= $d_logbookT; ?>><label for="d_logbookT">Tidak</label>
+                        <div class="text-center text-danger font-weight-bold font-italic text-xs blink" id="err_d_logbook"></div>
+                    </td>
+                </tr>
             </tbody>
             </tbody>
         </table>
@@ -653,6 +705,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
         var r_pkd = $("input[name='r_pkd']:checked").val();
         var u_pkd = $("input[name='u_pkd']:checked").val();
         var d_pkd = $("input[name='d_pkd']:checked").val();
+        var c_logbook = $("input[name='c_logbook']:checked").val();
+        var r_logbook = $("input[name='r_logbook']:checked").val();
+        var u_logbook = $("input[name='u_logbook']:checked").val();
+        var d_logbook = $("input[name='d_logbook']:checked").val();
         var c_praktikan = $("input[name='c_praktikan']:checked").val();
         var r_praktikan = $("input[name='r_praktikan']:checked").val();
         var u_praktikan = $("input[name='u_praktikan']:checked").val();
@@ -702,6 +758,10 @@ $d_user_prvl = $q_user_prvl->fetch(PDO::FETCH_ASSOC);
             r_pkd != "" &&
             u_pkd != "" &&
             d_pkd != "" &&
+            c_logbook != "" &&
+            r_logbook != "" &&
+            u_logbook != "" &&
+            d_logbook != "" &&
             c_praktikan != "" &&
             r_praktikan != "" &&
             u_praktikan != "" &&
