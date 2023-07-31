@@ -7,6 +7,7 @@
 // print_r($_GET);
 // echo "</pre>";
 
+error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
@@ -22,19 +23,18 @@ try {
     // echo $sql_praktik;
     $q_praktik = $conn->query($sql_praktik);
     $d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC);
-} catch (Exception $ex) {
-    // echo "<script>alert('-DATA PRAKTIK-');";
-    // echo "document.location.href='?error404';</script>";
+} catch (Exception $e) {
+    echo $e->getMessage();
 }
 try {
     $sql_institusi = "SELECT * FROM tb_institusi";
     $sql_institusi .= " WHERE id_institusi = " . $d_praktik['id_institusi'];
     $q_institusi = $conn->query($sql_institusi);
     $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
-} catch (Exception $ex) {
-    // echo "<script>alert('-DATA INSTITUSI-');";
-    // echo "document.location.href='?error404';</script>";
+} catch (Exception $e) {
+    echo $e->getMessage();
 }
+
 
 $ukuranFontIsi = "16px";
 $img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';

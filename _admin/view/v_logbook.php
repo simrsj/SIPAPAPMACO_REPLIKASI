@@ -11,10 +11,6 @@
             try {
                 $sql = "SELECT * FROM tb_praktik ";
                 $sql .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
-                // $sql .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
-                // $sql .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd ";
-                // $sql .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd ";
-                // $sql .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
                 $sql .= " WHERE status_praktik = 'Y' ";
                 if ($d_prvl['level_user'] == 2) {
                     $sql .= " AND  tb_institusi.id_institusi = " . $d_prvl['id_institusi'];
