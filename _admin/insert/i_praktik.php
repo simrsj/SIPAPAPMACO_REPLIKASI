@@ -259,7 +259,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                 </div>
                                 <textarea id="uraian_alasan" name="uraian_alasan" class="form-control"></textarea>
                                 <div class="text-danger b i text-xs blink" id="err_uraian_alasan"></div>
-                                Minimal 100 Karakter, <span id="count_text" style="display: none;">Karakter yang telah diinputkan <span id="count_alasan" class="b">0</span></span>
+                                Minimal 50 Karakter, <span id="count_text" style="display: none;">Karakter yang telah diinputkan <span id="count_alasan" class="b">0</span></span>
                             </div>
 
                             <script>
@@ -282,8 +282,8 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                                         // tampilkan jumlah karakter di dalam span
                                         $('#count_alasan').text(count);
 
-                                        // jika jumlah karakter kurang dari 100
-                                        if (count < 100) {
+                                        // jika jumlah karakter kurang dari 50
+                                        if (count < 50) {
                                             // nonaktifkan tombol submit
                                             $('#simpan_praktik').attr('disabled', true);
                                             $("#count_alasan").addClass("text-danger");
@@ -422,18 +422,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 getSizeAkredJurusan > 3072
             ) {
                 //warning Toast bila ada data wajib yg berlum terisi
-                Swal.fire({
-                    allowOutsideClick: true,
-                    showConfirmButton: false,
-                    icon: 'warning',
-                    title: '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>',
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
+                simpan_tidaksesuai();
 
                 //notif File Surat Institusi 
                 if (getTypeSurat == "") $("#err_file_surat").html("File Surat Institusi Harus pdf");
@@ -527,18 +516,7 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                 (tgl_mulai != "" && tgl_selesai != "") ||
                 (tgl_mulai == "" && tgl_selesai == "")
             ) {
-                Swal.fire({
-                    allowOutsideClick: true,
-                    showConfirmButton: false,
-                    icon: 'warning',
-                    title: '<center><b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b></center>',
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
+                simpan_tidaksesuai();
                 $("#err_tgl_selesai").html("<b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b>");
             }
             //bila tanggal mulai dan selesai sesuai
@@ -553,29 +531,11 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
                     success: function(response) {
                         //notif jika jadwal dan/ jumlah praktik melebihi kuota
                         if (response.ket == 'T') {
+                            simpan_tidaksesuai();
                             console.log('Jadwal Praktik Tidak Bisa');
-                            Swal.fire({
-                                allowOutsideClick: true,
-                                icon: 'error',
-                                showConfirmButton: false,
-                                html: '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b>' +
-                                    '<br>Silahkan Cek Kembali Informasi Jadwal Praktik<br><br>' +
-                                    '<a href="?info_diklat" class="btn btn-outline-primary">Cek Informasi Jadwal Praktik</a>',
-                                timer: 10000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            }).then(
-                                function() {
-                                    // document.location.href = "?ptk";
-                                }
-                            );
                         }
                         //eksekusi bila jadwal tersedia
                         else if (response.ket == 'Y') {
-                            console.log('Jadwal Praktik Bisa');
                             //simpan data praktik dan data tarif
                             if (
                                 institusi != "" &&
@@ -633,29 +593,10 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
                                         xhttp.open("POST", "_admin/exc/x_i_praktik_sFile.php", true);
                                         xhttp.send(data_file);
-
-                                        Swal.fire({
-                                            allowOutsideClick: true,
-                                            // isDismissed: false,
-                                            icon: 'success',
-                                            html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
-                                            title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan</span>',
-                                            showConfirmButton: false,
-                                            timer: 5000,
-                                            timerProgressBar: true,
-                                            didOpen: (toast) => {
-                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            }
-                                        }).then(
-                                            function() {
-                                                document.location.href = "?ptk";
-                                            }
-                                        );
+                                        simpan_berhasil("?ptk");
                                     },
                                     error: function(response) {
-                                        console.log(response.responseText);
-                                        alert('eksekusi query gagal');
+                                        error();
                                     }
                                 });
                             } else console.log("Data Wajib Praktik Belum Diisi dan/ tidak sesuai");
