@@ -147,7 +147,7 @@ $html .= '
 <center class="">
 <b>BIODATA MAHASISWA</b><br><br>
 <img src="' . $d['foto_praktikan'] . '" style="width: 120px !important, heigth:180px !important;" alt="Foto Tidak Ada"><br><br><br>
-<table width="100%" border=0 >
+<table width="100%" border=1 >
 <tr>
     <td>
         NAMA
@@ -214,12 +214,18 @@ $html .= '
 <tr class="t-center">
     <td>
       Mahasiswa<br><br><br><br><br><br><br>
+    </td>
+    <td>
+        Ketua Tim Koordinator Pendidikan<br>
+        Rumah Sakit Jiwa <br>
+        Provinsi Jawa Barat<br><br><br><br><br>
+    </td>
+</tr>
+<tr class="t-center">
+    <td>
       (' . $d['nama_praktikan'] . ')
     </td>
     <td>
-        Koordinator Kedokteran<br>
-        Rumah Sakit Jiwa <br>
-        Provinsi Jawa Barat<br><br><br><br><br>
         (Lina Budiyanti, dr., Sp.KJ.)
     </td>
 </tr>
