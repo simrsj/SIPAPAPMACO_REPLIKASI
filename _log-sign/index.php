@@ -10,8 +10,8 @@ if (empty($_SESSION['username_user'])) {
 				<div class="col-auto my-auto">
 					<img src="./_img/rsj.svg" width="28" />
 				</div>
-				<div class="col">
-					<span class="text-primary text-left  d-flex b">
+				<div class="col text-left text-sm ">
+					<span class="text-primary d-flex b">
 						SIPAPAP MACO &nbsp;
 						<span class="d-none d-md-block">
 							(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)<br>
@@ -25,7 +25,7 @@ if (empty($_SESSION['username_user'])) {
 		<ul class="navbar-nav ml-auto ">
 			<!-- Nav Item - Menu 3 Bar -->
 			<li class="nav-item dropdown no-arrow  my-auto align-middle">
-				<a class="nav-item dropdown-toggle d-flex btn btn-outline-primary btn-sm" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<a class="nav-item dropdown-toggle d-flex btn btn-outline-primary btn-xs" href="#" id="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<div class="d-none d-md-block">Menu &nbsp;</div>
 					<div class="fa fa-bars my-auto"></div>
 				</a>
@@ -38,8 +38,15 @@ if (empty($_SESSION['username_user'])) {
 						Dashboard
 					</a>
 					<a class="btn btn-outline-info btn-sm col-md mb-2" href="?info_diklat">
-						Jadwal
+						Jadwal Dokter
 					</a>
+					<a class="btn btn-outline-info btn-sm col-md mb-2" href="?info_diklat">
+						Jadwal Perawat
+					</a>
+					<a class="btn btn-outline-info btn-sm col-md mb-2" href="?info_diklat">
+						Jadwal Nakes Lain
+					</a>
+
 					<a class="btn btn-outline-success btn-sm col-md mb-2" href="?reg">
 						Register
 					</a>

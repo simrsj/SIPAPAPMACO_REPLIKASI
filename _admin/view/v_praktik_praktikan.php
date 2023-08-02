@@ -93,10 +93,17 @@
                                 <!-- collapse data praktikan -->
                                 <div id="rincian<?= md5($d_praktik['id_praktik']); ?>" class="collapse" data-parent="#accordion<?= md5($d_praktik['id_praktik']) ?>">
                                     <div class="card-body" style="font-size: medium;">
+                                        <?= $d_praktik['status_mess_praktik'] . $d_praktik['status_alasan'] . $d_praktik['nama_praktik'] ?>
                                         <?php if ($d_praktik['status_alasan'] == "T") { ?>
                                             <div class="jumbotron text-center">
                                                 <div class="jumbotron-fluid">
                                                     <div class="badge badge-danger text-lg ">Alasan Mess Ditolak</div>
+                                                </div>
+                                            </div>
+                                        <?php } elseif ($d_praktik['status_mess_praktik'] == "T" && $d_praktik['status_alasan'] == NULL) { ?>
+                                            <div class="jumbotron text-center">
+                                                <div class="jumbotron-fluid">
+                                                    <div class="badge badge-danger text-lg ">Alasan Mess Belum DiPilih Admin</div>
                                                 </div>
                                             </div>
                                         <?php } else { ?>

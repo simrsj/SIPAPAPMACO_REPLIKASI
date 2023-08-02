@@ -17,6 +17,9 @@
                 $sql_praktik .= " JOIN tb_jurusan_pdd_jenis ON tb_jurusan_pdd.id_jurusan_pdd_jenis = tb_jurusan_pdd_jenis.id_jurusan_pdd_jenis ";
                 $sql_praktik .= " JOIN tb_pembimbing_pilih ON tb_praktik.id_praktik = tb_pembimbing_pilih.id_praktik  ";
                 $sql_praktik .= " WHERE tb_praktik.status_praktik = 'Y'";
+                if ($d_prvl['level_user'] == 2) {
+                    $sql_praktik .= " AND tb_praktik.id_institusi = " . $d_prvl['id_institusi'];
+                }
                 $sql_praktik .= " GROUP BY tb_praktik.id_praktik";
                 $sql_praktik .= " ORDER BY tb_praktik.id_praktik DESC";
 

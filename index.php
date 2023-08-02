@@ -50,11 +50,11 @@ require_once "_add-ons/crypt.php";
 </head>
 
 <body id="page-top" class="bg-sipapapmaco-abstrack1">
-    <!-- <div class="preloader">
+    <div class="preloader">
         <div class="loading">
             <div class="loader loader-main"></div>
         </div>
-    </div> -->
+    </div>
     <?php
     if (isset($_GET['dashboard'])) include "_dashboard/dashboard.php";
     elseif (isset($_GET['test'])) include "test.php";

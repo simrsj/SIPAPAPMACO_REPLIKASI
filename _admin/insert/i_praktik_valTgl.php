@@ -41,10 +41,6 @@ foreach ($period as $key => $value) {
         $jumlah_total += $d['jumlah_praktik'];
     }
 
-    //jika jurusannnya adalah keperawatan
-    if ($id_jurusan == 1 || $id_jurusan == 2)
-        $id_jurusan = 1;
-
     try {
         //mencari kuota sesuai dengan jurusannya
         $sql_k = "SELECT * FROM tb_kuota";

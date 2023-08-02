@@ -17,6 +17,8 @@
             <div class="card-body">
                 <?php if ($d_praktik['status_alasan'] == "T") { ?>
                     <div class="badge badge-danger text-lg text-center">Alasan Mess Ditolak</div>
+                <?php } elseif ($d_praktik['status_mess_praktik'] == "T" && $d_praktik['status_alasan'] == "") { ?>
+                    <div class="badge badge-secondary text-lg text-center">Alasan Mess Belum DiPilih Admin</div>
                 <?php } else { ?>
                     <?php
                     $sql_praktik = "SELECT * FROM tb_praktik ";
@@ -51,7 +53,8 @@
                             $sql_praktik_pembimbing .= " JOIN tb_praktikan ON tb_pembimbing_pilih.id_praktikan = tb_praktikan.id_praktikan ";
                             $sql_praktik_pembimbing .= " JOIN tb_unit ON tb_pembimbing_pilih.id_unit = tb_unit.id_unit ";
                             $sql_praktik_pembimbing .= " JOIN tb_praktik ON tb_pembimbing_pilih.id_praktik = tb_praktik.id_praktik ";
-                            $sql_praktik_pembimbing .= " WHERE tb_praktik.status_praktik = 'Y' AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
+                            $sql_praktik_pembimbing .= " WHERE tb_praktik.status_praktik = 'Y'";
+                            $sql_praktik_pembimbing .= " AND tb_praktik.id_praktik = " . $d_praktik['id_praktik'];
                             $sql_praktik_pembimbing .= " ORDER BY tb_praktikan.nama_praktikan ASC";
                             // echo "$sql_praktik_pembimbing<br>";
                             try {
