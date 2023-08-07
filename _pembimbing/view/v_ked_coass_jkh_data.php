@@ -67,10 +67,10 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="#" class="btn btn-primary btn-sm ubah<?= $no0; ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a href="#" class="btn btn-primary btn-sm ubah<?= md5($no0); ?>"><i class="fa fa-edit"></i> Ubah</a>
                                             </div>
                                             <script>
-                                                $(document).on('click', '.ubah<?= $no0; ?>', function() {
+                                                $(document).on('click', '.ubah<?= md5($no0); ?>', function() {
                                                     var data_form = $('#form_u<?= $no0; ?>').serializeArray();
 
                                                     data_form.push({

@@ -11,8 +11,8 @@ if (empty($_SESSION['username_user'])) {
 					<img src="./_img/rsj.svg" width="28" />
 				</div>
 				<div class="col text-left text-sm ">
-					<span class="text-primary d-flex b">
-						SIPAPAP MACO &nbsp;
+					<span class="text-primary b">
+						SIPAPAP MACO &nbsp; <br>
 						<span class="d-none d-md-block">
 							(Sistem Informasi Pendaftaran Penjadwalan Praktikan Mahasiswa dan Co-Ass)<br>
 						</span>
@@ -38,15 +38,8 @@ if (empty($_SESSION['username_user'])) {
 						Dashboard
 					</a>
 					<a class="btn btn-outline-info btn-sm col-md mb-2" href="?info_diklat">
-						Jadwal Dokter
+						Jadwal Praktik
 					</a>
-					<a class="btn btn-outline-info btn-sm col-md mb-2" href="?info_diklat">
-						Jadwal Perawat
-					</a>
-					<a class="btn btn-outline-info btn-sm col-md mb-2" href="?info_diklat">
-						Jadwal Nakes Lain
-					</a>
-
 					<a class="btn btn-outline-success btn-sm col-md mb-2" href="?reg">
 						Register
 					</a>

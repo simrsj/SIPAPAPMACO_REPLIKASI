@@ -90,7 +90,7 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql_insert .= " '" . $_POST['pilih_mess'] . "', ";
     $sql_insert .= " '" . $alasan_mess . "', ";
     $sql_insert .= " 'Y',";
-    $sql_insert .= " 'NULL'";
+    $sql_insert .= " '" . $status_alasan . "'";
     $sql_insert .= " )";
     // echo $sql_insert . "<br>";
     $conn->query($sql_insert);

@@ -12,7 +12,7 @@
         <div class="card-body  text-center">
             <div class="row">
                 <div class="col-md-2 my-auto align-middle text-center">
-                    <img src="<?= $d_praktikan['foto_praktikan'] ?>"><br><br>
+                    <img src="<?= $d_praktikan['foto_praktikan'] ?>" height="150" alt="foto praktikan"><br><br>
                 </div>
                 <div class="col-md-5">
                     <b>Nama Lengkap : </b><br>
