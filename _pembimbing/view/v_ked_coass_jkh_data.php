@@ -66,7 +66,6 @@
                                                     <div id="err_topik<?= $no0 ?>" class="i text-danger text-center text-xs blink"></div>
                                                 </form>
                                             </div>
-                                            <!-- ubah<?= md5($no0); ?>" -->
                                             <div class="modal-footer">
                                                 <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_jkh['id'], $customkey) ?>' );" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                             </div>
@@ -87,14 +86,11 @@
             </table>
         </div>
         <script>
-            // x = id loopp idxx = encrypt 
-            function ubah(x, idxx) {
-
+            function ubah(x, y) {
                 var data_form = $('#form_u' + x).serializeArray();
-
                 data_form.push({
                     name: "id",
-                    value: idxx
+                    value: y
                 });
                 var tgl = $("#tgl" + x).val();
                 var kegiatan = $("#kegiatan" + x).val();
@@ -185,7 +181,7 @@
                                             "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
                                 } else simpan_gagal_database();
                             },
-                            error: function(response) {
+                            error: function() {
                                 error();
                             }
                         });
