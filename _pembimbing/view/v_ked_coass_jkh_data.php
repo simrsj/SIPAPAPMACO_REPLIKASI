@@ -66,73 +66,10 @@
                                                     <div id="err_topik<?= $no0 ?>" class="i text-danger text-center text-xs blink"></div>
                                                 </form>
                                             </div>
+                                            <!-- ubah<?= md5($no0); ?>" -->
                                             <div class="modal-footer">
-                                                <a href="#" class="btn btn-primary btn-sm ubah<?= md5($no0); ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_jkh['id'], $customkey) ?>' );" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                             </div>
-                                            <script>
-                                                $(document).on('click', '.ubah<?= md5($no0); ?>', function() {
-                                                    var data_form = $('#form_u<?= $no0; ?>').serializeArray();
-
-                                                    data_form.push({
-                                                        name: "id",
-                                                        value: '<?= encryptString($d_jkh['id'], $customkey) ?>'
-                                                    });
-                                                    var tgl = $("#tgl<?= $no0; ?>").val();
-                                                    var kegiatan = $("#kegiatan<?= $no0; ?>").val();
-                                                    var topik = $("#topik<?= $no0; ?>").val();
-
-                                                    if (
-                                                        tgl == "" ||
-                                                        kegiatan == "" ||
-                                                        topik == ""
-                                                    ) {
-                                                        simpan_tidaksesuai();
-                                                        if (tgl == "") {
-                                                            $('#tgl<?= $no0; ?>').attr('class', 'border-danger border-2  form-control');
-                                                            $("#err_tgl<?= $no0; ?>").html("Pilih Tanggal");
-                                                        } else {
-                                                            $('#tgl<?= $no0; ?>').attr('class', 'form-control');
-                                                            $("#err_tgl<?= $no0; ?>").html("");
-                                                        }
-
-                                                        if (kegiatan == "") {
-                                                            $('#kegiatan<?= $no0; ?>').attr('class', 'border-danger border-2 form-control');
-                                                            $("#err_kegiatan<?= $no0; ?>").html("Isikan Kegiatan");
-                                                        } else {
-                                                            $('#kegiatan<?= $no0; ?>').attr('class', 'form-control');
-                                                            $("#err_kegiatan<?= $no0; ?>").html("");
-                                                        }
-
-                                                        if (topik == "") {
-                                                            $('#topik<?= $no0; ?>').attr('class', 'border-danger border-2 form-control');
-                                                            $("#err_topik<?= $no0; ?>").html("Isikan Topik");
-                                                        } else {
-                                                            $('#topik<?= $no0; ?>').attr('class', 'form-control');
-                                                            $("#err_topik<?= $no0; ?>").html("");
-                                                        }
-                                                    } else {
-                                                        $.ajax({
-                                                            type: 'POST',
-                                                            url: "_pembimbing/exc/x_v_ked_coass_jkh_data_u.php",
-                                                            data: data_form,
-                                                            dataType: "json",
-                                                            success: function(response) {
-                                                                if (response.ket == "SUCCESS") {
-                                                                    $('#modal_ubah<?= $no0 ?>').modal('hide');
-                                                                    ubah_berhasil();
-                                                                    loading_sw2();
-                                                                    $('#data_jkh')
-                                                                        .load(
-                                                                            "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                                                } else simpan_gagal_database();
-                                                            },
-                                                            error: function(response) {
-                                                                error();
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -150,6 +87,76 @@
             </table>
         </div>
         <script>
+            // x = id loopp idxx = encrypt 
+            function ubah(x, idxx) {
+
+                var data_form = $('#form_u' + x).serializeArray();
+
+                data_form.push({
+                    name: "id",
+                    value: idxx
+                });
+                var tgl = $("#tgl" + x).val();
+                var kegiatan = $("#kegiatan" + x).val();
+                var topik = $("#topik" + x).val();
+                console.log(tgl + "id dong" + kegiatan);
+                if (
+                    tgl == "" ||
+                    kegiatan == "" ||
+                    topik == ""
+                ) {
+                    simpan_tidaksesuai();
+                    if (tgl == "") {
+                        $('#tgl' + x).attr('class', 'border-danger border-2  form-control');
+                        $("#err_tgl" + x).html("Pilih Tanggal");
+                    } else {
+                        $('#tgl' + x).attr('class', 'form-control');
+                        $("#err_tgl" + x).html("");
+                    }
+
+                    if (kegiatan == "") {
+                        $('#kegiatan' + x).attr('class', 'border-danger border-2 form-control');
+                        $("#err_kegiatan" + x).html("Isikan Kegiatan");
+                    } else {
+                        $('#kegiatan' + x).attr('class', 'form-control');
+                        $("#err_kegiatan" + x).html("");
+                    }
+
+                    if (topik == "") {
+                        $('#topik' + x).attr('class', 'border-danger border-2 form-control');
+                        $("#err_topik" + x).html("Isikan Topik");
+                    } else {
+                        $('#topik' + x).attr('class', 'form-control');
+                        $("#err_topik" + x).html("");
+                    }
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: "_pembimbing/exc/x_v_ked_coass_jkh_data_u.php",
+                        data: data_form,
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.ket == "SUCCESS") {
+                                // console.log('<?= $no0; ?>');
+                                console.log(response.cok);
+                                $('#modal_ubah' + x).modal('hide');
+                                ubah_berhasil();
+                                loading_sw2();
+                                $('#data_jkh')
+                                    .load(
+                                        "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                            } else simpan_gagal_database();
+                            console.log(response);
+                        },
+                        error: function(response) {
+                            error();
+                            console.log(response.cek);
+
+                        }
+                    });
+                }
+            }
+
             $(document).on('click', '.hapus', function() {
                 Swal.fire({
                     title: 'Anda Yakin?',
