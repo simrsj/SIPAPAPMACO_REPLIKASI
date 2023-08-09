@@ -269,17 +269,19 @@ $html .= '
 
 //MATERI PEMBELAJARAN SESUAI TINGKAT KOMPETENSI SKDI
 $html .= '
-<center class="">
+<center>
 <b>MATERI PEMBELAJARAN SESUAI TINGKAT KOMPETENSI SKDI</b><br>
 <div class="fs-12"> Daftar Penyakit sesuai Standar Kompetensi Dokter Indonesia Tahun 2019.</div>
-<table width="100%" class="border-1">
+<table width="100%" border=1>
     <tr>
-        <td style="witdh: 20px;">
-            1. 
-        </td>
-        <td>
-        Membentuk rapport yang baik dalam hubungan dokter-pasien
-        </td>
+        <th style="witdh: 20px;">No.</th>
+        <th>POKOK BAHASAN</th>
+        <th>SUB POKOK BAHASAN</th>
+    </tr>
+    <tr>
+        <td colspan=3><b>Daftar Penyakit Ilmu Kesehatan Jiwa</b></td>
+        <td>POKOK BAHASAN</td>
+        <td>SUB POKOK BAHASAN</td>
     </tr>
     <tr>
         <td>

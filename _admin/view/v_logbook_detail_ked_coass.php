@@ -58,7 +58,7 @@
                         </a>
                     </td>
                     <td class="text-center">
-                        <a href="_print\p_logbook_ked_coss.php?data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>" class="btn btn-danger" title="Download Log Book" download>
+                        <a href="_print\p_logbook_ked_coass.php?data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>" class="btn btn-danger" title="Download Log Book" download>
                             <i class="fa-solid fa-file-pdf"></i> <span class="d-none d-lg-inline">Cetak</span>
                         </a>
                     </td>
