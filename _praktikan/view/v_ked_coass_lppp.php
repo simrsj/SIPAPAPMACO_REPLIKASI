@@ -94,7 +94,7 @@
                                                 if ($d_lppp['skor'] == 1) echo '<span class="text-lg badge badge-danger">1</span>';
                                                 elseif ($d_lppp['skor'] == 2) echo '<span class="text-lg badge badge-warning">2</span>';
                                                 elseif ($d_lppp['skor'] == 3) echo '<span class="text-lg badge badge-success">3</span>';
-                                                else echo '<span class="text-lg badge badge-secondary">Nilai Belum Ada</span>';
+                                                else echo '<span class="text-lg badge badge-secondary">Skor Belum Ada</span>';
                                                 ?>
                                             </td>
                                         </tr>
@@ -122,7 +122,7 @@
                                         <h5 class="text-center">
                                             <?php
                                             if ($r_lppp_ket > 0) echo $d_lppp_ket['ket'];
-                                            else echo "<span class='badge badge-danger text-lg'>DATA TIDAK ADA</span>"
+                                            else echo "<span class='badge badge-secondary text-lg'>DATA TIDAK ADA</span>"
                                             ?>
                                         </h5>
                                     </div>
