@@ -94,7 +94,7 @@
                                                 if ($d_lppp['skor'] == 1) echo '<span class="text-lg badge badge-danger">1</span>';
                                                 elseif ($d_lppp['skor'] == 2) echo '<span class="text-lg badge badge-warning">2</span>';
                                                 elseif ($d_lppp['skor'] == 3) echo '<span class="text-lg badge badge-success">3</span>';
-                                                else echo '<span class="text-lg badge badge-danger">ERROR!</span>';
+                                                else echo '<span class="text-lg badge badge-secondary">Nilai Belum Ada</span>';
                                                 ?>
                                             </td>
                                         </tr>
