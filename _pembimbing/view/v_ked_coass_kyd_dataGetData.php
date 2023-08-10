@@ -10,6 +10,7 @@ try {
     // $conn->query($sql);
     $d = $conn->query($sql)->fetch(PDO::FETCH_ASSOC);
     echo json_encode([
+        // 'sql' => $sql,
         'ruang' => $d['ruang'],
         'tgl' => $d['tgl'],
         'nama_pasien' => $d['nama_pasien'],

@@ -52,7 +52,7 @@
                             <td><?= $d_kyd['diagnosis']; ?></td>
                             <td><?= $d_kyd['terapi']; ?></td>
                             <td class="text-center">
-                                <a class="btn btn-primary btn-sm ubah_init<?= $no0 ?> " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
+                                <a onClick="ubahGetData('<?= $no0; ?>', '<?= encryptString($d_kyd['id'], $customkey) ?>' );" class="btn btn-primary btn-sm ubah_init<?= $no0 ?> " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
                                     <i class=" fa fa-edit"></i> Ubah
                                 </a>
 
@@ -104,110 +104,22 @@
                                                         </div>
                                                     </div>
 
-
                                                     <label for="medrec<?= $no0 ?>">Medrec</label>
                                                     <input class="form-control" id="medrec<?= $no0 ?>" name="medrec" value="<?= $d_kyd['medrec'] ?>">
                                                     <div id="err_medrec<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="diagnosis<?= $no0 ?>">Diagnosis</label>
-                                                    <textarea class="form-control" id="diagnosis<?= $no0 ?>" name="diagnosis" rows="3"><?= $d_kyd['diagnosis'] ?>"</textarea>
+                                                    <textarea class="form-control" id="diagnosis<?= $no0 ?>" name="diagnosis" rows="3"><?= $d_kyd['diagnosis'] ?></textarea>
                                                     <div id="err_diagnosis<?= $no0 ?>" class="err i text-danger text-center text-xs blink mb-2"></div>
 
                                                     <label for="terapi<?= $no0 ?>">Terapi</label>
-                                                    <textarea class="form-control" id="terapi<?= $no0 ?>" name="terapi" rows="3"><?= $d_kyd['terapi'] ?>"</textarea>
+                                                    <textarea class="form-control" id="terapi<?= $no0 ?>" name="terapi" rows="3"><?= $d_kyd['terapi'] ?></textarea>
                                                     <div id="err_terapi<?= $no0 ?>" class="err i text-danger text-center text-xs blink"></div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="#" class="btn btn-primary btn-sm ubah<?= $no0; ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_kyd['id'], $customkey) ?>' );" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                             </div>
-                                            <script>
-                                                $(".ubah_init<?= $no0 ?>").click(function() {
-                                                    $(".err").html("");
-                                                    loading_sw2();
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: "_pembimbing/view/v_ked_coass_kyd_dataGetData.php",
-                                                        data: {
-                                                            id: '<?= encryptString($d_kyd['id'], $customkey) ?>'
-                                                        },
-                                                        dataType: "JSON",
-                                                        success: function(response) {
-                                                            if (response.ket == "SUCCESS") {
-                                                                $('#ruang<?= $no0 ?>').val(response.ruang);
-                                                                $('#tgl<?= $no0 ?>').val(response.tgl);
-                                                                $('#nama_pasien<?= $no0 ?>').val(response.nama_pasien);
-                                                                $('#usia<?= $no0 ?>').val(response.usia);
-                                                                $('#jenis_kelamin<?= $no0 ?>').val(response.jenis_kelamin);
-                                                                $('#medrec<?= $no0 ?>').val(response.medrec);
-                                                                $('#diagnosis<?= $no0 ?>').val(response.diagnosis);
-                                                                $('#terapi<?= $no0 ?>').val(response.terapi);
-                                                            } else error();
-                                                            swal.close();
-                                                        },
-                                                        error: function(response) {
-                                                            error();
-                                                        }
-                                                    });
-                                                });
-                                                $(document).on('click', '.ubah<?= $no0 ?>', function() {
-                                                    var data_form = $('#form_u<?= $no0 ?>').serializeArray();
-                                                    data_form.push({
-                                                        name: "id",
-                                                        value: "<?= encryptString($d_kyd['id'], $customkey) ?>"
-                                                    });
-                                                    var ruang = $("#ruang<?= $no0 ?>").val();
-                                                    var tgl = $("#tgl<?= $no0 ?>").val();
-                                                    var nama_pasien = $("#nama_pasien<?= $no0 ?>").val();
-                                                    var usia = $("#usia<?= $no0 ?>").val();
-                                                    var jenis_kelamin = $("#jenis_kelamin<?= $no0 ?>").val();
-                                                    var medrec = $("#medrec<?= $no0 ?>").val();
-                                                    var diagnosis = $("#diagnosis<?= $no0 ?>").val();
-                                                    var terapi = $("#terapi<?= $no0 ?>").val();
-                                                    if (
-                                                        ruang == "" ||
-                                                        tgl == "" ||
-                                                        nama_pasien == "" ||
-                                                        usia == "" ||
-                                                        jenis_kelamin == "" ||
-                                                        medrec == "" ||
-                                                        diagnosis == "" ||
-                                                        terapi == ""
-                                                    ) {
-                                                        simpan_tidaksesuai();
-                                                        ruang == "" ? $("#err_ruang<?= $no0 ?>").html("Pilih Ruang") : $("#err_ruang<?= $no0 ?>").html("");
-                                                        tgl == "" ? $("#err_tgl<?= $no0 ?>").html("Pilih Tanggal") : $("#err_tgl<?= $no0 ?>").html("");
-                                                        nama_pasien == "" ? $("#err_nama_pasien<?= $no0 ?>").html("Isikan Nama Pasien") : $("#err_nama_pasien<?= $no0 ?>").html("")
-                                                        usia == "" ? $("#err_usia<?= $no0 ?>").html("Isikan Usia") : $("#err_usia<?= $no0 ?>").html("")
-                                                        jenis_kelamin == "" ? $("#err_jenis_kelamin<?= $no0 ?>").html("Pilih Jenis Kelamin") : $("#err_jenis_kelamin<?= $no0 ?>").html("")
-                                                        medrec == "" ? $("#err_medrec<?= $no0 ?>").html("Isikan Medrec") : $("#err_medrec<?= $no0 ?>").html("")
-                                                        diagnosis == "" ? $("#err_diagnosis<?= $no0 ?>").html("Isikan Diagnosis") : ("#err_diagnosis<?= $no0 ?>").html("")
-                                                        terapi == "" ? $("#err_terapi<?= $no0 ?>").html("Isikan Terapi") : $("#err_terapi<?= $no0 ?>").html("")
-                                                    } else {
-                                                        loading_sw2();
-                                                        $.ajax({
-                                                            type: 'POST',
-                                                            url: "_pembimbing/exc/x_v_ked_coass_kyd_data_u.php",
-                                                            data: data_form,
-                                                            dataType: "JSON",
-                                                            success: function(response) {
-                                                                if (response.ket == "SUCCESS") {
-                                                                    $('#modal_ubah<?= $no0 ?>').modal('hide')
-                                                                    ubah_berhasil();
-                                                                    loading_sw2();
-                                                                    $('#data_kyd')
-                                                                        .load(
-                                                                            "_pembimbing/view/v_ked_coass_kyd_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                                                } else simpan_gagal_database();
-                                                                swal.close();
-                                                            },
-                                                            error: function(response) {
-                                                                error();
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -225,6 +137,92 @@
             </table>
         </div>
         <script>
+            function ubahGetData(x, y) {
+                $(".err").html("");
+                loading_sw2();
+                $.ajax({
+                    type: 'POST',
+                    url: "_pembimbing/view/v_ked_coass_kyd_dataGetData.php",
+                    data: {
+                        id: y
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.ket == "SUCCESS") {
+                            $('#ruang' + x).val(response.ruang).trigger('change');
+                            $('#tgl' + x).val(response.tgl);
+                            $('#nama_pasien' + x).val(response.nama_pasien);
+                            $('#usia' + x).val(response.usia);
+                            $('#jenis_kelamin' + x).val(response.jenis_kelamin);
+                            $('#medrec' + x).val(response.medrec);
+                            $('#diagnosis' + x).val(response.diagnosis);
+                            $('#terapi' + x).val(response.terapi);
+                        } else error();
+                        swal.close();
+                    },
+                    error: function(response) {
+                        error();
+                    }
+                });
+            }
+
+            function ubah(x, y) {
+                var data_form = $('#form_u' + x).serializeArray();
+                data_form.push({
+                    name: "id",
+                    value: y
+                });
+                var ruang = $("#ruang" + x).val();
+                var tgl = $("#tgl<?= $no0 ?>").val();
+                var nama_pasien = $("#nama_pasien" + x).val();
+                var usia = $("#usia" + x).val();
+                var jenis_kelamin = $("#jenis_kelamin" + x).val();
+                var medrec = $("#medrec" + x).val();
+                var diagnosis = $("#diagnosis" + x).val();
+                var terapi = $("#terapi" + x).val();
+                if (
+                    ruang == "" ||
+                    tgl == "" ||
+                    nama_pasien == "" ||
+                    usia == "" ||
+                    jenis_kelamin == "" ||
+                    medrec == "" ||
+                    diagnosis == "" ||
+                    terapi == ""
+                ) {
+                    simpan_tidaksesuai();
+                    ruang == "" ? $("#err_ruang" + x).html("Pilih Ruang") : $("#err_ruang" + x).html("");
+                    tgl == "" ? $("#err_tgl" + x).html("Pilih Tanggal") : $("#err_tgl" + x).html("");
+                    nama_pasien == "" ? $("#err_nama_pasien" + x).html("Isikan Nama Pasien") : $("#err_nama_pasien" + x).html("")
+                    usia == "" ? $("#err_usia" + x).html("Isikan Usia") : $("#err_usia" + x).html("")
+                    jenis_kelamin == "" ? $("#err_jenis_kelamin" + x).html("Pilih Jenis Kelamin") : $("#err_jenis_kelamin" + x).html("")
+                    medrec == "" ? $("#err_medrec" + x).html("Isikan Medrec") : $("#err_medrec" + x).html("")
+                    diagnosis == "" ? $("#err_diagnosis" + x).html("Isikan Diagnosis") : ("#err_diagnosis" + x).html("")
+                    terapi == "" ? $("#err_terapi" + x).html("Isikan Terapi") : $("#err_terapi" + x).html("")
+                } else {
+                    loading_sw2();
+                    $.ajax({
+                        type: 'POST',
+                        url: "_pembimbing/exc/x_v_ked_coass_kyd_data_u.php",
+                        data: data_form,
+                        dataType: "JSON",
+                        success: function(response) {
+                            if (response.ket == "SUCCESS") {
+                                $('#modal_ubah<?= $no0 ?>').modal('hide')
+                                ubah_berhasil();
+                                loading_sw2();
+                                $('#data_kyd')
+                                    .load(
+                                        "_pembimbing/view/v_ked_coass_kyd_data.php?idpr=<?= $_GET['idpr'] ?>");
+                            } else simpan_gagal_database();
+                            swal.close();
+                        },
+                        error: function(response) {
+                            error();
+                        }
+                    });
+                }
+            }
             $(document).on('click', '.hapus', function() {
                 Swal.fire({
                     title: 'Anda Yakin?',
