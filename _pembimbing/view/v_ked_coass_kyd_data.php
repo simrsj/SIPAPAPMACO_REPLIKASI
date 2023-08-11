@@ -208,7 +208,7 @@
                         dataType: "JSON",
                         success: function(response) {
                             if (response.ket == "SUCCESS") {
-                                $('#modal_ubah<?= $no0 ?>').modal('hide')
+                                $('#modal_ubah' + x).modal('hide')
                                 ubah_berhasil();
                                 loading_sw2();
                                 $('#data_kyd')
