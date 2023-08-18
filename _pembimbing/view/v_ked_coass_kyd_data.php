@@ -20,14 +20,14 @@
     <?php if ($r_kyd > 0) { ?>
         <div class="table-responsive">
             <table class="table table-striped table-bordered " id="dataTable">
-                <thead class="table-dark">
+                <thead class="">
                     <tr class="text-center">
-                        <th scope='col'>No</th>
+                        <th scope='col'>No&nbsp;&nbsp;</th>
                         <th>Ruang</th>
                         <th>Tanggal</th>
                         <th>Nama Pasien</th>
-                        <th>Usia</th>
-                        <th>Jenis Kelamin</th>
+                        <th>Usia&nbsp;&nbsp;</th>
+                        <th>Jenis Kelamin&nbsp;</th>
                         <th>Medrec</th>
                         <th>Diagnosis</th>
                         <th>Terapi</th>
