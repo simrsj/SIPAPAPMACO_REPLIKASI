@@ -20,7 +20,7 @@ try {
     $sql .= ")";
     $conn->query($sql);
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'ket' => 'SUCCESS'
     ]);
 } catch (PDOException $ex) {

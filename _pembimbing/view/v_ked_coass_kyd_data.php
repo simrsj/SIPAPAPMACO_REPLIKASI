@@ -222,6 +222,7 @@
                     });
                 }
             }
+
             $(document).on('click', '.hapus', function() {
                 Swal.fire({
                     title: 'Anda Yakin?',

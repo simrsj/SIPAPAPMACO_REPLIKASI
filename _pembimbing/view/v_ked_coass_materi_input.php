@@ -43,7 +43,7 @@
             <div class="card shadow m-2 rounded-5">
                 <div class="card-header b between bg-dark">
                     <div class="row">
-                        <div class="col-md-10 text-light">Daftar Pembuatan Status Wajib</div>
+                        <div class="col-md-10 text-light">Daftar Materi</div>
                         <div class="col-md-2 text-right">
                             <a class="btn btn-success btn-sm tambah_init" href="#" data-toggle="modal" data-target="#modal_tambah">
                                 <i class="fa-solid fa-plus"></i> Tambah

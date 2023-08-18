@@ -48,7 +48,7 @@
                             <a class="btn btn-success btn-sm tambah_init" href="#" data-toggle="modal" data-target="#modal_tambah">
                                 <i class="fa-solid fa-plus"></i> Tambah
                             </a>
-                            <div class="modal  fade" id="modal_tambah" role="dialog" aria-labelledby="modal_tambah" aria-hidden="true">
+                            <div class="modal fade" id="modal_tambah" role="dialog" aria-labelledby="modal_tambah" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header bg-success text-light">
@@ -57,7 +57,7 @@
                                                 X
                                             </button>
                                         </div>
-                                        <div class="modal-body text-left">
+                                        <div class="modal-body text-left text-dark">
                                             <form id="form_t" method="post">
                                                 <label for="ruang">Ruang</label>
                                                 <select class="form-control" id="ruang" name="ruang">

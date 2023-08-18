@@ -20,14 +20,14 @@
     <?php if ($r_materi > 0) { ?>
         <div class="table-responsive">
             <table class="table table-striped table-bordered" id="dataTable">
-                <thead class="table-dark">
+                <thead class="">
                     <tr class="text-center">
-                        <th scope='col'>No</th>
-                        <th>Materi</th>
-                        <th>Tanggal</th>
-                        <th>Topik</th>
-                        <th>LK</th>
-                        <th>Dosen Pembimbing</th>
+                        <th scope='col'>No&nbsp;&nbsp;</th>
+                        <th>Materi&nbsp;&nbsp;</th>
+                        <th>Tanggal&nbsp;&nbsp;</th>
+                        <th>Topik&nbsp;&nbsp;</th>
+                        <th>LK&nbsp;&nbsp;</th>
+                        <th>Dosen Pembimbing&nbsp;&nbsp;</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -44,7 +44,7 @@
                             <td><?= $d_materi['lk']; ?></td>
                             <td><?= $d_materi['dosen_pembimbing']; ?></td>
                             <td class="text-center">
-                                <a class="btn btn-primary btn-sm ubah_init<?= $no0 ?> " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
+                                <a onClick="ubahGetData('<?= $no0; ?>', '<?= encryptString($d_materi['id'], $customkey) ?>' );" class="btn btn-primary btn-sm ubah_init<?= $no0 ?> " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
                                     <i class=" fa fa-edit"></i> Ubah
                                 </a>
 
@@ -90,80 +90,8 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="#" class="btn btn-primary btn-sm ubah<?= $no0; ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_materi['id'], $customkey) ?>' );" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                             </div>
-                                            <script>
-                                                $(".ubah_init<?= $no0 ?>").click(function() {
-                                                    loading_sw2();
-                                                    $(".err").html("");
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: "_pembimbing/view/v_ked_coass_materi_dataGetData.php",
-                                                        data: {
-                                                            id: '<?= encryptString($d_materi['id'], $customkey) ?>'
-                                                        },
-                                                        dataType: "JSON",
-                                                        success: function(response) {
-                                                            if (response.ket == "SUCCESS") {
-                                                                $('#materi<?= $no0 ?>').val(response.materi);
-                                                                $('#tgl<?= $no0 ?>').val(response.tgl);
-                                                                $('#topik<?= $no0 ?>').val(response.topik);
-                                                                $('#lk<?= $no0 ?>').val(response.lk);
-                                                                $('#dosen_pembimbing<?= $no0 ?>').val(response.dosen_pembimbing);
-                                                            } else error();
-                                                            swal.close();
-                                                        },
-                                                        error: function(response) {
-                                                            error();
-                                                        }
-                                                    });
-                                                });
-                                                $(document).on('click', '.ubah<?= $no0 ?>', function() {
-                                                    var data_form = $('#form_u<?= $no0 ?>').serializeArray();
-                                                    data_form.push({
-                                                        name: "id",
-                                                        value: "<?= encryptString($d_materi['id'], $customkey) ?>"
-                                                    });
-                                                    var materi = $("#materi<?= $no0 ?>").val();
-                                                    var tgl = $("#tgl<?= $no0 ?>").val();
-                                                    var topik = $("#topik<?= $no0 ?>").val();
-                                                    var lk = $("#lk<?= $no0 ?>").val();
-                                                    var dosen_pembimbing = $("#dosen_pembimbing<?= $no0 ?>").val();
-                                                    if (
-                                                        materi == "" ||
-                                                        tgl == "" ||
-                                                        topik == "" ||
-                                                        lk == "" ||
-                                                        dosen_pembimbing == ""
-                                                    ) {
-                                                        simpan_tidaksesuai();
-                                                        materi == "" ? $("#err_materi<?= $no0 ?>").html("Pilih Materi") : $("#err_materi<?= $no0 ?>").html("");
-                                                        tgl == "" ? $("#err_tgl<?= $no0 ?>").html("Pilih Tanggal") : $("#err_tgl<?= $no0 ?>").html("");
-                                                        topik == "" ? $("#err_topik<?= $no0 ?>").html("Isikan Topik") : $("#err_topik<?= $no0 ?>").html("")
-                                                        lk == "" ? $("#err_lk<?= $no0 ?>").html("Isikan LK") : $("#err_lk<?= $no0 ?>").html("")
-                                                        dosen_pembimbing == "" ? $("#err_dosen_pembimbing<?= $no0 ?>").html("Isikan Dosen Pembimbing") : $("#err_dosen_pembimbing<?= $no0 ?>").html("")
-                                                    } else {
-                                                        loading_sw2();
-                                                        $.ajax({
-                                                            type: 'POST',
-                                                            url: "_pembimbing/exc/x_v_ked_coass_materi_data_u.php",
-                                                            data: data_form,
-                                                            dataType: "JSON",
-                                                            success: function(response) {
-                                                                if (response.ket == "SUCCESS") {
-                                                                    $('#modal_ubah<?= $no0 ?>').modal('hide')
-                                                                    $('#data_materi')
-                                                                        .load(
-                                                                            "_pembimbing/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                                                } else simpan_gagal_database();
-                                                            },
-                                                            error: function(response) {
-                                                                error();
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -181,6 +109,78 @@
             </table>
         </div>
         <script>
+            function ubahGetData(x, y) {
+                $(".err").html("");
+                loading_sw2();
+                $.ajax({
+                    type: 'POST',
+                    url: "_pembimbing/view/v_ked_coass_materi_dataGetData.php",
+                    data: {
+                        id: y
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.ket == "SUCCESS") {
+                            $('#materi' + x).val(response.materi);
+                            $('#tgl' + x).val(response.tgl);
+                            $('#topik' + x).val(response.topik);
+                            $('#lk' + x).val(response.lk);
+                            $('#dosen_pembimbing' + x).val(response.dosen_pembimbing);
+                        } else error();
+                        swal.close();
+                    },
+                    error: function(response) {
+                        error();
+                    }
+                });
+            }
+
+            function ubah(x, y) {
+                var data_form = $('#form_u' + x).serializeArray();
+                data_form.push({
+                    name: "id",
+                    value: y
+                });
+                var materi = $("#materi" + x).val();
+                var tgl = $("#tgl" + x).val();
+                var topik = $("#topik" + x).val();
+                var lk = $("#lk" + x).val();
+                var dosen_pembimbing = $("#dosen_pembimbing" + x).val();
+                if (
+                    materi == "" ||
+                    tgl == "" ||
+                    topik == "" ||
+                    lk == "" ||
+                    dosen_pembimbing == ""
+                ) {
+                    simpan_tidaksesuai();
+                    materi == "" ? $("#err_materi" + x).html("Pilih Materi") : $("#err_materi" + x).html("");
+                    tgl == "" ? $("#err_tgl" + x).html("Pilih Tanggal") : $("#err_tgl" + x).html("");
+                    topik == "" ? $("#err_topik" + x).html("Isikan Topik") : $("#err_topik" + x).html("")
+                    lk == "" ? $("#err_lk" + x).html("Isikan LK") : $("#err_lk" + x).html("")
+                    dosen_pembimbing == "" ? $("#err_dosen_pembimbing" + x).html("Isikan Dosen Pembimbing") : $("#err_dosen_pembimbing" + x).html("")
+                } else {
+                    loading_sw2();
+                    $.ajax({
+                        type: 'POST',
+                        url: "_pembimbing/exc/x_v_ked_coass_materi_data_u.php",
+                        data: data_form,
+                        dataType: "JSON",
+                        success: function(response) {
+                            if (response.ket == "SUCCESS") {
+                                $('#modal_ubah' + x).modal('hide')
+                                $('#data_materi')
+                                    .load(
+                                        "_pembimbing/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");
+                            } else simpan_gagal_database();
+                        },
+                        error: function(response) {
+                            error();
+                        }
+                    });
+                }
+            }
+
             $(document).on('click', '.hapus', function() {
                 Swal.fire({
                     title: 'Anda Yakin?',

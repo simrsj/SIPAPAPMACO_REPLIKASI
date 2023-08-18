@@ -15,15 +15,14 @@ try {
     $sql .= " WHERE id = " . decryptString($_POST['id'], $customkey);
     $conn->query($sql);
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'cok' => $i,
         'ket' => 'SUCCESS'
     ]);
     $i++;
 } catch (PDOException $ex) {
-
     echo json_encode([
-        'sql' => $sql,
+        // 'sql' => $sql,
         'cek' => 'cek',
         'ket' => 'ERROR'
     ]);
