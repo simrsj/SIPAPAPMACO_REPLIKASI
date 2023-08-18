@@ -20,7 +20,7 @@
     <?php if ($r_jkh > 0) { ?>
         <div class="table-responsive">
             <table class="table table-striped table-bordered " id="dataTable">
-                <thead class="table-dark">
+                <thead class="">
                     <tr class="text-center">
                         <th scope='col'>No</th>
                         <th>Tanggal</th>
@@ -62,7 +62,7 @@
                                                     <textarea id="kegiatan<?= $no0 ?>" name="kegiatan" class="form-control " rows="3"><?= $d_jkh['kegiatan'] ?></textarea>
                                                     <div id="err_kegiatan<?= $no0 ?>" class="i text-danger text-center text-xs blink  mb-2"></div>
                                                     <label for="topik<?= $no0 ?>">Topik</label>
-                                                    <textarea id="topik<?= $no0 ?>" name="topik" class="form-control" rows="3"><?= $d_jkh['kegiatan'] ?></textarea>
+                                                    <textarea id="topik<?= $no0 ?>" name="topik" class="form-control" rows="3"><?= $d_jkh['topik'] ?></textarea>
                                                     <div id="err_topik<?= $no0 ?>" class="i text-danger text-center text-xs blink"></div>
                                                 </form>
                                             </div>

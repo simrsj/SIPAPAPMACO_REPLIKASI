@@ -14,8 +14,8 @@
         echo "<script>document.location.href='?error404';</script>";
     }
     ?>
-    <div class="card shadow  m-2">
-        <div class="card-header b text-center">
+    <div class="card shadow m-2">
+        <div class="card-header b text-center bg-dark text-light">
             Data Praktikan
         </div>
         <div class="card-body text-center">
@@ -41,7 +41,7 @@
     <div class="row">
         <div class="col-md">
             <div class="card shadow m-2 rounded-5">
-                <div class="card-header b between">
+                <div class="card-header b between  bg-dark text-light">
                     <div class="row">
                         <div class="col-md-10">Data Jadwal Kegiatan Harian</div>
                         <div class="col-md-2 text-right">
