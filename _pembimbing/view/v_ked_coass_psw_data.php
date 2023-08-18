@@ -20,15 +20,15 @@
     <?php if ($r_psw > 0) { ?>
         <div class="table-responsive">
             <table class="table table-striped table-bordered " id="dataTable">
-                <thead class="table-dark">
+                <thead class="">
                     <tr class="text-center">
-                        <th scope='col'>No</th>
-                        <th>Ruang</th>
-                        <th>Nama</th>
-                        <th>Usia</th>
-                        <th>DD</th>
-                        <th>Diagnosis Kerja</th>
-                        <th>Terapi</th>
+                        <th scope='col'>No&nbsp;&nbsp;</th>
+                        <th>Ruang&nbsp;&nbsp;</th>
+                        <th>Nama&nbsp;&nbsp;</th>
+                        <th>Usia&nbsp;&nbsp;</th>
+                        <th>DD&nbsp;&nbsp;</th>
+                        <th>Diagnosis Kerja&nbsp;&nbsp;</th>
+                        <th>Terapi&nbsp;&nbsp;</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -46,7 +46,7 @@
                             <td><?= $d_psw['diagnosis_kerja']; ?></td>
                             <td><?= $d_psw['terapi']; ?></td>
                             <td class="text-center">
-                                <a class="btn btn-primary btn-sm ubah_init<?= $no0 ?> " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
+                                <a onClick="ubahGetData('<?= $no0; ?>', '<?= encryptString($d_psw['id'], $customkey) ?>' );" class="btn btn-primary btn-sm ubah_init<?= $no0 ?> " data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
                                     <i class=" fa fa-edit"></i> Ubah
                                 </a>
 
@@ -101,85 +101,8 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="#" class="btn btn-primary btn-sm ubah<?= $no0; ?>"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_psw['id'], $customkey) ?>' );" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                             </div>
-                                            <script>
-                                                $(".ubah_init<?= $no0 ?>").click(function() {
-                                                    loading_sw2();
-                                                    $(".err").html("");
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: "_pembimbing/view/v_ked_coass_psw_dataGetData.php",
-                                                        data: {
-                                                            id: '<?= encryptString($d_psw['id'], $customkey) ?>'
-                                                        },
-                                                        dataType: "JSON",
-                                                        success: function(response) {
-                                                            if (response.ket == "SUCCESS") {
-                                                                $('#ruang<?= $no0 ?>').val(response.ruang);
-                                                                $('#nama<?= $no0 ?>').val(response.nama);
-                                                                $('#usia<?= $no0 ?>').val(response.usia);
-                                                                $('#dd<?= $no0 ?>').val(response.dd);
-                                                                $('#diagnosis_kerja<?= $no0 ?>').val(response.diagnosis_kerja);
-                                                                $('#terapi<?= $no0 ?>').val(response.terapi);
-                                                            } else error();
-                                                            swal.close();
-
-                                                        },
-                                                        error: function(response) {
-                                                            error();
-                                                        }
-                                                    });
-                                                });
-                                                $(document).on('click', '.ubah<?= $no0 ?>', function() {
-                                                    var data_form = $('#form_u<?= $no0 ?>').serializeArray();
-                                                    data_form.push({
-                                                        name: "id",
-                                                        value: "<?= encryptString($d_psw['id'], $customkey) ?>"
-                                                    });
-                                                    var ruang = $("#ruang<?= $no0 ?>").val();
-                                                    var nama = $("#nama<?= $no0 ?>").val();
-                                                    var usia = $("#usia<?= $no0 ?>").val();
-                                                    var dd = $("#dd<?= $no0 ?>").val();
-                                                    var diagnosis_kerja = $("#diagnosis_kerja<?= $no0 ?>").val();
-                                                    var terapi = $("#terapi<?= $no0 ?>").val();
-                                                    if (
-                                                        ruang == "" ||
-                                                        nama == "" ||
-                                                        usia == "" ||
-                                                        dd == "" ||
-                                                        diagnosis_kerja == "" ||
-                                                        terapi == ""
-                                                    ) {
-                                                        simpan_tidaksesuai();
-                                                        ruang == "" ? $("#err_ruang<?= $no0 ?>").html("Pilih Ruang") : $("#err_ruang<?= $no0 ?>").html("");
-                                                        nama == "" ? $("#err_nama<?= $no0 ?>").html("Isikan Nama Pasien") : $("#err_nama<?= $no0 ?>").html("")
-                                                        usia == "" ? $("#err_usia<?= $no0 ?>").html("Isikan Usia") : $("#err_usia<?= $no0 ?>").html("")
-                                                        dd == "" ? $("#err_dd<?= $no0 ?>").html("Isiskan DD") : $("#err_dd<?= $no0 ?>").html("")
-                                                        diagnosis_kerja == "" ? $("#err_diagnosis<?= $no0 ?>").html("Isikan Diagnosis") : ("#err_diagnosis<?= $no0 ?>").html("")
-                                                        terapi == "" ? $("#err_terapi<?= $no0 ?>").html("Isikan Terapi") : $("#err_terapi<?= $no0 ?>").html("")
-                                                    } else {
-                                                        loading_sw2();
-                                                        $.ajax({
-                                                            type: 'POST',
-                                                            url: "_pembimbing/exc/x_v_ked_coass_psw_data_u.php",
-                                                            data: data_form,
-                                                            dataType: "JSON",
-                                                            success: function(response) {
-                                                                if (response.ket == "SUCCESS") {
-                                                                    $('#modal_ubah<?= $no0 ?>').modal('hide')
-                                                                    $('#data_psw')
-                                                                        .load(
-                                                                            "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                                                } else simpan_gagal_database();
-                                                            },
-                                                            error: function(response) {
-                                                                error();
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -197,6 +120,85 @@
             </table>
         </div>
         <script>
+            function ubahGetData(x, y) {
+                $(".err").html("");
+                loading_sw2();
+                $.ajax({
+                    type: 'POST',
+                    url: "_pembimbing/view/v_ked_coass_psw_dataGetData.php",
+                    data: {
+                        id: y
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.ket == "SUCCESS") {
+                            $('#ruang' + x).val(response.ruang);
+                            $('#nama' + x).val(response.nama);
+                            $('#usia' + x).val(response.usia);
+                            $('#dd' + x).val(response.dd);
+                            $('#diagnosis_kerja' + x).val(response.diagnosis_kerja);
+                            $('#terapi' + x).val(response.terapi);
+                        } else error();
+                        swal.close();
+                    },
+                    error: function(response) {
+                        error();
+                    }
+                });
+            }
+
+            function ubah(x, y) {
+                var data_form = $('#form_u' + x).serializeArray();
+                data_form.push({
+                    name: "id",
+                    value: y
+                });
+                var ruang = $("#ruang" + x).val();
+                var nama = $("#nama" + x).val();
+                var usia = $("#usia" + x).val();
+                var dd = $("#dd" + x).val();
+                var diagnosis_kerja = $("#diagnosis_kerja" + x).val();
+                var terapi = $("#terapi" + x).val();
+                if (
+                    ruang == "" ||
+                    nama == "" ||
+                    usia == "" ||
+                    dd == "" ||
+                    diagnosis_kerja == "" ||
+                    terapi == ""
+                ) {
+                    simpan_tidaksesuai();
+                    ruang == "" ? $("#err_ruang" + x).html("Pilih Ruang") : $("#err_ruang" + x).html("");
+                    nama == "" ? $("#err_nama" + x).html("Isikan Nama") : $("#err_nama" + x).html("");
+                    usia == "" ? $("#err_usia" + x).html("Isikan Usia") : $("#err_usia" + x).html("")
+                    dd == "" ? $("#err_dd" + x).html("Isikan DD") : $("#err_dd" + x).html("")
+                    diagnosis_kerja == "" ? $("#err_diagnosis_kerja" + x).html("Isikan Diagnosis Kerja") : ("#err_diagnosis_kerja" + x).html("")
+                    terapi == "" ? $("#err_terapi" + x).html("Isikan Terapi") : $("#err_terapi" + x).html("")
+                } else {
+                    loading_sw2();
+                    $.ajax({
+                        type: 'POST',
+                        url: "_pembimbing/exc/x_v_ked_coass_psw_data_u.php",
+                        data: data_form,
+                        dataType: "JSON",
+                        success: function(response) {
+                            if (response.ket == "SUCCESS") {
+                                $('#modal_ubah' + x).modal('hide')
+                                ubah_berhasil();
+                                loading_sw2();
+                                $('#data_psw')
+                                    .load(
+                                        "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['idpr'] ?>");
+                            } else simpan_gagal_database();
+                            swal.close();
+                        },
+                        error: function(response) {
+                            error();
+                        }
+                    });
+                }
+            }
+
             $(document).on('click', '.hapus', function() {
                 Swal.fire({
                     title: 'Anda Yakin?',

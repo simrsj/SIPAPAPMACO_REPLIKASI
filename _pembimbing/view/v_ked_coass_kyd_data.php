@@ -123,7 +123,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_kyd['id'], $customkey) ?>">
                                     <i class="fa fa-trash"></i> Hapus
                                 </a>
@@ -173,7 +172,7 @@
                     value: y
                 });
                 var ruang = $("#ruang" + x).val();
-                var tgl = $("#tgl<?= $no0 ?>").val();
+                var tgl = $("#tgl" + x).val();
                 var nama_pasien = $("#nama_pasien" + x).val();
                 var usia = $("#usia" + x).val();
                 var jenis_kelamin = $("#jenis_kelamin" + x).val();
