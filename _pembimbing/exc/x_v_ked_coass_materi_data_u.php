@@ -10,6 +10,7 @@ try {
     $sql .= " tgl_ubah = '" . date('Y-m-d G:i:s') . "',";
     $sql .= " materi = '" . $_POST['materi'] . "',";
     $sql .= " tgl = '" . $_POST['tgl'] . "',";
+    $sql .= " topik = '" . $_POST['topik'] . "',";
     $sql .= " lk = '" . $_POST['lk'] . "',";
     $sql .= " dosen_pembimbing = '" . $_POST['dosen_pembimbing'] . "'";
     $sql .= " WHERE id = " . decryptString($_POST['id'], $customkey);
