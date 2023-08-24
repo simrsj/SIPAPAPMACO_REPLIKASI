@@ -73,6 +73,8 @@ require_once "_add-ons/crypt.php";
             ) include "_admin/index.php";
             elseif ($_SESSION['level_user'] == 4) include "_pembimbing/index.php";
             elseif ($_SESSION['level_user'] == 5) include "_praktikan/index.php";
+
+            include "index_data.php";
     ?>
             <script>
                 setTimeout(function() {

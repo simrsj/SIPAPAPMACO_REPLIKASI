@@ -10,8 +10,12 @@
             $q_praktikan = $conn->query($sql_praktikan);
             $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $ex) {
-            echo "<script>alert('DATA BIMBINGAN PRAKTIKAN')</script>;";
-            echo "<script>document.location.href='?error404';</script>";
+        ?>
+            <script>
+                alert('<?= $ex->getMessage() ?>');
+                document.location.href = '?error404';
+            </script>";
+        <?php
         }
         try {
             $sql_nilai = "SELECT * FROM tb_nilai_ked_coass ";
@@ -193,6 +197,13 @@
                                                     name: "idpr",
                                                     value: "<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>"
                                                 });
+
+                                                <?php
+                                                if (isset($_GET['admin']))
+                                                    $link = "?logbook&data=" . $_GET['admin'];
+                                                else
+                                                    $link = "?ked_coass_nilai";
+                                                ?>
                                                 $.ajax({
                                                     type: 'POST',
                                                     url: "_pembimbing/exc/x_u_ked_coass_nilai.php",
@@ -200,7 +211,7 @@
                                                     dataType: "JSON",
                                                     success: function(response) {
                                                         if (response.ket == "ERROR") error();
-                                                        else simpan_berhasil("?ked_coass_nilai");
+                                                        else simpan_berhasil("<?= $link ?>");
                                                     },
                                                     error: function(response) {
                                                         console.log(response);
