@@ -22,6 +22,7 @@
                     <th scope="row"><?= $no; ?></th>
                     <td><?= $d_praktikan['nama_praktikan']; ?></td>
                     <td><?= $d_praktikan['no_id_praktikan']; ?></td>
+                    <!-- Penilaian  -->
                     <td class="text-center">
                         <?php
                         try {
@@ -29,6 +30,7 @@
                             $sql_nil .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
                             // echo $sql_nil;
                             $q_nil  = $conn->query($sql_nil);
+                            $d_nil = $q_nil->fetch(PDO::FETCH_ASSOC);
                             $r_nil  = $q_nil->rowCount();
                         } catch (Exception $ex) {
                         ?>
@@ -53,41 +55,14 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <table class="table table-striped table-bordered">
-                                                <thead class="table-dark">
-                                                    <tr class="text-center">
-                                                        <th scope="col">No</th>
-                                                        <th>BST</th>
-                                                        <th>CRS</th>
-                                                        <th>CSS</th>
-                                                        <th>MINI C-EX</th>
-                                                        <th>RPS</th>
-                                                        <th>OSLER</th>
-                                                        <th>DOPS</th>
-                                                        <th>CBD</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    $no_nil = 1;
-                                                    while ($d_nil = $q_nil->fetch(PDO::FETCH_ASSOC)) {
-                                                    ?>
-                                                        <tr>
-                                                            <th class="text-center"><?= $no_nil ?></th>
-                                                            <td><?= $d_nil['bst'] ?></td>
-                                                            <td><?= $d_nil['crs'] ?></td>
-                                                            <td><?= $d_nil['css'] ?></td>
-                                                            <td><?= $d_nil['minicex'] ?></td>
-                                                            <td><?= $d_nil['rps'] ?></td>
-                                                            <td><?= $d_nil['osler'] ?></td>
-                                                            <td><?= $d_nil['dops'] ?></td>
-                                                            <td><?= $d_nil['cbd'] ?></td>
-                                                        <?php
-                                                        $no_nil++;
-                                                    }
-                                                        ?>
-                                                </tbody>
-                                            </table>
+                                            BST (BEDSIDE TEACHING) : <b><?= $d_nil['bst'] ?></b><br>
+                                            CRS (CASE REPORT SESSION/TUTORIAL) : <b><?= $d_nil['crs'] ?></b><br>
+                                            CSS (CLINICAL SCIENCE SESSION/REFERAT/JOURNAL READING): <b><?= $d_nil['css'] ?></b><br>
+                                            MINI C-EX (MINI CLINICAL EXAMINATION) : <b><?= $d_nil['minicex'] ?></b><br>
+                                            RPS (RESOURCE PERSON SESION) : <b><?= $d_nil['rps'] ?></b><br>
+                                            OSLER (OBJECTIVE STRUKTURED LONG EXAMINATION STRUKTURED) : <b><?= $d_nil['osler'] ?></b><br>
+                                            DOPS (DIRECT OBSERVATION PROCEDURAL SKILLS) : <b><?= $d_nil['dops'] ?></b><br>
+                                            BCBD (CASE BASED DISCUSSION) : <b><?= $d_nil['cbd'] ?></b><br>
                                         </div>
                                     </div>
                                 </div>
@@ -99,6 +74,7 @@
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>
+                    <!-- P3D -->
                     <td class="text-center">
                         <?php
                         try {
