@@ -11,6 +11,7 @@ elseif (isset($_GET['logbook']) && $d_prvl['r_logbook'] == 'Y') {
 	elseif (isset($_GET['ked_coass_jkh']) && isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_jkh_input.php";
 	elseif (isset($_GET['ked_coass_kyd']) && isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_kyd_input.php";
 	elseif (isset($_GET['ked_coass_psw']) && isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_psw_input.php";
+	elseif (isset($_GET['ked_coass_materi']) && isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_materi_input.php";
 	elseif (isset($_GET['data'])) include "_admin/view/v_logbook_detail.php";
 	else include "_admin/view/v_logbook.php";
 }

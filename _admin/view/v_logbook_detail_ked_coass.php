@@ -490,6 +490,149 @@
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>
+                    <!-- MATERI -->
+                    <td class="text-center">
+                        <?php
+                        try {
+                            $sql_materi = "SELECT * FROM tb_logbook_ked_coass_materi ";
+                            $sql_materi .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
+                            // echo $sql_materi;
+                            $q_materi  = $conn->query($sql_materi);
+                            $r_materi  = $q_materi->rowCount();
+                        } catch (Exception $ex) {
+                        ?>
+                            <script>
+                                alert("<?= $ex->getMessage() ?>");
+                                document.location.href = '?error404';
+                            </script>
+                        <?php
+                        }
+                        ?>
+                        <?php if ($r_materi > 0) { ?>
+                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_materi_<?= $no; ?>" title="Detail Materi">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <div class="modal" id="m_materi_<?= $no; ?>" style="display: none;">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-secondary text-light">
+                                            Daftar Materi
+                                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                X
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <?php
+                                                try {
+                                                    $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'Kuliah Pengayaan'")->rowCount();
+                                                    $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'Mini C-Ex'")->rowCount();
+                                                    $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'RPS'")->rowCount();
+                                                    $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'CRS'")->rowCount();
+                                                    $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'CSS'")->rowCount();
+                                                    $r_6 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'OSLER'")->rowCount();
+                                                    $r_7 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'DPS'")->rowCount();
+                                                } catch (PDOException $ex) {
+                                                ?>
+                                                    <script>
+                                                        alert("<?= $ex->getMessage() ?>");
+                                                        document.location.href = '?error404';
+                                                    </script>";
+                                                <?php
+                                                }
+                                                ?>
+                                                <div class="col-md">
+                                                    Kuliah Pengayaan <div class="badge badge-danger"><?= $r_1 ?></div><br>
+                                                    Mini C-Ex <div class="badge badge-danger"><?= $r_2 ?></div><br>
+                                                    RPS <div class="badge badge-danger"><?= $r_3 ?></div><br>
+                                                    CRS <div class="badge badge-danger"><?= $r_4 ?></div><br>
+                                                </div>
+                                                <div class="col-md my-auto">
+                                                    CSS <div class="badge badge-danger"><?= $r_5 ?></div><br>
+                                                    OSLER <div class="badge badge-danger"><?= $r_6 ?></div><br>
+                                                    DPS <div class="badge badge-danger"><?= $r_7 ?></div><br>
+                                                </div>
+                                            </div>
+                                            <hr class="border-1">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered" id="dataTable_materi<?= $no; ?>">
+                                                    <thead class="table-dark">
+                                                        <tr class="text-center">
+                                                            <th scope='col'>No</th>
+                                                            <th>Materi</th>
+                                                            <th>tgl</th>
+                                                            <th>Topik</th>
+                                                            <th>LK</th>
+                                                            <th>Dosen Pembimbing</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $no0 = 1;
+                                                        while ($d_materi = $q_materi->fetch(PDO::FETCH_ASSOC)) {
+                                                        ?>
+                                                            <tr>
+                                                                <td class="text-center"><?= $no0; ?></td>
+                                                                <td><?= $d_materi['materi']; ?></td>
+                                                                <td><?= tanggal($d_materi['tgl']); ?></td>
+                                                                <td><?= $d_materi['topik']; ?></td>
+                                                                <td><?= $d_materi['lk']; ?></td>
+                                                                <td><?= $d_materi['dosen_pembimbing']; ?></td>
+                                                            </tr>
+                                                        <?php
+                                                            $no0++;
+                                                        }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#dataTable_materi<?= $no ?>").DataTable();
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <a href="?logbook&ked_coass_materi&data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Detail Materi">
+                            <i class="fa-solid fa-pen-to-square "></i>
+                        </a>
+                    </td>
+                    <!-- LPPP -->
+                    <td class="text-center">
+                        <?php
+                        try {
+                            $sql_lppp = "SELECT * FROM tb_logbook_ked_coass_lppp ";
+                            $sql_lppp .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
+                            // echo $sql_lppp;
+                            $q_lppp  = $conn->query($sql_lppp);
+                            $r_lppp  = $q_lppp->rowCount();
+                        } catch (Exception $ex) {
+                        ?>
+                            <script>
+                                alert("<?= $ex->getMessage() ?>");
+                                document.location.href = '?error404';
+                            </script>
+                        <?php
+                        }
+                        ?>
+                        <?php if ($r_lppp > 0) { ?>
+                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_lppp_<?= $no; ?>" title="Detail lppp">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <div class="modal" id="m_lppp_<?= $no; ?>" style="display: none;">
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <a href="?logbook&ked_coass_lppp&data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Detail Materi">
+                            <i class="fa-solid fa-pen-to-square "></i>
+                        </a>
+                    </td>
                     <td class="text-center">
                         <a href="_print\p_logbook_ked_coass.php?data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>" class="btn btn-danger col" title="Download Log Book" download>
                             <i class="fa-solid fa-file-arrow-down"></i> <span class="d-none">Cetak</span>
