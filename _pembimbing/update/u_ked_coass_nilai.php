@@ -198,18 +198,18 @@
                                                     value: "<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>"
                                                 });
 
-                                                <?php
-                                                if (isset($_GET['admin']))
-                                                    $link = "?logbook&data=" . $_GET['admin'];
-                                                else
-                                                    $link = "?ked_coass_nilai";
-                                                ?>
                                                 $.ajax({
                                                     type: 'POST',
                                                     url: "_pembimbing/exc/x_u_ked_coass_nilai.php",
                                                     data: data_form,
                                                     dataType: "JSON",
                                                     success: function(response) {
+                                                        <?php
+                                                        if (isset($_GET['admin']))
+                                                            $link = "?logbook&data=" . $_GET['admin'];
+                                                        else
+                                                            $link = "?ked_coass_nilai";
+                                                        ?>
                                                         if (response.ket == "ERROR") error();
                                                         else simpan_berhasil("<?= $link ?>");
                                                     },

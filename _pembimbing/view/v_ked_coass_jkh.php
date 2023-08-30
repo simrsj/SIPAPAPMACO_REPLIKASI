@@ -61,7 +61,6 @@
                                                 <a class="btn btn-outline-info btn-sm col" href="#" data-toggle="modal" data-target="#modal_data_jkh<?= $no ?>">
                                                     <i class="fas fa-eye"></i> Lihat
                                                 </a>
-                                                <!-- Logout Modal-->
                                                 <div class="modal" id="modal_data_jkh<?= $no ?>" tabindex="-1" role="dialog" aria-labelledby="modal_data_jkh<?= $no ?>" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                                                         <div class="modal-content">

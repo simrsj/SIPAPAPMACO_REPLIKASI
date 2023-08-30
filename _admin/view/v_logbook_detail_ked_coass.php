@@ -182,33 +182,82 @@
                         <?php
                         }
                         ?>
-                        <a href="?logbook&ked_coass_nilai&u=<?= encryptString($d['id_praktik'], $customkey) ?>" class="btn btn-outline-info" title="Detail Pencapaian Kompetensi Keterampilan">
-                            <i class="fa-solid fa-info-circle"></i>
+                        <a href="?logbook&ked_coass_p3d&u=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Detail Pencapaian Kompetensi Keterampilan (P3D)">
+                            <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>
+                    <!-- JKH -->
                     <td class="text-center">
-                        <a href="?logbook&data=<?= encryptString($d['id_praktik'], $customkey) ?>" class="btn btn-outline-info" title="Detail Jadwal Kegiatan Harian">
-                            <i class="fa-solid fa-info-circle"></i> <span class="d-none">Detail</span>
-                        </a>
-                    </td>
-                    <td class="text-center">
-                        <a href="?logbook&data=<?= encryptString($d['id_praktik'], $customkey) ?>" class="btn btn-outline-info" title="Detail Kasus Yang Ditemukan">
-                            <i class="fa-solid fa-info-circle"></i> <span class="d-none">Detail</span>
-                        </a>
-                    </td>
-                    <td class="text-center">
-                        <a href="?logbook&data=<?= encryptString($d['id_praktik'], $customkey) ?>" class="btn btn-outline-info" title="Detail Pembuatan Status Wajib">
-                            <i class="fa-solid fa-info-circle"></i> <span class="d-none">Detail</span>
-                        </a>
-                    </td>
-                    <td class="text-center">
-                        <a href="?logbook&data=<?= encryptString($d['id_praktik'], $customkey) ?>" class="btn btn-outline-info" title="Detail Materi">
-                            <i class="fa-solid fa-info-circle"></i> <span class="d-none">Detail</span>
-                        </a>
-                    </td>
-                    <td class="text-center">
-                        <a href="?logbook&data=<?= encryptString($d['id_praktik'], $customkey) ?>" class="btn btn-outline-info" title="Detail Lembar Penilaian Perilaku Profesional">
-                            <i class="fa-solid fa-info-circle"></i> <span class="d-none">Detail</span>
+                        <?php
+                        try {
+                            $sql_jkh = "SELECT * FROM tb_logbook_ked_coass_jhk ";
+                            $sql_jkh .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
+                            // echo $sql_jkh;
+                            $q_jkh  = $conn->query($sql_jkh);
+                            $r_jkh  = $q_jkh->rowCount();
+                        } catch (Exception $ex) {
+                        ?>
+                            <script>
+                                alert('<?= $ex->getMessage() ?>');
+                                document.location.href = '?error404';
+                            </script>
+                        <?php
+                        }
+                        ?>
+                        <?php if ($r_jkh > 0) { ?>
+                            <a class="btn btn-outline-info m-1" href="#" data-toggle="modal" data-target="#m_jkh_<?= $no; ?>">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <div class="modal" id="m_jkh_<?= $no; ?>" style="display: none;">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-secondary text-light">
+                                            Jadwal Kegiatan Harian
+                                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                X
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="table table-striped table-bordered " id="dataTable<?= $no; ?>">
+                                                <thead class="table-dark">
+                                                    <tr class="text-center">
+                                                        <th scope='col'>No</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Kegiatan</th>
+                                                        <th>Topik</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $no0 = 1;
+                                                    while ($d_jkh = $q_jkh->fetch(PDO::FETCH_ASSOC)) {
+                                                    ?>
+                                                        <tr>
+                                                            <td class="text-center"><?= $no0; ?></td>
+                                                            <td><?= tanggal($d_jkh['tgl']); ?></td>
+                                                            <td><?= $d_jkh['kegiatan']; ?></td>
+                                                            <td><?= $d_jkh['topik']; ?></td>
+                                                        </tr>
+                                                    <?php
+                                                        $no0++;
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#dataTable<?= $no ?>").DataTable();
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <a href="?logbook&ked_coass_jkh&u=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Detail Pencapaian Kompetensi Keterampilan (P3D)">
+                            <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>
                     <td class="text-center">

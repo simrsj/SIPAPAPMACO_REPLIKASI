@@ -8,6 +8,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 elseif (isset($_GET['logbook']) && $d_prvl['r_logbook'] == 'Y') {
 	if (isset($_GET['data'])) include "_admin/view/v_logbook_detail.php";
 	elseif (isset($_GET['ked_coass_nilai']) && isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_nilai.php";
+	elseif (isset($_GET['ked_coass_p3d']) && isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_p3d.php";
 	else include "_admin/view/v_logbook.php";
 }
 //kuesioner pembimbing 
