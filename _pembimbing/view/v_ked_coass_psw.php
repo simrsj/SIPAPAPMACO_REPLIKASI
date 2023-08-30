@@ -81,8 +81,12 @@
                                                                         $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'Psikogeriatri'")->rowCount();
                                                                         $r_6 = $conn->query("SELECT * FROM tb_logbook_ked_coass_psw WHERE id_praktikan = " . $d_bimbingan['id_praktikan'] . " AND ruang = 'IGD'")->rowCount();
                                                                     } catch (PDOException $ex) {
-                                                                        echo "<script>alert('$ex');</script>";
-                                                                        echo "<script>document.location.href='?error404';</script>";
+                                                                    ?>
+                                                                        <script>
+                                                                            alert("<?= $ex->getMessage() ?>");
+                                                                            document.location.href = '?error404';
+                                                                        </script>";
+                                                                    <?php
                                                                     }
                                                                     ?>
                                                                     <div class="col-md">

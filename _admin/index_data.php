@@ -10,6 +10,7 @@ elseif (isset($_GET['logbook']) && $d_prvl['r_logbook'] == 'Y') {
 	elseif (isset($_GET['ked_coass_p3d']) && isset($_GET['u'])) include "_pembimbing/update/u_ked_coass_p3d.php";
 	elseif (isset($_GET['ked_coass_jkh']) && isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_jkh_input.php";
 	elseif (isset($_GET['ked_coass_kyd']) && isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_kyd_input.php";
+	elseif (isset($_GET['ked_coass_psw']) && isset($_GET['data'])) include "_pembimbing/view/v_ked_coass_psw_input.php";
 	elseif (isset($_GET['data'])) include "_admin/view/v_logbook_detail.php";
 	else include "_admin/view/v_logbook.php";
 }
