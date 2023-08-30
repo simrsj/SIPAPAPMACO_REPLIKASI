@@ -35,14 +35,14 @@
                         } catch (Exception $ex) {
                         ?>
                             <script>
-                                alert('<?= $ex->getMessage() ?>');
+                                alert("<?= $ex->getMessage() ?>");
                                 document.location.href = '?error404';
                             </script>";
                         <?php
                         }
                         ?>
                         <?php if ($r_nil > 0) { ?>
-                            <a class="btn btn-outline-info m-1" href="#" data-toggle="modal" data-target="#m_nilai_<?= $no; ?>">
+                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_nilai_<?= $no; ?>" title="Detail Penilaian">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <div class="modal" id="m_nilai_<?= $no; ?>" style="display: none;">
@@ -70,7 +70,7 @@
                         <?php
                         }
                         ?>
-                        <a href="?logbook&ked_coass_nilai&u=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Detail Penilaian">
+                        <a href="?logbook&ked_coass_nilai&u=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Ubah Penilaian">
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>
@@ -86,14 +86,14 @@
                         } catch (Exception $ex) {
                         ?>
                             <script>
-                                alert('<?= $ex->getMessage() ?>');
+                                alert("<?= $ex->getMessage() ?>");
                                 document.location.href = '?error404';
                             </script>";
                         <?php
                         }
                         ?>
                         <?php if ($r_p3d > 0) { ?>
-                            <a class="btn btn-outline-info m-1" href="#" data-toggle="modal" data-target="#m_p3d_<?= $no; ?>">
+                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_p3d_<?= $no; ?>" title="Detail Pencapaian Kompetensi Keterampilan (P3D)">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <div class="modal" id="m_p3d_<?= $no; ?>" style="display: none;">
@@ -127,7 +127,7 @@
                                                     } catch (Exception $ex) {
                                                     ?>
                                                         <script>
-                                                            alert('<?= $ex->getMessage() ?>');
+                                                            alert("<?= $ex->getMessage() ?>");
                                                             document.location.href = '?error404';
                                                         </script>";
                                                     <?php
@@ -151,7 +151,7 @@
                                                                 } catch (Exception $ex) {
                                                                 ?>
                                                                     <script>
-                                                                        alert('<?= $ex->getMessage() ?>');
+                                                                        alert("<?= $ex->getMessage() ?>");
                                                                         document.location.href = '?error404';
                                                                     </script>";
                                                                 <?php
@@ -182,7 +182,7 @@
                         <?php
                         }
                         ?>
-                        <a href="?logbook&ked_coass_p3d&u=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Detail Pencapaian Kompetensi Keterampilan (P3D)">
+                        <a href="?logbook&ked_coass_p3d&u=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Ubah Pencapaian Kompetensi Keterampilan (P3D)">
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>
@@ -190,7 +190,7 @@
                     <td class="text-center">
                         <?php
                         try {
-                            $sql_jkh = "SELECT * FROM tb_logbook_ked_coass_jhk ";
+                            $sql_jkh = "SELECT * FROM tb_logbook_ked_coass_jkh ";
                             $sql_jkh .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
                             // echo $sql_jkh;
                             $q_jkh  = $conn->query($sql_jkh);
@@ -198,14 +198,14 @@
                         } catch (Exception $ex) {
                         ?>
                             <script>
-                                alert('<?= $ex->getMessage() ?>');
+                                alert("<?= $ex->getMessage() ?>");
                                 document.location.href = '?error404';
                             </script>
                         <?php
                         }
                         ?>
                         <?php if ($r_jkh > 0) { ?>
-                            <a class="btn btn-outline-info m-1" href="#" data-toggle="modal" data-target="#m_jkh_<?= $no; ?>">
+                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_jkh_<?= $no; ?>" title="Detail Pencapaian Kompetensi Keterampilan (P3D)">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <div class="modal" id="m_jkh_<?= $no; ?>" style="display: none;">
@@ -218,7 +218,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <table class="table table-striped table-bordered " id="dataTable<?= $no; ?>">
+                                            <table class="table table-striped table-bordered " id="dataTable_jkh<?= $no; ?>">
                                                 <thead class="table-dark">
                                                     <tr class="text-center">
                                                         <th scope='col'>No</th>
@@ -247,7 +247,7 @@
                                         </div>
                                         <script>
                                             $(document).ready(function() {
-                                                $("#dataTable<?= $no ?>").DataTable();
+                                                $("#dataTable_jkh<?= $no ?>").DataTable();
                                             });
                                         </script>
                                     </div>
@@ -256,7 +256,125 @@
                         <?php
                         }
                         ?>
-                        <a href="?logbook&ked_coass_jkh&u=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Detail Pencapaian Kompetensi Keterampilan (P3D)">
+                        <a href="?logbook&ked_coass_jkh&data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Ubah Pencapaian Kompetensi Keterampilan (P3D)">
+                            <i class="fa-solid fa-pen-to-square "></i>
+                        </a>
+                    </td>
+                    <!-- KYD -->
+                    <td class="text-center">
+                        <?php
+                        try {
+                            $sql_kyd = "SELECT * FROM tb_logbook_ked_coass_kyd ";
+                            $sql_kyd .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
+                            // echo $sql_kyd;
+                            $q_kyd  = $conn->query($sql_kyd);
+                            $r_kyd  = $q_kyd->rowCount();
+                        } catch (Exception $ex) {
+                        ?>
+                            <script>
+                                alert("<?= $ex->getMessage() ?>");
+                                document.location.href = '?error404';
+                            </script>
+                        <?php
+                        }
+                        ?>
+                        <?php if ($r_kyd > 0) { ?>
+                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_kyd_<?= $no; ?>" title="Detail Kejadian Yang Ditemukan">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <div class="modal" id="m_kyd_<?= $no; ?>" style="display: none;">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-secondary text-light b">
+                                            Kegiatan Yang Ditemukan
+                                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                X
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <?php
+                                                try {
+                                                    $r_1 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND ruang = 'Poliklinik/Rawat Jalan'")->rowCount();
+                                                    $r_2 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND ruang = 'Intensif/Rawat Inap'")->rowCount();
+                                                    $r_3 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND ruang = 'IGD'")->rowCount();
+                                                    $r_4 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND ruang = 'Rehabilitasi Napza'")->rowCount();
+                                                    $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_kyd WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND ruang = 'ECT'")->rowCount();
+                                                } catch (PDOException $ex) {
+                                                ?>
+                                                    <script>
+                                                        alert("<?= $ex->getMessage() ?>");
+                                                        document.location.href = '?error404';
+                                                    </script>
+                                                <?php
+                                                }
+                                                ?>
+                                                <div class="col-md">
+                                                    Poliklinik/Rawat Jalan : <div class="badge badge-danger"><?= $r_1 ?></div><br>
+                                                    Intensif/Rawat Inap : <div class="badge badge-danger"><?= $r_2 ?></div><br>
+                                                    IGD : <div class="badge badge-danger"><?= $r_3 ?></div>
+                                                </div>
+                                                <div class="col-md my-auto">
+                                                    Rehabilitasi Napza : <div class="badge badge-danger"><?= $r_4 ?></div><br>
+                                                    ECT : <div class="badge badge-danger"><?= $r_5 ?></div>
+                                                </div>
+                                            </div>
+                                            <hr class="border-1">
+                                            <table class="table table-striped table-bordered " id="dataTable_kyd<?= $no; ?>">
+                                                <thead class="table-dark">
+                                                    <tr class="text-center">
+                                                        <th scope='col'>No</th>
+                                                        <th>Ruang</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Nama Pasien</th>
+                                                        <th>Usia</th>
+                                                        <th>Jenis Kelamin</th>
+                                                        <th>Medrec</th>
+                                                        <th>Diagnosis</th>
+                                                        <th>Terapi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $no0 = 1;
+                                                    while ($d_kyd = $q_kyd->fetch(PDO::FETCH_ASSOC)) {
+                                                    ?>
+                                                        <tr>
+                                                            <td class="text-center"><?= $no0; ?></td>
+                                                            <td><?= $d_kyd['ruang']; ?></td>
+                                                            <td><?= tanggal($d_kyd['tgl']); ?></td>
+                                                            <td><?= $d_kyd['nama_pasien']; ?></td>
+                                                            <td><?= $d_kyd['usia']; ?></td>
+                                                            <td>
+                                                                <?php
+                                                                if ($d_kyd['jenis_kelamin'] == "L") echo "Laki-laki";
+                                                                elseif ($d_kyd['jenis_kelamin'] == "P") echo "Perempuan";
+                                                                else echo "<span class='badge badge-danger'>ERROR</span>";
+                                                                ?>
+                                                            </td>
+                                                            <td><?= $d_kyd['medrec']; ?></td>
+                                                            <td><?= $d_kyd['diagnosis']; ?></td>
+                                                            <td><?= $d_kyd['terapi']; ?></td>
+                                                        </tr>
+                                                    <?php
+                                                        $no0++;
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#dataTable_kyd<?= $no ?>").DataTable();
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                        <a href="?logbook&ked_coass_kyd&data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Detail Kejadian Yang Ditemukan">
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>

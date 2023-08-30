@@ -53,8 +53,12 @@
                                                 $r_pertanyaan = $q_pertanyaan->rowCount();
                                                 echo $r_pertanyaan != NULL ? "<span class='badge badge-success'>Data Sudah Ada</span>" : "<span class='badge badge-secondary'>Data Belum Ada</span>";
                                             } catch (Exception $ex) {
-                                                echo "<script>alert('DATA PRAKTIKAN');</script>";
-                                                echo "<script>document.location.href='?error404';</script>";
+                                            ?>
+                                                <script>
+                                                    alert("<?= $ex->getMessage() ?>");
+                                                    document.location.href = '?error404';
+                                                </script>
+                                            <?php
                                             }
                                             ?>
                                         </td>
