@@ -745,10 +745,46 @@
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>
+                    <!-- Unduh, Unggah -->
                     <td class="text-center">
-                        <a href="_print\p_logbook_ked_coass.php?data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>" class="btn btn-danger col" title="Download Log Book" download>
-                            <i class="fa-solid fa-file-arrow-down"></i> <span class="d-none">Cetak</span>
+                        <a href="_print\p_logbook_ked_coass.php?data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>" class="btn m-1 btn-outline-danger btn-xs rounded" title="Unduh Log Book" download>
+                            <i class="fa-solid fa-file-arrow-down"></i> Unduh
                         </a>
+
+                        <a href="#" data-toggle="modal" data-target="#m_unggah_<?= $no ?>" class="btn m-1 btn-outline-warning btn-xs text-dark rounded" title="Unggah Log Book">
+                            <i class="fa-solid fa-file-arrow-up"></i> Unggah
+                        </a>
+
+                        <div class="modal" id="m_unggah_<?= $no ?>" style="display: none;">
+                            <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body m-0 ">
+                                            <form id="form_file_logbook<?= $no ?>" enctype="multipart/form-data" method="POST">
+                                                Unggah File Log Book yang Sudah di Tanda Tangan : <span style="color:red">*</span><br>
+                                                <div class="custom-file">
+                                                    <label class="custom-file-label text-xs mt-1" for="file_logbook<?= $no ?>" id="labelfile_logbook<?= $no ?>">Pilih File</label>
+                                                    <input type="file" class="custom-file-input" id="file_logbook<?= $no ?>" name="file_logbook" accept="application/pdf" required>
+                                                    <span class='i text-xs'>Data unggah harus pdf, Ukuran maksimal 3 Mb</span><br>
+                                                    <div class="text-xs font-italic text-danger blink" id="err_file_invoice"></div><br>
+                                                    <script>
+                                                        $('.custom-file-input').on('change', function() {
+                                                            var fileName = $(this).val();
+                                                            fileName = fileName.replace(/^.*[\\\/]/, '');
+                                                            if (fileName == "") fileName = "Pilih File";
+                                                            $('#labelfile_logbook<?= $no ?>').html(fileName);
+                                                        })
+                                                    </script>
+                                                </div>
+                                                <a onClick="unggah_file_logbook('<?= $no ?>', '<?= encryptString($d_jkh['id'], $customkey) ?>' );" class="btn btn-warning btn-sm">
+                                                    <i class="fa-solid fa-file-arrow-up"></i> Unggah
+                                                </a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <?php $no++; ?>
@@ -756,3 +792,47 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function ubah_file_logbook(x, y) {
+        var data_form = $('#form_u' + x).serializeArray();
+        data_form.push({
+            name: "id",
+            value: y
+        });
+        var materi = $("#materi" + x).val();
+        if (
+            materi == "" ||
+            tgl == "" ||
+            topik == "" ||
+            lk == "" ||
+            dosen_pembimbing == ""
+        ) {
+            simpan_tidaksesuai();
+            materi == "" ? $("#err_materi" + x).html("Pilih Materi") : $("#err_materi" + x).html("");
+            tgl == "" ? $("#err_tgl" + x).html("Pilih Tanggal") : $("#err_tgl" + x).html("");
+            topik == "" ? $("#err_topik" + x).html("Isikan Topik") : $("#err_topik" + x).html("")
+            lk == "" ? $("#err_lk" + x).html("Isikan LK") : $("#err_lk" + x).html("")
+            dosen_pembimbing == "" ? $("#err_dosen_pembimbing" + x).html("Isikan Dosen Pembimbing") : $("#err_dosen_pembimbing" + x).html("")
+        } else {
+            loading_sw2();
+            $.ajax({
+                type: 'POST',
+                url: "_pembimbing/exc/x_v_ked_coass_materi_data_u.php",
+                data: data_form,
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.ket == "SUCCESS") {
+                        $('#modal_ubah' + x).modal('hide')
+                        $('#data_materi')
+                            .load(
+                                "_pembimbing/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");
+                    } else simpan_gagal_database();
+                },
+                error: function(response) {
+                    error();
+                }
+            });
+        }
+    }
+</script>
