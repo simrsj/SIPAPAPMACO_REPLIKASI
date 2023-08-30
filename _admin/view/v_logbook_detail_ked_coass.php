@@ -621,15 +621,127 @@
                         }
                         ?>
                         <?php if ($r_lppp > 0) { ?>
-                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_lppp_<?= $no; ?>" title="Detail lppp">
+                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_lppp_<?= $no; ?>" title="Detail Lembar Penilaian Perilaku Profesional">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <div class="modal" id="m_lppp_<?= $no; ?>" style="display: none;">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-secondary text-light">
+                                            Daftar Materi
+                                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                X
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive text-sm">
+                                                <table class="table table-striped table-bordered" id="dataTable_lppp<?= $no ?>">
+                                                    <thead class="table-dark">
+                                                        <tr class="text-center">
+                                                            <th scope='col'>No</th>
+                                                            <th>Aspek Penilaian</th>
+                                                            <th>Ket Skor <span class="badge badge-danger">1</span></th>
+                                                            <th>Ket Skor <span class="badge badge-warning">2</span></th>
+                                                            <th>Ket Skor <span class="badge badge-success">3</span></th>
+                                                            <th width="200px">SKOR</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        try {
+                                                            $sql_pertanyaan = "SELECT * FROM tb_pertanyaan ";
+                                                            $sql_pertanyaan .= " WHERE kategori_pertanyaan = 'LPPP'";
+                                                            // echo "$sql_pertanyaan<br>";
+                                                            $q_pertanyaan = $conn->query($sql_pertanyaan);
+                                                        } catch (Exception $ex) {
+                                                        ?>
+                                                            <script>
+                                                                alert("<?= $ex->getMessage() ?>");
+                                                                document.location.href = '?error404';
+                                                            </script>
+                                                            <?php
+                                                        }
+                                                        $no = 1;
+                                                        while ($d_pertanyaan = $q_pertanyaan->fetch(PDO::FETCH_ASSOC)) {
+                                                            try {
+                                                                $sql_lppp = "SELECT * FROM tb_logbook_ked_coass_lppp ";
+                                                                $sql_lppp .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
+                                                                $sql_lppp .= " AND id_pertanyaan = " . $d_pertanyaan['id'];
+                                                                // echo "$sql_nilai_p3d<br>";
+                                                                $q_lppp = $conn->query($sql_lppp);
+                                                                $d_lppp = $q_lppp->fetch(PDO::FETCH_ASSOC);
+                                                            } catch (Exception $ex) {
+                                                            ?>
+                                                                <script>
+                                                                    alert("<?= $ex->getMessage() ?>");
+                                                                    document.location.href = '?error404';
+                                                                </script>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                            <tr class="m-auto">
+                                                                <td class="text-center"><?= $no; ?></td>
+                                                                <td><?= $d_pertanyaan['pertanyaan']; ?></td>
+                                                                <td><?= $d_pertanyaan['p1']; ?></td>
+                                                                <td><?= $d_pertanyaan['p2']; ?></td>
+                                                                <td><?= $d_pertanyaan['p3']; ?></td>
+                                                                <td style="vertical-align: middle; text-align: center;">
+                                                                    <?php
+                                                                    if ($d_lppp['skor'] == 1) echo '<span class="text-lg badge badge-danger">1</span>';
+                                                                    elseif ($d_lppp['skor'] == 2) echo '<span class="text-lg badge badge-warning">2</span>';
+                                                                    elseif ($d_lppp['skor'] == 3) echo '<span class="text-lg badge badge-success">3</span>';
+                                                                    else echo '<span class="text-lg badge badge-secondary">Skor Belum Ada</span>';
+                                                                    ?>
+                                                                </td>
+                                                            </tr>
+                                                            <?php $no++; ?>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-center mb-2">
+                                                    Kejadian-kejadian terkait dengan perilaku Profesional selama kegiatan kepaniteraan berlangsung
+                                                    <?php
+                                                    try {
+                                                        $sql_lppp_ket = "SELECT * FROM tb_logbook_ked_coass_lppp_ket ";
+                                                        $sql_lppp_ket .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
+                                                        // echo "$sql_nilai_p3d<br>";
+                                                        $q_lppp_ket = $conn->query($sql_lppp_ket);
+                                                        $r_lppp_ket = $q_lppp_ket->rowCount();
+                                                        $d_lppp_ket = $q_lppp_ket->fetch(PDO::FETCH_ASSOC);
+                                                    } catch (Exception $ex) {
+                                                    ?>
+                                                        <script>
+                                                            alert("<?= $ex->getMessage() ?>");
+                                                            document.location.href = '?error404';
+                                                        </script>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <div class="jumbotron">
+                                                        <div class="jumbotron-fluid ">
+                                                            <h5 class="text-center">
+                                                                <?php
+                                                                if ($r_lppp_ket > 0) echo $d_lppp_ket['ket'];
+                                                                else echo "<span class='badge badge-secondary text-lg'>DATA TIDAK ADA</span>"
+                                                                ?>
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#dataTable_lppp<?= $no ?>").DataTable();
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
                             </div>
                         <?php
                         }
                         ?>
-                        <a href="?logbook&ked_coass_lppp&data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Detail Materi">
+                        <a href="?logbook&ked_coass_lppp&u=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Ubah Lembar Penilaian Perilaku Profesional">
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>

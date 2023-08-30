@@ -215,7 +215,14 @@
                                         data: data_form,
                                         dataType: "JSON",
                                         success: function(response) {
-                                            response.ket == "SUCCESS" ? simpan_berhasil("?ked_coass_elogbook=<?= $_GET['ked_coass_elogbook'] ?>") : simpan_gagal_database()
+                                            <?php
+                                            if (isset($_GET['admin']))
+                                                $link = "?logbook&data=" . $_GET['admin'];
+                                            else
+                                                $link = "?ked_coass_lppp";
+                                            ?>
+                                            if (response.ket == "ERROR") error();
+                                            else simpan_berhasil("<?= $link ?>");
                                         },
                                         error: function(response) {
                                             error();
