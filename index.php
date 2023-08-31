@@ -64,6 +64,8 @@ require_once "_add-ons/crypt.php";
     elseif (isset($_GET['error404'])) include "_error/error404.php";
     elseif (isset($_GET['error503'])) include "_error/error503.php";
     elseif (isset($_SESSION['status_user'])) {
+    ?>
+        <?php
         if ($_SESSION['status_user'] == 'Y') {
             if (isset($_GET['lo'])) include "_log-sign/exc/x_log_out.php";
             elseif (
@@ -75,7 +77,7 @@ require_once "_add-ons/crypt.php";
             elseif ($_SESSION['level_user'] == 5) include "_praktikan/index.php";
 
             include "index_data.php";
-    ?>
+        ?>
             <script>
                 setTimeout(function() {
                     idle_logout();
@@ -85,7 +87,8 @@ require_once "_add-ons/crypt.php";
                 }, 14400000);
                 // }, 5000);
             </script>
-        <?php } elseif ($_SESSION['status_user'] == 'T') { ?>
+        <?php
+        } elseif ($_SESSION['status_user'] == 'T') { ?>
             <script>
                 alert('Akun Sudah Tidak Aktif');
                 document.location.href = "?lo";

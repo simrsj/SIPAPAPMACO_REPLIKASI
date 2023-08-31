@@ -30,11 +30,8 @@
             ?>
               <div class="col-md-<?= $round_col; ?> text-center mb-2 ">
                 <span class="b">
-                  <?php if ($d_praktik['akronim_institusi'] == NULL) { ?>
-                    <?= $d_praktik['nama_institusi']; ?>
-                  <?php } else { ?>
-                    <?= $d_praktik['akronim_institusi']; ?>
-                  <?php } ?>
+                  <?= $d_praktik['nama_institusi'] ?>
+                  <?= $d_praktik['akronim_institusi'] != NULL ? " (" . $d_praktik['akronim_institusi'] . ")" : "" ?>
                 </span><br>
                 <div class="flip-container">
                   <?php if ($d_praktik['logo_institusi'] == '') { ?>
@@ -43,7 +40,7 @@
                     <img src="<?= $d_praktik['logo_institusi']; ?>" class="img-fluid rounded flip-image" alt="<?= $d_praktik['nama_institusi']; ?>" width="30px" height="30px">
                   <?php }  ?>
                 </div>
-                <?= $d_praktik['nama_jurusan_pdd']; ?> &nbsp;
+                <?= $d_praktik['nama_jurusan_pdd']; ?> <br>
                 <?php if ($d_praktik['id_profesi_pdd'] != 0) { ?>
                   (<?= $d_praktik['nama_profesi_pdd']; ?>)
                 <?php } ?>
