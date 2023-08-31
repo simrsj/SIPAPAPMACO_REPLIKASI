@@ -24,20 +24,20 @@
         if ($r_praktik > 0) {
           $round_col = ceil(12 / $r_praktik);
         ?>
-          <div class="row text-xs align-center justify-content-center my-auto mr-auto text-light  ">
+          <div class="row text-xs align-center justify-content-center my-auto mr-auto text-light">
             <?php
             while ($d_praktik = $q_praktik->fetch(PDO::FETCH_ASSOC)) {
             ?>
-              <div class="col-md-<?= $round_col; ?> text-center mb-2 ">
+              <div class="col-md-<?= $round_col; ?> text-center  mb-4">
                 <span class="b">
-                  <?= $d_praktik['nama_institusi'] ?>
+                  <?= $d_praktik['nama_institusi'] ?> <br>
                   <?= $d_praktik['akronim_institusi'] != NULL ? " (" . $d_praktik['akronim_institusi'] . ")" : "" ?>
                 </span><br>
                 <div class="flip-container">
                   <?php if ($d_praktik['logo_institusi'] == '') { ?>
                     <span class="badge badge-danger">Data Logo Tidak Ada</span>
                   <?php } else { ?>
-                    <img src="<?= $d_praktik['logo_institusi']; ?>" class="img-fluid rounded flip-image" alt="<?= $d_praktik['nama_institusi']; ?>" width="30px" height="30px">
+                    <img src="<?= $d_praktik['logo_institusi']; ?>" class="img-fluid rounded flip-image" alt="<?= $d_praktik['nama_institusi']; ?>" width="70px" height="70px">
                   <?php }  ?>
                 </div>
                 <?= $d_praktik['nama_jurusan_pdd']; ?> <br>
