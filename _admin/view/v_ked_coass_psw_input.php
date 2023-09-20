@@ -116,7 +116,7 @@
                     $(document).ready(function() {
                         $('#data_psw')
                             .load(
-                                "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['data'] ?>");
+                                "_admin/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['data'] ?>");
                         $('#loader').remove();
 
                     });
@@ -154,7 +154,7 @@
                         } else {
                             $.ajax({
                                 type: 'POST',
-                                url: "_pembimbing/exc/x_v_ked_coass_psw_input_t.php",
+                                url: "_admin/exc/x_v_ked_coass_psw_input_t.php",
                                 data: data_form,
                                 dataType: "JSON",
                                 success: function(response) {
@@ -164,7 +164,7 @@
                                         loading_sw2();
                                         $('#data_psw')
                                             .load(
-                                                "_pembimbing/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['data'] ?>");
+                                                "_admin/view/v_ked_coass_psw_data.php?idpr=<?= $_GET['data'] ?>");
                                     } else simpan_gagal_database();
                                 },
                                 error: function(response) {

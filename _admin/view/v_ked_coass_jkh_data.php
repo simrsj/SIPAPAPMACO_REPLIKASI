@@ -128,7 +128,7 @@
                 } else {
                     $.ajax({
                         type: 'POST',
-                        url: "_pembimbing/exc/x_v_ked_coass_jkh_data_u.php",
+                        url: "_admin/exc/x_v_ked_coass_jkh_data_u.php",
                         data: data_form,
                         dataType: "json",
                         success: function(response) {
@@ -140,7 +140,7 @@
                                 loading_sw2();
                                 $('#data_jkh')
                                     .load(
-                                        "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                        "_admin/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
                             } else simpan_gagal_database();
                             console.log(response);
                         },
@@ -167,7 +167,7 @@
                     if (result.value) {
                         $.ajax({
                             type: 'POST',
-                            url: "_pembimbing/exc/x_v_ked_coass_jkh_data_h.php",
+                            url: "_admin/exc/x_v_ked_coass_jkh_data_h.php",
                             data: {
                                 id: $(this).attr('id')
                             },
@@ -178,7 +178,7 @@
                                     loading_sw2();
                                     $('#data_jkh')
                                         .load(
-                                            "_pembimbing/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                            "_admin/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
                                 } else simpan_gagal_database();
                             },
                             error: function() {

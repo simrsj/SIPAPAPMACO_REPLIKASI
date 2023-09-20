@@ -114,7 +114,7 @@
                 loading_sw2();
                 $.ajax({
                     type: 'POST',
-                    url: "_pembimbing/view/v_ked_coass_materi_dataGetData.php",
+                    url: "_admin/view/v_ked_coass_materi_dataGetData.php",
                     data: {
                         id: y
                     },
@@ -163,7 +163,7 @@
                     loading_sw2();
                     $.ajax({
                         type: 'POST',
-                        url: "_pembimbing/exc/x_v_ked_coass_materi_data_u.php",
+                        url: "_admin/exc/x_v_ked_coass_materi_data_u.php",
                         data: data_form,
                         dataType: "JSON",
                         success: function(response) {
@@ -171,7 +171,7 @@
                                 $('#modal_ubah' + x).modal('hide')
                                 $('#data_materi')
                                     .load(
-                                        "_pembimbing/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                        "_admin/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");
                             } else simpan_gagal_database();
                         },
                         error: function(response) {
@@ -196,7 +196,7 @@
                     if (result.value) {
                         $.ajax({
                             type: 'POST',
-                            url: "_pembimbing/exc/x_v_ked_coass_materi_data_h.php",
+                            url: "_admin/exc/x_v_ked_coass_materi_data_h.php",
                             data: {
                                 id: $(this).attr('id')
                             },
@@ -206,7 +206,7 @@
                                     hapus_berhasil("");
                                     $('#data_materi')
                                         .load(
-                                            "_pembimbing/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                            "_admin/view/v_ked_coass_materi_data.php?idpr=<?= $_GET['idpr'] ?>");
                                 } else simpan_gagal_database();
                                 swal.close();
                             },

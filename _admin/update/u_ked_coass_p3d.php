@@ -207,7 +207,7 @@
                                 });
                                 $.ajax({
                                     type: 'POST',
-                                    url: "_pembimbing/exc/x_u_ked_coass_p3d.php",
+                                    url: "_admin/exc/x_u_ked_coass_p3d.php",
                                     data: data_form,
                                     dataType: "JSON",
                                     success: function(response) {
