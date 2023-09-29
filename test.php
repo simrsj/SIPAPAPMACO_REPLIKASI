@@ -1,4 +1,5 @@
 <div class="card bg-light text-black shadow m-2">
+    <?= md5("admin123"); ?>
 </div>
 <style>
     .navbar {

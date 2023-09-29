@@ -58,8 +58,11 @@
         ?>
         <?php if ($r_praktikan > 0) { ?>
             <?php
+            echo $d['id_profesi_pdd'];
+            //Kedokteran Residen
+            if ($d['id_profesi_pdd'] == 1) include "_admin/view/v_logbook_detail_ked_residen.php";
             //Kedokteran Co-Ass
-            if ($d['id_profesi_pdd'] == 2) include "_admin/view/v_logbook_detail_ked_coass.php";
+            else if ($d['id_profesi_pdd'] == 2) include "_admin/view/v_logbook_detail_ked_coass.php";
             ?>
         <?php } else { ?>
             <div class="jumbotron">
