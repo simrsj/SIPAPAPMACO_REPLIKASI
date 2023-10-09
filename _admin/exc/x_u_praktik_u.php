@@ -3,16 +3,18 @@ error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
 
-$exp_arr_idu = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idu']))));
-$idu = $exp_arr_idu[1];
-$exp_arr_idp = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idp']))));
-$idp = $exp_arr_idp[1];
+// $exp_arr_idu = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idu']))));
+// $idu = $exp_arr_idu[1];
+// $exp_arr_idp = explode("*sm*", base64_decode(urldecode(hex2bin($_POST['idp']))));
+// $idu = $exp_arr_idu[1];
+$idu = decryptString($_POST['idu'], $customkey);
+$idp = decryptString($_POST['idp'], $customkey);
 //data privileges 
-$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($_POST['user']));
+$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . decryptString($_POST['user'], $customkey);
 try {
     $q_prvl = $conn->query($sql_prvl);
 } catch (Exception $ex) {
@@ -42,7 +44,7 @@ if ($d_prvl['c_praktik'] == "Y") {
 
     $sql = "UPDATE tb_praktik SET  ";
     $sql .= " id_user= '" . $idu . "'";
-    $sql .= " id_praktik= '" . $ipd . "'";
+    $sql .= " id_praktik= '" . $idp . "'";
     $sql .= " id_institusi = '" . $_POST['institusi'] . "',";
     $sql .= " tgl_ubah_praktik = '" . date('Y-m-d', time()) . "',";
     $sql .= " tgl_mulai_praktik = '" . $_POST['tgl_mulai_praktik'] . "',";
@@ -59,12 +61,14 @@ if ($d_prvl['c_praktik'] == "Y") {
     $sql .= " telp_koordinator_praktik = '" . $_POST['kelompok'] . "',";
     $sql .= " kode_bayar_praktik = '" . $_POST['telp_koordinator'] . "',";
     $sql .= " status_mess_praktik = '" . $_POST['pilih_mess'] . "'";
-    $sql .= " WHERE id_praktik=" . $_POST['idp'];
-    echo $sql . "<br>";
+    $sql .= " WHERE id_praktik=" . $idp;
+    // echo $sql . "<br>";
 
     $dataJSON['sql'] = $sql;
-    $dataJSON['idp'] = urlencode(base64_encode($id_pkd));
-    $dataJSON['q'] = urlencode(base64_encode($sql));
+    // $dataJSON['idp'] = urlencode(base64_encode($id_pkd));
+    // $dataJSON['q'] = urlencode(base64_encode($sql));
+    $dataJSON['idp'] = encryptString($id_pkd, $customkey);
+    $dataJSON['q'] = encryptString($sql, $customkey);
     echo json_encode($dataJSON);
 } else {
     echo "<script>alert('unauthorized');document.location.href='?error401';</script>";
