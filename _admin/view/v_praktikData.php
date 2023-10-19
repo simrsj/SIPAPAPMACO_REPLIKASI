@@ -1,12 +1,13 @@
 <?php
 error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
+
 // echo "<pre>" . print_r($_POST) . "</pre>";
+
 //data privileges 
-$exp_ar = explode('*sm*', base64_decode(urldecode(hex2bin($_GET['idu']))));
-// echo "<pre>" . print_r($exp_ar) . "</pre>";
-$id = $exp_ar[0];
+$id = decryptString($_GET['idu'], $customkey);
 
 $sql_prvl = "SELECT * FROM tb_user_privileges ";
 $sql_prvl .= " JOIN tb_user ON tb_user_privileges.id_user = tb_user.id_user";
@@ -596,7 +597,7 @@ if ($d_prvl['r_praktik'] == "Y") {
 
                                     <?php if ($d_prvl['u_praktik'] == "Y") { ?>
                                         <!-- tombol ubah praktik  -->
-                                        <a title="Ubah" class='btn btn-primary btn-xs' href='?ptk&u&idp=<?= bin2hex(urlencode(base64_encode(date('Ymd') . "*sm*" . $d_praktik['id_praktik']))); ?>'>
+                                        <a title="Ubah" class='btn btn-primary btn-xs' href='?ptk&u&idp=<?= encryptString($d_praktik['id_praktik'], $customkey) . "&idu=" . encryptString($_SESSION['id_user'], $customkey); ?>'>
                                             <i class="fa-regular fa-pen-to-square"></i>
                                         </a>
                                     <?php } ?>

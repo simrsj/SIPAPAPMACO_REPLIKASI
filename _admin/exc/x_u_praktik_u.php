@@ -1,7 +1,9 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
+// require_once __DIR__.
 
 echo "<pre>";
 print_r($_POST);
@@ -14,7 +16,8 @@ echo "</pre>";
 $idu = decryptString($_POST['idu'], $customkey);
 $idp = decryptString($_POST['idp'], $customkey);
 //data privileges 
-$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . decryptString($_POST['user'], $customkey);
+$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . $idu;
+echo $sql_prvl . "<br>";
 try {
     $q_prvl = $conn->query($sql_prvl);
 } catch (Exception $ex) {

@@ -1,5 +1,6 @@
 <div class="card bg-light text-black shadow m-2">
-    <?= md5("admin123"); ?>
+    <?= decryptString("4d6a41794d7a45774d546b784e6a6b334e6a67774d6a63304b6e4e744b6a45253344", $customkey) ?>
+    <?= "test" ?>
 </div>
 <style>
     .navbar {

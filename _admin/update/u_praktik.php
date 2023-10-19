@@ -1,10 +1,15 @@
 <?php
 if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
-    // echo "<pre>";
-    // echo print_r($_SESSION);
-    // echo "</pre>";
-    $exp_arr_idp = explode("*sm*", base64_decode(urldecode(hex2bin($_GET['idp']))));
-    $idp = $exp_arr_idp[1];
+    echo "<pre>";
+    echo print_r($_SESSION);
+    echo "</pre>";
+    echo "<pre>";
+    echo print_r($_GET);
+    echo "</pre>";
+    echo "<pre>";
+    echo print_r($_POST);
+    echo "</pre>";
+    $idp = decryptString($_GET['idp'], $customkey);
     $sql_praktik = "SELECT * FROM tb_praktik ";
     $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
     $sql_praktik .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd ";
@@ -29,39 +34,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                 <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Ubah Pengajuan Praktik</h1>
             </div>
         </div>
-        <style>
-            .loader {
-                border: 8px solid #f3f3f3;
-                border-radius: 50%;
-                border-top: 8px solid #3498db;
-                width: 15px;
-                height: 15px;
-                -webkit-animation: spin 2s linear infinite;
-                /* Safari */
-                animation: spin 2s linear infinite;
-            }
-
-            /* Safari */
-            @-webkit-keyframes spin {
-                0% {
-                    -webkit-transform: rotate(0deg);
-                }
-
-                100% {
-                    -webkit-transform: rotate(360deg);
-                }
-            }
-
-            @keyframes spin {
-                0% {
-                    transform: rotate(0deg);
-                }
-
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-        </style>
         <form class="form-data text-gray-900" method="post" enctype="multipart/form-data" id="form_praktik">
             <!-- Data Pengajuan Praktik  -->
             <div id="data_praktik_input">
@@ -73,8 +45,8 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                         </div>
                         <!-- Nama Institusi, Nama Kelompok, dan Jumlah Praktik -->
                         <div class="row">
-                            <input name="idp" id="idp" value="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $idp))); ?>" hidden>
-                            <input name="user" id="user" value="<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))); ?>" hidden>
+                            <input name="idp" value="<?= $_GET['idp']; ?>" hidden>
+                            <input name="idu" value="<?= $_GET['idu']; ?>" hidden>
                             <div class="col-md">
                                 <?php if ($_SESSION['level_user'] == 2) {
                                     $sql_institusi = "SELECT * FROM tb_user";
@@ -302,6 +274,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                     <div class="boxed-check-label">Tidak</div>
                                 </label>
                             </div>
+                            <div class="text-danger b i text-xs blink" id="err_pilih_mess"></div>
                             <div class=" col-6 mx-auto animated--grow-in alasan" style="display: none;">
                                 <div class="text-center">
                                     Alasan<span class="text-danger">*</span><br>
@@ -349,7 +322,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                             <div class="i text-left mb-3">
                                 <span class="text-danger">*</span>: Wajib Diisi/Dipilih
                             </div>
-                            <div class="text-danger b i text-xs blink" id="err_pilih_mess"></div>
                             <hr>
                         </div>
 
@@ -382,9 +354,10 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 
             Swal.fire({
                 title: 'Mohon Ditunggu',
-                html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-4 mt-4" width="100" height="100" />',
+                html: '<div class="loader mb-5 mt-5 text-center"></div>',
                 allowOutsideClick: false,
                 showConfirmButton: false,
+                backdrop: true
             });
             var data_praktik = $('#form_praktik').serializeArray();
             var id = $("#id").val();
@@ -406,7 +379,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
             var email_koordinator = $("#email_koordinator").val();
             var telp_koordinator = $("#telp_koordinator").val();
             var pilih_mess = $('input[name="pilih_mess"]:checked').val();
-
+            // console.log(pilih_mess);
             //eksekusi bila file surat terisi
             if (file_surat != "" && file_surat != undefined) {
 
@@ -625,6 +598,12 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                 }
             }
 
+            //notif alasan mess 
+            if (pilih_mess == "T") {
+                if (alasan_mess == "") $("#err_uraian_alasan").html("Alasan Tidak Memilih Mess Harus Diisi");
+                else $("#err_uraian_alasan").html("");
+            }
+
             //Alert jika Tanggal Selesai kurang dari tanggal mulai
             if (
                 (tgl_selesai <= tgl_mulai) &&
@@ -711,11 +690,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                     name: 'pilih_mess',
                                     value: pilih_mess
                                 });
-                                //push data pilih_mess
-                                data_praktik.push({
-                                    name: 'idu',
-                                    value: '<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))); ?>'
-                                });
 
                                 //Simpan Data Praktik dan Tarif
                                 $.ajax({
@@ -748,7 +722,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                             data_file.append("q", response.q);
                                             data_file.append("idpp", response.idpp);
                                             data_file.append("profesi", "<?= bin2hex(urlencode(base64_encode(date("Ymd") . "*sm*" . $d_praktik['id_profesi_pdd']))) ?>");
-                                            data_file.append("idp", idp);
 
                                             xhttp.open("POST", "_admin/exc/x_u_praktik_sFile.php", true);
 

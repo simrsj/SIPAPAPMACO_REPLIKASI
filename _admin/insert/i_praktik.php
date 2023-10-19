@@ -506,8 +506,8 @@ if (isset($_GET['ptk']) && isset($_GET['i']) && $d_prvl['c_praktik'] == "Y") {
 
             //notif alasan mess 
             if (pilih_mess == "T") {
-                if (alasan_mess == "") $("#err_pilih_mess").html("Alasan Tidak Memilih Mess Harus Diisi");
-                else $("#err_pilih_mess").html("");
+                if (alasan_mess == "") $("#err_uraian_alasan").html("Alasan Tidak Memilih Mess Harus Diisi");
+                else $("#err_uraian_alasan").html("");
             }
 
             //Alert jika Tanggal Selesai kurang dari tanggal mulai
