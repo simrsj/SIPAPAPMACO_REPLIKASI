@@ -353,7 +353,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
         $("#ubah_praktik").click(function() {
 
             Swal.fire({
-                title: 'Mohon Ditunggu',
+                title: 'Mohon Ditunggu . . .',
                 html: '<div class="loader mb-5 mt-5 text-center"></div>',
                 allowOutsideClick: false,
                 showConfirmButton: false,
@@ -379,6 +379,8 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
             var email_koordinator = $("#email_koordinator").val();
             var telp_koordinator = $("#telp_koordinator").val();
             var pilih_mess = $('input[name="pilih_mess"]:checked').val();
+            var uraian_alasan = $("#uraian_alasan").val();
+
             // console.log(pilih_mess);
             //eksekusi bila file surat terisi
             if (file_surat != "" && file_surat != undefined) {
@@ -600,7 +602,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 
             //notif alasan mess 
             if (pilih_mess == "T") {
-                if (alasan_mess == "") $("#err_uraian_alasan").html("Alasan Tidak Memilih Mess Harus Diisi");
+                if (uraian_alasan == "") $("#err_uraian_alasan").html("Alasan Tidak Memilih Mess Harus Diisi");
                 else $("#err_uraian_alasan").html("");
             }
 
@@ -623,6 +625,22 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                     }
                 });
                 $("#err_tgl_selesai").html("<b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b>");
+            }
+            //bila pilih mess dan uraian tidak sesaui
+            else if (pilih_mess == 'T' && (uraian_alasan == '' || uraian_alasan.length >= 100)) {
+                Swal.fire({
+                    allowOutsideClick: true,
+                    showConfirmButton: false,
+                    icon: 'warning',
+                    title: '<center>Alasan Mess Harus Diisi dan Harus Lebih dari 100 Karakter</center>',
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+                $("#err_uraian_alasan").html("Alasan Mess Harus Diisi dan Harus Lebih dari 100 Karakter");
             }
             //bila tanggal mulai dan selesai sesuai
             else { //Cek Data Ketersediaan Jadwal Praktik

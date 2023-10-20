@@ -269,7 +269,7 @@ if ($d_prvl['r_pkd'] == "Y") {
                                                             }).then(
                                                                 function() {
                                                                     Swal.fire({
-                                                                        title: 'Mohon Ditunggu',
+                                                                        title: 'Mohon Ditunggu . . .',
                                                                         html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
                                                                         // add html attribute if you want or remove
                                                                         allowOutsideClick: false,
@@ -318,7 +318,7 @@ if ($d_prvl['r_pkd'] == "Y") {
                                                             function() {
 
                                                                 Swal.fire({
-                                                                    title: 'Mohon Ditunggu',
+                                                                    title: 'Mohon Ditunggu . . .',
                                                                     html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
                                                                     // add html attribute if you want or remove
                                                                     allowOutsideClick: false,

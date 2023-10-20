@@ -90,7 +90,7 @@ if (isset($_GET['pkd']) && isset($_GET['i']) && $d_prvl['c_pkd'] == "Y") {
         $("#simpan").click(function() {
 
             Swal.fire({
-                title: 'Mohon Ditunggu',
+                title: 'Mohon Ditunggu . . .',
                 html: ' <img src="./_img/d3f472b06590a25cb4372ff289d81711.gif" class="rotate mb-3" width="100" height="100" />',
                 allowOutsideClick: false,
                 showConfirmButton: false,
