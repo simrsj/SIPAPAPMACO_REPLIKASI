@@ -8,6 +8,39 @@ function loading_sw2() {
   });
 }
 
+function custom_alert(klickoutside, icon, title, timer) {
+  Swal.fire({
+    allowOutsideClick: klickoutside,
+    backdrop: true,
+    icon: icon,
+    title: title,
+    showConfirmButton: false,
+    timer: timer,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+}
+function custom_alert_link(klickoutside, icon, title, timer, link) {
+  Swal.fire({
+    allowOutsideClick: klickoutside,
+    backdrop: true,
+    icon: icon,
+    title: title,
+    showConfirmButton: false,
+    timer: timer,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  }).then(function () {
+    document.location.href = link;
+  });
+}
+
 function simpan_tidaksesuai() {
   Swal.fire({
     allowOutsideClick: true,

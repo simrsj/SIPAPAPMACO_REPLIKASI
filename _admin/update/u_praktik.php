@@ -1,14 +1,14 @@
 <?php
 if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
-    echo "<pre>";
-    echo print_r($_SESSION);
-    echo "</pre>";
-    echo "<pre>";
-    echo print_r($_GET);
-    echo "</pre>";
-    echo "<pre>";
-    echo print_r($_POST);
-    echo "</pre>";
+    // echo "<pre>";
+    // echo print_r($_SESSION);
+    // echo "</pre>";
+    // echo "<pre>";
+    // echo print_r($_GET);
+    // echo "</pre>";
+    // echo "<pre>";
+    // echo print_r($_POST);
+    // echo "</pre>";
     $idp = decryptString($_GET['idp'], $customkey);
     $sql_praktik = "SELECT * FROM tb_praktik ";
     $sql_praktik .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi ";
@@ -30,7 +30,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-xl-8">
                 <h1 class="h3 mb-2 text-gray-800" id="title_praktik">Ubah Pengajuan Praktik</h1>
             </div>
         </div>
@@ -41,13 +41,13 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                     <div class="card-body text-center">
                         <!-- Data Praktikan -->
                         <div class="row">
-                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary mb-3">DATA PRAKTIK</div>
+                            <div class="col-xl-12 text-lg b text-center text-gray-100 badge bg-primary mb-3">DATA PRAKTIK</div>
                         </div>
                         <!-- Nama Institusi, Nama Kelompok, dan Jumlah Praktik -->
                         <div class="row">
                             <input name="idp" value="<?= $_GET['idp']; ?>" hidden>
-                            <input name="idu" value="<?= $_GET['idu']; ?>" hidden>
-                            <div class="col-md">
+                            <input name="idu" value="<?= encryptString($_SESSION['id_user'], $customkey); ?>" hidden>
+                            <div class="col-xl">
                                 <?php if ($_SESSION['level_user'] == 2) {
                                     $sql_institusi = "SELECT * FROM tb_user";
                                     $sql_institusi .= " JOIN tb_institusi ON tb_user.id_institusi = tb_institusi.id_institusi";
@@ -102,12 +102,12 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                     }
                                 } ?>
                             </div>
-                            <div class="col-md">
+                            <div class="col-xl">
                                 Nama Gelombang/Kelompok : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="kelompok" id="kelompok" value="<?= $d_praktik['nama_praktik'] ?>" placeholder="Isi Gelombang/Kelompok" required>
                                 <div class="text-danger b  i text-xs blink" id="err_kelompok"></div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-xl-2">
                                 Jumlah Praktik: <span style="color:red">*</span><br>
                                 <input type="number" min="1" class="form-control form-control-xs" name="jumlah" id="jumlah" value="<?= $d_praktik['jumlah_praktik'] ?>" placeholder="Isi Jumlah Praktik" required>
                                 <div class="text-danger b  i text-xs blink" id="err_jumlah"></div>
@@ -117,7 +117,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 
                         <!-- Jurusan, Jenjang, profesi dan Akreditasi -->
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-xl-4">
                                 Jurusan : <span style="color:red">*</span><br>
                                 <?php
                                 $sql_jurusan_pdd = "SELECT * FROM  tb_jurusan_pdd ORDER BY nama_jurusan_pdd ASC";
@@ -132,14 +132,14 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                 </select>
                                 <div class="text-danger b i text-xs blink" id="err_jurusan"></div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xl-4">
                                 Jenjang : <span style="color:red">*</span><br>
                                 <div class="loader-small" id="jenjangLoader" style="display: none;"></div>
                                 <div id="jenjangData" style="display: none;"></div>
                                 <span id="jenjangKet" class="b i">Pilih Jurusan Terlebih Dahulu</span>
                                 <div class="text-danger b i text-xs blink" id="err_jenjang"></div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xl-4">
                                 Profesi : <span style="color:red">*</span><br>
                                 <span id="profesiData" style="display: none;">
                                     <input type="hidden" id="profesi" name="profesi" value="0">
@@ -154,22 +154,22 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 
                         <!-- Tanggal Mulai, Tanggal Selesai, No Surat Institusi Surat dan Tanggal Surat Institusi -->
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-xl-2">
                                 Tanggal Mulai Praktik : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control form-control-xs" name="tgl_mulai_praktik" id="tgl_mulai" value="<?= $d_praktik['tgl_mulai_praktik'] ?>" required>
                                 <span class="text-danger b  i text-xs blink" id="err_tgl_mulai"></span>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-xl-2">
                                 Tanggal Selesai Praktik: <span style="color:red">*</span><br>
                                 <input type="date" class="form-control form-control-xs" name="tgl_selesai_praktik" id="tgl_selesai" value="<?= $d_praktik['tgl_selesai_praktik'] ?>" required>
                                 <span class="text-danger b  i text-xs blink" id="err_tgl_selesai"></span>
                             </div>
-                            <div class="col-md">
+                            <div class="col-xl">
                                 No. Surat Institusi : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="no_surat" placeholder="Isi No Surat Institusi" id="no_surat" value="<?= $d_praktik['no_surat_praktik'] ?>" required>
                                 <span class="text-danger b  i text-xs blink" id="err_no_surat"></span>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-xl-2">
                                 Tanggal Surat Institusi : <span style="color:red">*</span><br>
                                 <input type="date" class="form-control form-control-xs" name="tgl_surat" id="tgl_surat" value="<?= $d_praktik['tgl_surat_praktik'] ?>" required>
                                 <span class="text-danger b  i text-xs blink" id="err_tgl_surat"></span>
@@ -178,7 +178,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                         <br>
                         <!-- File Surat Institusi, File Akreditasi Insitutsi, File Akreditasi Jurusan -->
                         <div class="row">
-                            <div class="col-md">
+                            <div class="col-xl">
                                 File Surat Institusi :<span style="color:red">*</span><a href="<?= $d_praktik['surat_praktik'] ?>" class="text-xs i" download>File Sebelumnya</a><br>
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfilesuratinstitusi">Pilih File</label>
@@ -195,7 +195,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                     </script>
                                 </div>
                             </div>
-                            <div class="col-md">
+                            <div class="col-xl">
                                 File Akreditasi Institusi :<span style="color:red">*</span><a href="<?= $d_praktik['akred_institusi_praktik'] ?>" class="text-xs i" download>File Sebelumnya</a><br>
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfileakredinstitusi">Pilih File</label>
@@ -212,7 +212,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                     </script>
                                 </div>
                             </div>
-                            <div class="col-md">
+                            <div class="col-xl">
                                 File Akreditasi Jurusan :<span style="color:red">*</span><a href="<?= $d_praktik['akred_jurusan_praktik'] ?>" class="text-xs i" download>File Sebelumnya</a><br>
                                 <div class="custom-file">
                                     <label class="custom-file-label text-xs" for="customFile" id="labelfileakredjururusan">Pilih File</label>
@@ -233,20 +233,20 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 
                         <!-- Koordinator -->
                         <div class=" row">
-                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary">KORDINATOR</div>
+                            <div class="col-xl-12 text-lg b text-center text-gray-100 badge bg-primary">KORDINATOR</div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-xl-4">
                                 Nama : <span style="color:red">*</span><br>
                                 <input type="text" class="form-control form-control-xs" name="nama_koordinator" id="nama_koordinator" value="<?= $d_praktik['nama_koordinator_praktik'] ?>" placeholder="Isi Nama Koordinator" value="<?= $d_user['nama_user']; ?>" required>
                                 <span class="text-danger b  i text-xs blink" id="err_nama_koordinator"></span>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xl-4">
                                 Email :<br>
                                 <input type="text" class="form-control form-control-xs" name="email_koordinator" id="email_koordinator" value="<?= $d_praktik['email_koordinator_praktik'] ?>" placeholder="Isi Email Koordinator" value="<?= $d_user['email_user']; ?>">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xl-4">
                                 Telpon : <span style="color:red">*</span><br>
                                 <input type="number" class="form-control form-control-xs" name="telp_koordinator" id="telp_koordinator" value="<?= $d_praktik['telp_koordinator_praktik'] ?>" placeholder="Isi Telpon Koordinator" min="1" value="<?= $d_user['no_telp_user']; ?>" required>
                                 <i style='font-size:12px;'>Isian hanya berupa angka</i>
@@ -256,7 +256,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 
                         <!-- Pakai Mess -->
                         <div class=" row">
-                            <div class="col-md-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
+                            <div class="col-xl-12 text-lg b text-center text-gray-100 badge bg-primary">MESS</div>
                         </div>
                         <div id="data_pilih_mess">
                             <div class="text-center mb-3">
@@ -352,13 +352,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 
         $("#ubah_praktik").click(function() {
 
-            Swal.fire({
-                title: 'Mohon Ditunggu . . .',
-                html: '<div class="loader mb-5 mt-5 text-center"></div>',
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                backdrop: true
-            });
+            loading_sw2();
             var data_praktik = $('#form_praktik').serializeArray();
             var id = $("#id").val();
             var user = $("#user").val();
@@ -447,164 +441,75 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                 getSizeAkredJurusan > 3072
             ) {
                 //warning Toast bila ada data wajib yg berlum terisi
-                Swal.fire({
-                    allowOutsideClick: true,
-                    showConfirmButton: false,
-                    icon: 'warning',
-                    title: '<center>DATA WAJIB ADA YANG BELUM TERISI</center>',
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
+                custom_alert(true, 'warning', '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>', 10000);
 
                 //notif File Surat Institusi 
-                if (getTypeSurat == "") {
-                    $("#err_file_surat").html("File Surat Institusi Harus pdf");
-                } else if (getSizeSurat == "") {
-                    $("#err_file_surat").html("File Surat Institusi Harus Kurang dari 3 Mb");
-                } else {
-                    $("#err_file_surat").html("");
-                }
+                if (getTypeSurat == "") $("#err_file_surat").html("File Surat Institusi Harus pdf");
+                else if (getSizeSurat > 3072) $("#err_file_surat").html("File Surat Institusi Harus Kurang dari 3 Mb");
+                else $("#err_file_surat").html("");
 
                 //notif File Akreditasi Institusi 
-                if (getTypeAkredInstitusi == "") {
-                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus pdf");
-                } else if (getSizeAkredInstitusi == "") {
-                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Kurang dari 3 Mb");
-                } else {
-                    $("#err_file_akred_institusi").html("");
-                }
+                if (getTypeAkredInstitusi == "") $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus pdf");
+                else if (getSizeAkredInstitusi > 3072) $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Kurang dari 3 Mb");
+                else $("#err_file_akred_institusi").html("");
 
                 //notif File Akreditasi Jurusan 
-                if (getTypeAkredJurusan == "") {
-                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus pdf");
-                } else if (getSizeAkredJurusan == "") {
-                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Kurang dari 3 Mb");
-                } else {
-                    $("#err_file_akred_jurusan").html("");
-                }
+                if (getTypeAkredJurusan == "") $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus pdf");
+                else if (getSizeAkredJurusan > 3072) $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Kurang dari 3 Mb");
+                else $("#err_file_akred_jurusan").html("");
 
                 //notif institusi 
-                if (institusi == "") {
-                    $("#err_institusi").html("Institusi Harus Dipilih");
-                } else {
-                    $("#err_institusi").html("");
-                }
+                (institusi == "") ? $("#err_institusi").html("Institusi Harus Dipilih"): $("#err_institusi").html("");
 
                 //notif kelompok 
-                if (kelompok == "") {
-                    $("#err_kelompok").html("Nama Kelompok Harus Diisi");
-                } else {
-                    $("#err_kelompok").html("");
-                }
+                (kelompok == "") ? $("#err_kelompok").html("Nama Kelompok Harus Diisi"): $("#err_kelompok").html("");
 
                 //notif jumlah 
-                if (jumlah == "") {
-                    $("#err_jumlah").html("Jumlah Praktik Harus Diisi");
-                } else {
-                    $("#err_jumlah").html("");
-                }
+                (jumlah == "") ? $("#err_jumlah").html("Jumlah Praktik Harus Diisi"): $("#err_jumlah").html("");
 
                 //notif jurusan 
-                if (jurusan == "") {
-                    $("#err_jurusan").html("Jurusan Harus Diisi");
-                } else {
-                    $("#err_jurusan").html("");
-                }
+                (jurusan == "") ? $("#err_jurusan").html("Jurusan Harus Diisi"): $("#err_jurusan").html("");
 
                 //notif jenjang 
-                if (jenjang == "") {
-                    $("#err_jenjang").html("Jenjang Harus Diisi");
-                } else {
-                    $("#err_jenjang").html("");
-                }
+                (jenjang == "") ? $("#err_jenjang").html("Jenjang Harus Diisi"): $("#err_jenjang").html("");
 
                 //notif profesi 
-                if (profesi == "") {
-                    $("#err_profesi").html("Profesi Harus Diisi");
-                } else {
-                    $("#err_profesi").html("");
-                }
+                (profesi == "") ? $("#err_profesi").html("Profesi Harus Diisi"): $("#err_profesi").html("");
 
                 //notif tgl_mulai 
-                if (tgl_mulai == "") {
-                    $("#err_tgl_mulai").html("Tanggal Mulai Praktik Harus Diisi");
-                } else {
-                    $("#err_tgl_mulai").html("");
-                }
+                (tgl_mulai == "") ? $("#err_tgl_mulai").html("Tanggal Mulai Praktik Harus Diisi"): $("#err_tgl_mulai").html("");
 
                 //notif tgl_selesai 
-                if (tgl_selesai == "") {
-                    $("#err_tgl_selesai").html("Tanggal Selesai Praktik Harus Diisi");
-                } else {
-                    $("#err_tgl_selesai").html("");
-                }
+                (tgl_selesai == "") ? $("#err_tgl_selesai").html("Tanggal Selesai Praktik Harus Diisi"): $("#err_tgl_selesai").html("");
 
                 //notif no_surat 
-                if (no_surat == "") {
-                    $("#err_no_surat").html("No. Surat Institusi Harus Diisi");
-                } else {
-                    $("#err_no_surat").html("");
-                }
+                (no_surat == "") ? $("#err_no_surat").html("No. Surat Institusi Harus Diisi"): $("#err_no_surat").html("");
 
                 //notif tgl_surat 
-                if (tgl_surat == "") {
-                    $("#err_no_surat").html("No. Surat Institusi Harus Diisi");
-                } else {
-                    $("#err_no_surat").html("");
-                }
+                (tgl_surat == "") ? $("#err_no_surat").html("No. Surat Institusi Harus Diisi"): $("#err_no_surat").html("");
 
                 // notif file_surat
-                if (file_surat == "" || file_surat == undefined) {
-                    $("#err_file_surat").html("File Surat Harus Unggah");
-                } else {
-                    $("#err_file_surat").html("");
-                }
+                (file_surat == "" || file_surat == undefined) ? $("#err_file_surat").html("File Surat Harus Unggah"): $("#err_file_surat").html("");
 
                 // notif file_akred_institusi
-                if (file_akred_institusi == "" || file_akred_institusi == undefined) {
-                    $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Unggah");
-                } else {
-                    $("#err_file_akred_institusi").html("");
-                }
+                (file_akred_institusi == "" || file_akred_institusi == undefined) ? $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Unggah"): $("#err_file_akred_institusi").html("");
 
                 // notif file_akred_jurusan
-                if (file_akred_jurusan == "" || file_akred_jurusan == undefined) {
-                    $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Unggah");
-                } else {
-                    $("#err_file_akred_jurusan").html("");
-                }
+                (file_akred_jurusan == "" || file_akred_jurusan == undefined) ? $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Unggah"): $("#err_file_akred_jurusan").html("");
 
                 //notif nama_koordinator
-                if (nama_koordinator == "") {
-                    $("#err_nama_koordinator").html("Nama Koordinator Harus Diisi");
-                } else {
-                    $("#err_nama_koordinator").html("");
-                }
+                (nama_koordinator == "") ? $("#err_nama_koordinator").html("Nama Koordinator Harus Diisi"): $("#err_nama_koordinator").html("");
 
                 //notif telp_koordinator
-                if (telp_koordinator == "") {
-                    $("#err_telp_koordinator").html("Telpon Koordinator Harus Diisi");
-                } else {
-                    $("#err_telp_koordinator").html("");
-                }
+                (telp_koordinator == "") ? $("#err_telp_koordinator").html("Telpon Koordinator Harus Diisi"): $("#err_telp_koordinator").html("");
 
                 //notif telp_koordinator
-                if (pilih_mess == undefined) {
-                    $("#err_pilih_mess").html("Pemakaian Mess Harus Dipilih");
-                } else {
-                    $("#err_pilih_mess").html("");
-                }
+                (pilih_mess == undefined) ? $("#err_pilih_mess").html("Pemakaian Mess Harus Dipilih"): $("#err_pilih_mess").html("");
             }
 
             //notif alasan mess 
-            if (pilih_mess == "T") {
-                if (uraian_alasan == "") $("#err_uraian_alasan").html("Alasan Tidak Memilih Mess Harus Diisi");
-                else $("#err_uraian_alasan").html("");
-            }
+            if (pilih_mess == "T")(uraian_alasan == "") ? $("#err_uraian_alasan").html("Alasan Tidak Memilih Mess Harus Diisi") : $("#err_uraian_alasan").html("");
+
 
             //Alert jika Tanggal Selesai kurang dari tanggal mulai
             if (
@@ -612,67 +517,31 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                 (tgl_mulai != "" && tgl_selesai != "") ||
                 (tgl_mulai == "" && tgl_selesai == "")
             ) {
-                Swal.fire({
-                    allowOutsideClick: true,
-                    showConfirmButton: false,
-                    icon: 'warning',
-                    title: '<center><b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b></center>',
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-                $("#err_tgl_selesai").html("<b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b>");
+                var ket = '<center><b>Tanggal Selesai</b> Harus Lebih dari <b>Tanggal Mulai</b></center>';
+                custom_alert(true, 'warning', ket, 10000);
+                $("#err_tgl_selesai").html(ket);
             }
             //bila pilih mess dan uraian tidak sesaui
-            else if (pilih_mess == 'T' && (uraian_alasan == '' || uraian_alasan.length >= 100)) {
-                Swal.fire({
-                    allowOutsideClick: true,
-                    showConfirmButton: false,
-                    icon: 'warning',
-                    title: '<center>Alasan Mess Harus Diisi dan Harus Lebih dari 100 Karakter</center>',
-                    timer: 10000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-                $("#err_uraian_alasan").html("Alasan Mess Harus Diisi dan Harus Lebih dari 100 Karakter");
+            else if (pilih_mess == 'T' && (uraian_alasan == '' || uraian_alasan.length < 100)) {
+                var ket = '<center>Alasan Mess Harus Diisi dan Harus Lebih dari 100 Karakter</center>';
+                custom_alert(true, 'warning', ket, 10000);
+                $("#err_uraian_alasan").html(ket);
             }
             //bila tanggal mulai dan selesai sesuai
             else { //Cek Data Ketersediaan Jadwal Praktik
-                console.log("Cek Jadwal Praktik . . .");
                 $.ajax({
                     type: 'POST',
                     url: "_admin/insert/i_praktik_valTgl.php",
                     data: data_praktik,
                     dataType: 'json',
                     success: function(response) {
+                        console.log("Cek Jadwal Praktik . . .");
+                        console.log(response.ket + "CEK Jadwal Praktik");
                         //notif jika jadwal dan/ jumlah praktik melebihi kuota
-                        if (response.ket == 'T') {
-                            console.log('Jadwal Praktik Tidak Bisa');
-                            Swal.fire({
-                                allowOutsideClick: true,
-                                icon: 'error',
-                                showConfirmButton: false,
-                                html: '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b>' +
-                                    '<br>Silahkan Cek Kembali Informasi Jadwal Praktik<br><br>' +
-                                    '<a href="?info_diklat" class="btn btn-outline-primary">Cek Informasi Jadwal Praktik</a>',
-                                timer: 10000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            }).then(
-                                function() {
-                                    // document.location.href = "?ptk";
-                                }
-                            );
-                        }
+                        if (response.ket == 'T')
+                            custom_alert(true, 'warning', '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b>' +
+                                '<br>Silahkan Cek Kembali Informasi Jadwal Praktik<br><br>' +
+                                '<a href="?info_diklat" class="btn btn-outline-primary">Cek Informasi Jadwal Praktik</a>', 10000);
                         //eksekusi bila jadwal tersedia
                         else if (response.ket == 'Y') {
                             console.log('Jadwal Praktik Bisa');
@@ -712,7 +581,7 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                 //Simpan Data Praktik dan Tarif
                                 $.ajax({
                                     type: 'POST',
-                                    url: "_admin/exc/x_u_praktik_u.php?",
+                                    url: "_admin/exc/x_u_praktik_u.php",
                                     data: data_praktik,
                                     dataType: "json",
                                     success: function(response) {
@@ -720,7 +589,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                             //ambil data file yang diupload
                                             var data_file = new FormData();
                                             var xhttp = new XMLHttpRequest();
-
 
                                             var fileSurat = document.getElementById("file_surat").files;
                                             data_file.append("file_surat", fileSurat[0]);
@@ -731,86 +599,29 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                             var fileAkredJurusan = document.getElementById("file_akred_jurusan").files;
                                             data_file.append("file_akred_jurusan", fileAkredJurusan[0]);
 
-                                            var id = document.getElementById("id").value;
-                                            data_file.append("id", id);
-
-                                            xhttp.open("POST", "_admin/exc/x_i_praktik_sFile.php", true);
-                                            xhttp.send(data_file);
-
+                                            data_file.append("idp", $("#idp").val());
                                             data_file.append("q", response.q);
-                                            data_file.append("idpp", response.idpp);
-                                            data_file.append("profesi", "<?= bin2hex(urlencode(base64_encode(date("Ymd") . "*sm*" . $d_praktik['id_profesi_pdd']))) ?>");
+
+                                            xhttp.open("POST", "_admin/exc/x_u_praktik_sFile.php", true);
+                                            xhttp.send(data_file);
 
                                             xhttp.open("POST", "_admin/exc/x_u_praktik_sFile.php", true);
 
                                             xhttp.onload = function() {
-                                                if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("size"))) ?>") {
-                                                    console.log("size too big");
-                                                    Swal.fire({
-                                                        allowOutsideClick: true,
-                                                        icon: 'warning',
-                                                        html: '<span class="text-danger text-lg text-center">Ukuran File Terlalu Besar</span>',
-                                                        showConfirmButton: false,
-                                                        backdrop: true,
-                                                        timer: 5000,
-                                                        timerProgressBar: true
-                                                    });
-                                                } else if (xhttp.response == "<?= bin2hex(urlencode(base64_encode("type"))); ?>") {
-                                                    console.log("Tipe Different");
-                                                    Swal.fire({
-                                                        allowOutsideClick: true,
-                                                        icon: 'warning',
-                                                        html: '<span class="text-danger text-lg text-center">Tipe File Berbeda</span>',
-                                                        showConfirmButton: false,
-                                                        backdrop: true,
-                                                        timer: 5000,
-                                                        timerProgressBar: true
-                                                    });
-                                                } else {
-                                                    console.log("Success");
-                                                    Swal.fire({
-                                                        allowOutsideClick: true,
-                                                        // isDismissed: false,
-                                                        icon: 'success',
-                                                        html: '<a href="?ptk" class="btn btn-outline-primary">OK</a>',
-                                                        title: '<span class"text-xs"><b>DATA PRAKTIK</b><br>Berhasil Tersimpan',
-                                                        showConfirmButton: false,
-                                                        timer: 5000,
-                                                        timerProgressBar: true,
-                                                        didOpen: (toast) => {
-                                                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                        }
-                                                    }).then(
-                                                        function() {
-                                                            document.location.href = "?ptk";
-                                                        }
-                                                    );
-                                                }
+                                                if (xhttp.response == "size") custom_alert(true, 'warning', '<span class="text-danger text-lg text-center">Ukuran File Terlalu Besar</span>', 5000);
+                                                else if (xhttp.response == "type") custom_alert(true, 'warning', '<span class="text-danger text-lg text-center">Tipe File Berbeda</span>', 5000);
+                                                else custom_alert_link(true, 'success', 'DATA BERHASIL DIUBAH', 5000, "?ptk");
                                             }
                                             xhttp.send(data_file);
-                                        } else {
-                                            Swal.fire({
-                                                allowOutsideClick: true,
-                                                showConfirmButton: false,
-                                                icon: 'warning',
-                                                html: '<div class="text-lg">Mohon Maaf Data Praktikan <br><b>Sudah Penuh</b></div>',
-                                                timer: 10000,
-                                                timerProgressBar: true,
-                                                didOpen: (toast) => {
-                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                }
-                                            });
-                                        }
+                                        } else custom_alert(true, 'warning', '<div class="text-lg">Data Yang Dikirimkan ke Database Tidak Sesuai</div>', 10000);
                                     },
                                     error: function(response) {
-                                        console.log(response.responseText);
-                                        alert('eksekusi query gagal');
+                                        console.log(response.ket);
+                                        custom_alert(true, 'error', '<b>KIRIM DATABASE GAGAL</b>', 10000);
                                     }
                                 });
-                            } else console.log("Data Wajib Praktik Belum Diisi dan/ tidak sesuai");
-                        } else alert("ERROR CEK TANGGAL PRAKTIK");
+                            } else custom_alert(true, 'error', '<b>Data Wajib Praktik Belum Diisi dan/ tidak sesuai</b>', 10000);
+                        } else custom_alert(true, 'error', '<b>ERROR CEK TANGGAL PRAKTIK</b', 10000);
                     }
                 });
             }
