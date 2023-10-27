@@ -29,7 +29,7 @@ if (
 
     if ($_FILES['file_surat']['size'] > 0) {
         //ubah Nama File PDF
-        $_FILES['file_surat']['name'] = "file_surat_" . $idp . "_" . md5($_FILES['file_surat']['name']) . "_" . date('Y-m-d ') . ".pdf";
+        $_FILES['file_surat']['name'] = "file_surat_" . $idp . "_" . md5($_FILES['file_surat']['name']) . "_" . date('Y-m-d') . ".pdf";
 
         //unggah surat dan data praktik
         if (!is_null($_FILES['file_surat'])) {
@@ -47,7 +47,7 @@ if (
 
     if ($_FILES['file_akred_institusi']['size'] > 0) {
         //ubah Nama File PDF
-        $_FILES['file_akred_institusi']['name'] = "file_akred_institusi_" . $idp . "_" . md5($_FILES['file_akred_institusi']['name']) . "_" . date('Y-m-d ') . ".pdf";
+        $_FILES['file_akred_institusi']['name'] = "file_akred_institusi_" . $idp . "_" . md5($_FILES['file_akred_institusi']['name']) . "_" . date('Y-m-d') . ".pdf";
 
         //unggah surat dan data praktik
         if (!is_null($_FILES['file_akred_institusi'])) {
@@ -65,7 +65,7 @@ if (
 
     if ($_FILES['file_akred_jurusan']['size'] > 0) {
         //ubah Nama File PDF
-        $_FILES['file_akred_jurusan']['name'] = "file_akred_jurusan_" . $idp . "_" . md5($_FILES['file_akred_jurusan']['name']) . "_" . date('Y-m-d ') . ".pdf";
+        $_FILES['file_akred_jurusan']['name'] = "file_akred_jurusan_" . $idp . "_" . md5($_FILES['file_akred_jurusan']['name']) . "_" . date('Y-m-d') . ".pdf";
 
         //unggah surat dan data praktik
         if (!is_null($_FILES['file_akred_jurusan'])) {
