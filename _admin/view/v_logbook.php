@@ -34,7 +34,7 @@
                             <tr class="text-center">
                                 <th scope="col">No</th>
                                 <th scope="col">Institusi Pendidikan</th>
-                                <th scope="col">Nama Kelompok/Gelombang Tambah</th>
+                                <th scope="col">Nama Kelompok/Gelombang</th>
                                 <th scope="col">Periode Mulai <br> (YYYY-MM-DD)</th>
                                 <th scope="col">Periode Selesai <br> (YYYY-MM-DD)</th>
                                 <th scope="col">Detail</th>
