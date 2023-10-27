@@ -123,7 +123,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                 $sql_jurusan_pdd = "SELECT * FROM  tb_jurusan_pdd ORDER BY nama_jurusan_pdd ASC";
                                 $q_jurusan_pdd = $conn->query($sql_jurusan_pdd);
                                 ?>
-
                                 <select class='select2' name='jurusan' id="jurusan" required>
                                     <option value="">-- <i>Pilih</i>--</option>
                                     <?php while ($d_jurusan_pdd = $q_jurusan_pdd->fetch(PDO::FETCH_ASSOC)) { ?>
@@ -342,7 +341,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 
     <script type="text/javascript">
         $('#jurusan').on('select2:select', function() {
-            console.log("pilih jurusan");
             $('#jenjangData').load('_admin/insert/i_praktikDataJenjang.php?jur=' + $("#jurusan").val());
             $('#jenjangKet').fadeOut(0);
             $('#jenjangData').fadeIn(0);
@@ -354,7 +352,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
 
             loading_sw2();
             var data_praktik = $('#form_praktik').serializeArray();
-            var id = $("#id").val();
             var user = $("#user").val();
             var institusi = $("#institusi").val();
             var kelompok = $("#kelompok").val();
@@ -375,7 +372,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
             var pilih_mess = $('input[name="pilih_mess"]:checked').val();
             var uraian_alasan = $("#uraian_alasan").val();
 
-            // console.log(pilih_mess);
             //eksekusi bila file surat terisi
             if (file_surat != "" && file_surat != undefined) {
 
@@ -412,6 +408,9 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                 var getSizeAkredJurusan = document.getElementById("file_akred_jurusan").files[0].size / 1024;
             }
 
+            //notif alasan mess 
+            if (pilih_mess == "T")(uraian_alasan == "") ? $("#err_uraian_alasan").html("Alasan Tidak Memilih Mess Harus Diisi") : $("#err_uraian_alasan").html("");
+
             //Notif Bila tidak diisi / tidak sesuai
             if (
                 institusi == "" ||
@@ -446,16 +445,19 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                 //notif File Surat Institusi 
                 if (getTypeSurat == "") $("#err_file_surat").html("File Surat Institusi Harus pdf");
                 else if (getSizeSurat > 3072) $("#err_file_surat").html("File Surat Institusi Harus Kurang dari 3 Mb");
+                else if (file_surat == "" || file_surat == undefined) $("#err_file_surat").html("File Surat Harus Unggah");
                 else $("#err_file_surat").html("");
 
                 //notif File Akreditasi Institusi 
                 if (getTypeAkredInstitusi == "") $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus pdf");
                 else if (getSizeAkredInstitusi > 3072) $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Kurang dari 3 Mb");
+                else if (file_akred_institusi == "" || file_akred_institusi == undefined) $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Unggah");
                 else $("#err_file_akred_institusi").html("");
 
                 //notif File Akreditasi Jurusan 
                 if (getTypeAkredJurusan == "") $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus pdf");
                 else if (getSizeAkredJurusan > 3072) $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Kurang dari 3 Mb");
+                else if (file_akred_jurusan == "" || file_akred_jurusan == undefined) $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Unggah");
                 else $("#err_file_akred_jurusan").html("");
 
                 //notif institusi 
@@ -488,14 +490,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                 //notif tgl_surat 
                 (tgl_surat == "") ? $("#err_no_surat").html("No. Surat Institusi Harus Diisi"): $("#err_no_surat").html("");
 
-                // notif file_surat
-                (file_surat == "" || file_surat == undefined) ? $("#err_file_surat").html("File Surat Harus Unggah"): $("#err_file_surat").html("");
-
-                // notif file_akred_institusi
-                (file_akred_institusi == "" || file_akred_institusi == undefined) ? $("#err_file_akred_institusi").html("File Akreditasi Institusi Harus Unggah"): $("#err_file_akred_institusi").html("");
-
-                // notif file_akred_jurusan
-                (file_akred_jurusan == "" || file_akred_jurusan == undefined) ? $("#err_file_akred_jurusan").html("File Akreditasi Jurusan Harus Unggah"): $("#err_file_akred_jurusan").html("");
 
                 //notif nama_koordinator
                 (nama_koordinator == "") ? $("#err_nama_koordinator").html("Nama Koordinator Harus Diisi"): $("#err_nama_koordinator").html("");
@@ -506,13 +500,8 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                 //notif telp_koordinator
                 (pilih_mess == undefined) ? $("#err_pilih_mess").html("Pemakaian Mess Harus Dipilih"): $("#err_pilih_mess").html("");
             }
-
-            //notif alasan mess 
-            if (pilih_mess == "T")(uraian_alasan == "") ? $("#err_uraian_alasan").html("Alasan Tidak Memilih Mess Harus Diisi") : $("#err_uraian_alasan").html("");
-
-
             //Alert jika Tanggal Selesai kurang dari tanggal mulai
-            if (
+            else if (
                 (tgl_selesai <= tgl_mulai) &&
                 (tgl_mulai != "" && tgl_selesai != "") ||
                 (tgl_mulai == "" && tgl_selesai == "")
@@ -536,7 +525,6 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                     dataType: 'json',
                     success: function(response) {
                         console.log("Cek Jadwal Praktik . . .");
-                        console.log(response.ket + "CEK Jadwal Praktik");
                         //notif jika jadwal dan/ jumlah praktik melebihi kuota
                         if (response.ket == 'T')
                             custom_alert(true, 'warning', '<span class"text-xs"><b>Kuota Jadwal Praktik</b> yang dipilih <b>Penuh</b>' +
@@ -585,43 +573,75 @@ if (isset($_GET['ptk']) && isset($_GET['u']) && $d_prvl['u_praktik'] == "Y") {
                                     data: data_praktik,
                                     dataType: "json",
                                     success: function(response) {
-                                        if (response.ket == 'Y') {
-                                            //ambil data file yang diupload
-                                            var data_file = new FormData();
-                                            var xhttp = new XMLHttpRequest();
 
-                                            var fileSurat = document.getElementById("file_surat").files;
-                                            data_file.append("file_surat", fileSurat[0]);
 
-                                            var fileAkredInstitusi = document.getElementById("file_akred_institusi").files;
-                                            data_file.append("file_akred_institusi", fileAkredInstitusi[0]);
+                                        var file_surat = $('#file_surat').prop('files')[0];
+                                        var file_akred_institusi = $('#file_akred_institusi').prop('files')[0];
+                                        var file_akred_jurusan = $('#file_akred_jurusan').prop('files')[0];
 
-                                            var fileAkredJurusan = document.getElementById("file_akred_jurusan").files;
-                                            data_file.append("file_akred_jurusan", fileAkredJurusan[0]);
+                                        var data_file = new FormData();
 
-                                            data_file.append("idp", $("#idp").val());
-                                            data_file.append("q", response.q);
+                                        // var fileSurat = document.getElementById("file_surat").files;
+                                        // data_file.append("file_surat", fileSurat[0]);
 
-                                            xhttp.open("POST", "_admin/exc/x_u_praktik_sFile.php", true);
-                                            xhttp.send(data_file);
+                                        // var fileAkredInstitusi = document.getElementById("file_akred_institusi").files;
+                                        // data_file.append("file_akred_institusi", fileAkredInstitusi[0]);
 
-                                            xhttp.open("POST", "_admin/exc/x_u_praktik_sFile.php", true);
+                                        // var fileAkredJurusan = document.getElementById("file_akred_jurusan").files;
+                                        // data_file.append("file_akred_jurusan", fileAkredJurusan[0]);
 
-                                            xhttp.onload = function() {
-                                                if (xhttp.response == "size") custom_alert(true, 'warning', '<span class="text-danger text-lg text-center">Ukuran File Terlalu Besar</span>', 5000);
-                                                else if (xhttp.response == "type") custom_alert(true, 'warning', '<span class="text-danger text-lg text-center">Tipe File Berbeda</span>', 5000);
-                                                else custom_alert_link(true, 'success', 'DATA BERHASIL DIUBAH', 5000, "?ptk");
+                                        data_file.append("idp", '<?= $_GET['idp'] ?>');
+                                        data_file.append("q", response.q);
+                                        data_file.append('file_surat', file_surat);
+                                        data_file.append('file_akred_institusi', file_akred_institusi);
+                                        data_file.append('file_akred_jurusan', file_akred_jurusan);
+                                        $.ajax({
+                                            cache: false,
+                                            contentType: false,
+                                            processData: false,
+                                            type: 'post',
+                                            url: "_admin/exc/x_u_praktik_sFile.php",
+                                            data: data_file,
+                                            dataType: "json",
+                                            success: function(response) {
+                                                if (response.ket == "size") custom_alert(true, 'warning', '<b>Ukuran File Tidak Sesuai</b>', 10000);
+                                                else if (response.ket == "type") custom_alert(true, 'warning', '<b>Tipe File Tidak Sesuai</b>', 10000);
+                                                else custom_alert_link(true, 'success', '<b>Data Berhasil Dirubah</b>', 5000, "?ptk");
+                                            },
+                                            error: function(response) {
+                                                console.log(response.ket);
+                                                custom_alert(true, 'error', '<b>KIRIM DATABASE GAGAL</b>', 10000);
                                             }
-                                            xhttp.send(data_file);
-                                        } else custom_alert(true, 'warning', '<div class="text-lg">Data Yang Dikirimkan ke Database Tidak Sesuai</div>', 10000);
+                                        });
+                                        // if (response.ket == 'Y') {
+                                        // var xhttp = new XMLHttpRequest();
+                                        //     //ambil data file yang diupload
+                                        //     xhttp.onreadystatechange = function() {
+                                        //         if (xhttp.readyState == 4 && xhttp.status == 200) {
+                                        //             var obj = JSON.parse(xhttp.ket);
+                                        //             console.log('responseText: ', ket);
+                                        //             myFunction(myArr);
+                                        //         }
+                                        //     };
+                                        //     xhttp.open("POST", "_admin/exc/x_u_praktik_sFile.php", true);
+
+                                        //     // xhttp.onload = function(ket) {
+                                        //     //     if (xhttp.ket == "size") custom_alert(true, 'warning', '<span class="text-danger text-lg text-center">Ukuran File Terlalu Besar</span>', 5000);
+                                        //     //     else if (xhttp.ket == "type") custom_alert(true, 'warning', '<span class="text-danger text-lg text-center">Tipe File Berbeda</span>', 5000);
+                                        //     //     // else custom_alert_link(true, 'success', 'DATA BERHASIL DIUBAH', 50000000, "?ptk");
+
+                                        //     // }
+                                        //     xhttp.send(data_file);
+
+                                        // } else custom_alert(true, 'warning', '<div class="text-lg">Data Yang Dikirimkan ke Database Tidak Sesuai</div>', 10000);
                                     },
                                     error: function(response) {
                                         console.log(response.ket);
                                         custom_alert(true, 'error', '<b>KIRIM DATABASE GAGAL</b>', 10000);
                                     }
                                 });
-                            } else custom_alert(true, 'error', '<b>Data Wajib Praktik Belum Diisi dan/ tidak sesuai</b>', 10000);
-                        } else custom_alert(true, 'error', '<b>ERROR CEK TANGGAL PRAKTIK</b', 10000);
+                            } else custom_alert(true, 'warning', '<b>Data Wajib Praktik Belum Diisi dan/tidak sesuai</b>', 10000);
+                        } else custom_alert(true, 'warning', '<b>ERROR CEK TANGGAL PRAKTIK</b', 10000);
                     }
                 });
             }

@@ -40,8 +40,8 @@ if (
     $d_jenis_jurusan = $q_jenis_jurusan->fetch(PDO::FETCH_ASSOC);
 
     $sql = "UPDATE tb_praktik SET  ";
-    $sql .= " id_user= '" . $idu . "'";
-    $sql .= " id_praktik= '" . $idp . "'";
+    $sql .= " id_user= '" . $idu . "', ";
+    $sql .= " id_praktik= '" . $idp . "', ";
     $sql .= " id_institusi = '" . $_POST['institusi'] . "',";
     $sql .= " tgl_ubah_praktik = '" . date('Y-m-d', time()) . "',";
     $sql .= " tgl_mulai_praktik = '" . $_POST['tgl_mulai_praktik'] . "',";
