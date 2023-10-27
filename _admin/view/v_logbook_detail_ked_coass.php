@@ -62,7 +62,7 @@
                                             RPS (RESOURCE PERSON SESION) : <b><?= $d_nil['rps'] ?></b><br>
                                             OSLER (OBJECTIVE STRUKTURED LONG EXAMINATION STRUKTURED) : <b><?= $d_nil['osler'] ?></b><br>
                                             DOPS (DIRECT OBSERVATION PROCEDURAL SKILLS) : <b><?= $d_nil['dops'] ?></b><br>
-                                            BCBD (CASE BASED DISCUSSION) : <b><?= $d_nil['cbd'] ?></b><br>
+                                            CBD (CASE BASED DISCUSSION) : <b><?= $d_nil['cbd'] ?></b><br>
                                         </div>
                                     </div>
                                 </div>
@@ -532,6 +532,7 @@
                                                     $r_5 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'CSS'")->rowCount();
                                                     $r_6 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'OSLER'")->rowCount();
                                                     $r_7 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'DPS'")->rowCount();
+                                                    $r_8 = $conn->query("SELECT * FROM tb_logbook_ked_coass_materi WHERE id_praktikan = " . $d_praktikan['id_praktikan'] . " AND materi = 'BST'")->rowCount();
                                                 } catch (PDOException $ex) {
                                                 ?>
                                                     <script>
@@ -551,6 +552,7 @@
                                                     CSS <div class="badge badge-danger"><?= $r_5 ?></div><br>
                                                     OSLER <div class="badge badge-danger"><?= $r_6 ?></div><br>
                                                     DPS <div class="badge badge-danger"><?= $r_7 ?></div><br>
+                                                    BST <div class="badge badge-danger"><?= $r_8 ?></div><br>
                                                 </div>
                                             </div>
                                             <hr class="border-1">
