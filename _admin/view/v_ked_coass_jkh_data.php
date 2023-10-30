@@ -95,7 +95,7 @@
                 var tgl = $("#tgl" + x).val();
                 var kegiatan = $("#kegiatan" + x).val();
                 var topik = $("#topik" + x).val();
-                console.log(tgl + "id dong" + kegiatan);
+
                 if (
                     tgl == "" ||
                     kegiatan == "" ||

@@ -16,14 +16,14 @@ try {
     $conn->query($sql);
     echo json_encode([
         // 'sql' => $sql,
-        'cok' => $i,
+        // 'cok' => $i,
         'ket' => 'SUCCESS'
     ]);
     $i++;
 } catch (PDOException $ex) {
     echo json_encode([
         // 'sql' => $sql,
-        'cek' => 'cek',
-        'ket' => 'ERROR'
+        // 'cek' => 'cek',
+        'ket' => $ex->getMessage() . $ex->getLine()
     ]);
 }

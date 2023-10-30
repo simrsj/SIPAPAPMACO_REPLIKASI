@@ -1,6 +1,14 @@
 <div class="card bg-light text-black shadow m-2">
-    <?= decryptString("4d6a41794d7a45774d6a557163323071596b7044544667794f586378556b355a566a564f626b6b336130523562315a586154684e62475172643273795a544243633342525657356b597a30253344", $customkey) ?>
-    <?= decryptString("4d6a41794d7a45774d6a5571633230714c307833556b6444646b5a35636a52764d5538784d4751344d3256725a6b6c4f4c314d355347564b63304a5359564a59574464576256677a5a7a30253344", $customkey) ?>
+
+    <h2>Check whether a value is number or not in JavaScript.</h2>
+    <h4>Using the <i> isNaN() </i> method for different values.</h4>
+    <div id="number1"></div>
+    <script>
+        var number1 = document.getElementById("number1");
+        number1.innerHTML = "-32.34 is number : " + !isNaN(-32.34) + " <br/>";
+        number1.innerHTML += "false is number : " + !isNaN(false) + " <br/>";
+        number1.innerHTML += "TutorialsPoint is number : " + !isNaN("TutorialsPoint") + " <br/> ";
+    </script>
 </div>
 <style>
     .navbar {

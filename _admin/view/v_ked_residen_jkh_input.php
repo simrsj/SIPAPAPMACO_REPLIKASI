@@ -69,12 +69,12 @@
                                                 <div class="row  mb-2 text-center">
                                                     <div class="col-xl">
                                                         <label for="visite_besar">Visite Besar</label>
-                                                        <input type="checkbox" id="visite_besar" name="visite_besar" class="" value="Y"></input>
+                                                        <input type="checkbox" id="visite_besar" name="visite_besar" class="" value="Y">
                                                         <!-- <div id="err_visite_besar" class="i err text-danger text-center text-xs blink mb-2"></div> -->
                                                     </div>
                                                     <div class="col-xl text-center">
                                                         <label for="rapat_klinik">Rapat Klinik</label>
-                                                        <input type="checkbox" id="rapat_klinik" name="rapat_klinik" class="" value="Y"></input>
+                                                        <input type="checkbox" id="rapat_klinik" name="rapat_klinik" class="" value="Y">
                                                         <!-- <div id="err_rapat_klinik" class="i err text-danger text-center text-xs blink mb-2"></div> -->
                                                     </div>
                                                 </div>
@@ -143,7 +143,9 @@
                             acara_ilmiah == "" ||
                             matkul_dosen == "" ||
                             j_pasien_rajal == "" ||
-                            j_pasien_ranap == ""
+                            j_pasien_ranap == "" ||
+                            j_pasien_rajal < 0 ||
+                            j_pasien_ranap < 0
                         ) {
                             custom_alert(true, 'warning', '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>', 10000);
                             (tgl == "") ? $("#err_tgl").html("Pilih Tanggal"): $("#err_tgl").html("");
@@ -151,10 +153,8 @@
                             // (rapat_klinik == "") ? $("#err_rapat_klinik").html("Pilih Rapat Klinik"): $("#err_rapat_klinik").html("");
                             (acara_ilmiah == "") ? $("#err_acara_ilmiah").html("Harus Diisi"): $("#err_acara_ilmiah").html("");
                             (matkul_dosen == "") ? $("#err_matkul_dosen").html("Harus Diisi"): $("#err_matkul_dosen").html("");
-                            (j_pasien_rajal == "") ? $("#err_j_pasien_rajal").html("Harus Diisi"): $("#err_j_pasien_rajal").html("");
-                            (j_pasien_ranap == "") ? $("#err_j_pasien_ranap").html("Harus Diisi"): $("#err_j_pasien_ranap").html("");
-                            (is_numeric(j_pasien_rajal) == true) ? $("#err_j_pasien_rajal").html("Isian Harus Angka"): $("#err_j_pasien_rajal").html("");
-                            (is_numeric(j_pasien_ranap) == true) ? $("#err_j_pasien_ranap").html("Isian Harus Angka"): $("#err_j_pasien_ranap").html("");
+                            (j_pasien_rajal == "" || j_pasien_rajal < 0) ? $("#err_j_pasien_rajal" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_rajal" + x).html("");
+                            (j_pasien_ranap == "" || j_pasien_ranap < 0) ? $("#err_j_pasien_ranap" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_ranap" + x).html("");
                         } else {
                             $.ajax({
                                 type: 'POST',
@@ -169,10 +169,10 @@
                                         $('#data_jkh')
                                             .load(
                                                 "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['data'] ?>");
-                                    } else custom_alert(true, 'error', '<center>DATA GAGAL DIISMPAN <br>' + response.ket + '</center>', 10000);
+                                    } else custom_alert(true, 'error', '<center>DATA GAGAL DISIMPAN <br>' + response.ket + '</center>', 10000);
                                 },
                                 error: function(response) {
-                                    console.log(response.ket);
+                                    custom_alert(true, 'error', '<center>DATA ERROR <br>' + response.ket + '</center>', 10000);
                                 }
                             });
                         }
