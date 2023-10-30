@@ -209,7 +209,7 @@
                                     loading_sw2();
                                     $('#data_jkh')
                                         .load(
-                                            "_admin/view/v_ked_coass_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                            "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
                                 } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
                             },
                             error: function(response) {
@@ -233,6 +233,13 @@
     <script>
         $(document).ready(function() {
             Swal.close();
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                'columnDefs': [{
+                    'targets': [8],
+                    /* column index */
+                    'orderable': false,
+                    /* true or false */
+                }]
+            });
         });
     </script>
