@@ -14,32 +14,32 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/autoload.php";
 
 $id_praktikan = decryptString($_GET['data'], $customkey);
 try {
-    $sql = "SELECT * FROM tb_praktik";
-    $sql .= " JOIN tb_praktikan ON tb_praktik.id_praktik = tb_praktikan.id_praktik";
-    $sql .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
-    $sql .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
-    $sql .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
-    $sql .= " WHERE tb_praktikan.id_praktikan = " . $id_praktikan;
-    // echo $sql;
-    $q = $conn->query($sql);
-    $d = $q->fetch(PDO::FETCH_ASSOC);
+  $sql = "SELECT * FROM tb_praktik";
+  $sql .= " JOIN tb_praktikan ON tb_praktik.id_praktik = tb_praktikan.id_praktik";
+  $sql .= " JOIN tb_jenjang_pdd ON tb_praktik.id_jenjang_pdd = tb_jenjang_pdd.id_jenjang_pdd";
+  $sql .= " JOIN tb_jurusan_pdd ON tb_praktik.id_jurusan_pdd = tb_jurusan_pdd.id_jurusan_pdd";
+  $sql .= " JOIN tb_profesi_pdd ON tb_praktik.id_profesi_pdd = tb_profesi_pdd.id_profesi_pdd";
+  $sql .= " WHERE tb_praktikan.id_praktikan = " . $id_praktikan;
+  // echo $sql;
+  $q = $conn->query($sql);
+  $d = $q->fetch(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
-    echo $e->getMessage();
+  echo $e->getMessage();
 }
 try {
-    $sql_institusi = "SELECT * FROM tb_institusi";
-    $sql_institusi .= " WHERE id_institusi = " . $d['id_institusi'];
-    // echo $sql_institusi;
-    $q_institusi = $conn->query($sql_institusi);
-    $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
+  $sql_institusi = "SELECT * FROM tb_institusi";
+  $sql_institusi .= " WHERE id_institusi = " . $d['id_institusi'];
+  // echo $sql_institusi;
+  $q_institusi = $conn->query($sql_institusi);
+  $d_institusi = $q_institusi->fetch(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
-    echo $e->getMessage();
+  echo $e->getMessage();
 }
 
 $ukuranFontIsi = "16px";
 $img =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logopemprov.png';
 $cover =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_img/logo_logbook_ked_coass.png';
-$css =  $_SERVER['DOCUMENT_ROOT'] . '/SM/vendor/custom/cssCustom.css';
+$css =  $_SERVER['DOCUMENT_ROOT'] . '/SM/_add-ons/cssCustom.css';
 
 require_once($_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/dompdf/autoload.inc.php");
 

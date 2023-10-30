@@ -43,10 +43,9 @@ require_once "_add-ons/crypt.php";
     <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet">
     <link href="vendor/sw2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="vendor/boxed-check/css/boxed-check.min.css" rel="stylesheet">
-    <link href="vendor/custom/cssCustom.css" rel="stylesheet">
-    <link href="vendor/custom/cs_loader.css" rel="stylesheet">
+    <link href="_add-ons/cssCustom.css" rel="stylesheet">
+    <link href="_add-ons/loader.css" rel="stylesheet">
     <script src="vendor/jquery3.6.0.min.js"></script>
-
 </head>
 
 <body id="page-top" class="bg-sipapapmaco-abstrack1">
@@ -109,8 +108,8 @@ require_once "_add-ons/crypt.php";
     <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
     <script src="vendor/select2/dist/js/select2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/custom/jsCustom.js"></script>
-    <script src="vendor/custom/alert.js"></script>
+    <script src="_add-ons/jsCustom.js"></script>
+    <script src="_add-ons/alert.js"></script>
     <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
     <!-- <script src="https://js.hcaptcha.com/1/api.js" async defer></script> -->
     <script>
@@ -133,8 +132,8 @@ require_once "_add-ons/crypt.php";
                     )
                 ));
         <?php
-        // include "./vendor/custom/disable_keyboard.js";
-        include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/custom/cs_datatable.js";
+        // include "./_add-ons/disable_keyboard.js";
+        include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/datatable.js";
         ?>
         // alert = function() {};
         $('img').mousedown(function(e) {

@@ -12,7 +12,7 @@
         } catch (Exception $ex) {
         ?>
             <script>
-                alert("<?= $ex->getMessage() ?>");
+                alert("<?= $ex->getMessage() . $ex->getLine() ?>");
                 document.location.href = '?error404';
             </script>";
         <?php

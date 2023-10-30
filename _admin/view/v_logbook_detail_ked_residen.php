@@ -6,8 +6,8 @@
                 <th scope="col">Nama Praktikan&nbsp;&nbsp;</th>
                 <th scope="col">ID Praktikan&nbsp;&nbsp;</th>
                 <th scope="col">Kegiatan Harian&nbsp;&nbsp;</th>
-                <th scope="col">Pencapaian Kompetensi Dasar&nbsp;&nbsp;</th>
-                <th scope="col">Presentasi Ilmiah&nbsp;&nbsp;</th>
+                <!-- <th scope="col">Pencapaian Kompetensi Dasar&nbsp;&nbsp;</th> -->
+                <!-- <th scope="col">Presentasi Ilmiah&nbsp;&nbsp;</th> -->
                 <th scope="col">e-Log Book&nbsp;&nbsp;</th>
             </tr>
         </thead>
@@ -31,7 +31,7 @@
                         } catch (Exception $ex) {
                         ?>
                             <script>
-                                alert("<?= $ex->getMessage() ?>");
+                                alert("<?= $ex->getMessage() . $ex->getLine() ?>");
                                 document.location.href = '?error404';
                             </script>
                         <?php
@@ -81,88 +81,6 @@
                                                                 <hr class="m-0 p-0">
                                                                 <?= $d_jkh['stase']; ?>
                                                             </td>
-                                                            <td><?= tanggal($d_jkh['tgl']); ?></td>
-                                                            <td><?= $d_jkh['visite_besar']; ?></td>
-                                                            <td><?= $d_jkh['rapat_klinik']; ?></td>
-                                                            <td><?= $d_jkh['acara_ilmiah']; ?></td>
-                                                            <td><?= $d_jkh['matkul_dosen']; ?></td>
-                                                            <td><?= $d_jkh['j_pasien_rajal']; ?></td>
-                                                            <td><?= $d_jkh['j_pasien_rajal']; ?></td>
-                                                        </tr>
-                                                    <?php
-                                                        $no0++;
-                                                    }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <script>
-                                            $(document).ready(function() {
-                                                $("#dataTable_jkh<?= $no ?>").DataTable();
-                                            });
-                                        </script>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
-                        <a href="?logbook&ked_residen_jkh&data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Ubah Jadwal Kegiatan Harian">
-                            <i class="fa-solid fa-pen-to-square "></i>
-                        </a>
-                    </td>
-                    <!-- PKD -->
-                    <td class="text-center">
-                        <?php
-                        try {
-                            $sql_pkd = "SELECT * FROM tb_logbook_ked_residen_pkd ";
-                            $sql_pkd .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
-                            // echo $sql_pkd;
-                            $q_pkd  = $conn->query($sql_pkd);
-                            $r_pkd  = $q_pkd->rowCount();
-                        } catch (Exception $ex) {
-                        ?>
-                            <script>
-                                alert("<?= $ex->getMessage() ?>");
-                                document.location.href = '?error404';
-                            </script>
-                        <?php
-                        }
-                        ?>
-                        <?php if ($r_pkd > 0) { ?>
-                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_pkd_<?= $no; ?>" title="Detail Pencapaian Kompetensi Dasar (PKD)">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <div class="modal" id="m_pkd_<?= $no; ?>" style="display: none;">
-                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-secondary text-light">
-                                            Jadwal Kegiatan Harian
-                                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
-                                                X
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table class="table table-striped table-bordered " id="dataTable_pkd<?= $no; ?>">
-                                                <thead class="table-dark">
-                                                    <tr class="text-center">
-                                                        <th scope='col'>No</th>
-                                                        <th>Semester</th>
-                                                        <th>Tanggal</th>
-                                                        <th>Visite Besar</th>
-                                                        <th>Rapat Klinik</th>
-                                                        <th>Acara Ilmiah</th>
-                                                        <th>Mata Kuliah / Dosen</th>
-                                                        <th>Jumlah Pasien Rajal</th>
-                                                        <th>Jumlah Pasien Ranap</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    $no0 = 1;
-                                                    while ($d_jkh = $q_jkh->fetch(PDO::FETCH_ASSOC)) {
-                                                    ?>
-                                                        <tr>
-                                                            <td class="text-center"><?= $no0; ?></td>
-                                                            <td><?= $d_jkh['semester']; ?></td>
                                                             <td><?= tanggal($d_jkh['tgl']); ?></td>
                                                             <td><?= $d_jkh['visite_besar']; ?></td>
                                                             <td><?= $d_jkh['rapat_klinik']; ?></td>

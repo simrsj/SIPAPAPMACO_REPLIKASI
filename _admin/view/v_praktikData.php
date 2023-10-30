@@ -763,7 +763,7 @@ if ($d_prvl['r_praktik'] == "Y") {
         $('.loader').hide();
         // alert = function() {};
         <?php
-        include $_SERVER['DOCUMENT_ROOT'] . "/SM/vendor/custom/cs_datatable.js";
+        include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/datatable.js";
         ?>
     </script>
 <?php
