@@ -6,51 +6,52 @@
     // error_reporting(0);
     $idpr = decryptString($_GET['idpr'], $customkey);
     try {
-        $sql_jkh = "SELECT * FROM tb_logbook_ked_residen_jkh ";
-        $sql_jkh .= " WHERE id_praktikan = " . $idpr;
-        $sql_jkh .= " ORDER BY tgl_ubah DESC, tgl_tambah DESC";
-        // echo "$sql_jkh<br>";
-        $q_jkh = $conn->query($sql_jkh);
-        $r_jkh = $q_jkh->rowCount();
+        $sql_pkd = "SELECT * , tb_logbook_ked_residen_pkd.id as id_pkd  FROM tb_logbook_ked_residen_pkd ";
+        $sql_pkd .= " JOIN tb_logbook_ked_residen_pkd_jenis ON tb_logbook_ked_residen_pkd.jenis = tb_logbook_ked_residen_pkd_jenis.id";
+        $sql_pkd .= " WHERE id_praktikan = " . $idpr;
+        $sql_pkd .= " ORDER BY tgl_ubah DESC, tgl_tambah DESC";
+        // echo "$sql_pkd<br>";
+        $q_pkd = $conn->query($sql_pkd);
+        $r_pkd = $q_pkd->rowCount();
     } catch (PDOException $ex) {
     ?>
         <script>
-            alert("<?= $ex->getMessage() . $ex->getLine() ?>");
+            alert("<?= $ex->getMessage() . $ex->getLine() . $sql_pkd ?>");
             document.location.href = '?error404';
         </script>
     <?php
     }
     ?>
-    <?php if ($r_jkh > 0) { ?>
+    <?php if ($r_pkd > 0) { ?>
         <div class="table-responsive">
             <table class="table table-striped table-bordered " id="dataTable">
                 <thead class="">
                     <tr class="text-center">
                         <th scope='col'>No&nbsp;&nbsp;</th>
+                        <th>Jenis&nbsp;&nbsp;</th>
                         <th>Tanggal<br>(yyyy-mm-dd)&nbsp;&nbsp;</th>
-                        <th>Visite Besar&nbsp;&nbsp;</th>
-                        <th>Rapat Klinik&nbsp;&nbsp;</th>
-                        <th>Acara Ilmiah&nbsp;&nbsp;</th>
-                        <th>Mata Kuliah/Dosen&nbsp;&nbsp;</th>
-                        <th>Pasien Rajal&nbsp;&nbsp;</th>
-                        <th>Pasien Ranap&nbsp;&nbsp;</th>
+                        <th>Semester&nbsp;&nbsp;</th>
+                        <th>No. RM&nbsp;&nbsp;</th>
+                        <th>Inisial&nbsp;&nbsp;</th>
+                        <th>ICD-10/Diagnosis&nbsp;&nbsp;</th>
+                        <th>Th Farmakologis/Manajemen/Sesi ECT/Teknik Psi Suportif/Manajemen/Metode&nbsp;&nbsp;</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $no0 = 1;
-                    while ($d_jkh = $q_jkh->fetch(PDO::FETCH_ASSOC)) {
+                    while ($d_pkd = $q_pkd->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                         <tr>
                             <td class="text-center"><?= $no0; ?></td>
-                            <td><?= $d_jkh['tgl']; ?></td>
-                            <td><?= $d_jkh['visite_besar'] == "Y" ? '<div class="text-success text-center text-lg"><i class="fa-solid fa-check"></i></div>' : ''; ?></td>
-                            <td><?= $d_jkh['rapat_klinik'] == "Y" ? '<div class="text-success text-center text-lg"><i class="fa-solid fa-check"></i></div>' : ''; ?></td>
-                            <td><?= $d_jkh['acara_ilmiah']; ?></td>
-                            <td><?= $d_jkh['matkul_dosen']; ?></td>
-                            <td><?= $d_jkh['j_pasien_rajal']; ?></td>
-                            <td><?= $d_jkh['j_pasien_ranap']; ?></td>
+                            <td><?= $d_pkd['id_pkd'] . $d_pkd['nama']; ?></td>
+                            <td><?= $d_pkd['tgl']; ?></td>
+                            <td><?= $d_pkd['semester']; ?></td>
+                            <td><?= $d_pkd['no_rm']; ?></td>
+                            <td><?= $d_pkd['inisial']; ?></td>
+                            <td><?= $d_pkd['icd10_diagnosis']; ?></td>
+                            <td><?= $d_pkd['ket']; ?></td>
                             <td class="text-center">
                                 <a href="#" class="btn btn-primary btn-sm ubah_init" data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
                                     <i class=" fa fa-edit"></i> Ubah
@@ -67,48 +68,73 @@
                                             </div>
                                             <div class="modal-body text-left">
                                                 <form id="form_u<?= $no0 ?>" method="post">
+                                                    <label for="jenis">Jenis <span class="text-danger">*</span></label>
+                                                    <div class="text-center">
+                                                        <select class="select2-long<?= $no0 ?> text-center" id="jenis<?= $no0 ?>>" name="jenis">
+                                                            <option value=""></option>
+                                                            <?php
+                                                            try {
+                                                                $sql_jenis = "SELECT * FROM `tb_logbook_ked_residen_pkd_jenis`";
+                                                                // echo "$sql_jenis<br>";
+                                                                $q_jenis = $conn->query($sql_jenis);
+                                                            } catch (PDOException $ex) {
+                                                            ?>
+                                                                <script>
+                                                                    alert("<?= $ex->getMessage() . $ex->getLine() ?>");
+                                                                    document.location.href = '?error404';
+                                                                </script>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                            <?php while ($d_jenis = $q_jenis->fetch(PDO::FETCH_ASSOC)) { ?>
+                                                                <?= ($d_pkd['jenis'] == $d_jenis['id']) ? $selected = "selected" : $selected = ""; ?>
+                                                                <option value="<?= $d_jenis['id'] ?>" <?= $selected ?>><?= $d_jenis['nama'] ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                        <script>
+                                                            $(".select2-long<?= $no0 ?>").select2({
+                                                                placeholder: "-------------- Pilih --------------",
+                                                                allowClear: true,
+                                                                width: "100%",
+                                                            });
+                                                        </script>
+                                                    </div>
+                                                    <div id="err_jenis<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                     <label for="tgl<?= $no0 ?>">Tanggal <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_jkh['tgl'] ?>">
+                                                    <input type="date" class="form-control" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_pkd['tgl'] ?>">
                                                     <div id="err_tgl<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                    <div class="row  mb-2 text-center">
+                                                    <div class="row mb-2 text-center">
                                                         <div class="col-xl">
-                                                            <label for="visite_besar<?= $no0 ?>">Visite Besar</label>
-                                                            <input type="checkbox" id="visite_besar<?= $no0 ?>" name="visite_besar" class="" value="Y" <?= $d_jkh['visite_besar'] == "Y" ? "checked" : "" ?>>
-                                                            <!-- <div id="err_visite_besar<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div> -->
+                                                            <label for="semester<?= $no0 ?>">Semester<span class="text-danger">*</span></label>
+                                                            <input type="number" min="0" id="semester<?= $no0 ?>" name="semester" class="form-control" value="<?= $d_pkd['semester'] ?>">
+                                                            <div id="err_semester<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                         <div class="col-xl text-center">
-                                                            <label for="rapat_klinik<?= $no0 ?>">Rapat Klinik</label>
-                                                            <input type="checkbox" id="rapat_klinik<?= $no0 ?>" name="rapat_klinik" class="" value="Y" <?= $d_jkh['rapat_klinik'] == "Y" ? "checked" : "" ?>>
-                                                            <!-- <div id="err_rapat_klinik<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div> -->
+                                                            <label for="no_rm<?= $no0 ?>">No. RM<span class="text-danger">*</span></label>
+                                                            <input type="number" min="0" id="no_rm<?= $no0 ?>" name="no_rm" class="form-control" value="<?= $d_pkd['no_rm'] ?>">
+                                                            <div id="err_no_rm<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                        </div>
+                                                        <div class="col-xl text-center">
+                                                            <label for="inisial<?= $no0 ?>">Inisial<span class="text-danger">*</span></label>
+                                                            <input type="type" id="inisial<?= $no0 ?>" name="inisial" class="form-control" value="<?= $d_pkd['inisial'] ?>">
+                                                            <div id="err_inisial<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                     </div>
-                                                    <label for="acara_ilmiah<?= $no0 ?>">Acara Ilmiah<span class="text-danger">*</span></label>
-                                                    <textarea id="acara_ilmiah<?= $no0 ?>" name="acara_ilmiah" class="form-control" rows="2"><?= $d_jkh['acara_ilmiah'] ?></textarea>
-                                                    <div id="err_acara_ilmiah<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                    <label for="matkul_dosen<?= $no0 ?>">Mata Kuliah/Dosen<span class="text-danger">*</span></label>
-                                                    <textarea id="matkul_dosen<?= $no0 ?>" name="matkul_dosen" class="form-control" rows="2"><?= $d_jkh['matkul_dosen'] ?></textarea>
-                                                    <div id="err_matkul_dosen<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                    <div class="row">
-                                                        <div class="col-xl">
-                                                            <label for="j_pasien_rajal<?= $no0 ?>">Pasien Rajal<span class="text-danger">*</span></label>
-                                                            <input type="number" min=0 id="j_pasien_rajal<?= $no0 ?>" name="j_pasien_rajal" class="form-control" value="<?= $d_jkh['j_pasien_rajal'] ?>">
-                                                            <div id="err_j_pasien_rajal<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                        </div>
-                                                        <div class="col-xl">
-                                                            <label for="j_pasien_ranap<?= $no0 ?>">Pasien Ranap<span class="text-danger">*</span></label>
-                                                            <input type="number" min=0 id="j_pasien_ranap<?= $no0 ?>" name="j_pasien_ranap" class="form-control" value="<?= $d_jkh['j_pasien_ranap'] ?>"></input>
-                                                            <div id="err_j_pasien_ranap<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                        </div>
-                                                    </div>
+                                                    <label for="icd10_diagnosis<?= $no0 ?>">ICD-10/Diagnosis<span class="text-danger">*</span></label>
+                                                    <textarea id="icd10_diagnosis<?= $no0 ?>" name="icd10_diagnosis" class="form-control" rows="2"><?= $d_pkd['icd10_diagnosis'] ?></textarea>
+                                                    <div id="err_icd10_diagnosis<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                    <label for="ket<?= $no0 ?>">Th Farmakologis/Manajemen/Sesi ECT/Teknik Psi Suportif/Manajemen/Metode<span class="text-danger">*</span></label>
+                                                    <textarea id="ket<?= $no0 ?>" name="ket" class="form-control" rows="2"><?= $d_pkd['ket'] ?></textarea>
+                                                    <div id="err_ket<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_jkh['id'], $customkey) ?>' )" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_pkd['id_pkd'], $customkey) ?>' )" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_jkh['id'], $customkey) ?>">
+                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_pkd['id_pkd'], $customkey) ?>">
                                     <i class="fa fa-trash"></i> Hapus
                                 </a>
                             </td>
@@ -131,50 +157,41 @@
                     name: "id",
                     value: y
                 });
+                var jenis = $("#jenis" + x).val();
                 var tgl = $("#tgl" + x).val();
-                // var visite_besar = $("#visite_besar").val();
-                // var rapat_klinik = $("#rapat_klinik").val();
-                var acara_ilmiah = $("#acara_ilmiah" + x).val();
-                var matkul_dosen = $("#matkul_dosen" + x).val();
-                var j_pasien_rajal = $("#j_pasien_rajal" + x).val();
-                var j_pasien_ranap = $("#j_pasien_ranap" + x).val();
+                var semester = $("#semester" + x).val();
+                var no_rm = $("#no_rm" + x).val();
+                var icd10_diagnosis = $("#icd10_diagnosis" + x).val();
+                var ket = $("#ket" + x).val();
                 if (
+                    jenis == "" ||
+                    semester == "" ||
                     tgl == "" ||
-                    // visite_besar == "" ||
-                    // rapat_klinik == "" ||
-                    acara_ilmiah == "" ||
-                    matkul_dosen == "" ||
-                    j_pasien_rajal == "" ||
-                    j_pasien_ranap == "" ||
-                    j_pasien_rajal < 0 ||
-                    j_pasien_ranap < 0
+                    no_rm == "" ||
+                    icd10_diagnosis == "" ||
+                    ket == ""
                 ) {
                     custom_alert(true, 'warning', '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>', 10000);
-                    (tgl == "") ? $("#err_tgl" + x).html("Pilih Tanggal"): $("#err_tgl").html("");
-                    // (visite_besar == "") ? $("#err_visite_besar" + x).html("Isi Visite Besar"): $("#err_visite_besar").html("");
-                    // (rapat_klinik == "") ? $("#err_rapat_klinik" + x).html("Pilih Rapat Klinik"): $("#err_rapat_klinik").html("");
-                    (acara_ilmiah == "") ? $("#err_acara_ilmiah" + x).html("Harus Diisi"): $("#err_acara_ilmiah").html("");
-                    (matkul_dosen == "") ? $("#err_matkul_dosen" + x).html("Harus Diisi"): $("#err_matkul_dosen").html("");
-                    (j_pasien_rajal == "" || j_pasien_rajal < 0) ? $("#err_j_pasien_rajal" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_rajal" + x).html("");
-                    (j_pasien_ranap == "" || j_pasien_ranap < 0) ? $("#err_j_pasien_ranap" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_ranap" + x).html("");
-                }
-                //eksekusi query ubah
-                else {
+                    (jenis == "") ? $("#err_jenis" + x).html("Harus Dipilih"): $("#err_jenis" + x).html("");
+                    (tgl == "") ? $("#err_tgl" + x).html("Harus Dipilih" + x): $("#err_tgl").html("");
+                    (semester == "" || semester < 0) ? $("#err_semester" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_semester" + x).html("");
+                    (no_rm == "" || no_rm < 0) ? $("#err_no_rm" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_no_rm" + x).html("");
+                    (icd10_diagnosis == "") ? $("#err_icd10_diagnosis" + x).html("Harus Diisi"): $("#err_icd10_diagnosis" + x).html("");
+                    (ket == "") ? $("#err_ket" + x).html("Harus Diisi"): $("#err_ket" + x).html("");
+                } else {
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_v_ked_residen_jkh_data_u.php",
+                        url: "_admin/exc/x_v_ked_residen_pkd_data_u.php",
                         data: data_form,
-                        dataType: "json",
+                        dataType: "JSON",
                         success: function(response) {
                             if (response.ket == "SUCCESS") {
-                                // console.log('<?= $no0; ?>');
-                                console.log(response.cok);
-                                $('#modal_ubah' + x).modal('hide');
+                                $('#modal_ubah' + x).modal('hide')
                                 custom_alert(true, 'success', '<center>DATA BERHASIL DIUBAH</center>', 10000);
                                 loading_sw2();
-                                $('#data_jkh')
+                                $('#data_pkd')
                                     .load(
-                                        "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                        "_admin/view/v_ked_residen_pkd_data.php?idpr=<?= $_GET['idpr'] ?>");
                             } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
                         },
                         error: function(response) {
@@ -198,7 +215,7 @@
                     if (result.value) {
                         $.ajax({
                             type: 'POST',
-                            url: "_admin/exc/x_v_ked_residen_jkh_data_h.php",
+                            url: "_admin/exc/x_v_ked_residen_pkd_data_h.php",
                             data: {
                                 id: $(this).attr('id')
                             },
@@ -207,9 +224,9 @@
                                 if (response.ket == "SUCCESS") {
                                     custom_alert(true, 'success', '<center>DATA BERHASIL DIHAPUS</center>', 10000);
                                     loading_sw2();
-                                    $('#data_jkh')
+                                    $('#data_pkd')
                                         .load(
-                                            "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                            "_admin/view/v_ked_residen_pkd_data.php?idpr=<?= $_GET['idpr'] ?>");
                                 } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
                             },
                             error: function(response) {
