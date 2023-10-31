@@ -42,8 +42,8 @@
                                     </select>
                                     <div class="text-xs font-italic text-center">
                                         Bila Tidak Ada Nama Institusi Anda : <br>
-                                        Kontak Admin :<b>082126795147 (ABDUL ROHMAN, S.S.T.)</b><br>
-                                        <a href="https://wa.me/6282126795147" class="btn btn-outline-success btn-xs">
+                                        Kontak Admin :<b>081386650688 (Wisnu Indrawan, S.AB)</b><br>
+                                        <a href="https://wa.me/6281386650688" class="btn btn-outline-success btn-xs">
                                             <i class="fa-brands fa-whatsapp"></i> WhatsApp
                                         </a>
                                     </div>
