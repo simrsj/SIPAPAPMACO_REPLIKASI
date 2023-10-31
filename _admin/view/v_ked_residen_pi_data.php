@@ -223,7 +223,7 @@
                                     $('#data_pi')
                                         .load(
                                             "_admin/view/v_ked_residen_pi_data.php?idpr=<?= $_GET['idpr'] ?>");
-                                } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
+                                } else custom_alert(true, 'error', '<center>DATA GAGAL DIHAPUS <br>' + response.ket + '</center>', 10000);
                             },
                             error: function(response) {
                                 custom_alert(true, 'error', '<center>DATA ERROR <br>' + response.ket + '</center>', 10000);
@@ -231,14 +231,6 @@
                         });
                     }
                 })
-            });
-
-            Swal.close();
-            $('#dataTable').DataTable({
-                'columnDefs': [{
-                    'targets': [10],
-                    'orderable': false,
-                }]
             });
         </script>
     <?php } else { ?>
@@ -250,3 +242,12 @@
             </div>
         </div>
     <?php } ?>
+    <script>
+        Swal.close();
+        $('#dataTable').DataTable({
+            'columnDefs': [{
+                'targets': [10],
+                'orderable': false,
+            }]
+        });
+    </script>
