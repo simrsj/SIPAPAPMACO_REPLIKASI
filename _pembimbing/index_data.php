@@ -4,8 +4,26 @@ if (isset($_GET["ked_coass_nilai"])) {
 	if (isset($_GET['u'])) include "_admin/update/u_ked_coass_nilai.php";
 	else include "_admin/view/v_ked_coass_nilai.php";
 }
+//data Log Book Kedokteran residen
+else if (isset($_GET["ked_residen_elogbook"]) && decryptString($_GET['jenis'], $customkey) == 1) {
+	//data Log Book Jadwal Kegiatan Harian
+	if ($_GET["ked_residen_elogbook"] == "jkh") {
+		if (isset($_GET['data'])) include "_admin/view/v_ked_residen_jkh_input.php";
+		else include "_admin/view/v_ked_residen_jkh.php";
+	}
+	//data Log Book Pencapaian Kompetensi Dasar
+	else if ($_GET["ked_residen_elogbook"] == "pkd") {
+		if (isset($_GET['data'])) include "_admin/view/v_ked_residen_pkd_input.php";
+		else include "_admin/view/v_ked_residen_jkh.php";
+	}
+	//data Log Book Presentasi Ilmiah
+	else if ($_GET["ked_residen_elogbook"] == "pi") {
+		if (isset($_GET['data'])) include "_admin/view/v_ked_residen_pi_input.php";
+		else include "_admin/view/v_ked_residen_pi.php";
+	} else pilihmenu();
+}
 //data Log Book Kedokteran Co-Ass
-else if (isset($_GET["ked_coass_elogbook"])) {
+else if (isset($_GET["ked_coass_elogbook"]) && decryptString($_GET['jenis'], $customkey) == 2) {
 	//data Log Book Pencapaian Komptensi Keterampilan P3D
 	if ($_GET["ked_coass_elogbook"] == "p3d") {
 		if (isset($_GET['u'])) include "_admin/update/u_ked_coass_p3d.php";
@@ -31,7 +49,7 @@ else if (isset($_GET["ked_coass_elogbook"])) {
 		if (isset($_GET['data'])) include "_admin/view/v_ked_coass_materi_input.php";
 		else include "_admin/view/v_ked_coass_materi.php";
 	}
-	//data Log Book materi
+	//data Log Book lppp
 	else if ($_GET["ked_coass_elogbook"] == "lppp") {
 		if (isset($_GET['u'])) include "_admin/update/u_ked_coass_lppp.php";
 		else include "_admin/view/v_ked_coass_lppp.php";

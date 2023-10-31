@@ -54,30 +54,46 @@ if ($_SESSION['status_user'] == "Y") {
 							<div class=" dropdown-menu dropdown-menu-scroll dropdown-menu-right shadow animated--grow-in" aria-labelledby="menu">
 								<?php if ($d_pembimbing['id_jurusan_pdd'] == 1) { ?>
 									<?php if ($d_pembimbing['id_profesi_pdd'] == 1) { ?>
-									<?php } else if ($d_pembimbing['id_profesi_pdd'] == 2) { ?>
-										<!-- Kedokteran Co-Ass  -->
-										<a class="dropdown-item b " href="?ked_coass_nilai">
+										<!-- Kedokteran Residen  -->
+										<!-- <a class="dropdown-item b " href="?ked_coass_nilai">
 											Penilaian
-										</a>
+										</a> -->
 										<div class="text-center mb-2">
 											<span class="badge badge-dark text-md col">e-Log Book</span>
 										</div>
-										<a class="dropdown-item " href="?ked_coass_elogbook=p3d">
-											Pencapaian Kompetensi Keterampilan P3D
-										</a>
-										<a class="dropdown-item " href="?ked_coass_elogbook=jkh">
+										<a class="dropdown-item " href="?ked_residen_elogbook=jkh&jenis=<?= encryptString($d_pembimbing['id_profesi_pdd'], $customkey) ?>">
 											Jadwal Kegiatan Harian
 										</a>
-										<a class="dropdown-item " href="?ked_coass_elogbook=kyd">
+										<a class="dropdown-item " href="?ked_residen_elogbook=pkd&jenis=<?= encryptString($d_pembimbing['id_profesi_pdd'], $customkey) ?>">
+											Pencapaian Kompetensi Dasar
+										</a>
+										<a class="dropdown-item " href="?ked_residen_elogbook=pi&jenis=<?= encryptString($d_pembimbing['id_profesi_pdd'], $customkey) ?>">
+											Presentasi Ilmiah
+										</a>
+									<?php } else if ($d_pembimbing['id_profesi_pdd'] == 2) { ?>
+										<!-- Kedokteran Co-Ass  -->
+										<!-- <a class="dropdown-item b " href="?ked_coass_nilai">
+											Penilaian
+										</a> -->
+										<div class="text-center mb-2">
+											<span class="badge badge-dark text-md col">e-Log Book</span>
+										</div>
+										<a class="dropdown-item " href="?ked_coass_elogbook=p3d&jenis=<?= encryptString($d_pembimbing['id_profesi_pdd'], $customkey) ?>">
+											Pencapaian Kompetensi Keterampilan P3D
+										</a>
+										<a class="dropdown-item " href="?ked_coass_elogbook=jkh&jenis=<?= encryptString($d_pembimbing['id_profesi_pdd'], $customkey) ?>">
+											Jadwal Kegiatan Harian
+										</a>
+										<a class="dropdown-item " href="?ked_coass_elogbook=kyd&jenis=<?= encryptString($d_pembimbing['id_profesi_pdd'], $customkey) ?>">
 											Kasus Yang Ditemukan
 										</a>
-										<a class="dropdown-item " href="?ked_coass_elogbook=psw">
+										<a class="dropdown-item " href="?ked_coass_elogbook=psw&jenis=<?= encryptString($d_pembimbing['id_profesi_pdd'], $customkey) ?>">
 											Pembuatan Status Wajib
 										</a>
-										<a class="dropdown-item " href="?ked_coass_elogbook=materi">
+										<a class="dropdown-item " href="?ked_coass_elogbook=materi&jenis=<?= encryptString($d_pembimbing['id_profesi_pdd'], $customkey) ?>">
 											Materi
 										</a>
-										<a class="dropdown-item " href="?ked_coass_elogbook=lppp">
+										<a class="dropdown-item " href="?ked_coass_elogbook=lppp&jenis=<?= encryptString($d_pembimbing['id_profesi_pdd'], $customkey) ?>">
 											Lembar Penilaian Perilaku Profesional
 										</a>
 									<?php } ?>
