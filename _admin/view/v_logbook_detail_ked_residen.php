@@ -7,7 +7,7 @@
                 <th scope="col">ID Praktikan&nbsp;&nbsp;</th>
                 <th scope="col">Kegiatan Harian&nbsp;&nbsp;</th>
                 <th scope="col">Pencapaian Kompetensi Dasar&nbsp;&nbsp;</th>
-                <!-- <th scope="col">Presentasi Ilmiah&nbsp;&nbsp;</th> -->
+                <th scope="col">Presentasi Ilmiah&nbsp;&nbsp;</th>
                 <th scope="col">e-Log Book&nbsp;&nbsp;</th>
             </tr>
         </thead>
@@ -190,6 +190,90 @@
                             <i class="fa-solid fa-pen-to-square "></i>
                         </a>
                     </td>
+
+                    <!-- PI -->
+                    <td class="text-center">
+                        <?php
+                        try {
+                            $sql_pi = "SELECT * FROM tb_logbook_ked_residen_pi ";
+                            $sql_pi .= " WHERE id_praktikan = " . $d_praktikan['id_praktikan'];
+                            // echo $sql_pi;
+                            $q_pi = $conn->query($sql_pi);
+                            $r_pi  = $q_pi->rowCount();
+                        } catch (Exception $ex) {
+                        ?>
+                            <script>
+                                alert("<?= $ex->getMessage() . $ex->getLine() ?>");
+                                document.location.href = '?error404';
+                            </script>
+                        <?php
+                        }
+                        ?>
+                        <?php if ($r_pi > 0) { ?>
+                            <a class="btn btn-outline-info " href="#" data-toggle="modal" data-target="#m_pi_<?= $no; ?>" title="Detail Pencapaian Kompetensi Dasar (PKD)">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <div class="modal" id="m_pi_<?= $no; ?>" style="display: none;">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xxl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-secondary text-light">
+                                            Presentasi Ilmiah
+                                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                X
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="table table-striped table-bordered " id="dataTable_pi<?= $no; ?>">
+                                                <thead class="table-dark">
+                                                    <tr class="text-center">
+                                                        <th scope='col'>No&nbsp;&nbsp;</th>
+                                                        <th>Tanggal&nbsp;&nbsp;</th>
+                                                        <th>Semester&nbsp;&nbsp;</th>
+                                                        <th>Judul&nbsp;&nbsp;</th>
+                                                        <th>Bim 1&nbsp;&nbsp;</th>
+                                                        <th>Bim 2&nbsp;&nbsp;</th>
+                                                        <th>Bim 3&nbsp;&nbsp;</th>
+                                                        <th>Present&nbsp;&nbsp;</th>
+                                                        <th>Pembimbing&nbsp;&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $no0 = 1;
+                                                    while ($d_pi = $q_pi->fetch(PDO::FETCH_ASSOC)) {
+                                                    ?>
+                                                        <tr>
+                                                            <td class="text-center"><?= $no0; ?></td>
+                                                            <td><?= tanggal($d_pkd['tgl']); ?></td>
+                                                            <td><?= $d_pkd['semester']; ?></td>
+                                                            <td><?= $d_pkd['jenis']; ?></td>
+                                                            <td><?= $d_pkd['bim1']; ?></td>
+                                                            <td><?= $d_pkd['bim2']; ?></td>
+                                                            <td><?= $d_pkd['bim3']; ?></td>
+                                                            <td><?= $d_pkd['present']; ?></td>
+                                                            <td><?= $d_pkd['pembimbing']; ?></td>
+                                                        </tr>
+                                                    <?php
+                                                        $no0++;
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $("#dataTable_pi<?= $no ?>").DataTable();
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <a href="?logbook&ked_residen_pi&data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>&admin=<?= $_GET['data'] ?>" class="btn btn-outline-primary" title="Ubah Jadwal Kegiatan Harian">
+                            <i class="fa-solid fa-pen-to-square "></i>
+                        </a>
+                    </td>
+
                     <!-- Unduh, Unggah -->
                     <td class="text-center">
                         <a href="_print\p_logbook_ked_coass.php?data=<?= encryptString($d_praktikan['id_praktikan'], $customkey) ?>" class="btn m-1 btn-outline-danger btn-xs rounded" title="Unduh Log Book" download>
