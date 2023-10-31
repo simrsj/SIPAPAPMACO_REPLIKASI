@@ -153,8 +153,8 @@
                             // (rapat_klinik == "") ? $("#err_rapat_klinik").html("Pilih Rapat Klinik"): $("#err_rapat_klinik").html("");
                             (acara_ilmiah == "") ? $("#err_acara_ilmiah").html("Harus Diisi"): $("#err_acara_ilmiah").html("");
                             (matkul_dosen == "") ? $("#err_matkul_dosen").html("Harus Diisi"): $("#err_matkul_dosen").html("");
-                            (j_pasien_rajal == "" || j_pasien_rajal < 0) ? $("#err_j_pasien_rajal" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_rajal" + x).html("");
-                            (j_pasien_ranap == "" || j_pasien_ranap < 0) ? $("#err_j_pasien_ranap" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_ranap" + x).html("");
+                            (j_pasien_rajal == "" || j_pasien_rajal < 0) ? $("#err_j_pasien_rajal").html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_rajal" + x).html("");
+                            (j_pasien_ranap == "" || j_pasien_ranap < 0) ? $("#err_j_pasien_ranap").html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_ranap" + x).html("");
                         } else {
                             $.ajax({
                                 type: 'POST',

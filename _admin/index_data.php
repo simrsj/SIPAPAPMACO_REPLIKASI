@@ -7,7 +7,7 @@ if (isset($_GET['aku']) && $d_prvl['r_akun'] == 'Y') {
 //log book 
 elseif (isset($_GET['logbook']) && $d_prvl['r_logbook'] == 'Y') {
 	if (isset($_GET['ked_residen_jkh']) && isset($_GET['data'])) include "_admin/view/v_ked_residen_jkh_input.php";
-	if (isset($_GET['ked_residen_pkd']) && isset($_GET['data'])) include "_admin/view/v_ked_residen_pkd_input.php";
+	elseif (isset($_GET['ked_residen_pkd']) && isset($_GET['data'])) include "_admin/view/v_ked_residen_pkd_input.php";
 	elseif (isset($_GET['ked_coass_nilai']) && isset($_GET['u'])) include "_admin/update/u_ked_coass_nilai.php";
 	elseif (isset($_GET['ked_coass_p3d']) && isset($_GET['u'])) include "_admin/update/u_ked_coass_p3d.php";
 	elseif (isset($_GET['ked_coass_jkh']) && isset($_GET['data'])) include "_admin/view/v_ked_coass_jkh_input.php";
