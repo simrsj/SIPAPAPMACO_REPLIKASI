@@ -1,5 +1,5 @@
 /_add-ons/koneksi.php
-# /_add-ons/crypt.php
+/_add-ons/crypt.php
 .gitignore
 .htaccess
 /.idea
