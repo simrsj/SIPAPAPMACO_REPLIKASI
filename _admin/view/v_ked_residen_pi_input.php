@@ -5,7 +5,7 @@
         $sql_praktikan = "SELECT * FROM tb_praktikan ";
         $sql_praktikan .= " JOIN tb_praktik ON tb_praktikan.id_praktik = tb_praktik.id_praktik";
         $sql_praktikan .= " JOIN tb_institusi ON tb_praktik.id_institusi = tb_institusi.id_institusi";
-        $sql_praktikan .= " WHERE id_praktikan = " .  $idpr;
+        $sql_praktikan .= " WHERE id_praktikan = " . $idpr;
         // echo "$sql_praktikan<br>";
         $q_praktikan = $conn->query($sql_praktikan);
         $d_praktikan = $q_praktikan->fetch(PDO::FETCH_ASSOC);
@@ -121,7 +121,6 @@
                     <div id="loader" class="loader mb-5 mt-5 text-center"></div>
                     <div id="data_pi"></div>
                 </div>
-
                 <script>
                     $(document).ready(function() {
                         $('#data_pi')
