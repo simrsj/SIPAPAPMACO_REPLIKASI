@@ -71,57 +71,57 @@
                                             <div class="modal-body text-left">
                                                 <form id="form_u<?= $no0 ?>" method="post">
                                                     <label for="tgl<?= $no0 ?>">Tanggal <span class="text-danger">*</span></label>
-                                                    <input type="date" class="form-control" id="tgl<?= $no0 ?>" name="tgl">
+                                                    <input type="date" class="form-control" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_pi['tgl']; ?>">
                                                     <div id="err_tgl<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                     <div class="row mb-2 text-center">
                                                         <div class="col-xl">
                                                             <label for="semester<?= $no0 ?>">Semester<span class="text-danger">*</span></label>
-                                                            <input type="number" min="0" id="semester<?= $no0 ?>" name="semester" class="form-control">
+                                                            <input type="number" min="0" id="semester<?= $no0 ?>" name="semester" class="form-control" value="<?= $d_pi['semester']; ?>">
                                                             <div id="err_semester<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                         <div class="col-xl text-center">
                                                             <label for="jenis<?= $no0 ?>">Jenis<span class="text-danger">*</span></label>
-                                                            <input id="jenis" name="jenis<?= $no0 ?>" class="form-control">
+                                                            <input id="jenis<?= $no0 ?>" name="jenis" class="form-control" value="<?= $d_pi['jenis']; ?>">
                                                             <div id="err_jenis<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                     </div>
                                                     <label for="judul<?= $no0 ?>">Judul<span class="text-danger">*</span></label>
-                                                    <textarea id="judul<?= $no0 ?>" name="judul" class="form-control" rows="2"></textarea>
+                                                    <textarea id="judul<?= $no0 ?>" name="judul" class="form-control" rows="2"><?= $d_pi['judul']; ?></textarea>
                                                     <div id="err_judul<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                     <div class="row mb-2 text-center">
                                                         <div class="col-xl">
                                                             <label for="bim1<?= $no0 ?>">Bim 1<span class="text-danger">*</span></label>
-                                                            <input type="date" id="bim1<?= $no0 ?>" name="bim1" class="form-control">
+                                                            <input type="date" id="bim1<?= $no0 ?>" name="bim1" class="form-control" value="<?= $d_pi['bim1']; ?>">
                                                             <div id="err_bim1<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                         <div class="col-xl text-center">
                                                             <label for="bim2<?= $no0 ?>">Bim 2<span class="text-danger">*</span></label>
-                                                            <input type="date" id="bim2<?= $no0 ?>" name="bim2" class="form-control">
+                                                            <input type="date" id="bim2<?= $no0 ?>" name="bim2" class="form-control" value="<?= $d_pi['bim2']; ?>">
                                                             <div id="err_bim2<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                         <div class="col-xl text-center">
                                                             <label for="bim3<?= $no0 ?>">Bim 3<span class="text-danger">*</span></label>
-                                                            <input type="date" id="bim3<?= $no0 ?>" name="bim3" class="form-control">
+                                                            <input type="date" id="bim3<?= $no0 ?>" name="bim3" class="form-control" value="<?= $d_pi['bim3']; ?>">
                                                             <div id="err_bim3<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                         <div class="col-xl text-center">
                                                             <label for="present<?= $no0 ?>">Present<span class="text-danger">*</span></label>
-                                                            <input type="date" id="present<?= $no0 ?>" name="present" class="form-control">
+                                                            <input type="date" id="present<?= $no0 ?>" name="present" class="form-control" value="<?= $d_pi['present']; ?>">
                                                             <div id="err_present<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                         </div>
                                                     </div>
                                                     <label for="pembimbing<?= $no0 ?>">Pembimbing<span class="text-danger">*</span></label>
-                                                    <input id="pembimbing<?= $no0 ?>" name="pembimbing" class="form-control">
+                                                    <input id="pembimbing<?= $no0 ?>" name="pembimbing" class="form-control" value="<?= $d_pi['pembimbing']; ?>">
                                                     <div id="err_pembimbing<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_pi['id_pi'], $customkey) ?>' )" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_pi['id'], $customkey) ?>' )" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_pi['id_pi'], $customkey) ?>">
+                                <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_pi['id'], $customkey) ?>">
                                     <i class="fa fa-trash"></i> Hapus
                                 </a>
                             </td>
@@ -141,30 +141,39 @@
             function ubah(x, y) {
                 var data_form = $('#form_u' + x).serializeArray();
                 data_form.push({
-                    name: "id",
+                    name: "idpr",
                     value: y
                 });
-                var jenis = $("#jenis" + x).val();
                 var tgl = $("#tgl" + x).val();
                 var semester = $("#semester" + x).val();
-                var no_rm = $("#no_rm" + x).val();
-                var icd10_diagnosis = $("#icd10_diagnosis" + x).val();
-                var ket = $("#ket" + x).val();
+                var jenis = $("#jenis" + x).val();
+                var judul = $("#judul" + x).val();
+                var bim1 = $("#bim1" + x).val();
+                var bim2 = $("#bim2" + x).val();
+                var bim3 = $("#bim3" + x).val();
+                var present = $("#present" + x).val();
+                var pembimbing = $("#pembimbing" + x).val();
                 if (
-                    jenis == "" ||
                     semester == "" ||
                     tgl == "" ||
-                    no_rm == "" ||
-                    icd10_diagnosis == "" ||
-                    ket == ""
+                    jenis == "" ||
+                    judul == "" ||
+                    bim1 == "" ||
+                    bim2 == "" ||
+                    bim3 == "" ||
+                    present == "" ||
+                    pembimbing == ""
                 ) {
                     custom_alert(true, 'warning', '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>', 10000);
-                    (jenis == "") ? $("#err_jenis" + x).html("Harus Dipilih"): $("#err_jenis" + x).html("");
-                    (tgl == "") ? $("#err_tgl" + x).html("Harus Dipilih" + x): $("#err_tgl").html("");
+                    (tgl == "") ? $("#err_tgl" + x).html("Harus Dipilih"): $("#err_tgl" + x).html("");
                     (semester == "" || semester < 0) ? $("#err_semester" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_semester" + x).html("");
-                    (no_rm == "" || no_rm < 0) ? $("#err_no_rm" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_no_rm" + x).html("");
-                    (icd10_diagnosis == "") ? $("#err_icd10_diagnosis" + x).html("Harus Diisi"): $("#err_icd10_diagnosis" + x).html("");
-                    (ket == "") ? $("#err_ket" + x).html("Harus Diisi"): $("#err_ket" + x).html("");
+                    (jenis == "") ? $("#err_jenis" + x).html("Harus Diisi"): $("#err_jenis" + x).html("");
+                    (judul == "") ? $("#err_judul" + x).html("Harus Diisi"): $("#err_judul" + x).html("");
+                    (bim1 == "") ? $("#err_bim1" + x).html("Harus Dipilih"): $("#err_bim1" + x).html("");
+                    (bim2 == "") ? $("#err_bim2" + x).html("Harus Dipilih"): $("#err_bim2" + x).html("");
+                    (bim3 == "") ? $("#err_bim3" + x).html("Harus Dipilih"): $("#err_bim3" + x).html("");
+                    (present == "") ? $("#err_present" + x).html("Harus Dipilih"): $("#err_present" + x).html("");
+                    (pembimbing == "") ? $("#err_pembimbing" + x).html("Harus Diisi"): $("#err_pembimbing" + x).html("");
                 } else {
                     $.ajax({
                         type: 'POST',
@@ -174,12 +183,12 @@
                         success: function(response) {
                             if (response.ket == "SUCCESS") {
                                 $('#modal_ubah' + x).modal('hide')
-                                custom_alert(true, 'success', '<center>DATA BERHASIL DIUBAH</center>', 10000);
+                                custom_alert(true, 'success', '<center>DATA BERHASIL DISIMPAN</center>', 10000);
                                 loading_sw2();
                                 $('#data_pi')
                                     .load(
                                         "_admin/view/v_ked_residen_pi_data.php?idpr=<?= $_GET['idpr'] ?>");
-                            } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
+                            } else custom_alert(true, 'error', '<center>DATA GAGAL DISIMPAN <br>' + response.ket + '</center>', 10000);
                         },
                         error: function(response) {
                             custom_alert(true, 'error', '<center>DATA ERROR <br>' + response.ket + '</center>', 10000);
@@ -225,7 +234,12 @@
             });
 
             Swal.close();
-            $('#dataTable').DataTable();
+            $('#dataTable').DataTable({
+                'columnDefs': [{
+                    'targets': [10],
+                    'orderable': false,
+                }]
+            });
         </script>
     <?php } else { ?>
         <div class="jumbotron border-2 m-2 shadow">

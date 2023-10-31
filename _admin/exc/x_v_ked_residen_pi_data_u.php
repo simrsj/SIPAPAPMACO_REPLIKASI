@@ -6,16 +6,18 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 // echo "</pre>";
 error_reporting(0);
 try {
-    $sql = "UPDATE tb_logbook_ked_residen_pkd SET ";
+    $sql = "UPDATE tb_logbook_ked_residen_pi SET ";
     $sql .= " tgl_ubah = '" . date('Y-m-d G:i:s') . "',";
-    $sql .= " jenis = '" . $_POST['jenis'] . "',";
     $sql .= " tgl = '" . $_POST['tgl'] . "',";
     $sql .= " semester = '" . $_POST['semester'] . "',";
-    $sql .= " no_rm = '" . $_POST['no_rm'] . "',";
-    $sql .= " inisial = '" . $_POST['inisial'] . "',";
-    $sql .= " icd10_diagnosis = '" . $_POST['icd10_diagnosis'] . "',";
-    $sql .= " ket = '" . $_POST['ket'] . "'";
-    $sql .= " WHERE id = " . decryptString($_POST['id'], $customkey);
+    $sql .= " jenis = '" . $_POST['jenis'] . "',";
+    $sql .= " judul = '" . $_POST['judul'] . "',";
+    $sql .= " bim1 = '" . $_POST['bim1'] . "',";
+    $sql .= " bim2 = '" . $_POST['bim2'] . "',";
+    $sql .= " bim3 = '" . $_POST['bim3'] . "',";
+    $sql .= " present = '" . $_POST['present'] . "',";
+    $sql .= " pembimbing = '" . $_POST['pembimbing'] . "'";
+    $sql .= " WHERE id = " . decryptString($_POST['idpr'], $customkey);
     $conn->query($sql);
     echo json_encode([
         'sql' => $sql,

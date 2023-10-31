@@ -164,7 +164,7 @@
                                 success: function(response) {
                                     if (response.ket == "SUCCESS") {
                                         $('#modal_tambah').modal('hide')
-                                        custom_alert(true, 'success', '<center>DATA BERHASIL DIISMPAN</center>', 10000);
+                                        custom_alert(true, 'success', '<center>DATA BERHASIL DISIMPAN</center>', 10000);
                                         loading_sw2();
                                         $('#data_jkh')
                                             .load(
