@@ -71,9 +71,9 @@
                                         <?php
                                         if (
                                             $d_praktik['jumlah_praktik'] == $r_jumlah_praktik &&
-                                            $d_praktik['id_profesi_pdd'] == 2 &&
-                                            ($d_praktik['status_alasan'] == "Y" ||
-                                                $d_praktik['status_mess_praktik'] == "Y")
+                                            ($d_praktik['id_profesi_pdd'] == 1 || $d_praktik['id_profesi_pdd'] == 2)
+                                            &&
+                                            ($d_praktik['status_alasan'] == "Y" || $d_praktik['status_mess_praktik'] == "Y")
                                         ) {
                                         ?>
                                             <div class="col-md text-center my-auto">

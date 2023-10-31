@@ -159,7 +159,7 @@ $html .= '
         Jurusan : <b>' . $d_praktik['nama_jurusan_pdd'] . '</b><br>
         Jenjang : <b>' . $d_praktik['nama_jenjang_pdd'] . '</b><br>
         Profesi : <b>' . $d_praktik['nama_profesi_pdd'] . '</b><br>
-        Link Aplikasi : <b style="color:blue">https://bit.ly/RSJJABARSIPAPAPMACO</b><br>
+        Link Aplikasi : <b style="color:blue">https://s.id/SIPAPAPMACORSJ</b><br>
         </td>
     </tr>
 </table>
