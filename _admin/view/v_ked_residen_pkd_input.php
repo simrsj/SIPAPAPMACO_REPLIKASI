@@ -52,7 +52,7 @@
                             <a class="btn btn-success btn-sm tambah_init" href="#" data-toggle="modal" data-target="#modal_tambah">
                                 <i class="fa-solid fa-plus"></i> Tambah
                             </a>
-                            <div class="modal  fade" id="modal_tambah" tabindex="-1" role="dialog" aria-labelledby="modal_tambah" aria-hidden="true">
+                            <div class="modal" id="modal_tambah">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header bg-secondary text-light">
@@ -64,52 +64,55 @@
                                         <div class="modal-body text-left">
                                             <form id="form_t" method="post">
                                                 <label for="jenis">Jenis <span class="text-danger">*</span></label>
-                                                <select class="select2-long" id="jenis" name="jenis">
-                                                    <option value="Diagnosis dan Psikofarmakoterapi Kasus Dewasa"></option>
-                                                    <option value="Keterampilan Diagnostik dan Psikofarmakoterapi Kasus Anak"></option>
-                                                    <option value="Keterampilan Terapi Elektrokonvulsif"></option>
-                                                    <option value="Keterampilan Psikoterapi Suportif dan konseling"></option>
-                                                    <option value="Diagnosis dan Psikofarmakoterapi Kasus Dewasa">Diagnosis dan Psikofarmakoterapi Kasus Dewasa</option>
-                                                    <option value="Diagnosis dan Psikofarmakoterapi Kasus Dewasa">Diagnosis dan Psikofarmakoterapi Kasus Dewasa</option>
-                                                    <option value="Diagnosis dan Psikofarmakoterapi Kasus Dewasa">Diagnosis dan Psikofarmakoterapi Kasus Dewasa</option>
-                                                    <option value="Diagnosis dan Psikofarmakoterapi Kasus Dewasa">Diagnosis dan Psikofarmakoterapi Kasus Dewasa</option>
-                                                    <option value="Diagnosis dan Psikofarmakoterapi Kasus Dewasa">Diagnosis dan Psikofarmakoterapi Kasus Dewasa</option>
-                                                    <option value="Diagnosis dan Psikofarmakoterapi Kasus Dewasa">Diagnosis dan Psikofarmakoterapi Kasus Dewasa</option>
-                                                </select>
+                                                <div class="text-center">
+                                                    <select class="select2 text-center" id="jenis" name="jenis">
+                                                        <option value=""></option>
+                                                        <?php
+                                                        try {
+                                                            $sql_jenis = "SELECT * FROM `tb_logbook_ked_residen_pkd_jenis`";
+                                                            // echo "$sql_jenis<br>";
+                                                            $q_jenis = $conn->query($sql_jenis);
+                                                        } catch (PDOException $ex) {
+                                                        ?>
+                                                            <script>
+                                                                alert("<?= $ex->getMessage() . $ex->getLine() ?>");
+                                                                document.location.href = '?error404';
+                                                            </script>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <?php while ($d_jenis = $q_jenis->fetch(PDO::FETCH_ASSOC)) { ?>
+                                                            <option value="<?= $d_jenis['id'] ?>"><?= $d_jenis['nama'] ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
                                                 <div id="err_jenis" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                 <label for="tgl">Tanggal <span class="text-danger">*</span></label>
                                                 <input type="date" class="form-control" id="tgl" name="tgl">
                                                 <div id="err_tgl" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                <div class="row  mb-2 text-center">
+                                                <div class="row mb-2 text-center">
                                                     <div class="col-xl">
-                                                        <label for="visite_besar">Visite Besar</label>
-                                                        <input type="checkbox" id="visite_besar" name="visite_besar" class="" value="Y">
-                                                        <!-- <div id="err_visite_besar" class="i err text-danger text-center text-xs blink mb-2"></div> -->
+                                                        <label for="semester">Semester<span class="text-danger">*</span></label>
+                                                        <input type="number" min="0" id="semester" name="semester" class="form-control">
+                                                        <div id="err_semester" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                     </div>
                                                     <div class="col-xl text-center">
-                                                        <label for="rapat_klinik">Rapat Klinik</label>
-                                                        <input type="checkbox" id="rapat_klinik" name="rapat_klinik" class="" value="Y">
-                                                        <!-- <div id="err_rapat_klinik" class="i err text-danger text-center text-xs blink mb-2"></div> -->
+                                                        <label for="no_rm">No. RM<span class="text-danger">*</span></label>
+                                                        <input type="number" min="0" id="no_rm" name="no_rm" class="form-control">
+                                                        <div id="err_no_rm" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                    </div>
+                                                    <div class="col-xl text-center">
+                                                        <label for="inisial">Inisial<span class="text-danger">*</span></label>
+                                                        <input type="type" id="inisial" name="inisial" class="form-control">
+                                                        <div id="err_inisial" class="i err text-danger text-center text-xs blink mb-2"></div>
                                                     </div>
                                                 </div>
-                                                <label for="acara_ilmiah">Acara Ilmiah<span class="text-danger">*</span></label>
-                                                <textarea id="acara_ilmiah" name="acara_ilmiah" class="form-control" rows="2"></textarea>
-                                                <div id="err_acara_ilmiah" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                <label for="matkul_dosen">Mata Kuliah/Dosen<span class="text-danger">*</span></label>
-                                                <textarea id="matkul_dosen" name="matkul_dosen" class="form-control" rows="2"></textarea>
-                                                <div id="err_matkul_dosen" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                <div class="row">
-                                                    <div class="col-xl">
-                                                        <label for="j_pasien_rajal">Pasien Rajal<span class="text-danger">*</span></label>
-                                                        <input type="number" id="j_pasien_rajal" name="j_pasien_rajal" class="form-control">
-                                                        <div id="err_j_pasien_rajal" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                    </div>
-                                                    <div class="col-xl">
-                                                        <label for="j_pasien_ranap">Pasien Ranap<span class="text-danger">*</span></label>
-                                                        <input type="number" id="j_pasien_ranap" name="j_pasien_ranap" class="form-control"></input>
-                                                        <div id="err_j_pasien_ranap" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                    </div>
-                                                </div>
+                                                <label for="icd10_diagnosis">ICD-10/Diagnosis<span class="text-danger">*</span></label>
+                                                <textarea id="icd10_diagnosis" name="icd10_diagnosis" class="form-control" rows="2"></textarea>
+                                                <div id="err_icd10_diagnosis" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                <label for="ket">Th Farmakologis/Manajemen/Sesi ECT/Teknik Psi Suportif/Manajemen/Metode<span class="text-danger">*</span></label>
+                                                <textarea id="ket" name="ket" class="form-control" rows="2"></textarea>
+                                                <div id="err_ket" class="i err text-danger text-center text-xs blink mb-2"></div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -123,19 +126,20 @@
                 </div>
                 <div class="card-body" id="data">
                     <div id="loader" class="loader mb-5 mt-5 text-center"></div>
-                    <div id="data_jkh"></div>
+                    <div id="data_pkd"></div>
                 </div>
 
                 <script>
                     $(document).ready(function() {
-                        $('#data_jkh')
+                        $('#data_pkd')
                             .load(
-                                "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['data'] ?>");
+                                "_admin/view/v_ked_residen_pkd_data.php?idpr=<?= $_GET['data'] ?>");
                         $('#loader').remove();
                     });
                     $(".tambah_init").click(function() {
                         $(".err").html("");
                         $("#form_t").trigger("reset");
+                        $('#jenis').val("").trigger("change");
                     });
                     $(document).on('click', '.tambah', function() {
                         var data_form = $('#form_t').serializeArray();
@@ -143,36 +147,31 @@
                             name: "idpr",
                             value: "<?= $_GET['data'] ?>"
                         });
+                        var jenis = $("#jenis").val();
                         var tgl = $("#tgl").val();
-                        // var visite_besar = $("#visite_besar").val();
-                        // var rapat_klinik = $("#rapat_klinik").val();
-                        var acara_ilmiah = $("#acara_ilmiah").val();
-                        var matkul_dosen = $("#matkul_dosen").val();
-                        var j_pasien_rajal = $("#j_pasien_rajal").val();
-                        var j_pasien_ranap = $("#j_pasien_ranap").val();
+                        var semester = $("#semester").val();
+                        var no_rm = $("#no_rm").val();
+                        var icd10_diagnosis = $("#icd10_diagnosis").val();
+                        var ket = $("#ket").val();
                         if (
+                            jenis == "" ||
+                            semester == "" ||
                             tgl == "" ||
-                            // visite_besar == "" ||
-                            // rapat_klinik == "" ||
-                            acara_ilmiah == "" ||
-                            matkul_dosen == "" ||
-                            j_pasien_rajal == "" ||
-                            j_pasien_ranap == "" ||
-                            j_pasien_rajal < 0 ||
-                            j_pasien_ranap < 0
+                            no_rm == "" ||
+                            icd10_diagnosis == "" ||
+                            ket == ""
                         ) {
                             custom_alert(true, 'warning', '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>', 10000);
-                            (tgl == "") ? $("#err_tgl").html("Pilih Tanggal"): $("#err_tgl").html("");
-                            // (visite_besar == "") ? $("#err_visite_besar").html("Isi Visite Besar"): $("#err_visite_besar").html("");
-                            // (rapat_klinik == "") ? $("#err_rapat_klinik").html("Pilih Rapat Klinik"): $("#err_rapat_klinik").html("");
-                            (acara_ilmiah == "") ? $("#err_acara_ilmiah").html("Harus Diisi"): $("#err_acara_ilmiah").html("");
-                            (matkul_dosen == "") ? $("#err_matkul_dosen").html("Harus Diisi"): $("#err_matkul_dosen").html("");
-                            (j_pasien_rajal == "" || j_pasien_rajal < 0) ? $("#err_j_pasien_rajal" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_rajal" + x).html("");
-                            (j_pasien_ranap == "" || j_pasien_ranap < 0) ? $("#err_j_pasien_ranap" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_ranap" + x).html("");
+                            (jenis == "") ? $("#err_jenis").html("Harus Dipilih"): $("#err_jenis").html("");
+                            (tgl == "") ? $("#err_tgl").html("Harus Dipilih"): $("#err_tgl").html("");
+                            (semester == "" || semester < 0) ? $("#err_semester").html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_semester").html("");
+                            (no_rm == "" || no_rm < 0) ? $("#err_no_rm").html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_no_rm").html("");
+                            (icd10_diagnosis == "") ? $("#err_icd10_diagnosis").html("Harus Diisi"): $("#err_icd10_diagnosis").html("");
+                            (ket == "") ? $("#err_ket").html("Harus Diisi"): $("#err_ket").html("");
                         } else {
                             $.ajax({
                                 type: 'POST',
-                                url: "_admin/exc/x_v_ked_residen_jkh_input_t.php",
+                                url: "_admin/exc/x_v_ked_residen_pkd_input_t.php",
                                 data: data_form,
                                 dataType: "JSON",
                                 success: function(response) {
@@ -180,9 +179,9 @@
                                         $('#modal_tambah').modal('hide')
                                         custom_alert(true, 'success', '<center>DATA BERHASIL DIISMPAN</center>', 10000);
                                         loading_sw2();
-                                        $('#data_jkh')
+                                        $('#data_pkd')
                                             .load(
-                                                "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['data'] ?>");
+                                                "_admin/view/v_ked_residen_pkd_data.php?idpr=<?= $_GET['data'] ?>");
                                     } else custom_alert(true, 'error', '<center>DATA GAGAL DISIMPAN <br>' + response.ket + '</center>', 10000);
                                 },
                                 error: function(response) {
