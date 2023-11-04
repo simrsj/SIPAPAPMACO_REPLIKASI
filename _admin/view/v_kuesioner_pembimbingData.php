@@ -2,14 +2,18 @@
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 
-$sql_pertanyaan = "SELECT * FROM tb_kuesioner_pembimbing";
-// echo $sql_kuota;
+$sql_pertanyaan = "SELECT * FROM tb_kuesioner_pembimbing_pertanyaan";
+// echo $sql_pertanyaan;
 try {
     $q_pertanyaan = $conn->query($sql_pertanyaan);
     $r_pertanyaan = $q_pertanyaan->rowCount();
 } catch (Exception $ex) {
-    echo "<script>alert('-DATA PERTANYAAN PEMBIMBING-');";
-    echo "document.location.href='?error404';</script>";
+?>
+    <script>
+        alert("<?= $ex->getMessage() . $ex->getLine() ?>");
+        document.location.href = '?error404';
+    </script>
+<?php
 }
 ?>
 <?php if ($r_pertanyaan > 0) { ?>
@@ -19,6 +23,7 @@ try {
                 <tr class="text-center">
                     <th scope="col">No</th>
                     <th scope="col">Pertanyaan</th>
+                    <th scope="col">Jawaban</th>
                     <th scope="col">Waktu Tambah</th>
                     <th scope="col">Waktu Ubah</th>
                     <th scope="col">Keterangan </th>
@@ -31,6 +36,34 @@ try {
                     <tr>
                         <th scope="row"><?= $no; ?></th>
                         <td><?= $d_pertanyaan['pertanyaan']; ?></td>
+                        <td>
+                            <?php
+                            $sql_p_jawaban = "SELECT * FROM tb_kuesioner_pembimbing_jawaban";
+                            $sql_p_jawaban .= " WHERE id_pertanyaan = " . $d_pertanyaan['id'];
+                            // echo $sql_p_jawaban;
+                            try {
+                                $q_p_jawaban = $conn->query($sql_p_jawaban);
+                                $r_p_jawaban = $q_p_jawaban->rowCount();
+                            } catch (Exception $ex) {
+                            ?>
+                                <script>
+                                    alert("<?= $ex->getMessage() . $ex->getLine() . $sql_p_jawaban ?>");
+                                    document.location.href = '?error404';
+                                </script>
+                            <?php
+                            }
+                            ?>
+                            <a href="?kuesioner_pembimbing&jawaban=<?= encryptString($d_pertanyaan['id'], $customkey) ?>&pertanyaan=<?= encryptString($d_pertanyaan['pertanyaan'], $customkey) ?>" title="ubah" class="btn btn-primary btn-xs">
+                                <i class="fa-regular fa-pen-to-square fa-beat"></i> Ubah
+                            </a>
+                            <?php if ($r_p_jawaban > 0) { ?>
+                                <a href="Ubah" title="ubah" class="btn btn-primary btn-xs">
+                                    <i class="fa-regular fa-pen-to-square"></i> Ubah
+                                </a>
+                            <?php } else { ?>
+                                <div class="badge badge-danger blink">Data Tidak Ada</div>
+                            <?php } ?>
+                        </td>
                         <td><?= $d_pertanyaan['tgl_tambah']; ?></td>
                         <td><?= $d_pertanyaan['tgl_ubah']; ?></td>
                         <td class="text-center"><?= $d_pertanyaan['ket']; ?></td>

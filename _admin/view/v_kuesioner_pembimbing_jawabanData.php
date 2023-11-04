@@ -1,236 +1,233 @@
 <?php
+
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
-$sql_prvl = "SELECT * FROM tb_user_privileges WHERE id_user = " . base64_decode(urldecode($_GET['idu']));
-// echo $sql_prvl;
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
+// error_reporting(0);
+$id_pertanyaan = decryptString($_GET['id'], $customkey);
 try {
-    $q_prvl = $conn->query($sql_prvl);
-} catch (Exception $ex) {
-    echo "<script>alert('$ex -DATA PRIVILEGES-');";
-    echo "document.location.href='?error404';</script>";
-}
-$d_prvl = $q_prvl->fetch(PDO::FETCH_ASSOC);
-
-$sql_kuota = "SELECT * FROM tb_kuota ORDER BY tb_kuota.nama_kuota ASC";
-// echo $sql_kuota;
-try {
-    $q_data_kuota = $conn->query($sql_kuota);
-} catch (Exception $ex) {
-    echo "<script>alert('$ex -DATA KUOTA-');";
-    echo "document.location.href='?error404';</script>";
-}
-$r_data_kuota = $q_data_kuota->rowCount();
-
-if ($r_data_kuota > 0) {
+    $sql_jawaban = "SELECT * FROM tb_kuesioner_pembimbing_jawaban ";
+    $sql_jawaban .= " JOIN tb_kuesioner_pembimbing_pertanyaan ON tb_kuesioner_pembimbing_jawaban.id_pertanyaan = tb_kuesioner_pembimbing_pertanyaan.id";
+    $sql_jawaban .= " WHERE tb_kuesioner_pembimbing_jawaban.id_pertanyaan = " . $id_pertanyaan;
+    $sql_jawaban .= " ORDER BY tb_kuesioner_pembimbing_jawaban.tgl_ubah DESC, tb_kuesioner_pembimbing_jawaban.tgl_tambah DESC";
+    // echo "$sql_jawaban<br>";
+    $q_jawaban = $conn->query($sql_jawaban);
+    $r_jawaban = $q_jawaban->rowCount();
+} catch (PDOException $ex) {
 ?>
+    <script>
+        alert("<?= $ex->getMessage() . $ex->getLine() ?>");
+        document.location.href = '?error404';
+    </script>
+<?php
+}
+?>
+<?php if ($r_jawaban > 0) { ?>
     <div class="table-responsive">
-        <table class="table table-striped" id="dataTable">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Nama Kuota</th>
-                    <th scope="col">Jumlah Kuota </th>
-                    <th scope="col">Keterangan </th>
-                    <th scope="col"></th>
+        <table class="table table-striped table-bordered " id="dataTable">
+            <thead class="">
+                <tr class="text-center">
+                    <th scope='col'>No&nbsp;&nbsp;</th>
+                    <th>Tanggal Tambah&nbsp;&nbsp;</th>
+                    <th>Tanggal Ubah&nbsp;&nbsp;</th>
+                    <th>Jawaban&nbsp;&nbsp;</th>
+                    <th>Nilai&nbsp;&nbsp;</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $total_jumlah_tarif = 0;
-                $no = 1;
-                while ($d_data_kuota = $q_data_kuota->fetch(PDO::FETCH_ASSOC)) {
+                $no0 = 1;
+                while ($d_jawaban = $q_jawaban->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                     <tr>
-                        <th scope="row"><?= $no; ?></th>
-                        <td><?= $d_data_kuota['nama_kuota']; ?></td>
-                        <td><?= $d_data_kuota['jumlah_kuota']; ?></td>
-                        <td><?= $d_data_kuota['ket_kuota']; ?></td>
+                        <td class="text-center"><?= $no0; ?></td>
+                        <td><?= $d_jawaban['tgl_tambah']; ?></td>
+                        <td><?= $d_jawaban['tgl_ubah']; ?></td>
+                        <td><?= $d_jawaban['jawaban']; ?></td>
+                        <td><?= $d_jawaban['nilai']; ?></td>
                         <td class="text-center">
-                            <?php if ($d_prvl['u_kuota'] == "Y") { ?>
-                                <button id="<?= $d_data_kuota['id_kuota']; ?>" class="btn btn-primary btn-sm ubah_init" title="UBAH" href="#page-top">
-                                    <i class="fa fa-edit"></i> Ubah
-                                </button>
-                            <?php } ?>
-                            <!-- <?php if ($d_prvl['d_kuota'] == "Y") { ?>
-                                <button id="<?= $d_data_kuota['id_kuota']; ?>" class="btn btn-danger btn-sm hapus" title="HAPUS">
-                                    <i class="fa fa-trash"></i> Hapus
-                                </button>
-                            <?php } ?> -->
+                            <a href="#" class="btn btn-primary btn-sm ubah_init" data-toggle="modal" data-target="#modal_ubah<?= $no0; ?>">
+                                <i class=" fa fa-edit"></i> Ubah
+                            </a>
+
+                            <div class="modal" id="modal_ubah<?= $no0; ?>" tabindex="-1" role="dialog" aria-labelledby="modal_ubah<?= $no0; ?>" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-primary text-light">
+                                            Ubah Jadwal Kegiatan Harian
+                                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                X
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-left">
+                                            <form id="form_u<?= $no0 ?>" method="post">
+                                                <label for="tgl<?= $no0 ?>">Tanggal <span class="text-danger">*</span></label>
+                                                <input type="date" class="form-control" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_jkh['tgl'] ?>">
+                                                <div id="err_tgl<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                <div class="row  mb-2 text-center">
+                                                    <div class="col-xl">
+                                                        <label for="visite_besar<?= $no0 ?>">Visite Besar</label>
+                                                        <input type="checkbox" id="visite_besar<?= $no0 ?>" name="visite_besar" class="" value="Y" <?= $d_jkh['visite_besar'] == "Y" ? "checked" : "" ?>>
+                                                        <!-- <div id="err_visite_besar<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div> -->
+                                                    </div>
+                                                    <div class="col-xl text-center">
+                                                        <label for="rapat_klinik<?= $no0 ?>">Rapat Klinik</label>
+                                                        <input type="checkbox" id="rapat_klinik<?= $no0 ?>" name="rapat_klinik" class="" value="Y" <?= $d_jkh['rapat_klinik'] == "Y" ? "checked" : "" ?>>
+                                                        <!-- <div id="err_rapat_klinik<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div> -->
+                                                    </div>
+                                                </div>
+                                                <label for="acara_ilmiah<?= $no0 ?>">Acara Ilmiah<span class="text-danger">*</span></label>
+                                                <textarea id="acara_ilmiah<?= $no0 ?>" name="acara_ilmiah" class="form-control" rows="2"><?= $d_jkh['acara_ilmiah'] ?></textarea>
+                                                <div id="err_acara_ilmiah<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                <label for="matkul_dosen<?= $no0 ?>">Mata Kuliah/Dosen<span class="text-danger">*</span></label>
+                                                <textarea id="matkul_dosen<?= $no0 ?>" name="matkul_dosen" class="form-control" rows="2"><?= $d_jkh['matkul_dosen'] ?></textarea>
+                                                <div id="err_matkul_dosen<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                <div class="row">
+                                                    <div class="col-xl">
+                                                        <label for="j_pasien_rajal<?= $no0 ?>">Pasien Rajal<span class="text-danger">*</span></label>
+                                                        <input type="number" min=0 id="j_pasien_rajal<?= $no0 ?>" name="j_pasien_rajal" class="form-control" value="<?= $d_jkh['j_pasien_rajal'] ?>">
+                                                        <div id="err_j_pasien_rajal<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                    </div>
+                                                    <div class="col-xl">
+                                                        <label for="j_pasien_ranap<?= $no0 ?>">Pasien Ranap<span class="text-danger">*</span></label>
+                                                        <input type="number" min=0 id="j_pasien_ranap<?= $no0 ?>" name="j_pasien_ranap" class="form-control" value="<?= $d_jkh['j_pasien_ranap'] ?>"></input>
+                                                        <div id="err_j_pasien_ranap<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_jkh['id'], $customkey) ?>' )" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_jkh['id'], $customkey) ?>">
+                                <i class="fa fa-trash"></i> Hapus
+                            </a>
                         </td>
                     </tr>
                 <?php
-                    $no++;
+                    $no0++;
                 }
                 ?>
             </tbody>
         </table>
     </div>
-<?php
-} else {
-?>
-    <div class="jumbotron">
-        <div class="jumbotron-fluid">
-            <div class="text-gray-700">
-                <h5 class="text-center">Data Praktikan Tidak Ada</h5>
-            </div>
-        </div>
-    </div>
-<?php
-}
-?>
-</div>
-</div>
-<script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable();
-    });
-
-    <?php if ($d_prvl['u_kuota'] == "Y") { ?>
+    <script>
         $(".ubah_init").click(function() {
-            document.getElementById("err_u_nama").innerHTML = "";
-            document.getElementById("err_u_jumlah").innerHTML = "";
-            document.getElementById("form_ubah_kuota").reset();
-            $("#data_ubah_kuota").fadeIn('slow');
-            $("#data_tambah_kuota").fadeOut('fast');
+            $(".err").html("");
+        });
 
-            var id = $(this).attr('id');
-            $.ajax({
-                type: 'POST',
-                url: "_admin/view/v_kuotaGetData.php",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(response) {
-
-                    document.getElementById("form_ubah_kuota").reset();
-
-                    document.getElementById("u_id_kuota").value = response.id_kuota;
-                    document.getElementById("u_nama_kuota").value = response.nama_kuota;
-                    document.getElementById("u_jumlah_kuota").value = response.jumlah_kuota;
-                    document.getElementById("u_ket_kuota").value = response.ket_kuota;
-                },
-                error: function(response) {
-                    alert(response.responseText);
-                    console.log(response.responseText);
-                }
+        function ubah(x, y) {
+            var data_form = $('#form_u' + x).serializeArray();
+            data_form.push({
+                name: "id",
+                value: y
             });
-
-            $("#data_tambah_test").fadeOut('slow');
-
-            $("#u_nama_kuota").focus();
-        });
-
-        $(".ubah_tutup").click(function() {
-            document.getElementById("err_u_nama").innerHTML = "";
-            document.getElementById("err_u_jumlah").innerHTML = "";
-            document.getElementById("form_ubah_kuota").reset();
-            $("#data_ubah_kuota").fadeOut('slow');
-        });
-
-        $(document).on('click', '.ubah', function() {
-            var data = $('#form_ubah_kuota').serialize();
-            var nama_kuota = document.getElementById("u_nama_kuota").value;
-            var jumlah_kuota = document.getElementById("u_jumlah_kuota").value;
-            var ket_kuota = document.getElementById("u_ket_kuota").value;
-
-            //cek data from ubah bila tidak diiisi
+            var tgl = $("#tgl" + x).val();
+            // var visite_besar = $("#visite_besar").val();
+            // var rapat_klinik = $("#rapat_klinik").val();
+            var acara_ilmiah = $("#acara_ilmiah" + x).val();
+            var matkul_dosen = $("#matkul_dosen" + x).val();
+            var j_pasien_rajal = $("#j_pasien_rajal" + x).val();
+            var j_pasien_ranap = $("#j_pasien_ranap" + x).val();
             if (
-                nama_kuota == "" ||
-                jumlah_kuota == ""
+                tgl == "" ||
+                // visite_besar == "" ||
+                // rapat_klinik == "" ||
+                acara_ilmiah == "" ||
+                matkul_dosen == "" ||
+                j_pasien_rajal == "" ||
+                j_pasien_ranap == "" ||
+                j_pasien_rajal < 0 ||
+                j_pasien_ranap < 0
             ) {
-                if (nama_kuota == "") {
-                    document.getElementById("err_u_nama").innerHTML = "Nama Harus Diisi";
-                } else {
-                    document.getElementById("err_u_nama").innerHTML = "";
-                }
-
-                if (jumlah_kuota == "") {
-                    document.getElementById("err_u_jumlah").innerHTML = "Kuota Harus Diisi";
-                } else {
-                    document.getElementById("err_u_jumlah").innerHTML = "";
-                }
-
-            } else {
+                custom_alert(true, 'warning', '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>', 10000);
+                (tgl == "") ? $("#err_tgl" + x).html("Pilih Tanggal"): $("#err_tgl").html("");
+                // (visite_besar == "") ? $("#err_visite_besar" + x).html("Isi Visite Besar"): $("#err_visite_besar").html("");
+                // (rapat_klinik == "") ? $("#err_rapat_klinik" + x).html("Pilih Rapat Klinik"): $("#err_rapat_klinik").html("");
+                (acara_ilmiah == "") ? $("#err_acara_ilmiah" + x).html("Harus Diisi"): $("#err_acara_ilmiah").html("");
+                (matkul_dosen == "") ? $("#err_matkul_dosen" + x).html("Harus Diisi"): $("#err_matkul_dosen").html("");
+                (j_pasien_rajal == "" || j_pasien_rajal < 0) ? $("#err_j_pasien_rajal" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_rajal" + x).html("");
+                (j_pasien_ranap == "" || j_pasien_ranap < 0) ? $("#err_j_pasien_ranap" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_ranap" + x).html("");
+            }
+            //eksekusi query ubah
+            else {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_v_kuota_u.php",
-                    data: data,
-                    success: function() {
-                        $('#data_kuota').load('_admin/view/v_kuotaData.php?idu=<?= $_GET['idu'] ?>');
-
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 5000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        });
-
-                        Toast.fire({
-                            icon: 'success',
-                            title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil Diubah</b></div>'
-                        });
+                    url: "_admin/exc/x_v_ked_residen_jkh_data_u.php",
+                    data: data_form,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.ket == "SUCCESS") {
+                            // console.log('<?= $no0; ?>');
+                            console.log(response.cok);
+                            $('#modal_ubah' + x).modal('hide');
+                            custom_alert(true, 'success', '<center>DATA BERHASIL DIUBAH</center>', 10000);
+                            loading_sw2();
+                            $('#data_jkh')
+                                .load(
+                                    "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                        } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
                     },
                     error: function(response) {
-                        console.log(response.responseText);
+                        custom_alert(true, 'error', '<center>DATA ERROR <br>' + response.ket + '</center>', 10000);
                     }
                 });
             }
-        });
-    <?php } ?>
+        }
 
-    <?php if ($d_prvl['d_kuota'] == "Y") { ?>
         $(document).on('click', '.hapus', function() {
-            console.log("hapus");
             Swal.fire({
-                position: 'top',
-                title: 'Hapus Data Praktikan?',
-                icon: 'error',
+                title: 'Anda Yakin?',
+                text: "Data akan Permanen Terhapus!",
+                icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#1cc88a',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Kembali',
-                confirmButtonText: 'Ya',
-                allowOutsideClick: false,
+                confirmButtonColor: '#e74a3b',
+                cancelButtonColor: '#858796',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Kembali'
             }).then((result) => {
-                if (result.isConfirmed) {
+                if (result.value) {
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_v_kuota_h.php",
+                        url: "_admin/exc/x_v_ked_residen_jkh_data_h.php",
                         data: {
-                            "id_kuota": $(this).attr('id')
+                            id: $(this).attr('id')
                         },
-                        success: function() {
-                            $('#data_kuota').load('_admin/view/v_kuotaData.php?idu=<?= $_GET['idu'] ?>');
-
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 5000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            });
-
-                            Toast.fire({
-                                icon: 'success',
-                                title: '<div class="text-center font-weight-bold text-uppercase">Data Berhasil DIHAPUS</b></div>'
-                            });
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.ket == "SUCCESS") {
+                                custom_alert(true, 'success', '<center>DATA BERHASIL DIHAPUS</center>', 10000);
+                                loading_sw2();
+                                $('#data_jkh')
+                                    .load(
+                                        "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                            } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
                         },
                         error: function(response) {
-                            console.log(response.responseText);
-                            alert('eksekusi query gagal');
+                            custom_alert(true, 'error', '<center>DATA ERROR <br>' + response.ket + '</center>', 10000);
                         }
                     });
                 }
             })
         });
-    <?php } ?>
+    </script>
+<?php } else { ?>
+    <div class="jumbotron border-2 m-2 shadow">
+        <div class="jumbotron-fluid">
+            <div class="text-gray-700">
+                <h5 class="text-center">Data Tidak Ada</h5>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+<script>
+    $(document).ready(function() {
+        Swal.close();
+        $('#dataTable').DataTable();
+    });
 </script>

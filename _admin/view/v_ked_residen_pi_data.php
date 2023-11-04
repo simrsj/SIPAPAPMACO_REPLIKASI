@@ -15,7 +15,7 @@
     } catch (PDOException $ex) {
     ?>
         <script>
-            alert("<?= $ex->getMessage() . $ex->getLine() . $sql_pi ?>");
+            alert("<?= $ex->getMessage() . $ex->getLine() ?>");
             document.location.href = '?error404';
         </script>
     <?php

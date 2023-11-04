@@ -10,7 +10,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 
 try {
     if ($_POST['pertanyaan'] != "") {
-        $sql = "UPDATE tb_kuesioner_pembimbing SET";
+        $sql = "UPDATE tb_kuesioner_pembimbing_pertanyaan SET";
         $sql .= " tgl_ubah = '" . date('Y-m-d G:i:s') . "',";
         $sql .= " pertanyaan = '" . $_POST['pertanyaan'] . "',";
         $sql .= " ket = '" . $_POST['ket'] . "'";

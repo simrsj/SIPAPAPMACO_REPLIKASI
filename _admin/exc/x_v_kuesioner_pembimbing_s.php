@@ -9,7 +9,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 
 try {
     $idu = decryptString($_POST['idu'], $customkey);
-    $sql = "INSERT INTO tb_kuesioner_pembimbing (";
+    $sql = "INSERT INTO tb_kuesioner_pembimbing_pertanyaan (";
     $sql .= " id,";
     $sql .= " pertanyaan,";
     $sql .= " tgl_tambah, ";

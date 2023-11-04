@@ -4,7 +4,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 error_reporting();
 
 try {
-    $sql = "SELECT * FROM tb_kuesioner_pembimbing";
+    $sql = "SELECT * FROM tb_kuesioner_pembimbing_pertanyaan";
     $sql .= " WHERE id= " . decryptString($_POST['id'], $customkey);
     $q = $conn->query($sql);
     $d = $q->fetch(PDO::FETCH_ASSOC);
