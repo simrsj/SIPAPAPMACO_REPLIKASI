@@ -19,7 +19,6 @@ try {
 } catch (PDOException $ex) {
     echo json_encode([
         // 'sql' => $sql,
-        'ket' => 'error',
-        'ket_detail' => $ex->getMessage()
+        'ket' => $ex->getMessage() . $ex->getLine()
     ]);
 }

@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 $id_pertanyaan = decryptString($_GET['idpt'], $customkey);
 try {
     $sql_jawaban = "SELECT ";
-    $sql_jawaban .= " tb_kuesioner_pembimbing_jawaban.id as idj, ";
+    $sql_jawaban .= " tb_kuesioner_pembimbing_jawaban.id as id, ";
     $sql_jawaban .= " tb_kuesioner_pembimbing_jawaban.id_pertanyaan as idpt, ";
     $sql_jawaban .= " tb_kuesioner_pembimbing_jawaban.tgl_tambah as tgl_tambah_idj, ";
     $sql_jawaban .= " tb_kuesioner_pembimbing_jawaban.tgl_ubah as tgl_ubah_idj, ";
@@ -59,58 +59,35 @@ try {
                             </a>
 
                             <div class="modal" id="modal_ubah<?= $no0; ?>" tabindex="-1" role="dialog" aria-labelledby="modal_ubah<?= $no0; ?>" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
-                                        <div class="modal-header bg-primary text-light">
-                                            Ubah Jadwal Kegiatan Harian
-                                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
-                                                X
-                                            </button>
-                                        </div>
                                         <div class="modal-body text-left">
-                                            <form id="form_u<?= $no0 ?>" method="post">
-                                                <label for="tgl<?= $no0 ?>">Tanggal <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="tgl<?= $no0 ?>" name="tgl" value="<?= $d_jkh['tgl'] ?>">
-                                                <div id="err_tgl<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                <div class="row  mb-2 text-center">
-                                                    <div class="col-xl">
-                                                        <label for="visite_besar<?= $no0 ?>">Visite Besar</label>
-                                                        <input type="checkbox" id="visite_besar<?= $no0 ?>" name="visite_besar" class="" value="Y" <?= $d_jkh['visite_besar'] == "Y" ? "checked" : "" ?>>
-                                                        <!-- <div id="err_visite_besar<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div> -->
-                                                    </div>
-                                                    <div class="col-xl text-center">
-                                                        <label for="rapat_klinik<?= $no0 ?>">Rapat Klinik</label>
-                                                        <input type="checkbox" id="rapat_klinik<?= $no0 ?>" name="rapat_klinik" class="" value="Y" <?= $d_jkh['rapat_klinik'] == "Y" ? "checked" : "" ?>>
-                                                        <!-- <div id="err_rapat_klinik<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div> -->
-                                                    </div>
-                                                </div>
-                                                <label for="acara_ilmiah<?= $no0 ?>">Acara Ilmiah<span class="text-danger">*</span></label>
-                                                <textarea id="acara_ilmiah<?= $no0 ?>" name="acara_ilmiah" class="form-control" rows="2"><?= $d_jkh['acara_ilmiah'] ?></textarea>
-                                                <div id="err_acara_ilmiah<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
-                                                <label for="matkul_dosen<?= $no0 ?>">Mata Kuliah/Dosen<span class="text-danger">*</span></label>
-                                                <textarea id="matkul_dosen<?= $no0 ?>" name="matkul_dosen" class="form-control" rows="2"><?= $d_jkh['matkul_dosen'] ?></textarea>
-                                                <div id="err_matkul_dosen<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                            <form id="form_u<?= $no0; ?>" method="post">
                                                 <div class="row">
                                                     <div class="col-xl">
-                                                        <label for="j_pasien_rajal<?= $no0 ?>">Pasien Rajal<span class="text-danger">*</span></label>
-                                                        <input type="number" min=0 id="j_pasien_rajal<?= $no0 ?>" name="j_pasien_rajal" class="form-control" value="<?= $d_jkh['j_pasien_rajal'] ?>">
-                                                        <div id="err_j_pasien_rajal<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                        <label for="jawaban<?= $no0; ?>">Jawaban <span class="text-danger">*</span></label>
+                                                        <input id="jawaban<?= $no0; ?>" name="jawaban" class="form-control" value="<?= $d_jawaban['jawaban']; ?>">
+                                                        <div class="err text-danger b i text-xs blink mb-2" id="err_jawaban<?= $no0; ?>"></div>
                                                     </div>
                                                     <div class="col-xl">
-                                                        <label for="j_pasien_ranap<?= $no0 ?>">Pasien Ranap<span class="text-danger">*</span></label>
-                                                        <input type="number" min=0 id="j_pasien_ranap<?= $no0 ?>" name="j_pasien_ranap" class="form-control" value="<?= $d_jkh['j_pasien_ranap'] ?>"></input>
-                                                        <div id="err_j_pasien_ranap<?= $no0 ?>" class="i err text-danger text-center text-xs blink mb-2"></div>
+                                                        <label for="nilai<?= $no0; ?>">Nilai <span class="text-danger">*</span></label>
+                                                        <input type="number" min="0" max="100" id="nilai<?= $no0; ?>" name="nilai" class="form-control" value="<?= $d_jawaban['nilai']; ?>">
+                                                        <div class=" i text-xs ">Isian Berupa Angka dan Lebih Sama Dengan 0 (Nol)</div>
+                                                        <div class="err text-danger b i text-xs blink mb-2" id="err_nilai<?= $no0; ?>"></div>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_jkh['id'], $customkey) ?>' )" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
+                                            <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                                                Kembali
+                                            </button>
+                                            <a onClick="ubah('<?= $no0; ?>', '<?= encryptString($d_jawaban['id'], $customkey) ?>' )" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Ubah</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_jkh['id'], $customkey) ?>">
+                            <a href="#" class="btn btn-danger btn-sm hapus" id="<?= encryptString($d_jawaban['id'], $customkey) ?>">
                                 <i class="fa fa-trash"></i> Hapus
                             </a>
                         </td>
@@ -130,54 +107,34 @@ try {
         function ubah(x, y) {
             var data_form = $('#form_u' + x).serializeArray();
             data_form.push({
-                name: "id",
+                name: "idj",
                 value: y
             });
-            var tgl = $("#tgl" + x).val();
-            // var visite_besar = $("#visite_besar").val();
-            // var rapat_klinik = $("#rapat_klinik").val();
-            var acara_ilmiah = $("#acara_ilmiah" + x).val();
-            var matkul_dosen = $("#matkul_dosen" + x).val();
-            var j_pasien_rajal = $("#j_pasien_rajal" + x).val();
-            var j_pasien_ranap = $("#j_pasien_ranap" + x).val();
+            var jawaban = $("#jawaban" + x).val();
+            var nilai = $("#nilai" + x).val();
+
             if (
-                tgl == "" ||
-                // visite_besar == "" ||
-                // rapat_klinik == "" ||
-                acara_ilmiah == "" ||
-                matkul_dosen == "" ||
-                j_pasien_rajal == "" ||
-                j_pasien_ranap == "" ||
-                j_pasien_rajal < 0 ||
-                j_pasien_ranap < 0
+                jawaban == "" ||
+                nilai == "" ||
+                nilai < 0
             ) {
                 custom_alert(true, 'warning', '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>', 10000);
-                (tgl == "") ? $("#err_tgl" + x).html("Pilih Tanggal"): $("#err_tgl").html("");
-                // (visite_besar == "") ? $("#err_visite_besar" + x).html("Isi Visite Besar"): $("#err_visite_besar").html("");
-                // (rapat_klinik == "") ? $("#err_rapat_klinik" + x).html("Pilih Rapat Klinik"): $("#err_rapat_klinik").html("");
-                (acara_ilmiah == "") ? $("#err_acara_ilmiah" + x).html("Harus Diisi"): $("#err_acara_ilmiah").html("");
-                (matkul_dosen == "") ? $("#err_matkul_dosen" + x).html("Harus Diisi"): $("#err_matkul_dosen").html("");
-                (j_pasien_rajal == "" || j_pasien_rajal < 0) ? $("#err_j_pasien_rajal" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_rajal" + x).html("");
-                (j_pasien_ranap == "" || j_pasien_ranap < 0) ? $("#err_j_pasien_ranap" + x).html("Isian harus lebih sama dengan 0 (Nol)"): $("#err_j_pasien_ranap" + x).html("");
-            }
-            //eksekusi query ubah
-            else {
+                (jawaban == "") ? $("#err_jawaban" + x).html("Harus Diisi"): $("#err_jawaban" + x).html("");
+                (nilai == "" || nilai < 0) ? $("#err_nilai" + x).html("Isian Tidak Sesuai"): $("#err_nilai" + x).html("");
+            } else {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_v_ked_residen_jkh_data_u.php",
+                    url: "_admin/exc/x_v_kuesioner_pembimbing_jawaban_u.php",
                     data: data_form,
-                    dataType: "json",
+                    dataType: "JSON",
                     success: function(response) {
                         if (response.ket == "SUCCESS") {
-                            // console.log('<?= $no0; ?>');
-                            console.log(response.cok);
-                            $('#modal_ubah' + x).modal('hide');
-                            custom_alert(true, 'success', '<center>DATA BERHASIL DIUBAH</center>', 10000);
-                            loading_sw2();
-                            $('#data_jkh')
+                            $('#modal_ubah' + x).modal('hide')
+                            custom_alert(true, 'success', '<center>DATA BERHASIL DIRUBAH</center>', 10000);
+                            $('#data_jawaban')
                                 .load(
-                                    "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
-                        } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
+                                    "_admin/view/v_kuesioner_pembimbing_jawabanData.php?idpt=<?= $_GET['idpt'] ?>");
+                        } else custom_alert(true, 'error', '<center>DATA GAGAL DISIMPAN <br>' + response.ket + '</center>', 10000);
                     },
                     error: function(response) {
                         custom_alert(true, 'error', '<center>DATA ERROR <br>' + response.ket + '</center>', 10000);
@@ -200,7 +157,7 @@ try {
                 if (result.value) {
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_v_ked_residen_jkh_data_h.php",
+                        url: "_admin/exc/x_v_kuesioner_pembimbing_jawaban_h.php",
                         data: {
                             id: $(this).attr('id')
                         },
@@ -209,9 +166,9 @@ try {
                             if (response.ket == "SUCCESS") {
                                 custom_alert(true, 'success', '<center>DATA BERHASIL DIHAPUS</center>', 10000);
                                 loading_sw2();
-                                $('#data_jkh')
+                                $('#data_jawaban')
                                     .load(
-                                        "_admin/view/v_ked_residen_jkh_data.php?idpr=<?= $_GET['idpr'] ?>");
+                                        "_admin/view/v_kuesioner_pembimbing_jawabanData.php?idpt=<?= $_GET['idpt'] ?>");
                             } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
                         },
                         error: function(response) {
