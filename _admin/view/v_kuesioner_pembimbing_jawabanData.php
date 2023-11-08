@@ -17,7 +17,7 @@ try {
     $sql_jawaban .= " JOIN tb_kuesioner_pembimbing_pertanyaan ON tb_kuesioner_pembimbing_jawaban.id_pertanyaan = tb_kuesioner_pembimbing_pertanyaan.id";
     $sql_jawaban .= " WHERE tb_kuesioner_pembimbing_jawaban.id_pertanyaan = " . $id_pertanyaan;
     $sql_jawaban .= " ORDER BY tb_kuesioner_pembimbing_jawaban.tgl_ubah DESC, tb_kuesioner_pembimbing_jawaban.tgl_tambah DESC";
-    echo "$sql_jawaban<br>";
+    // echo "$sql_jawaban<br>";
     $q_jawaban = $conn->query($sql_jawaban);
     $r_jawaban = $q_jawaban->rowCount();
 } catch (PDOException $ex) {
@@ -72,7 +72,7 @@ try {
                                                     <div class="col-xl">
                                                         <label for="nilai<?= $no0; ?>">Nilai <span class="text-danger">*</span></label>
                                                         <input type="number" min="0" max="100" id="nilai<?= $no0; ?>" name="nilai" class="form-control" value="<?= $d_jawaban['nilai']; ?>">
-                                                        <div class=" i text-xs ">Isian Berupa Angka dan Lebih Sama Dengan 0 (Nol)</div>
+                                                        <div class=" i text-xs ">Isian Berupa Angka dan Lebih Sama Dengan 0 (Nol) sampai 100 (Seratus)</div>
                                                         <div class="err text-danger b i text-xs blink mb-2" id="err_nilai<?= $no0; ?>"></div>
                                                     </div>
                                                 </div>
@@ -116,11 +116,12 @@ try {
             if (
                 jawaban == "" ||
                 nilai == "" ||
-                nilai < 0
+                nilai < 0 ||
+                nilai > 100
             ) {
                 custom_alert(true, 'warning', '<center>DATA WAJIB ADA YANG BELUM TERISI/TIDAK SESUAI</center>', 10000);
                 (jawaban == "") ? $("#err_jawaban" + x).html("Harus Diisi"): $("#err_jawaban" + x).html("");
-                (nilai == "" || nilai < 0) ? $("#err_nilai" + x).html("Isian Tidak Sesuai"): $("#err_nilai" + x).html("");
+                (nilai == "" || nilai < 0 || nilai > 100) ? $("#err_nilai" + x).html("Isian Tidak Sesuai"): $("#err_nilai" + x).html("");
             } else {
                 $.ajax({
                     type: 'POST',
@@ -128,7 +129,7 @@ try {
                     data: data_form,
                     dataType: "JSON",
                     success: function(response) {
-                        if (response.ket == "SUCCESS") {
+                        if (response.ket == "success") {
                             $('#modal_ubah' + x).modal('hide')
                             custom_alert(true, 'success', '<center>DATA BERHASIL DIRUBAH</center>', 10000);
                             $('#data_jawaban')
@@ -159,11 +160,11 @@ try {
                         type: 'POST',
                         url: "_admin/exc/x_v_kuesioner_pembimbing_jawaban_h.php",
                         data: {
-                            id: $(this).attr('id')
+                            idj: $(this).attr('id')
                         },
                         dataType: "json",
                         success: function(response) {
-                            if (response.ket == "SUCCESS") {
+                            if (response.ket == "success") {
                                 custom_alert(true, 'success', '<center>DATA BERHASIL DIHAPUS</center>', 10000);
                                 loading_sw2();
                                 $('#data_jawaban')

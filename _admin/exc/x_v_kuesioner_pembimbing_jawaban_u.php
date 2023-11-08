@@ -1,5 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 // echo "<pre>";
 // print_r($_POST);
@@ -14,11 +15,11 @@ try {
     $conn->query($sql);
     echo json_encode([
         // 'sql' => $sql,
-        'ket' => 'SUCCESS'
+        'ket' => 'success'
     ]);
 } catch (PDOException $ex) {
     echo json_encode([
         // 'sql' => $sql,
-        'ket' => $ex->getMessage() . $ex->getLine() . $sql
+        'ket' => $ex->getMessage() . $ex->getLine()
     ]);
 }
