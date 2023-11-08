@@ -4,13 +4,20 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/koneksi.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/tanggal_waktu.php";
 // error_reporting(0);
-$id_pertanyaan = decryptString($_GET['id'], $customkey);
+$id_pertanyaan = decryptString($_GET['idpt'], $customkey);
 try {
-    $sql_jawaban = "SELECT * FROM tb_kuesioner_pembimbing_jawaban ";
+    $sql_jawaban = "SELECT ";
+    $sql_jawaban .= " tb_kuesioner_pembimbing_jawaban.id as idj, ";
+    $sql_jawaban .= " tb_kuesioner_pembimbing_jawaban.id_pertanyaan as idpt, ";
+    $sql_jawaban .= " tb_kuesioner_pembimbing_jawaban.tgl_tambah as tgl_tambah_idj, ";
+    $sql_jawaban .= " tb_kuesioner_pembimbing_jawaban.tgl_ubah as tgl_ubah_idj, ";
+    $sql_jawaban .= " jawaban, ";
+    $sql_jawaban .= " nilai";
+    $sql_jawaban .= " FROM tb_kuesioner_pembimbing_jawaban ";
     $sql_jawaban .= " JOIN tb_kuesioner_pembimbing_pertanyaan ON tb_kuesioner_pembimbing_jawaban.id_pertanyaan = tb_kuesioner_pembimbing_pertanyaan.id";
     $sql_jawaban .= " WHERE tb_kuesioner_pembimbing_jawaban.id_pertanyaan = " . $id_pertanyaan;
     $sql_jawaban .= " ORDER BY tb_kuesioner_pembimbing_jawaban.tgl_ubah DESC, tb_kuesioner_pembimbing_jawaban.tgl_tambah DESC";
-    // echo "$sql_jawaban<br>";
+    echo "$sql_jawaban<br>";
     $q_jawaban = $conn->query($sql_jawaban);
     $r_jawaban = $q_jawaban->rowCount();
 } catch (PDOException $ex) {
@@ -42,8 +49,8 @@ try {
                 ?>
                     <tr>
                         <td class="text-center"><?= $no0; ?></td>
-                        <td><?= $d_jawaban['tgl_tambah']; ?></td>
-                        <td><?= $d_jawaban['tgl_ubah']; ?></td>
+                        <td><?= $d_jawaban['tgl_tambah_idj']; ?></td>
+                        <td class="text-center"><?= ($d_jawaban['tgl_ubah_idj'] != NULL) ? $d_jawaban['tgl_ubah_idj'] : "-"; ?></td>
                         <td><?= $d_jawaban['jawaban']; ?></td>
                         <td><?= $d_jawaban['nilai']; ?></td>
                         <td class="text-center">

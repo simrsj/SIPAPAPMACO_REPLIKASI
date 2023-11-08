@@ -54,7 +54,7 @@ try {
                             }
                             ?>
                             <a href="?kuesioner_pembimbing&jawaban=<?= encryptString($d_pertanyaan['id'], $customkey) ?>&pertanyaan=<?= encryptString($d_pertanyaan['pertanyaan'], $customkey) ?>" title="ubah" class="btn btn-primary btn-xs">
-                                <i class="fa-regular fa-pen-to-square fa-beat"></i> Ubah
+                                <i class="fa-regular fa-pen-to-square"></i> Ubah
                             </a>
                             <?php if ($r_p_jawaban > 0) { ?>
                                 <a href="Ubah" title="ubah" class="btn btn-primary btn-xs">
