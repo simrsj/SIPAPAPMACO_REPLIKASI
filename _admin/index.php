@@ -78,11 +78,11 @@ if ($_SESSION['status_user'] == "Y") {
 						</a>
 						<div id="kuesioner" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
 							<div class="bg-white py-2 collapse-inner rounded">
-								<a class="collapse-item" href="?kuesioner_pembimbing">
+								<a class="collapse-item" href="?kuesioner">
 									<i class="fas fa-fw fa-circle"></i>
-									<span>Pertanyaan<br>Pembimbing</span>
+									<span>Pertanyaan & Jawaban</span>
 								</a>
-								<a class="collapse-item" href="?kuesioner_pembimbing&jawaban">
+								<a class="collapse-item" href="?kuesioner&jawaban">
 									<i class="fas fa-fw fa-circle"></i>
 									<span>Jawaban<br>Pembimbing</span>
 								</a>

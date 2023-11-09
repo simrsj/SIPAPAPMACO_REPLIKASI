@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 error_reporting(0);
 $idpt = decryptString($_POST['idpt'], $customkey);
 try {
-    $sql = "INSERT INTO tb_kuesioner_pembimbing_jawaban (";
+    $sql = "INSERT INTO tb_kuesioner_jawaban (";
     $sql .= " id,";
     $sql .= " id_pertanyaan,";
     $sql .= " tgl_tambah,";

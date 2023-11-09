@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
+if (isset($_GET['kuesioner']) && $d_prvl['level_user'] == 1) {
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -51,7 +51,7 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
     <script>
         $(document).ready(function() {
             loading_sw2();
-            $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php');
+            $('#data_pertanyaan').load('_admin/view/v_kuesionerData.php');
         });
 
         // inisiasi klik modal tambah
@@ -77,13 +77,13 @@ if (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
             else {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_v_kuesioner_pembimbing_s.php",
+                    url: "_admin/exc/x_v_kuesioner_t.php",
                     data: data_t,
                     success: function() {
                         simpan_berhasil("");
                         setTimeout(function() {
                             loading_sw2()
-                            $('#data_pertanyaan').load('_admin/view/v_kuesioner_pembimbingData.php?idu=<?= bin2hex(urlencode(base64_encode(date("Ymd") . time() . "*sm*" . $_SESSION['id_user']))) ?>');
+                            $('#data_pertanyaan').load('_admin/view/v_kuesionerData.php');
                             $('#err_t_pertanyaan').empty();
                             Swal.close();
                         }, 5000);

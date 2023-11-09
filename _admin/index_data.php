@@ -20,9 +20,9 @@ elseif (isset($_GET['logbook']) && $d_prvl['r_logbook'] == 'Y') {
 	else include "_admin/view/v_logbook.php";
 }
 //kuesioner pembimbing 
-elseif (isset($_GET['kuesioner_pembimbing']) && $d_prvl['level_user'] == 1) {
-	if (isset($_GET['jawaban'])) include "_admin/view/v_kuesioner_pembimbing_jawaban.php";
-	else include "_admin/view/v_kuesioner_pembimbing.php";
+elseif (isset($_GET['kuesioner']) && $d_prvl['level_user'] == 1) {
+	if (isset($_GET['jawaban'])) include "_admin/view/v_kuesioner_jawaban.php";
+	else include "_admin/view/v_kuesioner.php";
 }
 //kuesioner sarpras
 elseif (isset($_GET['kuesioner_sarpras']) && $d_prvl['level_user'] == 1) {

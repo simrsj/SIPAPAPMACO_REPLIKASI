@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_GET['kuesioner_pembimbing']) && isset($_GET['jawaban']) && $d_prvl['level_user'] == 1) {
+if (isset($_GET['kuesioner']) && isset($_GET['jawaban']) && $d_prvl['level_user'] == 1) {
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -9,7 +9,7 @@ if (isset($_GET['kuesioner_pembimbing']) && isset($_GET['jawaban']) && $d_prvl['
             </div>
             <div class="col-lg-2 my-auto text-right">
 
-                <a title="Tambah Jawaban" class="btn btn-success btn-sm" href="#" data-toggle="modal" data-target="#modal_tambah">
+                <a title="Tambah Jawaban" class="btn btn-success btn-sm tambah_init" href="#" data-toggle="modal" data-target="#modal_tambah">
                     <i class="fas fa-plus"></i> Tambah Data
                 </a>
 

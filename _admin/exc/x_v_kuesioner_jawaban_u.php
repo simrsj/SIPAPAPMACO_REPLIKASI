@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 // echo "</pre>";
 error_reporting(0);
 try {
-    $sql = "UPDATE tb_kuesioner_pembimbing_jawaban SET ";
+    $sql = "UPDATE tb_kuesioner_jawaban SET ";
     $sql .= " tgl_ubah = '" . date('Y-m-d G:i:s') . "',";
     $sql .= " jawaban = '" . $_POST['jawaban'] . "',";
     $sql .= " nilai = '" . $_POST['nilai'] . "'";

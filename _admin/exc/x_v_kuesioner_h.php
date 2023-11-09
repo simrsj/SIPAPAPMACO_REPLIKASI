@@ -9,8 +9,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/SM/_add-ons/crypt.php";
 // echo "</pre>";
 
 try {
-    $sql = "DELETE FROM tb_kuesioner_pembimbing_jawaban";
-    $sql .= " WHERE id=" . decryptString($_POST['idj'], $customkey);
+    $sql = "DELETE FROM tb_kuesioner_pertanyaan";
+    $sql .= " WHERE id=" . decryptString($_POST['id'], $customkey);
     $conn->query($sql);
     echo json_encode([
         // 'sql' => $sql,
