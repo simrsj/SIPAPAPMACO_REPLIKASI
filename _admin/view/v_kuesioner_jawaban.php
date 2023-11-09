@@ -51,7 +51,7 @@ if (isset($_GET['kuesioner']) && isset($_GET['jawaban']) && $d_prvl['level_user'
         $(document).ready(function() {
             $('#data_jawaban')
                 .load(
-                    "_admin/view/v_kuesioner_pembimbing_jawabanData.php?idpt=<?= $_GET['jawaban'] ?>");
+                    "_admin/view/v_kuesioner_jawabanData.php?idpt=<?= $_GET['jawaban'] ?>");
             $('#loader').remove();
         });
         $(".tambah_init").click(function() {
@@ -78,7 +78,7 @@ if (isset($_GET['kuesioner']) && isset($_GET['jawaban']) && $d_prvl['level_user'
             } else {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_v_kuesioner_pembimbing_jawaban_t.php",
+                    url: "_admin/exc/x_v_kuesioner_jawaban_t.php",
                     data: data_form,
                     dataType: "JSON",
                     success: function(response) {
@@ -87,7 +87,7 @@ if (isset($_GET['kuesioner']) && isset($_GET['jawaban']) && $d_prvl['level_user'
                             custom_alert(true, 'success', '<center>DATA BERHASIL DISIMPAN</center>', 10000);
                             $('#data_jawaban')
                                 .load(
-                                    "_admin/view/v_kuesioner_pembimbing_jawabanData.php?idpt=<?= $_GET['jawaban'] ?>");
+                                    "_admin/view/v_kuesioner_jawabanData.php?idpt=<?= $_GET['jawaban'] ?>");
                         } else custom_alert(true, 'error', '<center>DATA GAGAL DISIMPAN <br>' + response.ket + '</center>', 10000);
                     },
                     error: function(response) {

@@ -125,7 +125,7 @@ try {
             } else {
                 $.ajax({
                     type: 'POST',
-                    url: "_admin/exc/x_v_kuesioner_pembimbing_jawaban_u.php",
+                    url: "_admin/exc/x_v_kuesioner_jawaban_u.php",
                     data: data_form,
                     dataType: "JSON",
                     success: function(response) {
@@ -134,7 +134,7 @@ try {
                             custom_alert(true, 'success', '<center>DATA BERHASIL DIRUBAH</center>', 10000);
                             $('#data_jawaban')
                                 .load(
-                                    "_admin/view/v_kuesioner_pembimbing_jawabanData.php?idpt=<?= $_GET['idpt'] ?>");
+                                    "_admin/view/v_kuesioner_jawabanData.php?idpt=<?= $_GET['idpt'] ?>");
                         } else custom_alert(true, 'error', '<center>DATA GAGAL DISIMPAN <br>' + response.ket + '</center>', 10000);
                     },
                     error: function(response) {
@@ -158,7 +158,7 @@ try {
                 if (result.value) {
                     $.ajax({
                         type: 'POST',
-                        url: "_admin/exc/x_v_kuesioner_pembimbing_jawaban_h.php",
+                        url: "_admin/exc/x_v_kuesioner_jawaban_h.php",
                         data: {
                             idj: $(this).attr('id')
                         },
@@ -169,7 +169,7 @@ try {
                                 loading_sw2();
                                 $('#data_jawaban')
                                     .load(
-                                        "_admin/view/v_kuesioner_pembimbing_jawabanData.php?idpt=<?= $_GET['idpt'] ?>");
+                                        "_admin/view/v_kuesioner_jawabanData.php?idpt=<?= $_GET['idpt'] ?>");
                             } else custom_alert(true, 'error', '<center>DATA GAGAL DIUBAH <br>' + response.ket + '</center>', 10000);
                         },
                         error: function(response) {
