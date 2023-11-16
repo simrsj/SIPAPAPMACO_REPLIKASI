@@ -160,27 +160,23 @@ try {
     );
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
-    // $mail->Host = 'relay.excellent.co.id';
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-
     $mail->Username = 'rsjiwajabar@gmail.com'; // YOUR gmail email
-    $mail->Password = 'jtvgvusfwgaxypyf'; // YOUR gmail password
-
-    // Sender and recipient settingss
+    $mail->Password = 'oofwfputqejdizob'; // YOUR gmail password 
+    // Sender and recipient settings
     $mail->setFrom('rsjiwajabar@gmail.com', 'SIPAPAP MACO - RESET PASSWORD');
-    // $mail->addAddress(base64_decode(urldecode($_GET['email'])), base64_decode(urldecode($_GET['nama'])));
     $mail->addAddress($email_user, $nama_user);
-    // $mail->addReplyTo("fajar.rachmat.h@gmail.com", "RECEIVER");
+    // $mail->addReplyTo("nama_email_tambahan@email.com", "RECEIVER");
 
     // Setting the email content
     $mail->IsHTML(true);
     $mail->Subject = "RESET PASSWORD AKUN SIPAPAP MACO";
     $mail->Body = $isi_email;
-    // $mail->AltBody = 'Bayar Hutang';
-    // $mail->addAttachment('tte.png');
+    // $mail->AltBody = 'Teks Alternatif';
+    // $mail->addAttachment('tambahan_file.nama_extensi');
     if ($mail->send()) {
         $sql_update = "UPDATE tb_user SET ";
         $sql_update .= " hash_password_user = '" . $crypt . "'";

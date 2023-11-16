@@ -161,20 +161,19 @@ try {
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
   $mail->Port = 587;
   $mail->Username = 'rsjiwajabar@gmail.com';
-  // $mail->Password = 'jtvgvusfwgaxypyf';
   $mail->Password = 'oofwfputqejdizob';
 
   // Sender and recipient settings
-  $mail->setFrom('rsj@jabarprov.go.id', 'SIPAPAP MACO - AKTIVASI');
+  $mail->setFrom('rsjiwajabar@gmail.com', 'SIPAPAP MACO - AKTIVASI');
   $mail->addAddress($_POST['email'], $_POST['nama']);
-  // $mail->addReplyTo("simrsjprovjabar@gmail.com", "SIPAPAP MACO - AKTIVASI (RECEIVER)");
+  // $mail->addReplyTo("nama_email_tambahan@email.com", "RECEIVER");
 
   // Setting the email content
   $mail->IsHTML(true);
   $mail->Subject = "Aktivasi Akun SIPAPAP MACO";
   $mail->Body = $isi_email;
-  // $mail->AltBody = 'Aktivasi Akun SIPAPAP MACO';
-  // $mail->addAttachment('tte.png');
+  // $mail->AltBody = 'Teks Alternatif';
+  // $mail->addAttachment('tambahan_file.nama_extensi');
   if ($mail->send()) {
     echo json_encode(['ket' => 'Sukses']);
   } else {

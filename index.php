@@ -37,7 +37,6 @@ require_once "_add-ons/crypt.php";
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link href="vendor/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet" type="text/css" />
-    <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet">
@@ -46,6 +45,7 @@ require_once "_add-ons/crypt.php";
     <link href="_add-ons/cssCustom.css" rel="stylesheet">
     <link href="_add-ons/loader.css" rel="stylesheet">
     <script src="vendor/jquery3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body id="page-top" class="bg-sipapapmaco-abstrack1">
@@ -107,7 +107,6 @@ require_once "_add-ons/crypt.php";
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="vendor/sw2/dist/sweetalert2.min.js"></script>
     <script src="vendor/select2/dist/js/select2.min.js"></script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="_add-ons/jsCustom.js"></script>
     <script src="_add-ons/alert.js"></script>
     <!-- <script src="js/pkd/chart-area-demo.js"></script> -->
