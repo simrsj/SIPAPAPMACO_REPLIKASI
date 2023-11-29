@@ -34,8 +34,8 @@ $email_user = $_POST['email'];
 // $crypt = password_hash($password, PASSWORD_DEFAULT, $options);
 $crypt = urlencode(base64_encode(date('Ymd') . '_' . $id_user . '_' .  $email_user .  '_' . $nama_user . '"'));
 
-// $urlserver = "http://103.147.222.122:84/SM/";
-$urlserver = "http://127.0.0.1/SM/";
+$urlserver = "http://103.147.222.122:89/SM/";
+// $urlserver = "http://127.0.0.1/SM/";
 
 $isi_email = "
 <!DOCTYPE html>
