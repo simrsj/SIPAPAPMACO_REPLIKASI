@@ -27,15 +27,9 @@ $id_user = $d_email['id_user'];
 $nama_user = $d_email['nama_user'];
 $email_user = $_POST['email'];
 
-// $options = [
-//     'cost' => 5,
-// ];
-// $password = $d_email['password_user'];
-// $crypt = password_hash($password, PASSWORD_DEFAULT, $options);
 $crypt = urlencode(base64_encode(date('Ymd') . '_' . $id_user . '_' .  $email_user .  '_' . $nama_user . '"'));
 
-// $urlserver = "http://103.147.222.122:84/SM/";
-$urlserver = "http://127.0.0.1/SM/";
+$urlserver = "http://namadomain.com"; //ISIKAN DOMAIN WEBSITE
 
 $isi_email = "
 <!DOCTYPE html>
@@ -143,8 +137,6 @@ $isi_email = "
 </html>
 ";
 
-
-
 // passing true in constructor enables exceptions in PHPMailer
 $mail = new PHPMailer(true);
 
@@ -159,15 +151,15 @@ try {
         )
     );
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = 'namadomain.host.com'; //ISIKAN HOST EMAIL
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    $mail->Port = 0; //UBAH NOMOR SESUAI DENGAN PORT HOST EMAIL
+    $mail->Username = 'namaemaildisini@email.com'; // ISIKAN EMAIL
+    $mail->Password = 'isikanpassword'; // ISIKAN PASSWORD EMAIL
 
-    $mail->Username = 'rsjiwajabar@gmail.com'; // YOUR gmail email
-    $mail->Password = 'oofwfputqejdizob'; // YOUR gmail password 
     // Sender and recipient settings
-    $mail->setFrom('rsjiwajabar@gmail.com', 'SIPAPAP MACO - RESET PASSWORD');
+    $mail->setFrom('namaemaildisini@email.com', 'SIPAPAP MACO - RESET PASSWORD'); //ISIKAN EMAIL PENGIRIM
     $mail->addAddress($email_user, $nama_user);
     // $mail->addReplyTo("nama_email_tambahan@email.com", "RECEIVER");
 

@@ -20,10 +20,10 @@ $nama_user = $_POST['nama'];
 $no_telp_user = $_POST['telp'];
 $email_user = $_POST['email'];
 $password_user = MD5($_POST['password']);
+
 $crypt = bin2hex(urlencode(base64_encode(date('Ymd') . '*sm*' . $id_user . '*sm*' .  $email_user .  '*sm*' . $nama_user . '"')));
 
-$urlserver = "http://103.147.222.122:84/SM/";
-// $urlserver = "http://127.0.0.1/SM/";
+$urlserver = "http://namadomain.com"; //ISIKAN DOMAIN WEBSITE
 
 $isi_email = "
 <!DOCTYPE html>
@@ -156,15 +156,16 @@ try {
   );
   $mail->isSMTP();
 
-  $mail->Host = 'smtp.gmail.com';
+  $mail->isSMTP();
+  $mail->Host = 'namadomain.host.com'; //ISIKAN HOST EMAIL
   $mail->SMTPAuth = true;
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-  $mail->Port = 587;
-  $mail->Username = 'rsjiwajabar@gmail.com';
-  $mail->Password = 'oofwfputqejdizob';
+  $mail->Port = 0; //UBAH NOMOR SESUAI DENGAN PORT HOST EMAIL
+  $mail->Username = 'namaemaildisini@email.com'; //ISIKAN EMAIL
+  $mail->Password = 'isikanpassword'; //ISIKAN PASSWORD EMAIL
 
   // Sender and recipient settings
-  $mail->setFrom('rsjiwajabar@gmail.com', 'SIPAPAP MACO - AKTIVASI');
+  $mail->setFrom('namaemaildisini@email.com', 'SIPAPAP MACO - AKTIVASI'); //ISIKAN EMAIL PENGIRIM
   $mail->addAddress($_POST['email'], $_POST['nama']);
   // $mail->addReplyTo("nama_email_tambahan@email.com", "RECEIVER");
 
