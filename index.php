@@ -1,7 +1,6 @@
 <?php
 error_reporting(0);
 session_start();
-// phpinfo();
 
 require_once "_add-ons/koneksi.php";
 require_once "_add-ons/tanggal_waktu.php";
