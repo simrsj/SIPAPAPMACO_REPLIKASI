@@ -71,7 +71,7 @@ if ($_SESSION['status_user'] == "Y") {
 						</a>
 					</li>
 
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a class="nav-link" href="#" data-toggle="collapse" data-target="#kuesioner" aria-expanded="true" aria-controls="collapseOne">
 							<i class="fas fa-fw fa-clipboard-question"></i>
 							<span>Kuesioner/Survei</span>
@@ -96,7 +96,7 @@ if ($_SESSION['status_user'] == "Y") {
 								</a>
 							</div>
 						</div>
-					</li>
+					</li> -->
 
 					<li class="nav-item">
 						<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
